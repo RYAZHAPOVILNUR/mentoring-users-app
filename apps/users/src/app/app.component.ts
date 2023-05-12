@@ -1,11 +1,11 @@
 import {Component, inject} from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
 import {UsersService} from "./users.service";
+import {FooterComponent, HeaderComponent} from "@users/core/ui/layout";
 
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent, RouterModule],
+  imports: [RouterModule, HeaderComponent, FooterComponent],
   providers: [],
   selector: 'users-root',
   templateUrl: './app.component.html',
