@@ -17,7 +17,8 @@
     "paths": {
       "@users/core/http": ["libs/core/http/src/index.ts"],
       "@users/core/ui/layout": ["libs/users/core/ui/layout/src/public-api.ts"],
-      "@users/home": ["libs/users/home/src/index.ts"]
+      "@users/home": ["libs/users/home/src/index.ts"],
+      "@users/users": ["libs/users/users/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
