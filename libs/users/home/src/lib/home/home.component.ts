@@ -2,8 +2,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ApiService } from '@users/core/http';
 
 @Component({
   selector: 'users-home',
@@ -14,4 +16,10 @@ import { CommonModule } from '@angular/common';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent {}
+export class HomeComponent {
+  private readonly apiService = inject(ApiService)
+
+  constructor() {
+    this.apiService.get('/users').subscribe(res => console.log('HOME: ', res))
+  }
+}
