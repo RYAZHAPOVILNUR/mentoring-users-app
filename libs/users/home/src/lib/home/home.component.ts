@@ -6,11 +6,12 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '@users/core/http';
+import { UsersListContainerComponent } from '@users/feature-users-list'
 
 @Component({
   selector: 'users-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, UsersListContainerComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
