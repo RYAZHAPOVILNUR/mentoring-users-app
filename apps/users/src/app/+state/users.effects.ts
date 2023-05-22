@@ -16,6 +16,6 @@ export class UsersEffects {
         console.error('Error', error);
         return of(UsersActions.loadUsersFailure({ error }));
       })
-    )
+    ), {dispatch: false}
   );
 }
