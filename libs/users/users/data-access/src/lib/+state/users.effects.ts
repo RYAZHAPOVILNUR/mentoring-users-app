@@ -3,7 +3,8 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { switchMap, catchError, of, map } from 'rxjs';
 import * as UsersActions from './users.actions';
 import { ApiService } from '@users/core/http';
-import { UsersEntity } from './users.models';
+import { UsersDTO } from '../users-dto.model';
+import { usersDTOAdapter } from '../users-dto.adapter';
 
 export const userEffects = createEffect(
   () => {
@@ -15,9 +16,11 @@ export const userEffects = createEffect(
     return actions$.pipe(
       ofType(UsersActions.initUsers),
       switchMap(
-        () => apiService.get<UsersEntity[]>('/users').pipe(
+        () => apiService.get<UsersDTO[]>('/users').pipe(
           map(
-            (users) => UsersActions.loadUsersSuccess({users})
+            (users) => UsersActions.loadUsersSuccess({
+              users: users.map(user => usersDTOAdapter.DTOtoEntity(user))
+            })
           ),
           catchError((error) => {
             console.error('Error', error);

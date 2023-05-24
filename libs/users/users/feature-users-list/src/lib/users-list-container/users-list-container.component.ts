@@ -6,9 +6,8 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersListComponent } from '../users-list/users-list.component';
-import { UsersEntity, UsersFacade } from '@users/users/data-access';
-import { UsersListVM } from '../users-list/users-list-view-model';
-import { map } from 'rxjs';
+import { UsersFacade } from '@users/users/data-access';
+import { UsersListContainerStore } from './users-list-container.store';
 
 @Component({
   selector: 'users-list-container',
@@ -18,15 +17,9 @@ import { map } from 'rxjs';
   styleUrls: ['./users-list-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [UsersListContainerStore]
 })
 export class UsersListContainerComponent {
-
-  private readonly userFacade = inject(UsersFacade);
-  public readonly users$ = this.userFacade.allUsers$.pipe(
-    map<UsersEntity[], UsersListVM>((users) => ({users}))
-  );
-
-  constructor() {
-    this.userFacade.init()
-  }
+  private readonly componentStore = inject(UsersListContainerStore);
+  public readonly users$ = this.componentStore.users$;
 }
