@@ -1,3 +1,4 @@
-<users-list-ui>
-
-</users-list-ui>
+<ng-container *ngIf="users$ | async as users">
+  <users-list-ui [vm]="users">
+  </users-list-ui>
+</ng-container>

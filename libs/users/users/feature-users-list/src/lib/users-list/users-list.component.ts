@@ -1,9 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  Input,
   ViewEncapsulation,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { UsersListVM } from './users-list-view-model';
 
 @Component({
   selector: 'users-list-ui',
@@ -14,4 +16,7 @@ import { CommonModule } from '@angular/common';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersListComponent {}
+export class UsersListComponent {
+  @Input({required: true})
+  vm!: UsersListVM;
+}

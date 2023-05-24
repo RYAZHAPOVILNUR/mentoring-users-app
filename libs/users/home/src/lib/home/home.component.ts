@@ -2,10 +2,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
-  inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApiService } from '@users/core/http';
 import { UsersListContainerComponent } from '@users/feature-users-list'
 
 @Component({
@@ -18,9 +16,4 @@ import { UsersListContainerComponent } from '@users/feature-users-list'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
-  private readonly apiService = inject(ApiService)
-
-  constructor() {
-    this.apiService.get('/users').subscribe(res => console.log('HOME: ', res))
-  }
 }
