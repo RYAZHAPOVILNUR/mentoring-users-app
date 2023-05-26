@@ -1,4 +1,14 @@
 <p>users-list UI works!</p>
-<ng-container>
-  {{vm | json}}
+<ng-container *ngIf="vm.status === 'loading'; else loadingResult">
+  Загрузка...
 </ng-container>
+
+<ng-template #loadingResult>
+  <ng-container *ngIf="vm.status === 'loaded'; else error">
+    {{vm | json}}
+  </ng-container>
+</ng-template>
+
+<ng-template #error>
+  Ошибка
+</ng-template>

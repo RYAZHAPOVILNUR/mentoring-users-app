@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { UsersEntity } from './users.models';
+import { UsersEntity } from './users.entity';
 
 export const initUsers = createAction('[Users Page] Init');
 

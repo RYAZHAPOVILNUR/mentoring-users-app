@@ -16,7 +16,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideEffects(userEffects),
     provideState(USERS_FEATURE_KEY, usersReducer),
-    provideEffects(),
     provideStore(),
     UsersFacade,
     provideStoreDevtools({

@@ -7,9 +7,9 @@ export const selectUsersState =
 
 const { selectAll, selectEntities } = usersAdapter.getSelectors();
 
-export const selectUsersLoaded = createSelector(
+export const selectUsersStatus = createSelector(
   selectUsersState,
-  (state: UsersState) => state.loaded
+  (state: UsersState) => state.status
 );
 
 export const selectUsersError = createSelector(

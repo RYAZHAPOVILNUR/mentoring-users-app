@@ -16,14 +16,16 @@ const initialState: UsersListState = {
 
 @Injectable()
 export class UsersListContainerStore extends ComponentStore<UsersListState> {
-  public readonly users$ = this.select(state => state.users);
-  private readonly userFacade = inject(UsersFacade);
-  
   private readonly usersFacade = inject(UsersFacade);
-
+  public readonly users$ = this.select(({users}) => users);
+  public readonly status$ = this.select(
+    this.usersFacade.status$,
+    (status) => status
+  );
+  
   constructor() {
     super(initialState);
-    this.userFacade.init();
+    this.usersFacade.init();
     this.setUsersFromGlobalToLocalStore();
   }
 
