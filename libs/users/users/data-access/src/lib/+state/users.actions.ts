@@ -12,3 +12,8 @@ export const loadUsersFailure = createAction(
   '[Users/API] Load Users Failure',
   props<{ error: any }>()
 );
+
+export const deleteUser = createAction(
+  '[Users Page] Delete User',
+  props<{id: number}>()
+  );

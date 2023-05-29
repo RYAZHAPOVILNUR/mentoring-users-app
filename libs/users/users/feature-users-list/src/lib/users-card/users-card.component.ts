@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { UsersVM } from '../users-vm';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
+import {ChangeDetectionStrategy, Component, inject, Input} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {UsersVM} from '../users-vm';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {UsersAdminService} from "../services/users-admin.service";
 
 @Component({
   selector: 'users-card',
@@ -13,6 +14,10 @@ import { MatButtonModule } from '@angular/material/button';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersCardComponent {
-  @Input({required: true})
-  user!: UsersVM
+  @Input({required: true}) user!: UsersVM
+  private usersAdmin = inject(UsersAdminService)
+
+  onDelete(cardId: number) {
+    this.usersAdmin.modifyUserCard({cardId, mod: 'delete'})
+  }
 }

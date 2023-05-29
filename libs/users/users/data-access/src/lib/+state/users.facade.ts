@@ -23,4 +23,8 @@ export class UsersFacade {
   init() {
     this.store.dispatch(UsersActions.initUsers());
   }
+
+  deleteUser(id: number) {
+    this.store.dispatch(UsersActions.deleteUser({id}))
+  }
 }

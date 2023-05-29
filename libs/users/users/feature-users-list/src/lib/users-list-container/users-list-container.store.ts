@@ -22,7 +22,7 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
     this.usersFacade.status$,
     (status) => status
   );
-  
+
   constructor() {
     super(initialState);
     this.usersFacade.init();
@@ -35,6 +35,10 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
         tap((users: UsersEntity[]) => this.patchUsers(users))
       )
     )
+  }
+
+  public deleteUser(id: number): void {
+    this.usersFacade.deleteUser(id)
   }
 
   private patchUsers(users: UsersEntity[]): void {
