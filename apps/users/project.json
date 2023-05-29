@@ -24,6 +24,7 @@
           "apps/users/src/assets"
         ],
         "styles": [
+          "@angular/material/prebuilt-themes/deeppurple-amber.css",
           "apps/users/src/styles.scss"
         ],
         "scripts": []
