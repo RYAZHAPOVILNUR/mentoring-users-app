@@ -1,8 +1,8 @@
 import {inject, Injectable} from '@angular/core';
-import {UsersListContainerStore} from "../users-list-container/users-list-container.store";
+import {UsersListContainerStore} from "./users-list-container/users-list-container.store";
 
 type CardChanges = {
-  cardId: number;
+  userId: number;
   mod: 'delete' | 'edit';
 }
 
@@ -12,9 +12,9 @@ type CardChanges = {
 export class UsersAdminService {
   private readonly componentStore = inject(UsersListContainerStore);
 
-  modifyUserCard(change: CardChanges): void {
-    if (change.mod === 'delete') {
-      this.componentStore.deleteUser(change.cardId)
+  modifyUserCard(changes: CardChanges): void {
+    if (changes.mod === 'delete') {
+      this.componentStore.deleteUser(changes.userId)
     }
   }
 }
