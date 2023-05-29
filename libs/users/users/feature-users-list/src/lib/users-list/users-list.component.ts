@@ -6,15 +6,23 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersListVM } from './users-list-view-model';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatButtonModule} from '@angular/material/button';
+import { UsersCardComponent } from "../users-card/users-card.component";
 
 @Component({
-  selector: 'users-list-ui',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './users-list.component.html',
-  styleUrls: ['./users-list.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'users-list-ui',
+    standalone: true,
+    templateUrl: './users-list.component.html',
+    styleUrls: ['./users-list.component.scss'],
+    encapsulation: ViewEncapsulation.Emulated,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        CommonModule,
+        UsersCardComponent
+    ]
 })
 export class UsersListComponent {
   @Input({required: true})
