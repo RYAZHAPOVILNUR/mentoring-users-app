@@ -14,7 +14,7 @@ const initialState: UsersListState = {
   users: []
 }
 
-@Injectable()
+@Injectable({providedIn: "root"})
 export class UsersListContainerStore extends ComponentStore<UsersListState> {
   private readonly usersFacade = inject(UsersFacade);
   public readonly users$ = this.select(({users}) => users);
