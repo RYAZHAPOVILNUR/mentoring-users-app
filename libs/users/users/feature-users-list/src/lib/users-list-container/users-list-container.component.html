@@ -1,5 +1,5 @@
 <ng-container *ngIf="users$ | async as users">
   <ng-container *ngIf="status$ | async as status">
-    <users-list-ui [vm]="{users, status}" />
+    <users-list-ui [vm]="{users, status}" (itemChanged)="modifyUserCard($event)" />
   </ng-container>
 </ng-container>

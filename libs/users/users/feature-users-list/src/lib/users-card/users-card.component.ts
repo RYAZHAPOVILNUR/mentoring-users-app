@@ -1,9 +1,13 @@
-import {ChangeDetectionStrategy, Component, inject, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {UsersVM} from '../users-vm';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
-import {UsersAdminService} from "../users-admin.service";
+
+export type CardChanges = {
+  userId: number;
+  mod: 'delete' | 'edit';
+}
 
 @Component({
   selector: 'users-card',
@@ -15,9 +19,13 @@ import {UsersAdminService} from "../users-admin.service";
 })
 export class UsersCardComponent {
   @Input({required: true}) user!: UsersVM
-  private usersAdmin = inject(UsersAdminService)
+  @Output() changeTrigger = new EventEmitter<CardChanges>();
 
   onDelete(userId: number) {
-    this.usersAdmin.modifyUserCard({userId, mod: 'delete'})
+    this.changeTrigger.emit({userId, mod: "delete"})
+  }
+
+  onEdit(userId: number) {
+    this.changeTrigger.emit({userId, mod: "edit"})
   }
 }

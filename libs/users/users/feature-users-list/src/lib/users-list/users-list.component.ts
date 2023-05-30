@@ -1,12 +1,12 @@
 import {
   ChangeDetectionStrategy,
-  Component,
-  Input,
+  Component, EventEmitter,
+  Input, Output,
   ViewEncapsulation,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersListVM } from './users-list-view-model';
-import { UsersCardComponent } from "../users-card/users-card.component";
+import {CardChanges, UsersCardComponent} from "../users-card/users-card.component";
 
 @Component({
     selector: 'users-list-ui',
@@ -21,6 +21,15 @@ import { UsersCardComponent } from "../users-card/users-card.component";
     ]
 })
 export class UsersListComponent {
-  @Input({required: true})
-  vm!: UsersListVM;
+  @Input({required: true}) vm!: UsersListVM;
+  @Output() itemChanged = new EventEmitter<CardChanges>()
+
+  public cardChangesHandler({userId, mod}: CardChanges) {
+    if (mod === "delete") {
+      this.itemChanged.emit({userId, mod: "delete"})
+    }
+    // if (mod === "edit") {
+    //   ...
+    // }
+  }
 }
