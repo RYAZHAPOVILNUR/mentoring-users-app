@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersVM } from '../users-vm';
 import { MatCardModule } from '@angular/material/card';
@@ -13,6 +13,12 @@ import { MatButtonModule } from '@angular/material/button';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersCardComponent {
-  @Input({required: true})
+  @Input({ required: true })
   user!: UsersVM
+
+  @Output() deleteUser = new EventEmitter();
+
+  onDeleteUser() {
+    this.deleteUser.emit();
+  }
 }
