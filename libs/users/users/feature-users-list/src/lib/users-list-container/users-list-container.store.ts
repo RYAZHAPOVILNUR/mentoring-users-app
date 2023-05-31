@@ -2,9 +2,9 @@ import { Injectable, inject } from "@angular/core";
 import { ComponentStore } from "@ngrx/component-store";
 import { UsersEntity, UsersFacade } from "@users/users/data-access";
 import { DeepReadonly } from '@users/core/utils'
-import { UsersVM } from "../users-vm";
+import { UsersVM } from "../../../../users-vm";
 import { tap } from "rxjs";
-import { usersVMAdapter } from "../users-vm.adapter";
+import { usersVMAdapter } from "../../../../users-vm.adapter";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { UsersUserDeleteDialogComponent } from "../users-user-delete-dialog/users-user-delete-dialog.component";
 
