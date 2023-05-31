@@ -41,9 +41,9 @@ const reducer = createReducer(
     status: 'error',
     error
   })),
-  on(UsersActions.deleteUser, (state, {id}) =>
-    usersAdapter.removeOne(id, {...state})
-  )
+  on(UsersActions.deleteUserSuccess, (state, { id }) =>
+    usersAdapter.removeOne(id, { ...state })
+  ),
 );
 
 export function usersReducer(state: UsersState | undefined, action: Action) {

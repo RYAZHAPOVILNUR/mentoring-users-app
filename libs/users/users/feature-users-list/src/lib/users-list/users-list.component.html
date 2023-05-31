@@ -7,7 +7,10 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4 mb-3" *ngFor="let user of vm.users">
-          <users-card [user]="user" (changeTrigger)="cardChangesHandler($event)"/>
+          <users-card
+          [user]="user"
+          (deleteUser)="onDeleteUser(user)"
+          />
         </div>
       </div>
     </div>

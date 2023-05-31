@@ -3,6 +3,7 @@ import { select, Store } from '@ngrx/store';
 
 import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
+import { UsersEntity } from './users.entity';
 
 @Injectable()
 export class UsersFacade {
@@ -24,7 +25,7 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.initUsers());
   }
 
-  deleteUser(id: number) {
+  deleteUser(id:number) {
     this.store.dispatch(UsersActions.deleteUser({id}))
   }
 }

@@ -1,13 +1,8 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {UsersVM} from '../users-vm';
-import {MatCardModule} from '@angular/material/card';
-import {MatButtonModule} from '@angular/material/button';
-
-export type CardChanges = {
-  userId: number;
-  mod: 'delete' | 'edit';
-}
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { UsersVM } from '../users-vm';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'users-card',
@@ -18,14 +13,12 @@ export type CardChanges = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersCardComponent {
-  @Input({required: true}) user!: UsersVM
-  @Output() changeTrigger = new EventEmitter<CardChanges>();
+  @Input({ required: true })
+  user!: UsersVM
 
-  onDelete(userId: number) {
-    this.changeTrigger.emit({userId, mod: "delete"})
-  }
+  @Output() deleteUser = new EventEmitter();
 
-  onEdit(userId: number) {
-    this.changeTrigger.emit({userId, mod: "edit"})
+  onDeleteUser() {
+    this.deleteUser.emit();
   }
 }

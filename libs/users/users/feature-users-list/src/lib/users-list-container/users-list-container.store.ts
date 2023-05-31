@@ -5,6 +5,8 @@ import { DeepReadonly } from '@users/core/utils'
 import { UsersVM } from "../users-vm";
 import { tap } from "rxjs";
 import { usersVMAdapter } from "../users-vm.adapter";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { UsersUserDeleteDialogComponent } from "../users-user-delete-dialog/users-user-delete-dialog.component";
 
 type UsersListState = DeepReadonly<{
   users: UsersVM[]
@@ -17,6 +19,7 @@ const initialState: UsersListState = {
 @Injectable({providedIn: "root"})
 export class UsersListContainerStore extends ComponentStore<UsersListState> {
   private readonly usersFacade = inject(UsersFacade);
+  private readonly dialog = inject(MatDialog);
   public readonly users$ = this.select(({users}) => users);
   public readonly status$ = this.select(
     this.usersFacade.status$,
@@ -47,5 +50,21 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
         user => usersVMAdapter.entityToVM(user)
       )
     })
+  }
+
+  public deleteUser(user: UsersVM): void {
+    const dialogRef: MatDialogRef<UsersUserDeleteDialogComponent> = this.dialog.open(UsersUserDeleteDialogComponent,{
+        data: {name: user.name}
+    });
+
+    this.effect(
+      () => dialogRef.afterClosed().pipe(
+        tap(
+          (result: boolean) => {
+            if (result) this.usersFacade.deleteUser(user.id)
+          }
+        )
+      )
+    )
   }
 }
