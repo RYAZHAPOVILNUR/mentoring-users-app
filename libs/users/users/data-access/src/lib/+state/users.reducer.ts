@@ -41,6 +41,18 @@ const reducer = createReducer(
     status: 'error',
     error
   })),
+  on(UsersActions.createUserSuccess, (state, { name, username, email }) =>
+    usersAdapter.addOne({
+      id: null as any,
+      name,
+      username,
+      email,
+      address: null as any,
+      phone: null as any,
+      website: null as any,
+      company: null as any
+    }, { ...state })
+  ),
   on(UsersActions.deleteUserSuccess, (state, { id }) =>
     usersAdapter.removeOne(id, { ...state })
   ),

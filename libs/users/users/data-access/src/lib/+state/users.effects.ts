@@ -32,6 +32,23 @@ export const userEffects = createEffect(
   }, { functional: true }
 )
 
+export const createUser = createEffect(() => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    return actions$.pipe(
+      ofType(UsersActions.createUser),
+      switchMap(({ name, username, email }) => apiService.post(`/users`, { name, username, email }).pipe(
+          map(() => UsersActions.createUserSuccess({ name, username, email })),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(UsersActions.createUserFailed({ error }))
+          })
+        )
+      ),
+    )
+  }, { functional: true }
+)
+
 export const deleteUser = createEffect(
   () => {
     const actions$ = inject(Actions);

@@ -1,1 +1,32 @@
-<p>create-users-dialog works!</p>
+<div class="create_dialog" [formGroup]="form">
+  <div mat-dialog-title>Добавить пользователя</div>
+
+  <div class="create_dialog__fields">
+    <mat-form-field appearance="outline">
+      <mat-label>Имя</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Фамилия</mat-label>
+      <input matInput formControlName="username">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email">
+    </mat-form-field>
+  </div>
+
+
+  <div mat-dialog-actions>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="form.invalid"
+      [mat-dialog-close]="true"
+      (click)="createUser()">Добавить</button>
+  </div>
+</div>
+
+
