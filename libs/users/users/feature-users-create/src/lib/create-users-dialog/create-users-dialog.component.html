@@ -1,1 +1,20 @@
-<p>create-users-dialog works!</p>
+<h1 mat-dialog-title>Добавление нового пользователя</h1>
+<div mat-dialog-content>
+  <form [formGroup]="formGroup">
+   <div class="dialog-content">
+    <mat-form-field>
+      <input matInput placeholder="Имя" formControlName="name">
+      <mat-error>Имя обязательно</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Электронная почта" formControlName="email">
+      <mat-error>Введите корректную электронную почту</mat-error>
+    </mat-form-field>
+   </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Отмена</button>
+  <button mat-raised-button color="primary" (click)="save()" [disabled]=" formGroup.invalid">Сохранить</button>
+</div>
+
