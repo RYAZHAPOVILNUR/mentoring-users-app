@@ -9,7 +9,8 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-    selector: 'users-users-user-delete-dialog',
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: 'user-delete-dialog',
     standalone: true,
     templateUrl: './users-user-delete-dialog.component.html',
     styleUrls: ['./users-user-delete-dialog.component.scss'],
