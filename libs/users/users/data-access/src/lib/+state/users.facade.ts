@@ -28,4 +28,8 @@ export class UsersFacade {
   deleteUser(id:number) {
     this.store.dispatch(UsersActions.deleteUser({id}))
   }
+
+  addUser(userData:UsersEntity) {
+    this.store.dispatch(UsersActions.addUser({userData}))
+  }
 }
