@@ -1,0 +1,8 @@
+.create_dialog {
+  padding: 20px;
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+  }
+}
