@@ -40,10 +40,6 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
     )
   }
 
-  public deleteUser(id: number): void {
-    this.usersFacade.deleteUser(id)
-  }
-
   private patchUsers(users: UsersEntity[]): void {
     this.patchState({
       users: users.map(

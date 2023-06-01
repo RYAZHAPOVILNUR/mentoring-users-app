@@ -50,3 +50,14 @@ export const deleteUser = createEffect(
     )
   }, { functional: true }
 )
+
+// export const createUser = createEffect(
+//   () => {
+//     const actions$ = inject(Actions);
+//     const apiService = inject(ApiService);
+//
+//     return actions$.pipe(
+//       ofType(UsersActions.createUser)
+//     )
+//   }, {functional: true}
+// )

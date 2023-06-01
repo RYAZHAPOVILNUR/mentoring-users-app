@@ -44,6 +44,9 @@ const reducer = createReducer(
   on(UsersActions.deleteUserSuccess, (state, { id }) =>
     usersAdapter.removeOne(id, { ...state })
   ),
+  on(UsersActions.createUser, (state, UsersEntity) =>
+    usersAdapter.addOne(UsersEntity, {...state})
+  )
 );
 
 export function usersReducer(state: UsersState | undefined, action: Action) {

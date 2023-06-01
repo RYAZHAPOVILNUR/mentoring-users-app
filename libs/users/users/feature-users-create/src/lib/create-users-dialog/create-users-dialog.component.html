@@ -1,1 +1,39 @@
-<p>create-users-dialog works!</p>
+<h1 mat-dialog-title>Новый пользователь</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-field">
+      <div class="form-field--names">
+        <mat-form-field subscriptSizing="fixed">
+          <mat-label>Имя</mat-label>
+          <input matInput type="text" formControlName="name">
+          <p matError *ngIf="form.get('name')!.invalid && form.get('name')!.touched" class="error-message">
+            Имя обязательно
+          </p>
+        </mat-form-field>
+        <mat-form-field subscriptSizing="fixed">
+          <mat-label>Фамилия</mat-label>
+          <input matInput type="text" formControlName="username">
+          <p matError *ngIf="form.get('username')!.invalid && form.get('username')!.touched" class="error-message">
+            Фамилия обязательна
+          </p>
+        </mat-form-field>
+      </div>
+      <div class="form-field--email">
+        <mat-form-field subscriptSizing="fixed">
+          <mat-label>Эл.почта</mat-label>
+          <input matInput type="email" formControlName="email">
+          <p matError *ngIf="form.get('email')!.invalid && form.get('email')!.touched" class="error-message">
+            Пожалуйста, введите корректный email
+          </p>
+        </mat-form-field>
+      </div>
+      <div class="form-field--actions">
+        <div mat-dialog-actions>
+          <button type="submit" mat-raised-button color="primary">Создать</button>
+          <button type="button" mat-button (click)="onCancel()">Отменить</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+

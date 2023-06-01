@@ -5,7 +5,7 @@ import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
 import { UsersEntity } from './users.entity';
 
-@Injectable()
+@Injectable({providedIn: "root"})
 export class UsersFacade {
   private readonly store = inject(Store);
 
@@ -27,5 +27,9 @@ export class UsersFacade {
 
   deleteUser(id:number) {
     this.store.dispatch(UsersActions.deleteUser({id}))
+  }
+
+  createUser(user: UsersEntity): void {
+    this.store.dispatch(UsersActions.createUser(user))
   }
 }
