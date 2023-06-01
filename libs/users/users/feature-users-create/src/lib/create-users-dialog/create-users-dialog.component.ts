@@ -44,6 +44,7 @@ export class CreateUsersDialogComponent {
 
   onCancel() {
     this.form.reset();
+    this.dialogRef.close();
   }
 
   markFormGroupTouched(formGroup: FormGroup) {

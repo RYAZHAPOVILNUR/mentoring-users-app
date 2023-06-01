@@ -10,12 +10,9 @@ export const usersVMAdapter: UsersVMAdapter = {
   entityToVM({ id, name, username, email }) {
     return {id, name, username, email}
   },
-  VMtoEntity(VM: UsersVM): UsersEntity {
+  VMtoEntity({id, name, username, email}: UsersVM): UsersEntity {
     return {
-      id: VM.id,
-      name: VM.name,
-      username: VM.username,
-      email: VM.email,
+      id, name, username, email,
       address: {
         street: '',
         suite: '',
