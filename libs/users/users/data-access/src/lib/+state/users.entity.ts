@@ -2,8 +2,6 @@
  * Interface for the 'Users' data
  */
 
-import { Address, UsersDTO } from "../users-dto.model";
+import { UsersDTO } from "../users-dto.model";
 
-export type UsersEntity = Omit<UsersDTO, 'address'> & {
-  address: Omit<Address, 'geo'>
-}
+export type UsersEntity = Omit<UsersDTO, 'created_at'>

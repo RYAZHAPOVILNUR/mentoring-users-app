@@ -3,7 +3,7 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { switchMap, catchError, of, map } from 'rxjs';
 import * as UsersActions from './users.actions';
 import { ApiService } from '@users/core/http';
-import { UsersDTO } from '../users-dto.model';
+import { CreateUserDTO, UsersDTO } from '../users-dto.model';
 import { usersDTOAdapter } from '../users-dto.adapter';
 import { UsersEntity } from './users.entity';
 
@@ -59,7 +59,7 @@ export const addUser = createEffect(
     return actions$.pipe(
       ofType(UsersActions.addUser),
       switchMap(
-        ({ userData }) => apiService.post<UsersEntity, UsersEntity>('/users', userData).pipe(
+        ({ userData }) => apiService.post<UsersDTO, CreateUserDTO>('/users', userData).pipe(
           map((user) => UsersActions.addUserSuccess({userData:user})),
           catchError((error) => {
             console.error('Error', error);

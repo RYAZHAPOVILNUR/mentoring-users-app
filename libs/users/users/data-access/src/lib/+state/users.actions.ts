@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { UsersEntity } from './users.entity';
+import { CreateUserDTO } from '../users-dto.model';
 
 
 export const initUsers = createAction('[Users Page] Init');
@@ -19,6 +20,6 @@ export const deleteUserSuccess = createAction('[Users/Api] Delete User Success',
 export const deleteUserFailed = createAction('[Users/Api] Delete User Failed', props<{ error: any }>());
 
 
-export const addUser = createAction('[Users Page] Add User', props<{userData:UsersEntity}>());
+export const addUser = createAction('[Users Page] Add User', props<{userData: CreateUserDTO}>());
 export const addUserSuccess = createAction('[Users/Api] Add User Success', props<{userData:UsersEntity}>());
 export const addUserFailed = createAction('[Users/Api] Add User Failed', props<{ error: any }>());
