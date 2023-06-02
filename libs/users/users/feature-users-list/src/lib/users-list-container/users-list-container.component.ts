@@ -24,9 +24,9 @@ import { UsersFacade } from '@users/users/data-access';
 })
 export class UsersListContainerComponent {
   private readonly componentStore = inject(UsersListContainerStore);
+  public usersFacade = inject(UsersFacade);
   public readonly users$ = this.componentStore.users$;
   public readonly status$ = this.componentStore.status$;
-  public usersFacade = inject(UsersFacade);
 
   onDeleteUser(user: UsersVM) {
     this.componentStore.deleteUser(user)

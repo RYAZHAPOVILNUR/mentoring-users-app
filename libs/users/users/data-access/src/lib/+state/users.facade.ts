@@ -3,7 +3,7 @@ import { select, Store } from '@ngrx/store';
 
 import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
-import { UsersEntity } from './users.entity';
+import { CreateUserDTO } from '../users-dto.model';
 
 @Injectable()
 export class UsersFacade {
@@ -29,7 +29,7 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.deleteUser({id}))
   }
 
-  addUser(userData:UsersEntity) {
+  addUser(userData: CreateUserDTO) {
     this.store.dispatch(UsersActions.addUser({userData}))
   }
 }
