@@ -21,6 +21,9 @@
       "@users/feature-users-create": [
         "libs/users/users/feature-users-create/src/index.ts"
       ],
+      "@users/feature-users-detail": [
+        "libs/users/users/feature-users-detail/src/index.ts"
+      ],
       "@users/feature-users-list": [
         "libs/users/users/feature-users-list/src/index.ts"
       ],
