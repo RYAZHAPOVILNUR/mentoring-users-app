@@ -46,7 +46,7 @@ export class DetailUsersCardComponent implements OnInit {
   }
 
   submit(): void {
-    this.dataService.setData(this.formGroup.value)
+    this.dataService.setData(this.formGroup.value);
   }
 
 }
