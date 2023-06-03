@@ -5,7 +5,6 @@ import * as UsersActions from './users.actions';
 import { ApiService } from '@users/core/http';
 import { CreateUserDTO, UsersDTO } from '../users-dto.model';
 import { usersDTOAdapter } from '../users-dto.adapter';
-import { UsersEntity } from './users.entity';
 
 export const userEffects = createEffect(
   () => {
@@ -60,11 +59,30 @@ export const addUser = createEffect(
       ofType(UsersActions.addUser),
       switchMap(
         ({ userData }) => apiService.post<UsersDTO, CreateUserDTO>('/users', userData).pipe(
-          map((user) => UsersActions.addUserSuccess({userData:user})),
+          map((user) => UsersActions.addUserSuccess({ userData: user })),
           catchError((error) => {
             console.error('Error', error);
             return of(UsersActions.addUserFailed({ error }))
           })
         )))
+  }, { functional: true }
+)
+
+export const editUser = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    return actions$.pipe(
+      ofType(UsersActions.editUser),
+      switchMap(
+        ({ userData, id }) => apiService.post<UsersDTO, CreateUserDTO>(`/users/${id}`, userData).pipe(
+          map((userData) => UsersActions.addUserSuccess({ userData })),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(UsersActions.editUserFailed({ error }))
+          })
+        )
+      )
+    )
   }, { functional: true }
 )

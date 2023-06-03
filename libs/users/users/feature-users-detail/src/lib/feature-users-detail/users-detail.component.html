@@ -1,1 +1,7 @@
-<h1>USERS DETAIL</h1>
+<ng-container *ngIf="selectedUser">
+  <detail-users-card [user] = "selectedUser"></detail-users-card>
+</ng-container>
+
+<ng-container *ngIf="!selectedUser">
+  <span>Данный пользователь не найден!</span>
+</ng-container>
