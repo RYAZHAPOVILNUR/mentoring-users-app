@@ -41,7 +41,7 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.deleteSelectedId());
   }
 
-  editUser(userData:CreateUserDTO, id: number) {
+  editUser(userData: CreateUserDTO, id: number) {
     this.store.dispatch(UsersActions.editUser({userData, id}));
   }
 
