@@ -45,8 +45,17 @@ const reducer = createReducer(
     usersAdapter.removeOne(id, { ...state })
   ),
   on(UsersActions.addUserSuccess, (state, { userData }) =>
-    usersAdapter.addOne({...userData, id: Date.now()}, { ...state })
-  )
+    usersAdapter.addOne({ ...userData, id: Date.now() }, { ...state })
+  ),
+  on(UsersActions.selectId, (state, { id }) => ({
+    ...state,
+    selectedId: id
+  })
+  ),
+  on(UsersActions.deleteSelectedId, ({ selectedId, ...state }) => ({
+    ...state
+  })
+  ),
 );
 
 export function usersReducer(state: UsersState | undefined, action: Action) {
