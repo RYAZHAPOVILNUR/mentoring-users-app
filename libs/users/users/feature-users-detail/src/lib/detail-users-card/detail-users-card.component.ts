@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CreateUserDTO, DataExchangeService } from '@users/users/data-access';
+import { CreateUserDTO } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -28,10 +28,10 @@ export class DetailUsersCardComponent implements OnInit {
   @Input({ required: true })
   user!: CreateUserDTO;
 
+  @Output() editUser = new EventEmitter<CreateUserDTO>();
+
   public formGroup!: FormGroup;
   private formBuilder!: FormBuilder;
-
-  private dataService = inject(DataExchangeService);
 
   ngOnInit(): void {
     this.formBuilder = new FormBuilder();
@@ -46,7 +46,7 @@ export class DetailUsersCardComponent implements OnInit {
   }
 
   submit(): void {
-    this.dataService.setData(this.formGroup.value);
+    this.editUser.emit(this.formGroup.value)
   }
 
 }

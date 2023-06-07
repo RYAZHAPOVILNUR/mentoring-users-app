@@ -1,5 +1,5 @@
 <ng-container *ngIf="selectedUser">
-  <detail-users-card [user]="selectedUser"></detail-users-card>
+  <detail-users-card [user]="selectedUser" (editUser)="onEditUser($event)"></detail-users-card>
 </ng-container>
 
 <ng-container *ngIf="!selectedUser">
