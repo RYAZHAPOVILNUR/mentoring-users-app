@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DetailUsersCardComponent } from '../detail-users-card/detail-users-card.component';
-import { UsersEntity, UsersFacade } from "@users/users/data-access";
+import { CreateUserDTO, UsersEntity, UsersFacade } from "@users/users/data-access";
 import { Subscription, filter } from 'rxjs';
 import { DataExchangeService } from '@users/users/data-access'
 
@@ -34,7 +34,6 @@ export class UsersDetailComponent implements OnDestroy {
   constructor() {
     this.setUserId();
     this.getSelectedUser();
-    this.sendEditedUser();
   }
 
   private selectUser(id: number) {
@@ -56,18 +55,14 @@ export class UsersDetailComponent implements OnDestroy {
     )
   }
 
-  private sendEditedUser() {
-    this.dataServiceSubscription = this.dataService.data$.pipe(
-      filter(data => data !== null)
-    ).subscribe(data => {
-      this.usersFacade.editUser(data, this.userId);
-      this.router.navigate(['/home'])
-    });
+  public onEditUser(userData: CreateUserDTO) {
+    this.usersFacade.editUser(userData, this.userId);
+    this.router.navigate(['/home'])
   }
+
 
   ngOnDestroy(): void {
     this.usersFacade.deleteSelectedId();
     this.selectedUserSubscription.unsubscribe()
-    this.dataServiceSubscription.unsubscribe();
   }
 }
