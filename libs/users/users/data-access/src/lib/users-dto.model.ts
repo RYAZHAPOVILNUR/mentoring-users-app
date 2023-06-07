@@ -10,11 +10,11 @@ export type UsersDTO = DeepReadonly<{
 }>
 
 
-export type CreateUserDTO = DeepReadonly<{
+export type CreateUserDTO = {
   id?: number;
   name: string;
   username?: string;
   email: string;
   city?: string;
   created_at?: number;
-}>
+}

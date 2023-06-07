@@ -1,0 +1,29 @@
+.edit-user-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.edit-user-card {
+  width: 400px;
+  padding: 20px;
+}
+
+.edit-user-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.edit-user-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-user-content {
+  margin-bottom: 20px;
+}
+
+.edit-user-field {
+  width: 100%;
+}

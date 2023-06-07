@@ -1,0 +1,45 @@
+<!-- <mat-card>
+  <h1>Редактирование пользователя</h1>
+  <form [formGroup]="formGroup" (ngSubmit)="submit()">
+    <div class="dialog-content">
+      <mat-form-field>
+        <mat-label>Имя:</mat-label>
+        <input matInput placeholder="Имя*"  formControlName="name">
+        <mat-error *ngIf="formGroup.hasError('required', 'name')">Это поле обязательно для заполненияw</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Электронная почта:</mat-label>
+        <input matInput placeholder="Электронная почта*" formControlName="email" >
+        <mat-error
+          *ngIf="formGroup.get('email')?.hasError('required') || formGroup.get('email')?.hasError('email')">Введите
+          корректную электронную почту</mat-error>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" [disabled]=" formGroup.invalid">Принять</button>
+  </form>
+</mat-card> -->
+
+<div class="edit-user-container">
+  <mat-card class="edit-user-card">
+    <h1 class="edit-user-title">Редактирование пользователя</h1>
+    <form [formGroup]="formGroup" (ngSubmit)="submit()" class="edit-user-form">
+      <div class="edit-user-content">
+        <mat-form-field class="edit-user-field">
+          <mat-label>Имя:</mat-label>
+          <input matInput placeholder="Имя*" formControlName="name" class="edit-user-input">
+          <mat-error *ngIf="formGroup.hasError('required', 'name')">Это поле обязательно для заполнения</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="edit-user-field">
+          <mat-label>Электронная почта:</mat-label>
+          <input matInput placeholder="Электронная почта*" formControlName="email" class="edit-user-input">
+          <mat-error *ngIf="formGroup.get('email')?.hasError('required') || formGroup.get('email')?.hasError('email')">
+            Введите корректную электронную почту
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <button mat-raised-button color="primary" [disabled]="formGroup.invalid" class="edit-user-button">Принять</button>
+    </form>
+  </mat-card>
+</div>

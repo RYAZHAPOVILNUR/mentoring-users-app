@@ -32,4 +32,18 @@ export class UsersFacade {
   addUser(userData: CreateUserDTO) {
     this.store.dispatch(UsersActions.addUser({userData}))
   }
+
+  selectId(id:number) {
+    this.store.dispatch(UsersActions.selectId({id}));
+  }
+
+  deleteSelectedId() {
+    this.store.dispatch(UsersActions.deleteSelectedId());
+  }
+
+  editUser(userData:CreateUserDTO, id: number) {
+    this.store.dispatch(UsersActions.editUser({userData, id}));
+  }
+
+
 }
