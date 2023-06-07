@@ -1,10 +1,13 @@
 import { inject } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, catchError, of, map } from 'rxjs';
+import { switchMap, catchError, of, map, withLatestFrom, filter } from 'rxjs';
 import * as UsersActions from './users.actions';
 import { ApiService } from '@users/core/http';
 import { CreateUserDTO, UsersDTO } from '../users-dto.model';
 import { usersDTOAdapter } from '../users-dto.adapter';
+import { Store, select } from '@ngrx/store';
+import { selectUsersEntities } from './users.selectors';
+import { UsersEntity } from './users.entity';
 
 export const userEffects = createEffect(
   () => {
@@ -72,11 +75,32 @@ export const editUser = createEffect(
   () => {
     const actions$ = inject(Actions);
     const apiService = inject(ApiService);
+    const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
+
     return actions$.pipe(
       ofType(UsersActions.editUser),
+      withLatestFrom(usersEntities$),
+      filter(([{id}, usersEntities]) => Boolean(usersEntities[id])),
+      // map(([{userData, id}, usersEntities]) => ({
+      //   ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
+      //   name: userData.name,
+      //   email: userData.email
+      // })),
+      map(([editUserPayload, usersEntities]) => {
+        const idUserToEdit = editUserPayload.id;
+        const usersEntityToEdit = <UsersEntity>usersEntities[idUserToEdit];
+        const dtoUser = usersDTOAdapter.entityToDTO(usersEntityToEdit);
+        const dtoToUpdateUser = {
+          ...dtoUser,
+          name: editUserPayload.userData.name,
+          email: editUserPayload.userData.email
+        }
+
+        return dtoToUpdateUser;
+      }),
       switchMap(
-        ({ userData, id }) => apiService.post<UsersDTO, CreateUserDTO>(`/users/${id}`, userData).pipe(
-          map((userData) => UsersActions.addUserSuccess({ userData })),
+        (user) => apiService.post<UsersDTO, UsersDTO>(`/users/${user.id}`, user).pipe(
+          map((userData) => UsersActions.editUserSuccess({ userData })),
           catchError((error) => {
             console.error('Error', error);
             return of(UsersActions.editUserFailed({ error }))

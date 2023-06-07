@@ -47,6 +47,10 @@ const reducer = createReducer(
   on(UsersActions.addUserSuccess, (state, { userData }) =>
     usersAdapter.addOne({ ...userData, id: Date.now() }, { ...state })
   ),
+  on(UsersActions.editUserSuccess, (state, { userData }) => usersAdapter.updateOne({
+    id: userData.id, 
+    changes: userData
+  }, state)),
   on(UsersActions.selectId, (state, { id }) => ({
     ...state,
     selectedId: id

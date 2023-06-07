@@ -5,7 +5,6 @@ import { DetailUsersCardComponent } from '../detail-users-card/detail-users-card
 import { UsersEntity, UsersFacade } from "@users/users/data-access";
 import { Subscription, filter } from 'rxjs';
 import { DataExchangeService } from '@users/users/data-access'
-import { Store } from '@ngrx/store';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
