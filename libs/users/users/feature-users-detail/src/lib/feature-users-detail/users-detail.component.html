@@ -1,7 +1,11 @@
-<ng-container *ngIf="selectedUser">
-  <detail-users-card [user]="selectedUser" (editUser)="onEditUser($event)"></detail-users-card>
+<ng-container *ngIf="currentUser">
+  <detail-users-card [user]="currentUser" (editUser)="onEditUser($event)"></detail-users-card>
 </ng-container>
 
-<ng-container *ngIf="!selectedUser">
+<ng-container *ngIf="!currentUser">
   <span>Данный пользователь не найден!</span>
 </ng-container>
+
+<pre>
+  {{currentUser | json}}
+</pre>

@@ -4,6 +4,8 @@ import { select, Store } from '@ngrx/store';
 import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
 import { CreateUserDTO } from '../users-dto.model';
+import { Observable, of, switchMap } from 'rxjs';
+import { UsersEntity } from './users.entity';
 
 @Injectable()
 export class UsersFacade {
@@ -25,24 +27,35 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.initUsers());
   }
 
-  deleteUser(id:number) {
-    this.store.dispatch(UsersActions.deleteUser({id}))
+  deleteUser(id: number) {
+    this.store.dispatch(UsersActions.deleteUser({ id }))
   }
 
   addUser(userData: CreateUserDTO) {
-    this.store.dispatch(UsersActions.addUser({userData}))
-  }
-
-  selectId(id:number) {
-    this.store.dispatch(UsersActions.selectId({id}));
-  }
-
-  deleteSelectedId() {
-    this.store.dispatch(UsersActions.deleteSelectedId());
+    this.store.dispatch(UsersActions.addUser({ userData }))
   }
 
   editUser(userData: CreateUserDTO, id: number) {
-    this.store.dispatch(UsersActions.editUser({userData, id}));
+    this.store.dispatch(UsersActions.editUser({ userData, id }));
+  }
+
+  getUserFromStore(id: number) {
+    return this.store.select(UsersSelectors.selectUserById(id))
+      .pipe(
+        switchMap((user: UsersEntity | undefined): Observable<UsersEntity> => {
+          if (user) {
+            return of(user);
+          } else {
+            this.loadUser(id);
+            this.init();
+           return this.getUserFromStore(id)
+          }
+        })
+      )
+  }
+
+  loadUser(id: number) {
+    this.store.dispatch(UsersActions.loadUser({ id }))
   }
 
 
