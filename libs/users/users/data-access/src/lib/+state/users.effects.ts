@@ -80,7 +80,7 @@ export const editUser = createEffect(
     return actions$.pipe(
       ofType(UsersActions.editUser),
       withLatestFrom(usersEntities$),
-      filter(([{id}, usersEntities]) => Boolean(usersEntities[id])),
+      filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
       // map(([{userData, id}, usersEntities]) => ({
       //   ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
       //   name: userData.name,
@@ -106,6 +106,26 @@ export const editUser = createEffect(
             return of(UsersActions.editUserFailed({ error }))
           })
         )
+      )
+    )
+  }, { functional: true }
+)
+
+export const loadUser = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    return actions$.pipe(
+      ofType(UsersActions.loadUser),
+      switchMap(
+        ({ id }) => apiService.get<UsersDTO>(`/users/${id}`)
+          .pipe(
+            map((userData) => UsersActions.loadUserSuccess({ userData })),
+            catchError((error) => {
+              console.error('Error', error);
+              return of(UsersActions.editUserFailed({ error }))
+            })
+          )
       )
     )
   }, { functional: true }
