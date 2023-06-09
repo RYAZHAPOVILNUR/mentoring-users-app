@@ -7,7 +7,7 @@ import { CreateUserDTO } from '../users-dto.model';
 import { Observable, of, switchMap } from 'rxjs';
 import { UsersEntity } from './users.entity';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class UsersFacade {
   private readonly store = inject(Store);
 
@@ -18,6 +18,7 @@ export class UsersFacade {
   status$ = this.store.pipe(select(UsersSelectors.selectUsersStatus));
   allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
   selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
+  public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
 
   /**
    * Use the initialization action to perform one
@@ -42,21 +43,17 @@ export class UsersFacade {
   getUserFromStore(id: number) {
     return this.store.select(UsersSelectors.selectUserById(id))
       .pipe(
-        switchMap((user: UsersEntity | undefined): Observable<UsersEntity> => {
+        switchMap((user: UsersEntity | undefined): Observable<UsersEntity | null> => {
           if (user) {
             return of(user);
           } else {
-            this.loadUser(id);
-            this.init();
-           return this.getUserFromStore(id)
+            return of(null)
           }
         })
       )
   }
 
-  loadUser(id: number) {
-    this.store.dispatch(UsersActions.loadUser({ id }))
+  loadUser() {
+    this.store.dispatch(UsersActions.loadUser())
   }
-
-
 }
