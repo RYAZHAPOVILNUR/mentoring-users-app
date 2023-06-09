@@ -47,8 +47,7 @@ export class UsersFacade {
             return of(user);
           } else {
             this.loadUser(id);
-            this.init();
-           return this.getUserFromStore(id)
+
           }
         })
       )
