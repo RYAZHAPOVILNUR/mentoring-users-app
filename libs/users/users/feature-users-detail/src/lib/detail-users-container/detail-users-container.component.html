@@ -1,0 +1,11 @@
+<ng-container *ngIf="currentUser$ | async as user">
+  <ng-container *ngIf="loadingStatus$ | async as status">
+    <detail-users-page
+    [vm]="{user, status}"
+    (userData)="onEditUser($event)"
+    />
+  </ng-container>
+</ng-container>
+<ng-template #nothing>
+
+</ng-template>

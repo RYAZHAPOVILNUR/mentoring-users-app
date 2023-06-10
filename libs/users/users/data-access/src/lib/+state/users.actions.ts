@@ -32,6 +32,6 @@ export const editUser = createAction('[Users Detail] Edit User', props<{ userDat
 export const editUserSuccess = createAction('[Users Detail] Edit User Success', props<{ userData: UsersDTO }>());
 export const editUserFailed = createAction('[Users Detail] Edit Failed', props<{ error: any }>());
 
-export const loadUser = createAction('[Users Page] Load User');
+export const loadUser = createAction('[Users Page] Start Loading User');
 export const loadUserSuccess = createAction('[Users/Api] Load User Success', props<{ userData: UsersDTO }>());
 export const loadUserFailed = createAction('[Users/Api] Load User Failed', props<{ error: any }>());

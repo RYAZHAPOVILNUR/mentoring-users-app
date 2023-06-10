@@ -57,9 +57,9 @@ const reducer = createReducer(
   })),
   on(UsersActions.loadUserSuccess, (state, { userData }) =>
     usersAdapter.addOne({ ...userData }, { ...state, status: 'loaded' })),
-  on(UsersActions.loadUserFailed, (state) => ({
+  on(UsersActions.loadUserFailed, (state, { error }) => ({
     ...state,
-    status: 'error'
+    status: 'error', error
   })),
 );
 

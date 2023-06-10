@@ -82,23 +82,23 @@ export const editUser = createEffect(
       ofType(UsersActions.editUser),
       withLatestFrom(usersEntities$),
       filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
-      // map(([{userData, id}, usersEntities]) => ({
-      //   ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
-      //   name: userData.name,
-      //   email: userData.email
-      // })),
-      map(([editUserPayload, usersEntities]) => {
-        const idUserToEdit = editUserPayload.id;
-        const usersEntityToEdit = <UsersEntity>usersEntities[idUserToEdit];
-        const dtoUser = usersDTOAdapter.entityToDTO(usersEntityToEdit);
-        const dtoToUpdateUser = {
-          ...dtoUser,
-          name: editUserPayload.userData.name,
-          email: editUserPayload.userData.email
-        }
-
-        return dtoToUpdateUser;
-      }),
+      map(([{userData, id}, usersEntities]) => ({
+        ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
+        name: userData.name,
+        email: userData.email
+      })),
+      // map(([editUserPayload, usersEntities]) => {
+      //   const idUserToEdit = editUserPayload.id;
+      //   const usersEntityToEdit = <UsersEntity>usersEntities[idUserToEdit];
+      //   const dtoUser = usersDTOAdapter.entityToDTO(usersEntityToEdit);
+      //   const dtoToUpdateUser = {
+      //     ...dtoUser,
+      //     name: editUserPayload.userData.name,
+      //     email: editUserPayload.userData.email
+      //   }
+      //
+      //   return dtoToUpdateUser;
+      // }),
       switchMap(
         (user) => apiService.post<UsersDTO, UsersDTO>(`/users/${user.id}`, user).pipe(
           map((userData) => UsersActions.editUserSuccess({ userData })),

@@ -12,6 +12,6 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'users/:id',
-    loadComponent: () => import('@users/feature-users-detail').then(c => c.UsersDetailComponent)
+    loadComponent: () => import('@users/feature-users-detail').then(c => c.DetailUsersContainerComponent)
   }
 ];

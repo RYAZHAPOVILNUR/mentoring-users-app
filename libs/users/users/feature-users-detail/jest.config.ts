@@ -1,10 +1,10 @@
 /* eslint-disable */
 export default {
-  displayName: 'users-users-feature-users-detail',
+  displayName: 'users-users-detail-users-page',
   preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory:
-    '../../../../coverage/libs/users/users/feature-users-detail',
+    '../../../../coverage/libs/users/users/detail-users-page',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
