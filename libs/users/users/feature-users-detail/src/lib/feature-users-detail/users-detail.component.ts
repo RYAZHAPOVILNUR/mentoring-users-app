@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { DetailUsersCardComponent } from '../detail-users-card/detail-users-card.component';
 import { CreateUserDTO, UsersEntity, UsersFacade } from "@users/users/data-access";
-import { Subscription } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -15,37 +15,20 @@ import { Subscription } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UsersDetailComponent {
-
-  private readonly route = inject(ActivatedRoute);
   private readonly usersFacade = inject(UsersFacade);
-  private selectedUserSubscription!: Subscription;
-  private router = inject(Router);
+  private readonly router = inject(Router);
+  public readonly userId!: number;
 
-
-  public userId!: number;
-
-  currentUser!: UsersEntity | null;
-
-  constructor() {
-    this.setUserId();
-    this.getCurrentUser(this.userId)
-  }
-
-
-  private setUserId() {
-    this.route.params.subscribe(params => {
-      this.userId = params['id'];
-    })
-  }
-
-  private getCurrentUser(id: number) {
-    this.usersFacade.getUserFromStore(id).subscribe((user) => {
-      this.currentUser = user ? user : null
-    })
-    console.log('пользователь', this.currentUser)
-  }
-
-
+  public readonly currentUser$: Observable<UsersEntity | null > = this.usersFacade.openedUser$.pipe(
+    tap(
+      user => {
+        if(!user) {
+          this.usersFacade.loadUser()
+        }
+      }
+    )
+  );
+  public readonly loadingStatus$ = this.usersFacade.status$;
 
   public onEditUser(userData: CreateUserDTO) {
     this.usersFacade.editUser(userData, this.userId);
