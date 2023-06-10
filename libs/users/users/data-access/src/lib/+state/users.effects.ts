@@ -1,13 +1,14 @@
 import { inject } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, catchError, of, map, withLatestFrom, filter } from 'rxjs';
+import { switchMap, catchError, of, map, withLatestFrom, filter, Observable } from 'rxjs';
 import * as UsersActions from './users.actions';
 import { ApiService } from '@users/core/http';
 import { CreateUserDTO, UsersDTO } from '../users-dto.model';
 import { usersDTOAdapter } from '../users-dto.adapter';
 import { Store, select } from '@ngrx/store';
-import { selectUsersEntities } from './users.selectors';
+import { selectOpenedUser, selectUsersEntities } from './users.selectors';
 import { UsersEntity } from './users.entity';
+import { selectRouteParams } from '@users/core/data-access';
 
 export const userEffects = createEffect(
   () => {
@@ -115,17 +116,24 @@ export const loadUser = createEffect(
   () => {
     const actions$ = inject(Actions);
     const apiService = inject(ApiService);
+    const store = inject(Store);
     return actions$.pipe(
       ofType(UsersActions.loadUser),
+      withLatestFrom(store.select(selectRouteParams)),
       switchMap(
-        ({ id }) => apiService.get<UsersDTO>(`/users/${id}`)
-          .pipe(
-            map((userData) => UsersActions.loadUserSuccess({ userData })),
-            catchError((error) => {
-              console.error('Error', error);
-              return of(UsersActions.editUserFailed({ error }))
-            })
-          )
+        ([, params]) => {
+          if (params['id']) {
+            return apiService.get<UsersDTO>(`/users/${params['id']}`)
+              .pipe(
+                map((userData) => UsersActions.loadUserSuccess({ userData })),
+                catchError((error) => {
+                  console.error('Error', error);
+                  return of(UsersActions.loadUserFailed({ error }))
+                })
+              )
+          }
+          return of(UsersActions.loadUserFailed({ error: 'User not found' }));
+        }
       )
     )
   }, { functional: true }

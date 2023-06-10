@@ -51,8 +51,16 @@ const reducer = createReducer(
     id: userData.id,
     changes: userData
   }, state)),
+  on(UsersActions.loadUser, (state) => ({
+    ...state,
+    status: 'loading'
+  })),
   on(UsersActions.loadUserSuccess, (state, { userData }) =>
-    usersAdapter.addOne({ ...userData }, { ...state }))
+    usersAdapter.addOne({ ...userData }, { ...state, status: 'loaded' })),
+  on(UsersActions.loadUserFailed, (state) => ({
+    ...state,
+    status: 'error'
+  })),
 );
 
 export function usersReducer(state: UsersState | undefined, action: Action) {
