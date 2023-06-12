@@ -1,30 +1,58 @@
-<div class="edit-user-container">
-  <mat-card class="edit-user-card">
-    <h1 class="edit-user-title">Редактирование пользователя</h1>
-    <form [formGroup]="formGroup" (ngSubmit)="submit()" class="edit-user-form">
-      <div class="edit-user-content">
-        <mat-form-field class="edit-user-field">
-          <mat-label>Имя:</mat-label>
-          <input matInput placeholder="Имя*" formControlName="name" class="edit-user-input">
-          <mat-error *ngIf="formGroup.hasError('required', 'name')">Это поле обязательно для заполнения</mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="edit-user-field">
-          <mat-label>Электронная почта:</mat-label>
-          <input matInput placeholder="Электронная почта*" formControlName="email" class="edit-user-input">
-          <mat-error *ngIf="formGroup.get('email')?.hasError('required') || formGroup.get('email')?.hasError('email')">
-            Введите корректную электронную почту
-          </mat-error>
-        </mat-form-field>
+  <div class="edit-user-container">
+    <mat-card class="edit-user-card">
+      <div class="close-button-container">
+        <button mat-icon-button aria-label="close dialog"
+        (click)="onCloseUser()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
       </div>
-      <mat-card-actions class="edit-user-btns-container">
-        <button mat-raised-button type="submit" color="primary"
-         [disabled]="formGroup.invalid"
-          class="edit-user-button">Сохранить</button>
-        <button mat-stroked-button
-        type="button" color="primary" class="edit-user-button">Отмена</button>
-      </mat-card-actions>
+      <h1 class="edit-user-title">Редактирование пользователя</h1>
+      <form [formGroup]="formGroup" (ngSubmit)="submit()" class="edit-user-form">
+        <div class="edit-user-content">
 
-    </form>
-  </mat-card>
-</div>
+          <mat-form-field class="edit-user-field">
+            <mat-label>Имя:</mat-label>
+            <input matInput placeholder="Имя*" formControlName="name" class="edit-user-input">
+            <mat-error *ngIf="formGroup.hasError('required', 'name')">Это поле обязательно для заполнения</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="edit-user-field">
+            <mat-label>Электронная почта:</mat-label>
+            <input matInput placeholder="Электронная почта*" formControlName="email" class="edit-user-input">
+            <mat-error
+              *ngIf="formGroup.get('email')?.hasError('required') || formGroup.get('email')?.hasError('email')">
+              Введите корректную электронную почту
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="edit-user-field">
+            <mat-label>Имя пользователя:</mat-label>
+            <input matInput placeholder="Имя пользователя" formControlName="username" class="edit-user-input">
+          </mat-form-field>
+
+
+          <mat-form-field class="edit-user-field">
+            <mat-label>Город:</mat-label>
+            <input matInput placeholder="Город" formControlName="city" class="edit-user-input">
+          </mat-form-field>
+
+        </div>
+        <ng-container *ngTemplateOutlet="editMode ? saveTemplate : editTemplate"></ng-container>
+        <ng-template #saveTemplate>
+          <mat-card-actions class="edit-user-btns-container">
+            <button mat-raised-button type="submit" color="primary" [disabled]="formGroup.invalid"
+              class="edit-user-button">Сохранить</button>
+            <button mat-stroked-button type="button" color="primary" class="edit-user-button">Отмена</button>
+          </mat-card-actions>
+        </ng-template>
+
+        <ng-template #editTemplate>
+          <mat-card-actions class="edit-user-btns-container">
+            <button mat-raised-button type="button" color="primary" class="edit-user-button">Редактировать</button>
+          </mat-card-actions>
+        </ng-template>
+
+      </form>
+    </mat-card>
+  </div>

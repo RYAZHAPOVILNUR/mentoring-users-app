@@ -1,0 +1,11 @@
+<ng-container *ngIf="status === 'loaded'; else error">
+  <detail-users-card [user]="user"
+  (editUser)="onEditUser($event)"
+  (closeUser)="onCloseUser()"
+  [editMode]="editMode"
+  />
+</ng-container>
+
+<ng-template #error>
+  Ошибка
+</ng-template>
