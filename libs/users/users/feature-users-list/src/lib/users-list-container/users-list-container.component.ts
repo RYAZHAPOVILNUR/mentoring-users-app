@@ -11,6 +11,7 @@ import { UsersVM } from '../../../../users-vm';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { UsersFacade } from '@users/users/data-access';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'users-list-container',
@@ -27,8 +28,13 @@ export class UsersListContainerComponent {
   public usersFacade = inject(UsersFacade);
   public readonly users$ = this.componentStore.users$;
   public readonly status$ = this.componentStore.status$;
+  private readonly router = inject(Router);
 
   onDeleteUser(user: UsersVM) {
     this.componentStore.deleteUser(user)
+  }
+
+  onRedirectToEdit({ id, editMode }: { id: number, editMode: boolean }) {
+    this.router.navigate(['/users', id], { queryParams: { edit: editMode } });
   }
 }

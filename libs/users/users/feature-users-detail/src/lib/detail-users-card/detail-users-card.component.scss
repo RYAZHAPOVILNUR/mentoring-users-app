@@ -2,12 +2,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
 .edit-user-card {
   width: 400px;
   padding: 20px;
+}
+
+.close-button-container {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .edit-user-title {
