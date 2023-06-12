@@ -1,14 +1,17 @@
-<ng-container *ngIf="currentUser$ | async as currentUser; else notFound">
-  <ng-container *ngIf="currentUser">
-    <detail-users-card [user]="currentUser" (editUser)="onEditUser($event)"></detail-users-card>
-  </ng-container>
+<ng-container *ngIf="loadingStatus$ | async as status">
   <pre>
-    {{currentUser | json}}
+    {{status | json}}
   </pre>
+
+  <ng-container *ngIf="status === 'loading'">
+    Загрузка...
+  </ng-container>
+  <ng-container *ngIf="currentUser$ | async as user">
+    <users-detail-card-container [user]="user"
+    [status]="status"
+    [editMode] = "(editMode$ | async)!"
+    (editUser)="onEditUser($event)"
+    (closeUser)="onCloseUser()"
+    />
+  </ng-container>
 </ng-container>
-
-<ng-template #notFound>
-  <span>Данный пользователь не найден!</span>
-</ng-template>
-
-

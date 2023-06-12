@@ -32,8 +32,13 @@ export class UsersListComponent {
   vm!: UsersListVM;
 
   @Output() deleteUser = new EventEmitter()
+  @Output() redirectToEdit = new EventEmitter()
 
   onDeleteUser(user: UsersVM) {
     this.deleteUser.emit(user)
+  }
+
+  onRedirectToEdit(editData: { id: number, editMode: boolean }) {
+    this.redirectToEdit.emit(editData)
   }
 }

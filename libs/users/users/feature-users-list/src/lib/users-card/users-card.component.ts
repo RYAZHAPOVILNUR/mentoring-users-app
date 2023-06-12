@@ -18,8 +18,18 @@ export class UsersCardComponent {
   user!: UsersVM
 
   @Output() deleteUser = new EventEmitter();
+  @Output() redirectToEdit = new EventEmitter()
 
   onDeleteUser() {
     this.deleteUser.emit();
+  }
+
+  redirectToEditPage(editMode: boolean, event: Event) {
+    event.stopPropagation();
+    const emitData = {
+      id: this.user.id,
+      editMode
+    }
+    this.redirectToEdit.emit(emitData)
   }
 }

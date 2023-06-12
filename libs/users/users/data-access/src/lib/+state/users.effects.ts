@@ -1,12 +1,12 @@
 import { inject } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, catchError, of, map, withLatestFrom, filter, Observable } from 'rxjs';
+import { switchMap, catchError, of, map, withLatestFrom, filter } from 'rxjs';
 import * as UsersActions from './users.actions';
 import { ApiService } from '@users/core/http';
 import { CreateUserDTO, UsersDTO } from '../users-dto.model';
 import { usersDTOAdapter } from '../users-dto.adapter';
 import { Store, select } from '@ngrx/store';
-import { selectOpenedUser, selectUsersEntities } from './users.selectors';
+import { selectUsersEntities } from './users.selectors';
 import { UsersEntity } from './users.entity';
 import { selectRouteParams } from '@users/core/data-access';
 
