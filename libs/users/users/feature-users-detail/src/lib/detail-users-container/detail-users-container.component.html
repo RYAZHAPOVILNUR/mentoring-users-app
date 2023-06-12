@@ -1,11 +1,17 @@
-<ng-container *ngIf="currentUser$ | async as user">
-  <ng-container *ngIf="loadingStatus$ | async as status">
-    <detail-users-page
-    [vm]="{user, status}"
-    (userData)="onEditUser($event)"
+<ng-container *ngIf="loadingStatus$ | async as status">
+  <ng-container *ngIf="currentUser$ | async as user; else err">
+      <detail-users-page
+        [vm]="{user, status}"
+      (userData)="onEditUser($event)"
     />
   </ng-container>
-</ng-container>
-<ng-template #nothing>
 
-</ng-template>
+  <ng-template #err>
+    <ng-container *ngIf="error$ | async as error">
+      <div class="error">
+        <span>{{error.status}}</span>
+      </div>
+    </ng-container>
+  </ng-template>
+</ng-container>
+

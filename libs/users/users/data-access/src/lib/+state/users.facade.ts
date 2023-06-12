@@ -18,7 +18,8 @@ export class UsersFacade {
   status$ = this.store.pipe(select(UsersSelectors.selectUsersStatus));
   allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
   selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
-  public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
+  public readonly openedUser$ = this.store.pipe(select(UsersSelectors.selectOpenedUser));
+  public readonly errors$ = this.store.pipe(select(UsersSelectors.selectUsersError))
 
   /**
    * Use the initialization action to perform one

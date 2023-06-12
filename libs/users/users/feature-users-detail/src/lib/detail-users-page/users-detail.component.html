@@ -3,18 +3,14 @@
 </ng-container>
 
 <ng-template #loadingResult>
-  <ng-container *ngIf="vm.user as currentUser; else error">
-    <ng-container *ngIf="vm.status === 'loaded'; else error">
-      <detail-users-card [user]="currentUser" (editUser)="onEditUser($event)"></detail-users-card>
+  <ng-container *ngIf="vm.user">
+    <ng-container *ngIf="vm.status === 'loaded'">
+      <detail-users-card [user]="vm.user" (editUser)="onEditUser($event)"></detail-users-card>
     </ng-container>
     <pre>
-    {{currentUser | json}}
+    {{vm.user | json}}
   </pre>
   </ng-container>
-</ng-template>
-
-<ng-template #error>
-  <span>Данный пользователь не найден</span>
 </ng-template>
 
 

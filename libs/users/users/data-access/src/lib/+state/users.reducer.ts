@@ -7,11 +7,14 @@ import { UsersEntity } from './users.entity';
 export const USERS_FEATURE_KEY = 'users';
 
 export type UsersStatus = 'init' | 'loading' | 'loaded' | 'error'
-
+export type UsersErrors = {
+  [key: string]: any;
+  status: number | string
+}
 export interface UsersState extends EntityState<UsersEntity> {
   selectedId?: string | number; // which Users record has been selected
   status: UsersStatus;
-  error: string | null;
+  error: UsersErrors | null;
 }
 
 export interface UsersPartialState {

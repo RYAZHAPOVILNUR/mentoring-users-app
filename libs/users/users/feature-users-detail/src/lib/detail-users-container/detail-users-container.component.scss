@@ -1,0 +1,15 @@
+.error {
+  padding: 10px;
+  white-space: nowrap;
+  min-height: min-content;
+  margin: 5em auto;
+  width: 10%;
+  text-align: center;
+
+  & span {
+    font-size: 50px;
+    margin: 0;
+    padding: 10px 0;
+    overflow: hidden;
+  }
+}

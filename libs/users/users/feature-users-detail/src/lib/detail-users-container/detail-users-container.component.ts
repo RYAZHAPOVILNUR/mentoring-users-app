@@ -19,20 +19,20 @@ export class DetailUsersContainerComponent {
   private readonly router = inject(Router);
   private userId!: number;
   public readonly loadingStatus$ = this.usersFacade.status$;
-  public readonly currentUser$: Observable<UsersEntity | null > = this.usersFacade.openedUser$.pipe(
+  public readonly error$ = this.usersFacade.errors$
+  public readonly currentUser$: Observable<UsersEntity | null> = this.usersFacade.openedUser$.pipe(
     tap((user: UsersEntity | null): void => {
         if(!user) {
           this.usersFacade.loadUser()
         } else {
-          this.userId = user?.id
+          this.userId = user.id
         }
       }
     )
-  );
+  )
 
   public onEditUser(userData: CreateUserDTO) {
     this.usersFacade.editUser(userData, this.userId);
     this.router.navigate(['/home'])
   }
-
 }

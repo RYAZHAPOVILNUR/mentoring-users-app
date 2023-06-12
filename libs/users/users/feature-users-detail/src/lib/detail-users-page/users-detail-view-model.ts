@@ -1,7 +1,7 @@
 import { DeepReadonly } from "@users/core/utils";
-import {CreateUserDTO, UsersStatus} from "@users/users/data-access";
+import {UsersEntity, UsersStatus} from "@users/users/data-access";
 
 export type UsersDetailVM = DeepReadonly<{
-  user: CreateUserDTO;
+  user: UsersEntity | null;
   status: UsersStatus;
 }>
