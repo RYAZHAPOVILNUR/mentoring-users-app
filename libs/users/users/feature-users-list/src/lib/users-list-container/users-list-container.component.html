@@ -1,9 +1,7 @@
-<ng-container *ngIf="users$ | async as users">
-  <ng-container *ngIf="status$ | async as status">
-    <users-list-ui
-    [vm]="{users, status}"
+<ng-container *ngrxLet="{ users: users$, status: status$ } as vm">
+  <users-list-ui
+    [vm]="vm"
     (deleteUser)="onDeleteUser($event)"
     (redirectToEdit)="onRedirectToEdit($event)"
-    />
-  </ng-container>
+  />
 </ng-container>

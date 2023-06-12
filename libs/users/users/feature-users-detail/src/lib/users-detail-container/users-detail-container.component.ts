@@ -1,20 +1,20 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { DetailUsersCardComponent } from '../detail-users-card/detail-users-card.component';
+import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
 import { CreateUserDTO, UsersEntity, UsersFacade } from "@users/users/data-access";
 import { Observable, map, tap } from 'rxjs';
-import { UsersDetailCardContainerComponent } from '../users-detail-card-container/users-detail-card-container.component';
 import { selectQueryParam } from '@users/core/data-access';
 import { Store, select } from '@ngrx/store';
+import { LetDirective } from '@ngrx/component';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'feature-users-detail',
+  selector: 'users-detail',
   standalone: true,
-  imports: [CommonModule, DetailUsersCardComponent, UsersDetailCardContainerComponent],
-  templateUrl: './users-detail.component.html',
-  styleUrls: ['./users-detail.component.scss'],
+  imports: [CommonModule, DetailUsersCardComponent, LetDirective],
+  templateUrl: './users-detail-container.component.html',
+  styleUrls: ['./users-detail-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UsersDetailComponent {
@@ -23,7 +23,7 @@ export class UsersDetailComponent {
   private readonly router = inject(Router);
   public readonly userId!: number;
 
-  public readonly currentUser$: Observable<UsersEntity | null> = this.usersFacade.openedUser$.pipe(
+  public readonly user$: Observable<UsersEntity | null> = this.usersFacade.openedUser$.pipe(
     tap(
       user => {
         if (!user) {
@@ -32,7 +32,7 @@ export class UsersDetailComponent {
       }
     )
   );
-  public readonly loadingStatus$ = this.usersFacade.status$;
+  public readonly status$ = this.usersFacade.status$;
   public readonly editMode$: Observable<boolean> = this.store.pipe(select(selectQueryParam('edit')),
     map(params => params === 'true')
   );
