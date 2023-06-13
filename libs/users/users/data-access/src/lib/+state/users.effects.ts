@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, catchError, of, map, withLatestFrom, filter } from 'rxjs';
+import { switchMap, catchError, of, map, withLatestFrom, filter, delay } from 'rxjs';
 import * as UsersActions from './users.actions';
 import { ApiService } from '@users/core/http';
 import { CreateUserDTO, UsersDTO } from '../users-dto.model';
@@ -19,6 +19,7 @@ export const userEffects = createEffect(
 
     return actions$.pipe(
       ofType(UsersActions.initUsers),
+      delay(1500),
       switchMap(
         () => apiService.get<UsersDTO[]>('/users').pipe(
           map(
@@ -42,6 +43,7 @@ export const deleteUser = createEffect(
     const apiService = inject(ApiService);
     return actions$.pipe(
       ofType(UsersActions.deleteUser),
+      delay(1500),
       switchMap(
         ({ id }) => apiService.delete<void>(`/users/${id}`).pipe(
           map(() => UsersActions.deleteUserSuccess({ id })),
@@ -61,6 +63,7 @@ export const addUser = createEffect(
     const apiService = inject(ApiService);
     return actions$.pipe(
       ofType(UsersActions.addUser),
+      delay(1500),
       switchMap(
         ({ userData }) => apiService.post<UsersDTO, CreateUserDTO>('/users', userData).pipe(
           map((user) => UsersActions.addUserSuccess({ userData: user })),
@@ -99,6 +102,7 @@ export const editUser = createEffect(
 
         return dtoToUpdateUser;
       }),
+      delay(1500),
       switchMap(
         (user) => apiService.post<UsersDTO, UsersDTO>(`/users/${user.id}`, user).pipe(
           map((userData) => UsersActions.editUserSuccess({ userData })),
@@ -120,6 +124,7 @@ export const loadUser = createEffect(
     return actions$.pipe(
       ofType(UsersActions.loadUser),
       withLatestFrom(store.select(selectRouteParams)),
+      delay(1500),
       switchMap(
         ([, params]) => {
           if (params['id']) {

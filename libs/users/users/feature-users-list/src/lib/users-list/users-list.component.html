@@ -19,5 +19,9 @@
 </ng-template>
 
 <ng-template #error>
-  Ошибка
+  <div class="alert alert-danger" role="alert">
+    <h1>{{vm.errors?.status}}</h1>
+    <hr>
+    {{vm.errors}}
+  </div>
 </ng-template>
