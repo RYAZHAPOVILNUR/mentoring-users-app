@@ -3,8 +3,15 @@
 </ng-container>
 
 <ng-template #loadingResult>
-  <ng-container *ngIf="vm.status === 'loaded'">
+  <ng-container *ngIf="(vm.status === 'loaded') || (vm.status === 'updated'); else error">
     <div class="edit-user-container">
+      <ng-container *ngIf="vm.status === 'updated'">
+        <ng-container *ngIf="alertTrigger | async">
+          <div class="alert alert-success" role="alert">
+            User data changed successfully
+          </div>
+        </ng-container>
+      </ng-container>
       <mat-card class="edit-user-card">
         <div class="close-button-container">
           <button mat-icon-button aria-label="close dialog"
@@ -16,13 +23,13 @@
         <h1 class="edit-user-title">Редактирование пользователя</h1>
         <form [formGroup]="formGroup" (ngSubmit)="submit()" class="edit-user-form">
           <div class="edit-user-content">
-  
+
             <mat-form-field class="edit-user-field">
               <mat-label>Имя:</mat-label>
               <input matInput placeholder="Имя*" formControlName="name" class="edit-user-input">
               <mat-error *ngIf="formGroup.hasError('required', 'name')">Это поле обязательно для заполнения</mat-error>
             </mat-form-field>
-  
+
             <mat-form-field class="edit-user-field">
               <mat-label>Электронная почта:</mat-label>
               <input matInput placeholder="Электронная почта*" formControlName="email" class="edit-user-input">
@@ -31,18 +38,18 @@
                 Введите корректную электронную почту
               </mat-error>
             </mat-form-field>
-  
+
             <mat-form-field class="edit-user-field">
               <mat-label>Имя пользователя:</mat-label>
               <input matInput placeholder="Имя пользователя" formControlName="username" class="edit-user-input">
             </mat-form-field>
-  
-  
+
+
             <mat-form-field class="edit-user-field">
               <mat-label>Город:</mat-label>
               <input matInput placeholder="Город" formControlName="city" class="edit-user-input">
             </mat-form-field>
-  
+
           </div>
           <ng-container *ngTemplateOutlet="vm.editMode ? saveTemplate : editTemplate"></ng-container>
           <ng-template #saveTemplate>
@@ -52,13 +59,13 @@
               <button mat-stroked-button type="button" color="primary" class="edit-user-button">Отмена</button>
             </mat-card-actions>
           </ng-template>
-  
+
           <ng-template #editTemplate>
             <mat-card-actions class="edit-user-btns-container">
               <button mat-raised-button type="button" color="primary" class="edit-user-button">Редактировать</button>
             </mat-card-actions>
           </ng-template>
-  
+
         </form>
       </mat-card>
     </div>
@@ -66,5 +73,9 @@
 </ng-template>
 
 <ng-template #error>
-  Ошибка
+  <div class="alert alert-danger" role="alert">
+    <h1>{{errors?.status}}</h1>
+    <hr>
+    Данный пользователь не найден
+  </div>
 </ng-template>

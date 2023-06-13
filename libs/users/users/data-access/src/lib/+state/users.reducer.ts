@@ -6,12 +6,17 @@ import { UsersEntity } from './users.entity';
 
 export const USERS_FEATURE_KEY = 'users';
 
-export type UsersStatus = 'init' | 'loading' | 'loaded' | 'error'
+export type UsersStatus = 'init' | 'loading' | 'loaded' | 'error' | 'updated'
+
+export type UsersErrors = {
+  status: number,
+  [key: string]: unknown
+}
 
 export interface UsersState extends EntityState<UsersEntity> {
   selectedId?: string | number; // which Users record has been selected
   status: UsersStatus;
-  error: string | null;
+  error: UsersErrors | null;
 }
 
 export interface UsersPartialState {
@@ -51,15 +56,21 @@ const reducer = createReducer(
     id: userData.id,
     changes: userData
   }, state)),
+  on(UsersActions.editUserSuccess, (state) => ({
+    ...state, status: 'updated'
+  })),
+  on(UsersActions.editUserFailed, (state, {error}) => ({
+    ...state, status: 'error', error
+  })),
   on(UsersActions.loadUser, (state) => ({
     ...state,
     status: 'loading'
   })),
   on(UsersActions.loadUserSuccess, (state, { userData }) =>
     usersAdapter.addOne({ ...userData }, { ...state, status: 'loaded' })),
-  on(UsersActions.loadUserFailed, (state) => ({
+  on(UsersActions.loadUserFailed, (state, {error}) => ({
     ...state,
-    status: 'error'
+    status: 'error', error
   })),
 );
 
