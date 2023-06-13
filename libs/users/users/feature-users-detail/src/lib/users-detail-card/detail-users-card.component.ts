@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { DetailUsersCardVm } from './detail-users-card-vm';
 import { Subject } from "rxjs";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -21,7 +22,8 @@ import { Subject } from "rxjs";
     ReactiveFormsModule,
     FormsModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressBarModule
   ],
   templateUrl: './detail-users-card.component.html',
   styleUrls: ['./detail-users-card.component.scss'],
@@ -52,8 +54,7 @@ export class DetailUsersCardComponent {
       this.formGroup.disable();
     }
   }
-  // @Input({ required: true })
-  // public errors!: UsersErrors | null;
+
   public alertTrigger = new Subject<boolean>();
 
   public formGroup = new FormBuilder().group({
