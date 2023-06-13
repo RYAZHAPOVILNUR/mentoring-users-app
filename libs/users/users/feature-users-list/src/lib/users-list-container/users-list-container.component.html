@@ -1,4 +1,4 @@
-<ng-container *ngrxLet="{ users: users$, status: status$ } as vm">
+<ng-container *ngrxLet="{ users: users$, status: status$, errors: errors$ } as vm">
   <users-list-ui
     [vm]="vm"
     (deleteUser)="onDeleteUser($event)"
