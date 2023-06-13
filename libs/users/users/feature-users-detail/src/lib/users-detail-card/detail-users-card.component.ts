@@ -59,10 +59,11 @@ export class DetailUsersCardComponent {
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
 
-  
+
 
   @Output() editUser = new EventEmitter<CreateUserDTO>();
   @Output() closeUser = new EventEmitter();
+  @Output() closeEditMode = new EventEmitter();
 
   onEditUser(userData: CreateUserDTO) {
     this.editUser.emit(userData);
@@ -79,6 +80,10 @@ export class DetailUsersCardComponent {
 
   onCloseUser() {
     this.closeUser.emit();
+  }
+
+  onCloseEditMode() {
+    this.closeEditMode.emit();
   }
 
 }
