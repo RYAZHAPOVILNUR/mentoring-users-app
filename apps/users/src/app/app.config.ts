@@ -11,7 +11,6 @@ import { provideEffects } from '@ngrx/effects';
 import { provideState, provideStore } from '@ngrx/store';
 import { USERS_FEATURE_KEY, usersReducer, userEffects } from '@users/users/data-access';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { provideNoopAnimations } from '@angular/platform-browser/animations'
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 
 export const appConfig: ApplicationConfig = {
@@ -34,7 +33,6 @@ export const appConfig: ApplicationConfig = {
     {
         provide: API_URL,
         useValue: environment.api_url,
-    },
-    provideNoopAnimations()
+    }
 ],
 };

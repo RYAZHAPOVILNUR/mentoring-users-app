@@ -14,6 +14,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { UsersCardComponent } from "../users-card/users-card.component";
 import { UsersVM } from '../../../../users-vm';
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 @Component({
   selector: 'users-list-ui',
@@ -24,7 +25,8 @@ import { UsersVM } from '../../../../users-vm';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
-    UsersCardComponent
+    UsersCardComponent,
+    MatProgressBarModule
   ]
 })
 export class UsersListComponent {
