@@ -14,13 +14,20 @@
       </ng-container>
       <mat-card class="edit-user-card">
         <div class="close-button-container">
-          <button mat-icon-button aria-label="close dialog"
-          (click)="onCloseUser()"
-          >
-            <mat-icon>close</mat-icon>
+          <button mat-icon-button aria-label="close dialog" color="primary" (click)="onCloseUser()">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+          <button mat-icon-button
+          type="button"
+          color="primary"
+          class="edit-user-button"
+          *ngIf="!vm.editMode"
+          ><mat-icon>edit</mat-icon>
           </button>
         </div>
-        <h1 class="edit-user-title">Редактирование пользователя</h1>
+        <h1 class="edit-user-title">
+          {{ vm.editMode ? 'Редактирование пользователя' : 'Информация пользователя' }}
+        </h1>
         <form [formGroup]="formGroup" (ngSubmit)="submit()" class="edit-user-form">
           <div class="edit-user-content">
 
@@ -51,21 +58,21 @@
             </mat-form-field>
 
           </div>
-          <ng-container *ngTemplateOutlet="vm.editMode ? saveTemplate : editTemplate"></ng-container>
-          <ng-template #saveTemplate>
-            <mat-card-actions class="edit-user-btns-container">
-              <button mat-raised-button type="submit" color="primary" [disabled]="formGroup.invalid"
-                class="edit-user-button">Сохранить</button>
-              <button mat-stroked-button type="button" color="primary" class="edit-user-button">Отмена</button>
+            <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
+              <button mat-icon-button
+              color="primary"
+              [disabled]="formGroup.invalid"
+              aria-label="submit new user data"
+              ><mat-icon>done</mat-icon>
+              </button>
+              <button mat-icon-button
+              color="primary"
+              type="button"
+              aria-label="Close edit mode"
+              (click)="onCloseEditMode()"
+              ><mat-icon>close</mat-icon>
+              </button>
             </mat-card-actions>
-          </ng-template>
-
-          <ng-template #editTemplate>
-            <mat-card-actions class="edit-user-btns-container">
-              <button mat-raised-button type="button" color="primary" class="edit-user-button">Редактировать</button>
-            </mat-card-actions>
-          </ng-template>
-
         </form>
       </mat-card>
     </div>
