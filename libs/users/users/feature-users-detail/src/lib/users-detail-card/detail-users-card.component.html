@@ -22,6 +22,7 @@
           color="primary"
           class="edit-user-button"
           *ngIf="!vm.editMode"
+          (click)="onOpenEditMode()"
           ><mat-icon>edit</mat-icon>
           </button>
         </div>

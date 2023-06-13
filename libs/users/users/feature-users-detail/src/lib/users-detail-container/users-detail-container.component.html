@@ -8,5 +8,7 @@
     [errors]="errors$ | async"
     (editUser)="onEditUser($event)"
     (closeUser)="onCloseUser()"
+    (closeEditMode)="onCloseEditMode()"
+    (openEditMode)="onOpenEditMode()"
   />
 </ng-container>
