@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
-import { CreateUserDTO, UsersEntity, UsersFacade } from "@users/users/data-access";
+import {CreateUserDTO, UsersEntity, UsersErrors, UsersFacade } from "@users/users/data-access";
 import { Observable, map, tap } from 'rxjs';
 import { selectQueryParam } from '@users/core/data-access';
 import { Store, select } from '@ngrx/store';
@@ -21,7 +21,7 @@ export class UsersDetailComponent {
   private readonly usersFacade = inject(UsersFacade);
   private readonly store = inject(Store)
   private readonly router = inject(Router);
-  public readonly userId!: number;
+  public userId!: number;
 
   public readonly user$: Observable<UsersEntity | null> = this.usersFacade.openedUser$.pipe(
     tap(
@@ -38,6 +38,7 @@ export class UsersDetailComponent {
   public readonly editMode$: Observable<boolean> = this.store.pipe(select(selectQueryParam('edit')),
     map(params => params === 'true')
   );
+  public readonly errors$: Observable<UsersErrors | null> = this.usersFacade.errors$
 
   public onEditUser(userData: CreateUserDTO) {
     this.usersFacade.editUser(userData, this.userId);

@@ -36,3 +36,11 @@
   display: flex;
   justify-content: space-between;
 }
+
+div.alert-success {
+  position: absolute;
+  text-align: center;
+  width: 400px;
+  top: 3em;
+  z-index: 1;
+}

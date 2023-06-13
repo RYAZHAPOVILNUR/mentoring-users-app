@@ -1,13 +1,14 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CreateUserDTO } from '@users/users/data-access';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { DetailUsersCardVm } from './detail-users-card-vm';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {CreateUserDTO, UsersErrors} from '@users/users/data-access';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
+import {DetailUsersCardVm} from './detail-users-card-vm';
+import {Subject} from "rxjs";
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -51,6 +52,9 @@ export class DetailUsersCardComponent {
       this.formGroup.disable();
     }
   }
+  @Input({required: true})
+  public errors!: UsersErrors | null;
+  public alertTrigger = new Subject<boolean>();
 
   public formGroup = new FormBuilder().group({
     name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
@@ -59,7 +63,6 @@ export class DetailUsersCardComponent {
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
 
-  
 
   @Output() editUser = new EventEmitter<CreateUserDTO>();
   @Output() closeUser = new EventEmitter();
@@ -74,7 +77,11 @@ export class DetailUsersCardComponent {
       username: this.formGroup.value.username || '',
       city: this.formGroup.value.city || '',
       email: this.formGroup.value.email || ''
-    })
+    });
+    this.alertTrigger.next(true);
+    setTimeout(() => {
+      this.alertTrigger.next(false)
+    }, 3000);
   }
 
   onCloseUser() {
