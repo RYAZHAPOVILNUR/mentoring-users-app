@@ -28,6 +28,8 @@ export class UsersDetailComponent {
       user => {
         if (!user) {
           this.usersFacade.loadUser()
+        } else {
+          this.userId = user.id
         }
       }
     )
