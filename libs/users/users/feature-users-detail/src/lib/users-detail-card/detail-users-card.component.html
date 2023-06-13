@@ -62,6 +62,7 @@
             <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
               <button mat-icon-button
               color="primary"
+              type="submit"
               [disabled]="formGroup.invalid"
               aria-label="submit new user data"
               ><mat-icon>done</mat-icon>
@@ -82,7 +83,7 @@
 
 <ng-template #error>
   <div class="alert alert-danger" role="alert">
-    <h1>{{errors?.status}}</h1>
+    <h1>{{vm.errors?.status}}</h1>
     <hr>
     Данный пользователь не найден
   </div>

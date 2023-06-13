@@ -29,7 +29,7 @@ import { Subject } from "rxjs";
 })
 
 export class DetailUsersCardComponent {
-  private _vm: DetailUsersCardVm = { editMode: false, user: null, status: 'init' };
+  private _vm: DetailUsersCardVm = { editMode: false, user: null, status: 'init', errors: null };
   public get vm() {
     return this._vm;
   }
@@ -52,8 +52,8 @@ export class DetailUsersCardComponent {
       this.formGroup.disable();
     }
   }
-  @Input({ required: true })
-  public errors!: UsersErrors | null;
+  // @Input({ required: true })
+  // public errors!: UsersErrors | null;
   public alertTrigger = new Subject<boolean>();
 
   public formGroup = new FormBuilder().group({
