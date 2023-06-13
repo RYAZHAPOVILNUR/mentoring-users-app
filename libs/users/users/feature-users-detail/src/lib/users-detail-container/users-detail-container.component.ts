@@ -42,12 +42,20 @@ export class UsersDetailComponent {
 
   public onEditUser(userData: CreateUserDTO) {
     this.usersFacade.editUser(userData, this.userId);
-    // this.router.navigate(['/users', this.userId], { queryParams: { edit: false} });
+    this.router.navigate(['/users', this.userId], { queryParams: { edit: false} });
     // this.router.navigate(['/home']);
   }
 
   onCloseUser() {
     this.router.navigate(['/home']);
+  }
+
+  onCloseEditMode(){
+    this.router.navigate(['/users', this.userId], { queryParams: { edit: false} });
+  }
+
+  onOpenEditMode() {
+    this.router.navigate(['/users', this.userId], { queryParams: { edit: true} });
   }
 
 }
