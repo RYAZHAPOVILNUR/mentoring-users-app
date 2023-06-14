@@ -147,7 +147,7 @@ export const loadUser = createEffect(
                 })
               )
           }
-          return of(UsersActions.loadUserFailed({ error: 'User not found' }));
+          return of(UsersActions.updateUserStatus({ status: 'loading' }));
         }
       )
     )
