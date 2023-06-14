@@ -48,6 +48,10 @@ export class DetailUsersCardComponent {
       });
     }
 
+    if (vm.status === 'updated') {
+      this.toggleAlertTrigger()
+    }
+
     if (vm.editMode) {
       this.formGroup.enable();
     } else {
@@ -75,6 +79,13 @@ export class DetailUsersCardComponent {
     this.editUser.emit(userData);
   }
 
+  private toggleAlertTrigger(): void {
+    this.alertTrigger.next(true);
+    setTimeout(() => {
+      this.alertTrigger.next(false)
+    }, 3000);
+  }
+
   submit(): void {
     this.editUser.emit({
       name: this.formGroup.value.name || '',
@@ -82,10 +93,7 @@ export class DetailUsersCardComponent {
       city: this.formGroup.value.city || '',
       email: this.formGroup.value.email || ''
     });
-    this.alertTrigger.next(true);
-    setTimeout(() => {
-      this.alertTrigger.next(false)
-    }, 3000);
+    this.toggleAlertTrigger();
   }
 
   onCloseUser() {

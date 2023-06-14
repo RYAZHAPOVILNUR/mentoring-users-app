@@ -5,13 +5,11 @@
 <ng-template #loadingResult>
   <ng-container *ngIf="(vm.status === 'loaded') || (vm.status === 'updated'); else error">
     <div class="edit-user-container">
-      <ng-container *ngIf="vm.status === 'updated'">
         <ng-container *ngIf="alertTrigger | async">
           <div class="alert alert-success" role="alert">
             User data changed successfully
           </div>
         </ng-container>
-      </ng-container>
       <mat-card class="edit-user-card">
         <div class="close-button-container">
           <button mat-icon-button aria-label="close dialog" color="primary" (click)="onCloseUser()">
