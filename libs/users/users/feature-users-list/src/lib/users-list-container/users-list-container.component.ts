@@ -29,6 +29,7 @@ export class UsersListContainerComponent {
   public usersFacade = inject(UsersFacade);
   public readonly users$ = this.componentStore.users$;
   public readonly status$ = this.componentStore.status$;
+  public readonly errors$ = this.componentStore.errors$;
   private readonly router = inject(Router);
 
   onDeleteUser(user: UsersVM) {

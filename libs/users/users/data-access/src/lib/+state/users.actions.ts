@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { UsersEntity } from './users.entity';
 import { CreateUserDTO, UsersDTO } from '../users-dto.model';
+import {UsersErrors, UsersStatus} from "./users.reducer";
 
 
 export const initUsers = createAction('[Users Page] Init');
@@ -30,8 +31,10 @@ export const deleteSelectedId = createAction('[Users Page] Delete Selected Id');
 
 export const editUser = createAction('[Users Detail] Edit User', props<{ userData: CreateUserDTO; id: number }>());
 export const editUserSuccess = createAction('[Users Detail] Edit User Success', props<{ userData: UsersDTO }>());
-export const editUserFailed = createAction('[Users Detail] Edit Failed', props<{ error: any }>());
+export const editUserFailed = createAction('[Users Detail] Edit Failed', props<{ error: UsersErrors | null }>());
 
 export const loadUser = createAction('[Users Page] Load User');
 export const loadUserSuccess = createAction('[Users/Api] Load User Success', props<{ userData: UsersDTO }>());
 export const loadUserFailed = createAction('[Users/Api] Load User Failed', props<{ error: any }>());
+
+export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{status: UsersStatus}>());

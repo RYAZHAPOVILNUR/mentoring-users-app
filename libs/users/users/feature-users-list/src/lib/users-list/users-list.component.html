@@ -1,5 +1,5 @@
 <ng-container *ngIf="vm.status === 'loading'; else loadingResult">
-  Загрузка...
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
 </ng-container>
 
 <ng-template #loadingResult>
@@ -19,5 +19,9 @@
 </ng-template>
 
 <ng-template #error>
-  Ошибка
+  <div class="alert alert-danger" role="alert">
+    <h1>{{vm.errors?.status}}</h1>
+    <hr>
+    {{vm.errors}}
+  </div>
 </ng-template>

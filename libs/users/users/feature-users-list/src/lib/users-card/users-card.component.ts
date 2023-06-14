@@ -20,7 +20,8 @@ export class UsersCardComponent {
   @Output() deleteUser = new EventEmitter();
   @Output() redirectToEdit = new EventEmitter()
 
-  onDeleteUser() {
+  onDeleteUser(event: Event) {
+    event.stopPropagation()
     this.deleteUser.emit();
   }
 
