@@ -1,11 +1,14 @@
 <ng-container *ngrxLet="{
-  user: user$, 
-  editMode: editMode$, 
-  status: status$
+  user: user$,
+  editMode: editMode$,
+  status: status$,
+  errors: errors$
 } as vm">
   <detail-users-card
     [vm]="vm"
     (editUser)="onEditUser($event)"
     (closeUser)="onCloseUser()"
+    (closeEditMode)="onCloseEditMode()"
+    (openEditMode)="onOpenEditMode()"
   />
 </ng-container>

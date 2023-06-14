@@ -25,7 +25,8 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
     this.usersFacade.status$,
     (status) => status
   );
-  
+  public errors$ = this.select(this.usersFacade.errors$, (error) => error)
+
   constructor() {
     super(initialState);
     this.usersFacade.init();

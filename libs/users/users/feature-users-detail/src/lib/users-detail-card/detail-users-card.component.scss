@@ -4,6 +4,12 @@
   align-items: center;
 }
 
+.user-avatar {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+}
+
 .edit-user-card {
   width: 400px;
   padding: 20px;
@@ -11,7 +17,7 @@
 
 .close-button-container {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
 .edit-user-title {
@@ -35,4 +41,12 @@
 .edit-user-btns-container {
   display: flex;
   justify-content: space-between;
+}
+
+div.alert-success {
+  position: absolute;
+  text-align: center;
+  width: 400px;
+  top: 3em;
+  z-index: 1;
 }

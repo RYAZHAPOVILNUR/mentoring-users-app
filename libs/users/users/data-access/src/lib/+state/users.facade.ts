@@ -6,6 +6,7 @@ import * as UsersSelectors from './users.selectors';
 import { CreateUserDTO } from '../users-dto.model';
 import { Observable, of, switchMap } from 'rxjs';
 import { UsersEntity } from './users.entity';
+import {UsersErrors} from "./users.reducer";
 
 @Injectable({providedIn: 'root'})
 export class UsersFacade {
@@ -19,7 +20,7 @@ export class UsersFacade {
   allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
   selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
-
+  public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError))
   /**
    * Use the initialization action to perform one
    * or more tasks in your Effects.
