@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input,  Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CreateUserDTO, UsersErrors } from '@users/users/data-access';
+import { CreateUserDTO } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -74,6 +74,7 @@ export class DetailUsersCardComponent {
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
+  @Output() deleteUser = new EventEmitter();
 
   onEditUser(userData: CreateUserDTO) {
     this.editUser.emit(userData);
@@ -106,6 +107,10 @@ export class DetailUsersCardComponent {
 
   onOpenEditMode() {
     this.openEditMode.emit();
+  }
+
+  onDeleteUser() {
+    this.deleteUser.emit();
   }
 
 }
