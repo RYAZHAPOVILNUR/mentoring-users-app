@@ -6,7 +6,7 @@ import { UsersVM } from "../../../../users-vm";
 import { tap } from "rxjs";
 import { usersVMAdapter } from "../../../../users-vm.adapter";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { UsersUserDeleteDialogComponent } from "../users-user-delete-dialog/users-user-delete-dialog.component";
+import { CoreUiConfirmDialogComponent } from "@users/core/ui";
 
 type UsersListState = DeepReadonly<{
   users: UsersVM[]
@@ -50,10 +50,9 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
   }
 
   public deleteUser(user: UsersVM): void {
-    const dialogRef: MatDialogRef<UsersUserDeleteDialogComponent> = this.dialog.open(UsersUserDeleteDialogComponent,{
-        data: {name: user.name}
+    const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent,{
+      data: { dialogText: `Вы уверены, что хотите удалить ${user.name}` },
     });
-
     this.effect(
       () => dialogRef.afterClosed().pipe(
         tap(
