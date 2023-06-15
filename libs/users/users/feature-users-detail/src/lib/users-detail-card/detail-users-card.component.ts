@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output, TemplateRef, ViewChild
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateUserDTO, UsersErrors } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,6 +18,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { DetailUsersCardVm } from './detail-users-card-vm';
 import { Subject } from "rxjs";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarModule,
+  MatSnackBarVerticalPosition
+} from "@angular/material/snack-bar";
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -23,7 +37,8 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
     FormsModule,
     MatInputModule,
     MatIconModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSnackBarModule
   ],
   templateUrl: './detail-users-card.component.html',
   styleUrls: ['./detail-users-card.component.scss'],
@@ -49,7 +64,7 @@ export class DetailUsersCardComponent {
     }
 
     if (vm.status === 'updated') {
-      this.toggleAlertTrigger()
+      this.openSnackbar(2500, "center", "top")
     }
 
     if (vm.editMode) {
@@ -59,8 +74,6 @@ export class DetailUsersCardComponent {
     }
   }
 
-  public alertTrigger = new Subject<boolean>();
-
   public formGroup = new FormBuilder().group({
     name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
@@ -68,22 +81,26 @@ export class DetailUsersCardComponent {
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
 
-
-
   @Output() editUser = new EventEmitter<CreateUserDTO>();
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
+  @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>
+
+  private snackBar = inject(MatSnackBar);
+
+  private openSnackbar(
+    duration: number,
+    horizontalPosition: MatSnackBarHorizontalPosition,
+    verticalPosition: MatSnackBarVerticalPosition
+  ): void {
+    this.snackBar.openFromTemplate(this.snackbarTemplateRef,  {
+          duration, horizontalPosition, verticalPosition
+    })
+  }
 
   onEditUser(userData: CreateUserDTO) {
     this.editUser.emit(userData);
-  }
-
-  private toggleAlertTrigger(): void {
-    this.alertTrigger.next(true);
-    setTimeout(() => {
-      this.alertTrigger.next(false)
-    }, 3000);
   }
 
   submit(): void {
@@ -93,7 +110,6 @@ export class DetailUsersCardComponent {
       city: this.formGroup.value.city || '',
       email: this.formGroup.value.email || ''
     });
-    this.toggleAlertTrigger();
   }
 
   onCloseUser() {

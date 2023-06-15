@@ -121,7 +121,7 @@ export const updateUserStatusWithDelay = createEffect(
     const actions$ = inject(Actions);
     return actions$.pipe(
       ofType(UsersActions.editUserSuccess),
-      delay(3000),
+      delay(10),
       map(() => UsersActions.updateUserStatus({ status: 'loaded' }))
     )
   }, {functional: true})
