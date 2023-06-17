@@ -5,11 +5,6 @@
 <ng-template #loadingResult>
   <ng-container *ngIf="(vm.status === 'loaded') || (vm.status === 'updated'); else error">
     <div class="edit-user-container">
-        <ng-container *ngIf="alertTrigger | async">
-          <div class="alert alert-success" role="alert">
-            User data changed successfully
-          </div>
-        </ng-container>
       <mat-card class="edit-user-card">
         <div class="close-button-container">
           <button mat-icon-button aria-label="close dialog" color="primary" (click)="onCloseUser()">
@@ -22,6 +17,14 @@
           *ngIf="!vm.editMode"
           (click)="onOpenEditMode()"
           ><mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button
+          type="button"
+          color="primary"
+          class="edit-user-button"
+          *ngIf="vm.editMode"
+          (click)="onDeleteUser()"
+          ><mat-icon>delete</mat-icon>
           </button>
         </div>
         <h1 class="edit-user-title">
@@ -66,7 +69,7 @@
               ><mat-icon>done</mat-icon>
               </button>
               <button mat-icon-button
-              color="primary"
+              color="warn"
               type="button"
               aria-label="Close edit mode"
               (click)="onCloseEditMode()"
@@ -84,5 +87,11 @@
     <h1>{{vm.errors?.status}}</h1>
     <hr>
     Данный пользователь не найден
+  </div>
+</ng-template>
+
+<ng-template #snackbar>
+  <div class="edit-user-snackbar">
+    <span>Пользователь успешно изменён!</span>
   </div>
 </ng-template>
