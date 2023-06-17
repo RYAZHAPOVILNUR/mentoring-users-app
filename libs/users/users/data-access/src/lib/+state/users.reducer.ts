@@ -3,10 +3,9 @@ import { createReducer, on, Action } from '@ngrx/store';
 
 import * as UsersActions from './users.actions';
 import { UsersEntity } from './users.entity';
+import { LoadingStatus } from '@users/core/data-access';
 
 export const USERS_FEATURE_KEY = 'users';
-
-export type UsersStatus = 'init' | 'loading' | 'loaded' | 'error' | 'updated'
 
 export type UsersErrors = {
   status: number,
@@ -15,7 +14,7 @@ export type UsersErrors = {
 
 export interface UsersState extends EntityState<UsersEntity> {
   selectedId?: string | number; // which Users record has been selected
-  status: UsersStatus;
+  status: LoadingStatus;
   error: UsersErrors | null;
 }
 
@@ -58,7 +57,7 @@ const reducer = createReducer(
       changes: userData
     }, state);
     return {
-    ...updatedState, status: 'updated' as UsersStatus
+    ...updatedState, status: 'updated' as LoadingStatus
   };
   }),
   on(UsersActions.editUserFailed, (state, {error}) => ({

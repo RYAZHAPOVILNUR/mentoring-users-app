@@ -1,9 +1,10 @@
 import { DeepReadonly } from "@users/core/utils";
 import { UsersVM } from "../../../../users-vm";
-import { UsersErrors, UsersStatus } from "@users/users/data-access";
+import { UsersErrors } from "@users/users/data-access";
+import { LoadingStatus } from "@users/core/data-access";
 
 export type UsersListVM = DeepReadonly<{
   users: UsersVM[],
-  status: UsersStatus,
+  status: LoadingStatus,
   errors: UsersErrors | null
 }>

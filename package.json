@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve users -o"
+    "start": "nx serve users -o",
+    "build": "nx build users"
   },
   "private": true,
   "dependencies": {
@@ -43,6 +44,7 @@
     "@ngrx/store-devtools": "~16.0.0",
     "@nrwl/cli": "^15.9.3",
     "@nx/cypress": "16.1.4",
+    "@nx/esbuild": "^16.3.2",
     "@nx/eslint-plugin": "16.1.4",
     "@nx/jest": "16.1.4",
     "@nx/js": "16.1.4",

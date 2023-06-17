@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,13 +21,14 @@ export class CreateUsersButtonComponent {
   private email!: string;
   public dialog = inject(MatDialog);
   private readonly usersFacade = inject(UsersFacade);
+  private readonly destroyRef = inject(DestroyRef)
 
   openAddUserDialog(): void {
     const dialogRef: MatDialogRef<CreateUsersDialogComponent> = this.dialog.open(CreateUsersDialogComponent, {
       data: { name: this.name, email: this.email },
     });
     dialogRef.afterClosed()
-    .pipe(takeUntilDestroyed())
+    .pipe(takeUntilDestroyed(this.destroyRef))
     .subscribe(result => {
       if (result) {
         const newUserData: CreateUserDTO = {
