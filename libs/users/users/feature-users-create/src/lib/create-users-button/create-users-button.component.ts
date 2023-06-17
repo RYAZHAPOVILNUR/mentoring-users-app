@@ -31,6 +31,7 @@ export class CreateUsersButtonComponent {
           name: result.name,
           email: result.email,
         };
+
         this.usersFacade.addUser(newUserData);
       }
     });
