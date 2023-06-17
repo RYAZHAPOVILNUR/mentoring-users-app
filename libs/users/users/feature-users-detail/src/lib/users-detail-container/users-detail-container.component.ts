@@ -9,6 +9,7 @@ import { Store, select } from '@ngrx/store';
 import { LetDirective } from '@ngrx/component';
 import { MatDialog, MatDialogModule, MatDialogRef } from "@angular/material/dialog";
 import { CoreUiConfirmDialogComponent } from "@users/core/ui";
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -65,7 +66,9 @@ export class UsersDetailComponent {
       data: { dialogText: `Вы уверены, что хотите удалить ${this.user.name}` },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed()
+    .pipe(takeUntilDestroyed())
+    .subscribe(result => {
       console.log('result',result)
       if (result) {
         this.usersFacade.deleteUser(this.user.id);

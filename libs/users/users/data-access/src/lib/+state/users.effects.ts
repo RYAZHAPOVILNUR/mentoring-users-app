@@ -15,8 +15,6 @@ export const userEffects = createEffect(
     const actions$ = inject(Actions);
     const apiService = inject(ApiService);
 
-    actions$.subscribe(console.log)
-
     return actions$.pipe(
       ofType(UsersActions.initUsers),
       // delay(1500),
