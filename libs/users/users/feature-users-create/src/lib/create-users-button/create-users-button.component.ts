@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { CreateUsersDialogComponent } from '../create-users-dialog/create-users-dialog.component';
 import { UsersFacade, CreateUserDTO } from '@users/users/data-access';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -25,7 +26,9 @@ export class CreateUsersButtonComponent {
     const dialogRef: MatDialogRef<CreateUsersDialogComponent> = this.dialog.open(CreateUsersDialogComponent, {
       data: { name: this.name, email: this.email },
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed()
+    .pipe(takeUntilDestroyed())
+    .subscribe(result => {
       if (result) {
         const newUserData: CreateUserDTO = {
           name: result.name,
