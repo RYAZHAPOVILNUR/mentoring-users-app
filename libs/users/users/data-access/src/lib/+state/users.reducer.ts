@@ -35,14 +35,14 @@ const reducer = createReducer(
   initialUsersState,
   on(UsersActions.initUsers, (state) => ({
     ...state,
-    status: 'loading'
+    status: 'loading' as const
   })),
   on(UsersActions.loadUsersSuccess, (state, { users }) =>
-    usersAdapter.setAll(users, { ...state, status: 'loaded' })
+    usersAdapter.setAll(users, { ...state, status: 'loaded' as const })
   ),
   on(UsersActions.loadUsersFailure, (state, { error }) => ({
     ...state,
-    status: 'error',
+    status: 'error' as const,
     error
   })),
   on(UsersActions.deleteUserSuccess, (state, { id }) =>
@@ -57,21 +57,21 @@ const reducer = createReducer(
       changes: userData
     }, state);
     return {
-    ...updatedState, status: 'updated' as LoadingStatus
+    ...updatedState, status: 'updated' as const
   };
   }),
   on(UsersActions.editUserFailed, (state, {error}) => ({
-    ...state, status: 'error', error
+    ...state, status: 'error' as const, error
   })),
   on(UsersActions.loadUser, (state) => ({
     ...state,
-    status: 'loading'
+    status: 'loading' as const
   })),
   on(UsersActions.loadUserSuccess, (state, { userData }) =>
-    usersAdapter.addOne({ ...userData }, { ...state, status: 'loaded' })),
+    usersAdapter.addOne({ ...userData }, { ...state, status: 'loaded' as const })),
   on(UsersActions.loadUserFailed, (state, {error}) => ({
     ...state,
-    status: 'error', error
+    status: 'error' as const, error
   })),
   on(UsersActions.updateUserStatus, (state, {status}) => ({
     ...state, status
