@@ -3,6 +3,7 @@ import { UsersEntity } from './users.entity';
 import { CreateUserDTO, UsersDTO } from '../users-dto.model';
 import { UsersErrors } from "./users.reducer";
 import { LoadingStatus } from '@users/core/data-access';
+import {onSuccessEditionCbType} from "../../../../feature-users-detail/src/lib/users-detail-card/detail-users-card.component";
 
 
 export const initUsers = createAction('[Users Page] Init');
@@ -30,7 +31,7 @@ export const selectId = createAction('[Users Page] Select Id', props<{ id: numbe
 
 export const deleteSelectedId = createAction('[Users Page] Delete Selected Id');
 
-export const editUser = createAction('[Users Detail] Edit User', props<{ userData: CreateUserDTO; id: number }>());
+export const editUser = createAction('[Users Detail] Edit User', props<{ userData: CreateUserDTO; id: number; onSuccessCb: onSuccessEditionCbType }>());
 export const editUserSuccess = createAction('[Users Detail] Edit User Success', props<{ userData: UsersDTO }>());
 export const editUserFailed = createAction('[Users Detail] Edit Failed', props<{ error: UsersErrors | null }>());
 
