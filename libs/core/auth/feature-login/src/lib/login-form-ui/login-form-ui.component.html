@@ -1,0 +1,29 @@
+<div class="form-element">
+
+<div class="wrapper">
+  <h1>Войти</h1>
+<p>У вас нет аккаунта?
+  <span class="interactive-link" (click)="redirToSignUp()">Зарегистрироваться</span>
+</p>
+
+<form
+class="form-fields-wrapper">
+<mat-label>Электронная почта*</mat-label>
+  <mat-form-field appearance="outline">
+    <input matInput>
+  </mat-form-field>
+
+  <mat-label>Пароль*</mat-label>
+  <mat-form-field appearance="outline">
+    <input matInput>
+  </mat-form-field>
+
+  <span class="interactive-link">Забыли пароль?</span>
+
+  <button class="button" mat-fab extended color="primary">
+   Войти
+  </button>
+
+</form>
+</div>
+</div>
