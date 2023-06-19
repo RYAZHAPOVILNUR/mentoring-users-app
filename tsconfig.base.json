@@ -15,6 +15,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@auth/data-access": ["libs/core/auth/data-access/src/index.ts"],
+      "@auth/feature-login": ["libs/core/auth/feature-login/src/index.ts"],
+      "@auth/feature-register": [
+        "libs/core/auth/feature-register/src/index.ts"
+      ],
       "@users/core/data-access": ["libs/core/data-access/src/index.ts"],
       "@users/core/http": ["libs/core/http/src/index.ts"],
       "@users/core/ui": ["libs/core/ui/src/index.ts"],

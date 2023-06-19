@@ -10,9 +10,9 @@ html, body {
   min-height: 100vh;
 }
 
-// router-outlet {
-//   flex: 1;
-// }
+.content {
+  flex-grow: 1;
+}
 
 .footer {
   margin-top: auto;
