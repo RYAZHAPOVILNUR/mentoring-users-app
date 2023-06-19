@@ -97,7 +97,7 @@ export const editUser = createEffect(
         ({user, onSuccessCb}) =>
           apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
             map(userData => ({userData, onSuccessCb})),
-            tap(({onSuccessCb}) => onSuccessCb(2500, 'center', 'top')),
+            tap(({onSuccessCb}) => onSuccessCb()),
             map(({userData}) =>
               UsersActions.editUserSuccess({userData})
             ),
@@ -110,16 +110,6 @@ export const editUser = createEffect(
     )
   }, { functional: true }
 )
-
-export const updateUserStatusWithDelay = createEffect(
-  () => {
-    const actions$ = inject(Actions);
-    return actions$.pipe(
-      ofType(UsersActions.editUserSuccess),
-      delay(10),
-      map(() => UsersActions.updateUserStatus({ status: 'loaded' }))
-    )
-  }, {functional: true})
 
 export const loadUser = createEffect(
   () => {

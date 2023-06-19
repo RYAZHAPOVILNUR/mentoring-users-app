@@ -23,11 +23,7 @@ import {
   MatSnackBarVerticalPosition
 } from "@angular/material/snack-bar";
 
-export type onSuccessEditionCbType = (
-  duration: number,
-  horizontalPosition: MatSnackBarHorizontalPosition,
-  verticalPosition: MatSnackBarVerticalPosition
-) => void
+export type onSuccessEditionCbType = () => void
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -90,13 +86,10 @@ export class DetailUsersCardComponent {
 
   private snackBar = inject(MatSnackBar);
 
-  private onEditSuccess: onSuccessEditionCbType = (
-    duration, horizontalPosition, verticalPosition
-  ) => {
+  private onEditSuccess: onSuccessEditionCbType = () =>
     this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
-      duration, horizontalPosition, verticalPosition
+      duration: 2500, horizontalPosition: 'center', verticalPosition: 'top'
     })
-  }
 
   submit(): void {
     this.editUser.emit({
