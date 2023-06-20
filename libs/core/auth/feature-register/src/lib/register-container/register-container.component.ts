@@ -2,11 +2,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'users-core-ui',
+  selector: 'users-register-container',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './core-ui.component.html',
-  styleUrls: ['./core-ui.component.scss'],
+  templateUrl: './register-container.component.html',
+  styleUrls: ['./register-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CoreUiComponent {}
+export class RegisterContainerComponent {}
