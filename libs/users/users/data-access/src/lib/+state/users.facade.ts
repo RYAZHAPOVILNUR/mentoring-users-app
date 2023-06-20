@@ -7,6 +7,7 @@ import { CreateUserDTO } from '../users-dto.model';
 import { Observable, of, switchMap } from 'rxjs';
 import { UsersEntity } from './users.entity';
 import {UsersErrors} from "./users.reducer";
+import {onSuccessEditionCbType} from "../../../../feature-users-detail/src/lib/users-detail-card/detail-users-card.component";
 
 @Injectable({providedIn: 'root'})
 export class UsersFacade {
@@ -37,8 +38,8 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.addUser({ userData }))
   }
 
-  editUser(userData: CreateUserDTO, id: number) {
-    this.store.dispatch(UsersActions.editUser({ userData, id }));
+  editUser(userData: CreateUserDTO, id: number, onSuccessCb: onSuccessEditionCbType) {
+    this.store.dispatch(UsersActions.editUser({ userData, id, onSuccessCb }));
   }
 
   getUserFromStore(id: number) {

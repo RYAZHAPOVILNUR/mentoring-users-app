@@ -3,7 +3,7 @@
 </ng-container>
 
 <ng-template #loadingResult>
-  <ng-container *ngIf="(vm.status === 'loaded') || (vm.status === 'updated'); else error">
+  <ng-container *ngIf="vm.status === 'loaded'; else error">
     <div class="edit-user-container">
       <mat-card class="edit-user-card">
         <div class="close-button-container">

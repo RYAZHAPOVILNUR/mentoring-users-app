@@ -23,6 +23,8 @@ import {
   MatSnackBarVerticalPosition
 } from "@angular/material/snack-bar";
 
+export type onSuccessEditionCbType = () => void
+
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'detail-users-card',
@@ -61,10 +63,6 @@ export class DetailUsersCardComponent {
       });
     }
 
-    if (vm.status === 'updated') {
-      this.openSnackbar(2500, "center", "top")
-    }
-
     if (vm.editMode) {
       this.formGroup.enable();
     } else {
@@ -79,7 +77,7 @@ export class DetailUsersCardComponent {
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
 
-  @Output() editUser = new EventEmitter<CreateUserDTO>();
+  @Output() editUser = new EventEmitter<{ user: CreateUserDTO, onSuccessCb: onSuccessEditionCbType }>();
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
@@ -88,26 +86,20 @@ export class DetailUsersCardComponent {
 
   private snackBar = inject(MatSnackBar);
 
-  private openSnackbar(
-    duration: number,
-    horizontalPosition: MatSnackBarHorizontalPosition,
-    verticalPosition: MatSnackBarVerticalPosition
-  ): void {
-    this.snackBar.openFromTemplate(this.snackbarTemplateRef,  {
-          duration, horizontalPosition, verticalPosition
+  private onEditSuccess: onSuccessEditionCbType = () =>
+    this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
+      duration: 2500, horizontalPosition: 'center', verticalPosition: 'top'
     })
-  }
-
-  onEditUser(userData: CreateUserDTO) {
-    this.editUser.emit(userData);
-  }
 
   submit(): void {
     this.editUser.emit({
-      name: this.formGroup.value.name || '',
-      username: this.formGroup.value.username || '',
-      city: this.formGroup.value.city || '',
-      email: this.formGroup.value.email || ''
+      user: {
+        name: this.formGroup.value.name || '',
+        username: this.formGroup.value.username || '',
+        city: this.formGroup.value.city || '',
+        email: this.formGroup.value.email || ''
+      },
+      onSuccessCb: this.onEditSuccess
     });
   }
 
