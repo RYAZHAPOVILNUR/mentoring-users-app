@@ -47,10 +47,10 @@ export class LoginFormUiComponent {
   }
 
   // TODO: удалить, это просто для примера
-  test() {
-    this.api.get('/auth/me', new HttpParams(), new HttpHeaders({
-      'Authorization': 'Bearer eyJhbGciOiJBMjU2S1ciLCJlbmMiOiJBMjU2Q0JDLUhTNTEyIiwiemlwIjoiREVGIn0.mY75YoeJpQyzzYOGVbIIdBPqN7YnWtfIien91BSWCPWPnOXNqFT_6PsaX5cuwn8g44b5JGZcFFV-tfddI6JJbod2Qx3O9SOa.dFia7xlc21AZSenTIowigQ.szl7wQTFGxv8Q4eILYJSd30MXTI319LBdEPLEeJYTgN0fYwRNFXI3avOE4e8-9juX94v-YJ0jW1ovo2Lj6GKjLqkp0EYQjmpo_OGsxdxJP5qEYwiW-YAqgTuTfryzb0etmt4-KqRRlEcQMXWNuJmrR8e328_FcBlT_6cv7TG9nM.5AUJNl4-oFqf8EGn0TK7yaDiBS7LKpESmj8JnamnWvw'
-    })).pipe(tap(console.log)).subscribe()
-  }
+  // test() {
+  //   this.api.get('/auth/me', new HttpParams(), new HttpHeaders({
+  //     'Authorization': 'Bearer eyJhbGciOiJBMjU2S1ciLCJlbmMiOiJBMjU2Q0JDLUhTNTEyIiwiemlwIjoiREVGIn0.mY75YoeJpQyzzYOGVbIIdBPqN7YnWtfIien91BSWCPWPnOXNqFT_6PsaX5cuwn8g44b5JGZcFFV-tfddI6JJbod2Qx3O9SOa.dFia7xlc21AZSenTIowigQ.szl7wQTFGxv8Q4eILYJSd30MXTI319LBdEPLEeJYTgN0fYwRNFXI3avOE4e8-9juX94v-YJ0jW1ovo2Lj6GKjLqkp0EYQjmpo_OGsxdxJP5qEYwiW-YAqgTuTfryzb0etmt4-KqRRlEcQMXWNuJmrR8e328_FcBlT_6cv7TG9nM.5AUJNl4-oFqf8EGn0TK7yaDiBS7LKpESmj8JnamnWvw'
+  //   })).pipe(tap(console.log)).subscribe()
+  // }
 
 }
