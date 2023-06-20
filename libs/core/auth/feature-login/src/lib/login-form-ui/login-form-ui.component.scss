@@ -27,6 +27,13 @@
   flex-direction: column;
 }
 
+.checkbox-container{
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 .button {
   margin-top: 20px;
 }
