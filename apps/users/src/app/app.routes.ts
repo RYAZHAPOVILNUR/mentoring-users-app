@@ -15,11 +15,11 @@ export const appRoutes: Route[] = [
     loadComponent: () => import('@users/feature-users-detail').then(c => c.UsersDetailComponent)
   },
   {
-    path: 'auth/login',
+    path: 'login',
     loadComponent: () => import('@auth/feature-login').then(c => c.LoginContainerComponent)
   },
   {
-    path: 'auth/sign-up',
+    path: 'signup',
     loadComponent: () => import('@auth/feature-register').then(c => c.RegisterContainerComponent)
   }
 ];
