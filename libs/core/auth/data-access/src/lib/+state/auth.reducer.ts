@@ -1,15 +1,14 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { AuthActions } from './auth.actions';
+import { authActions } from './auth.actions';
 import { SignAuthResponse } from './sign.auth.model';
+import { LoadingStatus } from '@users/core/data-access';
 
 export const authFeatureKey = 'auth';
 
-export type AuthLoadingStatus = 'init' | 'loggin out' | 'loading' | 'loggin in'
-
 export interface AuthState {
-  status: AuthLoadingStatus
+  status: LoadingStatus
   error: string | null
-  authData: SignAuthResponse
+  authData: SignAuthResponse,
 }
 
 export const authInitialState: AuthState = {
@@ -26,11 +25,15 @@ export const authFeature = createFeature({
   name: 'auth',
   reducer: createReducer(
     authInitialState,
-    on(AuthActions.login, (state) => ({
+    on(authActions.login, (state) => ({
       ...state,
       status: 'loading' as const,
     })),
-
+    on(authActions.loginSuccess, (state, {res}) => ({
+      ...state,
+      status: 'loaded' as const,
+      authData: res
+    }))
   ),
 });
 

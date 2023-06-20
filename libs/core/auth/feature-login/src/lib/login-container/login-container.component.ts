@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginFormUiComponent } from '../login-form-ui/login-form-ui.component';
 import { Store } from '@ngrx/store';
-import { AuthActions, SignAuthPayload } from '@auth/data-access';
+import { authActions, SignAuthPayload } from '@auth/data-access';
 
 
 @Component({
@@ -17,7 +17,7 @@ export class LoginContainerComponent {
   private readonly store = inject(Store);
 
   onLogin(userData: SignAuthPayload) {
-    this.store.dispatch(AuthActions.login({userData}))
+    this.store.dispatch(authActions.login({userData}))
   }
 
 }
