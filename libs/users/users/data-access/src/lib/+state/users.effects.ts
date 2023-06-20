@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, catchError, of, map, withLatestFrom, filter, delay } from 'rxjs';
+import {switchMap, catchError, of, map, withLatestFrom, filter, delay, tap} from 'rxjs';
 import * as UsersActions from './users.actions';
 import { ApiService } from '@users/core/http';
 import { CreateUserDTO, UsersDTO } from '../users-dto.model';
@@ -83,48 +83,33 @@ export const editUser = createEffect(
       ofType(UsersActions.editUser),
       withLatestFrom(usersEntities$),
       filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
-      map(([{userData, id}, usersEntities]) => ({
-        ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
-        name: userData.name,
-        email: userData.email,
-        username: userData.username,
-        city: userData.city
+      map(([{userData, id, onSuccessCb}, usersEntities]) => ({
+        user: {
+          ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
+          name: userData.name,
+          email: userData.email,
+          username: userData.username,
+          city: userData.city
+        },
+        onSuccessCb
       })),
-      // map(([editUserPayload, usersEntities]) => {
-      //   const idUserToEdit = editUserPayload.id;
-      //   const usersEntityToEdit = <UsersEntity>usersEntities[idUserToEdit];
-      //   const dtoUser = usersDTOAdapter.entityToDTO(usersEntityToEdit);
-      //   const dtoToUpdateUser = {
-      //     ...dtoUser,
-      //     name: editUserPayload.userData.name,
-      //     email: editUserPayload.userData.email
-      //   }
-      //
-      //   return dtoToUpdateUser;
-      // }),
-      // delay(1500),
       switchMap(
-        (user) => apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
-          map((userData) => UsersActions.editUserSuccess({ userData })),
-          catchError((error) => {
-            console.error('Error', error);
-            return of(UsersActions.editUserFailed({ error }))
-          })
-        )
+        ({user, onSuccessCb}) =>
+          apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+            map(userData => ({userData, onSuccessCb})),
+            tap(({onSuccessCb}) => onSuccessCb()),
+            map(({userData}) =>
+              UsersActions.editUserSuccess({userData})
+            ),
+            catchError((error) => {
+              console.error('Error', error);
+              return of(UsersActions.editUserFailed({error}))
+            })
+          )
       )
     )
   }, { functional: true }
 )
-
-export const updateUserStatusWithDelay = createEffect(
-  () => {
-    const actions$ = inject(Actions);
-    return actions$.pipe(
-      ofType(UsersActions.editUserSuccess),
-      delay(10),
-      map(() => UsersActions.updateUserStatus({ status: 'loaded' }))
-    )
-  }, {functional: true})
 
 export const loadUser = createEffect(
   () => {

@@ -1,1 +1,1 @@
-export type LoadingStatus = 'init' | 'loading' | 'loaded' | 'error' | 'updated';
+export type LoadingStatus = 'init' | 'loading' | 'loaded' | 'error'

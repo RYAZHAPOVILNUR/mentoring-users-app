@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
+import {DetailUsersCardComponent, onSuccessEditionCbType} from '../users-detail-card/detail-users-card.component';
 import { CreateUserDTO, UsersEntity, UsersErrors, UsersFacade } from "@users/users/data-access";
 import { Observable, map, tap } from 'rxjs';
 import { selectQueryParam } from '@users/core/data-access';
@@ -45,8 +45,8 @@ export class UsersDetailComponent {
   );
   public readonly errors$: Observable<UsersErrors | null> = this.usersFacade.errors$
 
-  public onEditUser(userData: CreateUserDTO) {
-    this.usersFacade.editUser(userData, this.user.id);
+  public onEditUser(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
+    this.usersFacade.editUser(userData, this.user.id, onSuccessCb);
     this.router.navigate(['/users', this.user.id], { queryParams: { edit: false } });
   }
 
