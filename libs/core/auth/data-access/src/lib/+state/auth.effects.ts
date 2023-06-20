@@ -3,18 +3,34 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ApiService } from "@users/core/http";
 import { authActions } from "./auth.actions";
 import { catchError, map, of, switchMap, tap } from "rxjs";
-import { SignAuthResponse } from "./sign.auth.model";
+import { SignAuthPayload, SignAuthResponse } from "./sign.auth.model";
+import { LocalStorageJwtService } from "../services/local-storage-jwt.service";
+import { Router } from "@angular/router";
 
-export const loginEffect = createEffect(
+export const loginEffect$ = createEffect(
   (api = inject(ApiService), actions$ = inject(Actions)) => actions$.pipe(
     ofType(authActions.login),
     switchMap(
-      ({userData: {email, password}}) => 
-        api.post<SignAuthResponse, {email: string; password: string}>('/auth/login', {email, password})
-        .pipe(
-          map((res) => authActions.loginSuccess({res})),
-          catchError(error => of(authActions.loginFailure({error})))
-        )
+      ({ userData }) =>
+        api.post<SignAuthResponse, SignAuthPayload>('/auth/login', userData)
+          .pipe(
+            map((res) => authActions.loginSuccess({ res })),
+            catchError(error => of(authActions.loginFailure({ error })))
+          )
     )
-  ), {functional: true}
+  ), { functional: true }
+)
+
+export const loginSuccessEffect$ = createEffect(
+  (actions$ = inject(Actions),
+    localStorageJwtService = inject(LocalStorageJwtService),
+    router = inject(Router)) => {
+    return actions$.pipe(
+      ofType(authActions.loginSuccess),
+      tap((action) => {
+        localStorageJwtService.setItem(action.res.authToken);
+        router.navigateByUrl('/home')
+      })
+    )
+  }, { functional: true, dispatch: false },
 )

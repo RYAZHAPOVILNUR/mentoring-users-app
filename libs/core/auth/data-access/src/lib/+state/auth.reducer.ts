@@ -15,7 +15,7 @@ export const authInitialState: AuthState = {
   status: 'init',
   error: null,
   authData: {
-    accessToken: '',
+    authToken: '',
     expiresIn: null,
     id: null
   }
