@@ -44,7 +44,10 @@ export class CreateUsersDialogComponent {
 
   save(): void {
     if (this.formGroup.valid) {
-      const formData = this.formGroup.value;
+      const formData = {
+      name: this.formGroup.value.name,
+      email: this.formGroup.value.email.trim().toLowerCase()
+      }
       this.dialogRef.close(formData);
     }
   }

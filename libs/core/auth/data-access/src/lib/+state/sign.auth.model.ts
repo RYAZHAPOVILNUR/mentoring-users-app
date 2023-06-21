@@ -8,3 +8,10 @@ export interface SignAuthResponse {
   expiresIn?: number | null
   id?: number | null
 }
+export interface LoggedInUser {
+  id: string;
+  email: string;
+  token: string;
+  username: string;
+  city: string;
+}
