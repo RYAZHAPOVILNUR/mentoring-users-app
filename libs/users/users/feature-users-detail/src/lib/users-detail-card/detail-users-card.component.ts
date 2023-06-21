@@ -97,7 +97,7 @@ export class DetailUsersCardComponent {
         name: this.formGroup.value.name || '',
         username: this.formGroup.value.username || '',
         city: this.formGroup.value.city || '',
-        email: this.formGroup.value.email || ''
+        email: this.formGroup.value.email?.trim().toLowerCase() || ''
       },
       onSuccessCb: this.onEditSuccess
     });
