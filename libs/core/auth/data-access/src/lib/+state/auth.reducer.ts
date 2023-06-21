@@ -38,6 +38,11 @@ export const authFeature = createFeature({
       status: 'loaded' as const,
       authToken: res.authToken,
       loggedUser: res.user
+    })),
+    on(authActions.getUserSuccess, (state, { user }) => ({
+      ...state,
+      status: 'loading' as const,
+      loggedUser: user
     }))
   ),
 });
