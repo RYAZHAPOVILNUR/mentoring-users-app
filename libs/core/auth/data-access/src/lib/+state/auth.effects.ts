@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ApiService } from "@users/core/http";
 import { authActions } from "./auth.actions";
 import { catchError, map, of, switchMap, tap } from "rxjs";
-import { SignAuthPayload, SignAuthResponse } from "./sign.auth.model";
+import { LoggedInUser, SignAuthPayload, SignAuthResponse } from "./sign.auth.model";
 import { LocalStorageJwtService } from "../services/local-storage-jwt.service";
 import { Router } from "@angular/router";
 
@@ -33,4 +33,20 @@ export const loginSuccessEffect$ = createEffect(
       })
     )
   }, { functional: true, dispatch: false },
+)
+
+export const getUserEffect$ = createEffect(
+  (actions$ = inject(Actions), api = inject(ApiService)) => {
+    return actions$.pipe(
+      ofType(authActions.getUser),
+      switchMap(
+        () =>
+          api.get<LoggedInUser>('/auth/me').pipe(
+            map((data) => authActions.getUserSuccess({ user: data })),
+            catchError((error) => of(authActions.getUserFailure({ error }))),
+          ),
+      ),
+    );
+  },
+  { functional: true }
 )
