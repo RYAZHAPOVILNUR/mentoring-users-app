@@ -50,3 +50,16 @@ export const getUserEffect$ = createEffect(
   },
   { functional: true }
 )
+
+export const logoutEffect$ = createEffect(
+  ((actions$ = inject(Actions),
+    jwtService = inject(LocalStorageJwtService),
+    router = inject(Router)) => actions$.pipe(
+      ofType(authActions.logout),
+      tap(_ => {
+        jwtService.removeItem();
+        router.navigate(['/login'])
+      })
+    )
+  ), { functional: true, dispatch: false }
+)
