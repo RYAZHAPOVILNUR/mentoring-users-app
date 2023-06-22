@@ -43,6 +43,10 @@ export const authFeature = createFeature({
       ...state,
       status: 'loading' as const,
       loggedUser: user
+    })),
+    on(authActions.logout, (state) => ({
+      ...state,
+      ...authInitialState
     }))
   ),
 });
