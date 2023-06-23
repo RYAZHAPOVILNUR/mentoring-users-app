@@ -4,7 +4,14 @@ export interface SignAuthPayload {
 }
 
 export interface SignAuthResponse {
-  accessToken: string
-  expiresIn: number | null
+  authToken: string,
+  user: LoggedInUser
+}
+
+export interface LoggedInUser {
   id: number | null
+  name: string
+  email: string
+  username: string
+  city: string
 }

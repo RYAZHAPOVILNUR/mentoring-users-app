@@ -8,16 +8,9 @@ export class ApiService {
   private readonly http = inject(HttpClient);
   private readonly apiUrl = inject(API_URL);
 
-  // public get<T>(url: string, params: HttpParams = new HttpParams()): Observable<T> {
-  //   return this.http.get<T>(`${this.apiUrl}${url}`, {
-  //     headers: this.headers,
-  //     params,
-  //   });
-  // }
-  // TODO: это просто для примера, нужно это удалить и раскомментировать вариант выше 
-  public get<T>(url: string, params: HttpParams = new HttpParams(), headers?: HttpHeaders): Observable<T> {
+  public get<T>(url: string, params: HttpParams = new HttpParams()): Observable<T> {
     return this.http.get<T>(`${this.apiUrl}${url}`, {
-      headers: headers || this.headers,
+      headers: this.headers,
       params,
     });
   }
