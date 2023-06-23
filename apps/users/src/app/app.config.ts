@@ -4,7 +4,7 @@ import {
   withEnabledBlockingInitialNavigation,
 } from '@angular/router';
 import { appRoutes } from './app.routes';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { API_URL } from '@users/core/http';
 import { environment } from '../environments/environment.development';
 import { provideEffects } from '@ngrx/effects';
@@ -13,7 +13,7 @@ import { USERS_FEATURE_KEY, usersReducer, userEffects } from '@users/users/data-
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { provideAnimations } from "@angular/platform-browser/animations";
-import { authEffects, authFeature } from '@auth/data-access';
+import { authEffects, authFeature, tokenInterceptor } from '@auth/data-access';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -32,7 +32,7 @@ export const appConfig: ApplicationConfig = {
         traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
     }),
     provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([tokenInterceptor])),
     {
         provide: API_URL,
         useValue: environment.api_url,
