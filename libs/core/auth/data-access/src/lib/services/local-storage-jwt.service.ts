@@ -5,21 +5,18 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class LocalStorageJwtService {
-  getItem(): Observable<string | null> {
-    const data = localStorage.getItem('jwtToken');
-    if (data) {
-      return of(data);
-    }
-    return of(null);
+
+  getItem(): string | null {
+    return localStorage.getItem('jwtToken') || null;
   }
 
-  setItem(data: string): Observable<string> {
+  setItem(data: string): string {
     localStorage.setItem('jwtToken', data);
-    return of(data);
+    return data;
   }
 
-  removeItem(): Observable<boolean> {
+  removeItem(): boolean {
     localStorage.removeItem('jwtToken');
-    return of(true);
+    return true;
   }
 }
