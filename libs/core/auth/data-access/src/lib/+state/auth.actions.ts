@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { LoggedInUser, SignAuthPayload, SignAuthResponse } from './sign.auth.model';
+import { LoggedInUser, NewUser, SignAuthPayload, SignAuthResponse } from './sign.auth.model';
 
 export const authActions = createActionGroup({
   source: 'Auth',
@@ -10,6 +10,9 @@ export const authActions = createActionGroup({
     getUser: emptyProps(),
     getUserFailure: props<{ error: Error }>(),
     getUserSuccess: props<{ user: LoggedInUser }>(),
-    logout: emptyProps()
+    register: props<{userData: NewUser}>(),
+    registerFailure: props<{ error: Error }>(),
+    registerSuccess: props<{ authToken: string }>(),
+    logout: emptyProps(),
   }
 });

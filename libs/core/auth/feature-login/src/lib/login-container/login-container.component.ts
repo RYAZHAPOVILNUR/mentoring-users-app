@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoginFormUiComponent } from '../login-form-ui/login-form-ui.component';
 import { Store } from '@ngrx/store';
 import { authActions, SignAuthPayload } from '@auth/data-access';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,9 +16,14 @@ import { authActions, SignAuthPayload } from '@auth/data-access';
 })
 export class LoginContainerComponent {
   private readonly store = inject(Store);
+  private readonly router = inject(Router);
 
   onLogin(userData: SignAuthPayload) {
     this.store.dispatch(authActions.login({userData}))
+  }
+
+  onRedirectToSignup() {
+    this.router.navigate(['/signup'])
   }
 
 }
