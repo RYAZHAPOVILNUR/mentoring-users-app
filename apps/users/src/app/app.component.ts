@@ -3,8 +3,6 @@ import { RouterModule } from '@angular/router';
 import { LocalStorageJwtService, authActions } from '@auth/data-access';
 import { Store } from '@ngrx/store';
 import { FooterComponent, HeaderComponent } from "@users/core/ui/layout";
-import { filter, take } from 'rxjs';
-
 
 @Component({
   standalone: true,

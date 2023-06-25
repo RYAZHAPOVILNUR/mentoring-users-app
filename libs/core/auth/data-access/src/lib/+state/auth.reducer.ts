@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { authActions } from './auth.actions';
-import { LoggedInUser, SignAuthResponse } from './sign.auth.model';
+import { LoggedInUser } from './sign.auth.model';
 import { LoadingStatus } from '@users/core/data-access';
 
 export const authFeatureKey = 'auth';
