@@ -1,8 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { authActions } from './auth.actions';
-import { LoadingStatus } from '@users/core/data-access';
-import { UsersEntity } from '@users/users/data-access';
-
+import { LoadingStatus, UsersEntity } from '@users/core/data-access';
 export const authFeatureKey = 'auth';
 
 export interface AuthState {

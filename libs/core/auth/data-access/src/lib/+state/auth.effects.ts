@@ -6,8 +6,7 @@ import { catchError, concatMap, map, of, switchMap, tap } from "rxjs";
 import { NewUser, RegisterResponse, SignAuthPayload, SignAuthResponse } from "./sign.auth.model";
 import { LocalStorageJwtService } from "../services/local-storage-jwt.service";
 import { Router } from "@angular/router";
-import { UsersDTO } from "@users/users/data-access";
-import { usersDTOAdapter } from "libs/users/users/data-access/src/lib/users-dto.adapter";
+import { UsersDTO, usersDTOAdapter } from "@users/core/data-access";
 
 export const loginEffect$ = createEffect(
   (api = inject(ApiService), actions$ = inject(Actions)) => actions$.pipe(

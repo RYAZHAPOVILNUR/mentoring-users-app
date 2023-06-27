@@ -7,7 +7,7 @@ import {
   Output, TemplateRef, ViewChild
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CreateUserDTO, onSuccessEditionCbType } from '@users/users/data-access';
+import { onSuccessEditionCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -15,17 +15,19 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { DetailUsersCardVm } from './detail-users-card-vm';
-import {MatProgressBarModule} from "@angular/material/progress-bar";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
 import {
   MatSnackBar,
   MatSnackBarModule,
 } from "@angular/material/snack-bar";
+import { CreateUserDTO } from '@users/core/data-access';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'detail-users-card',
   standalone: true,
-  imports: [CommonModule,
+  imports: [
+    CommonModule,
     MatCardModule,
     MatButtonModule,
     MatFormFieldModule,

@@ -1,6 +1,6 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import {  NewUser, SignAuthPayload, SignAuthUser } from './sign.auth.model';
-import { UsersEntity } from '@users/users/data-access';
+import { UsersEntity } from '@users/core/data-access';
 
 export const authActions = createActionGroup({
   source: 'Auth',

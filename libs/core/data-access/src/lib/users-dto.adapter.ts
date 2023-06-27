@@ -1,5 +1,8 @@
-import { UsersEntity } from "./+state/users.entity"
+
+
+
 import { UsersDTO } from "./users-dto.model"
+import { UsersEntity } from "./users.entity"
 
 type UsersDTOAdapter = {
   DTOtoEntity(dto: UsersDTO): UsersEntity,
