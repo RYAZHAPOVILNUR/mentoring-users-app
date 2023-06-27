@@ -7,7 +7,7 @@ import { CreateUserDTO } from '../users-dto.model';
 import { Observable, of, switchMap } from 'rxjs';
 import { UsersEntity } from './users.entity';
 import {UsersErrors} from "./users.reducer";
-import {onSuccessEditionCbType} from "../../../../feature-users-detail/src/lib/users-detail-card/detail-users-card.component";
+import {onSuccessEditionCbType} from "./users.actions";
 import { selectLoggedUser } from '@auth/data-access';
 
 @Injectable({providedIn: 'root'})

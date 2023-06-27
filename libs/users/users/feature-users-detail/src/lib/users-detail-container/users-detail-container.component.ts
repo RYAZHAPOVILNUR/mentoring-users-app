@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import {DetailUsersCardComponent, onSuccessEditionCbType} from '../users-detail-card/detail-users-card.component';
-import { CreateUserDTO, UsersEntity, UsersErrors, UsersFacade } from "@users/users/data-access";
+import {DetailUsersCardComponent} from '../users-detail-card/detail-users-card.component';
+import { CreateUserDTO, UsersEntity, UsersErrors, UsersFacade, onSuccessEditionCbType } from "@users/users/data-access";
 import { Observable, map, tap } from 'rxjs';
 import { selectQueryParam } from '@users/core/data-access';
 import { Store, select } from '@ngrx/store';
