@@ -22,6 +22,7 @@ import {
   MatSnackBarModule,
   MatSnackBarVerticalPosition
 } from "@angular/material/snack-bar";
+import {DadataCityInputComponent} from "@dadata";
 
 export type onSuccessEditionCbType = () => void
 
@@ -38,7 +39,7 @@ export type onSuccessEditionCbType = () => void
     MatInputModule,
     MatIconModule,
     MatProgressBarModule,
-    MatSnackBarModule
+    MatSnackBarModule, DadataCityInputComponent
   ],
   templateUrl: './detail-users-card.component.html',
   styleUrls: ['./detail-users-card.component.scss'],
@@ -117,6 +118,10 @@ export class DetailUsersCardComponent {
 
   onDeleteUser() {
     this.deleteUser.emit();
+  }
+
+  handleCitySelected(city: string) {
+      this.formGroup.get('city')!.setValue(city)
   }
 
 }
