@@ -30,6 +30,7 @@ export class UsersListContainerComponent {
   public readonly users$ = this.componentStore.users$;
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;
+  public readonly loggedUser$ = this.usersFacade.loggedUser$;
   private readonly router = inject(Router);
 
   onDeleteUser(user: UsersVM) {

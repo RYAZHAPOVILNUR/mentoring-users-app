@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { UsersEntity } from '@users/users/data-access';
 
 @Component({
   selector: 'users-card',
@@ -16,7 +17,10 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class UsersCardComponent {
   @Input({ required: true })
-  user!: UsersVM
+  user!: UsersVM;
+
+  @Input({ required: true })
+  loggedUser!: UsersEntity;
 
   @Output() deleteUser = new EventEmitter();
   @Output() redirectToEdit = new EventEmitter()
