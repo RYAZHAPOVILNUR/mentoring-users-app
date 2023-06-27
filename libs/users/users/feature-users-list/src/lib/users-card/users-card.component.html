@@ -10,7 +10,14 @@
 
   <mat-card-actions>
     <button mat-button color="primary" (click)="redirectToEditPage(true, $event)">Редактировать</button>
-    <button mat-button color="warn" (click)="onDeleteUser($event)">Удалить</button>
+    <button 
+      mat-button 
+      color="warn" 
+      [disabled]="user.isAdmin || user.id === loggedUser.id"
+      (click)="onDeleteUser($event)"
+    >
+      Удалить
+    </button>
   </mat-card-actions>
 
   <div *ngIf="user.isAdmin" class="admin-icon">
