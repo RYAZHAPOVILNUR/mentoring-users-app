@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import {DetailUsersCardComponent} from '../users-detail-card/detail-users-card.component';
-import { CreateUserDTO, UsersEntity, UsersErrors, UsersFacade, onSuccessEditionCbType } from "@users/users/data-access";
+import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
+import { UsersErrors, UsersFacade, onSuccessEditionCbType } from "@users/users/data-access";
 import { Observable, map, tap } from 'rxjs';
-import { selectQueryParam } from '@users/core/data-access';
+import { selectQueryParam, CreateUserDTO, UsersEntity, } from '@users/core/data-access';
 import { Store, select } from '@ngrx/store';
 import { LetDirective } from '@ngrx/component';
 import { MatDialog, MatDialogModule, MatDialogRef } from "@angular/material/dialog";
@@ -68,13 +68,13 @@ export class UsersDetailComponent {
     });
 
     dialogRef.afterClosed()
-    .pipe(takeUntilDestroyed(this.destroyRef))
-    .subscribe(result => {
-      if (result) {
-        this.usersFacade.deleteUser(this.user.id);
-        this.router.navigate(['/home']);
-      }
-    });
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(result => {
+        if (result) {
+          this.usersFacade.deleteUser(this.user.id);
+          this.router.navigate(['/home']);
+        }
+      });
   }
 
 

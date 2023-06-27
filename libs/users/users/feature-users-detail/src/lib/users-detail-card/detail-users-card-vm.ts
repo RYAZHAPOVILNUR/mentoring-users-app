@@ -1,5 +1,5 @@
-import { LoadingStatus } from "@users/core/data-access"
-import {UsersEntity, UsersErrors} from "@users/users/data-access"
+import { LoadingStatus, UsersEntity } from "@users/core/data-access"
+import { UsersErrors } from "@users/users/data-access"
 
 export type DetailUsersCardVm = {
   editMode: boolean,

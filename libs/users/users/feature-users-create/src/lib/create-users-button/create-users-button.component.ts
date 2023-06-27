@@ -4,8 +4,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { CreateUsersDialogComponent } from '../create-users-dialog/create-users-dialog.component';
-import { UsersFacade, CreateUserDTO } from '@users/users/data-access';
+import { UsersFacade } from '@users/users/data-access';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { CreateUserDTO } from '@users/core/data-access';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -28,16 +29,16 @@ export class CreateUsersButtonComponent {
       data: { name: this.name, email: this.email },
     });
     dialogRef.afterClosed()
-    .pipe(takeUntilDestroyed(this.destroyRef))
-    .subscribe(result => {
-      if (result) {
-        const newUserData: CreateUserDTO = {
-          name: result.name,
-          email: result.email,
-        };
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(result => {
+        if (result) {
+          const newUserData: CreateUserDTO = {
+            name: result.name,
+            email: result.email,
+          };
 
-        this.usersFacade.addUser(newUserData);
-      }
-    });
+          this.usersFacade.addUser(newUserData);
+        }
+      });
   }
 }

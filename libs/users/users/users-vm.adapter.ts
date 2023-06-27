@@ -1,4 +1,4 @@
-import { UsersEntity } from "@users/users/data-access"
+import { UsersEntity } from "../../core/data-access/src"
 import { UsersVM } from "./users-vm"
 
 type UsersVMAdapter = {
