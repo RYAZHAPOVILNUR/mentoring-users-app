@@ -1,0 +1,7 @@
+<mat-form-field>
+  <mat-label>Город:</mat-label>
+  <input #inputField matInput placeholder="Город" class="edit-user-input">
+      <mat-option *ngFor="let option of suggestions$ | async" [value]="option">
+      {{ option }}
+    </mat-option>
+</mat-form-field>

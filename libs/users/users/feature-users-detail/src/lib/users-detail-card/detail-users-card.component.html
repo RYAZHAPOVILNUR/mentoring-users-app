@@ -54,10 +54,12 @@
             </mat-form-field>
 
 
-            <mat-form-field class="edit-user-field">
-              <mat-label>Город:</mat-label>
-              <input matInput placeholder="Город" formControlName="city" class="edit-user-input">
-            </mat-form-field>
+<!--            <mat-form-field class="edit-user-field">-->
+<!--              <mat-label>Город:</mat-label>-->
+<!--              <input matInput placeholder="Город" formControlName="city" class="edit-user-input">-->
+<!--              -->
+<!--            </mat-form-field>-->
+            <dadata-city-input style="display:block;" class="edit-user-field"/>
 
           </div>
             <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
