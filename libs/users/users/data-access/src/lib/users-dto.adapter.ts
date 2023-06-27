@@ -8,15 +8,19 @@ type UsersDTOAdapter = {
 
 export const usersDTOAdapter: UsersDTOAdapter = {
   DTOtoEntity(dto) {
-    const { created_at, ...otherAddressFields } = dto
+    const { role, ...otherAddressFields } = dto
 
     return {
-      ...otherAddressFields
+      ...otherAddressFields,
+      isAdmin: role === 'admin' ? true : false,
     }
   },
   entityToDTO(entity) {
+    const { isAdmin, ...otherFields } = entity;
+
     return {
-      ...entity,
-    }
+      ...otherFields,
+      role: isAdmin ? 'admin' : 'user',
+    };
   }
 }

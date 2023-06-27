@@ -1,7 +1,7 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { authActions } from './auth.actions';
-import { LoggedInUser, SignAuthResponse } from './sign.auth.model';
 import { LoadingStatus } from '@users/core/data-access';
+import { UsersEntity } from '@users/users/data-access';
 
 export const authFeatureKey = 'auth';
 
@@ -9,7 +9,7 @@ export interface AuthState {
   status: LoadingStatus
   error: string | null
   authToken: string
-  loggedUser: LoggedInUser,
+  loggedUser: UsersEntity,
 }
 
 export const authInitialState: AuthState = {
@@ -21,7 +21,8 @@ export const authInitialState: AuthState = {
     name: '',
     username: '',
     city: '',
-    id: null
+    id: 0,
+    isAdmin: false
   }
 };
 

@@ -3,7 +3,7 @@
   <div class="wrapper">
     <h1>Войти</h1>
     <p>У вас нет аккаунта?
-      <span class="interactive-link" (click)="redirToSignUp()">Зарегистрироваться</span>
+      <span class="interactive-link" (click)="onRedirectToSignUp()">Зарегистрироваться</span>
     </p>
 
     <form class="form-fields-wrapper" [formGroup]="formGroup" (ngSubmit)="onLogin()">
