@@ -4,11 +4,12 @@ import { UsersVM } from '../../../../users-vm';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'users-card',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule, RouterModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, RouterModule, MatIconModule],
   templateUrl: './users-card.component.html',
   styleUrls: ['./users-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
