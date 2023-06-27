@@ -3,8 +3,8 @@ import { UsersEntity } from './users.entity';
 import { CreateUserDTO, UsersDTO } from '../users-dto.model';
 import { UsersErrors } from "./users.reducer";
 import { LoadingStatus } from '@users/core/data-access';
-import {onSuccessEditionCbType} from "../../../../feature-users-detail/src/lib/users-detail-card/detail-users-card.component";
 
+export type onSuccessEditionCbType = () => void
 
 export const initUsers = createAction('[Users Page] Init');
 

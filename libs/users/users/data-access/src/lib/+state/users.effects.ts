@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, catchError, of, map, withLatestFrom, filter, delay, tap } from 'rxjs';
+import { switchMap, catchError, of, map, withLatestFrom, filter, tap } from 'rxjs';
 import * as UsersActions from './users.actions';
 import { ApiService } from '@users/core/http';
 import { CreateUserDTO, UsersDTO } from '../users-dto.model';
