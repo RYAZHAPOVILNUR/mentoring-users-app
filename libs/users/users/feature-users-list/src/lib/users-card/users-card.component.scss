@@ -1,7 +1,7 @@
 .user-card {
   height: 200px;
   display: flex;
-  align-items:center;
+  align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
@@ -13,7 +13,7 @@
   }
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -29,7 +29,11 @@
   }
 }
 
-
 .user-card:active::before {
+}
 
+.admin-icon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
 }
