@@ -7,7 +7,7 @@ import {
   Output, TemplateRef, ViewChild
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CreateUserDTO } from '@users/users/data-access';
+import { CreateUserDTO, onSuccessEditionCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -18,13 +18,9 @@ import { DetailUsersCardVm } from './detail-users-card-vm';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {
   MatSnackBar,
-  MatSnackBarHorizontalPosition,
   MatSnackBarModule,
-  MatSnackBarVerticalPosition
 } from "@angular/material/snack-bar";
 import {DadataCityInputComponent} from "@dadata";
-
-export type onSuccessEditionCbType = () => void
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector

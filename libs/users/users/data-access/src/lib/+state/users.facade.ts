@@ -7,7 +7,8 @@ import { CreateUserDTO } from '../users-dto.model';
 import { Observable, of, switchMap } from 'rxjs';
 import { UsersEntity } from './users.entity';
 import {UsersErrors} from "./users.reducer";
-import {onSuccessEditionCbType} from "../../../../feature-users-detail/src/lib/users-detail-card/detail-users-card.component";
+import {onSuccessEditionCbType} from "./users.actions";
+import { selectLoggedUser } from '@auth/data-access';
 
 @Injectable({providedIn: 'root'})
 export class UsersFacade {
@@ -21,6 +22,7 @@ export class UsersFacade {
   allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
   selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
+  public readonly loggedUser$ = this.store.select(selectLoggedUser);
   public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError))
   /**
    * Use the initialization action to perform one

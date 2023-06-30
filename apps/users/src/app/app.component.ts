@@ -1,10 +1,8 @@
-import {Component, OnInit, inject} from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LocalStorageJwtService, authActions } from '@auth/data-access';
 import { Store } from '@ngrx/store';
-import {FooterComponent, HeaderComponent} from "@users/core/ui/layout";
-import { filter, take } from 'rxjs';
-
+import { FooterComponent, HeaderComponent } from "@users/core/ui/layout";
 
 @Component({
   standalone: true,
@@ -20,12 +18,8 @@ export class AppComponent implements OnInit {
   private readonly localStorageJwtService = inject(LocalStorageJwtService);
 
   ngOnInit() {
-    this.localStorageJwtService
-      .getItem()
-      .pipe(
-        take(1),
-        filter((token) => !!token),
-      )
-      .subscribe(() => this.store.dispatch(authActions.getUser()));
+    if (this.localStorageJwtService.getItem()) {
+      this.store.dispatch(authActions.getUser());
+    }
   }
 }

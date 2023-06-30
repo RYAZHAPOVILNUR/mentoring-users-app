@@ -1,0 +1,42 @@
+<div class="form-element">
+
+  <div class="wrapper">
+    <h1>Зарегистрироваться</h1>
+    <p>У вас уже есть аккаунт?
+      <span class="interactive-link" (click)="onRedirectToLogin()">Войти</span>
+    </p>
+
+    <form class="form-fields-wrapper" [formGroup]="formGroup" (ngSubmit)="onRegister()">
+
+      <mat-label>Полное имя*</mat-label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="name">
+      </mat-form-field>
+
+      <mat-label>Электронная почта*</mat-label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="email">
+      </mat-form-field>
+
+      <mat-label>Пароль*</mat-label>
+      <mat-form-field appearance="outline">
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <div class="checkbox-container">
+        <mat-checkbox formControlName="agreement">Я согласен с
+          <span class="interactive-link">Условиями</span> и <span class="interactive-link">
+            Политикой конфиденциальности</span>
+        </mat-checkbox>
+      </div>
+
+      <button mat-fab extended color="primary">
+        Зарегистрироваться
+      </button>
+    </form>
+
+  </div>
+</div>
