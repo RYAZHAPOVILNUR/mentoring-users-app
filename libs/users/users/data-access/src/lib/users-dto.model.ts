@@ -6,16 +6,16 @@ export type UsersDTO = DeepReadonly<{
   username: string;
   email: string;
   city: string;
-  created_at?: number;
+  role: 'admin' | 'user'
 }>
 
 
 export type CreateUserDTO = DeepReadonly<{
-  id?: number;
+  id?: number | null;
   name: string;
   username?: string;
   email: string;
   city?: string;
-  created_at?: number;
+  role?: 'admin' | 'user'
 }>
 

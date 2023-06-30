@@ -1,13 +1,13 @@
-import { HttpEvent, HttpHandlerFn, HttpRequest } from "@angular/common/http";
+import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpRequest } from "@angular/common/http";
 import { inject } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, catchError, throwError } from "rxjs";
 import { LocalStorageJwtService } from "./local-storage-jwt.service";
+import { Router } from "@angular/router";
 
 export const tokenInterceptor = (request: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> => {
-  let token: string | null = null;
-  inject(LocalStorageJwtService)
-    .getItem()
-    .subscribe((t) => (token = t));
+  const localStorageJwtService = inject(LocalStorageJwtService)
+  const token: string | null = localStorageJwtService.getItem()
+  const router = inject(Router);
 
   if (token) {
     request = request.clone({
@@ -16,5 +16,13 @@ export const tokenInterceptor = (request: HttpRequest<any>, next: HttpHandlerFn)
       },
     });
   }
-  return next(request);
+  return next(request).pipe(
+    catchError((error: HttpErrorResponse) => {
+      if (error.status === 401) {
+        router.navigate(['/login']);
+        localStorageJwtService.removeItem()
+      }
+      return throwError(() => error);
+    })
+  );
 };
