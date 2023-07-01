@@ -38,6 +38,6 @@ export class UsersListContainerComponent {
   }
 
   onRedirectToEdit({ id, editMode }: { id: number, editMode: boolean }) {
-    this.router.navigate(['/users', id], { queryParams: { edit: editMode } });
+    this.router.navigate(['/admin/users', id], { queryParams: { edit: editMode } });
   }
 }

@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NewUser } from '@auth/data-access';
+import { InputPasswordComponent } from '@users/core/ui';
 
 @Component({
   selector: 'users-register-form-ui',
@@ -19,7 +20,8 @@ import { NewUser } from '@auth/data-access';
     MatTooltipModule,
     MatButtonModule,
     ReactiveFormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    InputPasswordComponent
   ],
   templateUrl: './register-form-ui.component.html',
   styleUrls: ['./register-form-ui.component.scss'],

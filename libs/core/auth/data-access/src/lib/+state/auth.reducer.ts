@@ -20,7 +20,7 @@ export const authInitialState: AuthState = {
     username: '',
     city: '',
     id: 0,
-    isAdmin: false
+    isAdmin: null
   }
 };
 
