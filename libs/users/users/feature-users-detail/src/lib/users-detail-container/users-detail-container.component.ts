@@ -47,7 +47,7 @@ export class UsersDetailComponent {
 
   public onEditUser(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
     this.usersFacade.editUser(userData, this.user.id, onSuccessCb);
-    this.router.navigate(['/users', this.user.id], { queryParams: { edit: false } });
+    this.router.navigate(['/admin/users', this.user.id], { queryParams: { edit: false } });
   }
 
   onCloseUser() {
