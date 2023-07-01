@@ -24,8 +24,7 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class InputPasswordComponent {
   public get value(): string {
-    return this.ngControl.value;
-  }
+    return this.ngControl.value;  }
 
   private readonly ngControl = inject(NgControl)
 
