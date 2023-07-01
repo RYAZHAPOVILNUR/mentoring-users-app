@@ -1,6 +1,7 @@
 <mat-toolbar color="primary">
   <span>Мой сайт</span>
   <button mat-button routerLink="/home">Главная</button>
+  <button mat-button routerLink="/admin/users" *ngIf="isAdmin$ | ngrxPush">Пользователи</button>
   <button mat-button routerLink="/about">О нас</button>
   <button mat-button routerLink="/contact">Контакты</button>
   <span class="spacer"></span>

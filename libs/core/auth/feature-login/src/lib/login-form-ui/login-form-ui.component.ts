@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ApiService } from '@users/core/http';
+import { InputPasswordComponent } from '@users/core/ui';
 
 @Component({
   selector: 'users-login-form-ui',
@@ -19,7 +20,8 @@ import { ApiService } from '@users/core/http';
     MatTooltipModule,
     MatButtonModule,
     ReactiveFormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    InputPasswordComponent
   ],
   templateUrl: './login-form-ui.component.html',
   styleUrls: ['./login-form-ui.component.scss'],

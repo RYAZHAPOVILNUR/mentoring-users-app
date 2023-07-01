@@ -51,15 +51,15 @@ export class UsersDetailComponent {
   }
 
   onCloseUser() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/admin/users']);
   }
 
   onCloseEditMode() {
-    this.router.navigate(['/users', this.user.id], { queryParams: { edit: false } });
+    this.router.navigate(['/admin/users', this.user.id], { queryParams: { edit: false } });
   }
 
   onOpenEditMode() {
-    this.router.navigate(['/users', this.user.id], { queryParams: { edit: true } });
+    this.router.navigate(['admin/users', this.user.id], { queryParams: { edit: true } });
   }
 
   onDeleteUser() {
