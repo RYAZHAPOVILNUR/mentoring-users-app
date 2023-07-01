@@ -4,14 +4,14 @@ import { LoadingStatus, UsersEntity } from '@users/core/data-access';
 export const authFeatureKey = 'auth';
 
 export interface AuthState {
-  status: LoadingStatus
+  authStatus: LoadingStatus
   error: string | null
   authToken: string
   loggedUser: UsersEntity,
 }
 
 export const authInitialState: AuthState = {
-  status: 'init',
+  authStatus: 'init',
   error: null,
   authToken: '',
   loggedUser: {
@@ -40,7 +40,7 @@ export const authFeature = createFeature({
     })),
     on(authActions.getUserSuccess, (state, { user }) => ({
       ...state,
-      status: 'loading' as const,
+      status: 'loaded' as const,
       loggedUser: user
     })),
     on(authActions.logout, (state) => ({

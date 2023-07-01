@@ -12,12 +12,12 @@ import { FooterComponent, HeaderComponent } from "@users/core/ui/layout";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'users';
   private readonly store = inject(Store);
   private readonly localStorageJwtService = inject(LocalStorageJwtService);
 
-  constructor() {
+  ngOnInit() {
     if (this.localStorageJwtService.getItem()) {
       this.store.dispatch(authActions.getUser());
     }

@@ -10,12 +10,16 @@ export const appRoutes: Route[] = [
     pathMatch: 'full',
   },
   {
+    path: 'home',
+    loadComponent: () => import('@users/home').then(c => c.HomeComponent)
+  },
+  {
     path: 'admin',
     canActivateChild: [authGuard, adminGuard],
     children: [
       {
         path: 'users',
-        loadComponent: () => import('@users/home').then(c => c.HomeComponent)
+        loadComponent: () => import('@users/feature-users-list').then(c => c.UsersListContainerComponent)
       },
       {
         path: 'users/:id',
