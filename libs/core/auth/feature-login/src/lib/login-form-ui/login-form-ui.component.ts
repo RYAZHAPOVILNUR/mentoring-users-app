@@ -42,11 +42,13 @@ export class LoginFormUiComponent {
   }
 
   onLogin() {
-    const userData = {
-      email: this.formGroup.value.email?.trim().toLowerCase(),
-      password: this.formGroup.value.password
+    if (this.formGroup.valid) {
+      const userData = {
+        email: this.formGroup.value.email?.trim().toLowerCase(),
+        password: this.formGroup.value.password
+      }
+      this.login.emit(userData);
     }
-    this.login.emit(userData);
   }
 
 }
