@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
-import { ControlValueAccessor, FormControl, NgControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { NgControl, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
@@ -22,12 +22,13 @@ import { MatInputModule } from '@angular/material/input';
   styleUrls: ['./input-password.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputPasswordComponent {
-  public get value(): string {
-    return this.ngControl.value;  }
 
+export class InputPasswordComponent {
   private readonly ngControl = inject(NgControl)
 
-  public isHide = true;
+  public get value(): string {
+    return this.ngControl.value;
+  }
 
+  public isHide = true;
 }

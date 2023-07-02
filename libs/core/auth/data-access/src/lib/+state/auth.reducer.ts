@@ -30,17 +30,21 @@ export const authFeature = createFeature({
     authInitialState,
     on(authActions.login, (state) => ({
       ...state,
-      status: 'loading' as const,
+      authStatus: 'loading' as const,
     })),
     on(authActions.loginSuccess, (state, { res }) => ({
       ...state,
-      status: 'loaded' as const,
+      authStatus: 'loaded' as const,
       authToken: res.authToken,
       loggedUser: res.user
     })),
+    on(authActions.getUser, (state) => ({
+      ...state,
+
+    })),
     on(authActions.getUserSuccess, (state, { user }) => ({
       ...state,
-      status: 'loaded' as const,
+      authStatus: 'loaded' as const,
       loggedUser: user
     })),
     on(authActions.logout, (state) => ({

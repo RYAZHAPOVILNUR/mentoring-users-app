@@ -1,12 +1,10 @@
 import { Route } from '@angular/router';
 import { authGuard, adminGuard } from '@auth/data-access';
 
-
-// TODO то как это будет выглядеть при добавлении слоя /admin
 export const appRoutes: Route[] = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {
