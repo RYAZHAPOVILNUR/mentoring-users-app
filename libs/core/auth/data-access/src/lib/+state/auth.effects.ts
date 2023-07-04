@@ -2,12 +2,13 @@ import { inject } from "@angular/core";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ApiService } from "@users/core/http";
 import { authActions } from "./auth.actions";
-import { catchError, concatMap, map, of, switchMap, tap } from "rxjs";
+import { catchError, concatMap, map, of, switchMap, tap, withLatestFrom } from "rxjs";
 import { NewUser, RegisterResponse, SignAuthPayload, SignAuthResponse } from "./sign.auth.model";
 import { LocalStorageJwtService } from "../services/local-storage-jwt.service";
 import { Router } from "@angular/router";
-import { UsersDTO } from "@users/users/data-access";
-import { usersDTOAdapter } from "libs/users/users/data-access/src/lib/users-dto.adapter";
+import { UsersDTO, usersDTOAdapter } from "@users/core/data-access";
+import { Store } from "@ngrx/store";
+import { selectAuthStatus } from "./auth.selectors";
 
 export const loginEffect$ = createEffect(
   (api = inject(ApiService), actions$ = inject(Actions)) => actions$.pipe(
@@ -42,23 +43,26 @@ export const loginSuccessEffect$ = createEffect(
 )
 
 export const getUserEffect$ = createEffect(
-  (actions$ = inject(Actions), api = inject(ApiService)) => {
-    return actions$.pipe(
+  (actions$ = inject(Actions),
+    api = inject(ApiService),
+    localStorageJwtService = inject(LocalStorageJwtService),
+    store = inject(Store)) =>
+    actions$.pipe(
       ofType(authActions.getUser),
-      switchMap(
-        () =>
-          api.get<UsersDTO>('/auth/me').pipe(
-            map((userDTO) => {
-              const userEntity = usersDTOAdapter.DTOtoEntity(userDTO);
-              return authActions.getUserSuccess({ user: userEntity });
-            }),
-            catchError((error) => of(authActions.getUserFailure({ error }))),
-          ),
-      ),
-    );
-  },
+      withLatestFrom(store.select(selectAuthStatus)),
+      switchMap(([action, authStatus]) =>
+        localStorageJwtService.getItem() && authStatus !== 'loaded'
+          ? api.get<UsersDTO>('/auth/me').pipe(
+              map((userDTO) => authActions.getUserSuccess({ user: usersDTOAdapter.DTOtoEntity(userDTO) })),
+              catchError((error) => of(authActions.getUserFailure({ error })))
+            )
+          : of()
+      )
+    ),
   { functional: true }
-)
+);
+
+
 
 export const registerEffect$ = createEffect(
   (actions$ = inject(Actions), api = inject(ApiService)) => {

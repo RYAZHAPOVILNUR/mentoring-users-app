@@ -1,7 +1,7 @@
 import { DeepReadonly } from "@users/core/utils";
 import { UsersVM } from "../../../../users-vm";
-import { UsersEntity, UsersErrors } from "@users/users/data-access";
-import { LoadingStatus } from "@users/core/data-access";
+import { UsersErrors } from "@users/users/data-access";
+import { LoadingStatus, UsersEntity } from "@users/core/data-access";
 
 export type UsersListVM = DeepReadonly<{
   users: UsersVM[],

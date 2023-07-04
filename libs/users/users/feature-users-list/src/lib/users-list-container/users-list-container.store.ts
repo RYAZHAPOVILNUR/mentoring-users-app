@@ -1,12 +1,13 @@
 import { Injectable, inject } from "@angular/core";
 import { ComponentStore } from "@ngrx/component-store";
-import { UsersEntity, UsersFacade } from "@users/users/data-access";
+import { UsersFacade } from "@users/users/data-access";
 import { DeepReadonly } from '@users/core/utils'
 import { UsersVM } from "../../../../users-vm";
 import { tap } from "rxjs";
 import { usersVMAdapter } from "../../../../users-vm.adapter";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { CoreUiConfirmDialogComponent } from "@users/core/ui";
+import { UsersEntity } from "@users/core/data-access";
 
 type UsersListState = DeepReadonly<{
   users: UsersVM[]
@@ -20,7 +21,7 @@ const initialState: UsersListState = {
 export class UsersListContainerStore extends ComponentStore<UsersListState> {
   private readonly usersFacade = inject(UsersFacade);
   private readonly dialog = inject(MatDialog);
-  public readonly users$ = this.select(({users}) => users);
+  public readonly users$ = this.select(({ users }) => users);
   public readonly status$ = this.select(
     this.usersFacade.status$,
     (status) => status
@@ -50,7 +51,7 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
   }
 
   public deleteUser(user: UsersVM): void {
-    const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent,{
+    const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
       data: { dialogText: `Вы уверены, что хотите удалить ${user.name}` },
     });
     this.effect(

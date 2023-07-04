@@ -1,13 +1,14 @@
 <mat-toolbar color="primary">
   <span>Мой сайт</span>
   <button mat-button routerLink="/home">Главная</button>
+  <button mat-button routerLink="/admin/users" *ngIf="isAdmin$ | ngrxPush">Пользователи</button>
   <button mat-button routerLink="/about">О нас</button>
   <button mat-button routerLink="/contact">Контакты</button>
   <span class="spacer"></span>
   <ng-container *ngIf="isAuthenticated$ | ngrxPush">
     <li [matMenuTriggerFor]="menu" class="user-avatar">
       <mat-menu class="user-dropdown" #menu="matMenu">
-        <button mat-menu-item>Профиль</button>
+        <button mat-menu-item routerLink="/profile">Профиль</button>
         <button mat-menu-item>Настройки</button>
         <button (click)="onLogout()" mat-menu-item>Выход</button>
       </mat-menu>
