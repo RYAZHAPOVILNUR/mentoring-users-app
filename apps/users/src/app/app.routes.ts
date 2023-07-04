@@ -27,7 +27,7 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'profile',
-    loadComponent: () => import('@users/users/profile/feature-profile').then(c => c.ProfileContaynerComponent)
+    loadComponent: () => import('@users/users/profile/feature-profile').then(c => c.ProfileContainerComponent)
   },
   {
     path: 'login',

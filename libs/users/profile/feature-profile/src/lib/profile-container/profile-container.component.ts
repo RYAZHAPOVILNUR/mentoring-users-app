@@ -4,11 +4,11 @@ import { ProfileFormUiComponent } from '../profile-form-ui/profile-form-ui.compo
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'profile-contayner',
+  selector: 'profile-container',
   standalone: true,
   imports: [CommonModule, ProfileFormUiComponent],
-  templateUrl: './profile-contayner.component.html',
-  styleUrls: ['./profile-contayner.component.scss'],
+  templateUrl: './profile-container.component.html',
+  styleUrls: ['./profile-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileContaynerComponent {}
+export class ProfileContainerComponent {}
