@@ -14,19 +14,19 @@
 
       <mat-label>Пароль*</mat-label>
       <input-password
-      ngDefaultControl
       [formControlName]="'password'"
       ></input-password>
-      <!-- <mat-form-field appearance="outline">
-        <input matInput formControlName="password">
-      </mat-form-field> -->
 
       <div class="checkbox-container">
         <mat-checkbox>Запомни меня</mat-checkbox>
         <span class="interactive-link">Забыли пароль?</span>
       </div>
 
-      <button mat-fab extended color="primary">
+      <button mat-fab
+      extended
+      color="primary"
+      type="submit"
+      >
         Войти
       </button>
     </form>

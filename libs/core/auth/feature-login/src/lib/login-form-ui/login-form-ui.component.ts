@@ -42,6 +42,7 @@ export class LoginFormUiComponent {
   }
 
   onLogin() {
+    console.log(this.formGroup)
     if (this.formGroup.valid) {
       const userData = {
         email: this.formGroup.value.email?.trim().toLowerCase(),
