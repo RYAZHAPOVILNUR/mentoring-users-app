@@ -7,22 +7,17 @@
 * сделать режим просмотра без инпутов?
 
 На 29.06.23
-* Добавить страницу профиля и показывать на ней профиль пользователя, через который зашли, можно так же реализовать смену пароля
+* Реализовать показ профиля пользователя, через который зашли, можно так же реализовать смену пароля
 (libs/users/profile/feature-profile)
 (libs/users/profile/data-access)
+* 
 
-
-* Добавить в путь строку admin (вместо /users будет /admin/users), на этот путь admin навесить гвард который будет пускать только админов (Rushan)
-* Сделать гвард для админа (Rushan)
 * реализовать подгрузку адресов при вводе адреса юзера (Умар) (
   dadata.ru, 
   https://material.angular.io/components/autocomplete/overview
   https://stackoverflow.com/questions/57852645/angular-material-autocomplete-from-api
 )
-* В библиотеке /libs/core/ui создать компонент "input-password", перенести туда компонент пароля из register-form-ui.component и подключить его к авторизации и регистрации
-
   ### Completed:
- * Исправить циклическую зависимость и перенести UsersEntity в /core/data-access
 
 ### Bugs:
 

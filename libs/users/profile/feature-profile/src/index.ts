@@ -1,1 +1,1 @@
-export * from './lib/profile-contayner/profile-contayner.component'
+export * from './lib/profile-container/profile-container.component'
