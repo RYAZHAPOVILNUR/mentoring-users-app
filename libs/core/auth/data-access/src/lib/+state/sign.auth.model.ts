@@ -1,5 +1,5 @@
+import { UsersDTO, UsersEntity } from "@users/core/data-access"
 import { DeepReadonly } from "@users/core/utils"
-import { UsersDTO, UsersEntity } from "@users/users/data-access"
 
 export interface SignAuthPayload {
   email: string

@@ -19,12 +19,15 @@
       </mat-form-field>
 
       <mat-label>Пароль*</mat-label>
-      <mat-form-field appearance="outline">
+      <!-- <mat-form-field appearance="outline">
         <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
-      </mat-form-field>
+      </mat-form-field> -->
+      <input-password
+      ngDefaultControl
+      [formControlName]="'password'"></input-password>
 
       <div class="checkbox-container">
         <mat-checkbox formControlName="agreement">Я согласен с

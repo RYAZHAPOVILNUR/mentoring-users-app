@@ -1,6 +1,6 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { LocalStorageJwtService, authActions } from '@auth/data-access';
+import { authActions } from '@auth/data-access';
 import { Store } from '@ngrx/store';
 import { FooterComponent, HeaderComponent } from "@users/core/ui/layout";
 
@@ -12,14 +12,10 @@ import { FooterComponent, HeaderComponent } from "@users/core/ui/layout";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
-  title = 'users';
+export class AppComponent {
   private readonly store = inject(Store);
-  private readonly localStorageJwtService = inject(LocalStorageJwtService);
 
-  ngOnInit() {
-    if (this.localStorageJwtService.getItem()) {
-      this.store.dispatch(authActions.getUser());
-    }
+  constructor() {
+    this.store.dispatch(authActions.getUser());
   }
 }

@@ -1,19 +1,17 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { authActions } from './auth.actions';
-import { LoadingStatus } from '@users/core/data-access';
-import { UsersEntity } from '@users/users/data-access';
-
+import { LoadingStatus, UsersEntity } from '@users/core/data-access';
 export const authFeatureKey = 'auth';
 
 export interface AuthState {
-  status: LoadingStatus
+  authStatus: LoadingStatus
   error: string | null
   authToken: string
   loggedUser: UsersEntity,
 }
 
 export const authInitialState: AuthState = {
-  status: 'init',
+  authStatus: 'init',
   error: null,
   authToken: '',
   loggedUser: {
@@ -22,7 +20,7 @@ export const authInitialState: AuthState = {
     username: '',
     city: '',
     id: 0,
-    isAdmin: false
+    isAdmin: null
   }
 };
 
@@ -32,17 +30,21 @@ export const authFeature = createFeature({
     authInitialState,
     on(authActions.login, (state) => ({
       ...state,
-      status: 'loading' as const,
+      authStatus: 'loading' as const,
     })),
     on(authActions.loginSuccess, (state, { res }) => ({
       ...state,
-      status: 'loaded' as const,
+      authStatus: 'loaded' as const,
       authToken: res.authToken,
       loggedUser: res.user
     })),
+    on(authActions.getUser, (state) => ({
+      ...state,
+
+    })),
     on(authActions.getUserSuccess, (state, { user }) => ({
       ...state,
-      status: 'loading' as const,
+      authStatus: 'loaded' as const,
       loggedUser: user
     })),
     on(authActions.logout, (state) => ({

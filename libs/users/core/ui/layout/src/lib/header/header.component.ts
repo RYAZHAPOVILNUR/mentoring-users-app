@@ -20,6 +20,7 @@ export class HeaderComponent {
   facade = inject(AuthFacade)
   isAuthenticated$: Observable<number | null> = this.facade.isAuthenticated$
   username$: Observable<string> = this.facade.user$.pipe(map(user => user.name))
+  isAdmin$: Observable<boolean | null> = this.facade.isAdmin$
 
   public onLogout() {
     this.facade.logout()
