@@ -1,5 +1,7 @@
 <div class="wrapper">
-  <lib-header></lib-header>
+  <ng-container *ngIf="isAuthenticated$ | ngrxPush">
+    <lib-header></lib-header>
+  </ng-container>
   <div class="content">
     <router-outlet></router-outlet>
   </div>

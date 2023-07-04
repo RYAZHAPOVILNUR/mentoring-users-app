@@ -1,7 +1,7 @@
 import {inject, Injectable} from "@angular/core";
 import {select, Store} from "@ngrx/store";
-import * as AuthSelectors from './auth.selectors'
-import { authActions } from "./auth.actions";
+import * as AuthSelectors from './+state/auth.selectors'
+import { authActions } from "./+state/auth.actions";
 
 @Injectable({providedIn: "root"})
 export class AuthFacade {
