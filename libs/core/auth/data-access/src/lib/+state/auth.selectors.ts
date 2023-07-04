@@ -1,13 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { authFeature, authFeatureKey, AuthState } from "./auth.reducer";
+import {LoadingStatus} from "@users/core/data-access";
 
 export const selectUsersState =
   createFeatureSelector<AuthState>(authFeatureKey);
-
-export const selectIsAuthenticated = createSelector(
-  selectUsersState,
-  (state: AuthState) => state.loggedUser.id
-);
 
 export const selectIsAdmin = createSelector(
   selectUsersState,
@@ -15,3 +11,8 @@ export const selectIsAdmin = createSelector(
 )
 
 export const {selectAuthStatus, selectAuthToken, selectError, selectLoggedUser, selectAuthState} = authFeature
+
+export const selectIsAuthenticated = createSelector(
+  selectAuthStatus,
+  (loadingStatus: LoadingStatus) => loadingStatus === 'loaded'
+);
