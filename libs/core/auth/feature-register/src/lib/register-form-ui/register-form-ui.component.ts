@@ -47,7 +47,6 @@ export class RegisterFormUiComponent {
         email: this.formGroup.value.email?.trim().toLowerCase() as string,
         password: this.formGroup.value.password as string
       }
-      console.log(userData)
       this.register.emit(userData);
     }
   }
