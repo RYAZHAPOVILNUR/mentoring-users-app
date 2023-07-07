@@ -24,22 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class ProfileFormUiComponent implements OnInit {
   @Input({ required: true }) vm!: ProfileFormUiVm
 
-  // defaultPhoto: {
-  //   path: "",
-  //   name: "",
-  //   type: "image",
-  //   size: 14386,
-  //   mime: "image/jpeg",
-  //   meta: {
-  //     width: 232,
-  //     height: 196
-  //   },
-  //   url: ""
-  // }
-
   public photo: any
-  events: string[] = [];
-  opened!: boolean;
 
   ngOnInit(): void {
     this.photo = this.vm.user.photo ? this.vm.user.photo.url : ''

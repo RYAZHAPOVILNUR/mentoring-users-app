@@ -3,7 +3,31 @@
     <lib-header></lib-header>
   </ng-container>
   <div class="content">
-    <router-outlet></router-outlet>
+    <mat-sidenav-container class="profile-container">
+      <mat-sidenav #sidenav mode="side"
+       [(opened)]="opened"
+       (opened)="events.push('open!')"
+       (closed)="events.push('close!')"
+       class="sidenav-container"
+      >
+        <div class="nav-items">
+          <a href="#" onclick="return false;"><p>О себе</p></a>
+          <a href="#" onclick="return false;"><p>Статьи</p></a>
+          <a href="#" onclick="return false;"><p>Задачи</p></a>
+        </div>
+      </mat-sidenav>
+
+      <mat-sidenav-content>
+        <div class="wrapper">
+          <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon *ngIf="!opened">arrow_forward_ios</mat-icon>
+            <mat-icon *ngIf="opened">arrow_back_ios</mat-icon>
+          </button>
+
+          <router-outlet></router-outlet>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
   </div>
   <ng-container *ngIf="isAuthenticated$ | ngrxPush">
     <lib-footer class="footer"></lib-footer>

@@ -7,10 +7,22 @@ import {AuthFacade} from "@auth/data-access";
 import {Observable} from "rxjs";
 import {NgIf} from "@angular/common";
 import {PushPipe} from "@ngrx/component";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
 
 @Component({
   standalone: true,
-  imports: [RouterModule, HeaderComponent, FooterComponent, NgIf, PushPipe],
+  imports: [
+    RouterModule,
+    HeaderComponent,
+    FooterComponent,
+    NgIf,
+    PushPipe,
+    MatSidenavModule,
+    MatIconModule,
+    MatButtonModule,
+  ],
   providers: [],
   selector: 'users-root',
   templateUrl: './app.component.html',
@@ -18,8 +30,11 @@ import {PushPipe} from "@ngrx/component";
 })
 export class AppComponent {
   private readonly store = inject(Store);
-  private readonly facade = inject(AuthFacade)
-  public readonly isAuthenticated$: Observable<boolean> = this.facade.isAuthenticated$
+  private readonly facade = inject(AuthFacade);
+  public readonly isAuthenticated$: Observable<boolean> =
+    this.facade.isAuthenticated$;
+  opened!: boolean;
+  events: string[] = [];
 
   constructor() {
     this.store.dispatch(authActions.getUser());
