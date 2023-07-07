@@ -1,1 +1,31 @@
-<p>profile-form-ui works!</p>
+<mat-sidenav-container class="profile-container">
+  <mat-sidenav #sidenav mode="side"
+  [(opened)]="opened"
+  (opened)="events.push('open!')"
+  (closed)="events.push('close!')"
+  class="sidenav-container"
+  >
+    <div class="nav-items">
+      <a href="#" onclick="return false;"><p>О себе</p></a>
+      <a href="#" onclick="return false;"><p>Статьи</p></a>
+      <a href="#" onclick="return false;"><p>Задачи</p></a>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="wrapper">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon *ngIf="!opened">arrow_forward_ios</mat-icon>
+        <mat-icon *ngIf="opened">arrow_back_ios</mat-icon>
+      </button>
+      <div class="user-info">
+        <div class="user-photo">
+          <img src={{photo}} alt="" class="user-photo-img">
+        </div>
+        <div class="name">{{vm.user.name}}</div>
+        <div class="email">{{vm.user.email}}</div>
+        <div class="city">{{vm.user.city}}</div>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

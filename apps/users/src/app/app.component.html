@@ -5,5 +5,7 @@
   <div class="content">
     <router-outlet></router-outlet>
   </div>
-  <lib-footer class="footer"></lib-footer>
+  <ng-container *ngIf="isAuthenticated$ | ngrxPush">
+    <lib-footer class="footer"></lib-footer>
+  </ng-container>
 </div>

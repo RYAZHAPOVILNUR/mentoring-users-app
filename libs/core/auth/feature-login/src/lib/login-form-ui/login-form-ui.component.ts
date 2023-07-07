@@ -33,8 +33,8 @@ export class LoginFormUiComponent {
   @Output() redirectToSignup = new EventEmitter();
 
   public formGroup = new FormBuilder().group({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required])
+    email: new FormControl('admin@gmail.com', [Validators.required, Validators.email]),
+    password: new FormControl('12345', [Validators.required])
   });
 
   onRedirectToSignUp() {

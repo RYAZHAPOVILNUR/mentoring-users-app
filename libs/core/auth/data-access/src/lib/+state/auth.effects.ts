@@ -50,7 +50,7 @@ export const getUserEffect$ = createEffect(
     actions$.pipe(
       ofType(authActions.getUser),
       withLatestFrom(store.select(selectAuthStatus)),
-      switchMap(([action, authStatus]) =>
+      switchMap(([, authStatus]) =>
         localStorageJwtService.getItem() && authStatus !== 'loaded'
           ? api.get<UsersDTO>('/auth/me').pipe(
               map((userDTO) => authActions.getUserSuccess({ user: usersDTOAdapter.DTOtoEntity(userDTO) })),
