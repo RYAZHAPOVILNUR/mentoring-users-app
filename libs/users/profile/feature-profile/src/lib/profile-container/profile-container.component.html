@@ -1,2 +1,10 @@
-<p>profile-contayner works!</p>
-<profile-form-ui></profile-form-ui>
+<ng-container
+*ngrxLet="{
+  user: user$,
+  status: status$
+} as vm">
+<profile-form-ui *ngIf="vm.status==='loaded'"
+[vm]="vm"
+></profile-form-ui>
+</ng-container>
+

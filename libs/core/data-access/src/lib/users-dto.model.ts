@@ -6,7 +6,8 @@ export type UsersDTO = DeepReadonly<{
   username: string;
   email: string;
   city: string;
-  role: 'admin' | 'user'
+  role: 'admin' | 'user';
+  photo?: UsersPhoto | null
 }>
 
 
@@ -19,3 +20,15 @@ export type CreateUserDTO = DeepReadonly<{
   role?: 'admin' | 'user'
 }>
 
+export type UsersPhoto = {
+  path: string,
+  name: string,
+  type: 'image',
+  size: number,
+  mime: 'image/jpeg',
+  meta: {
+    width: number,
+    height: number
+  },
+  url: string
+}
