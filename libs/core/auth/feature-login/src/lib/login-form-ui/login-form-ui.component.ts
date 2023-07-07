@@ -33,8 +33,8 @@ export class LoginFormUiComponent {
   @Output() redirectToSignup = new EventEmitter();
 
   public formGroup = new FormBuilder().group({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required])
+    email: new FormControl('admin@gmail.com', [Validators.required, Validators.email]),
+    password: new FormControl('12345', [Validators.required])
   });
 
   onRedirectToSignUp() {
@@ -42,7 +42,6 @@ export class LoginFormUiComponent {
   }
 
   onLogin() {
-    console.log(this.formGroup)
     if (this.formGroup.valid) {
       const userData = {
         email: this.formGroup.value.email?.trim().toLowerCase(),
