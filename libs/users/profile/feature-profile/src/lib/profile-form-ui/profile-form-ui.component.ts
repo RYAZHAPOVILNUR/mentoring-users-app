@@ -1,13 +1,50 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ProfileFormUiVm } from './profile-form-ui-vm';
+import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'profile-form-ui',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    FormsModule,
+    MatSidenavModule,
+    MatIconModule
+  ],
   templateUrl: './profile-form-ui.component.html',
   styleUrls: ['./profile-form-ui.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileFormUiComponent {}
+export class ProfileFormUiComponent implements OnInit {
+  @Input({ required: true }) vm!: ProfileFormUiVm
+
+  // defaultPhoto: {
+  //   path: "",
+  //   name: "",
+  //   type: "image",
+  //   size: 14386,
+  //   mime: "image/jpeg",
+  //   meta: {
+  //     width: 232,
+  //     height: 196
+  //   },
+  //   url: ""
+  // }
+
+  public photo: any
+  events: string[] = [];
+  opened!: boolean;
+
+  ngOnInit(): void {
+    this.photo = this.vm.user.photo ? this.vm.user.photo.url : ''
+  }
+
+
+
+}
