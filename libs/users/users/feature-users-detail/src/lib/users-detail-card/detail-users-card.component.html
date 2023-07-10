@@ -56,9 +56,18 @@
 
             <mat-form-field class="edit-user-field">
               <mat-label>Город:</mat-label>
-              <input matInput placeholder="Город" formControlName="city" class="edit-user-input">
+              <input type="text"
+                     class="edit-user-input"
+                     placeholder="Введите город"
+                     matInput
+                     formControlName="city"
+                     [matAutocomplete]="auto">
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let suggestion of citySuggestions | ngrxPush" [value]="suggestion">
+                  {{suggestion}}
+                </mat-option>
+              </mat-autocomplete>
             </mat-form-field>
-
           </div>
             <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
               <button mat-icon-button

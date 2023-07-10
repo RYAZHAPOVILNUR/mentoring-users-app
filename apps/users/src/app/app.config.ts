@@ -14,6 +14,7 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { provideAnimations } from "@angular/platform-browser/animations";
 import { authEffects, authFeature, tokenInterceptor } from '@auth/data-access';
+import {DADATA_TOKEN} from "../../../../libs/core/dadata/src/lib/dadata.token";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -36,6 +37,10 @@ export const appConfig: ApplicationConfig = {
     {
         provide: API_URL,
         useValue: environment.api_url,
+    },
+    {
+      provide: DADATA_TOKEN,
+      useValue: environment.dadata_api_key
     },
     provideAnimations()
 ],
