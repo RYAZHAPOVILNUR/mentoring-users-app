@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProfileFormUiVm } from './profile-form-ui-vm';
+import { ProfileFormVm } from './profile-form-ui-vm';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -22,7 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileFormUiComponent implements OnInit {
-  @Input({ required: true }) vm!: ProfileFormUiVm
+  @Input({ required: true }) vm!: ProfileFormVm
 
   public photo: any
 

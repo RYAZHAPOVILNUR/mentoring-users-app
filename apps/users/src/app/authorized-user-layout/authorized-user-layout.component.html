@@ -1,0 +1,29 @@
+<div class="wrapper" *ngIf="isAuthenticated$ | ngrxPush">
+  <div class="content">
+      <lib-header></lib-header>
+      <mat-sidenav-container class="sidenav-container">
+        <mat-sidenav
+          #sidenav mode="side"
+          [(opened)]="opened"
+          (opened)="events.push('open!')"
+          (closed)="events.push('close!')"
+          class="sidenav"
+        >
+        <navbar></navbar>
+
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+          <div class="wrapper">
+            <button mat-icon-button (click)="sidenav.toggle()">
+              <mat-icon *ngIf="!opened">arrow_forward_ios</mat-icon>
+              <mat-icon *ngIf="opened">arrow_back_ios</mat-icon>
+            </button>
+            <router-outlet></router-outlet>
+          </div>
+        </mat-sidenav-content>
+      </mat-sidenav-container>
+    <lib-footer class="footer"></lib-footer>
+  </div>
+</div>
+

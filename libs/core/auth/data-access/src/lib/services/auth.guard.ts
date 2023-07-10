@@ -8,7 +8,7 @@ export const authGuard = () => {
   const storage = inject(LocalStorageJwtService);
 
   if (!storage.getItem()) {
-    router.navigate(['/login']);
+    router.navigate(['/guest/home']);
     return false;
   }
   return true;

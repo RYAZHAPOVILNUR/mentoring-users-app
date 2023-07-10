@@ -13,7 +13,8 @@ import { InputPasswordComponent } from '@users/core/ui';
 @Component({
   selector: 'users-login-form-ui',
   standalone: true,
-  imports: [CommonModule,
+  imports: [
+    CommonModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
