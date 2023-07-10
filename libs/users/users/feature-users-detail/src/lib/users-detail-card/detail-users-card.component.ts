@@ -7,7 +7,7 @@ import {
   Output, TemplateRef, ViewChild
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CreateUserDTO, onSuccessEditionCbType } from '@users/users/data-access';
+import { onSuccessEditionCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -21,7 +21,10 @@ import {
   MatSnackBarModule,
 } from "@angular/material/snack-bar";
 import { CreateUserDTO } from '@users/core/data-access';
-import {DadataCityInputComponent} from "@dadata";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {DadataApiService} from "../../../../../../core/dadata/src/lib/dadata-api/dadata-api.service";
+import {debounceTime, distinctUntilChanged, filter, switchMap} from "rxjs";
+import {PushPipe} from "@ngrx/component";
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -36,7 +39,7 @@ import {DadataCityInputComponent} from "@dadata";
     MatInputModule,
     MatIconModule,
     MatProgressBarModule,
-    MatSnackBarModule, DadataCityInputComponent
+    MatSnackBarModule, MatAutocompleteModule, PushPipe
   ],
   templateUrl: './detail-users-card.component.html',
   styleUrls: ['./detail-users-card.component.scss'],
@@ -81,6 +84,14 @@ export class DetailUsersCardComponent {
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>
+  private dadata = inject(DadataApiService)
+  public citySuggestions = this.formGroup.controls.city.valueChanges
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        filter(Boolean),
+        switchMap((value) => this.dadata.getCities(value))
+      )
 
   private snackBar = inject(MatSnackBar);
 
@@ -116,5 +127,4 @@ export class DetailUsersCardComponent {
   onDeleteUser() {
     this.deleteUser.emit();
   }
-
 }
