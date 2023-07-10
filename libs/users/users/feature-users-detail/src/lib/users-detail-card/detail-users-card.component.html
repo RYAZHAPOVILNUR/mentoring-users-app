@@ -54,13 +54,21 @@
             </mat-form-field>
 
 
-<!--            <mat-form-field class="edit-user-field">-->
-<!--              <mat-label>Город:</mat-label>-->
-<!--              <input matInput placeholder="Город" formControlName="city" class="edit-user-input">-->
-<!--              -->
-<!--            </mat-form-field>-->
-            <dadata-city-input style="display:block;" class="edit-user-field"/>
-
+            <mat-form-field class="edit-user-field">
+              <mat-label>Город:</mat-label>
+              <input type="text"
+                     class="edit-user-input"
+                     placeholder="Введите город"
+                     aria-label="Number"
+                     matInput
+                     formControlName="city"
+                     [matAutocomplete]="auto">
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let suggestion of citySuggestions | ngrxPush" [value]="suggestion">
+                  {{suggestion}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
           </div>
             <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
               <button mat-icon-button
