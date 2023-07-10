@@ -20,6 +20,7 @@ import {
   MatSnackBar,
   MatSnackBarModule,
 } from "@angular/material/snack-bar";
+import { CreateUserDTO } from '@users/core/data-access';
 import {DadataCityInputComponent} from "@dadata";
 
 @Component({
@@ -114,10 +115,6 @@ export class DetailUsersCardComponent {
 
   onDeleteUser() {
     this.deleteUser.emit();
-  }
-
-  handleCitySelected(city: string) {
-      this.formGroup.get('city')!.setValue(city)
   }
 
 }

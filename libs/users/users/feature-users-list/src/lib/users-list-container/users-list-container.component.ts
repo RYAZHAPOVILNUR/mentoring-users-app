@@ -13,11 +13,19 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { UsersFacade } from '@users/users/data-access';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
+import { CreateUsersButtonComponent } from '@users/feature-users-create';
 
 @Component({
   selector: 'users-list-container',
   standalone: true,
-  imports: [CommonModule, UsersListComponent, MatButtonModule, MatDialogModule, LetDirective],
+  imports: [
+    CommonModule,
+    UsersListComponent,
+    MatButtonModule,
+    MatDialogModule,
+    LetDirective,
+    CreateUsersButtonComponent
+  ],
   templateUrl: './users-list-container.component.html',
   styleUrls: ['./users-list-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
@@ -38,6 +46,6 @@ export class UsersListContainerComponent {
   }
 
   onRedirectToEdit({ id, editMode }: { id: number, editMode: boolean }) {
-    this.router.navigate(['/users', id], { queryParams: { edit: editMode } });
+    this.router.navigate(['/admin/users', id], { queryParams: { edit: editMode } });
   }
 }
