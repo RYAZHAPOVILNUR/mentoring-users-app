@@ -21,6 +21,10 @@ import {
   MatSnackBarModule,
 } from "@angular/material/snack-bar";
 import { CreateUserDTO } from '@users/core/data-access';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {DadataApiService} from "@dadata";
+import {debounceTime, distinctUntilChanged, filter, switchMap} from "rxjs";
+import {PushPipe} from "@ngrx/component";
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -36,7 +40,7 @@ import { CreateUserDTO } from '@users/core/data-access';
     MatInputModule,
     MatIconModule,
     MatProgressBarModule,
-    MatSnackBarModule
+    MatSnackBarModule, MatAutocompleteModule, PushPipe
   ],
   templateUrl: './detail-users-card.component.html',
   styleUrls: ['./detail-users-card.component.scss'],
@@ -81,6 +85,14 @@ export class DetailUsersCardComponent {
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>
+  private dadata = inject(DadataApiService)
+  public citySuggestions = this.formGroup.controls.city.valueChanges
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        filter(Boolean),
+        switchMap((value) => this.dadata.getCities(value)),
+      )
 
   private snackBar = inject(MatSnackBar);
 
@@ -117,4 +129,7 @@ export class DetailUsersCardComponent {
     this.deleteUser.emit();
   }
 
+  public onOptionClicked(selectedValue: string) {
+    this.formGroup.get('city')?.setValue(selectedValue);
+  }
 }
