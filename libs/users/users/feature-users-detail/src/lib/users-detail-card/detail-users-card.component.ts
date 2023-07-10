@@ -15,14 +15,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { DetailUsersCardVm } from './detail-users-card-vm';
-import {MatProgressBarModule} from "@angular/material/progress-bar";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
 import {
   MatSnackBar,
   MatSnackBarModule,
 } from "@angular/material/snack-bar";
 import { CreateUserDTO } from '@users/core/data-access';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
-import {DadataApiService} from "../../../../../../core/dadata/src/lib/dadata-api/dadata-api.service";
+import {DadataApiService} from "@dadata";
 import {debounceTime, distinctUntilChanged, filter, switchMap} from "rxjs";
 import {PushPipe} from "@ngrx/component";
 
@@ -30,7 +30,8 @@ import {PushPipe} from "@ngrx/component";
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'detail-users-card',
   standalone: true,
-  imports: [CommonModule,
+  imports: [
+    CommonModule,
     MatCardModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -90,7 +91,7 @@ export class DetailUsersCardComponent {
         debounceTime(300),
         distinctUntilChanged(),
         filter(Boolean),
-        switchMap((value) => this.dadata.getCities(value))
+        switchMap((value) => this.dadata.getCities(value)),
       )
 
   private snackBar = inject(MatSnackBar);
@@ -126,5 +127,9 @@ export class DetailUsersCardComponent {
 
   onDeleteUser() {
     this.deleteUser.emit();
+  }
+
+  public onOptionClicked(selectedValue: string) {
+    this.formGroup.get('city')?.setValue(selectedValue);
   }
 }
