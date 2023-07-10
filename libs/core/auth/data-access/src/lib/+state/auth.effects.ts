@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ApiService } from "@users/core/http";
 import { authActions } from "./auth.actions";
 import { catchError, concatMap, map, of, switchMap, tap, withLatestFrom } from "rxjs";
-import { NewUser, RegisterResponse, SignAuthPayload, SignAuthResponse } from "./sign.auth.model";
+import { ChangePasswordPayload, ChangePasswordResponce, NewUser, RegisterResponse, SignAuthPayload, SignAuthResponse } from "./sign.auth.model";
 import { LocalStorageJwtService } from "../services/local-storage-jwt.service";
 import { Router } from "@angular/router";
 import { UsersDTO, usersDTOAdapter } from "@users/core/data-access";
@@ -36,7 +36,7 @@ export const loginSuccessEffect$ = createEffect(
       ofType(authActions.loginSuccess),
       tap((action) => {
         localStorageJwtService.setItem(action.res.authToken);
-        router.navigateByUrl('/home')
+        router.navigateByUrl('/profile')
       })
     )
   }, { functional: true, dispatch: false },
@@ -53,9 +53,9 @@ export const getUserEffect$ = createEffect(
       switchMap(([, authStatus]) =>
         localStorageJwtService.getItem() && authStatus !== 'loaded'
           ? api.get<UsersDTO>('/auth/me').pipe(
-              map((userDTO) => authActions.getUserSuccess({ user: usersDTOAdapter.DTOtoEntity(userDTO) })),
-              catchError((error) => of(authActions.getUserFailure({ error })))
-            )
+            map((userDTO) => authActions.getUserSuccess({ user: usersDTOAdapter.DTOtoEntity(userDTO) })),
+            catchError((error) => of(authActions.getUserFailure({ error })))
+          )
           : of()
       )
     ),
@@ -71,7 +71,7 @@ export const registerEffect$ = createEffect(
       switchMap(
         ({ userData }) => api.post<RegisterResponse, NewUser>('/auth/signup', userData).pipe(
           map(({ authToken }) => authActions.registerSuccess({ authToken })),
-          catchError((error) => of(authActions.loginFailure({ error })))
+          catchError((error) => of(authActions.registerFailure({ error })))
         )
       )
     )
@@ -86,7 +86,7 @@ export const registerSuccessEffects$ = createEffect(
       ofType(authActions.registerSuccess),
       concatMap((action) => {
         localStorageJwtService.setItem(action.authToken);
-        router.navigateByUrl('/home');
+        router.navigateByUrl('/profile');
         return of(authActions.getUser());
       })
     );
@@ -99,10 +99,25 @@ export const logoutEffect$ = createEffect(
     jwtService = inject(LocalStorageJwtService),
     router = inject(Router)) => actions$.pipe(
       ofType(authActions.logout),
-      tap(_ => {
+      tap(() => {
         jwtService.removeItem();
         router.navigate(['/login'])
       })
     )
   ), { functional: true, dispatch: false }
+)
+
+export const changePasswordEffects$ = createEffect(
+  (actions$ = inject(Actions),
+    api = inject(ApiService)) => actions$.pipe(
+      ofType(authActions.changePassword),
+      switchMap(
+        ({ data }) => api.put<ChangePasswordResponce, ChangePasswordPayload>('/auth/change_password', data)
+          .pipe(
+            map((res) => authActions.changePasswordSuccess({ res })),
+            catchError((error) => of(authActions.changePasswordFailure({ error })))
+          )
+
+      )
+    ), { functional: true }
 )

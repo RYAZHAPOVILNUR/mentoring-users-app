@@ -43,3 +43,12 @@ export interface NewUser {
   email: string;
   password: string;
 }
+
+export interface ChangePasswordPayload {
+  oldPassword: string
+  newPassword: string
+}
+
+export interface ChangePasswordResponce {
+  message: string
+}

@@ -4,29 +4,3 @@ html, body {
   padding: 0;
 }
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.content {
-  flex-grow: 1;
-}
-
-.footer {
-  margin-top: auto;
-}
-
-.profile-container {
-  height: 100%
-}
-
-.sidenav-container{
-  width: 175px;
-  background-color: #475569;
-}
-
-.nav-items {
-  margin-top: 20px;
-}
