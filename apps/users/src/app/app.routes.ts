@@ -27,14 +27,14 @@ export const appRoutes: Route[] = [
           {
             path: 'users/:id',
             loadComponent: () => import('@users/feature-users-detail').then(c => c.UsersDetailComponent),
-          },
-          ...layoutAgnosticComponents
+          }
         ],
       },
       {
         path: 'profile',
         loadComponent: () => import('@users/users/profile/feature-profile').then(c => c.ProfileContainerComponent),
       },
+      ...layoutAgnosticComponents
     ]
   },
   {
