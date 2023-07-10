@@ -2,13 +2,14 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { InputPasswordComponent } from '../input-password/input-password.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { debounceTime } from 'rxjs';
+import {BehaviorSubject, debounceTime} from 'rxjs';
+import {PushPipe} from "@ngrx/component";
 
 
 @Component({
@@ -23,7 +24,8 @@ import { debounceTime } from 'rxjs';
     MatDialogModule,
     ReactiveFormsModule,
     InputPasswordComponent,
-    MatTooltipModule
+    MatTooltipModule,
+    PushPipe
   ],
   templateUrl: './password-change-dialog.component.html',
   styleUrls: ['./password-change-dialog.component.scss'],
@@ -39,7 +41,7 @@ export class PasswordChangeDialogComponent {
     confirmNewPassword: new FormControl('', [Validators.required]),
   });
 
-  public passwordsMatch = true;
+  public passwordsMatch$ = new BehaviorSubject(true);
 
   constructor() {
     this.checkPasswordMatch()
@@ -57,7 +59,7 @@ export class PasswordChangeDialogComponent {
         takeUntilDestroyed(this.destroyRef)
         )
       .subscribe(() => {
-        this.passwordsMatch = this.formGroup.value.newPassword === this.formGroup.value.confirmNewPassword;
+        this.passwordsMatch$.next(this.formGroup.value.newPassword === this.formGroup.value.confirmNewPassword);
       })
   }
 
