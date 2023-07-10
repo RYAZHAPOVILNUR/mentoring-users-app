@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ApiService } from '@users/core/http';
+import { InputPasswordComponent } from '@users/core/ui';
 
 @Component({
   selector: 'users-login-form-ui',
@@ -19,7 +20,8 @@ import { ApiService } from '@users/core/http';
     MatTooltipModule,
     MatButtonModule,
     ReactiveFormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    InputPasswordComponent
   ],
   templateUrl: './login-form-ui.component.html',
   styleUrls: ['./login-form-ui.component.scss'],
@@ -31,8 +33,8 @@ export class LoginFormUiComponent {
   @Output() redirectToSignup = new EventEmitter();
 
   public formGroup = new FormBuilder().group({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required])
+    email: new FormControl('admin@gmail.com', [Validators.required, Validators.email]),
+    password: new FormControl('12345', [Validators.required])
   });
 
   onRedirectToSignUp() {
@@ -40,11 +42,13 @@ export class LoginFormUiComponent {
   }
 
   onLogin() {
-    const userData = {
-      email: this.formGroup.value.email?.trim().toLowerCase(),
-      password: this.formGroup.value.password
+    if (this.formGroup.valid) {
+      const userData = {
+        email: this.formGroup.value.email?.trim().toLowerCase(),
+        password: this.formGroup.value.password
+      }
+      this.login.emit(userData);
     }
-    this.login.emit(userData);
   }
 
 }

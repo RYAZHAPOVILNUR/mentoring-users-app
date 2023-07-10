@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-import {AuthFacade} from "../../../../../../../core/auth/data-access/src/lib/+state/auth.facade";
+import {AuthFacade} from "@auth/data-access";
 import {map, Observable} from "rxjs";
 import {PushPipe} from "@ngrx/component";
 import {MatMenuModule} from "@angular/material/menu";
@@ -18,8 +18,9 @@ import {MatMenuModule} from "@angular/material/menu";
 })
 export class HeaderComponent {
   facade = inject(AuthFacade)
-  isAuthenticated$: Observable<number | null> = this.facade.isAuthenticated$
+  isAuthenticated$: Observable<boolean> = this.facade.isAuthenticated$
   username$: Observable<string> = this.facade.user$.pipe(map(user => user.name))
+  isAdmin$: Observable<boolean | null> = this.facade.isAdmin$
 
   public onLogout() {
     this.facade.logout()

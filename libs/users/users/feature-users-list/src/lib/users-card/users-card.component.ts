@@ -5,7 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { UsersEntity } from '@users/users/data-access';
+import { UsersEntity } from '@users/core/data-access';
 
 @Component({
   selector: 'users-card',
