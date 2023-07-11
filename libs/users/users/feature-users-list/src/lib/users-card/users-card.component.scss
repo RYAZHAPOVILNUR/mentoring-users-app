@@ -1,8 +1,9 @@
-.user-card {
+.user-card-wrapper {
   height: 200px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   position: relative;
   overflow: hidden;
   &:hover {
@@ -29,8 +30,21 @@
   }
 }
 
-.user-card:active::before {
+.user-card-wrapper:active::before {
 }
+
+.mat-card-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-photo {
+  width: 6rem;
+  height: 6rem;
+}
+
 
 .admin-icon {
   position: absolute;
