@@ -30,7 +30,7 @@
         <h1 class="edit-user-title">
           {{ vm.editMode ? 'Редактирование пользователя' : 'Информация пользователя' }}
         </h1>
-        <form [formGroup]="formGroup" (ngSubmit)="submit()" class="edit-user-form">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="edit-user-form">
           <div class="edit-user-content">
 
             <mat-form-field class="edit-user-field">
@@ -73,7 +73,7 @@
               <button mat-icon-button
               color="primary"
               type="submit"
-              [disabled]="formGroup.invalid"
+              [disabled]="formGroup.invalid || (areFieldsChanged$ | async) === false"
               aria-label="submit new user data"
               ><mat-icon>done</mat-icon>
               </button>
