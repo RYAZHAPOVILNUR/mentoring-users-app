@@ -23,6 +23,7 @@ import {
   MatSnackBar,
   MatSnackBarModule,
 } from "@angular/material/snack-bar";
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { CreateUserDTO } from '@users/core/data-access';
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { DadataApiService } from "@dadata";
@@ -44,7 +45,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     MatInputModule,
     MatIconModule,
     MatProgressBarModule,
-    MatSnackBarModule, MatAutocompleteModule, PushPipe
+    MatTooltipModule,
+    MatSnackBarModule,
+    MatAutocompleteModule,
+    PushPipe
   ],
   templateUrl: './detail-users-card.component.html',
   styleUrls: ['./detail-users-card.component.scss'],
