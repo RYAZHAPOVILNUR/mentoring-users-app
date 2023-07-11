@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   EventEmitter,
   inject,
   Input,
+  OnInit,
   Output, TemplateRef, ViewChild
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -21,10 +24,11 @@ import {
   MatSnackBarModule,
 } from "@angular/material/snack-bar";
 import { CreateUserDTO } from '@users/core/data-access';
-import {MatAutocompleteModule} from "@angular/material/autocomplete";
-import {DadataApiService} from "@dadata";
-import {debounceTime, distinctUntilChanged, filter, switchMap} from "rxjs";
-import {PushPipe} from "@ngrx/component";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { DadataApiService } from "@dadata";
+import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap } from "rxjs";
+import { PushPipe } from "@ngrx/component";
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -47,7 +51,7 @@ import {PushPipe} from "@ngrx/component";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class DetailUsersCardComponent {
+export class DetailUsersCardComponent implements OnInit {
   private _vm: DetailUsersCardVm = { editMode: false, user: null, status: 'init', errors: null };
   public get vm() {
     return this._vm;
@@ -87,21 +91,27 @@ export class DetailUsersCardComponent {
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>
   private dadata = inject(DadataApiService)
   public citySuggestions = this.formGroup.controls.city.valueChanges
-      .pipe(
-        debounceTime(300),
-        distinctUntilChanged(),
-        filter(Boolean),
-        switchMap((value) => this.dadata.getCities(value)),
-      )
+    .pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      filter(Boolean),
+      switchMap((value) => this.dadata.getCities(value)),
+    )
 
   private snackBar = inject(MatSnackBar);
+  private readonly destroyRef = inject(DestroyRef);
+  public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
+
+  ngOnInit(): void {
+    this.checkChangeFields();
+  }
 
   private onEditSuccess: onSuccessEditionCbType = () =>
     this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
       duration: 2500, horizontalPosition: 'center', verticalPosition: 'top'
     })
 
-  submit(): void {
+  onSubmit(): void {
     this.editUser.emit({
       user: {
         name: this.formGroup.value.name || '',
@@ -131,5 +141,23 @@ export class DetailUsersCardComponent {
 
   public onOptionClicked(selectedValue: string) {
     this.formGroup.get('city')?.setValue(selectedValue);
+  }
+
+  private checkChangeFields() {
+    this.formGroup.valueChanges
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        if (
+          this.vm.user!.name === this.formGroup.value.name &&
+          this.vm.user!.city === this.formGroup.value.city &&
+          this.vm.user!.email === this.formGroup.value.email &&
+          this.vm.user!.username === this.formGroup.value.username
+        ) {
+          this.areFieldsChanged$.next(false);
+        }
+        else {
+          this.areFieldsChanged$.next(true);
+        }
+      })
   }
 }
