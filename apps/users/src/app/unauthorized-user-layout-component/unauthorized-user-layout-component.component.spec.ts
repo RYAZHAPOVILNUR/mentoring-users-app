@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UnauthorizedUserLayoutComponentComponent } from './unauthorized-user-layout-component.component';
+import { UnauthorizedUserLayoutComponent } from './unauthorized-user-layout-component.component';
 
 describe('UnauthorizedUserLayoutComponentComponent', () => {
-  let component: UnauthorizedUserLayoutComponentComponent;
-  let fixture: ComponentFixture<UnauthorizedUserLayoutComponentComponent>;
+  let component: UnauthorizedUserLayoutComponent;
+  let fixture: ComponentFixture<UnauthorizedUserLayoutComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UnauthorizedUserLayoutComponentComponent],
+      imports: [UnauthorizedUserLayoutComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(UnauthorizedUserLayoutComponentComponent);
+    fixture = TestBed.createComponent(UnauthorizedUserLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

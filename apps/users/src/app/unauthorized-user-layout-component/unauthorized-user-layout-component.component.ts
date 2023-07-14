@@ -13,4 +13,4 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./unauthorized-user-layout-component.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UnauthorizedUserLayoutComponentComponent {}
+export class UnauthorizedUserLayoutComponent {}

@@ -30,16 +30,20 @@
         <h1 class="edit-user-title">
           {{ vm.editMode ? 'Редактирование пользователя' : 'Информация пользователя' }}
         </h1>
-        <form [formGroup]="formGroup" (ngSubmit)="submit()" class="edit-user-form">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="edit-user-form" >
           <div class="edit-user-content">
 
-            <mat-form-field class="edit-user-field">
+            <mat-form-field class="edit-user-field"
+            [matTooltip]="vm.user!.name"
+            [matTooltipDisabled]="formGroup.enabled">
               <mat-label>Имя:</mat-label>
               <input matInput placeholder="Имя*" formControlName="name" class="edit-user-input">
               <mat-error *ngIf="formGroup.hasError('required', 'name')">Это поле обязательно для заполнения</mat-error>
             </mat-form-field>
 
-            <mat-form-field class="edit-user-field">
+            <mat-form-field class="edit-user-field"
+            [matTooltip]="vm.user!.email"
+            [matTooltipDisabled]="formGroup.enabled">
               <mat-label>Электронная почта:</mat-label>
               <input matInput placeholder="Электронная почта*" formControlName="email" class="edit-user-input">
               <mat-error
@@ -48,18 +52,23 @@
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field class="edit-user-field">
+            <mat-form-field class="edit-user-field"
+            [matTooltip]="vm.user!.username"
+            [matTooltipDisabled]="formGroup.enabled">
               <mat-label>Имя пользователя:</mat-label>
               <input matInput placeholder="Имя пользователя" formControlName="username" class="edit-user-input">
             </mat-form-field>
 
 
-            <mat-form-field class="edit-user-field">
+            <mat-form-field class="edit-user-field"
+            [matTooltip]="vm.user!.city"
+            [matTooltipDisabled]="formGroup.enabled">
               <mat-label>Город:</mat-label>
               <input type="text"
                      class="edit-user-input"
                      placeholder="Введите город"
                      matInput
+
                      formControlName="city"
                      [matAutocomplete]="auto">
               <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
@@ -68,15 +77,17 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+
           </div>
             <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
               <button mat-icon-button
               color="primary"
               type="submit"
-              [disabled]="formGroup.invalid"
+              [disabled]="formGroup.invalid || (areFieldsChanged$ | async) === false"
               aria-label="submit new user data"
               ><mat-icon>done</mat-icon>
               </button>
+
               <button mat-icon-button
               color="warn"
               type="button"

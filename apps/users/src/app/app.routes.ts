@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
 import { authGuard, adminGuard } from '@auth/data-access';
 import { AuthorizedUserLayoutComponent } from './authorized-user-layout/authorized-user-layout.component';
-import { UnauthorizedUserLayoutComponentComponent } from './unauthorized-user-layout-component/unauthorized-user-layout-component.component';
+import { UnauthorizedUserLayoutComponent } from './unauthorized-user-layout-component/unauthorized-user-layout-component.component';
 
 const layoutAgnosticComponents = [
   {
@@ -39,7 +39,7 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'guest',
-    component: UnauthorizedUserLayoutComponentComponent,
+    component: UnauthorizedUserLayoutComponent,
     children: [
       ...layoutAgnosticComponents
     ]
