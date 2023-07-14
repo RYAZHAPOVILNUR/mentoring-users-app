@@ -24,10 +24,10 @@ import {
   MatSnackBarModule,
 } from "@angular/material/snack-bar";
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { CreateUserDTO } from '@users/core/data-access';
+import {CreateUserDTO, UsersEntity} from '@users/core/data-access';
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { DadataApiService } from "@dadata";
-import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap } from "rxjs";
+import {BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap} from "rxjs";
 import { PushPipe } from "@ngrx/component";
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -149,19 +149,20 @@ export class DetailUsersCardComponent implements OnInit {
 
   private checkChangeFields() {
     this.formGroup.valueChanges
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        if (
-          this.vm.user!.name === this.formGroup.value.name &&
-          this.vm.user!.city === this.formGroup.value.city &&
-          this.vm.user!.email === this.formGroup.value.email &&
-          this.vm.user!.username === this.formGroup.value.username
-        ) {
-          this.areFieldsChanged$.next(false);
-        }
-        else {
-          this.areFieldsChanged$.next(true);
-        }
-      })
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        tap(() => {
+          const formEntries = Object.entries(this.formGroup.controls);
+          const isFormControlChanged = (key: string, control: FormControl) =>
+            this.vm.user && this.vm.user[key as keyof UsersEntity] !== control.value
+
+          const isFieldChanged = formEntries.some(
+            ([key, control]) => isFormControlChanged(key, control)
+          )
+
+          this.areFieldsChanged$.next(isFieldChanged);
+        })
+      )
+      .subscribe()
   }
 }
