@@ -1,18 +1,24 @@
-<mat-card class="user-card" (click)="redirectToEditPage(false, $event)">
-  <mat-card-content>
-    <div>
-      {{ user.username }}
-    </div>
-    <div>
-      {{ user.email }}
-    </div>
+<mat-card class="user-card-wrapper" (click)="redirectToEditPage(false, $event)">
+  <mat-card-content class="mat-card-content">
+
+
+
+        <img [src]="user.photo?   user.photo.url :  'assets/img/1.png'" alt="" class="user-photo">
+
+      <span>
+        {{ user.username }}
+      </span>
+      <span>
+        {{ user.email }}
+      </span>
+
   </mat-card-content>
 
   <mat-card-actions>
     <button mat-button color="primary" (click)="redirectToEditPage(true, $event)">Редактировать</button>
-    <button 
-      mat-button 
-      color="warn" 
+    <button
+      mat-button
+      color="warn"
       [disabled]="user.isAdmin || user.id === loggedUser.id"
       (click)="onDeleteUser($event)"
     >

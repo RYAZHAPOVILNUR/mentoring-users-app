@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProfileContainerComponent } from './profile-container.component';
 
-describe('ProfileContaynerComponent', () => {
+describe('ProfileContainerComponent', () => {
   let component: ProfileContainerComponent;
   let fixture: ComponentFixture<ProfileContainerComponent>;
 
