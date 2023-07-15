@@ -34,6 +34,10 @@ export const appRoutes: Route[] = [
         path: 'profile',
         loadComponent: () => import('@users/users/profile/feature-profile').then(c => c.ProfileContainerComponent),
       },
+      {
+        path: 'article-create',
+        loadComponent: () => import('@users/users/articles/articles-create').then(c => c.UsersArticlesCreateComponent),
+      },
       ...layoutAgnosticComponents
     ]
   },
