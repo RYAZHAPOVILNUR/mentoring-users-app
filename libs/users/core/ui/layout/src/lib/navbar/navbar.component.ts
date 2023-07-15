@@ -6,6 +6,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { PasswordChangeDialogComponent } from '../../../../../../../core/ui/src';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthFacade, ChangePasswordPayload } from '../../../../../../../core/auth/data-access/src';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'navbar',
@@ -14,7 +15,8 @@ import { AuthFacade, ChangePasswordPayload } from '../../../../../../../core/aut
     CommonModule,
     MatButtonModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    RouterModule
   ],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
@@ -39,5 +41,9 @@ export class NavbarComponent {
           this.authFacade.changePassword(changePasswordPayload);
         }
       });
+  }
+
+  handleClick() {
+    console.log('Кнопка была нажата');
   }
 }
