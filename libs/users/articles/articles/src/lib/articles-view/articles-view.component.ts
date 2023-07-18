@@ -2,11 +2,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'users-users-articles-data-access',
+  selector: 'users-articles-view',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './users-articles-data-access.component.html',
-  styleUrls: ['./users-articles-data-access.component.scss'],
+  templateUrl: './articles-view.component.html',
+  styleUrls: ['./articles-view.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersArticlesDataAccessComponent {}
+export class ArticlesViewComponent {}

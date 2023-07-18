@@ -1,0 +1,27 @@
+<div class="wrapper">
+  <form [formGroup]="formGroup" (submit)="onSubmit($event)">
+
+    <mat-form-field>
+      <input type="text" autocomplete="off" placeholder="Заголовок" formControlName="title" class="input-field"
+        matInput />
+      <mat-error> Заголовок должен содержать минимум 6 символов и не более 60!</mat-error>
+    </mat-form-field>
+
+    <div class="custom-input-container" [class.valid]="formGroup.get('textEditor')?.valid"
+      [class.invalid]="formGroup.get('textEditor')?.invalid && formGroup.get('textEditor')?.touched">
+      <quill-editor [styles]="{height: '400px'}" [modules]="quillEditorModules"
+      placeholder=""
+        formControlName="textEditor"></quill-editor>
+    </div>
+
+    <p class="error-message"
+      *ngIf="formGroup.get('textEditor')?.dirty && formGroup.get('textEditor')?.invalid && formGroup.get('textEditor')?.touched">
+      Статья должна состоять минимум из 66 символов!
+    </p>
+
+    <div class="button">
+      <button mat-raised-button type="submit" color="primary">Опубликовать</button>
+    </div>
+
+  </form>
+</div>
