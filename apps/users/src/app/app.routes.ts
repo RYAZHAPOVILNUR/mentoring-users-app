@@ -36,7 +36,7 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'article-create',
-        loadComponent: () => import('@users/users/articles/articles-create').then(c => c.UsersArticlesCreateComponent),
+        loadComponent: () => import('@users/users/articles/articles-create').then(c => c.ArticlesCreateContainerComponent),
       },
       ...layoutAgnosticComponents
     ]

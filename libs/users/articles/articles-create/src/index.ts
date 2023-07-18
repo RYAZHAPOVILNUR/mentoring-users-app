@@ -1,1 +1,1 @@
-export * from './lib/users-articles-articles-create/users-articles-articles-create.component';
+export * from './lib/articles-create-container/articles-create-container.component'
