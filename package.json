@@ -26,6 +26,9 @@
     "@ngrx/store": "~16.0.0",
     "@nx/angular": "16.1.4",
     "bootstrap": "^5.2.3",
+    "ngx-quill": "^22.0.0",
+    "quill": "^1.3.7",
+    "quill-blot-formatter": "^1.0.5",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
@@ -54,6 +57,7 @@
     "@schematics/angular": "~16.0.0",
     "@types/jest": "^29.4.0",
     "@types/node": "16.11.7",
+    "@types/quill": "^2.0.10",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
     "cypress": "^12.11.0",

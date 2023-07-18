@@ -15,10 +15,12 @@ import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { provideAnimations } from "@angular/platform-browser/animations";
 import { authEffects, authFeature, tokenInterceptor } from '@auth/data-access';
 import {DADATA_TOKEN} from "../../../../libs/core/dadata/src/lib/dadata.token";
+import { provideQuillConfig } from 'ngx-quill/config';
+import { articlesEffects } from '@users/users/articles/data-access';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideEffects(userEffects, authEffects),
+    provideEffects(userEffects, authEffects, articlesEffects),
     provideStore({
       router: routerReducer,
       [USERS_FEATURE_KEY]: usersReducer,
@@ -42,6 +44,11 @@ export const appConfig: ApplicationConfig = {
       provide: DADATA_TOKEN,
       useValue: environment.dadata_api_key
     },
-    provideAnimations()
+    provideAnimations(),
+    provideQuillConfig({
+      modules: {
+        syntax: true,
+      }
+    })
 ],
 };
