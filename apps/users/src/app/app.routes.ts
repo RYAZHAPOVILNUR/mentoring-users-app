@@ -38,6 +38,10 @@ export const appRoutes: Route[] = [
         path: 'article-create',
         loadComponent: () => import('@users/users/articles/articles-create').then(c => c.ArticlesCreateContainerComponent),
       },
+      {
+        path: 'articles',
+        loadComponent: () => import('@users/users/articles/articles').then(c => c.ArticlesViewContainerComponent),
+      },
       ...layoutAgnosticComponents
     ]
   },
