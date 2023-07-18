@@ -1,5 +1,6 @@
 import { createActionGroup, emptyProps, props } from "@ngrx/store";
-import { CreateArticle } from "../models/createArticle.model";
+import { CreateArticle } from "../models/create-article.model";
+import { Article } from "../models/article.model";
 
 export const articlesActions = createActionGroup({
   source: 'Article',
@@ -7,5 +8,8 @@ export const articlesActions = createActionGroup({
     publishArticle: props<{ article: CreateArticle }>(),
     publishArticleSuccess: emptyProps(),
     publishArticleFailed: props<{ error: Error }>(),
+    loadArticles: emptyProps(),
+    loadArticlesSuccess: props<{articles: Article[]}>(),
+    loadArticlesFailed: props<{ error: Error }>(),
   },
 });
