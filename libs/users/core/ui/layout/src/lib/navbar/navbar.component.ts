@@ -42,8 +42,4 @@ export class NavbarComponent {
         }
       });
   }
-
-  handleClick() {
-    console.log('Кнопка была нажата');
-  }
 }
