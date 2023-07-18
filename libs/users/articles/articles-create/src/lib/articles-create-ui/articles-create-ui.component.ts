@@ -1,14 +1,14 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { QuillModule } from 'ngx-quill'
-import { FormsModule, FormGroup, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
+import {ChangeDetectionStrategy, Component, EventEmitter, Output, ViewEncapsulation} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {QuillModule} from 'ngx-quill'
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import Quill from 'quill'
 import BlotFormatter from 'quill-blot-formatter';
-import { MatButtonModule } from '@angular/material/button';
+import {MatButtonModule} from '@angular/material/button';
 
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { CreateArticle} from '@users/users/articles/data-access';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {CreateArticle} from '@users/users/articles/data-access';
 
 Quill.register('modules/blotFormatter', BlotFormatter)
 
