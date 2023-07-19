@@ -2,6 +2,7 @@ import { Route } from '@angular/router';
 import { authGuard, adminGuard } from '@auth/data-access';
 import { AuthorizedUserLayoutComponent } from './authorized-user-layout/authorized-user-layout.component';
 import { UnauthorizedUserLayoutComponent } from './unauthorized-user-layout-component/unauthorized-user-layout-component.component';
+import { canDeactivateFormComponent } from '@users/core/utils';
 
 const layoutAgnosticComponents = [
   {
@@ -37,6 +38,7 @@ export const appRoutes: Route[] = [
       {
         path: 'article-create',
         loadComponent: () => import('@users/users/articles/articles-create').then(c => c.ArticlesCreateContainerComponent),
+        canDeactivate: [canDeactivateFormComponent]
       },
       {
         path: 'articles',
