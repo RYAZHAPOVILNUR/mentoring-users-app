@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Article } from '@users/users/articles/data-access';
 
 @Component({
   selector: 'users-articles-view',
@@ -9,4 +10,11 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./articles-view.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ArticlesViewComponent {}
+export class ArticlesViewComponent {
+
+  @Input({ required: true }) articles!: any
+
+
+
+
+}
