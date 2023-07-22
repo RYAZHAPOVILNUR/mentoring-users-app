@@ -1,1 +1,18 @@
-<users-articles-view></users-articles-view>
+<!--
+<ng-container *ngrxLet = "articles$ as articles; suspenseTpl: loading"> -->
+
+<!-- <users-articles-view
+[articles] = "articles"
+></users-articles-view> -->
+
+<!-- </ng-container> -->
+
+<!-- <ng-template #loading>
+  <p>loading...</p>
+</ng-template> -->
+
+<div *ngFor="let article of articles">
+  <h2>{{ article.title }}</h2>
+  <p>{{ article.content }}</p>
+</div>
+
