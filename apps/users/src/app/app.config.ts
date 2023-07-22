@@ -16,7 +16,7 @@ import { provideAnimations } from "@angular/platform-browser/animations";
 import { authEffects, authFeature, tokenInterceptor } from '@auth/data-access';
 import {DADATA_TOKEN} from "../../../../libs/core/dadata/src/lib/dadata.token";
 import { provideQuillConfig } from 'ngx-quill/config';
-import { articlesEffects } from '@users/users/articles/data-access';
+import { articlesEffects, articlesFeature } from '@users/users/articles/data-access';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -24,7 +24,8 @@ export const appConfig: ApplicationConfig = {
     provideStore({
       router: routerReducer,
       [USERS_FEATURE_KEY]: usersReducer,
-      [authFeature.name]: authFeature.reducer
+      [authFeature.name]: authFeature.reducer,
+      [articlesFeature.name]: articlesFeature.reducer
     }),
     provideRouterStore(),
     provideStoreDevtools({

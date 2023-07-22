@@ -2,7 +2,7 @@ import { createActionGroup, emptyProps, props } from "@ngrx/store";
 import { CreateArticle } from "../models/create-article.model";
 import { Article } from "../models/article.model";
 
-export const articlesActions = createActionGroup({
+export const ArticlesActions = createActionGroup({
   source: 'Article',
   events: {
     publishArticle: props<{ article: CreateArticle }>(),
