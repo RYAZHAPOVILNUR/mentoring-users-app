@@ -11,7 +11,7 @@ export interface ArticlesState extends EntityState<Article> {
   status: LoadingStatus
 }
 
-const articlesAdapter: EntityAdapter<Article> =
+export const articlesAdapter: EntityAdapter<Article> =
   createEntityAdapter<Article>();
 
 export const initialArticlesState: ArticlesState = articlesAdapter.getInitialState({

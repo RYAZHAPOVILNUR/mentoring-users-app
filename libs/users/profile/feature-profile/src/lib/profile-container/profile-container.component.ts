@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileFormUiComponent } from '../profile-form-ui/profile-form-ui.component';
 import { UsersEntity } from '@users/core/data-access';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { selectAuthStatus, selectLoggedUser } from '@auth/data-access';
 import { LetDirective } from '@ngrx/component';
 
