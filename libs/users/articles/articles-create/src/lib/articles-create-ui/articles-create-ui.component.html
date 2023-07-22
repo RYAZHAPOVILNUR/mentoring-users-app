@@ -11,7 +11,8 @@
       [class.invalid]="formGroup.get('textEditor')?.invalid && formGroup.get('textEditor')?.touched">
       <quill-editor [styles]="{height: '400px'}" [modules]="quillEditorModules"
       placeholder=""
-        formControlName="textEditor"></quill-editor>
+      defaultEmptyValue=""
+      formControlName="textEditor"></quill-editor>
     </div>
 
     <p class="error-message"
