@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ArticlesCreateUiComponent } from '../articles-create-ui/articles-create-ui.component';
-import { CreateArticle, articlesActions } from '@users/users/articles/data-access';
+import { CreateArticle, ArticlesActions } from '@users/users/articles/data-access';
 import { Store } from '@ngrx/store';
 import { DeactivatableComponent } from '@users/core/utils';
 import { MatDialog } from '@angular/material/dialog';
@@ -29,7 +29,7 @@ export class ArticlesCreateContainerComponent implements DeactivatableComponent 
 
   onCreateArticle(article: CreateArticle) {
     console.log('from create container', article)
-    this.store.dispatch(articlesActions.publishArticle({ article }))
+    this.store.dispatch(ArticlesActions.publishArticle({ article }))
   }
 
   onFormChange(isFormChage: boolean) {

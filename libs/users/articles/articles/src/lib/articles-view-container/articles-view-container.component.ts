@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ArticlesViewComponent } from '../articles-view/articles-view.component';
+import { Store } from '@ngrx/store';
+import { ArticlesActions } from '@users/users/articles/data-access';
 
 @Component({
   selector: 'users-articles-view-container',
@@ -13,4 +15,11 @@ import { ArticlesViewComponent } from '../articles-view/articles-view.component'
   styleUrls: ['./articles-view-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ArticlesViewContainerComponent { }
+export class ArticlesViewContainerComponent {
+
+  private readonly store = inject(Store);
+
+  constructor() {
+    this.store.dispatch(ArticlesActions.loadArticles())
+  }
+}
