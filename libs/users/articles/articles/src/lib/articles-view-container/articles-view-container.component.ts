@@ -26,7 +26,7 @@ export class ArticlesViewContainerComponent {
   // );
   // public readonly articles$ = this.store.select(articlesFeature.selectEntities)
 
-  public readonly articles = this.store.select(ArticleSelectors.selectArticles)
+  public readonly articles$ = this.store.select(ArticleSelectors.selectArticles)
 
   constructor() {
     this.store.dispatch(ArticlesActions.loadArticles());

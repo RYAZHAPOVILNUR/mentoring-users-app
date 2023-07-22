@@ -1,18 +1,12 @@
-<!--
-<ng-container *ngrxLet = "articles$ as articles; suspenseTpl: loading"> -->
+<ng-container *ngrxLet="articles$; let articles; suspenseTpl: loading">
 
-<!-- <users-articles-view
-[articles] = "articles"
-></users-articles-view> -->
+<users-articles-view
+  [articles] = "articles"
+></users-articles-view>
 
-<!-- </ng-container> -->
+</ng-container>
 
-<!-- <ng-template #loading>
+<ng-template #loading>
   <p>loading...</p>
-</ng-template> -->
-
-<div *ngFor="let article of articles">
-  <h2>{{ article.title }}</h2>
-  <p>{{ article.content }}</p>
-</div>
+</ng-template>
 
