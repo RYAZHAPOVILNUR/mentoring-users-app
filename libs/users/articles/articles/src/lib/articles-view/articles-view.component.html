@@ -1,6 +1,10 @@
-<p>articles-view works!</p>
-{{articles|json}}
 <div *ngFor="let article of articles">
-  <h2>{{ article.title }}</h2>
-  <p>{{ article.content }}</p>
+  <mat-card style="margin: 40px auto; max-width: 700px">
+    <mat-card-header>
+      <mat-card-title style="padding-left: 12px">{{article.title}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="ql-editor" [innerHTML]="article.content"></div>
+    </mat-card-content>
+  </mat-card>
 </div>
