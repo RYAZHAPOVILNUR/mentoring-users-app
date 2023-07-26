@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuillModule } from 'ngx-quill'
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CreateArticle } from '@users/users/articles/data-access';
 import { DeactivatableComponent } from '@users/core/utils';
+import { ArticlesCreateVm } from './articles-create-vm';
 
 
 Quill.register('modules/blotFormatter', BlotFormatter)
@@ -33,7 +34,22 @@ Quill.register('modules/blotFormatter', BlotFormatter)
 })
 
 export class ArticlesCreateUiComponent {
-  @Output() createArticle = new EventEmitter<CreateArticle>();
+  private _vm: ArticlesCreateVm = { editMode: false, editingArticle: null };
+  public get vm() {
+    return this._vm;
+  }
+
+  @Input({ required: true })
+  set vm(vm: ArticlesCreateVm) {
+    this._vm = vm;
+
+    this.formGroup.patchValue({
+      textEditor: vm.editingArticle?.content || '',
+      title: vm.editingArticle?.title || '',
+    });
+  }
+
+  @Output() publishArticle = new EventEmitter<CreateArticle>();
   @Output() formChange = new EventEmitter<boolean>();
 
   public formGroup = new FormGroup({
@@ -61,13 +77,14 @@ export class ArticlesCreateUiComponent {
   }
 
   public onSubmit(event: Event) {
-    event.preventDefault();
+    // event.preventDefault();
     if (this.formGroup.valid) {
       const article: CreateArticle = {
         title: this.formGroup.value.title as string,
         content: this.formGroup.value.textEditor as string
       }
-      this.createArticle.emit(article)
+      // this.publishArticle.emit(article)
+      console.log(this.vm)
     }
   }
 
@@ -78,10 +95,13 @@ export class ArticlesCreateUiComponent {
   }
 
   private containsUnsavedChanges() {
-    const initialFormValues = {
-      textEditor: '',
-      title: ''
-    };
+    const initialFormValues = this.vm.editMode
+      ? { textEditor: '', title: '' }
+      : {
+        textEditor: this.vm.editingArticle?.content,
+        title: this.vm.editingArticle?.title,
+      };
+
     return JSON.stringify(this.formGroup.value) !== JSON.stringify(initialFormValues);
   }
 

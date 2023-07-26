@@ -4,7 +4,7 @@ import { ArticlesViewComponent } from '../articles-view/articles-view.component'
 import { Store } from '@ngrx/store';
 import { ArticleSelectors, ArticlesActions } from '@users/users/articles/data-access';
 import { LetDirective } from '@ngrx/component';
-
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 @Component({
   selector: 'users-articles-view-container',
@@ -12,7 +12,8 @@ import { LetDirective } from '@ngrx/component';
   imports: [
     CommonModule,
     ArticlesViewComponent,
-    LetDirective
+    LetDirective,
+    MatProgressBarModule
   ],
   templateUrl: './articles-view-container.component.html',
   styleUrls: ['./articles-view-container.component.scss'],
@@ -20,13 +21,8 @@ import { LetDirective } from '@ngrx/component';
 })
 export class ArticlesViewContainerComponent {
   private readonly store = inject(Store);
-
-  // public readonly articles = this.store.select(articlesFeature.selectEntities).pipe(
-  //   map((articlesObj) => Object.values(articlesObj))
-  // );
-  // public readonly articles$ = this.store.select(articlesFeature.selectEntities)
-
-  public readonly articles$ = this.store.select(ArticleSelectors.selectArticles)
+  public readonly articles$ = this.store.select(ArticleSelectors.selectArticles);
+  public readonly status$ = this.store.select(ArticleSelectors.selectStatus);
 
   constructor() {
     this.store.dispatch(ArticlesActions.loadArticles());
