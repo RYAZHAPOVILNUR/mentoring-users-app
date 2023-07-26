@@ -8,10 +8,6 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersListVM } from './users-list-view-model';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatButtonModule } from '@angular/material/button';
 import { UsersCardComponent } from "../users-card/users-card.component";
 import { UsersVM } from '../../../../users-vm';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
