@@ -6,5 +6,10 @@
     <mat-card-content>
       <div class="ql-editor" [innerHTML]="article.content"></div>
     </mat-card-content>
+    <button  mat-button
+    [routerLink]="['/article-editor']"
+    [queryParams]="{ mode: 'edit', id: article.id }"
+    routerLinkActive="router-link-active">Edit</button>
   </mat-card>
+
 </div>

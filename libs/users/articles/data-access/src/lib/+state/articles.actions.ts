@@ -11,5 +11,8 @@ export const ArticlesActions = createActionGroup({
     loadArticles: emptyProps(),
     loadArticlesSuccess: props<{articles: Article[]}>(),
     loadArticlesFailed: props<{ error: Error }>(),
+    getArticle: props<{id:number}>(),
+    getArticleSuccess: props<{article: Article}>(),
+    getArticlesFailed: props<{ error: Error }>(),
   },
 });

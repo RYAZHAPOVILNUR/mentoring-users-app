@@ -1,4 +1,13 @@
+
+
+<ng-container *ngrxLet="{
+  editMode: editMode$,
+  editingArticle: editingArticle$
+} as vm" >
 <articles-create-ui
-(createArticle)="onCreateArticle($event)"
+[vm]="vm"
+(publishArticle)="onPublishArticle($event)"
 (formChange)="onFormChange($event)"
 ></articles-create-ui>
+
+</ng-container>

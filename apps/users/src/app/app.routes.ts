@@ -36,7 +36,7 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('@users/users/profile/feature-profile').then(c => c.ProfileContainerComponent),
       },
       {
-        path: 'article-create',
+        path: 'article-editor',
         loadComponent: () => import('@users/users/articles/articles-create').then(c => c.ArticlesCreateContainerComponent),
         canDeactivate: [canDeactivateFormComponent]
       },
