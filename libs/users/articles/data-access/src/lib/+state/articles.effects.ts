@@ -47,3 +47,23 @@ export const loadArticles$ = createEffect(
     )
   }, { functional: true }
 )
+export const getArticle$ = createEffect(
+  (actions$ = inject(Actions),
+    apiService = inject(ApiService)) => {
+    return actions$.pipe(
+      ofType(ArticlesActions.getArticle),
+      switchMap(
+        (id) => apiService.get<Article>(`/articles/${id}`)
+          .pipe(
+            map(
+              (article) => ArticlesActions.getArticleSuccess({ article })
+            ),
+            catchError((error) => {
+              console.error('Error', error);
+              return of(ArticlesActions.getArticlesFailed({error}))
+            })
+          )
+      )
+    )
+  }, {functional: true}
+)

@@ -3,7 +3,6 @@ import { ArticlesActions } from './articles.actions';
 import { LoadingStatus } from '@users/core/data-access';
 import { Article } from '../models/article.model';
 import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
-import { usersAdapter } from '@users/users/data-access';
 
 export const articlesFeatureKey = 'articles';
 
@@ -32,10 +31,18 @@ export const articlesFeature = createFeature({
       articlesAdapter.setAll(articles, { ...state, status: 'loaded' as const })
     ),
 
-    on(ArticlesActions.loadArticlesFailed,( state) => ({
+    on(ArticlesActions.loadArticlesFailed, (state) => ({
       ...state,
       status: 'error' as const
-    }))
+    })),
+
+    on(ArticlesActions.getArticle, (state) => ({
+      ...state,
+      status: 'loading' as const
+    })),
+
+    on(ArticlesActions.getArticleSuccess, (state, { article }) =>
+      articlesAdapter.addOne({ ...article }, { ...state, status: 'loaded' as const })),
   )
 });
 
