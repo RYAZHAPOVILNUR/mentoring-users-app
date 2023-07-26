@@ -5,4 +5,7 @@
   <div class="name">{{vm.user.name}}</div>
   <div class="email">{{vm.user.email}}</div>
   <div class="city">{{vm.user.city}}</div>
+  <button mat-button class="navbar-btn" (click)="onOpenChangePassword()">
+    <mat-icon>lock-reset</mat-icon><span class="button-label">Сменить пароль</span>
+  </button>
 </div>
