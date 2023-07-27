@@ -4,6 +4,7 @@ import { QuillModule } from "ngx-quill";
 import { MatCardModule } from "@angular/material/card";
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { Article } from '@users/users/articles/data-access';
 
 @Component({
   selector: 'users-articles-view',
@@ -19,5 +20,6 @@ import { MatButtonModule } from '@angular/material/button';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticlesViewComponent {
-  @Input({ required: true }) articles!: any
+  @Input({ required: true }) articles!: Article[];
+  @Input({required: true}) loggedUserId!: number;
 }
