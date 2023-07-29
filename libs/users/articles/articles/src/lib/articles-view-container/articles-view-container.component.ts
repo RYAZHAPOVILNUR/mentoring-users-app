@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { ArticleSelectors, ArticlesActions } from '@users/users/articles/data-access';
 import { LetDirective } from '@ngrx/component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
-import { AuthFacade } from '@auth/data-access';
+import { AuthFacade, selectLoggedUserId } from '@auth/data-access';
 import { map } from 'rxjs';
 
 @Component({
@@ -23,11 +23,10 @@ import { map } from 'rxjs';
 })
 export class ArticlesViewContainerComponent {
   private readonly store = inject(Store);
-  private readonly facade = inject(AuthFacade);
 
   public readonly articles$ = this.store.select(ArticleSelectors.selectArticles);
   public readonly status$ = this.store.select(ArticleSelectors.selectStatus);
-  public readonly loggedUserId$ = this.facade.user$.pipe(map(user => user.id))
+  public readonly loggedUserId$ = this.store.select(selectLoggedUserId);
 
   constructor() {
     this.store.dispatch(ArticlesActions.loadArticles());
