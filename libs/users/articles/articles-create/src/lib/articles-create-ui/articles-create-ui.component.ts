@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuillModule } from 'ngx-quill'
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -9,7 +16,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CreateArticle } from '@users/users/articles/data-access';
-import { DeactivatableComponent } from '@users/core/utils';
 import { ArticlesCreateVm } from './articles-create-vm';
 
 
@@ -32,22 +38,9 @@ Quill.register('modules/blotFormatter', BlotFormatter)
   styleUrls: ['./articles-create-ui.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
-export class ArticlesCreateUiComponent {
-  private _vm: ArticlesCreateVm = { editMode: false, editingArticle: null };
-  public get vm() {
-    return this._vm;
-  }
-
+export class ArticlesCreateUiComponent implements OnInit {
   @Input({ required: true })
-  set vm(vm: ArticlesCreateVm) {
-    this._vm = vm;
-
-    this.formGroup.patchValue({
-      textEditor: vm.editingArticle?.content || '',
-      title: vm.editingArticle?.title || '',
-    });
-  }
+  public vm!: ArticlesCreateVm
 
   @Output() publishArticle = new EventEmitter<CreateArticle>();
   @Output() formChange = new EventEmitter<boolean>();
@@ -73,7 +66,14 @@ export class ArticlesCreateUiComponent {
   }
 
   constructor() {
-    this.checkChanges()
+    this.checkChanges();
+  }
+
+  public ngOnInit(): void {
+    this.formGroup.patchValue({
+      textEditor: this.vm.editingArticle?.content || '',
+      title: this.vm.editingArticle?.title || '',
+    });
   }
 
   public onSubmit(event: Event) {
@@ -104,5 +104,4 @@ export class ArticlesCreateUiComponent {
 
     return JSON.stringify(this.formGroup.value) !== JSON.stringify(initialFormValues);
   }
-
 }
