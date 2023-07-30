@@ -1,6 +1,3 @@
-
-
-
 import { UsersDTO } from "./users-dto.model"
 import { UsersEntity } from "./users.entity"
 
