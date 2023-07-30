@@ -7,6 +7,7 @@
       <div class="ql-editor" [innerHTML]="article.content"></div>
     </mat-card-content>
     <button  mat-button
+    *ngIf="article.authorId === loggedUserId"
     [routerLink]="['/article-editor']"
     [queryParams]="{ mode: 'edit', id: article.id }"
     routerLinkActive="router-link-active">Edit</button>

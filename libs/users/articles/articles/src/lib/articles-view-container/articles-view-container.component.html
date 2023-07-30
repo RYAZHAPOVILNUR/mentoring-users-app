@@ -1,13 +1,17 @@
-<ng-container *ngrxLet="status$; let status;">
-  <ng-container [ngSwitch]="status">
+<ng-container *ngrxLet="{ 
+  articles: articles$,  
+  status: status$,
+  loggedUserId: loggedUserId$
+} as vm">
+  <ng-container [ngSwitch]="vm.status">
 
     <ng-container *ngSwitchCase="'loading'">
       <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
     </ng-container>
 
     <ng-container *ngSwitchCase="'loaded'">
-      <ng-container *ngrxLet="articles$; let articles;">
-        <users-articles-view [articles]="articles"></users-articles-view>
+      <ng-container>
+        <users-articles-view [articles]="vm.articles" [loggedUserId]="vm.loggedUserId" />
       </ng-container>
     </ng-container>
 
