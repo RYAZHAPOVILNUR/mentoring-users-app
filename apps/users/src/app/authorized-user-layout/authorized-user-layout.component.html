@@ -1,6 +1,8 @@
 <div class="wrapper" *ngIf="isAuthenticated$ | ngrxPush">
   <div class="content">
-      <lib-header></lib-header>
+  
+      <lib-header ></lib-header>
+    
       <mat-sidenav-container class="sidenav-container">
         <mat-sidenav
           #sidenav mode="side"
