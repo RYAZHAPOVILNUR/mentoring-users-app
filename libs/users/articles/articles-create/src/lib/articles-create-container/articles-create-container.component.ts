@@ -33,33 +33,22 @@ export class ArticlesCreateContainerComponent implements DeactivatableComponent 
   public editMode$ = this.store.pipe(
     takeUntilDestroyed(this.destroyRef),    //Почему не происходит отписка?
     select(selectQueryParam('mode')),
-    tap((res) => console.log('res', res)),
-    map(params => params === 'edit')
+    tap((mode) => console.log('mode', mode)),
+    map(mode => mode === 'edit')
   )
 
-  public articleId$ = this.store.pipe(
-    select(selectQueryParam('id')),
-    map(id => {
-      if (id) {
-        return parseInt(id, 10)
-      } else {
-        return null
-      }
-    })
-  )
+  public articleId$ = this.store.pipe(select(selectQueryParam('id')))
 
-  public editingArticle$: Observable<Article | null> = this.store.select(ArticleSelectors.selectArticlesEntities)
+  public editingArticle$: Observable<Article | null> = this.store.select(ArticleSelectors.selectArticleForEdit)
     .pipe(
       withLatestFrom(this.articleId$),
-      map(([articles, id]) => {
-        if (id) {
-          return articles[id] as Article
-        } else {
-          return null
+      map(([article, id]) => {
+        if (!article && id) {
+          this.store.dispatch(ArticlesActions.getArticle({ id }));
         }
+        return article
       })
-    );
-
+  );
 
   onPublishArticle(article: CreateArticle) {
     this.store.dispatch(ArticlesActions.publishArticle({ article }))

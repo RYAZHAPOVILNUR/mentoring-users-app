@@ -10,6 +10,7 @@ export class AuthFacade {
   isAuthenticated$ = this.store.pipe(select(AuthSelectors.selectIsAuthenticated))
   user$ = this.store.pipe(select(AuthSelectors.selectLoggedUser))
   isAdmin$ = this.store.pipe(select(AuthSelectors.selectIsAdmin))
+  loggedUserId$ = this.store.pipe(select(AuthSelectors.selectLoggedUserId))
 
   public logout() {
     this.store.dispatch(authActions.logout())
