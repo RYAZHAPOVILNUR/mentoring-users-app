@@ -1,4 +1,7 @@
-<mat-card class="user-card-wrapper" (click)="redirectToEditPage(false, $event)">
+<mat-card 
+class="user-card-wrapper" (click)="redirectToEditPage(false, $event)"  
+matTooltip="{{user.isAdmin ? 'Admin' : 'User'}}"
+matTooltipClass="example-tooltip-uppercase">
   <mat-card-content class="mat-card-content">
     <img [src]="user.photo? user.photo.url:'assets/img/1.png'" alt="" class="user-photo">
     <span>
