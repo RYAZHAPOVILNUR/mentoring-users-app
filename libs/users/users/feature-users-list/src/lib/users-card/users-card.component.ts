@@ -6,11 +6,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { UsersEntity } from '@users/core/data-access';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 @Component({
   selector: 'users-card',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule, RouterModule, MatIconModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, RouterModule, MatIconModule,MatTooltipModule],
   templateUrl: './users-card.component.html',
   styleUrls: ['./users-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
