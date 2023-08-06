@@ -51,7 +51,8 @@
       ],
       "@users/users/profile/feature-profile": [
         "libs/users/profile/feature-profile/src/index.ts"
-      ]
+      ],
+      "@users/users/tasks": ["libs/users/tasks/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
