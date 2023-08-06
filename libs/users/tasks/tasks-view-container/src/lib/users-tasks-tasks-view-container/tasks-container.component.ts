@@ -12,6 +12,4 @@ import { TasksViewComponent } from '@users/users/tasks/tasks-view';
 })
 export class TasksContainerComponent {
   private readonly store = inject(Store);
-  public readonly loggedUserId$ = this.store.select(selectLoggedUserId);
-
 }

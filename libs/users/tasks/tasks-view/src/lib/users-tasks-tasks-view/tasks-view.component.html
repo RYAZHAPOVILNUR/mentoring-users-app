@@ -1,12 +1,13 @@
-<div>
-    <mat-card style="margin: 40px auto; max-width: 700px">
-      <mat-card-header>
-        <mat-card-title style="padding-left: 12px">Available tasks</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="ql-editor">Сделать функционал to-do списка без бэкенда, нужно связаться с Рушаном чтобы добавить задачки на бэке</div>
-      </mat-card-content>
-      <button mat-button>Select</button>
-    </mat-card>
-  
+<div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop($event)">
+  <div class="example-box" *ngFor="let name of BoardName" cdkDrag>{{name}}
+    <div cdkDropList (cdkDropListDropped)="drop1($event)"
+    >
+    <div
+    class="example-box"
+    *ngFor="let task of tasks"
+    [cdkDragData]="task"
+    cdkDrag>{{tasks[0]}}</div>
+      
+    </div>
   </div>
+</div>
