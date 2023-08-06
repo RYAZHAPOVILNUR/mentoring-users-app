@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'users-tasks',
-  preset: '../../../jest.preset.js',
+  displayName: 'users-tasks-tasks-view',
+  preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../coverage/libs/users/tasks',
+  coverageDirectory: '../../../../coverage/libs/users/tasks/tasks-view',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

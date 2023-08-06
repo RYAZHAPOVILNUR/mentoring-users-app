@@ -36,6 +36,8 @@
         "libs/users/users/feature-users-list/src/index.ts"
       ],
       "@users/home": ["libs/users/home/src/index.ts"],
+      "@users/tasks-view": ["libs/tasks-view/src/index.ts"],
+      "@users/tasks/tasks-view": ["libs/tasks/tasks-view/src/index.ts"],
       "@users/users/articles/articles": [
         "libs/users/articles/articles/src/index.ts"
       ],
@@ -52,7 +54,13 @@
       "@users/users/profile/feature-profile": [
         "libs/users/profile/feature-profile/src/index.ts"
       ],
-      "@users/users/tasks": ["libs/users/tasks/src/index.ts"]
+      "@users/users/tasks": ["libs/users/tasks/src/index.ts"],
+      "@users/users/tasks/tasks-view": [
+        "libs/users/tasks/tasks-view/src/index.ts"
+      ],
+      "@users/users/tasks/tasks-view-container": [
+        "libs/users/tasks/tasks-view-container/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
