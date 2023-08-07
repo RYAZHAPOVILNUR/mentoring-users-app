@@ -1,41 +1,68 @@
-import {Component} from '@angular/core';
-import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray} from '@angular/cdk/drag-drop';
+import { MatButtonModule } from '@angular/material/button';
+import { Board } from './../../../../state/model/board.model';
+import {Component } from '@angular/core';
+import {CdkDragDrop, moveItemInArray, transferArrayItem, CdkDrag, CdkDropList, CdkDropListGroup} from '@angular/cdk/drag-drop';
 import {NgFor} from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Column } from '../../../../state/model/column.model';
+
+
+
 
 @Component({
   selector: 'users-tasks-view',
   standalone: true,
-  imports: [CdkDrag, CdkDropList, NgFor],
+  imports: [CdkDrag, CdkDropList, NgFor, FormsModule, CdkDropListGroup, MatButtonModule],
   templateUrl: './tasks-view.component.html',
   styleUrls: ['./tasks-view.component.scss'],
 })
-export class TasksViewComponent {BoardName = [
-  'IDEAS',
-  'RESEARCH',
-  'TODO',
-  'DONE',
-];
-tasks = [{
-  id: 1,
-  created_at: 'now',
-  email: 'admin@admin',
-  authorId: 0,
-  borders: {
-    boardName: 'IDEAS',
-    tasks: [{
-      taskName: 'task 1'
-    }]
-  }
-},
-{
+export class TasksViewComponent {
 
-}]
+  newBoard = '';
+
+  board: Board = new Board('myBoard', [
+    new Column('Ideas',[
+    'some Random Idea',
+    'qwe',
+    'eqwq'
+  ]),
+  new Column('Reaserch' , [
+    'asdsadsad',
+    'foooo',
+    'newCOlum'
+  ]),
+  new Column('Todo',[
+    'SADASDAS',
+    'ASDASD',
+    'ASSSSAD'
+  ]),
+  new Column('Done', [
+    'hhhhh',
+    'dfhdfhdfh',
+    'hfdhdfhdfh'
+  ])
+])
+
+
 
 drop(event: CdkDragDrop<string[]>) {
-  moveItemInArray(this.BoardName, event.previousIndex, event.currentIndex);
-}
-drop1(event: CdkDragDrop<unknown>) {
-  moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
+  if (event.previousContainer === event.container) {
+    moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+  } else {
+    transferArrayItem(
+      event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex,
+    );
+  }
 }
 
+addBoard() {
+  if (this.newBoard) {
+    const newColumn = new Column(this.newBoard, []);
+    this.board.columns.push(newColumn);
+    this.newBoard = ''; 
+}
+}
 }
