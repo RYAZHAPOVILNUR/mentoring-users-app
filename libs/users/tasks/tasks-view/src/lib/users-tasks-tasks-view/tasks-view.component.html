@@ -1,13 +1,33 @@
-<div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop($event)">
-  <div class="example-box" *ngFor="let name of BoardName" cdkDrag>{{name}}
-    <div cdkDropList (cdkDropListDropped)="drop1($event)"
-    >
-    <div
-    class="example-box"
-    *ngFor="let task of tasks"
-    [cdkDragData]="task"
-    cdkDrag>{{tasks[0]}}</div>
-      
+
+<div>
+  <div class="new-board">
+      <input type="text" [(ngModel)]="newBoard" placeholder="new board"><br>
+      <button mat-mini-fab extended (click)="addBoard()">+1</button>
     </div>
-  </div>
+
+
 </div>
+  <div class='board'>
+    <div class="board-bar">
+    </div>
+    <div class="board-wrapper">
+      <div class="board-columns" cdkDropListGroup>
+        <div class="board-column" *ngFor="let column of board.columns">
+
+          <div class="column-title">
+            {{column.name}}
+          </div>
+          <div class="task-container"
+          cdkDropList 
+          [cdkDropListData]="column.tasks"
+          (cdkDropListDropped)="drop($event)"
+        >
+            <div class="task" *ngFor="let item of column.tasks" cdkDrag>
+              {{item}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
