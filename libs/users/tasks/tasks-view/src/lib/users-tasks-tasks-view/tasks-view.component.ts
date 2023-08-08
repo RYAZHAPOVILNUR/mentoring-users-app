@@ -4,6 +4,7 @@ import {Component } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem, CdkDrag, CdkDropList, CdkDropListGroup} from '@angular/cdk/drag-drop';
 import {NgFor} from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Column } from '../../../../state/model/column.model';
 
 
@@ -12,13 +13,15 @@ import { Column } from '../../../../state/model/column.model';
 @Component({
   selector: 'users-tasks-view',
   standalone: true,
-  imports: [CdkDrag, CdkDropList, NgFor, FormsModule, CdkDropListGroup, MatButtonModule],
+  imports: [CdkDrag, CdkDropList, NgFor, FormsModule, CdkDropListGroup, MatButtonModule, CommonModule],
   templateUrl: './tasks-view.component.html',
   styleUrls: ['./tasks-view.component.scss'],
 })
 export class TasksViewComponent {
 
   newBoard = '';
+  showTask = false;
+  selectedItem!: string;
 
   board: Board = new Board('myBoard', [
     new Column('Ideas',[
@@ -64,5 +67,9 @@ addBoard() {
     this.board.columns.push(newColumn);
     this.newBoard = ''; 
 }
+}
+showTaskDetails(item: string){
+  this.showTask = !this.showTask
+  this.selectedItem = item;
 }
 }
