@@ -1,11 +1,15 @@
+import { Board } from '../../../../data-acces/src/lib/model/board.model';
+import { Task } from '../../../../data-acces/src/lib/model/task.model';
 import { MatButtonModule } from '@angular/material/button';
-import { Board } from './../../../../state/model/board.model';
+import { Column } from '../../../../data-acces/src/lib/model/column.model';
+
+
 import {Component } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem, CdkDrag, CdkDropList, CdkDropListGroup} from '@angular/cdk/drag-drop';
 import {NgFor} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Column } from '../../../../state/model/column.model';
+
 
 
 
@@ -18,21 +22,32 @@ import { Column } from '../../../../state/model/column.model';
   styleUrls: ['./tasks-view.component.scss'],
 })
 export class TasksViewComponent {
-
+  testBoardId = 1
   newBoard = '';
+  newTask!: Task[];
   showTask = false;
-  selectedItem!: string;
+  selectedItem!: Task | string;
+  CreateNewTask = ''
 
-  board: Board = new Board('myBoard', [
-    new Column('Ideas', ['some Random Idea', 'qwe', 'eqwq']),
-    new Column('Reaserch', ['asdsadsad', 'foooo', 'newCOlum']),
-    new Column('Todo', ['SADASDAS', 'ASDASD', 'ASSSSAD']),
-    new Column('Done', ['hhhhh', 'dfhdfhdfh', 'hfdhdfhdfh']),
+  board: Board = new Board( 1, 'myBoard', [
+    new Column(1, 'Idea', [
+      new Task([new Date()], 'Make some Task' )
+    ]),
+    new Column(2, 'Todo', [
+      new Task([new Date()], 'Make some Task2' )
+    ]),
+    new Column(3, 'In Progress', [
+      new Task([new Date()],'Make some Task3' )
+    ]),
+    new Column(4, 'Done', [
+      new Task([new Date()], 'Make some Task4' )
+    ]),
+    
+    
   ]);
 
 
-
-drop(event: CdkDragDrop<string[]>) {
+    drop(event: CdkDragDrop<Task[], Task[]>) {
   if (event.previousContainer === event.container) {
     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
   } else {
@@ -47,13 +62,20 @@ drop(event: CdkDragDrop<string[]>) {
 
 addBoard() {
   if (this.newBoard) {
-    const newColumn = new Column(this.newBoard, []);
+    const newColumn = new Column(this.testBoardId, this.newBoard, this.newTask);
     this.board.columns.push(newColumn);
     this.newBoard = ''; 
 }
 }
-showTaskDetails(item: string){
-  this.showTask = !this.showTask
+// addTask(){
+//   if (this.newTask){
+//     const newTask = new Task([new Date()], this.CreateNewTask );
+//     this.column.tasks.push(newTask)
+//     this.CreateNewTask = '';
+//   }
+// }
+showTaskDetails(item: Task | string) {
+  this.showTask = !this.showTask;
   this.selectedItem = item;
 }
 }

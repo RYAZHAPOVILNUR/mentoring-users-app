@@ -26,6 +26,7 @@
       "@users/core/ui": ["libs/core/ui/src/index.ts"],
       "@users/core/ui/layout": ["libs/users/core/ui/layout/src/public-api.ts"],
       "@users/core/utils": ["libs/core/utils/src/index.ts"],
+      "@users/data-access": ["libs/data-access/src/index.ts"],
       "@users/feature-users-create": [
         "libs/users/users/feature-users-create/src/index.ts"
       ],
@@ -55,6 +56,9 @@
         "libs/users/profile/feature-profile/src/index.ts"
       ],
       "@users/users/tasks": ["libs/users/tasks/src/index.ts"],
+      "@users/users/tasks/data-acces": [
+        "libs/users/tasks/data-acces/src/index.ts"
+      ],
       "@users/users/tasks/tasks-view": [
         "libs/users/tasks/tasks-view/src/index.ts"
       ],

@@ -47,7 +47,7 @@
   margin: 10px;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.85),
   0 3px 14px 2px rgba(0, 0, 0, 0.05);
-  cursor: pointer;
+  cursor: move;
 .showTask:hover {
   background-color: #007bff;
   color: white;
@@ -81,7 +81,5 @@
   transform: scale(1.5);
   border: solid 1px rgba(black, 0.5);
   border-radius: 5px;
-
-  
-  
+  cursor: pointer;
 }

@@ -2,7 +2,9 @@
 <div>
   <div class="new-board">
       <input type="text" [(ngModel)]="newBoard" placeholder="new board"><br>
+      <input type="text" [(ngModel)]="CreateNewTask" placeholder="new task"><br>
       <button mat-mini-fab extended (click)="addBoard()">+1</button>
+      <!-- <button mat-mini-fab extended (click)="addTask()">+1</button> -->
     </div>
 
 
@@ -10,12 +12,12 @@
   <div class='board'>
     <div class="board-bar">
     </div>
-    <div class="board-wrapper" cdkDropListGroup >
-      <div class="board-columns"  cdkDrag>
+    <div class="board-wrapper" cdkDropListGroup  >
+      <div class="board-columns" cdkDrag>
         <div class="board-column" *ngFor="let column of board.columns" cdkDrag>
 
           <div class="column-title" cdkDropList
-          [cdkDropListData]="column.name">
+          [cdkDropListData]="column">
             {{column.name}}
           </div>
           <div class="task-container"
@@ -23,14 +25,18 @@
           [cdkDropListData]="column.tasks"
           (cdkDropListDropped)="drop($event)"
         >
-            <div class="task" *ngFor="let item of column.tasks" cdkDrag>
-              {{item}}
+            <div class="task" *ngFor="let task of column.tasks" cdkDrag>
+              {{task.task}}
               <div>
-                <button class="showTask" (click)="showTaskDetails(item)" mat-mini-fab extended>show</button>
-                <div class="taskForm" *ngIf="showTask && selectedItem === item">
-                    {{item}}
+                <div class="createdTime" *ngFor="let item of task.created_at">
+                  {{item| date: 'MMM d, HH:mm'}}
+                </div>
+                <button class="showTask" (click)="showTaskDetails(task)" mat-mini-fab extended>show</button>
+                <div class="taskForm" *ngIf="showTask && selectedItem === task">
+                  {{selectedItem.task}}
+                </div>
               </div>
-              </div>
+              
             </div>
           </div>
         </div>
@@ -38,3 +44,7 @@
     </div>
 
   </div>
+
+
+
+  
