@@ -3,7 +3,6 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnInit,
   Output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -38,9 +37,18 @@ Quill.register('modules/blotFormatter', BlotFormatter)
   styleUrls: ['./articles-create-ui.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ArticlesCreateUiComponent implements OnInit {
+export class ArticlesCreateUiComponent {
+
+  public _vm!: ArticlesCreateVm
+
   @Input({ required: true })
-  public vm!: ArticlesCreateVm
+  set vm(value: ArticlesCreateVm) {
+    this._vm = value
+    this.patchFormValues()
+  }
+  get vm() {
+    return this._vm
+  }
 
   @Output() publishArticle = new EventEmitter<CreateArticle>();
   @Output() formChange = new EventEmitter<boolean>();
@@ -69,11 +77,13 @@ export class ArticlesCreateUiComponent implements OnInit {
     this.checkChanges();
   }
 
-  public ngOnInit(): void {
-    this.formGroup.patchValue({
-      textEditor: this.vm.editingArticle?.content || '',
-      title: this.vm.editingArticle?.title || '',
-    });
+  public patchFormValues () {
+    if (this._vm.editingArticle && !this.formGroup.dirty) {
+      this.formGroup.patchValue({
+        textEditor: this._vm.editMode ? this.vm.editingArticle?.content : '',
+        title: this._vm.editMode ? this.vm.editingArticle?.title : '',
+      });
+    }
   }
 
   public onSubmit(event: Event) {
@@ -96,11 +106,11 @@ export class ArticlesCreateUiComponent implements OnInit {
 
   private containsUnsavedChanges() {
     const initialFormValues = this.vm.editMode
-      ? { textEditor: '', title: '' }
-      : {
-        textEditor: this.vm.editingArticle?.content,
-        title: this.vm.editingArticle?.title,
-      };
+      ? {
+          textEditor: this.vm.editingArticle?.content,
+          title: this.vm.editingArticle?.title,
+        }
+      : { textEditor: '', title: '' };
 
     return JSON.stringify(this.formGroup.value) !== JSON.stringify(initialFormValues);
   }
