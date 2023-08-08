@@ -12,9 +12,10 @@
     </div>
     <div class="board-wrapper">
       <div class="board-columns" cdkDropListGroup>
-        <div class="board-column" *ngFor="let column of board.columns">
+        <div class="board-column" *ngFor="let column of board.columns" cdkDrag>
 
-          <div class="column-title">
+          <div class="column-title" cdkDropList
+          [cdkDropListData]="column.name">
             {{column.name}}
           </div>
           <div class="task-container"
@@ -24,6 +25,12 @@
         >
             <div class="task" *ngFor="let item of column.tasks" cdkDrag>
               {{item}}
+              <div>
+                <button class="showTask" (click)="showTaskDetails(item)" mat-mini-fab extended>show</button>
+                <div class="taskForm" *ngIf="showTask && selectedItem === item">
+                    {{item}}
+              </div>
+              </div>
             </div>
           </div>
         </div>
