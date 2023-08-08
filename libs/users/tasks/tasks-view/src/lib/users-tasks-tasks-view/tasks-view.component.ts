@@ -24,27 +24,11 @@ export class TasksViewComponent {
   selectedItem!: string;
 
   board: Board = new Board('myBoard', [
-    new Column('Ideas',[
-    'some Random Idea',
-    'qwe',
-    'eqwq'
-  ]),
-  new Column('Reaserch' , [
-    'asdsadsad',
-    'foooo',
-    'newCOlum'
-  ]),
-  new Column('Todo',[
-    'SADASDAS',
-    'ASDASD',
-    'ASSSSAD'
-  ]),
-  new Column('Done', [
-    'hhhhh',
-    'dfhdfhdfh',
-    'hfdhdfhdfh'
-  ])
-])
+    new Column('Ideas', ['some Random Idea', 'qwe', 'eqwq']),
+    new Column('Reaserch', ['asdsadsad', 'foooo', 'newCOlum']),
+    new Column('Todo', ['SADASDAS', 'ASDASD', 'ASSSSAD']),
+    new Column('Done', ['hhhhh', 'dfhdfhdfh', 'hfdhdfhdfh']),
+  ]);
 
 
 
