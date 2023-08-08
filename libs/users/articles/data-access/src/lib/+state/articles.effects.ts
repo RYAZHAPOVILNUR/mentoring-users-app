@@ -1,11 +1,13 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ArticlesActions } from './articles.actions';
-import { catchError, map, of, switchMap, tap } from 'rxjs';
+import { catchError, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
 import { ApiService } from '@users/core/http';
 import { CreateArticle } from '../models/create-article.model';
 import { Router } from "@angular/router";
 import { Article } from '../models/article.model';
+import { Store } from '@ngrx/store';
+import { selectQueryParam, selectQueryParams, selectRouteParams } from '@users/core/data-access';
 
 export const publishArticle$ = createEffect(
   (actions$ = inject(Actions),
@@ -53,8 +55,8 @@ export const getArticle$ = createEffect(
     return actions$.pipe(
       ofType(ArticlesActions.getArticle),
       switchMap(
-        (id) => apiService.get<Article>(`/articles/${id}`)
-          .pipe(
+        ({id}) => {
+          return apiService.get<Article>(`/articles/${id}`).pipe(
             map(
               (article) => ArticlesActions.getArticleSuccess({ article })
             ),
@@ -63,6 +65,7 @@ export const getArticle$ = createEffect(
               return of(ArticlesActions.getArticlesFailed({error}))
             })
           )
+        }
       )
     )
   }, {functional: true}
