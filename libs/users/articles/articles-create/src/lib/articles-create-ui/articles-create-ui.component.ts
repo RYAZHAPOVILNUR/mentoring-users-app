@@ -78,11 +78,16 @@ export class ArticlesCreateUiComponent {
   }
 
   public patchFormValues () {
-    if (this._vm.editingArticle && !this.formGroup.dirty) {
+    if (this._vm.editMode && !this.formGroup.dirty) {
       this.formGroup.patchValue({
-        textEditor: this._vm.editMode ? this.vm.editingArticle?.content : '',
-        title: this._vm.editMode ? this.vm.editingArticle?.title : '',
+        textEditor: this.vm.editingArticle?.content || '',
+        title: this.vm.editingArticle?.title || '',
       });
+    } else if (!this._vm.editMode) {
+        this.formGroup.patchValue({
+          textEditor: '',
+          title: '',
+        });
     }
   }
 
