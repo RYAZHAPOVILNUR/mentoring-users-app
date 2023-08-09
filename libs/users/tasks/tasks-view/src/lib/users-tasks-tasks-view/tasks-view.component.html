@@ -13,8 +13,8 @@
     <div class="board-bar">
     </div>
     <div class="board-wrapper" cdkDropListGroup  >
-      <div class="board-columns" cdkDrag>
-        <div class="board-column" *ngFor="let column of board.columns" cdkDrag>
+      <div class="board-columns" >
+        <div class="board-column" *ngFor="let column of board.columns">
 
           <div class="column-title" cdkDropList
           [cdkDropListData]="column">
