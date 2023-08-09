@@ -1,4 +1,4 @@
-import { inject } from '@angular/core';
+import { EventEmitter, Output, inject } from '@angular/core';
 import { ChangeDetectionStrategy, Component, Input, OnInit, DestroyRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileFormVm } from './profile-form-ui-vm';
@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
-import { PasswordChangeDialogComponent } from '@users/core/ui';
+import { CropperDialogComponent, PasswordChangeDialogComponent } from '@users/core/ui';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthFacade, ChangePasswordPayload } from '@auth/data-access';
 import { MatDialog } from '@angular/material/dialog';
@@ -33,6 +33,8 @@ export class ProfileFormUiComponent implements OnInit {
   private readonly authFacade = inject(AuthFacade);
   @Input({ required: true }) vm!: ProfileFormVm
 
+  @Output() loadPhoto = new EventEmitter<File>()
+
   public photo: any
 
   ngOnInit(): void {
@@ -44,7 +46,7 @@ export class ProfileFormUiComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(result => {
         if (result) {
-          const changePasswordPayload:ChangePasswordPayload = {
+          const changePasswordPayload: ChangePasswordPayload = {
             newPassword: result.value.newPassword,
             oldPassword: result.value.oldPassword
           }
@@ -54,5 +56,26 @@ export class ProfileFormUiComponent implements OnInit {
       });
   }
 
+  handleFileInput(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.loadPhoto.emit(file)
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        const image = new Image();
+        image.src = e.target.result;
 
+        const dialogRef = this.dialog.open(CropperDialogComponent, {
+          data: { image }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          if(result) {
+            console.log('Cropped image data:', result);
+          }
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  }
 }

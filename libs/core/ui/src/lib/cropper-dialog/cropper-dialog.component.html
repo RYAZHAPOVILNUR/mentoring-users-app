@@ -1,0 +1,21 @@
+<p>cropper-dialog works!</p>
+<h2>Обрезать фото</h2>
+<image-cropper
+
+[imageBase64]="imageBase64"
+[maintainAspectRatio]="true"
+[aspectRatio]="4 / 4"
+[resizeToWidth]="256"
+[roundCropper] = "true"
+format="png"
+(imageCropped)="cropImg($event)"
+(imageLoaded)="imgLoad()"
+(cropperReady)="initCropper()"
+(loadImageFailed)="imgFailed()">
+></image-cropper>
+<button mat-raised-button (click)="onCrop()">Обрезать</button>
+
+<div class="col-md-4">
+  <h6>Image Preview</h6>
+  <img [src]="cropImgPreview" />
+</div>
