@@ -6,7 +6,7 @@ import { Store, select } from '@ngrx/store';
 import { DeactivatableComponent } from '@users/core/utils';
 import { MatDialog } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from "@users/core/ui";
-import { Observable, map, tap, withLatestFrom } from 'rxjs';
+import { Observable, filter, map, tap, withLatestFrom } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { selectQueryParam } from '@users/core/data-access';
 import { LetDirective } from '@ngrx/component';
@@ -33,6 +33,7 @@ export class ArticlesCreateContainerComponent implements DeactivatableComponent 
   public editMode$ = this.store.pipe(
     takeUntilDestroyed(this.destroyRef),    //Почему не происходит отписка?
     select(selectQueryParam('mode')),
+    filter(mode => mode !== undefined),
     tap((mode) => console.log('mode', mode)),
     map(mode => mode === 'edit')
   )
