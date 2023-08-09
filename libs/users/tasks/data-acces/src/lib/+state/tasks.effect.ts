@@ -1,25 +1,25 @@
-import { tap } from 'rxjs';
-import { Store } from '@ngrx/store';
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { ApiService } from '@users/core/http';
-import { map, switchMap } from 'rxjs/operators'; 
+import { ITaskColum } from '../model/task.interface';
+import { tap, map, switchMap } from 'rxjs/operators'; 
 import { tasksAction } from './tasks.action';
-import {  ITaskColum } from '../model/task.interface';
+import { Store } from '@ngrx/store';
 
-export const getColumn$ = createEffect(
-    (actions$ = inject(Actions),
-    api = inject(ApiService),
-    store = inject(Store)) =>
-    actions$.pipe(
-        ofType(tasksAction.getColumn),
-        switchMap(()=>
+export class TasksEffects {
+  getColumn$ = createEffect(() => {
+    const actions$ = inject(Actions);
+    const api = inject(ApiService);
+    const store = inject(Store);
+
+    return actions$.pipe(
+      ofType(tasksAction.getColumn),
+      switchMap(() =>
         api.get<ITaskColum>('/todos/me').pipe( 
-            tap((res) => console.log('res', res)),
-            map((res) =>{
-                return tasksAction.getColumnSuccess({ res });
-            })
-        ) )
-    ),
-    {functional: true}
-)
+          tap((res) => console.log('res', res)),
+          map((res) => tasksAction.getColumnSuccess({ res }))
+        )
+      )
+    );
+  });
+}

@@ -1,3 +1,4 @@
+import { TasksEffects  } from '../../../../libs/users/tasks/data-acces/src/lib/+state/tasks.effect';
 import { ApplicationConfig, isDevMode } from '@angular/core';
 import {
   provideRouter,
@@ -20,7 +21,7 @@ import { articlesEffects, articlesFeature } from '@users/users/articles/data-acc
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideEffects(userEffects, authEffects, articlesEffects),
+    provideEffects(userEffects, authEffects, articlesEffects, TasksEffects ),
     provideStore({
       router: routerReducer,
       [USERS_FEATURE_KEY]: usersReducer,
