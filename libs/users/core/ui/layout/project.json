@@ -1,32 +1,32 @@
 {
-  "name": "layout",
+  "name": "users-core-ui-layout",
   "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
-  "projectType": "library",
   "sourceRoot": "libs/users/core/ui/layout/src",
-  "prefix": "lib",
+  "prefix": "users",
+  "tags": [],
+  "projectType": "library",
   "targets": {
-    "build": {
-      "executor": "@angular-devkit/build-angular:ng-packagr",
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "project": "libs/users/core/ui/layout/ng-package.json"
+        "jestConfig": "libs/users/core/ui/layout/jest.config.ts",
+        "passWithNoTests": true
       },
       "configurations": {
-        "production": {
-          "tsConfig": "libs/users/core/ui/layout/tsconfig.lib.prod.json"
-        },
-        "development": {
-          "tsConfig": "libs/users/core/ui/layout/tsconfig.lib.json"
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
         }
-      },
-      "defaultConfiguration": "production"
+      }
     },
-    "test": {
-      "executor": "@angular-devkit/build-angular:karma",
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "tsConfig": "libs/users/core/ui/layout/tsconfig.spec.json",
-        "polyfills": [
-          "zone.js",
-          "zone.js/testing"
+        "lintFilePatterns": [
+          "libs/users/core/ui/layout/**/*.ts",
+          "libs/users/core/ui/layout/**/*.html"
         ]
       }
     }
