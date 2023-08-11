@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
-import { CropperDialogComponent, PasswordChangeDialogComponent } from '@users/core/ui';
+import { PasswordChangeDialogComponent } from '@users/core/ui';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthFacade, ChangePasswordPayload } from '@auth/data-access';
 import { MatDialog } from '@angular/material/dialog';
@@ -33,7 +33,7 @@ export class ProfileFormUiComponent implements OnInit {
   private readonly authFacade = inject(AuthFacade);
   @Input({ required: true }) vm!: ProfileFormVm
 
-  @Output() loadPhoto = new EventEmitter<File>()
+  @Output() loadPhoto: EventEmitter<File> = new EventEmitter<File>();
 
   public photo: any
 
@@ -59,23 +59,7 @@ export class ProfileFormUiComponent implements OnInit {
   handleFileInput(event: any) {
     const file = event.target.files[0];
     if (file) {
-      this.loadPhoto.emit(file)
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        const image = new Image();
-        image.src = e.target.result;
-
-        const dialogRef = this.dialog.open(CropperDialogComponent, {
-          data: { image }
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
-          if(result) {
-            console.log('Cropped image data:', result);
-          }
-        });
-      };
-      reader.readAsDataURL(file);
+      this.loadPhoto.emit(file);
     }
   }
 }
