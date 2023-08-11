@@ -1,4 +1,4 @@
-import { TasksEffects  } from '../../../../libs/users/tasks/data-acces/src/lib/+state/tasks.effect';
+import { tasksEffects  } from '../../../../libs/users/tasks/data-acces/src/lib/+state/tasks.effect';
 import { ApplicationConfig, isDevMode } from '@angular/core';
 import {
   provideRouter,
@@ -18,15 +18,17 @@ import { authEffects, authFeature, tokenInterceptor } from '@auth/data-access';
 import {DADATA_TOKEN} from "../../../../libs/core/dadata/src/lib/dadata.token";
 import { provideQuillConfig } from 'ngx-quill/config';
 import { articlesEffects, articlesFeature } from '@users/users/articles/data-access';
+import { tasksFeature } from 'libs/users/tasks/data-acces/src/lib/+state/tasks.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideEffects(userEffects, authEffects, articlesEffects, TasksEffects ),
+    provideEffects(userEffects, authEffects, articlesEffects, tasksEffects ),
     provideStore({
       router: routerReducer,
       [USERS_FEATURE_KEY]: usersReducer,
       [authFeature.name]: authFeature.reducer,
-      [articlesFeature.name]: articlesFeature.reducer
+      [articlesFeature.name]: articlesFeature.reducer,
+      [tasksFeature.name]: tasksFeature.reducer
     }),
     provideRouterStore(),
     provideStoreDevtools({

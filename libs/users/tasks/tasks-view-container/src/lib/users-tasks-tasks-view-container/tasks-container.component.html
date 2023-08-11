@@ -1,4 +1,10 @@
 <div>
-    <users-tasks-view></users-tasks-view>
-
-</div>
+    <users-tasks-view></users-tasks-view><br>
+    <div *ngIf="columnName$ | async as columnName">
+      {{ columnName }}
+    </div>
+    <div *ngIf="columnTasks$ | async as columnTasks">
+      123{{columnTasks}}
+    </div>
+  </div>
+  

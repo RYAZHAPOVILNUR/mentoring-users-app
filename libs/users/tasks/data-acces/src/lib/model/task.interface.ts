@@ -1,6 +1,6 @@
 export interface ITaskColum {
-  id?: number;
-  created_at?: number;
+  id: number;
+  created_at: number;
   email: string;
   authorId: number;
   column: {
