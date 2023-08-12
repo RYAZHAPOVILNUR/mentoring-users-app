@@ -1,0 +1,8 @@
+<div>
+    <users-tasks-view></users-tasks-view><br>
+    
+    <div *ngIf="columns$ | async as columns">
+      <div *ngFor="let column of columns">{{column.columnName}}</div>
+    </div>
+  </div>
+  

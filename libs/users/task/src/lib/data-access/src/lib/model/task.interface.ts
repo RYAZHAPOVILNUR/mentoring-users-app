@@ -1,14 +1,16 @@
-export interface ITaskColum {
+export interface ITaskBoard {
   id: number;
   created_at: number;
   email: string;
   authorId: number;
-  column: {
-    columnName: string;
-    tasks: ITask[];
-  };
+  columns: IColumn[];
 }
 
 export interface ITask {
   taskName: string;
+}
+
+export interface IColumn{
+  columnName: string;
+  tasks: ITask[];
 }

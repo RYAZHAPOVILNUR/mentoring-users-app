@@ -1,25 +1,23 @@
-import { ITaskColum } from '../model/task.interface';
+import { ITaskBoard } from '../model/task.interface';
 import { createReducer, on, createFeature } from '@ngrx/store';
 import { tasksAction } from './tasks.action';
 import { act } from '@ngrx/effects';
 
 
+export const TASKS_FEATURE_KEY = 'tasks'
 
-export const tasksInitialState: ITaskColum = {
+export const tasksInitialState: ITaskBoard = {
   id: 0,
   created_at: 0,
   email: '',
   authorId: 0,
-  column: {
-    columnName: '',
-    tasks: []
-  }
+  columns: []
 };
 
 
 
 export const tasksFeature = createFeature({
-  name: 'tasks',
+  name: TASKS_FEATURE_KEY,
   reducer: createReducer(
     tasksInitialState,
     on(tasksAction.getTasksColumn, (state) =>({
