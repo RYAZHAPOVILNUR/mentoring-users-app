@@ -1,8 +1,8 @@
 <div>
     <div>
-        <input type="text" [(ngModel)]="newColumn" placeholder="Column Name">
+        <input type="text" [(ngModel)]="newColumnName" placeholder="Column Name">
         <input type="text" [(ngModel)]="task" placeholder="new Task">
-        <button (click)="addNewColumn(newColumn)">Add Column</button>
+        <button (click)="addNewColumn(newColumnName)">Add Column</button>
       </div>
     <users-tasks-view [columns]="columns$ | async" [drop]="drop" ></users-tasks-view>
 
