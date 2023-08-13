@@ -9,6 +9,12 @@
     
 </div>
 
+<ng-container *ngIf="vm$| async as vm">
+  <div *ngIf="vm.isLoading">Im loading...</div>
+  <div *ngIf="vm.columnName">{{vm.columnName}}</div>
+  <div *ngIf="vm.tasks">{{vm.tasks}}</div>
+</ng-container>
+
 
 <!-- <div *ngIf="columns$ | async as columns">
        <div *ngFor="let column of columns">
