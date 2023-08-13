@@ -46,7 +46,7 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'tasks',
-        loadComponent: () => import('@users/users/tasks/tasks-view-container').then(c => c.TasksContainerComponent)
+        loadComponent: () => import('@users/users/task').then(c => c.TasksContainerComponent)
       },
       ...layoutAgnosticComponents
     ]

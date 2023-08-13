@@ -55,6 +55,10 @@
       "@users/users/profile/feature-profile": [
         "libs/users/profile/feature-profile/src/index.ts"
       ],
+      "@users/users/task": ["libs/users/task/src/index.ts"],
+      "@users/users/task/data-access": [
+        "libs/users/task/data-access/src/index.ts"
+      ],
       "@users/users/tasks": ["libs/users/tasks/src/index.ts"],
       "@users/users/tasks/data-acces": [
         "libs/users/tasks/data-acces/src/index.ts"
