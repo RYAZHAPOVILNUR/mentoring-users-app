@@ -1,0 +1,18 @@
+<div>
+    <div>
+        <input type="text" [(ngModel)]="newColumn" placeholder="Column Name">
+        <input type="text" [(ngModel)]="task" placeholder="new Task">
+        <button (click)="addNewColumn(newColumn)">Add Column</button>
+      </div>
+    <users-tasks-view [columns]="columns$ | async" [drop]="drop" ></users-tasks-view>
+
+    
+</div>
+
+
+<!-- <div *ngIf="columns$ | async as columns">
+       <div *ngFor="let column of columns">
+        {{column.columnName}}
+       </div>
+    </div> -->
+<!-- [addTaskColumn]="addTaskColumn.bind(this)"  добавить позже, если потребуется добавить в дочку-->

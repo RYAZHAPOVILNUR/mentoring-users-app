@@ -1,0 +1,25 @@
+<div class='board'>
+  <div class="board-bar">
+  </div>
+  <div class="board-wrapper" cdkDropListGroup  >
+    <div class="board-columns" >
+      <div class="board-column" *ngFor="let column of columns">
+        <div class="column-title" cdkDropList [cdkDropListData]="column">
+          {{column.columnName}}
+        </div>
+        <div class="task-container" 
+        cdkDropList
+        [cdkDropListData]="column.tasks"
+        (cdkDropListDropped)="drop($event)">
+          <div class="task" *ngFor="let task of column.tasks" cdkDrag>
+            {{task.taskName}}
+            <div>
+              
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+<!-- <button (click)="addTaskColumn()">QWEQWE</button> -->
