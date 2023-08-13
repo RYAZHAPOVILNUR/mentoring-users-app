@@ -18,7 +18,6 @@ export class tasksEffects {
       ofType(tasksAction.getTasksColumn),
       mergeMap(() =>
         api.get<ITaskBoard>('/todos/me').pipe(
-          tap((res) => console.log('res', res)),
           map((res) => tasksAction.getColumnSuccess(res))
           ))
     );
@@ -29,8 +28,10 @@ export class tasksEffects {
     const api = inject(ApiService);
     return actions$.pipe(
       ofType(tasksAction.postChangeColumns),
+      tap((payload) => console.log('payload',payload)),
       mergeMap(({columns})=>
-      api.post<void, IColumn[]>('/todos/change', columns).pipe(
+      api.post<void, {columns: IColumn[ ] }>('/todos/change', {columns}).pipe(
+        tap(()=> console.log('columns', columns)),
         map(() => tasksAction.postChangeColumnsSuccess({columns}))
       ))
     )

@@ -7,7 +7,7 @@ export const tasksAction = createActionGroup({
     events:{
       getTasksColumn: emptyProps(),
       getColumnSuccess: props<ITaskBoard>(),
-      postChangeColumns: props<{columns: IColumn[]}>(),
+      postChangeColumns: props<{columns: IColumn[ ] }>(),
       postChangeColumnsSuccess: props<{columns: IColumn[]}>(),
       moveTask: props<{ columns: IColumn[] }>(),  
     }

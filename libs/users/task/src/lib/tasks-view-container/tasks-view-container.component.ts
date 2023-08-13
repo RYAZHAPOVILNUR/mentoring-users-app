@@ -20,14 +20,13 @@ export class TasksContainerComponent {
 public columns$ = this.store.select(selectColumn)
 public columns: IColumn[] = [];
 private subscription: Subscription;
-public newColumn!: string;
+public newColumnName!: string;
 public task!: string;
 public toggle = false;
 
 constructor() {
   this.store.dispatch(tasksAction.getTasksColumn());
   this.subscription = this.columns$.subscribe(columns => this.columns = columns);
-  this.store.dispatch(tasksAction.postChangeColumns({ columns: this.columns }));
 
 }
 
@@ -38,14 +37,12 @@ public addNewColumn(newColumnName: string){
   };
   this.columns = [...this.columns, newColumn];
   this.store.dispatch(tasksAction.postChangeColumns({ columns: this.columns }));
-  this.newColumn = '';
+  this.newColumnName = '';
 }
 
-
 public addTaskColumn(task: string){
- 
   console.log(task)
-  this.newColumn = ''
+  this.newColumnName = ''
 }
 public drop(event: CdkDragDrop<ITask[]>) {
   const prevIndex = event.previousIndex;
@@ -63,13 +60,6 @@ public drop(event: CdkDragDrop<ITask[]>) {
 }
 
 }
-
-
-
-
-
-
-
 
 
 
