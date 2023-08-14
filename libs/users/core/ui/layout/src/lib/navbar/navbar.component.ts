@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -13,6 +14,7 @@ import { RouterModule } from '@angular/router';
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
+    MatListModule,
     RouterModule
   ],
   templateUrl: './navbar.component.html',
