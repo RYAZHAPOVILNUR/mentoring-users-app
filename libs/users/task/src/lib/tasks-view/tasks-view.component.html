@@ -1,0 +1,31 @@
+<div class='board'>
+  <div class="board-bar">
+  </div>
+  <div class="board-wrapper" cdkDropListGroup  >
+    <div class="board-columns" >
+      <div class="board-column" *ngFor="let column of columns; let i = index">
+        <div class="column-title" cdkDropList [cdkDropListData]="column">
+          {{column.columnName}}
+        </div>
+        <div class="task-container" 
+        cdkDropList
+        [cdkDropListData]="column.tasks"
+        (cdkDropListDropped)="drop($event)">
+          <div class="task" *ngFor="let task of column.tasks" cdkDrag>
+            {{task.taskName}}
+            <div>
+              
+      </div>
+    </div>
+  </div>
+  <div class='delBtnContainer'>
+    <button class="dellBtn" mat-fab extended>
+      <mat-icon style="margin: 0 auto" (click)="deleteColumn(i)">delete</mat-icon>
+    </button>
+</div>
+</div>
+
+</div>
+
+</div>
+<!-- <button (click)="addTaskColumn()">QWEQWE</button> -->

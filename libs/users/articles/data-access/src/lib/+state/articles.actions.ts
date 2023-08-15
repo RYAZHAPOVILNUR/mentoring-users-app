@@ -14,5 +14,6 @@ export const ArticlesActions = createActionGroup({
     getArticle: props<{id:string}>(),
     getArticleSuccess: props<{article: Article}>(),
     getArticlesFailed: props<{ error: Error }>(),
+    deleteColumn: props<{ columnIndex: number }>(),
   },
 });

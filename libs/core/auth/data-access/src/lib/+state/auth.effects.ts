@@ -121,3 +121,17 @@ export const changePasswordEffects$ = createEffect(
       )
     ), { functional: true }
 )
+
+export const uploadImageEffects$ = createEffect(
+  (actions$ = inject(Actions),
+    api = inject(ApiService)) => actions$.pipe(
+      ofType(authActions.uploadImage),
+      switchMap(
+        ({ image }) => api.post<UsersDTO, any>('/users/upload/image', {image})
+          .pipe(
+            map((userDTO) => authActions.uploadImageSuccess({ user: usersDTOAdapter.DTOtoEntity(userDTO) })),
+            catchError((error) => of(authActions.uploadImageFailure({ error })))
+          )
+      )
+    ), { functional: true }
+)
