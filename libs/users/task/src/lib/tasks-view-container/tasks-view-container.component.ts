@@ -6,16 +6,24 @@ import { TasksViewComponent } from '../tasks-view/tasks-view.component';
 import { CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
+import { TasksStore } from './tasks-list-container.store';
 
 @Component({
   selector: 'users-tasks-container',
   standalone: true,
-  imports: [CommonModule, TasksViewComponent, CdkDrag, CdkDropList, NgFor, CdkDropListGroup, FormsModule],
+  imports: [CommonModule, TasksViewComponent, CdkDrag, CdkDropList, NgFor, CdkDropListGroup, FormsModule, MatButtonModule],
   templateUrl: './tasks-view-container.component.html',
   styleUrls: ['./tasks-view-container.component.scss'],
+  providers: [TasksStore]
 })
 export class TasksContainerComponent {
+
   private readonly store = inject(Store);
+  private tasksStore = inject(TasksStore)
+
+  vm$ = this.tasksStore.vm$
+
 
 public columns$ = this.store.select(selectColumn)
 public columns: IColumn[] = [];
@@ -27,8 +35,13 @@ public toggle = false;
 constructor() {
   this.store.dispatch(tasksAction.getTasksColumn());
   this.subscription = this.columns$.subscribe(columns => this.columns = columns);
+  
 
 }
+public deleteColumn(columnIndex: number) {
+  this.store.dispatch(tasksAction.deleteColumnTask({ columnIndex }));
+}
+
 
 public addNewColumn(newColumnName: string){
   const newColumn: IColumn = {
@@ -60,19 +73,3 @@ public drop(event: CdkDragDrop<ITask[]>) {
 }
 
 }
-
-
-
-
-
- // public readonly columnName$ = this.store.select(selectTaskName)
-  // public readonly columnTasks$ = this.store.select(selectTasks)
-
-  // constructor() {
-  //   this.store.dispatch(tasksAction.getTasksColumn());
-  //   this.columnName$ = this.store.select(selectTaskName);
-  //   this.columnTasks$ = this.store.select(selectTasks)
-  //   console.log(this.columnName$)
-
-      
-  // }

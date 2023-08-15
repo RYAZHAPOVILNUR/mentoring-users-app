@@ -92,3 +92,16 @@
     border-radius: 5px;
     cursor: pointer;
   }
+ 
+  .delBtnContainer {
+    position: relative;
+    height: 100%;
+  .dellBtn{
+  max-height: 30px;
+  max-height: 30px;
+  margin: 10px;
+  position: absolute; 
+    right: 0;
+    bottom: 0;
+  }
+}
