@@ -1,9 +1,20 @@
+
 <mat-nav-list>
 
   <mat-list-item class="list-item">
     <mat-icon matListItemIcon>account_circle</mat-icon>
     <span matListItemTitle>О себе</span>
   </mat-list-item>
+
+<div class="user-photo-contayner">
+  <img [src]="userPhoto | async" alt="User Photo">
+</div>
+
+<div class="nav-items-list">
+
+  <button mat-button class="navbar-btn" routerLink="/profile">
+    <mat-icon>account_circle</mat-icon><span class="button-label">Профиль</span>
+  </button>
 
   <mat-list-item class="list-item" routerLink="articles">
     <mat-icon matListItemIcon>book</mat-icon>
@@ -18,6 +29,9 @@
   <mat-list-item class="list-item">
     <mat-icon matListItemIcon>assignment</mat-icon><span matListItemTitle>Задачи</span>
   </mat-list-item>
+  <button mat-button class="navbar-btn" routerLink="tasks">
+    <mat-icon>assignment</mat-icon><span class="button-label">Задачи</span>
+  </button>
 
   <mat-list-item class="list-item">
     <mat-icon matListItemIcon> contacts</mat-icon><span matListItemTitle>Контакты</span>
@@ -28,3 +42,8 @@
   </mat-list-item>
 
 </mat-nav-list>
+  <button mat-button class="navbar-btn" (click)="onLogout()">
+    <mat-icon>logout</mat-icon><span class="button-label">Выход</span>
+  </button>
+
+</div>

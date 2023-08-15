@@ -1,4 +1,4 @@
-import { inject } from '@angular/core';
+import { EventEmitter, Output, inject } from '@angular/core';
 import { ChangeDetectionStrategy, Component, Input, OnInit, DestroyRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileFormVm } from './profile-form-ui-vm';
@@ -33,6 +33,8 @@ export class ProfileFormUiComponent implements OnInit {
   private readonly authFacade = inject(AuthFacade);
   @Input({ required: true }) vm!: ProfileFormVm
 
+  @Output() loadPhoto: EventEmitter<File> = new EventEmitter<File>();
+
   public photo: any
 
   ngOnInit(): void {
@@ -44,7 +46,7 @@ export class ProfileFormUiComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(result => {
         if (result) {
-          const changePasswordPayload:ChangePasswordPayload = {
+          const changePasswordPayload: ChangePasswordPayload = {
             newPassword: result.value.newPassword,
             oldPassword: result.value.oldPassword
           }
@@ -54,5 +56,10 @@ export class ProfileFormUiComponent implements OnInit {
       });
   }
 
-
+  handleFileInput(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.loadPhoto.emit(file);
+    }
+  }
 }

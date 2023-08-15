@@ -51,3 +51,4 @@ export class HeaderComponent implements OnInit{
     this.themeSwitch.switchTheme()
   }
 }
+
