@@ -1,4 +1,4 @@
-import { IColumn, ITask, TasksStore, selectColumn, tasksAction } from '@users/users/task/data-access';
+import { IColumn, ITask, selectColumn, tasksAction } from '@users/users/task/data-access';
 import { Store } from '@ngrx/store';
 import { Component, inject } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
@@ -6,11 +6,13 @@ import { TasksViewComponent } from '../tasks-view/tasks-view.component';
 import { CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
+import { TasksStore } from './tasks-list-container.store';
 
 @Component({
   selector: 'users-tasks-container',
   standalone: true,
-  imports: [CommonModule, TasksViewComponent, CdkDrag, CdkDropList, NgFor, CdkDropListGroup, FormsModule],
+  imports: [CommonModule, TasksViewComponent, CdkDrag, CdkDropList, NgFor, CdkDropListGroup, FormsModule, MatButtonModule],
   templateUrl: './tasks-view-container.component.html',
   styleUrls: ['./tasks-view-container.component.scss'],
   providers: [TasksStore]
@@ -36,6 +38,10 @@ constructor() {
   
 
 }
+public deleteColumn(columnIndex: number) {
+  this.store.dispatch(tasksAction.deleteColumnTask({ columnIndex }));
+}
+
 
 public addNewColumn(newColumnName: string){
   const newColumn: IColumn = {

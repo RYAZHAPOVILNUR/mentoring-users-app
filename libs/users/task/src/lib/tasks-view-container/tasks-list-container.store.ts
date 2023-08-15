@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { IColumn, ITask } from '../model/tasks.interface';
+import { ITask } from '@users/users/task/data-access';
 import { exhaustMap, tap } from 'rxjs';
 
 export interface TasksComponentState {

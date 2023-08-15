@@ -1,15 +1,15 @@
 <div>
     <div>
-        <input type="text" [(ngModel)]="newColumnName" placeholder="Column Name">
-        <input type="text" [(ngModel)]="task" placeholder="new Task">
-        <button (click)="addNewColumn(newColumnName)">Add Column</button>
+        <input class="newColumnInput" type="text" [(ngModel)]="newColumnName" placeholder="Add column"><br>
+        <!-- <input type="text" [(ngModel)]="task" placeholder="new Task"><br> -->
+        <button mat-mini-fab extended style="margin: 10px" (click)="addNewColumn(newColumnName)">+1</button>
       </div>
-    <users-tasks-view [columns]="columns$ | async" [drop]="drop" ></users-tasks-view>
+    <users-tasks-view [columns]="columns$ | async" [drop]="drop" [deleteColumn]="deleteColumn"></users-tasks-view>
 
     
 </div>
-
-<ng-container *ngIf="vm$| async as vm">
+<!-- component state -->
+<ng-container *ngIf="vm$| async as vm"> 
   <div *ngIf="vm.isLoading">Im loading...</div>
   <div *ngIf="vm.columnName">{{vm.columnName}}</div>
   <div *ngIf="vm.tasks">{{vm.tasks}}</div>
