@@ -18,20 +18,8 @@ import { PushPipe } from '@ngrx/component';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit{
-  facade = inject(AuthFacade)
-  isAuthenticated$: Observable<boolean> = this.facade.isAuthenticated$
-  username$: Observable<string> = this.facade.user$.pipe(map(user => user.name))
-  isAdmin$: Observable<boolean | null> = this.facade.isAdmin$
-  public readonly userPhoto: Observable<string | undefined> = this.facade.user$.pipe(map(user => user.photo?.url))
-
-  public photo: any
-
-  ngOnInit(): void {
-    this.photo = this.userPhoto ? this.userPhoto : ''
-  }
-
-  public onLogout() {
-    this.facade.logout()
-  }
+export class HeaderComponent {
+  private readonly facade = inject(AuthFacade)
+  public readonly isAdmin$: Observable<boolean | null> = this.facade.isAdmin$
 }
+

@@ -1,7 +1,12 @@
+
+<div class="user-photo-contayner">
+  <img [src]="userPhoto | async" alt="User Photo">
+</div>
+
 <div class="nav-items-list">
 
-  <button mat-button class="navbar-btn">
-    <mat-icon>account_circle</mat-icon><span class="button-label">О себе</span>
+  <button mat-button class="navbar-btn" routerLink="/profile">
+    <mat-icon>account_circle</mat-icon><span class="button-label">Профиль</span>
   </button>
 
   <button mat-button class="navbar-btn" routerLink="articles">
@@ -23,6 +28,10 @@
 
   <button mat-button class="navbar-btn">
     <mat-icon>settings</mat-icon><span class="button-label">Настройки</span>
+  </button>
+
+  <button mat-button class="navbar-btn" (click)="onLogout()">
+    <mat-icon>logout</mat-icon><span class="button-label">Выход</span>
   </button>
 
 </div>
