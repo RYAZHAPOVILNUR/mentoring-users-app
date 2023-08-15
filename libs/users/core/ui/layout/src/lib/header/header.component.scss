@@ -1,0 +1,22 @@
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.user-avatar {
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.user-avatar img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.theme-toggle {
+  margin-left: 5px;
+}

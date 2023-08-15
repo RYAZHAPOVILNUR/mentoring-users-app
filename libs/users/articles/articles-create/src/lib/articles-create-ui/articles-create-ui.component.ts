@@ -4,6 +4,7 @@ import {
   EventEmitter,
   Input,
   Output,
+  inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuillModule } from 'ngx-quill'
@@ -11,12 +12,19 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import Quill from 'quill'
 import BlotFormatter from 'quill-blot-formatter';
 import { MatButtonModule } from '@angular/material/button';
-
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { FormGroupDirective, NgForm } from '@angular/forms';
 import { CreateArticle } from '@users/users/articles/data-access';
 import { ArticlesCreateVm } from './articles-create-vm';
 
+class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && isSubmitted && control.touched);
+  }
+}
 
 Quill.register('modules/blotFormatter', BlotFormatter)
 
@@ -38,7 +46,6 @@ Quill.register('modules/blotFormatter', BlotFormatter)
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticlesCreateUiComponent {
-
   public _vm!: ArticlesCreateVm
 
   @Input({ required: true })
@@ -61,6 +68,9 @@ export class ArticlesCreateUiComponent {
       validators: [Validators.required, Validators.minLength(5), Validators.maxLength(66)]
     }),
   });
+
+  public formSubmitted = false;
+  public matcher = new MyErrorStateMatcher()
 
   public quillEditorModules = {
     toolbar: [
@@ -93,6 +103,7 @@ export class ArticlesCreateUiComponent {
 
   public onSubmit(event: Event) {
     // event.preventDefault();
+    this.formSubmitted = true
     if (this.formGroup.valid) {
       const article: CreateArticle = {
         title: this.formGroup.value.title as string,

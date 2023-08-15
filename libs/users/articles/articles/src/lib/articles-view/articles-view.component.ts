@@ -4,6 +4,7 @@ import { QuillModule } from "ngx-quill";
 import { MatCardModule } from "@angular/material/card";
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon'
 import { Article } from '@users/users/articles/data-access';
 
 @Component({
@@ -13,7 +14,8 @@ import { Article } from '@users/users/articles/data-access';
     QuillModule,
     MatCardModule,
     RouterModule,
-    MatButtonModule
+    MatButtonModule, 
+    MatIconModule
   ],
   templateUrl: './articles-view.component.html',
   styleUrls: ['./articles-view.component.scss'],
@@ -22,4 +24,8 @@ import { Article } from '@users/users/articles/data-access';
 export class ArticlesViewComponent {
   @Input({ required: true }) articles!: Article[];
   @Input({required: true}) loggedUserId!: number;
+
+  public clearArticleContent(content: string) {
+    return content.replace(/<[^>]*>/g, ' ')
+  }
 }
