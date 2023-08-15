@@ -2,24 +2,50 @@
   padding: 0 15px;
 }
 
-quill-editor {
+.editor {
   display: block;
+}
+
+quill-editor {
+  &.ql-toolbar .ql-stroke {
+    fill: none !important;
+    stroke: #fff !important;
+  }
+  &.ql-toolbar .ql-fill {
+    fill: #fff !important;
+    stroke: none !important;
+  }
+  &.ql-toolbar .ql-picker {
+    color: #fff !important;
+  }
+}
+
+.ql-toolbar .ql-stroke {
+  fill: none !important;
+  stroke: #fff !important;
+}
+
+.ql-toolbar .ql-fill {
+  fill: #fff !important;
+  stroke: none !important;
+}
+
+.ql-toolbar .ql-picker {
+  color: #fff !important;
 }
 
 mat-form-field {
   display: block;
 }
 
-.custom-input-container.valid {
-  color: #5e35b1;
+.custom-input-container {
   font-size: 14px;
-}
-
-.custom-input-container.invalid {
-  background-color: #fee2e2;
-  color: #991b1b;
-  font-size: 14px;
-
+  & .light-invalid {
+    background-color: #ffd6d3;
+  }
+  & .dark-invalid {
+    background-color: #7c4c47;
+  }
 }
 
 .error-message {
