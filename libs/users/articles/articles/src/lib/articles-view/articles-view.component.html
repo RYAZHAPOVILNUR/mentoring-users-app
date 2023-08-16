@@ -1,16 +1,22 @@
 <div *ngFor="let article of articles">
-  <mat-card style="margin: 40px auto; max-width: 700px">
-    <mat-card-header>
-      <mat-card-title style="padding-left: 12px">{{article.title}}</mat-card-title>
+  <mat-card class="article">
+    <mat-card-header class="article-header" style="width: 100%;">
+      <mat-card-title>{{article.title}}</mat-card-title>
+      <mat-card-subtitle>от: Админ Админыч</mat-card-subtitle>
+      <mat-card-subtitle class="article-subtitle">{{ article.created_at | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content>
-      <div class="ql-editor" [innerHTML]="article.content"></div>
+    <mat-card-content class="article-content">
+      <article class="block-with-text">{{ clearArticleContent(article.content) }}</article>
     </mat-card-content>
-    <button  mat-button
-    *ngIf="article.authorId === loggedUserId"
-    [routerLink]="['/article-editor']"
-    [queryParams]="{ mode: 'edit', id: article.id }"
-    routerLinkActive="router-link-active">Edit</button>
+    <div class="article-button">
+      <button mat-button color="accent"
+      *ngIf="article.authorId === loggedUserId"
+      [routerLink]="['/article-editor']"
+      [queryParams]="{ mode: 'edit', id: article.id }"
+      routerLinkActive="router-link-active"
+      >
+      Читать
+      </button>
+    </div>
   </mat-card>
-
 </div>

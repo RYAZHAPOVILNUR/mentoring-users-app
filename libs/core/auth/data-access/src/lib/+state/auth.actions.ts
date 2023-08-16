@@ -15,8 +15,11 @@ export const authActions = createActionGroup({
     registerFailure: props<{ error: Error }>(),
     registerSuccess: props<{ authToken: string }>(),
     logout: emptyProps(),
-    changePassword: props<{data:ChangePasswordPayload}>(),
-    changePasswordFailure: props<{error: Error}>(),
-    changePasswordSuccess: props<{res:ChangePasswordResponce}>()
+    changePassword: props<{ data: ChangePasswordPayload }>(),
+    changePasswordFailure: props<{ error: Error }>(),
+    changePasswordSuccess: props<{ res: ChangePasswordResponce }>(),
+    uploadImage: props<{ image:any}>(),
+    uploadImageSuccess: props<{ user: UsersEntity }>(),
+    uploadImageFailure: props<{ error: Error }>()
   }
 });

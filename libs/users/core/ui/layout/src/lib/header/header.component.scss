@@ -1,17 +1,6 @@
+
 .spacer {
   flex: 1 1 auto;
-}
-
-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-}
-
-nav li {
-  margin-right: 10px;
 }
 
 .user-avatar {
@@ -26,4 +15,8 @@ nav li {
   height: 30px;
   border-radius: 50%;
   margin-right: 5px;
+}
+
+.theme-toggle {
+  margin-left: 5px;
 }
