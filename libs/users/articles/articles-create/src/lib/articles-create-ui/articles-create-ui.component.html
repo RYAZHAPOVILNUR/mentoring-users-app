@@ -3,20 +3,29 @@
 
     <mat-form-field>
       <input type="text" autocomplete="off" placeholder="Заголовок" formControlName="title" class="input-field"
-        matInput />
-      <mat-error> Заголовок должен содержать минимум 6 символов и не более 60!</mat-error>
+        matInput [errorStateMatcher]="matcher"/>
+      <mat-error *ngIf="formSubmitted && formGroup.get('title')?.hasError"> 
+        Заголовок должен содержать минимум 6 символов и не более 60!
+      </mat-error>
     </mat-form-field>
 
-    <div class="custom-input-container" [class.valid]="formGroup.get('textEditor')?.valid"
-      [class.invalid]="formGroup.get('textEditor')?.invalid && formGroup.get('textEditor')?.touched">
-      <quill-editor [styles]="{height: '400px'}" [modules]="quillEditorModules"
-      placeholder=""
-      defaultEmptyValue=""
-      formControlName="textEditor"></quill-editor>
+    <div class="custom-input-container">
+      <quill-editor
+        class="editor"
+        [class.light-invalid]="formSubmitted && formGroup.get('textEditor')?.invalid"
+        [class.dark-invalid]="vm.isDarkTheme && formSubmitted && formGroup.get('textEditor')?.invalid"
+        [class.dark-theme]="vm.isDarkTheme" 
+        [styles]="{height: '400px'}"
+        [modules]="quillEditorModules"
+        placeholder=""
+        defaultEmptyValue=""
+        formControlName="textEditor"
+      >
+      </quill-editor>
     </div>
 
     <p class="error-message"
-      *ngIf="formGroup.get('textEditor')?.dirty && formGroup.get('textEditor')?.invalid && formGroup.get('textEditor')?.touched">
+      *ngIf="formSubmitted && formGroup.get('textEditor')?.invalid">
       Статья должна состоять минимум из 66 символов!
     </p>
 

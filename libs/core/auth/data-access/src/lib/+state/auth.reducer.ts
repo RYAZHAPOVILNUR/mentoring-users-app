@@ -51,6 +51,10 @@ export const authFeature = createFeature({
     on(authActions.logout, (state) => ({
       ...state,
       ...authInitialState
+    })),
+    on(authActions.uploadImageSuccess, (state, { user}) => ({
+      ...state,
+      loggedUser: user
     }))
   ),
 });

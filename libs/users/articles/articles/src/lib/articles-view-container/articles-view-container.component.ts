@@ -5,8 +5,8 @@ import { Store } from '@ngrx/store';
 import { ArticleSelectors, ArticlesActions } from '@users/users/articles/data-access';
 import { LetDirective } from '@ngrx/component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
-import { AuthFacade, selectLoggedUserId } from '@auth/data-access';
-import { map } from 'rxjs';
+import { selectLoggedUserId } from '@auth/data-access';
+
 
 @Component({
   selector: 'users-articles-view-container',

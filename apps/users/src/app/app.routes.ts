@@ -4,10 +4,6 @@ import { AuthorizedUserLayoutComponent } from './authorized-user-layout/authoriz
 import { UnauthorizedUserLayoutComponent } from './unauthorized-user-layout-component/unauthorized-user-layout-component.component';
 import { canDeactivateFormComponent } from '@users/core/utils';
 
-
-
-
-
 const layoutAgnosticComponents = [
   {
     path: 'home',
@@ -49,8 +45,8 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('@users/users/articles/articles').then(c => c.ArticlesViewContainerComponent),
       },
       {
-        path: 'articles/:id',
-        loadComponent: () => import('../../../../libs/users/articles/article-read/src/index').then(c => c.ArticleReadComponent),
+        path: 'tasks',
+        loadComponent: () => import('@users/users/task').then(c => c.TasksContainerComponent)
       },
       ...layoutAgnosticComponents
     ]

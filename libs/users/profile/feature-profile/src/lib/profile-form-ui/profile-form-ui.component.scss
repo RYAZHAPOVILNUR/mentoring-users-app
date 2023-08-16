@@ -6,8 +6,9 @@
 }
 
 .user-photo {
-  width: 6rem;
-  height: 6rem;
+  position: relative; /* Add this to make the overlay position relative to the photo container */
+  width: 10rem;
+  height: 10rem;
   background-size: cover;
   background-position: center;
   margin-bottom: 20px;
@@ -16,5 +17,29 @@
 .user-photo-img {
   width: 100%;
   height: 100%;
-  border-radius: 9999px
+  border-radius: 9999px;
+}
+
+.change-photo-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 9999px;
+}
+
+.user-photo:hover .change-photo-overlay {
+  opacity: 1;
+}
+
+.change-photo-text {
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
 }
