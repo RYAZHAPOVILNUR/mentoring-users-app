@@ -1,18 +1,29 @@
+.user-photo-contayner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.user-photo-contayner img {
+  width: 100px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
 .nav-items-list {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 5px;
+  margin-top: 5px;
 }
 
 .navbar-btn {
-  vertical-align: middle;
-  margin-top: 5px;
-  color:white;
-}
-.navbar-btn mat-icon {
-  color: white;
+  display: flex;
+  align-items: center;
 }
 
-.button-label {
-  color:white;
+.list-item {
+  height: 40px !important;
 }

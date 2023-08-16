@@ -1,0 +1,45 @@
+@use '@angular/material' as mat;
+@use 'sass:map';
+@include mat.core();
+
+$primary-core: mat.define-palette(mat.$deep-purple-palette, 400);
+$primary-dark: mat.define-palette(mat.$deep-purple-palette, 800);
+
+$accent-core: mat.define-palette(mat.$blue-grey-palette, 300);
+$accent-dark: mat.define-palette(mat.$blue-grey-palette, A200, 700);
+
+$mat-core-theme: mat.define-light-theme((
+  color: (
+    primary: $primary-core,
+    accent: $accent-core,
+  )
+));
+
+$mat-dark-theme: mat.define-dark-theme((
+  color: (
+    primary: $primary-dark,
+    accent: $accent-dark,
+  )
+));
+
+@include mat.all-component-themes($mat-core-theme);
+
+.dark-theme {
+  @include mat.all-component-colors($mat-dark-theme);
+  .ql-toolbar .ql-stroke {
+    fill: none !important;
+    stroke: #fff !important;
+  }
+
+  .ql-toolbar .ql-fill {
+    fill: #fff !important;
+    stroke: none !important;
+  }
+
+  .ql-toolbar .ql-picker {
+    color: #fff !important;
+  }
+  .ql-picker-options {
+    background-color: rgb(28, 28, 28) !important;
+  }
+}

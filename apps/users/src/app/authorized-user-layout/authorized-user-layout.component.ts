@@ -36,4 +36,5 @@ export class AuthorizedUserLayoutComponent {
     this.facade.isAuthenticated$;
   opened!: boolean;
   events: string[] = [];
+
 }
