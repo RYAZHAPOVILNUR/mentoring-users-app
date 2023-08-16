@@ -1,0 +1,29 @@
+.article {
+  max-width: 700px;
+  margin: 40px auto; 
+  & .article-header {
+    padding: 20px 20px 0 20px;
+    margin-bottom: 10px;
+    & .article-subtitle {
+      font-weight: 400;
+    }
+  }
+  & .article-content {
+      padding: 0 20px 5px 20px;
+      & article {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  & .article-button {
+    & button {
+      width: 100%;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+  }
+}
+

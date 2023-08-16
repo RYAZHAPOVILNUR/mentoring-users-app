@@ -14,5 +14,8 @@
       </div>
       <span>{{username$ | ngrxPush }}</span>
     </li>
+    <button mat-icon-button (click)="onSwitchTheme()">
+      <mat-icon>{{(isDarkTheme$ | async) ? 'light_mode' : 'dark_mode'}}</mat-icon>
+    </button>
   </ng-container>
 </mat-toolbar>

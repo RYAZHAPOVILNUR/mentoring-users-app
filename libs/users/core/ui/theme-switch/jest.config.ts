@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'users-profile-data-access',
-  preset: '../../../../jest.preset.js',
+  displayName: 'users-core-ui-theme-switch',
+  preset: '../../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../../coverage/libs/users/profile/data-access',
+  coverageDirectory: '../../../../../coverage/libs/users/core/ui/theme-switch',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

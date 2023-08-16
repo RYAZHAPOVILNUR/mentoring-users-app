@@ -1,0 +1,14 @@
+.home-wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.home-icon {
+  height: 80px;
+  width: 80px;
+  font-size: 80px;
+}

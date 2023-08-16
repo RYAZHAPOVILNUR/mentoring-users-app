@@ -1,7 +1,11 @@
 <div class="user-info">
-  <div class="user-photo">
-    <img [src]="vm.user.photo?   vm.user.photo.url :  'assets/img/1.png'" alt="" class="user-photo-img">
+  <div class="user-photo" (click)="fileInput.click()">
+    <img [src]="vm.user.photo ? vm.user.photo.url : 'assets/img/1.png'" alt="" class="user-photo-img">
+    <div class="change-photo-overlay">
+      <span class="change-photo-text">Сменить фото</span>
+    </div>
   </div>
+  <input type="file" #fileInput style="display: none;" (change)="handleFileInput($event)">
   <div class="name">{{vm.user.name}}</div>
   <div class="email">{{vm.user.email}}</div>
   <div class="city">{{vm.user.city}}</div>
