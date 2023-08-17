@@ -12,8 +12,6 @@ export class tasksEffects {
   getColumn$ = createEffect(() => {
     const actions$ = inject(Actions);
     const api = inject(ApiService);
-    
-
     return actions$.pipe(
       ofType(tasksAction.getTasksColumn),
       mergeMap(() =>

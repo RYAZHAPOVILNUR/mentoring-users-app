@@ -7,7 +7,7 @@ import { CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup, moveItemInArray, t
 import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
-import { TasksStore } from './tasks-list-container.store';
+import { Column, TasksStore } from './tasks-list-container.store';
 
 @Component({
   selector: 'users-tasks-container',
@@ -22,41 +22,40 @@ export class TasksContainerComponent {
   private readonly store = inject(Store);
   private tasksStore = inject(TasksStore)
 
-  vm$ = this.tasksStore.vm$
+  public vm$ = this.tasksStore.vm$;
+  public errorName = false;
 
 
-public columns$ = this.store.select(selectColumn)
+// public columns$ = this.store.select(selectColumn)
 public columns: IColumn[] = [];
-private subscription: Subscription;
+// private subscription: Subscription;
+
+public columns$ = this.tasksStore.columns$
+public tasks$ = this.tasksStore.tasks$
+
 public newColumnName!: string;
 public task!: string;
 public toggle = false;
 
 constructor() {
-  this.store.dispatch(tasksAction.getTasksColumn());
-  this.subscription = this.columns$.subscribe(columns => this.columns = columns);
-  
-
+  // this.store.dispatch(tasksAction.getTasksColumn());
+  // this.subscription = this.columns$.subscribe(columns => this.columns = columns);  
 }
-public deleteColumn(columnIndex: number) {
-  this.store.dispatch(tasksAction.deleteColumnTask({ columnIndex }));
-}
-
 
 public addNewColumn(newColumnName: string){
-  const newColumn: IColumn = {
-    columnName: newColumnName,
-    tasks: []
-  };
-  this.columns = [...this.columns, newColumn];
-  this.store.dispatch(tasksAction.postChangeColumns({ columns: this.columns }));
-  this.newColumnName = '';
+  if(this.newColumnName){
+    const newColumn: Column = {
+      columnName: newColumnName,
+      tasks: []
+    };
+    this.tasksStore.addColumn(newColumn)
+  }
+  else(this.newColumnName = ''){
+    this.errorName = true}
 }
 
-public addTaskColumn(task: string){
-  console.log(task)
-  this.newColumnName = ''
-}
+
+
 public drop(event: CdkDragDrop<ITask[]>) {
   const prevIndex = event.previousIndex;
   const currentIndex = event.currentIndex;
@@ -68,8 +67,29 @@ public drop(event: CdkDragDrop<ITask[]>) {
   } else {
     transferArrayItem(previousContainer, currentContainer, prevIndex, currentIndex);
   }
-
-  this.store.dispatch(tasksAction.moveTask({ columns: this.columns }));
+  
 }
 
 }
+
+// public deleteColumn(columnIndex: number) {
+//   this.store.dispatch(tasksAction.deleteColumnTask({ columnIndex }));
+// }
+
+
+// public addNewColumn(newColumnName: string){
+//   if(newColumnName){
+//   const newColumn: Column = {
+//     columnName: newColumnName,
+//     tasks: []
+//   };
+//   this.columns = [...this.columns, newColumn];
+//   this.tasksStore.dispatch(tasksAction.postChangeColumns({ columns: this.columns }));
+//   this.newColumnName = '';
+// }
+// }
+
+// public addTaskColumn(task: string){
+//   console.log(task)
+//   this.newColumnName = ''
+// }

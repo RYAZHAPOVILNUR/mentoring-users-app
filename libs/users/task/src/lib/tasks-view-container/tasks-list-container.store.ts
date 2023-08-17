@@ -1,48 +1,88 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { ITask } from '@users/users/task/data-access';
-import { exhaustMap, tap } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { ApiService } from '@users/core/http';
+import {
+  IColumn,
+  ITask,
+  ITaskBoard,
+  tasksAction,
+} from '@users/users/task/data-access';
+import { map, tap } from 'rxjs';
 
-export interface TasksComponentState {
-  isLoading: boolean;
+export interface Column {
   columnName: string;
   tasks: ITask[];
 }
 
+export interface TasksComponentState {
+  isLoading: boolean;
+  columns: Column[];
+}
+
+const initialState: TasksComponentState = {
+  isLoading: false,
+  columns: [],
+};
 
 @Injectable()
 export class TasksStore extends ComponentStore<TasksComponentState> {
-  private isLoading$ = this.select((state) => state.isLoading);
-  private columnName$ = this.select((state) => state.columnName);
-  private tasks$ = this.select((state) => state.tasks);
+  private readonly store = inject(Store);
+  private readonly apiService = inject(ApiService);
+
+  public isLoading$ = this.select((state) => state.isLoading);
+  public columns$ = this.select(({columns})=> columns);
+  public tasks$ = this.select((state) =>
+    state.columns.flatMap((column: Column) =>
+      column.tasks.map((task) => task.taskName)
+    )
+  );
 
   public readonly vm$ = this.select({
     isLoading: this.isLoading$,
-    columnName: this.columnName$,
+    columns: this.columns$,
     tasks: this.tasks$,
   });
 
-
-  public setIsLoading = this.updater(state => ({...state, isLoading: true}));
-
-  // getColumnTasks = this.effect((trigger$) =>{
-  //   return trigger$.pipe(
-  //     tap(() => {
-  //       this.setIsLoading()
-  //     }),
-  //     exhaustMap(()=>{
-  //       return 
-  //     })
-  //   )
-  // })
-
   constructor() {
-    super({
-      isLoading: false,
-      columnName: 'Todo',
-      tasks: [{
-        taskName: 'ngrx component state'
-      }],
-    });
+    super(initialState);
   }
+  
+  private readonly getColumnSuccess = this.updater(
+    (state, action: ITaskBoard) => ({
+      ...state,
+      columns: action.columns,
+    })
+  );
+
+  readonly getColumnTasks = this.effect(() =>
+    this.apiService
+      .get<ITaskBoard>('/todos/me')
+      .pipe(tap((res) => this.getColumnSuccess(res)))
+  );
+
+  readonly addColumn = this.updater((state, column: Column) => ({
+    ...state,
+    columns: [...state.columns, column],
+  }));
+  
+  readonly removeColumn = this.updater((state, columnName: string) => ({
+    ...state,
+    columns: state.columns.filter((column) => column.columnName !== columnName),
+  }));
 }
+
+
+// {
+//   columnName: 'Idea',
+//   tasks: [{ taskName: 'first task' }, { taskName: 'not first task' }],
+// },
+// {
+//   columnName: 'Todo',
+//   tasks: [{ taskName: 'my task' }, { taskName: 'not my task' }],
+// },
+// {
+//   columnName: 'In Progress',
+//   tasks: [{ taskName: 'first task' }, { taskName: 'second task' }],
+// },
+// { columnName: 'Done', tasks: [{ taskName: 'not first task' }] },
