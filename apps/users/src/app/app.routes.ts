@@ -45,6 +45,10 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('@users/users/articles/articles').then(c => c.ArticlesViewContainerComponent),
       },
       {
+        path: '/articles/:id',
+        loadComponent: () => import("@users/users/articles/article-read").then(c => c.ArticleReadComponent),
+      },
+      {
         path: 'tasks',
         loadComponent: () => import('@users/users/task').then(c => c.TasksContainerComponent)
       },
