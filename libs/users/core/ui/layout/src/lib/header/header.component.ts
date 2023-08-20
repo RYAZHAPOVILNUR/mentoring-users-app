@@ -1,4 +1,4 @@
-import {Component, OnInit, inject} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -39,6 +39,8 @@ export class HeaderComponent implements OnInit{
 
   public photo: any
 
+  @Output() sidenavToggle = new EventEmitter()
+
   ngOnInit(): void {
     this.photo = this.userPhoto ? this.userPhoto : ''
   }
@@ -49,6 +51,10 @@ export class HeaderComponent implements OnInit{
 
   public onSwitchTheme() {
     this.themeSwitch.switchTheme()
+  }
+
+  public onToggleSidenav() {
+    this.sidenavToggle.emit()
   }
 }
 
