@@ -1,5 +1,7 @@
-export interface UserComment {
-  authorId: number;
-  author: string;
-  text: string;
+export interface Comment {
+  id: number,
+  created_at: Date,
+  articleId: string,
+  authorId: string,
+  text: string
 }
