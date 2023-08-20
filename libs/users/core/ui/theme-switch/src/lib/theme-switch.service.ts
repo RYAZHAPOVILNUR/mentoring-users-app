@@ -13,7 +13,7 @@ export class ThemeSwitchService {
     this.setSavedTheme(nextValue);
   }
   private getSavedTheme() {
-    return localStorage.getItem('isDarkTheme') === 'false' ? false : true
+    return localStorage.getItem('isDarkTheme') === 'true' ? true : false
   }
   private setSavedTheme(isDark: boolean) {
     localStorage.setItem('isDarkTheme', String(isDark))
