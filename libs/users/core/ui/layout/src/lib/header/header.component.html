@@ -1,19 +1,11 @@
 <mat-toolbar color="primary">
+  <button mat-icon-button (click)="onToggleSidenav()">
+    <mat-icon>menu</mat-icon>
+  </button>
   <button mat-button routerLink="/home">Главная</button>
   <button mat-button routerLink="/admin/users" *ngIf="isAdmin$ | ngrxPush">Пользователи</button>
   <span class="spacer"></span>
   <ng-container *ngIf="isAuthenticated$ | ngrxPush">
-    <li [matMenuTriggerFor]="menu" class="user-avatar">
-      <mat-menu class="user-dropdown" #menu="matMenu">
-        <button mat-menu-item routerLink="/profile">Профиль</button>
-        <button mat-menu-item>Настройки</button>
-        <button (click)="onLogout()" mat-menu-item>Выход</button>
-      </mat-menu>
-      <div *ngIf="userPhoto | async as photoUrl">
-        <img [src]="photoUrl" alt="User Photo">
-      </div>
-      <span>{{username$ | ngrxPush }}</span>
-    </li>
     <button mat-icon-button (click)="onSwitchTheme()">
       <mat-icon>{{(isDarkTheme$ | async) ? 'light_mode' : 'dark_mode'}}</mat-icon>
     </button>
