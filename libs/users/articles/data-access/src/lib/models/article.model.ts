@@ -1,4 +1,4 @@
-import { UserComment } from "./user-comment.model";
+import { Comment } from "./user-comment.model";
 
 export interface Article {
   id: number;
@@ -8,5 +8,5 @@ export interface Article {
   image: string;
   title: string;
   content: string;
-  comments: UserComment[]
+  comments: Comment[];
 }

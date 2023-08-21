@@ -1,7 +1,7 @@
 <div class="wrapper" *ngIf="isAuthenticated$ | ngrxPush">
   <div class="content">
   
-      <lib-header ></lib-header>
+      <lib-header (sidenavToggle)="sidenav.toggle()"></lib-header>
     
       <mat-sidenav-container class="sidenav-container">
         <mat-sidenav
@@ -15,13 +15,8 @@
 
         </mat-sidenav>
 
-        <mat-sidenav-content>
-          <div class="wrapper">
-            <button mat-icon-button (click)="sidenav.toggle()">
-              <mat-icon>menu</mat-icon>
-            </button>
-            <router-outlet></router-outlet>
-          </div>
+        <mat-sidenav-content class="sidenav-content">
+          <router-outlet></router-outlet>
         </mat-sidenav-content>
       </mat-sidenav-container>
     <lib-footer class="footer"></lib-footer>
