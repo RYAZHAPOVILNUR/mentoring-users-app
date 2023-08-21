@@ -3,6 +3,7 @@ import { authGuard, adminGuard } from '@auth/data-access';
 import { AuthorizedUserLayoutComponent } from './authorized-user-layout/authorized-user-layout.component';
 import { UnauthorizedUserLayoutComponent } from './unauthorized-user-layout-component/unauthorized-user-layout-component.component';
 import { canDeactivateFormComponent } from '@users/core/utils';
+import { ArticleReadContainerComponent } from '@users/users/articles/article-read';
 
 const layoutAgnosticComponents = [
   {
@@ -43,6 +44,10 @@ export const appRoutes: Route[] = [
       {
         path: 'articles',
         loadComponent: () => import('@users/users/articles/articles').then(c => c.ArticlesViewContainerComponent),
+      },
+      {
+        path: 'articles/:id',
+        loadComponent: () => import('@users/users/articles/article-read').then(c => c.ArticleReadContainerComponent),
       },
       {
         path: 'tasks',
