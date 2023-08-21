@@ -16,17 +16,18 @@ import { provideAnimations } from "@angular/platform-browser/animations";
 import { authEffects, authFeature, tokenInterceptor } from '@auth/data-access';
 import {DADATA_TOKEN} from "../../../../libs/core/dadata/src/lib/dadata.token";
 import { provideQuillConfig } from 'ngx-quill/config';
-import { articlesEffects, articlesFeature } from '@users/users/articles/data-access';
+import { articlesEffects, articlesFeature, commentsEffects, commentsFeature } from '@users/users/articles/data-access';
 import { tasksEffects, tasksFeature } from '@users/users/task/data-access';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideEffects(userEffects, authEffects, articlesEffects, tasksEffects ),
+    provideEffects(userEffects, authEffects, articlesEffects, tasksEffects, commentsEffects ),
     provideStore({
       router: routerReducer,
       [USERS_FEATURE_KEY]: usersReducer,
       [authFeature.name]: authFeature.reducer,
       [articlesFeature.name]: articlesFeature.reducer,
+      [commentsFeature.name]: commentsFeature.reducer,
       [tasksFeature.name]: tasksFeature.reducer
     }),
     provideRouterStore(),
