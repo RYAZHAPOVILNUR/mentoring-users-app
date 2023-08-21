@@ -15,6 +15,13 @@
       [queryParams]="{ mode: 'edit', id: article.id }"
       routerLinkActive="router-link-active"
       >
+        Редактировать
+      </button>
+      <button mat-button color="accent"
+      [routerLink]="['/articles/:id']"
+      [queryParams]="{ id: article.id }"
+      routerLinkActive="router-link-active"
+      >
       Читать
       </button>
     </div>
