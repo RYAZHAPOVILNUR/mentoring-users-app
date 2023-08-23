@@ -24,11 +24,23 @@ export class TasksViewComponent {
   @Input() drop!: (event: CdkDragDrop<ITask[]>) => void;
   @Input() tasks!: ITask[] 
   @Input() addTaskColumn!: () => void; //Возможо нужно убрать, в случае если можно реалзиовывать отрисовку внутри родиительской комп.
-  @Input() deleteColumn!: (columnIndex: number) => void;
-  @Input() delColumn!: (columnIndex: number) => void;
+  @Input() removeColumn!: (columnIndex: number) => void;
   @Input() deleteTask!: (columnIndex: number, taskIndex: number)=> void;
   @Input() addNewTask!: (columnIndex: number, taskName: string)=> void;
   @Input() addTask!: (args: { columnIndex: number; taskName: string }) => void;
-}
+
+ 
+    isHovering = false;
+  
+    onMouseOver() {
+      this.isHovering = true;
+    }
+  
+    onMouseOut() {
+      this.isHovering = false;
+    }
+  }
+  
+
 
 

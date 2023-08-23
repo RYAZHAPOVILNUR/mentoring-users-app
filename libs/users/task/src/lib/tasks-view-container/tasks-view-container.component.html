@@ -7,11 +7,8 @@
       <users-tasks-view 
       [columns]="(vm$ | async)?.columns ?? null" 
       [vm]="vm$ | async" [drop]="drop" 
-      [deleteColumn]="deleteColumn" 
-      [delColumn]="delColumn"
-      [addNewTask]="addNewTask"
-      [deleteTask]="deleteTask"
-      [addTask]="addTask"
+      [removeColumn]="removeColumn"
+      
 
       ></users-tasks-view>
 </div>
@@ -33,3 +30,8 @@
        </div>
     </div> -->
 <!-- [addTaskColumn]="addTaskColumn.bind(this)"  добавить позже, если потребуется добавить в дочку-->
+<!-- [deleteColumn]="deleteColumn" 
+      [delColumn]="delColumn"
+      [addNewTask]="addNewTask"
+      [deleteTask]="deleteTask"
+      [addTask]="addTask" -->

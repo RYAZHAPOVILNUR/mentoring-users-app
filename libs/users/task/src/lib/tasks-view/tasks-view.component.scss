@@ -121,3 +121,14 @@
   transform: translateY(10px);
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
+button.delTask {
+  display: none;
+  max-width: 20px;
+  max-height: 20px;
+
+}
+
+div.task:hover button.delTask {
+  display: inline;
+}
+
