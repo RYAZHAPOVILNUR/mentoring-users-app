@@ -1,9 +1,10 @@
 .board {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    min-width: 0;
-    min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 600px;
+  overflow-x: auto;
+  min-width: 0;
   }
   .board-wrapper{
     display: flex;
@@ -12,6 +13,10 @@
     .board-columns{
       display: flex;
       flex-grow: 1;
+      &:hover .tasksBtn {
+        opacity: 1;
+        transform: translateY(0);
+      }
       .board-column{
         display: flex;
         flex-direction: column;
@@ -40,6 +45,7 @@
           text-transform: uppercase;
           margin: 15px;
         }
+        
       }
     }
   }
@@ -61,6 +67,10 @@
   .showTask:hover {
     background-color: #007bff;
     color: white;
+  }
+  &:hover .delTask {
+    opacity: 1;
+    transform: translateY(0);
   }
    }
    .cdk-drag-preview {
@@ -105,4 +115,9 @@
     right: 0;
     bottom: 0;
   }
+}
+.tasksBtn {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }

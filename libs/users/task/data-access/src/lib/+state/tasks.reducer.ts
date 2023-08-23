@@ -1,6 +1,5 @@
 import { createReducer, on, createFeature } from '@ngrx/store';
 import { tasksAction } from './tasks.action';
-import { act } from '@ngrx/effects';
 import { ITaskBoard } from '../model/tasks.interface';
 
 export const TASKS_FEATURE_KEY = 'tasks';
@@ -40,6 +39,5 @@ export const tasksFeature = createFeature({
         columns: state.columns.filter((_, index) => index !== columnIndex),
       };
     })
-    
   ),
 });
