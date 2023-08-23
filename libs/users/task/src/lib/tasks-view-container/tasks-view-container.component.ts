@@ -47,14 +47,7 @@ export class TasksContainerComponent {
   public newColumnName!: string;
   public task!: string;
   public toggle = false;
-  public readonly delColumn = this.tasksStore.removeColumn;
-  public readonly addTask = this.tasksStore.addTask;
-  public readonly removeTask = this.tasksStore.removeTask;
-
-  constructor() {
-    // this.store.dispatch(tasksAction.getTasksColumn());
-    // this.subscription = this.columns$.subscribe(columns => this.columns = columns);
-  }
+  public readonly removeColumn = (columnIndex: number) => this.tasksStore.removeColumn(columnIndex);
 
     public addNewColumn(newColumnName: string) {
       if (newColumnName) {
@@ -70,16 +63,10 @@ export class TasksContainerComponent {
       }
     }
   
-    public deleteColumn(columnIndex: number) {
-      this.delColumn(columnIndex);
-    }
-    public addNewTask(columnIndex: number, taskName: string) {
-      this.addTask({ columnIndex, taskName });
-    }
-    
-    public deleteTask(columnIndex: number, taskIndex: number) {
-      this.removeTask({ columnIndex, taskIndex });
-    }
+    // public deleteColumn(columnIndex: number) {
+    //   this.removeColumn(columnIndex);
+    // }
+
     public drop(event: CdkDragDrop<ITask[]>) {
       const prevIndex = event.previousIndex;
       const currentIndex = event.currentIndex;
