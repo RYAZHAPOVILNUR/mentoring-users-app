@@ -1,29 +1,28 @@
 <div class='board'>
   <div class="board-wrapper" cdkDropListGroup>
     <div class="board-columns">
-      <div class="board-column" *ngFor="let column of columns let i = index">
+      <div class="board-column" *ngFor="let column of columns; let i = index">
         <div class="column-title" cdkDropList [cdkDropListData]="column">
           {{column.columnName}}
         </div>
         <mat-card-content class="task-container" cdkDropList [cdkDropListData]="column.tasks" (cdkDropListDropped)="drop($event)">
-          <div class="task" *ngFor="let task of column.tasks" cdkDrag>
+          <div class="task" *ngFor="let task of column.tasks; let taskIndex = index" cdkDrag>
             {{task.taskName}}
-
+            <button class='delTask' mat-mini-fab extended (click)="deleteTask(i, taskIndex)">x</button>
           </div>
+          
         </mat-card-content>
-        <div class='delBtnContainer'>
-          <button class="dellBtn" mat-fab extended>
-            <mat-icon style="margin: 0 auto" (click)="deleteColumn(i)">delete</mat-icon>
+        <div *ngFor="let task of column.tasks">
+          <button class='tasksBtn' mat-mini-fab extended style="margin: 10px" (click)="addNewTask(i, task.taskName)">add task</button>
+
+        </div>
+        <div class='delBtnContainer' >
+          
+          <button class="dellBtn" mat-fab extended (click)="deleteColumn(i)">
+            <mat-icon style="margin: 0 auto" >delete</mat-icon>
           </button>
         </div>
       </div>
-
     </div>
   </div>
-
-
 </div>
-<!-- <button (click)="addTaskColumn()">QWEQWE</button> -->
-<!-- 
-<ng-container *ngIf="vm$| async as vm"> 
-  <div *ngIf="vm.isLoading">Im loading...</div> -->

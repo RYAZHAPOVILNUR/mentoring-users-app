@@ -33,5 +33,6 @@ export class tasksEffects {
         map(() => tasksAction.postChangeColumnsSuccess({columns}))
       ))
     )
-  })
+  });
+  
   }
