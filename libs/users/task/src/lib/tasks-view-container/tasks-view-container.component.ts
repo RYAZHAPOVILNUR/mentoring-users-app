@@ -13,7 +13,6 @@ import {
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { TasksStore } from './tasks-list-container.store';
-import { take } from 'rxjs';
 
 @Component({
   selector: 'users-tasks-container',

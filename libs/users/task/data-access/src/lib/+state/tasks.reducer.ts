@@ -27,7 +27,7 @@ export const tasksFeature = createFeature({
       ...state,
       columns: action.columns,
     })),
-    on(tasksAction.deleteColumnSuccess, (state, { columnIndex }) => ({ // Обработка успешного удаления колонны
+    on(tasksAction.deleteColumnSuccess, (state, { columnIndex }) => ({
       ...state,
       columns: [...state.columns.slice(0, columnIndex), ...state.columns.slice(columnIndex + 1)]
     })),
@@ -48,15 +48,12 @@ export const tasksFeature = createFeature({
     on(tasksAction.moveTask, (state, { previousColumnIndex, currentColumnIndex, prevTaskIndex, currentTaskIndex }) => {
       const newState = JSON.parse(JSON.stringify(state));
   
-      // Получаем начальный и конечный столбцы
       const startColumn = newState.columns[previousColumnIndex];
       const finishColumn = newState.columns[currentColumnIndex];
   
-      // Удаляем задачу из начального столбца
-      const [removed] = startColumn.tasks.splice(prevTaskIndex, 1); // Изменил taskIds на tasks
+      const [removed] = startColumn.tasks.splice(prevTaskIndex, 1);
   
-      // Добавляем задачу в конечный столбец
-      finishColumn.tasks.splice(currentTaskIndex, 0, removed); // Изменил taskIds на tasks
+      finishColumn.tasks.splice(currentTaskIndex, 0, removed);
   
       return newState;
     })
