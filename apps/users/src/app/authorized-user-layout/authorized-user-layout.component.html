@@ -5,13 +5,12 @@
     
       <mat-sidenav-container class="sidenav-container">
         <mat-sidenav
-          #sidenav mode="side"
+          #sidenav 
+          [mode]="(isMobile | async) ? 'over' : 'side'"
           [(opened)]="opened"
-          (opened)="events.push('open!')"
-          (closed)="events.push('close!')"
           class="sidenav"
         >
-        <navbar></navbar>
+        <navbar (click)="closeSidenavOnTouch(sidenav)"></navbar>
 
         </mat-sidenav>
 
