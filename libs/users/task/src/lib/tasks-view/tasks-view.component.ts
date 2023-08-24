@@ -5,9 +5,9 @@ import {
   CdkDropList,
   CdkDropListGroup,
 } from '@angular/cdk/drag-drop';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
-import { IColumn, ITask, ITaskBoard } from '@users/users/task/data-access';
+import { IColumn, ITask } from '@users/users/task/data-access';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
