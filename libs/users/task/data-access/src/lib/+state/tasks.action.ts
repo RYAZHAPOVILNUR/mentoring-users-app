@@ -7,10 +7,13 @@ export const tasksAction = createActionGroup({
     events:{
       getTasksColumn: emptyProps(),
       getColumnSuccess: props<ITaskBoard>(),
-      postChangeColumns: props<{columns: IColumn[ ] }>(),
+      postChangeColumns: props<{columns: IColumn[]}>(),
       postChangeColumnsSuccess: props<{columns: IColumn[]}>(),
-      moveTask: props<{ columns: IColumn[] }>(),
-      deleteColumnTask: props<{ columnIndex: number }>(),
-
+      deleteColumn: props<{ columnIndex: number }>(),
+      deleteColumnSuccess: props<{ columnIndex: number }>(),
+      addColumn: props<{ columnName: IColumn }>(),
+      addTask: props<{ columnIndex: number; taskName: string }>(),
+      deleteTask: props<{ columnIndex: number; taskIndex: number }>(),
+      moveTask: props<{ previousColumnIndex: number, currentColumnIndex: number, prevTaskIndex: number, currentTaskIndex: number }>(),
     }
   });
