@@ -1,13 +1,14 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ArticlesActions } from './articles.actions';
-import { catchError, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
+import { catchError, filter, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
 import { ApiService } from '@users/core/http';
 import { CreateArticle } from '../models/create-article.model';
 import { Router } from "@angular/router";
 import { Article } from '../models/article.model';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { selectQueryParam, selectQueryParams, selectRouteParams } from '@users/core/data-access';
+import { selectArticles, selectArticlesEntities } from './articles.selectors';
 
 export const publishArticle$ = createEffect(
   (actions$ = inject(Actions),
@@ -67,6 +68,42 @@ export const getArticle$ = createEffect(
           )
         }
       )
+
+      
     )
+  }, {functional: true}
+)
+
+export const editArticle$ = createEffect(
+  (actions$ = inject(Actions),
+    articlesEntities$ = inject(Store).pipe(select(selectArticlesEntities)),
+    apiService = inject(ApiService)) => {
+
+      return actions$.pipe(
+        ofType(ArticlesActions.editArticle),
+        withLatestFrom(articlesEntities$),
+        filter(([{ id }, articlesEntities$]) => Boolean(articlesEntities$[id])),
+        map(([{ articleData, id }, articlesEntities$]) => ({
+          article: {
+            ...articlesEntities$[id],
+            articlesId: id,
+            title: articleData.title,
+            content: articleData.content
+          }
+        })),
+        switchMap(
+          ({ article }) =>
+            apiService.post<Article, CreateArticle>(`/articles/${article.id}`, article).pipe(
+              map(articles => ({ articles })),
+              map(({ articles }) =>
+                ArticlesActions.editArticleSuccess({ articles })
+              ),
+              catchError((error) => {
+                console.error('Error', error);
+                return of(ArticlesActions.editArticleFailed({ error }))
+              })
+            )
+        )
+      )
   }, {functional: true}
 )

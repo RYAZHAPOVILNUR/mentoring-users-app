@@ -1,4 +1,5 @@
 export * from './lib/models/create-article.model';
+export * from './lib/+state/articles.facade'
 export * from './lib/models/article.model';
 export * from './lib/+state/articles.actions'
 export * from './lib/+state/articles.reducer'
