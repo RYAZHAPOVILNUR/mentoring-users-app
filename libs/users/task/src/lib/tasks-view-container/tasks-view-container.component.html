@@ -1,37 +1,10 @@
 <div>
-    <div>
-        <input class="newColumnInput" [style.border-color]="errorName ? 'red' : 'normalColor'" type="text" [(ngModel)]="newColumnName" placeholder="Add column"><br>
-        <input class="newColumnInput" type="text" [(ngModel)]="task" placeholder="new Task"><br>
-        <button mat-mini-fab extended style="margin: 10px" (click)="addNewColumn(newColumnName)">+1</button>
-      </div>
-      <users-tasks-view 
-      [columns]="(vm$ | async)?.columns ?? null" 
-      [vm]="vm$ | async" [drop]="drop" 
-      [removeColumn]="removeColumn"
-      
-
-      ></users-tasks-view>
-</div>
-<!-- component state -->
-
-<!-- <div *ngFor="let column of columns; let columnIndex = index">
-    <button (click)="addNewTask(columnIndex, 'Новая задача')">Добавить задачу</button>
-    <div *ngFor="let task of column.tasks; let taskIndex = index">
-        {{ task.taskName }}
-        <button (click)="deleteTask(columnIndex, taskIndex)">Удалить задачу</button>
-      </div>
-    </div> -->
-
-
-
-<!-- <div *ngIf="columns$ | async as columns">
-       <div *ngFor="let column of columns">
-        {{column.columnName}}
-       </div>
-    </div> -->
-<!-- [addTaskColumn]="addTaskColumn.bind(this)"  добавить позже, если потребуется добавить в дочку-->
-<!-- [deleteColumn]="deleteColumn" 
-      [delColumn]="delColumn"
-      [addNewTask]="addNewTask"
+  <users-tasks-view
+      [columns]="columns$ | async"
+      [addColumn]="addColumn"
+      [addNewTask]="addTask"
+      [deleteColumn]="deleteColumn"
       [deleteTask]="deleteTask"
-      [addTask]="addTask" -->
+      [drop]="drop">
+    </users-tasks-view>
+</div>

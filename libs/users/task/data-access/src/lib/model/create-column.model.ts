@@ -1,7 +1,8 @@
-export interface INewColumn{
-    columnName: string,
-    tasks?: [{
-        taskName: string
+export interface INewColumn {
+  columnName: string;
+  tasks?: [
+    {
+      taskName: string;
     }
-    ]
+  ];
 }
