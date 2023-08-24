@@ -1,29 +1,24 @@
-<div class='board'>
-  <div class="board-wrapper" cdkDropListGroup>
-    <div class="board-columns">
-      <div class="board-column" *ngFor="let column of columns; let i = index">
-        <div class="column-title" cdkDropList [cdkDropListData]="column">
-          {{column.columnName}}
+<div class="board">
+  <div class="board-wrapper">
+    <div class="board-columns" *ngFor="let column of columns; let columnIndex = index">
+      <div class="board-column">
+        <div class="column-title">{{column.columnName}}</div>
+        <div class="tasks-container" cdkDropList [cdkDropListData]="column.tasks" (cdkDropListDropped)="drop($event, columnIndex)">
+          <div class="task" *ngFor="let task of column.tasks; let taskIndex = index" cdkDrag>
+            <div [innerHTML]="splitText(task.taskName)"></div>
+            <button mat-icon-button class="delTask" (click)="deleteTask(columnIndex, taskIndex)">x</button>
+          </div>          
         </div>
-        <mat-card-content class="task-container" cdkDropList [cdkDropListData]="column.tasks" (cdkDropListDropped)="drop($event)">
-          <div class="task" *ngFor="let task of column.tasks; let taskIndex = index" cdkDrag (mouseover)="onMouseOver()"
-          (mouseout)="onMouseOut()">
-            {{task.taskName}}
-            <button class='delTask' mat-mini-fab extended (click)="deleteTask(i, taskIndex)">x</button>
-          </div>
-          
-          
-        </mat-card-content>
-        <div *ngFor="let task of column.tasks">
-          <button class='tasksBtn' mat-mini-fab extended style="margin: 10px" (click)="addNewTask(i, task.taskName)">add task</button>
-        </div>
-        <div class='delBtnContainer'>
-          
-          <button class="dellBtn" mat-fab extended (click)="removeColumn(i)">
-            <mat-icon style="margin: 0 auto" >delete</mat-icon>
-          </button>
+        <button mat-raised-button class="delBtnContainer" (click)="deleteColumn(columnIndex)">Delete Column</button>
+        <button mat-raised-button class="tasksBtn" (click)="selectedColumnIndex = columnIndex">Add Task</button>
+        <div class="taskForm" *ngIf="selectedColumnIndex === columnIndex">
+          <button class="closeTaskForm" (click)="selectedColumnIndex = null">x</button>
+          <input class="newColumnInput" type="text" [(ngModel)]="task" placeholder="new Task"><br>
+          <button class="addNew" mat-mini-fab extended style="margin: 10px" (click)="addNewTask(selectedColumnIndex, task); task = ''; selectedColumnIndex = null">+1</button>
         </div>
       </div>
     </div>
   </div>
+  <input class="newColumnInput" type="text" [(ngModel)]="columnName" placeholder="New Column Name">
+  <button class="addNew" style="padding: 1px" mat-raised-button (click)="addNewColumn(); columnName = ''">Add Column</button>
 </div>
