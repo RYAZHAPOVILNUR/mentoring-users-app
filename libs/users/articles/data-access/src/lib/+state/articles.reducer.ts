@@ -30,7 +30,11 @@ export const articlesFeature = createFeature({
     on(ArticlesActions.loadArticlesSuccess, (state, { articles }) =>
       articlesAdapter.setAll(articles, { ...state, status: 'loaded' as const })
     ),
-
+    on(ArticlesActions.editArticleSuccess, (state, {articles}) => articlesAdapter.updateOne({
+      id: articles.id,
+      changes: articles
+    }, state)
+    ),
     on(ArticlesActions.loadArticlesFailed, (state) => ({
       ...state,
       status: 'error' as const
