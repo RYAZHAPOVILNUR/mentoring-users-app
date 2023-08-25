@@ -43,6 +43,9 @@
       "@users/users/articles/articles": [
         "libs/users/articles/articles/src/index.ts"
       ],
+      "@users/users/articles/article-read": [
+        "libs/users/articles/article-read/src/index.ts"
+      ],
       "@users/users/articles/articles-create": [
         "libs/users/articles/articles-create/src/index.ts"
       ],
