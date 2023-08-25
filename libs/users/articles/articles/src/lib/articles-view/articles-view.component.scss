@@ -1,6 +1,6 @@
 .article {
   max-width: 700px;
-  margin: 40px auto; 
+  margin: 40px auto;
   & .article-header {
     padding: 20px 20px 0 20px;
     margin-bottom: 10px;
@@ -20,7 +20,7 @@
     }
   & .article-button {
     & button {
-      width: 100%;
+      width: 50%;
       font-size: 12px;
       text-transform: uppercase;
     }
