@@ -1,0 +1,21 @@
+.article {
+  max-width: 80%;
+  margin: 40px auto;
+  & .article-header {
+    padding: 20px 20px 0 20px;
+    margin-bottom: 10px;
+    & .article-subtitle {
+      font-weight: 400;
+    }
+  }
+  & .article-content {
+    padding: 0 20px 5px 20px;
+    & article {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
