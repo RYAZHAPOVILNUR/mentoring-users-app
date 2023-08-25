@@ -1,10 +1,10 @@
 <div>
   <users-tasks-view
-      [columns]="columns$ | async"
-      [addColumn]="addColumn"
-      [addNewTask]="addTask"
-      [deleteColumn]="deleteColumn"
-      [deleteTask]="deleteTask"
-      [drop]="drop">
-    </users-tasks-view>
+    [columns]="columns$ | async"
+    (addColumnEvent)="handleAddColumn($event)"
+    (addNewTaskEvent)="handleAddTask($event)"
+    (deleteColumnEvent)="handleDeleteColumn($event)"
+    (deleteTaskEvent)="handleDeleteTask($event)"
+    [dragDrop]="dragDrop">
+  </users-tasks-view>
 </div>

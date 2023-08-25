@@ -16,6 +16,32 @@ export const tasksFeature = createFeature({
   name: TASKS_FEATURE_KEY,
   reducer: createReducer(
     tasksInitialState,
+//новые reducers
+    on(tasksAction.loadBoard, (state)=>({
+      ...state,
+    })),
+    on(tasksAction.loadBoardSuccess,(state, action)=>({
+      ...state,
+      ...action
+    })),
+    on(tasksAction.postBoard, (state, action) =>({
+      ...state,
+    })),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //старые reducers
     on(tasksAction.getTasksColumn, (state) => ({
       ...state,
     })),

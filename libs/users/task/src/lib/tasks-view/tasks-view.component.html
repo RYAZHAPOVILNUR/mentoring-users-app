@@ -3,7 +3,7 @@
     <div class="board-columns" *ngFor="let column of columns; let columnIndex = index">
       <div class="board-column">
         <div class="column-title">{{column.columnName}}</div>
-        <div class="tasks-container" cdkDropList [cdkDropListData]="column.tasks" (cdkDropListDropped)="drop($event, columnIndex)">
+        <div class="tasks-container" cdkDropList [cdkDropListData]="column.tasks" (cdkDropListDropped)="dragDrop($event, columnIndex)">
           <div class="task" *ngFor="let task of column.tasks; let taskIndex = index" cdkDrag>
             <div [innerHTML]="splitText(task.taskName)"></div>
             <button mat-icon-button class="delTask" (click)="deleteTask(columnIndex, taskIndex)">x</button>
@@ -13,12 +13,19 @@
         <button mat-raised-button class="tasksBtn" (click)="selectedColumnIndex = columnIndex">Add Task</button>
         <div class="taskForm" *ngIf="selectedColumnIndex === columnIndex">
           <button class="closeTaskForm" (click)="selectedColumnIndex = null">x</button>
-          <input class="newColumnInput" type="text" [(ngModel)]="task" placeholder="new Task"><br>
-          <button class="addNew" mat-mini-fab extended style="margin: 10px" (click)="addNewTask(selectedColumnIndex, task); task = ''; selectedColumnIndex = null">+1</button>
+          <input matInput class="newColumnInput" type="text" [(ngModel)]="task" placeholder="new Task"><br>
+          <button class="addNew" mat-mini-fab extended style="margin: 10px" (click)="addNewTaskEvent.emit({ columnIndex: selectedColumnIndex, taskName: task }); task = ''; selectedColumnIndex = null">+1</button>
         </div>
       </div>
     </div>
   </div>
-  <input class="newColumnInput" type="text" [(ngModel)]="columnName" placeholder="New Column Name">
-  <button class="addNew" style="padding: 1px" mat-raised-button (click)="addNewColumn(); columnName = ''">Add Column</button>
+  <input class="newColumnInput" matInput type="text" [(ngModel)]="columnName" placeholder="New Column Name">
+  <button mat-raised-button (click)="addNewColumn(); columnName = ''">Add Column</button>
 </div>
+<!-- <mat-form-field class="example-form-field">
+  <mat-label>Clearable input</mat-label>
+  <input matInput type="text" [(ngModel)]="task">
+  <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field> -->
