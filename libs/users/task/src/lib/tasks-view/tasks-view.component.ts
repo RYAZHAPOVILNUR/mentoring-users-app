@@ -5,12 +5,15 @@ import {
   CdkDropList,
   CdkDropListGroup,
 } from '@angular/cdk/drag-drop';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { IColumn, ITask } from '@users/users/task/data-access';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
+
 
 @Component({
   selector: 'users-tasks-view',
@@ -25,17 +28,18 @@ import { MatCardModule } from '@angular/material/card';
     MatButtonModule,
     CommonModule,
     MatIconModule,
+    MatFormFieldModule,
   ],
   templateUrl: './tasks-view.component.html',
   styleUrls: ['./tasks-view.component.scss'],
 })
 export class TasksViewComponent {
   @Input() columns!: IColumn[] | null;
-  @Input() addColumn!: (columnName: IColumn) => void;
-  @Input() addNewTask!: (columnIndex: number, taskName: string) => void;
-  @Input() deleteColumn!: (columnIndex: number) => void;
-  @Input() deleteTask!: (columnIndex: number, taskIndex: number) => void;
-  @Input() drop!: (event: CdkDragDrop<ITask[]>, columnIndex: number) => void;
+  @Output() addColumnEvent = new EventEmitter<IColumn>();
+  @Output() addNewTaskEvent = new EventEmitter<{ columnIndex: number, taskName: string }>();
+  @Output() deleteColumnEvent = new EventEmitter<number>();
+  @Output() deleteTaskEvent = new EventEmitter<{ columnIndex: number, taskIndex: number }>();
+  @Input() dragDrop!: (event: CdkDragDrop<ITask[]>, columnIndex: number) => void;
 
   public selectedColumnIndex: number | null = null;
   public task!: string;
@@ -47,12 +51,19 @@ export class TasksViewComponent {
         columnName: this.columnName,
         tasks: [],
       };
-      this.addColumn(newColumn);
+      this.addColumnEvent.emit(newColumn);
       this.columnName = '';
     }
   }
+  public deleteColumn(columnIndex: number) {
+    this.deleteColumnEvent.emit(columnIndex);
+  }
 
-  splitText(text: string): string {
+  public deleteTask(columnIndex: number, taskIndex: number) {
+    this.deleteTaskEvent.emit({ columnIndex, taskIndex });
+  }
+
+  public splitText(text: string): string {
     let result = '';
     let line = '';
 
@@ -67,3 +78,4 @@ export class TasksViewComponent {
     return result + (line ? '<br>' + line : '');
   }
 }
+

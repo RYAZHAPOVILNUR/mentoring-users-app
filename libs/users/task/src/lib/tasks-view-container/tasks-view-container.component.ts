@@ -32,40 +32,36 @@ import { TasksStore } from './tasks-list-container.store';
   providers: [TasksStore],
 })
 export class TasksContainerComponent {
-  private readonly tasksStore = inject(TasksStore)
+  private readonly tasksStore = inject(TasksStore);
   public columns$ = this.tasksStore.columns$;
   public columns!: IColumn[];
 
-  public addColumn = (columnName: IColumn) => {
+  public handleAddColumn(columnName: IColumn) {
     this.tasksStore.addColumn(columnName);
   }
-  public deleteColumn = (columnIndex: number) => {
+
+  public handleDeleteColumn(columnIndex: number) {
     this.tasksStore.deleteColumn(columnIndex);
   }
-  public addTask = (columnIndex: number, taskName: string) => {
-    if(taskName){
-    this.tasksStore.addTask(columnIndex, taskName);
-    }
-  }
-  public deleteTask = (columnIndex: number, taskIndex: number) => {
-    this.tasksStore.deleteTask(columnIndex, taskIndex);
+
+  public handleAddTask(event: { columnIndex: number, taskName: string }) {
+    this.tasksStore.addTask(event.columnIndex, event.taskName);
   }
 
-  public drop(event: CdkDragDrop<ITask[]>) {
+  public handleDeleteTask(event: { columnIndex: number, taskIndex: number }) {
+    this.tasksStore.deleteTask(event.columnIndex, event.taskIndex);
+  }
+
+  public dragDrop(event: CdkDragDrop<ITask[]>) {
     const prevIndex = event.previousIndex;
     const currentIndex = event.currentIndex;
     const previousContainer = event.previousContainer.data as ITask[];
     const currentContainer = event.container.data as ITask[];
-  
+
     if (event.previousContainer === event.container) {
       moveItemInArray(previousContainer, prevIndex, currentIndex);
     } else {
-      transferArrayItem(
-        previousContainer,
-        currentContainer,
-        prevIndex,
-        currentIndex
-      );
+      transferArrayItem(previousContainer, currentContainer, prevIndex, currentIndex);
     }
   }
 }

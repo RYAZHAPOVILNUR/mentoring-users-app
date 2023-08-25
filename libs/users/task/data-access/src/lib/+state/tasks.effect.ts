@@ -11,16 +11,28 @@ import { selectColumns } from './tasks.selector';
 
 export class tasksEffects {
   
-  getColumn$ = createEffect(() => {
+  // getColumn$ = createEffect(() => {
+  //   const actions$ = inject(Actions);
+  //   const api = inject(ApiService);
+  //   return actions$.pipe(
+  //     ofType(tasksAction.getTasksColumn),
+  //     mergeMap(() =>
+  //       api.get<ITaskBoard>('/todos/me').pipe(
+  //         map((res) => tasksAction.getColumnSuccess(res))
+  //         ))
+  //   );
+  // });
+
+  loadColumns$ = createEffect(() =>{
     const actions$ = inject(Actions);
     const api = inject(ApiService);
     return actions$.pipe(
-      ofType(tasksAction.getTasksColumn),
-      mergeMap(() =>
-        api.get<ITaskBoard>('/todos/me').pipe(
-          map((res) => tasksAction.getColumnSuccess(res))
-          ))
-    );
+      ofType(tasksAction.loadBoard),
+      mergeMap(()=>
+      api.get<ITaskBoard>('/todos/me').pipe(
+        map((res)=> tasksAction.loadBoardSuccess(res))
+      ))
+    )
   });
 
   postColumn$ = createEffect(() =>{

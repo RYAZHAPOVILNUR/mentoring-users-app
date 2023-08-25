@@ -12,7 +12,7 @@ export class TasksFacade {
     public allTaskColumns$ = this.store.select(selectColumns);
    
   getTasksColumn() {
-    this.store.dispatch(tasksAction.getTasksColumn());
+    this.store.dispatch(tasksAction.loadBoard());
   }
 
   addColumn(columnName: IColumn) {
