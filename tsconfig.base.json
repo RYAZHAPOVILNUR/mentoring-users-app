@@ -21,9 +21,9 @@
         "libs/core/auth/feature-register/src/index.ts"
       ],
       "@dadata": ["libs/core/dadata/src/index.ts"],
+      "@users/core/dadata": ["libs/core/dadata/src/index.ts"],
       "@users/core/data-access": ["libs/core/data-access/src/index.ts"],
       "@users/core/http": ["libs/core/http/src/index.ts"],
-      "@users/core/dadata": ["libs/core/dadata/src/index.ts"],
       "@users/core/ui": ["libs/core/ui/src/index.ts"],
       "@users/core/ui/layout": ["libs/users/core/ui/layout/src/public-api.ts"],
       "@users/core/utils": ["libs/core/utils/src/index.ts"],
@@ -40,17 +40,20 @@
       "@users/home": ["libs/users/home/src/index.ts"],
       "@users/tasks-view": ["libs/tasks-view/src/index.ts"],
       "@users/tasks/tasks-view": ["libs/tasks/tasks-view/src/index.ts"],
-      "@users/users/articles/articles": [
-        "libs/users/articles/articles/src/index.ts"
-      ],
       "@users/users/articles/article-read": [
         "libs/users/articles/article-read/src/index.ts"
+      ],
+      "@users/users/articles/articles": [
+        "libs/users/articles/articles/src/index.ts"
       ],
       "@users/users/articles/articles-create": [
         "libs/users/articles/articles-create/src/index.ts"
       ],
       "@users/users/articles/data-access": [
         "libs/users/articles/data-access/src/index.ts"
+      ],
+      "@users/users/core/ui/language-switch": [
+        "libs/users/core/ui/language-switch/src/index.ts"
       ],
       "@users/users/core/ui/theme-switch": [
         "libs/users/core/ui/theme-switch/src/index.ts"

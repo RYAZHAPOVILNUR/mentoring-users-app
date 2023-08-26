@@ -1,0 +1,17 @@
+{
+  "LAYOUT": {
+    "HEADER": {
+      "HOME": "Home",
+      "USERS": "Users"
+    },
+    "SIDENAV": {
+      "PROFILE": "Profile",
+      "ARTICLES": "Articles",
+      "CREATE_ARTICLE": "Create article",
+      "TASKS": "Tasks",
+      "CONTACTS": "Contacts",
+      "SETTINGS": "Settings",
+      "LOGOUT": "Logout"
+    }
+  }
+}

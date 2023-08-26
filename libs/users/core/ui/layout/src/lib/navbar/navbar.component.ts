@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { AuthFacade } from '@auth/data-access';
 import { Observable, map } from 'rxjs';
 
@@ -17,7 +18,8 @@ import { Observable, map } from 'rxjs';
     MatIconModule,
     MatDialogModule,
     MatListModule,
-    RouterModule
+    RouterModule, 
+    TranslateModule
   ],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
