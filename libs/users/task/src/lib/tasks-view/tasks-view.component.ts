@@ -35,7 +35,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 })
 export class TasksViewComponent {
   @Input() columns!: IColumn[] | null;
-  @Output() addColumnEvent = new EventEmitter<IColumn>();
+  @Output() addColumnEvent = new EventEmitter<IColumn[]>();
   @Output() addNewTaskEvent = new EventEmitter<{ columnIndex: number, taskName: string }>();
   @Output() deleteColumnEvent = new EventEmitter<number>();
   @Output() deleteTaskEvent = new EventEmitter<{ columnIndex: number, taskIndex: number }>();
@@ -47,10 +47,10 @@ export class TasksViewComponent {
 
   public addNewColumn() {
     if (this.columnName) {
-      const newColumn: IColumn = {
+      const newColumn: IColumn[] = [{
         columnName: this.columnName,
         tasks: [],
-      };
+      }];
       this.addColumnEvent.emit(newColumn);
       this.columnName = '';
     }
