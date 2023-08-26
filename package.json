@@ -24,6 +24,8 @@
     "@ngrx/entity": "~16.0.0",
     "@ngrx/router-store": "~16.0.0",
     "@ngrx/store": "~16.0.0",
+    "@ngx-translate/core": "^15.0.0",
+    "@ngx-translate/http-loader": "^8.0.0",
     "@nx/angular": "^16.6.0",
     "bootstrap": "^5.2.3",
     "ngx-image-cropper": "^7.0.2",
