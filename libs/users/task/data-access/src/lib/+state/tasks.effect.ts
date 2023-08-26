@@ -1,4 +1,4 @@
-import { IColumn } from './../model/tasks.interface';
+import { IColumn, ITask } from './../model/tasks.interface';
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { ApiService } from '@users/core/http';
@@ -11,69 +11,55 @@ import { selectColumns } from './tasks.selector';
 
 export class tasksEffects {
   
-  // getColumn$ = createEffect(() => {
-  //   const actions$ = inject(Actions);
-  //   const api = inject(ApiService);
-  //   return actions$.pipe(
-  //     ofType(tasksAction.getTasksColumn),
-  //     mergeMap(() =>
-  //       api.get<ITaskBoard>('/todos/me').pipe(
-  //         map((res) => tasksAction.getColumnSuccess(res))
-  //         ))
-  //   );
-  // });
-
+ private actions$ = inject(Actions);
+ private api = inject(ApiService);
+  //Загрузка данных из стейт
   loadColumns$ = createEffect(() =>{
-    const actions$ = inject(Actions);
-    const api = inject(ApiService);
-    return actions$.pipe(
+    return this.actions$.pipe(
       ofType(tasksAction.loadBoard),
       mergeMap(()=>
-      api.get<ITaskBoard>('/todos/me').pipe(
-        map((res)=> tasksAction.loadBoardSuccess(res))
+      this.api.get<ITaskBoard>('/todos').pipe(
+        map((res)=> tasksAction.loadBoardSuccess(res)),
+        tap((res)=> console.log(res))
       ))
     )
   });
-
-  postColumn$ = createEffect(() =>{
-    const actions$ = inject(Actions);
-    const api = inject(ApiService);
-    return actions$.pipe(
-      ofType(tasksAction.postChangeColumns),
-      tap((payload) => console.log('payload',payload)),
-      mergeMap(({columns})=>
-      api.post<void, {columns: IColumn[ ] }>('/todos/change', {columns}).pipe(
-        tap(()=> console.log('columns', columns)),
-        map(() => tasksAction.postChangeColumnsSuccess({columns}))
-      ))
-    )
-  });
-
-  deleteColumn$ = createEffect(() => {
-    const actions$ = inject(Actions);
-    const api = inject(ApiService);
-    return actions$.pipe(
-      ofType(tasksAction.deleteColumn),
-      mergeMap(({ columnIndex }) =>
-        api.delete(`/todos/${columnIndex}`).pipe( 
-          map(() => tasksAction.deleteColumnSuccess({ columnIndex })),
-        ))
-    );
-  });
-
-  postChangeColumns$ = createEffect(() => {
-    const actions$ = inject(Actions);
-    const api = inject(ApiService);
-    const store = inject(Store);
-    return actions$.pipe(
-      ofType(tasksAction.addColumn, tasksAction.addTask, tasksAction.deleteTask, tasksAction.moveTask),
-      withLatestFrom(store.select(selectColumns)),
-      mergeMap(([action, columns]) => 
-        api.post<void, { columns: IColumn[] }>('/todos/change', { columns }).pipe(
-          map(() => tasksAction.postChangeColumnsSuccess({ columns })), 
-          catchError(() => EMPTY) 
+  // Добавление новой колонки
+  postColumn$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(tasksAction.postColumn),
+      mergeMap(({ columns }) => 
+        this.api.post('/todos', { columns }).pipe(
+          map(res => tasksAction.postColumnSuccess(res as {columns: IColumn[], email: string})),
+          catchError(() => EMPTY)
         )
       )
     );
-  })
+  });
+
+// Изменение колонок
+changeColumns$ = createEffect(() => {
+  return this.actions$.pipe(
+    ofType(tasksAction.changeColumns),
+    mergeMap(({ columns }) =>
+      this.api.post('/todos/change', { columns }).pipe(
+        map(res => tasksAction.changeColumnsSuccess(res as ITaskBoard)),
+        catchError(() => EMPTY)
+      )
+    )
+  );
+});
+
+// Удаление колонки
+// deleteFromBoard$ = createEffect(() => {
+//   return this.actions$.pipe(
+//     ofType(tasksAction.deleteColumn),
+//     mergeMap(({ columnIndex }) =>
+//       this.api.delete(`/todos/${columnIndex}`).pipe(
+//         map(() => tasksAction.deleteColumnSuccess( columnIndex )),
+//         catchError(() => EMPTY)
+//       )
+//     )
+//   );
+// });
 }

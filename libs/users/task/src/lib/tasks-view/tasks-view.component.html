@@ -3,18 +3,20 @@
     <div class="board-columns" *ngFor="let column of columns; let columnIndex = index">
       <div class="board-column">
         <div class="column-title">{{column.columnName}}</div>
-        <div class="tasks-container" cdkDropList [cdkDropListData]="column.tasks" (cdkDropListDropped)="dragDrop($event, columnIndex)">
+        <div class="tasks-container" cdkDropList [cdkDropListData]="column.tasks"
+          (cdkDropListDropped)="dragDrop($event, columnIndex)">
           <div class="task" *ngFor="let task of column.tasks; let taskIndex = index" cdkDrag>
             <div [innerHTML]="splitText(task.taskName)"></div>
             <button mat-icon-button class="delTask" (click)="deleteTask(columnIndex, taskIndex)">x</button>
-          </div>          
+          </div>
         </div>
         <button mat-raised-button class="delBtnContainer" (click)="deleteColumn(columnIndex)">Delete Column</button>
         <button mat-raised-button class="tasksBtn" (click)="selectedColumnIndex = columnIndex">Add Task</button>
         <div class="taskForm" *ngIf="selectedColumnIndex === columnIndex">
           <button class="closeTaskForm" (click)="selectedColumnIndex = null">x</button>
           <input matInput class="newColumnInput" type="text" [(ngModel)]="task" placeholder="new Task"><br>
-          <button class="addNew" mat-mini-fab extended style="margin: 10px" (click)="addNewTaskEvent.emit({ columnIndex: selectedColumnIndex, taskName: task }); task = ''; selectedColumnIndex = null">+1</button>
+          <button class="addNew" mat-mini-fab extended style="margin: 10px"
+            (click)="addNewTaskEvent.emit({ columnIndex: selectedColumnIndex, taskName: task }); task = ''; selectedColumnIndex = null">+1</button>
         </div>
       </div>
     </div>

@@ -17,23 +17,32 @@ export const tasksFeature = createFeature({
   reducer: createReducer(
     tasksInitialState,
 //новые reducers
-    on(tasksAction.loadBoard, (state)=>({
-      ...state,
-    })),
-    on(tasksAction.loadBoardSuccess,(state, action)=>({
-      ...state,
-      ...action
-    })),
-    on(tasksAction.postBoard, (state, action) =>({
-      ...state,
-    })),
-
-
-
-
-
-
-
+on(tasksAction.loadBoardSuccess, (state, action) => {
+  return {
+    ...state,
+    ...action
+  };
+}),
+on(tasksAction.postColumnSuccess, (state, { columns }) => {
+  return {
+    ...state,
+    columns: [...state.columns, ...columns]
+  };
+}),
+on(tasksAction.changeColumnsSuccess, (state, { columns }) => {
+  return {
+    ...state,
+    columns: [...columns]
+  };
+}),
+on(tasksAction.deleteColumnSuccess, (state, { columnIndex }) => {
+  const newColumns = [...state.columns];
+  newColumns.splice(columnIndex, 1);
+  return {
+    ...state,
+    columns: newColumns
+  };
+}),
 
 
 

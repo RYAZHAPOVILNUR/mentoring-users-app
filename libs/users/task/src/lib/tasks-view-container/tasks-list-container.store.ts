@@ -27,7 +27,7 @@ export class TasksStore extends ComponentStore<TaskColumnsState> {
         tap((columns: IColumn[]) => this.patchColumns(columns))
       )
     );
-    this.taskFacade.getTasksColumn();
+    this.taskFacade.loadTasksData();
   }
 
   private patchColumns(columns: IColumn[]): void {
@@ -40,19 +40,9 @@ export class TasksStore extends ComponentStore<TaskColumnsState> {
     this.taskFacade.deleteColumn(columnIndex);
   }
 
-  public addColumn(columnName: IColumn): void {
-    this.taskFacade.addColumn(columnName);
+  public addColumn(columns: IColumn[], ): void {
+    this.taskFacade.addColumn(columns);
+  
   }
-
-  public addTask(columnIndex: number, taskName: string) {
-    this.taskFacade.addTask(columnIndex, taskName);
-  }
-
-  public deleteTask(columnIndex: number, taskIndex: number) {
-    this.taskFacade.deleteTask(columnIndex, taskIndex);
-  }
-
-  public moveTask(previousColumnIndex: number, currentColumnIndex: number, prevTaskIndex: number, currentTaskIndex: number): void {
-    this.taskFacade.moveTask(previousColumnIndex, currentColumnIndex, prevTaskIndex, currentTaskIndex);
-  }
+ 
 }

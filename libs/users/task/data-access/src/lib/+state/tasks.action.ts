@@ -10,14 +10,14 @@ export const tasksAction = createActionGroup({
       loadBoard: emptyProps(),
       loadBoardSuccess: props<ITaskBoard>(),
 
-      postBoard: props<{board: ITaskBoard[]}>(),
-      postBoardSuccess: props<{board: ITaskBoard[]}>(),
+      postColumn: props<{columns: IColumn[], email: string}>(),
+      postColumnSuccess: props<{columns: IColumn[], email: string}>(),
 
-      changeBoard: props<({columnName: string,  columnId: number, taskName: string, columns: IColumn[], tasks: ITask[]})>(),
-      changeBoardSuccess: props<({columnName: string,  columnId: number, taskName: string, columns: IColumn[], tasks: ITask[]})>(),
+      changeColumns: props<ITaskBoard>(),
+      changeColumnsSuccess: props<ITaskBoard>(),
 
-      deleteBoard: props<({columnId: number, taskName: string})>(),
-      deleteBoardSuccess: props<({columnId: number, taskName: string})>(),
+      deleteColumn: props<({columnIndex: number})>(),
+      deleteColumnSuccess: props<({columnIndex: number})>(),
 
 
 
@@ -26,8 +26,8 @@ export const tasksAction = createActionGroup({
       getColumnSuccess: props<ITaskBoard>(),
       postChangeColumns: props<{columns: IColumn[]}>(),
       postChangeColumnsSuccess: props<{columns: IColumn[]}>(),
-      deleteColumn: props<{ columnIndex: number }>(),
-      deleteColumnSuccess: props<{ columnIndex: number }>(),
+      // deleteColumn: props<{ columnIndex: number }>(),
+      // deleteColumnSuccess: props<{ columnIndex: number }>(),
       addColumn: props<{ columnName: IColumn }>(),
       addTask: props<{ columnIndex: number; taskName: string }>(),
       deleteTask: props<{ columnIndex: number; taskIndex: number }>(),

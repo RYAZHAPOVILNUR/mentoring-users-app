@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { tasksAction } from './tasks.action';
 import { IColumn } from '../model/tasks.interface';
 import { selectColumns } from './tasks.selector';
+import { map, take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,28 +11,22 @@ import { selectColumns } from './tasks.selector';
 export class TasksFacade {  
     private readonly store = inject(Store)
     public allTaskColumns$ = this.store.select(selectColumns);
+    public userEmail$ = this.store.select(state => state.tasksFeature.email);
+
    
-  getTasksColumn() {
+  loadTasksData() {
     this.store.dispatch(tasksAction.loadBoard());
   }
 
-  addColumn(columnName: IColumn) {
-    this.store.dispatch(tasksAction.addColumn({ columnName }));
+  addColumn(columns: IColumn[]) {
+    this.userEmail$.pipe(
+      take(1),
+      map(email => this.store.dispatch(tasksAction.postColumn({ columns, email })))
+    ).subscribe();
   }
 
   deleteColumn(columnIndex: number) {
-    this.store.dispatch(tasksAction.deleteColumn({ columnIndex }));
+    this.store.dispatch(tasksAction.deleteColumn({ columnIndex}));
   }
 
-  addTask(columnIndex: number, taskName: string) {
-    this.store.dispatch(tasksAction.addTask({ columnIndex, taskName }));
-  }
-
-  deleteTask(columnIndex: number, taskIndex: number) {
-    this.store.dispatch(tasksAction.deleteTask({ columnIndex, taskIndex }));
-  }
-  moveTask(previousColumnIndex: number, currentColumnIndex: number, prevTaskIndex: number, currentTaskIndex: number) {
-    this.store.dispatch( tasksAction.moveTask({ previousColumnIndex, currentColumnIndex, prevTaskIndex, currentTaskIndex,})
-    );
-  }
 }

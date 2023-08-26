@@ -36,20 +36,13 @@ export class TasksContainerComponent {
   public columns$ = this.tasksStore.columns$;
   public columns!: IColumn[];
 
-  public handleAddColumn(columnName: IColumn) {
-    this.tasksStore.addColumn(columnName);
+
+  public handleAddColumn(columns: IColumn[]) {
+    this.tasksStore.addColumn(columns);
   }
 
   public handleDeleteColumn(columnIndex: number) {
     this.tasksStore.deleteColumn(columnIndex);
-  }
-
-  public handleAddTask(event: { columnIndex: number, taskName: string }) {
-    this.tasksStore.addTask(event.columnIndex, event.taskName);
-  }
-
-  public handleDeleteTask(event: { columnIndex: number, taskIndex: number }) {
-    this.tasksStore.deleteTask(event.columnIndex, event.taskIndex);
   }
 
   public dragDrop(event: CdkDragDrop<ITask[]>) {
