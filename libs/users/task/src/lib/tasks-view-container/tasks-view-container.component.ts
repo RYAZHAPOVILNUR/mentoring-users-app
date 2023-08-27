@@ -35,10 +35,11 @@ export class TasksContainerComponent {
   private readonly tasksStore = inject(TasksStore);
   public columns$ = this.tasksStore.columns$;
   public columns!: IColumn[];
+ 
 
-
-  public handleAddColumn(columns: IColumn[]) {
-    this.tasksStore.addColumn(columns);
+  onUpdateColumns(event: {columns: IColumn[]}): void {
+    this.tasksStore.updateColumns(event.columns);
+    console.log("onUpdateColumns called", event.columns);
   }
 
   public handleDeleteColumn(columnIndex: number) {
