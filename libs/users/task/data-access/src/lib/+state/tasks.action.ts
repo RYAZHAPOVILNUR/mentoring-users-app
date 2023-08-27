@@ -1,36 +1,24 @@
 
 import { createActionGroup, props, emptyProps } from "@ngrx/store";
-import { IColumn, ITask, ITaskBoard } from "../model/tasks.interface";
+import { IColumn, ITaskBoard } from "../model/tasks.interface";
 
 export const tasksAction = createActionGroup({
-    source: 'tasks',
-    events:{
+  source: 'tasks',
+  events:{
+    loadBoards: emptyProps(),
+    loadBoardsSuccess: props<ITaskBoard>(),
 
-      //Новые action  получить, добавить, изменить , удалить
-      loadBoard: emptyProps(),
-      loadBoardSuccess: props<ITaskBoard>(),
+    loadMyBoard: emptyProps(),
+    loadMyBoardSuccess: props<ITaskBoard>(),
+    
 
-      postColumn: props<{columns: IColumn[], email: string}>(),
-      postColumnSuccess: props<{columns: IColumn[], email: string}>(),
+    addBoard: props<ITaskBoard>(),
+    addBoardSuccess: props<ITaskBoard>(),
 
-      changeColumns: props<ITaskBoard>(),
-      changeColumnsSuccess: props<ITaskBoard>(),
+    updateColumns: props<{columns: IColumn[]}>(),
+    updateColumnsSuccess: props<{columns: IColumn[]}>(),
 
-      deleteColumn: props<({columnIndex: number})>(),
-      deleteColumnSuccess: props<({columnIndex: number})>(),
-
-
-
-      //старые action
-      getTasksColumn: emptyProps(),
-      getColumnSuccess: props<ITaskBoard>(),
-      postChangeColumns: props<{columns: IColumn[]}>(),
-      postChangeColumnsSuccess: props<{columns: IColumn[]}>(),
-      // deleteColumn: props<{ columnIndex: number }>(),
-      // deleteColumnSuccess: props<{ columnIndex: number }>(),
-      addColumn: props<{ columnName: IColumn }>(),
-      addTask: props<{ columnIndex: number; taskName: string }>(),
-      deleteTask: props<{ columnIndex: number; taskIndex: number }>(),
-      moveTask: props<{ previousColumnIndex: number, currentColumnIndex: number, prevTaskIndex: number, currentTaskIndex: number }>(),
-    }
-  });
+    deleteColumn: props<{ columnIndex: number }>(),
+    deleteColumnSuccess: props<{ columnIndex: number }>(), 
+  }
+});

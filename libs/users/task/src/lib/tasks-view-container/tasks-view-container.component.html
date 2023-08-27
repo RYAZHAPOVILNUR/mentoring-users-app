@@ -1,11 +1,12 @@
 <div>
   <users-tasks-view
     [columns]="columns$ | async"
-    (addColumnEvent)="handleAddColumn($event)"
+    (updateColumns)="onUpdateColumns($event)"
     (deleteColumnEvent)="handleDeleteColumn($event)"
-  
     [dragDrop]="dragDrop">
   </users-tasks-view>
 </div>
 <!-- (deleteTaskEvent)="handleDeleteTask($event)"
 (addNewTaskEvent)="handleAddTask($event)" -->
+<!-- (addNewTaskEvent)="handleAddTask($event)"
+    (deleteTaskEvent)="handleDeleteTask($event)" -->
