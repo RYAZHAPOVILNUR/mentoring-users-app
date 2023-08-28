@@ -1,4 +1,3 @@
-import { tap } from 'rxjs';
 import { IColumn } from './../model/tasks.interface';
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -31,7 +30,6 @@ export class tasksEffects {
       ofType(tasksAction.loadMyBoard),
       mergeMap(() =>
         api.get<ITaskBoard>('/todos/me').pipe(
-          tap((res) => console.log('я из /todos/me', res)),
           map((res) => tasksAction.loadMyBoardSuccess({ board: res }))
         )
       )
