@@ -1,5 +1,5 @@
 import { IColumn, ITask } from '@users/users/task/data-access';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { TasksViewComponent } from '../tasks-view/tasks-view.component';
 import {
@@ -32,19 +32,24 @@ import { TasksStore } from './tasks-list-container.store';
   providers: [TasksStore],
 })
 export class TasksContainerComponent {
-  private readonly tasksStore = inject(TasksStore);
+  constructor(private tasksStore: TasksStore) {}
   public columns$ = this.tasksStore.columns$;
   public columns!: IColumn[];
- 
 
-  onUpdateColumns(event: {columns: IColumn[]}): void {
-    this.tasksStore.updateColumns(event.columns);
-    console.log("onUpdateColumns called", event.columns);
+  public onUpdateColumns(event: {columns: IColumn[]}): void {
+    this.tasksStore.updateLocalColumns(event.columns);
   }
-
-  public handleDeleteColumn(columnIndex: number) {
-    this.tasksStore.deleteColumn(columnIndex);
+  public deleteColumn(columnIndex: number){
+    this.tasksStore.deleteLocalColumn(columnIndex)
   }
+  public addTask(event: {columnIndex: number, taskName: string}) {
+    const { columnIndex, taskName } = event;
+    this.tasksStore.addTaskToLocalColumn({ columnIndex, taskName });
+  }
+  public deleteTask(event: { columnIndex: number, taskName: string }) {
+    this.tasksStore.deleteTask(event);
+  }
+  
 
   public dragDrop(event: CdkDragDrop<ITask[]>) {
     const prevIndex = event.previousIndex;

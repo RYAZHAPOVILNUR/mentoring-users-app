@@ -28,7 +28,7 @@ export const appConfig: ApplicationConfig = {
       [authFeature.name]: authFeature.reducer,
       [articlesFeature.name]: articlesFeature.reducer,
       [commentsFeature.name]: commentsFeature.reducer,
-      [tasksFeature.name]: tasksFeature.reducer
+      [tasksFeature.name]: tasksFeature.reducer,
     }),
     provideRouterStore(),
     provideStoreDevtools({

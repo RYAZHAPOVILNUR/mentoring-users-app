@@ -6,10 +6,10 @@ export const tasksAction = createActionGroup({
   source: 'tasks',
   events:{
     loadBoards: emptyProps(),
-    loadBoardsSuccess: props<ITaskBoard>(),
+    loadBoardsSuccess: props<{ boards: ITaskBoard[] }>(),
 
     loadMyBoard: emptyProps(),
-    loadMyBoardSuccess: props<ITaskBoard>(),
+    loadMyBoardSuccess: props<{ board: ITaskBoard }>(),
     
 
     addBoard: props<ITaskBoard>(),
