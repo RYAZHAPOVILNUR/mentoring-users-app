@@ -106,10 +106,9 @@
             cursor: pointer;
           }
         
-          .newColumnInput {
-            width: 100%;
-            max-width: 220px;
-            padding: 5px;
+          .newTaskInput {
+            max-width: 170px;
+            padding: 2px;
             border: 1px solid #ccc;
             border-radius: 5px;
             margin-bottom: 5px;
@@ -121,6 +120,12 @@
             margin: 0;
             align-self: flex-end;
           }
+          mat-form-field {
+            width: 100%;
+            max-width: 200px;
+            margin-bottom: 5px;
+          }
+        
         }
         
 
@@ -137,11 +142,15 @@
   }
 
   .newColumnInput {
-    width: 300px;
-    padding: 10px;
+    width: auto;
+    padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin-left: 25px;
+    margin-left: 5px;
+  }
+  .inputContainer{
+    max-width: 250px;
+    margin: 5px 25px;
   }
 
   .addNew {
@@ -149,4 +158,9 @@
     margin-left: 25px;
     margin-top: 10px;
   }
+}
+.addColumn{
+  width: 200px;
+  margin:  5px 25px;
+  padding: 5px;
 }

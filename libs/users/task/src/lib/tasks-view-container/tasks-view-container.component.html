@@ -2,7 +2,9 @@
   <users-tasks-view
     [columns]="columns$ | async"
     (updateColumns)="onUpdateColumns($event)"
-    (deleteColumnEvent)="handleDeleteColumn($event)"
+    (deleteColumn)="deleteColumn($event)"
+    (addTask)="addTask($event)"
+    (deleteTask)="deleteTask($event)"
     [dragDrop]="dragDrop">
   </users-tasks-view>
 </div>

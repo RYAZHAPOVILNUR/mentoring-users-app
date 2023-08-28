@@ -12,8 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
-
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'users-tasks-view',
@@ -29,6 +28,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     CommonModule,
     MatIconModule,
     MatFormFieldModule,
+    MatInputModule,
   ],
   templateUrl: './tasks-view.component.html',
   styleUrls: ['./tasks-view.component.scss'],
@@ -36,28 +36,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 export class TasksViewComponent {
   @Input() columns!: IColumn[] | null;
   @Output() updateColumns = new EventEmitter<{ columns: IColumn[] }>();
-  @Output() addNewTaskEvent = new EventEmitter<{ columnIndex: number, taskName: string }>();
-  @Output() deleteColumnEvent = new EventEmitter<number>();
-  @Output() deleteTaskEvent = new EventEmitter<{ columnIndex: number, taskIndex: number }>();
+  @Output() deleteColumn = new EventEmitter<number>();
+  @Output() addTask = new EventEmitter<{ columnIndex: number, taskName: string }>();
+  @Output() deleteTask = new EventEmitter<{columnIndex: number, taskName: string}>();
   @Input() dragDrop!: (event: CdkDragDrop<ITask[]>, columnIndex: number) => void;
 
   public selectedColumnIndex: number | null = null;
   public task!: string;
   public columnName!: string;
   public NewBoardName!: string;
-
-  createNewBoard(): void{
-    if (this.NewBoardName){
-      const newBoard: ITaskBoard ={
-        id: 1,
-        created_at: 1,
-        email: 'email',
-        authorId: 1,
-        columns: []
-      }
-      
-    }
-  }
 
   someUserActionThatChangesColumns(): void {
     if (this.columns && this.columnName) {
@@ -68,25 +55,20 @@ export class TasksViewComponent {
       });
       this.updateColumns.emit({columns: newColumns});
       console.log("Emitting updateColumns event", newColumns);
+      this.columnName = '';
     }
   }
-  
-  // public addNewColumn() {
-  //   if (this.columnName) {
-  //     const newColumn: IColumn = {
-  //       columnName: this.columnName,
-  //       tasks: [],
-  //     };
-  //     this.addColumnEvent.emit(newColumn);
-  //     this.columnName = '';
-  //   }
-  // }
-  public deleteColumn(columnIndex: number) {
-    this.deleteColumnEvent.emit(columnIndex);
+
+  public removeColumn(columnIndex: number) {
+    this.deleteColumn.emit(columnIndex);
   }
 
-  public deleteTask(columnIndex: number, taskIndex: number) {
-    this.deleteTaskEvent.emit({ columnIndex, taskIndex });
+  public addNewTask(columnIndex: number, taskName: string ){
+    this.addTask.emit({ columnIndex, taskName});
+    this.task = '';
+  }
+  public removeTask(columnIndex: number, taskName: string) {
+    this.deleteTask.emit({ columnIndex, taskName });
   }
 
   public splitText(text: string): string {

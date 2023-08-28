@@ -16,23 +16,24 @@ export const tasksFeature = createFeature({
   name: TASKS_FEATURE_KEY,
   reducer: createReducer(
     tasksInitialState,
-    on(tasksAction.loadBoards, (state) => ({
+    on(tasksAction.loadBoards, (state) => {
+      return { ...state };
+    }),
+    on(tasksAction.loadBoardsSuccess, (state, { boards }) => {
+      return {
+        ...state,
+        boards
+      };
+    }),
+    on(tasksAction.updateColumns, (state, { columns }) => {
+      return { ...state, columns: [...columns] };
+    }),
+    on(tasksAction.updateColumnsSuccess, (state, { columns }) => {
+      return { ...state, columns: [...columns] };
+    }),
+    on(tasksAction.loadMyBoardSuccess, (state, { board }) => ({
       ...state,
-    })),
-    on(tasksAction.loadBoardsSuccess, (state, action) => ({
-      ...state,
-      ...action,
-    })),
-    on(tasksAction.updateColumnsSuccess, (state, { columns }) => ({
-      ...state,
-      columns: [...columns]
-    })),
-    on(tasksAction.deleteColumnSuccess, (state, { columnIndex }) => ({
-      ...state,
-      columns: [...state.columns.slice(0, columnIndex), ...state.columns.slice(columnIndex + 1)]
-    })),
-    on(tasksAction.loadMyBoardSuccess, (state)=>({
-      ...state
+      ...board
     }))
   ),
 });
