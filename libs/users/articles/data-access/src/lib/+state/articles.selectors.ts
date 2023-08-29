@@ -21,3 +21,4 @@ export const selectArticleForEdit = createSelector(
   selectArticlesEntities,
   ({ id }, entities) => entities[id] || null
 )
+

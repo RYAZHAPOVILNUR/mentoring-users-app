@@ -9,33 +9,38 @@
 
   <mat-list-item class="list-item" routerLink="/profile">
     <mat-icon matListItemIcon>account_circle</mat-icon>
-    <span class="button-label">Профиль</span>
+    <span class="button-label">{{ 'LAYOUT.SIDENAV.PROFILE' | translate }}</span>
   </mat-list-item>
 
   <mat-list-item class="list-item" routerLink="articles">
     <mat-icon matListItemIcon>book</mat-icon>
-    <span matListItemTitle>Статьи</span>
+    <span matListItemTitle>{{ 'LAYOUT.SIDENAV.ARTICLES' | translate }}</span>
   </mat-list-item>
 
   <mat-list-item class="list-item" routerLink="article-editor"
   [queryParams]="{ mode: 'create' }">
-    <mat-icon matListItemIcon>create</mat-icon><span matListItemTitle>Написать статью</span>
+    <mat-icon matListItemIcon>create</mat-icon>
+    <span matListItemTitle>{{ 'LAYOUT.SIDENAV.CREATE_ARTICLE' | translate }}</span>
   </mat-list-item>
 
   <mat-list-item class="list-item" routerLink="tasks">
-    <mat-icon matListItemIcon>assignment</mat-icon><span matListItemTitle>Задачи</span>
+    <mat-icon matListItemIcon>assignment</mat-icon>
+    <span matListItemTitle>{{ 'LAYOUT.SIDENAV.TASKS' | translate }}</span>
   </mat-list-item>
 
   <mat-list-item class="list-item">
-    <mat-icon matListItemIcon> contacts</mat-icon><span matListItemTitle>Контакты</span>
+    <mat-icon matListItemIcon> contacts</mat-icon>
+    <span matListItemTitle>{{ 'LAYOUT.SIDENAV.CONTACTS' | translate }}</span>
   </mat-list-item>
 
   <mat-list-item class="list-item">
-    <mat-icon matListItemIcon>settings</mat-icon><span matListItemTitle>Настройки</span>
+    <mat-icon matListItemIcon>settings</mat-icon>
+    <span matListItemTitle>{{ 'LAYOUT.SIDENAV.SETTINGS' | translate }}</span>
   </mat-list-item>
 
   <mat-list-item class="list-item" (click)="onLogout()">
-    <mat-icon matListItemIcon>logout</mat-icon><span class="button-label">Выход</span>
+    <mat-icon matListItemIcon>logout</mat-icon>
+    <span class="button-label">{{ 'LAYOUT.SIDENAV.LOGOUT' | translate }}</span>
   </mat-list-item>
 
 </div>

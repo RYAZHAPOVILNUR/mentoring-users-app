@@ -17,6 +17,15 @@
   margin-right: 5px;
 }
 
-.theme-toggle {
+.theme-switch-btn {
   margin-left: 5px;
 }
+
+.lang-switch-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
