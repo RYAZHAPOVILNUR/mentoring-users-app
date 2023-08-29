@@ -4,20 +4,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import {AuthFacade} from "@auth/data-access";
-import {map, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {MatMenuModule} from "@angular/material/menu";
 import { PushPipe } from '@ngrx/component';
 import { ThemeSwitchService } from '@users/users/core/ui/theme-switch';
-
-
-
+import { LanguageKeys, LanguageSwitchService } from '@users/users/core/ui/language-switch';
 
 @Component({
   selector: 'lib-header',
   standalone: true,
   imports: [
     CommonModule, 
+    TranslateModule,
     MatButtonModule, 
     MatToolbarModule,
     MatIconModule,
@@ -28,29 +28,27 @@ import { ThemeSwitchService } from '@users/users/core/ui/theme-switch';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent {
   private readonly facade = inject(AuthFacade)
-  private readonly themeSwitch = inject(ThemeSwitchService);
+  private readonly themeSwitchService = inject(ThemeSwitchService);
+  private readonly languageSwitchService = inject(LanguageSwitchService);
   public readonly isAuthenticated$: Observable<boolean> = this.facade.isAuthenticated$
-  public readonly isDarkTheme$: Observable<boolean> = this.themeSwitch.isDarkTheme$;
-  public readonly username$: Observable<string> = this.facade.user$.pipe(map(user => user.name))
+  public readonly isDarkTheme$: Observable<boolean> = this.themeSwitchService.isDarkTheme$;
   public readonly isAdmin$: Observable<boolean | null> = this.facade.isAdmin$
-  public readonly userPhoto: Observable<string | undefined> = this.facade.user$.pipe(map(user => user.photo?.url))
-
-  public photo: any
+  public readonly selectedLanguage$ = this.languageSwitchService.selectedLanguage$
 
   @Output() sidenavToggle = new EventEmitter()
-
-  ngOnInit(): void {
-    this.photo = this.userPhoto ? this.userPhoto : ''
-  }
 
   public onLogout() {
     this.facade.logout()
   }
 
   public onSwitchTheme() {
-    this.themeSwitch.switchTheme()
+    this.themeSwitchService.switchTheme()
+  }
+
+  public onSwitchLanguage(language: LanguageKeys) {
+    this.languageSwitchService.setLanguage(language);
   }
 
   public onToggleSidenav() {
