@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+// <<<<<<< HEAD
 import { Component, ViewEncapsulation, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuillModule } from "ngx-quill";
@@ -34,23 +34,23 @@ export class ArticleReadComponent {
 
 }
 
-=======
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+// =======
+// import { Component } from '@angular/core';
+// import { CommonModule } from '@angular/common';
 
-@Component({
-  selector: 'lib-article-read',
-  standalone: true,
-  imports: [CommonModule],
-  template: `
-    <p>
-      article-read works!
-    </p>
-  `,
-  styles: [
-  ]
-})
-export class ArticleReadComponent {
+// @Component({
+//   selector: 'lib-article-read',
+//   standalone: true,
+//   imports: [CommonModule],
+//   template: `
+//     <p>
+//       article-read works!
+//     </p>
+//   `,
+//   styles: [
+//   ]
+// })
+// export class ArticleReadComponent {
 
-}
->>>>>>> origin/seynaro
+// }
+// >>>>>>> origin/seynaro
