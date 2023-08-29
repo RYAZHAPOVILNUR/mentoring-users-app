@@ -1,13 +1,10 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { CommentsActions } from './comments.actions';
-import { catchError, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
+import { catchError, map, of, switchMap } from 'rxjs';
 import { ApiService } from '@users/core/http';
 import { CreateComment } from '../../models/create-comment.model';
 import { Comment } from '../../models/user-comment.model';
-import { Router } from "@angular/router";
-import { Store } from '@ngrx/store';
-import { selectQueryParam, selectQueryParams, selectRouteParams } from '@users/core/data-access';
 
 export const publishComment$ = createEffect(
   (actions$ = inject(Actions),
@@ -16,8 +13,8 @@ export const publishComment$ = createEffect(
     return actions$.pipe(
       ofType(CommentsActions.publishComment),
       switchMap( 
-        ({ comment }) => apiService.post<void, CreateComment>('/comments', comment).pipe(
-          map(() => CommentsActions.publishCommentSuccess),
+        ({ comment }) => apiService.post<Comment, CreateComment>('/comments', comment).pipe(
+          map((comment) => CommentsActions.publishCommentSuccess({ comment })),
           catchError((error) => {
             console.error('Error', error);
             return of(CommentsActions.publishCommentFailed({ error }))
@@ -34,17 +31,16 @@ export const loadComments$ = createEffect(
     return actions$.pipe(
       ofType(CommentsActions.loadComments),
       switchMap(
-        () => apiService.get<Comment[]>('/comments')
-          .pipe(
-            map(
-              (comments) => CommentsActions.loadCommentsSuccess({ comments })
-            ),
-            catchError((error) => {
-              console.error('Error', error);
-              return of(CommentsActions.loadCommentsFailed({ error }))
-            })
-          )
-      )
+        ({articleId}) => apiService.get<Comment[]>(`/commentsByArticle/${articleId}`).pipe(
+          map(
+            (comments) => CommentsActions.loadCommentsSuccess({ comments })
+          ),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(CommentsActions.loadCommentsFailed({ error }))
+          })
+        )
+      ),
     )
   }, { functional: true }
 )
