@@ -6,9 +6,9 @@ export const CommentsActions = createActionGroup({
   source: 'Comment',
   events: {
     publishComment: props<{ comment: CreateComment }>(),
-    publishCommentSuccess: emptyProps(),
+    publishCommentSuccess: props<{ comment: Comment }>(),
     publishCommentFailed: props<{ error: Error }>(),
-    loadComments: emptyProps(),
+    loadComments: props<{ articleId: number }>(),
     loadCommentsSuccess: props<{comments: Comment[]}>(),
     loadCommentsFailed: props<{ error: Error }>(),
     deleteComment: props<{ id: number }>(),

@@ -40,6 +40,9 @@
       "@users/home": ["libs/users/home/src/index.ts"],
       "@users/tasks-view": ["libs/tasks-view/src/index.ts"],
       "@users/tasks/tasks-view": ["libs/tasks/tasks-view/src/index.ts"],
+      "@users/users/articles/article-comments": [
+        "libs/users/articles/article-comments/src/index.ts"
+      ],
       "@users/users/articles/article-read": [
         "libs/users/articles/article-read/src/index.ts"
       ],
