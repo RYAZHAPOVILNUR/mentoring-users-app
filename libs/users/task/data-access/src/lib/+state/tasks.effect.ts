@@ -8,20 +8,21 @@ import { ITaskBoard } from '../model/tasks.interface';
 import { EMPTY } from 'rxjs';
 
 export class tasksEffects {
-  // loadAllBoards$ = createEffect(() => {
-  //   const actions$ = inject(Actions);
-  //   const api = inject(ApiService);
-  //   return actions$.pipe(
-  //     ofType(tasksAction.loadBoards),
-  //     mergeMap(() =>
-  //       api.get<{boards: ITaskBoard[]}>('/todos').pipe(
-  //         map((res) => {
-  //           return tasksAction.loadBoardsSuccess({ boards: res.boards });
-  //         }),
-  //         tap((res) => console.log('я из /todos', res))
-  //       ))
-  //   );
-  // });
+  // Загрузка всех бордв, спросить нужны ли они
+  loadAllBoards$ = createEffect(() => {
+    const actions$ = inject(Actions);
+    const api = inject(ApiService);
+    return actions$.pipe(
+      ofType(tasksAction.loadBoards),
+      mergeMap(() =>
+        api.get<{ boards: ITaskBoard[] }>('/todos').pipe(
+          map((res) => {
+            return tasksAction.loadBoardsSuccess({ boards: res.boards });
+          })
+        )
+      )
+    );
+  });
 
   loadMyBoards$ = createEffect(() => {
     const actions$ = inject(Actions);
@@ -29,9 +30,9 @@ export class tasksEffects {
     return actions$.pipe(
       ofType(tasksAction.loadMyBoard),
       mergeMap(() =>
-        api.get<ITaskBoard>('/todos/me').pipe(
-          map((res) => tasksAction.loadMyBoardSuccess({ board: res }))
-        )
+        api
+          .get<ITaskBoard>('/todos/me')
+          .pipe(map((res) => tasksAction.loadMyBoardSuccess({ board: res })))
       )
     );
   });
@@ -55,10 +56,17 @@ export class tasksEffects {
     return actions$.pipe(
       ofType(tasksAction.updateColumns),
       mergeMap((action) =>
-        api.post<{columns: IColumn[]}, {columns: IColumn[]}>('/todos/change', { columns: action.columns }).pipe(
-          map((response) => tasksAction.updateColumnsSuccess({ columns: response.columns })),
-          catchError(() => EMPTY)
-        )
+        api
+          .post<{ columns: IColumn[] }, { columns: IColumn[] }>(
+            '/todos/change',
+            { columns: action.columns }
+          )
+          .pipe(
+            map((response) =>
+              tasksAction.updateColumnsSuccess({ columns: response.columns })
+            ),
+            catchError(() => EMPTY)
+          )
       )
     );
   });
