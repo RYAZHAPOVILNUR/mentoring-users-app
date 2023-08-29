@@ -1,37 +1,27 @@
-import { Injectable, inject } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { inject, Injectable } from '@angular/core';
 import { tasksAction } from './tasks.action';
-import { IColumn } from '../model/tasks.interface';
 import { selectColumns } from './tasks.selector';
+import { IColumn } from '../model/tasks.interface';
+import { select, Store } from '@ngrx/store';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TasksFacade {  
-    private readonly store = inject(Store)
-    public allTaskColumns$ = this.store.select(selectColumns);
-   
-  getTasksColumn() {
-    this.store.dispatch(tasksAction.getTasksColumn());
+export class TasksFacade {
+  private readonly store = inject(Store);
+  public allTaskColumns$ = this.store.pipe(select(selectColumns));
+
+  getMyBoard() {
+    this.store.dispatch(tasksAction.loadMyBoard());
   }
 
-  addColumn(columnName: IColumn) {
-    this.store.dispatch(tasksAction.addColumn({ columnName }));
+  getAllBoards() {
+    this.store.dispatch(tasksAction.loadBoards());
   }
-
+  updateColumns(columns: IColumn[]) {
+    this.store.dispatch(tasksAction.updateColumns({ columns }));
+  }
   deleteColumn(columnIndex: number) {
     this.store.dispatch(tasksAction.deleteColumn({ columnIndex }));
-  }
-
-  addTask(columnIndex: number, taskName: string) {
-    this.store.dispatch(tasksAction.addTask({ columnIndex, taskName }));
-  }
-
-  deleteTask(columnIndex: number, taskIndex: number) {
-    this.store.dispatch(tasksAction.deleteTask({ columnIndex, taskIndex }));
-  }
-  moveTask(previousColumnIndex: number, currentColumnIndex: number, prevTaskIndex: number, currentTaskIndex: number) {
-    this.store.dispatch( tasksAction.moveTask({ previousColumnIndex, currentColumnIndex, prevTaskIndex, currentTaskIndex,})
-    );
   }
 }

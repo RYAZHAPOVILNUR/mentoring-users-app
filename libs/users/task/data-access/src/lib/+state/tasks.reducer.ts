@@ -16,48 +16,24 @@ export const tasksFeature = createFeature({
   name: TASKS_FEATURE_KEY,
   reducer: createReducer(
     tasksInitialState,
-    on(tasksAction.getTasksColumn, (state) => ({
+    on(tasksAction.loadBoards, (state) => {
+      return { ...state };
+    }),
+    on(tasksAction.loadBoardsSuccess, (state, { boards }) => {
+      return {
+        ...state,
+        boards
+      };
+    }),
+    on(tasksAction.updateColumns, (state, { columns }) => {
+      return { ...state, columns: [...columns] };
+    }),
+    on(tasksAction.updateColumnsSuccess, (state, { columns }) => {
+      return { ...state, columns: [...columns] };
+    }),
+    on(tasksAction.loadMyBoardSuccess, (state, { board }) => ({
       ...state,
-    })),
-    on(tasksAction.getColumnSuccess, (state, action) => ({
-      ...state,
-      ...action,
-    })),
-    on(tasksAction.postChangeColumnsSuccess, (state, action) => ({
-      ...state,
-      columns: action.columns,
-    })),
-    on(tasksAction.deleteColumnSuccess, (state, { columnIndex }) => ({
-      ...state,
-      columns: [...state.columns.slice(0, columnIndex), ...state.columns.slice(columnIndex + 1)]
-    })),
-    on(tasksAction.addColumn, (state, { columnName }) => ({
-      ...state,
-      columns: [...state.columns, columnName]
-    })),
-    on(tasksAction.addTask, (state, { columnIndex, taskName }) => ({
-      ...state,
-      columns: state.columns.map((column, index) => 
-        index === columnIndex ? {...column, tasks: [...column.tasks, {taskName}]} : column)
-    })),
-    on(tasksAction.deleteTask, (state, { columnIndex, taskIndex }) => ({
-      ...state,
-      columns: state.columns.map((column, index) => 
-        index === columnIndex ? {...column, tasks: column.tasks.filter((_, idx) => idx !== taskIndex)} : column)
-    })),
-    on(tasksAction.moveTask, (state, { previousColumnIndex, currentColumnIndex, prevTaskIndex, currentTaskIndex }) => {
-      const newState = JSON.parse(JSON.stringify(state));
-  
-      const startColumn = newState.columns[previousColumnIndex];
-      const finishColumn = newState.columns[currentColumnIndex];
-  
-      const [removed] = startColumn.tasks.splice(prevTaskIndex, 1);
-  
-      finishColumn.tasks.splice(currentTaskIndex, 0, removed);
-  
-      return newState;
-    })
+      ...board
+    }))
   ),
 });
-
-
