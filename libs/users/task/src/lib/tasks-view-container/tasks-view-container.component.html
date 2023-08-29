@@ -1,10 +1,9 @@
 <div>
   <users-tasks-view
-      [columns]="columns$ | async"
-      [addColumn]="addColumn"
-      [addNewTask]="addTask"
-      [deleteColumn]="deleteColumn"
-      [deleteTask]="deleteTask"
-      [drop]="drop">
-    </users-tasks-view>
+    [columns]="columns$ | async"
+    (updateColumns)="onUpdateColumns($event)"
+    (deleteColumn)="deleteColumn($event)"
+    (addTask)="addTask($event)"
+    (deleteTask)="deleteTask($event)">
+  </users-tasks-view>
 </div>

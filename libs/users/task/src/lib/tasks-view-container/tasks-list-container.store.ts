@@ -1,7 +1,7 @@
-import { Injectable, inject } from "@angular/core";
-import { ComponentStore } from "@ngrx/component-store";
-import { IColumn, TasksFacade } from "@users/users/task/data-access";
-import { tap } from "rxjs";
+import { Injectable, inject } from '@angular/core';
+import { ComponentStore } from '@ngrx/component-store';
+import { IColumn, TasksFacade } from '@users/users/task/data-access';
+import { tap } from 'rxjs';
 
 type TaskColumnsState = {
   columns: IColumn[];
@@ -13,7 +13,7 @@ const initialState: TaskColumnsState = {
 
 @Injectable()
 export class TasksStore extends ComponentStore<TaskColumnsState> {
-  private readonly taskFacade = inject(TasksFacade)
+  private readonly taskFacade = inject(TasksFacade);
   public columns$ = this.select(({ columns }) => columns);
 
   constructor() {
@@ -22,37 +22,51 @@ export class TasksStore extends ComponentStore<TaskColumnsState> {
   }
 
   private setColumnsFromGlobalToLocalStore(): void {
+    this.taskFacade.getMyBoard();
+    this.taskFacade.getAllBoards();
     this.effect(() =>
       this.taskFacade.allTaskColumns$.pipe(
-        tap((columns: IColumn[]) => this.patchColumns(columns))
+        tap((columns: IColumn[]) => {
+          this.patchColumns(columns);
+        })
       )
     );
-    this.taskFacade.getTasksColumn();
   }
 
   private patchColumns(columns: IColumn[]): void {
-    this.patchState({
-      columns,
-    });
+    this.patchState({ columns });
   }
 
   public deleteColumn(columnIndex: number): void {
     this.taskFacade.deleteColumn(columnIndex);
   }
 
-  public addColumn(columnName: IColumn): void {
-    this.taskFacade.addColumn(columnName);
-  }
+  public updateLocalColumns = this.updater((state, columns: IColumn[]) => {
+    this.taskFacade.updateColumns(columns);
+    return { ...state, columns };
+});
 
-  public addTask(columnIndex: number, taskName: string) {
-    this.taskFacade.addTask(columnIndex, taskName);
-  }
+public deleteLocalColumn = this.updater((state, columnIndex: number) => {
+  const updatedColumns = [...state.columns];
+  updatedColumns.splice(columnIndex, 1);
+  this.taskFacade.updateColumns(updatedColumns);
+  return { ...state, columns: updatedColumns };
+});
 
-  public deleteTask(columnIndex: number, taskIndex: number) {
-    this.taskFacade.deleteTask(columnIndex, taskIndex);
-  }
-
-  public moveTask(previousColumnIndex: number, currentColumnIndex: number, prevTaskIndex: number, currentTaskIndex: number): void {
-    this.taskFacade.moveTask(previousColumnIndex, currentColumnIndex, prevTaskIndex, currentTaskIndex);
-  }
+public addTaskToLocalColumn = this.updater((state, { columnIndex, taskName }: { columnIndex: number, taskName: string }) => {
+  const updatedColumns = [...state.columns];
+  const column = { ...updatedColumns[columnIndex] };
+  column.tasks = [...column.tasks, { taskName }];
+  updatedColumns[columnIndex] = column;
+  this.taskFacade.updateColumns(updatedColumns);
+  return { ...state, columns: updatedColumns };
+});
+public deleteTask = this.updater((state, { columnIndex, taskName }: { columnIndex: number, taskName: string }) => {
+  const updatedColumns = [...state.columns];
+  const column = { ...updatedColumns[columnIndex] };
+  column.tasks = column.tasks.filter(task => task.taskName !== taskName);
+  updatedColumns[columnIndex] = column;
+  this.taskFacade.updateColumns(updatedColumns);
+  return { ...state, columns: updatedColumns };
+});
 }

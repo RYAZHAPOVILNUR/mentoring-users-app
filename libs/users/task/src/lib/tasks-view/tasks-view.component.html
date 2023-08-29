@@ -1,24 +1,29 @@
-<div class="board">
+<div class="board" cdkDropListGroup>
   <div class="board-wrapper">
     <div class="board-columns" *ngFor="let column of columns; let columnIndex = index">
-      <div class="board-column">
+      <mat-card class="board-column" cdkDropList [cdkDropListData]="column" (cdkDropListDropped)="dragDrop($event)">
         <div class="column-title">{{column.columnName}}</div>
-        <div class="tasks-container" cdkDropList [cdkDropListData]="column.tasks" (cdkDropListDropped)="drop($event, columnIndex)">
-          <div class="task" *ngFor="let task of column.tasks; let taskIndex = index" cdkDrag>
+        <div class="tasks-container">
+          <mat-card class="task" *ngFor="let task of column.tasks; let taskIndex = index" cdkDrag>
             <div [innerHTML]="splitText(task.taskName)"></div>
-            <button mat-icon-button class="delTask" (click)="deleteTask(columnIndex, taskIndex)">x</button>
-          </div>          
+            <button mat-icon-button class="delTask" (click)="removeTask(columnIndex, task.taskName)">х</button>
+          </mat-card>
         </div>
-        <button mat-raised-button class="delBtnContainer" (click)="deleteColumn(columnIndex)">Delete Column</button>
+        <button mat-raised-button class="delBtnContainer" (click)="removeColumn(columnIndex)">Delete Column</button>
         <button mat-raised-button class="tasksBtn" (click)="selectedColumnIndex = columnIndex">Add Task</button>
         <div class="taskForm" *ngIf="selectedColumnIndex === columnIndex">
           <button class="closeTaskForm" (click)="selectedColumnIndex = null">x</button>
-          <input class="newColumnInput" type="text" [(ngModel)]="task" placeholder="new Task"><br>
-          <button class="addNew" mat-mini-fab extended style="margin: 10px" (click)="addNewTask(selectedColumnIndex, task); task = ''; selectedColumnIndex = null">+1</button>
+          <mat-form-field appearance="outline">
+            <input matInput class="newTaskInput" type="text" [(ngModel)]="task" placeholder="new Task">
+          </mat-form-field>
+          <button class="addNew" mat-mini-fab extended style="margin: 10px"
+            (click)="addNewTask(columnIndex, task)">+1</button>
         </div>
-      </div>
+      </mat-card>
     </div>
   </div>
-  <input class="newColumnInput" type="text" [(ngModel)]="columnName" placeholder="New Column Name">
-  <button class="addNew" style="padding: 1px" mat-raised-button (click)="addNewColumn(); columnName = ''">Add Column</button>
+  <mat-form-field appearance="outline" class="inputContainer">
+    <input class="newColumnInput" matInput type="text" [(ngModel)]="columnName" placeholder="New Column Name">
+  </mat-form-field>
+  <button class="addColumn" mat-raised-button (click)="someUserActionThatChangesColumns()">Add Column</button>
 </div>
