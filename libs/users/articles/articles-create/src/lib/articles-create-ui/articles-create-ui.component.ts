@@ -16,7 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormGroupDirective, NgForm } from '@angular/forms';
-import { CreateArticle } from '@users/users/articles/data-access';
+import {  ArticlesFacade, CreateArticle } from '@users/users/articles/data-access';
 import { ArticlesCreateVm } from './articles-create-vm';
 
 class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -47,7 +47,7 @@ Quill.register('modules/blotFormatter', BlotFormatter)
 })
 export class ArticlesCreateUiComponent {
   public _vm!: ArticlesCreateVm
-
+  private readonly articleFacade = inject(ArticlesFacade);
   @Input({ required: true })
   set vm(value: ArticlesCreateVm) {
     this._vm = value
@@ -110,7 +110,11 @@ export class ArticlesCreateUiComponent {
         content: this.formGroup.value.textEditor as string
       }
       // this.publishArticle.emit(article)
-      console.log(this.vm)
+      if(this.vm.editMode == true)
+      {
+        this.articleFacade.editArticle(article , this.vm.editingArticle!.id)
+      }
+      console.log(article)
     }
   }
 
