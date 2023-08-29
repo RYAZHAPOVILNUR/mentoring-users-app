@@ -28,4 +28,3 @@ export class ArticleReadComponent {
   public clearArticleContent(content: string) {
     return content.replace(/<[^>]*>/g, ' ')
   };
-}
