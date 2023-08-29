@@ -1,0 +1,35 @@
+<section>
+  <form [formGroup]="formGroup" (submit)="onSubmitComment()">
+    <h2>Комментарии</h2>
+    <mat-form-field>
+      <textarea
+        placeholder="Напишите что-нибудь"
+        formControlName="commentText"
+        matInput
+      ></textarea>
+      <mat-error *ngIf="formGroup.get('commentText')?.hasError('maxlength')">
+        Комментарий должен быть не более 100 символов
+      </mat-error>
+      <button type="submit" mat-icon-button matSuffix>
+        <mat-icon>send</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+  <mat-spinner *ngIf="status === 'loading'" diameter="50"></mat-spinner>
+  <ul *ngIf="status === 'loaded'">
+    <li *ngFor="let comment of comments">
+      <mat-card>
+        <mat-card-header>
+          <img 
+            mat-card-avatar 
+            [src]="comment.author.photo ? comment.author.photo.url : 'assets/img/1.png'" 
+            alt=""
+          >
+          <mat-card-title>{{ comment.author.name }}</mat-card-title>
+          <mat-card-subtitle>{{ comment.created_at | date: 'MMM d, y, H:mm'}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>{{ comment.text }}</mat-card-content>
+      </mat-card>
+    </li>
+  </ul>
+</section>

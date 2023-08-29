@@ -1,5 +1,5 @@
 export interface CreateComment {
-  articleId: string,
-  authorId: string,
+  article_id: number,
+  author_id: number,
   text: string
 }
