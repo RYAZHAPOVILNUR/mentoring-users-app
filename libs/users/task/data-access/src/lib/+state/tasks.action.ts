@@ -11,7 +11,6 @@ export const tasksAction = createActionGroup({
     loadMyBoard: emptyProps(),
     loadMyBoardSuccess: props<{ board: ITaskBoard }>(),
     
-
     addBoard: props<ITaskBoard>(),
     addBoardSuccess: props<ITaskBoard>(),
 

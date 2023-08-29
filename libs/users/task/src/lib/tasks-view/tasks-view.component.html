@@ -1,17 +1,12 @@
-<div class="board">
+<div class="board" cdkDropListGroup>
   <div class="board-wrapper">
     <div class="board-columns" *ngFor="let column of columns; let columnIndex = index">
-      <mat-card class="board-column">
+      <mat-card class="board-column" cdkDropList [cdkDropListData]="column" (cdkDropListDropped)="dragDrop($event)">
         <div class="column-title">{{column.columnName}}</div>
-        <div class="tasks-container" cdkDropList [cdkDropListData]="column.tasks"
-          (cdkDropListDropped)="dragDrop($event, columnIndex)">
+        <div class="tasks-container">
           <mat-card class="task" *ngFor="let task of column.tasks; let taskIndex = index" cdkDrag>
             <div [innerHTML]="splitText(task.taskName)"></div>
-            <button mat-icon-button class="delTask" (click)="removeTask(columnIndex, task.taskName)">x</button>
-            <mat-card class="task" *cdkDragPreview>
-              <div [innerHTML]="splitText(task.taskName)"></div>
-              <button mat-icon-button class="delTask">x</button>
-            </mat-card>
+            <button mat-icon-button class="delTask" (click)="removeTask(columnIndex, task.taskName)">х</button>
           </mat-card>
         </div>
         <button mat-raised-button class="delBtnContainer" (click)="removeColumn(columnIndex)">Delete Column</button>

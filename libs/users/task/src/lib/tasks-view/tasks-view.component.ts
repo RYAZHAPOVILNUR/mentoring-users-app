@@ -2,17 +2,22 @@ import { MatButtonModule } from '@angular/material/button';
 import {
   CdkDrag,
   CdkDragDrop,
+  CdkDragPreview,
   CdkDropList,
   CdkDropListGroup,
+  moveItemInArray,
+  transferArrayItem,
+  DragDropModule
 } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
-import { IColumn, ITask, ITaskBoard } from '@users/users/task/data-access';
+import { IColumn } from '@users/users/task/data-access';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { TasksStore } from '../tasks-view-container/tasks-list-container.store';
 
 @Component({
   selector: 'users-tasks-view',
@@ -29,17 +34,21 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+    CdkDragPreview,
+    DragDropModule
   ],
   templateUrl: './tasks-view.component.html',
   styleUrls: ['./tasks-view.component.scss'],
 })
 export class TasksViewComponent {
+  constructor(private tasksStore: TasksStore) {}
+
   @Input() columns!: IColumn[] | null;
   @Output() updateColumns = new EventEmitter<{ columns: IColumn[] }>();
   @Output() deleteColumn = new EventEmitter<number>();
-  @Output() addTask = new EventEmitter<{ columnIndex: number, taskName: string }>();
+  @Output() addTask = new EventEmitter<{columnIndex: number, taskName: string}>();
   @Output() deleteTask = new EventEmitter<{columnIndex: number, taskName: string}>();
-  @Input() dragDrop!: (event: CdkDragDrop<ITask[]>, columnIndex: number) => void;
+  // @Output() dragDrop = new EventEmitter<CdkDragDrop<IColumn>>();
 
   public selectedColumnIndex: number | null = null;
   public task!: string;
@@ -53,8 +62,7 @@ export class TasksViewComponent {
         columnName: this.columnName,
         tasks: [],
       });
-      this.updateColumns.emit({columns: newColumns});
-      console.log("Emitting updateColumns event", newColumns);
+      this.updateColumns.emit({ columns: newColumns });
       this.columnName = '';
     }
   }
@@ -63,8 +71,8 @@ export class TasksViewComponent {
     this.deleteColumn.emit(columnIndex);
   }
 
-  public addNewTask(columnIndex: number, taskName: string ){
-    this.addTask.emit({ columnIndex, taskName});
+  public addNewTask(columnIndex: number, taskName: string) {
+    this.addTask.emit({ columnIndex, taskName });
     this.task = '';
   }
   public removeTask(columnIndex: number, taskName: string) {
@@ -85,5 +93,33 @@ export class TasksViewComponent {
     });
     return result + (line ? '<br>' + line : '');
   }
-}
 
+  public dragDrop(event: CdkDragDrop<IColumn>): void {
+    const prevIndex = event.previousIndex;
+    const currentIndex = event.currentIndex;
+
+    const previousColumnName = event.previousContainer.data?.columnName;
+    const currentColumnName = event.container.data?.columnName;
+
+    const updatedColumns = JSON.parse(JSON.stringify(this.columns));
+
+    const previousColumn = updatedColumns.find(
+      (column: IColumn) => column.columnName === previousColumnName
+    );
+    const currentColumn = updatedColumns.find(
+      (column: IColumn) => column.columnName === currentColumnName
+    );
+
+    if (event.previousContainer === event.container) {
+      moveItemInArray(previousColumn.tasks, prevIndex, currentIndex);
+    } else {
+      transferArrayItem(
+        previousColumn.tasks,
+        currentColumn.tasks,
+        prevIndex,
+        currentIndex
+      );
+    }
+    this.tasksStore.updateLocalColumns(updatedColumns);
+  }
+}
