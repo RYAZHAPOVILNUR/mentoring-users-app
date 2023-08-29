@@ -8,13 +8,19 @@ export const commentsFeatureKey = 'comments';
 
 export interface CommentsState extends EntityState<Comment> {
   status: LoadingStatus
+  publishStatus: LoadingStatus
 }
 
 export const commentsAdapter: EntityAdapter<Comment> =
-  createEntityAdapter<Comment>();
+  createEntityAdapter<Comment>({
+    sortComparer: (a, b) => {
+      return Number(b.created_at) - Number(a.created_at)
+    }
+  });
 
 export const initialCommentsState: CommentsState = commentsAdapter.getInitialState({
-  status: 'init'
+  status: 'init',
+  publishStatus: 'init'
 })
 
 export const commentsFeature = createFeature({
@@ -34,6 +40,20 @@ export const commentsFeature = createFeature({
     on(CommentsActions.loadCommentsFailed, (state) => ({
       ...state,
       status: 'error' as const
+    })),
+
+    on(CommentsActions.publishComment, (state) => ({
+      ...state,
+      publishStatus: 'loading' as const
+    })),
+
+    on(CommentsActions.publishCommentSuccess, (state, { comment }) =>
+      commentsAdapter.addOne(comment, { ...state, publishStatus: 'loaded' as const })
+    ),
+
+    on(CommentsActions.publishCommentFailed, (state) => ({
+      ...state,
+      publishStatus: 'error' as const
     })),
 
     on(CommentsActions.deleteComment, (state, { id }) => 
