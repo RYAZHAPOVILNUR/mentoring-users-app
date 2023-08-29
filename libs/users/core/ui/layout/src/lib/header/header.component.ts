@@ -54,9 +54,5 @@ export class HeaderComponent {
   public onToggleSidenav() {
     this.sidenavToggle.emit()
   }
-
-  constructor() {
-    this.selectedLanguage$.subscribe(console.log)
-  }
 }
 
