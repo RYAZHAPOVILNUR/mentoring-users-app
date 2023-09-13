@@ -14,8 +14,5 @@
       </mat-card>
     </div>
   </div>
-  <mat-form-field appearance="outline" class="inputContainer">
-    <input class="newColumnInput" matInput type="text" [(ngModel)]="columnName" placeholder="New Column Name">
-  </mat-form-field>
-  <button class="addColumn" mat-raised-button (click)="someUserActionThatChangesColumns()">Add Column</button>
+  <button class="addColumn" mat-raised-button (click)="openAddNewColumnModal()">Add Column</button>
 </div>

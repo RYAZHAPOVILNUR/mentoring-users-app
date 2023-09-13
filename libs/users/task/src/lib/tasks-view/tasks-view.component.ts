@@ -22,6 +22,7 @@ import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {TasksCreateDialogComponent} from "../tasks-create-dialog/tasks-create-dialog.component";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {filter} from "rxjs";
+import {TasksCreateColumnDialogComponent} from "../tasks-create-column-dialog/tasks-create-column-dialog.component";
 
 @Component({
   selector: 'users-tasks-view',
@@ -57,21 +58,6 @@ export class TasksViewComponent {
   @Output() addTask = new EventEmitter<{columnIndex: number, taskName: string}>();
   @Output() deleteTask = new EventEmitter<{columnIndex: number, taskName: string}>();
   // @Output() dragDrop = new EventEmitter<CdkDragDrop<IColumn>>();
-
-  public columnName!: string;
-  public NewBoardName!: string;
-
-  someUserActionThatChangesColumns(): void {
-    if (this.columns && this.columnName) {
-      const newColumns = [...this.columns];
-      newColumns.push({
-        columnName: this.columnName,
-        tasks: [],
-      });
-      this.updateColumns.emit({ columns: newColumns });
-      this.columnName = '';
-    }
-  }
 
   public removeColumn(columnIndex: number) {
     this.deleteColumn.emit(columnIndex);
@@ -133,5 +119,26 @@ export class TasksViewComponent {
         filter(taskName => !!taskName)
       )
       .subscribe((taskName: string) => this.addTask.emit({ columnIndex, taskName }))
+  }
+
+  public openAddNewColumnModal(): void {
+    const dialogRef: MatDialogRef<TasksCreateColumnDialogComponent> = this.matDialog.open(TasksCreateColumnDialogComponent, {});
+    dialogRef.afterClosed()
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        filter(column => !!column)
+      )
+      .subscribe((columnName => this.addNewColumn(columnName)))
+  }
+
+  private addNewColumn(columnName: string): void {
+    if (this.columns) {
+      const newColumns = [...this.columns];
+      newColumns.push({
+        columnName: columnName,
+        tasks: [],
+      });
+      this.updateColumns.emit({ columns: newColumns });
+    }
   }
 }
