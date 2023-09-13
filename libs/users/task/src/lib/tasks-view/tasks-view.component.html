@@ -4,10 +4,21 @@
       <mat-card class="board-column" cdkDropList [cdkDropListData]="column" (cdkDropListDropped)="dragDrop($event)">
         <div class="column-title">{{column.columnName}}</div>
         <div class="tasks-container">
-          <mat-card class="task" *ngFor="let task of column.tasks; let taskIndex = index" cdkDrag>
+
+          <!-- <mat-card class="task" *ngFor="let task of column.tasks; let taskIndex = index" cdkDrag>
             <div [innerHTML]="splitText(task.taskName)"></div>
             <button mat-icon-button class="delTask" (click)="removeTask(columnIndex, task.taskName)">х</button>
+          </mat-card> -->
+
+          <mat-card class="task" *ngFor="let task of column.tasks; let taskIndex = index" cdkDrag>
+            <div class="task__wrapper">
+              <div class="task__wrapper_text" [innerHTML]="splitText(task.taskName)"></div>
+              <button mat-icon-button (click)="removeTask(columnIndex, task.taskName)">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+              </button>
+            </div>
           </mat-card>
+
         </div>
         <button mat-raised-button class="delBtnContainer" (click)="removeColumn(columnIndex)">Delete Column</button>
         <button mat-raised-button class="tasksBtn" (click)="selectedColumnIndex = columnIndex">Add Task</button>
