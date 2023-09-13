@@ -1,19 +1,19 @@
-<h2 mat-dialog-title>Создание задачи</h2>
+<h2 mat-dialog-title>Создание колонки</h2>
 <mat-dialog-content>
-  <mat-form-field appearance="outline">
-    <input matInput
-           type="text"
-           class="newTaskInput"
-           [(ngModel)]="task"
-           placeholder="new Task">
-  </mat-form-field>
+    <mat-form-field appearance="outline" class="inputContainer">
+      <input type="text"
+             class="newColumnInput"
+             matInput
+             [(ngModel)]="column"
+             placeholder="New Column Name">
+    </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-icon-button
           color="accent"
           aria-label="Согласиться"
           (click)="create()"
-          [disabled]="!task">
+          [disabled]="!column">
     <mat-icon>done</mat-icon>
   </button>
   <button mat-icon-button
