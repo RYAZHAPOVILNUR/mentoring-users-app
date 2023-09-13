@@ -10,15 +10,7 @@
           </mat-card>
         </div>
         <button mat-raised-button class="delBtnContainer" (click)="removeColumn(columnIndex)">Delete Column</button>
-        <button mat-raised-button class="tasksBtn" (click)="selectedColumnIndex = columnIndex">Add Task</button>
-        <div class="taskForm" *ngIf="selectedColumnIndex === columnIndex">
-          <button class="closeTaskForm" (click)="selectedColumnIndex = null">x</button>
-          <mat-form-field appearance="outline">
-            <input matInput class="newTaskInput" type="text" [(ngModel)]="task" placeholder="new Task">
-          </mat-form-field>
-          <button class="addNew" mat-mini-fab extended style="margin: 10px"
-            (click)="addNewTask(columnIndex, task)">+1</button>
-        </div>
+        <button mat-raised-button class="tasksBtn" (click)="openAddNewTaskModal(columnIndex)">Add Task</button>
       </mat-card>
     </div>
   </div>
