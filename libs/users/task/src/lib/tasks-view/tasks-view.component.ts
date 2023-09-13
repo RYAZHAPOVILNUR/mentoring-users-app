@@ -50,7 +50,6 @@ export class TasksViewComponent {
   @Output() deleteColumn = new EventEmitter<number>();
   @Output() addTask = new EventEmitter<{columnIndex: number, taskName: string}>();
   @Output() deleteTask = new EventEmitter<{columnIndex: number, taskName: string}>();
-  // @Output() dragDrop = new EventEmitter<CdkDragDrop<IColumn>>(); Если будет необходимо перенести dragDrop в smart компоненту или сервис
   
 
   public selectedColumnIndex: number | null = null;
