@@ -43,7 +43,7 @@ import { TasksStore } from '../tasks-view-container/tasks-list-container.store';
 export class TasksViewComponent {
   constructor(private tasksStore: TasksStore) {}
 
-  @Input() columns!: IColumn[] | null;
+  @Input() columns!: IColumn[] | undefined;
   @Output() updateColumns = new EventEmitter<{ columns: IColumn[] }>();
   @Output() deleteColumn = new EventEmitter<number>();
   @Output() addTask = new EventEmitter<{columnIndex: number, taskName: string}>();

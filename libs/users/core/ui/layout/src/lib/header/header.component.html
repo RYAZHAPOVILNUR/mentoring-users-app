@@ -11,9 +11,9 @@
   </button>
   <span class="spacer"></span>
   <button mat-icon-button (click)="onSwitchTheme()" class="theme-switch-btn">
-    <mat-icon>{{(isDarkTheme$ | async) ? 'light_mode' : 'dark_mode'}}</mat-icon>
+    <mat-icon>{{(isDarkTheme$ | ngrxPush) ? 'light_mode' : 'dark_mode'}}</mat-icon>
   </button>
-  <ng-container [ngSwitch]="selectedLanguage$ | async">
+  <ng-container [ngSwitch]="selectedLanguage$ | ngrxPush">
     <button mat-icon-button *ngSwitchCase="'ru'" (click)="onSwitchLanguage('en')" class="lang-switch-btn">
       En
     </button>

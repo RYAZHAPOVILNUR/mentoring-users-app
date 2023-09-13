@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthFacade } from '@auth/data-access';
 import { Observable, map } from 'rxjs';
+import { PushPipe } from '@ngrx/component';
 
 @Component({
   selector: 'navbar',
@@ -19,7 +20,8 @@ import { Observable, map } from 'rxjs';
     MatDialogModule,
     MatListModule,
     RouterModule, 
-    TranslateModule
+    TranslateModule,
+    PushPipe
   ],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
