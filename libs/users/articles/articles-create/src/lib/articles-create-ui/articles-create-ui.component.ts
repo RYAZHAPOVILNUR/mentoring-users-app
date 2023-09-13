@@ -109,7 +109,7 @@ export class ArticlesCreateUiComponent {
         title: this.formGroup.value.title as string,
         content: this.formGroup.value.textEditor as string
       }
-      // this.publishArticle.emit(article)
+      this.publishArticle.emit(article)
       if(this.vm.editMode == true)
       {
         this.articleFacade.editArticle(article , this.vm.editingArticle!.id)
