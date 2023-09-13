@@ -1,4 +1,4 @@
-<div class="board" cdkDropListGroup>
+<div class="board" cdkDropListGroup [ngClass]="{ 'dark-mode': colorMode }">
   <div class="board-wrapper">
     <div class="board-columns" *ngFor="let column of columns; let columnIndex = index">
       <mat-card class="board-column" cdkDropList [cdkDropListData]="column" (cdkDropListDropped)="dragDrop($event)">

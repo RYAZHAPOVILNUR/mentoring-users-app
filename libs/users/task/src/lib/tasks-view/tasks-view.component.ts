@@ -35,7 +35,8 @@ import { TasksStore } from '../tasks-view-container/tasks-list-container.store';
     MatFormFieldModule,
     MatInputModule,
     CdkDragPreview,
-    DragDropModule
+    DragDropModule,
+    
   ],
   templateUrl: './tasks-view.component.html',
   styleUrls: ['./tasks-view.component.scss'],
@@ -44,11 +45,13 @@ export class TasksViewComponent {
   constructor(private tasksStore: TasksStore) {}
 
   @Input() columns!: IColumn[] | null;
+  @Input() colorMode!: boolean | null;
   @Output() updateColumns = new EventEmitter<{ columns: IColumn[] }>();
   @Output() deleteColumn = new EventEmitter<number>();
   @Output() addTask = new EventEmitter<{columnIndex: number, taskName: string}>();
   @Output() deleteTask = new EventEmitter<{columnIndex: number, taskName: string}>();
-  // @Output() dragDrop = new EventEmitter<CdkDragDrop<IColumn>>();
+  // @Output() dragDrop = new EventEmitter<CdkDragDrop<IColumn>>(); Если будет необходимо перенести dragDrop в smart компоненту или сервис
+  
 
   public selectedColumnIndex: number | null = null;
   public task!: string;
