@@ -34,11 +34,11 @@ export class ArticlesCreateContainerComponent implements DeactivatableComponent 
   private readonly destroyRef = inject(DestroyRef);
 
   public editMode$ = this.store.pipe(
-    takeUntilDestroyed(this.destroyRef),    //Почему не происходит отписка?
     select(selectQueryParam('mode')),
     filter(mode => mode !== undefined),
     tap((mode) => console.log('mode', mode)),
-    map(mode => mode === 'edit')
+    map(mode => mode === 'edit'),
+    takeUntilDestroyed(this.destroyRef)    //Почему не происходит отписка?
   )
 
   public articleId$ = this.store.pipe(select(selectQueryParam('id')))

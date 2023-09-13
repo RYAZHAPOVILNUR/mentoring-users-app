@@ -1,12 +1,13 @@
-<ng-container *ngrxLet="{
-  isDarkTheme: isDarkTheme$,
-  editMode: editMode$,
-  editingArticle: editingArticle$
-} as vm" >
-<articles-create-ui
-[vm]="vm"
-(publishArticle)="onPublishArticle($event)"
-(formChange)="onFormChange($event)"
-></articles-create-ui>
-
+<ng-container
+  *ngrxLet="{
+    isDarkTheme: isDarkTheme$,
+    editMode: editMode$,
+    editingArticle: editingArticle$
+  } as vm"
+>
+  <articles-create-ui
+    [vm]="vm"
+    (publishArticle)="onPublishArticle($event)"
+    (formChange)="onFormChange($event)"
+  ></articles-create-ui>
 </ng-container>
