@@ -16,4 +16,8 @@ export class ArticlesFacade {
   editArticle(articleData:CreateArticle, id:number){
     this.store.dispatch(ArticlesActions.editArticle({articleData,id}));
   }
+
+  publishArticle(article:CreateArticle){
+    this.store.dispatch(ArticlesActions.publishArticle({article}));
+  }
 }
