@@ -6,7 +6,7 @@
       <mat-sidenav-container class="sidenav-container">
         <mat-sidenav
           #sidenav 
-          [mode]="(isMobile$ | async) ? 'over' : 'side'"
+          [mode]="(isMobile$ | ngrxPush) ? 'over' : 'side'"
           [(opened)]="opened"
           class="sidenav"
         >
