@@ -1,6 +1,6 @@
 <div>
   <users-tasks-view
-    [columns]="columns$ | async"
+    [columns]="columns$ | ngrxPush"
     (updateColumns)="onUpdateColumns($event)"
     (deleteColumn)="deleteColumn($event)"
     (addTask)="addTask($event)"
