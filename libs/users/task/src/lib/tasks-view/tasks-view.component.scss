@@ -43,35 +43,35 @@
           margin: 15px;
         }
 
-        .task {
-          position: relative;
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          padding: 15px 12px;
-          background: white;
-          border-bottom: solid 1px #ddd;
-          border-radius: 5px;
-          justify-content: space-between;
-          margin: 5px;
-          box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.85),
-            0 3px 14px 2px rgba(0, 0, 0, 0.05);
-          cursor: move;
-          width: 290px;
-          white-space: normal;
-          overflow-wrap: break-word;
+        // .task {
+        //   position: relative;
+        //   display: flex;
+        //   flex-direction: column;
+        //   align-items: flex-start;
+        //   padding: 15px 12px;
+        //   background: white;
+        //   border-bottom: solid 1px #ddd;
+        //   border-radius: 5px;
+        //   justify-content: space-between;
+        //   margin: 5px;
+        //   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.85),
+        //     0 3px 14px 2px rgba(0, 0, 0, 0.05);
+        //   cursor: move;
+        //   width: 290px;
+        //   white-space: normal;
+        //   overflow-wrap: break-word;
 
-          &:hover {
-            box-shadow: 0 7px 7px -4px rgba(0, 0, 0, 0.9),
-              0 5px 16px 4px rgba(0, 0, 0, 0.07);
-          }
+        //   &:hover {
+        //     box-shadow: 0 7px 7px -4px rgba(0, 0, 0, 0.9),
+        //       0 5px 16px 4px rgba(0, 0, 0, 0.07);
+        //   }
 
-          .delTask {
-            position: absolute;
-            right: 5px;
-            top: 5px;
-          }
-        }
+        //   .delTask {
+        //     position: absolute;
+        //     right: 5px;
+        //     top: 5px;
+        //   }
+        // }
 
         .tasksBtn,
         .delBtnContainer {
@@ -238,4 +238,25 @@
 
 .example-box:last-child {
   border: none;
+}
+
+.task {
+  padding: 10px 0 10px 10px;
+  margin: 5px;
+  cursor: move;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.85), 0 3px 14px 2px rgba(0, 0, 0, 0.05);
+
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    &_text {
+      margin-top: -5px;
+    }
+  }
+
+  &:hover {
+    box-shadow: 0 7px 7px -4px rgba(0, 0, 0, 0.9), 0 5px 16px 4px rgba(0, 0, 0, 0.07);
+  }
 }
