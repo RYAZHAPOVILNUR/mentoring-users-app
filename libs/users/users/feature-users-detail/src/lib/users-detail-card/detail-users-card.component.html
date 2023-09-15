@@ -83,7 +83,7 @@
               <button mat-icon-button
               color="primary"
               type="submit"
-              [disabled]="formGroup.invalid || (areFieldsChanged$ | async) === false"
+              [disabled]="formGroup.invalid || (areFieldsChanged$ | ngrxPush) === false"
               aria-label="submit new user data"
               ><mat-icon>done</mat-icon>
               </button>

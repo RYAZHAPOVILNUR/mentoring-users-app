@@ -6,6 +6,7 @@ import { TasksViewComponent } from '../tasks-view/tasks-view.component';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { TasksStore } from './tasks-list-container.store';
+import { PushPipe } from '@ngrx/component';
 
 @Component({
   selector: 'users-tasks-container',
@@ -16,6 +17,7 @@ import { TasksStore } from './tasks-list-container.store';
     NgFor,
     FormsModule,
     MatButtonModule,
+    PushPipe
   ],
   templateUrl: './tasks-view-container.component.html',
   styleUrls: ['./tasks-view-container.component.scss'],
