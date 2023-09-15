@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Введите новое имя</h1>
+<form [formGroup]="formGroup">
+  <div mat-dialog-content>
+      <mat-label>Новое имя</mat-label>
+      <input-name [formControlName]="'newName'"></input-name>
+      <mat-error *ngIf="(nameIsAvailable$ | async) === false">Такое имя уже занято.</mat-error>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="formGroup" [disabled]="(nameIsAvailable$ | async) === false" cdkFocusInitial>Сменить</button>
+  </div>
+</form>

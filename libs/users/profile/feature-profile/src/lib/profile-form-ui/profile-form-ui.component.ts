@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
-import { PasswordChangeDialogComponent } from '@users/core/ui';
+import { PasswordChangeDialogComponent, NameChangeDialogComponent } from '@users/core/ui';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthFacade, ChangePasswordPayload } from '@auth/data-access';
 import { MatDialog } from '@angular/material/dialog';
@@ -21,7 +21,8 @@ import { MatDialog } from '@angular/material/dialog';
     FormsModule,
     MatSidenavModule,
     MatIconModule,
-    PasswordChangeDialogComponent
+    PasswordChangeDialogComponent,
+    NameChangeDialogComponent,
   ],
   templateUrl: './profile-form-ui.component.html',
   styleUrls: ['./profile-form-ui.component.scss'],
@@ -45,6 +46,26 @@ export class ProfileFormUiComponent implements OnInit {
     dialogRef.afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(result => {
+        console.log(result);
+
+        if (result) {
+          const changePasswordPayload: ChangePasswordPayload = {
+            newPassword: result.value.newPassword,
+            oldPassword: result.value.oldPassword
+          }
+          console.log(changePasswordPayload)
+          this.authFacade.changePassword(changePasswordPayload);
+        }
+      });
+  }
+
+  onOpenChangeName() {
+    const dialogRef = this.dialog.open(NameChangeDialogComponent)
+    dialogRef.afterClosed()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(result => {
+        console.log(result);
+        
         if (result) {
           const changePasswordPayload: ChangePasswordPayload = {
             newPassword: result.value.newPassword,

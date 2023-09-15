@@ -48,7 +48,7 @@ export class PasswordChangeDialogComponent {
   }
 
   onNoClick() {
-    this.dialogRef.close();
+    this.dialogRef.close(); 
   }
 
   checkPasswordMatch() {
