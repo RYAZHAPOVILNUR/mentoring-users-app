@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { TasksStore } from './tasks-list-container.store';
 import { ThemeSwitchService } from '@users/users/core/ui/theme-switch';
+import { PushPipe } from '@ngrx/component';
+
 
 @Component({
   selector: 'users-tasks-container',
@@ -17,6 +19,7 @@ import { ThemeSwitchService } from '@users/users/core/ui/theme-switch';
     NgFor,
     FormsModule,
     MatButtonModule,
+    PushPipe
   ],
   templateUrl: './tasks-view-container.component.html',
   styleUrls: ['./tasks-view-container.component.scss'],

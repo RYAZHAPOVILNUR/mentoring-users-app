@@ -104,15 +104,17 @@ export class ArticlesCreateUiComponent {
   public onSubmit(event: Event) {
     // event.preventDefault();
     this.formSubmitted = true
+    this.formGroup.markAllAsTouched()
     if (this.formGroup.valid) {
       const article: CreateArticle = {
         title: this.formGroup.value.title as string,
         content: this.formGroup.value.textEditor as string
       }
       // this.publishArticle.emit(article)
-      if(this.vm.editMode == true)
-      {
+      if(this.vm.editMode == true) {
         this.articleFacade.editArticle(article , this.vm.editingArticle!.id)
+      } else {
+        this.articleFacade.publishArticle(article)
       }
       console.log(article)
     }

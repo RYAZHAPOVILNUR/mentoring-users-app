@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon'
 import { Article } from '@users/users/articles/data-access';
+import { MatListModule } from "@angular/material/list";
 
 @Component({
   selector: 'users-articles-view',
@@ -14,8 +15,8 @@ import { Article } from '@users/users/articles/data-access';
     QuillModule,
     MatCardModule,
     RouterModule,
-    MatButtonModule, 
-    MatIconModule
+    MatButtonModule,
+    MatIconModule, MatListModule
   ],
   templateUrl: './articles-view.component.html',
   styleUrls: ['./articles-view.component.scss'],

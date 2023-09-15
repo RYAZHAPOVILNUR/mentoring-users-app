@@ -7,7 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'users-core-ui-confirm-dialog',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, MatIconModule, MatIconModule, MatButtonModule],
+  imports: [CommonModule, MatDialogModule, MatIconModule, MatButtonModule],
   templateUrl: './core-ui-confirm-dialog.component.html',
   styleUrls: ['./core-ui-confirm-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
