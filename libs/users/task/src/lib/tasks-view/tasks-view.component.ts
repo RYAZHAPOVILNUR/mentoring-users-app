@@ -40,7 +40,8 @@ import {TasksCreateColumnDialogComponent} from "../tasks-create-column-dialog/ta
     MatFormFieldModule,
     MatInputModule,
     CdkDragPreview,
-    DragDropModule
+    DragDropModule,
+    
   ],
   templateUrl: './tasks-view.component.html',
   styleUrls: ['./tasks-view.component.scss'],
@@ -52,12 +53,14 @@ export class TasksViewComponent {
 
   constructor(private tasksStore: TasksStore) {}
 
-  @Input() columns!: IColumn[] | undefined;
+
+  @Input() columns?: IColumn[];
+  @Input() colorMode?: boolean;
   @Output() updateColumns = new EventEmitter<{ columns: IColumn[] }>();
   @Output() deleteColumn = new EventEmitter<number>();
   @Output() addTask = new EventEmitter<{columnIndex: number, taskName: string}>();
   @Output() deleteTask = new EventEmitter<{columnIndex: number, taskName: string}>();
-  // @Output() dragDrop = new EventEmitter<CdkDragDrop<IColumn>>();
+  
 
   public removeColumn(columnIndex: number) {
     this.deleteColumn.emit(columnIndex);
