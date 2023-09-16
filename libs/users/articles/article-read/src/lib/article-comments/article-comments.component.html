@@ -18,18 +18,7 @@
   <mat-spinner *ngIf="status === 'loading'" diameter="50"></mat-spinner>
   <ul *ngIf="status === 'loaded'">
     <li *ngFor="let comment of comments">
-      <mat-card>
-        <mat-card-header>
-          <img 
-            mat-card-avatar 
-            [src]="comment.author.photo ? comment.author.photo.url : 'assets/img/1.png'" 
-            alt=""
-          >
-          <mat-card-title>{{ comment.author.name }}</mat-card-title>
-          <mat-card-subtitle>{{ comment.created_at | date: 'MMM d, y, H:mm'}}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>{{ comment.text }}</mat-card-content>
-      </mat-card>
+      <article-comment [comment]="comment"></article-comment>
     </li>
   </ul>
 </section>
