@@ -48,8 +48,4 @@ export class ArticleCommentComponent {
   public get isLikesExists(): boolean {
     return this.likesCount > 0;
   }
-  public get currentLocale():string {
-    console.log(this.languageService.selectedLanguage$.value)
-    return this.languageService.selectedLanguage$.value
-  }
 }
