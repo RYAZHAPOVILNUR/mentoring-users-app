@@ -8,8 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PushPipe } from '@ngrx/component';
-import { Comment } from '@users/users/articles/data-access';
-import { LanguageSwitchService } from '@users/users/core/ui/language-switch';
+import { LanguageSwitchService } from '../../../../../../core/ui/language-switch/src';
+import { Comment } from '../../../../../data-access/src';
 @Component({
   standalone: true,
   imports: [
