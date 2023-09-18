@@ -49,6 +49,15 @@ export interface ChangePasswordPayload {
   newPassword: string
 }
 
-export interface ChangePasswordResponce {
+
+export interface ChangeNamePayload {
+  newName: string
+}
+
+export interface ChangePasswordResponse {
+  message: string
+}
+
+export interface ChangeNameResponse {
   message: string
 }

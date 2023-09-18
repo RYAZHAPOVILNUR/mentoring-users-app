@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { NewUser, SignAuthPayload, SignAuthUser, ChangePasswordPayload, ChangePasswordResponce } from './sign.auth.model';
+import { NewUser, SignAuthPayload, SignAuthUser, ChangePasswordPayload, ChangePasswordResponse, ChangeNamePayload, ChangeNameResponse } from './sign.auth.model';
 import { UsersEntity } from '@users/core/data-access';
 
 export const authActions = createActionGroup({
@@ -17,7 +17,10 @@ export const authActions = createActionGroup({
     logout: emptyProps(),
     changePassword: props<{ data: ChangePasswordPayload }>(),
     changePasswordFailure: props<{ error: Error }>(),
-    changePasswordSuccess: props<{ res: ChangePasswordResponce }>(),
+    changePasswordSuccess: props<{ res: ChangePasswordResponse }>(),
+    changeName: props<{ data: ChangeNamePayload }>(),
+    changeNameFailure: props<{ error: Error }>(),
+    changeNameSuccess: props<{ res: ChangeNameResponse }>(),
     uploadImage: props<{ image:any}>(),
     uploadImageSuccess: props<{ user: UsersEntity }>(),
     uploadImageFailure: props<{ error: Error }>()

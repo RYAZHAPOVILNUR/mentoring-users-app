@@ -41,7 +41,6 @@ export const authFeature = createFeature({
     })),
     on(authActions.getUser, (state) => ({
       ...state,
-
     })),
     on(authActions.getUserSuccess, (state, { user }) => ({
       ...state,
@@ -51,6 +50,10 @@ export const authFeature = createFeature({
     on(authActions.logout, (state) => ({
       ...state,
       ...authInitialState
+    })),
+    on(authActions.changeName, (state, {data}) => ({
+      ...state,
+      loggedUser: {...state.loggedUser, name: data.newName}
     })),
     on(authActions.uploadImageSuccess, (state, { user}) => ({
       ...state,

@@ -8,7 +8,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { PasswordChangeDialogComponent, NameChangeDialogComponent } from '@users/core/ui';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { AuthFacade, ChangePasswordPayload } from '@auth/data-access';
+import { AuthFacade, ChangePasswordPayload, ChangeNamePayload } from '@auth/data-access';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -64,15 +64,12 @@ export class ProfileFormUiComponent implements OnInit {
     dialogRef.afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(result => {
-        console.log(result);
         
         if (result) {
-          const changePasswordPayload: ChangePasswordPayload = {
-            newPassword: result.value.newPassword,
-            oldPassword: result.value.oldPassword
+          const changeNamePayload: ChangeNamePayload = {
+            newName: result.value.newName,
           }
-          console.log(changePasswordPayload)
-          this.authFacade.changePassword(changePasswordPayload);
+          this.authFacade.changeName(changeNamePayload);
         }
       });
   }

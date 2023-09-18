@@ -51,7 +51,7 @@ export class NameChangeDialogComponent extends ComponentStore<UsersListState>{
   private readonly destroyRef = inject(DestroyRef);
   private readonly usersFacade = inject(UsersFacade);
   public readonly users$ = this.select(({ users }) => users);
-
+ 
   public formGroup = new FormBuilder().group({
     newName: new FormControl('', [Validators.required]),
   }); 
