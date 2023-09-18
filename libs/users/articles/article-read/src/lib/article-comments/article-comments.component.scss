@@ -12,6 +12,9 @@ section {
     padding: 0;
     gap: 10px;
   }
+  .mat-card-header {
+    cursor: pointer;
+  }
 }
 
 form {

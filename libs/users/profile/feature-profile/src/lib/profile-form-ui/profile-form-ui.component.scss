@@ -3,6 +3,9 @@
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
+  input[type="file"] {
+    display: none;
+  }
 }
 
 .user-photo {

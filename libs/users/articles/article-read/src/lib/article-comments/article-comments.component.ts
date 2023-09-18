@@ -9,19 +9,21 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { LoadingStatus } from '../../../../../../core/data-access/src';
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'article-comments',
   standalone: true,
   imports: [
-    CommonModule, 
-    MatFormFieldModule, 
-    ReactiveFormsModule, 
-    MatCardModule, 
-    MatInputModule, 
-    MatButtonModule, 
+    CommonModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatInputModule,
+    MatButtonModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    RouterLink
   ],
   templateUrl: './article-comments.component.html',
   styleUrls: ['./article-comments.component.scss'],
@@ -45,5 +47,5 @@ export class ArticleCommentsComponent {
       return;
     }
     return;
-  }  
+  }
 }
