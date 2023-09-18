@@ -31,16 +31,19 @@ export class ProfileFormUiComponent implements OnInit {
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
   private readonly authFacade = inject(AuthFacade);
-  @Input({ required: true }) vm!: ProfileFormVm
+  @Input({ required: true }) vm!: any;
+  @Input({ required: true }) isLoggedUser!: boolean;
 
   @Output() loadPhoto: EventEmitter<File> = new EventEmitter<File>();
 
-  public photo: any
+  public photo: any;
 
   ngOnInit(): void {
     this.photo = this.vm.user.photo ? this.vm.user.photo.url : ''
+    // console.log(this.vm);
   }
-  onOpenChangePassword() {
+
+  public onOpenChangePassword(): void {
     const dialogRef = this.dialog.open(PasswordChangeDialogComponent)
     dialogRef.afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -50,7 +53,6 @@ export class ProfileFormUiComponent implements OnInit {
             newPassword: result.value.newPassword,
             oldPassword: result.value.oldPassword
           }
-          console.log(changePasswordPayload)
           this.authFacade.changePassword(changePasswordPayload);
         }
       });
