@@ -2,7 +2,7 @@ import { IColumn } from './../model/tasks.interface';
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ApiService } from '@users/core/http';
-import { map, mergeMap, catchError } from 'rxjs/operators';
+import {map, mergeMap, catchError, tap} from 'rxjs/operators';
 import { tasksAction } from './tasks.action';
 import { ITaskBoard } from '../model/tasks.interface';
 import { EMPTY } from 'rxjs';
