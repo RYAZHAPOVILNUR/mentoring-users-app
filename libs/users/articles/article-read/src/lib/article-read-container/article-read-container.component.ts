@@ -36,7 +36,7 @@ export class ArticleReadContainerComponent {
   public viewedArticle$: Observable<Article | null> = this.store.select(ArticleSelectors.selectArticleForEdit)
     .pipe(
       withLatestFrom(this.articleId$),
-      map(([article, id]) => {
+      map(([article, id, ...rest]) => {
         if (!article && id) {
           this.store.dispatch(ArticlesActions.getArticle({ id }));
         }
@@ -47,10 +47,10 @@ export class ArticleReadContainerComponent {
   onSubmitComment(commentText: string) {
     this.loggedUserId$.pipe(withLatestFrom(this.articleId$), take(1))
       .subscribe(([authorId, articleId]) => {
-        const comment = { 
-          author_id: Number(authorId), 
-          article_id: Number(articleId), 
-          text: commentText 
+        const comment = {
+          author_id: Number(authorId),
+          article_id: Number(articleId),
+          text: commentText
         }
         this.store.dispatch(CommentsActions.publishComment({ comment }))
       })

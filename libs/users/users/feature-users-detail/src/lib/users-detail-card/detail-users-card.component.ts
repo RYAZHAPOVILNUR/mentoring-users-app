@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
-  ChangeDetectionStrategy,
+  ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
   DestroyRef,
   EventEmitter,
@@ -30,6 +30,7 @@ import { DadataApiService } from "@dadata";
 import {BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap} from "rxjs";
 import { PushPipe } from "@ngrx/component";
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -58,7 +59,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class DetailUsersCardComponent implements OnInit {
   private _vm: DetailUsersCardVm = { editMode: false, user: null, status: 'init', errors: null };
   public get vm() {
-    
+
     return this._vm;
   }
   @Input({ required: true })
@@ -106,6 +107,8 @@ export class DetailUsersCardComponent implements OnInit {
   private snackBar = inject(MatSnackBar);
   private readonly destroyRef = inject(DestroyRef);
   public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
+
+
 
   ngOnInit(): void {
     this.checkChangeFields();

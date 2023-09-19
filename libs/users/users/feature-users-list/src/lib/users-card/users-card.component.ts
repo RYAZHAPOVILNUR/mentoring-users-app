@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersVM } from '../../../../users-vm';
 import { MatCardModule } from '@angular/material/card';
@@ -30,6 +30,7 @@ export class UsersCardComponent {
   @Output() redirectToEdit = new EventEmitter()
 
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
+
 
   onOpenMenu(event: Event) {
     event.stopPropagation()
