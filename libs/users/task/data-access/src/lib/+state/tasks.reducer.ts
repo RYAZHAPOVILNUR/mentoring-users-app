@@ -10,6 +10,8 @@ export const tasksInitialState: ITaskBoard = {
   email: '',
   authorId: 0,
   columns: [],
+  term: '',
+  filteredColumns: []
 };
 
 export const tasksFeature = createFeature({
@@ -34,6 +36,10 @@ export const tasksFeature = createFeature({
     on(tasksAction.loadMyBoardSuccess, (state, { board }) => ({
       ...state,
       ...board
-    }))
+    })),
+    on(tasksAction.searchTask, (state, {term}) => ({
+      ...state,
+      term,
+    })),
   ),
 });

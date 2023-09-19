@@ -10,7 +10,7 @@ export const tasksAction = createActionGroup({
 
     loadMyBoard: emptyProps(),
     loadMyBoardSuccess: props<{ board: ITaskBoard }>(),
-    
+
     addBoard: props<ITaskBoard>(),
     addBoardSuccess: props<ITaskBoard>(),
 
@@ -18,6 +18,8 @@ export const tasksAction = createActionGroup({
     updateColumnsSuccess: props<{columns: IColumn[]}>(),
 
     deleteColumn: props<{ columnIndex: number }>(),
-    deleteColumnSuccess: props<{ columnIndex: number }>(), 
+    deleteColumnSuccess: props<{ columnIndex: number }>(),
+
+    searchTask: props<{term: string}>(),
   }
 });
