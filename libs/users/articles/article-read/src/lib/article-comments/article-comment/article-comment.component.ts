@@ -28,11 +28,11 @@ import { Comment } from '../../../../../data-access/src';
   styleUrls: ['./article-comment.component.scss'],
 })
 export class ArticleCommentComponent {
-  private readonly languageService = inject(LanguageSwitchService);
-  public currentLanguage$ = this.languageService.selectedLanguage$.asObservable()
-  public likesCount: number = 0;
-  public isLikeActive: boolean = false;
   @Input({ required: true }) comment!: Comment;
+  private readonly languageService = inject(LanguageSwitchService);
+  public readonly currentLanguage$ = this.languageService.selectedLanguage$.asObservable()
+  public likesCount = 0;
+  public isLikeActive = false;
 
   public onThumbUp() {
     this.likesCount = this.likesCount === 0 ? 1 : 0;

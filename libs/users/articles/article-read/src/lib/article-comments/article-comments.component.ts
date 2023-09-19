@@ -42,7 +42,7 @@ import '@angular/common/locales/global/ru';
   styleUrls: ['./article-comments.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ArticleCommentsComponent implements OnInit {
+export class ArticleCommentsComponent {
 
   public likesCount: number = 0;
   public isLikeActive: boolean = false;
@@ -62,8 +62,4 @@ export class ArticleCommentsComponent implements OnInit {
     }
     return;
   }
-  ngOnInit(): void {
-    console.log(this.comments, 'comments')
-  }
-
 }
