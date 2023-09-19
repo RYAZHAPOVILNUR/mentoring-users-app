@@ -14,15 +14,15 @@ import {MatIconModule} from "@angular/material/icon";
 @Component({
   selector: 'users-tasks-container',
   standalone: true,
-    imports: [
-        CommonModule,
-        TasksViewComponent,
-        NgFor,
-        FormsModule,
-        MatButtonModule,
-        PushPipe,
-        MatIconModule
-    ],
+  imports: [
+    CommonModule,
+    TasksViewComponent,
+    NgFor,
+    FormsModule,
+    MatButtonModule,
+    PushPipe,
+    MatIconModule
+  ],
   templateUrl: './tasks-view-container.component.html',
   styleUrls: ['./tasks-view-container.component.scss'],
   providers: [TasksStore],
