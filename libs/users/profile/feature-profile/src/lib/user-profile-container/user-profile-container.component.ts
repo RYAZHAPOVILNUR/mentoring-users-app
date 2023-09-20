@@ -5,7 +5,7 @@ import {LetDirective} from "@ngrx/component";
 import {Store} from "@ngrx/store";
 import {UsersFacade} from "@users/users/data-access";
 import {selectAuthStatus} from "@auth/data-access";
-import {Observable, tap} from "rxjs";
+import {filter, Observable, tap} from "rxjs";
 import {UsersEntity} from "@users/core/data-access";
 
 @Component({
@@ -27,13 +27,8 @@ export class UserProfileContainerComponent {
   private readonly store = inject(Store);
 
   public readonly status$ = this.store.select(selectAuthStatus);
-  public readonly user$: Observable<UsersEntity | null> = this.usersFacade.openedUser$.pipe(
-    tap(
-      user => {
-        if (!user) {
-          this.usersFacade.loadUser()
-        }
-      }
-    )
-  );
+  public readonly user$: Observable<UsersEntity | null> = this.usersFacade.openedUser$
+    .pipe(
+      tap(_ => this.usersFacade.loadUser())
+    );
 }
