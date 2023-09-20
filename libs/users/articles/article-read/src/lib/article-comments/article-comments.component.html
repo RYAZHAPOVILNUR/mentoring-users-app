@@ -21,18 +21,14 @@
       <mat-card>
         <mat-card-header>
           <img
-            [routerLink]="['/profile/', comment.author_id]"
-
+            [routerLink]="['/profile', comment.author_id]"
             mat-card-avatar
             [src]="comment.author.photo ? comment.author.photo.url : 'assets/img/1.png'"
             alt=""
           >
           <mat-card-title
-            [routerLink]="['/profile/', comment.author_id]"
+            [routerLink]="['/profile', comment.author_id]"
             >
-
-            12  3
-
             {{ comment.author.name }}
           </mat-card-title>
           <mat-card-subtitle>{{ comment.created_at | date: 'MMM d, y, H:mm'}}</mat-card-subtitle>

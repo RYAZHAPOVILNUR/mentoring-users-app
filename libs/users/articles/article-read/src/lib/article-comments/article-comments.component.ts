@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, inject, Inject, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Inject, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Comment } from '../../../../data-access/src';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -9,7 +9,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { LoadingStatus } from '../../../../../../core/data-access/src';
-import { ActivatedRoute, Router, RouterModule } from "@angular/router";
+import { Router, RouterModule } from "@angular/router";
 import { Store } from "@ngrx/store";
 
 @Component({
@@ -30,27 +30,17 @@ import { Store } from "@ngrx/store";
   styleUrls: ['./article-comments.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ArticleCommentsComponent implements OnInit{
+export class ArticleCommentsComponent {
   @Input() comments!: Comment[];
   @Input() status!: LoadingStatus;
   @Output() submitComment = new EventEmitter<string>();
 
   private readonly router = inject(Router);
-  private readonly route = inject(ActivatedRoute);
 
 
   public formGroup = new FormGroup({
     commentText: new FormControl('', [Validators.maxLength(100)])
   })
-
-
-  ngOnInit(): void {
-    // this.route.params.subscribe(
-    //   params => {
-    //     console.log(params)
-    //   })
-  }
-
 
   onSubmitComment() {
     if(this.formGroup.valid && this.formGroup.value.commentText) {
@@ -62,7 +52,4 @@ export class ArticleCommentsComponent implements OnInit{
     }
     return;
   }
-
-
-
 }

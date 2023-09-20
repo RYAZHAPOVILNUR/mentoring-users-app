@@ -5,7 +5,7 @@ import {
   DestroyRef,
   EventEmitter,
   inject,
-  Input,
+  Input, OnDestroy,
   OnInit,
   Output, TemplateRef, ViewChild
 } from '@angular/core';
@@ -111,6 +111,7 @@ export class DetailUsersCardComponent implements OnInit {
 
 
   ngOnInit(): void {
+    console.log(this.vm)
     this.checkChangeFields();
   }
 
@@ -169,4 +170,6 @@ export class DetailUsersCardComponent implements OnInit {
       )
       .subscribe()
   }
+
+
 }
