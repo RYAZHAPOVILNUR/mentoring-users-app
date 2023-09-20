@@ -40,7 +40,6 @@ export class ProfileFormUiComponent implements OnInit {
 
   ngOnInit(): void {
     this.photo = this.vm.user.photo ? this.vm.user.photo.url : ''
-    // console.log(this.vm);
   }
 
   public onOpenChangePassword(): void {
