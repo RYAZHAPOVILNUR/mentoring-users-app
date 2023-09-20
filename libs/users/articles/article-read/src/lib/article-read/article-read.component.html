@@ -1,7 +1,10 @@
 <div *ngIf='article'>
   <mat-card class="article">
     <mat-card-header class="article-header">
-      <mat-card-title class="article-title">{{article.title}}</mat-card-title>
+      <mat-card-title class="article-title">
+        {{article.title}}
+        <img class="article-avatar" [src]="userPhoto | ngrxPush" alt="User Photo">
+      </mat-card-title>
       <mat-card-subtitle>от: Админ Админыч</mat-card-subtitle>
       <mat-card-subtitle class="article-subtitle">{{ article.created_at | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
     </mat-card-header>
