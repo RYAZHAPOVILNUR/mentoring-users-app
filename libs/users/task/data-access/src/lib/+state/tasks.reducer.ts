@@ -43,7 +43,7 @@ export const tasksFeature = createFeature({
       return {
         ...state,
         term,
-        filteredColumns
+        filteredColumns: term ? filteredColumns : []
       }
     }),
   ),
