@@ -13,6 +13,17 @@ const initialState: TaskColumnsState = {
   filteredColumns: []
 };
 
+export function filterColumnsByTerm(columns: IColumn[], term: string): IColumn[] {
+  return columns.map((column) => {
+    const filteredTasks = filterTasksByTerm(column.tasks, term);
+    return { ...column, tasks: filteredTasks };
+  });
+}
+
+function filterTasksByTerm(tasks: ITask[], term: string): ITask[] {
+  return tasks.filter((task) => task.taskName.includes(term));
+}
+
 @Injectable()
 export class TasksStore extends ComponentStore<TaskColumnsState> {
   private readonly taskFacade = inject(TasksFacade);
@@ -79,19 +90,7 @@ export class TasksStore extends ComponentStore<TaskColumnsState> {
     }
     state.filteredColumns = [...state.columns];
     const list = [...state.filteredColumns];
-    const filteredColumns = this.filterColumnsByTerm(list, term);
+    const filteredColumns = filterColumnsByTerm(list, term);
     return {...state, columns: [...state.columns], filteredColumns: [...filteredColumns] };
   })
-
-  // TODO: Helper function
-  private filterColumnsByTerm(columns: IColumn[], term: string): IColumn[] {
-    return columns.filter((column) => {
-      const filteredTasks = this.filterTasksByTerm(column.tasks, term);
-      return filteredTasks.length > 0;
-    });
-  }
-
-  private filterTasksByTerm(tasks: ITask[], term: string): ITask[] {
-    return tasks.filter((task) => task.taskName.includes(term));
-  }
 }
