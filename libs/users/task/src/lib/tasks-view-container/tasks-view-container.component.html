@@ -4,7 +4,6 @@
     <input class="w-100"
            type="text"
            [(ngModel)]="text"
-           [ngModelOptions]="{ updateOn: 'blur' }"
            (ngModelChange)="searchTask()">
   </div>
   <users-tasks-view
