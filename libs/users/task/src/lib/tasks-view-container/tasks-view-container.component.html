@@ -1,11 +1,7 @@
 <div>
-  <div class="d-flex align-items-center input">
-    <mat-icon class="d-flex align-items-center icon">search icon</mat-icon>
-    <input class="w-100"
-           type="text"
-           [(ngModel)]="text"
-           (ngModelChange)="searchTask()">
-  </div>
+  <users-tasks-search-input (handleSearchText)="onHandleSearchText($event)">
+  </users-tasks-search-input>
+
   <users-tasks-view
     [columns]="(text ? filteredColumn$ : columns$) | ngrxPush"
     [colorMode]="colorMode$ | ngrxPush"

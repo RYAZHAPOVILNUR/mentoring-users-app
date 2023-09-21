@@ -3,13 +3,11 @@ import { Component, inject } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { TasksViewComponent } from '../tasks-view/tasks-view.component';
 
-import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { TasksStore } from './tasks-list-container.store';
 import { ThemeSwitchService } from '@users/users/core/ui/theme-switch';
 import { PushPipe } from '@ngrx/component';
-import {MatIconModule} from "@angular/material/icon";
-
+import {TasksSearchInputComponent} from "../tasks-search-input/tasks-search-input.component";
 
 @Component({
   selector: 'users-tasks-container',
@@ -18,10 +16,9 @@ import {MatIconModule} from "@angular/material/icon";
     CommonModule,
     TasksViewComponent,
     NgFor,
-    FormsModule,
     MatButtonModule,
     PushPipe,
-    MatIconModule
+    TasksSearchInputComponent
   ],
   templateUrl: './tasks-view-container.component.html',
   styleUrls: ['./tasks-view-container.component.scss'],
@@ -35,8 +32,8 @@ export class TasksContainerComponent {
   public columns$ = this.tasksStore.columns$;
   public filteredColumn$ = this.tasksStore.filteredColumn$
 
-  public columns!: IColumn[];
   public text = '';
+  public columns!: IColumn[];
 
   public onUpdateColumns(event: { columns: IColumn[] }): void {
     this.tasksStore.updateLocalColumns(event.columns);
@@ -55,7 +52,8 @@ export class TasksContainerComponent {
     this.tasksStore.deleteTask(event);
   }
 
-  public searchTask(): void {
+  public onHandleSearchText(text: string): void {
+    this.text = text;
     this.tasksStore.searchTask(this.text);
   }
 }
