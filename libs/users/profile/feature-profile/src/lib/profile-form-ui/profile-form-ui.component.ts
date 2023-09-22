@@ -31,7 +31,7 @@ export class ProfileFormUiComponent implements OnInit {
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
   private readonly authFacade = inject(AuthFacade);
-  @Input({ required: true }) vm!: any;
+  @Input({ required: true }) vm!: ProfileFormVm;
   @Input({ required: true }) isLoggedUser!: boolean;
 
   @Output() loadPhoto: EventEmitter<File> = new EventEmitter<File>();
@@ -39,6 +39,7 @@ export class ProfileFormUiComponent implements OnInit {
   public photo: any;
 
   ngOnInit(): void {
+    console.log(this.vm);
     this.photo = this.vm.user.photo ? this.vm.user.photo.url : ''
   }
 
