@@ -2,10 +2,9 @@ import {ChangeDetectionStrategy, Component, inject} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {ProfileFormUiComponent} from "../profile-form-ui/profile-form-ui.component";
 import {LetDirective} from "@ngrx/component";
-import {Store} from "@ngrx/store";
 import {UsersFacade} from "@users/users/data-access";
-import {selectAuthStatus} from "@auth/data-access";
-import {filter, Observable, tap} from "rxjs";
+import {AuthFacade} from "@auth/data-access";
+import {Observable, of, tap} from "rxjs";
 import {UsersEntity} from "@users/core/data-access";
 
 @Component({
@@ -24,11 +23,14 @@ import {UsersEntity} from "@users/core/data-access";
 export class UserProfileContainerComponent {
 
   private readonly usersFacade = inject(UsersFacade);
-  private readonly store = inject(Store);
+  private readonly authFacade = inject(AuthFacade);
 
-  public readonly status$ = this.store.select(selectAuthStatus);
-  public readonly user$: Observable<any | null> = this.usersFacade.openedUser$
+  public readonly isLoggedUser = of(false);
+
+  public readonly status$ = this.authFacade.status$;
+  public readonly user$: Observable<UsersEntity | any> = this.usersFacade.openedUser$
     .pipe(
       tap(_ => this.usersFacade.loadUser())
     );
+
 }

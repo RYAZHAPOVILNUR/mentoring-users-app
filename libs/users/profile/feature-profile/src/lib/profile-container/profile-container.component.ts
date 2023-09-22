@@ -7,6 +7,7 @@ import { authActions, selectAuthStatus, selectLoggedUser } from '@auth/data-acce
 import { LetDirective } from '@ngrx/component';
 import { CropperDialogComponent } from '@users/core/ui';
 import { MatDialog } from '@angular/material/dialog';
+import {of} from "rxjs";
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -29,6 +30,8 @@ export class ProfileContainerComponent {
 
   public readonly user$ = this.store.select(selectLoggedUser);
   public readonly status$ = this.store.select(selectAuthStatus);
+
+  public readonly isLoggedUser = of(true);
 
   public onLoadPhoto(file: File): void {
     const reader = new FileReader();

@@ -13,6 +13,7 @@ import {RouterLink} from "@angular/router";
 import {CommentsFacade} from "../../../../data-access/src/lib/+state/comments/comments.facade";
 import {PushPipe} from "@ngrx/component";
 import {ArticleCommentComponent} from "./article-comment/article-comment.component";
+import {AuthFacade} from "../../../../../../core/auth/data-access/src";
 
 @Component({
   selector: 'article-comments',
@@ -39,9 +40,9 @@ export class ArticleCommentsComponent {
   @Input() status!: LoadingStatus;
   @Output() submitComment = new EventEmitter<string>();
 
-  private commentFacade = inject(CommentsFacade);
+  private authFacade = inject(AuthFacade);
 
-  public readonly userId$ = this.commentFacade.loggedUser$;
+  public readonly userId$ = this.authFacade.loggedUserId$;
 
   public formGroup = new FormGroup({
     commentText: new FormControl('', [Validators.maxLength(100)])

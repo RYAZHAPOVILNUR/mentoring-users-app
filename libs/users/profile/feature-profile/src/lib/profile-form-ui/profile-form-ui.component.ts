@@ -1,5 +1,5 @@
 import { EventEmitter, Output, inject } from '@angular/core';
-import { ChangeDetectionStrategy, Component, Input, OnInit, DestroyRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, DestroyRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileFormVm } from './profile-form-ui-vm';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,21 +27,24 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./profile-form-ui.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileFormUiComponent implements OnInit {
+export class ProfileFormUiComponent {
+
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
   private readonly authFacade = inject(AuthFacade);
-  @Input({ required: true }) vm!: ProfileFormVm;
-  @Input({ required: true }) isLoggedUser!: boolean;
+
+  @Input({ required: true })
+  set vm(vm: ProfileFormVm) {
+    this._vm = vm;
+  }
+
+  get vm(): ProfileFormVm {
+    return this._vm;
+  }
 
   @Output() loadPhoto: EventEmitter<File> = new EventEmitter<File>();
 
-  public photo: any;
-
-  ngOnInit(): void {
-    console.log(this.vm);
-    this.photo = this.vm.user.photo ? this.vm.user.photo.url : ''
-  }
+  private _vm!: ProfileFormVm;
 
   public onOpenChangePassword(): void {
     const dialogRef = this.dialog.open(PasswordChangeDialogComponent)

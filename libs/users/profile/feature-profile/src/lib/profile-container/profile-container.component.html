@@ -1,10 +1,10 @@
 <ng-container *ngrxLet="{
   user: user$,
-  status: status$
+  status: status$,
+  isLoggedUser
 } as vm">
   <profile-form-ui *ngIf="vm.status === 'loaded'"
                    [vm]="vm"
-                   [isLoggedUser]="true"
                    (loadPhoto)="onLoadPhoto($event)">
   </profile-form-ui>
 </ng-container>
