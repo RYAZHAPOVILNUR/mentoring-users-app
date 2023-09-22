@@ -17,9 +17,12 @@ import {CommonModule} from "@angular/common";
 
 export class TasksSearchInputComponent {
 
+  public text = '';
+
   @Output() handleSearchText: EventEmitter<string> = new EventEmitter<string>();
 
-  public searchTasks(event: any): void {
-    this.handleSearchText.emit(event.target.value);
+  public searchTasks(text: string): void {
+    this.text = text;
+    this.handleSearchText.emit(this.text);
   }
 }
