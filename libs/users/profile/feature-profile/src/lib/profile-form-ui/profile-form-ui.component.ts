@@ -33,18 +33,17 @@ export class ProfileFormUiComponent {
   private readonly destroyRef = inject(DestroyRef);
   private readonly authFacade = inject(AuthFacade);
 
+  private _vm!: ProfileFormVm;
+
   @Input({ required: true })
   set vm(vm: ProfileFormVm) {
     this._vm = vm;
   }
-
   get vm(): ProfileFormVm {
     return this._vm;
   }
 
   @Output() loadPhoto: EventEmitter<File> = new EventEmitter<File>();
-
-  private _vm!: ProfileFormVm;
 
   public onOpenChangePassword(): void {
     const dialogRef = this.dialog.open(PasswordChangeDialogComponent)
@@ -61,7 +60,7 @@ export class ProfileFormUiComponent {
       });
   }
 
-  handleFileInput(event: any) {
+  public handleFileInput(event: any): void {
     const file = event.target.files[0];
     if (file) {
       this.loadPhoto.emit(file);
