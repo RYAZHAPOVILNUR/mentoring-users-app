@@ -27,7 +27,7 @@ export class UserProfileContainerComponent {
   private readonly store = inject(Store);
 
   public readonly status$ = this.store.select(selectAuthStatus);
-  public readonly user$: Observable<UsersEntity | null> = this.usersFacade.openedUser$
+  public readonly user$: Observable<any | null> = this.usersFacade.openedUser$
     .pipe(
       tap(_ => this.usersFacade.loadUser())
     );
