@@ -2,5 +2,6 @@
   <mat-icon class="d-flex align-items-center icon">search icon</mat-icon>
   <input class="w-100"
          type="text"
-         (keyup.enter)="searchTasks($event)">
+         [(ngModel)]="text"
+         (ngModelChange)="searchTasks($event)">
 </div>
