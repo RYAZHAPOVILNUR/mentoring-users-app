@@ -1,5 +1,9 @@
 <div *ngFor="let article of articles">
-  <mat-card class="article">
+  <mat-card class="article"
+  [routerLink]="['/articles/:id']"
+  [queryParams]="{ id: article.id }"
+  routerLinkActive="router-link-active"
+  >
     <mat-card-header class="article-header">
 
       <button mat-icon-button
@@ -11,8 +15,9 @@
         <mat-icon >edit</mat-icon>
       </button>
 
-      <mat-card-title >{{article.title}}</mat-card-title>
+      <mat-card-title>{{article.title}}</mat-card-title>
 
+      <mat-card-subtitle (click)="preventRouterNavigation($event)">от: Админ Админыч</mat-card-subtitle>
       <mat-card-subtitle
       >от:
         <span
@@ -24,14 +29,12 @@
       <mat-card-subtitle class="article-subtitle">{{ article.created_at | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
     </mat-card-header>
 
-
-
     <mat-card-content class="article-content">
       <article class="block-with-text"
                [routerLink]="['/articles/:id']"
                [queryParams]="{ id: article.id }"
                routerLinkActive="router-link-active"
-      >22 {{ clearArticleContent(article.content) }}</article>
+      >{{ clearArticleContent(article.content) }}</article>
     </mat-card-content>
 
 

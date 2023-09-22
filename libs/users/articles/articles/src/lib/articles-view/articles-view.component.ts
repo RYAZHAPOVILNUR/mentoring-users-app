@@ -29,4 +29,7 @@ export class ArticlesViewComponent {
   public clearArticleContent(content: string) {
     return content.replace(/<[^>]*>/g, ' ')
   }
+
+  preventRouterNavigation(event: Event) {
+    event.stopPropagation()}
 }
