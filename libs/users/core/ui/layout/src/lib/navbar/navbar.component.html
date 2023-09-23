@@ -33,6 +33,11 @@
     <span matListItemTitle>{{ 'LAYOUT.SIDENAV.SETTINGS' | translate }}</span>
   </mat-list-item>
 
+  <mat-list-item class="list-item" routerLink="chart">
+    <mat-icon matListItemIcon>assessment</mat-icon>
+    <span matListItemTitle>{{ 'LAYOUT.SIDENAV.CHART' | translate }}</span>
+  </mat-list-item>
+
   <mat-list-item class="list-item" (click)="onLogout()">
     <mat-icon matListItemIcon>logout</mat-icon>
     <span class="button-label">{{ 'LAYOUT.SIDENAV.LOGOUT' | translate }}</span>
