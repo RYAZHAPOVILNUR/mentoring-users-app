@@ -1,11 +1,14 @@
 <ng-container
 *ngrxLet="{
   user: user$,
+  githubUserName: githubUserName$,
   status: status$
 } as vm">
 <profile-form-ui *ngIf="vm.status==='loaded'"
 [vm]="vm"
 (loadPhoto)="onLoadPhoto($event)"
+(connectGithub)="onConnectGithub()"
+(disconnectGithub)="onDisconnectGithub()"
 ></profile-form-ui>
 </ng-container>
 

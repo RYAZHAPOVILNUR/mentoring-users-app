@@ -20,6 +20,7 @@ import { DADATA_TOKEN } from '@users/core/dadata';
 import { provideQuillConfig } from 'ngx-quill/config';
 import { articlesEffects, articlesFeature, commentsEffects, commentsFeature } from '@users/users/articles/data-access';
 import { tasksEffects, tasksFeature } from '@users/users/task/data-access';
+import { CLIENT_ID, githubApiEffects, githubApiFeature } from '@users/core/github-api/data-access';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -27,7 +28,14 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideEffects(userEffects, authEffects, articlesEffects, tasksEffects, commentsEffects ),
+    provideEffects(
+      userEffects, 
+      authEffects, 
+      articlesEffects, 
+      tasksEffects, 
+      commentsEffects, 
+      githubApiEffects 
+    ),
     provideStore({
       router: routerReducer,
       [USERS_FEATURE_KEY]: usersReducer,
@@ -35,6 +43,7 @@ export const appConfig: ApplicationConfig = {
       [articlesFeature.name]: articlesFeature.reducer,
       [commentsFeature.name]: commentsFeature.reducer,
       [tasksFeature.name]: tasksFeature.reducer,
+      [githubApiFeature.name]: githubApiFeature.reducer
     }),
     provideRouterStore(),
     provideStoreDevtools({
@@ -53,6 +62,10 @@ export const appConfig: ApplicationConfig = {
     {
       provide: DADATA_TOKEN,
       useValue: environment.dadata_api_key
+    },
+    {
+      provide: CLIENT_ID,
+      useValue: environment.github_client_id
     },
     provideAnimations(),
     provideQuillConfig({
