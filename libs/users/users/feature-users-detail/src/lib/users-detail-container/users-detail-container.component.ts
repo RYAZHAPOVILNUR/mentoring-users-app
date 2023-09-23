@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
@@ -27,9 +27,6 @@ export class UsersDetailComponent {
   public user!: UsersEntity;
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
-
-
-
 
   public readonly user$: Observable<UsersEntity | null> = this.usersFacade.openedUser$.pipe(
     tap(
@@ -79,8 +76,4 @@ export class UsersDetailComponent {
         }
       });
   }
-
-
-
-
 }

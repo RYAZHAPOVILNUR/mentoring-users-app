@@ -9,7 +9,6 @@ import { CreateUserDTO, UsersDTO, UsersEntity, selectRouteParams, usersDTOAdapte
 
 export const userEffects = createEffect(
   () => {
-
     const actions$ = inject(Actions);
     const apiService = inject(ApiService);
 
@@ -35,7 +34,6 @@ export const userEffects = createEffect(
 
 export const deleteUser = createEffect(
   () => {
-
     const actions$ = inject(Actions);
     const apiService = inject(ApiService);
     return actions$.pipe(
@@ -56,7 +54,6 @@ export const deleteUser = createEffect(
 
 export const addUser = createEffect(
   () => {
-
     const actions$ = inject(Actions);
     const apiService = inject(ApiService);
     return actions$.pipe(

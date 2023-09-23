@@ -31,7 +31,6 @@ export class UsersCardComponent {
 
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
 
-
   onOpenMenu(event: Event) {
     event.stopPropagation()
     this.trigger.openMenu();

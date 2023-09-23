@@ -36,7 +36,7 @@ export class ArticleReadContainerComponent {
   public viewedArticle$: Observable<Article | null> = this.store.select(ArticleSelectors.selectArticleForEdit)
     .pipe(
       withLatestFrom(this.articleId$),
-      map(([article, id, ...rest]) => {
+      map(([article, id]) => {
         if (!article && id) {
           this.store.dispatch(ArticlesActions.getArticle({ id }));
         }

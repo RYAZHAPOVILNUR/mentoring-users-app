@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit, Input } from '@angular/core';
+import { Component, ViewEncapsulation, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuillModule } from "ngx-quill";
 import { MatCardModule } from "@angular/material/card";

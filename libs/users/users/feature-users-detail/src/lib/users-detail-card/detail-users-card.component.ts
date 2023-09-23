@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
-  ChangeDetectionStrategy, ChangeDetectorRef,
+  ChangeDetectionStrategy,
   Component,
   DestroyRef,
   EventEmitter,
   inject,
-  Input, OnDestroy,
+  Input,
   OnInit,
   Output, TemplateRef, ViewChild
 } from '@angular/core';
@@ -30,7 +30,6 @@ import { DadataApiService } from "@dadata";
 import {BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap} from "rxjs";
 import { PushPipe } from "@ngrx/component";
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -111,7 +110,6 @@ export class DetailUsersCardComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log(this.vm)
     this.checkChangeFields();
   }
 
@@ -170,6 +168,4 @@ export class DetailUsersCardComponent implements OnInit {
       )
       .subscribe()
   }
-
-
 }

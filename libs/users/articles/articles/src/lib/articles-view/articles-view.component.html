@@ -12,18 +12,15 @@
               [queryParams]="{ mode: 'edit', id: article.id }"
               routerLinkActive="router-link-active"
       >
-        <mat-icon >edit</mat-icon>
+        <mat-icon>edit</mat-icon>
       </button>
 
       <mat-card-title>{{article.title}}</mat-card-title>
 
-      <mat-card-subtitle (click)="preventRouterNavigation($event)">от: Админ Админыч</mat-card-subtitle>
-      <mat-card-subtitle
-      >от:
-        <span
-          [routerLink]="['/profile', article.authorId]"
-        >
-        Админ Админыч
+      <mat-card-subtitle (click)="preventRouterNavigation($event)">
+        от:
+        <span  [routerLink]="['/profile', article.authorId]">
+          Админ Админыч
         </span>
       </mat-card-subtitle>
       <mat-card-subtitle class="article-subtitle">{{ article.created_at | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
@@ -36,8 +33,5 @@
                routerLinkActive="router-link-active"
       >{{ clearArticleContent(article.content) }}</article>
     </mat-card-content>
-
-
-
   </mat-card>
 </div>

@@ -53,12 +53,10 @@ export const loadArticles$ = createEffect(
 export const getArticle$ = createEffect(
   (actions$ = inject(Actions),
     apiService = inject(ApiService)) => {
-
     return actions$.pipe(
       ofType(ArticlesActions.getArticle),
       switchMap(
         ({id}) => {
-          console.log('getArticle')
           return apiService.get<Article>(`/articles/${id}`).pipe(
             map(
               (article) => ArticlesActions.getArticleSuccess({ article })
@@ -70,8 +68,6 @@ export const getArticle$ = createEffect(
           )
         }
       )
-
-
     )
   }, {functional: true}
 )
