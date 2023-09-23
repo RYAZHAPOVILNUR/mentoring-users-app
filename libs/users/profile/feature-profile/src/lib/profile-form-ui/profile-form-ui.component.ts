@@ -34,6 +34,8 @@ export class ProfileFormUiComponent implements OnInit {
   @Input({ required: true }) vm!: ProfileFormVm
 
   @Output() loadPhoto: EventEmitter<File> = new EventEmitter<File>();
+  @Output() connectGithub: EventEmitter<void> = new EventEmitter();
+  @Output() disconnectGithub: EventEmitter<void> = new EventEmitter();
 
   public photo: any
 
@@ -61,5 +63,13 @@ export class ProfileFormUiComponent implements OnInit {
     if (file) {
       this.loadPhoto.emit(file);
     }
+  }
+
+  onConnectGithub() {
+    this.connectGithub.emit();
+  }
+
+  onDisconnectGithub() {
+    this.disconnectGithub.emit();
   }
 }

@@ -12,4 +12,18 @@
   <button mat-button class="navbar-btn" (click)="onOpenChangePassword()">
     <mat-icon>lock-reset</mat-icon><span class="button-label">Сменить пароль</span>
   </button>
+  <div *ngIf="vm.githubUserName as ghUserName; else connectGithub" class="github">
+    <label>
+      <strong>GitHub: </strong>
+      <span>{{ ghUserName }}</span>
+    </label>
+    <button mat-button class="navbar-btn" (click)="onDisconnectGithub()">
+      <span class="button-label">Отвязать Github</span>
+    </button>
+  </div>
+  <ng-template #connectGithub>
+    <button mat-button class="navbar-btn" (click)="onConnectGithub()">
+      <span class="button-label">Привязать Github</span>
+    </button>
+  </ng-template>
 </div>
