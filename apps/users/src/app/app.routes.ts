@@ -52,6 +52,10 @@ export const appRoutes: Route[] = [
         path: 'tasks',
         loadComponent: () => import('@users/users/task').then(c => c.TasksContainerComponent)
       },
+      {
+        path: 'chart',
+        loadComponent: () => import('@users/users/chart').then(c => c.ChartViewComponent)
+      },
       ...layoutAgnosticComponents
     ]
   },
