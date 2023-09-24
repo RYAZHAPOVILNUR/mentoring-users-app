@@ -1,42 +1,44 @@
-import { EventEmitter, Output, inject } from '@angular/core';
 import { ChangeDetectionStrategy, Component, Input, OnInit, DestroyRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ProfileFormVm } from './profile-form-ui-vm';
-import { MatButtonModule } from '@angular/material/button';
-import { FormsModule } from '@angular/forms';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { PasswordChangeDialogComponent, NameChangeDialogComponent } from '@users/core/ui';
+import { PasswordChangeDialogComponent, ProfileChangeDialogComponent } from '@users/core/ui';
+import { AuthFacade, ChangePasswordPayload, ChangeProfileDataPayload } from '@auth/data-access';
+import { EventEmitter, Output, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { AuthFacade, ChangePasswordPayload, ChangeNamePayload } from '@auth/data-access';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { ProfileFormVm } from './feature-user-info-vm';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'profile-form-ui',
+  selector: 'feature-user-info',
   standalone: true,
   imports: [
-    CommonModule,
-    MatButtonModule,
-    FormsModule,
-    MatSidenavModule,
-    MatIconModule,
     PasswordChangeDialogComponent,
-    NameChangeDialogComponent,
+    ProfileChangeDialogComponent,
+    MatSidenavModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    CommonModule,
+    FormsModule,
   ],
-  templateUrl: './profile-form-ui.component.html',
-  styleUrls: ['./profile-form-ui.component.scss'],
+  templateUrl: './feature-user-info.component.html',
+  styleUrls: ['./feature-user-info.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileFormUiComponent implements OnInit {
-  private readonly dialog = inject(MatDialog);
+export class FeatureUserInfoComponent implements OnInit {
+  private readonly dialog = inject(MatDialog); 
   private readonly destroyRef = inject(DestroyRef);
   private readonly authFacade = inject(AuthFacade);
   @Input({ required: true }) vm!: ProfileFormVm
 
   @Output() loadPhoto: EventEmitter<File> = new EventEmitter<File>();
 
-  public photo: any
+  public photo: any;
 
   ngOnInit(): void {
     this.photo = this.vm.user.photo ? this.vm.user.photo.url : ''
@@ -59,17 +61,18 @@ export class ProfileFormUiComponent implements OnInit {
       });
   }
 
-  onOpenChangeName() {
-    const dialogRef = this.dialog.open(NameChangeDialogComponent)
+  onOpenChangeProfileData() {
+    const dialogRef = this.dialog.open(ProfileChangeDialogComponent)
     dialogRef.afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(result => {
+        console.log(result);
         
         if (result) {
-          const changeNamePayload: ChangeNamePayload = {
-            newName: result.value.newName,
+          const changeProfileDataPayload: ChangeProfileDataPayload = {
+            ...result.value,
           }
-          this.authFacade.changeName(changeNamePayload);
+          this.authFacade.changeProfileData(changeProfileDataPayload);
         }
       });
   }
@@ -78,6 +81,6 @@ export class ProfileFormUiComponent implements OnInit {
     const file = event.target.files[0];
     if (file) {
       this.loadPhoto.emit(file);
-    }
+    } 
   }
 }

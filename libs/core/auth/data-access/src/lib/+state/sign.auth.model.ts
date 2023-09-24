@@ -58,6 +58,17 @@ export interface ChangePasswordResponse {
   message: string
 }
 
+export interface ChangeProfileDataResponse {
+  message: string
+}
+
 export interface ChangeNameResponse {
   message: string
+}
+
+export interface ChangeProfileDataPayload {
+  name?: string;
+  city?: string
+  email?: string;
+  password?: string;
 }

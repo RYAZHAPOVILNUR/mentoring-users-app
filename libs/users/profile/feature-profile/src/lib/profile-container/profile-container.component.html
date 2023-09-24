@@ -1,13 +1,14 @@
 <ng-container
-*ngrxLet="{
-  user: user$,
-  status: status$
-} as vm">
-<profile-form-ui *ngIf="vm.status==='loaded'"
-[vm]="vm"
-(loadPhoto)="onLoadPhoto($event)"
-></profile-form-ui>
-</ng-container>
-
-
-
+  *ngrxLet="{
+    user: user$,
+    status: status$
+  } as vm" class="profile-container">
+  
+  <div class="profile-container">
+    <feature-user-info class="profile-column" *ngIf="vm.status==='loaded'"
+    [vm]="vm"
+    (loadPhoto)="onLoadPhoto($event)"
+    ></feature-user-info>
+    <users-feature-user-general class="profile-column"></users-feature-user-general>
+  </div>
+  </ng-container>

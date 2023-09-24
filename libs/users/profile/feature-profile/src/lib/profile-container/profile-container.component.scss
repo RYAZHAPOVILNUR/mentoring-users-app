@@ -1,0 +1,12 @@
+.profile-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.profile-column:nth-child(2){
+    width: 65%;
+}
+
+.profile-column:nth-child(1){
+    width: 30%;
+}

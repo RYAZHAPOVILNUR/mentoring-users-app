@@ -4,13 +4,8 @@
 <div class="user-photo-contayner">
   <img [src]="userPhoto | async" alt="User Photo">
 </div>
-
+ 
 <div class="nav-items-list">
-
-  <mat-list-item class="list-item" routerLink="/profile">
-    <mat-icon matListItemIcon>account_circle</mat-icon>
-    <span class="button-label">{{ 'LAYOUT.SIDENAV.PROFILE' | translate }}</span>
-  </mat-list-item>
 
   <mat-list-item class="list-item" routerLink="articles">
     <mat-icon matListItemIcon>book</mat-icon>

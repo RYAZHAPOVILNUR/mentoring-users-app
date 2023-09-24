@@ -11,7 +11,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {BehaviorSubject, debounceTime} from 'rxjs';
 import {PushPipe} from "@ngrx/component";
 
-
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'password-change-dialog',

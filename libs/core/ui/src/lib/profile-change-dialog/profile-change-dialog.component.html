@@ -1,0 +1,20 @@
+<ng-container *ngrxLet="{
+  user: user$,
+} as vm" class="profile-container">
+
+  <h1 mat-dialog-title>Изменение профиля</h1>
+  <form [formGroup]="formGroup">
+    <div mat-dialog-content>
+        <mat-label>Имя</mat-label>
+        <input-name [vm]="vm" [formControlName]="'name'"></input-name>
+        <mat-label>E-mail</mat-label>
+        <users-input-email [vm]="vm" [formControlName]="'email'"></users-input-email>
+        <mat-label>Город</mat-label>
+        <users-input-city [vm]="vm" [formControlName]="'city'" (cityControlEmitter)="onCityReceived($event)"></users-input-city>
+    </div>
+  
+    <div mat-dialog-actions>
+      <button mat-button [mat-dialog-close]="formGroup" (click)="onSubmit()" cdkFocusInitial>Сменить</button>
+    </div>
+  </form> 
+</ng-container>

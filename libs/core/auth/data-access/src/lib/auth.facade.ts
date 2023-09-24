@@ -2,7 +2,7 @@ import { inject, Injectable } from "@angular/core";
 import { select, Store } from "@ngrx/store";
 import * as AuthSelectors from './+state/auth.selectors'
 import { authActions } from "./+state/auth.actions";
-import { ChangeNamePayload, ChangePasswordPayload } from "./+state/sign.auth.model";
+import { ChangeNamePayload, ChangePasswordPayload, ChangeProfileDataPayload } from "./+state/sign.auth.model";
 
 @Injectable({ providedIn: "root" })
 export class AuthFacade {
@@ -22,5 +22,13 @@ export class AuthFacade {
 
   public changeName(data: ChangeNamePayload) {
     this.store.dispatch(authActions.changeName({ data }))
+  }
+
+  public changeProfileData(data: ChangeProfileDataPayload){
+    this.store.dispatch(authActions.changeProfileData({ data }));
+  }
+
+  public getLoggedUser(){
+    return this.user$;
   }
 }
