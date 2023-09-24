@@ -1,4 +1,25 @@
 <div class="home-wrapper">
   <mat-icon class="home-icon">home</mat-icon>
   <h1>Home page</h1>
+
+  <div class="home-wrapper__about">
+    <div class="home-wrapper__text">
+      <h2>Прокачайся в разработке на Angular с ментором</h2>
+      <h4>
+        Ментор помогает студенту отточить навыки программирования,
+        дает ценные советы и руководит учебным процессом,
+        а также делится своими знаниями и опытом.
+      </h4>
+    </div>
+    <div class="home-wrapper__image">
+      <img [src]="'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHByb2dyYW1taW5nJTIwYW5ndWxhcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60'"/>
+    </div>
+  </div>
+
+  <div class="home-wrapper__charts">
+    <highcharts-chart [Highcharts]="Highcharts" [options]="pieChartOptions"></highcharts-chart>
+
+    <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions">
+    </highcharts-chart>
+  </div>
 </div>

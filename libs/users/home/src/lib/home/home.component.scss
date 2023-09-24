@@ -5,6 +5,22 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
+
+  &__about {
+    display: flex;
+  }
+  &__text {
+    margin-right: 20px;
+
+    h2 {
+      font-size: 25px;
+    }
+  }
+
+  &__charts {
+    display: flex;
+    column-gap: 20px;
+  }
 }
 
 .home-icon {
