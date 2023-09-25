@@ -23,6 +23,7 @@
       "@dadata": ["libs/core/dadata/src/index.ts"],
       "@users/core/dadata": ["libs/core/dadata/src/index.ts"],
       "@users/core/data-access": ["libs/core/data-access/src/index.ts"],
+      "@users/core/highcharts": ["libs/core/highcharts/src/index.ts"],
       "@users/core/http": ["libs/core/http/src/index.ts"],
       "@users/core/ui": ["libs/core/ui/src/index.ts"],
       "@users/core/ui/layout": ["libs/users/core/ui/layout/src/public-api.ts"],
@@ -55,6 +56,7 @@
       "@users/users/articles/data-access": [
         "libs/users/articles/data-access/src/index.ts"
       ],
+      "@users/users/chart": ["libs/users/chart/src/index.ts"],
       "@users/users/core/ui/language-switch": [
         "libs/users/core/ui/language-switch/src/index.ts"
       ],
@@ -81,9 +83,6 @@
       ],
       "@users/users/tasks/tasks-view-container": [
         "libs/users/tasks/tasks-view-container/src/index.ts"
-      ],
-      "@users/users/chart": [
-        "libs/users/chart/src/index.ts"
       ]
     }
   },

@@ -1,6 +1,6 @@
 import {
   ChangeDetectionStrategy,
-  Component,
+  Component, OnInit,
   ViewEncapsulation,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -8,6 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
 // @ts-ignore
 import Highcharts from 'highcharts'
 import { HighchartsChartModule } from "highcharts-angular";
+import {HighchartsService} from "@users/core/highcharts";
+import {Student} from "../../../../../core/highcharts/src/lib/students-data.model";
 
 @Component({
   selector: 'users-home',
@@ -22,7 +24,21 @@ import { HighchartsChartModule } from "highcharts-angular";
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
+
+  studentsData: Student[] = []
+
+  constructor(
+    private readonly apiData: HighchartsService
+  ) {
+  }
+
+  ngOnInit() {
+    this.apiData.getData().subscribe((data) => {
+      console.log(data)
+      // this.studentsData = data
+    })
+  }
 
   Highcharts: typeof Highcharts = Highcharts;
 
