@@ -1,12 +1,16 @@
 import { DeepReadonly } from '@users/core/utils'
-
+export enum Role {
+  Admin = "admin",
+  User = "user",
+  Mentor = "mentor"
+}
 export type UsersDTO = DeepReadonly<{
   id: number;
   name: string;
   username: string;
   email: string;
   city: string;
-  role: 'admin' | 'user';
+  role: Role;
   photo?: UsersPhoto | null
 }>
 
@@ -17,7 +21,7 @@ export type CreateUserDTO = DeepReadonly<{
   username?: string;
   email: string;
   city?: string;
-  role?: 'admin' | 'user'
+  role?: Role;
 }>
 
 export type UsersPhoto = {

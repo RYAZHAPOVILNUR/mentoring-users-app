@@ -12,3 +12,8 @@ export const selectGithubUserAvatar = createSelector(
   selectGithubUser,
   (state) => state?.avatar_url
 )
+
+export const selectGithubStatus = createSelector(
+  selectStatus,
+  (state) => state
+)

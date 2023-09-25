@@ -1,7 +1,10 @@
 <div>
+  <users-tasks-search-input (handleSearchText)="onHandleSearchText($event)">
+  </users-tasks-search-input>
+
   <users-tasks-view
-    [columns]="columns$ | ngrxPush"
-    [colorMode]="colorMode$ | ngrxPush" 
+    [columns]="(text ? filteredColumn$ : columns$) | ngrxPush"
+    [colorMode]="colorMode$ | ngrxPush"
     (updateColumns)="onUpdateColumns($event)"
     (deleteColumn)="deleteColumn($event)"
     (addTask)="addTask($event)"
