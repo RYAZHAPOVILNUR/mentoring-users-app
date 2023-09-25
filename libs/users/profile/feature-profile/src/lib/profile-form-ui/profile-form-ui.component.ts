@@ -10,6 +10,7 @@ import { PasswordChangeDialogComponent } from '@users/core/ui';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthFacade, ChangePasswordPayload } from '@auth/data-access';
 import { MatDialog } from '@angular/material/dialog';
+import { UsersDetailComponent } from "@users/feature-users-detail";
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -21,7 +22,8 @@ import { MatDialog } from '@angular/material/dialog';
     FormsModule,
     MatSidenavModule,
     MatIconModule,
-    PasswordChangeDialogComponent
+    PasswordChangeDialogComponent,
+    UsersDetailComponent
   ],
   templateUrl: './profile-form-ui.component.html',
   styleUrls: ['./profile-form-ui.component.scss'],

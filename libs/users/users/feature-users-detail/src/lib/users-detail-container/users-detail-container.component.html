@@ -6,6 +6,7 @@
 } as vm">
   <detail-users-card
     [vm]="vm"
+    [isAdmin]="isAdmin"
     (editUser)="onEditUser($event.user, $event.onSuccessCb)"
     (closeUser)="onCloseUser()"
     (closeEditMode)="onCloseEditMode()"

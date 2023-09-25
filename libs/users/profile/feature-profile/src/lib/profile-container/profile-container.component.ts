@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileFormUiComponent } from '../profile-form-ui/profile-form-ui.component';
-import { UsersEntity } from '@users/core/data-access';
+import { selectRouteParams } from '@users/core/data-access';
 import { Store } from '@ngrx/store';
 import { authActions, selectAuthStatus, selectLoggedUser } from '@auth/data-access';
 import { LetDirective } from '@ngrx/component';
 import { CropperDialogComponent } from '@users/core/ui';
 import { MatDialog } from '@angular/material/dialog';
+import { map, withLatestFrom } from "rxjs";
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -23,12 +24,16 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ProfileContainerComponent {
   private readonly store = inject(Store);
-  public readonly user!: UsersEntity;
   private readonly dialog = inject(MatDialog);
 
   public readonly user$ = this.store.select(selectLoggedUser);
   public readonly status$ = this.store.select(selectAuthStatus);
-
+  public isMyProfile$ = this.user$.pipe(
+    withLatestFrom(this.store.select(selectRouteParams)),
+    map(([user, params]) =>  {
+      return (+user['id'] === +params['id'] || !params['id']);
+    }),
+  )
 
   onLoadPhoto(file: File) {
     const reader = new FileReader();

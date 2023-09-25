@@ -37,7 +37,7 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'profile/:id',
-        loadComponent: () => import('@users/feature-users-detail').then(c => c.UsersDetailComponent),
+        loadComponent: () => import('@users/users/profile/feature-profile').then(c => c.ProfileContainerComponent),
       },
       {
         path: 'article-editor',

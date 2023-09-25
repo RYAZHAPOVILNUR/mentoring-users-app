@@ -2,11 +2,13 @@
   <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
 </ng-container>
 
+
+
 <ng-template #loadingResult>
   <ng-container *ngIf="vm.status === 'loaded'; else error">
     <div class="edit-user-container">
       <mat-card class="edit-user-card">
-        <div class="close-button-container">
+        <div *ngIf="isAdmin" class="close-button-container">
           <button mat-icon-button aria-label="close dialog" color="accent" (click)="onCloseUser()">
             <mat-icon>arrow_back</mat-icon>
           </button>
@@ -14,7 +16,7 @@
           type="button"
           color="accent"
           class="edit-user-button"
-          *ngIf="!vm.editMode"
+          *ngIf="!vm.editMode "
           (click)="onOpenEditMode()"
           ><mat-icon>edit</mat-icon>
           </button>
