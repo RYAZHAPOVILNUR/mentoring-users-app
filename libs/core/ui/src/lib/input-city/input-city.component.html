@@ -1,9 +1,10 @@
 <mat-form-field appearance="outline">
     <input
+      #inputElement
       matInput
+      (input)="onInputValueChange($event)"
       type="text"
-      [value]="value"
-      (click)="testClick()"
+      [value]="value$ | async"
       formControlName="city"
       [matAutocomplete]="auto">
       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" >

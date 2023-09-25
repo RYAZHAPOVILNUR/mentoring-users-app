@@ -39,9 +39,7 @@ export class ProfileChangeDialogComponent{
   private dialogRef = inject(MatDialogRef<ProfileChangeDialogComponent>);
   private readonly destroyRef = inject(DestroyRef);
   private authFacade = inject(AuthFacade);
-  public onCityReceived (receivedCityControl: any) {
-    this.formGroup.addControl("city", receivedCityControl);
-  }
+
   public user$ = this.authFacade.user$;
   
   public formGroup = new FormBuilder().group({
