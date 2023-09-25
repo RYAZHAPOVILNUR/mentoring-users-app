@@ -25,6 +25,8 @@ export class AuthFacade {
   }
 
   public changeProfileData(data: ChangeProfileDataPayload){
+    console.log("data", data);
+    
     this.store.dispatch(authActions.changeProfileData({ data }));
   }
 

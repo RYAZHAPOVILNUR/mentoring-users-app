@@ -1,14 +1,14 @@
 <mat-form-field appearance="outline">
     <input
-      #inputElement
+      id="inputElement"
       matInput
       (input)="onInputValueChange($event)"
       type="text"
-      [value]="value$ | async"
+      [value]="value"
       formControlName="city"
       [matAutocomplete]="auto">
       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" >
-        <mat-option *ngFor="let suggestion of citySuggestions | ngrxPush" [value]="suggestion">
+        <mat-option *ngFor="let suggestion of citySuggestions$ | ngrxPush" [value]="suggestion">
           {{suggestion}}
         </mat-option>
       </mat-autocomplete>

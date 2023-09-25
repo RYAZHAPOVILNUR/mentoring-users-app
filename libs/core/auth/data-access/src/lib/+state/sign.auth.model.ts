@@ -70,5 +70,4 @@ export interface ChangeProfileDataPayload {
   name?: string;
   city?: string
   email?: string;
-  password?: string;
 }

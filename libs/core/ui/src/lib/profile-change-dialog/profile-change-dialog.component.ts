@@ -1,7 +1,7 @@
-import { AuthFacade } from '@auth/data-access';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { LetDirective, PushPipe } from "@ngrx/component";
 import { InputEmailComponent } from '../input-email/input-email.component';
 import { InputNameComponent } from '../input-name/input-name.component';
 import { InputCityComponent } from '../input-city/input-city.component';
@@ -10,7 +10,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
-import { LetDirective, PushPipe } from "@ngrx/component";
+import { AuthFacade } from '@auth/data-access';
 
 
 @Component({
@@ -43,7 +43,7 @@ export class ProfileChangeDialogComponent{
   public user$ = this.authFacade.user$;
   
   public formGroup = new FormBuilder().group({
-    name: new FormControl('', [Validators.required]),
+    name: new FormControl("", [Validators.required]),
     city: new FormControl("", [Validators.required]),
     email: new FormControl("", [Validators.required, Validators.email])
   });
@@ -54,8 +54,12 @@ export class ProfileChangeDialogComponent{
 
   // TODO - Собрать данные и отправить НОРМАЛЬНО, и что за там ошибки в консоле куча ?
   onSubmit(): void{
-   console.log("user",this.user$);
-  //  this.formGroup.add
-    // this.authFacade.changeProfileData(this.formGroup.controls.city);
+    const payload = {
+      name: this.formGroup.get('name')?.value || '',
+      city: this.formGroup.get('city')?.value || '',
+      email: this.formGroup.get('email')?.value || ''
+    };
+    console.log("payload", payload);  
+   this.authFacade.changeProfileData(payload);
   }
 }
