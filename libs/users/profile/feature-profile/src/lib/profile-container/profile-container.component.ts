@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
-import { noop, of, take, tap } from 'rxjs';
+import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { noop, of, tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ProfileFormUiComponent } from '../profile-form-ui/profile-form-ui.component';
 import { UsersEntity, selectQueryParam } from '@users/core/data-access';
@@ -8,8 +8,7 @@ import { authActions, selectAuthStatus, selectLoggedUser } from '@auth/data-acce
 import { LetDirective } from '@ngrx/component';
 import { CropperDialogComponent } from '@users/core/ui';
 import { MatDialog } from '@angular/material/dialog';
-import { GithubApiService, githubApiActions, selectGithubUserName } from '@users/core/github-api/data-access';
-import { Router } from '@angular/router';
+import { GithubApiService, githubApiActions, selectGithubStatus, selectGithubUserName } from '@users/core/github-api/data-access';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -25,7 +24,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrls: ['./profile-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileContainerComponent {
+export class ProfileContainerComponent implements OnInit {
+
   private readonly store = inject(Store);
   private destroyRef = inject(DestroyRef);
   public readonly user!: UsersEntity;
@@ -34,6 +34,8 @@ export class ProfileContainerComponent {
   public readonly user$ = this.store.select(selectLoggedUser);
   public readonly status$ = this.store.select(selectAuthStatus);
   public readonly githubUserName$ = this.store.select(selectGithubUserName);
+  public readonly githubStatus$ = this.store.select(selectGithubStatus);
+  public readonly isLoggedUser = of(true);
 
   ngOnInit() {
     this.store.select(selectQueryParam('code')).pipe(
@@ -51,7 +53,7 @@ export class ProfileContainerComponent {
     }
   }
 
-  onLoadPhoto(file: File) {
+  public onLoadPhoto(file: File): void {
     const reader = new FileReader();
     reader.onload = (e: any) => {
       const image = new Image();

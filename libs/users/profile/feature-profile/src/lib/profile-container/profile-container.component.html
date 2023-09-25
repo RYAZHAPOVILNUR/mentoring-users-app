@@ -1,8 +1,9 @@
-<ng-container
-*ngrxLet="{
+<ng-container *ngrxLet="{
   user: user$,
+  status: status$,
   githubUserName: githubUserName$,
-  status: status$
+  githubStatus: githubStatus$,
+  isLoggedUser
 } as vm">
 <profile-form-ui *ngIf="vm.status==='loaded'"
 [vm]="vm"

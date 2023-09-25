@@ -22,6 +22,10 @@ export const githubApiFeature = createFeature({
   name: 'githubApi',
   reducer: createReducer(
     githubApiInitialState,
+    on(githubApiActions.getAccessToken, (state) => ({
+      ...state,
+      status: 'loading' as const,
+    })),
     on(githubApiActions.getAccessTokenSuccess, (state, { token }) => ({
       ...state,
       status: 'loaded' as const,
@@ -32,9 +36,13 @@ export const githubApiFeature = createFeature({
       status: 'error' as const,
       error
     })),
+    on(githubApiActions.getGithubUser, (state) => ({
+      ...state,
+      status: 'loading' as const,
+    })),
     on(githubApiActions.getGithubUserSuccess, (state, { user }) => ({
       ...state,
-      authStatus: 'loaded' as const,
+      status: 'loaded' as const,
       githubUser: user
     })),
     on(githubApiActions.getGithubUserFailure, (state, { error }) => ({

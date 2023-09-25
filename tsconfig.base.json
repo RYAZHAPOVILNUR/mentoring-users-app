@@ -85,6 +85,9 @@
       ],
       "@users/users/tasks/tasks-view-container": [
         "libs/users/tasks/tasks-view-container/src/index.ts"
+      ],
+      "@users/users/chart": [
+        "libs/users/chart/src/index.ts"
       ]
     }
   },
