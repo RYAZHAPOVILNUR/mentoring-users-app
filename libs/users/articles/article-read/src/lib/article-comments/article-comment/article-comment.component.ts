@@ -31,7 +31,6 @@ import {RouterLink} from "@angular/router";
 })
 export class ArticleCommentComponent {
   private readonly languageService = inject(LanguageSwitchService);
-  public currentLanguage$ = this.languageService.selectedLanguage$.asObservable()
   public likesCount: number = 0;
   public isLikeActive: boolean = false;
 
