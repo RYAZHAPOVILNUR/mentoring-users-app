@@ -22,5 +22,22 @@
         <mat-icon>lock-reset</mat-icon><span class="button-label">Сменить пароль</span>
       </button>
     </ng-container>
+    <mat-spinner *ngIf="vm.githubStatus === 'loading'" diameter="24"></mat-spinner>
+    <ng-container *ngIf="vm.githubStatus !== 'loading'">
+      <div *ngIf="vm.githubUserName as ghUserName; else connectGithub" class="github">
+        <button mat-button class="navbar-btn" disabled>
+          <mat-icon svgIcon="github"></mat-icon>
+          <span>{{ ghUserName }}</span>
+        </button>
+        <button mat-button class="navbar-btn" (click)="onDisconnectGithub()">
+          <span class="button-label">Отвязать GitHub</span>
+        </button>
+      </div>
+      <ng-template #connectGithub>
+        <button mat-button class="navbar-btn" (click)="onConnectGithub()">
+          <mat-icon svgIcon="github">edit</mat-icon><span class="button-label">Привязать GitHub</span>
+        </button>
+      </ng-template>
+    </ng-container>
   </div>
 </ng-container>
