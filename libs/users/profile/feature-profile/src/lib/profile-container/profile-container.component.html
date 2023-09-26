@@ -3,10 +3,15 @@
   user: user$,
   status: status$,
   isMyProfile: isMyProfile$,
+  githubUserName: githubUserName$,
+  githubStatus: githubStatus$,
+  isLoggedUser
 } as vm">
 <profile-form-ui *ngIf="vm.status==='loaded'"
 [vm]="vm"
 (loadPhoto)="onLoadPhoto($event)"
+(connectGithub)="onConnectGithub()"
+(disconnectGithub)="onDisconnectGithub()"
 ></profile-form-ui>
 </ng-container>
 

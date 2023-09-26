@@ -18,10 +18,16 @@ export class TasksFacade {
   getAllBoards() {
     this.store.dispatch(tasksAction.loadBoards());
   }
+
   updateColumns(columns: IColumn[]) {
     this.store.dispatch(tasksAction.updateColumns({ columns }));
   }
+
   deleteColumn(columnIndex: number) {
     this.store.dispatch(tasksAction.deleteColumn({ columnIndex }));
+  }
+
+  public searchTask(term: string): void {
+    this.store.dispatch(tasksAction.searchTask({term}));
   }
 }

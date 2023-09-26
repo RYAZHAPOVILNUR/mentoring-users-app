@@ -1,6 +1,7 @@
 <div *ngIf='article'>
   <mat-card class="article">
     <mat-card-header class="article-header">
+      <img *ngIf="authorPhoto$ | ngrxPush" mat-card-avatar [src]="authorPhoto$ | ngrxPush" alt="">
       <mat-card-title class="article-title">{{article.title}}</mat-card-title>
       <mat-card-subtitle
         [routerLink]="['/profile', article.authorId]"
