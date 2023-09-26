@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileFormUiComponent } from '../profile-form-ui/profile-form-ui.component';
 import { UsersEntity } from '@users/core/data-access';
@@ -7,6 +7,7 @@ import { authActions, selectAuthStatus, selectLoggedUser } from '@auth/data-acce
 import { LetDirective } from '@ngrx/component';
 import { CropperDialogComponent } from '@users/core/ui';
 import { MatDialog } from '@angular/material/dialog';
+import {of} from "rxjs";
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -22,6 +23,7 @@ import { MatDialog } from '@angular/material/dialog';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileContainerComponent {
+
   private readonly store = inject(Store);
   public readonly user!: UsersEntity;
   private readonly dialog = inject(MatDialog);
@@ -29,8 +31,9 @@ export class ProfileContainerComponent {
   public readonly user$ = this.store.select(selectLoggedUser);
   public readonly status$ = this.store.select(selectAuthStatus);
 
+  public readonly isLoggedUser = of(true);
 
-  onLoadPhoto(file: File) {
+  public onLoadPhoto(file: File): void {
     const reader = new FileReader();
     reader.onload = (e: any) => {
       const image = new Image();

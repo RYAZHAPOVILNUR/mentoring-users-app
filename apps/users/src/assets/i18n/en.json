@@ -9,8 +9,8 @@
       "ARTICLES": "Articles",
       "CREATE_ARTICLE": "Create article",
       "TASKS": "Tasks",
-      "CONTACTS": "Contacts",
       "SETTINGS": "Settings",
+      "CHART": "Chart",
       "LOGOUT": "Logout"
     }
   }

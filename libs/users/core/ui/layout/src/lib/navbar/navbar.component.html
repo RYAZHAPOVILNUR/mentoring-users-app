@@ -29,13 +29,13 @@
   </mat-list-item>
 
   <mat-list-item class="list-item">
-    <mat-icon matListItemIcon> contacts</mat-icon>
-    <span matListItemTitle>{{ 'LAYOUT.SIDENAV.CONTACTS' | translate }}</span>
-  </mat-list-item>
-
-  <mat-list-item class="list-item">
     <mat-icon matListItemIcon>settings</mat-icon>
     <span matListItemTitle>{{ 'LAYOUT.SIDENAV.SETTINGS' | translate }}</span>
+  </mat-list-item>
+
+  <mat-list-item class="list-item" routerLink="chart">
+    <mat-icon matListItemIcon>assessment</mat-icon>
+    <span matListItemTitle>{{ 'LAYOUT.SIDENAV.CHART' | translate }}</span>
   </mat-list-item>
 
   <mat-list-item class="list-item" (click)="onLogout()">
