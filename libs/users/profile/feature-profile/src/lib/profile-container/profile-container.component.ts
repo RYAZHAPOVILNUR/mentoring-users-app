@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
-import { noop, of, tap, map, withLatestFrom } from 'rxjs';
+import { noop, of, tap, map, withLatestFrom, Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ProfileFormUiComponent } from '../profile-form-ui/profile-form-ui.component';
-import { UsersEntity,selectRouteParams, selectQueryParam } from '@users/core/data-access';
+import { UsersEntity, selectRouteParams, selectQueryParam, LoadingStatus } from '@users/core/data-access';
 import { Store } from '@ngrx/store';
 import { authActions, selectAuthStatus, selectLoggedUser } from '@auth/data-access';
 import { LetDirective } from '@ngrx/component';
@@ -31,11 +31,11 @@ export class ProfileContainerComponent implements OnInit {
   public readonly user!: UsersEntity;
   private readonly dialog = inject(MatDialog);
   private readonly githubApiService = inject(GithubApiService);
-  public readonly user$ = this.store.select(selectLoggedUser);
-  public readonly status$ = this.store.select(selectAuthStatus);
-  public readonly githubUserName$ = this.store.select(selectGithubUserName);
-  public readonly githubStatus$ = this.store.select(selectGithubStatus);
-  public readonly isLoggedUser = of(true);
+  public readonly user$: Observable<UsersEntity> = this.store.select(selectLoggedUser);
+  public readonly status$: Observable<LoadingStatus> = this.store.select(selectAuthStatus);
+  public readonly githubUserName$: Observable<string | undefined> = this.store.select(selectGithubUserName);
+  public readonly githubStatus$: Observable<LoadingStatus> = this.store.select(selectGithubStatus);
+  public readonly isLoggedUser: Observable<boolean> = of(true);
 
 
     public isMyProfile$ = this.user$.pipe(
