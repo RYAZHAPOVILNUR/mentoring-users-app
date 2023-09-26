@@ -18,7 +18,6 @@
   <mat-spinner *ngIf="status === 'loading'" diameter="50"></mat-spinner>
   <ul *ngIf="status === 'loaded'">
     <li *ngFor="let comment of comments">
-      <!-- <article-comment [comment]="comment"></article-comment> -->
       <article-comment [comment]="comment"
                        [userId]="userId">
       </article-comment>
