@@ -4,7 +4,6 @@ import { selectComments, selectCommentsEntities } from "./comments.selectors";
 import { Observable } from "rxjs";
 import { Comment } from "../../models/user-comment.model";
 
-
 @Injectable({providedIn: 'root'})
 export class CommentsFacade {
   private readonly store = inject(Store);

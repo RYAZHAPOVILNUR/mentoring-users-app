@@ -1,4 +1,4 @@
-import { UsersDTO } from "./users-dto.model"
+import { UsersDTO,Role} from "./users-dto.model"
 import { UsersEntity } from "./users.entity"
 
 type UsersDTOAdapter = {
@@ -12,7 +12,7 @@ export const usersDTOAdapter: UsersDTOAdapter = {
 
     return {
       ...otherAddressFields,
-      isAdmin: role === 'admin' ? true : false,
+      isAdmin: role === Role.Admin ? true : false,
     }
   },
   entityToDTO(entity) {
@@ -20,7 +20,7 @@ export const usersDTOAdapter: UsersDTOAdapter = {
 
     return {
       ...otherFields,
-      role: isAdmin ? 'admin' : 'user',
+      role: isAdmin ? Role.Admin : Role.User,
     };
   }
 }

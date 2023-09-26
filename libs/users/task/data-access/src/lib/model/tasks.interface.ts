@@ -4,6 +4,8 @@ export interface ITaskBoard {
   email: string;
   authorId: number;
   columns: IColumn[];
+  term: string;
+  filteredColumns: IColumn[];
 }
 
 export interface ITask {

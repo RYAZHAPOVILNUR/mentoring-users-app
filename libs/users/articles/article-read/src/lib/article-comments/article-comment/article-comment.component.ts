@@ -10,6 +10,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PushPipe } from '@ngrx/component';
 import { LanguageSwitchService } from '../../../../../../core/ui/language-switch/src';
 import { Comment } from '../../../../../data-access/src';
+import {RouterLink} from "@angular/router";
 @Component({
   standalone: true,
   imports: [
@@ -21,18 +22,21 @@ import { Comment } from '../../../../../data-access/src';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    PushPipe
+    PushPipe,
+    RouterLink,
   ],
   selector: 'article-comment',
   templateUrl: './article-comment.component.html',
   styleUrls: ['./article-comment.component.scss'],
 })
 export class ArticleCommentComponent {
-  @Input({ required: true }) comment!: Comment;
   private readonly languageService = inject(LanguageSwitchService);
-  public readonly currentLanguage$ = this.languageService.selectedLanguage$.asObservable()
-  public likesCount = 0;
-  public isLikeActive = false;
+  public currentLanguage$ = this.languageService.selectedLanguage$.asObservable()
+  public likesCount: number = 0;
+  public isLikeActive: boolean = false;
+
+  @Input({ required: true }) comment!: Comment;
+  @Input({required: true}) userId!: number;
 
   public onThumbUp() {
     this.likesCount = this.likesCount === 0 ? 1 : 0;

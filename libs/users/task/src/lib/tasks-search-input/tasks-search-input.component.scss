@@ -1,0 +1,15 @@
+.input {
+  border: 1px solid #ddd;
+  width: 160px;
+  .icon {
+    width: 32px;
+    height: 32px;
+  }
+  input {
+    border: none;
+    background: none;
+    &:focus {
+      outline: none;
+    }
+  }
+}
