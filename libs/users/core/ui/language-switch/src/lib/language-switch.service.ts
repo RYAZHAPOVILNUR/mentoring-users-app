@@ -28,4 +28,5 @@ export class LanguageSwitchService {
     this.selectedLanguage$ = new BehaviorSubject<LanguageKeys>(this.getStoredLanguage());
     this.translateService.setDefaultLang(this.getStoredLanguage())
   }
+
 }
