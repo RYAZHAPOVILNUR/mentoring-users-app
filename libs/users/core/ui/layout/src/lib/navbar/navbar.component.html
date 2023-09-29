@@ -1,41 +1,41 @@
 <mat-nav-list>
-  <div class="user-photo-contayner">
-    <img [src]="userPhoto | ngrxPush" alt="User Photo" />
-  </div>
 
+  <div class="user-photo-contayner">
+    <img [src]="userPhoto | ngrxPush" alt="User Photo">
+  </div>
+  
   <div class="nav-items-list">
+  
     <mat-list-item class="list-item" routerLink="/profile">
       <mat-icon matListItemIcon>account_circle</mat-icon>
-      <span class="button-label">{{
-        'LAYOUT.SIDENAV.PROFILE' | translate
-      }}</span>
+      <span class="button-label">{{ 'LAYOUT.SIDENAV.PROFILE' | translate }}</span>
     </mat-list-item>
-
+  
     <mat-list-item class="list-item" routerLink="articles">
       <mat-icon matListItemIcon>book</mat-icon>
       <span matListItemTitle>{{ 'LAYOUT.SIDENAV.ARTICLES' | translate }}</span>
     </mat-list-item>
-
+  
     <mat-list-item class="list-item" routerLink="tasks">
       <mat-icon matListItemIcon>assignment</mat-icon>
       <span matListItemTitle>{{ 'LAYOUT.SIDENAV.TASKS' | translate }}</span>
     </mat-list-item>
-
+  
     <mat-list-item class="list-item">
       <mat-icon matListItemIcon>settings</mat-icon>
       <span matListItemTitle>{{ 'LAYOUT.SIDENAV.SETTINGS' | translate }}</span>
     </mat-list-item>
-
+  
     <mat-list-item class="list-item" routerLink="chart">
       <mat-icon matListItemIcon>assessment</mat-icon>
       <span matListItemTitle>{{ 'LAYOUT.SIDENAV.CHART' | translate }}</span>
     </mat-list-item>
-
+  
     <mat-list-item class="list-item" (click)="onLogout()">
       <mat-icon matListItemIcon>logout</mat-icon>
-      <span class="button-label">{{
-        'LAYOUT.SIDENAV.LOGOUT' | translate
-      }}</span>
+      <span class="button-label">{{ 'LAYOUT.SIDENAV.LOGOUT' | translate }}</span>
     </mat-list-item>
+  
   </div>
-</mat-nav-list>
+  
+  </mat-nav-list>
