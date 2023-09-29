@@ -1,33 +1,39 @@
-<div *ngFor="let article of articles">
-  <mat-card class="article"
-  [routerLink]="['/articles/:id']"
-  [queryParams]="{ id: article.id }"
-  routerLinkActive="router-link-active"
-  >
-    <mat-card-header class="article-header">
+<div>
+  <div *ngFor="let article of articles">
+    <mat-card
+      class="article"
+      [routerLink]="['/articles/:id']"
+      [queryParams]="{ id: article.id }"
+      routerLinkActive="router-link-active"
+    >
+      <mat-card-header class="article-header">
+        <button
+          mat-icon-button
+          *ngIf="article.authorId === loggedUserId"
+          [routerLink]="['/article-editor']"
+          [queryParams]="{ mode: 'edit', id: article.id }"
+          routerLinkActive="router-link-active"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
 
-      <button mat-icon-button
-              *ngIf="article.authorId === loggedUserId"
-              [routerLink]="['/article-editor']"
-              [queryParams]="{ mode: 'edit', id: article.id }"
-              routerLinkActive="router-link-active"
-      >
-        <mat-icon >edit</mat-icon>
-      </button>
+        <mat-card-title>{{ article.title }}</mat-card-title>
 
-      <mat-card-title>{{article.title}}</mat-card-title>
+        <mat-card-subtitle (click)="preventRouterNavigation($event)">{{
+          article.author
+        }}</mat-card-subtitle>
+        <mat-card-subtitle class="article-subtitle">{{
+          article.created_at | date : 'dd/MM/yyyy'
+        }}</mat-card-subtitle>
+      </mat-card-header>
 
-      <mat-card-subtitle (click)="preventRouterNavigation($event)">{{article.author}}</mat-card-subtitle>
-      <mat-card-subtitle class="article-subtitle">{{ article.created_at | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
-    </mat-card-header>
+      <mat-card-content class="article-content">
+        <article class="block-with-text">
+          {{ clearArticleContent(article.content) }}
+        </article>
+      </mat-card-content>
+    </mat-card>
+  </div>
 
-    <mat-card-content class="article-content">
-      <article class="block-with-text"
-
-      >{{ clearArticleContent(article.content) }}</article>
-    </mat-card-content>
-
-
-
-  </mat-card>
+  <users-articles-create-button></users-articles-create-button>
 </div>
