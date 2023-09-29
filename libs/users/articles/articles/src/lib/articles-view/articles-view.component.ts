@@ -1,4 +1,8 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuillModule } from 'ngx-quill';
 import { MatCardModule } from '@angular/material/card';
@@ -26,7 +30,7 @@ import { ArticlesCreateButtonComponent } from '@users/users/articles/articles-cr
   styleUrls: ['./articles-view.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ArticlesViewComponent {
+export class ArticlesViewComponent  {
   @Input({ required: true }) articles!: Article[];
   @Input({ required: true }) loggedUserId!: number;
   public clearArticleContent(content: string) {
@@ -36,4 +40,5 @@ export class ArticlesViewComponent {
   preventRouterNavigation(event: Event) {
     event.stopPropagation();
   }
+
 }
