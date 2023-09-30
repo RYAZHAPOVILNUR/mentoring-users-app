@@ -1,0 +1,41 @@
+<mat-card
+  class="board-column"
+  cdkDropList
+  [cdkDropListData]="column"
+  (cdkDropListDropped)="onDragDrop($event)"
+>
+  <div class="column-title" (dblclick)="onEditing()">
+    <span *ngIf="!editing" class="column-title">{{ title}}</span>
+    <input
+      *ngIf="editing"
+      #input
+      mat-input
+      type="text"
+     [(ngModel)]="title"
+     (keyup.enter)="onEditing()"
+     (blur)="onEditing()"
+    />
+  </div>
+  <div class="tasks-container">
+    <mat-card
+      class="task"
+      *ngFor="let task of column.tasks; let taskIndex = index"
+      cdkDrag
+    >
+      <div [innerHTML]="splitText(task.taskName)"></div>
+      <button
+        mat-icon-button
+        class="delTask"
+        (click)="onRemoveTask(task.taskName)"
+      >
+        х
+      </button>
+    </mat-card>
+  </div>
+  <button mat-raised-button class="delBtnContainer" (click)="removeColumn()">
+    Delete Column
+  </button>
+  <button mat-raised-button class="tasksBtn" (click)="onAddNewTaskModal()">
+    Add Task
+  </button>
+</mat-card>

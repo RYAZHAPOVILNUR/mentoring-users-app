@@ -1,10 +1,37 @@
-<div *ngFor="let article of articles">
-  <mat-card class="article"
-  [routerLink]="['/articles/:id']"
-  [queryParams]="{ id: article.id }"
-  routerLinkActive="router-link-active"
-  >
+<div *ngFor="let article of articles; let i = index">
+  <mat-card class="article">
     <mat-card-header class="article-header">
+      <mat-card-content class="article-header-block">
+        <mat-card-content class="article-author-block-img">
+          <img
+            [routerLink]="
+        article.authorId === loggedUserId
+        ? ['/profile']
+        : ['/profile', article.authorId]
+        "
+            class="article-author-img" *ngIf="(authorPhoto$[i] | ngrxPush) as authorPhoto" mat-card-avatar
+            [src]="authorPhoto"
+            alt="">
+        </mat-card-content>
+        <mat-card-content>
+          <mat-card-title>
+            <article class="block-with-text"
+                     [routerLink]="['/articles/:id']"
+                     [queryParams]="{ id: article.id }"
+                     routerLinkActive="router-link-active"
+            >{{ clearArticleContent(article.title) }}</article>
+          </mat-card-title>
+          <mat-card-subtitle
+            [routerLink]="
+        article.authorId === loggedUserId
+        ? ['/profile']
+        : ['/profile', article.authorId]
+        "
+            class="article-author-name">  от: {{article.author ? article.author : (authorArticle$[i] | ngrxPush) }}
+          </mat-card-subtitle>
+          <mat-card-subtitle class="article-subtitle">{{ article.created_at | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
+        </mat-card-content>
+      </mat-card-content>
 
       <button mat-icon-button
               *ngIf="article.authorId === loggedUserId"
@@ -12,18 +39,15 @@
               [queryParams]="{ mode: 'edit', id: article.id }"
               routerLinkActive="router-link-active"
       >
-        <mat-icon >edit</mat-icon>
+        <mat-icon>edit</mat-icon>
       </button>
-
-      <mat-card-title>{{article.title}}</mat-card-title>
-
-      <mat-card-subtitle (click)="preventRouterNavigation($event)">{{article.author}}</mat-card-subtitle>
-      <mat-card-subtitle class="article-subtitle">{{ article.created_at | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content class="article-content">
       <article class="block-with-text"
-
+               [routerLink]="['/articles/:id']"
+               [queryParams]="{ id: article.id }"
+               routerLinkActive="router-link-active"
       >{{ clearArticleContent(article.content) }}</article>
     </mat-card-content>
 
