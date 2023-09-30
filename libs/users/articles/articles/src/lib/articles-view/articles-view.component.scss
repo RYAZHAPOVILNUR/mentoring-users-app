@@ -2,9 +2,11 @@
   max-width: 700px;
   margin: 40px auto;
   & .article-header {
-    justify-content: space-between;
     padding: 20px 20px 0 20px;
     margin-bottom: 10px;
+    & .article-button {
+        margin-left: auto;
+    }
     & .article-subtitle {
       font-weight: 400;
     }
@@ -19,15 +21,7 @@
         text-overflow: ellipsis;
       }
     }
-  & .article-button {
-    & button {
-      width: 50%;
-      font-size: 12px;
-      text-transform: uppercase;
-    }
-  }
   cursor: pointer;
-
 }
 
 

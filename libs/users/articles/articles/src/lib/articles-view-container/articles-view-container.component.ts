@@ -6,6 +6,7 @@ import { ArticleSelectors, ArticlesActions } from '@users/users/articles/data-ac
 import { LetDirective } from '@ngrx/component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import { selectLoggedUserId } from '@auth/data-access';
+import { selectAllUsers, UsersFacade } from "@users/users/data-access";
 
 
 @Component({
@@ -23,12 +24,15 @@ import { selectLoggedUserId } from '@auth/data-access';
 })
 export class ArticlesViewContainerComponent {
   private readonly store = inject(Store);
+  private userFacade = inject(UsersFacade)
 
   public readonly articles$ = this.store.select(ArticleSelectors.selectArticles);
   public readonly status$ = this.store.select(ArticleSelectors.selectStatus);
   public readonly loggedUserId$ = this.store.select(selectLoggedUserId);
+  public readonly allUsers$ = this.store.select(selectAllUsers);
 
   constructor() {
+    this.userFacade.init();
     this.store.dispatch(ArticlesActions.loadArticles());
   }
 }

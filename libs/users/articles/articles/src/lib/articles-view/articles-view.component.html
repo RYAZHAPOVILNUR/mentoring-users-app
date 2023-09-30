@@ -7,6 +7,7 @@
     <mat-card-header class="article-header">
 
       <button mat-icon-button
+              class="article-button"
               *ngIf="article.authorId === loggedUserId"
               [routerLink]="['/article-editor']"
               [queryParams]="{ mode: 'edit', id: article.id }"
@@ -15,10 +16,16 @@
         <mat-icon >edit</mat-icon>
       </button>
 
+
+
       <mat-card-title>{{article.title}}</mat-card-title>
 
-      <mat-card-subtitle (click)="preventRouterNavigation($event)">{{article.author}}</mat-card-subtitle>
+      <img [src]="getUserAvatar(article.id) ?? 'assets/img/1.png'"
+           [routerLink]="['/profile', article.authorId]"
+           mat-card-avatar>
+      <mat-card-subtitle [routerLink]="['/profile', article.authorId]" (click)="preventRouterNavigation($event)">{{article.author || 'Нет данных'}}</mat-card-subtitle>
       <mat-card-subtitle class="article-subtitle">{{ article.created_at | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
+
     </mat-card-header>
 
     <mat-card-content class="article-content">
