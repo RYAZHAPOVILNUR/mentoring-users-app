@@ -23,28 +23,29 @@ import {TasksCreateDialogComponent} from "../tasks-create-dialog/tasks-create-di
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {filter} from "rxjs";
 import {TasksCreateColumnDialogComponent} from "../tasks-create-column-dialog/tasks-create-column-dialog.component";
+import { TasksColumnComponent } from "./tasks-column/tasks-column.component";
 
 @Component({
-  selector: 'users-tasks-view',
-  standalone: true,
-  imports: [
-    CdkDrag,
-    CdkDropList,
-    NgFor,
-    FormsModule,
-    CdkDropListGroup,
-    MatCardModule,
-    MatButtonModule,
-    CommonModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatInputModule,
-    CdkDragPreview,
-    DragDropModule,
-    
-  ],
-  templateUrl: './tasks-view.component.html',
-  styleUrls: ['./tasks-view.component.scss'],
+    selector: 'users-tasks-view',
+    standalone: true,
+    templateUrl: './tasks-view.component.html',
+    styleUrls: ['./tasks-view.component.scss'],
+    imports: [
+        CdkDrag,
+        CdkDropList,
+        NgFor,
+        FormsModule,
+        CdkDropListGroup,
+        MatCardModule,
+        MatButtonModule,
+        CommonModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        CdkDragPreview,
+        DragDropModule,
+        TasksColumnComponent
+    ]
 })
 export class TasksViewComponent {
 
@@ -66,7 +67,7 @@ export class TasksViewComponent {
     this.deleteColumn.emit(columnIndex);
   }
 
-  public removeTask(columnIndex: number, taskName: string) {
+  public removeTask(taskName: string, columnIndex: number,) {
     this.deleteTask.emit({ columnIndex, taskName });
   }
 
