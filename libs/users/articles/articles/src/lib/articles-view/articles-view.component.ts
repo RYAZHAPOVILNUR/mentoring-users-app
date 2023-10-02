@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon'
 import { Article } from '@users/users/articles/data-access';
+import { ArticlesCreateButtonComponent } from '@users/users/articles/articles-create';
 import { MatListModule } from "@angular/material/list";
 import {PushPipe} from "@ngrx/component";
 import {map, Observable} from "rxjs";
@@ -22,6 +23,7 @@ import {UsersFacade} from "@users/users/data-access";
     MatCardModule,
     RouterModule,
     MatButtonModule,
+    ArticlesCreateButtonComponent,
     MatIconModule, MatListModule, PushPipe
   ],
   templateUrl: './articles-view.component.html',
