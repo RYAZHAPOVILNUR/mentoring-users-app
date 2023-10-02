@@ -1,9 +1,16 @@
 
 <mat-nav-list>
 
-<div class="user-photo-contayner">
-  <img [src]="userPhoto | ngrxPush" alt="User Photo">
-</div>
+    <div class="user-photo-contayner" (click)="openAvatar()">
+      <img [src]="userPhoto | ngrxPush" alt="User Photo" >
+    </div>
+    <ng-template #photo >
+      <div class="mat-icon">
+        <mat-icon mat-dialog-close="true">clear</mat-icon>
+      </div>
+      <img width="500px" height="500px" [src]="userPhoto | ngrxPush" alt="User Photo" >
+    </ng-template>
+
 
 <div class="nav-items-list">
 
