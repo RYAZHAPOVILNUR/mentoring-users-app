@@ -1,18 +1,18 @@
-import {ChangeDetectionStrategy, Component, inject} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {ProfileFormUiComponent} from "../profile-form-ui/profile-form-ui.component";
-import {LetDirective} from "@ngrx/component";
-import {UsersFacade} from "@users/users/data-access";
-import {AuthFacade} from "@auth/data-access";
-import {Observable, of, tap} from "rxjs";
-import {UsersEntity} from "@users/core/data-access";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
+import { FeatureUserInfoComponent} from "libs/users/profile/feature-user-info/feature-user-info.component";
+import { Observable, of, tap } from "rxjs";
+import { CommonModule } from "@angular/common";
+import { LetDirective } from "@ngrx/component";
+import { UsersFacade } from "@users/users/data-access";
+import { UsersEntity } from "@users/core/data-access";
+import { AuthFacade } from "@auth/data-access";
 
 @Component({
   selector: 'users-profile-container',
   standalone: true,
   imports: [
+    FeatureUserInfoComponent,
     CommonModule,
-    ProfileFormUiComponent,
     LetDirective
   ],
   templateUrl: './user-profile-container.component.html',

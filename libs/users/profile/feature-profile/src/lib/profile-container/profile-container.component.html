@@ -5,13 +5,15 @@
   githubStatus: githubStatus$,
   isLoggedUser
 } as vm">
-<profile-form-ui *ngIf="vm.status==='loaded'"
-[vm]="vm"
-(loadPhoto)="onLoadPhoto($event)"
-(connectGithub)="onConnectGithub()"
-(disconnectGithub)="onDisconnectGithub()"
-></profile-form-ui>
-</ng-container>
-
-
-
+  <div class="profile-container">
+    <feature-user-info 
+        *ngIf="vm.status==='loaded'"
+        [vm]="vm"
+        (loadPhoto)="onLoadPhoto($event)"
+        (connectGithub)="onConnectGithub()"
+        (disconnectGithub)="onDisconnectGithub()"
+        class="profile-column"
+    ></feature-user-info>
+    <users-feature-user-general class="profile-column"></users-feature-user-general>
+  </div>
+  </ng-container> 

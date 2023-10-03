@@ -1,0 +1,31 @@
+<ng-container class="profile-container">
+
+  <h1 mat-dialog-title>Изменение профиля</h1>
+  <form [formGroup]="formGroup">
+    <div mat-dialog-content>
+        <mat-label>Имя</mat-label>
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            type="text"
+            [formControlName]="'name'"
+            >
+        </mat-form-field>
+        <mat-label>E-mail</mat-label>
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            type="text"
+            [formControlName]="'email'"
+            >
+        </mat-form-field>
+        
+        <mat-label>Город</mat-label>
+        <users-input-city [vm]="userEntityData" [formControlName]="'city'"></users-input-city>
+    </div>
+  
+    <div mat-dialog-actions>
+      <button mat-button [mat-dialog-close]="formGroup" (click)="onSubmit()" cdkFocusInitial>Сменить</button>
+    </div>
+  </form> 
+</ng-container>

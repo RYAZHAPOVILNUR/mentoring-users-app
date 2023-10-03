@@ -1,24 +1,26 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
-import { noop, of, tap } from 'rxjs';
-import { CommonModule } from '@angular/common';
-import { ProfileFormUiComponent } from '../profile-form-ui/profile-form-ui.component';
-import { UsersEntity, selectQueryParam } from '@users/core/data-access';
-import { Store } from '@ngrx/store';
-import { authActions, selectAuthStatus, selectLoggedUser } from '@auth/data-access';
-import { LetDirective } from '@ngrx/component';
-import { CropperDialogComponent } from '@users/core/ui';
-import { MatDialog } from '@angular/material/dialog';
 import { GithubApiService, githubApiActions, selectGithubStatus, selectGithubUserName } from '@users/core/github-api/data-access';
+import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { authActions, selectAuthStatus, selectLoggedUser } from '@auth/data-access';
+import { UsersEntity, selectQueryParam } from '@users/core/data-access';
+import { FeatureUserGeneralComponent } from '../../../../feature-user-general/feature-user-general.component';
+import { FeatureUserInfoComponent } from '../../../../feature-user-info/feature-user-info.component';
+import { CropperDialogComponent } from '@users/core/ui';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { noop, of, tap } from 'rxjs';
+import { LetDirective } from '@ngrx/component';
+import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'profile-container',
   standalone: true,
   imports: [
-    CommonModule,
-    ProfileFormUiComponent,
+    FeatureUserGeneralComponent,
+    FeatureUserInfoComponent,
     LetDirective,
+    CommonModule,
   ],
   templateUrl: './profile-container.component.html',
   styleUrls: ['./profile-container.component.scss'],
@@ -81,3 +83,4 @@ export class ProfileContainerComponent implements OnInit {
     this.store.dispatch(githubApiActions.logoutFromGithub());
   }
 }
+ 

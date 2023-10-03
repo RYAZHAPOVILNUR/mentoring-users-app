@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ProfileFormUiComponent } from './profile-form-ui.component';
+import { InputCityComponent } from './input-city.component';
 
-describe('ProfileFormUiComponent', () => {
-  let component: ProfileFormUiComponent;
-  let fixture: ComponentFixture<ProfileFormUiComponent>;
+describe('InputCityComponent', () => {
+  let component: InputCityComponent;
+  let fixture: ComponentFixture<InputCityComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProfileFormUiComponent],
+      imports: [InputCityComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ProfileFormUiComponent);
+    fixture = TestBed.createComponent(InputCityComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
