@@ -20,6 +20,10 @@ export interface RegisterResponse {
   authToken: string
 }
 
+export interface ChangeProfileDataResponse {
+  message: string
+}
+
 export type LoggedInUserDTO = DeepReadonly<{
   id: number;
   name: string;
@@ -49,6 +53,15 @@ export interface ChangePasswordPayload {
   newPassword: string
 }
 
-export interface ChangePasswordResponce {
+export interface ChangePasswordResponse {
+  message: string
+}
+export interface ChangeProfileDataPayload {
+  name?: string;
+  city?: string
+  email?: string;
+}
+
+export interface ChangeProfileDataResponse {
   message: string
 }
