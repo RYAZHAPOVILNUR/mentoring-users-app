@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ApiService } from "@users/core/http";
 import { authActions } from "./auth.actions";
 import { catchError, concatMap, map, of, switchMap, tap, withLatestFrom } from "rxjs";
-import { ChangePasswordPayload, ChangePasswordResponce, NewUser, RegisterResponse, SignAuthPayload, SignAuthResponse } from "./sign.auth.model";
+import { ChangePasswordPayload, ChangePasswordResponse, NewUser, RegisterResponse, SignAuthPayload, SignAuthResponse } from "./sign.auth.model";
 import { LocalStorageJwtService } from "../services/local-storage-jwt.service";
 import { Router } from "@angular/router";
 import { UsersDTO, usersDTOAdapter } from "@users/core/data-access";
@@ -112,7 +112,7 @@ export const changePasswordEffects$ = createEffect(
     api = inject(ApiService)) => actions$.pipe(
       ofType(authActions.changePassword),
       switchMap(
-        ({ data }) => api.put<ChangePasswordResponce, ChangePasswordPayload>('/auth/change_password', data)
+        ({ data }) => api.put<ChangePasswordResponse, ChangePasswordPayload>('/auth/change_password', data)
           .pipe(
             map((res) => authActions.changePasswordSuccess({ res })),
             catchError((error) => of(authActions.changePasswordFailure({ error })))

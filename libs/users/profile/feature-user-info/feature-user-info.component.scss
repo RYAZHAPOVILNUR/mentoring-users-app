@@ -1,17 +1,14 @@
+
 .user-info {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
-  input[type="file"] {
-    display: none;
-  }
 }
 
 .user-photo {
   position: relative; /* Add this to make the overlay position relative to the photo container */
-  width: 10rem;
-  height: 10rem;
+  width: 8rem;
   background-size: cover;
   background-position: center;
   margin-bottom: 20px;
@@ -47,8 +44,50 @@
   cursor: pointer;
 }
 
-.github {
+.name-edit-btn{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: solid 1px #7e57c2;
+  box-shadow: none;
+}
+.name-edit-btn>.mat-icon{
+  height: 25px;
+  width: 25px;
+  font-size: 25px;
+  color: #7e57c2;
+}
+.user-info-card{
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 40px;
+}
+.user-info-items:not(.user-photo){
+  width: 100%;
+}
+.user-info-items:nth-child(3){
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border-top: dotted 1px;
+  margin-top: 20px;
+}
+.name-edit-btn .mat-mdc-button-touch-target{
+  width: 30px;
+  height: 30px;
+}
+.user-info-items .navbar-btn{
+  width: 100%;
+  border: solid 1px #7e57c2;
+  margin-bottom: 15px;
+}
+div.github{
+  width: 100%;
 }
