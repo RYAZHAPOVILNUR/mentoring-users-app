@@ -8,6 +8,7 @@
       (addTask)="openAddNewTaskModal(columnIndex)"
       (dragDrop)="dragDrop($event)"
       (deleteColumn)="removeColumn(columnIndex)"
+      (changeColumnName)="onChangeColumnName($event, columnIndex)"
     >
     </users-tasks-column>
   </div>
