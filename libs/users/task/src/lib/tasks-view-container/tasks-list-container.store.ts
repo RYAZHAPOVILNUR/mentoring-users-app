@@ -45,6 +45,14 @@ export class TasksStore extends ComponentStore<TaskColumnsState> {
     );
   }
 
+  public changeColumnName = this.updater((state, { columnIndex, columnName }: { columnIndex: number, columnName: string }) => {
+    const updatedColumns = [...state.columns];
+    const column = { ...updatedColumns[columnIndex], columnName };
+    updatedColumns[columnIndex] = column;
+    this.taskFacade.updateColumns(updatedColumns);
+    return { ...state, columns: updatedColumns };
+  });
+
   private patchColumns(columns: IColumn[]): void {
     this.patchState({ columns });
   }

@@ -61,7 +61,8 @@ export class TasksViewComponent {
   @Output() deleteColumn = new EventEmitter<number>();
   @Output() addTask = new EventEmitter<{columnIndex: number, taskName: string}>();
   @Output() deleteTask = new EventEmitter<{columnIndex: number, taskName: string}>();
-  
+  @Output() changeColumnName = new EventEmitter<{columnIndex: number, columnName: string}>();
+
 
   public removeColumn(columnIndex: number) {
     this.deleteColumn.emit(columnIndex);
@@ -144,5 +145,9 @@ export class TasksViewComponent {
       });
       this.updateColumns.emit({ columns: newColumns });
     }
+  }
+
+  public onChangeColumnName(event: string, columnIndex: number): void {
+    this.changeColumnName.emit({columnName: event, columnIndex});
   }
 }

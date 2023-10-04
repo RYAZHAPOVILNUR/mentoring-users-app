@@ -56,4 +56,8 @@ export class TasksContainerComponent {
     this.text = text;
     this.tasksStore.searchTask(this.text);
   }
+
+  public onChangeColumnName({columnIndex, columnName}: {columnIndex: number, columnName: string}): void {
+    this.tasksStore.changeColumnName({columnIndex, columnName});
+  }
 }
