@@ -5,10 +5,11 @@
     (input)="onInputValueChange($event)"
     type="text"
     [value]="value"
-    [matAutocomplete]="auto">
+    [matAutocomplete]="auto"
+  >
     <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" >
-      <mat-option *ngFor="let suggestion of citySuggestions$ | ngrxPush" [value]="value">
+      <mat-option *ngFor="let suggestion of citySuggestions$ | ngrxPush" [value]="suggestion" (click)="onClickSuggestion(suggestion)">
         {{suggestion}}
       </mat-option>
     </mat-autocomplete>
-</mat-form-field> 
+</mat-form-field>

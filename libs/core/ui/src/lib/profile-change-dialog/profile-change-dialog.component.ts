@@ -33,29 +33,11 @@ import { AuthFacade } from '@auth/data-access';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileChangeDialogComponent{
-  private dialogRef = inject(MatDialogRef<ProfileChangeDialogComponent>);
-  private readonly destroyRef = inject(DestroyRef);
-  private authFacade = inject(AuthFacade);
-
-  public user$ = this.authFacade.user$;
-  public userEntityData:UsersEntity = inject(MAT_DIALOG_DATA);
+  public userEntityData: UsersEntity = inject(MAT_DIALOG_DATA);
 
   public formGroup = new FormBuilder().group({
     name: new FormControl(this.userEntityData.name, [Validators.required]),
     city: new FormControl(this.userEntityData.city, [Validators.required]),
     email: new FormControl(this.userEntityData.email, [Validators.required, Validators.email])
   });
-
-  onNoClick() {
-    this.dialogRef.close();
-  }
-
-  onSubmit(): void{
-    const payload = {
-      name: this.formGroup.get('name')?.value || '',
-      city: this.formGroup.get('city')?.value || '',
-      email: this.formGroup.get('email')?.value || ''
-    };
-   this.authFacade.changeProfileData(payload);
-  }
 }
