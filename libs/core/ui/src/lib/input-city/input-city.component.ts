@@ -32,7 +32,7 @@ export class InputCityComponent implements ControlValueAccessor, OnInit{
   private onChange!: (value: string) => void;
   private onTouched!: () => void;
   private inputElement!:HTMLInputElement;
-  
+
   value?:string;
   public citySuggestions$!:Observable<string[]>;
 
@@ -63,12 +63,9 @@ export class InputCityComponent implements ControlValueAccessor, OnInit{
   public onInputValueChange(event: Event): void {
     const targetInputElement = event.target as HTMLInputElement;
     const city = targetInputElement.value;
-    this.citySuggestions$.subscribe((text)=>{
-      console.log(text);
-    })
     this.onChange(city);
   }
-  
+
 
   registerOnChange(fn: any): void {
       this.onChange = fn;
@@ -77,7 +74,10 @@ export class InputCityComponent implements ControlValueAccessor, OnInit{
       this.onTouched = fn;
   }
 
-  // ASK - ЧЕ ОН ДЕЛАЕТ. кто занимается перерисовкой компанента this.onChange()??
+  onClickSuggestion(suggestion: string) {
+    this.onChange(suggestion);
+  }
+
   writeValue(value: string): void {
       this.value = value;
       this.changeDetector.detectChanges();

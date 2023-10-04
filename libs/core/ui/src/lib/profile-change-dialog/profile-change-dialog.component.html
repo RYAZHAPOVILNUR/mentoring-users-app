@@ -1,5 +1,4 @@
 <ng-container class="profile-container">
-
   <h1 mat-dialog-title>Изменение профиля</h1>
   <form [formGroup]="formGroup">
     <div mat-dialog-content>
@@ -19,13 +18,11 @@
             [formControlName]="'email'"
             >
         </mat-form-field>
-        
         <mat-label>Город</mat-label>
         <users-input-city [vm]="userEntityData" [formControlName]="'city'"></users-input-city>
     </div>
-  
     <div mat-dialog-actions>
-      <button mat-button [mat-dialog-close]="formGroup" (click)="onSubmit()" cdkFocusInitial>Сменить</button>
+      <button mat-button [mat-dialog-close]="formGroup" cdkFocusInitial>Сменить</button>
     </div>
-  </form> 
+  </form>
 </ng-container>
