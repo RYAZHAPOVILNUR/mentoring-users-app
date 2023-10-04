@@ -4,8 +4,6 @@
   isLoggedUser
 } as vm">
   <ng-container *ngIf="vm.status === 'loaded'">
-    <profile-form-ui [vm]="vm"></profile-form-ui>
+    <feature-user-info [vm]="vm"></feature-user-info>
   </ng-container>
 </ng-container>
-
-

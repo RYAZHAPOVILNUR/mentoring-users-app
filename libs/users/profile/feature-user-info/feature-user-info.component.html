@@ -1,0 +1,55 @@
+
+<ng-container *ngIf="vm.user">
+    <div class="user-info">
+      <button (click)="onOpenChangeProfileData()" class="name-edit-btn" mat-mini-fab>
+        <mat-icon>edit</mat-icon>
+      </button>
+      <mat-card class="user-info-card user-info-column">
+        <ng-container *ngIf="vm.isLoggedUser; else notLoggedUser">
+          <div class="user-photo user-info-items" (click)="fileInput.click();">
+            <img [src]="vm.user.photo ? vm.user.photo.url : 'assets/img/1.png'" alt="" class="user-photo-img">
+            <div class="change-photo-overlay">
+              <span class="change-photo-text">Сменить фото</span>
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #notLoggedUser>
+          <div class="user-photo user-info-items">
+            <img [src]="vm.user.photo ? vm.user.photo.url : 'assets/img/1.png'" alt="" class="user-photo-img">
+          </div>
+        </ng-template>
+        <mat-card-content class="user-info-items">
+          <input type="file" #fileInput style="display: none;" (change)="handleFileInput($event)">
+          <div class="name">
+            <span>name:</span>{{vm.user.name}}
+          </div>
+          <div class="email"><span>email:</span>{{vm.user.email}}</div>
+          <div class="city"><span>city:</span>{{vm.user.city}}</div>
+        </mat-card-content>
+        <mat-card-actions class="user-info-items">
+          <ng-container *ngIf="vm.isLoggedUser">
+            <button mat-button class="navbar-btn" (click)="onOpenChangePassword()">
+              <mat-icon>lock-reset</mat-icon><span class="button-label">Сменить пароль</span>
+            </button>
+          </ng-container>
+          <mat-spinner *ngIf="vm.githubStatus === 'loading'" diameter="24"></mat-spinner>
+          <ng-container *ngIf="vm.githubStatus !== 'loading'">
+            <div *ngIf="vm.githubUserName as ghUserName; else connectGithub" class="github">
+              <button mat-button class="navbar-btn" disabled>
+                <mat-icon svgIcon="github"></mat-icon>
+                <span>{{ ghUserName }}</span>
+              </button>
+              <button mat-button class="navbar-btn" (click)="onDisconnectGithub()">
+                <span class="button-label">Отвязать GitHub</span>
+              </button>
+            </div>
+            <ng-template #connectGithub>
+              <button mat-button class="navbar-btn" (click)="onConnectGithub()">
+                <mat-icon svgIcon="github">edit</mat-icon><span class="button-label">Привязать GitHub</span>
+              </button>
+            </ng-template>
+          </ng-container>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+</ng-container>

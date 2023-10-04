@@ -12,10 +12,10 @@ import { MatInputModule } from '@angular/material/input';
   standalone: true,
   imports: [
     CommonModule,
-    MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatButtonModule,
+    MatFormFieldModule,
     ReactiveFormsModule,
   ],
   templateUrl: './input-password.component.html',
