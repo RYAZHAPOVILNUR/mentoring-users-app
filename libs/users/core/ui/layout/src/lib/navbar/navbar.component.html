@@ -1,16 +1,18 @@
 <mat-nav-list>
 
-  <div class="user-photo-contayner">
-    <img [src]="userPhoto | ngrxPush" alt="User Photo">
+  <div class="user-photo-contayner" (click)="onZoomPhotoClick()">
+    <div class="user-photo-wrapper">
+      <img [src]="userPhoto | ngrxPush" alt="User Photo">
+      <div class="photo_overlay">
+        <div class="zoom_in" mat-mini-fab>
+          <mat-icon>zoom_in</mat-icon>
+        </div>
+      </div>
+    </div>
   </div>
   
   <div class="nav-items-list">
-  
-    <mat-list-item class="list-item" routerLink="/profile">
-      <mat-icon matListItemIcon>account_circle</mat-icon>
-      <span class="button-label">{{ 'LAYOUT.SIDENAV.PROFILE' | translate }}</span>
-    </mat-list-item>
-  
+
     <mat-list-item class="list-item" routerLink="articles">
       <mat-icon matListItemIcon>book</mat-icon>
       <span matListItemTitle>{{ 'LAYOUT.SIDENAV.ARTICLES' | translate }}</span>
