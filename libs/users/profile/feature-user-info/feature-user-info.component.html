@@ -6,10 +6,22 @@
       </button>
       <mat-card class="user-info-card user-info-column">
         <ng-container *ngIf="vm.isLoggedUser; else notLoggedUser">
-          <div class="user-photo user-info-items" (click)="fileInput.click();">
+          <div class="user-photo user-info-items"  (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()" >
             <img [src]="vm.user.photo ? vm.user.photo.url : 'assets/img/1.png'" alt="" class="user-photo-img">
-            <div class="change-photo-overlay">
+            <!-- <div class="change-photo-overlay">
               <span class="change-photo-text">Сменить фото</span>
+            </div> -->
+            <div class="change-or-zoom-photo" [class.isPhotoUnHovered]="!isPhotoHovered"  [class.isPhotoHovered]="isPhotoHovered" >
+              <span class="change-or-zoom-photo__item">
+                <button class="zoom_in" mat-mini-fab (click)="onZoomPhotoClick()">
+                  <mat-icon>zoom_in</mat-icon>
+                </button>
+              </span>
+              <span class="change-or-zoom-photo__item">
+                <button (click)="fileInput.click();" class="add_a_photo" mat-mini-fab>
+                  <mat-icon>add_a_photo</mat-icon>
+                </button>
+              </span>
             </div>
           </div>
         </ng-container>
