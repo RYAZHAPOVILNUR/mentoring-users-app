@@ -190,3 +190,34 @@ div.github{
     opacity: 0;
   }
 }
+
+.user-info-inner {
+  & .mat-icon{
+    height: 40px;
+    width: 40px;
+    overflow: hidden;
+    font-size: 40px;
+    color: #7e57c22b;
+    margin-right: 10px;
+  }
+  & div{
+    border-bottom: dashed 1px #7e57c2;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 5px;
+  }
+  & span{
+    font-size: 16px;
+    color: #000;
+  }
+  & .name{
+    
+  }
+  & .mail{
+    
+  }
+  & .city{
+    
+  }
+}

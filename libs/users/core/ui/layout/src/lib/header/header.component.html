@@ -10,6 +10,9 @@
     {{ 'LAYOUT.HEADER.USERS' | translate }}
   </button>
   <span class="spacer"></span>
+  <button mat-icon-button routerLink="/profile">
+    <mat-icon matListItemIcon>account_circle</mat-icon>
+  </button>
   <button mat-icon-button (click)="onSwitchTheme()" class="theme-switch-btn">
     <mat-icon>{{(isDarkTheme$ | ngrxPush) ? 'light_mode' : 'dark_mode'}}</mat-icon>
   </button>
