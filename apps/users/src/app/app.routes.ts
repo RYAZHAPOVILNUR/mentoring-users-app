@@ -81,9 +81,7 @@ export const appRoutes: Route[] = [
       {
         path: 'settings',
         loadComponent: () =>
-          import('@users/users/settings/feature-change-color').then(
-            (c) => c.ChangeColorComponent
-          ),
+          import('@users/users/settings/feature-change-theme').then((c) => c.ChangeThemeComponent),
       },
       {
         path: 'chart',

@@ -89,8 +89,8 @@
       "@users/users/tasks/tasks-view-container": [
         "libs/users/tasks/tasks-view-container/src/index.ts"
       ],
-      "@users/users/settings/feature-change-color": [
-        "libs/users/settings/feature-change-color/src/index.ts"
+      "@users/users/settings/feature-change-theme": [
+        "libs/users/settings/feature-change-theme/src/index.ts"
       ]
     }
   },

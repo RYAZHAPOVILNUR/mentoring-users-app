@@ -1,0 +1,15 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use '../app-theme.scss';
+
+$primary: mat.define-palette(mat.$deep-purple-palette, 800);
+$accent:  mat.define-palette(mat.$blue-grey-palette, A200, 700);
+$theme: mat.define-dark-theme((
+  color: (
+    primary: $primary,
+    accent: $accent
+  ),
+));
+
+@include mat.all-component-themes(map.merge($theme));
+@include app-theme.theme($theme);
