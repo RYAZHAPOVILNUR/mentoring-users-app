@@ -11,7 +11,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import {Component, DestroyRef, EventEmitter, inject, Input, Output} from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
-import { IColumn } from '@users/users/task/data-access';
+import { IColumn, ITask } from '@users/users/task/data-access';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
@@ -24,6 +24,9 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {filter} from "rxjs";
 import {TasksCreateColumnDialogComponent} from "../tasks-create-column-dialog/tasks-create-column-dialog.component";
 import { TasksColumnComponent } from "./tasks-column/tasks-column.component";
+import { TaskChangeDialogComponent } from '../task-change-dialog/task-change-dialog.component';
+
+
 
 @Component({
     selector: 'users-tasks-view',
@@ -47,6 +50,7 @@ import { TasksColumnComponent } from "./tasks-column/tasks-column.component";
         TasksColumnComponent
     ]
 })
+
 export class TasksViewComponent {
 
   private matDialog = inject(MatDialog);
@@ -61,6 +65,7 @@ export class TasksViewComponent {
   @Output() deleteColumn = new EventEmitter<number>();
   @Output() addTask = new EventEmitter<{columnIndex: number, taskName: string}>();
   @Output() deleteTask = new EventEmitter<{columnIndex: number, taskName: string}>();
+  @Output() changer = new EventEmitter<{task:any}>();
   @Output() changeColumnName = new EventEmitter<{columnIndex: number, columnName: string}>();
 
 
@@ -125,7 +130,19 @@ export class TasksViewComponent {
       )
       .subscribe((taskName: string) => this.addTask.emit({ columnIndex, taskName }))
   }
-
+  
+  public openChangeTaskModal(task:ITask): void {
+    
+    const dialogRef: MatDialogRef<TaskChangeDialogComponent> = this.matDialog.open(TaskChangeDialogComponent, {
+      width: '1040px',
+      data: {task}
+    });
+    dialogRef.afterClosed()
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe()
+  }
   public openAddNewColumnModal(): void {
     const dialogRef: MatDialogRef<TasksCreateColumnDialogComponent> = this.matDialog.open(TasksCreateColumnDialogComponent, {});
     dialogRef.afterClosed()
@@ -151,3 +168,4 @@ export class TasksViewComponent {
     this.changeColumnName.emit({columnName: event, columnIndex});
   }
 }
+
