@@ -65,6 +65,7 @@ export class TasksColumnComponent {
   @Output() dragDrop = new EventEmitter<CdkDragDrop<IColumn>>();
   @Output() addTask = new EventEmitter();
   @Output() removeTask = new EventEmitter();
+  @Output() changeTaskModal = new EventEmitter();
   @Output() changeColumnName = new EventEmitter<string>()
   @ViewChild('input', { read: ElementRef })
   set input(elRef: ElementRef<HTMLInputElement>) {
@@ -107,6 +108,9 @@ export class TasksColumnComponent {
 
   public onRemoveTask(taskData: any) {
     this.removeTask.emit(taskData);
+  }
+  public onChangeTaskModal(task: any) {
+    this.changeTaskModal.emit(task);
   }
 
   public splitText(text: string): string {
