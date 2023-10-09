@@ -51,7 +51,7 @@ export class ArticlesViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    for (let article of this.articles) {
+    for (const article of this.articles) {
       this.authorPhoto$.push(
         this.userFacade.getUserFromStore(article.authorId).pipe(
           map(data => data?.photo?.url)));
