@@ -1,0 +1,47 @@
+<button mat-stroked-button color="accent"><mat-icon>add</mat-icon> USER STORY</button>
+<mat-action-list>
+  <mat-list-item *ngFor="let backlog of backlogs | async " class="backlog-item">
+
+    <div class="backlog-container">
+
+      <p class="user-story-name">
+        <span class="user-story-number">#{{backlog.todos_id}}</span> {{backlog.title}}
+      </p>
+
+      <div class="backlog-item-actions">
+        <small [matMenuTriggerFor]="status" class="backlog-inProgress">
+          In progress
+          <mat-icon class="expand_more">expand_more</mat-icon>
+        </small>
+        <mat-menu #status="matMenu">
+          <button mat-menu-item>New</button>
+          <button mat-menu-item>Ready</button>
+          <button mat-menu-item>In Progress</button>
+          <button mat-menu-item>Done</button>
+        </mat-menu>
+
+        <mat-icon inline>question_mark</mat-icon>
+
+
+
+        <button  mat-icon-button [matMenuTriggerFor]="actions" class="more_actions">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #actions="matMenu">
+          <button mat-menu-item>
+            <mat-icon>edit</mat-icon>
+            Редактировать
+          </button>
+          <button mat-menu-item (click)="onDeleteBacklogItem(backlog.id)">
+            <mat-icon>delete</mat-icon>
+            Удалить
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+
+
+  </mat-list-item>
+
+
+</mat-action-list>
