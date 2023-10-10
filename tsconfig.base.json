@@ -43,6 +43,7 @@
         "libs/users/users/feature-users-list/src/index.ts"
       ],
       "@users/home": ["libs/users/home/src/index.ts"],
+      "@users/settings": ["libs/users/settings/src/index.ts"],
       "@users/tasks-view": ["libs/tasks-view/src/index.ts"],
       "@users/tasks/tasks-view": ["libs/tasks/tasks-view/src/index.ts"],
       "@users/users/articles/article-comments": [
