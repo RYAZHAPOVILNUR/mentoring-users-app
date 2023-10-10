@@ -21,6 +21,7 @@ export class SettingsComponent {
   public readonly selectedLanguage$ = this.languageSwitchService.selectedLanguage$
   private readonly themeSwitchService = inject(ThemeSwitchService);
   public readonly isDarkTheme$: Observable<boolean> = this.themeSwitchService.isDarkTheme$;
+
   public articleStyle = 'LIST'
 
   public onSwitchTheme() {
