@@ -1,0 +1,40 @@
+
+.backlog-item {
+  //background-color: #efeff5;;
+  //border: 1px solid #9e9e9e;;
+  border: 1px solid rgb(147 147 147 / 20%);
+  border-radius: 3px;
+  margin-bottom: 0.25rem;
+  margin-top: 0.25rem;
+
+  & .backlog-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  & .user-story-name {
+    display: inline;
+    margin: 0;
+  }
+
+  & .backlog-item-actions {
+    display: flex;
+    align-items: center;
+  }
+
+  & .more_actions {
+    margin-left: 10px;
+  }
+}
+
+
+
+
+.backlog-inProgress {
+  margin-right: 50px;
+
+  & .expand_more {
+    vertical-align: text-bottom;
+  }
+}

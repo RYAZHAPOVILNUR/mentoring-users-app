@@ -60,6 +60,10 @@ export const appRoutes: Route[] = [
         path: 'chart',
         loadComponent: () => import('@users/users/chart').then(c => c.ChartViewComponent)
       },
+      {
+        path: 'backlog',
+        loadComponent: () => import('@users/users/backlog').then(c => c.BacklogComponent)
+      },
       ...layoutAgnosticComponents
     ]
   },
