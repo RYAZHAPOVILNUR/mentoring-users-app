@@ -51,3 +51,7 @@
 :host::ng-deep.mat-mdc-card-header-text {
   display: none;
 }
+.articles{
+  display: flex;
+  flex-direction: column;
+}
