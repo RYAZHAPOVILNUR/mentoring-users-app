@@ -19,6 +19,7 @@
   <div class="tasks-container">
     <mat-card
       class="task"
+      (click)="onChangeTaskModal(task)"
       *ngFor="let task of column.tasks; let taskIndex = index"
       cdkDrag
     >

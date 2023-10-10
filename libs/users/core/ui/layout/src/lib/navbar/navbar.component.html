@@ -1,7 +1,14 @@
 <mat-nav-list>
 
-  <div class="user-photo-contayner">
-    <img [src]="userPhoto | ngrxPush" alt="User Photo">
+  <div class="user-photo-contayner" (click)="onZoomPhotoClick()">
+    <div class="user-photo-wrapper">
+      <img [src]="userPhoto | ngrxPush" alt="User Photo">
+      <div class="photo_overlay">
+        <div class="zoom_in" mat-mini-fab>
+          <mat-icon>zoom_in</mat-icon>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="nav-items-list">
