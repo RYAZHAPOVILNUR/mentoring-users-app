@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store, select } from '@ngrx/store';
 import { Article, ArticlesActions, ArticleSelectors, CommentsActions, commentsSelectors } from '../../../../data-access/src';
-import { selectQueryParam } from '../../../../../../core/data-access/src';
+import { selectQueryParam, selectRouteParam } from '../../../../../../core/data-access/src';
 import { map, Observable, withLatestFrom, take } from 'rxjs';
 import { LetDirective } from '@ngrx/component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -10,6 +10,7 @@ import { ArticleReadComponent } from '../article-read/article-read.component';
 import { ArticleCommentsComponent } from '../article-comments/article-comments.component';
 import { selectLoggedUserId } from '../../../../../../core/auth/data-access/src';
 import { selectComments } from '../../../../data-access/src/lib/+state/comments/comments.selectors';
+import { selectOpenedArticle } from 'libs/users/articles/data-access/src/lib/+state/articles.selectors';
 
 @Component({
   selector: 'article-read-container',
@@ -26,30 +27,20 @@ import { selectComments } from '../../../../data-access/src/lib/+state/comments/
 })
 export class ArticleReadContainerComponent {
   private readonly store = inject(Store);
-
-  public articleId$ = this.store.pipe(select(selectQueryParam('id')))
+  public openedArticle$ = this.store.select(selectOpenedArticle)
   public readonly status$ = this.store.select(ArticleSelectors.selectStatus);
   public readonly commentsStatus$ = this.store.select(commentsSelectors.selectStatus)
   public readonly loggedUserId$ = this.store.select(selectLoggedUserId);
   public articleComments$ = this.store.select(selectComments);
 
-  public viewedArticle$: Observable<Article | null> = this.store.select(ArticleSelectors.selectArticleForEdit)
-    .pipe(
-      withLatestFrom(this.articleId$),
-      map(([article, id]) => {
-        if (!article && id) {
-          this.store.dispatch(ArticlesActions.getArticle({ id }));
-        }
-        return article
-      })
-    );
-
   onSubmitComment(commentText: string) {
-    this.loggedUserId$.pipe(withLatestFrom(this.articleId$), take(1))
-      .subscribe(([authorId, articleId]) => {
-        const comment = { 
+    this.loggedUserId$.pipe(withLatestFrom(this.openedArticle$), take(1))
+      .subscribe(([authorId, article]) => {
+        console.log("authorId, articleId", authorId, article?.id);
+        
+        const comment = {
           author_id: Number(authorId), 
-          article_id: Number(articleId), 
+          article_id: Number(article?.id), 
           text: commentText 
         }
         this.store.dispatch(CommentsActions.publishComment({ comment }))
@@ -57,8 +48,8 @@ export class ArticleReadContainerComponent {
   }
 
   constructor() {
-    this.articleId$.pipe(take(1)).subscribe(articleId => {
-      this.store.dispatch(CommentsActions.loadComments({ articleId: Number(articleId) }));
+    this.openedArticle$.pipe(take(1)).subscribe(article => {
+      this.store.dispatch(CommentsActions.loadComments({ articleId: Number(article?.id) }));
     })
   }
 }

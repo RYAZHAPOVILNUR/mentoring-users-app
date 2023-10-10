@@ -1,5 +1,6 @@
+import { UiPhotoModalComponent } from 'libs/users/profile/ui-profile/ui-photo-modal/ui-photo-modal.component';
 import { AuthFacade, ChangePasswordPayload, ChangeProfileDataPayload } from '../../../core/auth/data-access/src';
-import { ChangeDetectionStrategy, Component, Input, OnInit, DestroyRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, DestroyRef, ChangeDetectorRef } from '@angular/core';
 import { PasswordChangeDialogComponent, ProfileChangeDialogComponent } from '../../../core/ui/src';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { EventEmitter, Output, inject } from '@angular/core';
@@ -48,17 +49,16 @@ export class FeatureUserInfoComponent implements OnInit {
   @Output() disconnectGithub: EventEmitter<void> = new EventEmitter();
 
   public photo: any;
-
+  public isPhotoHovered?:boolean;
+  
   ngOnInit(): void {
     this.photo = this.vm.user.photo ? this.vm.user.photo.url : ''
- 
     this.matIconRegistry.addSvgIcon(
       'github',
       this.domSanitizer.bypassSecurityTrustResourceUrl(
         `assets/icons/github.svg`
       )
     )
-
     of(this.vm.githubUserName).subscribe(console.log);
   }
   onOpenChangePassword() {
@@ -66,8 +66,6 @@ export class FeatureUserInfoComponent implements OnInit {
     dialogRef.afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(result => {
-        console.log(result);
-
         if (result) {
           const changePasswordPayload: ChangePasswordPayload = {
             newPassword: result.value.newPassword,
@@ -94,6 +92,14 @@ export class FeatureUserInfoComponent implements OnInit {
       });
   }
 
+  onMouseEnter() {
+    this.isPhotoHovered = true;
+  }
+
+  onMouseLeave() {
+    this.isPhotoHovered = false;
+  }
+
   handleFileInput(event: any) {
     const file = event.target.files[0];
     if (file) {
@@ -107,5 +113,9 @@ export class FeatureUserInfoComponent implements OnInit {
 
   onDisconnectGithub() {
     this.disconnectGithub.emit();
+  }
+  
+  onZoomPhotoClick(){
+    this.dialog.open(UiPhotoModalComponent, {data: this.vm.user.photo ? this.vm.user.photo.url : ''});
   }
 }

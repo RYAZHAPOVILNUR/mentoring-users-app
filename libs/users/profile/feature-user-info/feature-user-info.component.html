@@ -6,10 +6,22 @@
       </button>
       <mat-card class="user-info-card user-info-column">
         <ng-container *ngIf="vm.isLoggedUser; else notLoggedUser">
-          <div class="user-photo user-info-items" (click)="fileInput.click();">
+          <div class="user-photo user-info-items"  (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()" >
             <img [src]="vm.user.photo ? vm.user.photo.url : 'assets/img/1.png'" alt="" class="user-photo-img">
-            <div class="change-photo-overlay">
+            <!-- <div class="change-photo-overlay">
               <span class="change-photo-text">Сменить фото</span>
+            </div> -->
+            <div class="change-or-zoom-photo" [class.isPhotoUnHovered]="!isPhotoHovered"  [class.isPhotoHovered]="isPhotoHovered" >
+              <span class="change-or-zoom-photo__item">
+                <button class="zoom_in" mat-mini-fab (click)="onZoomPhotoClick()">
+                  <mat-icon>zoom_in</mat-icon>
+                </button>
+              </span>
+              <span class="change-or-zoom-photo__item">
+                <button (click)="fileInput.click();" class="add_a_photo" mat-mini-fab>
+                  <mat-icon>add_a_photo</mat-icon>
+                </button>
+              </span>
             </div>
           </div>
         </ng-container>
@@ -20,11 +32,20 @@
         </ng-template>
         <mat-card-content class="user-info-items">
           <input type="file" #fileInput style="display: none;" (change)="handleFileInput($event)">
-          <div class="name">
-            <span>name:</span>{{vm.user.name}}
+          <div class="user-info-inner">
+            <div class="name">
+              <mat-icon>face</mat-icon>
+             <span>{{vm.user.name}}</span> 
+            </div>
+            <div class="email">
+              <mat-icon>alternate_email</mat-icon>
+             <span>{{vm.user.email}}</span>
+            </div>
+            <div class="city">
+              <mat-icon>explore</mat-icon>
+              <span>{{vm.user.city}}</span>
+            </div>
           </div>
-          <div class="email"><span>email:</span>{{vm.user.email}}</div>
-          <div class="city"><span>city:</span>{{vm.user.city}}</div>
         </mat-card-content>
         <mat-card-actions class="user-info-items">
           <ng-container *ngIf="vm.isLoggedUser">
