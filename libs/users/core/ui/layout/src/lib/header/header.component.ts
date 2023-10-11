@@ -1,13 +1,13 @@
-import {Component, EventEmitter, OnInit, Output, inject} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import {AuthFacade} from "@auth/data-access";
-import {Observable} from "rxjs";
-import {MatMenuModule} from "@angular/material/menu";
+import { AuthFacade } from '@auth/data-access';
+import { Observable } from 'rxjs';
+import { MatMenuModule } from '@angular/material/menu';
 import { PushPipe } from '@ngrx/component';
 import { ThemeSwitchService } from '@users/users/core/ui/theme-switch';
 import { LanguageKeys, LanguageSwitchService } from '@users/users/core/ui/language-switch';
@@ -16,35 +16,35 @@ import { LanguageKeys, LanguageSwitchService } from '@users/users/core/ui/langua
   selector: 'lib-header',
   standalone: true,
   imports: [
-    CommonModule, 
+    CommonModule,
     TranslateModule,
-    MatButtonModule, 
+    MatButtonModule,
     MatToolbarModule,
     MatIconModule,
-    RouterModule, 
-    MatMenuModule, 
+    RouterModule,
+    MatMenuModule,
     PushPipe
   ],
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  private readonly facade = inject(AuthFacade)
+  private readonly facade = inject(AuthFacade);
   private readonly themeSwitchService = inject(ThemeSwitchService);
   private readonly languageSwitchService = inject(LanguageSwitchService);
-  public readonly isAuthenticated$: Observable<boolean> = this.facade.isAuthenticated$
+  public readonly isAuthenticated$: Observable<boolean> = this.facade.isAuthenticated$;
   public readonly isDarkTheme$: Observable<boolean> = this.themeSwitchService.isDarkTheme$;
-  public readonly isAdmin$: Observable<boolean | null> = this.facade.isAdmin$
-  public readonly selectedLanguage$ = this.languageSwitchService.selectedLanguage$
+  public readonly isAdmin$: Observable<boolean | null> = this.facade.isAdmin$;
+  public readonly selectedLanguage$ = this.languageSwitchService.selectedLanguage$;
 
-  @Output() sidenavToggle = new EventEmitter()
+  @Output() sidenavToggle = new EventEmitter();
 
   public onLogout() {
-    this.facade.logout()
+    this.facade.logout();
   }
 
   public onSwitchTheme() {
-    this.themeSwitchService.switchTheme()
+    this.themeSwitchService.switchTheme();
   }
 
   public onSwitchLanguage(language: LanguageKeys) {
@@ -52,7 +52,7 @@ export class HeaderComponent {
   }
 
   public onToggleSidenav() {
-    this.sidenavToggle.emit()
+    this.sidenavToggle.emit();
   }
 }
 
