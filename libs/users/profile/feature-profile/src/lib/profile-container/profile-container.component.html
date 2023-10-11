@@ -6,7 +6,7 @@
   isLoggedUser
 } as vm">
   <div class="profile-container">
-    <feature-user-info 
+    <feature-user-info
         *ngIf="vm.status==='loaded'"
         [vm]="vm"
         (loadPhoto)="onLoadPhoto($event)"
@@ -14,6 +14,5 @@
         (disconnectGithub)="onDisconnectGithub()"
         class="profile-column"
     ></feature-user-info>
-    <users-feature-user-general class="profile-column"></users-feature-user-general>
   </div>
-  </ng-container> 
+  </ng-container>
