@@ -12,6 +12,15 @@
       "SETTINGS": "Настройки",
       "CHART": "График",
       "LOGOUT": "Выход"
+    },
+    "LOGIN": {
+      "SIGN_IN": "Войти",
+      "EMAIL": "Электронная почта",
+      "PASSWORD": "Пароль",
+      "SIGN_UP": "Зарегистрироваться",
+      "REMEMBER_ME": "Запомни меня",
+      "YOU_DONT_HAVE_AN_ACCOUNT": "У вас нет аккаунта?",
+      "FORGOT_YOUR_PASSWORD": "Забыли пароль?"
     }
   }
 }
