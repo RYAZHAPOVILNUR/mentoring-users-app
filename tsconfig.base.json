@@ -48,6 +48,10 @@
         "libs/users/settings/data-access/src/index.ts"
       ],
   
+      "@users/materials": ["libs/users/materials/src/index.ts"],
+      "@users/materials/data-access": [
+        "libs/users/materials/data-access/src/index.ts"
+      ],
       "@users/tasks-view": ["libs/tasks-view/src/index.ts"],
       "@users/tasks/tasks-view": ["libs/tasks/tasks-view/src/index.ts"],
       "@users/users/articles/article-comments": [
