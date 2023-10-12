@@ -7,6 +7,7 @@
     "SIDENAV": {
       "PROFILE": "Profile",
       "ARTICLES": "Articles",
+      "MATERIALS": "Materials",
       "CREATE_ARTICLE": "Create article",
       "TASKS": "Tasks",
       "SETTINGS": "Settings",
