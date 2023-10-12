@@ -13,6 +13,15 @@
       "SETTINGS": "Settings",
       "CHART": "Chart",
       "LOGOUT": "Logout"
+    },
+    "LOGIN": {
+      "SIGN_IN": "Sign in",
+      "EMAIL": "Email",
+      "PASSWORD": "Password",
+      "SIGN_UP": "Sign up",
+      "REMEMBER_ME": "Remember me",
+      "YOU_DONT_HAVE_AN_ACCOUNT": "You don't have an account?",
+      "FORGOT_YOUR_PASSWORD": "Forgot your password?"
     }
   }
 }
