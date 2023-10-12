@@ -22,6 +22,18 @@
       "REMEMBER_ME": "Запомни меня",
       "YOU_DONT_HAVE_AN_ACCOUNT": "У вас нет аккаунта?",
       "FORGOT_YOUR_PASSWORD": "Забыли пароль?"
+    },
+    "REGISTRATION": {
+      "YOU_HAVE_AN_ACCOUNT": "У вас есть аккаунт?",
+      "SIGN_IN": "Войти",
+      "FULLNAME": "Полное имя",
+      "EMAIL": "Электронная почта",
+      "PASSWORD": "Пароль",
+      "SIGN_UP": "Зарегистрироваться",
+      "AGREE": "Я согласен с",
+      "TERMS": "Условиями",
+      "AND": "и",
+      "PRIVACY_POLICY": "Политикой конфиденциальности"
     }
   }
 }
