@@ -7,8 +7,6 @@ export const SettingsActions = createActionGroup({
     loadSettings: emptyProps(),
     loadSettingsSuccess: props<{ settings: ISettings }>(),
     // loadSettingsFailure: props<{ error: unknown }>(),
-    setArticlesViewStyleTypeList: emptyProps(),
-    setArticlesViewStyleTypeTile: emptyProps(),
     setArticlesStyleType: props<{ articlesViewStyleType: string }>(),
     setArticlesStyleTypeSuccess: props<{ articlesViewStyleType: string }>(),    
   }

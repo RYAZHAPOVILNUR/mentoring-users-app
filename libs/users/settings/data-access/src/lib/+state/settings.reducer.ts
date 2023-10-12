@@ -14,8 +14,6 @@ export const settingsFeature = createFeature({
     initialState,
     on(SettingsActions.loadSettings, state => state),
     on(SettingsActions.loadSettingsSuccess, (state, {settings}) => {return {...state, ...settings}}),
-    on(SettingsActions.setArticlesViewStyleTypeList, (state) =>{ return {...state, articlesViewStyleType: 'LIST'}}),
-    on(SettingsActions.setArticlesViewStyleTypeTile, (state) => { return {...state, articlesViewStyleType: 'TILE'}}),
     on(SettingsActions.setArticlesStyleType, (state, {articlesViewStyleType}) => { return {...state, articlesViewStyleType}}),
     
   ),
