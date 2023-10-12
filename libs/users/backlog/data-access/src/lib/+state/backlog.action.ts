@@ -1,6 +1,7 @@
-import { createActionGroup, props, emptyProps } from "@ngrx/store";
+import { createActionGroup, props, emptyProps, createAction } from "@ngrx/store";
 import { Article } from "@users/users/articles/data-access";
-import { IBacklog } from "../model/backlog.model";
+import { CreateBacklog, IBacklog } from "../model/backlog.model";
+import { CreateUserDTO, UsersEntity } from "@users/core/data-access";
 
 export const backlogAction = createActionGroup({
   source: 'backlog',
@@ -9,6 +10,14 @@ export const backlogAction = createActionGroup({
     loadBacklogSuccess: props<{ backlogs: IBacklog[] }>(),
     deleteBacklog: props<{ id: number }>(),
     deleteBacklogSuccess: props<{ id: number }>(),
+    addBacklog: props<{ backlogData: CreateBacklog }>(),
+    addBacklogSuccess: props<{ backlogData: IBacklog }>()
+
+    //
+    // export const addUser = createAction('[Users Page] Add User', props<{ userData: CreateUserDTO }>());
+    // export const addUserSuccess = createAction('[Users/Api] Add User Success', props<{ userData: UsersEntity }>());
+    // export const addUserFailed = createAction('[Users/Api] Add User Failed', props<{ error: any }>());
+
     // loadBacklogSuccess: ,
     // loadBacklogSuccess: props<{ boards: ITaskBoard[] }>(),
     // loadBacklogSuccess: props<{ boards: ITaskBoard[] }>(),

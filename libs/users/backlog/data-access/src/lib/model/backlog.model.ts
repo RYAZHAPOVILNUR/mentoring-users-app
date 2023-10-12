@@ -1,4 +1,4 @@
-export interface IBacklog  {
+export interface IBacklog {
   id: number,
   created_at: number,
   todos_id: number,
@@ -6,3 +6,10 @@ export interface IBacklog  {
   title: string,
   description: string,
 };
+
+export interface CreateBacklog {
+  title: string,
+  todos_id?: 0,
+  teams_id?: 0,
+  description?: string
+}
