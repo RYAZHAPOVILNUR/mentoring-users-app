@@ -7,12 +7,22 @@
     "SIDENAV": {
       "PROFILE": "Profile",
       "ARTICLES": "Articles",
+      "MATERIALS": "Materials",
       "CREATE_ARTICLE": "Create article",
       "TASKS": "Tasks",
       "SETTINGS": "Settings",
       "CHART": "Chart",
       "LOGOUT": "Logout",
       "BACKLOG": "Backlog"
+    },
+    "LOGIN": {
+      "SIGN_IN": "Sign in",
+      "EMAIL": "Email",
+      "PASSWORD": "Password",
+      "SIGN_UP": "Sign up",
+      "REMEMBER_ME": "Remember me",
+      "YOU_DONT_HAVE_AN_ACCOUNT": "You don't have an account?",
+      "FORGOT_YOUR_PASSWORD": "Forgot your password?"
     }
   }
 }

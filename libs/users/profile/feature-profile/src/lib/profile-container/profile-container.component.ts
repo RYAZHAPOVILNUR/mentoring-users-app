@@ -2,7 +2,6 @@ import { GithubApiService, githubApiActions, selectGithubStatus, selectGithubUse
 import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { authActions, selectAuthStatus, selectLoggedUser } from '@auth/data-access';
 import { UsersEntity, selectQueryParam } from '@users/core/data-access';
-import { FeatureUserGeneralComponent } from '../../../../feature-user-general/feature-user-general.component';
 import { FeatureUserInfoComponent } from '../../../../feature-user-info/feature-user-info.component';
 import { CropperDialogComponent } from '@users/core/ui';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -17,7 +16,6 @@ import { Store } from '@ngrx/store';
   selector: 'profile-container',
   standalone: true,
   imports: [
-    FeatureUserGeneralComponent,
     FeatureUserInfoComponent,
     LetDirective,
     CommonModule,
@@ -48,8 +46,8 @@ export class ProfileContainerComponent implements OnInit {
         }
       }),
     ).subscribe(noop);
-    
-    const ghToken = this.githubApiService.accessToken.value; 
+
+    const ghToken = this.githubApiService.accessToken.value;
     if(ghToken) {
       this.store.dispatch(githubApiActions.getGithubUser({ token: ghToken }))
     }
@@ -83,4 +81,3 @@ export class ProfileContainerComponent implements OnInit {
     this.store.dispatch(githubApiActions.logoutFromGithub());
   }
 }
- 
