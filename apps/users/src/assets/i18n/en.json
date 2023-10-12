@@ -7,11 +7,33 @@
     "SIDENAV": {
       "PROFILE": "Profile",
       "ARTICLES": "Articles",
+      "MATERIALS": "Materials",
       "CREATE_ARTICLE": "Create article",
       "TASKS": "Tasks",
       "SETTINGS": "Settings",
       "CHART": "Chart",
       "LOGOUT": "Logout"
+    },
+    "LOGIN": {
+      "SIGN_IN": "Sign in",
+      "EMAIL": "Email",
+      "PASSWORD": "Password",
+      "SIGN_UP": "Sign up",
+      "REMEMBER_ME": "Remember me",
+      "YOU_DONT_HAVE_AN_ACCOUNT": "You don't have an account?",
+      "FORGOT_YOUR_PASSWORD": "Forgot your password?"
+    },
+    "REGISTRATION": {
+      "YOU_HAVE_AN_ACCOUNT": "You have an account?",
+      "SIGN_IN": "Sign in",
+      "FULLNAME": "Full name",
+      "EMAIL": "Email",
+      "PASSWORD": "Password",
+      "SIGN_UP": "Sign up",
+      "AGREE": "I agee to the",
+      "TERMS": "Terms",
+      "AND": "and",
+      "PRIVACY_POLICY": "Privacy Policy"
     }
   }
 }

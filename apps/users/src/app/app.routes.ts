@@ -46,6 +46,10 @@ export const appRoutes: Route[] = [
         canDeactivate: [canDeactivateFormComponent]
       },
       {
+        path: 'materials',
+        loadComponent: () => import('@users/materials').then(c => c.UsersMaterialsComponent),
+      },
+      {
         path: 'articles',
         loadComponent: () => import('@users/users/articles/articles').then(c => c.ArticlesViewContainerComponent),
       },

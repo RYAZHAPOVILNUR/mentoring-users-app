@@ -1,25 +1,34 @@
+<ng-container [ngSwitch]="selectedLanguage$ | ngrxPush">
+  <button mat-icon-button *ngSwitchCase="'ru'" (click)="onSwitchLanguage('en')" class="lang-switch-btn">
+    En
+  </button>
+  <button mat-icon-button *ngSwitchCase="'en'" (click)="onSwitchLanguage('ru')" class="lang-switch-btn">
+    Ru
+  </button>
+</ng-container>
+
 <div class="form-element">
 
   <div class="wrapper">
-    <h1>Войти</h1>
-    <p>У вас нет аккаунта?
-      <span class="interactive-link" (click)="onRedirectToSignUp()">Зарегистрироваться</span>
+    <h1>{{ 'LAYOUT.LOGIN.SIGN_IN' | translate }}</h1>
+    <p>{{ 'LAYOUT.LOGIN.YOU_DONT_HAVE_AN_ACCOUNT' | translate }}
+      <span class="interactive-link" (click)="onRedirectToSignUp()">{{ 'LAYOUT.LOGIN.SIGN_UP' | translate }}</span>
     </p>
 
     <form class="form-fields-wrapper" [formGroup]="formGroup" (ngSubmit)="onLogin()">
-      <mat-label>Электронная почта*</mat-label>
+      <mat-label>{{ 'LAYOUT.LOGIN.EMAIL' | translate }}*</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="email">
       </mat-form-field>
 
-      <mat-label>Пароль*</mat-label>
+      <mat-label>{{ 'LAYOUT.LOGIN.PASSWORD' | translate }}*</mat-label>
       <input-password
       [formControlName]="'password'"
       ></input-password>
 
       <div class="checkbox-container">
-        <mat-checkbox>Запомни меня</mat-checkbox>
-        <span class="interactive-link">Забыли пароль?</span>
+        <mat-checkbox>{{ 'LAYOUT.LOGIN.REMEMBER_ME' | translate }}</mat-checkbox>
+        <span class="interactive-link">{{ 'LAYOUT.LOGIN.FORGOT_YOUR_PASSWORD' | translate }}</span>
       </div>
 
       <button mat-fab
@@ -27,7 +36,7 @@
       color="primary"
       type="submit"
       >
-        Войти
+        {{ 'LAYOUT.LOGIN.SIGN_IN' | translate }}
       </button>
     </form>
 
