@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuillModule } from "ngx-quill";
 import { MatCardModule } from "@angular/material/card";
@@ -8,23 +8,30 @@ import { MatIconModule } from '@angular/material/icon'
 import { Article } from '@users/users/articles/data-access';
 import { ArticlesCreateButtonComponent } from '@users/users/articles/articles-create';
 import { MatListModule } from "@angular/material/list";
-import {PushPipe} from "@ngrx/component";
-import {map, Observable} from "rxjs";
+import { PushPipe } from "@ngrx/component";
+import { map, Observable } from "rxjs";
+import { ApiService } from '@users/core/http';
+import { LanguageSwitchService } from '@users/users/core/ui/language-switch';
+import { TranslateModule } from '@ngx-translate/core';
 import {
   UsersListContainerStore
 } from "../../../../../users/feature-users-list/src/lib/users-list-container/users-list-container.store";
-import {UsersFacade} from "@users/users/data-access";
+import { UsersFacade } from "@users/users/data-access";
 
 @Component({
   selector: 'users-articles-view',
   standalone: true,
-  imports: [CommonModule,
+  imports: [
+    CommonModule,
     QuillModule,
     MatCardModule,
     RouterModule,
     MatButtonModule,
     ArticlesCreateButtonComponent,
-    MatIconModule, MatListModule, PushPipe
+    MatIconModule,
+    MatListModule,
+    TranslateModule,
+    PushPipe
   ],
   templateUrl: './articles-view.component.html',
   styleUrls: ['./articles-view.component.scss'],
@@ -35,12 +42,16 @@ import {UsersFacade} from "@users/users/data-access";
 export class ArticlesViewComponent implements OnInit {
   @Input({ required: true }) articles!: Article[];
   @Input({ required: true }) article!: Article | null;
-  @Input({required: true}) loggedUserId!: number;
+  @Input({ required: true }) loggedUserId!: number;
 
   private readonly componentStore = inject(UsersListContainerStore);
   private readonly userFacade = inject(UsersFacade);
   public authorPhoto$: Observable<string | undefined>[] = [];
   public authorArticle$: Observable<string | undefined>[] = [];
+
+  private readonly api = inject(ApiService);
+  private readonly languageSwitchService = inject(LanguageSwitchService);
+  public readonly selectedLanguage$ = this.languageSwitchService.selectedLanguage$;
 
   public clearArticleContent(content: string) {
     return content.replace(/<[^>]*>/g, ' ')
