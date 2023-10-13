@@ -31,8 +31,18 @@
     "USER_PROFILE_EDIT": {
       "PROFILE": "Изменить профиль",
       "NAME": "Имя",
-      "EMAIL":"Электронная почта",
-      "CITY": "Город"
+      "EMAIL": "Электронная почта",
+      "CITY": "Город",
+      "CHANGE": "Сменить"
+    },
+    "USER_PROFILE_CHANGE_PASSWORD": {
+      "TITLE": "Заполните поля для смены пароля",
+      "OLD_PASSWORD": "Старый пароль",
+      "NEW_PASSWORD": "Новый Пароль",
+      "CONFIRM_PASSWORD": "Подтвердите новый пароль",
+      "PASSWORD_DONT_MATCH": "Пароли не совпадают",
+      "CHANGE": "Сменить",
+      "RESET": "Сброс"
     }
   }
 }
