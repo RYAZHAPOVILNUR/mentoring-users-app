@@ -4,14 +4,14 @@
       <input
         type="text"
         autocomplete="off"
-        [placeholder]="'LAYOUT.ARTICLE_CREATE.TITLE' | translate"
+        [placeholder]="'LAYOUT.ARTICLE.TITLE' | translate"
         formControlName="title"
         class="input-field"
         matInput
         [errorStateMatcher]="matcher"
       />
       <mat-error *ngIf="formSubmitted && formGroup.get('title')?.hasError">
-        {{ 'LAYOUT.ARTICLE_CREATE.TITLE_LENGTH_ERR' | translate }}!
+        {{ 'LAYOUT.ARTICLE.TITLE_LENGTH_ERR' | translate }}!
       </mat-error>
     </mat-form-field>
 
@@ -40,15 +40,15 @@
       class="error-message"
       *ngIf="formSubmitted && formGroup.get('textEditor')?.invalid"
     >
-      {{ 'LAYOUT.ARTICLE_CREATE.ARTICLE_LENGTH_ERR' | translate }}!
+      {{ 'LAYOUT.ARTICLE.ARTICLE_LENGTH_ERR' | translate }}!
     </p>
 
     <div class="button">
       <button mat-raised-button type="submit" color="primary">
         {{
           vm.editMode
-            ? ('LAYOUT.ARTICLE_CREATE.EDIT' | translate)
-            : ('LAYOUT.ARTICLE_CREATE.PUBLISH' | translate)
+            ? ('LAYOUT.ARTICLE.EDIT' | translate)
+            : ('LAYOUT.ARTICLE.PUBLISH' | translate)
         }}
       </button>
     </div>

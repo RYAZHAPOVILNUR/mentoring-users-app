@@ -44,12 +44,13 @@
       "CHANGE": "Change",
       "RESET": "Reset"
     },
-    "ARTICLE_CREATE": {
+    "ARTICLE": {
       "TITLE": "Title",
       "TITLE_LENGTH_ERR": "The title must contain a minimum of 6 characters and no more than 60",
       "ARTICLE_LENGTH_ERR": "The article must consist of at least 66 characters",
       "EDIT": "Edit",
-      "PUBLISH": "Publish"
+      "PUBLISH": "Publish",
+      "FROM": "From"
     }
   }
 }
