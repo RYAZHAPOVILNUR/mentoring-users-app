@@ -1,14 +1,14 @@
 <section *ngIf="userId$ | ngrxPush as userId">
   <form [formGroup]="formGroup" (submit)="onSubmitComment()">
-    <h2>Комментарии</h2>
+    <h2>{{ 'LAYOUT.ARTICALE.COMMENTS' | translate }}</h2>
     <mat-form-field>
       <textarea
-        placeholder="Напишите что-нибудь"
+        placeholder="{{ 'LAYOUT.ARTICALE.WRITE_SOMETHING' | translate }}..."
         formControlName="commentText"
         matInput
       ></textarea>
       <mat-error *ngIf="formGroup.get('commentText')?.hasError('maxlength')">
-        Комментарий должен быть не более 100 символов
+        {{ 'LAYOUT.ARTICALE.COMMENT_ERROR' | translate }}
       </mat-error>
       <button type="submit" mat-icon-button matSuffix>
         <mat-icon>send</mat-icon>
@@ -18,9 +18,7 @@
   <mat-spinner *ngIf="status === 'loading'" diameter="50"></mat-spinner>
   <ul *ngIf="status === 'loaded'">
     <li *ngFor="let comment of comments">
-      <article-comment [comment]="comment"
-                       [userId]="userId">
-      </article-comment>
+      <article-comment [comment]="comment" [userId]="userId"> </article-comment>
     </li>
   </ul>
 </section>
