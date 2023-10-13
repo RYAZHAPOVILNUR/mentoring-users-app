@@ -27,6 +27,12 @@
       "CHANGE_PASSWORD": "Поменять пароль",
       "LINK_GITHUB": "Привязать GitHub",
       "UNLINK_GITHUB": "Отвязать GitHub"
+    },
+    "USER_PROFILE_EDIT": {
+      "PROFILE": "Изменить профиль",
+      "NAME": "Имя",
+      "EMAIL":"Электронная почта",
+      "CITY": "Город"
     }
   }
 }

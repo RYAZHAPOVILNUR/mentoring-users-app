@@ -27,6 +27,12 @@
       "CHANGE_PASSWORD": "Change password",
       "LINK_GITHUB": "Link GitHub",
       "UNLINK_GITHUB": "Unlink GitHub"
+    },
+    "USER_PROFILE_EDIT": {
+      "PROFILE": "Change Profile",
+      "NAME": "Name",
+      "EMAIL": "Email",
+      "CITY": "City"
     }
   }
 }
