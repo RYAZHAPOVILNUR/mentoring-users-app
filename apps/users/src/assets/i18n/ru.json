@@ -23,7 +23,7 @@
       "YOU_DONT_HAVE_AN_ACCOUNT": "У вас нет аккаунта?",
       "FORGOT_YOUR_PASSWORD": "Забыли пароль?"
     },
-    "USER-PROFILE": {
+    "USER_PROFILE": {
       "CHANGE_PASSWORD": "Поменять пароль",
       "LINK_GITHUB": "Привязать GitHub",
       "UNLINK_GITHUB": "Отвязать GitHub"

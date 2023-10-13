@@ -16,7 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
-import { LanguageKeys, LanguageSwitchService } from '@users/users/core/ui/language-switch';
+import { PushPipe } from '@ngrx/component';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -32,7 +32,8 @@ import { LanguageKeys, LanguageSwitchService } from '@users/users/core/ui/langua
     MatIconModule,
     CommonModule,
     FormsModule,
-    TranslateModule
+    TranslateModule,
+    PushPipe
   ],
   templateUrl: './feature-user-info.component.html',
   styleUrls: ['./feature-user-info.component.scss'],
@@ -44,8 +45,7 @@ export class FeatureUserInfoComponent implements OnInit {
   private readonly authFacade = inject(AuthFacade);
   private matIconRegistry = inject(MatIconRegistry);
   private domSanitizer = inject(DomSanitizer);
-  private readonly languageSwitchService = inject(LanguageSwitchService);
-  public readonly selectedLanguage$ = this.languageSwitchService.selectedLanguage$;
+
 
   @Input({ required: true }) vm!: ProfileFormVm
 
@@ -122,8 +122,5 @@ export class FeatureUserInfoComponent implements OnInit {
   
   onZoomPhotoClick(){
     this.dialog.open(UiPhotoModalComponent, {data: this.vm.user.photo ? this.vm.user.photo.url : ''});
-  }
-  public onSwitchLanguage(language: LanguageKeys) {
-    this.languageSwitchService.setLanguage(language);
   }
 }
