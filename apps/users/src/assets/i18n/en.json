@@ -22,6 +22,11 @@
       "REMEMBER_ME": "Remember me",
       "YOU_DONT_HAVE_AN_ACCOUNT": "You don't have an account?",
       "FORGOT_YOUR_PASSWORD": "Forgot your password?"
+    },
+    "USER_PROFILE": {
+      "CHANGE_PASSWORD": "Change password",
+      "LINK_GITHUB": "Link GitHub",
+      "UNLINK_GITHUB": "Unlink GitHub"
     }
   }
 }

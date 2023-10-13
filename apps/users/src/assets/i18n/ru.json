@@ -22,6 +22,11 @@
       "REMEMBER_ME": "Запомни меня",
       "YOU_DONT_HAVE_AN_ACCOUNT": "У вас нет аккаунта?",
       "FORGOT_YOUR_PASSWORD": "Забыли пароль?"
+    },
+    "USER-PROFILE": {
+      "CHANGE_PASSWORD": "Поменять пароль",
+      "LINK_GITHUB": "Привязать GitHub",
+      "UNLINK_GITHUB": "Отвязать GitHub"
     }
   }
 }
