@@ -18,6 +18,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { FormGroupDirective, NgForm } from '@angular/forms';
 import {  ArticlesFacade, CreateArticle } from '@users/users/articles/data-access';
 import { ArticlesCreateVm } from './articles-create-vm';
+import { TranslateModule } from '@ngx-translate/core';
 
 class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -39,7 +40,8 @@ Quill.register('modules/blotFormatter', BlotFormatter)
     ReactiveFormsModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    TranslateModule
   ],
   templateUrl: './articles-create-ui.component.html',
   styleUrls: ['./articles-create-ui.component.scss'],

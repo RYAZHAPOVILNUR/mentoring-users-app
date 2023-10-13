@@ -34,8 +34,7 @@
       "EMAIL": "Email",
       "CITY": "City",
       "CHANGE": "Change"
-    }
-    ,
+    },
     "USER_PROFILE_CHANGE_PASSWORD": {
       "TITLE": "Fill in the fields to change your password",
       "OLD_PASSWORD": "Old Password",
@@ -44,6 +43,13 @@
       "PASSWORD_DONT_MATCH": "Password mismatch",
       "CHANGE": "Change",
       "RESET": "Reset"
+    },
+    "ARTICLE_CREATE": {
+      "TITLE": "Title",
+      "TITLE_LENGTH_ERR": "The title must contain a minimum of 6 characters and no more than 60",
+      "ARTICLE_LENGTH_ERR": "The article must consist of at least 66 characters",
+      "EDIT": "Edit",
+      "PUBLISH": "Publish"
     }
   }
 }
