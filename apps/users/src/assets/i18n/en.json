@@ -51,6 +51,18 @@
       "EDIT": "Edit",
       "PUBLISH": "Publish",
       "FROM": "From"
+    },
+    "REGISTRATION": {
+      "YOU_HAVE_AN_ACCOUNT": "You have an account?",
+      "SIGN_IN": "Sign in",
+      "FULLNAME": "Full name",
+      "EMAIL": "Email",
+      "PASSWORD": "Password",
+      "SIGN_UP": "Sign up",
+      "AGREE": "I agee to the",
+      "TERMS": "Terms",
+      "AND": "and",
+      "PRIVACY_POLICY": "Privacy Policy"
     }
   }
 }
