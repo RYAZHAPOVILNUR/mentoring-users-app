@@ -16,9 +16,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { LoadingStatus } from '../../../../../../core/data-access/src';
 import {RouterLink} from "@angular/router";
 import {CommentsFacade} from "../../../../data-access/src/lib/+state/comments/comments.facade";
-import {PushPipe} from "@ngrx/component";
-import {ArticleCommentComponent} from "./article-comment/article-comment.component";
-import {AuthFacade} from "../../../../../../core/auth/data-access/src";
+import { PushPipe } from "@ngrx/component";
+import { ArticleCommentComponent } from "./article-comment/article-comment.component";
+import { AuthFacade } from "../../../../../../core/auth/data-access/src";
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'article-comments',
@@ -33,7 +34,8 @@ import {AuthFacade} from "../../../../../../core/auth/data-access/src";
     MatIconModule,
     MatProgressSpinnerModule,
     PushPipe,
-    ArticleCommentComponent
+    ArticleCommentComponent,
+    TranslateModule
   ],
   templateUrl: './article-comments.component.html',
   styleUrls: ['./article-comments.component.scss'],
