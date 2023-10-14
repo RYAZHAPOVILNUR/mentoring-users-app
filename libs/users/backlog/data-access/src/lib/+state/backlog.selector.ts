@@ -15,14 +15,3 @@ export const selectBacklogEntities = createSelector(
   selectBacklogState,
   (state: BacklogsState) => selectEntities(state)
 );
-
-
-// export const selectUsersState =
-//   createFeatureSelector<UsersState>(USERS_FEATURE_KEY);
-//
-// const { selectAll, selectEntities } = usersAdapter.getSelectors();
-//
-// export const selectUsersStatus = createSelector(
-//   selectUsersState,
-//   (state: UsersState) => state.status
-// );

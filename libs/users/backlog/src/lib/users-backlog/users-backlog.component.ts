@@ -6,7 +6,6 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatMenuModule } from "@angular/material/menu";
 import { IBacklog, BacklogFacade } from "@users/users/backlog/data-access";
 import { Observable } from "rxjs";
-// import { ITask } from "@users/users/task/data-access";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { TaskChangeDialogComponent } from "../../../../task/src/lib/task-change-dialog/task-change-dialog.component";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
@@ -22,7 +21,6 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
-
   ],
   templateUrl: './users-backlog.component.html',
   styleUrls: ['./users-backlog.component.scss'],
@@ -51,14 +49,12 @@ export class BacklogComponent implements OnInit {
   }
 
   public openBacklogModal(task?: IBacklog): void {
-
     const newBacklogData = task ?
       {
         title: task?.title,
         description: task?.description,
         id: task?.id
       } : null
-
 
     const dialogRef: MatDialogRef<TaskChangeDialogComponent> = this.matDialog.open(TaskChangeDialogComponent, {
       width: '1040px',

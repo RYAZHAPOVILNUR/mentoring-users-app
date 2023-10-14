@@ -5,24 +5,6 @@ import { catchError, map, of, switchMap } from "rxjs";
 import { backlogAction } from "./backlog.action";
 import { CreateBacklog, IBacklog } from "../model/backlog.model";
 
-// export const addUser = createEffect(
-//   () => {
-//     const actions$ = inject(Actions);
-//     const apiService = inject(ApiService);
-//     return actions$.pipe(
-//       ofType(UsersActions.addUser),
-//       // delay(1500),
-//       switchMap(
-//         ({ userData }) => apiService.post<UsersDTO, CreateUserDTO>('/users', userData).pipe(
-//           map((user) => usersDTOAdapter.DTOtoEntity(user)),
-//           map((userEntity) => UsersActions.addUserSuccess({ userData: userEntity })),
-//           catchError((error) => {
-//             console.error('Error', error);
-//             return of(UsersActions.addUserFailed({ error }))
-//           })
-//         )))
-//   }, { functional: true }
-// )
 
 export const addBacklogTask$ = createEffect(() => {
     const actions$ = inject(Actions);
@@ -59,7 +41,6 @@ export const loadBacklogs$ = createEffect(() => {
             catchError((error) => {
               console.error('Error', error);
               return of(error)
-              // return of(ArticlesActions.loadArticlesFailed({ error }))
             })
           )
       )
