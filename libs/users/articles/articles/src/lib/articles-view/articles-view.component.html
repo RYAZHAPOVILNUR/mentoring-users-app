@@ -1,5 +1,9 @@
-<div *ngFor="let article of articles; let i = index">
-  <mat-card class="article">
+<mat-button-toggle-group [value]="(viewStyleType$ | ngrxPush)">
+  <mat-button-toggle [value]="'LIST'" (click)="changeArticlesStyleType('LIST')" ><mat-icon>list</mat-icon></mat-button-toggle>
+  <mat-button-toggle [value]="'TILE'" (click)="changeArticlesStyleType('TILE')" ><mat-icon>view_module</mat-icon></mat-button-toggle>
+</mat-button-toggle-group>
+<div [ngClass]="['articles', 'articlesType' + (viewStyleType$ | ngrxPush)]">
+  <mat-card [ngClass]="['article', 'articleType' + (viewStyleType$ | ngrxPush)]" *ngFor="let article of articles; let i = index">
     <mat-card-header class="article-header">
       <mat-card-content class="article-header-block">
         <mat-card-content class="article-author-block-img">

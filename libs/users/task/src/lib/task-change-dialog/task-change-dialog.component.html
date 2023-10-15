@@ -34,11 +34,11 @@
 
 
       <mat-label>Описание</mat-label>
-      <div [ngClass]="{'show': editStatus, 'hide': !editStatus}">
+      <div [ngClass]="{'show': editStatus || !editMode, 'hide': !editStatus && editMode}">
         <quill-editor class="editor" [modules]="quillEditorModules" [(ngModel)]="editorContent"></quill-editor>
         <div class="btnDiv">
           <button mat-raised-button color="primary" (click)="toggleQuill()">Сохранить</button>
-          <button mat-stroked-button color="basic" (click)="toggleQuill()">Отмена</button>
+          <button mat-stroked-button color="accent" (click)="toggleQuill()">Отмена</button>
         </div>
       </div>
 
@@ -85,7 +85,7 @@
             </div>
           </mat-menu>
         </div>
-         
+
         </mat-card-actions>
       </mat-card>
 
