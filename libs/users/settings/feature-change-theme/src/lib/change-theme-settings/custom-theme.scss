@@ -2,9 +2,9 @@
 @use '@angular/material' as mat;
 @use '../app-theme.scss';
 
-$primary: mat.define-palette(mat.$red-palette, 800);
-$accent:  mat.define-palette(mat.$lime-palette, A200, 700);
-$theme: mat.define-dark-theme((
+$primary: mat.define-palette(mat.$blue-grey-palette, 300);
+$accent:  mat.define-palette(mat.$blue-grey-palette, 300);
+$theme: mat.define-light-theme((
   color: (
     primary: $primary,
     accent: $accent

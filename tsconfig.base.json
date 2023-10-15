@@ -43,7 +43,8 @@
         "libs/users/users/feature-users-list/src/index.ts"
       ],
       "@users/home": ["libs/users/home/src/index.ts"],
-      "@users/settings": ["libs/settings/src/index.ts"],
+      "@users/settings": ["libs/users/settings/src/index.ts"],
+      "@users/settings-ui": ["libs/settings-ui/src/index.ts"],
       "@users/tasks-view": ["libs/tasks-view/src/index.ts"],
       "@users/tasks/tasks-view": ["libs/tasks/tasks-view/src/index.ts"],
       "@users/users/articles/article-comments": [
@@ -75,6 +76,12 @@
       "@users/users/profile/feature-profile": [
         "libs/users/profile/feature-profile/src/index.ts"
       ],
+      "@users/users/settings/settings-ui": [
+        "libs/users/settings/settings-ui/src/index.ts"
+      ],
+      "@users/users/settings/feature-change-theme": [
+        "libs/users/settings/feature-change-theme/src/index.ts"
+      ],
       "@users/users/task": ["libs/users/task/src/index.ts"],
       "@users/users/task/data-access": [
         "libs/users/task/data-access/src/index.ts"
@@ -88,9 +95,6 @@
       ],
       "@users/users/tasks/tasks-view-container": [
         "libs/users/tasks/tasks-view-container/src/index.ts"
-      ],
-      "@users/users/settings/feature-change-theme": [
-        "libs/users/settings/feature-change-theme/src/index.ts"
       ]
     }
   },

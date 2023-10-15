@@ -13,8 +13,6 @@
       <quill-editor
         class="editor"
         [class.light-invalid]="formSubmitted && formGroup.get('textEditor')?.invalid"
-        [class.dark-invalid]="vm.isDarkTheme && formSubmitted && formGroup.get('textEditor')?.invalid"
-        [class.dark-theme]="vm.isDarkTheme" 
         [styles]="{height: '400px'}"
         [modules]="quillEditorModules"
         placeholder=""

@@ -1,0 +1,36 @@
+.menu {
+  display: grid; 
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  margin: 5px;
+  height: 100%;
+}
+
+.button {
+  border-radius: 10%;
+}
+
+.button-light-violet {
+  background: linear-gradient(to top, white 60%, #7e57c2 40%);
+}
+
+.button-light-green {
+  background: linear-gradient(to top, white 60%, #66bb6a 40%);
+}
+
+.button-light-red {
+  background: linear-gradient(to top, white 60%, #ef5350 40%);
+}
+
+.button-dark-violet {
+  background: linear-gradient(to top, rgb(72,72,72) 60%, #4527a0 40%);
+}
+
+.button-dark-green {
+  background: linear-gradient(to top, rgb(72,72,72) 60%, #2e7d32 40%);
+}
+
+.button-dark-red {
+  background: linear-gradient(to top, rgb(72,72,72) 60%, #c62828 40%);
+}

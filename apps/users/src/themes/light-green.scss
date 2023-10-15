@@ -11,5 +11,5 @@ $theme: mat.define-light-theme((
   ),
 ));
 
-@include mat.all-component-themes(map.merge($theme));
+@include mat.all-component-themes($theme);
 @include app-theme.theme($theme);
