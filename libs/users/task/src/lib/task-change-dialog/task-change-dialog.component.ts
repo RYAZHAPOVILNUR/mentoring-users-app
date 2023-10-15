@@ -18,6 +18,7 @@ import { UsersFacade } from '@users/users/data-access';
 import { PushPipe } from '@ngrx/component';
 import { UsersEntity } from '@users/core/data-access';
 import { skip } from 'rxjs/operators';
+import { BacklogFacade } from "@users/users/backlog/data-access";
 
 interface Task {
   name: string;
@@ -54,6 +55,7 @@ interface StoryPoint {
 })
 export class TaskChangeDialogComponent {
   public readonly data: any = inject(MAT_DIALOG_DATA);
+  private readonly backlogFacade = inject(BacklogFacade)
   private readonly usersFacade = inject(UsersFacade);
   private dialogRef = inject(MatDialogRef<TaskChangeDialogComponent>);
   public status = false;
@@ -70,7 +72,7 @@ export class TaskChangeDialogComponent {
   };
 
 
-  get totalPoint(): string {    
+  get totalPoint(): string {
     const values = Object.values(this.storyPoint);
 
 if(Object.values(this.storyPoint).every(value => value === "?")) return '?'
@@ -82,14 +84,14 @@ if(Object.values(this.storyPoint).every(value => value === "?")) return '?'
       } else {
         return total;
       }
-    }, 0); 
+    }, 0);
 
 
   }
 
 
   setPoint(category: string, value: string) {
-    
+
     this.storyPoint = {
       ...this.storyPoint, [category]: value
     };
@@ -99,9 +101,8 @@ if(Object.values(this.storyPoint).every(value => value === "?")) return '?'
 
 
   public task: Task = {
-    name: this.data.task.taskName,
-    descriprion:
-      'Lorem ipsum dolor sit amet conctetur adipisicing elit. Aliquam ab, minus ut, mollitia reprehenderit quisquam omnis necessitatibus recusandae fuga nesciunt eveniet laborum quidem dolorem tempore voluptate eius eaque quo vero?',
+    name: this.data?.title,
+    descriprion: this.data?.description ?? 'У тасок в меню "Задачи" с бека description не приходит',
     priority: 'high',
     status: 'progress',
     assignees: [
@@ -127,12 +128,15 @@ if(Object.values(this.storyPoint).every(value => value === "?")) return '?'
       },
     ],
   };
-  public textareaValue: string = this.task.name;
-  public editorContent: string = this.task.descriprion;
+  public editMode = this.data !== null;
+  public textareaValue = this.editMode ? this.task.name : '';
+  public editorContent: string = this.editMode ? this.task.descriprion : '';
   public editStatus = false;
   public users$ = this.usersFacade.allUsers$;
 
   ngOnInit() {
+    console.log(this.data);
+    console.log('this.editMode', this.editMode);
     this.users$.pipe(skip(1)).subscribe(() => {
       this.status = true;
     });
@@ -154,6 +158,7 @@ if(Object.values(this.storyPoint).every(value => value === "?")) return '?'
     this.task = { ...this.task, priority };
   }
   toggleQuill() {
+    this.editMode = true;
     this.editStatus = !this.editStatus;
   }
 
@@ -172,6 +177,10 @@ if(Object.values(this.storyPoint).every(value => value === "?")) return '?'
   }
 
   public saveChanges(): void {
+    this.backlogFacade.addBacklog({
+      title: this.textareaValue,
+      description: this.editorContent
+    })
     this.dialogRef.close();
   }
 }
