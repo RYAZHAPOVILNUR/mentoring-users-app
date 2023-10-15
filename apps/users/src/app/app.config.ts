@@ -22,6 +22,7 @@ import { provideQuillConfig } from 'ngx-quill/config';
 import { articlesEffects, articlesFeature, commentsEffects, commentsFeature } from '@users/users/articles/data-access';
 import { tasksEffects, tasksFeature } from '@users/users/task/data-access';
 import { CLIENT_ID, githubApiEffects, githubApiFeature } from '@users/core/github-api/data-access';
+import { backlogFeature, backlogEffects } from "@users/users/backlog/data-access";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -30,13 +31,14 @@ export function HttpLoaderFactory(http: HttpClient) {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideEffects(
-      userEffects, 
-      authEffects, 
-      articlesEffects, 
-      tasksEffects, 
+      userEffects,
+      authEffects,
+      articlesEffects,
+      tasksEffects,
+      commentsEffects,
+      githubApiEffects,
+      backlogEffects,
       SettingsEffects,
-      commentsEffects, 
-      githubApiEffects 
     ),
     provideStore({
       router: routerReducer,
@@ -46,7 +48,8 @@ export const appConfig: ApplicationConfig = {
       [articlesFeature.name]: articlesFeature.reducer,
       [commentsFeature.name]: commentsFeature.reducer,
       [tasksFeature.name]: tasksFeature.reducer,
-      [githubApiFeature.name]: githubApiFeature.reducer
+      [githubApiFeature.name]: githubApiFeature.reducer,
+      [backlogFeature.name]: backlogFeature.reducer
     }),
     provideRouterStore(),
     provideStoreDevtools({

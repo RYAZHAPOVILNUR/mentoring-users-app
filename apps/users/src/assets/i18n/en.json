@@ -12,7 +12,8 @@
       "TASKS": "Tasks",
       "SETTINGS": "Settings",
       "CHART": "Chart",
-      "LOGOUT": "Logout"
+      "LOGOUT": "Logout",
+      "BACKLOG": "Backlog"
     },
     "LOGIN": {
       "SIGN_IN": "Sign in",

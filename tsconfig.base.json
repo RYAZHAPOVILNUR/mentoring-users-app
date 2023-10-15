@@ -69,6 +69,10 @@
       "@users/users/articles/data-access": [
         "libs/users/articles/data-access/src/index.ts"
       ],
+      "@users/users/backlog": ["libs/users/backlog/src/index.ts"],
+      "@users/users/backlog/data-access": [
+        "libs/users/backlog/data-access/src/index.ts"
+      ],
       "@users/users/chart": ["libs/users/chart/src/index.ts"],
       "@users/users/core/ui/language-switch": [
         "libs/users/core/ui/language-switch/src/index.ts"
