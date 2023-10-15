@@ -15,7 +15,6 @@ import {
   UsersListContainerStore
 } from "../../../../../users/feature-users-list/src/lib/users-list-container/users-list-container.store";
 import {UsersFacade} from "@users/users/data-access";
-import { TranslateModule } from '@ngx-translate/core';
 import { SettingsFacade } from '@users/settings/data-access';
 
 @Component({
@@ -26,7 +25,7 @@ import { SettingsFacade } from '@users/settings/data-access';
     MatCardModule,
     RouterModule,
     MatButtonModule,
-    ArticlesCreateButtonComponent, TranslateModule,
+    ArticlesCreateButtonComponent,
     MatIconModule, MatListModule, PushPipe,
     MatButtonToggleModule,
   ],
