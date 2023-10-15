@@ -12,7 +12,8 @@
       "TASKS": "Задачи",
       "SETTINGS": "Настройки",
       "CHART": "График",
-      "LOGOUT": "Выход"
+      "LOGOUT": "Выход",
+      "BACKLOG": "Бэклог"
     },
     "LOGIN": {
       "SIGN_IN": "Войти",
