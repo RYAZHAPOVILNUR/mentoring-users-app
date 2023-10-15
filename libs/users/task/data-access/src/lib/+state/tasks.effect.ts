@@ -17,6 +17,7 @@ export class tasksEffects {
       mergeMap(() =>
         api.get<{ boards: ITaskBoard[] }>('/todos').pipe(
           map((res) => {
+            
             return tasksAction.loadBoardsSuccess({ boards: res.boards });
           })
         )
