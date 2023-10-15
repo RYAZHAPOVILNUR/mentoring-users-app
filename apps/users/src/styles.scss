@@ -1,9 +1,5 @@
 @use '@angular/material' as mat;
-@import './app-theme.scss';
-
-// @tailwind base;
-// @tailwind components;
-// @tailwind utilities;
+@use './app-theme.scss';
 
 $primary: mat.define-palette(mat.$deep-purple-palette, 400);
 $accent:  mat.define-palette(mat.$blue-grey-palette, 300);
@@ -11,7 +7,7 @@ $theme: mat.define-light-theme((
   color: (
     primary: $primary,
     accent: $accent
-  ),
+  )
 ));
 
 @include mat.core();

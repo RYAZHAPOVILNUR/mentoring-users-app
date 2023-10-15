@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChangeThemeComponent } from './change-theme.component';
 
-describe('ChangeThmeComponent', () => {
+describe('ChangeThemeComponent', () => {
   let component: ChangeThemeComponent;
   let fixture: ComponentFixture<ChangeThemeComponent>;
 

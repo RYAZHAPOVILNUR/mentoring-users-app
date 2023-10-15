@@ -2,17 +2,14 @@ import {Injectable, EventEmitter} from '@angular/core';
 
 export interface DocsSiteTheme {
   name: string;
-  displayName?: string;
-  accent: string;
-  primary: string;
-  isDark?: boolean;
+  displayName: string;
   isDefault?: boolean;
 }
 
 
 @Injectable({providedIn: 'root'})
 export class ThemeStorage {
-  static storageKey = 'docs-theme-storage-current-name';
+  static storageKey = 'users-theme-storage-current-name';
 
   onThemeUpdate: EventEmitter<DocsSiteTheme> = new EventEmitter<DocsSiteTheme>();
 

@@ -4,7 +4,6 @@ import { ArticlesCreateUiComponent } from '../articles-create-ui/articles-create
 import { CreateArticle, ArticlesActions, ArticleSelectors, Article } from '@users/users/articles/data-access';
 import { Store, select } from '@ngrx/store';
 import { DeactivatableComponent } from '@users/core/utils';
-import { ThemeSwitchService } from '@users/users/core/ui/theme-switch';
 import { MatDialog } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from "@users/core/ui";
 import { Observable, filter, map, tap, withLatestFrom } from 'rxjs';
@@ -28,9 +27,7 @@ export class ArticlesCreateContainerComponent implements DeactivatableComponent 
 
   private readonly store = inject(Store);
   private dialog = inject(MatDialog);
-  private readonly themeSwitch = inject(ThemeSwitchService)
   private isFormChange = false;
-  public readonly isDarkTheme$ = this.themeSwitch.isDarkTheme$
   private readonly destroyRef = inject(DestroyRef);
 
   public editMode$ = this.store.pipe(

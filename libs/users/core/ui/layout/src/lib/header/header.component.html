@@ -10,9 +10,9 @@
     {{ 'LAYOUT.HEADER.USERS' | translate }}
   </button>
   <span class="spacer"></span>
-  <button mat-icon-button (click)="onSwitchTheme()" class="theme-switch-btn">
-    <mat-icon>{{(isDarkTheme$ | ngrxPush) ? 'light_mode' : 'dark_mode'}}</mat-icon>
-  </button>
+
+  <users-change-theme-header></users-change-theme-header>
+
   <ng-container [ngSwitch]="selectedLanguage$ | ngrxPush">
     <button mat-icon-button *ngSwitchCase="'ru'" (click)="onSwitchLanguage('en')" class="lang-switch-btn">
       En
