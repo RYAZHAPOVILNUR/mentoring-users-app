@@ -1,0 +1,17 @@
+<div class="settings">
+    <div class="langBtnsDiv">
+        <h2>Переключить язык: </h2>
+        <button mat-raised-button (click)="onSwitchLanguage('ru')" [ngClass]="{'mat-primary': selectedLanguage$.value==='ru'}">RU</button>
+        <button mat-raised-button (click)="onSwitchLanguage('en')" [ngClass]="{'mat-primary': selectedLanguage$.value==='en'}" >EN</button>
+    </div>
+    <div class="langBtnsDiv">
+        <h2>Переключить тему: </h2>
+        <button  вшыфclass="themeBtn" mat-raised-button [color]="'primary'" (click)="onSwitchTheme()"><mat-icon class="themeIcon">{{(isDarkTheme$ | ngrxPush) ? 'light_mode' : 'dark_mode'}}</mat-icon></button>
+        <!-- <button class="themeBtn" mat-raised-button [color]="(isDarkTheme$ | ngrxPush) ? 'primary' : ''" (click)="onSwitchTheme()"><mat-icon class="themeIcon">dark_mode</mat-icon></button> -->
+    </div>
+    <div *ngIf="articleStyle$ | ngrxPush as articleStyle" class="langBtnsDiv">
+        <h2>Отображение карточек статей: </h2>
+        <button  mat-raised-button (click)="changeArticlesStyleType('LIST')"  [ngClass]="{'mat-primary': articleStyle ==='LIST'}">СПИСОК</button>
+        <button mat-raised-button (click)="changeArticlesStyleType('TILE')" [ngClass]="{'mat-primary': articleStyle ==='TILE'}" >ПЛИТКА</button>
+    </div>
+</div>

@@ -1,3 +1,4 @@
+import { TasksContainerComponent } from './../../../../libs/users/task/src/lib/tasks-view-container/tasks-view-container.component';
 import { Route } from '@angular/router';
 import { authGuard, adminGuard } from '@auth/data-access';
 import { AuthorizedUserLayoutComponent } from './authorized-user-layout/authorized-user-layout.component';
@@ -59,6 +60,10 @@ export const appRoutes: Route[] = [
       {
         path: 'tasks',
         loadComponent: () => import('@users/users/task').then(c => c.TasksContainerComponent)
+      },
+      {
+        path: 'settings',
+        loadComponent: () => import('@users/settings').then(c => c.SettingsComponent)
       },
       {
         path: 'chart',
