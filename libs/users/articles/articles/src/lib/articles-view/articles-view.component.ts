@@ -14,6 +14,7 @@ import {
   UsersListContainerStore
 } from "../../../../../users/feature-users-list/src/lib/users-list-container/users-list-container.store";
 import {UsersFacade} from "@users/users/data-access";
+import {OrderByPipe} from "./orderby.pipe";
 
 @Component({
   selector: 'users-articles-view',
@@ -24,7 +25,7 @@ import {UsersFacade} from "@users/users/data-access";
     RouterModule,
     MatButtonModule,
     ArticlesCreateButtonComponent,
-    MatIconModule, MatListModule, PushPipe
+    MatIconModule, MatListModule, PushPipe, OrderByPipe
   ],
   templateUrl: './articles-view.component.html',
   styleUrls: ['./articles-view.component.scss'],
