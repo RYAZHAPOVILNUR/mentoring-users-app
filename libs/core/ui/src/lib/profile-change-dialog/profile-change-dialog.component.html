@@ -1,8 +1,8 @@
 <ng-container class="profile-container">
-  <h1 mat-dialog-title>Изменение профиля</h1>
+  <h1 mat-dialog-title>{{'LAYOUT.USER_PROFILE_EDIT.PROFILE' | translate}}</h1>
   <form [formGroup]="formGroup">
     <div mat-dialog-content>
-        <mat-label>Имя</mat-label>
+        <mat-label>{{'LAYOUT.USER_PROFILE_EDIT.NAME' | translate}}</mat-label>
         <mat-form-field appearance="outline">
           <input
             matInput
@@ -10,7 +10,7 @@
             [formControlName]="'name'"
             >
         </mat-form-field>
-        <mat-label>E-mail</mat-label>
+        <mat-label>{{'LAYOUT.USER_PROFILE_EDIT.EMAIL' | translate}}</mat-label>
         <mat-form-field appearance="outline">
           <input
             matInput
@@ -18,11 +18,11 @@
             [formControlName]="'email'"
             >
         </mat-form-field>
-        <mat-label>Город</mat-label>
+        <mat-label>{{'LAYOUT.USER_PROFILE_EDIT.CITY' | translate}}</mat-label>
         <users-input-city [vm]="userEntityData" [formControlName]="'city'"></users-input-city>
     </div>
     <div mat-dialog-actions>
-      <button mat-button [mat-dialog-close]="formGroup" cdkFocusInitial>Сменить</button>
+      <button mat-button [mat-dialog-close]="formGroup" cdkFocusInitial>{{'LAYOUT.USER_PROFILE_EDIT.CHANGE' | translate}}</button>
     </div>
   </form>
 </ng-container>

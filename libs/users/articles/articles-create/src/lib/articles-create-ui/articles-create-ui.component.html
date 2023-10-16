@@ -1,21 +1,33 @@
 <div class="wrapper">
   <form [formGroup]="formGroup" (submit)="onSubmit($event)">
-
     <mat-form-field>
-      <input type="text" autocomplete="off" placeholder="Заголовок" formControlName="title" class="input-field"
-        matInput [errorStateMatcher]="matcher"/>
-      <mat-error *ngIf="formSubmitted && formGroup.get('title')?.hasError"> 
-        Заголовок должен содержать минимум 6 символов и не более 60!
+      <input
+        type="text"
+        autocomplete="off"
+        [placeholder]="'LAYOUT.ARTICLE.TITLE' | translate"
+        formControlName="title"
+        class="input-field"
+        matInput
+        [errorStateMatcher]="matcher"
+      />
+      <mat-error *ngIf="formSubmitted && formGroup.get('title')?.hasError">
+        {{ 'LAYOUT.ARTICLE.TITLE_LENGTH_ERR' | translate }}!
       </mat-error>
     </mat-form-field>
 
     <div class="custom-input-container">
       <quill-editor
         class="editor"
-        [class.light-invalid]="formSubmitted && formGroup.get('textEditor')?.invalid"
-        [class.dark-invalid]="vm.isDarkTheme && formSubmitted && formGroup.get('textEditor')?.invalid"
-        [class.dark-theme]="vm.isDarkTheme" 
-        [styles]="{height: '400px'}"
+        [class.light-invalid]="
+          formSubmitted && formGroup.get('textEditor')?.invalid
+        "
+        [class.dark-invalid]="
+          vm.isDarkTheme &&
+          formSubmitted &&
+          formGroup.get('textEditor')?.invalid
+        "
+        [class.dark-theme]="vm.isDarkTheme"
+        [styles]="{ height: '400px' }"
         [modules]="quillEditorModules"
         placeholder=""
         defaultEmptyValue=""
@@ -24,14 +36,21 @@
       </quill-editor>
     </div>
 
-    <p class="error-message"
-      *ngIf="formSubmitted && formGroup.get('textEditor')?.invalid">
-      Статья должна состоять минимум из 66 символов!
+    <p
+      class="error-message"
+      *ngIf="formSubmitted && formGroup.get('textEditor')?.invalid"
+    >
+      {{ 'LAYOUT.ARTICLE.ARTICLE_LENGTH_ERR' | translate }}!
     </p>
 
     <div class="button">
-      <button mat-raised-button type="submit" color="primary">{{ vm.editMode ? 'Редактировать' : 'Опубликовать' }}</button>
+      <button mat-raised-button type="submit" color="primary">
+        {{
+          vm.editMode
+            ? ('LAYOUT.ARTICLE.EDIT' | translate)
+            : ('LAYOUT.ARTICLE.PUBLISH' | translate)
+        }}
+      </button>
     </div>
-
   </form>
 </div>

@@ -24,6 +24,35 @@
       "YOU_DONT_HAVE_AN_ACCOUNT": "You don't have an account?",
       "FORGOT_YOUR_PASSWORD": "Forgot your password?"
     },
+    "USER_PROFILE": {
+      "CHANGE_PASSWORD": "Change password",
+      "LINK_GITHUB": "Link GitHub",
+      "UNLINK_GITHUB": "Unlink GitHub"
+    },
+    "USER_PROFILE_EDIT": {
+      "PROFILE": "Change Profile",
+      "NAME": "Name",
+      "EMAIL": "Email",
+      "CITY": "City",
+      "CHANGE": "Change"
+    },
+    "USER_PROFILE_CHANGE_PASSWORD": {
+      "TITLE": "Fill in the fields to change your password",
+      "OLD_PASSWORD": "Old Password",
+      "NEW_PASSWORD": "New Password",
+      "CONFIRM_PASSWORD": "Confirm your new password",
+      "PASSWORD_DONT_MATCH": "Password mismatch",
+      "CHANGE": "Change",
+      "RESET": "Reset"
+    },
+    "ARTICLE": {
+      "TITLE": "Title",
+      "TITLE_LENGTH_ERR": "The title must contain a minimum of 6 characters and no more than 60",
+      "ARTICLE_LENGTH_ERR": "The article must consist of at least 66 characters",
+      "EDIT": "Edit",
+      "PUBLISH": "Publish",
+      "FROM": "From"
+    },
     "REGISTRATION": {
       "YOU_HAVE_AN_ACCOUNT": "You have an account?",
       "SIGN_IN": "Sign in",

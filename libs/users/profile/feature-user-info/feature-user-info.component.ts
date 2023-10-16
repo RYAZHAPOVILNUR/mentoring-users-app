@@ -15,6 +15,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
+import { PushPipe } from '@ngrx/component';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -30,6 +32,8 @@ import { of } from 'rxjs';
     MatIconModule,
     CommonModule,
     FormsModule,
+    TranslateModule,
+    PushPipe
   ],
   templateUrl: './feature-user-info.component.html',
   styleUrls: ['./feature-user-info.component.scss'],
@@ -41,6 +45,7 @@ export class FeatureUserInfoComponent implements OnInit {
   private readonly authFacade = inject(AuthFacade);
   private matIconRegistry = inject(MatIconRegistry);
   private domSanitizer = inject(DomSanitizer);
+
 
   @Input({ required: true }) vm!: ProfileFormVm
 

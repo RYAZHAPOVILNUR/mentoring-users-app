@@ -36,6 +36,35 @@
       "AND": "и",
       "PRIVACY_POLICY": "Политикой конфиденциальности"
     },
+    "USER_PROFILE": {
+      "CHANGE_PASSWORD": "Поменять пароль",
+      "LINK_GITHUB": "Привязать GitHub",
+      "UNLINK_GITHUB": "Отвязать GitHub"
+    },
+    "USER_PROFILE_EDIT": {
+      "PROFILE": "Изменить профиль",
+      "NAME": "Имя",
+      "EMAIL": "Электронная почта",
+      "CITY": "Город",
+      "CHANGE": "Сменить"
+    },
+    "USER_PROFILE_CHANGE_PASSWORD": {
+      "TITLE": "Заполните поля для смены пароля",
+      "OLD_PASSWORD": "Старый пароль",
+      "NEW_PASSWORD": "Новый Пароль",
+      "CONFIRM_PASSWORD": "Подтвердите новый пароль",
+      "PASSWORD_DONT_MATCH": "Пароли не совпадают",
+      "CHANGE": "Сменить",
+      "RESET": "Сброс"
+    },
+    "ARTICLE": {
+      "TITLE": "Заголовок",
+      "TITLE_LENGTH_ERR": "Заголовок должен содержать минимум 6 символов и не более 60",
+      "ARTICLE_LENGTH_ERR": "Статья должна состоять минимум из 66 символов",
+      "EDIT": "Редактировать",
+      "PUBLISH": "Опубликовть",
+      "FROM": "От"
+    },
     "ARTICALE": {
       "COMMENTS": "Комментарии",
       "WRITE_SOMETHING": "Напишите что-нибудь",
