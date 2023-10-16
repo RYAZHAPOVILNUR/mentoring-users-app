@@ -1,0 +1,51 @@
+<button (click)="openBacklogModal()" mat-stroked-button color="accent">
+  <mat-icon>add</mat-icon>
+  USER STORY
+</button>
+<mat-action-list>
+  <mat-list-item (click)="openBacklogModal(backlog)" *ngFor="let backlog of backlogs | async " class="backlog-item">
+
+    <div class="backlog-container">
+
+      <p class="user-story-name">
+        <span class="user-story-number">#{{backlog.todos_id}}</span> {{backlog.title}}
+      </p>
+
+      <div class="backlog-item-actions">
+        <small (click)="stopPropagation($event)" [matMenuTriggerFor]="status" class="backlog-inProgress">
+          <!--{{backlog.status}}-->
+          In progress
+          <mat-icon class="expand_more">expand_more</mat-icon>
+        </small>
+        <mat-menu #status="matMenu">
+          <button
+            mat-menu-item
+            *ngFor="let status of backlogStatus[0] | keyvalue"
+            (click)="onChangeStatus(status.value)"
+          >
+            {{status.value}}
+          </button>
+        </mat-menu>
+
+
+        <mat-icon (click)="stopPropagation($event)" inline>question_mark</mat-icon>
+
+
+        <button (click)="stopPropagation($event)" mat-icon-button [matMenuTriggerFor]="actions" class="more_actions">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #actions="matMenu">
+          <button mat-menu-item>
+            <mat-icon>edit</mat-icon>
+            Редактировать
+          </button>
+          <button mat-menu-item (click)="onDeleteBacklogItem(backlog.id)">
+            <mat-icon>delete</mat-icon>
+            Удалить
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+
+  </mat-list-item>
+</mat-action-list>

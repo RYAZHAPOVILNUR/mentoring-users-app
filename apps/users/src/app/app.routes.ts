@@ -1,3 +1,4 @@
+import { TasksContainerComponent } from './../../../../libs/users/task/src/lib/tasks-view-container/tasks-view-container.component';
 import { Route } from '@angular/router';
 import { authGuard, adminGuard } from '@auth/data-access';
 import { AuthorizedUserLayoutComponent } from './authorized-user-layout/authorized-user-layout.component';
@@ -45,6 +46,10 @@ export const appRoutes: Route[] = [
         canDeactivate: [canDeactivateFormComponent]
       },
       {
+        path: 'materials',
+        loadComponent: () => import('@users/materials').then(c => c.UsersMaterialsComponent),
+      },
+      {
         path: 'articles',
         loadComponent: () => import('@users/users/articles/articles').then(c => c.ArticlesViewContainerComponent),
       },
@@ -57,8 +62,16 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('@users/users/task').then(c => c.TasksContainerComponent)
       },
       {
+        path: 'settings',
+        loadComponent: () => import('@users/settings').then(c => c.SettingsComponent)
+      },
+      {
         path: 'chart',
         loadComponent: () => import('@users/users/chart').then(c => c.ChartViewComponent)
+      },
+      {
+        path: 'backlog',
+        loadComponent: () => import('@users/users/backlog').then(c => c.BacklogComponent)
       },
       ...layoutAgnosticComponents
     ]

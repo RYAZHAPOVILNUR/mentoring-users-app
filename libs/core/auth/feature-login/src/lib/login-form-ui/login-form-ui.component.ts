@@ -8,7 +8,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ApiService } from '@users/core/http';
+import { PushPipe } from '@ngrx/component';
 import { InputPasswordComponent } from '@users/core/ui';
+import { LanguageKeys, LanguageSwitchService } from '@users/users/core/ui/language-switch';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'users-login-form-ui',
@@ -22,7 +25,9 @@ import { InputPasswordComponent } from '@users/core/ui';
     MatButtonModule,
     ReactiveFormsModule,
     MatCheckboxModule,
-    InputPasswordComponent
+    InputPasswordComponent,
+    TranslateModule,
+    PushPipe
   ],
   templateUrl: './login-form-ui.component.html',
   styleUrls: ['./login-form-ui.component.scss'],
@@ -32,6 +37,8 @@ export class LoginFormUiComponent {
   private readonly api = inject(ApiService);
   @Output() login = new EventEmitter();
   @Output() redirectToSignup = new EventEmitter();
+  private readonly languageSwitchService = inject(LanguageSwitchService);
+  public readonly selectedLanguage$ = this.languageSwitchService.selectedLanguage$;
 
   public formGroup = new FormBuilder().group({
     email: new FormControl('admin@gmail.com', [Validators.required, Validators.email]),
@@ -50,6 +57,10 @@ export class LoginFormUiComponent {
       }
       this.login.emit(userData);
     }
+  }
+
+  public onSwitchLanguage(language: LanguageKeys) {
+    this.languageSwitchService.setLanguage(language);
   }
 
 }
