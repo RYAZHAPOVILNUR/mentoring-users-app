@@ -9,7 +9,7 @@
         <mat-card-content class="article-author-block-img">
           <img
             [routerLink]="
-        article.authorId === loggedUserId 
+        article.authorId === loggedUserId
         ? ['/profile']
         : ['/profile', article.authorId]
         "
@@ -20,8 +20,8 @@
         <mat-card-content>
           <mat-card-title>
             <article class="block-with-text"
-                     [routerLink]="['/articles', article.id]"
-                     routerLinkActive="router-link-active"
+                    [routerLink]="['/articles', article.id]"
+                    routerLinkActive="router-link-active"
             >{{ clearArticleContent(article.title) }}</article>
           </mat-card-title>
           <mat-card-subtitle
@@ -30,7 +30,7 @@
         ? ['/profile']
         : ['/profile', article.authorId]
         "
-            class="article-author-name">  от: {{article.author ? article.author : (authorArticle$[i] | ngrxPush) }}
+            class="article-author-name"> {{ 'LAYOUT.ARTICALE.BY' | translate }}: {{article.author ? article.author : (authorArticle$[i] | ngrxPush) }}
           </mat-card-subtitle>
           <mat-card-subtitle class="article-subtitle">{{ article.created_at | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
         </mat-card-content>
@@ -48,12 +48,12 @@
 
     <mat-card-content class="article-content">
       <article class="block-with-text"
-               [routerLink]="['/articles/:id']"
-               [queryParams]="{ id: article.id }"
-               routerLinkActive="router-link-active"
+                [routerLink]="['/articles', article.id]"
+                routerLinkActive="router-link-active"
       >{{ clearArticleContent(article.content) }}</article>
     </mat-card-content>
 
   </mat-card>
 </div>
+
 <users-articles-create-button></users-articles-create-button>
