@@ -13,5 +13,38 @@
       "CHART": "Chart",
       "LOGOUT": "Logout"
     }
+  },
+  "PROFILE": {
+    "USER_INFO": {
+      "CONNECT_GITHUB": "Connect GitHub",
+      "DISCONNECT_GITHUB": "Disconnect Github",
+      "CHANGE_PASSWORD": "Change password"
+    },
+    "PASSWORD_CHANGE": {
+      "FILL_THE_FORM": "Fill the form for password change",
+      "OLD_PASSWORD": "Old password",
+      "NEW_PASSWORD": "New password",
+      "CONFIRM_NEW_PASSWORD": "Confirm new password",
+      "DONT_MATCH": "Passwords doen't match",
+      "CANSEL": "Cansel",
+      "CHANGE": "Change"
+    },
+    "PROFILE_CHANGE": {
+      "PROFILE_CHANGE": "Profile change",
+      "NAME": "Name",
+      "EMAIL": "Email",
+      "CITY": "City",
+      "CHANGE": "Change"
+    }
+  },
+  "ARTICLES": {
+    "ARTICLE": {
+      "HEADER": "Header",
+      "FROM": "From",
+      "EDIT": "Edit",
+      "POST": "Post",
+      "ARTICLE_SIZE": "The post must start minimum with 66 symbols!",
+      "HEADER_SIZE": "The header should contain minimum 6 symbols and maximum 60!"
+    }
   }
 }

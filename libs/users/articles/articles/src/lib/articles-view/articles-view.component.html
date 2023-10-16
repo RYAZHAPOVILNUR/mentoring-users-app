@@ -27,7 +27,7 @@
         ? ['/profile']
         : ['/profile', article.authorId]
         "
-            class="article-author-name">  от: {{article.author ? article.author : (authorArticle$[i] | ngrxPush) }}
+            class="article-author-name">  {{ 'ARTICLES.FROM' | translate }} {{article.author ? article.author : (authorArticle$[i] | ngrxPush) }}
           </mat-card-subtitle>
           <mat-card-subtitle class="article-subtitle">{{ article.created_at | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
         </mat-card-content>

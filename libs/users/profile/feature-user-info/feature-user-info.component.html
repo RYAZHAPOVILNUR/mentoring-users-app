@@ -50,7 +50,7 @@
         <mat-card-actions class="user-info-items">
           <ng-container *ngIf="vm.isLoggedUser">
             <button mat-button class="navbar-btn" (click)="onOpenChangePassword()">
-              <mat-icon>lock-reset</mat-icon><span class="button-label">Сменить пароль</span>
+              <mat-icon>lock-reset</mat-icon><span class="button-label">{{ 'PROFILE.USER_INFO.CHANGE_PASSWORD' | translate }}</span>
             </button>
           </ng-container>
           <mat-spinner *ngIf="vm.githubStatus === 'loading'" diameter="24"></mat-spinner>
@@ -61,12 +61,12 @@
                 <span>{{ ghUserName }}</span>
               </button>
               <button mat-button class="navbar-btn" (click)="onDisconnectGithub()">
-                <span class="button-label">Отвязать GitHub</span>
+                <span class="button-label">{{ 'PROFILE.USER_INFO.DISCONNECT_GITHUB' | translate }}</span>
               </button>
             </div>
             <ng-template #connectGithub>
               <button mat-button class="navbar-btn" (click)="onConnectGithub()">
-                <mat-icon svgIcon="github">edit</mat-icon><span class="button-label">Привязать GitHub</span>
+                <mat-icon svgIcon="github">edit</mat-icon><span class="button-label">{{ 'PROFILE.USER_INFO.CONNECT_GITHUB' | translate }}</span>
               </button>
             </ng-template>
           </ng-container>
