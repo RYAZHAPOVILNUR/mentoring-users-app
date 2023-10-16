@@ -1,4 +1,4 @@
-<div *ngFor="let article of articles; let i = index">
+<div *ngFor="let article of articles | orderBy; let i = index">
   <mat-card class="article">
     <mat-card-header class="article-header">
       <mat-card-content class="article-header-block">
