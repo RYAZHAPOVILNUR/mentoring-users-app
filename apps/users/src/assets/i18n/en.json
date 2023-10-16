@@ -64,6 +64,12 @@
       "TERMS": "Terms",
       "AND": "and",
       "PRIVACY_POLICY": "Privacy Policy"
+    },
+    "ARTICALE": {
+      "COMMENTS": "Comments",
+      "COMMENT_ERROR": "The comment must be no more than 100 characters",
+      "WRITE_SOMETHING": "Write something",
+      "BY": "by"
     }
   }
 }

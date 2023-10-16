@@ -1,10 +1,10 @@
-import {
+import { 
   ChangeDetectionStrategy,
   Component,
   inject,
   Input,
   OnInit,
-  ViewEncapsulation,
+  ViewEncapsulation ,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuillModule } from 'ngx-quill';
@@ -28,6 +28,8 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [
     CommonModule,
+  imports: [
+    CommonModule,
     QuillModule,
     MatCardModule,
     RouterModule,
@@ -48,6 +50,7 @@ import { TranslateModule } from '@ngx-translate/core';
 export class ArticlesViewComponent implements OnInit {
   @Input({ required: true }) articles!: Article[];
   @Input({ required: true }) article!: Article | null;
+  @Input({ required: true }) loggedUserId!: number;
   @Input({ required: true }) loggedUserId!: number;
 
   private readonly componentStore = inject(UsersListContainerStore);
