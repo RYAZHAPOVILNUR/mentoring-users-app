@@ -78,6 +78,7 @@ export class FeatureUserInfoComponent implements OnInit {
 
   onOpenChangeProfileData() {
     const dialogRef = this.dialog.open(ProfileChangeDialogComponent,{
+      width: '400px',
       data: this.vm.user
     })
     dialogRef.afterClosed()
