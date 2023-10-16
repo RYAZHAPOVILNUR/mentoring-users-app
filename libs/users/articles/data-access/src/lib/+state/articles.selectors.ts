@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { ArticlesState, articlesAdapter, articlesFeature } from './articles.reducer';
-import { selectQueryParams } from '@users/core/data-access';
+import { selectQueryParams, selectRouteParams } from '@users/core/data-access';
 
 export const { selectArticlesState, selectIds, selectStatus } = articlesFeature
 
@@ -22,3 +22,8 @@ export const selectArticleForEdit = createSelector(
   ({ id }, entities) => entities[id] || null
 )
 
+export const selectOpenedArticle = createSelector(
+  selectRouteParams,
+  selectArticlesEntities,
+  ({ id }, entities) => entities[id] || null
+)

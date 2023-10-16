@@ -33,6 +33,7 @@ export class ArticlesViewContainerComponent {
   public readonly loggedUserId$ = this.store.select(selectLoggedUserId);
   public articleId$ = this.store.pipe(select(selectQueryParam('id')))
 
+
   public viewedArticle$: Observable<Article | null> = this.store.select(ArticleSelectors.selectArticleForEdit)
     .pipe(
       withLatestFrom(this.articleId$),
