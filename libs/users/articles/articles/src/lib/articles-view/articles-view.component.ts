@@ -65,7 +65,7 @@ export class ArticlesViewComponent implements OnInit {
 
   public clearArticleContent(content: string) {
     return content.replace(/<[^>]*>/g, ' ');
-  }
+  };
 
   preventRouterNavigation(event: Event) {
     event.stopPropagation();
