@@ -1,3 +1,4 @@
+import { UiPhotoModalComponent } from 'libs/users/profile/ui-profile/ui-photo-modal/ui-photo-modal.component';
 import { AuthFacade, ChangePasswordPayload, ChangeProfileDataPayload } from '../../../core/auth/data-access/src';
 import { ChangeDetectionStrategy, Component, Input, OnInit, DestroyRef, ChangeDetectorRef } from '@angular/core';
 import { PasswordChangeDialogComponent, ProfileChangeDialogComponent } from '../../../core/ui/src';
@@ -14,7 +15,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
-import { UiPhotoModalComponent } from '../ui-profile/ui-photo-modal/ui-photo-modal.component';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -80,6 +80,7 @@ export class FeatureUserInfoComponent implements OnInit {
 
   onOpenChangeProfileData() {
     const dialogRef = this.dialog.open(ProfileChangeDialogComponent,{
+      width: '400px',
       data: this.vm.user
     })
     dialogRef.afterClosed()
