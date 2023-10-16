@@ -18,10 +18,10 @@
   </button>
   <ng-container [ngSwitch]="selectedLanguage$ | ngrxPush">
     <button mat-icon-button *ngSwitchCase="'ru'" (click)="onSwitchLanguage('en')" class="lang-switch-btn">
-      En
+      Ru
     </button>
     <button mat-icon-button *ngSwitchCase="'en'" (click)="onSwitchLanguage('ru')" class="lang-switch-btn">
-      Ru
+      En
     </button>
   </ng-container>
 </mat-toolbar>
