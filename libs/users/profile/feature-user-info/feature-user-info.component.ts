@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { UiPhotoModalComponent } from '../ui-profile/ui-photo-modal/ui-photo-modal.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -30,6 +31,7 @@ import { UiPhotoModalComponent } from '../ui-profile/ui-photo-modal/ui-photo-mod
     MatIconModule,
     CommonModule,
     FormsModule,
+    TranslateModule,
   ],
   templateUrl: './feature-user-info.component.html',
   styleUrls: ['./feature-user-info.component.scss'],
