@@ -5,13 +5,6 @@
   padding: 20px 20px 0 20px;
   margin-bottom: 10px;
 }
-.settings-header {
-  padding: 20px 20px 0 20px;
-  margin-bottom: 10px;
-  & .settings-subtitle {
-    font-weight: 400;
-  }
-}
 .settings-color-grid {
   display: flex;
   padding: 10px 20px 0 20px;
@@ -128,10 +121,10 @@
     margin-top: 20px;
     margin-bottom: 0px;
   }
-}
 
-.mdc-button {
-  min-width: 100%;
+  .mdc-button {
+    min-width: 100%;
+  }
 }
 
 .set-custom-theme {
@@ -140,6 +133,10 @@
   margin-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.mdc-button {
+  min-width: max-content;
 }
 
 $color-palettes: (
