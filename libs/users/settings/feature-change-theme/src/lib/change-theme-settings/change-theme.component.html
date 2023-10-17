@@ -1,0 +1,64 @@
+<mat-card-title class="settings-title">Настройка темы</mat-card-title>
+
+<mat-card-header class="settings-header">
+  Выбор готовых тем
+</mat-card-header>
+
+<mat-grid-list cols="3" rowHeight="3:1" gutterSize="7" class="settings-color-grid">
+  <mat-grid-tile><button mat-raised-button class="button-light-violet" (click)="selectTheme('light-violent')">
+      Светлый/Фиолетовый
+  </button></mat-grid-tile>
+
+  <mat-grid-tile><button mat-raised-button class="button-light-green" (click)="selectTheme('light-green')">
+    Светлый/Зеленый
+  </button></mat-grid-tile>
+
+  <mat-grid-tile><button mat-raised-button class="button-light-red" (click)="selectTheme('light-red')">
+    Светлый/Красный
+  </button></mat-grid-tile>
+
+  <mat-grid-tile><button mat-raised-button class="button-dark-violet" (click)="selectTheme('dark-violent')">
+      Темный/Фиолетовый
+  </button></mat-grid-tile>
+
+  <mat-grid-tile><button mat-raised-button class="button-dark-green" (click)="selectTheme('dark-green')">
+      Темный/Зеленый
+  </button></mat-grid-tile>
+
+  <mat-grid-tile><button mat-raised-button class="button-dark-red" (click)="selectTheme('dark-red')">
+    Темный/Красный
+  </button></mat-grid-tile>
+</mat-grid-list>
+
+<mat-card-header class="settings-header">
+Выбор своей темы
+</mat-card-header>
+
+<div class="container">
+  <div class="section">
+    <p>Основной цвет</p>
+    <mat-grid-list cols="4" gutterSize="4">
+      <mat-grid-tile class="tile" *ngFor="let item of primaryColors">
+        <button mat-raised-button class="square-button" [ngClass]="item.color" (click)="pickPrimaryColor(item.color)"><mat-icon *ngIf="selectedPrimaryColor === item.color">done</mat-icon></button>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <p class="hue">Оттенок</p>
+    <mat-slider discrete [max]="900" [min]="100" [step]="100">
+      <input matSliderThumb [(ngModel)]="primaryValue" (change)="primarySliderChange()">
+    </mat-slider>
+  </div>
+
+  <div class="section">
+    <p>Дополнительный цвет</p>
+    <mat-grid-list cols="4" gutterSize="4">
+      <mat-grid-tile *ngFor="let item of secondaryColors">
+        <button mat-raised-button class="square-button" [ngClass]="item.color" (click)="pickSecondaryColor(item.color)"><mat-icon *ngIf="selectedSecondaryColor === item.color">done</mat-icon></button>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <p class="hue">Оттенок</p>
+    <mat-slider discrete [max]="900" [min]="100" [step]="100">
+      <input matSliderThumb [(ngModel)]="secondaryValue" (change)="secondarySliderChange()">
+    </mat-slider>
+  </div>
+</div>
+<button mat-raised-button class="set-custom-theme" (click)="selectTheme('custom-theme')">Установить тему</button>

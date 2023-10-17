@@ -5,7 +5,6 @@ import { TasksViewComponent } from '../tasks-view/tasks-view.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { TasksStore } from './tasks-list-container.store';
-import { ThemeSwitchService } from '@users/users/core/ui/theme-switch';
 import { PushPipe } from '@ngrx/component';
 import {TasksSearchInputComponent} from "../tasks-search-input/tasks-search-input.component";
 
@@ -26,9 +25,7 @@ import {TasksSearchInputComponent} from "../tasks-search-input/tasks-search-inpu
 })
 export class TasksContainerComponent {
   private readonly tasksStore = inject(TasksStore);
-  public readonly switchMode = inject(ThemeSwitchService);
 
-  public colorMode$ = this.switchMode.isDarkTheme$;
   public columns$ = this.tasksStore.columns$;
   public filteredColumn$ = this.tasksStore.filteredColumn$
 
