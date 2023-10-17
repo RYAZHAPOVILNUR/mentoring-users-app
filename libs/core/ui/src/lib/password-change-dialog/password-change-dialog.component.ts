@@ -10,6 +10,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {BehaviorSubject, debounceTime} from 'rxjs';
 import {PushPipe} from "@ngrx/component";
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
@@ -25,7 +26,8 @@ import {PushPipe} from "@ngrx/component";
     ReactiveFormsModule,
     InputPasswordComponent,
     MatTooltipModule,
-    PushPipe
+    PushPipe,
+    TranslateModule
   ],
   templateUrl: './password-change-dialog.component.html',
   styleUrls: ['./password-change-dialog.component.scss'],
