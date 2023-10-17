@@ -2,10 +2,10 @@
   <form [formGroup]="formGroup" (submit)="onSubmit($event)">
 
     <mat-form-field>
-      <input type="text" autocomplete="off" placeholder="Заголовок" formControlName="title" class="input-field"
+      <input type="text" autocomplete="off" placeholder="{{ 'ARTICLES.ARTICLE.HEADER' | translate }}" formControlName="title" class="input-field"
         matInput [errorStateMatcher]="matcher"/>
       <mat-error *ngIf="formSubmitted && formGroup.get('title')?.hasError"> 
-        Заголовок должен содержать минимум 6 символов и не более 60!
+        {{ 'ARTICLES.ARTICLE.HEADER_SIZE' | translate }}
       </mat-error>
     </mat-form-field>
 
@@ -26,11 +26,11 @@
 
     <p class="error-message"
       *ngIf="formSubmitted && formGroup.get('textEditor')?.invalid">
-      Статья должна состоять минимум из 66 символов!
+      {{ 'ARTICLES.ARTICLE.ARTICLE_SIZE' | translate }}
     </p>
 
     <div class="button">
-      <button mat-raised-button type="submit" color="primary">{{ vm.editMode ? 'Редактировать' : 'Опубликовать' }}</button>
+      <button mat-raised-button type="submit" color="primary">{{ vm.editMode ? ('ARTICLES.ARTICLE.EDIT' | translate) : ('ARTICLES.ARTICLE.POST' | translate) }}</button>
     </div>
 
   </form>
