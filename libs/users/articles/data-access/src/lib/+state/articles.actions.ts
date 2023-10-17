@@ -17,9 +17,13 @@ export const ArticlesActions = createActionGroup({
     loadArticlesSuccess: props<{articles: Article[]}>(),
     loadArticlesFailed: props<{ error: Error }>(),
 
-    getArticle: props<{id:string}>(),
-    getArticleSuccess: props<{article: Article}>(),
-    getArticlesFailed: props<{ error: Error }>(),
+    getArticleForEdit: props<{id:string}>(),
+    getArticleForEditSuccess: props<{article: Article}>(),
+    getArticleForEditFailed: props<{ error: Error }>(),
+
+    getArticleForRead: emptyProps(),
+    getArticleForReadSuccess: props<{article: Article}>(),
+    getArticleForReadFailed: props<{error: Error}>(),
 
     deleteColumn: props<{ columnIndex: number }>(),
   },

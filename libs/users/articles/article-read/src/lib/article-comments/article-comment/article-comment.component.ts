@@ -32,7 +32,9 @@ import {RouterLink} from "@angular/router";
 export class ArticleCommentComponent {
   private readonly languageService = inject(LanguageSwitchService);
   public likesCount: number = 0;
+  public disLikesCount: number = 0;
   public isLikeActive: boolean = false;
+  public isDisLikeActive: boolean = false;
 
   @Input({ required: true }) comment!: Comment;
   @Input({required: true}) userId!: number;
@@ -40,6 +42,10 @@ export class ArticleCommentComponent {
   public onThumbUp() {
     this.likesCount = this.likesCount === 0 ? 1 : 0;
     this.isLikeActive = !this.isLikeActive;
+  }
+  public onThumbDown() {
+    this.disLikesCount = this.disLikesCount === 0 ? 1 : 0;
+    this.isDisLikeActive = !this.isDisLikeActive;
   }
 
   public get avatarSrc(): string {
@@ -50,5 +56,8 @@ export class ArticleCommentComponent {
 
   public get isLikesExists(): boolean {
     return this.likesCount > 0;
+  }
+  public get isDisLikesExists(): boolean {
+    return this.disLikesCount > 0;
   }
 }
