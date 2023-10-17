@@ -97,17 +97,12 @@ export const appRoutes: Route[] = [
         loadComponent: () =>
           import('@users/users/chart').then((c) => c.ChartViewComponent),
       },
-<<<<<<< HEAD
       {
         path: 'backlog',
         loadComponent: () => import('@users/users/backlog').then(c => c.BacklogComponent)
       },
       ...layoutAgnosticComponents
     ]
-=======
-      ...layoutAgnosticComponents,
-    ],
->>>>>>> de1d21e19dcb4f014b0083caaa75bcd7117c13d1
   },
   {
     path: 'guest',

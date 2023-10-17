@@ -1,11 +1,19 @@
 @use '@angular/material' as mat;
-@import './theme.scss';
+@use './app-theme.scss';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+$primary: mat.define-palette(mat.$deep-purple-palette, 400);
+$accent:  mat.define-palette(mat.$blue-grey-palette, 300);
+$theme: mat.define-light-theme((
+  color: (
+    primary: $primary,
+    accent: $accent
+  )
+));
 
-/* You can add global styles to this file, and also import other style files */
+@include mat.core();
+
+@include mat.all-component-themes($theme);
+@include app-theme.theme($theme);
 
 html,
 body {
