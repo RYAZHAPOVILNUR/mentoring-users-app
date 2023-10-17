@@ -48,7 +48,7 @@ export class ArticlesCreateContainerComponent implements DeactivatableComponent 
       withLatestFrom(this.articleId$),
       map(([article, id]) => {
         if (!article && id) {
-          this.store.dispatch(ArticlesActions.getArticle({ id }));
+          this.store.dispatch(ArticlesActions.getArticleForEdit({ id }));
         }
         return article
       })
