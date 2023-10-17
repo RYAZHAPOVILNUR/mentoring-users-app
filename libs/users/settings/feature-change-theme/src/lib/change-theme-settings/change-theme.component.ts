@@ -101,7 +101,7 @@ export class ChangeThemeComponent implements OnInit, OnDestroy {
   secondaryColors = this.colors.map(color => ({color: `${color}-${this.secondaryValue}`}));
 
   primarySliderChange() {
-    this.primaryColors = this.colors.map(color => ({color: `${color}-${this.primaryValue}`}));
+    this.primaryColors = this.colors.map(color => ({color: `${color}-${this.primaryValue}`}));    
   }
 
   secondarySliderChange() {
@@ -117,7 +117,6 @@ export class ChangeThemeComponent implements OnInit, OnDestroy {
   }
 
   pickSecondaryColor(color: string) {
-    console.log(color);
     if (this.selectedSecondaryColor === color) {
       this.selectedSecondaryColor = null;
     } else {

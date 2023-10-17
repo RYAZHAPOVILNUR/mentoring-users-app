@@ -114,15 +114,6 @@ export class ChangeThemeComponentHeader implements OnInit, OnDestroy {
 
     if (this.currentTheme) {
       this.themeStorage.storeTheme(this.currentTheme);
-    }
-
-    console.log(theme.displayName);
-    
-  }
-
-  color: string = '';
-
-  onOKButtonClick() {
-    console.log('Value on OK Button Click:', this.color);
+    }    
   }
 }
