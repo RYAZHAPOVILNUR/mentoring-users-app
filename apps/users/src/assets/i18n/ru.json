@@ -42,5 +42,38 @@
       "COMMENT_ERROR": "Комментарий должен быть не более 100 символов",
       "BY": "от"
     }
+  },
+  "PROFILE": {
+    "USER_INFO": {
+      "CONNECT_GITHUB": "Привязать Гитхаб",
+      "DISCONNECT_GITHUB": "Отвязать Гитхаб",
+      "CHANGE_PASSWORD": "Сменить пароль"
+    },
+    "PASSWORD_CHANGE": {
+      "FILL_THE_FORM": "Заполните поля для смены пароля",
+      "OLD_PASSWORD": "Старый пароль",
+      "NEW_PASSWORD": "Новый пароль",
+      "CONFIRM_NEW_PASSWORD": "Подтвердите новый пароль",
+      "DONT_MATCH": "Пароли не совпадают",
+      "CANSEL": "Отмена",
+      "CHANGE": "Сменить"
+    },
+    "PROFILE_CHANGE": {
+      "PROFILE_CHANGE": "Изменение профиля",
+      "NAME": "Имя",
+      "EMAIL": "Почта",
+      "CITY": "Город",
+      "CHANGE": "Сменить"
+    }
+  },
+  "ARTICLES": {
+    "ARTICLE": {
+      "HEADER": "Заголовок",
+      "FROM": "От",
+      "EDIT": "Редактировать",
+      "POST": "Опубликовать",
+      "ARTICLE_SIZE": "Статья должна состоять минимум из 66 символов!",
+      "HEADER_SIZE": "Заголовок должен содержать минимум 6 символов и не более 60!"
+    }
   }
 }

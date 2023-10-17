@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { UsersEntity } from '@users/core/data-access';
 import { AuthFacade } from '@auth/data-access';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
@@ -26,7 +27,8 @@ import { AuthFacade } from '@auth/data-access';
     MatInputModule,
     LetDirective,
     CommonModule,
-    PushPipe
+    PushPipe,
+    TranslateModule
   ],
   templateUrl: './profile-change-dialog.component.html',
   styleUrls: ['./profile-change-dialog.component.scss'],
