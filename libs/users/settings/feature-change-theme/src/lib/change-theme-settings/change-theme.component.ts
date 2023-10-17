@@ -109,7 +109,6 @@ export class ChangeThemeComponent implements OnInit, OnDestroy {
   }
 
   pickPrimaryColor(color: string) {
-    console.log(color);
     if (this.selectedPrimaryColor === color) {
       this.selectedPrimaryColor = null;
     } else {
@@ -162,7 +161,5 @@ export class ChangeThemeComponent implements OnInit, OnDestroy {
     if (this.currentTheme) {
       this.themeStorage.storeTheme(this.currentTheme);
     }
-
-    console.log(theme.displayName);
   }
 }
