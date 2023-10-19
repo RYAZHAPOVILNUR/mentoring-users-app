@@ -7,5 +7,6 @@ export type UsersListVM = DeepReadonly<{
   users: UsersVM[],
   status: LoadingStatus,
   errors: UsersErrors | null,
+  filterOptions: UsersFilter
   loggedUser: UsersEntity;
 }>

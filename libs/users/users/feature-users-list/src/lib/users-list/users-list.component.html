@@ -3,12 +3,16 @@
 </ng-container>
 
 <ng-template #loadingResult>
-  <div>
-    <mat-form-field>
-      <input matInput [(ngModel)]="filterName" name="filter" placeholder="Введите имя">
-    </mat-form-field>
-    <button mat-button  (click)="onFilterUser()">Поиск</button>
-  </div>
+  <div class="container">
+  <mat-form-field class="example-form-field">
+    <mat-label>Введите имя</mat-label>
+    <input matInput type="text" [(ngModel)]="filterName">
+    <button *ngIf="filterName" matSuffix mat-icon-button aria-label="Clear" (click)="filterName=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="onFilterUser()">Применить</button>
+</div>
   <ng-container *ngIf="vm.status === 'loaded'; else error">
     <div class="container">
       <div class="row">

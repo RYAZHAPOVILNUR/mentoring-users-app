@@ -15,6 +15,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'users-list-ui',
@@ -30,18 +31,20 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     MatButtonModule,
     FormsModule,
+    MatIconModule,
   ],
 })
-export class UsersListComponent {
+export class UsersListComponent implements OnInit {
+
   @Input({ required: true })
   vm!: UsersListVM;
-  public filterName = '';
-
-
-
   @Output() deleteUser = new EventEmitter();
   @Output() filterUsers = new EventEmitter();
   @Output() redirectToEdit = new EventEmitter();
+  public filterName = '';
+
+  ngOnInit(): void {
+this.filterName = this.vm.filterOptions.name}
 
   onFilterUser() {
     const filterOptions = {

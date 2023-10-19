@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   OnDestroy,
+  OnInit,
   ViewEncapsulation,
   inject,
 } from '@angular/core';
@@ -15,6 +16,8 @@ import { UsersFacade, UsersFilter } from '@users/users/data-access';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
+import { Store, select } from '@ngrx/store';
+import { selectQueryParam } from '@users/core/data-access';
 
 @Component({
   selector: 'users-list-container',
@@ -25,40 +28,52 @@ import { CreateUsersButtonComponent } from '@users/feature-users-create';
     MatButtonModule,
     MatDialogModule,
     LetDirective,
-    CreateUsersButtonComponent
+    CreateUsersButtonComponent,
   ],
   templateUrl: './users-list-container.component.html',
   styleUrls: ['./users-list-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [UsersListContainerStore]
+  providers: [UsersListContainerStore],
 })
-export class UsersListContainerComponent implements OnDestroy {
-
+export class UsersListContainerComponent implements OnDestroy, OnInit {
   private readonly componentStore = inject(UsersListContainerStore);
   public usersFacade = inject(UsersFacade);
+  public store = inject(Store);
   public readonly users$ = this.componentStore.users$;
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;
   public readonly loggedUser$ = this.usersFacade.loggedUser$;
   public readonly filterOptions$ = this.usersFacade.filter$;
   private readonly router = inject(Router);
+  public queryParamName$ = this.store.pipe(select(selectQueryParam('name')));
 
+  ngOnInit() {
+    this.queryParamName$.subscribe((param) => {
+      if (param) {
+        this.usersFacade.filterUser({ name: param });
+      }
+    });
+  }
 
-
-  onFilterUsers(filterOptions: UsersFilter){
-    this.usersFacade.filterUser(filterOptions)
-    this.router.navigate(['/admin/users'], { queryParams: { name: filterOptions.name } });
+  onFilterUsers(filterOptions: UsersFilter) {
+    this.usersFacade.filterUser(filterOptions);
+    this.router.navigate(['/admin/users'], {
+      queryParams: { name: filterOptions.name },
+    });
   }
 
   onDeleteUser(user: UsersVM) {
-    this.componentStore.deleteUser(user)
-  }
-  ngOnDestroy(): void {
-      this.usersFacade.filterUser({name:''})
+    this.componentStore.deleteUser(user);
   }
 
-  onRedirectToEdit({ id, editMode }: { id: number, editMode: boolean }) {
-    this.router.navigate(['/admin/users', id], { queryParams: { edit: editMode } });
+  ngOnDestroy(): void {
+    this.usersFacade.filterUser({ name: '' });
+  }
+
+  onRedirectToEdit({ id, editMode }: { id: number; editMode: boolean }) {
+    this.router.navigate(['/admin/users', id], {
+      queryParams: { edit: editMode },
+    });
   }
 }
