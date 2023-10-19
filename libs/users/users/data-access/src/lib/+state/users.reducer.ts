@@ -1,3 +1,4 @@
+import { filter } from 'rxjs';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
@@ -12,9 +13,14 @@ export type UsersErrors = {
   [key: string]: unknown
 }
 
+export type UsersFilter = {
+  name: string
+}
+
 export interface UsersState extends EntityState<UsersEntity> {
   selectedId?: string | number; // which Users record has been selected
   status: LoadingStatus;
+  filter: UsersFilter
   error: UsersErrors | null;
 }
 
@@ -28,6 +34,9 @@ export const usersAdapter: EntityAdapter<UsersEntity> =
 export const initialUsersState: UsersState = usersAdapter.getInitialState({
   // set initial required properties
   status: 'init',
+  filter: {
+    name: ''
+  },
   error: null
 });
 
@@ -48,6 +57,9 @@ const reducer = createReducer(
   on(UsersActions.deleteUserSuccess, (state, { id }) =>
     usersAdapter.removeOne(id, { ...state })
   ),
+  on(UsersActions.filterUsers, (state, {filterOptions})=>{
+    return {...state, filter: filterOptions }
+  }),
   on(UsersActions.addUserSuccess, (state, { userData }) =>
     usersAdapter.addOne({ ...userData }, { ...state })
   ),

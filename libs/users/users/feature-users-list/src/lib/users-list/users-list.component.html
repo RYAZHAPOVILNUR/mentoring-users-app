@@ -3,6 +3,12 @@
 </ng-container>
 
 <ng-template #loadingResult>
+  <div>
+    <mat-form-field>
+      <input matInput [(ngModel)]="filterName" name="filter" placeholder="Введите имя">
+    </mat-form-field>
+    <button mat-button  (click)="onFilterUser()">Поиск</button>
+  </div>
   <ng-container *ngIf="vm.status === 'loaded'; else error">
     <div class="container">
       <div class="row">
