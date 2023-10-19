@@ -8,18 +8,19 @@ import {
   LanguageSwitchService,
 } from '@users/users/core/ui/language-switch';
 import { PushPipe } from '@ngrx/component';
-import { ThemeSwitchService } from '@users/users/core/ui/theme-switch';
 import { Observable } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import {
   selectArticlesViewStyleType,
   SettingsFacade,
 } from '@users/settings/data-access';
+import { MatCardModule } from '@angular/material/card';
+import { ChangeThemeComponent } from 'libs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component'
 
 @Component({
   selector: 'users-settings',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, PushPipe, MatIconModule],
+  imports: [CommonModule, MatButtonModule, PushPipe, MatIconModule, MatCardModule, ChangeThemeComponent],
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,9 +33,6 @@ export class SettingsComponent implements OnInit {
   private settingsFacade = inject(SettingsFacade);
   public readonly selectedLanguage$ =
     this.languageSwitchService.selectedLanguage$;
-  private readonly themeSwitchService = inject(ThemeSwitchService);
-  public readonly isDarkTheme$: Observable<boolean> =
-    this.themeSwitchService.isDarkTheme$;
   public articleStyle$ = this.settingsFacade.articlesViewStyleType$;
  
 
@@ -46,11 +44,6 @@ export class SettingsComponent implements OnInit {
   changeArticlesStyleType(styleType: string): void {
     this.settingsFacade.setArticlesStyleType(styleType)
     }
-  
-
-  public onSwitchTheme() {
-    this.themeSwitchService.switchTheme();
-  }
 
   public onSwitchLanguage(language: LanguageKeys) {
     this.languageSwitchService.setLanguage(language);
