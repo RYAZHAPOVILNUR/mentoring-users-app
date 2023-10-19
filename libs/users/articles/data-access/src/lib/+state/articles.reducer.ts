@@ -40,13 +40,22 @@ export const articlesFeature = createFeature({
       status: 'error' as const
     })),
 
-    on(ArticlesActions.getArticle, (state) => ({
+    on(ArticlesActions.getArticleForEdit, (state) => ({
       ...state,
       status: 'loading' as const
     })),
 
-    on(ArticlesActions.getArticleSuccess, (state, { article }) =>
+    on(ArticlesActions.getArticleForEditSuccess, (state, { article }) =>
       articlesAdapter.addOne({ ...article }, { ...state, status: 'loaded' as const })),
+
+      on(ArticlesActions.getArticleForRead, (state)=>({
+        ...state, status: 'loading' as const
+      }) ),
+
+      on(ArticlesActions.getArticleForReadSuccess, (state, {article})=>
+      articlesAdapter.addOne({ ...article }, { ...state, status: 'loaded' as const })
+      )
+
   )
 });
 

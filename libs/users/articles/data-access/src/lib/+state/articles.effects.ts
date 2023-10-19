@@ -50,20 +50,20 @@ export const loadArticles$ = createEffect(
     )
   }, { functional: true }
 )
-export const getArticle$ = createEffect(
+export const getArticleForEdit$ = createEffect(
   (actions$ = inject(Actions),
     apiService = inject(ApiService)) => {
     return actions$.pipe(
-      ofType(ArticlesActions.getArticle),
+      ofType(ArticlesActions.getArticleForEdit),
       switchMap(
         ({id}) => {
           return apiService.get<Article>(`/articles/${id}`).pipe(
             map(
-              (article) => ArticlesActions.getArticleSuccess({ article })
+              (article) => ArticlesActions.getArticleForEditSuccess({ article })
             ),
             catchError((error) => {
               console.error('Error', error);
-              return of(ArticlesActions.getArticlesFailed({error}))
+              return of(ArticlesActions.getArticleForEditFailed({error}))
             })
           )
         }
@@ -73,6 +73,39 @@ export const getArticle$ = createEffect(
     )
   }, {functional: true}
 )
+
+
+export const getArticleForRead$ = createEffect(
+  () => {
+   const actions$ = inject(Actions)
+   const store = inject(Store)
+   const apiService = inject(ApiService)
+    return actions$.pipe(
+      ofType(ArticlesActions.getArticleForRead),
+      withLatestFrom(store.select(selectRouteParams)),
+      switchMap(
+        ([, params]) => {
+          return apiService.get<Article>(`/articles/${params['id']}`).pipe(
+            map(
+              (article) => ArticlesActions.getArticleForReadSuccess({ article })
+            ),
+            catchError((error) => {
+              console.error('Error', error);
+              return of(ArticlesActions.getArticleForReadFailed({error}))
+            })
+          )
+        }
+      )
+
+      
+    )
+  }, {functional: true}
+)
+
+
+
+
+
 
 export const editArticle$ = createEffect(
   (actions$ = inject(Actions),

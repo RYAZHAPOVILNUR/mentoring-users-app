@@ -1,3 +1,4 @@
+import { selectRouteParams } from '@users/core/data-access';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store, select } from '@ngrx/store';
@@ -27,11 +28,23 @@ import { selectOpenedArticle } from 'libs/users/articles/data-access/src/lib/+st
 })
 export class ArticleReadContainerComponent {
   private readonly store = inject(Store);
-  public openedArticle$ = this.store.select(selectOpenedArticle)
   public readonly status$ = this.store.select(ArticleSelectors.selectStatus);
   public readonly commentsStatus$ = this.store.select(commentsSelectors.selectStatus)
   public readonly loggedUserId$ = this.store.select(selectLoggedUserId);
   public articleComments$ = this.store.select(selectComments);
+
+  public articleId$ = this.store.pipe(select(selectRouteParams))
+ 
+  public openedArticle$: Observable<Article | null> = this.store.select(ArticleSelectors.selectOpenedArticle)
+  .pipe(
+
+    map((article) => {
+        if (!article) {
+        this.store.dispatch(ArticlesActions.getArticleForRead());
+      }
+      return article 
+    })
+);
 
   onSubmitComment(commentText: string) {
     this.loggedUserId$.pipe(withLatestFrom(this.openedArticle$), take(1))
@@ -48,8 +61,8 @@ export class ArticleReadContainerComponent {
   }
 
   constructor() {
-    this.openedArticle$.pipe(take(1)).subscribe(article => {
-      this.store.dispatch(CommentsActions.loadComments({ articleId: Number(article?.id) }));
+    this.openedArticle$.pipe(take(1), withLatestFrom(this.articleId$)).subscribe(([, params]) => {
+      this.store.dispatch(CommentsActions.loadComments({ articleId: params['id'] }));
     })
   }
 }
