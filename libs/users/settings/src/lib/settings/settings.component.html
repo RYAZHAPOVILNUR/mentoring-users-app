@@ -7,7 +7,7 @@
     <div *ngIf="articleStyle$ | ngrxPush as articleStyle" class="langBtnsDiv">
         <h2>Отображение карточек статей: </h2>
         <button  mat-raised-button (click)="changeArticlesStyleType('LIST')"  [ngClass]="{'mat-primary': articleStyle ==='LIST'}">СПИСОК</button>
-        <button mat-raised-button (click)="changeArticlesStyleType('TILE')" [ngClass]="{'mat-primary': articleStyle ==='TILE'}" >ПЛИТКА</button>
+        <button mat-raised-button (click)="changeArticlesStyleType('TILE')" [ngClass]="{'mat-primary': articleStyle ==='TILE'}">ПЛИТКА</button>
     </div>
     <div class="langBtnsDiv">
         <h2>Переключить тему: </h2>

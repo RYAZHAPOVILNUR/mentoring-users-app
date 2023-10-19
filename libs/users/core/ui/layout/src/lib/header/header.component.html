@@ -13,9 +13,7 @@
   <button mat-icon-button routerLink="/profile">
     <mat-icon matListItemIcon>account_circle</mat-icon>
   </button>
-  <button mat-icon-button (click)="onSwitchTheme()" class="theme-switch-btn">
-    <mat-icon>{{(isDarkTheme$ | ngrxPush) ? 'light_mode' : 'dark_mode'}}</mat-icon>
-  </button>
+  <users-change-theme-header></users-change-theme-header>
   <ng-container [ngSwitch]="selectedLanguage$ | ngrxPush">
     <button mat-icon-button *ngSwitchCase="'ru'" (click)="onSwitchLanguage('en')" class="lang-switch-btn">
       En

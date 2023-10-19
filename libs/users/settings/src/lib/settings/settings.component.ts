@@ -8,12 +8,8 @@ import {
   LanguageSwitchService,
 } from '@users/users/core/ui/language-switch';
 import { PushPipe } from '@ngrx/component';
-import { Observable } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
-import {
-  selectArticlesViewStyleType,
-  SettingsFacade,
-} from '@users/settings/data-access';
+import { SettingsFacade } from '@users/settings/data-access';
 import { MatCardModule } from '@angular/material/card';
 import { ChangeThemeComponent } from 'libs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component'
 
