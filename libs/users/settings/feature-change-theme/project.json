@@ -1,7 +1,7 @@
 {
-  "name": "users-core-ui-theme-switch",
-  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/users/core/ui/theme-switch/src",
+  "name": "users-feature-change-theme",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/settings/feature-change-theme/src",
   "prefix": "users",
   "tags": [],
   "projectType": "library",
@@ -10,7 +10,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/users/core/ui/theme-switch/jest.config.ts",
+        "jestConfig": "libs/settings/feature-change-theme/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -24,10 +24,7 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "libs/users/core/ui/theme-switch/**/*.ts",
-          "libs/users/core/ui/theme-switch/**/*.html"
-        ]
+        "lintFilePatterns": ["libs/settings/feature-change-theme/**/*.ts", "libs/settings/feature-change-theme/**/*.html"]
       }
     }
   }
