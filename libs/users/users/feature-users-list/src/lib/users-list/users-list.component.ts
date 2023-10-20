@@ -53,6 +53,15 @@ this.filterName = this.vm.filterOptions.name}
     this.filterUsers.emit(filterOptions);
   }
 
+  clearFilterName(){
+    this.filterName=''
+    const filterOptions = {
+      name: this.filterName,
+    };
+    this.filterUsers.emit(filterOptions);
+  }
+
+
   onDeleteUser(user: UsersVM) {
     this.deleteUser.emit(user);
   }
