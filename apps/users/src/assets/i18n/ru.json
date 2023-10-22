@@ -64,6 +64,13 @@
       "EMAIL": "Почта",
       "CITY": "Город",
       "CHANGE": "Сменить"
+    },
+    "TIMER": {
+      "DAYS": "д",
+      "HOURS": "ч",
+      "PAUSE": "Пауза",
+      "START": "Старт",
+      "RESET": "Обнулить"
     }
   },
   "ARTICLES": {

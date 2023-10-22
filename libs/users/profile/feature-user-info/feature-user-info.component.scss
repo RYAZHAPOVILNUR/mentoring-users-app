@@ -69,6 +69,11 @@
   align-items: center;
   padding: 40px;
 }
+
+.mdc-card__actions {
+  flex-direction: column;
+}
+
 .user-info-items:not(.user-photo){
   width: 100%;
 }

@@ -64,6 +64,13 @@
       "EMAIL": "Email",
       "CITY": "City",
       "CHANGE": "Change"
+    },
+    "TIMER": {
+      "DAYS": "d",
+      "HOURS": "h",
+      "PAUSE": "Pause",
+      "START": "Start",
+      "RESET": "Reset"
     }
   },
   "ARTICLES": {

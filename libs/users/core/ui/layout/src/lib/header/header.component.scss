@@ -25,3 +25,12 @@
   text-transform: uppercase;
 }
 
+.timer-paragraph {
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .timer-paragraph{
+      display: none;
+  }
+}

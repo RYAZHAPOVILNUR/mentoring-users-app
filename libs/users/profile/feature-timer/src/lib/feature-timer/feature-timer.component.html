@@ -1,0 +1,22 @@
+<mat-card class="timer">
+    <div class="counter">
+        <p>
+            <span>{{ (timerData$ | async)?.days }}</span>
+            {{ 'PROFILE.TIMER.DAYS' | translate }}
+            <span>{{ (timerData$ | async)?.hours }}</span>
+            {{ 'PROFILE.TIMER.HOURS' | translate }}
+            <span>{{ (timerData$ | async)?.minutes }}:{{ (timerData$ | async)?.seconds }}</span>
+        </p>
+    </div>
+    
+    <div class="buttons">
+        <button mat-raised-button color="primary" (click)="startOrPause()">
+            <mat-icon>{{ toggleBtnTimer ? 'pause' : 'play_arrow' }}</mat-icon>
+            <span>{{ toggleBtnTimer ? ('PROFILE.TIMER.PAUSE' | translate) : ('PROFILE.TIMER.START' | translate) }}</span>
+        </button>
+        <button mat-raised-button color="primary" (click)="reset()">
+            <mat-icon>stop</mat-icon>
+            <span>{{ 'PROFILE.TIMER.RESET' | translate }}</span>
+        </button>
+    </div>
+</mat-card>

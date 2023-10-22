@@ -1,4 +1,5 @@
-import { UiPhotoModalComponent } from 'libs/users/profile/ui-profile/ui-photo-modal/ui-photo-modal.component';
+import { UiPhotoModalComponent } from './../ui-profile/ui-photo-modal/ui-photo-modal.component';
+import { FeatureTimerComponent } from '../feature-timer/src/lib/feature-timer/feature-timer.component'
 import { AuthFacade, ChangePasswordPayload, ChangeProfileDataPayload } from '../../../core/auth/data-access/src';
 import { ChangeDetectionStrategy, Component, Input, OnInit, DestroyRef, ChangeDetectorRef } from '@angular/core';
 import { PasswordChangeDialogComponent, ProfileChangeDialogComponent } from '../../../core/ui/src';
@@ -32,6 +33,7 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     FormsModule,
     TranslateModule,
+    FeatureTimerComponent
   ],
   templateUrl: './feature-user-info.component.html',
   styleUrls: ['./feature-user-info.component.scss'],

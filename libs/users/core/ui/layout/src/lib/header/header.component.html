@@ -10,6 +10,16 @@
     {{ 'LAYOUT.HEADER.USERS' | translate }}
   </button>
   <span class="spacer"></span>
+  <button mat-button class="timer-btn" routerLink="/profile">
+    <mat-icon>timer</mat-icon>
+    <p class="timer-paragraph">
+      <span>{{ (timerData$ | async)?.days }}</span>
+      {{ 'PROFILE.TIMER.DAYS' | translate }}
+      <span>{{ (timerData$ | async)?.hours }}</span>
+      {{ 'PROFILE.TIMER.HOURS' | translate }}
+      <span>{{ (timerData$ | async)?.minutes }}:{{ (timerData$ | async)?.seconds }}</span>
+  </p>
+  </button>
   <button mat-icon-button routerLink="/profile">
     <mat-icon matListItemIcon>account_circle</mat-icon>
   </button>
