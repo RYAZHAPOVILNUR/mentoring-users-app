@@ -5,6 +5,23 @@
 <ng-template #loadingResult>
   <ng-container *ngIf="vm.status === 'loaded'; else error">
     <div class="container">
+
+      <form [formGroup]="formGroup" (ngSubmit)="onHandleFilter()">
+        <mat-form-field>
+          <mat-label>Поиск по имени</mat-label>
+          <input matInput
+                 placeholder="Введите имя"
+                 type="search"
+                 autocomplete="false"
+                 [formControlName]="'name'"
+                 (change)="inputFilterChange()"
+          >
+        </mat-form-field>
+        <button [disabled]="!formGroup.value.name" mat-button mat-stroked-button aria-label="search">
+          Применить
+        </button>
+      </form>
+
       <div class="row">
         <div class="col-md-4 mb-3" *ngFor="let user of vm.users">
           <users-card

@@ -23,6 +23,14 @@ export const selectAllUsers = createSelector(
   (state: UsersState) => selectAll(state)
 );
 
+export const filteredUsers = createSelector(
+  selectUsersState,
+  selectAllUsers,
+  (state,users) => users.filter(
+    user => user.name.toLowerCase().includes(state.filter.name.toLowerCase())
+  )
+)
+
 export const selectUsersEntities = createSelector(
   selectUsersState,
   (state: UsersState) => selectEntities(state)

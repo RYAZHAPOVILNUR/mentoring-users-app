@@ -7,7 +7,7 @@ import { tap } from "rxjs";
 import { usersVMAdapter } from "../../../../users-vm.adapter";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { CoreUiConfirmDialogComponent } from "@users/core/ui";
-import { UsersEntity } from "@users/core/data-access";
+import { selectQueryParam, selectQueryParams, UsersEntity } from "@users/core/data-access";
 
 type UsersListState = DeepReadonly<{
   users: UsersVM[]
@@ -22,11 +22,15 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
   private readonly usersFacade = inject(UsersFacade);
   private readonly dialog = inject(MatDialog);
   public readonly users$ = this.select(({ users }) => users);
+  public readonly filteredUsers$ = this.select(this.usersFacade.filteredUsers$,
+    (filteredUsers) => filteredUsers
+  );
   public readonly status$ = this.select(
     this.usersFacade.status$,
     (status) => status
   );
-  public errors$ = this.select(this.usersFacade.errors$, (error) => error)
+  public errors$ = this.select(this.usersFacade.errors$, (error) => error);
+  public queryParam$ = this.select(selectQueryParam('name'))
 
   constructor() {
     super(initialState);
