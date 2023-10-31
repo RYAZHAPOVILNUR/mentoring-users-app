@@ -1,0 +1,80 @@
+
+
+
+.mat-header {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  p {
+    font-size: 22px;
+    cursor: pointer;
+  }
+}
+
+.material {
+
+  display: flex;
+  flex-direction: column;
+  width: 120px;
+  height: 120px;
+  justify-content: center;
+  position: relative;
+  &:hover {
+    .deleteDiv{
+      display: block;
+    }
+
+    cursor: pointer;
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.07);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+
+  .material-icon {
+    font-size: 50px;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+  }
+
+}
+
+.mat-list{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+
+
+.mat-title{
+text-align: center;
+}
+
+
+
+.deleteDiv{
+  position: absolute;
+  display: none;
+  opacity: 0.5;
+  top: 10px;
+  right: 10px;
+  &:hover{
+    opacity: 1;
+  }
+
+}

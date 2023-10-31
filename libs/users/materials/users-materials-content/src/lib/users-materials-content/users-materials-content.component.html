@@ -1,0 +1,27 @@
+<div style="user-select: none;">
+
+  <div class="mat-header">
+    <p routerLink="/materials">Материалы</p> <span>/</span>
+    <p>{{vm.openedFolder?.title}}</p> <span>|</span>
+    <p> <button [matMenuTriggerFor]="menu">Загрузить</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="openAddMaterial()"> <mat-icon>description</mat-icon>PDF файл</button>
+        <button mat-menu-item> <mat-icon>music_note</mat-icon>Видео</button>
+        <button mat-menu-item> <mat-icon>ondemand_video</mat-icon>Аудио</button>
+      </mat-menu>
+    </p>
+
+  </div>
+  <mat-divider></mat-divider>
+
+  <div>
+    <mat-list class="mat-list">
+      <div (dblclick)="openMaterialContent(material)" class="material" *ngFor="let material of vm.materials">
+        <mat-icon class="material-icon" matListItemIcon>note</mat-icon>
+        <div class="mat-title" matListItemTitle>{{material.title}}</div>
+        <div class="mat-title" matListItemLine>{{material.created_at | date}}</div>
+        <div class="deleteDiv" (click)="deletedMaterial(material.id)"><mat-icon class="matIcon">delete</mat-icon></div>
+
+      </div>
+    </mat-list>
+  </div>
