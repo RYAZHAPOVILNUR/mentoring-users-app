@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { UsersErrors } from "./users.reducer";
+import { UsersErrors, UsersFilter  } from "./users.reducer";
 import { CreateUserDTO, LoadingStatus, UsersDTO, UsersEntity } from '@users/core/data-access';
 
 export type onSuccessEditionCbType = () => void
@@ -24,6 +24,7 @@ export const deleteUserFailed = createAction('[Users/Api] Delete User Failed', p
 export const addUser = createAction('[Users Page] Add User', props<{ userData: CreateUserDTO }>());
 export const addUserSuccess = createAction('[Users/Api] Add User Success', props<{ userData: UsersEntity }>());
 export const addUserFailed = createAction('[Users/Api] Add User Failed', props<{ error: any }>());
+export const filterUsers = createAction('[Users Page] Filter Users', props<{ filterParams: UsersFilter }>());
 
 // export const selectId = createAction('[Users Page] Select Id', props<{ id: number }>());
 

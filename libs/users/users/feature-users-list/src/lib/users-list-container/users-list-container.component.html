@@ -3,11 +3,13 @@
     users: users$,
     status: status$,
     errors: errors$,
-    loggedUser: loggedUser$
+    loggedUser: loggedUser$,
+    filterParams: filterParams$,
 } as vm">
   <users-list-ui
     [vm]="vm"
     (deleteUser)="onDeleteUser($event)"
+    (filterUsers)="onFilterUsers($event)"
     (redirectToEdit)="onRedirectToEdit($event)"
   />
 </ng-container>

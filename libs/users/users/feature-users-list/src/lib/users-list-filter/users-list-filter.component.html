@@ -1,0 +1,19 @@
+<div class="search-wrapper">
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'USERS.SEARCH_LABEL' | translate }}</mat-label>
+    <input autofocus matInput placeholder="{{ 'USERS.SEARCH_PLACEHOLDER' | translate }}" type="text" [(ngModel)]="filterName">
+    <button *ngIf="filterName" matSuffix mat-icon-button aria-label="clear" (click)="clearFilterName()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <button *ngIf="!filterName" mat-icon-button matIconPrefix matTooltip="search" matTooltipPosition="before" class="mat-small">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+  <button class="search-button" mat-raised-button color="primary" matTooltip="search" matTooltipPosition="before" color="primary" (click)="OnFiltredUsers()">
+    <mat-icon>search</mat-icon>
+    <span>{{ 'USERS.SEARCH' | translate }}</span>
+  </button>
+</div>
+
+
+

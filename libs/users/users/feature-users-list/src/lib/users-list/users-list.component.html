@@ -5,6 +5,10 @@
 <ng-template #loadingResult>
   <ng-container *ngIf="vm.status === 'loaded'; else error">
     <div class="container">
+      <users-list-filter
+        (filterName)="vm.filterParams.name"
+        (filterUsers)="OnFiltredUsers($event)"
+      ></users-list-filter>
       <div class="row">
         <div class="col-md-4 mb-3" *ngFor="let user of vm.users">
           <users-card
