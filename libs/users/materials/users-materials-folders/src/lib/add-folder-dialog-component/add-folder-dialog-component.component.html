@@ -1,0 +1,13 @@
+<div class="addFolder">
+  <div class="mat-inp">
+  <mat-form-field class="example-form-field">
+    <mat-label>Название</mat-label>
+    <input matInput type="text" [(ngModel)]="folderName">
+    <button *ngIf="folderName" matSuffix mat-icon-button aria-label="Clear" (click)="folderName=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="create()">Создать</button>
+
+</div>
+</div>

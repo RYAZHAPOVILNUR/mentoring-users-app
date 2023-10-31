@@ -1,4 +1,4 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
 import { ArticlesState, articlesAdapter, articlesFeature } from './articles.reducer';
 import { selectQueryParams, selectRouteParams } from '@users/core/data-access';
 

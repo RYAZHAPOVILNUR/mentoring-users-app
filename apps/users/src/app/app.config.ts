@@ -16,13 +16,14 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { provideAnimations } from "@angular/platform-browser/animations";
 import { authEffects, authFeature, tokenInterceptor } from '@auth/data-access';
-import { SettingsEffects, settingsFeature } from '@users/settings/data-access';
 import { DADATA_TOKEN } from '@users/core/dadata';
 import { provideQuillConfig } from 'ngx-quill/config';
 import { articlesEffects, articlesFeature, commentsEffects, commentsFeature } from '@users/users/articles/data-access';
 import { tasksEffects, tasksFeature } from '@users/users/task/data-access';
 import { CLIENT_ID, githubApiEffects, githubApiFeature } from '@users/core/github-api/data-access';
 import { backlogFeature, backlogEffects } from "@users/users/backlog/data-access";
+import { SettingsEffects, settingsFeature } from '@users/settings/data-access';
+import { MaterialsEffects, materialsFeature } from '@users/materials/data-access';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -32,6 +33,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideEffects(
       userEffects,
+      MaterialsEffects,
       authEffects,
       articlesEffects,
       tasksEffects,
@@ -43,6 +45,7 @@ export const appConfig: ApplicationConfig = {
     provideStore({
       router: routerReducer,
       [USERS_FEATURE_KEY]: usersReducer,
+      [materialsFeature.name]: materialsFeature.reducer,
       [settingsFeature.name]: settingsFeature.reducer,
       [authFeature.name]: authFeature.reducer,
       [articlesFeature.name]: articlesFeature.reducer,
