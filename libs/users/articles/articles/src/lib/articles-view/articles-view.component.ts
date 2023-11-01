@@ -74,10 +74,6 @@ export class ArticlesViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.articles.sort(
-      (a, b) =>
-        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-    );
     this.settingsFacade.getSettings();
     for (const article of this.articles) {
       this.authorPhoto$.push(
