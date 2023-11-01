@@ -3,7 +3,9 @@ import {
   Component,
   inject,
   Input,
+  OnChanges,
   OnInit,
+  SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -24,7 +26,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { UsersListContainerStore } from '../../../../../users/feature-users-list/src/lib/users-list-container/users-list-container.store';
 import { UsersFacade } from '@users/users/data-access';
 import { SettingsFacade } from '@users/settings/data-access';
-
 
 @Component({
   selector: 'users-articles-view',
@@ -58,23 +59,26 @@ export class ArticlesViewComponent implements OnInit {
   private readonly settingsFacade = inject(SettingsFacade);
   public authorPhoto$: Observable<string | undefined>[] = [];
   public authorArticle$: Observable<string | undefined>[] = [];
-  public readonly viewStyleType$ =  this.settingsFacade.articlesViewStyleType$
+  public readonly viewStyleType$ = this.settingsFacade.articlesViewStyleType$;
 
   changeArticlesStyleType(styleType: string): void {
-   this.settingsFacade.setArticlesStyleType(styleType)
+    this.settingsFacade.setArticlesStyleType(styleType);
   }
 
   public clearArticleContent(content: string) {
     return content.replace(/<[^>]*>/g, ' ');
-  };
+  }
 
   preventRouterNavigation(event: Event) {
     event.stopPropagation();
   }
 
   ngOnInit(): void {
+    this.articles.sort(
+      (a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    );
     this.settingsFacade.getSettings();
-
     for (const article of this.articles) {
       this.authorPhoto$.push(
         this.userFacade
