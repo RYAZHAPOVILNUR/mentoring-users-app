@@ -9,8 +9,6 @@ import { EMPTY } from 'rxjs';
 
 export class tasksEffects {
   // Загрузка всех бордв, спросить нужны ли они
-
-
   loadAllBoards$ = createEffect(() => {
     const actions$ = inject(Actions);
     const api = inject(ApiService);
@@ -19,7 +17,7 @@ export class tasksEffects {
       mergeMap(() =>
         api.get<{ boards: ITaskBoard[] }>('/todos').pipe(
           map((res) => {
-
+            
             return tasksAction.loadBoardsSuccess({ boards: res.boards });
           })
         )

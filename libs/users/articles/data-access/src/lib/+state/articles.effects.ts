@@ -7,8 +7,8 @@ import { CreateArticle } from '../models/create-article.model';
 import { Router } from "@angular/router";
 import { Article } from '../models/article.model';
 import { Store, select } from '@ngrx/store';
-import {  selectRouteParams } from '@users/core/data-access';
-import {  selectArticlesEntities } from './articles.selectors';
+import { selectQueryParam, selectQueryParams, selectRouteParams } from '@users/core/data-access';
+import { selectArticles, selectArticlesEntities } from './articles.selectors';
 
 export const publishArticle$ = createEffect(
   (actions$ = inject(Actions),
@@ -69,7 +69,7 @@ export const getArticleForEdit$ = createEffect(
         }
       )
 
-
+      
     )
   }, {functional: true}
 )
@@ -97,7 +97,7 @@ export const getArticleForRead$ = createEffect(
         }
       )
 
-
+      
     )
   }, {functional: true}
 )
