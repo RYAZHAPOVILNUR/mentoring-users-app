@@ -1,7 +1,0 @@
-<mat-progress-bar *ngIf="loadedProgress" mode="indeterminate"></mat-progress-bar>
-<div class="viewMaterial">
-<h3 style="text-align: center;">Просмотр материала: {{data.material.title}}</h3>
-
-<pdf-viewer (on-progress)="onProgress($event)"  [page]="2" [src]="materialLink" [render-text]="true" [original-size]="false"
-  style="width: 400px; height: 600px"></pdf-viewer>
-  </div>
