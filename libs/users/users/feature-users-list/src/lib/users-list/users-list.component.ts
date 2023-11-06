@@ -8,9 +8,10 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersListVM } from './users-list-view-model';
-import { UsersCardComponent } from "../users-card/users-card.component";
+import { UsersCardComponent } from '../users-card/users-card.component';
 import { UsersVM } from '../../../../users-vm';
-import {MatProgressBarModule} from "@angular/material/progress-bar";
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { FilterUsersComponent } from '../users-filter/filter-users.component';
 
 @Component({
   selector: 'users-list-ui',
@@ -22,21 +23,26 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
   imports: [
     CommonModule,
     UsersCardComponent,
-    MatProgressBarModule
-  ]
+    MatProgressBarModule,
+    FilterUsersComponent,
+  ],
 })
 export class UsersListComponent {
   @Input({ required: true })
   vm!: UsersListVM;
 
-  @Output() deleteUser = new EventEmitter()
-  @Output() redirectToEdit = new EventEmitter()
+  @Output() deleteUser = new EventEmitter();
+  @Output() redirectToEdit = new EventEmitter();
+  @Output() filterUser = new EventEmitter();
 
   onDeleteUser(user: UsersVM) {
-    this.deleteUser.emit(user)
+    this.deleteUser.emit(user);
   }
 
-  onRedirectToEdit(editData: { id: number, editMode: boolean }) {
-    this.redirectToEdit.emit(editData)
+  onRedirectToEdit(editData: { id: number; editMode: boolean }) {
+    this.redirectToEdit.emit(editData);
+  }
+  onFilterUsers(name: string) {
+    this.filterUser.emit(name);
   }
 }

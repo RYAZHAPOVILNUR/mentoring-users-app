@@ -1,0 +1,13 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+    .input{
+        padding: 5px 20px;
+        border: none;
+    }
+    .btn {
+        margin-left: 5px;
+    }
+}

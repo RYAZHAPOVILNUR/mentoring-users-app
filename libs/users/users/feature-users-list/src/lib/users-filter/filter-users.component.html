@@ -1,0 +1,9 @@
+<div class="container">
+  <input
+    class="input"
+    type="text"
+    [formControl]="filterUsersControl"
+    placeholder="Введите имя"
+  />
+  <button class="btn" mat-flat-button color="primary" (click)="onFilterUsers()">Применить</button>
+</div>

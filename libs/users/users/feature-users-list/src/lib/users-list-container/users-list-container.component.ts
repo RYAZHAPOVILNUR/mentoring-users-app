@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  OnDestroy,
   ViewEncapsulation,
   inject,
 } from '@angular/core';
@@ -14,6 +15,7 @@ import { UsersFacade } from '@users/users/data-access';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
+import { FilterUsersComponent } from '../users-filter/filter-users.component';
 
 @Component({
   selector: 'users-list-container',
@@ -24,7 +26,8 @@ import { CreateUsersButtonComponent } from '@users/feature-users-create';
     MatButtonModule,
     MatDialogModule,
     LetDirective,
-    CreateUsersButtonComponent
+    CreateUsersButtonComponent,
+    FilterUsersComponent
   ],
   templateUrl: './users-list-container.component.html',
   styleUrls: ['./users-list-container.component.scss'],
@@ -32,7 +35,7 @@ import { CreateUsersButtonComponent } from '@users/feature-users-create';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [UsersListContainerStore]
 })
-export class UsersListContainerComponent {
+export class UsersListContainerComponent implements OnDestroy {
   private readonly componentStore = inject(UsersListContainerStore);
   public usersFacade = inject(UsersFacade);
   public readonly users$ = this.componentStore.users$;
@@ -47,5 +50,12 @@ export class UsersListContainerComponent {
 
   onRedirectToEdit({ id, editMode }: { id: number, editMode: boolean }) {
     this.router.navigate(['/admin/users', id], { queryParams: { edit: editMode } });
+  }
+
+  onFilterUsers(name: string) {
+    this.usersFacade.filterUsers(name)
+  }
+  ngOnDestroy(): void {
+      this.usersFacade.filterUsers('')
   }
 }
