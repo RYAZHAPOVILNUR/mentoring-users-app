@@ -132,7 +132,7 @@ if(Object.values(this.storyPoint).every(value => value === "?")) return '?'
   public textareaValue = this.editMode ? this.task.name : '';
   public editorContent: string = this.editMode ? this.task.descriprion : '';
   public editStatus = false;
-  public users$ = this.usersFacade.allUsers$;
+  public users$ = this.usersFacade.filteredUsers$;
 
   ngOnInit() {
     console.log(this.data);

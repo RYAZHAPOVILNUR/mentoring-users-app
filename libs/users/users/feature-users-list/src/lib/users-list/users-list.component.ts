@@ -11,6 +11,7 @@ import { UsersListVM } from './users-list-view-model';
 import { UsersCardComponent } from "../users-card/users-card.component";
 import { UsersVM } from '../../../../users-vm';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import { FilterUsersComponent } from '../fitler-users/filter-users/filter-users.component';
 
 @Component({
   selector: 'users-list-ui',
@@ -22,13 +23,15 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
   imports: [
     CommonModule,
     UsersCardComponent,
-    MatProgressBarModule
+    MatProgressBarModule,
+    FilterUsersComponent
   ]
 })
 export class UsersListComponent {
   @Input({ required: true })
   vm!: UsersListVM;
-
+  @Output() filterUsers = new EventEmitter
+  ()
   @Output() deleteUser = new EventEmitter()
   @Output() redirectToEdit = new EventEmitter()
 
@@ -38,5 +41,8 @@ export class UsersListComponent {
 
   onRedirectToEdit(editData: { id: number, editMode: boolean }) {
     this.redirectToEdit.emit(editData)
+  }
+  onFilterUsers(name: string) {
+    this.filterUsers.emit(name)
   }
 }

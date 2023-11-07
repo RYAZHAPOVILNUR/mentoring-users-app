@@ -1,0 +1,16 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .input-filter{
+        border: 1px solid #ddd;
+        width: 260px;
+        padding: 5px 10px;
+        &:focus {
+            outline: none;
+          }
+    }
+    .button-filter{
+        margin-left: 5px;
+    }
+}
