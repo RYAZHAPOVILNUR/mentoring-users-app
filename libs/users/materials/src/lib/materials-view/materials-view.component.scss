@@ -1,0 +1,17 @@
+mat-card,.folder-button{
+    min-width:200px ;
+    min-height: 50px;
+}
+.folder-card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-folder-fab-button {
+    position: fixed !important;
+    bottom: 5em !important;
+    right: 10em !important;
+    z-index: 100;
+}
+  

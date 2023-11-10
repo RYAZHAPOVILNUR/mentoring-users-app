@@ -22,6 +22,9 @@ import { provideQuillConfig } from 'ngx-quill/config';
 import { articlesEffects, articlesFeature, commentsEffects, commentsFeature } from '@users/users/articles/data-access';
 import { tasksEffects, tasksFeature } from '@users/users/task/data-access';
 import { CLIENT_ID, githubApiEffects, githubApiFeature } from '@users/core/github-api/data-access';
+import { foldersFeature } from '@users/materials/data-access';
+import { folderEffects } from '@users/materials/data-access';
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -33,7 +36,8 @@ export const appConfig: ApplicationConfig = {
       userEffects, 
       authEffects, 
       articlesEffects, 
-      tasksEffects, 
+      tasksEffects,
+      folderEffects,
       SettingsEffects,
       commentsEffects, 
       githubApiEffects 
@@ -44,6 +48,7 @@ export const appConfig: ApplicationConfig = {
       [settingsFeature.name]: settingsFeature.reducer,
       [authFeature.name]: authFeature.reducer,
       [articlesFeature.name]: articlesFeature.reducer,
+      [foldersFeature.name]:foldersFeature.reducer,
       [commentsFeature.name]: commentsFeature.reducer,
       [tasksFeature.name]: tasksFeature.reducer,
       [githubApiFeature.name]: githubApiFeature.reducer

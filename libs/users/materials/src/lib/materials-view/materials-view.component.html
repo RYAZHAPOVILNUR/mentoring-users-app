@@ -1,0 +1,16 @@
+<mat-grid-list cols="3" rowHeight="5:1">
+    <mat-grid-tile class="folder-tile" *ngFor="let folder of folders;let i = index">
+        <mat-card class="folder-card">
+              <button class="folder-button" mat-button> 
+           
+              <p>{{folder.title}}</p>
+            </button>
+        </mat-card>
+        
+    </mat-grid-tile>
+   
+    <button (click)="openAddNewFolderModal()" matTooltip="Создать" mat-fab color="primary" class="create-folder-fab-button">
+        <mat-icon>add</mat-icon>
+    </button>
+
+</mat-grid-list>
