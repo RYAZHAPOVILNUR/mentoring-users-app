@@ -14,6 +14,8 @@ import { UsersFacade } from '@users/users/data-access';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
+import {UsersFilterComponent} from "../users-filter/users-filter.component";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'users-list-container',
@@ -24,7 +26,9 @@ import { CreateUsersButtonComponent } from '@users/feature-users-create';
     MatButtonModule,
     MatDialogModule,
     LetDirective,
-    CreateUsersButtonComponent
+    CreateUsersButtonComponent,
+    UsersFilterComponent,
+    FormsModule
   ],
   templateUrl: './users-list-container.component.html',
   styleUrls: ['./users-list-container.component.scss'],

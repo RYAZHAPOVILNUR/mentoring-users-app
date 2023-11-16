@@ -1,0 +1,5 @@
+<form [formGroup]="filterForm" (ngSubmit)="applyFilter()">
+  <label for="name">Имя:</label>
+  <input type="text" id="name" formControlName="name">
+  <button type="submit">Применить</button>
+</form>
