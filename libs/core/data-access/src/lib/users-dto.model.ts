@@ -14,6 +14,9 @@ export type UsersDTO = DeepReadonly<{
   photo?: UsersPhoto | null
 }>
 
+export type UsersFilter = {
+  name ?: string | undefined
+}
 
 export type CreateUserDTO = DeepReadonly<{
   id?: number | null;

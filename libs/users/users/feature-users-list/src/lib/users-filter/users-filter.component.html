@@ -1,0 +1,17 @@
+<div class="row mb-5">
+
+  <div class="offset-2 col-2">
+    <form [formGroup]="formGroup" class="example-form">
+      <mat-form-field class="example-full-width ">
+        <input type="text"  [formControlName]="'name'"  matInput placeholder="Введите имя для поиска...">
+      </mat-form-field>
+    </form>
+  </div>
+
+  <div class="col-2 mt-3">
+    <div class="example-button-row">
+      <button (click)="filterUsers()"  mat-button color="primary">Применить</button>
+    </div>
+  </div>
+
+</div>
