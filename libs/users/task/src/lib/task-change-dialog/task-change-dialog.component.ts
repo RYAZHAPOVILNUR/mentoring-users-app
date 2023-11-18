@@ -110,7 +110,11 @@ if(Object.values(this.storyPoint).every(value => value === "?")) return '?'
         id: 80,
         name: 'Dzhavid',
         email: 'strategy05@mail.ru',
+        purchaseDate: 'string',
+        educationStatus: 'string',
+        educationTime: 0,
         username: 'Dzhavid',
+        totalStoryPoints: 0,
         city: '',
         photo: {
           path: '/vault/XBYkUImp/a3wAS70PV6uO4QH5_mRMIkW22KU/bQW7WA../file-f0764d.png',

@@ -19,6 +19,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { DetailUsersCardVm } from './detail-users-card-vm';
 import { MatProgressBarModule } from "@angular/material/progress-bar";
+import {MatSelectModule} from '@angular/material/select';
+
 import {
   MatSnackBar,
   MatSnackBarModule,
@@ -48,7 +50,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     MatTooltipModule,
     MatSnackBarModule,
     MatAutocompleteModule,
-    PushPipe
+    PushPipe,
+    MatSelectModule
   ],
   templateUrl: './detail-users-card.component.html',
   styleUrls: ['./detail-users-card.component.scss'],
@@ -58,7 +61,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class DetailUsersCardComponent implements OnInit {
   private _vm: DetailUsersCardVm = { editMode: false, user: null, status: 'init', errors: null };
   public get vm() {
-    
+
     return this._vm;
   }
   @Input({ required: true })
@@ -70,7 +73,8 @@ export class DetailUsersCardComponent implements OnInit {
         name: vm.user.name,
         email: vm.user.email,
         username: vm.user.username,
-        city: vm.user.city
+        city: vm.user.city,
+        educationStatus: vm.user.educationStatus
       });
     }
 
@@ -86,6 +90,7 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    educationStatus: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
 
   @Output() editUser = new EventEmitter<{ user: CreateUserDTO, onSuccessCb: onSuccessEditionCbType }>();
@@ -122,7 +127,8 @@ export class DetailUsersCardComponent implements OnInit {
         name: this.formGroup.value.name || '',
         username: this.formGroup.value.username || '',
         city: this.formGroup.value.city || '',
-        email: this.formGroup.value.email?.trim().toLowerCase() || ''
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        educationStatus: this.formGroup.value.educationStatus || ''
       },
       onSuccessCb: this.onEditSuccess
     });

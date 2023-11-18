@@ -78,7 +78,19 @@
               </mat-autocomplete>
             </mat-form-field>
 
+            <mat-form-field class="edit-user-field"
+            [matTooltip]="vm.user!.educationStatus"
+            [matTooltipDisabled]="formGroup.enabled">
+              <mat-label>Уровень знаний:</mat-label>
+              <mat-select style=""  class="edit-user-input"  formControlName="educationStatus">
+                <mat-option value="trainee">Стажер</mat-option>
+                <mat-option value="junior">Джун</mat-option>
+                <mat-option value="middle">Мидл</mat-option>
+              </mat-select>
+            </mat-form-field>
+
           </div>
+
             <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
               <button mat-icon-button
               color="primary"

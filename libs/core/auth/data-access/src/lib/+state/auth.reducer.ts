@@ -17,6 +17,10 @@ export const authInitialState: AuthState = {
   loggedUser: {
     email: '',
     name: '',
+    purchaseDate: '',
+    educationStatus: '',
+    educationTime: 0,
+    totalStoryPoints: 0,
     username: '',
     city: '',
     id: 0,
