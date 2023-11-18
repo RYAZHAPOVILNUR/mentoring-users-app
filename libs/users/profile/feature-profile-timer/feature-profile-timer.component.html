@@ -1,0 +1,9 @@
+<div class="row">
+  <mat-icon [class.timer-start]="isStart" class="timer-button col-4 offset-4" (click)="startTimer()">timer</mat-icon>
+</div>
+<div class="row mb-2">
+  <div class="col-10 offset-2 timer">{{time.days }}д. {{time.hours}}ч  {{showMinutes}}:{{showSeconds}}</div>
+</div>
+<div class="row">
+  <button (click)="clearTimer()" class="col offset-2" mat-button color="warn">Очистить</button>
+</div>

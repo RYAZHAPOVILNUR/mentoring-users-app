@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
+import {FeatureProfileTimerComponent} from "../feature-profile-timer/feature-profile-timer.component";
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -32,6 +33,7 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     FormsModule,
     TranslateModule,
+    FeatureProfileTimerComponent,
   ],
   templateUrl: './feature-user-info.component.html',
   styleUrls: ['./feature-user-info.component.scss'],
@@ -52,7 +54,7 @@ export class FeatureUserInfoComponent implements OnInit {
 
   public photo: any;
   public isPhotoHovered?:boolean;
-  
+
   ngOnInit(): void {
     this.photo = this.vm.user.photo ? this.vm.user.photo.url : ''
     this.matIconRegistry.addSvgIcon(
@@ -107,7 +109,7 @@ export class FeatureUserInfoComponent implements OnInit {
     const file = event.target.files[0];
     if (file) {
       this.loadPhoto.emit(file);
-    } 
+    }
   }
 
   onConnectGithub() {
@@ -117,7 +119,7 @@ export class FeatureUserInfoComponent implements OnInit {
   onDisconnectGithub() {
     this.disconnectGithub.emit();
   }
-  
+
   onZoomPhotoClick(){
     this.dialog.open(UiPhotoModalComponent, {data: this.vm.user.photo ? this.vm.user.photo.url : ''});
   }
