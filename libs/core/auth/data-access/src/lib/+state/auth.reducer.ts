@@ -4,25 +4,30 @@ import { LoadingStatus, UsersEntity } from '@users/core/data-access';
 export const authFeatureKey = 'auth';
 
 export interface AuthState {
-  authStatus: LoadingStatus
-  error: string | null
-  authToken: string
-  loggedUser: UsersEntity,
+  authStatus: LoadingStatus;
+  error: string | null;
+  authToken: string;
+  loggedUser: UsersEntity;
 }
 
 export const authInitialState: AuthState = {
   authStatus: 'init',
   error: null,
   authToken: '',
+
   loggedUser: {
+    purchaseDate: '',
+    educationStatus: 'trainee',
+    educationTime: 0,
+    totalStoryPoints: 0,
     email: '',
     name: '',
     username: '',
     city: '',
     id: 0,
     photo: null,
-    isAdmin: null
-  }
+    isAdmin: null,
+  },
 };
 
 export const authFeature = createFeature({
@@ -37,25 +42,23 @@ export const authFeature = createFeature({
       ...state,
       authStatus: 'loaded' as const,
       authToken: res.authToken,
-      loggedUser: res.user
+      loggedUser: res.user,
     })),
     on(authActions.getUser, (state) => ({
       ...state,
-
     })),
     on(authActions.getUserSuccess, (state, { user }) => ({
       ...state,
       authStatus: 'loaded' as const,
-      loggedUser: user
+      loggedUser: user,
     })),
     on(authActions.logout, (state) => ({
       ...state,
-      ...authInitialState
+      ...authInitialState,
     })),
-    on(authActions.uploadImageSuccess, (state, { user}) => ({
+    on(authActions.uploadImageSuccess, (state, { user }) => ({
       ...state,
-      loggedUser: user
+      loggedUser: user,
     }))
   ),
 });
-
