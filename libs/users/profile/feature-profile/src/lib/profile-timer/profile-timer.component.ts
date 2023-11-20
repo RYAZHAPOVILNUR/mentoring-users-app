@@ -1,21 +1,21 @@
 import {ChangeDetectorRef, Component, inject, OnInit} from "@angular/core";
 import { interval} from "rxjs";
-import {LocalStorageTimerService} from "./feature-profile-timer.component.spec";
-import {ITime} from "./feature-profile-models/IType";
+import {LocalStorageTimerService} from "./profile-timer.component.spec";
+import {ITime} from "./models/IType";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 
 @Component({
-  selector: 'feature-profile-timer',
-  styleUrls:['./feature-profile-timer.component.scss'],
+  selector: 'profile-timer',
+  styleUrls:['./profile-timer.component.scss'],
   standalone: true,
   imports: [
     MatIconModule,
     MatButtonModule
   ],
-  templateUrl: './feature-profile-timer.component.html'
+  templateUrl: './profile-timer.component.html'
 })
-export class FeatureProfileTimerComponent implements OnInit {
+export class ProfileTimerComponent implements OnInit {
   cdr = inject(ChangeDetectorRef);
   LocalStore = inject(LocalStorageTimerService)
 
@@ -32,6 +32,7 @@ showSeconds:string= '00'
 
   ngOnInit() {
   this.getCurrentTimer()
+    this.showTime()
   }
   getCurrentTimer() {
     let LocalSeconds = this.LocalStore.getItem()

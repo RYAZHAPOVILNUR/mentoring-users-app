@@ -16,7 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
-import {FeatureProfileTimerComponent} from "../feature-profile-timer/feature-profile-timer.component";
+import {ProfileTimerComponent} from "../feature-profile/src/lib/profile-timer/profile-timer.component";
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -33,7 +33,7 @@ import {FeatureProfileTimerComponent} from "../feature-profile-timer/feature-pro
     CommonModule,
     FormsModule,
     TranslateModule,
-    FeatureProfileTimerComponent,
+    ProfileTimerComponent,
   ],
   templateUrl: './feature-user-info.component.html',
   styleUrls: ['./feature-user-info.component.scss'],
