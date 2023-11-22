@@ -21,6 +21,8 @@ export class UsersFacade {
   public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
   public readonly loggedUser$ = this.store.select(selectLoggedUser);
+  public readonly filteredUsers$ = this.store.select(UsersSelectors.selectFilteredUsers);
+
   public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError))
   /**
    * Use the initialization action to perform one
@@ -40,6 +42,10 @@ export class UsersFacade {
 
   editUser(userData: CreateUserDTO, id: number, onSuccessCb: onSuccessEditionCbType) {
     this.store.dispatch(UsersActions.editUser({ userData, id, onSuccessCb }));
+  }
+
+  filterUsers(filter: {name: string}) {
+    this.store.dispatch(UsersActions.setUsersFilter({filter}))
   }
 
   getUserFromStore(id: number) {

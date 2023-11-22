@@ -1,0 +1,17 @@
+<div>
+
+  <div>
+    <form [formGroup]="formGroup">
+      <mat-form-field>
+        <input type="text"  [formControlName]="'name'"  matInput placeholder="Введите имя...">
+      </mat-form-field>
+    </form>
+  </div>
+
+  <div>
+    <div>
+      <button (click)="filterUsers()"  mat-button color="primary">Применить</button>
+    </div>
+  </div>
+
+</div>
