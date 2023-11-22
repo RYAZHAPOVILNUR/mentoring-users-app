@@ -1,1 +1,13 @@
-<p>folders-list works!</p>
+<div class="container">
+    <div class="folders-cards-flex">
+        <ng-container *ngFor="let folder of folders">
+            <users-folders-card
+                [folder]="folder"
+                (deleteFolder)="onDeleteFolder(folder)"
+                (click)="onOpenFolder(folder.id)"
+            ></users-folders-card>
+        </ng-container>
+    </div>
+</div>
+
+<users-folders-add-button></users-folders-add-button>
