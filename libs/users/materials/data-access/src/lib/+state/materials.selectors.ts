@@ -6,6 +6,7 @@ export const selectMaterialsState = createFeatureSelector<MaterialsState>(MATERI
 
 const { selectAll, selectEntities } = materialsAdapter.getSelectors();
 
+// folders
 export const selectFoldersStatus = createSelector(
   selectMaterialsState, (state: MaterialsState) => state.status
 )
@@ -22,4 +23,13 @@ export const selectOpenedFolder = createSelector(
   selectRouteParams,
   selectFodlersEntities,
   ({id}, entities) => entities[id] || null
+)
+
+// materials
+export const selectMaterialsStatus = createSelector(
+  selectMaterialsState, (state: MaterialsState) => state.status
+)
+
+export const selectAllMaterials = createSelector(
+  selectMaterialsState, (state: MaterialsState) => state.materials
 )

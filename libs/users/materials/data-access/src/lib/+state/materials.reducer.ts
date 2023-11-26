@@ -25,6 +25,7 @@ export const materialsFeature = createFeature({
   reducer: createReducer(
     initialMaterialsState,
 
+    // folders
     on(MaterialsActions.loadFolders, (state) => ({
       ...state, status: 'loading' as const
     })),
@@ -51,7 +52,7 @@ export const materialsFeature = createFeature({
       ...state, status: 'error' as const, error
     })
     ),
-    
+
     on(MaterialsActions.openFolder, (state) => ({
       ...state, status: 'loading' as const
     })
@@ -61,6 +62,39 @@ export const materialsFeature = createFeature({
     ),
     on(MaterialsActions.openFolderFailure, (state, { error }) => ({
       ...state, status: 'error' as const, error
-    }))
+    })
+    ),
+
+    // materials
+    on(MaterialsActions.loadMaterials, (state) => ({
+      ...state, status: 'loading' as const
+    })
+    ),
+    on(MaterialsActions.loadMaterialsSuccess, (state, { materials }) => ({
+      ...state, materials, status: 'loaded' as const
+    })
+    ),
+    on(MaterialsActions.loadMaterialsFailure, (state, { error }) => ({
+      ...state, status: 'error' as const, error
+    })
+    ),
+
+    on(MaterialsActions.deleteMaterialSuccess, (state, { id }) =>
+    materialsAdapter.removeOne(id, { ...state })
+    ),
+    on(MaterialsActions.deleteMaterialFailure, (state, { error }) => ({
+      ...state, status: 'error' as const, error
+    })
+    ),
+
+    on(MaterialsActions.addMaterialSuccess, (state, { material }) => ({
+      ...state, materials: [...state.materials, material]
+    })
+    ),
+
+    on(MaterialsActions.addMaterialFailure, (state, { error }) => ({
+      ...state, status: 'error' as const, error
+    })
+    ),
   )
 })
