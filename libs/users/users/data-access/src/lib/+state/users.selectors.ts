@@ -23,6 +23,30 @@ export const selectAllUsers = createSelector(
   (state: UsersState) => selectAll(state)
 );
 
+export const allUsers = createSelector(
+  selectUsersState,
+  usersAdapter.getSelectors().selectAll
+);
+
+export const selectUsersFilter = createSelector(
+  selectUsersState,
+  (state: UsersState) => state.usersFilter
+);
+
+export const filteredUsers = createSelector(
+  selectAllUsers,
+  selectUsersFilter,
+  (users, filter) => {
+    if (!filter.name) {
+      return users; // If the filter is empty, return all users
+    }
+
+    // Filter users based on the name
+    return users.filter((user) =>
+      user.name.toLowerCase().includes(filter.name.toLowerCase())
+    );
+  }
+)
 export const selectUsersEntities = createSelector(
   selectUsersState,
   (state: UsersState) => selectEntities(state)

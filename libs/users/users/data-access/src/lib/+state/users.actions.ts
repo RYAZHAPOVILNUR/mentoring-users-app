@@ -2,6 +2,10 @@ import { createAction, props } from '@ngrx/store';
 import { UsersErrors } from "./users.reducer";
 import { CreateUserDTO, LoadingStatus, UsersDTO, UsersEntity } from '@users/core/data-access';
 
+interface setUsersFilter {
+  filter: {name: string}
+}
+
 export type onSuccessEditionCbType = () => void
 
 export const initUsers = createAction('[Users Page] Init');
@@ -15,6 +19,12 @@ export const loadUsersFailure = createAction(
   '[Users/API] Load Users Failure',
   props<{ error: any }>()
 );
+
+export const  setUsersFilter = createAction(
+  '[Users] Set Users Filter',
+  props<{ filter: { name: string }}>()
+)
+
 
 export const deleteUser = createAction('[Users Page] Delete User', props<{ id: number }>());
 export const deleteUserSuccess = createAction('[Users/Api] Delete User Success', props<{ id: number }>());
