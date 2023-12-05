@@ -1,0 +1,14 @@
+<div>
+  <users-tasks-search-input (handleSearchText)="onHandleSearchText($event)">
+  </users-tasks-search-input>
+
+  <users-tasks-view
+    [columns]="(text ? filteredColumn$ : columns$) | ngrxPush"
+    (updateColumns)="onUpdateColumns($event)"
+    (deleteColumn)="deleteColumn($event)"
+    (addTask)="addTask($event)"
+    (deleteTask)="deleteTask($event)"
+    (changeColumnName)=onChangeColumnName($event)
+  >
+  </users-tasks-view>
+</div>

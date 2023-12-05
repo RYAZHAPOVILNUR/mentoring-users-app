@@ -1,0 +1,31 @@
+<ng-container *ngrxLet="{
+  viewedArticle: openedArticle$,
+  comments: articleComments$,
+  status: status$,
+  commentsStatus: commentsStatus$,
+  loggedUserId: loggedUserId$
+} as vm">
+  <ng-container [ngSwitch]="vm.status">
+
+    <ng-container *ngSwitchCase="'loading'">
+      <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'loaded'">
+      <ng-container>
+        <article-read [article]="vm.viewedArticle" [loggedUserId]="vm.loggedUserId"/>
+        <article-comments 
+          [comments]="vm.comments" 
+          [status]="vm.commentsStatus"
+          (submitComment)="onSubmitComment($event)">
+        </article-comments>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'error'">
+      <h1>Ошибка!</h1>
+      <p>Произошла ошибка при загрузке данных.</p>
+    </ng-container>
+
+  </ng-container>
+</ng-container>

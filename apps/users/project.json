@@ -1,0 +1,125 @@
+{
+  "name": "users",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "users",
+  "sourceRoot": "apps/users/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/users",
+        "index": "apps/users/src/index.html",
+        "main": "apps/users/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/users/tsconfig.app.json",
+        "assets": ["apps/users/src/favicon.ico", "apps/users/src/assets"],
+        "styles": [
+          "node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
+          "./node_modules/quill/dist/quill.core.css",
+          "./node_modules/quill/dist/quill.bubble.css",
+          "./node_modules/quill/dist/quill.snow.css",
+          "node_modules/bootstrap/dist/css/bootstrap.min.css",
+          {"input": "apps/users/src/themes/light-violent.scss", "inject": false, "bundleName": "light-violent"},
+          {"input": "apps/users/src/themes/light-green.scss", "inject": false, "bundleName": "light-green"},
+          {"input": "apps/users/src/themes/light-red.scss", "inject": false, "bundleName": "light-red"},
+          {"input": "apps/users/src/themes/dark-violent.scss", "inject": false, "bundleName": "dark-violent"},
+          {"input": "apps/users/src/themes/dark-green.scss", "inject": false, "bundleName": "dark-green"},
+          {"input": "apps/users/src/themes/dark-red.scss", "inject": false, "bundleName": "dark-red"},
+          {"input": "apps/users/src/themes/custom-theme.scss", "inject": false, "bundleName": "custom-theme"},
+          {"input": "apps/users/src/app-theme.scss"},
+          "@angular/material/prebuilt-themes/deeppurple-amber.css"
+        ],
+        "stylePreprocessorOptions": {
+          "includePaths": [
+            "libs/users/settings"
+          ]
+        },
+        "scripts": ["./node_modules/quill/dist/quill.min.js"]
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "5mb",
+              "maximumError": "5mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/users/src/environments/environment.ts",
+              "with": "apps/users/src/environments/environment.development.ts"
+            }
+          ]
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "users:build:production"
+        },
+        "development": {
+          "browserTarget": "users:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "users:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/users/**/*.ts", "apps/users/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/users/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "users:build"
+      }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/users/Dockerfile . -t users"
+    }
+  }
+}

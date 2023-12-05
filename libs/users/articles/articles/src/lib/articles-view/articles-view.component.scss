@@ -1,0 +1,76 @@
+.article {
+
+
+  & .article-author-img,
+  .article-author-name {
+    cursor: pointer;
+  }
+
+  & .article-author-block-img {
+    padding: 16px 0 0;
+  }
+
+  & .article-header {
+    justify-content: space-between;
+    padding: 20px 20px 0 20px;
+    margin-bottom: 10px;
+
+    & .article-subtitle {
+      font-weight: 400;
+    }
+  }
+  & .article-content {
+    padding: 0 20px 5px 20px;
+    & article {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 4;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  & .article-button {
+    & button {
+      width: 50%;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.block-with-text {
+  cursor: pointer;
+}
+
+.article-header-block {
+  display: flex;
+  justify-content: flex-start;
+}
+
+:host::ng-deep.mat-mdc-card-header-text {
+  display: none;
+}
+.articlesTypeLIST{}
+
+
+
+.articlesTypeTILE{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 10px;
+
+}
+.articleTypeLIST{
+  max-width: 700px;
+  margin: 40px auto;
+
+}
+.articleTypeTILE{
+  width: 400px;
+  height: 250px;
+  margin: 10px;
+  overflow: hidden;
+}
+

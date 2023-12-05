@@ -1,0 +1,22 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="onToggleSidenav()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <button mat-button routerLink="/home">{{ 'LAYOUT.HEADER.HOME' | translate }}</button>
+  <button
+    mat-button routerLink="/admin/users"
+    *ngIf="isAdmin$ | ngrxPush"
+  >
+    {{ 'LAYOUT.HEADER.USERS' | translate }}
+  </button>
+  <span class="spacer"></span>
+  <button mat-icon-button routerLink="/profile">
+    <mat-icon matListItemIcon>account_circle</mat-icon>
+  </button>
+  <users-change-theme-header></users-change-theme-header>
+    <button mat-button [matMenuTriggerFor]="menu"  class="lang-switch-btn"> {{selectedLanguage$ | ngrxPush}}</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="onSwitchLanguage('ru')" class="lang-switch-btn">Ru</button>
+      <button mat-menu-item (click)="onSwitchLanguage('en')" class="lang-switch-btn">En</button>
+    </mat-menu>
+</mat-toolbar>

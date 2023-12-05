@@ -1,0 +1,261 @@
+.board {
+  display: flex;
+  flex-direction: column;
+  min-height: 600px;
+  overflow-x: auto;
+  min-width: 0;
+  height: 90vh;
+
+  .board-wrapper {
+    display: flex;
+    width: max-content;
+    overflow-x: auto;
+
+    .board-columns {
+      display: flex;
+      flex-grow: 1;
+      min-height: 600px;
+
+      .board-column {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        margin: 25px;
+        border-radius: 5px;
+        background: rgba(#fff, 0.5);
+        transition: box-shadow 0.3s ease;
+        box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+          0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+        position: relative;
+
+        &:hover {
+          box-shadow: 0 8px 8px -4px rgba(0, 0, 0, 0.3),
+            0 11px 13px 4px rgba(0, 0, 0, 0.16),
+            0 5px 16px 4px rgba(0, 0, 0, 0.14);
+        }
+
+        .column-title {
+          text-align: center;
+          font-size: 20px;
+          font-weight: 800;
+          text-transform: uppercase;
+          margin: 15px;
+        }
+
+        // .task {
+        //   position: relative;
+        //   display: flex;
+        //   flex-direction: column;
+        //   align-items: flex-start;
+        //   padding: 15px 12px;
+        //   background: white;
+        //   border-bottom: solid 1px #ddd;
+        //   border-radius: 5px;
+        //   justify-content: space-between;
+        //   margin: 5px;
+        //   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.85),
+        //     0 3px 14px 2px rgba(0, 0, 0, 0.05);
+        //   cursor: move;
+        //   width: 290px;
+        //   white-space: normal;
+        //   overflow-wrap: break-word;
+
+        //   &:hover {
+        //     box-shadow: 0 7px 7px -4px rgba(0, 0, 0, 0.9),
+        //       0 5px 16px 4px rgba(0, 0, 0, 0.07);
+        //   }
+
+        //   .delTask {
+        //     position: absolute;
+        //     right: 5px;
+        //     top: 5px;
+        //   }
+        // }
+
+        .tasksBtn,
+        .delBtnContainer {
+          position: absolute;
+          bottom: 10px;
+          display: none;
+          margin: 10px;
+        }
+
+        .tasksBtn {
+          left: 10px;
+        }
+
+        .delBtnContainer {
+          right: 10px;
+        }
+
+        .taskForm {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          padding: 5px;
+          background: #f2f2f2;
+          border-radius: 5px;
+          margin: 10px;
+          box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1),
+            0 1px 1px 1px rgba(0, 0, 0, 0.08), 0 1px 3px 1px rgba(0, 0, 0, 0.06);
+
+          &:hover {
+            box-shadow: 0 3px 3px -2px rgba(0, 0, 0, 0.2),
+              0 2px 2px 2px rgba(0, 0, 0, 0.1),
+              0 2px 4px 2px rgba(0, 0, 0, 0.08);
+          }
+
+          .closeTaskForm {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+          }
+
+          .newTaskInput {
+            max-width: 170px;
+            padding: 2px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            box-sizing: border-box;
+          }
+
+          .addNew {
+            max-width: 100px;
+            margin: 0;
+            align-self: flex-end;
+          }
+
+          mat-form-field {
+            width: 100%;
+            max-width: 200px;
+            margin-bottom: 5px;
+            height: 65px;
+          }
+        }
+
+        &:hover {
+          .tasksBtn,
+          .delBtnContainer {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+
+  .newColumnInput {
+    width: auto;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-left: 5px;
+  }
+
+  .inputContainer {
+    max-width: 250px;
+    margin: 5px 25px;
+  }
+
+  .addNew {
+    max-width: 100px;
+    margin-left: 25px;
+    margin-top: 10px;
+  }
+}
+
+
+.dark-mode {
+  background-color: #333;
+  color: white;
+
+  .board-wrapper {
+    .board-columns {
+      .board-column {
+        background: rgba(#333, 0.8);
+
+        .column-title {
+          color: white;
+        }
+
+        .taskForm {
+          background: #444;
+          color: white;
+
+          &:hover {
+            box-shadow: 0 3px 3px -2px rgba(255, 255, 255, 0.2),
+              0 2px 2px 2px rgba(255, 255, 255, 0.1),
+              0 2px 4px 2px rgba(255, 255, 255, 0.08);
+          }
+
+          .newTaskInput,
+          mat-form-field {
+            border: 1px solid #666;
+            color: white;
+          }
+
+          .addNew {
+            background-color: #555;
+            color: white;
+            border: 1px solid #666;
+          }
+        }
+
+        .task {
+          background: #444;
+          color: white;
+
+          &:hover {
+            box-shadow: 0 7px 7px -4px rgba(255, 255, 255, 0.1),
+              0 5px 16px 4px rgba(255, 255, 255, 0.07);
+          }
+        }
+      }
+    }
+  }
+}
+
+.addColumn {
+  width: 200px;
+  margin: 5px 25px;
+  padding: 5px;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box:last-child {
+  border: none;
+}
+
+.task {
+  padding: 10px 0 10px 10px;
+  margin: 5px;
+  cursor: move;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.85),
+    0 3px 14px 2px rgba(0, 0, 0, 0.05);
+
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    &_text {
+      margin-top: -5px;
+    }
+  }
+
+  &:hover {
+    box-shadow: 0 7px 7px -4px rgba(0, 0, 0, 0.9),
+      0 5px 16px 4px rgba(0, 0, 0, 0.07);
+  }
+}

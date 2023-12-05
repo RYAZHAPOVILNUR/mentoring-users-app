@@ -1,0 +1,21 @@
+section, form, ul {
+  display: flex;
+  flex-direction: column;
+}
+
+section {
+  max-width: 960px;
+  gap: 20px;
+  margin: 0 auto;
+  & ul {
+    list-style: none;
+    padding: 0;
+    gap: 10px;
+  }
+}
+
+form {
+  & textarea {
+    resize: none;
+  }
+}
