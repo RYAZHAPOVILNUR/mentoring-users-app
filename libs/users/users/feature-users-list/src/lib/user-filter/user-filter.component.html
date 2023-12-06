@@ -1,1 +1,43 @@
-<p>user-filter works!</p>
+<mat-toolbar class="toolbar-filter">
+  <!-- <mat-label class="toolbar-label" for="nameInput">Имя:</mat-label>
+  <input
+    class="toolbar-input"
+    matInput
+    id="nameInput"
+    type="text"
+    [formControl]="nameFilterControl"
+    placeholder="Введите имя"
+    [autocomplete]="'off'"
+  /> -->
+
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Фильтр по имени:</mat-label>
+      <input
+        matInput
+        id="nameInput"
+        [formControl]="nameFilterControl"
+        placeholder="Введите имя"
+        [autocomplete]="'off'"
+      />
+    </mat-form-field>
+  </form>
+
+  <!-- <mat-form-field class="example-form-field">
+      <mat-label>Clearable input</mat-label>
+      <input matInput type="text" [formControl]="nameFilterControl" />
+      @if (value) {
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="value = ''">
+        <mat-icon>close</mat-icon>
+      </button>
+      }
+    </mat-form-field> -->
+  <button
+    mat-raised-button
+    class="toolbar-btn"
+    color="primary"
+    (click)="applyFilter()"
+  >
+    Применить
+  </button>
+</mat-toolbar>
