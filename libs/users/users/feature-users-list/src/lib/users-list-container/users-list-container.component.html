@@ -4,7 +4,9 @@
     status: status$,
     errors: errors$,
     loggedUser: loggedUser$
-} as vm">
+  } as vm"
+>
+  <users-user-filter></users-user-filter>
   <users-list-ui
     [vm]="vm"
     (deleteUser)="onDeleteUser($event)"
