@@ -7,6 +7,10 @@ import {UsersErrors} from "./users.reducer";
 import {onSuccessEditionCbType} from "./users.actions";
 import { selectLoggedUser } from '@auth/data-access';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+<<<<<<< HEAD
+=======
+import { filteredUsersSelector } from './users.selectors';
+>>>>>>> feature-branch
 
 @Injectable({providedIn: 'root'})
 export class UsersFacade {
@@ -58,4 +62,9 @@ export class UsersFacade {
   loadUser() {
     this.store.dispatch(UsersActions.loadUser())
   }
+<<<<<<< HEAD
+=======
+
+  filteredUsers$: Observable<[]> = this.store.select(filteredUsersSelector);
+>>>>>>> feature-branch
 }

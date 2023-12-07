@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "LAYOUT": {
     "HEADER": {
@@ -77,3 +78,84 @@
     }
   }
 }
+=======
+{
+  "LAYOUT": {
+    "HEADER": {
+      "HOME": "Home",
+      "USERS": "Users"
+    },
+    "SIDENAV": {
+      "PROFILE": "Profile",
+      "ARTICLES": "Articles",
+      "MATERIALS": "Materials",
+      "CREATE_ARTICLE": "Create article",
+      "TASKS": "Tasks",
+      "SETTINGS": "Settings",
+      "CHART": "Chart",
+      "LOGOUT": "Logout",
+      "BACKLOG": "Backlog"
+    },
+    "LOGIN": {
+      "SIGN_IN": "Sign in",
+      "EMAIL": "Email",
+      "PASSWORD": "Password",
+      "SIGN_UP": "Sign up",
+      "REMEMBER_ME": "Remember me",
+      "YOU_DONT_HAVE_AN_ACCOUNT": "You don't have an account?",
+      "FORGOT_YOUR_PASSWORD": "Forgot your password?"
+    },
+    "REGISTRATION": {
+      "YOU_HAVE_AN_ACCOUNT": "You have an account?",
+      "SIGN_IN": "Sign in",
+      "FULLNAME": "Full name",
+      "EMAIL": "Email",
+      "PASSWORD": "Password",
+      "SIGN_UP": "Sign up",
+      "AGREE": "I agee to the",
+      "TERMS": "Terms",
+      "AND": "and",
+      "PRIVACY_POLICY": "Privacy Policy"
+    },
+    "ARTICALE": {
+      "COMMENTS": "Comments",
+      "COMMENT_ERROR": "The comment must be no more than 100 characters",
+      "WRITE_SOMETHING": "Write something",
+      "BY": "by"
+    }
+  },
+  "PROFILE": {
+    "USER_INFO": {
+      "CONNECT_GITHUB": "Connect GitHub",
+      "DISCONNECT_GITHUB": "Disconnect Github",
+      "CHANGE_PASSWORD": "Change password"
+    },
+    "PASSWORD_CHANGE": {
+      "FILL_THE_FORM": "Fill the form for password change",
+      "OLD_PASSWORD": "Old password",
+      "NEW_PASSWORD": "New password",
+      "CONFIRM_NEW_PASSWORD": "Confirm new password",
+      "DONT_MATCH": "Passwords doen't match",
+      "CANSEL": "Cansel",
+      "CHANGE": "Change"
+    },
+    "PROFILE_CHANGE": {
+      "PROFILE_CHANGE": "Profile change",
+      "NAME": "Name",
+      "EMAIL": "Email",
+      "CITY": "City",
+      "CHANGE": "Change"
+    }
+  },
+  "ARTICLES": {
+    "ARTICLE": {
+      "HEADER": "Header",
+      "FROM": "From",
+      "EDIT": "Edit",
+      "POST": "Post",
+      "ARTICLE_SIZE": "The post must start minimum with 66 symbols!",
+      "HEADER_SIZE": "The header should contain minimum 6 symbols and maximum 60!"
+    }
+  }
+}
+>>>>>>> feature-branch

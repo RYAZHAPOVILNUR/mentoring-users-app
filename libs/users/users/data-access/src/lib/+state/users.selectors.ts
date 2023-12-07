@@ -48,4 +48,34 @@ export const selectOpenedUser = createSelector(
   selectRouteParams,
   selectUsersEntities,
   ({id}, entities) => entities[id] || null
+<<<<<<< HEAD
 )
+=======
+)
+
+export const selectUsersState = createFeatureSelector<UsersState>('users');
+
+export const usersFilterSelector = createSelector(
+  selectUsersState,
+  (state:UsersState) => state.usersFilter
+)
+export const allUsersSelector = createSelector(
+  selectUsersState,
+  (state: UsersState) => state.users
+);
+
+
+export const filteredUsersSelector = createSelector(
+  usersFilterSelector,
+  allUsersSelector,
+  (filter, allUsers) => {
+    if (!filter.name) {
+      return allUsers; 
+    }
+
+    return allUsers.filter(user =>
+      user.name.toLowerCase().includes(filter.name.toLowerCase())
+    );
+  }
+);
+>>>>>>> feature-branch

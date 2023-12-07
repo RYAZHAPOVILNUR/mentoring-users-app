@@ -4,9 +4,31 @@ import { createReducer, on, Action } from '@ngrx/store';
 import * as UsersActions from './users.actions';
 import { UsersEntity } from '@users/core/data-access';
 import { LoadingStatus } from '@users/core/data-access';
+<<<<<<< HEAD
 
 export const USERS_FEATURE_KEY = 'users';
 
+=======
+import { setUsersFilter } from './users.actions';
+
+export const USERS_FEATURE_KEY = 'users';
+
+export interface UsersState{
+  users:[];
+  usersFilter: {name:string};
+}
+
+export const initialState: UsersState = {
+  users: [],
+  usersFilter: { name: '' },
+};
+
+export const usersReducer = createReducer(
+  initialState,
+  on(setUsersFilter,(state, {filter}) => ({...state,usersFilter:filter}))
+);
+
+>>>>>>> feature-branch
 export type UsersErrors = {
   status: number,
   [key: string]: unknown
