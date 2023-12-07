@@ -4,6 +4,9 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { setUsersFilter, UsersState } from '@users/users/data-access';
+// import { UsersState } from '@users/core/data-access';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'users-user-filter',
@@ -19,10 +22,11 @@ import { MatInputModule } from '@angular/material/input';
   styleUrls: ['./user-filter.component.scss'],
 })
 export class UserFilterComponent {
+  constructor(private store: Store<UsersState>) {}
   nameFilterControl = new FormControl('');
-  value = '';
 
-  applyFilter() {
-    const filterValue = this.nameFilterControl.value;
+  applyFilter(filterValue: string) {
+    this.store.dispatch(setUsersFilter({ filter: { name: filterValue } }));
+    console.log(filterValue);
   }
 }
