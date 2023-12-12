@@ -2,17 +2,18 @@
   rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
 />
-<p>feature-folder-list works!</p>
-<!-- <ng-container *ngFor="let folder of folders">
-  <users-folder-card [folder]="folder"></users-folder-card>
-</ng-container> -->
-<mat-card class="folder">
-  <mat-card-header>
-    <mat-card-title>Название папки</mat-card-title>
-    <mat-card-subtitle>Дата создания</mat-card-subtitle>
-  </mat-card-header>
 
-  <mat-card-actions>
-    <button mat-button class="material-symbols-outlined">delete</button>
-  </mat-card-actions>
-</mat-card>
+<ng-container>
+  <ng-container *ngFor="let folder of folders$ | async">
+    <mat-card class="folder">
+      <mat-card-header>
+        <mat-card-title>{{ folder.title }}</mat-card-title>
+        <mat-card-subtitle>{{ folder.created_at }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-actions>
+        <button mat-button class="material-symbols-outlined">delete</button>
+      </mat-card-actions>
+    </mat-card>
+  </ng-container>
+</ng-container>

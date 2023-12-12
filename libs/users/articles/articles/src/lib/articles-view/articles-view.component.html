@@ -1,60 +1,81 @@
-<mat-button-toggle-group [value]="(viewStyleType$ | ngrxPush)">
-  <mat-button-toggle [value]="'LIST'" (click)="changeArticlesStyleType('LIST')" ><mat-icon>list</mat-icon></mat-button-toggle>
-  <mat-button-toggle [value]="'TILE'" (click)="changeArticlesStyleType('TILE')" ><mat-icon>view_module</mat-icon></mat-button-toggle>
+<mat-button-toggle-group [value]="viewStyleType$ | ngrxPush">
+  <mat-button-toggle [value]="'LIST'" (click)="changeArticlesStyleType('LIST')"
+    ><mat-icon>list</mat-icon></mat-button-toggle
+  >
+  <mat-button-toggle [value]="'TILE'" (click)="changeArticlesStyleType('TILE')"
+    ><mat-icon>view_module</mat-icon></mat-button-toggle
+  >
 </mat-button-toggle-group>
 <div [ngClass]="['articles', 'articlesType' + (viewStyleType$ | ngrxPush)]">
-  <mat-card [ngClass]="['article', 'articleType' + (viewStyleType$ | ngrxPush)]" *ngFor="let article of articles; let i = index">
+  <mat-card
+    [ngClass]="['article', 'articleType' + (viewStyleType$ | ngrxPush)]"
+    *ngFor="let article of articles; let i = index"
+  >
     <mat-card-header class="article-header">
       <mat-card-content class="article-header-block">
         <mat-card-content class="article-author-block-img">
           <img
             [routerLink]="
-        article.authorId === loggedUserId
-        ? ['/profile']
-        : ['/profile', article.authorId]
-        "
-            class="article-author-img" *ngIf="(authorPhoto$[i] | ngrxPush) as authorPhoto" mat-card-avatar
+              article.authorId === loggedUserId
+                ? ['/profile']
+                : ['/profile', article.authorId]
+            "
+            class="article-author-img"
+            *ngIf="authorPhoto$[i] | ngrxPush as authorPhoto"
+            mat-card-avatar
             [src]="authorPhoto"
-            alt="">
+            alt=""
+          />
         </mat-card-content>
         <mat-card-content>
           <mat-card-title>
-            <article class="block-with-text"
-                    [routerLink]="['/articles', article.id]"
-                    routerLinkActive="router-link-active"
-            >{{ clearArticleContent(article.title) }}</article>
+            <article
+              class="block-with-text"
+              [routerLink]="['/articles', article.id]"
+              routerLinkActive="router-link-active"
+            >
+              {{ clearArticleContent(article.title) }}
+            </article>
           </mat-card-title>
           <mat-card-subtitle
             [routerLink]="
-        article.authorId === loggedUserId
-        ? ['/profile']
-        : ['/profile', article.authorId]
-        "
-
-            class="article-author-name">  {{ 'ARTICLES.FROM' | translate }} {{article.author ? article.author : (authorArticle$[i] | ngrxPush) }}
-
+              article.authorId === loggedUserId
+                ? ['/profile']
+                : ['/profile', article.authorId]
+            "
+            class="article-author-name"
+          >
+            {{ 'ARTICLES.FROM' | translate }}
+            {{
+              article.author ? article.author : (authorArticle$[i] | ngrxPush)
+            }}
           </mat-card-subtitle>
-          <mat-card-subtitle class="article-subtitle">{{ article.created_at | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
+          <mat-card-subtitle class="article-subtitle">{{
+            article.created_at | date : 'dd/MM/yyyy'
+          }}</mat-card-subtitle>
         </mat-card-content>
       </mat-card-content>
 
-      <button mat-icon-button
-              *ngIf="article.authorId === loggedUserId"
-              [routerLink]="['/article-editor']"
-              [queryParams]="{ mode: 'edit', id: article.id }"
-              routerLinkActive="router-link-active"
+      <button
+        mat-icon-button
+        *ngIf="article.authorId === loggedUserId"
+        [routerLink]="['/article-editor']"
+        [queryParams]="{ mode: 'edit', id: article.id }"
+        routerLinkActive="router-link-active"
       >
         <mat-icon>edit</mat-icon>
       </button>
     </mat-card-header>
 
     <mat-card-content class="article-content">
-      <article class="block-with-text"
-                [routerLink]="['/articles', article.id]"
-                routerLinkActive="router-link-active"
-      >{{ clearArticleContent(article.content) }}</article>
+      <article
+        class="block-with-text"
+        [routerLink]="['/articles', article.id]"
+        routerLinkActive="router-link-active"
+      >
+        {{ clearArticleContent(article.content) }}
+      </article>
     </mat-card-content>
-
   </mat-card>
 </div>
 
