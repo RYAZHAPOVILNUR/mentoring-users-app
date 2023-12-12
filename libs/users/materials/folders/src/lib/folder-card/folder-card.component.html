@@ -1,1 +1,20 @@
-<p>folder-card works!</p>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+/>
+
+<ng-container>
+  <ng-container *ngFor="let material of materials$ | async">
+    <mat-card class="material">
+      <mat-card-content
+        ><span class="material-symbols-outlined">
+          videocam
+        </span></mat-card-content
+      >
+      <mat-card-header>
+        <mat-card-title>{{ material.title }}</mat-card-title>
+        <mat-card-subtitle>{{ material.created_at | date }}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </ng-container>
+</ng-container>

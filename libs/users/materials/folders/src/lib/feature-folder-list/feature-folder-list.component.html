@@ -8,7 +8,7 @@
     <mat-card class="folder" [routerLink]="['/folder-card']">
       <mat-card-header>
         <mat-card-title>{{ folder.title }}</mat-card-title>
-        <mat-card-subtitle>{{ folder.created_at }}</mat-card-subtitle>
+        <mat-card-subtitle>{{ folder.created_at | date }}</mat-card-subtitle>
       </mat-card-header>
 
       <mat-card-actions>
