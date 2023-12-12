@@ -62,7 +62,15 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'materials',
-        loadComponent: () => import('@users/materials').then(c => c.UsersMaterialsComponent),
+        loadComponent: () =>
+          import('@users/materials').then((c) => c.UsersMaterialsComponent),
+      },
+      {
+        path: 'folder-card',
+        loadComponent: () =>
+          import('@users/feature-folder-card').then(
+            (m) => m.FolderCardComponent
+          ),
       },
       {
         path: 'articles',
@@ -85,7 +93,8 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'settings',
-        loadComponent: () => import('@users/settings').then(c => c.SettingsComponent)
+        loadComponent: () =>
+          import('@users/settings').then((c) => c.SettingsComponent),
       },
       {
         path: 'chart',
@@ -94,10 +103,11 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'backlog',
-        loadComponent: () => import('@users/users/backlog').then(c => c.BacklogComponent)
+        loadComponent: () =>
+          import('@users/users/backlog').then((c) => c.BacklogComponent),
       },
-      ...layoutAgnosticComponents
-    ]
+      ...layoutAgnosticComponents,
+    ],
   },
   {
     path: 'guest',

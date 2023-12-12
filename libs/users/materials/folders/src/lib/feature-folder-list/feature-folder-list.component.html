@@ -5,7 +5,7 @@
 
 <ng-container>
   <ng-container *ngFor="let folder of folders$ | async">
-    <mat-card class="folder">
+    <mat-card class="folder" [routerLink]="['/folder-card']">
       <mat-card-header>
         <mat-card-title>{{ folder.title }}</mat-card-title>
         <mat-card-subtitle>{{ folder.created_at }}</mat-card-subtitle>

@@ -36,6 +36,9 @@
       "@users/feature-folder-list": [
         "libs/users/materials/folders/src/index.ts"
       ],
+      "@users/feature-folder-card": [
+        "libs/users/materials/folders/src/index.ts"
+      ],
       "@users/feature-users-create": [
         "libs/users/users/feature-users-create/src/index.ts"
       ],
