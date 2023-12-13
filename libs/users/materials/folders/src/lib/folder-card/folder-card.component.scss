@@ -1,3 +1,6 @@
+$material-icons-font-path: '~material-icons/iconfont/';
+@import 'material-icons/iconfont/material-icons.scss';
+
 :host {
   display: flex;
   flex-wrap: wrap;

@@ -13,11 +13,8 @@ import { IMaterial } from '../../../../data-access/src/lib/models/imaterial';
   templateUrl: './folder-card.component.html',
   styleUrls: ['./folder-card.component.scss'],
 })
-export class FolderCardComponent implements OnInit {
+export class FolderCardComponent {
   constructor(private materialService: MaterialService) {}
-  public materials$!: Observable<IMaterial[]>;
-
-  ngOnInit(): void {
-    this.materials$ = this.materialService.getMaterials();
-  }
+  public materials$: Observable<IMaterial[]> =
+    this.materialService.getMaterials();
 }
