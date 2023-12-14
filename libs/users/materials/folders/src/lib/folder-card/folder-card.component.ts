@@ -18,14 +18,13 @@ export class FolderCardComponent implements OnInit {
   folderId: number | null = 38;
   constructor(
     private materialService: MaterialService,
-    private route: ActivatedRoute,
     private router: Router
   ) {
-    // const navigationExtras = this.router.getCurrentNavigation()?.extras.state;
-    // if (navigationExtras && typeof navigationExtras['data'] === 'number') {
-    //   this.folderId = navigationExtras['data'];
-    // }
-    // console.log(this.folderId);
+    const navigationExtras = this.router.getCurrentNavigation()?.extras.state;
+    if (navigationExtras && typeof navigationExtras['data'] === 'number') {
+      this.folderId = navigationExtras['data'];
+    }
+    console.log(this.folderId);
   }
 
   ngOnInit() {}
