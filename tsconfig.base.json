@@ -33,10 +33,10 @@
       "@users/core/ui/layout": ["libs/users/core/ui/layout/src/public-api.ts"],
       "@users/core/utils": ["libs/core/utils/src/index.ts"],
       "@users/data-access": ["libs/data-access/src/index.ts"],
-      "@users/feature-folder-list": [
+      "@users/feature-folder-card": [
         "libs/users/materials/folders/src/index.ts"
       ],
-      "@users/feature-folder-card": [
+      "@users/feature-folder-list": [
         "libs/users/materials/folders/src/index.ts"
       ],
       "@users/feature-users-create": [
@@ -50,6 +50,9 @@
       ],
       "@users/home": ["libs/users/home/src/index.ts"],
       "@users/materials": ["libs/users/materials/src/index.ts"],
+      "@users/materials-list": [
+        "libs/users/materials/materials-list/src/index.ts"
+      ],
       "@users/materials/data-access": [
         "libs/users/materials/data-access/src/index.ts"
       ],
