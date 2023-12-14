@@ -6,7 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { IFolder } from '../../../../data-access/src/lib/models/ifolder';
 import { FolderService } from '../../../../data-access/src/lib/services/folder-service/folder-service.service';
 import { Observable } from 'rxjs';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterModule, NavigationExtras } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -24,11 +24,12 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./feature-folder-list.component.scss'],
 })
 export class FeatureFolderListComponent {
-  constructor(private folderService: FolderService) {}
+  constructor(private folderService: FolderService, private router: Router) {}
 
   public folders$: Observable<IFolder[]> = this.folderService.getFolders();
 
-  // ngOnInit() {
-  //   this.folders$ = this.folderService.getFolders(); //delete
-  // }
+  public openFolder(folderId: number) {
+    this.router.navigate(['/folder-card'], { state: { data: folderId } });
+    console.log(folderId);
+  }
 }

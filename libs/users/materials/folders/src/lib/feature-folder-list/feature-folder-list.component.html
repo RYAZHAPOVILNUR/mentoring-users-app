@@ -1,9 +1,10 @@
 <ng-container>
   <ng-container *ngFor="let folder of folders$ | async">
-    <mat-card class="folder" [routerLink]="['/folder-card']">
+    <mat-card class="folder" (click)="openFolder(folder.id)">
       <mat-card-header>
         <mat-card-title>{{ folder.title }}</mat-card-title>
         <mat-card-subtitle>{{ folder.created_at | date }}</mat-card-subtitle>
+        <mat-card-subtitle>{{ folder.id }}</mat-card-subtitle>
       </mat-card-header>
 
       <mat-card-actions>

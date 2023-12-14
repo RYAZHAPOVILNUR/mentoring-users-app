@@ -1,16 +1,21 @@
 <!-- ngrx push pipe -->
-<ng-container>
-  <ng-container *ngFor="let material of materials$ | async">
-    <mat-card class="material">
-      <mat-card-content
-        ><span class="material-icons-outlined">
-          ondemand_video
-        </span></mat-card-content
-      >
-      <mat-card-header>
-        <mat-card-title>{{ material.title }}</mat-card-title>
-        <mat-card-subtitle>{{ material.created_at | date }}</mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
+<ng-container *ngIf="materials$ | async as materials">
+  <ng-container *ngFor="let material of materials">
+    <ng-container *ngIf="folderId === material.folder_id">
+      <mat-card class="material">
+        <mat-card-content
+          ><span class="material-icons-outlined">
+            ondemand_video
+          </span></mat-card-content
+        >
+        <mat-card-header>
+          <mat-card-title>{{ material.title }}</mat-card-title>
+          <mat-card-subtitle>{{
+            material.created_at | date
+          }}</mat-card-subtitle>
+          <p>The folder ID is: {{ folderId }}</p>
+        </mat-card-header>
+      </mat-card>
+    </ng-container>
   </ng-container>
 </ng-container>
