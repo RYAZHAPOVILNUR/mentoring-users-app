@@ -14,11 +14,6 @@ const layoutAgnosticComponents = [
 
 export const appRoutes: Route[] = [
   {
-    path: 'materials-list',
-    loadChildren: () =>
-      import('@users/materials-list').then((m) => m.materialsListRoutes),
-  },
-  {
     path: '',
     component: AuthorizedUserLayoutComponent,
     canActivate: [authGuard],
@@ -76,6 +71,11 @@ export const appRoutes: Route[] = [
           import('@users/feature-folder-card').then(
             (m) => m.FolderCardComponent
           ),
+      },
+      {
+        path: 'materials-list',
+        loadChildren: () =>
+          import('@users/materials-list').then((m) => m.materialsListRoutes),
       },
       {
         path: 'articles',

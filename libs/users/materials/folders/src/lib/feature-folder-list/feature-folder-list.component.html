@@ -8,10 +8,22 @@
       </mat-card-header>
 
       <mat-card-actions>
-        <button mat-button>
+        <button mat-raised-button color="accent">
           <mat-icon>delete_outline</mat-icon>
         </button>
       </mat-card-actions>
     </mat-card>
   </ng-container>
+  <!-- <button mat-button class="add-folder-button">
+    <mat-icon>note-add</mat-icon>
+  </button> -->
+  <button
+    mat-fab
+    title="Добавить папку"
+    color="accent"
+    aria-label="Добавить папку"
+    class="add-folder-button"
+  >
+    <mat-icon>add_circle</mat-icon>
+  </button>
 </ng-container>

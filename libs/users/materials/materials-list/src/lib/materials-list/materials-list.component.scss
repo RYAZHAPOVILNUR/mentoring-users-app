@@ -1,0 +1,13 @@
+$material-icons-font-path: '~material-icons/iconfont/';
+@import 'material-icons/iconfont/material-icons.scss';
+
+:host {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.material {
+  max-width: 200px;
+  margin: 10px;
+}

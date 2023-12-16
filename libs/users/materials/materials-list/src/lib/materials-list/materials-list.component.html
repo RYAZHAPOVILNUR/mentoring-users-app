@@ -1,1 +1,18 @@
-<p>materials-list works!</p>
+<!-- ngrx push pipe -->
+<ng-container>
+  <ng-container *ngFor="let material of materials">
+    <mat-card class="material">
+      <mat-card-content
+        ><span class="material-icons-outlined">
+          ondemand_video
+        </span></mat-card-content
+      >
+      <mat-card-header>
+        <mat-card-title>{{ material.title }}</mat-card-title>
+        <mat-card-subtitle>{{ material.created_at | date }}</mat-card-subtitle>
+        <!-- <mat-card-subtitle>{{ material.material_link }}</mat-card-subtitle> -->
+        <p>The folder ID is: {{ material.folder_id }}</p>
+      </mat-card-header>
+    </mat-card>
+  </ng-container>
+</ng-container>
