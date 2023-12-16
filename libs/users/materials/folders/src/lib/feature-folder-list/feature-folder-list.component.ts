@@ -24,12 +24,14 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./feature-folder-list.component.scss'],
 })
 export class FeatureFolderListComponent {
-  constructor(private folderService: FolderService, private router: Router) {}
+  constructor(private folderService: FolderService, private router: Router) {
+    console.log('storage in parent', sessionStorage.getItem('folderId'));
+  }
 
   public folders$: Observable<IFolder[]> = this.folderService.getFolders();
 
   public openFolder(folderId: number) {
-    this.router.navigate(['/folder-card'], { state: { data: folderId } });
+    this.router.navigate(['/materials-list'], { state: { data: folderId } });
     console.log(folderId);
   }
 }

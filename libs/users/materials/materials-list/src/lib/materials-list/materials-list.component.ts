@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./materials-list.component.scss'],
 })
 export class MaterialsListComponent implements OnInit, OnDestroy {
-  private folderId: number | null = 38;
+  private folderId: number | null = null;
   public materials: IMaterial[] | null = null;
   private materialsSubscription: Subscription | null = null;
 
@@ -23,17 +23,25 @@ export class MaterialsListComponent implements OnInit, OnDestroy {
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef
   ) {
+    // Извлекает ID папки из хранилища sessionStorage
+    if (sessionStorage.getItem('folderId')) {
+      this.folderId = Number(sessionStorage.getItem('folderId'));
+    }
+    // Получает ID папки из текущего роута
     const navigationExtras = this.router.getCurrentNavigation()?.extras.state;
     if (navigationExtras && typeof navigationExtras['data'] === 'number') {
       this.folderId = navigationExtras['data'];
+      sessionStorage.setItem('folderId', this.folderId.toString());
     }
-    console.log(this.folderId);
+
+    console.log('storage', sessionStorage.getItem('folderId'));
   }
 
   ngOnInit() {
+    // Получает материалы через подписку и фильтрует их по ID папки
     this.materialsSubscription = this.materialService.getMaterials().subscribe({
       next: (data: IMaterial[]) => {
-        this.materials = data;
+        this.materials = this.filterMaterialsByFolderId(data, this.folderId);
         console.log('Materials:', this.materials);
         this.changeDetectorRef?.detectChanges();
       },
@@ -43,9 +51,25 @@ export class MaterialsListComponent implements OnInit, OnDestroy {
     });
   }
 
+  // Метод для фильтрации материалов по ID папки
+  filterMaterialsByFolderId(
+    data: IMaterial[],
+    folderId: number | null
+  ): IMaterial[] {
+    if (folderId === null) {
+      return data; // Return the whole array if folderId is null
+    }
+    return data.filter((material) => material.folder_id === folderId);
+  }
+
   ngOnDestroy() {
+    // Очищает подписку
     if (this.materialsSubscription) {
       this.materialsSubscription.unsubscribe();
+    }
+    // Удаляет ID папки из хранилища sessionStorage
+    if (sessionStorage.getItem('folderId')) {
+      sessionStorage.removeItem('folderId');
     }
   }
 }
