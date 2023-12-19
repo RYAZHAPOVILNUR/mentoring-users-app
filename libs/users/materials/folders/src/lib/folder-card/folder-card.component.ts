@@ -6,29 +6,47 @@ import { MaterialService } from '../../../../data-access/src/lib/services/materi
 import { Observable } from 'rxjs';
 import { IMaterial } from '../../../../data-access/src/lib/models/imaterial';
 import { ActivatedRoute, Router } from '@angular/router';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogModule,
+  MatDialogRef,
+} from '@angular/material/dialog';
+import {
+  MatFormFieldControl,
+  MatFormFieldModule,
+} from '@angular/material/form-field';
+import { DialogRef } from '@angular/cdk/dialog';
+import { Inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { FormControl, ReactiveFormsModule, FormGroup } from '@angular/forms';
+import { IFolder } from '../../../../data-access/src/lib/models/ifolder';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'users-folder-card',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatCardModule],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatCardModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatInputModule,
+  ],
   templateUrl: './folder-card.component.html',
   styleUrls: ['./folder-card.component.scss'],
 })
-export class FolderCardComponent implements OnInit {
-  folderId: number | null = 38;
+export class FolderCardComponent {
   constructor(
-    private materialService: MaterialService,
-    private router: Router
-  ) {
-    const navigationExtras = this.router.getCurrentNavigation()?.extras.state;
-    if (navigationExtras && typeof navigationExtras['data'] === 'number') {
-      this.folderId = navigationExtras['data'];
-    }
-    console.log(this.folderId);
+    public dialogRef: MatDialogRef<FolderCardComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
-
-  ngOnInit() {}
-
-  public materials$: Observable<IMaterial[]> =
-    this.materialService.getMaterials();
 }

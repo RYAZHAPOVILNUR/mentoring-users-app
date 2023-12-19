@@ -8,23 +8,32 @@ import { FolderService } from '../../../../data-access/src/lib/services/folder-s
 import { Observable } from 'rxjs';
 import { Router, RouterModule, NavigationExtras } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import {
+  MatDialog,
+  MatDialogConfig,
+  MatDialogModule,
+} from '@angular/material/dialog';
 
 @Component({
   selector: 'users-feature-folder-list',
   standalone: true,
   imports: [
     CommonModule,
-    FolderCardComponent,
     MatButtonModule,
     MatCardModule,
     MatIconModule,
     RouterModule,
+    MatDialogModule,
   ],
   templateUrl: './feature-folder-list.component.html',
   styleUrls: ['./feature-folder-list.component.scss'],
 })
 export class FeatureFolderListComponent {
-  constructor(private folderService: FolderService, private router: Router) {
+  constructor(
+    private folderService: FolderService,
+    private router: Router,
+    public dialog: MatDialog
+  ) {
     console.log('storage in parent', sessionStorage.getItem('folderId'));
   }
 
@@ -33,5 +42,18 @@ export class FeatureFolderListComponent {
   public openFolder(folderId: number) {
     this.router.navigate(['/materials-list'], { state: { data: folderId } });
     console.log(folderId);
+  }
+
+  openDialog(): void {
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '500px';
+    dialogConfig.data = {
+      name: 'test',
+    };
+    const dialogRef = this.dialog.open(FolderCardComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
   }
 }

@@ -18,6 +18,7 @@ export class MaterialsListComponent implements OnInit, OnDestroy {
   public materials: IMaterial[] | null = null;
   private materialsSubscription: Subscription | null = null;
 
+  //TODO: переписать компонент с использованием передачи ID папки через адресную строку
   constructor(
     private materialService: MaterialService,
     private router: Router,

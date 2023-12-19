@@ -48,6 +48,8 @@ import {
   backlogEffects,
 } from '@users/users/backlog/data-access';
 import { RouterLink } from '@angular/router';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -117,6 +119,12 @@ export const appConfig: ApplicationConfig = {
     {
       provide: RouterLink,
       useValue: RouterLink,
+    },
+    {
+      provide: MatDialogModule,
+    },
+    {
+      provide: ReactiveFormsModule,
     },
   ],
 };

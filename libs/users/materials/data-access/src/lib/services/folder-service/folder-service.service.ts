@@ -13,4 +13,8 @@ export class FolderService {
   public getFolders(): Observable<IFolder[]> {
     return this.httpClient.get<IFolder[]>(this.url);
   }
+
+  public getFolder(id: number): Observable<IFolder> {
+    return this.httpClient.get<IFolder>(`${this.url}` + `/${id}`);
+  }
 }
