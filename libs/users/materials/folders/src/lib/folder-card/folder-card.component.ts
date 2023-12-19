@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Type } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -22,6 +22,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormControl, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { IFolder } from '../../../../data-access/src/lib/models/ifolder';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'users-folder-card',
@@ -36,6 +37,7 @@ import { MatInputModule } from '@angular/material/input';
     MatSelectModule,
     ReactiveFormsModule,
     MatInputModule,
+    MatIconModule,
   ],
   templateUrl: './folder-card.component.html',
   styleUrls: ['./folder-card.component.scss'],
@@ -46,7 +48,18 @@ export class FolderCardComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
+  myForm: FormGroup = new FormGroup({
+    title: new FormControl(''),
+  });
+
+  onSubmit(): void {
+    this.data = {
+      title: this.myForm.value.title,
+    };
+    console.log(this.myForm.value.title);
+    this.dialogRef.close(this.data);
+  }
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(null);
   }
 }

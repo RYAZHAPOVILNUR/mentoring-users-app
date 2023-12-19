@@ -1,6 +1,14 @@
-<form class="example-form">
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="example-form">
   <mat-form-field class="example-full-width">
-    <mat-label>Favorite food</mat-label>
-    <input matInput placeholder="Ex. Pizza" value="Sushi" />
+    <mat-label>Новая папка</mat-label>
+    <input
+      matInput
+      formControlName="title"
+      placeholder="Введите название папки"
+    />
   </mat-form-field>
+  <button mat-raised-button color="accent" type="submit">Создать</button>
+  <button mat-raised-button color="accent" type="button" (click)="onNoClick()">
+    Отмена
+  </button>
 </form>
