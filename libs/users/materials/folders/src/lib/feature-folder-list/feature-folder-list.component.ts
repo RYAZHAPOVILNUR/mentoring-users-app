@@ -22,6 +22,7 @@ import {
   MatDialogConfig,
   MatDialogModule,
 } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'users-feature-folder-list',
@@ -33,15 +34,28 @@ import {
     MatIconModule,
     RouterModule,
     MatDialogModule,
+    MatMenuModule,
   ],
   templateUrl: './feature-folder-list.component.html',
   styleUrls: ['./feature-folder-list.component.scss'],
 })
-export class FeatureFolderListComponent implements OnDestroy {
+export class FeatureFolderListComponent implements OnInit, OnDestroy {
   private subscriptions = new Subscription();
+  public folders: IFolder[] | null = null;
+  public isLoading = true;
+
   private refreshFoldersList() {
-    this.folders$ = this.folderService.getFolders();
-    this.changeDetectorRef.detectChanges();
+    this.isLoading = true;
+
+    const refreshSubscription = this.folderService
+      .getFolders()
+      .subscribe((data) => {
+        this.folders = data;
+        this.isLoading = false;
+        this.changeDetectorRef.detectChanges();
+      });
+
+    this.subscriptions.add(refreshSubscription);
   }
   constructor(
     private folderService: FolderService,
@@ -53,11 +67,39 @@ export class FeatureFolderListComponent implements OnDestroy {
       console.log('storage in parent', sessionStorage.getItem('folderId'));
   }
 
-  public folders$: Observable<IFolder[]> = this.folderService.getFolders();
+  ngOnInit(): void {
+    const folderSubscription = this.folderService
+      .getFolders()
+      .subscribe((data) => {
+        this.folders = data;
+        this.isLoading = false;
+        this.changeDetectorRef.detectChanges();
+      });
+    this.subscriptions.add(folderSubscription);
+  }
+  // public folders$: Observable<IFolder[]> = this.folderService.getFolders();
 
   public openFolder(folderId: number) {
     this.router.navigate(['/materials-list'], { state: { data: folderId } });
     console.log(folderId);
+  }
+
+  public deleteFolder(event: Event, folderId: number) {
+    event.stopPropagation();
+    console.log('Folder deleted:', folderId);
+
+    const deleteSubscription = this.folderService
+      .deleteFolder(folderId)
+      .subscribe({
+        next: (data) => {
+          console.log('Folder deleted:', data);
+          this.refreshFoldersList();
+        },
+        error: (error) => {
+          console.error('Error deleting folder:', error);
+        },
+      });
+    this.subscriptions.add(deleteSubscription);
   }
 
   openDialog(): void {

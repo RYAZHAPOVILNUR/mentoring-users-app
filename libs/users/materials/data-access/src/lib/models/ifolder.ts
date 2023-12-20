@@ -7,3 +7,7 @@ export interface IFolder {
 export interface IFolderTitle {
   title: string;
 }
+
+export interface IFolderId {
+  id: number;
+}

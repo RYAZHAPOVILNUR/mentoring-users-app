@@ -1,6 +1,6 @@
-<ng-container>
-  <ng-container *ngFor="let folder of folders$ | async">
-    <mat-card class="folder" (click)="openFolder(folder.id)">
+<ng-container *ngIf="!isLoading">
+  <ng-container *ngFor="let folder of folders">
+    <mat-card class="folder">
       <mat-card-header>
         <mat-card-title>{{ folder.title }}</mat-card-title>
         <mat-card-subtitle>{{ folder.created_at | date }}</mat-card-subtitle>
@@ -8,8 +8,28 @@
       </mat-card-header>
 
       <mat-card-actions>
-        <button mat-raised-button color="accent">
-          <mat-icon>delete_outline</mat-icon>
+        <button
+          class="edit-button"
+          mat-raised-button
+          color="basic"
+          [matMenuTriggerFor]="menu"
+        >
+          <span>
+            <mat-icon class="edit-icon">edit</mat-icon>
+          </span>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>Редактировать</button>
+          <button mat-menu-item (click)="deleteFolder($event, folder.id)">
+            Удалить
+          </button>
+        </mat-menu>
+        <button
+          mat-raised-button
+          color="accent"
+          (click)="openFolder(folder.id)"
+        >
+          <span> <mat-icon>next_week</mat-icon></span>
         </button>
       </mat-card-actions>
     </mat-card>
@@ -27,4 +47,8 @@
   >
     <mat-icon>add_circle</mat-icon>
   </button>
+</ng-container>
+
+<ng-container *ngIf="isLoading">
+  <p>Загрузка...</p>
 </ng-container>

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IFolder, IFolderTitle } from '../../models/ifolder';
+import { IFolder, IFolderId, IFolderTitle } from '../../models/ifolder';
 
 @Injectable({
   providedIn: 'root',
@@ -20,5 +20,9 @@ export class FolderService {
 
   public postFolder(title: IFolderTitle): Observable<IFolderTitle> {
     return this.httpClient.post<IFolderTitle>(this.url, title);
+  }
+
+  public deleteFolder(folder_id: number): Observable<IFolderId> {
+    return this.httpClient.delete<IFolderId>(`${this.url}/${folder_id}`);
   }
 }
