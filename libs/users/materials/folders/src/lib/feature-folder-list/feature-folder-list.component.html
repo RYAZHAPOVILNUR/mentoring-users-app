@@ -19,7 +19,9 @@
           </span>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>Редактировать</button>
+          <button mat-menu-item (click)="openDialog(folder)">
+            Редактировать
+          </button>
           <button mat-menu-item (click)="deleteFolder($event, folder.id)">
             Удалить
           </button>

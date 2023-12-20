@@ -25,4 +25,8 @@ export class FolderService {
   public deleteFolder(folder_id: number): Observable<IFolderId> {
     return this.httpClient.delete<IFolderId>(`${this.url}/${folder_id}`);
   }
+
+  public updateFolder(folder: IFolder) {
+    return this.httpClient.put<IFolder>(`${this.url}/${folder.id}`, folder);
+  }
 }

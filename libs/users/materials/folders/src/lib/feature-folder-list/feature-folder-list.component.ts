@@ -102,10 +102,12 @@ export class FeatureFolderListComponent implements OnInit, OnDestroy {
     this.subscriptions.add(deleteSubscription);
   }
 
-  openDialog(): void {
+  public openDialog(folder?: IFolder): void {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.width = '500px';
     dialogConfig.disableClose = true;
+    dialogConfig.data = { folder };
+    console.log(folder?.title);
 
     const dialogRef = this.dialog.open(FolderCardComponent, dialogConfig);
 
@@ -113,8 +115,9 @@ export class FeatureFolderListComponent implements OnInit, OnDestroy {
       .afterClosed()
       .subscribe((result) => {
         if (!result) return;
-        this.postData(result);
-        console.log('The dialog was closed');
+        if (result && result.id) {
+          this.postData(result);
+        } else this.updateData(result);
       });
     this.subscriptions.add(dialogRefSubscription);
   }
@@ -126,6 +129,10 @@ export class FeatureFolderListComponent implements OnInit, OnDestroy {
         this.refreshFoldersList();
       });
     this.subscriptions.add(postSubscription);
+  }
+
+  updateData(data: IFolder) {
+    console.log('изменение папки в работе', data.title);
   }
 
   ngOnDestroy(): void {

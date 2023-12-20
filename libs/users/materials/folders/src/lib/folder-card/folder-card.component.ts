@@ -46,11 +46,18 @@ export class FolderCardComponent {
   constructor(
     public dialogRef: MatDialogRef<FolderCardComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) {
+    console.log(this.data);
+    if (this.data?.folder) {
+      this.isNew = false;
+    }
+  }
 
   myForm: FormGroup = new FormGroup({
-    title: new FormControl(''),
+    title: new FormControl(this.data?.folder?.title ?? ''),
   });
+
+  isNew: boolean = true;
 
   onSubmit(): void {
     this.data = {
