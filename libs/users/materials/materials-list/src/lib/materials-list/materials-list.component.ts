@@ -40,14 +40,30 @@ export class MaterialsListComponent implements OnInit, OnDestroy {
   public isLoading: boolean = true;
   private subscriptions = new Subscription();
   // private materialsSubscription: Subscription | null = null;
+  // private refreshFoldersList() {
+  //   const refreshSubscription = this.materialService
+  //     .getMaterials()
+  //     .subscribe((data) => {
+  //       this.materials = data;
+  //       this.isLoading = false;
+  //       this.changeDetectorRef.detectChanges();
+  //     });
+
+  //   this.subscriptions.add(refreshSubscription);
+  // }
+
   private refreshFoldersList() {
-    const refreshSubscription = this.materialService
-      .getMaterials()
-      .subscribe((data) => {
-        this.materials = data;
+    const refreshSubscription = this.materialService.getMaterials().subscribe({
+      next: (data) => {
+        this.materials = this.filterMaterialsByFolderId(data, this.folderId);
         this.isLoading = false;
         this.changeDetectorRef.detectChanges();
-      });
+      },
+      error: (error) => {
+        console.error('Error fetching materials:', error);
+        this.isLoading = false;
+      },
+    });
 
     this.subscriptions.add(refreshSubscription);
   }
