@@ -5,23 +5,36 @@ import { Subscription } from 'rxjs';
 import { IMaterial } from '../../../../data-access/src/lib/models/imaterial';
 import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'users-materials-list',
   standalone: true,
-  imports: [CommonModule, MatCardModule],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+  ],
   templateUrl: './materials-list.component.html',
   styleUrls: ['./materials-list.component.scss'],
 })
 export class MaterialsListComponent implements OnInit, OnDestroy {
   private folderId: number | null = null;
   public materials: IMaterial[] | null = null;
+  public isLoading: boolean = true;
   private materialsSubscription: Subscription | null = null;
 
   //TODO: переписать компонент с использованием передачи ID папки через адресную строку
   constructor(
     private materialService: MaterialService,
     private router: Router,
+
     private changeDetectorRef: ChangeDetectorRef
   ) {
     // Извлекает ID папки из хранилища sessionStorage
@@ -44,6 +57,7 @@ export class MaterialsListComponent implements OnInit, OnDestroy {
       next: (data: IMaterial[]) => {
         this.materials = this.filterMaterialsByFolderId(data, this.folderId);
         console.log('Materials:', this.materials);
+        this.isLoading = false;
         this.changeDetectorRef?.detectChanges();
       },
       error: (error) => {
@@ -62,6 +76,12 @@ export class MaterialsListComponent implements OnInit, OnDestroy {
     }
     return data.filter((material) => material.folder_id === folderId);
   }
+
+  openDialog() {}
+
+  deleteMaterial() {}
+
+  openMaterial() {}
 
   ngOnDestroy() {
     // Очищает подписку

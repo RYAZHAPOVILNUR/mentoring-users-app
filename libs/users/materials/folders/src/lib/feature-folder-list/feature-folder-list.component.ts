@@ -45,8 +45,6 @@ export class FeatureFolderListComponent implements OnInit, OnDestroy {
   public isLoading = true;
 
   private refreshFoldersList() {
-    this.isLoading = true;
-
     const refreshSubscription = this.folderService
       .getFolders()
       .subscribe((data) => {
@@ -116,18 +114,37 @@ export class FeatureFolderListComponent implements OnInit, OnDestroy {
       .subscribe((result) => {
         if (!result) return;
         if (result && result.id) {
-          this.postData(result);
-        } else this.updateData(result);
+          this.updateData(result);
+        } else this.postData(result);
       });
+
     this.subscriptions.add(dialogRefSubscription);
   }
+  // postData(data: IFolderTitle) {
+  //   this.isLoading = true;
+  //   const postSubscription = this.folderService
+  //     .postFolder(data)
+  //     .subscribe((data) => {
+  //       console.log(data);
+  //       this.refreshFoldersList();
+  //     });
+  //   this.subscriptions.add(postSubscription);
+  // }
   postData(data: IFolderTitle) {
-    const postSubscription = this.folderService
-      .postFolder(data)
-      .subscribe((data) => {
-        console.log(data);
+    this.isLoading = true; // Установка isLoading в true перед началом запроса
+    const postSubscription = this.folderService.postFolder(data).subscribe({
+      next: (response) => {
+        console.log(response);
         this.refreshFoldersList();
-      });
+      },
+      error: (error) => {
+        console.error('Error posting folder:', error);
+        this.isLoading = false; // Установка isLoading обратно в false в случае ошибки
+      },
+      complete: () => {
+        this.isLoading = false; // Установка isLoading в false после завершения запроса
+      },
+    });
     this.subscriptions.add(postSubscription);
   }
 

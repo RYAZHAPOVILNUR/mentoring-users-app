@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IMaterial } from '../../models/imaterial';
+import { IMaterial, IMaterialPost } from '../../models/imaterial';
 
 @Injectable({
   providedIn: 'root',
@@ -12,5 +12,9 @@ export class MaterialService {
 
   public getMaterials(): Observable<IMaterial[]> {
     return this.httpClient.get<IMaterial[]>(this.url);
+  }
+
+  public postMaterial(post: IMaterialPost): Observable<IMaterialPost> {
+    return this.httpClient.post<IMaterialPost>(this.url, post);
   }
 }

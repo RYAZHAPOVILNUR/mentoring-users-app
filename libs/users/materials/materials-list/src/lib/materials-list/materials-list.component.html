@@ -1,18 +1,59 @@
-<!-- ngrx push pipe -->
+<!--TODO ngrx push pipe -->
+<mat-toolbar color="accent">
+  <span>Материалы</span>
+</mat-toolbar>
 <ng-container>
-  <ng-container *ngFor="let material of materials">
-    <mat-card class="material">
-      <mat-card-content
-        ><span class="material-icons-outlined">
-          ondemand_video
-        </span></mat-card-content
-      >
-      <mat-card-header>
-        <mat-card-title>{{ material.title }}</mat-card-title>
-        <mat-card-subtitle>{{ material.created_at | date }}</mat-card-subtitle>
-        <!-- <mat-card-subtitle>{{ material.material_link }}</mat-card-subtitle> -->
+  <ng-container *ngIf="!isLoading">
+    <ng-container *ngFor="let material of materials">
+      <mat-card class="material">
+        <mat-card-content
+          ><span class="material-icons-outlined">
+            ondemand_video
+          </span></mat-card-content
+        >
+        <mat-card-header>
+          <mat-card-title>{{ material.title }}</mat-card-title>
+          <mat-card-subtitle>{{
+            material.created_at | date
+          }}</mat-card-subtitle>
+        </mat-card-header>
         <p>The folder ID is: {{ material.folder_id }}</p>
-      </mat-card-header>
-    </mat-card>
+        <mat-card-subtitle class="material-link">{{
+          material.material_link
+        }}</mat-card-subtitle>
+        <mat-card-actions>
+          <button
+            class="edit-button"
+            mat-raised-button
+            color="basic"
+            [matMenuTriggerFor]="menu"
+          >
+            <span>
+              <mat-icon class="edit-icon">edit</mat-icon>
+            </span>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="openDialog()">Редактировать</button>
+            <button mat-menu-item (click)="deleteMaterial()">Удалить</button>
+          </mat-menu>
+          <button mat-raised-button color="accent" (click)="openMaterial()">
+            <span> <mat-icon>next_week</mat-icon></span>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </ng-container>
+    <button
+      mat-fab
+      title="Добавить материал"
+      color="accent"
+      aria-label="Добавить материал"
+      class="add-material-button"
+      (click)="openDialog()"
+    >
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  </ng-container>
+  <ng-container *ngIf="isLoading">
+    <p>Загрузка...</p>
   </ng-container>
 </ng-container>

@@ -8,6 +8,21 @@ $material-icons-font-path: '~material-icons/iconfont/';
 }
 
 .material {
-  max-width: 200px;
+  width: 200px;
+  margin: 10px;
+  // filter: sepia(0.5);
+  overflow: hidden;
+  // align-items: center;
+}
+
+.material-link {
+  overflow-wrap: break-word;
+}
+
+.add-material-button {
+  margin: 10px;
+}
+
+button {
   margin: 10px;
 }

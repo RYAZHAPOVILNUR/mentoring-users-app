@@ -1,44 +1,49 @@
-<ng-container *ngIf="!isLoading">
-  <ng-container *ngFor="let folder of folders">
-    <mat-card class="folder">
-      <mat-card-header>
-        <mat-card-title>{{ folder.title }}</mat-card-title>
-        <mat-card-subtitle>{{ folder.created_at | date }}</mat-card-subtitle>
-        <mat-card-subtitle>{{ folder.id }}</mat-card-subtitle>
-      </mat-card-header>
+<ng-container>
+  <ng-container *ngIf="!isLoading">
+    <ng-container *ngFor="let folder of folders">
+      <mat-card class="folder">
+        <mat-card-header>
+          <mat-card-title>{{ folder.title }}</mat-card-title>
+          <mat-card-subtitle>{{ folder.created_at | date }}</mat-card-subtitle>
+          <mat-card-subtitle>{{ folder.id }}</mat-card-subtitle>
+        </mat-card-header>
 
-      <mat-card-actions>
-        <button
-          class="edit-button"
-          mat-raised-button
-          color="basic"
-          [matMenuTriggerFor]="menu"
-        >
-          <span>
-            <mat-icon class="edit-icon">edit</mat-icon>
-          </span>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="openDialog(folder)">
-            Редактировать
+        <mat-card-actions>
+          <button
+            class="edit-button"
+            mat-raised-button
+            color="basic"
+            [matMenuTriggerFor]="menu"
+          >
+            <span>
+              <mat-icon class="edit-icon">edit</mat-icon>
+            </span>
           </button>
-          <button mat-menu-item (click)="deleteFolder($event, folder.id)">
-            Удалить
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="openDialog(folder)">
+              Редактировать
+            </button>
+            <button mat-menu-item (click)="deleteFolder($event, folder.id)">
+              Удалить
+            </button>
+          </mat-menu>
+          <button
+            mat-raised-button
+            color="accent"
+            (click)="openFolder(folder.id)"
+          >
+            <span> <mat-icon>next_week</mat-icon></span>
           </button>
-        </mat-menu>
-        <button
-          mat-raised-button
-          color="accent"
-          (click)="openFolder(folder.id)"
-        >
-          <span> <mat-icon>next_week</mat-icon></span>
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </ng-container>
-  <!-- <button mat-button class="add-folder-button">
+        </mat-card-actions>
+      </mat-card>
+    </ng-container>
+    <!-- <button mat-button class="add-folder-button">
     <mat-icon>note-add</mat-icon>
   </button> -->
+  </ng-container>
+  <ng-container *ngIf="isLoading">
+    <p>Загрузка...</p>
+  </ng-container>
   <button
     mat-fab
     title="Добавить папку"
@@ -49,8 +54,4 @@
   >
     <mat-icon>add_circle</mat-icon>
   </button>
-</ng-container>
-
-<ng-container *ngIf="isLoading">
-  <p>Загрузка...</p>
 </ng-container>
