@@ -136,3 +136,7 @@ export const loadUser = createEffect(
     )
   }, { functional: true }
 )
+
+export class UsersEffects {
+  init$: ;
+}

@@ -12,10 +12,7 @@ import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
 export class UsersFacade {
   private readonly store = inject(Store);
 
-  /**
-   * Combine pieces of state using createSelector,
-   * and expose them as observables through the facade.
-   */
+  public readonly filteredUsers$ = this.store.pipe(select(UsersSelectors.selectFilteredUsers));
   public readonly status$ = this.store.pipe(select(UsersSelectors.selectUsersStatus));
   public readonly allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
   public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
