@@ -3,6 +3,10 @@ export interface IMaterial extends IMaterialPost {
   created_at: number;
 }
 
+export interface IMaterialId {
+  id: number;
+}
+
 export interface IMaterialPost {
   title: string;
   material_link: string;

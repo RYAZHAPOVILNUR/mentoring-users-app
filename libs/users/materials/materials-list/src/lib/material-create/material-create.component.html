@@ -1,12 +1,21 @@
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="example-form">
   <mat-form-field class="example-full-width">
-    <mat-label>Новая папка</mat-label>
+    <mat-label>Новый материал</mat-label>
     <input
       matInput
       formControlName="title"
-      placeholder="Введите название папки"
+      placeholder="Введите название нового материала"
     />
   </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Ссылка на материал</mat-label>
+    <input
+      matInput
+      formControlName="material_link"
+      placeholder="Введите ссылку на материал"
+    />
+  </mat-form-field>
+
   <button mat-raised-button color="accent" type="submit">
     {{ isNew ? 'Создать' : 'Сохранить' }}
   </button>

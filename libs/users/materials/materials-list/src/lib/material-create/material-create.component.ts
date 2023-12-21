@@ -48,20 +48,28 @@ export class MaterialCreateComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     console.log(this.data);
-    if (this.data?.folder) {
+    if (this.data?.material) {
       this.isNew = false;
     }
   }
 
   myForm: FormGroup = new FormGroup({
-    title: new FormControl(this.data?.folder?.title ?? ''),
+    title: new FormControl(this.data?.material?.title ?? ''),
+    material_link: new FormControl(this.data?.material?.material_link ?? ''),
   });
+  //   export interface IMaterialPost {
+  //   title: string;
+  //   material_link: string;
+  //   folder_id: number;
+  // }
 
   isNew: boolean = true;
 
   onSubmit(): void {
     this.data = {
       title: this.myForm.value.title,
+      material_link: this.myForm.value.material_link,
+      folder_id: this.data?.folder_id,
     };
     console.log(this.myForm.value.title);
     this.dialogRef.close(this.data);

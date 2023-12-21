@@ -34,7 +34,9 @@
           </button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="openDialog()">Редактировать</button>
-            <button mat-menu-item (click)="deleteMaterial()">Удалить</button>
+            <button mat-menu-item (click)="deleteMaterial($event, material.id)">
+              Удалить
+            </button>
           </mat-menu>
           <button mat-raised-button color="accent" (click)="openMaterial()">
             <span> <mat-icon>next_week</mat-icon></span>

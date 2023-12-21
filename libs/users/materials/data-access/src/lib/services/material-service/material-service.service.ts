@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IMaterial, IMaterialPost } from '../../models/imaterial';
+import { IMaterial, IMaterialId, IMaterialPost } from '../../models/imaterial';
 
 @Injectable({
   providedIn: 'root',
@@ -16,5 +16,9 @@ export class MaterialService {
 
   public postMaterial(post: IMaterialPost): Observable<IMaterialPost> {
     return this.httpClient.post<IMaterialPost>(this.url, post);
+  }
+
+  public deleteMaterial(material_id: number): Observable<IMaterialId> {
+    return this.httpClient.delete<IMaterialId>(`${this.url}/${material_id}`);
   }
 }
