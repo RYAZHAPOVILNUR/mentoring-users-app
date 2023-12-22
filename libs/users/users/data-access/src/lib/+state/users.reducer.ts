@@ -4,6 +4,36 @@ import { createReducer, on, Action } from '@ngrx/store';
 import * as UsersActions from './users.actions';
 import { UsersEntity } from '@users/core/data-access';
 import { LoadingStatus } from '@users/core/data-access';
+import { setUsersFilter } from './users.actions';
+export interface State{
+  usersFilter:{name:string};
+}
+export const initialState:State = {
+  usersFilter:{name:''},
+};
+
+// убери ts-ignore,двух местах у меня выдаёт ошибку что здесь что в самом внизу у тебя,я не знаю в чем проблема
+// @ts-ignore
+export const usersReducer = createReducer(
+  initialState,
+  on(setUsersFilter, (state: State, { filter }) => ({ ...state, usersFilter: filter }))
+);
+
+const usersFilterSelector = (state:State) => {
+  return state.usersFilter;
+};
+const allUsers =[
+{ name: 'User1', age: 25 },
+{ name: 'User2', age: 30 },
+{ name: 'User3', age: 22 },
+];
+
+const simpleFilter = (users: any[], filter: string) => {
+  return users.filter(user => user.name.includes(filter));
+};
+
+const result = simpleFilter(allUsers, "User");
+console.log(result);
 
 export const USERS_FEATURE_KEY = 'users';
 
@@ -74,6 +104,8 @@ const reducer = createReducer(
   })),
 );
 
+
+// @ts-ignore
 export function usersReducer(state: UsersState | undefined, action: Action) {
   return reducer(state, action);
 }

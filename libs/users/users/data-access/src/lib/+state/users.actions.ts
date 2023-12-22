@@ -2,6 +2,11 @@ import { createAction, props } from '@ngrx/store';
 import { UsersErrors } from "./users.reducer";
 import { CreateUserDTO, LoadingStatus, UsersDTO, UsersEntity } from '@users/core/data-access';
 
+export const setUsersFilter = createAction(
+  '[Users] SetUsersFilter',
+  props<{filter:{name:string}}>()
+);
+
 export type onSuccessEditionCbType = () => void
 
 export const initUsers = createAction('[Users Page] Init');
