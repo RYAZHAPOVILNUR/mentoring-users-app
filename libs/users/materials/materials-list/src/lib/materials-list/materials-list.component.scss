@@ -8,11 +8,17 @@ $material-icons-font-path: '~material-icons/iconfont/';
 }
 
 .material {
-  width: 200px;
+  width: fit-content;
+  height: fit-content;
   margin: 10px;
+  position: relative;
   // filter: sepia(0.5);
   overflow: hidden;
   // align-items: center;
+}
+
+.material-body {
+  width: 200px;
 }
 
 .material-link {

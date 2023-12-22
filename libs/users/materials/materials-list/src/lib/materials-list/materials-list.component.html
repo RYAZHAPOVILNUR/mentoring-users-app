@@ -6,42 +6,118 @@
   <ng-container *ngIf="!isLoading">
     <ng-container *ngFor="let material of materials">
       <mat-card class="material">
-        <mat-card-content
-          ><span class="material-icons-outlined">
-            ondemand_video
-          </span></mat-card-content
-        >
-        <mat-card-header>
-          <mat-card-title>{{ material.title }}</mat-card-title>
-          <mat-card-subtitle>{{
-            material.created_at | date
-          }}</mat-card-subtitle>
-        </mat-card-header>
-        <p>The folder ID is: {{ material.folder_id }}</p>
-        <mat-card-subtitle class="material-link">{{
-          material.material_link
-        }}</mat-card-subtitle>
-        <mat-card-actions>
-          <button
-            class="edit-button"
-            mat-raised-button
-            color="basic"
-            [matMenuTriggerFor]="menu"
-          >
-            <span>
-              <mat-icon class="edit-icon">edit</mat-icon>
+        <div class="material-body">
+          <mat-card-content
+            ><span
+              *ngIf="material.material_link.endsWith('.pdf')"
+              class="material-icons-outlined"
+            >
+              insert_drive_file
             </span>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="openDialog()">Редактировать</button>
-            <button mat-menu-item (click)="deleteMaterial($event, material.id)">
-              Удалить
+            <span
+              *ngIf="material.material_link.endsWith('.mp3')"
+              class="material-icons-outlined"
+            >
+              music_note
+            </span>
+            <span
+              *ngIf="
+                !material.material_link.endsWith('.pdf') &&
+                !material.material_link.endsWith('.mp3')
+              "
+              class="material-icons-outlined"
+            >
+              ondemand_video
+            </span>
+          </mat-card-content>
+
+          <mat-card-header>
+            <mat-card-title>{{ material.title }}</mat-card-title>
+            <mat-card-subtitle>{{
+              material.created_at | date
+            }}</mat-card-subtitle>
+          </mat-card-header>
+          <p>The folder ID is: {{ material.folder_id }}</p>
+          <!-- <mat-card-subtitle class="material-link">{{
+            material.material_link
+          }}</mat-card-subtitle> -->
+          <mat-card-actions>
+            <button
+              class="edit-button"
+              mat-raised-button
+              color="basic"
+              [matMenuTriggerFor]="menu"
+            >
+              <span>
+                <mat-icon class="edit-icon">edit</mat-icon>
+              </span>
             </button>
-          </mat-menu>
-          <button mat-raised-button color="accent" (click)="openMaterial()">
-            <span> <mat-icon>next_week</mat-icon></span>
-          </button>
-        </mat-card-actions>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="openDialog()">
+                Редактировать
+              </button>
+              <button
+                mat-menu-item
+                (click)="deleteMaterial($event, material.id)"
+              >
+                Удалить
+              </button>
+            </mat-menu>
+            <button
+              mat-raised-button
+              color="accent"
+              (click)="openMaterial(material)"
+            >
+              <span> <mat-icon>next_week</mat-icon></span>
+            </button>
+          </mat-card-actions>
+        </div>
+        <!-- Показать контент -->
+        <mat-tab-group preserveContent>
+          <mat-tab label="Скрыть"></mat-tab>
+          <mat-tab label="Показать">
+            <!-- PDF -->
+            <div *ngIf="material.material_link.endsWith('.pdf')">
+              <p>{{ pdfSrc }}</p>
+              <pdf-viewer
+                [src]="pdfSrc"
+                [render-text]="true"
+                [original-size]="false"
+                class="pdf-viewer"
+              ></pdf-viewer>
+            </div>
+
+            <!-- AUDIO -->
+            <ng-container *ngIf="material.material_link.endsWith('.mp3')">
+              <div class="audio">
+                <audio controls>
+                  <source [src]="material.material_link" type="audio/mp3" />
+                </audio>
+              </div>
+            </ng-container>
+
+            <!-- VIDEO -->
+            <ng-container
+              *ngIf="
+                !material.material_link.endsWith('.pdf') &&
+                !material.material_link.endsWith('.mp3')
+              "
+            >
+              <div class="link"></div>
+
+              <iframe
+                width="560"
+                height="315"
+                [src]="material.material_link | ytubePipe"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              >
+              </iframe>
+            </ng-container>
+          </mat-tab>
+        </mat-tab-group>
       </mat-card>
     </ng-container>
     <button

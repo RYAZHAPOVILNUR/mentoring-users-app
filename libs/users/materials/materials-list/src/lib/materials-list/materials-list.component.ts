@@ -18,6 +18,10 @@ import {
   MatDialogModule,
 } from '@angular/material/dialog';
 import { MaterialCreateComponent } from '../material-create/material-create.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTabsModule } from '@angular/material/tabs';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { YtubePipe } from './ytube-pipe/ytube-pipe.pipe';
 
 @Component({
   selector: 'users-materials-list',
@@ -30,14 +34,20 @@ import { MaterialCreateComponent } from '../material-create/material-create.comp
     MatButtonModule,
     MatMenuModule,
     MatDialogModule,
+    MatExpansionModule,
+    MatTabsModule,
+    PdfViewerModule,
+    YtubePipe,
   ],
   templateUrl: './materials-list.component.html',
   styleUrls: ['./materials-list.component.scss'],
 })
 export class MaterialsListComponent implements OnInit, OnDestroy {
+  pdfSrc = 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf';
   private folderId: number | null = null;
   public materials: IMaterial[] | null = null;
   public isLoading: boolean = true;
+  public panelOpenState = false;
   private subscriptions = new Subscription();
   // private materialsSubscription: Subscription | null = null;
   // private refreshFoldersList() {
@@ -176,7 +186,9 @@ export class MaterialsListComponent implements OnInit, OnDestroy {
     this.subscriptions.add(deleteSubscription);
   }
 
-  openMaterial() {}
+  openMaterial(material: IMaterial) {
+    console.log('Open Material', material.id);
+  }
 
   ngOnDestroy() {
     // Unsubscribes from all subscriptions
