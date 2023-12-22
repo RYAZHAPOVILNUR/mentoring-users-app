@@ -78,12 +78,11 @@
           <mat-tab label="Показать">
             <!-- PDF -->
             <div *ngIf="material.material_link.endsWith('.pdf')">
-              <p>{{ pdfSrc }}</p>
               <pdf-viewer
-                [src]="pdfSrc"
+                [src]="material.material_link"
                 [render-text]="true"
                 [original-size]="false"
-                class="pdf-viewer"
+                style="width: 400px; height: 500px"
               ></pdf-viewer>
             </div>
 

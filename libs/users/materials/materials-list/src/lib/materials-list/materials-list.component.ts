@@ -22,6 +22,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { YtubePipe } from './ytube-pipe/ytube-pipe.pipe';
+import {
+  NgxExtendedPdfViewerModule,
+  NgxExtendedPdfViewerComponent,
+  NgxExtendedPdfViewerService,
+} from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'users-materials-list',
@@ -38,6 +43,7 @@ import { YtubePipe } from './ytube-pipe/ytube-pipe.pipe';
     MatTabsModule,
     PdfViewerModule,
     YtubePipe,
+    NgxExtendedPdfViewerModule,
   ],
   templateUrl: './materials-list.component.html',
   styleUrls: ['./materials-list.component.scss'],

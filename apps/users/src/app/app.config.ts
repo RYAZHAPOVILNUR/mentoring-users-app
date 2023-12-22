@@ -50,6 +50,7 @@ import {
 import { RouterLink } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -125,6 +126,12 @@ export const appConfig: ApplicationConfig = {
     },
     {
       provide: ReactiveFormsModule,
+    },
+    {
+      provide: NgxExtendedPdfViewerModule,
+      useValue: {
+        renderText: true,
+      },
     },
   ],
 };
