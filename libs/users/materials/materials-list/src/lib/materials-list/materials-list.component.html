@@ -37,7 +37,7 @@
               material.created_at | date
             }}</mat-card-subtitle>
           </mat-card-header>
-          <p>The folder ID is: {{ material.folder_id }}</p>
+          <!-- <p>The folder ID is: {{ material.folder_id }}</p> -->
           <!-- <mat-card-subtitle class="material-link">{{
             material.material_link
           }}</mat-card-subtitle> -->
@@ -63,13 +63,6 @@
                 Удалить
               </button>
             </mat-menu>
-            <button
-              mat-raised-button
-              color="accent"
-              (click)="openMaterial(material)"
-            >
-              <span> <mat-icon>next_week</mat-icon></span>
-            </button>
           </mat-card-actions>
         </div>
         <!-- Показать контент -->

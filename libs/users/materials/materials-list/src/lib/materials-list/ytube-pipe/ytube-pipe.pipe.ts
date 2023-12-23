@@ -6,20 +6,41 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   standalone: true,
 })
 export class YtubePipe implements PipeTransform {
+  // В конструкторе класса создается приватное свойство sanitizer, которое будет использоваться для санитизации URL.
   constructor(private sanitizer: DomSanitizer) {}
 
+  // Метод createYoutubeEmbed принимает идентификатор видео на YouTube (ключ) и возвращает URL для встроенного просмотра видео.
   createYoutubeEmbed(key: string): string {
     return `https://www.youtube.com/embed/${key}`;
   }
 
+  // Метод transform: Метод transform преобразует входной URL в безопасный URL для встраивания. Сначала он проверяет, есть ли вообще URL, и если нет, возвращает пустую строку.
   transform(url: string): SafeResourceUrl {
     if (!url) {
       return '';
     }
 
+    // Затем, используя регулярное выражение, он извлекает идентификатор видео из URL. Если идентификатор найден, метод создает полный URL для встраивания через createYoutubeEmbed и санитизирует его с помощью sanitizer.bypassSecurityTrustResourceUrl, что возвращает SafeResourceUrl. Если URL не соответствует ожидаемому формату YouTube, метод возвращает исходный URL, также пропустив его через санитизацию для безопасности.
     let videoId: string | null = null;
+
+    //     Регулярное выражение fullreg в данном коде используется для поиска и извлечения идентификатора видео из URL-адресов YouTube. Когда этот шаблон регулярного выражения применяется к строке, совпадение будет включать следующие компоненты:
+    //1. Протокол: http:// или https://, который является необязательным ((https?:\/\/)?).
+    //2. www. - также необязательная часть URL ((www\.)?).
+    //3. Домен и путь: youtube.com/watch?v= (для стандартных URL YouTube) или youtu.be/ (для сокращённых URL YouTube).
+    // Идентификатор видео: последовательность символов, которая следует сразу за одним из вышеуказанных путей до первого встреченного символа &, пробела, перевода строки или < (([^& \n<]+)).
+    // Когда регулярное выражение применяется к строке, оно пытается найти совпадение, которое соответствует всему вышеописанному шаблону. Если совпадение найдено, fullreg.exec(url) вернет массив, где:
+
+    // match[0] будет содержать всю совпавшую подстроку URL.
+    // match[1] будет содержать протокол, если он присутствует.
+    // match[2] будет содержать www., если оно присутствует.
+    // match[3] будет содержать часть URL, указывающую на youtube.com/watch?v= или youtu.be/.
+    // match[4] будет именно тем идентификатором видео, который нужно извлечь для дальнейшего использования.
     const fullreg =
       /(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)([^& \n<]+)(?:[^ \n<]+)?/g;
+    //       [...]: Квадратные скобки определяют набор символов, которые могут встречаться в данной позиции совпадения. Символы внутри квадратных скобок указывают на допустимые символы, которые могут быть сопоставлены.
+    // ^: Когда этот символ используется в начале набора в квадратных скобках, он инвертирует набор, указывая, что совпадение должно происходить с любым символом, который не указан в наборе.
+    // & \n<: Это символы, которые не должны встречаться в совпадении. Таким образом, данная часть регулярного выражения означает: "не амперсанд &, не пробел , не символ новой строки \n и не знак меньше <".
+    // +: Квантификатор, который означает "один или более раз". Это означает, что предыдущий набор символов ([^& \n<]) должен встречаться один или более раз подряд.
     const match = fullreg.exec(url);
     if (match && match.length > 4) {
       videoId = match[4];
@@ -29,70 +50,11 @@ export class YtubePipe implements PipeTransform {
       const safeUrl = this.createYoutubeEmbed(videoId);
       // Санитизация URL перед возвращением
       return this.sanitizer.bypassSecurityTrustResourceUrl(safeUrl);
+      // return safeUrl;
     }
 
     // Если URL не подходит под формат YouTube, не преобразовываем его
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    // return url;
   }
 }
-
-// import { Pipe, PipeTransform } from '@angular/core';
-
-// @Pipe({
-//   name: 'ytubePipe',
-//   standalone: true,
-// })
-// export class YtubePipePipe implements PipeTransform {
-//   createYoutubeEmbed = (key: string) => {
-//     return 'https://www.youtube.com/embed/' + key;
-//   };
-
-//   transform(url: string): string {
-//     if (!url) return url;
-
-//     const linkreg = /(?:)<a([^>]+)>(.+?)<\/a>/g;
-//     const fullreg =
-//       /(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)([^& \n<]+)(?:[^ \n<]+)?/g;
-//     const regex =
-//       /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^& \n<]+)(?:[^ \n<]+)?/g;
-
-//     let resultHtml = url;
-
-//     // get all the matches for youtube links using the first regex
-//     const match = url.match(fullreg);
-//     if (match && match.length > 0) {
-//       // get all links and put in placeholders
-//       const matchlinks = url.match(linkreg);
-//       if (matchlinks && matchlinks.length > 0) {
-//         for (let i = 0; i < matchlinks.length; i++) {
-//           resultHtml = resultHtml.replace(
-//             matchlinks[i],
-//             '#placeholder' + i + '#'
-//           );
-//         }
-//       }
-
-//       // now go through the matches one by one
-//       for (let i = 0; i < match.length; i++) {
-//         // get the key out of the match using the second regex
-//         const matchParts = match[i].split(regex);
-//         // replace the full match with the embedded youtube code
-//         resultHtml = resultHtml.replace(
-//           match[i],
-//           this.createYoutubeEmbed(matchParts[1])
-//         );
-//       }
-
-//       // ok now put our links back where the placeholders were.
-//       if (matchlinks && matchlinks.length > 0) {
-//         for (let i = 0; i < matchlinks.length; i++) {
-//           resultHtml = resultHtml.replace(
-//             '#placeholder' + i + '#',
-//             matchlinks[i]
-//           );
-//         }
-//       }
-//     }
-//     return resultHtml;
-//   }
-// }

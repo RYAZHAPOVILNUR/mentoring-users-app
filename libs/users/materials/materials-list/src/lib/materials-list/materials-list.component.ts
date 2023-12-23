@@ -55,18 +55,6 @@ export class MaterialsListComponent implements OnInit, OnDestroy {
   public isLoading: boolean = true;
   public panelOpenState = false;
   private subscriptions = new Subscription();
-  // private materialsSubscription: Subscription | null = null;
-  // private refreshFoldersList() {
-  //   const refreshSubscription = this.materialService
-  //     .getMaterials()
-  //     .subscribe((data) => {
-  //       this.materials = data;
-  //       this.isLoading = false;
-  //       this.changeDetectorRef.detectChanges();
-  //     });
-
-  //   this.subscriptions.add(refreshSubscription);
-  // }
 
   private refreshFoldersList() {
     const refreshSubscription = this.materialService.getMaterials().subscribe({
@@ -192,9 +180,9 @@ export class MaterialsListComponent implements OnInit, OnDestroy {
     this.subscriptions.add(deleteSubscription);
   }
 
-  openMaterial(material: IMaterial) {
-    console.log('Open Material', material.id);
-  }
+  // openMaterial(material: IMaterial) {
+  //   console.log('Open Material', material.id);
+  // }
 
   ngOnDestroy() {
     // Unsubscribes from all subscriptions
