@@ -51,6 +51,10 @@ import { RouterLink } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { registerLocaleData } from '@angular/common';
+import localeRU from '@angular/common/locales/ru';
+
+registerLocaleData(localeRU);
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
