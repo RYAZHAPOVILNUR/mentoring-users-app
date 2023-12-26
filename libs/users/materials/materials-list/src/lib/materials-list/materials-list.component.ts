@@ -51,6 +51,9 @@ export class MaterialsListComponent implements OnInit, OnDestroy {
   public isLoading: boolean = true;
   public panelOpenState = false;
 
+  public trackByMaterialId(index: number, material: IMaterial): number {
+    return material.id;
+  }
   private refreshFoldersList() {
     this.materialService
       .getMaterials()

@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import {
   IFolder,
+  IFolderId,
   IFolderTitle,
 } from '../../../../data-access/src/lib/models/ifolder';
 import { FolderService } from '../../../../data-access/src/lib/services/folder-service/folder-service.service';
@@ -35,6 +36,7 @@ import { MatMenuModule } from '@angular/material/menu';
 })
 export class FeatureFolderListComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
+
   public folders: IFolder[] | null = null;
   public isLoading = true;
 
@@ -53,6 +55,10 @@ export class FeatureFolderListComponent implements OnInit, OnDestroy {
           this.isLoading = false;
         },
       });
+  }
+
+  public trackByFolderId(index: number, folder: IFolder): number {
+    return folder.id;
   }
   constructor(
     private folderService: FolderService,

@@ -1,6 +1,6 @@
 <ng-container>
   <ng-container *ngIf="!isLoading">
-    <ng-container *ngFor="let folder of folders">
+    <ng-container *ngFor="let folder of folders; trackBy: trackByFolderId">
       <mat-card class="folder">
         <mat-card-header>
           <mat-card-title>{{ folder.title }}</mat-card-title>

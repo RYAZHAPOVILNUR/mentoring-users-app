@@ -3,7 +3,9 @@
 </mat-toolbar>
 <ng-container>
   <ng-container *ngIf="!isLoading">
-    <ng-container *ngFor="let material of materials">
+    <ng-container
+      *ngFor="let material of materials; trackBy: trackByMaterialId"
+    >
       <mat-card class="material">
         <div class="material-body">
           <mat-card-content
