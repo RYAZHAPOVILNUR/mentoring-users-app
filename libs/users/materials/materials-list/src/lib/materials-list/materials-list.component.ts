@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialService } from '../../../../data-access/src/lib/services/material-service/material-service.service';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import {
   IMaterial,
   IMaterialPost,
@@ -22,11 +22,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { YtubePipe } from './ytube-pipe/ytube-pipe.pipe';
-import {
-  NgxExtendedPdfViewerModule,
-  NgxExtendedPdfViewerComponent,
-  NgxExtendedPdfViewerService,
-} from 'ngx-extended-pdf-viewer';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 @Component({
   selector: 'users-materials-list',
@@ -49,27 +45,27 @@ import {
   styleUrls: ['./materials-list.component.scss'],
 })
 export class MaterialsListComponent implements OnInit, OnDestroy {
-  pdfSrc = 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf';
+  private destroy$ = new Subject();
   private folderId: number | null = null;
   public materials: IMaterial[] | null = null;
   public isLoading: boolean = true;
   public panelOpenState = false;
-  private subscriptions = new Subscription();
 
   private refreshFoldersList() {
-    const refreshSubscription = this.materialService.getMaterials().subscribe({
-      next: (data) => {
-        this.materials = this.filterMaterialsByFolderId(data, this.folderId);
-        this.isLoading = false;
-        this.changeDetectorRef.detectChanges();
-      },
-      error: (error) => {
-        console.error('Error fetching materials:', error);
-        this.isLoading = false;
-      },
-    });
-
-    this.subscriptions.add(refreshSubscription);
+    this.materialService
+      .getMaterials()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (data) => {
+          this.materials = this.filterMaterialsByFolderId(data, this.folderId);
+          this.isLoading = false;
+          this.changeDetectorRef.detectChanges();
+        },
+        error: (error) => {
+          console.error('Error fetching materials:', error);
+          this.isLoading = false;
+        },
+      });
   }
 
   //TODO: переписать компонент с использованием передачи ID папки через адресную строку
@@ -95,23 +91,20 @@ export class MaterialsListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // Subscribe to materials and add it to the subscriptions object
-    const materialsSubscription = this.materialService
+    this.materialService
       .getMaterials()
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (data: IMaterial[]) => {
           this.materials = this.filterMaterialsByFolderId(data, this.folderId);
           console.log('Materials:', this.materials);
           this.isLoading = false;
-          this.changeDetectorRef?.detectChanges();
+          this.changeDetectorRef.detectChanges();
         },
         error: (error) => {
           console.error('Error fetching materials:', error);
         },
       });
-
-    // Add the materials subscription to the collection of subscriptions
-    this.subscriptions.add(materialsSubscription);
   }
 
   // Метод для фильтрации материалов по ID папки
@@ -135,8 +128,9 @@ export class MaterialsListComponent implements OnInit, OnDestroy {
 
     const dialogRef = this.dialog.open(MaterialCreateComponent, dialogConfig);
 
-    const dialogRefSubscription = dialogRef
+    dialogRef
       .afterClosed()
+      .pipe(takeUntil(this.destroy$))
       .subscribe((result) => {
         if (!result) return;
         this.postData(result);
@@ -146,28 +140,28 @@ export class MaterialsListComponent implements OnInit, OnDestroy {
 
   postData(data: IMaterialPost) {
     this.isLoading = true; // Установка isLoading в true перед началом запроса
-    const postSubscription = this.materialService.postMaterial(data).subscribe({
-      next: (response) => {
-        console.log(response);
-        this.refreshFoldersList();
-      },
-      error: (error) => {
-        console.error('Error posting folder:', error);
-        this.isLoading = false; // Установка isLoading обратно в false в случае ошибки
-      },
-      complete: () => {
-        this.isLoading = false; // Установка isLoading в false после завершения запроса
-      },
-    });
-    this.subscriptions.add(postSubscription);
+    this.materialService
+      .postMaterial(data)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          this.refreshFoldersList();
+        },
+        error: (error) => {
+          console.error('Error posting folder:', error);
+          this.isLoading = false; // Установка isLoading обратно в false в случае ошибки
+        },
+      });
   }
 
   public deleteMaterial(event: Event, materialId: number) {
     event.stopPropagation();
     console.log('Material deleted:', materialId);
 
-    const deleteSubscription = this.materialService
+    this.materialService
       .deleteMaterial(materialId)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (data) => {
           console.log('Material deleted:', data);
@@ -177,16 +171,11 @@ export class MaterialsListComponent implements OnInit, OnDestroy {
           console.error('Error deleting folder:', error);
         },
       });
-    this.subscriptions.add(deleteSubscription);
   }
 
-  // openMaterial(material: IMaterial) {
-  //   console.log('Open Material', material.id);
-  // }
-
   ngOnDestroy() {
-    // Unsubscribes from all subscriptions
-    this.subscriptions.unsubscribe();
+    this.destroy$.next(true);
+    this.destroy$.complete();
 
     // Remove the folderId from sessionStorage
     sessionStorage.removeItem('folderId');

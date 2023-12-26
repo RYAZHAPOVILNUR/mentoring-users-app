@@ -33,7 +33,7 @@
           <mat-card-header>
             <mat-card-title>{{ material.title }}</mat-card-title>
             <mat-card-subtitle>{{
-              material.created_at | date
+              material.created_at | date : 'd MMMM YYYY' : '+3' : 'ru'
             }}</mat-card-subtitle>
           </mat-card-header>
           <!-- <p>The folder ID is: {{ material.folder_id }}</p> -->
