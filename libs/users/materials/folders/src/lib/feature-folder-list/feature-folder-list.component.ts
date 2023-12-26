@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ViewEncapsulation,
-  ChangeDetectorRef,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FolderCardComponent } from '../folder-card/folder-card.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,8 +8,8 @@ import {
   IFolderTitle,
 } from '../../../../data-access/src/lib/models/ifolder';
 import { FolderService } from '../../../../data-access/src/lib/services/folder-service/folder-service.service';
-import { Observable, Subscription } from 'rxjs';
-import { Router, RouterModule, NavigationExtras } from '@angular/router';
+import { Subject, Subscription, takeUntil } from 'rxjs';
+import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import {
   MatDialog,
@@ -40,20 +34,25 @@ import { MatMenuModule } from '@angular/material/menu';
   styleUrls: ['./feature-folder-list.component.scss'],
 })
 export class FeatureFolderListComponent implements OnInit, OnDestroy {
-  private subscriptions = new Subscription();
+  private destroy$ = new Subject();
   public folders: IFolder[] | null = null;
   public isLoading = true;
 
   private refreshFoldersList() {
-    const refreshSubscription = this.folderService
+    this.folderService
       .getFolders()
-      .subscribe((data) => {
-        this.folders = data;
-        this.isLoading = false;
-        this.changeDetectorRef.detectChanges();
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (data) => {
+          this.folders = data;
+          this.isLoading = false;
+          this.changeDetectorRef.detectChanges();
+        },
+        error: (error) => {
+          console.error('Error fetching folders:', error);
+          this.isLoading = false;
+        },
       });
-
-    this.subscriptions.add(refreshSubscription);
   }
   constructor(
     private folderService: FolderService,
@@ -61,21 +60,25 @@ export class FeatureFolderListComponent implements OnInit, OnDestroy {
     private changeDetectorRef: ChangeDetectorRef,
     public dialog: MatDialog
   ) {
-    (this.subscriptions = new Subscription()),
-      console.log('storage in parent', sessionStorage.getItem('folderId'));
+    console.log('storage in parent', sessionStorage.getItem('folderId'));
   }
 
   ngOnInit(): void {
-    const folderSubscription = this.folderService
+    this.folderService
       .getFolders()
-      .subscribe((data) => {
-        this.folders = data;
-        this.isLoading = false;
-        this.changeDetectorRef.detectChanges();
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (data) => {
+          this.folders = data;
+          this.isLoading = false;
+          this.changeDetectorRef.detectChanges();
+        },
+        error: (error) => {
+          console.error('Error fetching folders:', error);
+          this.isLoading = false;
+        },
       });
-    this.subscriptions.add(folderSubscription);
   }
-  // public folders$: Observable<IFolder[]> = this.folderService.getFolders();
 
   public openFolder(folderId: number) {
     this.router.navigate(['/materials-list'], { state: { data: folderId } });
@@ -84,10 +87,10 @@ export class FeatureFolderListComponent implements OnInit, OnDestroy {
 
   public deleteFolder(event: Event, folderId: number) {
     event.stopPropagation();
-    console.log('Folder deleted:', folderId);
 
-    const deleteSubscription = this.folderService
+    this.folderService
       .deleteFolder(folderId)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (data) => {
           console.log('Folder deleted:', data);
@@ -97,7 +100,6 @@ export class FeatureFolderListComponent implements OnInit, OnDestroy {
           console.error('Error deleting folder:', error);
         },
       });
-    this.subscriptions.add(deleteSubscription);
   }
 
   public openDialog(folder?: IFolder): void {
@@ -109,43 +111,45 @@ export class FeatureFolderListComponent implements OnInit, OnDestroy {
 
     const dialogRef = this.dialog.open(FolderCardComponent, dialogConfig);
 
-    const dialogRefSubscription = dialogRef
+    dialogRef
       .afterClosed()
-      .subscribe((result) => {
-        if (!result) return;
-        if (result && result.id) {
-          this.updateData(result);
-        } else this.postData(result);
-      });
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (result) => {
+          if (!result) {
+            return;
+          }
 
-    this.subscriptions.add(dialogRefSubscription);
+          if (result.id) {
+            this.updateData(result);
+          } else {
+            this.postData(result);
+          }
+        },
+        error: (err) => {
+          console.error('Error after closing dialog:', err);
+        },
+      });
   }
-  // postData(data: IFolderTitle) {
-  //   this.isLoading = true;
-  //   const postSubscription = this.folderService
-  //     .postFolder(data)
-  //     .subscribe((data) => {
-  //       console.log(data);
-  //       this.refreshFoldersList();
-  //     });
-  //   this.subscriptions.add(postSubscription);
-  // }
+
   postData(data: IFolderTitle) {
-    this.isLoading = true; // Установка isLoading в true перед началом запроса
-    const postSubscription = this.folderService.postFolder(data).subscribe({
-      next: (response) => {
-        console.log(response);
-        this.refreshFoldersList();
-      },
-      error: (error) => {
-        console.error('Error posting folder:', error);
-        this.isLoading = false; // Установка isLoading обратно в false в случае ошибки
-      },
-      complete: () => {
-        this.isLoading = false; // Установка isLoading в false после завершения запроса
-      },
-    });
-    this.subscriptions.add(postSubscription);
+    this.isLoading = true;
+    this.folderService
+      .postFolder(data)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          this.refreshFoldersList();
+        },
+        error: (error) => {
+          console.error('Error posting folder:', error);
+          this.isLoading = false;
+        },
+        complete: () => {
+          this.isLoading = false;
+        },
+      });
   }
 
   updateData(data: IFolder) {
@@ -153,6 +157,7 @@ export class FeatureFolderListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 }
