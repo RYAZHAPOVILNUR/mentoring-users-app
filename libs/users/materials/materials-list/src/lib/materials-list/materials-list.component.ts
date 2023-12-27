@@ -7,7 +7,7 @@ import {
   IMaterialPost,
 } from '../../../../data-access/src/lib/models/imaterial';
 import { MatCardModule } from '@angular/material/card';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -44,11 +44,11 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
   templateUrl: './materials-list.component.html',
   styleUrls: ['./materials-list.component.scss'],
 })
-export class MaterialsListComponent implements OnInit, OnDestroy {
+export class MaterialsListComponent implements OnDestroy, OnInit {
   private destroy$ = new Subject();
-  private folderId: number | null = null;
+  private folderId: number;
   public materials: IMaterial[] | null = null;
-  public isLoading: boolean = true;
+  public isLoading = true;
   public panelOpenState = false;
 
   public trackByMaterialId(index: number, material: IMaterial): number {
@@ -74,32 +74,35 @@ export class MaterialsListComponent implements OnInit, OnDestroy {
   //TODO: переписать компонент с использованием передачи ID папки через адресную строку(написать резолвер)
   constructor(
     private materialService: MaterialService,
-    private router: Router,
+    private router: ActivatedRoute,
     public dialog: MatDialog,
     private changeDetectorRef: ChangeDetectorRef
   ) {
+    this.folderId = Number(this.router.snapshot.params['id']);
+    console.log(this.folderId);
+
     // Извлекает ID папки из хранилища sessionStorage
-    if (sessionStorage.getItem('folderId')) {
-      this.folderId = Number(sessionStorage.getItem('folderId'));
-    }
+    // if (sessionStorage.getItem('folderId')) {
+    //   this.folderId = Number(sessionStorage.getItem('folderId'));
+    // }
 
-    // Получает ID папки из текущего роута
-    const navigationExtras = this.router.getCurrentNavigation()?.extras.state;
-    if (navigationExtras && typeof navigationExtras['data'] === 'number') {
-      this.folderId = navigationExtras['data'];
-      sessionStorage.setItem('folderId', this.folderId.toString());
-    }
+    // // Получает ID папки из текущего роута
+    // const navigationExtras = this.router.getCurrentNavigation()?.extras.state;
+    // if (navigationExtras && typeof navigationExtras['data'] === 'number') {
+    //   this.folderId = navigationExtras['data'];
+    //   sessionStorage.setItem('folderId', String(this.folderId));
+    // }
 
-    console.log('storage', sessionStorage.getItem('folderId'));
+    // console.log('storage', sessionStorage.getItem('folderId'));
   }
 
   ngOnInit() {
     this.materialService
-      .getMaterials()
+      .getFolderMaterials(this.folderId)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (data: IMaterial[]) => {
-          this.materials = this.filterMaterialsByFolderId(data, this.folderId);
+          this.materials = data;
           console.log('Materials:', this.materials);
           this.isLoading = false;
           this.changeDetectorRef.detectChanges();
@@ -122,7 +125,7 @@ export class MaterialsListComponent implements OnInit, OnDestroy {
   }
 
   public openDialog(): void {
-    let dialogConfig = new MatDialogConfig();
+    const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '500px';
     dialogConfig.disableClose = true;
     dialogConfig.data = {

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { IMaterial, IMaterialId, IMaterialPost } from '../../models/imaterial';
 
 @Injectable({
@@ -12,6 +12,17 @@ export class MaterialService {
 
   public getMaterials(): Observable<IMaterial[]> {
     return this.httpClient.get<IMaterial[]>(this.url);
+  }
+
+  // получаем полный список материалов и возвращаем новый массив, содержащий только те материалы, у которых folder_id соответствует заданному. Нужно так как API не поддерживает запрос по folder_id
+  public getFolderMaterials(folder_id: number): Observable<IMaterial[]> {
+    return this.httpClient
+      .get<IMaterial[]>(this.url)
+      .pipe(
+        map((materials) =>
+          materials.filter((material) => material.folder_id === folder_id)
+        )
+      );
   }
 
   public postMaterial(post: IMaterialPost): Observable<IMaterialPost> {

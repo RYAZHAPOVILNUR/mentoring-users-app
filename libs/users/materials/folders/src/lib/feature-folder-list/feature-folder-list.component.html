@@ -32,10 +32,17 @@
           <button
             mat-raised-button
             color="accent"
-            (click)="openFolder(folder.id)"
+            [routerLink]="['/materials-list', folder.id]"
           >
             <span> <mat-icon>next_week</mat-icon></span>
           </button>
+          <!-- <button
+            mat-raised-button
+            color="accent"
+            (click)="openFolder(folder.id)"
+          >
+            <span> <mat-icon>next_week</mat-icon></span>
+          </button> -->
         </mat-card-actions>
       </mat-card>
     </ng-container>
