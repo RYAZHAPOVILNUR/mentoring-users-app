@@ -71,7 +71,7 @@ export class MaterialsListComponent implements OnInit, OnDestroy {
       });
   }
 
-  //TODO: переписать компонент с использованием передачи ID папки через адресную строку
+  //TODO: переписать компонент с использованием передачи ID папки через адресную строку(написать резолвер)
   constructor(
     private materialService: MaterialService,
     private router: Router,

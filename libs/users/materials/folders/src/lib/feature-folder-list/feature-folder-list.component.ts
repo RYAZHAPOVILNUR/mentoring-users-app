@@ -9,7 +9,7 @@ import {
   IFolderTitle,
 } from '../../../../data-access/src/lib/models/ifolder';
 import { FolderService } from '../../../../data-access/src/lib/services/folder-service/folder-service.service';
-import { Subject, Subscription, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import {
