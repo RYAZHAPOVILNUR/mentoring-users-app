@@ -109,10 +109,11 @@ export class FeatureFolderListComponent implements OnInit, OnDestroy {
   }
 
   public openDialog(folder?: IFolder): void {
+    const folderTitles = this.folders?.map((f) => f.title);
     let dialogConfig = new MatDialogConfig();
     dialogConfig.width = '500px';
     dialogConfig.disableClose = true;
-    dialogConfig.data = { folder };
+    dialogConfig.data = { folder, folderTitles };
     console.log(folder?.title);
 
     const dialogRef = this.dialog.open(FolderCardComponent, dialogConfig);

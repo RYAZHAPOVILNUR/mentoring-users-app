@@ -17,7 +17,7 @@ import {
 } from '@angular/material/form-field';
 import { DialogRef } from '@angular/cdk/dialog';
 import { Inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, Validators } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { FormControl, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { IFolder } from '../../../../data-access/src/lib/models/ifolder';
@@ -54,8 +54,14 @@ export class MaterialCreateComponent {
   }
 
   myForm: FormGroup = new FormGroup({
-    title: new FormControl(this.data?.material?.title ?? ''),
-    material_link: new FormControl(this.data?.material?.material_link ?? ''),
+    title: new FormControl(
+      this.data?.material?.title ?? '',
+      Validators.required
+    ),
+    material_link: new FormControl(this.data?.material?.material_link ?? '', [
+      Validators.required,
+      Validators.pattern(/^(https:\/\/|www\.).+$/),
+    ]),
   });
   //   export interface IMaterialPost {
   //   title: string;
