@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { catchError, of } from 'rxjs';
 
 @Pipe({
   name: 'ytubePipe',
@@ -40,7 +41,7 @@ export class YtubePipe implements PipeTransform {
     //       [...]: Квадратные скобки определяют набор символов, которые могут встречаться в данной позиции совпадения. Символы внутри квадратных скобок указывают на допустимые символы, которые могут быть сопоставлены.
     // ^: Когда этот символ используется в начале набора в квадратных скобках, он инвертирует набор, указывая, что совпадение должно происходить с любым символом, который не указан в наборе.
     // & \n<: Это символы, которые не должны встречаться в совпадении. Таким образом, данная часть регулярного выражения означает: "не амперсанд &, не пробел , не символ новой строки \n и не знак меньше <".
-    // +: Квантификатор, который означает "один или более раз". Это означает, что предыдущий набор символов ([^& \n<]) должен встречаться один или более раз подряд.
+    // +: Квантификатор, который означает "один или более раз". Это означает, что предыдущий набор символов ([^& \n<]) может встречаться один или более раз подряд.
     const match = fullreg.exec(url);
     if (match && match.length > 4) {
       videoId = match[4];
@@ -51,10 +52,9 @@ export class YtubePipe implements PipeTransform {
       // Санитизация URL перед возвращением
       return this.sanitizer.bypassSecurityTrustResourceUrl(safeUrl);
       // return safeUrl;
+    } else {
+      // Если URL не подходит под формат YouTube, бросаем исключение так как урл не соответствующий формату ютуб может быть не безопасен для применения.
+      throw new Error('Provided URL does not match YouTube format');
     }
-
-    // Если URL не подходит под формат YouTube, не преобразовываем его
-    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
-    // return url;
   }
 }
