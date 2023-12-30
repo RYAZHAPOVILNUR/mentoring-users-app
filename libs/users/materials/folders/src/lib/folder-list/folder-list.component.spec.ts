@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FeatureFolderListComponent } from './feature-folder-list.component';
+import { FeatureFolderListComponent } from './folder-list.component';
 
 describe('FeatureFolderListComponent', () => {
   let component: FeatureFolderListComponent;

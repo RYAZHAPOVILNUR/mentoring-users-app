@@ -31,8 +31,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatDialogModule,
     MatMenuModule,
   ],
-  templateUrl: './feature-folder-list.component.html',
-  styleUrls: ['./feature-folder-list.component.scss'],
+  templateUrl: './folder-list.component.html',
+  styleUrls: ['./folder-list.component.scss'],
 })
 export class FeatureFolderListComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
