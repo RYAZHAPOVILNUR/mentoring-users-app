@@ -5,11 +5,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import {
   IFolder,
-  IFolderId,
-  IFolderTitle,
-} from '../../../../data-access/src/lib/models/ifolder';
-import { FolderService } from '../../../../data-access/src/lib/services/folder-service/folder-service.service';
-import { Subject, takeUntil } from 'rxjs';
+  IFolderCreate,
+  materialsFeature,
+} from '@users/materials/data-access';
+import { FolderService } from '@users/materials/data-access';
+import { Subject, takeUntil, tap, catchError, EMPTY } from 'rxjs';
 import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import {
@@ -18,6 +18,9 @@ import {
   MatDialogModule,
 } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
+import { Store } from '@ngrx/store';
+import { FoldersActions } from '@users/materials/data-access';
+import { LoadingStatus } from '@users/core/data-access';
 
 @Component({
   selector: 'users-feature-folder-list',
@@ -36,8 +39,10 @@ import { MatMenuModule } from '@angular/material/menu';
 })
 export class FeatureFolderListComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
+  public folders: IFolder[] = [];
 
-  public folders: IFolder[] | null = null;
+  public folders$ = this.store.select(materialsFeature.selectFolders);
+  public status$ = this.store.select(materialsFeature.selectStatus);
   public isLoading = true;
 
   private refreshFoldersList() {
@@ -64,26 +69,51 @@ export class FeatureFolderListComponent implements OnInit, OnDestroy {
     private folderService: FolderService,
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private store: Store
   ) {
     console.log('storage in parent', sessionStorage.getItem('folderId'));
   }
 
   ngOnInit(): void {
-    this.folderService
-      .getFolders()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (data) => {
-          this.folders = data;
-          this.isLoading = false;
-          this.changeDetectorRef.detectChanges();
-        },
-        error: (error) => {
-          console.error('Error fetching folders:', error);
-          this.isLoading = false;
-        },
-      });
+    this.store.dispatch(FoldersActions.loadFolders());
+    // this.store
+    //   .select(materialsFeature.selectFolders)
+    //   .pipe(
+    //     tap((data) => {
+    //       this.folders = data;
+    //       console.log('folders', this.folders);
+
+    //       this.status = 'loaded';
+    //       console.log('status', this.status);
+    //     }),
+    //     catchError((error) => {
+    //       console.error('Error fetching folders:', error);
+    //       this.status = 'error';
+    //       return EMPTY;
+    //     }),
+    //     takeUntil(this.destroy$)
+    //   )
+    //   .subscribe();
+
+    // this.store.select(materialsFeature.selectFolders)
+
+    // this.folderService
+    //   .getFolders()
+    //   .pipe(
+    //     tap((data) => {
+    //       this.folders = data;
+    //       this.isLoading = false;
+    //       this.changeDetectorRef.detectChanges();
+    //     }),
+    //     catchError((error) => {
+    //       console.error('Error fetching folders:', error);
+    //       this.isLoading = false;
+    //       return EMPTY;
+    //     }),
+    //     takeUntil(this.destroy$)
+    //   )
+    //   .subscribe();
   }
 
   public openFolder(folderId: number) {
@@ -110,7 +140,7 @@ export class FeatureFolderListComponent implements OnInit, OnDestroy {
 
   public openDialog(folder?: IFolder): void {
     const folderTitles = this.folders?.map((f) => f.title);
-    let dialogConfig = new MatDialogConfig();
+    const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '500px';
     dialogConfig.disableClose = true;
     dialogConfig.data = { folder, folderTitles };
@@ -120,26 +150,48 @@ export class FeatureFolderListComponent implements OnInit, OnDestroy {
 
     dialogRef
       .afterClosed()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (result) => {
+      .pipe(
+        tap((result) => {
           if (!result) {
             return;
           }
-
           if (result.id) {
             this.updateData(result);
           } else {
             this.postData(result);
           }
-        },
-        error: (err) => {
-          console.error('Error after closing dialog:', err);
-        },
-      });
+        }),
+        tap({
+          error: (err) => {
+            console.error('Error after closing dialog:', err);
+          },
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
   }
+  //   dialogRef
+  //     .afterClosed()
+  //     .pipe(takeUntil(this.destroy$))
+  //     .subscribe({
+  //       next: (result) => {
+  //         if (!result) {
+  //           return;
+  //         }
 
-  postData(data: IFolderTitle) {
+  //         if (result.id) {
+  //           this.updateData(result);
+  //         } else {
+  //           this.postData(result);
+  //         }
+  //       },
+  //       error: (err) => {
+  //         console.error('Error after closing dialog:', err);
+  //       },
+  //     });
+  // }
+
+  postData(data: IFolderCreate) {
     this.isLoading = true;
     this.folderService
       .postFolder(data)

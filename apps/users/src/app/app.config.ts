@@ -53,6 +53,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { registerLocaleData } from '@angular/common';
 import localeRU from '@angular/common/locales/ru';
+import {
+  MaterialsEffects,
+  materialsFeature,
+} from '@users/materials/data-access';
 
 registerLocaleData(localeRU);
 
@@ -70,7 +74,8 @@ export const appConfig: ApplicationConfig = {
       commentsEffects,
       githubApiEffects,
       backlogEffects,
-      SettingsEffects
+      SettingsEffects,
+      MaterialsEffects
     ),
     provideStore({
       router: routerReducer,
@@ -82,6 +87,7 @@ export const appConfig: ApplicationConfig = {
       [tasksFeature.name]: tasksFeature.reducer,
       [githubApiFeature.name]: githubApiFeature.reducer,
       [backlogFeature.name]: backlogFeature.reducer,
+      [materialsFeature.name]: materialsFeature.reducer,
     }),
     provideRouterStore(),
     provideStoreDevtools({

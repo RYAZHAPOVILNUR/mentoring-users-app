@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { IFolder, IFolderId, IFolderTitle } from '../models/ifolder';
+import { IFolder, IFolderId, IFolderCreate } from '../models/ifolder';
 import { IMaterial, IMaterialId, IMaterialPost } from '../models/imaterial';
 
 export const FoldersActions = createActionGroup({
@@ -16,14 +16,14 @@ export const FoldersActions = createActionGroup({
     'Delete Folder Failure': props<{ error: unknown }>(),
 
     //Creating folder
-    'Create Folder': props<{ title: IFolderTitle }>(),
+    'Create Folder': props<{ title: IFolderCreate }>(),
     'Create Folder Success': props<{ folder: IFolder }>(),
     'Create Folder Failure': props<{ error: unknown }>(),
 
-    //Opening folder - going to materials page
-    'Open Folder': emptyProps(),
-    'Open Folder Success': props<{ folder_id: IFolderId }>(),
-    'Open Folder Failure': props<{ error: unknown }>(),
+    //Opening folder - going to materials page - change to loading materials
+    // 'Open Folder': emptyProps(),
+    // 'Open Folder Success': props<{ folder_id: IFolderId }>(),
+    // 'Open Folder Failure': props<{ error: unknown }>(),
   },
 });
 
@@ -31,7 +31,7 @@ export const MaterialsActions = createActionGroup({
   source: 'Materials',
   events: {
     //Loading materials
-    'Load Materials': emptyProps(),
+    'Load Materials': props<{ id: IFolderId }>(),
     'Load Materials Success': props<{ materials: IMaterial[] }>(),
     'Load Materials Failure': props<{ error: unknown }>(),
 

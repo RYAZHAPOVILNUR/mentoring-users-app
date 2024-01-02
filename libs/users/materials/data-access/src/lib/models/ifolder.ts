@@ -1,10 +1,12 @@
+// переделать на FolderInterface
 export interface IFolder {
   id: number;
   created_at: number;
-  title: IFolderTitle;
+  title: string;
 }
 
-export interface IFolderTitle {
+// переделать на type: FolderType
+export interface IFolderCreate {
   title: string;
 }
 

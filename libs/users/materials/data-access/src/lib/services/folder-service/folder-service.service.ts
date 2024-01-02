@@ -1,25 +1,29 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IFolder, IFolderId, IFolderTitle } from '../../models/ifolder';
+import { IFolder, IFolderId, IFolderCreate } from '../../models/ifolder';
+import { ApiService } from '@users/core/http';
+import { inject } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FolderService {
   constructor(private httpClient: HttpClient) {}
+
+  private apiService = inject(ApiService);
   private url = 'https://x8ki-letl-twmt.n7.xano.io/api:RaqAbOVN/folder';
 
   public getFolders(): Observable<IFolder[]> {
-    return this.httpClient.get<IFolder[]>(this.url);
+    return this.apiService.get<IFolder[]>('/folder');
   }
 
   public getFolder(id: number): Observable<IFolder> {
-    return this.httpClient.get<IFolder>(`${this.url}` + `/${id}`);
+    return this.apiService.get<IFolder>(`/${id}`);
   }
 
-  public postFolder(title: IFolderTitle): Observable<IFolderTitle> {
-    return this.httpClient.post<IFolderTitle>(this.url, title);
+  public postFolder(title: IFolderCreate): Observable<IFolderCreate> {
+    return this.httpClient.post<IFolderCreate>(this.url, title);
   }
 
   public deleteFolder(folder_id: number): Observable<IFolderId> {

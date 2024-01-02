@@ -1,6 +1,8 @@
 <ng-container>
-  <ng-container *ngIf="!isLoading">
-    <ng-container *ngFor="let folder of folders; trackBy: trackByFolderId">
+  <ng-container *ngIf="(status$ | async) === 'loaded'">
+    <ng-container
+      *ngFor="let folder of folders$ | async; trackBy: trackByFolderId"
+    >
       <mat-card class="folder">
         <mat-card-header>
           <mat-card-title>{{ folder.title }}</mat-card-title>
@@ -50,7 +52,7 @@
     <mat-icon>note-add</mat-icon>
   </button> -->
   </ng-container>
-  <ng-container *ngIf="isLoading">
+  <ng-container *ngIf="(status$ | async) === 'loading'">
     <p>Загрузка...</p>
   </ng-container>
   <button
