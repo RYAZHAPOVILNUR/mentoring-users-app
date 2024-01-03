@@ -5,6 +5,7 @@ import { Observable, EMPTY, of } from 'rxjs';
 import { FoldersActions, MaterialsActions } from './materials.actions';
 import { IMaterial } from '../models/imaterial';
 import { FolderService } from '../services/folder-service/folder-service.service';
+import { IFolder, IFolderCreate } from '../models/ifolder';
 
 @Injectable()
 export class MaterialsEffects {
@@ -28,21 +29,40 @@ export class MaterialsEffects {
     { functional: true }
   );
 
-  // loadFolders$ = createEffect(() => {
-  //   const httpFolderService = inject(FolderService);
-  //   return this.actions$.pipe(
-  //     ofType(FoldersActions.loadFolders),
-  //     switchMap(() =>
-  //       /** An EMPTY observable only emits completion. Replace with your own observable API request */
-  //       EMPTY.pipe(
-  //         map((data) => FoldersActions.loadFoldersSuccess({ folders: data })),
-  //         catchError((error) =>
-  //           of(FoldersActions.loadFoldersFailure({ error }))
-  //         )
-  //       )
-  //     )
-  //   );
-  // });
+  createFolder$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(FoldersActions.createFolder),
+        switchMap(({ folder }) =>
+          this.httpFolderService
+            .createFolder<IFolder, IFolderCreate>('/folder', folder)
+            .pipe(
+              map((newFolder) =>
+                FoldersActions.createFolderSuccess({ folder: newFolder })
+              ),
+              catchError((error) =>
+                of(FoldersActions.createFolderFailure({ error }))
+              )
+            )
+        )
+      );
+    },
+    { functional: true }
+  );
+
+  deleteFolder$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FoldersActions.deleteFolder),
+      switchMap(({ id }) =>
+        this.httpFolderService.deleteFolder(Number(id)).pipe(
+          map(() => FoldersActions.deleteFolderSuccess({ id })),
+          catchError((error) =>
+            of(FoldersActions.deleteFolderFailure({ error }))
+          )
+        )
+      )
+    );
+  });
 
   loadMaterials$ = createEffect(() => {
     return this.actions$.pipe(

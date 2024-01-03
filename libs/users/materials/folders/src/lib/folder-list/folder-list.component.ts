@@ -13,6 +13,7 @@ import { MatCardModule } from '@angular/material/card';
 import {
   IFolder,
   IFolderCreate,
+  IFolderId,
   materialsFeature,
 } from '@users/materials/data-access';
 import { FolderService } from '@users/materials/data-access';
@@ -75,43 +76,6 @@ export class FeatureFolderListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.store.dispatch(FoldersActions.loadFolders());
-    // this.store
-    //   .select(materialsFeature.selectFolders)
-    //   .pipe(
-    //     tap((data) => {
-    //       this.folders = data;
-    //       console.log('folders', this.folders);
-
-    //       this.status = 'loaded';
-    //       console.log('status', this.status);
-    //     }),
-    //     catchError((error) => {
-    //       console.error('Error fetching folders:', error);
-    //       this.status = 'error';
-    //       return EMPTY;
-    //     }),
-    //     takeUntil(this.destroy$)
-    //   )
-    //   .subscribe();
-
-    // this.store.select(materialsFeature.selectFolders)
-
-    // this.folderService
-    //   .getFolders()
-    //   .pipe(
-    //     tap((data) => {
-    //       this.folders = data;
-    //       this.isLoading = false;
-    //       this.changeDetectorRef.detectChanges();
-    //     }),
-    //     catchError((error) => {
-    //       console.error('Error fetching folders:', error);
-    //       this.isLoading = false;
-    //       return EMPTY;
-    //     }),
-    //     takeUntil(this.destroy$)
-    //   )
-    //   .subscribe();
   }
 
   public openFolder(folderId: number) {
@@ -121,21 +85,21 @@ export class FeatureFolderListComponent implements OnInit, OnDestroy {
 
   public deleteFolder(event: Event, folderId: number) {
     event.stopPropagation();
-
-    this.folderService
-      .deleteFolder(folderId)
-      .pipe(
-        tap((data) => {
-          this.refreshFoldersList();
-          console.log('Folder deleted:', data);
-        }),
-        catchError((error) => {
-          console.error('Error deleting folder:', error);
-          return EMPTY;
-        }),
-        takeUntilDestroyed(this.destroyRef)
-      )
-      .subscribe();
+    this.store.dispatch(FoldersActions.deleteFolder({ id: folderId }));
+    // this.folderService
+    //   .deleteFolder(folderId)
+    //   .pipe(
+    //     tap((data) => {
+    //       this.refreshFoldersList();
+    //       console.log('Folder deleted:', data);
+    //     }),
+    //     catchError((error) => {
+    //       console.error('Error deleting folder:', error);
+    //       return EMPTY;
+    //     }),
+    //     takeUntilDestroyed(this.destroyRef)
+    //   )
+    //   .subscribe();
   }
 
   public openDialog(folder?: IFolder): void {
@@ -166,49 +130,13 @@ export class FeatureFolderListComponent implements OnInit, OnDestroy {
             console.error('Error after closing dialog:', err);
           },
         }),
-        takeUntil(this.destroy$)
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
   }
-  //   dialogRef
-  //     .afterClosed()
-  //     .pipe(takeUntil(this.destroy$))
-  //     .subscribe({
-  //       next: (result) => {
-  //         if (!result) {
-  //           return;
-  //         }
 
-  //         if (result.id) {
-  //           this.updateData(result);
-  //         } else {
-  //           this.postData(result);
-  //         }
-  //       },
-  //       error: (err) => {
-  //         console.error('Error after closing dialog:', err);
-  //       },
-  //     });
-  // }
-
-  postData(data: IFolderCreate) {
-    this.isLoading = true;
-    this.folderService
-      .postFolder(data)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (response) => {
-          console.log(response);
-          this.refreshFoldersList();
-        },
-        error: (error) => {
-          console.error('Error posting folder:', error);
-          this.isLoading = false;
-        },
-        complete: () => {
-          this.isLoading = false;
-        },
-      });
+  postData(folder: IFolder) {
+    this.store.dispatch(FoldersActions.createFolder({ folder }));
   }
 
   updateData(data: IFolder) {

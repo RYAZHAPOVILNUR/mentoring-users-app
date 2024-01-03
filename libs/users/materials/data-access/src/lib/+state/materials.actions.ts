@@ -11,12 +11,12 @@ export const FoldersActions = createActionGroup({
     'Load Folders Failure': props<{ error: unknown }>(),
 
     //Deleting folder
-    'Delete Folder': props<{ id: IFolderId }>(),
-    'Delete Folder Success': props<{ id: IFolderId }>(),
+    'Delete Folder': props<{ id: number }>(),
+    'Delete Folder Success': props<{ id: number }>(),
     'Delete Folder Failure': props<{ error: unknown }>(),
 
     //Creating folder
-    'Create Folder': props<{ title: IFolderCreate }>(),
+    'Create Folder': props<{ folder: IFolder }>(),
     'Create Folder Success': props<{ folder: IFolder }>(),
     'Create Folder Failure': props<{ error: unknown }>(),
 
