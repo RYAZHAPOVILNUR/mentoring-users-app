@@ -1,4 +1,11 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ChangeDetectorRef,
+  inject,
+  DestroyRef,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FolderCardComponent } from '../folder-card/folder-card.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,10 +24,12 @@ import {
   MatDialogConfig,
   MatDialogModule,
 } from '@angular/material/dialog';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatMenuModule } from '@angular/material/menu';
 import { Store } from '@ngrx/store';
 import { FoldersActions } from '@users/materials/data-access';
 import { LoadingStatus } from '@users/core/data-access';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'users-feature-folder-list',
@@ -33,11 +42,13 @@ import { LoadingStatus } from '@users/core/data-access';
     RouterModule,
     MatDialogModule,
     MatMenuModule,
+    MatProgressBarModule,
   ],
   templateUrl: './folder-list.component.html',
   styleUrls: ['./folder-list.component.scss'],
 })
 export class FeatureFolderListComponent implements OnInit, OnDestroy {
+  destroyRef = inject(DestroyRef);
   private destroy$ = new Subject();
   public folders: IFolder[] = [];
 
@@ -46,20 +57,7 @@ export class FeatureFolderListComponent implements OnInit, OnDestroy {
   public isLoading = true;
 
   private refreshFoldersList() {
-    this.folderService
-      .getFolders()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (data) => {
-          this.folders = data;
-          this.isLoading = false;
-          this.changeDetectorRef.detectChanges();
-        },
-        error: (error) => {
-          console.error('Error fetching folders:', error);
-          this.isLoading = false;
-        },
-      });
+    this.store.dispatch(FoldersActions.loadFolders());
   }
 
   public trackByFolderId(index: number, folder: IFolder): number {
@@ -126,16 +124,18 @@ export class FeatureFolderListComponent implements OnInit, OnDestroy {
 
     this.folderService
       .deleteFolder(folderId)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (data) => {
-          console.log('Folder deleted:', data);
+      .pipe(
+        tap((data) => {
           this.refreshFoldersList();
-        },
-        error: (error) => {
+          console.log('Folder deleted:', data);
+        }),
+        catchError((error) => {
           console.error('Error deleting folder:', error);
-        },
-      });
+          return EMPTY;
+        }),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe();
   }
 
   public openDialog(folder?: IFolder): void {

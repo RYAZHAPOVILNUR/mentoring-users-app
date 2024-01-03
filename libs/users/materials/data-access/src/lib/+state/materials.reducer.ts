@@ -20,6 +20,7 @@ export const initialState: State = {
 
 export const reducer = createReducer(
   initialState,
+  //Load folders
   on(FoldersActions.loadFolders, (state) => ({
     ...state,
     status: 'loading' as LoadingStatus,
@@ -27,7 +28,15 @@ export const reducer = createReducer(
   on(FoldersActions.loadFoldersSuccess, (state, { folders }) =>
     folders ? { ...state, folders, status: 'loaded' as LoadingStatus } : state
   ),
-  on(FoldersActions.loadFoldersFailure, (state, action) => state)
+  on(FoldersActions.loadFoldersFailure, (state, { error }) => ({
+    ...state,
+    status: 'error' as LoadingStatus,
+    error,
+  }))
+  //Create folder
+  // on(FoldersActions.createFolder, (state) => ({
+
+  // }))
 );
 
 export const materialsFeature = createFeature({
