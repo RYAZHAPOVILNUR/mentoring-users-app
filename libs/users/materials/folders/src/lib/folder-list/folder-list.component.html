@@ -1,7 +1,7 @@
 <ng-container>
   <!-- <ng-container *ngIf="(status$ | async) === 'loaded'"> -->
   <ng-container
-    *ngFor="let folder of folders$ | async; trackBy: trackByFolderId"
+    *ngFor="let folder of folders$ | ngrxPush; trackBy: trackByFolderId"
   >
     <mat-card class="folder">
       <mat-card-header>
@@ -52,7 +52,7 @@
     <mat-icon>note-add</mat-icon>
   </button> -->
   <!-- </ng-container> -->
-  <ng-container *ngIf="(status$ | async) === 'loading'">
+  <ng-container *ngIf="(status$ | ngrxPush) === 'loading'">
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </ng-container>
   <button

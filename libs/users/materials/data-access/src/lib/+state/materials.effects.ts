@@ -50,19 +50,22 @@ export class MaterialsEffects {
     { functional: true }
   );
 
-  deleteFolder$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(FoldersActions.deleteFolder),
-      switchMap(({ id }) =>
-        this.httpFolderService.deleteFolder(Number(id)).pipe(
-          map(() => FoldersActions.deleteFolderSuccess({ id })),
-          catchError((error) =>
-            of(FoldersActions.deleteFolderFailure({ error }))
+  deleteFolder$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(FoldersActions.deleteFolder),
+        switchMap(({ id }) =>
+          this.httpFolderService.deleteFolder(Number(id)).pipe(
+            map(() => FoldersActions.deleteFolderSuccess({ id })),
+            catchError((error) =>
+              of(FoldersActions.deleteFolderFailure({ error }))
+            )
           )
         )
-      )
-    );
-  });
+      );
+    },
+    { functional: true }
+  );
 
   loadMaterials$ = createEffect(() => {
     return this.actions$.pipe(
