@@ -25,8 +25,10 @@ export class MaterialService {
       );
   }
 
-  public postMaterial(post: IMaterialPost): Observable<IMaterialPost> {
-    return this.httpClient.post<IMaterialPost>(this.url, post);
+  public postMaterial<IMaterial, IMaterialPost>(
+    post: IMaterialPost
+  ): Observable<IMaterial> {
+    return this.httpClient.post<IMaterial>(this.url, post);
   }
 
   public deleteMaterial(material_id: number): Observable<IMaterialId> {

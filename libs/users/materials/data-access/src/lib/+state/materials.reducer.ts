@@ -21,6 +21,7 @@ export const initialState: State = {
 export const reducer = createReducer(
   initialState,
 
+  //Folders
   //Load folders
   on(FoldersActions.loadFolders, (state) => ({
     ...state,
@@ -62,6 +63,55 @@ export const reducer = createReducer(
     status: 'loaded' as LoadingStatus,
   })),
   on(FoldersActions.deleteFolderFailure, (state, { error }) => ({
+    ...state,
+    status: 'error' as LoadingStatus,
+    error,
+  })),
+
+  //Materials
+  //Load materials
+  on(MaterialsActions.loadMaterials, (state) => ({
+    ...state,
+    status: 'loading' as LoadingStatus,
+  })),
+  on(MaterialsActions.loadMaterialsSuccess, (state, { materials }) => ({
+    ...state,
+    materials,
+    status: 'loaded' as LoadingStatus,
+  })),
+  on(MaterialsActions.loadMaterialsFailure, (state, { error }) => ({
+    ...state,
+    status: 'error' as LoadingStatus,
+    error,
+  })),
+
+  //Create material
+  on(MaterialsActions.createMaterial, (state) => ({
+    ...state,
+    status: 'loading' as LoadingStatus,
+  })),
+  on(MaterialsActions.createMaterialSuccess, (state, { material }) => ({
+    ...state,
+    materials: [...state.materials, material],
+    status: 'loaded' as LoadingStatus,
+  })),
+  on(MaterialsActions.createMaterialFailure, (state, { error }) => ({
+    ...state,
+    status: 'error' as LoadingStatus,
+    error,
+  })),
+
+  //Delete material
+  on(MaterialsActions.deleteMaterial, (state) => ({
+    ...state,
+    status: 'loading' as LoadingStatus,
+  })),
+  on(MaterialsActions.deleteMaterialSuccess, (state, { id }) => ({
+    ...state,
+    materials: state.materials.filter((material) => material.id !== Number(id)),
+    status: 'loaded' as LoadingStatus,
+  })),
+  on(MaterialsActions.deleteMaterialFailure, (state, { error }) => ({
     ...state,
     status: 'error' as LoadingStatus,
     error,

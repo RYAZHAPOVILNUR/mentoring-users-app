@@ -10,20 +10,15 @@ export const FoldersActions = createActionGroup({
     'Load Folders Success': props<{ folders: IFolder[] }>(),
     'Load Folders Failure': props<{ error: unknown }>(),
 
-    //Deleting folder
-    'Delete Folder': props<{ id: number }>(),
-    'Delete Folder Success': props<{ id: number }>(),
-    'Delete Folder Failure': props<{ error: unknown }>(),
-
     //Creating folder
     'Create Folder': props<{ folder: IFolder }>(),
     'Create Folder Success': props<{ folder: IFolder }>(),
     'Create Folder Failure': props<{ error: unknown }>(),
 
-    //Opening folder - going to materials page - change to loading materials
-    // 'Open Folder': emptyProps(),
-    // 'Open Folder Success': props<{ folder_id: IFolderId }>(),
-    // 'Open Folder Failure': props<{ error: unknown }>(),
+    //Deleting folder
+    'Delete Folder': props<{ id: number }>(),
+    'Delete Folder Success': props<{ id: number }>(),
+    'Delete Folder Failure': props<{ error: unknown }>(),
   },
 });
 
@@ -31,18 +26,18 @@ export const MaterialsActions = createActionGroup({
   source: 'Materials',
   events: {
     //Loading materials
-    'Load Materials': props<{ id: IFolderId }>(),
+    'Load Materials': props<{ id: number }>(),
     'Load Materials Success': props<{ materials: IMaterial[] }>(),
     'Load Materials Failure': props<{ error: unknown }>(),
-
-    //Deleting material
-    'Delete Material': props<{ id: IMaterialId }>(),
-    'Delete Material Success': props<{ id: IMaterialId }>(),
-    'Delete Material Failure': props<{ error: unknown }>(),
 
     //Creating material
     'Create Material': props<{ material: IMaterialPost }>(),
     'Create Material Success': props<{ material: IMaterial }>(),
     'Create Material Failure': props<{ error: unknown }>(),
+
+    //Deleting material
+    'Delete Material': props<{ id: number }>(),
+    'Delete Material Success': props<{ id: number }>(),
+    'Delete Material Failure': props<{ error: unknown }>(),
   },
 });

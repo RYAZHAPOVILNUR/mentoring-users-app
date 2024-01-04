@@ -2,127 +2,122 @@
   <span>Материалы</span>
 </mat-toolbar>
 <ng-container>
-  <ng-container *ngIf="!isLoading">
-    <ng-container
-      *ngFor="let material of materials; trackBy: trackByMaterialId"
-    >
-      <mat-card class="material">
-        <div class="material-body">
-          <mat-card-content
-            ><span
-              *ngIf="material.material_link.endsWith('.pdf')"
-              class="material-icons-outlined"
-            >
-              insert_drive_file
-            </span>
-            <span
-              *ngIf="material.material_link.endsWith('.mp3')"
-              class="material-icons-outlined"
-            >
-              music_note
-            </span>
-            <span
-              *ngIf="
-                !material.material_link.endsWith('.pdf') &&
-                !material.material_link.endsWith('.mp3')
-              "
-              class="material-icons-outlined"
-            >
-              ondemand_video
-            </span>
-          </mat-card-content>
+  <!-- <ng-container *ngIf="!isLoading"> -->
+  <ng-container
+    *ngFor="let material of materials$ | ngrxPush; trackBy: trackByMaterialId"
+  >
+    <mat-card class="material">
+      <div class="material-body">
+        <mat-card-content
+          ><span
+            *ngIf="material.material_link.endsWith('.pdf')"
+            class="material-icons-outlined"
+          >
+            insert_drive_file
+          </span>
+          <span
+            *ngIf="material.material_link.endsWith('.mp3')"
+            class="material-icons-outlined"
+          >
+            music_note
+          </span>
+          <span
+            *ngIf="
+              !material.material_link.endsWith('.pdf') &&
+              !material.material_link.endsWith('.mp3')
+            "
+            class="material-icons-outlined"
+          >
+            ondemand_video
+          </span>
+        </mat-card-content>
 
-          <mat-card-header>
-            <mat-card-title>{{ material.title }}</mat-card-title>
-            <mat-card-subtitle>{{
-              material.created_at | date : 'd MMMM YYYY' : '+3' : 'ru'
-            }}</mat-card-subtitle>
-          </mat-card-header>
-          <!-- <p>The folder ID is: {{ material.folder_id }}</p> -->
-          <!-- <mat-card-subtitle class="material-link">{{
+        <mat-card-header>
+          <mat-card-title>{{ material.title }}</mat-card-title>
+          <mat-card-subtitle>{{
+            material.created_at | date : 'd MMMM YYYY' : '+3' : 'ru'
+          }}</mat-card-subtitle>
+        </mat-card-header>
+        <!-- <p>The folder ID is: {{ material.folder_id }}</p> -->
+        <!-- <mat-card-subtitle class="material-link">{{
             material.material_link
           }}</mat-card-subtitle> -->
-          <mat-card-actions>
-            <button
-              class="edit-button"
-              mat-raised-button
-              color="basic"
-              [matMenuTriggerFor]="menu"
-            >
-              <span>
-                <mat-icon class="edit-icon">edit</mat-icon>
-              </span>
+        <mat-card-actions>
+          <button
+            class="edit-button"
+            mat-raised-button
+            color="basic"
+            [matMenuTriggerFor]="menu"
+          >
+            <span>
+              <mat-icon class="edit-icon">edit</mat-icon>
+            </span>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="openDialog()">Редактировать</button>
+            <button mat-menu-item (click)="deleteMaterial($event, material.id)">
+              Удалить
             </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="openDialog()">
-                Редактировать
-              </button>
-              <button
-                mat-menu-item
-                (click)="deleteMaterial($event, material.id)"
-              >
-                Удалить
-              </button>
-            </mat-menu>
-          </mat-card-actions>
-        </div>
-        <!-- Показать контент -->
-        <mat-tab-group preserveContent>
-          <mat-tab label="Скрыть"></mat-tab>
-          <mat-tab label="Показать">
-            <!-- PDF -->
-            <div *ngIf="material.material_link.endsWith('.pdf')">
-              <pdf-viewer
-                [src]="material.material_link"
-                [render-text]="true"
-                [original-size]="false"
-                style="width: 400px; height: 500px"
-              ></pdf-viewer>
+          </mat-menu>
+        </mat-card-actions>
+      </div>
+      <!-- Показать контент -->
+      <mat-tab-group preserveContent>
+        <mat-tab label="Скрыть"></mat-tab>
+        <mat-tab label="Показать">
+          <!-- PDF -->
+          <div *ngIf="material.material_link.endsWith('.pdf')">
+            <pdf-viewer
+              [src]="material.material_link"
+              [render-text]="true"
+              [original-size]="false"
+              style="width: 400px; height: 500px"
+            ></pdf-viewer>
+          </div>
+
+          <!-- AUDIO -->
+          <ng-container *ngIf="material.material_link.endsWith('.mp3')">
+            <div class="audio">
+              <audio controls>
+                <source [src]="material.material_link" type="audio/mp3" />
+              </audio>
             </div>
+          </ng-container>
 
-            <!-- AUDIO -->
-            <ng-container *ngIf="material.material_link.endsWith('.mp3')">
-              <div class="audio">
-                <audio controls>
-                  <source [src]="material.material_link" type="audio/mp3" />
-                </audio>
-              </div>
-            </ng-container>
-
-            <!-- VIDEO -->
-            <ng-container
-              *ngIf="
-                !material.material_link.endsWith('.pdf') &&
-                !material.material_link.endsWith('.mp3')
-              "
+          <!-- VIDEO -->
+          <ng-container
+            *ngIf="
+              !material.material_link.endsWith('.pdf') &&
+              !material.material_link.endsWith('.mp3')
+            "
+          >
+            <iframe
+              width="560"
+              height="315"
+              [src]="material.material_link | ytubePipe"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+              allowfullscreen
             >
-              <iframe
-                width="560"
-                height="315"
-                [src]="material.material_link | ytubePipe"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
-                allowfullscreen
-              >
-              </iframe>
-            </ng-container>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card>
-    </ng-container>
-    <button
-      mat-fab
-      title="Добавить материал"
-      color="accent"
-      aria-label="Добавить материал"
-      class="add-material-button"
-      (click)="openDialog()"
-    >
-      <mat-icon>add_circle</mat-icon>
-    </button>
+            </iframe>
+          </ng-container>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
   </ng-container>
-  <ng-container *ngIf="isLoading">
+  <button
+    mat-fab
+    title="Добавить материал"
+    color="accent"
+    aria-label="Добавить материал"
+    class="add-material-button"
+    (click)="openDialog()"
+  >
+    <mat-icon>add_circle</mat-icon>
+  </button>
+  <!-- </ng-container> -->
+  <ng-container *ngIf="(status$ | ngrxPush) === 'loading'">
     <p>Загрузка...</p>
   </ng-container>
 </ng-container>
