@@ -20,7 +20,7 @@ import {
 } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { FormControl, ReactiveFormsModule, FormGroup } from '@angular/forms';
-import { IFolder } from '../../../../data-access/src/lib/models/ifolder';
+
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -62,7 +62,7 @@ export class FolderCardComponent {
     ]),
   });
 
-  isNew: boolean = true;
+  isNew = true;
 
   onSubmit(): void {
     this.data = {

@@ -54,6 +54,12 @@ export class FeatureFolderListComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.store.dispatch(FoldersActions.loadFolders());
+    this.folders$
+      .pipe(
+        tap((folders) => (this.folders = folders)),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe();
   }
 
   public openFolder(folderId: number) {
