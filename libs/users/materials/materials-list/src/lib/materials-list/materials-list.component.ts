@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, DestroyRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { materialsFeature } from '@users/materials/data-access';
-import { catchError, tap } from 'rxjs';
+import { Observable, catchError, tap } from 'rxjs';
 import { IMaterial, IMaterialPost } from '@users/materials/data-access';
 import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute } from '@angular/router';
@@ -20,10 +20,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { YtubePipe } from './ytube-pipe/ytube-pipe.pipe';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { MaterialsActions } from '@users/materials/data-access';
 import { PushPipe } from '@ngrx/component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { selectRouteParams } from '@users/core/data-access';
 
 @Component({
   selector: 'users-materials-list',
@@ -49,6 +50,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class MaterialsListComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
   private folderId: number;
+  private folderStoreId = 0;
   public materials$ = this.store.select(materialsFeature.selectMaterials);
   public status$ = this.store.select(materialsFeature.selectStatus);
 
@@ -61,12 +63,24 @@ export class MaterialsListComponent implements OnInit {
     public dialog: MatDialog,
     private store: Store
   ) {
+    // Получение id папки из роута напрямую
     this.folderId = Number(this.router.snapshot.params['id']);
-    console.log(this.folderId);
+
+    // Получение id папки из store
+    this.store
+      .pipe(
+        select(selectRouteParams),
+        tap((params) => (this.folderStoreId = params['id'])),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe();
+    console.log(this.folderStoreId);
   }
 
   ngOnInit() {
-    this.store.dispatch(MaterialsActions.loadMaterials({ id: this.folderId }));
+    this.store.dispatch(
+      MaterialsActions.loadMaterials({ id: this.folderStoreId })
+    );
   }
 
   public openDialog(): void {
@@ -74,7 +88,7 @@ export class MaterialsListComponent implements OnInit {
     dialogConfig.width = '500px';
     dialogConfig.disableClose = true;
     dialogConfig.data = {
-      folder_id: this.folderId,
+      folder_id: this.folderStoreId,
     };
 
     const dialogRef = this.dialog.open(MaterialCreateComponent, dialogConfig);
@@ -85,7 +99,7 @@ export class MaterialsListComponent implements OnInit {
         tap((result) => {
           if (!result) return;
           this.postData(result);
-          this.folderId = result.folder_id;
+          this.folderStoreId = result.folder_id;
         }),
         catchError(() => {
           return [];

@@ -74,7 +74,6 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'materials-list/:id',
-
         loadComponent: () =>
           import('@users/materials-list').then((m) => m.MaterialsListComponent),
       },

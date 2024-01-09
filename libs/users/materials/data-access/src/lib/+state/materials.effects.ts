@@ -1,12 +1,19 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
+import {
+  catchError,
+  map,
+  concatMap,
+  switchMap,
+  debounceTime,
+} from 'rxjs/operators';
 import { Observable, EMPTY, of } from 'rxjs';
 import { FoldersActions, MaterialsActions } from './materials.actions';
 import { IMaterial, IMaterialPost } from '../models/imaterial';
 import { FolderService } from '../services/folder-service/folder-service.service';
 import { IFolder, IFolderCreate, IFolderId } from '../models/ifolder';
 import { MaterialService } from '../services/material-service/material-service.service';
+import { fetch } from '@nx/angular';
 
 @Injectable()
 export class MaterialsEffects {
@@ -14,11 +21,32 @@ export class MaterialsEffects {
   httpFolderService = inject(FolderService);
   httpMaterialService = inject(MaterialService);
 
-  //Folders
+  //Folders (using fetch Nx operator)
+  // loadFolders$ = createEffect(
+  //   () => {
+  //     return this.actions$.pipe(
+  //       ofType(FoldersActions.loadFolders),
+  //       fetch({
+  //         run: () => {
+  //           return this.httpFolderService
+  //             .getFolders()
+  //             .pipe(
+  //               map((folders) => FoldersActions.loadFoldersSuccess({ folders }))
+  //             );
+  //         },
+  //         onError: (action, error) =>
+  //           FoldersActions.loadFoldersFailure({ error }),
+  //       })
+  //     );
+  //   },
+  //   { functional: true }
+  // );
+
   loadFolders$ = createEffect(
-    () => {
-      return this.actions$.pipe(
+    () =>
+      this.actions$.pipe(
         ofType(FoldersActions.loadFolders),
+        debounceTime(300), // предотвратить множественные запросы
         switchMap(() =>
           this.httpFolderService.getFolders().pipe(
             map((folders) => FoldersActions.loadFoldersSuccess({ folders })),
@@ -27,8 +55,7 @@ export class MaterialsEffects {
             )
           )
         )
-      );
-    },
+      ),
     { functional: true }
   );
 

@@ -2,9 +2,9 @@ import { Component, Input, OnInit, Type } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MaterialService } from '../../../../data-access/src/lib/services/material-service/material-service.service';
+import { MaterialService } from '@users/materials/data-access';
 import { Observable } from 'rxjs';
-import { IMaterial } from '../../../../data-access/src/lib/models/imaterial';
+import { IMaterial } from '@users/materials/data-access';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   MAT_DIALOG_DATA,
@@ -20,7 +20,7 @@ import { Inject } from '@angular/core';
 import { FormsModule, Validators } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { FormControl, ReactiveFormsModule, FormGroup } from '@angular/forms';
-import { IFolder } from '../../../../data-access/src/lib/models/ifolder';
+import { IFolder } from '@users/materials/data-access';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -69,7 +69,7 @@ export class MaterialCreateComponent {
   //   folder_id: number;
   // }
 
-  isNew: boolean = true;
+  isNew = true;
 
   onSubmit(): void {
     this.data = {
