@@ -7,7 +7,6 @@ import {UsersErrors} from "./users.reducer";
 import {onSuccessEditionCbType} from "./users.actions";
 import { selectLoggedUser } from '@auth/data-access';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
-import { selectFilteredUsers } from './users.selectors';
 
 @Injectable({providedIn: 'root'})
 export class UsersFacade {
