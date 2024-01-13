@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { UsersErrors } from "./users.reducer";
+import { UsersErrors } from './users.reducer';
 import { CreateUserDTO, LoadingStatus, UsersDTO, UsersEntity } from '@users/core/data-access';
 
 export type onSuccessEditionCbType = () => void
@@ -29,7 +29,11 @@ export const addUserFailed = createAction('[Users/Api] Add User Failed', props<{
 
 // export const deleteSelectedId = createAction('[Users Page] Delete Selected Id');
 
-export const editUser = createAction('[Users Detail] Edit User', props<{ userData: CreateUserDTO; id: number; onSuccessCb: onSuccessEditionCbType }>());
+export const editUser = createAction('[Users Detail] Edit User', props<{
+  userData: CreateUserDTO;
+  id: number;
+  onSuccessCb: onSuccessEditionCbType
+}>());
 export const editUserSuccess = createAction('[Users Detail] Edit User Success', props<{ userData: UsersDTO }>());
 export const editUserFailed = createAction('[Users Detail] Edit Failed', props<{ error: UsersErrors | null }>());
 
@@ -37,4 +41,8 @@ export const loadUser = createAction('[Users Page] Load User');
 export const loadUserSuccess = createAction('[Users/Api] Load User Success', props<{ userData: UsersEntity }>());
 export const loadUserFailed = createAction('[Users/Api] Load User Failed', props<{ error: any }>());
 
-export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{status: LoadingStatus}>());
+export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{ status: LoadingStatus }>());
+
+export const setUsersFilter = createAction('[Users Detail] Users Filter', props<{ filter: { name: string | null } }>());
+
+
