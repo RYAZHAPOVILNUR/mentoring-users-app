@@ -49,3 +49,14 @@ export const selectOpenedUser = createSelector(
   selectUsersEntities,
   ({id}, entities) => entities[id] || null
 )
+
+export const usersFilterSelector = createSelector(
+  selectUsersState,
+  (state: UsersState) => state.usersFilter.name
+);
+
+export const selectFilteredUsers = createSelector(
+  selectAllUsers,
+  usersFilterSelector, 
+  (allUsers, usersFilter) => allUsers.filter((user)=> user.name.includes(usersFilter))
+)

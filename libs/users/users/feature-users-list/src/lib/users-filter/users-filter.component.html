@@ -1,0 +1,14 @@
+<div [formGroup]="form"class="filter" >
+    <input 
+        class="filter-input"
+        matInput 
+        placeholder="Имя"
+        formControlName="filter">
+    <button 
+        class="btn"
+        color="primary" 
+        (click)="filterUsers()"
+        type="submit"
+        matDialogClose>
+    Применить</button>
+</div>
