@@ -20,6 +20,7 @@ export class UsersFacade {
   public readonly allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
   public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
+  public readonly filteredUsers$ = this.store.select(UsersSelectors.filteredUsers)
   public readonly loggedUser$ = this.store.select(selectLoggedUser);
   public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError))
   /**
@@ -57,5 +58,9 @@ export class UsersFacade {
 
   loadUser() {
     this.store.dispatch(UsersActions.loadUser())
+  }
+
+  setUsersFilter(filter: {name: string}):  void {
+    this.store.dispatch(UsersActions.setUsersFilter({filter}))
   }
 }
