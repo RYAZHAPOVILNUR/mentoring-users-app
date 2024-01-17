@@ -97,6 +97,25 @@
               </button>
             </mat-card-actions>
         </form>
+
+        <div>
+          <mat-form-field class="edit-user-field">
+              <mat-label>Количество сторипоинтов:</mat-label>
+              <input matInput type="text" [formControl]="totalStoryPoints" class="edit-user-input"> 
+              <button matSuffix mat-icon-button aria-label="disabled" (click)="switchInputStoryPoints()">
+                <mat-icon>close</mat-icon>
+              </button>
+          </mat-form-field>
+          <div *ngIf="totalStoryPoints.enabled">
+            <button matSuffix mat-icon-button (click)="onAddTotalStoryPoints()">
+              <mat-icon>check</mat-icon>
+            </button>
+            <button matSuffix mat-icon-button matDialogClose>
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+        </div>
+
       </mat-card>
     </div>
   </ng-container>

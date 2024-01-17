@@ -11,17 +11,24 @@ export type UsersDTO = DeepReadonly<{
   email: string;
   city: string;
   role: Role;
-  photo?: UsersPhoto | null
+  photo?: UsersPhoto | null;
+  totalStoryPoints?: number;
+  purchaseDate?: string;
+  educationStatus?: string;
+  educationTime?: number;
 }>
 
-
 export type CreateUserDTO = DeepReadonly<{
-  id?: number | null;
-  name: string;
-  username?: string;
-  email: string;
-  city?: string;
-  role?: Role;
+  id?: number | null, 
+  name: string,
+  email: string,
+  username?: string,
+  city?: string,
+  role?: string,
+  purchaseDate?: string,
+  educationStatus?: string,
+  educationTime?: number,
+  totalStoryPoints?: number,
 }>
 
 export type UsersPhoto = {

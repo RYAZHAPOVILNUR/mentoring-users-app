@@ -77,5 +77,7 @@ export class UsersDetailComponent {
       });
   }
 
-
+  onAddTotalStoryPoints(storyPoints: number) {
+    this.usersFacade.addStoryPoints(this.user, this.user.id, storyPoints);
+  }
 }
