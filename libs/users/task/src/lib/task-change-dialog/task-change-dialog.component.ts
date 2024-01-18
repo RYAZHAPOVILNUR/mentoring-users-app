@@ -112,6 +112,10 @@ if(Object.values(this.storyPoint).every(value => value === "?")) return '?'
         email: 'strategy05@mail.ru',
         username: 'Dzhavid',
         city: '',
+        purchaseDate: new Date().toString(),
+        educationStatus: 'trainee',
+        educationTime: 0,
+        totalStoryPoints: 0,
         photo: {
           path: '/vault/XBYkUImp/a3wAS70PV6uO4QH5_mRMIkW22KU/bQW7WA../file-f0764d.png',
           name: 'file-f0764d.png',
