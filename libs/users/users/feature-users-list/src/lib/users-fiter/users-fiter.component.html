@@ -1,4 +1,4 @@
-<div [formGroup]="form" >
-    <input matInput placeholder="Имя" formControlName="filter">
-  <button (click)="filterUsers()" matDialogClose> Применить</button>
-</div>
+<mat-form-field [formGroup]="form">
+  <input formControlName="name" matInput>
+</mat-form-field>
+<button mat-raised-button (click)="filterUsers()">Применить</button>

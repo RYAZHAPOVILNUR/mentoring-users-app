@@ -1,22 +1,29 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { UsersFacade } from '@users/users/data-access';
+
 @Component({
-  selector: 'users-filter',
+  selector: 'users-users-filter',
   standalone: true,
-  imports: [ CommonModule , ReactiveFormsModule],
+  imports: [MatButtonModule, ReactiveFormsModule,MatInputModule],
   templateUrl: './users-filter.component.html',
   styleUrls: ['./users-filter.component.scss'],
 })
 export class UsersFilterComponent {
-  @Output()
-  filterUserEvent = new EventEmitter<string>();
+  private ara: FormBuilder = inject(FormBuilder);
+  private usersFacade = inject(UsersFacade);
+  form!: FormGroup;
 
-  form = new FormGroup({
-    filter: new FormControl<string>('')
-  })
+  constructor() {
+    this.form = this.ara.group({
+      name: [''],
+    });
+  }
 
-  filterUsers(){
-    this.filterUserEvent.emit(this.form.value.filter!);
+  filterUsers(): void {
+    this.usersFacade.filterUsers(this.form.value);
   }
 }

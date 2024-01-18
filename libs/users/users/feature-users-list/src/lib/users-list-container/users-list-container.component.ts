@@ -50,8 +50,4 @@ export class UsersListContainerComponent {
   onRedirectToEdit({ id, editMode }: { id: number, editMode: boolean }) {
     this.router.navigate(['/admin/users', id], { queryParams: { edit: editMode } });
   }
-
-  filterUsers(filter: string) {
-    this.usersFacade.filterUsers(filter)
-  }
 }

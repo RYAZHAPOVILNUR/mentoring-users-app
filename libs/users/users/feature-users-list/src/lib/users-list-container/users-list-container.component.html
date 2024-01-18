@@ -5,7 +5,8 @@
     errors: errors$,
     loggedUser: loggedUser$
 } as vm">
-  <users-filter (filterUserEvent)="filterUsers($event)" )></users-filter>
+  <users-filter></users-filter>
+
   <users-list-ui
     [vm]="vm"
     (deleteUser)="onDeleteUser($event)"

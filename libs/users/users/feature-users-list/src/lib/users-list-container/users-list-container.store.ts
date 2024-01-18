@@ -38,8 +38,8 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
     this.effect(
       () => this.usersFacade.allUsers$.pipe(
         () => this.usersFacade.filteredUsers$.pipe(
-        tap((users: UsersEntity[]) => this.patchUsers(users))
-      )
+          tap((users: UsersEntity[]) => this.patchUsers(users))
+        )
       )
     )
   }

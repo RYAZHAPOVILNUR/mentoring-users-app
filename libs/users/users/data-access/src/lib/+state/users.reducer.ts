@@ -4,7 +4,7 @@ import { createReducer, on, Action } from '@ngrx/store';
 import * as UsersActions from './users.actions';
 import { UsersEntity } from '@users/core/data-access';
 import { LoadingStatus } from '@users/core/data-access';
-
+import {filter} from "rxjs";
 
 export const USERS_FEATURE_KEY = 'users';
 
@@ -31,7 +31,7 @@ export const initialUsersState: UsersState = usersAdapter.getInitialState({
   // set initial required properties
   status: 'init',
   error: null,
-  usersFilter:{name:''}
+  usersFilter:{name: ''}
 });
 
 const reducer = createReducer(
@@ -75,10 +75,10 @@ const reducer = createReducer(
   on(UsersActions.updateUserStatus, (state, {status}) => ({
     ...state, status
   })),
-  on(UsersActions.setUsersFilter, (state, { nameFilter})=>({
+  on(UsersActions.setUsersFilter, (state, {filter}) => ({
     ...state,
-    usersFilter: {name: nameFilter}
-  }))
+    usersFilter: {...filter},
+  })),
 );
 
 export function usersReducer(state: UsersState | undefined, action: Action) {
