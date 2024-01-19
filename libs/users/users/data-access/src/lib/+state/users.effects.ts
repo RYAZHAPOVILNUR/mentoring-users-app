@@ -87,7 +87,7 @@ export const editUser = createEffect(
           name: userData.name,
           email: userData.email,
           username: userData.username,
-          city: userData.city
+          city: userData.city,
         },
         onSuccessCb
       })),

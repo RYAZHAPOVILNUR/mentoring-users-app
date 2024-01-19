@@ -7,12 +7,18 @@ export enum Role {
 export type UsersDTO = DeepReadonly<{
   id: number;
   name: string;
-  username: string;
   email: string;
+  username: string;
   city: string;
-  role: Role;
+  role?: Role;
+  purchaseDate: string;
+  educationStatus: string;
+  educationTime?: number;
+  totalStoryPoints?: number;
   photo?: UsersPhoto | null
 }>
+
+
 
 
 export type CreateUserDTO = DeepReadonly<{
@@ -22,6 +28,10 @@ export type CreateUserDTO = DeepReadonly<{
   email: string;
   city?: string;
   role?: Role;
+  purchaseDate: string;
+  educationStatus: string;
+  educationTime?: number;
+  totalStoryPoints?: number;
 }>
 
 export type UsersPhoto = {
