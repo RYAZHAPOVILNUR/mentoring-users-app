@@ -15,6 +15,7 @@ export const authInitialState: AuthState = {
   error: null,
   authToken: '',
   loggedUser: {
+    totalStoryPoints: 0,
     email: '',
     name: '',
     username: '',

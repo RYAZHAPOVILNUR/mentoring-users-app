@@ -3,6 +3,7 @@ import { createReducer, on, Action } from '@ngrx/store';
 import * as UsersActions from './users.actions';
 import { UsersEntity } from '@users/core/data-access';
 import { LoadingStatus } from '@users/core/data-access';
+import { addStoryPointsFailure } from './users.actions';
 
 export const USERS_FEATURE_KEY = 'users';
 
@@ -51,6 +52,14 @@ const reducer = createReducer(
   on(UsersActions.addUserSuccess, (state, { userData }) =>
     usersAdapter.addOne({ ...userData }, { ...state })
   ),
+  on(UsersActions.addStoryPointsSuccess, (state, {userData}) => usersAdapter.updateOne({
+      id: userData.id,
+      changes: userData
+    }, state)
+  ),
+  on(UsersActions.addStoryPointsFailure, (state, {error}) => ({
+    ...state, status: 'error' as const, error
+  })),
   on(UsersActions.editUserSuccess, (state, {userData}) => usersAdapter.updateOne({
       id: userData.id,
       changes: userData

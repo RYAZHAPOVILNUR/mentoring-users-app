@@ -43,6 +43,10 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.editUser({ userData, id, onSuccessCb }));
   }
 
+  addStoryPoint(userData: CreateUserDTO, id:number) {
+    this.store.dispatch(UsersActions.addStoryPoints({ userData, id, }));
+  }
+
   getUserFromStore(id: number) {
     return this.store.select(UsersSelectors.selectUserById(id))
       .pipe(

@@ -50,6 +50,10 @@ export class UsersDetailComponent {
     this.router.navigate(['/admin/users', this.user.id], { queryParams: { edit: false } });
   }
 
+  public onAddStoryPoint(userData: CreateUserDTO) {
+    this.usersFacade.addStoryPoint(userData, this.user.id)
+  }
+
   onCloseUser() {
     this.router.navigate(['/admin/users']);
   }
@@ -76,6 +80,4 @@ export class UsersDetailComponent {
         }
       });
   }
-
-
 }

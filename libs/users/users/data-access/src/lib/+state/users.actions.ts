@@ -45,4 +45,16 @@ export const updateUserStatus = createAction('[Users Detail] Update User Status'
 
 export const setUsersFilter = createAction('[Users Detail] Users Filter', props<{ filter: { name: string | null } }>());
 
+export const addStoryPoints = createAction(
+  '[Users Detail] Add Story Points',
+  props<{ userData: CreateUserDTO, id: number}>()
+)
+
+export const addStoryPointsSuccess = createAction(
+  '[User Detail] Add Story Points Success',
+  props<{userData: UsersDTO}>()
+)
+
+export const addStoryPointsFailure = createAction('[Users/Api] Load User Failed', props<{ error: any }>());
+
 

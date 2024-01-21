@@ -58,7 +58,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class DetailUsersCardComponent implements OnInit {
   private _vm: DetailUsersCardVm = { editMode: false, user: null, status: 'init', errors: null };
   public get vm() {
-    
+
     return this._vm;
   }
   @Input({ required: true })
@@ -70,8 +70,9 @@ export class DetailUsersCardComponent implements OnInit {
         name: vm.user.name,
         email: vm.user.email,
         username: vm.user.username,
-        city: vm.user.city
+        city: vm.user.city,
       });
+      this.totalStoryPointsForm.patchValue(vm.user.totalStoryPoints)
     }
 
     if (vm.editMode) {
@@ -88,6 +89,9 @@ export class DetailUsersCardComponent implements OnInit {
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
 
+  public totalStoryPointsForm = new FormControl({value: this.vm.user?.totalStoryPoints , disabled: true}, Validators.required)
+
+  @Output() addStoryPoint = new EventEmitter<{ user: CreateUserDTO }>();
   @Output() editUser = new EventEmitter<{ user: CreateUserDTO, onSuccessCb: onSuccessEditionCbType }>();
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
@@ -165,5 +169,16 @@ export class DetailUsersCardComponent implements OnInit {
         })
       )
       .subscribe()
+  }
+
+  public onAddStoryPoint() {
+    this.totalStoryPointsForm.disable()
+    this.addStoryPoint.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        totalStoryPoints: this.totalStoryPointsForm.value || 0 ,
+      },
+    })
   }
 }

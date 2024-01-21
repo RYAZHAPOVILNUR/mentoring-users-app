@@ -108,6 +108,7 @@ if(Object.values(this.storyPoint).every(value => value === "?")) return '?'
     assignees: [
       {
         id: 80,
+        totalStoryPoints: 0,
         name: 'Dzhavid',
         email: 'strategy05@mail.ru',
         username: 'Dzhavid',
