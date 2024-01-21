@@ -72,9 +72,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city
       });
-      // this.totalStoryPoints.patchValue({
-      //   totalStoryPoints: vm.user.totalStoryPoints,
-      // }); ???? 
+      this.totalStoryPoints.patchValue(String(vm.user.totalStoryPoints)); 
     }
 
     if (vm.editMode) {
@@ -91,7 +89,10 @@ export class DetailUsersCardComponent implements OnInit {
     city: new FormControl({ value: '', disabled: !this.vm.editMode })
   });
 
-  totalStoryPoints = new FormControl({ value: this.vm.user?.totalStoryPoints, disabled: true });
+  totalStoryPoints = new FormControl<string>(
+    {value: String(this.vm.user?.totalStoryPoints) ?? '0', disabled: true },
+    [Validators.required]
+  );
   @Output() addTotalStoryPoints = new EventEmitter();
 
   @Output() editUser = new EventEmitter<{ user: CreateUserDTO, onSuccessCb: onSuccessEditionCbType }>();
@@ -100,6 +101,7 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>
+  @ViewChild('snackbarStoryPoints') snackbarStoryPointsTemplateRef!: TemplateRef<any>
   private dadata = inject(DadataApiService)
   public citySuggestions = this.formGroup.controls.city.valueChanges
     .pipe(
@@ -174,10 +176,18 @@ export class DetailUsersCardComponent implements OnInit {
   }
 
   onAddTotalStoryPoints() {
-    this.addTotalStoryPoints.emit(this.totalStoryPoints.value);
+    if(this.totalStoryPoints.value){
+      if(!isNaN(+this.totalStoryPoints.value))
+        this.addTotalStoryPoints.emit({storyPoints: +this.totalStoryPoints.value, onSuccessCb: this.onStoryPointsEditSuccess});
+    }
   }
 
   switchInputStoryPoints() {
     this.totalStoryPoints.disabled ? this.totalStoryPoints.enable() : this.totalStoryPoints.disable();
   }
+
+  private onStoryPointsEditSuccess: onSuccessEditionCbType = () =>
+  this.snackBar.openFromTemplate(this.snackbarStoryPointsTemplateRef, {
+    duration: 2500, horizontalPosition: 'center', verticalPosition: 'top'
+  })
 }

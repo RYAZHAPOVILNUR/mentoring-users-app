@@ -64,7 +64,7 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.setUsersFilter({nameFilter: filter}))
   }
 
-  addStoryPoints(userData: CreateUserDTO, id: number, storyPoints: number) {
-    this.store.dispatch(UsersActions.addUserStoryPoints({ userData, id, storyPoints }));
+  addStoryPoints(userData: CreateUserDTO, id: number, storyPoints: number, onSuccessCb: onSuccessEditionCbType) {
+    this.store.dispatch(UsersActions.addUserStoryPoints({ userData, id, storyPoints, onSuccessCb }));
   }
 }

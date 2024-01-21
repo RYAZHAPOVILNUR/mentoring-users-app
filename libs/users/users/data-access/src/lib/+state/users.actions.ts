@@ -41,6 +41,6 @@ export const updateUserStatus = createAction('[Users Detail] Update User Status'
 
 export const setUsersFilter = createAction('[USER] set user filter', props<{nameFilter:string}>()); 
 
-export const addUserStoryPoints = createAction('[USER] add user storyPoints', props<{ userData: CreateUserDTO, id: number, storyPoints: number }>());
+export const addUserStoryPoints = createAction('[USER] add user storyPoints', props<{ userData: CreateUserDTO, id: number, storyPoints: number, onSuccessCb: onSuccessEditionCbType }>());
 export const addUserStoryPointsSuccess = createAction('[USER] add user storyPoints Success', props<{ userData: UsersDTO }>());
 export const addUserStoryPointsFailed = createAction('[USER] add user storyPoints Failed', props<{ error: any }>());
