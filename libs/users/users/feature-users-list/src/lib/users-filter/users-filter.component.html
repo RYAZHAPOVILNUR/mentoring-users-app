@@ -1,0 +1,12 @@
+<div class="filter-container">
+  <form class="example-form" [formGroup]="filterByName">
+    <mat-form-field class="example-full-width">
+      <mat-label>Filter users by name</mat-label>
+      <input matInput placeholder="type users name" value="" formControlName="name">
+    </mat-form-field>
+  </form>
+  <div class="button-wrapper">
+    <button mat-raised-button color="accent" (click)="acceptFilterByName()">Accept</button>
+    <button mat-raised-button color="primary" (click)="resetFilter()">Reset</button>
+  </div>
+</div>

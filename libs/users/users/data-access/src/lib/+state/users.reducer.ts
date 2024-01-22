@@ -1,9 +1,8 @@
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { createReducer, on, Action } from '@ngrx/store';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { Action, createReducer, on } from '@ngrx/store';
 
 import * as UsersActions from './users.actions';
-import { UsersEntity } from '@users/core/data-access';
-import { LoadingStatus } from '@users/core/data-access';
+import { LoadingStatus, UsersEntity } from '@users/core/data-access';
 
 export const USERS_FEATURE_KEY = 'users';
 
@@ -16,6 +15,7 @@ export interface UsersState extends EntityState<UsersEntity> {
   selectedId?: string | number; // which Users record has been selected
   status: LoadingStatus;
   error: UsersErrors | null;
+  usersFilter: { name: string };
 }
 
 export interface UsersPartialState {
@@ -28,7 +28,8 @@ export const usersAdapter: EntityAdapter<UsersEntity> =
 export const initialUsersState: UsersState = usersAdapter.getInitialState({
   // set initial required properties
   status: 'init',
-  error: null
+  error: null,
+  usersFilter: { name: '' }
 });
 
 const reducer = createReducer(
@@ -51,12 +52,12 @@ const reducer = createReducer(
   on(UsersActions.addUserSuccess, (state, { userData }) =>
     usersAdapter.addOne({ ...userData }, { ...state })
   ),
-  on(UsersActions.editUserSuccess, (state, {userData}) => usersAdapter.updateOne({
+  on(UsersActions.editUserSuccess, (state, { userData }) => usersAdapter.updateOne({
       id: userData.id,
       changes: userData
     }, state)
   ),
-  on(UsersActions.editUserFailed, (state, {error}) => ({
+  on(UsersActions.editUserFailed, (state, { error }) => ({
     ...state, status: 'error' as const, error
   })),
   on(UsersActions.loadUser, (state) => ({
@@ -65,13 +66,20 @@ const reducer = createReducer(
   })),
   on(UsersActions.loadUserSuccess, (state, { userData }) =>
     usersAdapter.addOne({ ...userData }, { ...state, status: 'loaded' as const })),
-  on(UsersActions.loadUserFailed, (state, {error}) => ({
+  on(UsersActions.loadUserFailed, (state, { error }) => ({
     ...state,
     status: 'error' as const, error
   })),
-  on(UsersActions.updateUserStatus, (state, {status}) => ({
+  on(UsersActions.updateUserStatus, (state, { status }) => ({
     ...state, status
   })),
+  on(UsersActions.updateUserStatus, (state, { status }) => ({
+    ...state, status
+  })),
+  on(UsersActions.selectUsersFilter, (state, { usersFilter }) => ({
+    ...state,
+    usersFilter
+  }))
 );
 
 export function usersReducer(state: UsersState | undefined, action: Action) {

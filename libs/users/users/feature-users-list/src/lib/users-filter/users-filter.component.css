@@ -1,0 +1,13 @@
+.filter-container {
+  display: flex;
+  max-width: 210px;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 30px;
+  padding: 25px 0;
+}
+
+.button-wrapper{
+  display: flex;
+  justify-content: space-between;
+}
