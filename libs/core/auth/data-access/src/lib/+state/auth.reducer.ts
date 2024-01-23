@@ -15,11 +15,16 @@ export const authInitialState: AuthState = {
   error: null,
   authToken: '',
   loggedUser: {
-    email: '',
+    id: 0,
     name: '',
+    email: '',
+    password: '',
     username: '',
     city: '',
-    id: 0,
+    purchaseDate: '',
+    educationStatus: '',
+    educationTime: 0,
+    totalStoryPoints: 0,
     photo: null,
     isAdmin: null
   }

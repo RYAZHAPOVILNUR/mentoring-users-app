@@ -57,8 +57,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export class DetailUsersCardComponent implements OnInit {
   private _vm: DetailUsersCardVm = { editMode: false, user: null, status: 'init', errors: null };
+  private fb = inject(FormBuilder)
   public get vm() {
-    
+
     return this._vm;
   }
   @Input({ required: true })
@@ -70,8 +71,9 @@ export class DetailUsersCardComponent implements OnInit {
         name: vm.user.name,
         email: vm.user.email,
         username: vm.user.username,
-        city: vm.user.city
+        city: vm.user.city,
       });
+      this.totalStoryPoints.patchValue(Number(vm.user.totalStoryPoints))
     }
 
     if (vm.editMode) {
@@ -81,19 +83,24 @@ export class DetailUsersCardComponent implements OnInit {
     }
   }
 
-  public formGroup = new FormBuilder().group({
+  public formGroup = this.fb.group({
     name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
 
+  public totalStoryPoints = new FormControl({value: 0, disabled: true})
+
+
   @Output() editUser = new EventEmitter<{ user: CreateUserDTO, onSuccessCb: onSuccessEditionCbType }>();
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
+  @Output() setTotalStoryPoints = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>
+  @ViewChild('snackbarTotalStoryPoints') snackbarTotalStoryPointsTemplateRef!: TemplateRef<any>
   private dadata = inject(DadataApiService)
   public citySuggestions = this.formGroup.controls.city.valueChanges
     .pipe(
@@ -116,13 +123,34 @@ export class DetailUsersCardComponent implements OnInit {
       duration: 2500, horizontalPosition: 'center', verticalPosition: 'top'
     })
 
+  private onSetTotalStoryPointsSuccess: onSuccessEditionCbType = () => {
+    this.snackBar.openFromTemplate(this.snackbarTotalStoryPointsTemplateRef, {
+      duration: 2500, horizontalPosition: "center", verticalPosition: 'top'
+    })
+  }
+
+  onTotalStoryPointsSubmit(): void {
+    this.totalStoryPoints.disable()
+    this.setTotalStoryPoints.emit({
+      user: {
+        totalStoryPoints: this.totalStoryPoints.value
+      },
+      onSuccessCb: this.onSetTotalStoryPointsSuccess
+    })
+  }
+
+
+
+
   onSubmit(): void {
     this.editUser.emit({
       user: {
         name: this.formGroup.value.name || '',
         username: this.formGroup.value.username || '',
         city: this.formGroup.value.city || '',
-        email: this.formGroup.value.email?.trim().toLowerCase() || ''
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        purchaseDate: new Date().toString() || '',
+        educationStatus: 'trainee'
       },
       onSuccessCb: this.onEditSuccess
     });

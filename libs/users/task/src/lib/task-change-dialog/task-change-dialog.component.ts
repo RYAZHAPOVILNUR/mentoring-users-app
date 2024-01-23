@@ -16,20 +16,20 @@ import { QuillModule } from 'ngx-quill';
 import { MatCardModule } from '@angular/material/card';
 import { UsersFacade } from '@users/users/data-access';
 import { PushPipe } from '@ngrx/component';
-import { UsersEntity } from '@users/core/data-access';
+import {UsersEntity} from '@users/core/data-access';
 import { skip } from 'rxjs/operators';
 import { BacklogFacade } from "@users/users/backlog/data-access";
 
 interface Task {
   name: string;
-  descriprion: string;
+  description: string;
   priority: string;
   status: string;
   assignees: UsersEntity[];
 }
 interface StoryPoint {
   UX: string;
-  DESING: string;
+  DESIGN: string;
   FRONT: string;
   BACK: string;
 }
@@ -66,7 +66,7 @@ export class TaskChangeDialogComponent {
   public storyPoint:StoryPoint= {
 
      "UX":"?",
-      "DESING":"?",
+      "DESIGN":"?",
       "FRONT":"?",
       "BACK":"?",
   };
@@ -102,7 +102,7 @@ if(Object.values(this.storyPoint).every(value => value === "?")) return '?'
 
   public task: Task = {
     name: this.data?.title,
-    descriprion: this.data?.description ?? 'У тасок в меню "Задачи" с бека description не приходит',
+    description: this.data?.description ?? 'У тасок в меню "Задачи" с бека description не приходит',
     priority: 'high',
     status: 'progress',
     assignees: [
@@ -112,7 +112,13 @@ if(Object.values(this.storyPoint).every(value => value === "?")) return '?'
         email: 'strategy05@mail.ru',
         username: 'Dzhavid',
         city: '',
+        password: '',
+        purchaseDate: new Date().toString(),
+        educationStatus: 'trainee',
+        educationTime: 0,
+        totalStoryPoints: 0,
         photo: {
+          access: 'public',
           path: '/vault/XBYkUImp/a3wAS70PV6uO4QH5_mRMIkW22KU/bQW7WA../file-f0764d.png',
           name: 'file-f0764d.png',
           type: 'image',
@@ -130,7 +136,7 @@ if(Object.values(this.storyPoint).every(value => value === "?")) return '?'
   };
   public editMode = this.data !== null;
   public textareaValue = this.editMode ? this.task.name : '';
-  public editorContent: string = this.editMode ? this.task.descriprion : '';
+  public editorContent: string = this.editMode ? this.task.description : '';
   public editStatus = false;
   public users$ = this.usersFacade.allUsers$;
 

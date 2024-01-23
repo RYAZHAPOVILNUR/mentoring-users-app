@@ -12,7 +12,7 @@ export const usersDTOAdapter: UsersDTOAdapter = {
 
     return {
       ...otherAddressFields,
-      isAdmin: role === Role.Admin ? true : false,
+      isAdmin: role === Role.Admin
     }
   },
   entityToDTO(entity) {

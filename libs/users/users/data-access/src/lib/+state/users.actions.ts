@@ -42,3 +42,7 @@ export const updateUserStatus = createAction('[Users Detail] Update User Status'
 export const setUsersFilter = createAction('[Users Page] Set Users Filter', props<{filter: {name: string}}>())
 // export const setUsersFilterSuccess = createAction('[Users Page] Set Users Filter Success', props<{filter: {name: string}}>())
 // export const setUsersFilterFailure = createAction('[Users Page] Set Users Filter Failure', props<{error: any}>())
+
+export const setTotalStoryPoints = createAction('[Users Page] setTotalStoryPoints', props<{totalStoryPoints: number, userData: CreateUserDTO; id: number; onSuccessCb: onSuccessEditionCbType}>())
+export const setTotalStoryPointsSuccess = createAction('[Users Page] setTotalStoryPointsSuccess', props<{userData: UsersDTO}>())
+export const setTotalStoryPointsFailure = createAction('[Users Page] setTotalStoryPointsFailure', props<{error: any}>())

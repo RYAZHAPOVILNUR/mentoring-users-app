@@ -11,5 +11,6 @@
     (closeEditMode)="onCloseEditMode()"
     (openEditMode)="onOpenEditMode()"
     (deleteUser)="onDeleteUser()"
+    (setTotalStoryPoints)="onSetTotalStoryPoints($event.totalStoryPoints, $event.user, $event.onSuccessCb)"
   />
 </ng-container>

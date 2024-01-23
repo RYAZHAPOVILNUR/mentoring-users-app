@@ -1,5 +1,9 @@
+<div class="filter">
 <mat-form-field [formGroup]="filterForm">
-  <input formControlName="name" matInput>
+  <input placeholder="Find user..." formControlName="name" matInput>
 </mat-form-field>
-<button mat-raised-button style="margin-left: 10px" (click)="applyFilter()">Применить</button>
+<button mat-raised-button (click)="applyFilter()">
+  <mat-icon>search</mat-icon>
+</button>
+</div>
 

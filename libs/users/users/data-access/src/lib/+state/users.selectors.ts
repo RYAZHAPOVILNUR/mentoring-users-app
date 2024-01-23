@@ -64,6 +64,6 @@ export const filteredUsers = createSelector(
       return allUsers;
     }
 
-    return allUsers.filter((user) => user.name.toLowerCase().includes(filter.name.toLowerCase()));
+    return allUsers.filter((user) => user.name.toLowerCase().includes(filter.name.trim().toLowerCase()));
   }
 );

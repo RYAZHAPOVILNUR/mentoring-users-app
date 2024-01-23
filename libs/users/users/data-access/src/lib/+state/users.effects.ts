@@ -60,7 +60,7 @@ export const addUser = createEffect(
       ofType(UsersActions.addUser),
       // delay(1500),
       switchMap(
-        ({ userData }) => apiService.post<UsersDTO, CreateUserDTO>('/users', userData).pipe(
+        ({userData}) => apiService.post<UsersDTO, CreateUserDTO>('/users', userData).pipe(
           map((user) => usersDTOAdapter.DTOtoEntity(user)),
           map((userEntity) => UsersActions.addUserSuccess({ userData: userEntity })),
           catchError((error) => {
@@ -87,7 +87,7 @@ export const editUser = createEffect(
           name: userData.name,
           email: userData.email,
           username: userData.username,
-          city: userData.city
+          city: userData.city,
         },
         onSuccessCb
       })),
@@ -102,6 +102,41 @@ export const editUser = createEffect(
             catchError((error) => {
               console.error('Error', error);
               return of(UsersActions.editUserFailed({ error }))
+            })
+          )
+      )
+    )
+  }, { functional: true }
+)
+
+export const setTotalStoryPoints = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
+
+    return actions$.pipe(
+      ofType(UsersActions.setTotalStoryPoints),
+      withLatestFrom(usersEntities$),
+      filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
+      map(([{ userData, id, onSuccessCb }, usersEntities]) => ({
+        user: {
+          ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
+          totalStoryPoints: userData.totalStoryPoints
+        },
+        onSuccessCb
+      })),
+      switchMap(
+        ({ user, onSuccessCb }) =>
+          apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+            map(userData => ({ userData, onSuccessCb })),
+            tap(({ onSuccessCb }) => onSuccessCb()),
+            map(({ userData }) =>
+              UsersActions.setTotalStoryPointsSuccess({ userData })
+            ),
+            catchError((error) => {
+              console.error('Error', error);
+              return of(UsersActions.setTotalStoryPointsFailure({ error }))
             })
           )
       )

@@ -3,12 +3,13 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { UsersFacade } from '@users/users/data-access';
+import {MatIconModule} from "@angular/material/icon";
 
 @Component({
   selector: 'users-filter',
   templateUrl: './users-filter.component.html',
   styleUrls: ['./users-filter.component.scss'],
-  imports: [ReactiveFormsModule, MatButtonModule, MatInputModule],
+  imports: [ReactiveFormsModule, MatButtonModule, MatInputModule, MatIconModule],
   standalone: true,
 })
 export class UsersFilterComponent {
