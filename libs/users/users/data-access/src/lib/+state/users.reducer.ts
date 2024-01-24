@@ -3,6 +3,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 
 import * as UsersActions from './users.actions';
 import { LoadingStatus, UsersEntity } from '@users/core/data-access';
+import { UserFilter } from '../models/user-filter';
 
 export const USERS_FEATURE_KEY = 'users';
 
@@ -15,7 +16,7 @@ export interface UsersState extends EntityState<UsersEntity> {
   selectedId?: string | number; // which Users record has been selected
   status: LoadingStatus;
   error: UsersErrors | null;
-  usersFilter: { name: string };
+  usersFilter: UserFilter;
 }
 
 export interface UsersPartialState {
@@ -29,7 +30,7 @@ export const initialUsersState: UsersState = usersAdapter.getInitialState({
   // set initial required properties
   status: 'init',
   error: null,
-  usersFilter: { name: '' }
+  usersFilter: {usersFilter: { value: '', field: '' }}
 });
 
 const reducer = createReducer(
@@ -76,7 +77,9 @@ const reducer = createReducer(
   on(UsersActions.updateUserStatus, (state, { status }) => ({
     ...state, status
   })),
-  on(UsersActions.selectUsersFilter, (state, { usersFilter }) => ({
+  on(UsersActions.selectUsersFilter, (state, {
+    usersFilter
+  }) => ({
     ...state,
     usersFilter
   }))

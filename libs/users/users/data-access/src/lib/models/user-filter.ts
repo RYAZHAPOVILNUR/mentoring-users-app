@@ -1,5 +1,6 @@
 export interface UserFilter {
   usersFilter: {
-    name: string
+    value: string,
+    field: string
   };
 }
