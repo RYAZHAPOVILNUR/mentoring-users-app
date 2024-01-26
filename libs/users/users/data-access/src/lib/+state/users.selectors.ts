@@ -58,16 +58,8 @@ export const selectFilter = createSelector(
 export const filteredUsers = createSelector(
   selectFilter,
   selectAllUsers,
-  ({usersFilter:{ value, field }}, allUsers) => {
-
-    if (value) {
-      return allUsers.filter((user: UsersEntity) => {
-        const checkField: keyof UsersEntity = field as keyof UsersEntity;
-        const fieldValue: string = user[checkField] as string;
-        return fieldValue.includes(value);
-      });
-    } else {
-      return allUsers;
-    }
-  }
-);
+  ({ value, field }, allUsers: UsersEntity[]): UsersEntity[] =>
+    value ?
+      allUsers.filter((user: UsersEntity) =>
+        user[field].includes(value))
+      : allUsers);

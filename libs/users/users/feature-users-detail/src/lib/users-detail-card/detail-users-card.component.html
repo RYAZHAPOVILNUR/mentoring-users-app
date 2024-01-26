@@ -34,7 +34,6 @@
         </h1>
         <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="edit-user-form">
           <div class="edit-user-content">
-
             <mat-form-field class="edit-user-field"
                             [matTooltip]="vm.user!.name"
                             [matTooltipDisabled]="formGroup.enabled">
@@ -42,7 +41,6 @@
               <input matInput placeholder="Имя*" formControlName="name" class="edit-user-input">
               <mat-error *ngIf="formGroup.hasError('required', 'name')">Это поле обязательно для заполнения</mat-error>
             </mat-form-field>
-
             <mat-form-field class="edit-user-field"
                             [matTooltip]="vm.user!.email"
                             [matTooltipDisabled]="formGroup.enabled">
@@ -53,14 +51,12 @@
                 Введите корректную электронную почту
               </mat-error>
             </mat-form-field>
-
             <mat-form-field class="edit-user-field"
                             [matTooltip]="vm.user!.username"
                             [matTooltipDisabled]="formGroup.enabled">
               <mat-label>Имя пользователя:</mat-label>
               <input matInput placeholder="Имя пользователя" formControlName="username" class="edit-user-input">
             </mat-form-field>
-
             <mat-form-field class="edit-user-field"
                             [matTooltip]="vm.user!.totalStoryPoints+''"
                             [matTooltipDisabled]="formGroup.enabled">
@@ -68,7 +64,6 @@
               <input matInput placeholder="Total story points" formControlName="totalStoryPoints"
                      class="edit-user-input" type="number">
             </mat-form-field>
-
             <mat-form-field class="edit-user-field"
                             [matTooltip]="vm.user!.city"
                             [matTooltipDisabled]="formGroup.enabled">
@@ -86,7 +81,6 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
-
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button mat-icon-button

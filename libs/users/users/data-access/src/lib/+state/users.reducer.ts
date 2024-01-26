@@ -30,7 +30,7 @@ export const initialUsersState: UsersState = usersAdapter.getInitialState({
   // set initial required properties
   status: 'init',
   error: null,
-  usersFilter: {usersFilter: { value: '', field: '' }}
+  usersFilter: { value: '', field: 'name' }
 });
 
 const reducer = createReducer(

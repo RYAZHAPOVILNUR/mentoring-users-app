@@ -6,6 +6,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { UsersFacade } from '@users/users/data-access';
+import { FIELD_FILTER } from '../util/constant';
 
 @Component({
   selector: 'users-filter',
@@ -17,7 +18,6 @@ import { UsersFacade } from '@users/users/data-access';
 export class UsersFilterComponent {
   private readonly usersFacade: UsersFacade = inject(UsersFacade);
   public filterByName: FormGroup;
-  private FIELD_FILTER = 'name';
 
   constructor(
     private formBuilder: FormBuilder
@@ -29,15 +29,13 @@ export class UsersFilterComponent {
 
   acceptFilterByName(): void {
     this.usersFacade.filterUsersByName({
-      usersFilter: {
-        value:
-          this.filterByName.value[this.FIELD_FILTER], field: this.FIELD_FILTER
-      }
+        value: this.filterByName.value[FIELD_FILTER],
+        field: FIELD_FILTER
     });
   };
 
   resetFilter(): void {
     this.filterByName.reset();
-    this.usersFacade.filterUsersByName({ usersFilter: { value: '', field: this.FIELD_FILTER } });
+    this.usersFacade.filterUsersByName( { value: '', field: FIELD_FILTER } );
   }
 }
