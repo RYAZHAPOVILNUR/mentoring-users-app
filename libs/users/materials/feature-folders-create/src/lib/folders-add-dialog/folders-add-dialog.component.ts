@@ -15,12 +15,15 @@ import { MatButtonModule } from '@angular/material/button';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersAddDialogComponent {
-  public readonly folderNameForm: FormControl = new FormControl('', Validators.required)
   private readonly dialogRef: MatDialogRef<FoldersAddDialogComponent>  = inject(MatDialogRef)
+  public readonly folderNameForm: FormControl = new FormControl('', Validators.required)
 
   saveNameFolder() {
     if (this.folderNameForm.valid) {
-    this.dialogRef.close(this.folderNameForm.value)
+      const newFolderTitle = {
+        title: this.folderNameForm.value
+      }
+    this.dialogRef.close(newFolderTitle)
     }
   }
 }
