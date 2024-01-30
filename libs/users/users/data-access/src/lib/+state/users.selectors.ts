@@ -60,6 +60,6 @@ export const filteredUsers = createSelector(
   usersFilterSelector,
   (allUsers: UsersEntity[], filter: { name: string }): UsersEntity[] => {
     if (!filter.name) return allUsers;
-    else return allUsers.filter((user: UsersEntity): boolean => user.name.toLowerCase() === filter.name.toLowerCase());
+    else return allUsers.filter((user: UsersEntity): boolean => user.name.toLowerCase().includes(filter.name.toLowerCase()));
   }
 )

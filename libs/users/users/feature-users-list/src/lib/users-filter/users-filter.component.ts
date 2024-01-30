@@ -28,7 +28,7 @@ export class UsersFilterComponent implements OnInit {
   private readonly fb: FormBuilder = inject(FormBuilder);
   public filterForm!: FormGroup;
   @Output()
-  public applyFilterEmit: EventEmitter<{ filter : { name: string } }> = new EventEmitter<{ filter: { name: string } }>();
+  private applyFilterEmit: EventEmitter<{ filter : { name: string } }> = new EventEmitter<{ filter: { name: string } }>();
 
   ngOnInit(): void {
     this.filterForm = this.fb.group({
