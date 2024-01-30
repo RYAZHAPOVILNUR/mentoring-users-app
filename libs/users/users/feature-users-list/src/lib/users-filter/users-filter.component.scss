@@ -1,0 +1,42 @@
+.users-filter {
+  padding: 25px 0;
+
+  .container {
+
+      .users-filter-form {
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+
+        .users-filter-form-item {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+
+          &.title {
+            font-size: 16px;
+          }
+
+          .users-filter-input {
+            width: 100%;
+          }
+
+          .users-filter-action-filter {
+            background-color: transparent;
+            border: solid 1px #7e57c2
+          }
+
+          .users-filter-action-reset {
+            width: 64px;
+            background-color: transparent;
+            color: black;
+            border: solid 1px #7e57c2;
+
+            .users-filter-action-reset-icon {
+              margin: 0 auto;
+            }
+          }
+        }
+      }
+    }
+}

@@ -5,6 +5,7 @@
     errors: errors$,
     loggedUser: loggedUser$
 } as vm">
+  <users-filter (applyFilterEmit)="onAppliedFilter($event)"></users-filter>
   <users-list-ui
     [vm]="vm"
     (deleteUser)="onDeleteUser($event)"

@@ -1,0 +1,19 @@
+<div class="users-filter">
+  <div class="container">
+    <form [formGroup]="filterForm" (ngSubmit)="applyFilter('applyFilter')" class="users-filter-form">
+      <p class="users-filter-form-item title">Поиск пользователя по имени:</p>
+      <div class="users-filter-form-item">
+        <mat-form-field class="users-filter-input">
+          <mat-label>Введите имя:</mat-label>
+          <input formControlName="name" matInput id="filterName" type="text">
+        </mat-form-field>
+      </div>
+      <div class="users-filter-form-item">
+        <button type="submit" class="users-filter-action-filter" mat-raised-button>Применить</button>
+        <button type="button" (click)="applyFilter('resetFilter')" class="users-filter-action-reset" mat-raised-button>
+          <mat-icon class="users-filter-action-reset-icon">close</mat-icon>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
