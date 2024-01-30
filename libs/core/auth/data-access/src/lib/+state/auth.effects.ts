@@ -101,7 +101,9 @@ export const logoutEffect$ = createEffect(
       ofType(authActions.logout),
       tap(() => {
         jwtService.removeItem();
-        router.navigate(['/login'])
+        router.navigate(['/login']);
+        const notDefaultTheme: Element | null = document.head.querySelector('.style-manager-theme');
+        if (notDefaultTheme) notDefaultTheme.remove();
       })
     )
   ), { functional: true, dispatch: false }
