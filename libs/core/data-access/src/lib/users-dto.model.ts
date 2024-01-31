@@ -18,7 +18,10 @@ export type UsersDTO = DeepReadonly<{
   educationTime?: number;
 }>
 
-export type CreateUserDTO = DeepReadonly<{
+
+  
+  
+  export type CreateUserDTO = DeepReadonly<{
   id?: number | null, 
   name: string,
   email: string,
