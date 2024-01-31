@@ -1,12 +1,26 @@
 <div class="filter-container">
-  <form class="example-form" [formGroup]="filterByName">
-    <mat-form-field class="example-full-width">
-      <mat-label>Filter users by name</mat-label>
-      <input matInput placeholder="type users name" value="" formControlName="name">
-    </mat-form-field>
+  <form class="form" [formGroup]="filters">
+    <div class="button_wrapper" *ngIf="isAddObservable$ | async">
+      <button mat-mini-fab color="primary"
+              (click)="openDialogAddFilter()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <div class="input-field" *ngFor="let filter of filtersFromStore$ | async">
+      <mat-form-field class="example-full-width">
+        <mat-label>Filter by {{ filter.field }}</mat-label>
+        <input matInput placeholder="type users {{filter.field}}" [formControlName]=filter.field>
+      </mat-form-field>
+      <div class="button_wrapper" *ngIf="isDelete">
+        <button (click)="deleteFilterField(filter.field)" color="primary" mat-mini-fab
+                aria-label="delete field form">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
   </form>
-  <div class="button-wrapper">
-    <button mat-raised-button color="accent" (click)="acceptFilterByName()">Accept</button>
+  <div class="button-wrapper--action">
+    <button mat-raised-button color="accent" (click)="acceptFilters()">Accept</button>
     <button mat-raised-button color="primary" (click)="resetFilter()">Reset</button>
   </div>
 </div>

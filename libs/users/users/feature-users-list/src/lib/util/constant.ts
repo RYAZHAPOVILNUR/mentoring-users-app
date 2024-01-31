@@ -1,1 +1,1 @@
-export const FIELD_FILTER = 'name';
+export const AVAILABLE_FILTERS = ['name', 'email', 'username', 'city'];

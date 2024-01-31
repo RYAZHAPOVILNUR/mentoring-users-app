@@ -1,0 +1,34 @@
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 25px 0;
+}
+
+.form {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.form div {
+  padding: 10px;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input-field {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-wrapper--action {
+  display: flex;
+  justify-content: space-between;
+  max-width: 180px;
+  padding: 20px 0;
+}

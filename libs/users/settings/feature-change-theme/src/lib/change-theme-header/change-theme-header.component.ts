@@ -73,7 +73,7 @@ export class ChangeThemeComponentHeader implements OnInit, OnDestroy {
       const themeName = this.themeStorage.getStoredThemeName();
 
       if (themeName) {
-        this.selectTheme(themeName);        
+        this.selectTheme(themeName);
       } else {
         this.themes.find(theme => {
           if (theme.isDefault === true) {
@@ -114,6 +114,6 @@ export class ChangeThemeComponentHeader implements OnInit, OnDestroy {
 
     if (this.currentTheme) {
       this.themeStorage.storeTheme(this.currentTheme);
-    }    
+    }
   }
 }

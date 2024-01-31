@@ -1,0 +1,15 @@
+<div mat-dialog-content>
+  <form class="form" [formGroup]="filterFormGroup">
+    <mat-form-field>
+      <mat-label>Select filter</mat-label>
+      <mat-select formControlName="filter">
+        <mat-option *ngFor="let filter of availableFilters" [value]="filter">{{ filter }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="filterFormGroup.value">Add filter</button>
+  <button mat-button mat-dialog-close>Close</button>
+</div>
+

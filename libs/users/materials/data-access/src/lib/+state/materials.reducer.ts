@@ -19,7 +19,7 @@ export const reducer = createReducer(
 );
 
 export const materialsFeature = createFeature({
-  name: materialsFeatureKey,
+  field: materialsFeatureKey,
   reducer,
 });
 

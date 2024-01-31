@@ -56,7 +56,7 @@ export const commentsFeature = createFeature({
       publishStatus: 'error' as const
     })),
 
-    on(CommentsActions.deleteComment, (state, { id }) => 
+    on(CommentsActions.deleteComment, (state, { id }) =>
       commentsAdapter.removeOne(id, state)
     )
   )

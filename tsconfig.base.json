@@ -27,6 +27,9 @@
       "@users/core/github-api/data-access": [
         "libs/core/github-api/data-access/src/index.ts"
       ],
+      "@users/users/models/data-access/user-filter": [
+        "libs/users/users/data-access/src/lib/models/user-filter.ts"
+      ],
       "@users/core/highcharts": ["libs/core/highcharts/src/index.ts"],
       "@users/core/http": ["libs/core/http/src/index.ts"],
       "@users/core/ui": ["libs/core/ui/src/index.ts"],
