@@ -1,0 +1,29 @@
+{
+  "name": "feature-materials",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/users/materials/feature-materials-list/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/users/materials/feature-materials-list",
+        "main": "libs/users/materials/feature-materials-list/src/index.ts",
+        "tsConfig": "libs/users/materials/feature-materials-list/tsconfig.lib.json",
+        "assets": ["libs/users/materials/feature-materials-list/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/users/materials/feature-materials-list/**/*.ts",
+          "libs/users/materials/feature-materials-list/package.json"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

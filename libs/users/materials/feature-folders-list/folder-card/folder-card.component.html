@@ -1,0 +1,21 @@
+<ng-container *ngIf="status==='loaded'"> 
+    <!-- (click)="router.navigate['/materials', folder.id]" -->
+    <div class="container_folder">
+        <div [routerLink]="[folder.id]"> 
+            <div class="container_icon">
+                <mat-icon aria-label="icon folder" fontIcon="folder_open"></mat-icon>
+                <div class="icon-delete">
+                    <button mat-button (click)="openDialog($event)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div class="title">
+                {{folder.title}}
+            </div>
+            <div>
+                {{folder.created_at | date}}
+            </div>
+        </div>
+    </div>
+</ng-container>

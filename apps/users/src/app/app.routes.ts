@@ -60,9 +60,14 @@ export const appRoutes: Route[] = [
           ),
         canDeactivate: [canDeactivateFormComponent],
       },
+      //??? folders
       {
         path: 'materials',
-        loadComponent: () => import('@users/materials').then(c => c.UsersMaterialsComponent),
+        loadComponent: () => import('@users/feature-folders-list').then(c => c.FolderListContainerComponent),
+      },
+      {
+        path: 'materials/:id',
+        loadComponent: () => import('@users/feature-materials').then(c => c.MaterialsListContainerComponent),
       },
       {
         path: 'articles',

@@ -1,0 +1,15 @@
+<!--  новый наблюдаемый объект c подпиской -->
+<!-- структурную директиву к разделу страницы, не создавай при этом дополнительный элемент (div) -->
+<ng-container 
+    *ngrxLet="{
+        materials: materials$,
+        status: status$
+    } as vmMaterials">
+    <users-materials-list 
+        [vm]="vmMaterials"
+        (deleteMaterial)="onDeleteMaterial($event)"
+        >
+    </users-materials-list>
+</ng-container>
+
+<users-materials-add-button [idFolder]="idFolder"></users-materials-add-button>

@@ -1,0 +1,27 @@
+<form>
+    <mat-dialog-content [formGroup]="form">
+        <header>
+            <h1>Добавление новой папки</h1>
+        </header>
+        <p>
+            <mat-form-field class="form-full-width">
+                <input 
+                    matInput 
+                    placeholder="Name"
+                    formControlName="name">
+                <mat-icon matSuffix>person</mat-icon>
+                <div *ngIf="form.controls['name'].invalid && form.controls['name'].touched"></div>
+            </mat-form-field>
+        </p>
+    </mat-dialog-content>
+</form>
+<mat-dialog-actions align="end">
+    <button 
+        mat-raised-button 
+        color="primary" 
+        (click)="submitFolderAdd()"
+        type="submit"
+        matDialogClose>
+    Сохранить</button>
+    <button mat-flat-button color="warn" matDialogClose>Отмена</button>
+</mat-dialog-actions>

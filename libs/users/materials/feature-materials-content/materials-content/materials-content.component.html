@@ -1,0 +1,52 @@
+<div class="title">
+  <h1 mat-dialog-title>{{ data.material.title }}</h1>
+</div>
+
+<div class="button-close">
+  <button class="title-button" mat-icon-button matDialogClose>
+      <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<ng-container [ngSwitch]="(this.data.material.material_link | typeMaterials)" >
+  <div *ngSwitchCase="'pdf'">
+    <ng-container class="player">
+      <pdf-viewer class="pdf"
+          [src]="linkMaterial"
+          [original-size]="true"
+          [autoresize]="true" 
+          [show-borders]="true"
+          [stick-to-page]="true"
+          style="width: 1200px; height: 600px;"
+      ></pdf-viewer>
+    </ng-container>
+  </div>
+  <div *ngSwitchCase="'audio'">
+    <ng-container class="player">
+      <div class="music">
+        <audio controls>
+          <source [src]="linkMaterial" type="audio/mpeg">
+        </audio>
+      </div>
+    </ng-container>
+  </div>
+  <div *ngSwitchCase="'video'">
+    <ng-container class="player"> 
+      <div class="link">
+          <p mat-dialog-title>Ссылка на видео: {{ data.material.material_link }}</p>
+      </div>
+      <div *ngIf="getVideoId()" class="video">
+        <img [src]="'https://img.youtube.com/vi/' + getVideoId() + '/maxresdefault.jpg'">
+      </div>
+    </ng-container>
+  </div>
+  <div *ngSwitchDefault>
+      <p mat-dialog-title>Некорректная ссылка</p>
+      <mat-icon 
+        aria-label="icon folder" 
+        fontIcon="broken_image"
+        style="width: 200px; height: 250px;"
+        ></mat-icon>
+  </div>
+</ng-container>
+

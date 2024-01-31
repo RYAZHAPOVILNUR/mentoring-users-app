@@ -1,0 +1,37 @@
+<ng-container>
+    <div class="container_material">
+        <div (click)="openViewMaterialDialog()">
+            <div class="title">
+                {{material.title}}
+            </div>
+            <div>
+                {{material.created_at | date}}
+            </div>
+        </div>
+
+        <div class="container_icon">
+            <ng-container [ngSwitch]="(this.material.material_link | typeMaterials)">
+                <div *ngSwitchCase="'pdf'">
+                    <mat-icon aria-label="icon folder" fontIcon="picture_as_pdf"></mat-icon>
+                </div>
+                <div *ngSwitchCase="'audio'">
+                    <mat-icon aria-label="icon folder" fontIcon="library_music"></mat-icon>
+                </div>
+                <div *ngSwitchCase="'video'">
+                    <mat-icon aria-label="icon folder" fontIcon="video_library"></mat-icon>
+                </div>
+                <div *ngSwitchDefault>
+                    <mat-icon aria-label="icon folder" fontIcon="broken_image"></mat-icon>
+                </div>
+            </ng-container>
+
+            <div class="icon-delete">
+                <button 
+                    mat-button 
+                    (click)="onDeleteMaterial()">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</ng-container>

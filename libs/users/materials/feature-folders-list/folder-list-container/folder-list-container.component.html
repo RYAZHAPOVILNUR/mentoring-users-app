@@ -1,0 +1,13 @@
+<ng-container 
+    *ngrxLet="{
+        folders: folders$,
+        status: status$,
+        error: error$
+    } as vmFolders">
+    <users-folder-list 
+        [vm]="vmFolders"
+        (deleteFolder) = 'onDeleteFolder($event)'>
+    </users-folder-list>
+</ng-container>
+
+<users-folders-add-button></users-folders-add-button>

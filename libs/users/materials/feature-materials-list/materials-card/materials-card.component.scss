@@ -1,0 +1,25 @@
+.container_material{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    gap: 5px;
+    margin: 20px;
+    padding: 10px;
+    width: 150px; //?
+    background-color: #5d5c5c7b;
+    border-radius: 5px;
+    box-shadow: 10px 5px 5px rgb(64, 64, 64);
+    posititon: relative;
+}
+.container_icon{
+    display: flex;
+    justify-content: space-between;
+}
+.icon-delete{
+    opacity: 0;
+}
+.container_material:hover .icon-delete{
+    opacity: 1;
+    transition: 1s;
+}

@@ -1,0 +1,10 @@
+<ng-container>
+    <div class="container">
+        <users-materials-card
+            *ngFor="let mat of vm.materials"
+            [material]="mat"
+            (deleteMaterial)="onDeleteMaterial($event)">
+        </users-materials-card>
+    </div>
+</ng-container>
+

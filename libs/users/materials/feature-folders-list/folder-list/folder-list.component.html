@@ -1,0 +1,23 @@
+<ng-container *ngIf="vm.status === 'loading'; else loadingResult">
+    <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+
+<ng-template #loadingResult>
+    <ng-container *ngIf="vm.status === 'loaded'; else error">
+        <div class="container">
+            <users-folder-card
+                *ngFor="let folder of vm.folders"
+                [folder]="folder"
+                [status]="vm.status"
+                (deleteFolderEvent) = 'onDeleteFolder($event)'>
+            </users-folder-card>
+        </div>
+    </ng-container>
+</ng-template>
+
+<ng-template #error>
+    <div class="alert alert-danger" role="alert">
+      <h1>{{vm.error}}</h1>
+    </div>
+</ng-template>
+  

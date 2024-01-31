@@ -1,0 +1,27 @@
+.container_folder{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    gap: 5px;
+    margin: 20px;
+    padding: 10px;
+    width: 150px;
+    background-color: #1c7fa3a3;
+    border-radius: 5px;
+    box-shadow: 10px 5px 5px rgba(7, 57, 110, 0.544);
+    posititon: relative;
+}   
+
+.container_icon{
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon-delete{
+    opacity: 0;
+}
+.container_folder:hover .icon-delete{
+    opacity: 1;
+    transition: 1s;
+}
