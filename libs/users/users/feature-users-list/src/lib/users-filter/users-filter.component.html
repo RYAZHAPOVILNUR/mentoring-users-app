@@ -1,0 +1,7 @@
+<div class="users-filter-component">
+  <div class="users-filter-form">
+    <input [formControl]="inputFilter" type="text" id="users-form-name" placeholder="Введите имя пользователя для поиска" class="users-filter-form-input">
+    <p *ngIf="inputFilter.hasError('required') && inputFilter.touched || inputFilter.hasError('minlength')" class="users-form-error">* Недостаточное количество символов для фильтрации!</p>
+  </div>
+  <button type="button" (click)="sendInputValue()" class="users-filter-form-button">Поиск</button>
+</div>

@@ -49,3 +49,19 @@ export const selectOpenedUser = createSelector(
   selectUsersEntities,
   ({id}, entities) => entities[id] || null
 )
+
+export const selectUsersFilter = createSelector(
+  selectUsersState,
+  (state: UsersState) => state.usersFilter
+);
+
+export const selectUsersFiltered = createSelector(
+  selectAllUsers,
+  selectUsersFilter,
+  (users, filter)=> {
+    if (filter.name) {
+      return users.filter(user => user.name == filter.name || user.username == filter.name);
+    }
+    return users;
+  }
+);
