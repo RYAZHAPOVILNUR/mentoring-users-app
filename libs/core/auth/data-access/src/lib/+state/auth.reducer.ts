@@ -19,6 +19,10 @@ export const authInitialState: AuthState = {
     name: '',
     username: '',
     city: '',
+    purchaseDate: new Date().toString(),
+    educationStatus: 'trainee',
+    educationTime: 0,
+    totalStoryPoints: 0,
     id: 0,
     photo: null,
     isAdmin: null

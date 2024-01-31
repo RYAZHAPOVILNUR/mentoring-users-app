@@ -58,7 +58,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class DetailUsersCardComponent implements OnInit {
   private _vm: DetailUsersCardVm = { editMode: false, user: null, status: 'init', errors: null };
   public get vm() {
-    
+
     return this._vm;
   }
   @Input({ required: true })
@@ -130,7 +130,9 @@ export class DetailUsersCardComponent implements OnInit {
         name: this.formGroup.value.name || '',
         username: this.formGroup.value.username || '',
         city: this.formGroup.value.city || '',
-        email: this.formGroup.value.email?.trim().toLowerCase() || ''
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        purchaseDate: new Date().toString() || '',
+        educationStatus: 'trainee'
       },
       onSuccessCb: this.onEditSuccess
     });
