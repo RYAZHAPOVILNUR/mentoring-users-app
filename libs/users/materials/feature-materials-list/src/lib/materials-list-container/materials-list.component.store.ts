@@ -22,13 +22,12 @@ const initialState: MaterialsState = {
 
 @Injectable()
 export class MaterialsListContainerStore extends ComponentStore<MaterialsState> {
-  private readonly store = inject(Store)
-  private readonly route = inject(ActivatedRoute)
+  private readonly store = inject(Store);
+  private readonly route = inject(ActivatedRoute);
   private readonly apiService = inject(ApiService);
   public readonly materials$ = this.select(state => state.materials);
-  public readonly status$ = this.select(state => state.status)
-  public readonly openedFolder$ = this.store.select(materialsSelector.selectOpenedFolder)
-  // public readonly selectRouteParams$ = this.store.select(selectRouteParams);
+  public readonly status$ = this.select(state => state.status);
+  public readonly openedFolder$ = this.store.select(materialsSelector.selectOpenedFolder);
 
   constructor() {
     super(initialState);
@@ -45,29 +44,11 @@ export class MaterialsListContainerStore extends ComponentStore<MaterialsState> 
     );
   }
 
-  // readonly addMaterials = this.effect((material$: Observable<CreateMaterial>) =>
-  //   material$.pipe(
-  //     withLatestFrom(this.selectRouteParams$),
-  //     switchMap(([material, params]) => {
-  //       const folderId = params['id']; // Получаем folder_id из параметров маршрута
-  //       const materialWithFolderId = { ...material, folder_id: folderId }; // Добавляем folder_id к создаваемому материалу
-  //       return this.apiService.post<Material, CreateMaterial>('/material', materialWithFolderId).pipe(
-  //         tap((createdMaterial) => {
-  //           this.patchState((state) => ({
-  //             ...state,
-  //             materials: [...state.materials, createdMaterial],
-  //           }));
-  //         })
-  //       );
-  //     })
-  //   )
-  // );
-
   readonly addMaterial = this.effect((material$: Observable<CreateMaterial>) =>
     material$.pipe(
       withLatestFrom(this.route.params), // Получаем текущие параметры маршрута
       switchMap(([material, params]) => {
-        this.patchState({status: 'loading'})
+        this.patchState({ status: 'loading' });
         const folderId = params['id']; // Получаем folder_id из параметров маршрута
         const materialWithFolderId = { ...material, folder_id: folderId }; // Добавляем folder_id к создаваемому материалу
         return this.apiService.post<Material, CreateMaterial>('/material', materialWithFolderId).pipe(
@@ -84,7 +65,7 @@ export class MaterialsListContainerStore extends ComponentStore<MaterialsState> 
   );
 
   deleteMaterial(id: number) {
-    this.patchState({status: 'loading'})
+    this.patchState({ status: 'loading' });
     this.apiService.delete<Material>(`/material/${id}`).subscribe(() => {
       this.updateMaterialStateAfterDelete(id);
     });
@@ -97,23 +78,5 @@ export class MaterialsListContainerStore extends ComponentStore<MaterialsState> 
     }));
   }
 
-
-  // public loadMaterials() {
-  //   this.effect(
-  //     () => this.selectRouteParams$.pipe(
-  //       switchMap(params => {
-  //         const folderId = params['id'];
-  //         return this.apiService.get<Material[]>(`/material`).pipe(
-  //           map(materials => materials.filter(material => material.folder_id === +folderId))
-  //         );
-  //       }),
-  //       tap(filteredMaterials => {
-  //         this.setState({ materials: filteredMaterials, status: 'loaded' });
-  //       })
-  //     )
-  //   );
-  // }
-  //
-  //
 }
 

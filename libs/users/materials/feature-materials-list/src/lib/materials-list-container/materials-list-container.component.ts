@@ -6,6 +6,7 @@ import {
   OnInit
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { LetDirective, PushPipe } from '@ngrx/component';
@@ -21,7 +22,6 @@ import {
   MaterialsAddDialogComponent
 } from '../../../../feature-materials-create/src/lib/materials-add-dialog/materials-add-dialog.component';
 import { MaterialsContentComponent } from '@users/feature-materials-content';
-import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 
 @Component({
   selector: 'users-materials-list-container',

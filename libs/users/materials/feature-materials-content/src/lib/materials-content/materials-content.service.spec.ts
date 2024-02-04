@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MaterialsContentService } from './materials-content.service';
+import { MaterialsContentYoutubeService } from './materials-content-youtube.service';
 
 describe('MaterialsContentService', () => {
-  let service: MaterialsContentService;
+  let service: MaterialsContentYoutubeService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(MaterialsContentService);
+    service = TestBed.inject(MaterialsContentYoutubeService);
   });
 
   it('should be created', () => {

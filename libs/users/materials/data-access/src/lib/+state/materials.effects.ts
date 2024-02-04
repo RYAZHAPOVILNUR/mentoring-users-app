@@ -28,7 +28,6 @@ export const loadFolders = createEffect(
   { functional: true }
 );
 
-
 export const addFolder = createEffect(
   () => {
     const actions$ = inject(Actions);

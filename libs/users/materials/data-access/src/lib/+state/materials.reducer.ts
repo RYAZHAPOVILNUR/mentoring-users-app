@@ -5,7 +5,6 @@ import { Folder } from '../models/folder.models';
 import { LoadingStatus } from '@users/core/data-access';
 import { Material } from '../models/material.models';
 
-
 export const MATERIALS_FEATURE_KEY = 'materials';
 
 export interface MaterialsState extends EntityState<Folder> {
@@ -37,15 +36,23 @@ export const materialsFeature = createFeature({
       ...state, status: 'error' as const
     })),
 
+    on(MaterialsActions.addFolder, (state) => ({
+      ...state,
+      status: 'loading' as const
+    })),
     on(MaterialsActions.addFolderSuccess, (state, { newFolder }) => {
-      return materialsAdapter.addOne(newFolder, state);
+      return materialsAdapter.addOne(newFolder, { ...state, status: 'loaded' as const });
     }),
     on(MaterialsActions.addFolderFailure, (state, action) => ({
       ...state, status: 'error' as const
     })),
 
+    on(MaterialsActions.deleteFolder, (state) => ({
+      ...state,
+      status: 'loading' as const
+    })),
     on(MaterialsActions.deleteFolderSuccess, (state, { id }) => {
-      return materialsAdapter.removeOne(id, state);
+      return materialsAdapter.removeOne(id, { ...state, status: 'loaded' as const });
     }),
     on(MaterialsActions.deleteFolderFailure, (state, action) => ({
       ...state, status: 'error' as const

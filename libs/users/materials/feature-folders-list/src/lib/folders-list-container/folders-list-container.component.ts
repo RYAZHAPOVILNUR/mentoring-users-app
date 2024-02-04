@@ -39,7 +39,7 @@ export class FoldersListContainerComponent implements OnInit {
       .subscribe(result => {
         if (result) {
           const newFolder: CreateFolder = {
-            title: result.title,
+            title: result.title
           };
           this.materialsFacade.addFolder(newFolder);
         }

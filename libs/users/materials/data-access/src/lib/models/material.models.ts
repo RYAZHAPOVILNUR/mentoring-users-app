@@ -11,5 +11,4 @@ export type Material = DeepReadonly<{
 export type CreateMaterial = DeepReadonly<{
   title: string,
   material_link: string,
-  // folder_id?: number
 }>

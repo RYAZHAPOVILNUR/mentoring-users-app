@@ -15,24 +15,24 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   imports: [CommonModule, MatButtonModule, MatIconModule, MaterialsCardComponent, MatProgressBarModule, FoldersCardComponent, MatProgressSpinnerModule],
   templateUrl: './materials-list.component.html',
   styleUrls: ['./materials-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MaterialsListComponent {
-  @Input({required: true}) vm!: MaterialsListVm
-  @Output() goBackEvent = new EventEmitter()
-  @Output() openMaterialEvent = new EventEmitter()
-  @Output() deleteMaterialEvent = new EventEmitter()
+  @Input({ required: true }) vm!: MaterialsListVm;
+  @Output() goBackEvent = new EventEmitter();
+  @Output() openMaterialEvent = new EventEmitter();
+  @Output() deleteMaterialEvent = new EventEmitter();
 
 
   goBackToFolders() {
-    this.goBackEvent.emit()
+    this.goBackEvent.emit();
   }
 
   openMaterial(material: Material) {
-    this.openMaterialEvent.emit(material)
+    this.openMaterialEvent.emit(material);
   }
 
   deleteMaterial(material: Material) {
-    this.deleteMaterialEvent.emit(material)
+    this.deleteMaterialEvent.emit(material);
   }
 }

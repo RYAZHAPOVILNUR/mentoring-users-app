@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, inject, Injectable, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -17,22 +17,14 @@ import { MatButtonModule } from '@angular/material/button';
 
 export class MaterialsAddDialogComponent {
   private readonly fb = inject(FormBuilder);
-  public formGroup: FormGroup = Inject(FormGroup)
-  // public formGroup: FormGroup = inject(FormGroup)  почему не сработает? и как луше Inject или через constructor
-  public  dialogRef = inject(MatDialogRef);
-  public data: {materialType: string, materialTitle: string, materialLink: string} = inject(MAT_DIALOG_DATA)
+  public formGroup: FormGroup = Inject(FormGroup);
+  public dialogRef = inject(MatDialogRef);
+  public data: { materialType: string, materialTitle: string, materialLink: string } = inject(MAT_DIALOG_DATA);
 
-  // ngOnInit() {
-  //   this.initDialog()
+  // public formGroup: FormGroup = inject(FormGroup)  почему не сработает(выдает ошибку)?
+  // чем отличается inject от Inject? и как луше Inject или через constructor
+  // constructor(formGroup: FormGroup) {
   // }
-
-  // initDialog() {
-  //   this.formGroup = this.fb.group({
-  //     materialTitle: ['', Validators.required],
-  //     materialLink: ['', Validators.required]
-  //   });
-  // }
-
   constructor() {
     this.formGroup = this.fb.group({
       materialTitle: ['', Validators.required],
@@ -63,7 +55,7 @@ export class MaterialsAddDialogComponent {
         materialTitle: this.formGroup.value.materialTitle,
         materialLink: this.formGroup.value.materialLink
       };
-      console.log(newMaterial)
+      console.log(newMaterial);
       this.dialogRef.close(newMaterial);
     }
   }

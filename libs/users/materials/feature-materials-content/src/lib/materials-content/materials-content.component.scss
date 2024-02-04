@@ -18,10 +18,6 @@
   right: 0;
 }
 
-
-
-
-
 .audio-container {
   position: relative;
 }
@@ -37,6 +33,26 @@
 }
 
 .audio-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.pdf-container {
+  position: relative;
+}
+
+.pdf-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pdf-header {
+  text-align: center;
+}
+
+.pdf-button {
   position: absolute;
   top: 0;
   right: 0;

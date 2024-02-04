@@ -19,5 +19,4 @@ export class MaterialsAddButtonComponent {
   onAddMaterial(materialType: string) {
     this.addMaterialEvent.emit(materialType);
   }
-
 }

@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Folder } from '../../../../data-access/src/lib/models/folder.models';
 import { MatCardModule } from '@angular/material/card';
 import { TranslateModule } from '@ngx-translate/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'users-folders-card',
@@ -16,7 +15,6 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoldersCardComponent {
-  public readonly router = inject(Router);
   @Input({ required: true }) folder!: Folder;
   @Output() deleteFolderEvent = new EventEmitter();
   @Output() openFolderEvent = new EventEmitter();

@@ -15,5 +15,7 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button color="warn" mat-dialog-close>Отмена</button>
-  <button mat-button color="primary" [disabled]="formGroup.invalid || !isLinkValid(this.formGroup.value.materialLink)" (click)="onSubmit()">Создать</button>
+  <button mat-button color="primary" [disabled]="formGroup.invalid || !isLinkValid(this.formGroup.value.materialLink)"
+          (click)="onSubmit()">Создать
+  </button>
 </div>

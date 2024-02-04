@@ -13,20 +13,19 @@ import { Material } from '../../../../data-access/src/lib/models/material.models
   imports: [CommonModule, MatButtonModule, MatCardModule, MatIconModule, MatProgressBarModule],
   templateUrl: './materials-card.component.html',
   styleUrls: ['./materials-card.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MaterialsCardComponent {
-  @Input({required: true}) material!: Material
-  @Output() openMaterialEvent = new EventEmitter()
-  @Output() deleteMaterialEvent = new EventEmitter()
-  @Input({required: true}) status!: LoadingStatus;
+  @Input({ required: true }) material!: Material;
+  @Output() openMaterialEvent = new EventEmitter();
+  @Output() deleteMaterialEvent = new EventEmitter();
+  @Input({ required: true }) status!: LoadingStatus;
 
   openMaterial() {
-   this.openMaterialEvent.emit(this.material)
+    this.openMaterialEvent.emit(this.material);
   }
 
   deleteMaterial() {
-    this.deleteMaterialEvent.emit(this.material)
+    this.deleteMaterialEvent.emit(this.material);
   }
-
 }

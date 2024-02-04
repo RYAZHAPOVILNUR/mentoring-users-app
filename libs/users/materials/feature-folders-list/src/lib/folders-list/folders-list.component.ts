@@ -6,7 +6,6 @@ import { UsersCardComponent } from '../../../../../users/feature-users-list/src/
 import { FoldersListVm } from './folders-list-vm';
 import { Folder } from '../../../../data-access/src/lib/models/folder.models';
 
-
 @Component({
   selector: 'users-folders-list',
   standalone: true,

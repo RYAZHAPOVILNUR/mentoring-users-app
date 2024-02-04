@@ -1,20 +1,28 @@
 <ng-container *ngIf="data.materialLink.endsWith('.pdf')">
-  <h2 mat-dialog-title>{{ data.materialTitle }}</h2>
-  <mat-dialog-content>
-    <pdf-viewer [src]="data.materialLink"
-                [render-text]="true"
-                [original-size]="false"
-                style="width: 900px; height: 700px"
-    ></pdf-viewer>
-  </mat-dialog-content>
+  <div class="pdf-container">
+    <div class="pdf-header-container">
+      <h2 mat-dialog-title class="pdf-header">{{ data.materialTitle }}</h2>
+      <button mat-icon-button mat-dialog-close class="pdf-button">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="pdf-wrapper">
+      <pdf-viewer [src]="data.materialLink"
+                  [render-text]="true"
+                  [original-size]="false"
+                  style="width: 900px; height: 700px"
+      ></pdf-viewer>
+    </div>
+  </div>
 </ng-container>
-
 
 <ng-container *ngIf="data.materialLink.endsWith('.mp3')">
   <div class="audio-container">
     <div class="audio-header-container">
       <h2 mat-dialog-title class="audio-header">{{ data.materialTitle }}</h2>
-      <button mat-icon-button mat-dialog-close class="audio-button"><mat-icon>close</mat-icon></button>
+      <button mat-icon-button mat-dialog-close class="audio-button">
+        <mat-icon>close</mat-icon>
+      </button>
     </div>
     <div class="audio-wrapper">
       <audio controls>
@@ -24,15 +32,16 @@
   </div>
 </ng-container>
 
-
-
 <ng-container *ngIf="!data.materialLink.endsWith('.mp3') && !data.materialLink.endsWith('.pdf')">
   <div *ngIf="apiLoaded()" class="video-container">
     <div class="video-header-container">
       <h2 mat-dialog-title class="video-header">{{ data.materialTitle }}</h2>
-      <button mat-icon-button mat-dialog-close class="video-button"><mat-icon>close</mat-icon></button>
+      <button mat-icon-button mat-dialog-close class="video-button">
+        <mat-icon>close</mat-icon>
+      </button>
     </div>
-    <youtube-player [playerVars]="{autoplay: 1}" [width]="900" [height]="700" [videoId]="extractVideoId(data.materialLink)" ></youtube-player>
+    <youtube-player [playerVars]="{autoplay: 1}" [width]="900" [height]="700"
+                    [videoId]="extractVideoId(data.materialLink)"></youtube-player>
   </div>
 </ng-container>
 
