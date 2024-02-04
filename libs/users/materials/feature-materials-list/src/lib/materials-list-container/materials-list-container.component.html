@@ -1,3 +1,19 @@
-<users-materials-list
-  (goBackEvent)="goBackToFolders()"
+<ng-container
+  *ngrxLet="{
+  materials: materials$,
+  status: status$,
+  openedFolder: openedFolder$
+  } as vm">
+  <users-materials-list
+    (goBackEvent)="goBackToFolders()"
+    [vm]="vm"
+    (openMaterialEvent)="openMaterial($event)"
+    (deleteMaterialEvent)="deleteMaterial($event)"
+  />
+</ng-container>
+<users-materials-add-button
+  (addMaterialEvent)="onAddMaterial($event)"
 />
+
+
+

@@ -1,1 +1,29 @@
-<p>materials-card works!</p>
+<ng-container *ngIf="status === 'loading'; else loaded">
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+
+<ng-template #loaded>
+  <ng-container *ngIf="status === 'loaded'">
+    <mat-card class="material-card" (dblclick)="openMaterial()">
+      <mat-card-header>
+        <div class="wrapper">
+          <mat-icon class="icon" *ngIf="this.material.material_link.endsWith('.pdf')">picture_as_pdf</mat-icon>
+          <mat-icon class="icon" *ngIf="this.material.material_link.endsWith('.mp3')">music_note</mat-icon>
+          <mat-icon class="icon" *ngIf="!this.material.material_link.endsWith('.pdf')
+          && !this.material.material_link.endsWith('.mp3')">smart_display</mat-icon>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <button class="button-delete" (click)="deleteMaterial()" mat-icon-button>
+          <mat-icon class="delete">delete</mat-icon>
+        </button>
+        <mat-card-title>{{ this.material.title }}</mat-card-title>
+        <mat-card-subtitle>{{ this.material.created_at |  date:'dd/MM/yyyy' }}</mat-card-subtitle>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+</ng-template>
+
+
+
+

@@ -4,7 +4,7 @@ import { FoldersCardComponent } from '../folders-card/folders-card.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { UsersCardComponent } from '../../../../../users/feature-users-list/src/lib/users-card/users-card.component';
 import { FoldersListVm } from './folders-list-vm';
-import { IFolder } from '../../../../data-access/src/lib/models/folder.interface';
+import { Folder } from '../../../../data-access/src/lib/models/folder.models';
 
 
 @Component({
@@ -21,12 +21,11 @@ export class FoldersListComponent {
   @Output() deleteFolderEvent = new EventEmitter()
   @Output() openFolderEvent = new EventEmitter()
 
-  onDeleteFolder(id: number){
-    this.deleteFolderEvent.emit(id)
+  onDeleteFolder(folder: Folder){
+    this.deleteFolderEvent.emit(folder)
   }
 
   onOpenFolder(id: number) {
     this.openFolderEvent.emit(id)
-    console.log('id', id)
   }
 }

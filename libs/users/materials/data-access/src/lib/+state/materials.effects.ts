@@ -1,21 +1,17 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap, switchMap, tap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { MaterialsActions } from './materials.actions';
 import { ApiService } from '@users/core/http';
-import { CreateIFolder, IFolder } from '../models/folder.interface';
-import * as UsersActions from '../../../../../users/data-access/src/lib/+state/users.actions';
-import { CreateUserDTO, UsersDTO, usersDTOAdapter } from '@users/core/data-access';
-import { error } from '@angular/compiler-cli/src/transformers/util';
-
+import { CreateFolder, Folder } from '../models/folder.models';
 
 export const loadFolders = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) => {
     return actions$.pipe(
       ofType(MaterialsActions.loadFolders),
       switchMap(() =>
-        apiService.get<IFolder[]>('/folder').pipe(
+        apiService.get<Folder[]>('/folder').pipe(
           map(
             (folders) => MaterialsActions.loadFoldersSuccess({
               folders
@@ -32,6 +28,7 @@ export const loadFolders = createEffect(
   { functional: true }
 );
 
+
 export const addFolder = createEffect(
   () => {
     const actions$ = inject(Actions);
@@ -39,7 +36,7 @@ export const addFolder = createEffect(
     return actions$.pipe(
       ofType(MaterialsActions.addFolder),
       switchMap(
-        ({ newFolder }) => apiService.post<IFolder, CreateIFolder>('/folder', newFolder).pipe(
+        ({ newFolder }) => apiService.post<Folder, CreateFolder>('/folder', newFolder).pipe(
           map((folder) => MaterialsActions.addFolderSuccess({ newFolder: folder })),
           catchError((error) => {
             console.error('Error', error);
@@ -56,14 +53,14 @@ export const deleteFolder = createEffect(
     return actions$.pipe(
       ofType(MaterialsActions.deleteFolder),
       switchMap(
-        ({id}) => apiService.delete<IFolder>(`/folder/${id}`).pipe(
-          map(() => MaterialsActions.deleteFolderSuccess({id})),
+        ({ id }) => apiService.delete<Folder>(`/folder/${id}`).pipe(
+          map(() => MaterialsActions.deleteFolderSuccess({ id })),
           catchError(error => {
-            console.error('Error', error)
-            return of(MaterialsActions.deleteFolderFailure({error}))
+            console.error('Error', error);
+            return of(MaterialsActions.deleteFolderFailure({ error }));
           })
         )
       )
-    )
-  }, {functional: true}
-)
+    );
+  }, { functional: true }
+);

@@ -1,0 +1,45 @@
+.video-container {
+  position: relative;
+}
+
+.video-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.video-header {
+  text-align: center;
+}
+
+.video-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+
+
+
+
+.audio-container {
+  position: relative;
+}
+
+.audio-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.audio-header {
+  text-align: center;
+}
+
+.audio-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+

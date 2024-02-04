@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { IFolder } from '../../../../data-access/src/lib/models/folder.interface';
+import { Folder } from '../../../../data-access/src/lib/models/folder.models';
 import { MatCardModule } from '@angular/material/card';
 import { TranslateModule } from '@ngx-translate/core';
 import { Router } from '@angular/router';
@@ -17,12 +17,12 @@ import { Router } from '@angular/router';
 })
 export class FoldersCardComponent {
   public readonly router = inject(Router);
-  @Input({ required: true }) folder!: IFolder;
+  @Input({ required: true }) folder!: Folder;
   @Output() deleteFolderEvent = new EventEmitter();
   @Output() openFolderEvent = new EventEmitter();
 
   onOpenFolder() {
-    this.openFolderEvent.emit()
+    this.openFolderEvent.emit();
   }
 
   onDeleteFolder() {

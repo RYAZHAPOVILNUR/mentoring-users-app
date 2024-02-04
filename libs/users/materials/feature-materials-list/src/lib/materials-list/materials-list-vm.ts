@@ -1,6 +1,10 @@
 import { DeepReadonly } from '@users/core/utils';
-import { IFolder } from '../../../../data-access/src/lib/models/folder.interface';
+import { Material } from '../../../../data-access/src/lib/models/material.models';
+import { LoadingStatus } from '@users/core/data-access';
+import { Folder } from '../../../../data-access/src/lib/models/folder.models';
 
 export type MaterialsListVm = DeepReadonly<{
-  openedFolder: IFolder | null
+  openedFolder?: Folder
+  materials: Material[]
+  status: LoadingStatus
 }>

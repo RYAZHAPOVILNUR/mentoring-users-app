@@ -1,0 +1,25 @@
+.folder-name {
+  display: inline-block;
+  font-size:30px;
+}
+
+.folders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+
+.custom-spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Высота 100% экрана */
+}
+
+.custom-spinner {
+  width: 100px; /* Желаемая ширина */
+  height: 100px; /* Желаемая высота */
+}
+
+

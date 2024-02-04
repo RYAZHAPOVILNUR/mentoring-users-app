@@ -1,5 +1,38 @@
-<button mat-icon-button (click)="goBackToFolders()">
-  <mat-icon>arrow_back</mat-icon>
-</button>
+<ng-container *ngIf="vm.status === 'loading'; else loaded">
+  <div class="custom-spinner-container">
+    <mat-spinner class="custom-spinner"></mat-spinner>
+  </div>
+</ng-container>
+
+<ng-template #loaded>
+  <ng-container *ngIf="vm.status === 'loaded'">
+    <div>
+      <button mat-icon-button (click)="goBackToFolders()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div class="folder-name">
+        {{ vm.openedFolder?.title }}
+      </div>
+    </div>
+    <div class="folders-grid">
+      <div *ngFor="let material of vm.materials">
+        <users-materials-card
+          [material]="material"
+          [status]="vm.status"
+          (openMaterialEvent)="openMaterial($event)"
+          (deleteMaterialEvent)="deleteMaterial($event)"
+        />
+      </div>
+    </div>
+  </ng-container>
+</ng-template>
+
+
+
+
+
+
+
+
 
 
