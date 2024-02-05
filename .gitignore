@@ -39,3 +39,4 @@ testem.log
 Thumbs.db
 
 .angular
+/libs/users/users/feature-users-list/src/
