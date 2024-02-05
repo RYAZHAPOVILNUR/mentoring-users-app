@@ -53,7 +53,7 @@
             </mat-form-field>
 
             <mat-form-field class="edit-user-field"
-            [matTooltip]="vm.user!.username"
+          [matTooltip]="vm.user!.username"
             [matTooltipDisabled]="formGroup.enabled">
               <mat-label>Имя пользователя:</mat-label>
               <input matInput placeholder="Имя пользователя" formControlName="username" class="edit-user-input">
@@ -78,6 +78,24 @@
               </mat-autocomplete>
             </mat-form-field>
 
+            <mat-form-field class="edit-user-field">
+              <mat-label>Количество сторипоинтов</mat-label>
+              <input type="text" class="edit-user-input" placeholder="Количество сторипоинтов" matInput
+              [formControl]="totalStoryPoints">
+              
+              <button matSuffix mat-icon-button (click)="storyPointsToggleEditMode()" *ngIf="storyPointsEditMode; else editMode">
+                <mat-icon>add</mat-icon>
+              </button>
+
+              <ng-template #editMode>
+                <button (click)="storyPointsToggleEditMode()" matSuffix mat-icon-button>
+                  <mat-icon>close</mat-icon>
+                </button>
+                <button (click)="onAddUserStoryPoints()" matSuffix mat-icon-button>
+                  <mat-icon>done</mat-icon>
+                </button>
+              </ng-template>
+            </mat-form-field>
           </div>
             <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
               <button mat-icon-button
@@ -113,5 +131,11 @@
 <ng-template #snackbar>
   <div class="edit-user-snackbar">
     <span>Пользователь успешно изменён!</span>
+  </div>
+</ng-template>
+
+<ng-template #snackbarStoryPoints>
+  <div class="edit-user-snackbar">
+    <span>Стори поинты успешно изменены!</span>
   </div>
 </ng-template>

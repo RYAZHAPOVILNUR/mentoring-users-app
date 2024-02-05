@@ -49,3 +49,8 @@ export const selectOpenedUser = createSelector(
   selectUsersEntities,
   ({id}, entities) => entities[id] || null
 )
+
+// export const selectStoryPoints = createSelector(
+//   selectUsersEntities,
+//   (entities) => entities
+// )

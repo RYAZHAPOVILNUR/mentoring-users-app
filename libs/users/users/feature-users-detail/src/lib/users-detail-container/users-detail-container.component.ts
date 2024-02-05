@@ -53,11 +53,11 @@ export class UsersDetailComponent {
   onCloseUser() {
     this.router.navigate(['/admin/users']);
   }
-
+  
   onCloseEditMode() {
     this.router.navigate(['/admin/users', this.user.id], { queryParams: { edit: false } });
   }
-
+  
   onOpenEditMode() {
     this.router.navigate(['admin/users', this.user.id], { queryParams: { edit: true } });
   }
@@ -77,5 +77,8 @@ export class UsersDetailComponent {
       });
   }
 
-
+  onAddUserStoryPoints(storyPoints: number, onSuccessCb: onSuccessEditionCbType) {
+    console.log(typeof +storyPoints)
+    this.usersFacade.setUserStoryPoints(+storyPoints, this.user.id, onSuccessCb);
+  }
 }

@@ -8,6 +8,7 @@
     [vm]="vm"
     (editUser)="onEditUser($event.user, $event.onSuccessCb)"
     (closeUser)="onCloseUser()"
+    (addUserStoryPoints)="onAddUserStoryPoints($event.storyPoints, $event.onSuccessCb)"
     (closeEditMode)="onCloseEditMode()"
     (openEditMode)="onOpenEditMode()"
     (deleteUser)="onDeleteUser()"

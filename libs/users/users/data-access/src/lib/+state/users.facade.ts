@@ -30,6 +30,10 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.initUsers());
   }
 
+  setUserStoryPoints(storyPoints: number, id: number, onSuccessCb: onSuccessEditionCbType){
+    this.store.dispatch(UsersActions.addUserStoryPoints({storyPoints, id, onSuccessCb }));
+  }
+
   deleteUser(id: number) {
     this.store.dispatch(UsersActions.deleteUser({ id }))
   }
