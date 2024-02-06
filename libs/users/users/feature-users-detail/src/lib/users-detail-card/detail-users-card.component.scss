@@ -56,3 +56,28 @@ div.alert-success {
   justify-content: center;
   color: white;
 }
+
+.btn-story-points {
+  background: transparent;
+  position: absolute;
+  z-index: 2;
+  :hover {
+    background: none;
+    box-shadow: none;
+    transform: scale(1.05);
+  }
+}
+
+.inp-story-points {
+  position: relative;
+}
+
+.edit {
+  top: 8px;
+  right: 43px;
+}
+
+.toggle {
+  bottom: 50px;
+  right: 30px;
+}
