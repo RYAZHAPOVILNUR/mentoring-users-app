@@ -78,7 +78,6 @@ export class UsersDetailComponent {
   }
 
   onAddUserStoryPoints(storyPoints: number, onSuccessCb: onSuccessEditionCbType) {
-    console.log(typeof +storyPoints)
     this.usersFacade.setUserStoryPoints(+storyPoints, this.user.id, onSuccessCb);
   }
 }
