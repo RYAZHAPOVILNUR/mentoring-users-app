@@ -1,0 +1,16 @@
+<div class="container">
+  <form class="filter-wrapper">
+    <mat-form-field class="example-full-width">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name" [formControl]="nameFilter" />
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      (click)="onUsersFilter()"
+    >
+      Primary
+    </button>
+  </form>
+</div>
