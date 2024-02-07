@@ -10,11 +10,13 @@ import { CoreUiConfirmDialogComponent } from "@users/core/ui";
 import { UsersEntity } from "@users/core/data-access";
 
 type UsersListState = DeepReadonly<{
-  users: UsersVM[]
+  users: UsersVM[],
+  filteredUsers: UsersVM[]
 }>
 
 const initialState: UsersListState = {
-  users: []
+  users: [],
+  filteredUsers: []
 }
 
 @Injectable()
@@ -22,6 +24,7 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
   private readonly usersFacade = inject(UsersFacade);
   private readonly dialog = inject(MatDialog);
   public readonly users$ = this.select(({ users }) => users);
+  public readonly filteredUsers$ = this.select(({filteredUsers}) => filteredUsers);
   public readonly status$ = this.select(
     this.usersFacade.status$,
     (status) => status
@@ -32,6 +35,7 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
     super(initialState);
     this.usersFacade.init();
     this.setUsersFromGlobalToLocalStore();
+    this.setFilteredUsersFromGlobalRoLocalStore()
   }
 
   private setUsersFromGlobalToLocalStore(): void {
@@ -39,6 +43,14 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
       () => this.usersFacade.allUsers$.pipe(
         tap((users: UsersEntity[]) => this.patchUsers(users))
       )
+    )
+  }
+
+  private setFilteredUsersFromGlobalRoLocalStore(): void {
+    this.effect(
+        ()=> this.usersFacade.filteredUsers$.pipe(
+          tap((users: UsersEntity[]) => this.patchFilteredUsers(users))
+        )
     )
   }
 
@@ -50,6 +62,13 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
     })
   }
 
+  private patchFilteredUsers(filteredUsers:UsersEntity[]): void{
+    this.patchState({
+      filteredUsers: filteredUsers.map(
+          user => usersVMAdapter.entityToVM(user)
+      )
+    })
+  }
   public deleteUser(user: UsersVM): void {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
       data: { dialogText: `Вы уверены, что хотите удалить ${user.name}` },

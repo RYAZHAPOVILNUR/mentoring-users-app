@@ -2,11 +2,12 @@ import { Injectable, inject } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
-import { Observable, of, switchMap } from 'rxjs';
+import {delay, Observable, of, switchMap} from 'rxjs';
 import {UsersErrors} from "./users.reducer";
 import {onSuccessEditionCbType} from "./users.actions";
 import { selectLoggedUser } from '@auth/data-access';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import {UsersFilter} from "../../../../users-filters.model";
 
 @Injectable({providedIn: 'root'})
 export class UsersFacade {
@@ -22,6 +23,7 @@ export class UsersFacade {
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
   public readonly loggedUser$ = this.store.select(selectLoggedUser);
   public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError))
+  public readonly filteredUsers$  =this.store.select(UsersSelectors.selectFilteredUsers).pipe(delay(300))
   /**
    * Use the initialization action to perform one
    * or more tasks in your Effects.
@@ -57,5 +59,14 @@ export class UsersFacade {
 
   loadUser() {
     this.store.dispatch(UsersActions.loadUser())
+  }
+
+
+  initUsersFilters(usersFilters: UsersFilter[]){
+    this.store.dispatch(UsersActions.initUsersFilters({usersFilters: [...usersFilters]}))
+  }
+
+  updateUsersFilters(usersFilter: UsersFilter){
+    this.store.dispatch(UsersActions.updateUsersFilter({usersFilter: usersFilter}))
   }
 }
