@@ -1,26 +1,69 @@
-import { Injectable } from '@angular/core';
+import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap } from 'rxjs/operators';
-import { Observable, EMPTY, of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 import { MaterialsActions } from './materials.actions';
+import { ApiService } from '@users/core/http';
+import { MATERIAL_URL } from '../../../../util/constant';
+import { IFolder } from '../models/models';
 
+export const loadFolders = createEffect(() => {
+    const apiService = inject(ApiService);
+    const actions$ = inject(Actions);
 
-@Injectable()
-export class MaterialsEffects {
-
-  loadMaterialss$ = createEffect(() => {
-    return this.actions$.pipe(
-
+    return actions$.pipe(
       ofType(MaterialsActions.loadMaterialss),
-      concatMap(() =>
-        /** An EMPTY observable only emits completion. Replace with your own observable API request */
-        EMPTY.pipe(
-          map(data => MaterialsActions.loadMaterialssSuccess({ data })),
-          catchError(error => of(MaterialsActions.loadMaterialssFailure({ error }))))
-      )
-    );
-  });
+      switchMap(() =>
+        apiService.get<IFolder[]>(MATERIAL_URL).pipe(
+          map((folders: IFolder[]) => MaterialsActions.loadMaterialssSuccess({
+            folders
+          })),
+          catchError(error => {
+            console.error('Error', error);
+            return of(MaterialsActions.loadMaterialssFailure({ error }));
+          })
+        )
+      ));
+  }, { functional: true }
+);
+
+export const addFolder = createEffect(() => {
+    const apiService = inject(ApiService);
+    const actions$ = inject(Actions);
+
+    return actions$.pipe(
+      ofType(MaterialsActions.addMaterialsFolder),
+      switchMap(({ title }) =>
+        apiService.post<IFolder, { title: string }>(MATERIAL_URL, { title })
+          .pipe(
+            map((folder: IFolder) => MaterialsActions.addMaterialsFolderSuccess({ folder })),
+            catchError(error => {
+              console.error('Error', error);
+              return of(MaterialsActions.addMaterialsFolderFail(error));
+            })
+          )
+      ));
+  }, { functional: true }
+);
 
 
-  constructor(private actions$: Actions) {}
-}
+export const deleteFolder = createEffect(() => {
+    const apiService = inject(ApiService);
+    const actions$ = inject(Actions);
+
+    return actions$.pipe(
+      ofType(MaterialsActions.deleteMaterialsFolder),
+      switchMap(({ folderId }) =>
+        apiService.delete<{ folder_id: string }>(MATERIAL_URL + '/' + folderId)
+          .pipe(
+            map(() => MaterialsActions.deleteMaterialsSuccess()),
+            catchError(error => {
+              console.error('Error', error);
+              return of(MaterialsActions.deleteMaterialsFolderFail(error));
+            })
+          )
+      ));
+  }, { functional: true }
+);
+
+

@@ -1,8 +1,9 @@
-import { TasksContainerComponent } from './../../../../libs/users/task/src/lib/tasks-view-container/tasks-view-container.component';
 import { Route } from '@angular/router';
-import { authGuard, adminGuard } from '@auth/data-access';
+import { adminGuard, authGuard } from '@auth/data-access';
 import { AuthorizedUserLayoutComponent } from './authorized-user-layout/authorized-user-layout.component';
-import { UnauthorizedUserLayoutComponent } from './unauthorized-user-layout-component/unauthorized-user-layout-component.component';
+import {
+  UnauthorizedUserLayoutComponent
+} from './unauthorized-user-layout-component/unauthorized-user-layout-component.component';
 import { canDeactivateFormComponent } from '@users/core/utils';
 
 const layoutAgnosticComponents = [
@@ -56,13 +57,14 @@ export const appRoutes: Route[] = [
         path: 'article-editor',
         loadComponent: () =>
           import('@users/users/articles/articles-create').then(
-            (c) => c.ArticlesCreateContainerComponent
+            c => c.ArticlesCreateContainerComponent
           ),
         canDeactivate: [canDeactivateFormComponent],
       },
       {
         path: 'materials',
-        loadComponent: () => import('@users/materials').then(c => c.UsersMaterialsComponent),
+        loadComponent: () => import('@users/materials/materials-list-container').then
+        (c => c.MaterialsListContainerComponent),
       },
       {
         path: 'articles',

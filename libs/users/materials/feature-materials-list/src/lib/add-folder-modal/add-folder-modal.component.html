@@ -1,0 +1,10 @@
+<div mat-dialog-content>
+  <form [formGroup]="folderFormGroup">
+    <mat-form-field class="example-form-field">
+      <mat-label>Add new folder</mat-label>
+      <input matInput type="text" formControlName="folderName" maxlength="10">
+    </mat-form-field>
+  </form>
+</div>
+<button mat-button [mat-dialog-close]="folderFormGroup.value">Add Folder</button>
+<button mat-button mat-dialog-close>Close</button>

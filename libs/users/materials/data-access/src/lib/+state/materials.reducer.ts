@@ -1,25 +1,41 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { MaterialsActions } from './materials.actions';
+import { IFolder } from '../models/models';
 
 export const materialsFeatureKey = 'materials';
 
-export interface State {
-
+export interface MaterialPartialState {
+  readonly [materialsFeatureKey]: MaterialState;
 }
 
-export const initialState: State = {
+export interface MaterialState {
+  isLoading: boolean;
+  folders: IFolder [];
+}
 
+export const initialState: MaterialState = {
+  isLoading: false,
+  folders: []
 };
 
-export const reducer = createReducer(
-  initialState,
-  on(MaterialsActions.loadMaterialss, state => state),
-  on(MaterialsActions.loadMaterialssSuccess, (state, action) => state),
-  on(MaterialsActions.loadMaterialssFailure, (state, action) => state),
-);
-
 export const materialsFeature = createFeature({
-  field: materialsFeatureKey,
-  reducer,
-});
-
+    name: materialsFeatureKey,
+    reducer: createReducer(
+      initialState,
+      on(MaterialsActions.loadMaterialss, state => state),
+      on(MaterialsActions.loadMaterialssSuccess, (state, { folders }) =>
+        ({ ...state, isLoading: false, folders })),
+      on(MaterialsActions.loadMaterialssFailure, state => state),
+      on(MaterialsActions.addMaterialsFolder, state => ({ ...state, isLoading: true })),
+      on(MaterialsActions.addMaterialsFolderSuccess, (state, { folder }) =>
+        ({
+          ...state, isLoading: false, folders: [...state.folders, folder]
+        })),
+      on(MaterialsActions.deleteMaterialsFolder, (state, { folderId }) => ({
+        ...state,
+        folders: state.folders.filter(folder => +folder.id !== folderId
+        )
+      }))
+    )
+  }
+);

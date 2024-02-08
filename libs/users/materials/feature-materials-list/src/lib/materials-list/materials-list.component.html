@@ -1,0 +1,15 @@
+<ng-container *ngIf="foldersVM.isLoading; else loadingResult">
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+
+<ng-template #loadingResult>
+  <ng-container *ngIf="foldersVM.folders">
+    <mat-grid-list cols="6" rowHeight="1:1">
+      <mat-grid-tile *ngFor="let fold of foldersVM.folders">
+        <materials-folder [folder]="fold"
+                          (folderId)=upFolderId($event)
+        />
+      </mat-grid-tile>
+    </mat-grid-list>
+  </ng-container>
+</ng-template>
