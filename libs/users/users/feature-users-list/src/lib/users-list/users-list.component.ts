@@ -26,6 +26,9 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
   ]
 })
 export class UsersListComponent {
+
+
+
   @Input({ required: true })
   vm!: UsersListVM;
 

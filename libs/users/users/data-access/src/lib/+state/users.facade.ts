@@ -36,7 +36,7 @@ export class UsersFacade {
   }
 
   setUsersFilter( filter: {name: string} ) {
-    this.store.dispatch(UsersActions.deleteUser({ id }))
+    this.store.dispatch(UsersActions.setUsersFilter({ filter }))
 }
 
   addUser(userData: CreateUserDTO) {
