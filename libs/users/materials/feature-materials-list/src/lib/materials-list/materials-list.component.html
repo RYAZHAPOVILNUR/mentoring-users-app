@@ -6,9 +6,7 @@
   <ng-container *ngIf="foldersVM.folders">
     <mat-grid-list cols="6" rowHeight="1:1">
       <mat-grid-tile *ngFor="let fold of foldersVM.folders">
-        <materials-folder [folder]="fold"
-                          (folderId)=upFolderId($event)
-        />
+        <materials-folder [folder]="fold" />
       </mat-grid-tile>
     </mat-grid-list>
   </ng-container>

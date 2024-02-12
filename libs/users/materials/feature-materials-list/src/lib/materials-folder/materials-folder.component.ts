@@ -1,9 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { IFolder } from '../../../../data-access/src/lib/models/models';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MaterialsService } from '../../../../service/materialsService';
 
 @Component({
   selector: 'materials-folder',
@@ -15,10 +16,14 @@ import { MatButtonModule } from '@angular/material/button';
 export class MaterialsFolderComponent {
   @Input({ required: true })
   folder!: IFolder;
-  @Output()
-  folderId = new EventEmitter<number>();
+  private readonly folderService = inject(MaterialsService);
 
   sendFolderId(folderId: string): void {
-    this.folderId.emit(+folderId);
+    this.folderService.setFolderId(+folderId);
+  }
+
+  openFolder() {
+    console.log(1);
   }
 }
+

@@ -1,6 +1,6 @@
 <mat-card class="folder">
   <mat-card-content>{{ folder.title }}</mat-card-content>
-  <mat-icon>folder</mat-icon>
+  <mat-icon  (dblclick)="openFolder()">folder</mat-icon>
   <div class="delete-button-container">
     <button mat-fab color="primary" aria-label="delete folder"
     (click)="sendFolderId(folder.id)"

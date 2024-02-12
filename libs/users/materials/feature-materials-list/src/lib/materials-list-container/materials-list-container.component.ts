@@ -10,6 +10,8 @@ import { AddFolderModalComponent } from '../add-folder-modal/add-folder-modal.co
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { DeleteFolderModalComponent } from '../delete-folder-modal/delete-folder-modal.component';
+import { MaterialsService } from '../../../../service/materialsService';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'lib-materials-list-container',
@@ -26,9 +28,18 @@ export class MaterialsListContainerComponent {
   public dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
   public folderName!: string;
+  private materialService = inject(MaterialsService);
 
   constructor(public snackBar: MatSnackBar) {
     this.materialsFacade.init();
+
+    this.materialService.folderId.pipe(
+      tap(folderId => {
+          if (!folderId) return;
+          this.deleteFolder(folderId);
+        }
+      )
+    ).subscribe();
   }
 
   private openSnackBar(snackBarLabel: string): void {
@@ -44,20 +55,27 @@ export class MaterialsListContainerComponent {
     });
     addFolderRef.afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(({ folderName }) => {
-        this.materialsFacade.addNewFolder(folderName);
-        this.openSnackBar(`Folder ${folderName} was added`);
-      });
+      .pipe(
+        tap(({ folderName }) => {
+          this.materialsFacade.addNewFolder(folderName);
+          this.openSnackBar(`Folder ${folderName} was added`);
+        })
+      )
+      .subscribe();
   }
 
   deleteFolder(folderId: number) {
     const deleteFolderRef: MatDialogRef<DeleteFolderModalComponent> = this.dialog.open(DeleteFolderModalComponent);
     deleteFolderRef.afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((value) => {
-        if (!value) return;
-        this.materialsFacade.deleteFolder(folderId);
-        this.openSnackBar(`Folder ${folderId} was removed`);
-      });
+      .pipe(
+        tap(confirmDelete => {
+          if (!confirmDelete) return;
+          this.materialsFacade.deleteFolder(folderId);
+          this.openSnackBar(`Folder ${folderId} was removed`);
+          this.materialService.setFolderId(0);
+        })
+      )
+      .subscribe();
   }
 }

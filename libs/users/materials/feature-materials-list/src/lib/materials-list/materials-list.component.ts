@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  Output,
-  ViewEncapsulation
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialsFolderComponent } from '../materials-folder/materials-folder.component';
 import { IFolder } from '../../../../data-access/src/lib/models/models';
@@ -28,11 +20,4 @@ export class MaterialsListComponent {
     folders: IFolder[],
     isLoading: boolean
   };
-
-  @Output()
-  folderId = new EventEmitter<number>();
-
-  upFolderId(folderId: number) {
-    this.folderId.emit(folderId);
-  }
 }
