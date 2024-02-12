@@ -9,13 +9,16 @@ export const USERS_FEATURE_KEY = 'users';
 
 export type UsersErrors = {
   status: number,
-  [key: string]: unknown
+  [key: string]: unknown,
 }
 
 export interface UsersState extends EntityState<UsersEntity> {
   selectedId?: string | number; // which Users record has been selected
   status: LoadingStatus;
   error: UsersErrors | null;
+  usersFilter: {
+    email: string
+  };
 }
 
 export interface UsersPartialState {
@@ -28,7 +31,10 @@ export const usersAdapter: EntityAdapter<UsersEntity> =
 export const initialUsersState: UsersState = usersAdapter.getInitialState({
   // set initial required properties
   status: 'init',
-  error: null
+  error: null,
+  usersFilter: {
+    email: ''
+  }
 });
 
 const reducer = createReducer(
@@ -51,12 +57,12 @@ const reducer = createReducer(
   on(UsersActions.addUserSuccess, (state, { userData }) =>
     usersAdapter.addOne({ ...userData }, { ...state })
   ),
-  on(UsersActions.editUserSuccess, (state, {userData}) => usersAdapter.updateOne({
+  on(UsersActions.editUserSuccess, (state, { userData }) => usersAdapter.updateOne({
       id: userData.id,
       changes: userData
     }, state)
   ),
-  on(UsersActions.editUserFailed, (state, {error}) => ({
+  on(UsersActions.editUserFailed, (state, { error }) => ({
     ...state, status: 'error' as const, error
   })),
   on(UsersActions.loadUser, (state) => ({
@@ -65,13 +71,17 @@ const reducer = createReducer(
   })),
   on(UsersActions.loadUserSuccess, (state, { userData }) =>
     usersAdapter.addOne({ ...userData }, { ...state, status: 'loaded' as const })),
-  on(UsersActions.loadUserFailed, (state, {error}) => ({
+  on(UsersActions.loadUserFailed, (state, { error }) => ({
     ...state,
     status: 'error' as const, error
   })),
-  on(UsersActions.updateUserStatus, (state, {status}) => ({
+  on(UsersActions.updateUserStatus, (state, { status }) => ({
     ...state, status
   })),
+  on(UsersActions.setUsersFilter, (state, { email }) => ({
+    ...state,
+    usersFilter: { email }
+  }))
 );
 
 export function usersReducer(state: UsersState | undefined, action: Action) {

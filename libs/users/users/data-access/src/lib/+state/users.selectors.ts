@@ -23,6 +23,17 @@ export const selectAllUsers = createSelector(
   (state: UsersState) => selectAll(state)
 );
 
+export const usersFilterSelector = createSelector(
+  selectUsersState,
+  (state: UsersState) => state.usersFilter
+);
+
+export const filteredUsers = createSelector(
+  selectAllUsers,
+  usersFilterSelector,
+  (users, usersFilter) => users.filter(user => user.email.includes(usersFilter.email.trim()))
+);
+
 export const selectUsersEntities = createSelector(
   selectUsersState,
   (state: UsersState) => selectEntities(state)
@@ -42,10 +53,10 @@ export const selectEntity = createSelector(
 export const selectUserById = (id: number) => createSelector(
   selectUsersEntities,
   (entities) => entities[id]
-)
+);
 
 export const selectOpenedUser = createSelector(
   selectRouteParams,
   selectUsersEntities,
-  ({id}, entities) => entities[id] || null
-)
+  ({ id }, entities) => entities[id] || null
+);
