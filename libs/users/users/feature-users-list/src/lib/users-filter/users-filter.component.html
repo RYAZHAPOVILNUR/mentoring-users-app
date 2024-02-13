@@ -1,10 +1,10 @@
 <form [formGroup]='form'>
   <mat-form-field>
     <mat-label class='form-label'>Email</mat-label>
-    <input matInput formControlName="email" required />
+    <input matInput formControlName="email" />
   </mat-form-field>
 
   <div mat-dialog-actions>
-    <button mat-flat-button color="accent">Search</button>
+    <button mat-flat-button color="accent" (click)='onUsersFilter()'>Search</button>
   </div>
 </form>

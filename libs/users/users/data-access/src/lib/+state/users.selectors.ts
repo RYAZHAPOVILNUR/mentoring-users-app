@@ -23,14 +23,14 @@ export const selectAllUsers = createSelector(
   (state: UsersState) => selectAll(state)
 );
 
-export const usersFilterSelector = createSelector(
+export const selectUsersFilter = createSelector(
   selectUsersState,
   (state: UsersState) => state.usersFilter
 );
 
-export const filteredUsers = createSelector(
+export const selectFilteredUsers = createSelector(
   selectAllUsers,
-  usersFilterSelector,
+  selectUsersFilter,
   (users, usersFilter) => users.filter(user => user.email.includes(usersFilter.email.trim()))
 );
 
