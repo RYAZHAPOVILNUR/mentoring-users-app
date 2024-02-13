@@ -63,6 +63,5 @@ export class UsersFacade {
 
   setUsersFilter(email: string): void {
     this.store.dispatch(UsersActions.setUsersFilter({ email }));
-    console.log(this.selectedUsers$)
   }
 }

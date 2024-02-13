@@ -15,12 +15,12 @@ import { UsersFacade } from '@users/users/data-access';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersFilterComponent {
+  private readonly usersFacade = inject(UsersFacade);
   private readonly formBuilder = inject(FormBuilder);
   public form: FormGroup = this.formBuilder.group({
       email: ['']
     }
   );
-  private readonly usersFacade = inject(UsersFacade);
 
   public onUsersFilter(): void {
     this.usersFacade.setUsersFilter(this.form.get('email')?.value)
