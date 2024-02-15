@@ -42,4 +42,6 @@ export const loadUserFailed = createAction('[Users/Api] Load User Failed', props
 
 export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{ status: LoadingStatus }>());
 
-export const setUsersFilter = createAction('[Users Page] Set Users Filter', props<{ email: string }>());
+export const setUsersFilter = createAction('[Users Page] Set Users Filter', props<{
+  filters: { type: string, value: string }[]
+}>());

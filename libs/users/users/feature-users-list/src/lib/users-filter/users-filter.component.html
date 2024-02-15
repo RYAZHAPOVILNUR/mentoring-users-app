@@ -1,10 +1,18 @@
-<form [formGroup]='form'>
-  <mat-form-field>
-    <mat-label class='form-label'>Email</mat-label>
-    <input matInput formControlName="email" />
-  </mat-form-field>
+<form [formGroup]='form' (ngSubmit)='onUsersFilter()'>
+  <fieldset formArrayName="filters">
+    <div *ngFor="let filter of filters.controls; let i = index" formGroupName="{{i}}">
+      <mat-form-field>
+        <mat-label class='form-label'>{{ filter.value.type === 'email' ? 'Email' : 'Name' }}</mat-label>
+        <input matInput formControlName="value" />
+      </mat-form-field>
 
-  <div mat-dialog-actions>
-    <button mat-flat-button color="accent" (click)='onUsersFilter()'>Search</button>
-  </div>
+      <button mat-button type='button' *ngIf='filters.length > 1' (click)="removeFilterField(i)">х</button>
+    </div>
+
+    <button mat-button type='button' *ngIf='filters.length < 2 ' (click)="addFilterField()">+ Add {{ getAddFieldButtonLabel() }} Field</button>
+    <div mat-dialog-actions>
+      <button mat-flat-button type='submit' color="accent">Search</button>
+      <button mat-flat-button type='button' (click)='onClearFilters()'>Clear</button>
+    </div>
+  </fieldset>
 </form>
