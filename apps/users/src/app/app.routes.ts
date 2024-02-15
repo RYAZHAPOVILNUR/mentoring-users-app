@@ -5,6 +5,7 @@ import {
   UnauthorizedUserLayoutComponent
 } from './unauthorized-user-layout-component/unauthorized-user-layout-component.component';
 import { canDeactivateFormComponent } from '@users/core/utils';
+import { ResourcesListContainerComponent } from '@users/materials/resources-list-container';
 
 const layoutAgnosticComponents = [
   {
@@ -65,6 +66,13 @@ export const appRoutes: Route[] = [
         path: 'materials',
         loadComponent: () => import('@users/materials/materials-list-container').then
         (c => c.MaterialsListContainerComponent),
+      },
+      {
+        path: 'folder/:id',
+        loadComponent: () =>
+          import('@users/materials/resources-list-container').then(
+            (c) => c.ResourcesListContainerComponent
+          ),
       },
       {
         path: 'articles',

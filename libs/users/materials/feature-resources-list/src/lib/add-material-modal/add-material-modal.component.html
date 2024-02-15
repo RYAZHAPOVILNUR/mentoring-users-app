@@ -1,0 +1,18 @@
+<div mat-dialog-content>
+  <form [formGroup]="materialFormGroup">
+    <mat-label>Select Material Type</mat-label>
+    <mat-select formControlName="materialType">
+      <mat-option *ngFor="let type of Object.keys(MATERIAL_TYPE)" [value]="type">{{ type }}</mat-option>
+    </mat-select>
+    <mat-form-field class="example-form-field">
+      <mat-label>Add Material Title</mat-label>
+      <input matInput type="text" formControlName="title" maxlength="10">
+    </mat-form-field>
+    <mat-form-field class="example-form-field">
+      <mat-label>Add Material Link</mat-label>
+      <input matInput type="text" formControlName="material_link" >
+    </mat-form-field>
+  </form>
+</div>
+<button mat-button [mat-dialog-close]="materialFormGroup.value">Add Material</button>
+<button mat-button mat-dialog-close>Close</button>

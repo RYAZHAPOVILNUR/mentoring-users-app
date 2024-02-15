@@ -8,10 +8,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddFolderModalComponent } from '../add-folder-modal/add-folder-modal.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { DeleteFolderModalComponent } from '../delete-folder-modal/delete-folder-modal.component';
+import {
+  ConfirmCustomModalComponent
+} from '../../../../../../core/ui/src/lib/confirm-custom-modal/confirm-custom-modal.component';
 import { MaterialsService } from '../../../../service/materialsService';
 import { tap } from 'rxjs';
+import { DELETE_ITEM_TYPE, MODAL_CONFIRM_TEXT } from '../../../../util/constant';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { IDeleteItem } from '../../../../data-access/src/lib/models/models';
 
 @Component({
   selector: 'lib-materials-list-container',
@@ -24,56 +28,51 @@ import { tap } from 'rxjs';
 export class MaterialsListContainerComponent {
   private readonly materialsFacade = inject(MaterialsFacade);
   public readonly folders$ = this.materialsFacade.folders$;
-  public readonly isLoading$ = this.materialsFacade.isLoading$;
+  public readonly isLoading$ = this.materialsFacade.isLoadingFolders$;
   public dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
-  public folderName!: string;
   private materialService = inject(MaterialsService);
 
-  constructor(public snackBar: MatSnackBar) {
-    this.materialsFacade.init();
+  constructor() {
+    this.materialsFacade.loadMaterialFolders();
 
-    this.materialService.folderId.pipe(
-      tap(folderId => {
-          if (!folderId) return;
-          this.deleteFolder(folderId);
+    this.materialService.deleteId.pipe(
+      tap((folder: IDeleteItem) => {
+          if (!folder.deleteId && folder.type !== DELETE_ITEM_TYPE.FOLDER) return;
+          this.deleteFolder(folder);
         }
       )
     ).subscribe();
   }
 
-  private openSnackBar(snackBarLabel: string): void {
-    this.snackBar.open(snackBarLabel,
-      'Dismiss', {
-        duration: 3000
-      });
-  }
-
   openAddFolderDialog(): void {
-    const addFolderRef: MatDialogRef<AddFolderModalComponent> = this.dialog.open(AddFolderModalComponent, {
-      data: { folderName: this.folderName }
-    });
+    const addFolderRef: MatDialogRef<AddFolderModalComponent> = this.dialog.open(AddFolderModalComponent);
     addFolderRef.afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .pipe(
-        tap(({ folderName }) => {
+        tap(({ folderName }): void => {
           this.materialsFacade.addNewFolder(folderName);
-          this.openSnackBar(`Folder ${folderName} was added`);
+          this.materialService.openSnackBar(`Folder ${folderName} was added`);
         })
       )
       .subscribe();
   }
 
-  deleteFolder(folderId: number) {
-    const deleteFolderRef: MatDialogRef<DeleteFolderModalComponent> = this.dialog.open(DeleteFolderModalComponent);
+  deleteFolder(folder: IDeleteItem) {
+    const deleteFolderRef: MatDialogRef<ConfirmCustomModalComponent> = this.dialog.open(ConfirmCustomModalComponent, {
+      data: {
+        dialogDescription: MODAL_CONFIRM_TEXT.FOLDER_DELETE.DESCRIPTION,
+        dialogButtonText: MODAL_CONFIRM_TEXT.FOLDER_DELETE.BUTTON_TEXT
+      }
+    });
     deleteFolderRef.afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .pipe(
         tap(confirmDelete => {
           if (!confirmDelete) return;
-          this.materialsFacade.deleteFolder(folderId);
-          this.openSnackBar(`Folder ${folderId} was removed`);
-          this.materialService.setFolderId(0);
+          this.materialsFacade.deleteFolder(folder);
+          this.materialService.openSnackBar(`Folder ${folder.title} was removed`);
+          this.materialService.setZeroId();
         })
       )
       .subscribe();

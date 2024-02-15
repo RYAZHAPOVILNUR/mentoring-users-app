@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DeleteFolderModalComponent } from './delete-folder-modal.component';
+import { ConfirmCustomModalComponent } from './confirm-custom-modal.component';
 
 describe('DeleteFolderModalComponent', () => {
-  let component: DeleteFolderModalComponent;
-  let fixture: ComponentFixture<DeleteFolderModalComponent>;
+  let component: ConfirmCustomModalComponent;
+  let fixture: ComponentFixture<ConfirmCustomModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DeleteFolderModalComponent],
+      imports: [ConfirmCustomModalComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(DeleteFolderModalComponent);
+    fixture = TestBed.createComponent(ConfirmCustomModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

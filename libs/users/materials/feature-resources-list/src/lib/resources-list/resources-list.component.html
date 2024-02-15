@@ -1,12 +1,12 @@
-<ng-container *ngIf="foldersVM.isLoading; else loadingResult">
+<ng-container *ngIf="materialsVM.isLoading; else loadingResult">
   <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
 </ng-container>
 
 <ng-template #loadingResult>
-  <ng-container *ngIf="foldersVM.folders">
+  <ng-container *ngIf="materialsVM.materials">
     <mat-grid-list cols="4" rowHeight="1:1">
-      <mat-grid-tile *ngFor="let fold of foldersVM.folders">
-        <materials-folder [folder]="fold" />
+      <mat-grid-tile *ngFor="let material of materialsVM.materials">
+        <resource-item [material]="material" />
       </mat-grid-tile>
     </mat-grid-list>
   </ng-container>

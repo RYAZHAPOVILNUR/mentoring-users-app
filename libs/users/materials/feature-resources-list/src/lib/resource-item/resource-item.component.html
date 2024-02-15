@@ -1,0 +1,13 @@
+<mat-card class="material">
+  <mat-card-content>{{ material.title }}</mat-card-content>
+  <mat-card-content>{{ getFormatedDate(material.created_at) }}</mat-card-content>
+  <mat-icon>{{ getResourceIcon(material.material_link) }}</mat-icon>
+  <div class="delete-button-container">
+    <button mat-fab color="primary" aria-label="delete material"
+            (click)="sendMaterialId({deleteId:+material.id, title:material.title, type:folderType})"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</mat-card>
+

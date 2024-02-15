@@ -4,23 +4,23 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { MaterialsActions } from './materials.actions';
 import { ApiService } from '@users/core/http';
-import { MATERIAL_URL } from '../../../../util/constant';
-import { IFolder } from '../models/models';
+import { FOLDER_URL, MATERIAL_URL } from '../../../../util/constant';
+import { IFolder, IMaterial, IMaterialPost } from '../models/models';
 
 export const loadFolders = createEffect(() => {
     const apiService = inject(ApiService);
     const actions$ = inject(Actions);
 
     return actions$.pipe(
-      ofType(MaterialsActions.loadMaterialss),
+      ofType(MaterialsActions.loadMaterialsFolders),
       switchMap(() =>
-        apiService.get<IFolder[]>(MATERIAL_URL).pipe(
-          map((folders: IFolder[]) => MaterialsActions.loadMaterialssSuccess({
+        apiService.get<IFolder[]>(FOLDER_URL).pipe(
+          map((folders: IFolder[]) => MaterialsActions.loadMaterialsFoldersSuccess({
             folders
           })),
           catchError(error => {
             console.error('Error', error);
-            return of(MaterialsActions.loadMaterialssFailure({ error }));
+            return of(MaterialsActions.loadMaterialsFoldersFailure({ error }));
           })
         )
       ));
@@ -34,7 +34,7 @@ export const addFolder = createEffect(() => {
     return actions$.pipe(
       ofType(MaterialsActions.addMaterialsFolder),
       switchMap(({ title }) =>
-        apiService.post<IFolder, { title: string }>(MATERIAL_URL, { title })
+        apiService.post<IFolder, { title: string }>(FOLDER_URL, { title })
           .pipe(
             map((folder: IFolder) => MaterialsActions.addMaterialsFolderSuccess({ folder })),
             catchError(error => {
@@ -53,10 +53,10 @@ export const deleteFolder = createEffect(() => {
 
     return actions$.pipe(
       ofType(MaterialsActions.deleteMaterialsFolder),
-      switchMap(({ folderId }) =>
-        apiService.delete<{ folder_id: string }>(MATERIAL_URL + '/' + folderId)
+      switchMap(({ folder: { deleteId } }) =>
+        apiService.delete<{ folder_id: string }>(FOLDER_URL + '/' + deleteId)
           .pipe(
-            map(() => MaterialsActions.deleteMaterialsSuccess()),
+            map(() => MaterialsActions.deleteMaterialsFolderSuccess()),
             catchError(error => {
               console.error('Error', error);
               return of(MaterialsActions.deleteMaterialsFolderFail(error));
@@ -66,4 +66,63 @@ export const deleteFolder = createEffect(() => {
   }, { functional: true }
 );
 
+export const loadMaterials = createEffect(() => {
+    const apiService = inject(ApiService);
+    const actions$ = inject(Actions);
 
+    return actions$.pipe(
+      ofType(MaterialsActions.loadMaterialss),
+      switchMap(() =>
+        apiService.get<IMaterial[]>(MATERIAL_URL).pipe(
+          map((materials: IMaterial[]) => MaterialsActions.loadMaterialssSuccess({
+            materials
+          })),
+          catchError(error => {
+            console.error('Error', error);
+            return of(MaterialsActions.loadMaterialssFailure({ error }));
+          })
+        )
+      ));
+  }, { functional: true }
+);
+
+export const addMaterial = createEffect(() => {
+    const apiService = inject(ApiService);
+    const actions$ = inject(Actions);
+
+    return actions$.pipe(
+      ofType(MaterialsActions.addMaterial),
+      switchMap(({ material }) => {
+        console.log(material);
+        return apiService.post<IMaterial, IMaterialPost>(MATERIAL_URL, material)
+          .pipe(
+            map((material: IMaterial) => MaterialsActions.addMaterialSuccess({ material })),
+            catchError(error => {
+              console.error('Error', error);
+              return of(MaterialsActions.addMaterialFail(error));
+            })
+          );
+      }));
+  }, { functional: true }
+);
+
+
+export const deleteMaterial = createEffect(() => {
+    const apiService = inject(ApiService);
+    const actions$ = inject(Actions);
+
+    return actions$.pipe(
+      ofType(MaterialsActions.deleteMaterial),
+      switchMap(({ deleteItem: { deleteId } }) =>{
+        console.log(deleteId);
+       return  apiService.delete<{ deleteId: number }>(MATERIAL_URL + '/' + deleteId)
+          .pipe(
+            map(() => MaterialsActions.deleteMaterialSuccess()),
+            catchError(error => {
+              console.error('Error', error);
+              return of(MaterialsActions.deleteMaterialFail(error));
+            })
+          )}
+      ));
+  }, { functional: true }
+);
