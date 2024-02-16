@@ -1,0 +1,7 @@
+<div class="folders-list-container">
+  <ng-container *ngIf="obs | async as folders; else loading">
+    <folders-list [folders]="folders"></folders-list>
+  </ng-container>
+  <ng-template #loading>...LOADING...</ng-template>
+  <folders-add-button (click)="testClick()"></folders-add-button>
+</div>

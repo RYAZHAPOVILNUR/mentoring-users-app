@@ -1,5 +1,5 @@
 {
-  "name": "users-materials-data-access",
+  "name": "data-access",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/users/materials/data-access/src",
   "prefix": "users",
