@@ -1,9 +1,18 @@
-<div>
-  <p>materials-content works!</p>
-  <pdf-viewer
-    [src]="testLink"
-    [render-text]="true"
-    [original-size]="false"
-    style="width: 400px; height: 500px"
-  ></pdf-viewer>
+<div class="content-pdf" *ngIf="dialogData.contentType === 'pdf'">
+  <div class="content-pdf-content">
+    <p>{{ dialogData.title }}</p>
+    <pdf-viewer
+      [src]="dialogData.material_link"
+      [render-text]="true"
+      [original-size]="true"
+    ></pdf-viewer>
+  </div>
+  <mat-icon mat-dialog-close>close</mat-icon>
+</div>
+<div *ngIf="dialogData.contentType === 'mp3'">
+  <audio controls [src]="'https://muz8.z3.fm/b/b4/cs_16_nonstop_public_server_-_muzika_dlja_trenerovok_(zf.fm).mp3'"></audio>
+  <p>ITS MP3</p>
+</div>
+<div *ngIf="dialogData.contentType === 'youtube'">
+  <p>ITS YOUTUBE</p>
 </div>

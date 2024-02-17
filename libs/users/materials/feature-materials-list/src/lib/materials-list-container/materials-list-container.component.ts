@@ -67,7 +67,8 @@ export class MaterialsListContainerComponent implements OnInit {
 
   public openMaterial(eventData: ContentModel): void {
     const dialogRef: MatDialogRef<MaterialsContentComponent> = this.dialog.open(MaterialsContentComponent, {
-      data: eventData
+      data: eventData,
+      height: '80%'
     });
 
     dialogRef.afterClosed()
