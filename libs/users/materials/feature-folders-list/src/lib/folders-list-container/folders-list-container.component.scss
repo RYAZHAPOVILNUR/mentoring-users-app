@@ -1,3 +1,14 @@
 .folders-list-container {
   position: relative;
 }
+mat-card {
+  height: 100px;
+  justify-content: center;
+
+  mat-card-content {
+    font-size: 24px;
+    color: red;
+    line-height: 1.2;
+  }
+}
+

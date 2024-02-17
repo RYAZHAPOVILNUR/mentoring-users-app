@@ -1,2 +1,16 @@
-<p>materials-list works!</p>
-<materials-card></materials-card>
+<div class="materials-list">
+  <div class="materials-list-back">
+    <mat-icon (click)="navigateBack()">arrow_back</mat-icon>
+    <p>{{ currentFolderData?.title }}</p>
+  </div>
+  <ng-container *ngIf="materials.length > 0; else empty">
+    <div class="materials-list-cards">
+      <materials-card (openMaterialEmit)="onOpenMaterialEmit($event)" (removeMaterialEmit)="onRemoveMaterial($event)" *ngFor="let material of materials" [materialItem]="material"></materials-card>
+    </div>
+  </ng-container>
+  <ng-template #empty>
+    <mat-card>
+      <mat-card-content>Вы пока еще не загрузили ни одного файла!</mat-card-content>
+    </mat-card>
+  </ng-template>
+</div>

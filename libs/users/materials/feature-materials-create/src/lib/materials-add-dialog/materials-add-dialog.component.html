@@ -1,1 +1,25 @@
-<p>materials-add-dialog works!</p>
+<h1 mat-dialog-title>Добавление нового учебного материала</h1>
+<div mat-dialog-content>
+  <form [formGroup]="formGroup">
+    <div class="dialog-content">
+      <mat-form-field>
+        <mat-label>Тип учебного материала</mat-label>
+        <mat-select formControlName="type">
+          <mat-option *ngFor="let materialType of materialTypes" [value]="materialType">{{ materialType }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="title" matInput placeholder="Название*">
+        <mat-error>Название обязательно</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="link" matInput placeholder="Ссылка*">
+        <mat-error>Ссылка обязательна</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Отмена</button>
+  <button [disabled]="formGroup.invalid" mat-raised-button color="primary" (click)="add()">Сохранить</button>
+</div>

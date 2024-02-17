@@ -1,7 +1,22 @@
 <div class="folders-list-container">
-  <ng-container *ngIf="obs | async as folders; else loading">
-    <folders-list [folders]="folders"></folders-list>
+  <ng-container *ngrxLet="{
+    folders: folders$,
+    loadingStatus: loadingStatus$
+    } as vm"
+  >
+    <ng-container [ngSwitch]="vm.loadingStatus">
+      <ng-container *ngSwitchCase="'loading'">
+        <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+      </ng-container>
+      <ng-container *ngSwitchCase="'loaded'">
+        <folders-list (removeFolderEmit)="removeFolder($event)" (openFolderEmit)="openFolder($event)" [folders]="vm.folders"></folders-list>
+      </ng-container>
+      <ng-container *ngSwitchCase="'error'">
+        <mat-card>
+          <mat-card-content>Произошла ошибка! Приносим свои извинения! Пожалуйста, повторите позже!</mat-card-content>
+        </mat-card>
+      </ng-container>
+    </ng-container>
   </ng-container>
-  <ng-template #loading>...LOADING...</ng-template>
-  <folders-add-button (click)="testClick()"></folders-add-button>
+  <folders-add-button (createNewFolderEmit)="createNewFolder($event)" matTooltip="Добавить новую папку" matTooltipPosition="above"></folders-add-button>
 </div>

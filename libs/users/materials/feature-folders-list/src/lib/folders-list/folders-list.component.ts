@@ -1,6 +1,13 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';
+import { Folder } from '@users/materials/data-access';
 
 @Component({
   selector: 'folders-list',
@@ -12,5 +19,16 @@ import { FoldersCardComponent } from '../folders-card/folders-card.component';
 })
 export class FoldersListComponent {
   @Input({ required: true })
-  public folders: string[] = [];
+  public folders: Folder[] = [];
+  @Output()
+  public removeFolderEmit: EventEmitter<{ folderId: number, folderTitle: string }> = new EventEmitter<{ folderId: number, folderTitle: string }>();
+  @Output()
+  public openFolderEmit: EventEmitter<number> = new EventEmitter<number>();
+
+  public onRemoveFolder(eventData: { folderId: number, folderTitle: string }): void {
+    this.removeFolderEmit.emit(eventData);
+  }
+  public onOpenFolder(id: number): void {
+    this.openFolderEmit.emit(id);
+  }
 }

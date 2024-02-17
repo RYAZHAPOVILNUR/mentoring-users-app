@@ -1,0 +1,21 @@
+h1 {
+  text-align: center;
+}
+.materials-remove-dialog-actions {
+  justify-content: center;
+  column-gap: 35px;
+  padding-bottom: 20px;
+
+  mat-icon {
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+    font-size: 50px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.07);;
+    }
+  }
+}

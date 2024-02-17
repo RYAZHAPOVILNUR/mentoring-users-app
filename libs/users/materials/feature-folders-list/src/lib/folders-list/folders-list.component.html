@@ -1,3 +1,3 @@
 <div class="folders-list">
-  <folders-card *ngFor="let folder of folders"></folders-card>
+  <folders-card *ngFor="let folder of folders" (removeFolderEmit)="onRemoveFolder($event)" (openFolderEmit)="onOpenFolder($event)" [folder]="folder"></folders-card>
 </div>

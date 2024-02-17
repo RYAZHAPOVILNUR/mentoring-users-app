@@ -1,6 +1,7 @@
-import { createAction, createActionGroup, emptyProps, props } from '@ngrx/store';
-import { MaterialsEntity } from './materials.models';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { Folder } from '../models/folder.model';
+import { Material } from '../models/material.model';
+import { MaterialCreate } from '../models/material-create.model';
 
 
 export const foldersActions = createActionGroup({
@@ -8,18 +9,35 @@ export const foldersActions = createActionGroup({
   events: {
     loadFolders: emptyProps(),
     loadFoldersSuccess: props<{ folders: Folder[] }>(),
-    loadFoldersFailed: props<{ error: Error }>()
+    loadFoldersFailed: props<{ error: Error }>(),
+
+    createFolder: props<{ title: string }>(),
+    createFolderSuccess: props<{ folder: Folder }>(),
+    createFolderFailed: props<{ error: Error }>(),
+
+    removeFolder: props<{ id: number }>(),
+    removeFolderSuccess: emptyProps(),
+    removeFolderFailed: props<{ error: Error }>(),
+
+    loadCurrentFolder:emptyProps(),
+    loadCurrentFolderSuccess: props<{ folder: Folder }>(),
+    loadCurrentFolderFailed: props<{ error: Error }>(),
   }
 });
 
-// export const initMaterials = createAction('[Materials Page] Init');
-//
-// export const loadMaterialsSuccess = createAction(
-//   '[Materials/API] Load Materials Success',
-//   props<{ materials: MaterialsEntity[] }>()
-// );
-//
-// export const loadMaterialsFailure = createAction(
-//   '[Materials/API] Load Materials Failure',
-//   props<{ error: any }>()
-// );
+export const materialsActions = createActionGroup({
+  source: 'Materials Page',
+  events: {
+    loadMaterials: emptyProps(),
+    loadMaterialsSuccess: props<{ materials: Material[] }>(),
+    loadMaterialsFailed: props<{ error: Error }>(),
+
+    addMaterial: props<{ material: MaterialCreate }>(),
+    addMaterialSuccess: props<{ material: Material }>(),
+    addMaterialFailed: props<{ error: Error }>(),
+
+    removeMaterial: props<{ materialId: number }>(),
+    removeMaterialSuccess: emptyProps(),
+    removeMaterialFailed: props<{ error: Error }>()
+  }
+})

@@ -1,11 +1,12 @@
-<a class="folderCard" (dblclick)="openFolder()">
-  <mat-card>
+<a class="folderCard">
+  <mat-card (dblclick)="openFolder()">
     <mat-card-header>
       <mat-icon>folder</mat-icon>
     </mat-card-header>
     <mat-card-content>
-      <p>Folder name</p>
-      <p>23 ноя 2023г.</p>
+      <p>{{ folder.title }}</p>
+      <p>{{ folder.created_at | date }}</p>
     </mat-card-content>
   </mat-card>
+  <mat-icon class="folderCard-remove" (click)="removeFolder()">delete</mat-icon>
 </a>

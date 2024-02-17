@@ -1,44 +1,48 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
   MATERIALS_FEATURE_KEY,
-  MaterialsState,
-  materialsAdapter,
+  foldersAdapter,
+  MaterialsFeatureState, materialsAdapter
 } from './materials.reducer';
+import { RouterReducerState } from '@ngrx/router-store';
+import { selectRouteParams } from '@users/core/data-access';
+import { Material } from '../models/material.model';
+import { Params } from '@angular/router';
 
-// Lookup the 'Materials' feature state managed by NgRx
-export const selectMaterialsState = createFeatureSelector<MaterialsState>(
+export const selectMaterialsState = createFeatureSelector<MaterialsFeatureState>(
   MATERIALS_FEATURE_KEY
 );
+export const selectRouter = createFeatureSelector<RouterReducerState>('router');
 
-const { selectAll, selectEntities } = materialsAdapter.getSelectors();
-
-export const selectMaterialsLoaded = createSelector(
+export const selectFoldersStateInside = createSelector(
   selectMaterialsState,
-  (state: MaterialsState) => state.status
+  (state: MaterialsFeatureState) => state.folders
+)
+export const selectAllFolders = createSelector(
+  selectFoldersStateInside,
+  foldersAdapter.getSelectors().selectAll
+);
+export const selectCurrentFolder = createSelector(
+  selectMaterialsState,
+  (state: MaterialsFeatureState) => state.selectedFolder
+)
+export const selectLoadingStatus = createSelector(
+  selectMaterialsState,
+  (state: MaterialsFeatureState) => state.status
 );
 
-// export const selectMaterialsError = createSelector(
-//   selectMaterialsState,
-//   (state: MaterialsState) => state.error
-// );
-
-// export const selectAllMaterials = createSelector(
-//   selectMaterialsState,
-//   (state: MaterialsState) => selectAll(state)
-// );
-
-// export const selectMaterialsEntities = createSelector(
-//   selectMaterialsState,
-//   (state: MaterialsState) => selectEntities(state)
-// );
-
-// export const selectSelectedId = createSelector(
-//   selectMaterialsState,
-//   (state: MaterialsState) => state.selectedId
-// );
-
-// export const selectEntity = createSelector(
-//   selectMaterialsEntities,
-//   selectSelectedId,
-//   (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
-// );
+export const selectMaterialsStateInside = createSelector(
+  selectMaterialsState,
+  (state: MaterialsFeatureState) => state.materials
+);
+export const selectAllMaterials = createSelector(
+  selectMaterialsStateInside,
+  materialsAdapter.getSelectors().selectAll
+);
+export const selectMaterialsForCurrentFolder = createSelector(
+  selectAllMaterials,
+  selectRouteParams,
+  (state: Material[], params: Params) => {
+    return state.filter((material: Material) => material.folder_id === +params['id'])
+  }
+);

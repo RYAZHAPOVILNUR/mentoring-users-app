@@ -1,2 +1,23 @@
-<p>materials-list-container works!</p>
-<materials-list></materials-list>
+<div class="materials-list-container">
+  <ng-container *ngrxLet="{
+    materials: materials$,
+    loadingStatus: loadingStatus$,
+    currentFolderData: currentFolderData$
+    } as vm"
+  >
+    <ng-container [ngSwitch]="vm.loadingStatus">
+      <ng-container *ngSwitchCase="'loading'">
+        <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+      </ng-container>
+      <ng-container *ngSwitchCase="'loaded'">
+        <materials-list (openMaterialEmit)="openMaterial($event)" (removeMaterialEmit)="removeMaterial($event)" (navigateBackEmit)="navigateBack()" [materials]="vm.materials" [currentFolderData]="vm.currentFolderData"></materials-list>
+      </ng-container>
+      <ng-container *ngSwitchCase="'error'">
+        <mat-card>
+          <mat-card-content>Произошла ошибка! Приносим свои извинения! Пожалуйста, повторите позже!</mat-card-content>
+        </mat-card>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+  <materials-add-button (addNewMaterial)="addNewMaterial($event)" matTooltip="Добавить новый материал" matTooltipPosition="above"></materials-add-button>
+</div>

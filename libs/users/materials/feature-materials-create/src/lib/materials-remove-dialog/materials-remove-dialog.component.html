@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Подтверждение</h1>
+<div mat-dialog-content>
+  <form >
+    <div class="dialog-content">
+      <p mat-dialog-content>Вы уверены, что хотите удалить {{ dialogData.materialTitle }}</p>
+    </div>
+  </form>
+</div>
+<div class="materials-remove-dialog-actions" mat-dialog-actions>
+  <mat-icon color="warn" (click)="removeMaterial(true)">check</mat-icon>
+  <mat-icon (click)="removeMaterial(false)">close</mat-icon>
+</div>

@@ -7,7 +7,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'users-folders-add-dialog',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatDialogModule, MatButtonModule, MatInputModule],
   templateUrl: './folders-add-dialog.component.html',
@@ -16,7 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class FoldersAddDialogComponent {
   public formControlFolderName: FormControl = new FormControl('', Validators.required)
-  public dialogRef: MatDialogRef<FoldersAddDialogComponent> = inject(MatDialogRef<FoldersAddDialogComponent>);
+  private dialogRef: MatDialogRef<FoldersAddDialogComponent> = inject(MatDialogRef<FoldersAddDialogComponent>);
 
   public cancel(): void {
     this.dialogRef.close();
@@ -24,7 +23,7 @@ export class FoldersAddDialogComponent {
 
   public save(): void {
     if (this.formControlFolderName.valid && this.formControlFolderName.value) {
-      const folderName: string = this.formControlFolderName.value;
+      const folderName: string = this.formControlFolderName.value.trim();
       this.dialogRef.close(folderName);
     }
   }

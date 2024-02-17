@@ -11,6 +11,7 @@
   text-decoration: none;
   color: inherit;
   cursor: pointer;
+  position: relative;
 
   mat-card {
     position: relative;
@@ -42,6 +43,22 @@
     }
   }
 
+  .folderCard-remove {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+    opacity: 0;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.12);
+    }
+  }
+
   &:hover {
 
     mat-card {
@@ -49,6 +66,10 @@
       &::before {
         opacity: 1;
       }
+    }
+
+    .folderCard-remove {
+      opacity: 1;
     }
   }
 }

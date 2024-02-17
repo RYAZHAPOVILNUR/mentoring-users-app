@@ -1,1 +1,15 @@
-<p>materials-card works!</p>
+<a class="materialCard">
+  <mat-card (dblclick)="openMaterial()">
+    <mat-card-header>
+      <mat-icon *ngIf="materialType === 'mp3'">music_note</mat-icon>
+      <mat-icon *ngIf="materialType === 'youtube'">live_tv</mat-icon>
+      <mat-icon *ngIf="materialType === 'pdf'">picture_as_pdf</mat-icon>
+      <mat-icon *ngIf="materialType === 'other'">help</mat-icon>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ _material.title }}</p>
+      <p>{{ _material.created_at | date }}</p>
+    </mat-card-content>
+  </mat-card>
+  <mat-icon class="materialCard-remove" (click)="removeMaterial()">delete</mat-icon>
+</a>
