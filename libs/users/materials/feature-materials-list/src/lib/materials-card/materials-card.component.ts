@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { Material } from '@users/materials/data-access';
-import { ContentModel } from '../../../../feature-materials-content/src/lib/materials-content/content.model';
+import { ContentModel } from '@users/materials/feature-materials-content';
+import { FileNameClipperPipe } from '@users/materials/utils';
 
 @Component({
   selector: 'materials-card',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatIconModule],
+  imports: [CommonModule, MatCardModule, MatIconModule, FileNameClipperPipe],
   templateUrl: './materials-card.component.html',
   styleUrls: ['./materials-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -16,6 +17,7 @@ import { ContentModel } from '../../../../feature-materials-content/src/lib/mate
 export class MaterialsCardComponent implements OnInit {
   public _material!: Material;
   public materialType: string = '';
+  public materialTitle: string = '';
   @Input({ required: true })
   set materialItem(value: Material) {
     this._material = value;
@@ -27,6 +29,11 @@ export class MaterialsCardComponent implements OnInit {
   public openMaterialEmit: EventEmitter<ContentModel> = new EventEmitter<ContentModel>();
 
   ngOnInit(): void {
+    this.initializeValues();
+  }
+
+  public initializeValues(): void {
+    this.materialTitle = this._material.title;
     this.materialType = this.checkMaterialType();
   }
 

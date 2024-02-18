@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, DestroyRef, EventEmitter, inject, O
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FoldersAddDialogComponent } from '../folders-add-dialog/folders-add-dialog.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -29,6 +29,6 @@ export class FoldersAddButtonComponent {
         if (folderName) {
           this.createNewFolderEmit.emit(folderName);
         }
-      })
+      });
   }
 }

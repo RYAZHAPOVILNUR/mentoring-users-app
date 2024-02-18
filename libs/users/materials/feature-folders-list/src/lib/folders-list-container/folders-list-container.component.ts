@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '
 import { CommonModule } from '@angular/common';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
 import { FoldersAddButtonComponent, FoldersRemoveDialogComponent } from '@users/materials/feature-folders-create';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { MaterialsFacade } from '@users/materials/data-access';
-import { Folder } from '../../../../data-access/src/lib/models/folder.model';
+import { Folder } from '@users/materials/data-access';
 import { LetDirective } from '@ngrx/component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardModule } from '@angular/material/card';

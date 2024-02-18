@@ -30,6 +30,6 @@ export class MaterialsAddButtonComponent {
         if (newMaterial) {
           this.addNewMaterial.emit(newMaterial);
         }
-      })
+      });
   }
 }

@@ -4,7 +4,7 @@
       <mat-icon>folder</mat-icon>
     </mat-card-header>
     <mat-card-content>
-      <p>{{ folder.title }}</p>
+      <p>{{ folder.title | fileNameClipper:40 }}</p>
       <p>{{ folder.created_at | date }}</p>
     </mat-card-content>
   </mat-card>

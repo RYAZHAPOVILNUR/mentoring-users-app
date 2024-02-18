@@ -30,12 +30,6 @@ export class MaterialsListComponent {
     this.navigateBackEmit.emit(true);
   }
 
-  public playMusic(): void {
-    const audio = new Audio();
-    audio.src = 'https://file-examples.com/storage/fe34a88a9a65cf545955ccb/2017/11/file_example_MP3_2MG.mp3';
-    audio.autoplay;
-  }
-
   public onRemoveMaterial(eventData: { materialId: number, materialTitle: string }): void {
     this.removeMaterialEmit.emit(eventData);
   }

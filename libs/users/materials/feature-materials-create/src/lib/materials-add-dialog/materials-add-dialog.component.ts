@@ -33,7 +33,6 @@ export class MaterialsAddDialogComponent {
     link: ['', [Validators.required]]
   }, { validators: this.typeValidate() });
 
-
   public cancel(): void {
     this.dialogRef.close();
   }
@@ -42,7 +41,7 @@ export class MaterialsAddDialogComponent {
     const data: MaterialCreate = {
       title: this.formGroup.value.title.trim(),
       material_link: this.formGroup.value.link.trim()
-    }
+    };
     this.dialogRef.close(data);
   }
 

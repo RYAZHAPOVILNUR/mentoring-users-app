@@ -4,7 +4,6 @@ import {
   foldersAdapter,
   MaterialsFeatureState, materialsAdapter
 } from './materials.reducer';
-import { RouterReducerState } from '@ngrx/router-store';
 import { selectRouteParams } from '@users/core/data-access';
 import { Material } from '../models/material.model';
 import { Params } from '@angular/router';
@@ -12,7 +11,6 @@ import { Params } from '@angular/router';
 export const selectMaterialsState = createFeatureSelector<MaterialsFeatureState>(
   MATERIALS_FEATURE_KEY
 );
-export const selectRouter = createFeatureSelector<RouterReducerState>('router');
 
 export const selectFoldersStateInside = createSelector(
   selectMaterialsState,

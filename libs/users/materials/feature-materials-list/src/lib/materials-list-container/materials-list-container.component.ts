@@ -6,10 +6,9 @@ import {
   MaterialsRemoveDialogComponent
 } from '@users/materials/feature-materials-create';
 import { Folder, Material, MaterialCreate, MaterialsFacade } from '@users/materials/data-access';
-import { Params, Router } from '@angular/router';
-import { Observable, pipe } from 'rxjs';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { FoldersAddButtonComponent } from '@users/materials/feature-folders-create';
-import { FoldersListComponent } from '../../../../feature-folders-list/src/lib/folders-list/folders-list.component';
 import { LetDirective } from '@ngrx/component';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -21,7 +20,7 @@ import { ContentModel, MaterialsContentComponent } from '@users/materials/featur
 @Component({
   selector: 'materials-list-container',
   standalone: true,
-  imports: [CommonModule, MaterialsListComponent, MaterialsAddButtonComponent, FoldersAddButtonComponent, FoldersListComponent, LetDirective, MatCardModule, MatProgressBarModule, MatTooltipModule],
+  imports: [CommonModule, MaterialsListComponent, MaterialsAddButtonComponent, FoldersAddButtonComponent, LetDirective, MatCardModule, MatProgressBarModule, MatTooltipModule],
   templateUrl: './materials-list-container.component.html',
   styleUrls: ['./materials-list-container.component.scss'],
   providers: [MaterialsFacade],
@@ -68,11 +67,11 @@ export class MaterialsListContainerComponent implements OnInit {
   public openMaterial(eventData: ContentModel): void {
     const dialogRef: MatDialogRef<MaterialsContentComponent> = this.dialog.open(MaterialsContentComponent, {
       data: eventData,
-      height: '80%'
+      height: eventData.contentType === 'pdf' ? '80%' : ''
     });
 
     dialogRef.afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => console.log('Modal closed'));
+      .subscribe(() => null);
   }
 }

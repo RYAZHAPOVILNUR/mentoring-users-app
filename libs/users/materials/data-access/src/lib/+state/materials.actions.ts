@@ -3,7 +3,6 @@ import { Folder } from '../models/folder.model';
 import { Material } from '../models/material.model';
 import { MaterialCreate } from '../models/material-create.model';
 
-
 export const foldersActions = createActionGroup({
   source: 'Materials Page',
   events: {

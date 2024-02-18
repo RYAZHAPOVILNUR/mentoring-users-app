@@ -2,12 +2,13 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { Folder } from '../../../../data-access/src/lib/models/folder.model';
+import { Folder } from '@users/materials/data-access';
+import { FileNameClipperPipe } from '@users/materials/utils';
 
 @Component({
   selector: 'folders-card',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatIconModule],
+  imports: [CommonModule, MatCardModule, MatIconModule, FileNameClipperPipe],
   templateUrl: './folders-card.component.html',
   styleUrls: ['./folders-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
