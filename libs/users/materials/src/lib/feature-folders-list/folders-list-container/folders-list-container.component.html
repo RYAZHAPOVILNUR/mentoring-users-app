@@ -1,8 +1,9 @@
 <ng-container>
-  <folders-list 
-    [foldersList]="folders$ | async" 
-    [loading]="isLoading$ | async" 
+  <folders-list
+    [foldersList]="folders$ | async"
+    [loading]="isLoading$ | async"
     (selectFolder)="onSelectFolder($event)"
-    (deleteFolder)="onDeleteFolder($event)"/>
-    <folders-add-btn (postNewFolder)="onPushNewFolder($event)"/>
-</ng-container >
+    (deleteFolder)="onDeleteFolder($event)"
+  />
+  <folders-add-btn (postNewFolder)="onPushNewFolder($event)" />
+</ng-container>

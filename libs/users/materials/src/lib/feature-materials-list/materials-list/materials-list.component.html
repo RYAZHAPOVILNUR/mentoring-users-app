@@ -1,13 +1,13 @@
 <ng-container *ngIf="loading; else loadingResult">
-	<mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
 </ng-container>
 
 <ng-template #loadingResult>
-	<mat-list *ngFor="let material of materialsList">
-		<materials-card 
-			[material]="material"
-			(selectMaterial)="onSelectMaterial($event)"
-			(deleteMaterial)="onDeleteMaterial($event)"
-		/>
-	</mat-list>
+  <mat-list *ngFor="let material of materialsList">
+    <materials-card
+      [material]="material"
+      (selectMaterial)="onSelectMaterial($event)"
+      (deleteMaterial)="onDeleteMaterial($event)"
+    />
+  </mat-list>
 </ng-template>
