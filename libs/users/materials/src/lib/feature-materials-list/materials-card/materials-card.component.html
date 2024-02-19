@@ -1,0 +1,6 @@
+<mat-list-item>
+	<mat-icon matListItemIcon (click)="onSelectMaterial(this.material.id)">note</mat-icon>
+	<div matListItemTitle>{{this.material.title}}</div>
+	<div matListItemLine>{{getDate()}}</div>
+	<mat-icon matListItemIcon (click)="openDialogDeleteMaterial()">delete</mat-icon>
+</mat-list-item>

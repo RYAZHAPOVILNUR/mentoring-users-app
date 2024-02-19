@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Create new material</h2>
+<form [formGroup]="material">
+	<mat-form-field>
+		<input matInput placeholder="Имя*" formControlName="title">
+		<mat-error>Имя обязательно</mat-error>
+	</mat-form-field>
+	<mat-form-field>
+		<input matInput placeholder="Ссылка*" formControlName="material_link">
+		<mat-error>Введите корректную ссылку</mat-error>
+	</mat-form-field>
+	<div>
+		<button mat-button (click)="onNoClick()">No Thanks</button>
+		<button mat-button (click)="initNewMaterial()">Ok</button>
+	</div>
+</form>
+

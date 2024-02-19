@@ -1,0 +1,13 @@
+<ng-container *ngIf="loading; else loadingResult">
+	<mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+
+<ng-template #loadingResult>
+	<mat-list *ngFor="let folder of foldersList">
+		<folders-card 
+			[folder]="folder"
+			(selectFolder)="onSelectFolder($event)"
+			(deleteFolder)="onDeleteFolder($event)"
+		/>
+	</mat-list>
+</ng-template>

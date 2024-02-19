@@ -1,0 +1,26 @@
+<div class='top__dialog'>
+	<h2 mat-dialog-title>{{dialogData.material.title}}</h2>
+	<button (click)="onNoClick()" mat-fab color="primary">
+		<mat-icon>close</mat-icon>
+	</button>
+</div>
+
+<div *ngIf="
+dialogData.material.material_link.endsWith('.pdf') || 
+dialogData.material.material_link.endsWith('.mp3'); else video">
+
+	<div *ngIf="dialogData.material.material_link.endsWith('.pdf')">
+		<pdf-viewer [src]=dialogData.material.material_link [render-text]="true" [original-size]="false"
+			style="width: 600px; height: 700px">
+		</pdf-viewer>
+	</div>
+
+	<div *ngIf="dialogData.material.material_link.endsWith('.mp3')">
+		<audio controls src={{dialogData.material.material_link}}></audio>
+	</div>
+</div>
+
+
+<ng-template #video>
+	<img src="//img.youtube.com/vi/{{this.idVideo}}/maxresdefault.jpg">
+</ng-template>

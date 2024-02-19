@@ -1,0 +1,11 @@
+<ng-container>
+	<mat-icon matListItemIcon (click)="goBack()">arrow_back</mat-icon>
+	<h2>{{folder$ | async}}</h2>
+	<materials-list 
+	  [materialsList]="materials$ | async" 
+	  [loading]="isLoading$ | async" 
+	  (selectMaterial)="onSelectMaterial($event)"
+	  (deleteMaterial)="onDeleteMaterial($event)"
+	/>
+	<materials-add-btn (createNewMaterial)="onCreateNewMaterial($event)"/>
+</ng-container>

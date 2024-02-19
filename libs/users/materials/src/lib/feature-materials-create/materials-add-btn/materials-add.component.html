@@ -1,0 +1,9 @@
+<button mat-button [matMenuTriggerFor]="materials" color="primary">
+	<mat-icon>add</mat-icon>
+</button>
+
+<mat-menu #materials="matMenu">
+  <button (click)="openDialog('.mp3')" mat-menu-item>Mp3</button>
+  <button (click)="openDialog('.pdf')" mat-menu-item>PDF</button>
+  <button (click)="openDialog('.mp4')" mat-menu-item>Video</button>
+</mat-menu>
