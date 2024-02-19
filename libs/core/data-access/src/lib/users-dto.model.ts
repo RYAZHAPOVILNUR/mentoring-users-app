@@ -1,8 +1,8 @@
-import { DeepReadonly } from '@users/core/utils'
+import { DeepReadonly } from '@users/core/utils';
 export enum Role {
-  Admin = "admin",
-  User = "user",
-  Mentor = "mentor"
+  Admin = 'admin',
+  User = 'user',
+  Mentor = 'mentor',
 }
 export type UsersDTO = DeepReadonly<{
   id: number;
@@ -14,12 +14,9 @@ export type UsersDTO = DeepReadonly<{
   purchaseDate: string;
   educationStatus: string;
   educationTime?: number;
-  totalStoryPoints?: number;
-  photo?: UsersPhoto | null
-}>
-
-
-
+  totalStoryPoints: number;
+  photo?: UsersPhoto | null;
+}>;
 
 export type CreateUserDTO = DeepReadonly<{
   id?: number | null;
@@ -32,17 +29,17 @@ export type CreateUserDTO = DeepReadonly<{
   educationStatus: string;
   educationTime?: number;
   totalStoryPoints?: number;
-}>
+}>;
 
 export type UsersPhoto = {
-  path: string,
-  name: string,
-  type: 'image',
-  size: number,
-  mime: 'image/jpeg',
+  path: string;
+  name: string;
+  type: 'image';
+  size: number;
+  mime: 'image/jpeg';
   meta: {
-    width: number,
-    height: number
-  },
-  url: string
-}
+    width: number;
+    height: number;
+  };
+  url: string;
+};
