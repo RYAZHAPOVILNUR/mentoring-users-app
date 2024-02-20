@@ -12,7 +12,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { onSuccessEditionCbType } from '@users/users/data-access';
+import { onSuccessEditionCbType, onSuccessSPEditionCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -62,8 +62,16 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
-  @Output() addStoryPoints = new EventEmitter<{ user: CreateUserDTO }>();
-  @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @Output() addStoryPoints = new EventEmitter<{ user: CreateUserDTO; onSuccessCb: onSuccessSPEditionCbType }>();
+  @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<MatSnackBar>;
+  @ViewChild('snackbarStoryPoints') snackbarTemplateRefSP!: TemplateRef<MatSnackBar>;
+
+  private _vm: DetailUsersCardVm = {
+    editMode: false,
+    user: null,
+    status: 'init',
+    errors: null,
+  };
 
   public get vm() {
     return this._vm;
@@ -90,21 +98,14 @@ export class DetailUsersCardComponent implements OnInit {
     }
   }
 
-  private _vm: DetailUsersCardVm = {
-    editMode: false,
-    user: null,
-    status: 'init',
-    errors: null,
-  };
-
   public formGroup = new FormBuilder().group({
     name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
-
   public totalStoryPoints = new FormControl({ value: 0, disabled: true });
+
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -123,6 +124,13 @@ export class DetailUsersCardComponent implements OnInit {
 
   private onEditSuccess: onSuccessEditionCbType = () =>
     this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+
+  private onSPEditSuccess: onSuccessSPEditionCbType = () =>
+    this.snackBar.openFromTemplate(this.snackbarTemplateRefSP, {
       duration: 2500,
       horizontalPosition: 'center',
       verticalPosition: 'top',
@@ -169,6 +177,7 @@ export class DetailUsersCardComponent implements OnInit {
           ...this.vm.user,
           totalStoryPoints: Number(this.totalStoryPoints.value),
         },
+        onSuccessCb: this.onSPEditSuccess,
       });
     }
     this.totalStoryPoints.disable();
