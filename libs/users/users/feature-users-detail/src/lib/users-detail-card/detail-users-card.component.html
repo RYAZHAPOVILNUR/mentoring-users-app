@@ -171,7 +171,12 @@
           >
             <mat-icon>add</mat-icon>
           </button>
-          <button *ngIf="totalStoryPoints.enabled" matSuffix mat-icon-button>
+          <button
+            *ngIf="totalStoryPoints.enabled"
+            matSuffix
+            mat-icon-button
+            (click)="onAddStoryPoints()"
+          >
             <mat-icon style="color: green">done</mat-icon>
           </button>
           <button
