@@ -23,6 +23,22 @@ export const selectAllUsers = createSelector(
   (state: UsersState) => selectAll(state)
 );
 
+export const selectUsersFilter = createSelector(
+  selectUsersState,
+  (state: UsersState) => state.usersFilter
+);
+
+export const selectFilteredUsers  = createSelector(
+  selectAllUsers,
+  selectUsersFilter,
+  (users, filter) => {
+    if (filter.name) {
+      return users.filter(user => user.name.includes(filter.name));
+    }
+    return users;
+  }
+);
+
 export const selectUsersEntities = createSelector(
   selectUsersState,
   (state: UsersState) => selectEntities(state)

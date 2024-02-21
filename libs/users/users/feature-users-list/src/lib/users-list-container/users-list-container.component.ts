@@ -14,6 +14,8 @@ import { UsersFacade } from '@users/users/data-access';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
+import { Observable } from 'rxjs';
+import { UsersFilterComponent } from '../users-filter/users-filter.component';
 
 @Component({
   selector: 'users-list-container',
@@ -24,7 +26,8 @@ import { CreateUsersButtonComponent } from '@users/feature-users-create';
     MatButtonModule,
     MatDialogModule,
     LetDirective,
-    CreateUsersButtonComponent
+    CreateUsersButtonComponent,
+    UsersFilterComponent
   ],
   templateUrl: './users-list-container.component.html',
   styleUrls: ['./users-list-container.component.scss'],
@@ -38,7 +41,7 @@ export class UsersListContainerComponent {
   public readonly users$ = this.componentStore.users$;
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;
-  public readonly loggedUser$ = this.usersFacade.loggedUser$;
+  public readonly loggedUser$: Observable<any> = this.usersFacade.loggedUser$;
   private readonly router = inject(Router);
 
   onDeleteUser(user: UsersVM) {
