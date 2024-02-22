@@ -37,4 +37,6 @@ export const loadUser = createAction('[Users Page] Load User');
 export const loadUserSuccess = createAction('[Users/Api] Load User Success', props<{ userData: UsersEntity }>());
 export const loadUserFailed = createAction('[Users/Api] Load User Failed', props<{ error: any }>());
 
-export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{status: LoadingStatus}>());
+export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{ status: LoadingStatus }>());
+
+export const setUsersFilter = createAction('[Users] Set Users Filter', props<{ filter: { name?: string, email?: string } }>());

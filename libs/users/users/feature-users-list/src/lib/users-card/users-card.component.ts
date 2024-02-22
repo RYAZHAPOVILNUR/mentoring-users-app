@@ -8,7 +8,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { UsersEntity } from '@users/core/data-access';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @Component({

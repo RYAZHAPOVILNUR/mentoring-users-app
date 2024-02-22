@@ -1,0 +1,18 @@
+<div class="users-filter-container">
+  <form [formGroup]="filterForm" (ngSubmit)="applyFilter()">
+    <mat-form-field appearance="fill">
+      <mat-label>Поиск пользователей</mat-label>
+      <input matInput formControlName="searchText" placeholder="Поиск пользователей">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Тип фильтра</mat-label>
+      <mat-select formControlName="filterType">
+        <mat-option value="user">Имя</mat-option>
+        <mat-option value="email">Email</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Поиск</button>
+  </form>
+</div>
