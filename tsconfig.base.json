@@ -36,6 +36,9 @@
       "@users/feature-materials": [
         "libs/users/materials/feature-materials/src/index.ts"
       ],
+      "@users/feature-materials-folder": [
+        "libs/users/materials/feature-materials-folder/src/index.ts"
+      ],
       "@users/feature-users-create": [
         "libs/users/users/feature-users-create/src/index.ts"
       ],
