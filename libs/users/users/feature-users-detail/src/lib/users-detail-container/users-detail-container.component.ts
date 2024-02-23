@@ -79,6 +79,6 @@ export class UsersDetailComponent {
 
   onAddStoryPoints(userData: CreateUserDTO, onSuccessCb: onSuccessSPEditionCbType): void {
     this.usersFacade.addStoryPoints(userData, this.user.id, onSuccessCb);
-    this.router.navigate(['/admin/users', this.user.id]);
+    // this.router.navigate(['/admin/users', this.user.id]);
   }
 }

@@ -112,12 +112,14 @@
           <button *ngIf="totalStoryPoints.disabled" matSuffix mat-icon-button (click)="totalStoryPoints.enable()">
             <mat-icon>add</mat-icon>
           </button>
-          <button type="submit" *ngIf="totalStoryPoints.enabled" matSuffix mat-icon-button (click)="onAddStoryPoints()">
-            <mat-icon style="color: green">done</mat-icon>
-          </button>
-          <button *ngIf="totalStoryPoints.enabled" matSuffix mat-icon-button (click)="totalStoryPoints.disable()">
-            <mat-icon style="color: red">close</mat-icon>
-          </button>
+          <ng-container matSuffix *ngIf="totalStoryPoints.enabled">
+            <button type="submit" mat-icon-button (click)="onAddStoryPoints()">
+              <mat-icon style="color: green">done</mat-icon>
+            </button>
+            <button mat-icon-button (click)="totalStoryPoints.disable()">
+              <mat-icon style="color: red">close</mat-icon>
+            </button>
+          </ng-container>
         </mat-form-field>
       </mat-card>
     </div>
