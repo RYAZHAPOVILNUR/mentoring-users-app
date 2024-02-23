@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 import { UsersFacade } from '@users/users/data-access';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -22,16 +22,18 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   templateUrl: './users-filter.component.html',
   styleUrls: ['./users-filter.component.scss']
 })
-export class UsersFilterComponent {
+export class UsersFilterComponent implements OnDestroy {
+  private unsubscribe$ = new Subject<void>();
   filterForm = new FormGroup({
-    searchText: new FormControl(''), // Предполагаем, что это поле для ввода текста фильтрации
-    filterType: new FormControl('user'), // Должно быть инициализировано со значением по умолчанию
+    searchText: new FormControl(''),
+    filterType: new FormControl('user'),
   });
 
   constructor(private usersFacade: UsersFacade) {
     this.filterForm.valueChanges.pipe(
       debounceTime(300),
-      distinctUntilChanged()
+      distinctUntilChanged(),
+      takeUntil(this.unsubscribe$)
     ).subscribe(filterValues => {
       this.applyFilter();
     });
@@ -45,5 +47,10 @@ export class UsersFilterComponent {
     } else if (filterType === 'email') {
       this.usersFacade.setUsersFilter({ email: searchText ?? '' });
     }
+  }
+
+  ngOnDestroy(): void {
+      this.unsubscribe$.next();
+      this.unsubscribe$.complete();
   }
 }
