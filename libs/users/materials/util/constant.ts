@@ -46,6 +46,6 @@ export const ADD_FOLDER_LIMITS = {
 };
 
 
-export const YOUTUBE_REGEX = /(http(s)?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)[a-zA-Z0-9_-]{11}/;
+export const YOUTUBE_REGEX = /(?:http(s)?:\/\/)?(?:www\.)?youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)([a-zA-Z0-9_-]{11})/;
 export const MP3_REGEX = /\.mp3$/i;
 export const PDF_REGEX = /\.pdf$/i;

@@ -58,19 +58,25 @@ export class AddMaterialModalComponent {
 
     const materialLinkInput = 'material_link';
 
-    this.materialFormGroup.get(materialLinkInput)?.valueChanges.pipe(
-      tap(materialFileType => {
+    this.materialFormGroup.get('materialType')?.valueChanges.pipe(
+      tap(materialType => {
         const baseValidators = [
           Validators.required,
           Validators.minLength(MATERIAL_LINK.MIN_LENGTH),
           Validators.maxLength(MATERIAL_LINK.MAX_LENGTH)
         ];
 
-        switch (materialFileType) {
+        switch (materialType) {
           case  MATERIAL_TYPE.pdf:
             this.materialFormGroup.get(materialLinkInput)?.setValidators([
               ...baseValidators,
               Validators.pattern(PDF_REGEX)
+            ]);
+            break;
+          case MATERIAL_TYPE.audio:
+            this.materialFormGroup.get(materialLinkInput)?.setValidators([
+              ...baseValidators,
+              Validators.pattern(MP3_REGEX)
             ]);
             break;
           case MATERIAL_TYPE.video:
@@ -79,11 +85,6 @@ export class AddMaterialModalComponent {
               Validators.pattern(YOUTUBE_REGEX)
             ]);
             break;
-          case MATERIAL_TYPE.audio:
-            this.materialFormGroup.get(materialLinkInput)?.setValidators([
-              ...baseValidators,
-              Validators.pattern(MP3_REGEX)
-            ]);
         }
         this.materialFormGroup.get(materialLinkInput)?.updateValueAndValidity();
       })
