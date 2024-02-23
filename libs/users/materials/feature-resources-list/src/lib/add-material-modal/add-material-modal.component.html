@@ -1,18 +1,59 @@
-<div mat-dialog-content>
+<mat-dialog-content class="add_new_material_dialog">
   <form [formGroup]="materialFormGroup">
-    <mat-label>Select Material Type</mat-label>
-    <mat-select formControlName="materialType">
-      <mat-option *ngFor="let type of Object.keys(MATERIAL_TYPE)" [value]="type">{{ type }}</mat-option>
-    </mat-select>
-    <mat-form-field class="example-form-field">
-      <mat-label>Add Material Title</mat-label>
-      <input matInput type="text" formControlName="title" maxlength="10">
+    <div class="title_close_row">
+      <div>
+        <p class="add_material_title">add new material</p>
+      </div>
+      <button class="close_button" mat-icon-button mat-dialog-close aria-label="close modal" color="warn">
+        <mat-icon class="close_icon">cancel</mat-icon>
+      </button>
+    </div>
+    <mat-form-field class="form_field">
+      <mat-label>Select Material Type</mat-label>
+      <mat-select formControlName="materialType">
+        <mat-option *ngFor="let type of Object.keys(MATERIAL_TYPE)" [value]="type">{{ type }}</mat-option>
+      </mat-select>
     </mat-form-field>
-    <mat-form-field class="example-form-field">
+    <mat-form-field class="form_field">
+      <mat-label>Add Material Title</mat-label>
+      <input matInput type="text" formControlName="title"
+             [minlength]="MATERIAL_TITLE.MIN_LENGTH"
+             [maxlength]="MATERIAL_TITLE.MAX_LENGTH"
+             [errorStateMatcher]="matcher">
+      <mat-error *ngIf="materialFormGroup.get('title')?.hasError('required')">
+        Title is <strong>required</strong></mat-error>
+      <mat-error *ngIf="materialFormGroup.get('title')?.hasError('minlength')">
+        Title must be at least {{ MATERIAL_TITLE.MIN_LENGTH }} characters
+      </mat-error>
+      <mat-error *ngIf="materialFormGroup.get('title')?.hasError('maxlength')">
+        Title cannot exceed {{ MATERIAL_TITLE.MAX_LENGTH }} characters
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form_field">
       <mat-label>Add Material Link</mat-label>
-      <input matInput type="text" formControlName="material_link" >
+      <input matInput type="text" formControlName="material_link"
+             [minlength]="MATERIAL_LINK.MIN_LENGTH"
+             [maxlength]="MATERIAL_LINK.MAX_LENGTH"
+             [errorStateMatcher]="matcher">
+      <mat-error *ngIf="materialFormGroup.get('material_link')?.hasError('required')">
+        Link is <strong>required</strong></mat-error>
+      <mat-error *ngIf="materialFormGroup.get('material_link')?.hasError('minlength')">
+        Link must be at least {{ MATERIAL_LINK.MIN_LENGTH }} characters
+      </mat-error>
+      <mat-error *ngIf="materialFormGroup.get('material_link')?.hasError('maxlength')">
+        Link cannot exceed {{ MATERIAL_LINK.MAX_LENGTH }} characters
+      </mat-error>
+      <mat-error *ngIf="materialFormGroup.get('material_link')?.hasError('pattern')">
+        The link does not match material type
+      </mat-error>
     </mat-form-field>
   </form>
-</div>
-<button mat-button [mat-dialog-close]="materialFormGroup.value">Add Material</button>
-<button mat-button mat-dialog-close>Close</button>
+  <mat-dialog-actions>
+    <button mat-raised-button color="primary" class="confirm_add_button"
+            [mat-dialog-close]="materialFormGroup.value"
+            [disabled]="!materialFormGroup.valid">
+      add
+    </button>
+  </mat-dialog-actions>
+</mat-dialog-content>
+

@@ -26,4 +26,10 @@ export interface IDeleteItem {
   type: DELETE_ITEM_TYPE
 }
 
+export interface IMaterialModal {
+  materialLink: string;
+  materialType: string;
+  materialTitle: string;
+}
+
 

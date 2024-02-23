@@ -51,7 +51,15 @@ export const materialsFeature = createFeature({
         ...state,
         isLoadingMaterials: true,
         errors: 'Error Load Materials'
-      }))
+      })),
+      on(MaterialsActions.deleteMaterial, state => ({
+        ...state,
+        isLoadingMaterials: true,
+      })),
+      on(MaterialsActions.deleteMaterialSuccess, state => ({
+        ...state,
+        isLoadingMaterials: false,
+      })),
     )
   }
 );

@@ -1,14 +1,16 @@
 <ng-container
   *ngrxLet="{
-  materials:materials$,
+  materials: materials$,
   isLoading: isLoadingMaterials$
   }
  as materialsVM"
 >
-  <resources-list
-    [materialsVM]="materialsVM"
-  />
+  <div class="action_panel">
+    <users-back-nav-button />
+    <button mat-icon-button color="warn" (click)="openAddMaterialDialog()">
+      <mat-icon class="material_icon">add</mat-icon>
+    </button>
+  </div>
+  <resources-list [materialsVM]="materialsVM" />
 </ng-container>
-<button mat-fab color="primary" class="add-user-fab-button" (click)="openAddMaterialDialog()">
-  <mat-icon>add</mat-icon>
-</button>
+

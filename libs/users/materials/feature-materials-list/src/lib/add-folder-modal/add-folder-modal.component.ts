@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ADD_FOLDER_LIMITS } from '../../../../util/constant';
+import { FormErrorStateMatcher } from '../../../../util/exceptions';
 
 @Component({
   selector: 'add-folder-modal',
@@ -13,7 +15,21 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrls: ['./add-folder-modal.component.scss']
 })
 export class AddFolderModalComponent {
-  public folderFormGroup: FormGroup = new FormGroup({
-    folderName: new FormControl('')
-  });
+  public readonly ADD_FOLDER_LIMITS = ADD_FOLDER_LIMITS;
+  public matcher: FormErrorStateMatcher = new FormErrorStateMatcher();
+  public folderFormGroup!: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.createAddFolderForm();
+  }
+
+  createAddFolderForm(): void {
+    this.folderFormGroup = this.fb.group({
+      folderName: ['', [
+        Validators.required,
+        Validators.minLength(ADD_FOLDER_LIMITS.MIN_LENGTH),
+        Validators.maxLength(ADD_FOLDER_LIMITS.MAX_LENGTH)
+      ]]
+    });
+  }
 }

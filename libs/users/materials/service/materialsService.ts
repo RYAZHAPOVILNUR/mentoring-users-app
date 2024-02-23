@@ -16,7 +16,7 @@ export class MaterialsService {
   constructor(private readonly snackBar: MatSnackBar) {
   }
 
-  public get deleteId(): Observable<IDeleteItem> {
+  public get deleteItem(): Observable<IDeleteItem> {
     return this.deleteItem$.asObservable();
   }
 
@@ -24,7 +24,7 @@ export class MaterialsService {
     this.deleteItem$.next(deleteItem);
   }
 
-  public setZeroId(): void {
+  public setZeroItem(): void {
     this.deleteItem$.next({ deleteId: 0, title: '', type: DELETE_ITEM_TYPE.EMPTY });
   }
 

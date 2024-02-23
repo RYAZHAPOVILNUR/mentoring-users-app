@@ -16,11 +16,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { getIdFromUrl } from '../../../../util/utils';
 import { DELETE_ITEM_TYPE } from '../../../../util/constant';
+import { BackNavButtonComponent } from '../../../../../../core/ui/src/lib/back-nav-button/back-nav-button.component';
 
 @Component({
   selector: 'lib-resources-list-container',
   standalone: true,
-  imports: [CommonModule, LetDirective, MatButtonModule, MatIconModule, ResourcesListComponent, MatSnackBarModule],
+  imports: [CommonModule, LetDirective, MatButtonModule, MatIconModule, ResourcesListComponent, MatSnackBarModule, BackNavButtonComponent],
   templateUrl: './resources-list-container.component.html',
   styleUrls: ['./resources-list-container.component.scss']
 })
@@ -36,7 +37,7 @@ export class ResourcesListContainerComponent {
   constructor() {
     this.materialsFacade.loadMaterials();
 
-    this.materialService.deleteId.pipe(
+    this.materialService.deleteItem.pipe(
       tap((material: IDeleteItem): void => {
           if (!material.deleteId && material.type !== DELETE_ITEM_TYPE.MATERIAL) return;
           this.deleteMaterial(material);
@@ -65,17 +66,16 @@ export class ResourcesListContainerComponent {
 
   deleteMaterial(material: IDeleteItem): void {
     const deleteFolderRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
-      data: { dialogText: 'material' }
+      data: { dialogText: `Do you what to delete material ${material.title}?` }
     });
     deleteFolderRef.afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .pipe(
-        tap((confirmDelete ) => {
-          console.log(confirmDelete);
+        tap((confirmDelete) => {
           if (!confirmDelete) return;
           this.materialsFacade.deleteMaterial(material);
           this.materialService.openSnackBar(`Material ${material.title} was removed`);
-          this.materialService.setZeroId();
+          this.materialService.setZeroItem();
         })
       )
       .subscribe();

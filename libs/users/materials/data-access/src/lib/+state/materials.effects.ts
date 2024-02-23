@@ -46,7 +46,6 @@ export const addFolder = createEffect(() => {
   }, { functional: true }
 );
 
-
 export const deleteFolder = createEffect(() => {
     const apiService = inject(ApiService);
     const actions$ = inject(Actions);
@@ -54,9 +53,11 @@ export const deleteFolder = createEffect(() => {
     return actions$.pipe(
       ofType(MaterialsActions.deleteMaterialsFolder),
       switchMap(({ folder: { deleteId } }) =>
-        apiService.delete<{ folder_id: string }>(FOLDER_URL + '/' + deleteId)
+        apiService.delete(FOLDER_URL + '/' + deleteId)
           .pipe(
-            map(() => MaterialsActions.deleteMaterialsFolderSuccess()),
+            map(() => {
+              return MaterialsActions.deleteMaterialsFolderSuccess();
+            }),
             catchError(error => {
               console.error('Error', error);
               return of(MaterialsActions.deleteMaterialsFolderFail(error));
@@ -93,10 +94,9 @@ export const addMaterial = createEffect(() => {
     return actions$.pipe(
       ofType(MaterialsActions.addMaterial),
       switchMap(({ material }) => {
-        console.log(material);
         return apiService.post<IMaterial, IMaterialPost>(MATERIAL_URL, material)
           .pipe(
-            map((material: IMaterial) => MaterialsActions.addMaterialSuccess({ material })),
+            map(() => MaterialsActions.loadMaterialss()),
             catchError(error => {
               console.error('Error', error);
               return of(MaterialsActions.addMaterialFail(error));
@@ -113,16 +113,16 @@ export const deleteMaterial = createEffect(() => {
 
     return actions$.pipe(
       ofType(MaterialsActions.deleteMaterial),
-      switchMap(({ deleteItem: { deleteId } }) =>{
-        console.log(deleteId);
-       return  apiService.delete<{ deleteId: number }>(MATERIAL_URL + '/' + deleteId)
-          .pipe(
-            map(() => MaterialsActions.deleteMaterialSuccess()),
-            catchError(error => {
-              console.error('Error', error);
-              return of(MaterialsActions.deleteMaterialFail(error));
-            })
-          )}
+      switchMap(({ deleteItem: { deleteId } }) => {
+          return apiService.delete<{ deleteId: number }>(MATERIAL_URL + '/' + deleteId)
+            .pipe(
+              map(() => MaterialsActions.loadMaterialss()),
+              catchError(error => {
+                console.error('Error', error);
+                return of(MaterialsActions.deleteMaterialFail(error));
+              })
+            );
+        }
       ));
   }, { functional: true }
 );

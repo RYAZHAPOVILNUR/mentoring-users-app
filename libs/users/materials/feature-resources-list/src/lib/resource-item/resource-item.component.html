@@ -1,13 +1,16 @@
 <mat-card class="material">
-  <mat-card-content>{{ material.title }}</mat-card-content>
-  <mat-card-content>{{ getFormatedDate(material.created_at) }}</mat-card-content>
-  <mat-icon>{{ getResourceIcon(material.material_link) }}</mat-icon>
-  <div class="delete-button-container">
-    <button mat-fab color="primary" aria-label="delete material"
-            (click)="sendMaterialId({deleteId:+material.id, title:material.title, type:folderType})"
-    >
+  <div class="first_row_container">
+    <mat-card-content class="material_title">{{ material.title }}</mat-card-content>
+    <button mat-icon-button color="warn" aria-label="delete material"
+            (click)="sendMaterialId({
+            deleteId:+material.id,
+             title:material.title, type:folderType
+             })">
       <mat-icon>delete</mat-icon>
     </button>
   </div>
+  <div class="icon_wrapper">
+    <mat-icon class="material_icon" (dblclick)="openView()">{{ getResourceIcon(material.material_link) }}</mat-icon>
+  </div>
+  <mat-card-content class="material_delete">{{ getFormattedDate(material.created_at) }}</mat-card-content>
 </mat-card>
-

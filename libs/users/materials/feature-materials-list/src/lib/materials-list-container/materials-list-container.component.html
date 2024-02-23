@@ -5,11 +5,14 @@
   }
  as foldersVM"
 >
+  <div class="action_panel">
+    <button mat-icon-button color="primary" class="add-user-fab-button" (click)="openAddFolderDialog()">
+      <mat-icon class="material_icon">add</mat-icon>
+    </button>
+  </div>
   <materials-list
     [foldersVM]="foldersVM"
   />
 </ng-container>
-<button mat-fab color="primary" class="add-user-fab-button" (click)="openAddFolderDialog()">
-  <mat-icon>add</mat-icon>
-</button>
+
 

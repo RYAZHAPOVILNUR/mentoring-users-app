@@ -1,0 +1,49 @@
+.modal_title {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.title_close_row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 20px;
+}
+
+.close_modal_button {
+  position: relative;
+  left: 35px;
+  bottom: 35px;
+  color: red;
+}
+
+.pdf_viewer {
+  min-height: 450px;
+  min-width: 850px;
+}
+
+.video_link_wrapper {
+  padding: 10px;
+}
+
+.video_viewer {
+  min-height: 450px;
+  min-width: 100%;
+}
+
+.video_link {
+  font-size: 26px;
+  font-weight: bold;
+  text-align: center;
+  outline: none;
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: #80bdff;
+    text-decoration: underline;
+  }
+}

@@ -1,4 +1,5 @@
-import { MONTHS } from './constant';
+import { MATERIAL_ICONS, MONTHS } from './constant';
+import { IMaterialModal } from '../data-access/src/lib/models/models';
 
 export const getFormattedDate = (time: string): string => {
   const date: Date = new Date(time);
@@ -15,4 +16,12 @@ export const getIdFromUrl = (url: string): number => {
     }
   }
   return 0;
+};
+
+
+export const getPreviewLink = ({ materialType, materialLink }: IMaterialModal): string => {
+  if (materialType !== MATERIAL_ICONS['video'] && !materialLink) return '';
+
+  const videoId = materialLink.split('=').pop();
+  return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
 };

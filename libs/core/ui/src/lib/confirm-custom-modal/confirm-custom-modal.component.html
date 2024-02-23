@@ -1,7 +1,11 @@
 <mat-dialog-content>
-  <mat-label>{{dialogDescription}}</mat-label>
+  <div>
+    <mat-label>{{ dialogDescription }}</mat-label>
+    <button class="close_button" mat-icon-button mat-dialog-close aria-label="close modal" color="warn">
+      <mat-icon class="close_icon">cancel</mat-icon>
+    </button>
+  </div>
   <mat-action-list>
-    <button mat-button [mat-dialog-close]="true">{{dialogButtonText}}</button>
-    <button mat-button mat-dialog-close>Close</button>
+    <button class="confirm_button" mat-raised-button color="accent" [mat-dialog-close]="true">{{ dialogButtonText }}</button>
   </mat-action-list>
 </mat-dialog-content>

@@ -36,8 +36,8 @@ export class MaterialsListContainerComponent {
   constructor() {
     this.materialsFacade.loadMaterialFolders();
 
-    this.materialService.deleteId.pipe(
-      tap((folder: IDeleteItem) => {
+    this.materialService.deleteItem.pipe(
+      tap((folder: IDeleteItem): void => {
           if (!folder.deleteId && folder.type !== DELETE_ITEM_TYPE.FOLDER) return;
           this.deleteFolder(folder);
         }
@@ -51,6 +51,7 @@ export class MaterialsListContainerComponent {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .pipe(
         tap(({ folderName }): void => {
+          if (!folderName) return;
           this.materialsFacade.addNewFolder(folderName);
           this.materialService.openSnackBar(`Folder ${folderName} was added`);
         })
@@ -72,7 +73,7 @@ export class MaterialsListContainerComponent {
           if (!confirmDelete) return;
           this.materialsFacade.deleteFolder(folder);
           this.materialService.openSnackBar(`Folder ${folder.title} was removed`);
-          this.materialService.setZeroId();
+          this.materialService.setZeroItem();
         })
       )
       .subscribe();

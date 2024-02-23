@@ -1,4 +1,37 @@
 .folder {
-  width: 150px;
+  width: 180px;
   height: 150px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 10px 10px 30px -17px rgba(0, 0, 0, 0.75);
+}
+
+.title_delete_row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.folder_title {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.delete_icon {
+  color: red;
+}
+
+.folder_icon {
+  width: 100%;
+  height: 75px;
+  font-size: 75px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease;
+  color: whitesmoke;
+
+  &:hover {
+    font-size: 80px;
+  }
 }

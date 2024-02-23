@@ -1,0 +1,38 @@
+<mat-dialog-content>
+  <div class="title_close_row">
+    <div>
+      <p class="modal_title">{{ materialTitle }}</p>
+    </div>
+    <button mat-icon-button mat-dialog-close class="close_modal_button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <ng-container *ngIf="materialType===MATERIAL_ICONS['.pdf']">
+    <pdf-viewer [src]=materialLink
+                [render-text]="true"
+                [original-size]="false"
+
+                class="pdf_viewer"
+    ></pdf-viewer>
+  </ng-container>
+
+  <ng-container *ngIf="materialType===MATERIAL_ICONS.video">
+    <div class="video_viewer">
+      <div class="video_link_wrapper">
+        <a class="video_link" [href]="materialLink" target="_blank">Open video in new tab</a>
+      </div>
+      <img alt="video preview" height="420"
+           width="700" [ngSrc]="previewImgLink">
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="materialType===MATERIAL_ICONS['.mp3']">
+    <div class="audio">
+      <audio controls>
+        <source [src]="materialLink"
+                type="audio/mp3">
+      </audio>
+    </div>
+  </ng-container>
+</mat-dialog-content>
