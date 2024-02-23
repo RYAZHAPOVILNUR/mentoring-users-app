@@ -1,0 +1,26 @@
+.title_close_row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.close_button {
+  position: relative;
+  left: 18px;
+  bottom: 18px;
+}
+
+.confirm_add_button {
+  margin-top: 12px;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.add_folder_title {
+  padding: 5px;
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  color: white;
+}
