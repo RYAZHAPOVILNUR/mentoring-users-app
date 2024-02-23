@@ -15,7 +15,7 @@ export const settingsFeature = createFeature({
     on(SettingsActions.loadSettings, state => state),
     on(SettingsActions.loadSettingsSuccess, (state, {settings}) => {return {...state, ...settings}}),
     on(SettingsActions.setArticlesStyleType, (state, {articlesViewStyleType}) => { return {...state, articlesViewStyleType}}),
-    
+
   ),
 });
 

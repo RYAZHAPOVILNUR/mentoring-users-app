@@ -10,7 +10,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { UsersEntity } from '@users/core/data-access';
 import {MatTooltipModule} from '@angular/material/tooltip';
 
-
 @Component({
   selector: 'users-card',
   standalone: true,

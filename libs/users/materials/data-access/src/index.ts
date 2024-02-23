@@ -1,1 +1,2 @@
-export * from './lib/users-materials-data-access/users-materials-data-access.component';
+export * from './lib/+state/materials.reducer'
+export * as materialEffects from'./lib/+state/materials.effects'

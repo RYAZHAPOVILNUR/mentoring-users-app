@@ -21,7 +21,7 @@ export class CoreUiConfirmDialogComponent {
   constructor(private dialogRef: MatDialogRef<CoreUiConfirmDialogComponent, boolean>) { }
 
   confirm() {
-    this.dialogRef.close(true)
+    return this.dialogRef.close(true)
   }
 
   cancel() {

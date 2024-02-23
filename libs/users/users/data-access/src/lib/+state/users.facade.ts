@@ -1,14 +1,15 @@
-import { Injectable, inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import * as UsersActions from './users.actions';
+import { onSuccessEditionCbType } from './users.actions';
 import * as UsersSelectors from './users.selectors';
 import { Observable, of, switchMap } from 'rxjs';
-import {UsersErrors} from "./users.reducer";
-import {onSuccessEditionCbType} from "./users.actions";
+import { UsersErrors } from './users.reducer';
 import { selectLoggedUser } from '@auth/data-access';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { FiltersArray } from '../models/user-filter';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class UsersFacade {
   private readonly store = inject(Store);
 
@@ -19,9 +20,12 @@ export class UsersFacade {
   public readonly status$ = this.store.pipe(select(UsersSelectors.selectUsersStatus));
   public readonly allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
   public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
+  public readonly filteredUsers$ = this.store.select(UsersSelectors.filteredUsers);
+  public readonly filters$ = this.store.select(UsersSelectors.getFilters);
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
   public readonly loggedUser$ = this.store.select(selectLoggedUser);
-  public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError))
+  public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError));
+
   /**
    * Use the initialization action to perform one
    * or more tasks in your Effects.
@@ -31,11 +35,11 @@ export class UsersFacade {
   }
 
   deleteUser(id: number) {
-    this.store.dispatch(UsersActions.deleteUser({ id }))
+    this.store.dispatch(UsersActions.deleteUser({ id }));
   }
 
   addUser(userData: CreateUserDTO) {
-    this.store.dispatch(UsersActions.addUser({ userData }))
+    this.store.dispatch(UsersActions.addUser({ userData }));
   }
 
   editUser(userData: CreateUserDTO, id: number, onSuccessCb: onSuccessEditionCbType) {
@@ -49,13 +53,17 @@ export class UsersFacade {
           if (user) {
             return of(user);
           } else {
-            return of(null)
+            return of(null);
           }
         })
-      )
+      );
   }
 
   loadUser() {
-    this.store.dispatch(UsersActions.loadUser())
+    this.store.dispatch(UsersActions.loadUser());
+  }
+
+  setUsersFilters(usersFilters: FiltersArray): void {
+    this.store.dispatch(UsersActions.setUsersFilters({ usersFilters }));
   }
 }

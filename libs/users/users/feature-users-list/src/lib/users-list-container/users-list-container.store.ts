@@ -36,7 +36,7 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
 
   private setUsersFromGlobalToLocalStore(): void {
     this.effect(
-      () => this.usersFacade.allUsers$.pipe(
+      () => this.usersFacade.filteredUsers$.pipe(
         tap((users: UsersEntity[]) => this.patchUsers(users))
       )
     )
@@ -52,7 +52,7 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
 
   public deleteUser(user: UsersVM): void {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
-      data: { dialogText: `Вы уверены, что хотите удалить ${user.name}` },
+      data: { dialogText: `Вы уверены, что хотите удалить ${user.name}`},
     });
     this.effect(
       () => dialogRef.afterClosed().pipe(

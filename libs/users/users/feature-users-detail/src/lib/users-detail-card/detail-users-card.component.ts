@@ -18,18 +18,19 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { DetailUsersCardVm } from './detail-users-card-vm';
-import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import {
   MatSnackBar,
-  MatSnackBarModule,
-} from "@angular/material/snack-bar";
+  MatSnackBarModule
+} from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import {CreateUserDTO, UsersEntity} from '@users/core/data-access';
-import { MatAutocompleteModule } from "@angular/material/autocomplete";
-import { DadataApiService } from "@dadata";
-import {BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap} from "rxjs";
-import { PushPipe } from "@ngrx/component";
+import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { DadataApiService } from '@dadata';
+import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs';
+import { PushPipe } from '@ngrx/component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { isNumber } from 'chart.js/helpers';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -52,7 +53,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   ],
   templateUrl: './detail-users-card.component.html',
   styleUrls: ['./detail-users-card.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class DetailUsersCardComponent implements OnInit {
@@ -61,6 +62,7 @@ export class DetailUsersCardComponent implements OnInit {
 
     return this._vm;
   }
+
   @Input({ required: true })
   set vm(vm: DetailUsersCardVm) {
     this._vm = vm;
@@ -70,7 +72,8 @@ export class DetailUsersCardComponent implements OnInit {
         name: vm.user.name,
         email: vm.user.email,
         username: vm.user.username,
-        city: vm.user.city
+        city: vm.user.city,
+        totalStoryPoints: vm.user.totalStoryPoints?.toString()
       });
     }
 
@@ -86,6 +89,7 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    totalStoryPoints: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required])
   });
 
   @Output() editUser = new EventEmitter<{ user: CreateUserDTO, onSuccessCb: onSuccessEditionCbType }>();
@@ -93,15 +97,15 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
-  @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>
-  private dadata = inject(DadataApiService)
+  @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges
     .pipe(
       debounceTime(300),
       distinctUntilChanged(),
       filter(Boolean),
-      switchMap((value) => this.dadata.getCities(value)),
-    )
+      switchMap((value) => this.dadata.getCities(value))
+    );
 
   private snackBar = inject(MatSnackBar);
   private readonly destroyRef = inject(DestroyRef);
@@ -114,9 +118,15 @@ export class DetailUsersCardComponent implements OnInit {
   private onEditSuccess: onSuccessEditionCbType = () =>
     this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
       duration: 2500, horizontalPosition: 'center', verticalPosition: 'top'
-    })
+    });
 
   onSubmit(): void {
+    let totalStoryPointsFromForm = this.formGroup.value.totalStoryPoints;
+
+    const getValueAsNumberOR_0 = (value: any) => {
+      return !isNaN(Number(value)) ? value : 0;
+    };
+
     this.editUser.emit({
       user: {
         name: this.formGroup.value.name || '',
@@ -124,7 +134,8 @@ export class DetailUsersCardComponent implements OnInit {
         city: this.formGroup.value.city || '',
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
         purchaseDate: new Date().toString() || '',
-        educationStatus: 'trainee'
+        educationStatus: 'trainee',
+        totalStoryPoints: getValueAsNumberOR_0(totalStoryPointsFromForm)
       },
       onSuccessCb: this.onEditSuccess
     });
@@ -157,15 +168,15 @@ export class DetailUsersCardComponent implements OnInit {
         tap(() => {
           const formEntries = Object.entries(this.formGroup.controls);
           const isFormControlChanged = (key: string, control: FormControl) =>
-            this.vm.user && this.vm.user[key as keyof UsersEntity] !== control.value
+            this.vm.user && this.vm.user[key as keyof UsersEntity] !== control.value;
 
           const isFieldChanged = formEntries.some(
             ([key, control]) => isFormControlChanged(key, control)
-          )
+          );
 
           this.areFieldsChanged$.next(isFieldChanged);
         })
       )
-      .subscribe()
+      .subscribe();
   }
 }

@@ -1,0 +1,40 @@
+.material {
+  max-width: 230px;
+  max-height: 200px;
+  border-radius: 5px;
+  box-shadow: 10px 10px 30px -17px rgba(0, 0, 0, 0.75);
+}
+
+.icon_wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.material_icon {
+  width: 70px;
+  height: 70px;
+  font-size: 70px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    box-shadow: 10px 10px 64px -3px rgba(69, 39, 160, 1);
+    font-size: 75px;
+  }
+}
+
+.first_row_container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.material_delete {
+  padding: 10px 20px;
+}
+
+.material_title {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

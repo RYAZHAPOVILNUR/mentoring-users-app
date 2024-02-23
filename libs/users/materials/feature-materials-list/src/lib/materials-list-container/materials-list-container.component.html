@@ -1,0 +1,18 @@
+<ng-container
+  *ngrxLet="{
+  folders:folders$,
+  isLoading: isLoading$
+  }
+ as foldersVM"
+>
+  <div class="action_panel">
+    <button mat-icon-button color="primary" class="add-user-fab-button" (click)="openAddFolderDialog()">
+      <mat-icon class="material_icon">add</mat-icon>
+    </button>
+  </div>
+  <materials-list
+    [foldersVM]="foldersVM"
+  />
+</ng-container>
+
+

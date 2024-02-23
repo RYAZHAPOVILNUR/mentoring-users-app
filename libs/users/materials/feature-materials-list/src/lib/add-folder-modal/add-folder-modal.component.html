@@ -1,0 +1,32 @@
+<mat-dialog-content>
+  <form [formGroup]="folderFormGroup">
+    <div class="title_close_row">
+      <div>
+        <p class="add_folder_title">add new folder</p>
+      </div>
+      <button class="close_button" mat-icon-button mat-dialog-close aria-label="close modal" color="warn">
+        <mat-icon class="close_icon">cancel</mat-icon>
+      </button>
+    </div>
+    <mat-form-field class="example-form-field">
+      <mat-label>Add new folder</mat-label>
+      <input matInput type="text" formControlName="folderName">
+      <mat-error *ngIf="folderFormGroup.get('folderName')?.hasError('required')">
+        Name is <strong>required</strong></mat-error>
+      <mat-error *ngIf="folderFormGroup.get('folderName')?.hasError('minlength')">
+        Name must be at least {{ ADD_FOLDER_LIMITS.MIN_LENGTH }} characters
+      </mat-error>
+      <mat-error *ngIf="folderFormGroup.get('folderName')?.hasError('maxlength')">
+        Name cannot exceed {{ ADD_FOLDER_LIMITS.MAX_LENGTH }} characters
+      </mat-error>
+    </mat-form-field>
+  </form>
+  <mat-dialog-actions>
+    <button class="confirm_add_button" mat-button mat-raised-button color="accent"
+            [mat-dialog-close]="folderFormGroup.value"
+            [disabled]="!folderFormGroup.valid">
+      Add Folder
+    </button>
+  </mat-dialog-actions>
+</mat-dialog-content>
+

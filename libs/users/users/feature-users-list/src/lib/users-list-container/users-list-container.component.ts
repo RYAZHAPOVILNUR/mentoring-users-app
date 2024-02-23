@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersListComponent } from '../users-list/users-list.component';
 import { UsersListContainerStore } from './users-list-container.store';
@@ -42,7 +37,7 @@ export class UsersListContainerComponent {
   private readonly router = inject(Router);
 
   onDeleteUser(user: UsersVM) {
-    this.componentStore.deleteUser(user)
+    this.componentStore.deleteUser(user);
   }
 
   onRedirectToEdit({ id, editMode }: { id: number, editMode: boolean }) {

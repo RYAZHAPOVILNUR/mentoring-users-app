@@ -11,6 +11,7 @@ import { UsersListVM } from './users-list-view-model';
 import { UsersCardComponent } from "../users-card/users-card.component";
 import { UsersVM } from '../../../../users-vm';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import { UsersFilterComponent } from '../users-filter/users-filter.component';
 
 @Component({
   selector: 'users-list-ui',
@@ -22,7 +23,8 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
   imports: [
     CommonModule,
     UsersCardComponent,
-    MatProgressBarModule
+    MatProgressBarModule,
+    UsersFilterComponent
   ]
 })
 export class UsersListComponent {
