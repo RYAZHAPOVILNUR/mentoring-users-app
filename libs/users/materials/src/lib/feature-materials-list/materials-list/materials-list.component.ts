@@ -1,7 +1,7 @@
 import { Component, inject, Input, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialsCardComponent } from '../materials-card/materials-card.component';
-import { typeMaterial } from '../../../../data-access/src/lib/folders-materials-types/folders-materials-types';
+import { Material } from '../../../../data-access/src/lib/folders-materials-types/folders-materials-types';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
@@ -18,7 +18,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 })
 export class MaterialsListComponent {
   @Input({ required: true })
-  materialsList!: typeMaterial[] | null;
+  materialsList!: Material[] | null;
 
   @Input({ required: true })
   loading!: boolean | null;

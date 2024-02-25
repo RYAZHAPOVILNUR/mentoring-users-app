@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';
-import { typeFolderVM } from '../../../../data-access/src/lib/folders-materials-types/folders-materials-types';
+import { FolderVM } from '../../../../data-access/src/lib/folders-materials-types/folders-materials-types';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
@@ -25,7 +25,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 })
 export class FoldersListComponent {
   @Input({ required: true })
-  foldersList!: typeFolderVM[] | null;
+  foldersList!: FolderVM[] | null;
 
   @Input({ required: true })
   loading!: boolean | null;

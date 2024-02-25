@@ -6,9 +6,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
-import { typeMaterialPostRequest } from '../../../../data-access/src/lib/folders-materials-types/folders-materials-types';
+import { MaterialPostRequest } from '../../../../data-access/src/lib/folders-materials-types/folders-materials-types';
+import { first, tap } from 'rxjs';
 
-@Component({
+@Component({  
   selector: 'materials-add-btn',
   templateUrl: './materials-add.component.html',
   standalone: true,
@@ -26,8 +27,9 @@ export class MaterialsAddComponent {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result: typeMaterialPostRequest) => {
-      if (result) this.createNewMaterial.emit(result);
-    });
+    dialogRef.afterClosed().pipe(
+      first(),
+      tap((res: MaterialPostRequest) => {if (res) this.createNewMaterial.emit(res)})
+    ).subscribe();
   }
 }

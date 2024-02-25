@@ -6,8 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MaterialsAddComponent } from '../../feature-materials-create/materials-add-btn/materials-add.component';
 import {
-  typeMaterialPostRequest,
-  typeMaterial,
+  MaterialPostRequest,
+  Material,
 } from '../../../../data-access/src/lib/folders-materials-types/folders-materials-types';
 import { MaterialsContentComponent } from '../../feature-materials-content/materials-content.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -39,7 +39,7 @@ export class MaterialsListContainerComponent implements OnInit {
   }
 
   onSelectMaterial(id: number) {
-    let material: typeMaterial[] = [];
+    let material: Material[] = [];
     this.materials$.subscribe(
       (materials) => (material = materials.filter((value) => value.id == id))
     );
@@ -53,7 +53,7 @@ export class MaterialsListContainerComponent implements OnInit {
     });
   }
 
-  onCreateNewMaterial(data: typeMaterialPostRequest) {
+  onCreateNewMaterial(data: MaterialPostRequest) {
     this.containerStore.postMaterial(data);
   }
 

@@ -3,12 +3,12 @@ import { ComponentStore } from '@ngrx/component-store';
 import { ApiService } from '@users/core/http';
 import { catchError, of, tap } from 'rxjs';
 import {
-  typeFolderVM,
-  typeFolderPostRequest,
+  FolderVM,
+  FolderPostRequest,
 } from '../../../../data-access/src/lib/folders-materials-types/folders-materials-types';
 
 interface typeInitialState {
-  folders: typeFolderVM[];
+  folders: FolderVM[];
   isLoading: boolean | null;
   error: null | string;
 }
@@ -29,7 +29,7 @@ export class FoldersListContainerStore extends ComponentStore<typeInitialState> 
   }
 
   public pushNewFolder(title: string) {
-    const newFolder: typeFolderPostRequest = {
+    const newFolder: FolderPostRequest = {
       title,
     };
 
@@ -40,7 +40,7 @@ export class FoldersListContainerStore extends ComponentStore<typeInitialState> 
 
     this.effect(() =>
       this.apiUrl
-        .post<typeFolderVM, typeFolderPostRequest>('/folder', newFolder)
+        .post<FolderVM, FolderPostRequest>('/folder', newFolder)
         .pipe(
           tap((folder) => {
             this.patchState((state) => ({
@@ -68,7 +68,7 @@ export class FoldersListContainerStore extends ComponentStore<typeInitialState> 
       isLoading: true,
     }));
     this.effect(() =>
-      this.apiUrl.delete<typeFolderVM[]>('/folder/' + id).pipe(
+      this.apiUrl.delete<FolderVM[]>('/folder/' + id).pipe(
         tap(() => {
           this.patchState((state) => ({
             ...state,
@@ -95,7 +95,7 @@ export class FoldersListContainerStore extends ComponentStore<typeInitialState> 
       isLoading: true,
     }));
     this.effect(() =>
-      this.apiUrl.get<typeFolderVM[]>('/folder').pipe(
+      this.apiUrl.get<FolderVM[]>('/folder').pipe(
         tap((folders) => {
           this.patchState((state) => ({
             ...state,

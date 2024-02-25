@@ -8,8 +8,8 @@ import {
   TemplateRef,
 } from '@angular/core';
 import {
-  typeFolderVM,
-  typeMaterial,
+  FolderVM,
+  Material,
 } from '../../../../data-access/src/lib/folders-materials-types/folders-materials-types';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
@@ -28,7 +28,7 @@ import {
 export class DeleteFolderComponent {
   dialogRef = inject(MatDialogRef<DeleteFolderComponent>);
   dialog = inject(MatDialog);
-  dialogData: { folder: typeFolderVM } = inject(MAT_DIALOG_DATA);
+  dialogData: { folder: FolderVM } = inject(MAT_DIALOG_DATA);
 
   closeDeleteDialog(id?: number) {
     this.dialogRef.close(id);

@@ -7,7 +7,7 @@ import {
   inject,
   TemplateRef,
 } from '@angular/core';
-import { typeFolderVM } from '../../../../data-access/src/lib/folders-materials-types/folders-materials-types';
+import { FolderVM } from '../../../../data-access/src/lib/folders-materials-types/folders-materials-types';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { DeleteFolderComponent } from '../folders-delete-dialog/folders-delete-dialog.component';
@@ -21,7 +21,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class FoldersCardComponent {
   @Input({ required: true })
-  folder!: typeFolderVM;
+  folder!: FolderVM;
 
   @Output() selectFolder = new EventEmitter();
   @Output() deleteFolder = new EventEmitter();

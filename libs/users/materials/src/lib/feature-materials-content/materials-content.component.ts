@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { typeMaterial } from '../../../data-access/src/lib/folders-materials-types/folders-materials-types';
+import { Material } from '../../../data-access/src/lib/folders-materials-types/folders-materials-types';
 import {
   MatDialog,
   MAT_DIALOG_DATA,
@@ -27,13 +27,13 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 export class MaterialsContentComponent {
   dialog = inject(MatDialog);
   dialogRef = inject(MatDialogRef<MaterialsContentComponent>);
-  dialogData: { material: typeMaterial } = inject(MAT_DIALOG_DATA);
+  dialogData: { material: Material } = inject(MAT_DIALOG_DATA);
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  getIdVideo(material: typeMaterial): string {
+  getIdVideo(material: Material): string {
     let resultSearchId = material.material_link.indexOf('v=');
     return material.material_link.slice(
       resultSearchId + 2,

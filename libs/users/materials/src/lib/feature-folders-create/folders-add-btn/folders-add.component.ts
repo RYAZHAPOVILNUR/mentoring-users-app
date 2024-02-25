@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FoldersAddDialogComponent } from '../folders-add-dialog/folders-add-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
+import { first, tap } from 'rxjs';
 
 @Component({
   selector: 'folders-add-btn',
@@ -17,8 +18,9 @@ export class FoldersAddComponent {
   openDialog(): void {
     const dialogRef = this.dialog.open(FoldersAddDialogComponent);
 
-    dialogRef.afterClosed().subscribe((result: string) => {
-      if (result) this.postNewFolder.emit(result);
-    });
+    dialogRef.afterClosed().pipe(
+      first(),
+      tap(res => {if(res) this.postNewFolder.emit(res)})
+    ).subscribe();
   }
 }

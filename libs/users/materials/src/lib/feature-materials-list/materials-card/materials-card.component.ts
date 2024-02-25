@@ -8,7 +8,7 @@ import {
   ViewChild,
   TemplateRef,
 } from '@angular/core';
-import { typeMaterial } from '../../../../data-access/src/lib/folders-materials-types/folders-materials-types';
+import { Material } from '../../../../data-access/src/lib/folders-materials-types/folders-materials-types';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
@@ -22,7 +22,7 @@ import { MaterialsDeleteDialogComponent } from '../delete-dialog/delete-material
 })
 export class MaterialsCardComponent {
   @Input({ required: true })
-  material!: typeMaterial;
+  material!: Material;
 
   @Output() selectMaterial = new EventEmitter();
   @Output() deleteMaterial = new EventEmitter();

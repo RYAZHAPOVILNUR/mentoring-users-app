@@ -6,7 +6,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
-import { typeMaterial } from 'libs/users/materials/data-access/src/lib/folders-materials-types/folders-materials-types';
+import { Material } from 'libs/users/materials/data-access/src/lib/folders-materials-types/folders-materials-types';
 
 @Component({
   selector: 'material-delete',
@@ -17,7 +17,7 @@ import { typeMaterial } from 'libs/users/materials/data-access/src/lib/folders-m
 export class MaterialsDeleteDialogComponent {
   dialog = inject(MatDialog);
   dialogRef = inject(MatDialogRef<MaterialsDeleteDialogComponent>);
-  dialogData: { material: typeMaterial } = inject(MAT_DIALOG_DATA);
+  dialogData: { material: Material } = inject(MAT_DIALOG_DATA);
 
   closeDialog(id?: number): void {
     this.dialogRef.close(id);

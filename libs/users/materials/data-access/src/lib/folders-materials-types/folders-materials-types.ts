@@ -1,19 +1,19 @@
-export type typeFolderPostRequest = {
+export type FolderPostRequest = {
 	title: string
 }
 
-export type typeMaterialPostRequest = {
+export type MaterialPostRequest = {
 	title: string,
 	material_link: string,
 }
 
-export type typeFolderVM = {
+export type FolderVM = {
 	id: number,
 	created_at: number,
 	title: string
 }
 
-export type typeMaterial = {
+export type Material = {
 	id: number,
 	created_at: number,
 	title: string,

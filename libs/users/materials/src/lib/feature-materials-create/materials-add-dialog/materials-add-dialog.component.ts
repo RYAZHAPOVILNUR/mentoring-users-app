@@ -43,7 +43,7 @@ export class MaterialsAddDialogComponent {
         return audioRegex.test(link);
       default: {
         console.error('error type material!');
-        return true;
+        return false;
       }
     }
   }
