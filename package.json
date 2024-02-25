@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "start": "nx serve users -o",
-    "build": "nx build users"
+    "build": "nx build users",
+    "nx": "nx"
   },
   "private": true,
   "dependencies": {
@@ -51,7 +52,7 @@
     "@angular/language-service": "~16.0.0",
     "@ngrx/schematics": "~16.0.0",
     "@ngrx/store-devtools": "~16.0.0",
-    "@nrwl/cli": "^13.8.6",
+    "@nrwl/cli": "^13.10.6",
     "@nx/cypress": "^16.6.0",
     "@nx/esbuild": "^16.3.2",
     "@nx/eslint-plugin": "^16.6.0",

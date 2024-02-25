@@ -1,0 +1,21 @@
+.user-filter {
+    display        : flex;
+    justify-content: center;
+
+    gap: 10px;
+}
+
+mat-form-field {
+    width: 300px;
+}
+
+button {
+    margin-top: 10px;
+
+}
+
+// :host {
+//     display       : flex;
+//     flex-direction: row;
+//     width         : 250px;
+// }
