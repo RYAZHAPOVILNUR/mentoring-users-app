@@ -47,5 +47,22 @@ export const selectUserById = (id: number) => createSelector(
 export const selectOpenedUser = createSelector(
   selectRouteParams,
   selectUsersEntities,
-  ({id}, entities) => entities[id] || null
+  ({ id }, entities) => entities[id] || null
 )
+
+export const selectUsersFilter = createSelector(
+  selectUsersState,
+  (state: UsersState) => state.usersFilter
+);
+
+export const selectFilteredUsers = createSelector(
+  selectAllUsers,//state -users
+  selectUsersFilter,//usersFilter
+  (users, usersFilter) => {
+    const filterLowerCase = usersFilter.name.trim().toLowerCase();
+    if (!filterLowerCase) {
+      return users; // Если фильтр пустой, вернуть всех пользователей
+    }
+    return users.filter(user => user.name.toLowerCase().includes(filterLowerCase));
+  }
+);
