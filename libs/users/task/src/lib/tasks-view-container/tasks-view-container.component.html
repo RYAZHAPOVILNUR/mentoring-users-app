@@ -1,6 +1,5 @@
 <div>
-  <users-tasks-search-input (handleSearchText)="onHandleSearchText($event)">
-  </users-tasks-search-input>
+  <users-tasks-search-input (handleSearchText)="onHandleSearchText($event)"> </users-tasks-search-input>
 
   <users-tasks-view
     [columns]="(text ? filteredColumn$ : columns$) | ngrxPush"

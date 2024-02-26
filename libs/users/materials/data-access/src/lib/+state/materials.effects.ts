@@ -13,9 +13,7 @@ export class MaterialsEffects {
         /** An EMPTY observable only emits completion. Replace with your own observable API request */
         EMPTY.pipe(
           map((data) => MaterialsActions.loadMaterialssSuccess({ data })),
-          catchError((error) =>
-            of(MaterialsActions.loadMaterialssFailure({ error }))
-          )
+          catchError((error) => of(MaterialsActions.loadMaterialssFailure({ error })))
         )
       )
     );

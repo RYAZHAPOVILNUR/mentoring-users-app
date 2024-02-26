@@ -7,11 +7,7 @@
         <mat-error>Имя обязательно</mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input
-          matInput
-          placeholder="Электронная почта*"
-          formControlName="email"
-        />
+        <input matInput placeholder="Электронная почта*" formControlName="email" />
         <mat-error>Введите корректную электронную почту</mat-error>
       </mat-form-field>
     </div>
@@ -19,12 +15,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="cancel()">Отмена</button>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="save()"
-    [disabled]="formGroup.invalid"
-  >
-    Сохранить
-  </button>
+  <button mat-raised-button color="primary" (click)="save()" [disabled]="formGroup.invalid">Сохранить</button>
 </div>

@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,10 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
-import {
-  ThemeStorage,
-  DocsSiteTheme,
-} from '../change-theme-storage/change-theme-storage';
+import { ThemeStorage, DocsSiteTheme } from '../change-theme-storage/change-theme-storage';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { StyleManager } from '../style-manager';
@@ -103,9 +94,7 @@ export class ChangeThemeComponentHeader implements OnInit, OnDestroy {
   }
 
   selectTheme(themeName: string) {
-    const theme = this.themes.find(
-      (currentTheme) => currentTheme.name === themeName
-    );
+    const theme = this.themes.find((currentTheme) => currentTheme.name === themeName);
 
     if (!theme) {
       return;

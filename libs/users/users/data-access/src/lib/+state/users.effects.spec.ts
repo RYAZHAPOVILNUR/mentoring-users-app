@@ -15,11 +15,7 @@ describe('UsersEffects', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [],
-      providers: [
-        UsersEffects,
-        provideMockActions(() => actions),
-        provideMockStore(),
-      ],
+      providers: [UsersEffects, provideMockActions(() => actions), provideMockStore()],
     });
 
     effects = TestBed.inject(UsersEffects);

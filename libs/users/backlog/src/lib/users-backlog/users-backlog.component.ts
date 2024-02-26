@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  inject,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,14 +13,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'users-backlog',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatListModule,
-    NgFor,
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule,
-  ],
+  imports: [CommonModule, MatListModule, NgFor, MatButtonModule, MatIconModule, MatMenuModule],
   templateUrl: './users-backlog.component.html',
   styleUrls: ['./users-backlog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -36,8 +23,7 @@ export class BacklogComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly matDialog = inject(MatDialog);
 
-  public readonly backlogs: Observable<IBacklog[]> =
-    this.backlogFacade.backlog$;
+  public readonly backlogs: Observable<IBacklog[]> = this.backlogFacade.backlog$;
   public readonly backlogStatus: {
     new: string;
     inProgress: string;
@@ -65,15 +51,11 @@ export class BacklogComponent implements OnInit {
         }
       : null;
 
-    const dialogRef: MatDialogRef<TaskChangeDialogComponent> =
-      this.matDialog.open(TaskChangeDialogComponent, {
-        width: '1040px',
-        data: newBacklogData,
-      });
-    dialogRef
-      .afterClosed()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe();
+    const dialogRef: MatDialogRef<TaskChangeDialogComponent> = this.matDialog.open(TaskChangeDialogComponent, {
+      width: '1040px',
+      data: newBacklogData,
+    });
+    dialogRef.afterClosed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
   }
 
   stopPropagation(event: Event) {

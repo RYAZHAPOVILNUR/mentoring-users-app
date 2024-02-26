@@ -1,9 +1,4 @@
-import {
-  HttpErrorResponse,
-  HttpEvent,
-  HttpHandlerFn,
-  HttpRequest,
-} from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpRequest } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { LocalStorageJwtService } from './local-storage-jwt.service';
@@ -21,10 +16,7 @@ const shouldIntercept = (req: HttpRequest<any>): boolean => {
   return true;
 };
 
-export const tokenInterceptor = (
-  request: HttpRequest<any>,
-  next: HttpHandlerFn
-): Observable<HttpEvent<any>> => {
+export const tokenInterceptor = (request: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> => {
   const localStorageJwtService = inject(LocalStorageJwtService);
   const token: string | null = localStorageJwtService.getItem();
   const router = inject(Router);

@@ -11,18 +11,16 @@ export interface CommentsState extends EntityState<Comment> {
   publishStatus: LoadingStatus;
 }
 
-export const commentsAdapter: EntityAdapter<Comment> =
-  createEntityAdapter<Comment>({
-    sortComparer: (a, b) => {
-      return Number(b.created_at) - Number(a.created_at);
-    },
-  });
+export const commentsAdapter: EntityAdapter<Comment> = createEntityAdapter<Comment>({
+  sortComparer: (a, b) => {
+    return Number(b.created_at) - Number(a.created_at);
+  },
+});
 
-export const initialCommentsState: CommentsState =
-  commentsAdapter.getInitialState({
-    status: 'init',
-    publishStatus: 'init',
-  });
+export const initialCommentsState: CommentsState = commentsAdapter.getInitialState({
+  status: 'init',
+  publishStatus: 'init',
+});
 
 export const commentsFeature = createFeature({
   name: 'comments',
@@ -60,8 +58,6 @@ export const commentsFeature = createFeature({
       publishStatus: 'error' as const,
     })),
 
-    on(CommentsActions.deleteComment, (state, { id }) =>
-      commentsAdapter.removeOne(id, state)
-    )
+    on(CommentsActions.deleteComment, (state, { id }) => commentsAdapter.removeOne(id, state))
   ),
 });

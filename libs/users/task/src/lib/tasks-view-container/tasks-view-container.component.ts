@@ -11,14 +11,7 @@ import { TasksSearchInputComponent } from '../tasks-search-input/tasks-search-in
 @Component({
   selector: 'users-tasks-container',
   standalone: true,
-  imports: [
-    CommonModule,
-    TasksViewComponent,
-    NgFor,
-    MatButtonModule,
-    PushPipe,
-    TasksSearchInputComponent,
-  ],
+  imports: [CommonModule, TasksViewComponent, NgFor, MatButtonModule, PushPipe, TasksSearchInputComponent],
   templateUrl: './tasks-view-container.component.html',
   styleUrls: ['./tasks-view-container.component.scss'],
   providers: [TasksStore],
@@ -54,13 +47,7 @@ export class TasksContainerComponent {
     this.tasksStore.searchTask(this.text);
   }
 
-  public onChangeColumnName({
-    columnIndex,
-    columnName,
-  }: {
-    columnIndex: number;
-    columnName: string;
-  }): void {
+  public onChangeColumnName({ columnIndex, columnName }: { columnIndex: number; columnName: string }): void {
     this.tasksStore.changeColumnName({ columnIndex, columnName });
   }
 }

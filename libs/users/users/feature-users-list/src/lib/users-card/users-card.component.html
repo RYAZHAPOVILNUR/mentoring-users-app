@@ -5,11 +5,7 @@
   matTooltipClass="example-tooltip-uppercase"
 >
   <mat-card-content class="mat-card-content">
-    <img
-      [src]="user.photo ? user.photo.url : 'assets/img/1.png'"
-      alt=""
-      class="user-photo"
-    />
+    <img [src]="user.photo ? user.photo.url : 'assets/img/1.png'" alt="" class="user-photo" />
     <label *ngIf="user.username; else email">{{ user.username }}</label>
     <ng-template #email>
       {{ user.email }}
@@ -18,13 +14,7 @@
   </mat-card-content>
 
   <mat-menu #menu="matMenu">
-    <button
-      mat-menu-item
-      color="accent"
-      (click)="redirectToEditPage(true, $event)"
-    >
-      Редактировать
-    </button>
+    <button mat-menu-item color="accent" (click)="redirectToEditPage(true, $event)">Редактировать</button>
     <button
       mat-menu-item
       color="warn"
@@ -36,11 +26,7 @@
   </mat-menu>
 
   <mat-card-actions class="user-card-buttons">
-    <button
-      mat-icon-button
-      (click)="onOpenMenu($event)"
-      [matMenuTriggerFor]="menu"
-    >
+    <button mat-icon-button (click)="onOpenMenu($event)" [matMenuTriggerFor]="menu">
       <mat-icon>more_horiz</mat-icon>
     </button>
   </mat-card-actions>

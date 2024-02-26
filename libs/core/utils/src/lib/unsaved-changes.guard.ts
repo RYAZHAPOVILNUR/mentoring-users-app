@@ -1,9 +1,9 @@
 import { CanDeactivateFn } from '@angular/router';
 import { Observable } from 'rxjs';
 
-export const canDeactivateFormComponent: CanDeactivateFn<
-  DeactivatableComponent
-> = (component: DeactivatableComponent) => {
+export const canDeactivateFormComponent: CanDeactivateFn<DeactivatableComponent> = (
+  component: DeactivatableComponent
+) => {
   if (component.canDeactivate) {
     return component.canDeactivate();
   }

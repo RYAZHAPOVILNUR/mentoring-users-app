@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 // @ts-ignore
@@ -75,27 +70,19 @@ export class HomeComponent implements OnInit {
     series: [
       {
         name: 'Intern',
-        data: [
-          3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 25.5, 25.6, 25.8, 26.1, 26.4,
-        ],
+        data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 25.5, 25.6, 25.8, 26.1, 26.4],
       },
       {
         name: 'Junior',
-        data: [
-          7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 25.5, 25.7, 25.8, 26.3, 26.4,
-        ],
+        data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 25.5, 25.7, 25.8, 26.3, 26.4],
       },
       {
         name: 'Middle',
-        data: [
-          -0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 25.5, 25.6, 25.8, 26.2, 26.4,
-        ],
+        data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 25.5, 25.6, 25.8, 26.2, 26.4],
       },
       {
         name: 'Middle+',
-        data: [
-          -0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 25.5, 25.5, 25.8, 26, 26.4,
-        ],
+        data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 25.5, 25.5, 25.8, 26, 26.4],
       },
     ],
   };
@@ -124,9 +111,7 @@ export class HomeComponent implements OnInit {
           enabled: true,
           format: '<b>{point.name}</b>: {point.percentage:.1f} %',
           style: {
-            color:
-              (Highcharts.theme && Highcharts.theme.contrastTextColor) ||
-              'black',
+            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
           },
         },
         showInLegend: true,

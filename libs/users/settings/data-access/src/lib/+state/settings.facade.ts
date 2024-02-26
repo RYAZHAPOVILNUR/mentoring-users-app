@@ -7,17 +7,13 @@ import { SettingsActions } from './settings.actions';
 })
 export class SettingsFacade {
   private readonly store = inject(Store);
-  public readonly articlesViewStyleType$ = this.store.select(
-    selectArticlesViewStyleType
-  );
+  public readonly articlesViewStyleType$ = this.store.select(selectArticlesViewStyleType);
 
   getSettings() {
     this.store.dispatch(SettingsActions.loadSettings());
   }
 
   setArticlesStyleType(articlesViewStyleType: string) {
-    this.store.dispatch(
-      SettingsActions.setArticlesStyleType({ articlesViewStyleType })
-    );
+    this.store.dispatch(SettingsActions.setArticlesStyleType({ articlesViewStyleType }));
   }
 }

@@ -13,11 +13,7 @@
 
     <ng-container *ngSwitchCase="'loaded'">
       <ng-container>
-        <users-articles-view
-          [articles]="vm.articles"
-          [loggedUserId]="vm.loggedUserId"
-          [article]="vm.viewedArticle"
-        />
+        <users-articles-view [articles]="vm.articles" [loggedUserId]="vm.loggedUserId" [article]="vm.viewedArticle" />
       </ng-container>
     </ng-container>
 

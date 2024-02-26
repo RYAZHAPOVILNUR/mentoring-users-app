@@ -9,8 +9,7 @@ import { CreateArticle } from '../models/create-article.model';
 @Injectable({ providedIn: 'root' })
 export class ArticlesFacade {
   private readonly store = inject(Store);
-  public readonly articles$: Observable<Article[]> =
-    this.store.select(selectArticles);
+  public readonly articles$: Observable<Article[]> = this.store.select(selectArticles);
   public readonly articlesEntities$ = this.store.select(selectArticlesEntities);
 
   editArticle(articleData: CreateArticle, id: number) {

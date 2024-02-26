@@ -6,11 +6,7 @@ import { GithubApiService } from '../services/github-api.service';
 import { Store } from '@ngrx/store';
 
 export const getAccessTokenEffect$ = createEffect(
-  (
-    githubApiService = inject(GithubApiService),
-    store = inject(Store),
-    actions$ = inject(Actions)
-  ) => {
+  (githubApiService = inject(GithubApiService), store = inject(Store), actions$ = inject(Actions)) => {
     return actions$.pipe(
       ofType(githubApiActions.getAccessToken),
       switchMap(({ code }) =>
@@ -18,9 +14,7 @@ export const getAccessTokenEffect$ = createEffect(
           map(({ token }) => {
             return githubApiActions.getAccessTokenSuccess({ token });
           }),
-          catchError((error) =>
-            of(githubApiActions.getAccessTokenFailure({ error }))
-          )
+          catchError((error) => of(githubApiActions.getAccessTokenFailure({ error })))
         )
       )
     );
@@ -29,11 +23,7 @@ export const getAccessTokenEffect$ = createEffect(
 );
 
 export const getAccessTokenSuccessEffect$ = createEffect(
-  (
-    actions$ = inject(Actions),
-    githubApiService = inject(GithubApiService),
-    store = inject(Store)
-  ) =>
+  (actions$ = inject(Actions), githubApiService = inject(GithubApiService), store = inject(Store)) =>
     actions$.pipe(
       ofType(githubApiActions.getAccessTokenSuccess),
       tap(({ token }) => {
@@ -52,9 +42,7 @@ export const getGithubUserEffect$ = createEffect(
       switchMap(({ token }) =>
         githubApiService.getGithubUser(token).pipe(
           map((user) => githubApiActions.getGithubUserSuccess({ user })),
-          catchError((error) =>
-            of(githubApiActions.getGithubUserFailure({ error }))
-          )
+          catchError((error) => of(githubApiActions.getGithubUserFailure({ error })))
         )
       )
     ),

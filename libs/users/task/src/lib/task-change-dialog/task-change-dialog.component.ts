@@ -1,11 +1,7 @@
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import {
-  MatDialogModule,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -73,8 +69,7 @@ export class TaskChangeDialogComponent {
   get totalPoint(): string {
     const values = Object.values(this.storyPoint);
 
-    if (Object.values(this.storyPoint).every((value) => value === '?'))
-      return '?';
+    if (Object.values(this.storyPoint).every((value) => value === '?')) return '?';
 
     return values.reduce((total, currentValue) => {
       const parsedValue = parseFloat(currentValue);
@@ -95,9 +90,7 @@ export class TaskChangeDialogComponent {
 
   public task: Task = {
     name: this.data?.title,
-    descriprion:
-      this.data?.description ??
-      'У тасок в меню "Задачи" с бека description не приходит',
+    descriprion: this.data?.description ?? 'У тасок в меню "Задачи" с бека description не приходит',
     priority: 'high',
     status: 'progress',
     assignees: [

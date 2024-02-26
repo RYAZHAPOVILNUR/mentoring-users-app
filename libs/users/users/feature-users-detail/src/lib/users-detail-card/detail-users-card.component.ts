@@ -15,13 +15,7 @@ import { CommonModule } from '@angular/common';
 import { onSuccessEditionCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import {
-  FormBuilder,
-  FormControl,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -32,14 +26,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { DadataApiService } from '@dadata';
-import {
-  BehaviorSubject,
-  debounceTime,
-  distinctUntilChanged,
-  filter,
-  switchMap,
-  tap,
-} from 'rxjs';
+import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs';
 import { PushPipe } from '@ngrx/component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -97,13 +84,8 @@ export class DetailUsersCardComponent implements OnInit {
   }
 
   public formGroup = new FormBuilder().group({
-    name: new FormControl({ value: '', disabled: !this.vm.editMode }, [
-      Validators.required,
-    ]),
-    email: new FormControl({ value: '', disabled: !this.vm.editMode }, [
-      Validators.required,
-      Validators.email,
-    ]),
+    name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
+    email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
@@ -181,12 +163,9 @@ export class DetailUsersCardComponent implements OnInit {
         tap(() => {
           const formEntries = Object.entries(this.formGroup.controls);
           const isFormControlChanged = (key: string, control: FormControl) =>
-            this.vm.user &&
-            this.vm.user[key as keyof UsersEntity] !== control.value;
+            this.vm.user && this.vm.user[key as keyof UsersEntity] !== control.value;
 
-          const isFieldChanged = formEntries.some(([key, control]) =>
-            isFormControlChanged(key, control)
-          );
+          const isFieldChanged = formEntries.some(([key, control]) => isFormControlChanged(key, control));
 
           this.areFieldsChanged$.next(isFieldChanged);
         })

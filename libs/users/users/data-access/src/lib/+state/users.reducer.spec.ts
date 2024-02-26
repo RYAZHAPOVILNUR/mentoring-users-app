@@ -12,10 +12,7 @@ describe('Users Reducer', () => {
 
   describe('valid Users actions', () => {
     it('loadUsersSuccess should return the list of known Users', () => {
-      const users = [
-        createUsersEntity('PRODUCT-AAA'),
-        createUsersEntity('PRODUCT-zzz'),
-      ];
+      const users = [createUsersEntity('PRODUCT-AAA'), createUsersEntity('PRODUCT-zzz')];
       const action = UsersActions.loadUsersSuccess({ users });
 
       const result: UsersState = usersReducer(initialUsersState, action);

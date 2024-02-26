@@ -2,15 +2,7 @@ import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ApiService } from '@users/core/http';
 import { authActions } from './auth.actions';
-import {
-  catchError,
-  concatMap,
-  map,
-  of,
-  switchMap,
-  tap,
-  withLatestFrom,
-} from 'rxjs';
+import { catchError, concatMap, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
 import {
   ChangePasswordPayload,
   ChangePasswordResponse,
@@ -30,27 +22,21 @@ export const loginEffect$ = createEffect(
     actions$.pipe(
       ofType(authActions.login),
       switchMap(({ userData }) =>
-        api
-          .post<SignAuthResponse, SignAuthPayload>('/auth/login', userData)
-          .pipe(
-            map((res) => {
-              const userEntity = usersDTOAdapter.DTOtoEntity(res.user);
-              const updatedRes = { ...res, user: userEntity };
-              return authActions.loginSuccess({ res: updatedRes });
-            }),
-            catchError((error) => of(authActions.loginFailure({ error })))
-          )
+        api.post<SignAuthResponse, SignAuthPayload>('/auth/login', userData).pipe(
+          map((res) => {
+            const userEntity = usersDTOAdapter.DTOtoEntity(res.user);
+            const updatedRes = { ...res, user: userEntity };
+            return authActions.loginSuccess({ res: updatedRes });
+          }),
+          catchError((error) => of(authActions.loginFailure({ error })))
+        )
       )
     ),
   { functional: true }
 );
 
 export const loginSuccessEffect$ = createEffect(
-  (
-    actions$ = inject(Actions),
-    localStorageJwtService = inject(LocalStorageJwtService),
-    router = inject(Router)
-  ) => {
+  (actions$ = inject(Actions), localStorageJwtService = inject(LocalStorageJwtService), router = inject(Router)) => {
     return actions$.pipe(
       ofType(authActions.loginSuccess),
       tap((action) => {
@@ -104,11 +90,7 @@ export const registerEffect$ = createEffect(
 );
 
 export const registerSuccessEffects$ = createEffect(
-  (
-    actions$ = inject(Actions),
-    localStorageJwtService = inject(LocalStorageJwtService),
-    router = inject(Router)
-  ) => {
+  (actions$ = inject(Actions), localStorageJwtService = inject(LocalStorageJwtService), router = inject(Router)) => {
     return actions$.pipe(
       ofType(authActions.registerSuccess),
       concatMap((action) => {
@@ -122,19 +104,13 @@ export const registerSuccessEffects$ = createEffect(
 );
 
 export const logoutEffect$ = createEffect(
-  (
-    actions$ = inject(Actions),
-    jwtService = inject(LocalStorageJwtService),
-    router = inject(Router)
-  ) =>
+  (actions$ = inject(Actions), jwtService = inject(LocalStorageJwtService), router = inject(Router)) =>
     actions$.pipe(
       ofType(authActions.logout),
       tap(() => {
         jwtService.removeItem();
         router.navigate(['/login']);
-        const notDefaultTheme: Element | null = document.head.querySelector(
-          '.style-manager-theme'
-        );
+        const notDefaultTheme: Element | null = document.head.querySelector('.style-manager-theme');
         if (notDefaultTheme) notDefaultTheme.remove();
       })
     ),
@@ -146,17 +122,10 @@ export const changePasswordEffects$ = createEffect(
     actions$.pipe(
       ofType(authActions.changePassword),
       switchMap(({ data }) =>
-        api
-          .put<ChangePasswordResponse, ChangePasswordPayload>(
-            '/auth/change_password',
-            data
-          )
-          .pipe(
-            map((res) => authActions.changePasswordSuccess({ res })),
-            catchError((error) =>
-              of(authActions.changePasswordFailure({ error }))
-            )
-          )
+        api.put<ChangePasswordResponse, ChangePasswordPayload>('/auth/change_password', data).pipe(
+          map((res) => authActions.changePasswordSuccess({ res })),
+          catchError((error) => of(authActions.changePasswordFailure({ error })))
+        )
       )
     ),
   { functional: true }

@@ -22,6 +22,7 @@ export class UserProfileContainerComponent {
   public readonly isLoggedUser = of(false);
 
   public readonly status$ = this.authFacade.status$;
-  public readonly user$: Observable<UsersEntity | any> =
-    this.usersFacade.openedUser$.pipe(tap((_) => this.usersFacade.loadUser()));
+  public readonly user$: Observable<UsersEntity | any> = this.usersFacade.openedUser$.pipe(
+    tap((_) => this.usersFacade.loadUser())
+  );
 }

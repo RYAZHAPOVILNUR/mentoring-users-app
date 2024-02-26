@@ -18,9 +18,7 @@
     <div class="custom-input-container">
       <quill-editor
         class="editor"
-        [class.light-invalid]="
-          formSubmitted && formGroup.get('textEditor')?.invalid
-        "
+        [class.light-invalid]="formSubmitted && formGroup.get('textEditor')?.invalid"
         [styles]="{ height: '400px' }"
         [modules]="quillEditorModules"
         placeholder=""
@@ -30,20 +28,13 @@
       </quill-editor>
     </div>
 
-    <p
-      class="error-message"
-      *ngIf="formSubmitted && formGroup.get('textEditor')?.invalid"
-    >
+    <p class="error-message" *ngIf="formSubmitted && formGroup.get('textEditor')?.invalid">
       {{ 'ARTICLES.ARTICLE.ARTICLE_SIZE' | translate }}
     </p>
 
     <div class="button">
       <button mat-raised-button type="submit" color="primary">
-        {{
-          vm.editMode
-            ? ('ARTICLES.ARTICLE.EDIT' | translate)
-            : ('ARTICLES.ARTICLE.POST' | translate)
-        }}
+        {{ vm.editMode ? ('ARTICLES.ARTICLE.EDIT' | translate) : ('ARTICLES.ARTICLE.POST' | translate) }}
       </button>
     </div>
   </form>

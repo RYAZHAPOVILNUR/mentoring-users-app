@@ -14,10 +14,7 @@
 
     <ng-container *ngSwitchCase="'loaded'">
       <ng-container>
-        <article-read
-          [article]="vm.viewedArticle"
-          [loggedUserId]="vm.loggedUserId"
-        />
+        <article-read [article]="vm.viewedArticle" [loggedUserId]="vm.loggedUserId" />
         <article-comments
           [comments]="vm.comments"
           [status]="vm.commentsStatus"

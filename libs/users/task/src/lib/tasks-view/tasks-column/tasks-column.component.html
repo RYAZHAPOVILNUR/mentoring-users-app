@@ -1,9 +1,4 @@
-<mat-card
-  class="board-column"
-  cdkDropList
-  [cdkDropListData]="column"
-  (cdkDropListDropped)="onDragDrop($event)"
->
+<mat-card class="board-column" cdkDropList [cdkDropListData]="column" (cdkDropListDropped)="onDragDrop($event)">
   <div class="column-title" (dblclick)="onEditing()">
     <span *ngIf="!editing" class="column-title">{{ title }}</span>
     <input
@@ -24,19 +19,9 @@
       cdkDrag
     >
       <div [innerHTML]="splitText(task.taskName)"></div>
-      <button
-        mat-icon-button
-        class="delTask"
-        (click)="onRemoveTask(task.taskName)"
-      >
-        х
-      </button>
+      <button mat-icon-button class="delTask" (click)="onRemoveTask(task.taskName)">х</button>
     </mat-card>
   </div>
-  <button mat-raised-button class="delBtnContainer" (click)="removeColumn()">
-    Delete Column
-  </button>
-  <button mat-raised-button class="tasksBtn" (click)="onAddNewTaskModal()">
-    Add Task
-  </button>
+  <button mat-raised-button class="delBtnContainer" (click)="removeColumn()">Delete Column</button>
+  <button mat-raised-button class="tasksBtn" (click)="onAddNewTaskModal()">Add Task</button>
 </mat-card>

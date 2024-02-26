@@ -10,12 +10,7 @@ import { Comment } from '../../models/user-comment.model';
 import { AuthFacade } from '@auth/data-access';
 
 export const publishComment$ = createEffect(
-  (
-    actions$ = inject(Actions),
-    store = inject(Store),
-    auth$ = inject(AuthFacade),
-    apiService = inject(ApiService)
-  ) => {
+  (actions$ = inject(Actions), store = inject(Store), auth$ = inject(AuthFacade), apiService = inject(ApiService)) => {
     return actions$.pipe(
       ofType(CommentsActions.publishComment),
       withLatestFrom(auth$.user$),
@@ -31,19 +26,17 @@ export const publishComment$ = createEffect(
           },
         };
 
-        return apiService
-          .post<Comment, CreateComment>('/comments', comment)
-          .pipe(
-            map((comment) =>
-              CommentsActions.publishCommentSuccess({
-                comment: { ...comment, author },
-              })
-            ),
-            catchError((error) => {
-              console.error('Error', error);
-              return of(CommentsActions.publishCommentFailed({ error }));
+        return apiService.post<Comment, CreateComment>('/comments', comment).pipe(
+          map((comment) =>
+            CommentsActions.publishCommentSuccess({
+              comment: { ...comment, author },
             })
-          );
+          ),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(CommentsActions.publishCommentFailed({ error }));
+          })
+        );
       })
     );
   },

@@ -24,10 +24,7 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "libs/core/utils/**/*.ts",
-          "libs/core/utils/**/*.html"
-        ]
+        "lintFilePatterns": ["libs/core/utils/**/*.ts", "libs/core/utils/**/*.html"]
       }
     }
   }

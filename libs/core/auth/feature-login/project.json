@@ -24,10 +24,7 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "libs/core/auth/feature-login/**/*.ts",
-          "libs/core/auth/feature-login/**/*.html"
-        ]
+        "lintFilePatterns": ["libs/core/auth/feature-login/**/*.ts", "libs/core/auth/feature-login/**/*.html"]
       }
     }
   }
