@@ -1,8 +1,17 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogModule,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { CreateUsersDialogComponent } from '../create-users-dialog/create-users-dialog.component';
 import { UsersFacade } from '@users/users/data-access';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -22,15 +31,17 @@ export class CreateUsersButtonComponent {
   private email!: string;
   public dialog = inject(MatDialog);
   private readonly usersFacade = inject(UsersFacade);
-  private readonly destroyRef = inject(DestroyRef)
+  private readonly destroyRef = inject(DestroyRef);
 
   openAddUserDialog(): void {
-    const dialogRef: MatDialogRef<CreateUsersDialogComponent> = this.dialog.open(CreateUsersDialogComponent, {
-      data: { name: this.name, email: this.email },
-    });
-    dialogRef.afterClosed()
+    const dialogRef: MatDialogRef<CreateUsersDialogComponent> =
+      this.dialog.open(CreateUsersDialogComponent, {
+        data: { name: this.name, email: this.email },
+      });
+    dialogRef
+      .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(result => {
+      .subscribe((result) => {
         if (result) {
           const newUserData: CreateUserDTO = {
             name: result.name,

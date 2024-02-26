@@ -5,17 +5,17 @@
   align-items: center;
   margin: 15px 0;
 }
-.user-photo-wrapper{
+.user-photo-wrapper {
   position: relative;
   width: auto;
-  &:hover{
-    .photo_overlay{
+  &:hover {
+    .photo_overlay {
       visibility: visible;
       transform: scale(1);
     }
   }
 }
-.zoom_in .mat-icon{
+.zoom_in .mat-icon {
   color: white;
   font-size: 33px;
   width: 33px;
@@ -43,16 +43,16 @@
 .list-item {
   height: 40px !important;
 }
-.user-photo-contayner img{
+.user-photo-contayner img {
   cursor: pointer;
 }
 
-.photo_overlay{
+.photo_overlay {
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
-  top:0;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;

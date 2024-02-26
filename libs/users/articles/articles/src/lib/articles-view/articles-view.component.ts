@@ -25,7 +25,6 @@ import { UsersListContainerStore } from '../../../../../users/feature-users-list
 import { UsersFacade } from '@users/users/data-access';
 import { SettingsFacade } from '@users/settings/data-access';
 
-
 @Component({
   selector: 'users-articles-view',
   standalone: true,
@@ -58,15 +57,15 @@ export class ArticlesViewComponent implements OnInit {
   private readonly settingsFacade = inject(SettingsFacade);
   public authorPhoto$: Observable<string | undefined>[] = [];
   public authorArticle$: Observable<string | undefined>[] = [];
-  public readonly viewStyleType$ =  this.settingsFacade.articlesViewStyleType$
+  public readonly viewStyleType$ = this.settingsFacade.articlesViewStyleType$;
 
   changeArticlesStyleType(styleType: string): void {
-   this.settingsFacade.setArticlesStyleType(styleType)
+    this.settingsFacade.setArticlesStyleType(styleType);
   }
 
   public clearArticleContent(content: string) {
     return content.replace(/<[^>]*>/g, ' ');
-  };
+  }
 
   preventRouterNavigation(event: Event) {
     event.stopPropagation();

@@ -5,15 +5,15 @@
   (cdkDropListDropped)="onDragDrop($event)"
 >
   <div class="column-title" (dblclick)="onEditing()">
-    <span *ngIf="!editing" class="column-title">{{ title}}</span>
+    <span *ngIf="!editing" class="column-title">{{ title }}</span>
     <input
       *ngIf="editing"
       #input
       mat-input
       type="text"
-     [(ngModel)]="title"
-     (keyup.enter)="onEditing()"
-     (blur)="onEditing()"
+      [(ngModel)]="title"
+      (keyup.enter)="onEditing()"
+      (blur)="onEditing()"
     />
   </div>
   <div class="tasks-container">

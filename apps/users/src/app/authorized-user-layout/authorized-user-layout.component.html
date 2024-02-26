@@ -1,24 +1,21 @@
 <div class="wrapper" *ngIf="isAuthenticated$ | ngrxPush">
   <div class="content">
-  
-      <lib-header (sidenavToggle)="sidenav.toggle()"></lib-header>
-    
-      <mat-sidenav-container class="sidenav-container">
-        <mat-sidenav
-          #sidenav 
-          [mode]="(isMobile$ | ngrxPush) ? 'over' : 'side'"
-          [(opened)]="opened"
-          class="sidenav"
-        >
+    <lib-header (sidenavToggle)="sidenav.toggle()"></lib-header>
+
+    <mat-sidenav-container class="sidenav-container">
+      <mat-sidenav
+        #sidenav
+        [mode]="(isMobile$ | ngrxPush) ? 'over' : 'side'"
+        [(opened)]="opened"
+        class="sidenav"
+      >
         <navbar (click)="closeSidenavOnTouch(sidenav)"></navbar>
+      </mat-sidenav>
 
-        </mat-sidenav>
-
-        <mat-sidenav-content class="sidenav-content">
-          <router-outlet></router-outlet>
-        </mat-sidenav-content>
-      </mat-sidenav-container>
+      <mat-sidenav-content class="sidenav-content">
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
     <lib-footer class="footer"></lib-footer>
   </div>
 </div>
-

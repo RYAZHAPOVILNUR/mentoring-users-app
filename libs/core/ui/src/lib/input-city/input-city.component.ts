@@ -1,6 +1,26 @@
-import { ChangeDetectionStrategy, Component, ChangeDetectorRef, Self, Input, OnInit, ElementRef } from '@angular/core';
-import { Observable, fromEvent, map, distinctUntilChanged, debounceTime, switchMap, filter} from 'rxjs';
-import { NgControl, ReactiveFormsModule, ControlValueAccessor } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ChangeDetectorRef,
+  Self,
+  Input,
+  OnInit,
+  ElementRef,
+} from '@angular/core';
+import {
+  Observable,
+  fromEvent,
+  map,
+  distinctUntilChanged,
+  debounceTime,
+  switchMap,
+  filter,
+} from 'rxjs';
+import {
+  NgControl,
+  ReactiveFormsModule,
+  ControlValueAccessor,
+} from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { inject, DestroyRef } from '@angular/core';
@@ -20,44 +40,44 @@ import { PushPipe } from '@ngrx/component';
     MatFormFieldModule,
     MatInputModule,
     CommonModule,
-    PushPipe
+    PushPipe,
   ],
   templateUrl: './input-city.component.html',
   styleUrls: ['./input-city.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputCityComponent implements ControlValueAccessor, OnInit{
+export class InputCityComponent implements ControlValueAccessor, OnInit {
   private dadataService = inject(DadataApiService);
   private destroyRef = inject(DestroyRef);
   private onChange!: (value: string) => void;
   private onTouched!: () => void;
-  private inputElement!:HTMLInputElement;
+  private inputElement!: HTMLInputElement;
 
-  value?:string;
-  public citySuggestions$!:Observable<string[]>;
+  value?: string;
+  public citySuggestions$!: Observable<string[]>;
 
   @Input({ required: true }) vm!: UsersEntity;
 
   ngOnInit(): void {
     this.value = this.vm.city;
-    this.inputElement = this.elementRef.nativeElement.querySelector("#inputElement");
+    this.inputElement =
+      this.elementRef.nativeElement.querySelector('#inputElement');
     this.citySuggestions$ = fromEvent<Event>(this.inputElement, 'input').pipe(
-        map((event: Event) => (event.target as HTMLInputElement).value),
-        debounceTime(300),
-        distinctUntilChanged(),
-        filter(Boolean),
-        switchMap((value)=>this.dadataService.getCities(value)),
-        takeUntilDestroyed(this.destroyRef)
-      );
+      map((event: Event) => (event.target as HTMLInputElement).value),
+      debounceTime(300),
+      distinctUntilChanged(),
+      filter(Boolean),
+      switchMap((value) => this.dadataService.getCities(value)),
+      takeUntilDestroyed(this.destroyRef)
+    );
   }
 
   constructor(
     @Self() private readonly ngControl: NgControl,
     private readonly changeDetector: ChangeDetectorRef,
     private elementRef: ElementRef
-    )
-  {
-      this.ngControl.valueAccessor = this;
+  ) {
+    this.ngControl.valueAccessor = this;
   }
 
   public onInputValueChange(event: Event): void {
@@ -66,12 +86,11 @@ export class InputCityComponent implements ControlValueAccessor, OnInit{
     this.onChange(city);
   }
 
-
   registerOnChange(fn: any): void {
-      this.onChange = fn;
+    this.onChange = fn;
   }
   registerOnTouched(fn: any): void {
-      this.onTouched = fn;
+    this.onTouched = fn;
   }
 
   onClickSuggestion(suggestion: string) {
@@ -79,7 +98,7 @@ export class InputCityComponent implements ControlValueAccessor, OnInit{
   }
 
   writeValue(value: string): void {
-      this.value = value;
-      this.changeDetector.detectChanges();
+    this.value = value;
+    this.changeDetector.detectChanges();
   }
 }

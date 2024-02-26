@@ -1,6 +1,21 @@
-import { GithubApiService, githubApiActions, selectGithubStatus, selectGithubUserName } from '@users/core/github-api/data-access';
-import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
-import { authActions, selectAuthStatus, selectLoggedUser } from '@auth/data-access';
+import {
+  GithubApiService,
+  githubApiActions,
+  selectGithubStatus,
+  selectGithubUserName,
+} from '@users/core/github-api/data-access';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  OnInit,
+  inject,
+} from '@angular/core';
+import {
+  authActions,
+  selectAuthStatus,
+  selectLoggedUser,
+} from '@auth/data-access';
 import { UsersEntity, selectQueryParam } from '@users/core/data-access';
 import { FeatureUserInfoComponent } from '../../../../feature-user-info/feature-user-info.component';
 import { CropperDialogComponent } from '@users/core/ui';
@@ -15,17 +30,12 @@ import { Store } from '@ngrx/store';
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'profile-container',
   standalone: true,
-  imports: [
-    FeatureUserInfoComponent,
-    LetDirective,
-    CommonModule,
-  ],
+  imports: [FeatureUserInfoComponent, LetDirective, CommonModule],
   templateUrl: './profile-container.component.html',
   styleUrls: ['./profile-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileContainerComponent implements OnInit {
-
   private readonly store = inject(Store);
   private destroyRef = inject(DestroyRef);
   public readonly user!: UsersEntity;
@@ -38,18 +48,21 @@ export class ProfileContainerComponent implements OnInit {
   public readonly isLoggedUser = of(true);
 
   ngOnInit() {
-    this.store.select(selectQueryParam('code')).pipe(
-      takeUntilDestroyed(this.destroyRef),
-      tap(code => {
-        if(code) {
-          this.store.dispatch(githubApiActions.getAccessToken({code}))
-        }
-      }),
-    ).subscribe(noop);
+    this.store
+      .select(selectQueryParam('code'))
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        tap((code) => {
+          if (code) {
+            this.store.dispatch(githubApiActions.getAccessToken({ code }));
+          }
+        })
+      )
+      .subscribe(noop);
 
     const ghToken = this.githubApiService.accessToken.value;
-    if(ghToken) {
-      this.store.dispatch(githubApiActions.getGithubUser({ token: ghToken }))
+    if (ghToken) {
+      this.store.dispatch(githubApiActions.getGithubUser({ token: ghToken }));
     }
   }
 
@@ -60,12 +73,12 @@ export class ProfileContainerComponent implements OnInit {
       image.src = e.target.result;
 
       const dialogRef = this.dialog.open(CropperDialogComponent, {
-        data: { image }
+        data: { image },
       });
 
-      dialogRef.afterClosed().subscribe(result => {
+      dialogRef.afterClosed().subscribe((result) => {
         if (result) {
-          this.store.dispatch(authActions.uploadImage({image: result}))
+          this.store.dispatch(authActions.uploadImage({ image: result }));
         }
       });
     };

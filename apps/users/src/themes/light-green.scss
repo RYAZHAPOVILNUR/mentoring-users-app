@@ -3,13 +3,15 @@
 @use '../app-theme.scss';
 
 $primary: mat.define-palette(mat.$green-palette, 400);
-$accent:  mat.define-palette(mat.$amber-palette, A200, A100, A400);
-$theme: mat.define-light-theme((
-  color: (
-    primary: $primary,
-    accent: $accent
-  ),
-));
+$accent: mat.define-palette(mat.$amber-palette, A200, A100, A400);
+$theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $primary,
+      accent: $accent,
+    ),
+  )
+);
 
 @include mat.all-component-themes($theme);
 @include app-theme.theme($theme);

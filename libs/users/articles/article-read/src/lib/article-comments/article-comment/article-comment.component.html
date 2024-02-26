@@ -10,8 +10,7 @@
     <img mat-card-avatar [src]="avatarSrc" alt="" />
     <mat-card-title>{{ comment.author.name }}</mat-card-title>
     <mat-card-subtitle>{{
-      comment.created_at
-        | date : 'MMM d, y, H:mm'
+      comment.created_at | date : 'MMM d, y, H:mm'
     }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>{{ comment.text }}</mat-card-content>
@@ -28,6 +27,8 @@
         >thumb_down</mat-icon
       >
     </button>
-    <span class="likes-count" *ngIf="isDisLikesExists">{{ disLikesCount }}</span>
+    <span class="likes-count" *ngIf="isDisLikesExists">{{
+      disLikesCount
+    }}</span>
   </mat-card-actions>
 </mat-card>

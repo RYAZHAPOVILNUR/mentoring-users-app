@@ -1,7 +1,7 @@
 export type DadataResponse = {
-    suggestions: Suggestion[];
-}
+  suggestions: Suggestion[];
+};
 
 export type Suggestion = {
-    value: string;
-}
+  value: string;
+};

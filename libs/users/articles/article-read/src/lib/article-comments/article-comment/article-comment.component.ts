@@ -10,7 +10,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PushPipe } from '@ngrx/component';
 import { LanguageSwitchService } from '../../../../../../core/ui/language-switch/src';
 import { Comment } from '../../../../../data-access/src';
-import {RouterLink} from "@angular/router";
+import { RouterLink } from '@angular/router';
 @Component({
   standalone: true,
   imports: [
@@ -37,7 +37,7 @@ export class ArticleCommentComponent {
   public isDisLikeActive: boolean = false;
 
   @Input({ required: true }) comment!: Comment;
-  @Input({required: true}) userId!: number;
+  @Input({ required: true }) userId!: number;
 
   public onThumbUp() {
     this.likesCount = this.likesCount === 0 ? 1 : 0;

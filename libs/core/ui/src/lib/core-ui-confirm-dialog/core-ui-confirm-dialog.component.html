@@ -1,10 +1,20 @@
 <h2 mat-dialog-title>Подтверждение</h2>
 <mat-dialog-content>{{ dialogText }}</mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-icon-button (click)="confirm()" color="accent" aria-label="Согласиться">
+  <button
+    mat-icon-button
+    (click)="confirm()"
+    color="accent"
+    aria-label="Согласиться"
+  >
     <mat-icon>done</mat-icon>
   </button>
-  <button mat-icon-button (click)="cancel()" color="warn" aria-label="Отказаться">
+  <button
+    mat-icon-button
+    (click)="cancel()"
+    color="warn"
+    aria-label="Отказаться"
+  >
     <mat-icon>close</mat-icon>
   </button>
 </mat-dialog-actions>
