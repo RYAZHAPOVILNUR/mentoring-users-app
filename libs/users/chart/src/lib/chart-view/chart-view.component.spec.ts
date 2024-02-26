@@ -8,7 +8,7 @@ describe('ChartViewComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ChartViewComponent]
+      imports: [ChartViewComponent],
     });
     fixture = TestBed.createComponent(ChartViewComponent);
     component = fixture.componentInstance;

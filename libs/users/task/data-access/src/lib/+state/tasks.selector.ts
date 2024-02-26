@@ -6,6 +6,6 @@ export const selectTaskState =
   createFeatureSelector<ITaskBoard>(TASKS_FEATURE_KEY);
 
 export const selectColumns = createSelector(
-  selectTaskState, 
+  selectTaskState,
   (state: ITaskBoard) => state.columns
 );

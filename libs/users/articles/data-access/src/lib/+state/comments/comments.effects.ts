@@ -10,78 +10,77 @@ import { Comment } from '../../models/user-comment.model';
 import { AuthFacade } from '@auth/data-access';
 
 export const publishComment$ = createEffect(
-  (actions$ = inject(Actions),
-  store = inject(Store),
-  auth$ = inject(AuthFacade),
+  (
+    actions$ = inject(Actions),
+    store = inject(Store),
+    auth$ = inject(AuthFacade),
     apiService = inject(ApiService)
   ) => {
     return actions$.pipe(
       ofType(CommentsActions.publishComment),
       withLatestFrom(auth$.user$),
-      switchMap( 
-        ([{ comment }, user]) => {
-          console.log(user);
+      switchMap(([{ comment }, user]) => {
+        console.log(user);
 
-          const author = {
-            id: user.id,
-            name: user.name,
-            username: user.username,
-            photo: {
-              url: user.photo!.url
-            }
-            
-          }
-          
-          return apiService.post<Comment, CreateComment>('/comments', comment).pipe(
-            map((comment) => CommentsActions.publishCommentSuccess({ comment : {...comment, author} })),
-            catchError((error) => {
-              console.error('Error', error);
-              return of(CommentsActions.publishCommentFailed({ error }))
-            })
-          )
-        }
-      )
-    )
-  }, { functional: true }
-)
+        const author = {
+          id: user.id,
+          name: user.name,
+          username: user.username,
+          photo: {
+            url: user.photo!.url,
+          },
+        };
 
-export const loadComments$ = createEffect(
-  (actions$ = inject(Actions),
-    apiService = inject(ApiService)) => {
-    return actions$.pipe(
-      ofType(CommentsActions.loadComments),
-      switchMap(
-        ({articleId}) => apiService.get<Comment[]>(`/commentsByArticle/${articleId}`).pipe(
-          map(
-            (comments) => CommentsActions.loadCommentsSuccess({ comments })
-          ),
-          catchError((error) => {
-            console.error('Error', error);
-            return of(CommentsActions.loadCommentsFailed({ error }))
-          })
-        )
-      ),
-    )
-  }, { functional: true }
-)
-export const deleteComment$ = createEffect(
-  (actions$ = inject(Actions),
-    apiService = inject(ApiService)) => {
-    return actions$.pipe(
-      ofType(CommentsActions.deleteComment),
-      switchMap(
-        ({id}) => {
-          return apiService.delete<number>(`/comments/${id}`).pipe(
-            map(
-              () => CommentsActions.deleteCommentSuccess({ id })
+        return apiService
+          .post<Comment, CreateComment>('/comments', comment)
+          .pipe(
+            map((comment) =>
+              CommentsActions.publishCommentSuccess({
+                comment: { ...comment, author },
+              })
             ),
             catchError((error) => {
               console.error('Error', error);
-              return of(CommentsActions.deleteCommentFailed({error}))
+              return of(CommentsActions.publishCommentFailed({ error }));
             })
-          )
-        }
+          );
+      })
+    );
+  },
+  { functional: true }
+);
+
+export const loadComments$ = createEffect(
+  (actions$ = inject(Actions), apiService = inject(ApiService)) => {
+    return actions$.pipe(
+      ofType(CommentsActions.loadComments),
+      switchMap(({ articleId }) =>
+        apiService.get<Comment[]>(`/commentsByArticle/${articleId}`).pipe(
+          map((comments) => CommentsActions.loadCommentsSuccess({ comments })),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(CommentsActions.loadCommentsFailed({ error }));
+          })
+        )
       )
-    )
-  }, {functional: true}
-)
+    );
+  },
+  { functional: true }
+);
+export const deleteComment$ = createEffect(
+  (actions$ = inject(Actions), apiService = inject(ApiService)) => {
+    return actions$.pipe(
+      ofType(CommentsActions.deleteComment),
+      switchMap(({ id }) => {
+        return apiService.delete<number>(`/comments/${id}`).pipe(
+          map(() => CommentsActions.deleteCommentSuccess({ id })),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(CommentsActions.deleteCommentFailed({ error }));
+          })
+        );
+      })
+    );
+  },
+  { functional: true }
+);

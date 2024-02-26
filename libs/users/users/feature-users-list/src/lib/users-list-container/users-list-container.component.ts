@@ -24,13 +24,13 @@ import { CreateUsersButtonComponent } from '@users/feature-users-create';
     MatButtonModule,
     MatDialogModule,
     LetDirective,
-    CreateUsersButtonComponent
+    CreateUsersButtonComponent,
   ],
   templateUrl: './users-list-container.component.html',
   styleUrls: ['./users-list-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [UsersListContainerStore]
+  providers: [UsersListContainerStore],
 })
 export class UsersListContainerComponent {
   private readonly componentStore = inject(UsersListContainerStore);
@@ -42,10 +42,12 @@ export class UsersListContainerComponent {
   private readonly router = inject(Router);
 
   onDeleteUser(user: UsersVM) {
-    this.componentStore.deleteUser(user)
+    this.componentStore.deleteUser(user);
   }
 
-  onRedirectToEdit({ id, editMode }: { id: number, editMode: boolean }) {
-    this.router.navigate(['/admin/users', id], { queryParams: { edit: editMode } });
+  onRedirectToEdit({ id, editMode }: { id: number; editMode: boolean }) {
+    this.router.navigate(['/admin/users', id], {
+      queryParams: { edit: editMode },
+    });
   }
 }

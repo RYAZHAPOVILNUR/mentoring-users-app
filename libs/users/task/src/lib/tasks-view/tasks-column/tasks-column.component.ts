@@ -22,8 +22,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { IColumn } from '@users/users/task/data-access';
-import {BehaviorSubject, skip} from "rxjs";
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import { BehaviorSubject, skip } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'users-tasks-column',
@@ -66,7 +66,7 @@ export class TasksColumnComponent {
   @Output() addTask = new EventEmitter();
   @Output() removeTask = new EventEmitter();
   @Output() changeTaskModal = new EventEmitter();
-  @Output() changeColumnName = new EventEmitter<string>()
+  @Output() changeColumnName = new EventEmitter<string>();
   @ViewChild('input', { read: ElementRef })
   set input(elRef: ElementRef<HTMLInputElement>) {
     if (elRef) {
@@ -86,16 +86,11 @@ export class TasksColumnComponent {
   private columnData!: IColumn;
 
   constructor() {
-    this.editing$
-      .pipe(
-        skip(1),
-        takeUntilDestroyed()
-      )
-      .subscribe(editing => {
-        if (!editing && this.title !== this.titleInitialValue) {
-          this.changeColumnName.emit(this.title);
-        };
-      })
+    this.editing$.pipe(skip(1), takeUntilDestroyed()).subscribe((editing) => {
+      if (!editing && this.title !== this.titleInitialValue) {
+        this.changeColumnName.emit(this.title);
+      }
+    });
   }
 
   onDragDrop($event: CdkDragDrop<IColumn>) {

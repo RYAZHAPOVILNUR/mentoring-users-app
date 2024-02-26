@@ -1,15 +1,19 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { ArticlesState, articlesAdapter, articlesFeature } from './articles.reducer';
+import {
+  ArticlesState,
+  articlesAdapter,
+  articlesFeature,
+} from './articles.reducer';
 import { selectQueryParams, selectRouteParams } from '@users/core/data-access';
 
-export const { selectArticlesState, selectIds, selectStatus } = articlesFeature
+export const { selectArticlesState, selectIds, selectStatus } = articlesFeature;
 
 const { selectAll, selectEntities } = articlesAdapter.getSelectors();
 
 export const selectArticles = createSelector(
   selectArticlesState,
   (state: ArticlesState) => selectAll(state)
-)
+);
 
 export const selectArticlesEntities = createSelector(
   selectArticlesState,
@@ -20,10 +24,10 @@ export const selectArticleForEdit = createSelector(
   selectQueryParams,
   selectArticlesEntities,
   ({ id }, entities) => entities[id] || null
-)
+);
 
 export const selectOpenedArticle = createSelector(
   selectRouteParams,
   selectArticlesEntities,
   ({ id }, entities) => entities[id] || null
-)
+);

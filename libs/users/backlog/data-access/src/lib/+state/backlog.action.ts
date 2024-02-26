@@ -1,5 +1,10 @@
-import { createActionGroup, props, emptyProps, createAction } from "@ngrx/store";
-import { CreateBacklog, IBacklog } from "../model/backlog.model";
+import {
+  createActionGroup,
+  props,
+  emptyProps,
+  createAction,
+} from '@ngrx/store';
+import { CreateBacklog, IBacklog } from '../model/backlog.model';
 
 export const backlogAction = createActionGroup({
   source: 'backlog',
@@ -9,6 +14,6 @@ export const backlogAction = createActionGroup({
     deleteBacklog: props<{ id: number }>(),
     deleteBacklogSuccess: props<{ id: number }>(),
     addBacklog: props<{ backlogData: CreateBacklog }>(),
-    addBacklogSuccess: props<{ backlogData: IBacklog }>()
-  }
+    addBacklogSuccess: props<{ backlogData: IBacklog }>(),
+  },
 });

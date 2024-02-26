@@ -8,6 +8,6 @@ export const SettingsActions = createActionGroup({
     loadSettingsSuccess: props<{ settings: ISettings }>(),
     // loadSettingsFailure: props<{ error: unknown }>(),
     setArticlesStyleType: props<{ articlesViewStyleType: string }>(),
-    setArticlesStyleTypeSuccess: props<{ articlesViewStyleType: string }>(),    
-  }
+    setArticlesStyleTypeSuccess: props<{ articlesViewStyleType: string }>(),
+  },
 });

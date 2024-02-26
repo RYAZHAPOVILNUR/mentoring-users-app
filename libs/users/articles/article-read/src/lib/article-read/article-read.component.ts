@@ -15,7 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { UsersFacade } from '../../../../../users/data-access/src';
 import { UsersListContainerStore } from '../../../../../users/feature-users-list/src/lib/users-list-container/users-list-container.store';
 import { map, Observable } from 'rxjs';
-import {PushPipe} from "@ngrx/component";
+import { PushPipe } from '@ngrx/component';
 
 @Component({
   selector: 'article-read',
@@ -27,14 +27,14 @@ import {PushPipe} from "@ngrx/component";
     RouterModule,
     MatButtonModule,
     MatIconModule,
-    PushPipe
+    PushPipe,
   ],
   templateUrl: './article-read.component.html',
   styleUrls: ['./article-read.component.scss'],
   providers: [UsersListContainerStore],
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class ArticleReadComponent implements OnInit{
+export class ArticleReadComponent implements OnInit {
   @Input({ required: true }) article!: Article | null;
   @Input({ required: true }) loggedUserId!: number;
   private readonly componentStore = inject(UsersListContainerStore);
@@ -45,6 +45,7 @@ export class ArticleReadComponent implements OnInit{
   }
   ngOnInit(): void {
     this.authorPhoto$ = this.userFacade
-      .getUserFromStore(this.article!.authorId).pipe(map(data => data?.photo?.url))
+      .getUserFromStore(this.article!.authorId)
+      .pipe(map((data) => data?.photo?.url));
   }
 }

@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
@@ -11,9 +16,9 @@ import { MatCardModule } from '@angular/material/card';
   styleUrls: ['./ui-photo-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UiPhotoModalComponent implements OnInit{
-    public photo = inject(MAT_DIALOG_DATA);
-    ngOnInit(){
-      console.log("photo",this.photo);
-    }
+export class UiPhotoModalComponent implements OnInit {
+  public photo = inject(MAT_DIALOG_DATA);
+  ngOnInit() {
+    console.log('photo', this.photo);
+  }
 }

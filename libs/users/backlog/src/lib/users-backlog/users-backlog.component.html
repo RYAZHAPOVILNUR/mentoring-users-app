@@ -3,16 +3,23 @@
   USER STORY
 </button>
 <mat-action-list>
-  <mat-list-item (click)="openBacklogModal(backlog)" *ngFor="let backlog of backlogs | async " class="backlog-item">
-
+  <mat-list-item
+    (click)="openBacklogModal(backlog)"
+    *ngFor="let backlog of backlogs | async"
+    class="backlog-item"
+  >
     <div class="backlog-container">
-
       <p class="user-story-name">
-        <span class="user-story-number">#{{backlog.todos_id}}</span> {{backlog.title}}
+        <span class="user-story-number">#{{ backlog.todos_id }}</span>
+        {{ backlog.title }}
       </p>
 
       <div class="backlog-item-actions">
-        <small (click)="stopPropagation($event)" [matMenuTriggerFor]="status" class="backlog-inProgress">
+        <small
+          (click)="stopPropagation($event)"
+          [matMenuTriggerFor]="status"
+          class="backlog-inProgress"
+        >
           <!--{{backlog.status}}-->
           In progress
           <mat-icon class="expand_more">expand_more</mat-icon>
@@ -23,15 +30,20 @@
             *ngFor="let status of backlogStatus[0] | keyvalue"
             (click)="onChangeStatus(status.value)"
           >
-            {{status.value}}
+            {{ status.value }}
           </button>
         </mat-menu>
 
+        <mat-icon (click)="stopPropagation($event)" inline
+          >question_mark</mat-icon
+        >
 
-        <mat-icon (click)="stopPropagation($event)" inline>question_mark</mat-icon>
-
-
-        <button (click)="stopPropagation($event)" mat-icon-button [matMenuTriggerFor]="actions" class="more_actions">
+        <button
+          (click)="stopPropagation($event)"
+          mat-icon-button
+          [matMenuTriggerFor]="actions"
+          class="more_actions"
+        >
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #actions="matMenu">
@@ -46,6 +58,5 @@
         </mat-menu>
       </div>
     </div>
-
   </mat-list-item>
 </mat-action-list>

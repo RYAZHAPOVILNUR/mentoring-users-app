@@ -1,7 +1,7 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { tasksAction } from './tasks.action';
 import { ITaskBoard } from '../model/tasks.interface';
-import {filterColumnsByTerm} from "../../../../src/lib/tasks-view-container/tasks-list-container.store";
+import { filterColumnsByTerm } from '../../../../src/lib/tasks-view-container/tasks-list-container.store';
 
 export const TASKS_FEATURE_KEY = 'tasks';
 
@@ -12,7 +12,7 @@ export const tasksInitialState: ITaskBoard = {
   authorId: 0,
   columns: [],
   term: '',
-  filteredColumns: []
+  filteredColumns: [],
 };
 
 export const tasksFeature = createFeature({
@@ -25,7 +25,7 @@ export const tasksFeature = createFeature({
     on(tasksAction.loadBoardsSuccess, (state, { boards }) => {
       return {
         ...state,
-        boards
+        boards,
       };
     }),
     on(tasksAction.updateColumns, (state, { columns }) => {
@@ -36,15 +36,15 @@ export const tasksFeature = createFeature({
     }),
     on(tasksAction.loadMyBoardSuccess, (state, { board }) => ({
       ...state,
-      ...board
+      ...board,
     })),
-    on(tasksAction.searchTask, (state, {term}) => {
+    on(tasksAction.searchTask, (state, { term }) => {
       const filteredColumns = filterColumnsByTerm(state.columns, term);
       return {
         ...state,
         term,
-        filteredColumns: term ? filteredColumns : []
-      }
-    }),
+        filteredColumns: term ? filteredColumns : [],
+      };
+    })
   ),
 });

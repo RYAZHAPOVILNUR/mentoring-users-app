@@ -1,7 +1,21 @@
 import { UiPhotoModalComponent } from 'libs/users/profile/ui-profile/ui-photo-modal/ui-photo-modal.component';
-import { AuthFacade, ChangePasswordPayload, ChangeProfileDataPayload } from '../../../core/auth/data-access/src';
-import { ChangeDetectionStrategy, Component, Input, OnInit, DestroyRef, ChangeDetectorRef } from '@angular/core';
-import { PasswordChangeDialogComponent, ProfileChangeDialogComponent } from '../../../core/ui/src';
+import {
+  AuthFacade,
+  ChangePasswordPayload,
+  ChangeProfileDataPayload,
+} from '../../../core/auth/data-access/src';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+  DestroyRef,
+  ChangeDetectorRef,
+} from '@angular/core';
+import {
+  PasswordChangeDialogComponent,
+  ProfileChangeDialogComponent,
+} from '../../../core/ui/src';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { EventEmitter, Output, inject } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -44,52 +58,54 @@ export class FeatureUserInfoComponent implements OnInit {
   private matIconRegistry = inject(MatIconRegistry);
   private domSanitizer = inject(DomSanitizer);
 
-  @Input({ required: true }) vm!: ProfileFormVm
+  @Input({ required: true }) vm!: ProfileFormVm;
 
   @Output() loadPhoto: EventEmitter<File> = new EventEmitter<File>();
   @Output() connectGithub: EventEmitter<void> = new EventEmitter();
   @Output() disconnectGithub: EventEmitter<void> = new EventEmitter();
 
   public photo: any;
-  public isPhotoHovered?:boolean;
-  
+  public isPhotoHovered?: boolean;
+
   ngOnInit(): void {
-    this.photo = this.vm.user.photo ? this.vm.user.photo.url : ''
+    this.photo = this.vm.user.photo ? this.vm.user.photo.url : '';
     this.matIconRegistry.addSvgIcon(
       'github',
       this.domSanitizer.bypassSecurityTrustResourceUrl(
         `assets/icons/github.svg`
       )
-    )
+    );
     of(this.vm.githubUserName).subscribe(console.log);
   }
   onOpenChangePassword() {
-    const dialogRef = this.dialog.open(PasswordChangeDialogComponent)
-    dialogRef.afterClosed()
+    const dialogRef = this.dialog.open(PasswordChangeDialogComponent);
+    dialogRef
+      .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(result => {
+      .subscribe((result) => {
         if (result) {
           const changePasswordPayload: ChangePasswordPayload = {
             newPassword: result.value.newPassword,
-            oldPassword: result.value.oldPassword
-          }
+            oldPassword: result.value.oldPassword,
+          };
           this.authFacade.changePassword(changePasswordPayload);
         }
       });
   }
 
   onOpenChangeProfileData() {
-    const dialogRef = this.dialog.open(ProfileChangeDialogComponent,{
+    const dialogRef = this.dialog.open(ProfileChangeDialogComponent, {
       width: '400px',
-      data: this.vm.user
-    })
-    dialogRef.afterClosed()
+      data: this.vm.user,
+    });
+    dialogRef
+      .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(result => {
+      .subscribe((result) => {
         if (result) {
           const changeProfileDataPayload: ChangeProfileDataPayload = {
             ...result.value,
-          }
+          };
           this.authFacade.changeProfileData(changeProfileDataPayload);
         }
       });
@@ -107,7 +123,7 @@ export class FeatureUserInfoComponent implements OnInit {
     const file = event.target.files[0];
     if (file) {
       this.loadPhoto.emit(file);
-    } 
+    }
   }
 
   onConnectGithub() {
@@ -117,8 +133,10 @@ export class FeatureUserInfoComponent implements OnInit {
   onDisconnectGithub() {
     this.disconnectGithub.emit();
   }
-  
-  onZoomPhotoClick(){
-    this.dialog.open(UiPhotoModalComponent, {data: this.vm.user.photo ? this.vm.user.photo.url : ''});
+
+  onZoomPhotoClick() {
+    this.dialog.open(UiPhotoModalComponent, {
+      data: this.vm.user.photo ? this.vm.user.photo.url : '',
+    });
   }
 }
