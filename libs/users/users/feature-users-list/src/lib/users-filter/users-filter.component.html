@@ -1,0 +1,7 @@
+<form class="filter-form" (submit)="onSubmit(name.value)">
+    <mat-form-field>
+        <mat-label>Фильтр</mat-label>
+        <input type="text" matInput [formControl]="name" placeholder="Вася Пупкин">
+    </mat-form-field>
+    <button mat-button type="submit">ПРИМЕНИТЬ</button>
+</form>

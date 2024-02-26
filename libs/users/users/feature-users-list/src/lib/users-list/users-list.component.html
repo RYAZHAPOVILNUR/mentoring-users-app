@@ -7,12 +7,8 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4 mb-3" *ngFor="let user of vm.users">
-          <users-card
-            [user]="user"
-            [loggedUser]="vm.loggedUser"
-            (deleteUser)="onDeleteUser(user)"
-            (redirectToEdit)="onRedirectToEdit($event)"
-          />
+          <users-card [user]="user" [loggedUser]="vm.loggedUser" (deleteUser)="onDeleteUser(user)"
+            (redirectToEdit)="onRedirectToEdit($event)" />
         </div>
       </div>
     </div>
