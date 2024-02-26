@@ -49,9 +49,7 @@ export class ArticleCommentComponent {
   }
 
   public get avatarSrc(): string {
-    return this.comment.author.photo
-      ? this.comment.author.photo.url
-      : 'assets/img/1.png';
+    return this.comment.author.photo ? this.comment.author.photo.url : 'assets/img/1.png';
   }
 
   public get isLikesExists(): boolean {

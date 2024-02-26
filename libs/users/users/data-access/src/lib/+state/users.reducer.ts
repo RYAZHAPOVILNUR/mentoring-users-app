@@ -22,8 +22,7 @@ export interface UsersPartialState {
   readonly [USERS_FEATURE_KEY]: UsersState;
 }
 
-export const usersAdapter: EntityAdapter<UsersEntity> =
-  createEntityAdapter<UsersEntity>();
+export const usersAdapter: EntityAdapter<UsersEntity> = createEntityAdapter<UsersEntity>();
 
 export const initialUsersState: UsersState = usersAdapter.getInitialState({
   // set initial required properties
@@ -45,12 +44,8 @@ const reducer = createReducer(
     status: 'error' as const,
     error,
   })),
-  on(UsersActions.deleteUserSuccess, (state, { id }) =>
-    usersAdapter.removeOne(id, { ...state })
-  ),
-  on(UsersActions.addUserSuccess, (state, { userData }) =>
-    usersAdapter.addOne({ ...userData }, { ...state })
-  ),
+  on(UsersActions.deleteUserSuccess, (state, { id }) => usersAdapter.removeOne(id, { ...state })),
+  on(UsersActions.addUserSuccess, (state, { userData }) => usersAdapter.addOne({ ...userData }, { ...state })),
   on(UsersActions.editUserSuccess, (state, { userData }) =>
     usersAdapter.updateOne(
       {
@@ -70,10 +65,7 @@ const reducer = createReducer(
     status: 'loading' as const,
   })),
   on(UsersActions.loadUserSuccess, (state, { userData }) =>
-    usersAdapter.addOne(
-      { ...userData },
-      { ...state, status: 'loaded' as const }
-    )
+    usersAdapter.addOne({ ...userData }, { ...state, status: 'loaded' as const })
   ),
   on(UsersActions.loadUserFailed, (state, { error }) => ({
     ...state,

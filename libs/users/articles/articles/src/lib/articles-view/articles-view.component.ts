@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  Input,
-  OnInit,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuillModule } from 'ngx-quill';
 import { MatCardModule } from '@angular/material/card';
@@ -75,16 +68,8 @@ export class ArticlesViewComponent implements OnInit {
     this.settingsFacade.getSettings();
 
     for (const article of this.articles) {
-      this.authorPhoto$.push(
-        this.userFacade
-          .getUserFromStore(article.authorId)
-          .pipe(map((data) => data?.photo?.url))
-      );
-      this.authorArticle$.push(
-        this.userFacade
-          .getUserFromStore(article.authorId)
-          .pipe(map((data) => data?.username))
-      );
+      this.authorPhoto$.push(this.userFacade.getUserFromStore(article.authorId).pipe(map((data) => data?.photo?.url)));
+      this.authorArticle$.push(this.userFacade.getUserFromStore(article.authorId).pipe(map((data) => data?.username)));
     }
   }
 }

@@ -1,17 +1,10 @@
 <div *ngIf="article">
   <mat-card class="article">
     <mat-card-header class="article-header">
-      <img
-        *ngIf="authorPhoto$ | ngrxPush"
-        mat-card-avatar
-        [src]="authorPhoto$ | ngrxPush"
-        alt=""
-      />
+      <img *ngIf="authorPhoto$ | ngrxPush" mat-card-avatar [src]="authorPhoto$ | ngrxPush" alt="" />
       <mat-card-title class="article-title">{{ article.title }}</mat-card-title>
       <mat-card-subtitle>{{ article.author }}</mat-card-subtitle>
-      <mat-card-subtitle class="article-subtitle">{{
-        article.created_at | date : 'dd/MM/yyyy'
-      }}</mat-card-subtitle>
+      <mat-card-subtitle class="article-subtitle">{{ article.created_at | date : 'dd/MM/yyyy' }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="article-content">
       <article class="ql-editor" [innerHTML]="article.content"></article>

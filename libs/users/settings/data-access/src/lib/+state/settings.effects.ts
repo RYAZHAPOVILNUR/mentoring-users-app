@@ -11,8 +11,7 @@ export class SettingsEffects {
       ofType(SettingsActions.loadSettings),
       switchMap(() => {
         const articleViewType =
-          localStorage.getItem('articleViewType') ??
-          (localStorage.setItem('articleViewType', 'LIST'), 'LIST');
+          localStorage.getItem('articleViewType') ?? (localStorage.setItem('articleViewType', 'LIST'), 'LIST');
         return of(1).pipe(
           map((e) =>
             SettingsActions.loadSettingsSuccess({

@@ -10,13 +10,11 @@ export interface ArticlesState extends EntityState<Article> {
   status: LoadingStatus;
 }
 
-export const articlesAdapter: EntityAdapter<Article> =
-  createEntityAdapter<Article>();
+export const articlesAdapter: EntityAdapter<Article> = createEntityAdapter<Article>();
 
-export const initialArticlesState: ArticlesState =
-  articlesAdapter.getInitialState({
-    status: 'init',
-  });
+export const initialArticlesState: ArticlesState = articlesAdapter.getInitialState({
+  status: 'init',
+});
 
 export const articlesFeature = createFeature({
   name: 'articles',
@@ -51,10 +49,7 @@ export const articlesFeature = createFeature({
     })),
 
     on(ArticlesActions.getArticleForEditSuccess, (state, { article }) =>
-      articlesAdapter.addOne(
-        { ...article },
-        { ...state, status: 'loaded' as const }
-      )
+      articlesAdapter.addOne({ ...article }, { ...state, status: 'loaded' as const })
     ),
 
     on(ArticlesActions.getArticleForRead, (state) => ({
@@ -63,10 +58,7 @@ export const articlesFeature = createFeature({
     })),
 
     on(ArticlesActions.getArticleForReadSuccess, (state, { article }) =>
-      articlesAdapter.addOne(
-        { ...article },
-        { ...state, status: 'loaded' as const }
-      )
+      articlesAdapter.addOne({ ...article }, { ...state, status: 'loaded' as const })
     )
   ),
 });

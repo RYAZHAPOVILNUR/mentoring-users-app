@@ -23,9 +23,7 @@ export class LanguageSwitchService {
   }
 
   constructor() {
-    this.selectedLanguage$ = new BehaviorSubject<LanguageKeys>(
-      this.getStoredLanguage()
-    );
+    this.selectedLanguage$ = new BehaviorSubject<LanguageKeys>(this.getStoredLanguage());
     this.translateService.setDefaultLang(this.getStoredLanguage());
   }
 }

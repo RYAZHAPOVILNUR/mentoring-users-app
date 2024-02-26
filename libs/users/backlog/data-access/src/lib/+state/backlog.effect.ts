@@ -14,9 +14,7 @@ export const addBacklogTask$ = createEffect(
       ofType(backlogAction.addBacklog),
       switchMap(({ backlogData }) =>
         apiService.post<IBacklog, CreateBacklog>('/backlog', backlogData).pipe(
-          map((backlogEntity) =>
-            backlogAction.addBacklogSuccess({ backlogData: backlogEntity })
-          ),
+          map((backlogEntity) => backlogAction.addBacklogSuccess({ backlogData: backlogEntity })),
           catchError((error) => {
             return of(error);
           })

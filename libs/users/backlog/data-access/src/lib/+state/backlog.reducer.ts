@@ -12,13 +12,11 @@ export interface BacklogsState extends EntityState<IBacklog> {
   status: LoadingStatus;
 }
 
-export const backlogsAdapter: EntityAdapter<IBacklog> =
-  createEntityAdapter<IBacklog>();
+export const backlogsAdapter: EntityAdapter<IBacklog> = createEntityAdapter<IBacklog>();
 
-export const initialBacklogsState: BacklogsState =
-  backlogsAdapter.getInitialState({
-    status: 'init',
-  });
+export const initialBacklogsState: BacklogsState = backlogsAdapter.getInitialState({
+  status: 'init',
+});
 
 export const backlogFeature = createFeature({
   name: BACKLOG_FEATURE_KEY,
@@ -36,9 +34,7 @@ export const backlogFeature = createFeature({
         status: 'loaded' as const,
       });
     }),
-    on(backlogAction.deleteBacklogSuccess, (state, { id }) =>
-      backlogsAdapter.removeOne(id, { ...state })
-    ),
+    on(backlogAction.deleteBacklogSuccess, (state, { id }) => backlogsAdapter.removeOne(id, { ...state })),
     on(backlogAction.addBacklogSuccess, (state, { backlogData }) =>
       backlogsAdapter.addOne({ ...backlogData }, { ...state })
     )

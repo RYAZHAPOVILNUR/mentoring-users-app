@@ -13,10 +13,7 @@
         <input matInput type="text" [formControlName]="'email'" />
       </mat-form-field>
       <mat-label>{{ 'PROFILE.PROFILE_CHANGE.CITY' | translate }}</mat-label>
-      <users-input-city
-        [vm]="userEntityData"
-        [formControlName]="'city'"
-      ></users-input-city>
+      <users-input-city [vm]="userEntityData" [formControlName]="'city'"></users-input-city>
     </div>
     <div mat-dialog-actions>
       <button mat-button [mat-dialog-close]="formGroup" cdkFocusInitial>

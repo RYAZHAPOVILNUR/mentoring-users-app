@@ -1,26 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ChangeDetectorRef,
-  Self,
-  Input,
-  OnInit,
-  ElementRef,
-} from '@angular/core';
-import {
-  Observable,
-  fromEvent,
-  map,
-  distinctUntilChanged,
-  debounceTime,
-  switchMap,
-  filter,
-} from 'rxjs';
-import {
-  NgControl,
-  ReactiveFormsModule,
-  ControlValueAccessor,
-} from '@angular/forms';
+import { ChangeDetectionStrategy, Component, ChangeDetectorRef, Self, Input, OnInit, ElementRef } from '@angular/core';
+import { Observable, fromEvent, map, distinctUntilChanged, debounceTime, switchMap, filter } from 'rxjs';
+import { NgControl, ReactiveFormsModule, ControlValueAccessor } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { inject, DestroyRef } from '@angular/core';
@@ -34,14 +14,7 @@ import { PushPipe } from '@ngrx/component';
 @Component({
   selector: 'users-input-city',
   standalone: true,
-  imports: [
-    MatAutocompleteModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    CommonModule,
-    PushPipe,
-  ],
+  imports: [MatAutocompleteModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, CommonModule, PushPipe],
   templateUrl: './input-city.component.html',
   styleUrls: ['./input-city.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -60,8 +33,7 @@ export class InputCityComponent implements ControlValueAccessor, OnInit {
 
   ngOnInit(): void {
     this.value = this.vm.city;
-    this.inputElement =
-      this.elementRef.nativeElement.querySelector('#inputElement');
+    this.inputElement = this.elementRef.nativeElement.querySelector('#inputElement');
     this.citySuggestions$ = fromEvent<Event>(this.inputElement, 'input').pipe(
       map((event: Event) => (event.target as HTMLInputElement).value),
       debounceTime(300),

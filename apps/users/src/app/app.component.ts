@@ -31,8 +31,7 @@ import { MatButtonModule } from '@angular/material/button';
 export class AppComponent {
   private readonly store = inject(Store);
   private readonly facade = inject(AuthFacade);
-  public readonly isAuthenticated$: Observable<boolean> =
-    this.facade.isAuthenticated$;
+  public readonly isAuthenticated$: Observable<boolean> = this.facade.isAuthenticated$;
   opened!: boolean;
   events: string[] = [];
 

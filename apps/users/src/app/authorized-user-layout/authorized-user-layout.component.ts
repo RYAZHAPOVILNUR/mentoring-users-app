@@ -1,10 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
-import {
-  FooterComponent,
-  HeaderComponent,
-  NavbarComponent,
-} from '@users/core/ui/layout';
+import { FooterComponent, HeaderComponent, NavbarComponent } from '@users/core/ui/layout';
 import { PushPipe } from '@ngrx/component';
 import { MatSidenavModule, MatSidenav } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -39,21 +35,13 @@ export class AuthorizedUserLayoutComponent {
   private readonly facade = inject(AuthFacade);
   public readonly breakpointObserver = inject(BreakpointObserver);
 
-  public readonly isAuthenticated$: Observable<boolean> =
-    this.facade.isAuthenticated$;
-  private readonly handset$ = this.breakpointObserver.observe(
-    Breakpoints.Handset
-  );
-  private readonly handsetLandscape$ = this.breakpointObserver.observe(
-    Breakpoints.HandsetLandscape
-  );
+  public readonly isAuthenticated$: Observable<boolean> = this.facade.isAuthenticated$;
+  private readonly handset$ = this.breakpointObserver.observe(Breakpoints.Handset);
+  private readonly handsetLandscape$ = this.breakpointObserver.observe(Breakpoints.HandsetLandscape);
 
   public readonly isMobile$ = this.handset$.pipe(
     withLatestFrom(this.handsetLandscape$),
-    map(
-      ([handset, handsetLandscape]) =>
-        !!(handset.matches && !handsetLandscape.matches)
-    )
+    map(([handset, handsetLandscape]) => !!(handset.matches && !handsetLandscape.matches))
   );
 
   opened!: boolean;

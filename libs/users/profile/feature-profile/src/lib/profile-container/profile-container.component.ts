@@ -4,18 +4,8 @@ import {
   selectGithubStatus,
   selectGithubUserName,
 } from '@users/core/github-api/data-access';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  OnInit,
-  inject,
-} from '@angular/core';
-import {
-  authActions,
-  selectAuthStatus,
-  selectLoggedUser,
-} from '@auth/data-access';
+import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { authActions, selectAuthStatus, selectLoggedUser } from '@auth/data-access';
 import { UsersEntity, selectQueryParam } from '@users/core/data-access';
 import { FeatureUserInfoComponent } from '../../../../feature-user-info/feature-user-info.component';
 import { CropperDialogComponent } from '@users/core/ui';

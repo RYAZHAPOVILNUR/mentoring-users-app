@@ -9,14 +9,7 @@ import {
   transferArrayItem,
   DragDropModule,
 } from '@angular/cdk/drag-drop';
-import {
-  Component,
-  DestroyRef,
-  EventEmitter,
-  inject,
-  Input,
-  Output,
-} from '@angular/core';
+import { Component, DestroyRef, EventEmitter, inject, Input, Output } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { IColumn, ITask } from '@users/users/task/data-access';
 import { FormsModule } from '@angular/forms';
@@ -111,55 +104,41 @@ export class TasksViewComponent {
 
     const updatedColumns = JSON.parse(JSON.stringify(this.columns));
 
-    const previousColumn = updatedColumns.find(
-      (column: IColumn) => column.columnName === previousColumnName
-    );
-    const currentColumn = updatedColumns.find(
-      (column: IColumn) => column.columnName === currentColumnName
-    );
+    const previousColumn = updatedColumns.find((column: IColumn) => column.columnName === previousColumnName);
+    const currentColumn = updatedColumns.find((column: IColumn) => column.columnName === currentColumnName);
 
     if (event.previousContainer === event.container) {
       moveItemInArray(previousColumn.tasks, prevIndex, currentIndex);
     } else {
-      transferArrayItem(
-        previousColumn.tasks,
-        currentColumn.tasks,
-        prevIndex,
-        currentIndex
-      );
+      transferArrayItem(previousColumn.tasks, currentColumn.tasks, prevIndex, currentIndex);
     }
     this.tasksStore.updateLocalColumns(updatedColumns);
   }
 
   public openAddNewTaskModal(columnIndex: number): void {
-    const dialogRef: MatDialogRef<TasksCreateDialogComponent> =
-      this.matDialog.open(TasksCreateDialogComponent, {});
+    const dialogRef: MatDialogRef<TasksCreateDialogComponent> = this.matDialog.open(TasksCreateDialogComponent, {});
     dialogRef
       .afterClosed()
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         filter((taskName) => !!taskName)
       )
-      .subscribe((taskName: string) =>
-        this.addTask.emit({ columnIndex, taskName })
-      );
+      .subscribe((taskName: string) => this.addTask.emit({ columnIndex, taskName }));
   }
 
   public openChangeTaskModal(task: ITask): void {
-    const dialogRef: MatDialogRef<TaskChangeDialogComponent> =
-      this.matDialog.open(TaskChangeDialogComponent, {
-        width: '1040px',
-        data: { title: task.taskName },
-      });
-    dialogRef
-      .afterClosed()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe();
+    const dialogRef: MatDialogRef<TaskChangeDialogComponent> = this.matDialog.open(TaskChangeDialogComponent, {
+      width: '1040px',
+      data: { title: task.taskName },
+    });
+    dialogRef.afterClosed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
   }
 
   public openAddNewColumnModal(): void {
-    const dialogRef: MatDialogRef<TasksCreateColumnDialogComponent> =
-      this.matDialog.open(TasksCreateColumnDialogComponent, {});
+    const dialogRef: MatDialogRef<TasksCreateColumnDialogComponent> = this.matDialog.open(
+      TasksCreateColumnDialogComponent,
+      {}
+    );
     dialogRef
       .afterClosed()
       .pipe(

@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersVM } from '../../../../users-vm';
 import { MatCardModule } from '@angular/material/card';
@@ -20,15 +13,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 @Component({
   selector: 'users-card',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatButtonModule,
-    RouterModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatMenuModule,
-  ],
+  imports: [CommonModule, MatCardModule, MatButtonModule, RouterModule, MatIconModule, MatTooltipModule, MatMenuModule],
   templateUrl: './users-card.component.html',
   styleUrls: ['./users-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

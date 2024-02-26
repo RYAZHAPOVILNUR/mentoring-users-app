@@ -1,17 +1,7 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ArticlesCreateUiComponent } from '../articles-create-ui/articles-create-ui.component';
-import {
-  CreateArticle,
-  ArticlesActions,
-  ArticleSelectors,
-  Article,
-} from '@users/users/articles/data-access';
+import { CreateArticle, ArticlesActions, ArticleSelectors, Article } from '@users/users/articles/data-access';
 import { Store, select } from '@ngrx/store';
 import { DeactivatableComponent } from '@users/core/utils';
 import { MatDialog } from '@angular/material/dialog';
@@ -29,9 +19,7 @@ import { LetDirective } from '@ngrx/component';
   styleUrls: ['./articles-create-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ArticlesCreateContainerComponent
-  implements DeactivatableComponent
-{
+export class ArticlesCreateContainerComponent implements DeactivatableComponent {
   private readonly store = inject(Store);
   private dialog = inject(MatDialog);
   private isFormChange = false;
@@ -47,17 +35,15 @@ export class ArticlesCreateContainerComponent
 
   public articleId$ = this.store.pipe(select(selectQueryParam('id')));
 
-  public editingArticle$: Observable<Article | null> = this.store
-    .select(ArticleSelectors.selectArticleForEdit)
-    .pipe(
-      withLatestFrom(this.articleId$),
-      map(([article, id]) => {
-        if (!article && id) {
-          this.store.dispatch(ArticlesActions.getArticleForEdit({ id }));
-        }
-        return article;
-      })
-    );
+  public editingArticle$: Observable<Article | null> = this.store.select(ArticleSelectors.selectArticleForEdit).pipe(
+    withLatestFrom(this.articleId$),
+    map(([article, id]) => {
+      if (!article && id) {
+        this.store.dispatch(ArticlesActions.getArticleForEdit({ id }));
+      }
+      return article;
+    })
+  );
 
   onPublishArticle(article: CreateArticle) {
     this.store.dispatch(ArticlesActions.publishArticle({ article }));

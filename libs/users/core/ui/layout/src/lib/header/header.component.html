@@ -17,19 +17,7 @@
     {{ selectedLanguage$ | ngrxPush }}
   </button>
   <mat-menu #menu="matMenu">
-    <button
-      mat-menu-item
-      (click)="onSwitchLanguage('ru')"
-      class="lang-switch-btn"
-    >
-      Ru
-    </button>
-    <button
-      mat-menu-item
-      (click)="onSwitchLanguage('en')"
-      class="lang-switch-btn"
-    >
-      En
-    </button>
+    <button mat-menu-item (click)="onSwitchLanguage('ru')" class="lang-switch-btn">Ru</button>
+    <button mat-menu-item (click)="onSwitchLanguage('en')" class="lang-switch-btn">En</button>
   </mat-menu>
 </mat-toolbar>

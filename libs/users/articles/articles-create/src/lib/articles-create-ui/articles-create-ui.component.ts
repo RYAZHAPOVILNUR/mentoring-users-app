@@ -1,20 +1,7 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuillModule } from 'ngx-quill';
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import Quill from 'quill';
 import BlotFormatter from 'quill-blot-formatter';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,18 +9,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormGroupDirective, NgForm } from '@angular/forms';
-import {
-  ArticlesFacade,
-  CreateArticle,
-} from '@users/users/articles/data-access';
+import { ArticlesFacade, CreateArticle } from '@users/users/articles/data-access';
 import { ArticlesCreateVm } from './articles-create-vm';
 import { TranslateModule } from '@ngx-translate/core';
 
 class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(
-    control: FormControl | null,
-    form: FormGroupDirective | NgForm | null
-  ): boolean {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && isSubmitted && control.touched);
   }
@@ -62,11 +43,13 @@ Quill.register('modules/blotFormatter', BlotFormatter);
 export class ArticlesCreateUiComponent {
   public _vm!: ArticlesCreateVm;
   private readonly articleFacade = inject(ArticlesFacade);
+
   @Input({ required: true })
   set vm(value: ArticlesCreateVm) {
     this._vm = value;
     this.patchFormValues();
   }
+
   get vm() {
     return this._vm;
   }
@@ -79,11 +62,7 @@ export class ArticlesCreateUiComponent {
       validators: [Validators.required, Validators.minLength(66)],
     }),
     title: new FormControl('', {
-      validators: [
-        Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(66),
-      ],
+      validators: [Validators.required, Validators.minLength(5), Validators.maxLength(66)],
     }),
   });
 
@@ -152,8 +131,6 @@ export class ArticlesCreateUiComponent {
         }
       : { textEditor: '', title: '' };
 
-    return (
-      JSON.stringify(this.formGroup.value) !== JSON.stringify(initialFormValues)
-    );
+    return JSON.stringify(this.formGroup.value) !== JSON.stringify(initialFormValues);
   }
 }
