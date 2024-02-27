@@ -9,15 +9,15 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MaterialPostRequest } from '../../../../data-access/src/lib/folders-materials-types/folders-materials-types';
 import { first, tap } from 'rxjs';
 
-@Component({  
+@Component({
   selector: 'materials-add-btn',
   templateUrl: './materials-add.component.html',
   standalone: true,
   imports: [CommonModule, MatIconModule, MatButtonModule, MatMenuModule],
 })
 export class MaterialsAddComponent {
-  dialog = inject(MatDialog);
-  @Output() createNewMaterial = new EventEmitter();
+  private dialog = inject(MatDialog);
+  @Output() createNewMaterial = new EventEmitter<MaterialPostRequest>();
 
   openDialog(typeMaterial: string): void {
     const dialogRef = this.dialog.open(MaterialsAddDialogComponent, {
@@ -27,9 +27,14 @@ export class MaterialsAddComponent {
       },
     });
 
-    dialogRef.afterClosed().pipe(
-      first(),
-      tap((res: MaterialPostRequest) => {if (res) this.createNewMaterial.emit(res)})
-    ).subscribe();
+    dialogRef
+      .afterClosed()
+      .pipe(
+        first(),
+        tap((res: MaterialPostRequest) => {
+          if (res) this.createNewMaterial.emit(res);
+        })
+      )
+      .subscribe();
   }
 }

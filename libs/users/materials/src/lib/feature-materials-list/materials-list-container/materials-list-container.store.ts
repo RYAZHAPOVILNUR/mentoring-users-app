@@ -1,21 +1,30 @@
 import { Injectable, inject } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { ApiService } from '@users/core/http';
-import { catchError, of, tap, filter, map, concatMap, switchMap } from 'rxjs';
+import {
+  catchError,
+  of,
+  tap,
+  filter,
+  map,
+  concatMap,
+  switchMap,
+  first,
+} from 'rxjs';
 import {
   Material,
   FolderVM,
   MaterialPostRequest,
 } from '../../../../data-access/src/lib/folders-materials-types/folders-materials-types';
 
-interface typeInitialState {
+interface TypeInitialState {
   materials: Material[];
   folder: FolderVM;
   isLoading: boolean | null;
   error: null | string;
 }
 
-const initialState: typeInitialState = {
+const initialState: TypeInitialState = {
   materials: [],
   isLoading: null,
   error: null,
@@ -27,7 +36,7 @@ const initialState: typeInitialState = {
 };
 
 @Injectable()
-export class MaterialsListContainerStore extends ComponentStore<typeInitialState> {
+export class MaterialsListContainerStore extends ComponentStore<TypeInitialState> {
   readonly apiUrl = inject(ApiService);
   public readonly materials$ = this.select((state) => state.materials);
   public readonly folderTitle$ = this.select((state) => state.folder.title);
@@ -46,6 +55,7 @@ export class MaterialsListContainerStore extends ComponentStore<typeInitialState
 
     this.effect(() =>
       this.apiUrl.get<Material[]>('/material').pipe(
+        first(),
         map((materials) => materials.filter((m) => m.folder_id == id)),
         tap((materials) => {
           this.patchState((state) => ({
@@ -72,7 +82,11 @@ export class MaterialsListContainerStore extends ComponentStore<typeInitialState
       ...data,
       folder_id: 0,
     };
-    this.folder$.subscribe((folder) => (newMaterial.folder_id = folder.id));
+
+    this.folder$
+      .pipe(tap((folder) => (newMaterial.folder_id = folder.id)))
+      .subscribe();
+
     this.patchState((state) => ({
       ...state,
       isLoading: true,
@@ -81,6 +95,7 @@ export class MaterialsListContainerStore extends ComponentStore<typeInitialState
       this.apiUrl
         .post<Material, MaterialPostRequest>('/material', newMaterial)
         .pipe(
+          first(),
           tap((material) => {
             this.patchState((state) => ({
               ...state,
@@ -109,6 +124,7 @@ export class MaterialsListContainerStore extends ComponentStore<typeInitialState
 
     this.effect(() =>
       this.apiUrl.get<FolderVM>('/folder/' + id).pipe(
+        first(),
         tap((folder) => {
           this.patchState((state) => ({
             ...state,
@@ -137,6 +153,7 @@ export class MaterialsListContainerStore extends ComponentStore<typeInitialState
 
     this.effect(() =>
       this.apiUrl.delete<Material[]>('/material/' + id).pipe(
+        first(),
         tap(() => {
           this.patchState((state) => ({
             ...state,

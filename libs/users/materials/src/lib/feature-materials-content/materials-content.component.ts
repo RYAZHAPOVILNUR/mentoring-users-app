@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { VideoIdPipe } from './videoId.pipe';
 
 @Component({
   selector: 'material-content',
@@ -22,24 +23,15 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     MatButtonModule,
     MatTooltipModule,
     MatIconModule,
+    VideoIdPipe,
   ],
+  providers: [VideoIdPipe],
 })
 export class MaterialsContentComponent {
-  dialog = inject(MatDialog);
-  dialogRef = inject(MatDialogRef<MaterialsContentComponent>);
+  private dialogRef = inject(MatDialogRef<MaterialsContentComponent>);
   dialogData: { material: Material } = inject(MAT_DIALOG_DATA);
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-
-  getIdVideo(material: Material): string {
-    let resultSearchId = material.material_link.indexOf('v=');
-    return material.material_link.slice(
-      resultSearchId + 2,
-      resultSearchId + 13
-    );
-  }
-
-  idVideo: string = this.getIdVideo(this.dialogData.material);
 }

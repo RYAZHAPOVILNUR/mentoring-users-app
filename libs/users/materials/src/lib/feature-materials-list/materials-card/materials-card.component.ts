@@ -13,33 +13,24 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { MaterialsDeleteDialogComponent } from '../delete-dialog/delete-material-dialog.component';
+import { first, tap } from 'rxjs';
+import { GetDatePipe } from '../../pipe-date-adapter/date-adapter.pipe';
 
 @Component({
   selector: 'materials-card',
   templateUrl: 'materials-card.component.html',
   standalone: true,
-  imports: [MatListModule, MatIconModule],
+  imports: [MatListModule, MatIconModule, GetDatePipe],
+  providers: [ GetDatePipe ]
 })
 export class MaterialsCardComponent {
   @Input({ required: true })
   material!: Material;
 
-  @Output() selectMaterial = new EventEmitter();
-  @Output() deleteMaterial = new EventEmitter();
+  @Output() selectMaterial = new EventEmitter<number>();
+  @Output() deleteMaterial = new EventEmitter<number>();
 
-  dialog = inject(MatDialog);
-
-  onSelectMaterial(id: number) {
-    this.selectMaterial.emit(id);
-  }
-
-  getDate(): string {
-    let date = new Date(this.material.created_at);
-    return `
-		${String(date.getDate()).padStart(2, '0')}.
-		${String(date.getDay() + 1).padStart(2, '0')}.
-		${date.getFullYear()}`;
-  }
+  private dialog = inject(MatDialog);
 
   openDialogDeleteMaterial() {
     const dialogRef = this.dialog.open(MaterialsDeleteDialogComponent, {
@@ -48,8 +39,14 @@ export class MaterialsCardComponent {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) this.deleteMaterial.emit(result);
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(
+        first(),
+        tap((result: number) => {
+          if (result) this.deleteMaterial.emit(result);
+        })
+      )
+      .subscribe();
   }
 }

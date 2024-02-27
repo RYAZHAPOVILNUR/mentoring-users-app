@@ -19,8 +19,8 @@ import { FoldersAddComponent } from '../../feature-folders-create/folders-add-bt
   ],
 })
 export class FoldersListContainerComponent implements OnInit {
-  containerStore = inject(FoldersListContainerStore);
-  router = inject(Router);
+  private containerStore = inject(FoldersListContainerStore);
+  private router = inject(Router);
 
   public readonly folders$ = this.containerStore.folders$;
   public readonly isLoading$ = this.containerStore.isLoading$;

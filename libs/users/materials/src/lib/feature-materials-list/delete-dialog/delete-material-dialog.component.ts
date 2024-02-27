@@ -15,9 +15,8 @@ import { Material } from 'libs/users/materials/data-access/src/lib/folders-mater
   imports: [CommonModule],
 })
 export class MaterialsDeleteDialogComponent {
-  dialog = inject(MatDialog);
-  dialogRef = inject(MatDialogRef<MaterialsDeleteDialogComponent>);
-  dialogData: { material: Material } = inject(MAT_DIALOG_DATA);
+  private dialogRef = inject(MatDialogRef<MaterialsDeleteDialogComponent>);
+  public dialogData: { material: Material } = inject(MAT_DIALOG_DATA);
 
   closeDialog(id?: number): void {
     this.dialogRef.close(id);

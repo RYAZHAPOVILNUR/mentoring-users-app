@@ -30,8 +30,8 @@ export class FoldersListComponent {
   @Input({ required: true })
   loading!: boolean | null;
 
-  @Output() selectFolder = new EventEmitter();
-  @Output() deleteFolder = new EventEmitter();
+  @Output() selectFolder = new EventEmitter<number>();
+  @Output() deleteFolder = new EventEmitter<number>();
 
   onSelectFolder(id: number) {
     this.selectFolder.emit(id);

@@ -26,9 +26,8 @@ import {
   imports: [MatListModule, MatIconModule],
 })
 export class DeleteFolderComponent {
-  dialogRef = inject(MatDialogRef<DeleteFolderComponent>);
-  dialog = inject(MatDialog);
-  dialogData: { folder: FolderVM } = inject(MAT_DIALOG_DATA);
+  private dialogRef = inject(MatDialogRef<DeleteFolderComponent>);
+  public dialogData: { folder: FolderVM } = inject(MAT_DIALOG_DATA);
 
   closeDeleteDialog(id?: number) {
     this.dialogRef.close(id);

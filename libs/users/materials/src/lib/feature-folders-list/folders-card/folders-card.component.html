@@ -1,8 +1,8 @@
 <mat-list-item>
-  <mat-icon (click)="onSelectFolder(this.folder.id)" matListItemIcon
+  <mat-icon (click)="selectFolder.emit(this.folder.id)" matListItemIcon
     >folder</mat-icon
   >
   <div matListItemTitle>{{ this.folder.title }}</div>
-  <div matListItemLine>{{ getDate() }}</div>
+  <div matListItemLine>{{ folder.created_at | getDate }}</div>
   <mat-icon (click)="openDeleteDialog()" matListItemIcon>delete</mat-icon>
 </mat-list-item>

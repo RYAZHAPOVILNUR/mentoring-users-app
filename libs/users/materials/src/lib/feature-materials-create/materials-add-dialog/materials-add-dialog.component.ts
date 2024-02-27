@@ -18,8 +18,8 @@ import { MatInputModule } from '@angular/material/input';
   imports: [CommonModule, MatIconModule, ReactiveFormsModule, MatInputModule],
 })
 export class MaterialsAddDialogComponent {
-  dialogRef = inject(MatDialogRef<MaterialsAddDialogComponent>);
-  dialogData: { typeMaterial: string } = inject(MAT_DIALOG_DATA);
+  private dialogRef = inject(MatDialogRef<MaterialsAddDialogComponent>);
+  public dialogData: { typeMaterial: string } = inject(MAT_DIALOG_DATA);
   private formBuilder = inject(FormBuilder);
 
   constructor() {
@@ -33,7 +33,7 @@ export class MaterialsAddDialogComponent {
     switch (this.dialogData.typeMaterial) {
       case '.mp4':
         const videoRegex =
-          /[?&]v=([a-zA-Z0-9_-]{11})|\/embed\/([a-zA-Z0-9_-]{11})/;
+          /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=))([\w\-]{10,12})\b/;
         return videoRegex.test(link);
       case '.pdf':
         const pdfRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*\.pdf$/;
@@ -58,10 +58,7 @@ export class MaterialsAddDialogComponent {
       this.material.valid &&
       this.selectPattern(this.material.value.material_link as string)
     ) {
-      this.dialogRef.close({
-        title: this.material.value.title,
-        material_link: this.material.value.material_link,
-      });
+      this.dialogRef.close(this.material.value);
     }
   }
 

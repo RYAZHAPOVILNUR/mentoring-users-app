@@ -11,6 +11,7 @@ import {
 } from '../../../../data-access/src/lib/folders-materials-types/folders-materials-types';
 import { MaterialsContentComponent } from '../../feature-materials-content/materials-content.component';
 import { MatDialog } from '@angular/material/dialog';
+import { filter, first, map, scan, tap } from 'rxjs';
 
 @Component({
   selector: 'materials-list-container',
@@ -25,32 +26,33 @@ import { MatDialog } from '@angular/material/dialog';
   ],
 })
 export class MaterialsListContainerComponent implements OnInit {
-  containerStore = inject(MaterialsListContainerStore);
-  router = inject(Router);
+  private containerStore = inject(MaterialsListContainerStore);
   private readonly route = inject(ActivatedRoute);
   private readonly _location = inject(Location);
   public readonly materials$ = this.containerStore.materials$;
   public readonly isLoading$ = this.containerStore.isLoading$;
   public readonly folder$ = this.containerStore.folderTitle$;
-  dialog = inject(MatDialog);
+  private dialog = inject(MatDialog);
 
   goBack() {
     this._location.back();
   }
 
   onSelectMaterial(id: number) {
-    let material: Material[] = [];
-    this.materials$.subscribe(
-      (materials) => (material = materials.filter((value) => value.id == id))
-    );
-
-    const dialogRef = this.dialog.open(MaterialsContentComponent, {
-      data: {
-        material:
-          material.length < 2 ? material[0] : console.error('not unique id'),
-        // Вопрос - уместен ли тут хард код ?
-      },
-    });
+    this.materials$
+      .pipe(
+        first(),
+        map((materials) => materials.filter((material) => material.id === id)),
+        tap((materials) =>
+          this.dialog.open(MaterialsContentComponent, {
+            data: {
+              material:
+                materials.length < 2 ? materials[0] : console.error('not unique id'),
+            },
+          })
+        )
+      )
+      .subscribe();
   }
 
   onCreateNewMaterial(data: MaterialPostRequest) {
