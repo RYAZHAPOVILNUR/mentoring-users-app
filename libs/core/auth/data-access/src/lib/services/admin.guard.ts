@@ -8,7 +8,6 @@ import { authActions } from '../+state/auth.actions';
 
 export const adminGuard: CanActivateFn = () => {
   const store = inject(Store);
-
   return store.select(selectIsAdmin).pipe(
     tap(isAdmin => {
       if (isAdmin === null) {

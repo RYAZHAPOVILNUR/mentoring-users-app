@@ -5,7 +5,12 @@ import { LoadingStatus, UsersEntity } from "@users/core/data-access";
 // export const selectUsersState =
 //   createFeatureSelector<AuthState>(authFeatureKey);
 
-export const { selectAuthStatus, selectAuthToken, selectError, selectLoggedUser, selectAuthState } = authFeature
+export const {
+  selectAuthStatus,
+  selectAuthToken,
+  selectError,
+  selectLoggedUser,
+  selectAuthState } = authFeature
 
 export const selectIsAdmin = createSelector(
   selectAuthState,

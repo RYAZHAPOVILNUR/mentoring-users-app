@@ -40,8 +40,8 @@ export class AuthorizedUserLayoutComponent {
   private readonly handsetLandscape$ = this.breakpointObserver.observe(Breakpoints.HandsetLandscape);
 
   public readonly isMobile$ = this.handset$.pipe(
-    withLatestFrom(this.handsetLandscape$), 
-    map(([handset, handsetLandscape]) => !!(handset.matches && !handsetLandscape.matches))
+    withLatestFrom(this.handsetLandscape$),
+    map(([handset, handsetLandscape]) => (handset.matches && !handsetLandscape.matches))
   )
 
   opened!: boolean;

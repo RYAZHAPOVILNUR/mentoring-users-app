@@ -1,0 +1,18 @@
+.filter-container {
+  margin: 0 100px 0 100px;
+  align-self: center;
+  display: flex;
+  justify-content: space-between;
+}
+.example-full-width {
+  width: 85%;
+  padding: 5px;
+  margin: 0;
+}
+.apply-button {
+  position: relative;
+  top: 4px;
+  width: 150px;
+  height: 55px !important;
+}
+

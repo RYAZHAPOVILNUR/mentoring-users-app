@@ -33,7 +33,7 @@ export const authFeature = createFeature({
   name: 'auth',
   reducer: createReducer(
     authInitialState,
-    on(authActions.login, (state) => ({
+    on(authActions.login, state => ({
       ...state,
       authStatus: 'loading' as const,
     })),
