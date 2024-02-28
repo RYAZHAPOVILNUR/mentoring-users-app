@@ -61,7 +61,9 @@ export class UsersDetailComponent {
   onOpenEditMode() {
     this.router.navigate(['admin/users', this.user.id], { queryParams: { edit: true } });
   }
-
+  public onAddStoryPoints(userData: CreateUserDTO, onAddSPSuccess: onSuccessEditionCbType) {
+    this.usersFacade.addStoryPoints(userData, this.user.id, onAddSPSuccess)
+  }
   onDeleteUser() {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
       data: { dialogText: `Вы уверены, что хотите удалить ${this.user.name}` },

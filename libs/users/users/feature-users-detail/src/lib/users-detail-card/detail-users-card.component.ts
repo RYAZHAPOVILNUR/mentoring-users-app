@@ -24,10 +24,10 @@ import {
   MatSnackBarModule,
 } from "@angular/material/snack-bar";
 import { MatTooltipModule } from '@angular/material/tooltip';
-import {CreateUserDTO, UsersEntity} from '@users/core/data-access';
+import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { DadataApiService } from "@dadata";
-import {BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap} from "rxjs";
+import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap } from "rxjs";
 import { PushPipe } from "@ngrx/component";
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -57,6 +57,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export class DetailUsersCardComponent implements OnInit {
   private _vm: DetailUsersCardVm = { editMode: false, user: null, status: 'init', errors: null };
+  public storyPoints = new FormControl({ value: 0, disabled: true }, Validators.pattern('^[0-9]$'));
+  public isEdit = true;
   public get vm() {
 
     return this._vm;
@@ -70,8 +72,10 @@ export class DetailUsersCardComponent implements OnInit {
         name: vm.user.name,
         email: vm.user.email,
         username: vm.user.username,
-        city: vm.user.city
+        city: vm.user.city,
+
       });
+      this.storyPoints.patchValue(vm.user.totalStoryPoints as number)
     }
 
     if (vm.editMode) {
@@ -93,7 +97,9 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
+  @Output() addStoryPoints = new EventEmitter<{ user: CreateUserDTO, onSuccessSP: onSuccessEditionCbType }>();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>
+  @ViewChild('editStoryPointsNotification') storyPontsNoticeTemplate!: TemplateRef<any>
   private dadata = inject(DadataApiService)
   public citySuggestions = this.formGroup.controls.city.valueChanges
     .pipe(
@@ -115,6 +121,11 @@ export class DetailUsersCardComponent implements OnInit {
     this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
       duration: 2500, horizontalPosition: 'center', verticalPosition: 'top'
     })
+  private onAddSPSuccess: onSuccessEditionCbType = () => {
+    this.snackBar.openFromTemplate(this.storyPontsNoticeTemplate, {
+      duration: 2500, horizontalPosition: 'center', verticalPosition: 'top'
+    })
+  }
 
   onSubmit(): void {
     this.editUser.emit({
@@ -124,12 +135,23 @@ export class DetailUsersCardComponent implements OnInit {
         city: this.formGroup.value.city || '',
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
         purchaseDate: new Date().toString() || '',
-        educationStatus: 'trainee'
+        educationStatus: 'trainee',
       },
       onSuccessCb: this.onEditSuccess
     });
   }
+  public onAddStoryPoints(): void {
 
+    this.storyPoints.disable()
+    this.addStoryPoints.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        totalStoryPoints: this.storyPoints.value ? +this.storyPoints.value : 0,
+      },
+      onSuccessSP: this.onAddSPSuccess
+    })
+  }
   onCloseUser() {
     this.closeUser.emit();
   }
@@ -149,7 +171,6 @@ export class DetailUsersCardComponent implements OnInit {
   public onOptionClicked(selectedValue: string) {
     this.formGroup.get('city')?.setValue(selectedValue);
   }
-
   private checkChangeFields() {
     this.formGroup.valueChanges
       .pipe(

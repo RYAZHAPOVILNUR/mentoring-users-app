@@ -1,4 +1,4 @@
-import { UsersDTO,Role} from "./users-dto.model"
+import { UsersDTO, Role } from "./users-dto.model"
 import { UsersEntity } from "./users.entity"
 
 type UsersDTOAdapter = {

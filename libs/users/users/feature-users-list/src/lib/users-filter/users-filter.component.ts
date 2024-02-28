@@ -18,7 +18,7 @@ import { MatInputModule } from "@angular/material/input";
 
     ],
     templateUrl: './users-filter.component.html',
-    styleUrls: ['./users-filter.component.css'],
+    styleUrls: ['./users-filter.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersFilterComponent {
