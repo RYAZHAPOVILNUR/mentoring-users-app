@@ -10,11 +10,11 @@ import { UsersFacade } from '@users/users/data-access';
   styleUrls: ['./users-filter.component.scss'],
 })
 export class UsersFilterComponent {
-  nameFilter = new FormControl('');
+  nameFilter = new FormControl<string>('');
   private usersFacade = inject(UsersFacade);
 
-  applyFilter() {
-    const name = this.nameFilter.value;
+  applyFilter(): void {
+    const name: string | null = this.nameFilter.value;
     if (name !== null) {
       this.usersFacade.filterUsers(name);
     }

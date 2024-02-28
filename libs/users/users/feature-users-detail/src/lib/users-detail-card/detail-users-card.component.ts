@@ -117,27 +117,28 @@ export class DetailUsersCardComponent implements OnInit {
 
   private onEditSuccess: onSuccessEditionCbType = () =>
     this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
-      duration: 2500, horizontalPosition: 'center', verticalPosition: 'top'
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
     })
 
   private onAddStoryPointsSuccess: onSuccessStoryPointsCbType = () =>
     this.snackBar.openFromTemplate(this.snackbarTemplateRefSP, {
-      duration: 2500, horizontalPosition: 'center', verticalPosition: 'top',
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
     })
 
   public onAddStoryPoints(): void {
-    this.addStoryPoints.emit({
-      user: {
-        name: this.formGroup.value.name || '',
-        username: this.formGroup.value.username || '',
-        city: this.formGroup.value.city || '',
-        email: this.formGroup.value.email?.trim().toLowerCase() || '',
-        purchaseDate: this.vm.user?.purchaseDate || new Date().toString(),
-        educationStatus: this.vm.user?.educationStatus || 'trainee',
-        totalStoryPoints: this.totalStoryPoints.value || 0,
-      },
-      onSuccessAddSP: this.onAddStoryPointsSuccess
-    });
+    if (this.vm.user) {
+      this.addStoryPoints.emit({
+        user: {
+          ...this.vm.user,
+          totalStoryPoints: this.totalStoryPoints.value || 0,
+        },
+        onSuccessAddSP: this.onAddStoryPointsSuccess
+      });
+    }
     this.totalStoryPoints.disable();
   }
 
