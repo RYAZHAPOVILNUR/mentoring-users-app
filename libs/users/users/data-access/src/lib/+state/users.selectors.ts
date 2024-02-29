@@ -52,14 +52,14 @@ export const selectOpenedUser = createSelector(
   ({id}, entities) => entities[id] || null
 );
 
-export const usersFilterSelector = createSelector(
+export const selectUsersFIlter = createSelector(
   selectUsersState,
   (state: UsersState) => state.usersFilter
 );
 
-export const filteredUsers = createSelector(
+export const selectFilteredUsers = createSelector(
   selectAllUsers,
-  usersFilterSelector,
+  selectUsersFIlter,
   (users, filter) => {
     let filtered = users;
 
