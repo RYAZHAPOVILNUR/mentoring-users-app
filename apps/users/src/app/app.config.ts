@@ -17,6 +17,7 @@ import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { provideAnimations } from "@angular/platform-browser/animations";
 import { authEffects, authFeature, tokenInterceptor } from '@auth/data-access';
 import { SettingsEffects, settingsFeature } from '@users/settings/data-access';
+import { materalsEffect, materialsFeature } from '@users/materials/data-access'
 import { DADATA_TOKEN } from '@users/core/dadata';
 import { provideQuillConfig } from 'ngx-quill/config';
 import { articlesEffects, articlesFeature, commentsEffects, commentsFeature } from '@users/users/articles/data-access';
@@ -39,6 +40,7 @@ export const appConfig: ApplicationConfig = {
       githubApiEffects,
       backlogEffects,
       SettingsEffects,
+      materalsEffect,
     ),
     provideStore({
       router: routerReducer,
@@ -49,7 +51,8 @@ export const appConfig: ApplicationConfig = {
       [commentsFeature.name]: commentsFeature.reducer,
       [tasksFeature.name]: tasksFeature.reducer,
       [githubApiFeature.name]: githubApiFeature.reducer,
-      [backlogFeature.name]: backlogFeature.reducer
+      [backlogFeature.name]: backlogFeature.reducer,
+      [materialsFeature.name]: materialsFeature.reducer
     }),
     provideRouterStore(),
     provideStoreDevtools({

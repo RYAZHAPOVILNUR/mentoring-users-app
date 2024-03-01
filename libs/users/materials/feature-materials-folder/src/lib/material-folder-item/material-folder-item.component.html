@@ -1,9 +1,11 @@
 <mat-card>
-  <div>
-    <mat-card-content>Lolka</mat-card-content>
-    <button mat-icon-button color="warn" aria-label="delete folder">
+  <div class="folder">
+    <button mat-icon-button color="warn" aria-label="delete folder" class="folder__btn">
       <mat-icon>delete</mat-icon>
     </button>
+    <mat-icon>folder</mat-icon>
+    <div class="folder__title">{{title}}</div>
+    <div>{{date | date}}</div>
   </div>
-  <mat-icon>folder</mat-icon>
+
 </mat-card>
