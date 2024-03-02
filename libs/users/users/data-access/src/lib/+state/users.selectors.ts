@@ -59,8 +59,10 @@ export const selectFilteredUsers = createSelector(
   selectUsersFilter,
   selectAllUsers,
   (filter, users) =>
-    filter.name ? users.filter(user => user.name.toLowerCase().includes(filter.name!.toLowerCase())) : users
-
+    filter.name
+      ? users.filter(user =>
+          user.name.toLowerCase().includes(filter.name!.toLowerCase()))
+      : users
 )
 
 

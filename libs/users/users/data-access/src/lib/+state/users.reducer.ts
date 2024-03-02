@@ -76,7 +76,7 @@ const reducer = createReducer(
   on(UsersActions.updateUserStatus, (state, {status}) => ({
     ...state, status
   })),
-  on(UsersActions.setUsersFilter, (state, { filter}) => ({
+  on(UsersActions.setUsersFilter, (state, { filter }) => ({
     ...state, filter
   }))
 );
