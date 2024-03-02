@@ -47,7 +47,8 @@
     "USER_INFO": {
       "CONNECT_GITHUB": "Привязать Гитхаб",
       "DISCONNECT_GITHUB": "Отвязать Гитхаб",
-      "CHANGE_PASSWORD": "Сменить пароль"
+      "CHANGE_PASSWORD": "Сменить пароль",
+      "FIND_USER": "Найти пользователя"
     },
     "PASSWORD_CHANGE": {
       "FILL_THE_FORM": "Заполните поля для смены пароля",

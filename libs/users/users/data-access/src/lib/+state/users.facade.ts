@@ -6,7 +6,7 @@ import { Observable, of, switchMap } from 'rxjs';
 import {UsersErrors} from "./users.reducer";
 import {onSuccessEditionCbType} from "./users.actions";
 import { selectLoggedUser } from '@auth/data-access';
-import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { CreateUserDTO, UsersEntity, UsersFilter } from '@users/core/data-access';
 
 @Injectable({providedIn: 'root'})
 export class UsersFacade {
@@ -19,6 +19,7 @@ export class UsersFacade {
   public readonly status$ = this.store.pipe(select(UsersSelectors.selectUsersStatus));
   public readonly allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
   public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
+  public readonly filteredUsers$ = this.store.pipe(select(UsersSelectors.selectFilteredUsers));
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
   public readonly loggedUser$ = this.store.select(selectLoggedUser);
   public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError))
@@ -40,6 +41,10 @@ export class UsersFacade {
 
   editUser(userData: CreateUserDTO, id: number, onSuccessCb: onSuccessEditionCbType) {
     this.store.dispatch(UsersActions.editUser({ userData, id, onSuccessCb }));
+  }
+
+  filterUsers(filter: UsersFilter) {
+    this.store.dispatch(UsersActions.setUsersFilter(filter));
   }
 
   getUserFromStore(id: number) {
