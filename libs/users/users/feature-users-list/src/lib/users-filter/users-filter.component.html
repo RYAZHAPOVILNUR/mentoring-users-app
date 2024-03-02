@@ -1,0 +1,12 @@
+<form [formGroup]="formGroup" class="users-filter">
+  <mat-form-field appearance="outline" subscriptSizing="dynamic">
+    <input
+      matInput
+      formControlName="name"
+      [placeholder]="'PROFILE.USER_INFO.FIND_USER' | translate"
+    />
+  </mat-form-field>
+  <button mat-button color="primary" (click)="onApplySearch()">
+    Применить
+  </button>
+</form>

@@ -18,6 +18,11 @@ export const selectUsersError = createSelector(
   (state: UsersState) => state.error
 );
 
+export const selectUsersFilterProps = createSelector(
+  selectUsersState,
+  (state) => state.usersFilter
+);
+
 export const selectAllUsers = createSelector(
   selectUsersState,
   (state: UsersState) => selectAll(state)
@@ -49,3 +54,10 @@ export const selectOpenedUser = createSelector(
   selectUsersEntities,
   ({id}, entities) => entities[id] || null
 )
+
+export const selectFilteredUsers = createSelector(
+  selectAllUsers,
+  selectUsersFilterProps,
+  (allUsers, { name }) =>
+    allUsers.filter((user) => user.name.toLowerCase().includes(name))
+);
