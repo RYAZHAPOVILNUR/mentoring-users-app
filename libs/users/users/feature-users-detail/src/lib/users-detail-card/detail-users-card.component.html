@@ -59,7 +59,6 @@
               <input matInput placeholder="Имя пользователя" formControlName="username" class="edit-user-input">
             </mat-form-field>
 
-
             <mat-form-field class="edit-user-field"
             [matTooltip]="vm.user!.city"
             [matTooltipDisabled]="formGroup.enabled">
@@ -68,7 +67,6 @@
                      class="edit-user-input"
                      placeholder="Введите город"
                      matInput
-
                      formControlName="city"
                      [matAutocomplete]="auto">
               <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
@@ -78,7 +76,34 @@
               </mat-autocomplete>
             </mat-form-field>
 
+            <mat-form-field class="edit-user-field" >
+              <mat-label>Сторипоинты</mat-label>
+              <input type="text"
+                     [matTooltip]="vm.user!.totalStoryPoints!.toString()"
+                     [matTooltipDisabled]="formGroup.enabled"
+                     placeholder="Количество сторипоинтов"
+                     matInput
+                     formControlName="totalStoryPoints">
+              <ng-container *ngIf="vm.editStoryPointsMode && !vm.editMode">
+                <button
+                  type="button"
+                  mat-raised-button
+                  (click)="onSubmitStoryPoints()"
+                  color="primary"
+                  [disabled]="formGroup.invalid || (areFieldsChanged$ | ngrxPush) === false">
+                  <mat-icon>done</mat-icon>
+                </button>
+                <button (click)="onCloseEditMode()"  type="button" mat-button><mat-icon>close</mat-icon></button>
+              </ng-container>
+            </mat-form-field>
+            <button  *ngIf="!vm.editStoryPointsMode"
+                    mat-mini-fab
+                    matTooltip="edit total story points"
+                    color="primary"
+                    (click)="onOpenEditStoryPointsMode()"> +
+            </button>
           </div>
+
             <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
               <button mat-icon-button
               color="primary"
@@ -115,3 +140,10 @@
     <span>Пользователь успешно изменён!</span>
   </div>
 </ng-template>
+
+<ng-template #storyPointsEditSuccessSnackbar>
+  <div class="edit-user-snackbar">
+    <span>Сторипоинты успешно изменены!</span>
+  </div>
+</ng-template>
+
