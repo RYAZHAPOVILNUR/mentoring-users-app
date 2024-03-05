@@ -25,15 +25,15 @@ export class UsersMaterialsComponent implements OnInit {
   public readonly folders$ = this.facade.folders$
 
 
-  // public openAddNewTaskModal(columnIndex: number): void {
-  //   const dialogRef: MatDialogRef<MaterialFolderDialogComponent> = this.matDialog.open(MaterialFolderDialogComponent, {});
-  //   dialogRef.afterClosed()
-  //     .pipe(
-  //       takeUntilDestroyed(this.destroyRef),
-  //       filter(folderName => !!folderName)
-  //     )
-  //     .subscribe((folderName: string) => this.addTask.emit({ folderName }))
-  // }
+  public openAddNewFolderModal(): void {
+    const dialogRef: MatDialogRef<MaterialFolderDialogComponent> = this.matDialog.open(MaterialFolderDialogComponent, {});
+    dialogRef.afterClosed()
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        filter(folderName => !!folderName)
+      )
+      .subscribe((folderName: string) => this.facade.addNewFolder({title:folderName}))
+  }
 
   ngOnInit(): void {
     this.facade.loadFolders()

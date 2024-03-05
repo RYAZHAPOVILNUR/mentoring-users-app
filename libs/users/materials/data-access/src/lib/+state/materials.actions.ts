@@ -1,4 +1,4 @@
-import { IAddFolder, IFolder } from './../model/material-models';
+import { IAddFolder, IFolder, } from '../model/folders-models';
 import { createAction, props } from '@ngrx/store';
 
 export const initMaterials = createAction('[Material Page] Init');
@@ -11,7 +11,7 @@ export const loadFoldersFailed = createAction('[Material Page] Load Folders Fail
 
 export const addFolder = createAction('[Material Page] Add Folder', props<{ folder: IAddFolder }>());
 
-export const addFolderSuccess = createAction('[Material Page] Add Folder Success',  props<{ newFolder: IAddFolder }>());
+export const addFolderSuccess = createAction('[Material Page] Add Folder Success',  props<{ newFolder: IFolder }>());
 
 export const addFolderFailed = createAction('[Material Page] Add Folder Failed');
 

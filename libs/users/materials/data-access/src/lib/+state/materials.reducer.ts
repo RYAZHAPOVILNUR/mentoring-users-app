@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import * as MaterialActions from './materials.actions';
-import { IFolder } from '../model/material-models';
+import { IFolder } from '../model/folders-models';
 import { LoadingStatus } from '@users/core/data-access';
 import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 
@@ -33,9 +33,29 @@ export const materialsFeature = createFeature({
             status: 'loaded' as const 
           })
     ),
-    on(MaterialActions.loadFoldersFailed, (state) => ({
-      ...state,
-      status: 'error' as const
-    })),
+    on(MaterialActions.loadFoldersFailed, 
+      (state) => ({
+        ...state,
+        status: 'error' as const
+      })),
+    on(MaterialActions.addFolder, 
+      (state) => ({
+        ...state,
+        status:'loading' as const
+      })),
+    on(MaterialActions.addFolderSuccess, 
+      (state, {newFolder}) => 
+        materialsAdapter.addOne(
+          {...newFolder},
+          {
+            ...state,
+            status:'loaded' as const
+          })
+      ),
+    on(MaterialActions.addFolder, 
+      (state) => ({
+        ...state,
+        status:'loading' as const
+      }))
   )
 });

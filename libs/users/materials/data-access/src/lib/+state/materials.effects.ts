@@ -4,7 +4,7 @@ import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
 import { Observable, EMPTY, of } from 'rxjs';
 import { ApiService } from '@users/core/http';
 import * as MaterialsActions from './materials.actions';
-import { IAddFolder,IFolder } from '../model/material-models';
+import { IAddFolder,IFolder } from '../model/folders-models';
 
 
 export const loadMaterials = createEffect(
