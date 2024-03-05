@@ -35,7 +35,7 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
     super(initialState);
     this.usersFacade.init();
     this.setUsersFromGlobalToLocalStore();
-    this.setFilteredUsersFromGlobalRoLocalStore()
+    this.setFilteredUsersFromGlobalToLocalStore()
   }
 
   private setUsersFromGlobalToLocalStore(): void {
@@ -46,7 +46,7 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
     )
   }
 
-  private setFilteredUsersFromGlobalRoLocalStore(): void {
+  private setFilteredUsersFromGlobalToLocalStore(): void {
     this.effect(
         ()=> this.usersFacade.filteredUsers$.pipe(
           tap((users: UsersEntity[]) => this.patchFilteredUsers(users))

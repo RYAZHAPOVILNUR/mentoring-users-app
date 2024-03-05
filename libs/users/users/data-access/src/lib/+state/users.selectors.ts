@@ -68,25 +68,6 @@ export const selectFilteredUsers = createSelector(
                   user[field] && user[field].includes(value))
               : filteredUsers;
       })
-
     return filteredUsers
   }
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

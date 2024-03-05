@@ -24,9 +24,10 @@ export class FeatureUsersFilterComponent implements OnInit{
 
   public controls: FiltersControls ={
     name: [''],
+    email: ['']
   }
 
-  public inputFields = [...Object.entries(this.controls).map(el=> el[0])]
+  public inputFieldsForUI = [...Object.entries(this.controls).map(el=> el[0])]
 
   private controlsToFiltersArray(controls: FiltersControls): UsersFilter[]{
     return Object.entries({...controls}).map(

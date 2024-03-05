@@ -1,17 +1,11 @@
-
-
-
 <form [formGroup]="filterFormGroup" >
-
     <ng-template #filterInput let-field='field'>
         <mat-form-field class="form-field">
             <mat-label>{{ field }}</mat-label>
             <input matInput type="text" (input)="updateUsersFilter(field)" [formControlName]='field'>
         </mat-form-field>
     </ng-template>
-
-    <ng-container *ngFor="let filterField of inputFields">
+    <ng-container *ngFor="let filterField of inputFieldsForUI">
         <ng-container  *ngTemplateOutlet="filterInput; context: {field: filterField}"></ng-container>
     </ng-container>
-
 </form>

@@ -2,16 +2,16 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
 import * as UsersActions from './users.actions';
-import { UsersEntity} from '@users/core/data-access';
+import { UsersEntity } from '@users/core/data-access';
 import { LoadingStatus } from '@users/core/data-access';
-import {UsersFilter} from "../../../../users-filters.model";
+import { UsersFilter } from '../../../../users-filters.model';
 
 export const USERS_FEATURE_KEY = 'users';
 
 export type UsersErrors = {
-  status: number,
-  [key: string]: unknown
-}
+  status: number;
+  [key: string]: unknown;
+};
 
 export interface UsersState extends EntityState<UsersEntity> {
   selectedId?: string | number; // which Users record has been selected
@@ -31,14 +31,14 @@ export const initialUsersState: UsersState = usersAdapter.getInitialState({
   // set initial required properties
   status: 'init',
   error: null,
-  usersFilters: []
+  usersFilters: [],
 });
 
 const reducer = createReducer(
   initialUsersState,
   on(UsersActions.initUsers, (state) => ({
     ...state,
-    status: 'loading' as const
+    status: 'loading' as const,
   })),
   on(UsersActions.loadUsersSuccess, (state, { users }) =>
     usersAdapter.setAll(users, { ...state, status: 'loaded' as const })
@@ -46,7 +46,7 @@ const reducer = createReducer(
   on(UsersActions.loadUsersFailure, (state, { error }) => ({
     ...state,
     status: 'error' as const,
-    error
+    error,
   })),
   on(UsersActions.deleteUserSuccess, (state, { id }) =>
     usersAdapter.removeOne(id, { ...state })
@@ -54,42 +54,58 @@ const reducer = createReducer(
   on(UsersActions.addUserSuccess, (state, { userData }) =>
     usersAdapter.addOne({ ...userData }, { ...state })
   ),
-  on(UsersActions.editUserSuccess, (state, {userData}) => usersAdapter.updateOne({
-      id: userData.id,
-      changes: userData
-    }, state)
+  on(UsersActions.editUserSuccess, (state, { userData }) =>
+    usersAdapter.updateOne(
+      {
+        id: userData.id,
+        changes: userData,
+      },
+      state
+    )
   ),
-  on(UsersActions.editUserFailed, (state, {error}) => ({
-    ...state, status: 'error' as const, error
+  on(UsersActions.editUserFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
   })),
   on(UsersActions.loadUser, (state) => ({
     ...state,
-    status: 'loading' as const
+    status: 'loading' as const,
   })),
   on(UsersActions.loadUserSuccess, (state, { userData }) =>
-    usersAdapter.addOne({ ...userData }, { ...state, status: 'loaded' as const })),
-  on(UsersActions.loadUserFailed, (state, {error}) => ({
+    usersAdapter.addOne(
+      { ...userData },
+      { ...state, status: 'loaded' as const }
+    )
+  ),
+  on(UsersActions.loadUserFailed, (state, { error }) => ({
     ...state,
-    status: 'error' as const, error
+    status: 'error' as const,
+    error,
   })),
-  on(UsersActions.updateUserStatus, (state, {status}) => ({
-    ...state, status
+  on(UsersActions.updateUserStatus, (state, { status }) => ({
+    ...state,
+    status,
   })),
-  on(UsersActions.updateUsersFilter, (state, {usersFilter}) => {
-      return {
-        ...state,
-        usersFilters: state.usersFilters.map(
-            (currentUsersFilter) =>
-                currentUsersFilter.field === usersFilter.field
-                    ? usersFilter
-                    : currentUsersFilter
-        )}
+  on(UsersActions.updateUsersFilter, (state, { usersFilter }) => {
+    return {
+      ...state,
+      usersFilters: state.usersFilters.map((currentUsersFilter) =>
+        currentUsersFilter.field === usersFilter.field
+          ? usersFilter
+          : currentUsersFilter
+      ),
+    };
   }),
-  on(UsersActions.initUsersFilters, (state, {usersFilters})=>({
-    ...state, usersFilters: [...usersFilters]
-  }))
-);
+  on(UsersActions.initUsersFilters, (state, { usersFilters }) => ({
+    ...state,
+    usersFilters: [...usersFilters],
+  })),
 
+  on(UsersActions.updateUserTotalStoryPointsSuccess, (state, { userData }) =>
+    usersAdapter.updateOne({ id: userData.id, changes: userData }, state)
+  )
+);
 
 export function usersReducer(state: UsersState | undefined, action: Action) {
   return reducer(state, action);

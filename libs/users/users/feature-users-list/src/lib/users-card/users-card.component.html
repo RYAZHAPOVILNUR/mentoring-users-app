@@ -1,5 +1,5 @@
-<mat-card 
-class="user-card-wrapper" (click)="redirectToEditPage(false, $event)"  
+<mat-card
+class="user-card-wrapper" (click)="redirectToEditPage(false, false,$event)"
 matTooltip="{{user.isAdmin ? 'Admin' : 'User'}}"
 matTooltipClass="example-tooltip-uppercase">
   <mat-card-content class="mat-card-content">
@@ -12,7 +12,7 @@ matTooltipClass="example-tooltip-uppercase">
   </mat-card-content>
 
   <mat-menu #menu="matMenu">
-    <button mat-menu-item color="accent" (click)="redirectToEditPage(true, $event)">Редактировать</button>
+    <button mat-menu-item color="accent" (click)="redirectToEditPage(true, false, $event)">Редактировать</button>
     <button mat-menu-item color="warn" [disabled]="user.isAdmin || user.id === loggedUser.id"
       (click)="onDeleteUser($event)">
       Удалить
@@ -20,8 +20,8 @@ matTooltipClass="example-tooltip-uppercase">
   </mat-menu>
 
   <mat-card-actions class="user-card-buttons">
-    <button mat-icon-button 
-      (click)="onOpenMenu($event)" 
+    <button mat-icon-button
+      (click)="onOpenMenu($event)"
       [matMenuTriggerFor]="menu">
       <mat-icon>more_horiz</mat-icon>
     </button>

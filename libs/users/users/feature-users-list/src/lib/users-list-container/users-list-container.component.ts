@@ -14,7 +14,8 @@ import { UsersFacade } from '@users/users/data-access';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
-import {FeatureUsersFilterComponent} from "@users/feature-users-filter";
+import { FeatureUsersFilterComponent } from '@users/feature-users-filter';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'users-list-container',
@@ -26,33 +27,39 @@ import {FeatureUsersFilterComponent} from "@users/feature-users-filter";
     MatDialogModule,
     LetDirective,
     CreateUsersButtonComponent,
-    FeatureUsersFilterComponent
+    FeatureUsersFilterComponent,
   ],
   templateUrl: './users-list-container.component.html',
   styleUrls: ['./users-list-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [UsersListContainerStore]
+  providers: [UsersListContainerStore],
 })
 export class UsersListContainerComponent {
   private readonly componentStore = inject(UsersListContainerStore);
   public usersFacade = inject(UsersFacade);
   public readonly users$ = this.componentStore.users$;
-  public filteredUsers$ = this.componentStore.filteredUsers$
+  public filteredUsers$ = this.componentStore.filteredUsers$;
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;
   public readonly loggedUser$ = this.usersFacade.loggedUser$;
   private readonly router = inject(Router);
 
   onDeleteUser(user: UsersVM) {
-    this.componentStore.deleteUser(user)
+    this.componentStore.deleteUser(user);
   }
 
-  onRedirectToEdit({ id, editMode }: { id: number, editMode: boolean }) {
-    this.router.navigate(['/admin/users', id], { queryParams: { edit: editMode } });
-  }
-
-  onSearchChange(){
-
+  onRedirectToEdit({
+    id,
+    editMode,
+    editStoryPointsMode,
+  }: {
+    id: number;
+    editMode: boolean;
+    editStoryPointsMode: boolean;
+  }) {
+    this.router.navigate(['/admin/users', id], {
+      queryParams: { edit: editMode, editStoryPoints: editStoryPointsMode },
+    });
   }
 }
