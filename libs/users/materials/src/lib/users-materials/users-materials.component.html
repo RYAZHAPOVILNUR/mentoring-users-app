@@ -1,5 +1,5 @@
 
 <div class="materials__list">
-  <users-material-folder-item *ngFor="let material of materials$ | ngrxPush" [date]="material.created_at" [title]="material.title"></users-material-folder-item>
+  <users-material-folder-item *ngFor="let folder of folders$ | ngrxPush" [date]="folder.created_at" [title]="folder.title"></users-material-folder-item>
 </div>
 <users-material-folder-add-btn></users-material-folder-add-btn>
