@@ -75,7 +75,8 @@ export class TaskChangeDialogComponent {
   get totalPoint(): string {
     const values = Object.values(this.storyPoint);
 
-if(Object.values(this.storyPoint).every(value => value === "?")) return '?'
+if(Object.values(this.storyPoint).every(value => value === "?"))
+  return '?'
 
     return values.reduce((total, currentValue) => {
       const parsedValue = parseFloat(currentValue);

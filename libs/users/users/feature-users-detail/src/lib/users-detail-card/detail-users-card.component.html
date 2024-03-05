@@ -78,6 +78,27 @@
               </mat-autocomplete>
             </mat-form-field>
 
+            <mat-form-field class="edit-user-field">
+              <mat-label> Количество сторипоинтов:</mat-label>
+              <input
+                     [formControl]="totalStoryPoints"
+                     type="text"
+                     class="edit-user-input"
+                     placeholder="Введите количество сторипоинтов"
+                     matInput
+                     >
+              <button (click)="onAddStoryPoints()"  *ngIf="!totalStoryPoints.disabled" matSuffix mat-icon-button aria-label="Clear" >
+                <mat-icon>done</mat-icon>
+              </button>
+              <button (click)="totalStoryPoints.disable()" *ngIf="!totalStoryPoints.disabled"  matSuffix mat-icon-button aria-label="Clear" >
+                <mat-icon>close</mat-icon>
+              </button>
+              <button (click)="totalStoryPoints.enable()" *ngIf="totalStoryPoints.disabled"  matSuffix mat-icon-button aria-label="Clear" >
+                <mat-icon>add</mat-icon>
+              </button>
+            </mat-form-field>
+
+
           </div>
             <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
               <button mat-icon-button
@@ -113,5 +134,11 @@
 <ng-template #snackbar>
   <div class="edit-user-snackbar">
     <span>Пользователь успешно изменён!</span>
+  </div>
+</ng-template>
+
+<ng-template #snackbarStoryPoints>
+  <div class="edit-user-snackbar">
+    <span>Сторипоинты успешно обновлены!</span>
   </div>
 </ng-template>
