@@ -4,9 +4,10 @@ import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
 import { Observable, of, switchMap } from 'rxjs';
 import {UsersErrors} from "./users.reducer";
-import {onSuccessEditionCbType} from "./users.actions";
+import {onSuccessEditionCbType, onSuccessAddSPType} from "./users.actions";
 import { selectLoggedUser } from '@auth/data-access';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { UsersDTO } from '../../../../../../core/data-access/src';
 
 @Injectable({providedIn: 'root'})
 export class UsersFacade {
@@ -40,6 +41,10 @@ export class UsersFacade {
 
   editUser(userData: CreateUserDTO, id: number, onSuccessCb: onSuccessEditionCbType) {
     this.store.dispatch(UsersActions.editUser({ userData, id, onSuccessCb }));
+  }
+
+  addStoryPoints(userData: UsersDTO, id: number, onSuccessAddSP: onSuccessAddSPType) {
+    this.store.dispatch(UsersActions.addStoryPoints({userData, id, onSuccessAddSP}))
   }
 
   getUserFromStore(id: number) {

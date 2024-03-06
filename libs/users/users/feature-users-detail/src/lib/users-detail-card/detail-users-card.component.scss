@@ -37,10 +37,9 @@
 .edit-user-field {
   width: 100%;
 }
-
-.edit-user-btns-container {
+.story-point-container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
 }
 
 div.alert-success {
