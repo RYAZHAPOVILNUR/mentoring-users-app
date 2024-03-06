@@ -10,7 +10,7 @@ import {
   Output, TemplateRef, ViewChild
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { onSuccessEditionCbType, onSuccessAddSPType } from '@users/users/data-access';
+import { onCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -94,15 +94,15 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
-    storyPoints: new FormControl({ value: 0, disabled: !this.vm.editMode })
+    storyPoints: new FormControl({ value: 0, disabled: !this.vm.editMode }, [Validators.pattern('^\\d+$')])
   });
 
-  @Output() editUser = new EventEmitter<{ user: CreateUserDTO, onSuccessCb: onSuccessEditionCbType }>();
+  @Output() editUser = new EventEmitter<{ user: CreateUserDTO, onSuccessCb: onCbType }>();
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
-  @Output() addStoryPoints = new EventEmitter<{ totalStoryPoints: number, onSuccessAddSP: onSuccessAddSPType }>();
+  @Output() addStoryPoints = new EventEmitter<{ totalStoryPoints: number, onSuccessAddSP: onCbType }>();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
   @ViewChild('snackbarStoryPoints') snackbarStoryPointsTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
@@ -129,10 +129,10 @@ export class DetailUsersCardComponent implements OnInit {
     this.checkChangeFields();
   }
 
-  private onEditSuccess: onSuccessEditionCbType = () =>
+  private onEditSuccess: onCbType = () =>
     this.snackBar.openFromTemplate(this.snackbarTemplateRef, this.snackBarConfig);
 
-  private onAddStoryPointsSuccess: onSuccessAddSPType = () =>
+  private onAddStoryPointsSuccess: onCbType = () =>
     this.snackBarStoryPoints.openFromTemplate(this.snackbarStoryPointsTemplateRef, this.snackBarConfig);
 
   onSubmit(): void {

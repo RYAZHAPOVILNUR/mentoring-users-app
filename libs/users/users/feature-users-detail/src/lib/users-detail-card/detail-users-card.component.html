@@ -84,18 +84,20 @@
           <mat-form-field class="edit-user-field">
             <mat-label>Количество сторипоинтов</mat-label>
             <input matInput type="text" formControlName="storyPoints">
-            <button matSuffix mat-icon-button aria-label="Add" (click)="onToggleStoryPoints()"
+            <button matSuffix mat-icon-button aria-label="Add"
+                    (click)="onToggleStoryPoints()"
                     *ngIf="!this.storyPointsEdit">
               <mat-icon color="accent">add</mat-icon>
             </button>
-            <button matSuffix mat-icon-button aria-label="Done" (click)="onAddStoryPoints()"
-                    *ngIf="this.storyPointsEdit">
+
+            <ng-container *ngIf="this.storyPointsEdit">
+            <button matSuffix mat-icon-button aria-label="Done" (click)="onAddStoryPoints()">
               <mat-icon color="accent">done</mat-icon>
             </button>
-            <button matSuffix mat-icon-button aria-label="Close" (click)="onToggleStoryPoints()"
-                    *ngIf="this.storyPointsEdit">
+            <button matSuffix mat-icon-button aria-label="Close" (click)="onToggleStoryPoints()">
               <mat-icon color="warn">close</mat-icon>
             </button>
+            </ng-container>
           </mat-form-field>
 
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
-import { UsersErrors, UsersFacade, onSuccessEditionCbType, onSuccessAddSPType } from "@users/users/data-access";
+import { UsersErrors, UsersFacade, onCbType } from "@users/users/data-access";
 import { Observable, map, tap } from 'rxjs';
 import { selectQueryParam, CreateUserDTO, UsersEntity, } from '@users/core/data-access';
 import { Store, select } from '@ngrx/store';
@@ -45,11 +45,11 @@ export class UsersDetailComponent {
   );
   public readonly errors$: Observable<UsersErrors | null> = this.usersFacade.errors$
 
-  public onEditUser(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
+  public onEditUser(userData: CreateUserDTO, onSuccessCb: onCbType) {
     this.usersFacade.editUser(userData, this.user.id, onSuccessCb);
     this.router.navigate(['/admin/users', this.user.id], { queryParams: { edit: false } });
   }
-  onAddStoryPoints(totalStoryPoints: number, onSuccessAddSP: onSuccessAddSPType) {
+  onAddStoryPoints(totalStoryPoints: number, onSuccessAddSP: onCbType) {
     this.usersFacade.addStoryPoints({...this.user, totalStoryPoints}, this.user.id, onSuccessAddSP)
   }
 
