@@ -1,0 +1,9 @@
+
+<div class="materials__list">
+  <users-material-folder-item *ngFor="let folder of folders$ | ngrxPush" 
+    [folder]="folder" 
+    (deleteFolder)="deleteFolder($event)"
+  >
+  </users-material-folder-item>
+</div>
+<users-material-folder-add-btn></users-material-folder-add-btn>
