@@ -55,7 +55,27 @@ export const materialsFeature = createFeature({
     on(MaterialActions.addFolder, 
       (state) => ({
         ...state,
+        status:'error' as const
+      })),
+
+    on(MaterialActions.deleteFolder, 
+      (state) => ({
+        ...state,
         status:'loading' as const
+      })),
+    on(MaterialActions.deleteFolderSuccess, 
+      (state, {id}) => 
+        materialsAdapter.removeOne(
+          id,
+          {
+            ...state,
+            status:'loaded' as const
+          })
+      ),
+    on(MaterialActions.deleteFolderFailed, 
+      (state) => ({
+        ...state,
+        status:'error' as const
       }))
   )
 });

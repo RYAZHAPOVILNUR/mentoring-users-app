@@ -15,6 +15,12 @@ export const addFolderSuccess = createAction('[Material Page] Add Folder Success
 
 export const addFolderFailed = createAction('[Material Page] Add Folder Failed');
 
+export const deleteFolder = createAction('[Material Page] delete Folder', props<{ id: number }>());
+
+export const deleteFolderSuccess = createAction('[Material Page] delete Folder Success', props<{ id: number }>());
+
+export const deleteFolderFailed = createAction('[Material Page] delete Folder Failed');
+
 // export const initFolderMaterials = createAction('[Folder Page] Init')
 
 // export const loadFolderMaterials = createAction('[Folder Page] Load Folder Materials')

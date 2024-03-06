@@ -52,3 +52,25 @@ export const addMaterial = createEffect(
     )
   },{ functional:true }
 )
+
+
+export const deleteMaterial = createEffect(
+  () => {
+    const actions$ = inject(Actions)
+    const apiService = inject(ApiService)
+
+    return actions$.pipe(
+      ofType(MaterialsActions.deleteFolder),
+      switchMap(
+        ({ id }) => {
+          return apiService
+            .delete<void>(`/folder/${id}`)
+            .pipe(
+              map(() => {
+                return MaterialsActions.deleteFolderSuccess({id});
+              })
+            );
+      })
+    )
+  },{ functional:true }
+)

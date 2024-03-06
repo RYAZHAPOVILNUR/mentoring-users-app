@@ -5,9 +5,10 @@ import { PushPipe } from '@ngrx/component';
 import { MaterialFolderAddBtnComponent } from '../../../feature-materials-folder/src/lib/material-folder-add-btn/material-folder-add-btn.component';
 import { MaterialFolderItemComponent } from '../../../feature-materials-folder/src/lib/material-folder-item/material-folder-item.component'
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { MaterialFolderDialogComponent } from 'libs/users/materials/feature-materials-folder/src/lib/material-folder-dialog/material-folder-dialog.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { filter } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
+import { IFolder } from 'libs/users/materials/data-access/src/lib/model/folders-models';
+import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 
 @Component({
   selector: 'users-users-materials',
@@ -24,20 +25,22 @@ export class UsersMaterialsComponent implements OnInit {
   private readonly facade = inject(MaterialsFacade)
   public readonly folders$ = this.facade.folders$
 
+  public deleteFolder(folder: IFolder): void {
+    const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.matDialog.open(
+      CoreUiConfirmDialogComponent,
+      { data: { dialogText: `Вы уверены, что хотите удалить ${folder.title}` } }
+    )
 
-  public openAddNewFolderModal(): void {
-    const dialogRef: MatDialogRef<MaterialFolderDialogComponent> = this.matDialog.open(MaterialFolderDialogComponent, {});
     dialogRef.afterClosed()
-      .pipe(
-        takeUntilDestroyed(this.destroyRef),
-        filter(folderName => !!folderName)
-      )
-      .subscribe((folderName: string) => this.facade.addNewFolder({title:folderName}))
+    .pipe(
+      takeUntilDestroyed(this.destroyRef),
+      tap((result: boolean) => {
+        if(result) this.facade.deleteFolder(folder.id)
+      })
+    )
+    .subscribe();
   }
-
   ngOnInit(): void {
     this.facade.loadFolders()
   }
-
-
 }

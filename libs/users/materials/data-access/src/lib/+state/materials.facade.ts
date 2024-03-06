@@ -19,4 +19,8 @@ export class MaterialsFacade {
   addNewFolder(folder:IAddFolder){
     this.store.dispatch(MaterialActions.addFolder({folder}))
   }
+
+  deleteFolder(id:number){
+    this.store.dispatch(MaterialActions.deleteFolder({id}))
+  }
 }
