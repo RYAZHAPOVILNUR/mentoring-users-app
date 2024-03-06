@@ -1,1 +1,1 @@
-export * from './lib/feature-materials.module';
+export * from './lib/feature-materials-container/feature-materials-container.component';

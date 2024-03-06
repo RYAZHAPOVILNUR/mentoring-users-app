@@ -1,5 +1,5 @@
 {
-  "name": "feature-materials",
+  "name": "feature-materials-container",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/users/materials/feature-materials/src",
   "prefix": "users",
@@ -25,8 +25,8 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "libs/users/materials/feature-materials/**/*.ts",
-          "libs/users/materials/feature-materials/**/*.html"
+          "libs/users/materials/feature-materials//**/*.ts",
+          "libs/users/materials/feature-materials//**/*.html"
         ]
       }
     }
