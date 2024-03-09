@@ -87,17 +87,14 @@
                      placeholder="Введите количество сторипоинтов"
                      matInput
                      >
-              <button (click)="onAddStoryPoints()"  *ngIf="!totalStoryPoints.disabled" matSuffix mat-icon-button aria-label="Clear" >
-                <mat-icon>done</mat-icon>
-              </button>
-              <button (click)="totalStoryPoints.disable()" *ngIf="!totalStoryPoints.disabled"  matSuffix mat-icon-button aria-label="Clear" >
-                <mat-icon>close</mat-icon>
-              </button>
-              <button (click)="totalStoryPoints.enable()" *ngIf="totalStoryPoints.disabled"  matSuffix mat-icon-button aria-label="Clear" >
-                <mat-icon>add</mat-icon>
-              </button>
             </mat-form-field>
-
+            <div class="button-to-edit-sp">
+              <ng-container  *ngIf="totalStoryPoints.disabled; else enabledButtons">
+                <button  (click)="totalStoryPoints.enable()" matSuffix mat-icon-button>
+                  <mat-icon>add</mat-icon>
+                </button>
+              </ng-container>
+            </div>
 
           </div>
             <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
@@ -141,4 +138,13 @@
   <div class="edit-user-snackbar">
     <span>Сторипоинты успешно обновлены!</span>
   </div>
+</ng-template>
+
+<ng-template #enabledButtons>
+  <button class="button-done" (click)="onAddStoryPoints()" matSuffix mat-icon-button>
+    <mat-icon>done</mat-icon>
+  </button>
+  <button class="button-close"(click)="totalStoryPoints.disable()" matSuffix mat-icon-button>
+    <mat-icon>close</mat-icon>
+  </button>
 </ng-template>

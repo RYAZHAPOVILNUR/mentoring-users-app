@@ -6,6 +6,7 @@ import { ApiService } from '@users/core/http';
 import { Store, select } from '@ngrx/store';
 import { selectUsersEntities } from './users.selectors';
 import { CreateUserDTO, UsersDTO, UsersEntity, selectRouteParams, usersDTOAdapter } from '@users/core/data-access';
+import {addUserStoryPointsFailed} from "./users.actions";
 
 export const userEffects = createEffect(
   () => {
@@ -150,25 +151,23 @@ export const addUserStoryPoints = createEffect(
         user: {
           ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
           totalStoryPoints: userData.totalStoryPoints,
-        },onSuccessAddSP
+        }, onSuccessAddSP
       })),
-      switchMap(({ user, onSuccessAddSP }) => {
-        return apiService
-          .post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user)
+      switchMap(({ user, onSuccessAddSP }) =>
+        apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user)
           .pipe(
             map((userData) => ({ userData, onSuccessAddSP })),
             tap(( {onSuccessAddSP} ) => onSuccessAddSP()),
-            map(({userData}) =>{
-                return UsersActions.addUserStoryPointsSuccess({ userData })
-              }
+            map(({userData}) =>
+                UsersActions.addUserStoryPointsSuccess({ userData })
             ),
             catchError((error) => {
               console.error('Error', error);
-              return of(UsersActions.editUserFailed({ error }));
+              return of(UsersActions.addUserStoryPointsFailed({ error }));
             })
-          );
-      })
-    );
+          )
+      )
+    )
   },
   { functional: true }
 );

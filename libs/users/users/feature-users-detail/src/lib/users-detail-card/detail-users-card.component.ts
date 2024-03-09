@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 import { onSuccessEditionCbType, onSuccessSPonCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -24,10 +24,10 @@ import {
   MatSnackBarModule,
 } from "@angular/material/snack-bar";
 import { MatTooltipModule } from '@angular/material/tooltip';
-import {CreateUserDTO, UsersEntity} from '@users/core/data-access';
+import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { DadataApiService } from "@dadata";
-import {BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap} from "rxjs";
+import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap } from "rxjs";
 import { PushPipe } from "@ngrx/component";
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -41,7 +41,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     MatButtonModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    FormsModule,
     MatInputModule,
     MatIconModule,
     MatProgressBarModule,
@@ -96,7 +95,7 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
-  @Output() addStoryPoints = new EventEmitter<{ user: CreateUserDTO, onSuccessAddSP: onSuccessSPonCbType }>();
+  @Output() addStoryPoints = new EventEmitter<{ userData: CreateUserDTO, onSuccessAddSP: onSuccessSPonCbType }>();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
   @ViewChild('snackbarStoryPoints') snackbarTemplateRefSP!: TemplateRef<any>;
   private dadata = inject(DadataApiService)
@@ -132,7 +131,7 @@ export class DetailUsersCardComponent implements OnInit {
   onAddStoryPoints() {
     this.totalStoryPoints.disable();
     this.addStoryPoints.emit({
-      user: {
+      userData: {
         name: this.formGroup.value.name || '',
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
         totalStoryPoints: this.totalStoryPoints.value || 0,

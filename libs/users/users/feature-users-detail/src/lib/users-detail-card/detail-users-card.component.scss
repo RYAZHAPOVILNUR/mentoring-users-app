@@ -57,8 +57,12 @@ div.alert-success {
   color: white;
 }
 
-.edit-points-icon {
-  position: absolute;
-  left: 90%;
-  top: 30%;
+.button-to-edit-sp {
+  display: flex;
+  margin-top: -75px;
+  margin-left: 300px;
+}
+
+.button-done {
+  margin-left: -50px;
 }
