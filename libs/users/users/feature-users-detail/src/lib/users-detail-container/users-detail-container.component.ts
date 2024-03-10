@@ -50,6 +50,10 @@ export class UsersDetailComponent {
     this.router.navigate(['/admin/users', this.user.id], { queryParams: { edit: false } });
   }
 
+  public onAddStoryPoints(user: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
+    this.usersFacade.addStoryPoints(user, this.user.id, onSuccessCb)
+  }
+
   onCloseUser() {
     this.router.navigate(['/admin/users']);
   }

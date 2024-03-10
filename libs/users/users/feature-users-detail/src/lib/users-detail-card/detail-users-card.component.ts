@@ -70,8 +70,10 @@ export class DetailUsersCardComponent implements OnInit {
         name: vm.user.name,
         email: vm.user.email,
         username: vm.user.username,
-        city: vm.user.city
+        city: vm.user.city,
       });
+
+      this.storyPoints.patchValue(vm.user.totalStoryPoints)
     }
 
     if (vm.editMode) {
@@ -88,11 +90,14 @@ export class DetailUsersCardComponent implements OnInit {
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
 
+  public readonly storyPoints = new FormControl({value: 0, disabled: true}, Validators.pattern('^[0-9]*$'))
+
   @Output() editUser = new EventEmitter<{ user: CreateUserDTO, onSuccessCb: onSuccessEditionCbType }>();
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
+  @Output() addStoryPoints = new EventEmitter<{user: CreateUserDTO, onSuccessCb: onSuccessEditionCbType}>();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>
   private dadata = inject(DadataApiService)
   public citySuggestions = this.formGroup.controls.city.valueChanges
@@ -111,8 +116,9 @@ export class DetailUsersCardComponent implements OnInit {
     this.checkChangeFields();
   }
 
-  private onEditSuccess: onSuccessEditionCbType = () =>
+    private onEditSuccess: onSuccessEditionCbType = (message: string) =>
     this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
+      data: { message },
       duration: 2500, horizontalPosition: 'center', verticalPosition: 'top'
     })
 
@@ -130,6 +136,18 @@ export class DetailUsersCardComponent implements OnInit {
     });
   }
 
+  onAddStoryPointSubmit(): void {
+    this.addStoryPoints.emit({
+      user: {
+        ...this.vm.user!,
+        totalStoryPoints: this.storyPoints.value ?? 0
+      },
+      onSuccessCb: this.onEditSuccess
+    })
+
+    this.storyPoints.disable();
+  }
+
   onCloseUser() {
     this.closeUser.emit();
   }
@@ -144,6 +162,14 @@ export class DetailUsersCardComponent implements OnInit {
 
   onDeleteUser() {
     this.deleteUser.emit();
+  }
+
+  public toggleButtonState(): void {
+    if(this.storyPoints.disabled) {
+      return this.storyPoints.enable()
+    }
+
+    return this.storyPoints.disable()
   }
 
   public onOptionClicked(selectedValue: string) {
