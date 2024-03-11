@@ -14,11 +14,16 @@ import { IFolder } from 'libs/users/materials/data-access/src/lib/model/folders-
 export class MaterialFolderItemComponent {
   @Input({ required: true }) folder!:IFolder;
   @Output() deleteFolder = new EventEmitter();
+  @Output() openFolder = new EventEmitter();
 
   
 
 
   onDeleteFolder(folder: IFolder) {
     this.deleteFolder.emit(folder)
+  }
+
+  onOpenFolder(folder:IFolder){
+    this.openFolder.emit(folder.id)
   }
 }

@@ -9,6 +9,7 @@ import { tap } from 'rxjs';
 import { PushPipe } from '@ngrx/component';
 import { MaterialFolderAddBtnComponent } from '../material-folder-add-btn/material-folder-add-btn.component';
 import { MaterialFolderItemComponent } from '../material-folder-item/material-folder-item.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'users-material-folder-container',
@@ -24,6 +25,13 @@ export class MaterialFolderContainerComponent implements OnInit{
 
   private readonly facade = inject(MaterialsFacade)
   public readonly folders$ = this.facade.folders$
+
+  private readonly router = inject(Router);
+
+  public openFolder(id: number) {
+    this.router.navigate([`/materials/`, id])
+  }
+
 
   public deleteFolder(folder: IFolder): void {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.matDialog.open(

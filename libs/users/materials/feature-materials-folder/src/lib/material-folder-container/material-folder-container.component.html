@@ -3,6 +3,7 @@
   <users-material-folder-item *ngFor="let folder of folders$ | ngrxPush" 
     [folder]="folder" 
     (deleteFolder)="deleteFolder($event)"
+    (openFolder)="openFolder($event)"
   >
   </users-material-folder-item>
 </div>

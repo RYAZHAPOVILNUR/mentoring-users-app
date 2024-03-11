@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card (dblclick)="onOpenFolder(folder)">
   <div class="folder">
     <button mat-icon-button color="warn" aria-label="delete folder" class="folder__btn" (click)="onDeleteFolder(folder)">
       <mat-icon>delete</mat-icon>
