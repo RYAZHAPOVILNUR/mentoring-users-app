@@ -1,1 +1,24 @@
 <p>folders-list-container works!</p>
+<div>
+  <ng-container
+    *ngrxLet="{
+      folders: folders$,
+      status: loadingStatus$
+    } as vm"
+  >
+    <ng-container [ngSwitch]="vm.status">
+      <ng-container *ngSwitchCase="'loading'">
+        <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'loaded'">
+        <users-folders-list [folders]="vm.folders"></users-folders-list>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'error'">
+        <h1>Ошибка!</h1>
+        <p>Произошла ошибка при загрузке данных.</p>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</div>
