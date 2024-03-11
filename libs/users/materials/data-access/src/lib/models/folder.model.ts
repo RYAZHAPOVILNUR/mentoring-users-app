@@ -1,5 +1,5 @@
 export interface Folder {
-  id: 0;
+  id: number;
   created_at: string;
   title: string;
 }

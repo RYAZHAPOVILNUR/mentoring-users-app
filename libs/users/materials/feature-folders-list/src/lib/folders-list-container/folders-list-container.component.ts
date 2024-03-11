@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,4 +9,6 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./folders-list-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FoldersListContainerComponent {}
+export class FoldersListContainerComponent {
+  private readonly materialsFacade = inject(MaterialsFacade);
+}
