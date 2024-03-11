@@ -1,12 +1,13 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import * as MaterialActions from './materials.actions';
-import { IFolder } from '../model/folders-models';
+import { IFolder, IMaterial } from '../model/folders-models';
 import { LoadingStatus } from '@users/core/data-access';
 import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 
 export const materialsFeatureKey = 'materials';
 
 export interface MaterialsState extends EntityState<IFolder> {
+  materials:[]
   status: LoadingStatus
 }
 
@@ -14,6 +15,7 @@ export const materialsAdapter: EntityAdapter<IFolder> =
   createEntityAdapter<IFolder>();
 
 export const initialMaterialsState: MaterialsState = materialsAdapter.getInitialState({
+  materials:[],
   status: 'init'
 });
 

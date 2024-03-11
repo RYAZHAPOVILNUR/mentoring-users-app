@@ -1,5 +1,6 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MaterialsFacade } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-feature-materials-container',
@@ -9,4 +10,11 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./feature-materials-container.component.css'],
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class FeatureMaterialsContainerComponent {}
+export class FeatureMaterialsContainerComponent implements OnInit {
+  private readonly facade = inject(MaterialsFacade)
+  public openedFolder = this.facade.openedFolder$
+
+  ngOnInit(): void {
+    this.facade.loadMaterials()
+  }
+}

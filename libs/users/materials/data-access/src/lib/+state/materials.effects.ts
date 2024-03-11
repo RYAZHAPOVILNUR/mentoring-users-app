@@ -4,10 +4,10 @@ import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
 import { Observable, EMPTY, of } from 'rxjs';
 import { ApiService } from '@users/core/http';
 import * as MaterialsActions from './materials.actions';
-import { IAddFolder,IFolder } from '../model/folders-models';
+import { IAddFolder,IFolder, IMaterial } from '../model/folders-models';
 
 
-export const loadMaterials = createEffect(
+export const loadFolders = createEffect(
   () => {
     const actions$ = inject(Actions)
     const apiService = inject(ApiService)
@@ -32,7 +32,7 @@ export const loadMaterials = createEffect(
   },{ functional:true }
 )
 
-export const addMaterial = createEffect(
+export const addFolder = createEffect(
   () => {
     const actions$ = inject(Actions)
     const apiService = inject(ApiService)
@@ -54,7 +54,7 @@ export const addMaterial = createEffect(
 )
 
 
-export const deleteMaterial = createEffect(
+export const deleteFolder = createEffect(
   () => {
     const actions$ = inject(Actions)
     const apiService = inject(ApiService)
@@ -72,5 +72,32 @@ export const deleteMaterial = createEffect(
             );
       })
     )
+  },{ functional:true }
+)
+
+
+
+export const loadMaterials = createEffect(
+  () => {
+    const actions$ = inject(Actions)
+    const apiService = inject(ApiService)
+
+  
+
+    return actions$.pipe(
+      ofType(MaterialsActions.loadMaterials),
+      switchMap(
+        () => apiService.get<IMaterial[]>('/material')
+        .pipe(
+          map((materials) => MaterialsActions.loadMaterialsSuccess({materials})),
+          catchError(error => {
+            console.log(error)
+            
+            return of(MaterialsActions.loadMaterialsFailed())
+          })
+        )
+      )
+    )
+
   },{ functional:true }
 )
