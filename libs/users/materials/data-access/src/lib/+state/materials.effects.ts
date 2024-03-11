@@ -1,23 +1,25 @@
-import { Injectable } from '@angular/core';
+import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap } from 'rxjs/operators';
+import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
 import { Observable, EMPTY, of } from 'rxjs';
 import { MaterialsActions } from './materials.actions';
+import { ApiService } from '@users/core/http';
+import { Router } from '@angular/router';
+import { Folder } from '../models/folder.model';
 
-@Injectable()
-export class MaterialsEffects {
-  loadMaterials$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(MaterialsActions.loadMaterials),
-      concatMap(() =>
-        /** An EMPTY observable only emits completion. Replace with your own observable API request */
-        EMPTY.pipe(
-          map((data) => MaterialsActions.loadMaterialsSuccess({ data })),
-          catchError((error) => of(MaterialsActions.loadMaterialsFailure({ error })))
+export const loadMaterials$ = createEffect(
+  (actions$ = inject(Actions), apiService = inject(ApiService), router = inject(Router)) => {
+    return actions$.pipe(
+      ofType(MaterialsActions.loadFolders),
+      switchMap(() =>
+        apiService.get<Folder[]>('/folder').pipe(
+          map((folders) => MaterialsActions.loadFoldersSuccess({ folders })),
+          catchError((error) => {
+            return of(MaterialsActions.loadFoldersFailure({ error }));
+          })
         )
       )
     );
-  });
-
-  constructor(private actions$: Actions) {}
-}
+  },
+  { functional: true }
+);
