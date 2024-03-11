@@ -1,0 +1,11 @@
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import { Folder } from '../models/folder.model';
+
+export const MaterialsActions = createActionGroup({
+  source: 'Materials',
+  events: {
+    loadFolders: emptyProps(),
+    loadFoldersSuccess: props<{ folders: Folder[] }>(),
+    loadFoldersFailure: props<{ error: Error }>(),
+  },
+});
