@@ -1,6 +1,9 @@
-<p>folder works!</p>
-<mat-card>
-  <mat-card-content>
-    <mat-icon>folder</mat-icon>
+<mat-card class="folder">
+  <mat-card-content class="folder_content">
+    <div class="folder_content_header">
+      <mat-icon class="folder_content_icon">folder</mat-icon>
+      <span>{{ folder.title }}</span>
+    </div>
+    <span class="folder_content_date">{{ folder.created_at | date }}</span>
   </mat-card-content>
 </mat-card>

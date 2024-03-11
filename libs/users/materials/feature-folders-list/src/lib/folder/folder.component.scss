@@ -1,0 +1,26 @@
+.folder {
+  height: 150px;
+
+  &_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+
+    &_icon {
+      font-size: 60px;
+      height: 60px;
+      width: 60px;
+    }
+
+    &_header {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    &_date {
+      align-self: flex-end;
+    }
+  }
+}
