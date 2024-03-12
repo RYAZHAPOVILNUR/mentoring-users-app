@@ -1,10 +1,12 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
+import { catchError, map, concatMap, switchMap, withLatestFrom } from 'rxjs/operators';
 import { Observable, EMPTY, of } from 'rxjs';
 import { ApiService } from '@users/core/http';
 import * as MaterialsActions from './materials.actions';
-import { IAddFolder,IFolder, IMaterial } from '../model/folders-models';
+import { IAddFolder,IAddMaterial,IFolder, IMaterial } from '../model/folders-models';
+import { Store } from '@ngrx/store';
+import { selectRouteParams } from '@users/core/data-access';
 
 
 export const loadFolders = createEffect(
@@ -101,3 +103,35 @@ export const loadMaterials = createEffect(
 
   },{ functional:true }
 )
+
+export const addMaterial = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const store = inject(Store);
+
+    return actions$.pipe(
+      ofType(MaterialsActions.addMaterial),
+      withLatestFrom(store.select(selectRouteParams)),
+      switchMap(([{material}, {id}]) => {
+        const folderId = Number(id);
+        
+        const materialWithFolderId:IAddMaterial = {
+          title: material.title,
+          material_link: material.material_link,
+          folder_id: folderId,
+        };
+
+        return apiService.post<IMaterial, IAddMaterial>('/materials', materialWithFolderId).pipe(
+          map(newMaterial => 
+            MaterialsActions.addMaterialSuccess({ material: newMaterial })
+          ),
+          catchError(() => 
+            of(MaterialsActions.addMaterialFailed())
+          )
+        );
+      })
+    );
+  },
+  { functional: true }
+);
