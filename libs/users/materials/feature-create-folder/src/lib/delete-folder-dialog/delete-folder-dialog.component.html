@@ -1,14 +1,8 @@
-<h2 mat-dialog-title>Новая папка</h2>
+<h2 mat-dialog-title>Подтверждение</h2>
 <div mat-dialog-content>
-  <form (ngSubmit)="save()">
-    <mat-form-field>
-      <mat-label>Имя папки</mat-label>
-      <input matInput type="text" placeholder="Введите имя папки" [formControl]="folderName" />
-    </mat-form-field>
-
-    <mat-dialog-actions>
-      <button mat-flat-button mat-dialog-close>Отмена</button>
-      <button mat-flat-button color="primary" type="submit" [disabled]="folderName.invalid">Сохранить</button>
-    </mat-dialog-actions>
-  </form>
+  <span>Вы уверены, что хотите удалить [название элемента]?</span>
+  <mat-dialog-actions>
+    <button mat-flat-button color="primary" type="submit">Да</button>
+    <button mat-flat-button mat-dialog-close>Отмена</button>
+  </mat-dialog-actions>
 </div>
