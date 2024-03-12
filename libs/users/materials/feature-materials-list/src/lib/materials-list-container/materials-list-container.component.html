@@ -1,0 +1,8 @@
+<ng-container *ngrxLet="{
+    status:status$,
+    materials: materials$,
+    folderName:folderName$
+} as vm">
+    <materials-list [vm]="vm" (redirectToBack)="onRedirectToBack()" (createMaterial)="onCreateMaterial($event)"
+        (deleteMaterial)="onDeleteMaterial($event)"></materials-list>
+</ng-container>

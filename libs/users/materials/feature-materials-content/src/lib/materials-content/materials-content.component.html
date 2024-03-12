@@ -1,0 +1,20 @@
+<div class="material-content-wrapper">
+    <h2 matDialogTitle>{{dialogData.title}}</h2>
+    <button mat-icon-button class="close-button" matDialogClose><mat-icon>close</mat-icon></button>
+    <mat-dialog-content>
+        <ng-container *ngIf="dialogData.material_format==='video'">
+            <span>ссылка на видео с ютуба: {{dialogData.material_link}}</span>
+            <img [src]="getYoutubeVideoId()">
+        </ng-container>
+        <ng-container *ngIf="dialogData.material_format==='audio'">
+            <audio [src]="safe_link" controls></audio>
+        </ng-container>
+        <ng-container *ngIf="dialogData.material_format==='pdf'">
+            <pdf-viewer [src]="dialogData.material_link" [render-text]="true" [original-size]="false"
+                style="width: 500px; height: 600px"></pdf-viewer>
+        </ng-container>
+        <ng-container *ngIf="dialogData.material_format==='incorrect'">
+            <span>Материал содержит некорректную ссылку</span>
+        </ng-container>
+    </mat-dialog-content>
+</div>

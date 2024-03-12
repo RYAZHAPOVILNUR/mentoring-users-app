@@ -5,7 +5,7 @@ import * as UsersSelectors from './users.selectors';
 import { Observable, of, switchMap } from 'rxjs';
 import { UsersErrors } from "./users.reducer";
 import { onSuccessEditionCbType } from "./users.actions";
-import { selectLoggedUser } from '@auth/data-access';
+import { selectLoggedUser } from '@auth/data-access'; 
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
 
 @Injectable({ providedIn: 'root' })

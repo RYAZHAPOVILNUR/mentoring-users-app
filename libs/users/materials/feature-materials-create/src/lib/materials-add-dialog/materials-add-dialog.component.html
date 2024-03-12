@@ -1,0 +1,15 @@
+<form class="add-dialog-form" [formGroup]="formAddDialog" (submit)="onSubmit()">
+    <h2 mat-dialog-title>
+        Добавить {{material | lowercase}}
+    </h2>
+    <mat-form-field>
+        <input matInput placeholder="Название*" formControlName="title">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Ссылка*" formControlName="material_link">
+    </mat-form-field>
+    <mat-dialog-actions>
+        <button mat-button mat-dialog-close>Отменить</button>
+        <button mat-button [disabled]="!formAddDialog.valid" type="submit">Сохранить</button>
+    </mat-dialog-actions>
+</form>

@@ -1,0 +1,18 @@
+.main{
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+.wrapper-material-card{
+    display: flex;
+    gap:20px;
+    flex-wrap: wrap;
+}
+.wrapper-button-back{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.wrapper-button-back span{
+    font-size: x-large;
+}

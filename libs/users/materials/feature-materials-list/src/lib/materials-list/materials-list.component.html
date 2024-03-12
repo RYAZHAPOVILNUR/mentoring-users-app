@@ -1,0 +1,15 @@
+<ng-template #loader>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>
+<main *ngIf="vm.status==='loaded';else loader" class="main">
+    <div class="wrapper-button-back">
+        <button mat-icon-button (click)="onRedirectToBack()"><mat-icon>chevron_left</mat-icon></button>
+        <span>{{vm.folderName}}</span>
+    </div>
+    <div class="wrapper-material-card">
+        <ng-container *ngFor="let material of vm.materials">
+            <materials-card [material]="material" (deleteMaterial)="onDeleteMaterial(material)"></materials-card>
+        </ng-container>
+    </div>
+    <materials-add-button (createMaterial)="onCreateMaterial($event)"></materials-add-button>
+</main>

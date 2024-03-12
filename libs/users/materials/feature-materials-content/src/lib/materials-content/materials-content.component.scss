@@ -1,0 +1,19 @@
+.material-content-wrapper{
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+mat-dialog-content{
+    overflow: hidden;
+}
+
+.close-button{
+position: absolute;
+top: 5px;
+right: 5px;
+}
+mat-dialog-content img{
+width:90%
+}

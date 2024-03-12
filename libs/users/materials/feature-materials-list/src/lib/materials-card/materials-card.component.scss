@@ -1,0 +1,21 @@
+.material-card{
+    width: 180px;
+    height: 110px;
+    background-color: rgba(103, 100, 100, 0.342);
+    border-radius: 6px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+}
+.material-card h3{
+    font-weight: 600;
+}
+.delete-button{
+    position: absolute;
+    top: 0;
+    right: 0;
+}

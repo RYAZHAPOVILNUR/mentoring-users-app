@@ -125,6 +125,7 @@ export class DetailUsersCardComponent implements OnInit {
     this.snackBar.openFromTemplate(this.storyPontsNoticeTemplate, {
       duration: 2500, horizontalPosition: 'center', verticalPosition: 'top'
     })
+
   }
 
   onSubmit(): void {

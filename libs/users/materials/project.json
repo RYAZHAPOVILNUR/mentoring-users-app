@@ -1,5 +1,5 @@
 {
-  "name": "users-materials",
+  "name": "feature-materials-content",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/users/materials/src",
   "prefix": "users",
