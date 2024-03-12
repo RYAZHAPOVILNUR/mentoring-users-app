@@ -1,0 +1,12 @@
+<ng-template #loader>
+    <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-template>
+
+<main *ngIf="vm.status==='loaded';else loader" class="main">
+    <ng-container *ngFor="let folder of vm.folders">
+        <folder-card [folder]="folder" (deleteFolder)="onDeleteFolder(folder.id)"
+            (redirectToMaterials)="onRedirectToMaterials(folder.id,folder.title)">
+        </folder-card>
+    </ng-container>
+    <folders-add-button></folders-add-button>
+</main>

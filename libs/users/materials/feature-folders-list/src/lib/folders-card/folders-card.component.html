@@ -1,0 +1,7 @@
+<div class="folder-card" [changeVisibility]="deleteBtn" (dblclick)="onRedirectToMaterials()">
+    <button mat-icon-button class="delete-button" #deleteButton
+        (click)="onDeleteUser($event)"><mat-icon>delete</mat-icon></button>
+    <mat-icon>folder</mat-icon>
+    <span>{{folder.title}}</span>
+    <p>{{folder.created_at | date:'d MMMM y'}}</p>
+</div>

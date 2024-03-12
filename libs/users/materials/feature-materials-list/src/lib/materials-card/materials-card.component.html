@@ -1,0 +1,10 @@
+<div class="material-card" [changeVisibility]="deleteBtn" (click)="openDialog()">
+    <mat-icon *ngIf="materialFormat==='pdf'">insert_drive_file</mat-icon>
+    <mat-icon *ngIf="materialFormat==='video'">movie</mat-icon>
+    <mat-icon *ngIf="materialFormat==='audio'">audiotrack</mat-icon>
+    <mat-icon *ngIf="materialFormat==='incorrect'">report_problem</mat-icon>
+    <button mat-icon-button class="delete-button" #deleteButton
+        (click)="onDeleteMaterial($event)"><mat-icon>delete</mat-icon></button>
+    <h3>{{material.title}}</h3>
+    <span>{{material.created_at | date}}</span>
+</div>

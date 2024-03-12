@@ -1,0 +1,10 @@
+<div class="wrapper-add-button">
+    <button mat-fab color="primary" matTooltip="Добавить материал" [matMenuTriggerFor]="menu">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>
+<mat-menu #menu="matMenu" xPosition="before" yPosition="above">
+    <button mat-menu-item (click)="openDialog($event)">Видео</button>
+    <button mat-menu-item (click)="openDialog($event)">Файл PDF</button>
+    <button mat-menu-item (click)="openDialog($event)">Подкаст</button>
+</mat-menu>
