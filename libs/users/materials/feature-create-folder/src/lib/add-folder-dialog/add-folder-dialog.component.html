@@ -1,2 +1,34 @@
-<h2 mat-dialog-title>Добавить папку</h2>
-<form></form>
+<h2 mat-dialog-title>Новая папка</h2>
+<mat-dialog-content>
+  <form>
+    <mat-form-field>
+      <mat-label>Имя папки</mat-label>
+      <input matInput type="text" placeholder="Введите имя папки" [formControl]="folderName" />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button mat-dialog-close>Отмена</button>
+  <button mat-flat-button color="primary" (click)="save()" [disabled]="folderName.invalid">Сохранить</button>
+</mat-dialog-actions>
+<!--        <mat-form-field class="edit-user-field">
+          <mat-label>Сторипоинты:</mat-label>
+          <input
+            matInput
+            type="text"
+            class="edit-user-input"
+            placeholder="Сторипоинты"
+            [formControl]="totalStoryPoints"
+            (keyup.enter)="onAddStoryPoints()" />
+          <button *ngIf="totalStoryPoints.disabled" matSuffix mat-icon-button (click)="totalStoryPoints.enable()">
+            <mat-icon>add</mat-icon>
+          </button>
+          <ng-container matSuffix *ngIf="totalStoryPoints.enabled">
+            <button type="submit" mat-icon-button (click)="onAddStoryPoints()">
+              <mat-icon style="color: green">done</mat-icon>
+            </button>
+            <button mat-icon-button (click)="totalStoryPoints.disable()">
+              <mat-icon style="color: red">close</mat-icon>
+            </button>
+          </ng-container>
+        </mat-form-field>-->

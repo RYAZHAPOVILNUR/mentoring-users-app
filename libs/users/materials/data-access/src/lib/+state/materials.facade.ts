@@ -12,4 +12,9 @@ export class MaterialsFacade {
   public loadFolders() {
     this.store.dispatch(MaterialsActions.loadFolders());
   }
+
+  public addFolder(title: string) {
+    console.log('MaterialsFacade', title);
+    this.store.dispatch(MaterialsActions.addFolder({ title }));
+  }
 }

@@ -39,6 +39,11 @@ export const materialsFeature = createFeature({
       ...state,
       status: 'error',
       error,
+    })),
+
+    on(MaterialsActions.addFolderSuccess, (state, { folder }) => ({
+      ...state,
+      folders: foldersAdapter.addOne(folder, state.folders),
     }))
   ),
 });

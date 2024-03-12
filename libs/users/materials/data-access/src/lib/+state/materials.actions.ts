@@ -7,5 +7,9 @@ export const MaterialsActions = createActionGroup({
     loadFolders: emptyProps(),
     loadFoldersSuccess: props<{ folders: Folder[] }>(),
     loadFoldersFailure: props<{ error: Error }>(),
+
+    addFolder: props<{ title: string }>(),
+    addFolderSuccess: props<{ folder: Folder }>(),
+    addFolderFailure: props<{ error: Error }>(),
   },
 });

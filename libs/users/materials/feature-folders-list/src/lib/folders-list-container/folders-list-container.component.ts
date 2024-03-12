@@ -18,9 +18,15 @@ export class FoldersListContainerComponent implements OnInit {
   private readonly materialsFacade = inject(MaterialsFacade);
   public folders$ = this.materialsFacade.folders$;
   public loadingStatus$ = this.materialsFacade.loadingStatus$;
+
   // public loadingStatus$ = 'error';
 
   ngOnInit(): void {
     this.materialsFacade.loadFolders();
+  }
+
+  public createFolder(title: string) {
+    this.materialsFacade.addFolder(title);
+    console.log('title FoldersListContainerComponent', title);
   }
 }
