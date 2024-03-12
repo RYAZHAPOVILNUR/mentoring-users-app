@@ -39,3 +39,5 @@ testem.log
 Thumbs.db
 
 .angular
+libs/users/users/data-access/src/lib/+state/users.facade.ts
+libs/users/users/data-access/src/lib/+state/users.facade.ts
