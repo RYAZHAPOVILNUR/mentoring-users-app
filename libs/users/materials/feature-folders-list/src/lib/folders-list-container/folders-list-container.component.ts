@@ -4,7 +4,7 @@ import { MaterialsFacade } from '@users/materials-data-access';
 import { LetDirective } from '@ngrx/component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
-import { AddFolderButtonComponent } from '@users/feature-create-folder';
+import { AddFolderButtonComponent } from '@users/feature-manage-folder';
 
 @Component({
   selector: 'folders-list-container',
