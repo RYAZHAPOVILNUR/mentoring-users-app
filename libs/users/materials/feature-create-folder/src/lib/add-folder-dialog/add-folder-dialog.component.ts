@@ -18,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     MatInputModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
   templateUrl: './add-folder-dialog.component.html',
   styleUrls: ['./add-folder-dialog.component.scss'],

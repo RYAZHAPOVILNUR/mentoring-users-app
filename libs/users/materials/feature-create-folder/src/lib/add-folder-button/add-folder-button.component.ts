@@ -24,7 +24,6 @@ export class AddFolderButtonComponent {
 
   public openCreateFolderDialog(): void {
     const dialogRef: MatDialogRef<AddFolderDialogComponent> = this.dialog.open(AddFolderDialogComponent);
-
     dialogRef
       .afterClosed()
       .pipe(
