@@ -56,18 +56,18 @@ const reducer = createReducer(
       changes: userData
     }, state)
   ),
-  on(UsersActions.addStoryPointsFailed, (state, { error }) => ({
-    ...state,
-    status: 'error' as const,
-    error
+  on(UsersActions.editUserFailed, (state, {error}) => ({
+    ...state, status: 'error' as const, error
   })),
   on(UsersActions.addStoryPointsSuccess, (state, { userData }) => usersAdapter.updateOne({
       id: userData.id,
       changes: userData
     }, state)
   ),
-  on(UsersActions.editUserFailed, (state, {error}) => ({
-    ...state, status: 'error' as const, error
+  on(UsersActions.addStoryPointsFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error
   })),
   on(UsersActions.loadUser, (state) => ({
     ...state,

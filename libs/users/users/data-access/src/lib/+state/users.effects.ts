@@ -95,9 +95,8 @@ export const editUser = createEffect(
         ({ user, onSuccessCb }) =>
           apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
             map(userData => ({ userData, onSuccessCb })),
-            tap(({ onSuccessCb, userData }) => {
-              onSuccessCb();
-            }),
+            tap(({ onSuccessCb, userData }) => onSuccessCb()
+            ),
             map(({ userData }) =>
               UsersActions.editUserSuccess({ userData })
             ),
@@ -135,8 +134,7 @@ export const editStoryPoints = createEffect(
           apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
             map(userData => ({ userData,  onSuccessAddSP})),
             tap(({ onSuccessAddSP, userData }) => onSuccessAddSP()),
-            map(({ userData }) =>
-              UsersActions.addStoryPointsSuccess({ userData })
+            map(({ userData }) => UsersActions.addStoryPointsSuccess({ userData })
             ),
             catchError((error) => {
               console.error('Error', error);

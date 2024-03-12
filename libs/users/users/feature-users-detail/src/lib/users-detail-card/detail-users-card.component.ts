@@ -114,10 +114,10 @@ export class DetailUsersCardComponent implements OnInit {
       switchMap((value) => this.dadata.getCities(value))
     );
 
-  private snackBar = inject(MatSnackBar);
-  private snackBarStoryPoints = inject(MatSnackBar);
+  private readonly snackBar = inject(MatSnackBar);
+  private readonly snackBarStoryPoints = inject(MatSnackBar);
   private readonly destroyRef = inject(DestroyRef);
-  public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
+  public readonly areFieldsChanged$ = new BehaviorSubject<boolean>(false);
 
   private readonly snackBarConfig: SnackBarConfig = {
     duration: 2500,

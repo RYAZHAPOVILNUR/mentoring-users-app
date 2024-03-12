@@ -33,9 +33,10 @@ export const editUser = createAction('[Users Detail] Edit User', props<{ userDat
 export const editUserSuccess = createAction('[Users Detail] Edit User Success', props<{ userData: UsersDTO }>());
 export const editUserFailed = createAction('[Users Detail] Edit Failed', props<{ error: UsersErrors | null }>());
 
-export const addStoryPoints = createAction('[Users Detail] Edit StoryPoints', props<{ userData: CreateUserDTO; id: number; onSuccessAddSP: onCbType }>());
+export const addStoryPoints = createAction('[Users Detail] Edit StoryPoints',
+  props<{ userData: CreateUserDTO; id: number; onSuccessAddSP: onCbType }>());
 export const addStoryPointsSuccess = createAction('[Users Detail] Edit StoryPoints Success', props<{ userData: UsersDTO }>());
-export const addStoryPointsFailed = createAction('[Users Detail] StoryPoints Failed', props<{ error: UsersErrors | null }>());
+export const addStoryPointsFailed = createAction('[Users Detail] StoryPoints Failed', props<{ error: any }>());
 
 export const loadUser = createAction('[Users Page] Load User');
 export const loadUserSuccess = createAction('[Users/Api] Load User Success', props<{ userData: UsersEntity }>());
