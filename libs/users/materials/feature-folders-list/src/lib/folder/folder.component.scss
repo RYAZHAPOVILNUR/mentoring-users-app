@@ -1,26 +1,54 @@
 .folder {
   height: 150px;
 
-  &_content {
+  &__content {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+  }
 
-    &_icon {
-      font-size: 60px;
-      height: 60px;
-      width: 60px;
+  &__header {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  &__icon {
+    font-size: 60px;
+    height: 60px;
+    width: 60px;
+  }
+
+  &__title {
+    font-size: 18px;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+  }
+
+  &__delete-icon {
+    cursor: pointer;
+    opacity: 0;
+    color: rgba(0, 0, 0, 0.5);
+    transition: opacity 0.3s, color 0.3s;
+
+    &:hover {
+      color: rgba(0, 0, 0, 1);
     }
+  }
 
-    &_header {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
+  &__date {
+    margin-left: auto;
+  }
 
-    &_date {
-      align-self: flex-end;
+  &:hover {
+    cursor: pointer;
+
+    & .folder__delete-icon {
+      opacity: 1;
     }
   }
 }

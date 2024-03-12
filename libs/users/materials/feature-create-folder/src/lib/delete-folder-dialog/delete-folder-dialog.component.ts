@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'users-delete-folder-dialog',
@@ -17,9 +18,18 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
+    MatIconModule,
   ],
   templateUrl: './delete-folder-dialog.component.html',
   styleUrls: ['./delete-folder-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DeleteFolderDialogComponent {}
+export class DeleteFolderDialogComponent {
+  private readonly dialogRef = inject(MatDialogRef<DeleteFolderDialogComponent>);
+  public readonly dialogData = inject(MAT_DIALOG_DATA);
+
+  public delete() {
+    console.log('click delete yes');
+    this.dialogRef.close({ id: this.dialogData.id });
+  }
+}

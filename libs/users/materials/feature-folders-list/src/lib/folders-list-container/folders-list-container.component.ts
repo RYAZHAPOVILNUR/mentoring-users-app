@@ -27,6 +27,5 @@ export class FoldersListContainerComponent implements OnInit {
 
   public createFolder(title: string) {
     this.materialsFacade.addFolder(title);
-    console.log('title FoldersListContainerComponent', title);
   }
 }
