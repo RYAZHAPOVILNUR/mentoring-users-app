@@ -1,3 +1,10 @@
-<button mat-fab color="primary" aria-label="Добавить папку">
+<button
+  (click)="openCreateFolderDialog()"
+  mat-fab
+  color="primary"
+  matTooltip="Добавить папку"
+  #tooltip="matTooltip"
+  [attr.aria-label]="tooltip.message"
+>
   <mat-icon>add</mat-icon>
 </button>
