@@ -7,7 +7,7 @@ import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 export const materialsFeatureKey = 'materials';
 
 export interface MaterialsState extends EntityState<IFolder> {
-  materials:[]
+  materials: IMaterial[]
   status: LoadingStatus
 }
 
@@ -15,7 +15,7 @@ export const materialsAdapter: EntityAdapter<IFolder> =
   createEntityAdapter<IFolder>();
 
 export const initialMaterialsState: MaterialsState = materialsAdapter.getInitialState({
-  materials:[],
+  materials:[] as IMaterial[],
   status: 'init'
 });
 
@@ -78,6 +78,22 @@ export const materialsFeature = createFeature({
       (state) => ({
         ...state,
         status:'error' as const
-      }))
+      })),
+    on(MaterialActions.loadMaterials, 
+      (state) => ({...state, status:'loading' as const})
+      ),
+    on(MaterialActions.loadMaterialsSuccess, 
+      (state, {materials}) => (
+        {...state, 
+          materials, 
+          status:'loading' as const
+        })
+      ),
+    on(MaterialActions.loadMaterialsFailed, 
+      (state) => (
+        {...state,
+          status:'error' as const
+        })
+      )
   )
 });

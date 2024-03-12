@@ -21,3 +21,13 @@ export const selectOpenedFolder = createSelector(
   selectFoldersEntity,
   ({id}, entities) => entities[id] || null
 )
+
+export const selectAllMaterials = createSelector(
+  selectMaterialsState, (state: MaterialsState) => state.materials
+)
+
+export const filteredByIdMaterials = createSelector(
+  selectRouteParams,
+  selectAllMaterials,
+  ({id}, materials) => materials.filter(item => item.folder_id === id)
+)
