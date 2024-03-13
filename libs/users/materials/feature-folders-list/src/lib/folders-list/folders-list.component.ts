@@ -20,8 +20,15 @@ export class FoldersListComponent {
     id: number;
     title: string;
   }>();
+  @Output() public readonly openFolderEmit: EventEmitter<number> = new EventEmitter<number>();
 
   public deleteFolder({ id, title }: { id: number; title: string }) {
     this.deleteFolderEmit.emit({ id, title });
   }
+
+  public openFolder(id: number) {
+    this.openFolderEmit.emit(id);
+  }
+
+  // @Input({ required: true }) public folder: Folder | null = null;
 }

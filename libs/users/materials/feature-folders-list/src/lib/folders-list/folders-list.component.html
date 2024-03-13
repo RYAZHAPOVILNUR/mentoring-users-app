@@ -1,6 +1,7 @@
 <div class="folders">
   <users-folder
     *ngFor="let folder of folders"
+    (openFolderEmit)="openFolder($event)"
     (deleteFolderEmit)="deleteFolder($event)"
     [folder]="folder"
   ></users-folder>

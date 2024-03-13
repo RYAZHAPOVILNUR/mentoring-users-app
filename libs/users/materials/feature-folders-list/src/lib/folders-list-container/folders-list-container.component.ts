@@ -8,6 +8,7 @@ import { AddFolderButtonComponent, DeleteFolderDialogComponent } from '@users/fe
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { tap } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'folders-list-container',
@@ -23,6 +24,8 @@ export class FoldersListContainerComponent implements OnInit {
   public loadingStatus$ = this.materialsFacade.loadingStatus$;
   private readonly dialog: MatDialog = inject(MatDialog);
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
+  private readonly router = inject(Router);
+  private readonly activeRoute = inject(ActivatedRoute);
 
   // public loadingStatus$ = 'error';
 
@@ -50,5 +53,9 @@ export class FoldersListContainerComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  public openFolder(id: number) {
+    this.router.navigate([id], { relativeTo: this.activeRoute });
   }
 }

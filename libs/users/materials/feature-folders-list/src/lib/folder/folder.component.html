@@ -1,8 +1,8 @@
 <mat-card class="folder">
   <mat-card-content class="folder__content">
     <div class="folder__header">
-      <mat-icon class="folder__icon">folder</mat-icon>
-      <span class="folder__title">{{ folder.title }}</span>
+      <mat-icon class="folder__icon" (dblclick)="openFolder()" matTooltip="Открыть папку">folder</mat-icon>
+      <span class="folder__title" [matTooltip]="getTitleTooltip(folder.title)">{{ folder.title }}</span>
     </div>
     <div class="folder__footer">
       <mat-icon class="folder__delete-icon" (click)="deleteFolder()">delete</mat-icon>

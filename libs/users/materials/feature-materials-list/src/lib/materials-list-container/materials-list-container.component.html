@@ -1,1 +1,11 @@
-<p>materials-list-container works!</p>
+<ng-container>
+  <button
+    class="button"
+    (click)="goBack()"
+    matTooltip="Назад"
+    #tooltip="matTooltip"
+    [attr.aria-label]="tooltip.message"
+  >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+</ng-container>
