@@ -30,6 +30,7 @@ export class DeleteFolderDialogComponent {
 
   public delete() {
     console.log('click delete yes');
-    this.dialogRef.close({ id: this.dialogData.id });
+    console.log('click delete yes', this.dialogData);
+    this.dialogRef.close(this.dialogData.id);
   }
 }

@@ -1,9 +1,12 @@
 <h2 mat-dialog-title>Подтверждение</h2>
 <div mat-dialog-content>
-  <span>Вы уверены, что хотите удалить {{ dialogData.name }}?</span>
-  <mat-dialog-actions>
-    <button matSuffix mat-icon-button>
-      <mat-icon style="color: green" (click)="delete()">done</mat-icon>
+  <span class="title"
+    >Вы уверены, что хотите удалить
+    <span class="folder_title">{{ dialogData.title }}?</span>
+  </span>
+  <mat-dialog-actions class="buttons">
+    <button matSuffix mat-icon-button (click)="delete()">
+      <mat-icon style="color: green">done</mat-icon>
     </button>
     <button matSuffix mat-icon-button mat-dialog-close>
       <mat-icon style="color: red">close</mat-icon>

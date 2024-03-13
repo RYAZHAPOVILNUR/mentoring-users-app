@@ -1,3 +1,7 @@
 <div class="folders">
-  <users-folder *ngFor="let folder of folders" [folder]="folder"></users-folder>
+  <users-folder
+    *ngFor="let folder of folders"
+    (deleteFolderEmit)="deleteFolder($event)"
+    [folder]="folder"
+  ></users-folder>
 </div>
