@@ -44,6 +44,11 @@ export const materialsFeature = createFeature({
     on(MaterialsActions.addFolderSuccess, (state, { folder }) => ({
       ...state,
       folders: foldersAdapter.addOne(folder, state.folders),
+    })),
+
+    on(MaterialsActions.deleteFolderSuccess, (state, { id }) => ({
+      ...state,
+      folders: foldersAdapter.removeOne(id, state.folders),
     }))
   ),
 });

@@ -11,5 +11,9 @@ export const MaterialsActions = createActionGroup({
     addFolder: props<{ title: string }>(),
     addFolderSuccess: props<{ folder: Folder }>(),
     addFolderFailure: props<{ error: Error }>(),
+
+    deleteFolder: props<{ id: number }>(),
+    deleteFolderSuccess: props<{ id: number }>(),
+    deleteFolderFailure: props<{ error: Error }>(),
   },
 });

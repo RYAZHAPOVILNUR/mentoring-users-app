@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialsFacade } from '@users/materials-data-access';
 import { LetDirective } from '@ngrx/component';
@@ -6,6 +6,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
 import { AddFolderButtonComponent, DeleteFolderDialogComponent } from '@users/feature-manage-folder';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'folders-list-container',
@@ -20,6 +22,7 @@ export class FoldersListContainerComponent implements OnInit {
   public folders$ = this.materialsFacade.folders$;
   public loadingStatus$ = this.materialsFacade.loadingStatus$;
   private readonly dialog: MatDialog = inject(MatDialog);
+  private readonly destroyRef: DestroyRef = inject(DestroyRef);
 
   // public loadingStatus$ = 'error';
 
@@ -35,6 +38,17 @@ export class FoldersListContainerComponent implements OnInit {
     const dialogRef: MatDialogRef<DeleteFolderDialogComponent> = this.dialog.open(DeleteFolderDialogComponent, {
       data: { id, title },
     });
-    console.log(dialogRef.componentInstance.dialogData);
+
+    dialogRef
+      .afterClosed()
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        tap((id) => {
+          if (id) {
+            this.materialsFacade.deleteFolder(id);
+          }
+        })
+      )
+      .subscribe();
   }
 }

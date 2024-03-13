@@ -14,7 +14,10 @@ export class MaterialsFacade {
   }
 
   public addFolder(title: string) {
-    console.log('MaterialsFacade', title);
     this.store.dispatch(MaterialsActions.addFolder({ title }));
+  }
+
+  public deleteFolder(id: number) {
+    this.store.dispatch(MaterialsActions.deleteFolder({ id }));
   }
 }

@@ -29,8 +29,6 @@ export class DeleteFolderDialogComponent {
   public readonly dialogData = inject(MAT_DIALOG_DATA);
 
   public delete() {
-    console.log('click delete yes');
-    console.log('click delete yes', this.dialogData);
     this.dialogRef.close(this.dialogData.id);
   }
 }

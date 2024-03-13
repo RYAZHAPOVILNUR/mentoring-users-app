@@ -20,7 +20,6 @@ export class FolderComponent {
   }>();
 
   public deleteFolder() {
-    console.log('id: this.folder.id, title: this.folder.title', this.folder.id, this.folder.title);
     this.deleteFolderEmit.emit({ id: this.folder.id, title: this.folder.title });
   }
 }
