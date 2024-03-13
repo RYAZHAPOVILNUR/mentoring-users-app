@@ -78,6 +78,22 @@
               </mat-autocomplete>
             </mat-form-field>
 
+            <mat-form-field class="edit-user-field">
+              <mat-label>StoryPoint</mat-label>
+              <input type="number"
+                     class="edit-user-input"
+                     placeholder="Введитек число"
+                     matInput
+                     [formControl]="storyPoint"
+              >
+            </mat-form-field>
+
+            <div class="storypoint">
+                <button (click)="storyPoint.enable()" mat-stroked-button type="button">Редактировать StoryPoint</button>              
+                <button (click)="onAddStoryPoint()" *ngIf="!storyPoint.disabled" mat-icon-button type="button"><mat-icon>done</mat-icon></button>
+                <button (click)="storyPoint.disable()" *ngIf="!storyPoint.disabled" mat-icon-button type="button" ><mat-icon>close</mat-icon></button>
+            </div>
+
           </div>
             <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
               <button mat-icon-button

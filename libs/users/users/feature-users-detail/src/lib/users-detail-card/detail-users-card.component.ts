@@ -10,7 +10,7 @@ import {
   Output, TemplateRef, ViewChild
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { onSuccessEditionCbType } from '@users/users/data-access';
+import { onSuccessEditionCbType, onSuccessSPointCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -72,6 +72,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city
       });
+      this.storyPoint.patchValue(vm.user.totalStoryPoints as number);
     }
 
     if (vm.editMode) {
@@ -89,6 +90,7 @@ export class DetailUsersCardComponent implements OnInit {
   });
 
   @Output() editUser = new EventEmitter<{ user: CreateUserDTO, onSuccessCb: onSuccessEditionCbType }>();
+  @Output() addStoryPoint = new EventEmitter<{ user: CreateUserDTO, onSuccessAddSP: onSuccessSPointCbType }>();
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
@@ -103,6 +105,7 @@ export class DetailUsersCardComponent implements OnInit {
       switchMap((value) => this.dadata.getCities(value)),
     )
 
+  public storyPoint = new FormControl({value: 0, disabled: true}, Validators.pattern('^[0-9]$'));
   private snackBar = inject(MatSnackBar);
   private readonly destroyRef = inject(DestroyRef);
   public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
@@ -167,5 +170,24 @@ export class DetailUsersCardComponent implements OnInit {
         })
       )
       .subscribe()
+  }
+
+  private onAddSPSuccess = () => 
+  this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
+    duration: 2500,
+    horizontalPosition: 'center',
+    verticalPosition: 'top'
+  })
+
+  onAddStoryPoint(){
+    this.storyPoint.disable();
+    this.addStoryPoint.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        email: this.formGroup.value.email?.trim().toLocaleLowerCase() || '',
+        totalStoryPoints: this.storyPoint.value || 0,
+      },
+      onSuccessAddSP: this.onAddSPSuccess
+    });
   }
 }

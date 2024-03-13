@@ -78,6 +78,14 @@ const reducer = createReducer(
     ...state,
     usersFilter: name
   })),
+  on(UsersActions.addUsersStiryPoinsSuccess, (state, {userData}) => usersAdapter.updateOne({
+    id: userData.id,
+    changes: userData
+  }, state)),
+  on(UsersActions.addUsersStiryPoinsFailed, (state, {error}) => ({
+    ...state,
+    error
+  }))
 );
 
 export function usersReducer(state: UsersState | undefined, action: Action) {
