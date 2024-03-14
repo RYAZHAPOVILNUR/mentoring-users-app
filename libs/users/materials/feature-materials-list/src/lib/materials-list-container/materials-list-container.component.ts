@@ -21,10 +21,15 @@ export class MaterialsListContainerComponent implements OnInit {
   private readonly materialsFacade = inject(MaterialsFacade);
   public readonly loadingStatus$ = this.materialsFacade.loadingStatus$;
   public readonly currentFolder$ = this.materialsFacade.currentFolder$;
+  public readonly currentFolderMaterials$ = this.materialsFacade.currentFolderMaterials$;
 
   ngOnInit(): void {
     this.materialsFacade.folderContent();
     this.materialsFacade.loadMaterials();
+
+    this.currentFolderMaterials$.subscribe((m) => {
+      console.log('currentFolderMaterials:', m);
+    });
   }
 
   public goBack() {
