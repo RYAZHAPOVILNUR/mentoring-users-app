@@ -1,9 +1,20 @@
-.button {
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
+.navigation {
   display: flex;
-  justify-content: center;
   align-items: center;
+  gap: 10px;
+
+  &__button {
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__title {
+    font-size: 22px;
+    line-height: 22px;
+  }
 }

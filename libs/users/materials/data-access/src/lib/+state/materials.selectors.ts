@@ -9,3 +9,8 @@ export const selectMaterialsState = createFeatureSelector<fromMaterials.Material
 export const selectFoldersState = createSelector(selectMaterialsState, (state: MaterialsFeatureState) => state.folders);
 export const selectLoadingStatus = createSelector(selectMaterialsState, (state: MaterialsFeatureState) => state.status);
 export const selectAllFolders = createSelector(selectFoldersState, foldersAdapter.getSelectors().selectAll);
+
+export const selectCurrentFolder = createSelector(
+  selectMaterialsState,
+  (state: MaterialsFeatureState) => state.currentFolder
+);

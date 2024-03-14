@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectAllFolders, selectLoadingStatus } from './materials.selectors';
+import { selectAllFolders, selectCurrentFolder, selectLoadingStatus } from './materials.selectors';
 import { MaterialsActions } from './materials.actions';
 
 @Injectable({ providedIn: 'root' })
@@ -8,6 +8,7 @@ export class MaterialsFacade {
   private readonly store = inject(Store);
   public readonly folders$ = this.store.select(selectAllFolders);
   public readonly loadingStatus$ = this.store.select(selectLoadingStatus);
+  public readonly currentFolder$ = this.store.select(selectCurrentFolder);
 
   public loadFolders() {
     this.store.dispatch(MaterialsActions.loadFolders());
@@ -19,5 +20,9 @@ export class MaterialsFacade {
 
   public deleteFolder(id: number) {
     this.store.dispatch(MaterialsActions.deleteFolder({ id }));
+  }
+
+  public folderContent() {
+    this.store.dispatch(MaterialsActions.currentFolder());
   }
 }

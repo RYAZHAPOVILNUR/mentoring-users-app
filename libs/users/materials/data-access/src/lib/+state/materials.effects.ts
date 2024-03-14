@@ -1,11 +1,13 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { MaterialsActions } from './materials.actions';
 import { ApiService } from '@users/core/http';
 import { Folder } from '../models/folder.model';
 import { MATERIALS_API_PATHS } from './materials-api.constants';
+import { Store } from '@ngrx/store';
+import { selectRouteParams } from '@users/core/data-access';
 
 export const loadMaterials$ = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) => {
@@ -54,6 +56,27 @@ export const deleteFolder$ = createEffect(
           map(() => MaterialsActions.deleteFolderSuccess({ id })),
           catchError((error) => {
             return of(MaterialsActions.deleteFolderFailure({ error }));
+          })
+        )
+      )
+    );
+  },
+  { functional: true }
+);
+
+export const loadFolderContent$ = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const store = inject(Store);
+    const apiService = inject(ApiService);
+    return actions$.pipe(
+      ofType(MaterialsActions.currentFolder),
+      withLatestFrom(store.select(selectRouteParams)),
+      switchMap(([, params]) =>
+        apiService.get<Folder>(`${MATERIALS_API_PATHS.folders}/${params['id']}`).pipe(
+          map((folder) => MaterialsActions.currentFolderSuccess({ folder })),
+          catchError((error) => {
+            return of(MaterialsActions.currentFolderFailure({ error }));
           })
         )
       )
