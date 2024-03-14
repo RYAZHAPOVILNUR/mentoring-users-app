@@ -1,0 +1,32 @@
+.dialog-remove {
+  padding: 15px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #3e3e3e;
+  color: #ffffff;
+}
+
+.dialog-btns-remove {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.dialog-btn-remove {
+  padding: 3px 10px;
+  border: none;
+  border-radius: 5px;
+  &:hover {
+    transform: scale(1.05);
+  }
+  &:active {
+    position: relative;
+    top: 1px;
+  }
+}
+
+.dialog-remove-title {
+  text-align: center;
+}

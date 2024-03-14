@@ -1,0 +1,17 @@
+<div class="materials-list-container">
+  <div class="materials-list-info">
+    <button mat-fab matTooltip="Назад" color="primary" aria-label="Example fab with aт arrow_back icon" [routerLink]="['/materials']">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2>{{ title }}</h2>
+  </div>
+  <ng-container *ngrxLet="{
+    folders: folders$,
+    materials: materials$,
+    status: status$,
+    error: error$,
+    } as foldersMaterialsList">
+    <users-materials-list [vmList]="foldersMaterialsList" (deleteMaterial)="onDeleteMaterial($event)"></users-materials-list>
+  </ng-container>
+  <users-materials-add-button></users-materials-add-button>
+</div>

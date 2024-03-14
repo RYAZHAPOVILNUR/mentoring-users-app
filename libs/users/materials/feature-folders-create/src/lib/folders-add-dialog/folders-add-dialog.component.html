@@ -1,0 +1,19 @@
+<div class="folders-add-dialog">
+  <form [formGroup]="formGroup">
+    <h1 mat-dialog-title>Создать папку</h1>
+    <div mat-dialog-content>
+      <mat-form-field>
+        <mat-label>Имя папки</mat-label>
+        <input matInput formControlName="name">
+        <mat-error *ngIf="formGroup.get('name')?.hasError('minLength') ||
+        formGroup.get('name')?.hasError('required')" class="mat-error-dialog">
+          *Название папки должно быть не менее 3 символов!
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="onNoClick()">Отмена</button>
+      <button mat-button [mat-dialog-close]="data" [disabled]="formGroup.invalid" (click)="onSaveData()">Создать</button>
+    </div>
+  </form>
+</div>

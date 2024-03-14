@@ -1,0 +1,13 @@
+<div class="users-folders-list-container">
+  <ng-container *ngrxLet="{
+    folders: folders$,
+    materials: materials$,
+    status: status$,
+    error: error$
+    } as vmFoldersList">
+    <users-folders-list [foldersList]="vmFoldersList"
+    (deleteCard)="onDeleteCard($event)"
+    (openFolder)="onOpenFolder($event)"></users-folders-list>
+  </ng-container>
+  <users-folders-add-button></users-folders-add-button>
+</div>

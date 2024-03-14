@@ -1,0 +1,35 @@
+.youtube-prev {
+  max-width: 600px;
+  height: 430px;
+}
+
+.mat-dialog-content {
+  position: relative;
+  padding: 30px 15px 15px;
+  h1 {
+    display: flex;
+    justify-content: center;
+  }
+  p {
+    max-width: 570px;
+  }
+}
+
+.btn-close {
+  position: absolute;
+  top: 25px;
+  right: 20px;
+}
+
+.video-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+}
+
+.video-content-item {
+  p {
+    display: inline;
+  }
+}

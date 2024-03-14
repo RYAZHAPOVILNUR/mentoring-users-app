@@ -1,0 +1,11 @@
+<div class="dialog-remove">
+  <h2 mat-dialog-title>Подтверждение</h2>
+  <div mat-dialog-content>
+    <p>Вы уверены, что хотите удалить файл:</p>
+    <p class="dialog-remove-title">"{{ data.material.title | uppercase }}" ?</p>
+  </div>
+  <div mat-dialog-actions class="dialog-btns-remove">
+    <button mat-button mat-dialog-close cdkFocusInitial class="dialog-btn-remove" (click)="onNoClick()">Отмена</button>
+    <button mat-button mat-dialog-close class="dialog-btn-remove" (click)="onDelete()">Удалить</button>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+.users-folders-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+@media(max-width:767px) {
+  .users-folders-list {
+    justify-content: center;
+  }
+}

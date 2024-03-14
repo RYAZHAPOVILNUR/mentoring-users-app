@@ -1,0 +1,15 @@
+.materials-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+@media(max-width:767px) {
+  .materials-list {
+    justify-content: center;
+  }
+}

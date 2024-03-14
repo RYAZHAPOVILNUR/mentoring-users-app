@@ -61,10 +61,6 @@ export const appRoutes: Route[] = [
         canDeactivate: [canDeactivateFormComponent],
       },
       {
-        path: 'materials',
-        loadComponent: () => import('@users/materials').then(c => c.UsersMaterialsComponent),
-      },
-      {
         path: 'articles',
         loadComponent: () =>
           import('@users/users/articles/articles').then(
@@ -79,13 +75,28 @@ export const appRoutes: Route[] = [
           ),
       },
       {
+        path: 'materials',
+        loadComponent: () =>
+          import('@users/materials/feature-folders-list').then(
+            (c) => c.FoldersListContainerComponent
+          ),
+      },
+      {
+        path: 'materials/:id',
+        loadComponent: () =>
+          import('@users/materials/feature-materials-list').then(
+            (c) => c.MaterialsListContainerComponent
+          ),
+      },
+      {
         path: 'tasks',
         loadComponent: () =>
           import('@users/users/task').then((c) => c.TasksContainerComponent),
       },
       {
         path: 'settings',
-        loadComponent: () => import('@users/settings').then(c => c.SettingsComponent)
+        loadComponent: () =>
+          import('@users/settings').then((c) => c.SettingsComponent),
       },
       {
         path: 'chart',
@@ -94,10 +105,11 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'backlog',
-        loadComponent: () => import('@users/users/backlog').then(c => c.BacklogComponent)
+        loadComponent: () =>
+          import('@users/users/backlog').then((c) => c.BacklogComponent),
       },
-      ...layoutAgnosticComponents
-    ]
+      ...layoutAgnosticComponents,
+    ],
   },
   {
     path: 'guest',

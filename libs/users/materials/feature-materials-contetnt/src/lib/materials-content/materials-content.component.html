@@ -1,0 +1,25 @@
+<div class="mat-dialog-content">
+  <h1 mat-dialog-title>{{material.title}}</h1>
+    <button mat-mini-fab mat-dialog-close color="primary" class="btn-close">
+      <mat-icon>close</mat-icon>
+    </button>
+  <ng-container *ngIf="material.material_link.endsWith('mp3'); else pdfContent">
+    <audio controls>
+      <source [src]="material.material_link" type="audio/mp3">
+    </audio>
+  </ng-container>
+  <ng-template #pdfContent>
+    <ng-container *ngIf="material.material_link.endsWith('pdf'); else videoContent">
+      <pdf-viewer [src]="pdfSrc"
+      [render-text]="true"
+      [original-size]="false"
+      style="width: 700px; height: 600px"></pdf-viewer>
+    </ng-container>
+  </ng-template>
+  <ng-template #videoContent>
+    <div class="video-content">
+      <a [href]="material.material_link" target="_blank">Смотреть видео</a>
+      <img *ngIf="thumbnailUrl" [src]="thumbnailUrl" alt="YouTube Thumbnail" class="youtube-prev">
+    </div>
+  </ng-template>
+</div>

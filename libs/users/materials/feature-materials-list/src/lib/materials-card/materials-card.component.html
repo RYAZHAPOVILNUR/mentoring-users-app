@@ -1,0 +1,12 @@
+<div (click)="openDialog()" class="materials-card">
+  <div class="card-container-img">
+    <mat-icon matListItemIcon class="card-img">{{ materialLink.endsWith('.mp3') ? 'music_note' : (materialLink.endsWith('.pdf') ? 'picture_as_pdf' : 'ondemand_video') }}</mat-icon>
+    <button mat-fab aria-label="Example icon button with a delete icon" class="btn-card-delete" (click)="onDeleteMaterial($event)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+  <div class="card-item">
+    <div matListItemTitle>{{material.title}}</div>
+    <div matListItemLine>{{material.created_at | date: 'dd MMMM yyyy'}}</div>
+  </div>
+</div>

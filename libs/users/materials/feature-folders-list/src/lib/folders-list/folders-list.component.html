@@ -1,0 +1,18 @@
+<div class="users-folders-list">
+  <ng-container *ngIf="foldersList.status === 'loading'; else loadingResult">
+    <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+  </ng-container>
+  <ng-template #loadingResult>
+    <ng-container *ngIf="foldersList.status === 'loaded'; else error">
+      <div *ngFor="let folder of foldersList.folders">
+        <users-folders-card
+        [folder]="folder"
+        (deleteCard)="onDeleteCard($event)"
+        (openFolder)="onOpenFolder($event)"></users-folders-card>
+      </div>
+    </ng-container>
+  </ng-template>
+  <ng-template #error>
+    <h2>Ошибка загрузки данных с сервера!</h2>
+  </ng-template>
+</div>

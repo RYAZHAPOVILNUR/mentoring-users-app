@@ -1,0 +1,9 @@
+<button mat-fab matTooltip="Добавить файл" color="primary" [matMenuTriggerFor]="aboveMenu">
+  <mat-icon>add</mat-icon>
+</button>
+<mat-menu #aboveMenu="matMenu" yPosition="above">
+  <button mat-menu-item (click)="addFile(pdf)">PDF-файл</button>
+  <button mat-menu-item (click)="addFile(video)">Видео</button>
+  <button mat-menu-item (click)="addFile(audio)">Подкаст</button>
+</mat-menu>
+

@@ -1,0 +1,17 @@
+<div class="materials-list">
+  <ng-container *ngIf="vmList.status === 'loading'; else loadingResult">
+    <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+  </ng-container>
+  <ng-template #loadingResult>
+    <ng-container *ngIf="vmList.status === 'loaded'; else error">
+      <div *ngFor="let material of vmList.materials">
+        <users-materials-card
+        [material]="material"
+        (deleteMaterial)="onDeleteMaterial($event)"></users-materials-card>
+      </div>
+    </ng-container>
+  </ng-template>
+  <ng-template #error>
+    <h2>Ошибка загрузки данных с сервера!</h2>
+  </ng-template>
+</div>

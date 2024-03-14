@@ -1,0 +1,38 @@
+.materials-card {
+  width: 220px;
+  height: 150px;
+  margin: 10px;
+  padding: 15px 20px;
+  border-radius: 5px;
+  background-color: #7d7c7c;
+  cursor: pointer;
+  &:hover {
+    background-color: #767676;
+    transform: scale(0.98);
+    .btn-card-delete {
+      display: block;
+    }
+  }
+}
+
+.card-img {
+  width: 60px;
+  height: 50px;
+  font-size: 50px;
+}
+
+.card-container-img {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.mdc-fab {
+  width: 40px;
+  height: 40px;
+  margin-top: 5px;
+}
+
+.btn-card-delete {
+  display: none;
+}

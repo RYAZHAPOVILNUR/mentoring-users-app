@@ -1,0 +1,12 @@
+<div (click)="onOpenFolder()" class="users-folders-card">
+  <div class="card-container-img">
+    <mat-icon matListItemIcon class="card-img">folder</mat-icon>
+    <button mat-fab aria-label="Example icon button with a delete icon" class="btn-card-delete" (click)="onDeleteCard($event)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+  <div class="card-item">
+    <div matListItemTitle>{{folder.title}}</div>
+    <div matListItemLine>{{folder.created_at | date: 'dd MMMM yyyy'}}</div>
+  </div>
+</div>
