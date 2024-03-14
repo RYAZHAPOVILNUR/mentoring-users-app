@@ -7,11 +7,20 @@ import { Router } from '@angular/router';
 import { MaterialsFacade, materialsFeature } from '@users/materials-data-access';
 import { LetDirective } from '@ngrx/component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MaterialsListComponent } from '../materials-list/materials-list.component';
 
 @Component({
   selector: 'users-materials-list-container',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatButtonModule, MatTooltipModule, LetDirective, MatProgressBarModule],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule,
+    LetDirective,
+    MatProgressBarModule,
+    MaterialsListComponent,
+  ],
   templateUrl: './materials-list-container.component.html',
   styleUrls: ['./materials-list-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

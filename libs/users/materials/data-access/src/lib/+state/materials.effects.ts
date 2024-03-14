@@ -96,12 +96,10 @@ export const loadMaterials$ = createEffect(
       ofType(MaterialsActions.loadMaterials),
       switchMap(() =>
         apiService.get<Material[]>(MATERIALS_API_PATHS.materials).pipe(
-          map(
-            (materials) => MaterialsActions.loadMaterialsSuccess({ materials }),
-            catchError((error) => {
-              return of(MaterialsActions.loadMaterialsFailure({ error }));
-            })
-          )
+          map((materials) => MaterialsActions.loadMaterialsSuccess({ materials })),
+          catchError((error) => {
+            return of(MaterialsActions.loadMaterialsFailure({ error }));
+          })
         )
       )
     );

@@ -1,1 +1,12 @@
-<p>material works!</p>
+<mat-card class="material" matTooltip="Открыть">
+  <mat-card-content class="material__content">
+    <div class="material__header">
+      <mat-icon class="material__icon">folder</mat-icon>
+      <span class="material__title" [matTooltip]="getTitleTooltip(material.title)">{{ material.title }}</span>
+    </div>
+    <div class="material__footer">
+      <mat-icon class="material__delete-icon">delete</mat-icon>
+      <span class="material__date">{{ material.created_at | date }}</span>
+    </div>
+  </mat-card-content>
+</mat-card>

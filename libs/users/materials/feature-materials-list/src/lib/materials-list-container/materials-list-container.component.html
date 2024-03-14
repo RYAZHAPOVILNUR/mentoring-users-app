@@ -23,6 +23,7 @@
         </button>
         <span class="navigation__title">{{ vm.currentFolder?.title }}</span>
       </div>
+      <users-materials-list [materials]="vm.materials"></users-materials-list>
     </ng-container>
 
     <ng-container *ngSwitchCase="'error'">
