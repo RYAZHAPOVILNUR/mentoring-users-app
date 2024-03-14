@@ -25,4 +25,8 @@ export class MaterialsFacade {
   public folderContent() {
     this.store.dispatch(MaterialsActions.currentFolder());
   }
+
+  public loadMaterials() {
+    this.store.dispatch(MaterialsActions.loadMaterials());
+  }
 }

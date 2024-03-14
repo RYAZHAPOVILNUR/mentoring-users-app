@@ -4,12 +4,12 @@
     currentFolder: currentFolder$
   } as vm"
 >
-  <ng-container ngSwitch="vm.status">
+  <ng-container [ngSwitch]="vm.status">
     <ng-container *ngSwitchCase="'loading'">
       <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
     </ng-container>
 
-    <ng-container>
+    <ng-container *ngSwitchCase="'loaded'">
       <div class="navigation">
         <button
           class="navigation__button"

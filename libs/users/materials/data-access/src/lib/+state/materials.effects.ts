@@ -8,9 +8,12 @@ import { Folder } from '../models/folder.model';
 import { MATERIALS_API_PATHS } from './materials-api.constants';
 import { Store } from '@ngrx/store';
 import { selectRouteParams } from '@users/core/data-access';
+import { Material } from '../models/material.model';
 
-export const loadMaterials$ = createEffect(
-  (actions$ = inject(Actions), apiService = inject(ApiService)) => {
+export const loadFolders$ = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
     return actions$.pipe(
       ofType(MaterialsActions.loadFolders),
       switchMap(() =>
@@ -64,7 +67,7 @@ export const deleteFolder$ = createEffect(
   { functional: true }
 );
 
-export const loadFolderContent$ = createEffect(
+export const loadCurrentFolder$ = createEffect(
   () => {
     const actions$ = inject(Actions);
     const store = inject(Store);
@@ -78,6 +81,27 @@ export const loadFolderContent$ = createEffect(
           catchError((error) => {
             return of(MaterialsActions.currentFolderFailure({ error }));
           })
+        )
+      )
+    );
+  },
+  { functional: true }
+);
+
+export const loadMaterials$ = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    return actions$.pipe(
+      ofType(MaterialsActions.loadMaterials),
+      switchMap(() =>
+        apiService.get<Material[]>(MATERIALS_API_PATHS.materials).pipe(
+          map(
+            (materials) => MaterialsActions.loadMaterialsSuccess({ materials }),
+            catchError((error) => {
+              return of(MaterialsActions.loadMaterialsFailure({ error }));
+            })
+          )
         )
       )
     );

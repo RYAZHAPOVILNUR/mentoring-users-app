@@ -24,6 +24,7 @@ export class MaterialsListContainerComponent implements OnInit {
 
   ngOnInit(): void {
     this.materialsFacade.folderContent();
+    this.materialsFacade.loadMaterials();
   }
 
   public goBack() {
