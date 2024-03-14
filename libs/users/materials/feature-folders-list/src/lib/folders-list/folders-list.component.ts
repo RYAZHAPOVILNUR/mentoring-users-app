@@ -16,15 +16,15 @@ import { MatCardModule } from '@angular/material/card';
 })
 export class FoldersListComponent {
   @Input({ required: true }) public folders: Folder[] = [];
-  @Output() public readonly deleteFolderEmit: EventEmitter<{ id: number; title: string }> = new EventEmitter<{
-    id: number;
-    title: string;
-  }>();
+  // @Output() public readonly deleteFolderEmit: EventEmitter<{ id: number; title: string }> = new EventEmitter<{
+  //   id: number;
+  //   title: string;
+  // }>();
   @Output() public readonly openFolderEmit: EventEmitter<number> = new EventEmitter<number>();
 
-  public deleteFolder({ id, title }: { id: number; title: string }) {
-    this.deleteFolderEmit.emit({ id, title });
-  }
+  // public deleteFolder({ id, title }: { id: number; title: string }) {
+  //   this.deleteFolderEmit.emit({ id, title });
+  // }
 
   public openFolder(id: number) {
     this.openFolderEmit.emit(id);

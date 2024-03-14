@@ -9,6 +9,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MaterialEventService } from '../../../../services/material-event-service';
 
 @Component({
   selector: 'folders-list-container',
@@ -26,22 +27,33 @@ export class FoldersListContainerComponent implements OnInit {
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
   private readonly activeRoute = inject(ActivatedRoute);
+  private materialEventService: MaterialEventService<{ id: number; title: string }> = inject(MaterialEventService);
 
   // public loadingStatus$ = 'error';
 
   ngOnInit(): void {
     this.materialsFacade.loadFolders();
+    this.subscribeToDeleteFolder();
   }
 
   public createFolder(title: string) {
     this.materialsFacade.addFolder(title);
   }
 
-  public deleteFolder({ id, title }: { id: number; title: string }) {
+  private subscribeToDeleteFolder() {
+    this.materialEventService
+      .getAction$()
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        tap(({ id, title }) => this.openDeleteDialog({ id, title }))
+      )
+      .subscribe();
+  }
+
+  private openDeleteDialog({ id, title }: { id: number; title: string }) {
     const dialogRef: MatDialogRef<DeleteFolderDialogComponent> = this.dialog.open(DeleteFolderDialogComponent, {
       data: { id, title },
     });
-
     dialogRef
       .afterClosed()
       .pipe(
