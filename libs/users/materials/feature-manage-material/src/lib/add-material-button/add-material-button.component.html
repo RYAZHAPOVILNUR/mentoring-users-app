@@ -1,1 +1,13 @@
-<p>add-material-button works!</p>
+<button
+  mat-fab
+  color="primary"
+  matTooltip="Добавить материал"
+  #tooltip="matTooltip"
+  [attr.aria-label]="tooltip.message"
+  [matMenuTriggerFor]="menu"
+>
+  <mat-icon>add</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item *ngFor="let materialType of materialTypes">{{ materialType }}</button>
+</mat-menu>

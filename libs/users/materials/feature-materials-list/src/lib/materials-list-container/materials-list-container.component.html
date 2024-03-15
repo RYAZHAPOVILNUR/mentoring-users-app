@@ -1,34 +1,37 @@
-<ng-container
-  *ngrxLet="{
-    materials: currentFolderMaterials$,
-    status: loadingStatus$,
-    currentFolder: currentFolder$
-  } as vm"
->
-  <ng-container [ngSwitch]="vm.status">
-    <ng-container *ngSwitchCase="'loading'">
-      <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
-    </ng-container>
+<div>
+  <ng-container
+    *ngrxLet="{
+      materials: currentFolderMaterials$,
+      status: loadingStatus$,
+      currentFolder: currentFolder$
+    } as vm"
+  >
+    <ng-container [ngSwitch]="vm.status">
+      <ng-container *ngSwitchCase="'loading'">
+        <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+      </ng-container>
 
-    <ng-container *ngSwitchCase="'loaded'">
-      <div class="navigation">
-        <button
-          class="navigation__button"
-          (click)="goBack()"
-          matTooltip="Назад"
-          #tooltip="matTooltip"
-          [attr.aria-label]="tooltip.message"
-        >
-          <mat-icon>arrow_back</mat-icon>
-        </button>
-        <span class="navigation__title">{{ vm.currentFolder?.title }}</span>
-      </div>
-      <users-materials-list [materials]="vm.materials"></users-materials-list>
-    </ng-container>
+      <ng-container *ngSwitchCase="'loaded'">
+        <div class="navigation">
+          <button
+            class="navigation__button"
+            (click)="goBack()"
+            matTooltip="Назад"
+            #tooltip="matTooltip"
+            [attr.aria-label]="tooltip.message"
+          >
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+          <span class="navigation__title">{{ vm.currentFolder?.title }}</span>
+        </div>
+        <users-materials-list [materials]="vm.materials"></users-materials-list>
+      </ng-container>
 
-    <ng-container *ngSwitchCase="'error'">
-      <h1>Ошибка!</h1>
-      <p>Произошла ошибка при загрузке данных.</p>
+      <ng-container *ngSwitchCase="'error'">
+        <h1>Ошибка!</h1>
+        <p>Произошла ошибка при загрузке данных.</p>
+      </ng-container>
     </ng-container>
   </ng-container>
-</ng-container>
+  <users-add-material-button></users-add-material-button>
+</div>
