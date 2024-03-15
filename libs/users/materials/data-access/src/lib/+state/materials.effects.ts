@@ -122,7 +122,7 @@ export const addMaterial = createEffect(
           folder_id: folderId,
         };
 
-        return apiService.post<IMaterial, IAddMaterial>('/materials', materialWithFolderId).pipe(
+        return apiService.post<IMaterial, IAddMaterial>('/material', materialWithFolderId).pipe(
           map(newMaterial => 
             MaterialsActions.addMaterialSuccess({ material: newMaterial })
           ),

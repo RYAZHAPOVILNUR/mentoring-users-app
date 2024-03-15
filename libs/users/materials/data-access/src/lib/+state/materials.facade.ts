@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { selectFolders } from './materials.selectors';
-import { IAddFolder, IFolder } from '../model/folders-models';
+import { IAddFolder, IAddMaterial, IFolder } from '../model/folders-models';
 import { materialSelectors } from '../..';
 
 @Injectable({ providedIn: 'root' })
@@ -31,5 +31,9 @@ export class MaterialsFacade {
 
   loadMaterials(){
     this.store.dispatch(MaterialActions.loadMaterials())
+  }
+
+  addNewMaterial(material:IAddMaterial){
+    this.store.dispatch(MaterialActions.addMaterial({material}))
   }
 }
