@@ -35,10 +35,6 @@ export class MaterialsListContainerComponent implements OnInit {
   ngOnInit(): void {
     this.materialsFacade.folderContent();
     this.materialsFacade.loadMaterials();
-
-    this.currentFolderMaterials$.subscribe((m) => {
-      console.log('currentFolderMaterials:', m);
-    });
   }
 
   public goBack() {

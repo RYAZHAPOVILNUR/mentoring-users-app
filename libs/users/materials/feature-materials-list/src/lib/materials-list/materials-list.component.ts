@@ -11,10 +11,6 @@ import { MaterialComponent } from '../material/material.component';
   styleUrls: ['./materials-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MaterialsListComponent implements OnInit {
+export class MaterialsListComponent {
   @Input({ required: true }) public materials: Material[] = [];
-
-  ngOnInit(): void {
-    console.log('materials', this.materials);
-  }
 }

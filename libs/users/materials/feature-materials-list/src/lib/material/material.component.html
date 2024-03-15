@@ -1,7 +1,7 @@
-<mat-card class="material" matTooltip="Открыть">
+<mat-card class="material">
   <mat-card-content class="material__content">
     <div class="material__header">
-      <mat-icon class="material__icon">folder</mat-icon>
+      <mat-icon class="material__icon" matTooltip="Открыть">{{ material.material_link | materialTypeIcon }}</mat-icon>
       <span class="material__title" [matTooltip]="getTitleTooltip(material.title)">{{ material.title }}</span>
     </div>
     <div class="material__footer">
