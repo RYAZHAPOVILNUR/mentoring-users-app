@@ -1,1 +1,23 @@
-<p>add-material-dialog works!</p>
+<div mat-dialog-container>
+  <h2 mat-dialog-title class="title">Добавить {{ materialType | lowercase }}</h2>
+  <div mat-dialog-content>
+    <form class="form" [formGroup]="formGroup">
+      <mat-form-field>
+        <mat-label>Название</mat-label>
+        <input matInput formControlName="title" required />
+        <mat-error *ngIf="formGroup.hasError('required', 'title')">Название обязательно</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Ссылка</mat-label>
+        <input matInput formControlName="link" required />
+        <mat-error *ngIf="formGroup.hasError('required', 'link')">Ссылка обязательна</mat-error>
+      </mat-form-field>
+
+      <mat-dialog-actions>
+        <button mat-flat-button mat-dialog-close>Отмена</button>
+        <button type="submit" mat-flat-button color="primary" [mat-dialog-close]="formGroup.value">Создать</button>
+      </mat-dialog-actions>
+    </form>
+  </div>
+</div>

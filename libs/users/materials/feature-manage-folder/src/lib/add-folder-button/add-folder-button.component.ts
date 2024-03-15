@@ -22,7 +22,7 @@ export class AddFolderButtonComponent {
 
   @Output() public readonly createFolderEmit: EventEmitter<string> = new EventEmitter<string>();
 
-  public openCreateFolderDialog(): void {
+  public openCreateFolderDialog() {
     const dialogRef: MatDialogRef<AddFolderDialogComponent> = this.dialog.open(AddFolderDialogComponent);
     dialogRef
       .afterClosed()
