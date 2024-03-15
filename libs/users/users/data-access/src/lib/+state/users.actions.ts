@@ -4,10 +4,6 @@ import { CreateUserDTO, LoadingStatus, UsersDTO, UsersEntity } from '@users/core
 import { EditUserPayloadWithId } from './users.actions.types';
 
 
-// export type Cb = () => void
-// export type onSuccessEditionCbType = () => void;
-// export type onSuccessSPEditionCbType = () => void;
-
 export const initUsers = createAction('[Users Page] Init');
 
 export const loadUsersSuccess = createAction(
