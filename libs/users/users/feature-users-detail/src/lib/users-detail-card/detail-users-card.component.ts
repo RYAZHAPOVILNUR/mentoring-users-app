@@ -89,7 +89,7 @@ export class DetailUsersCardComponent implements OnInit {
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
-  public totalStoryPoints = new FormControl({ value: 0, disabled: true });
+  public totalStoryPoints = new FormControl({ value: 0, disabled: true }, { nonNullable: true });
 
   @Output() editUser: EventEmitter<EditUserPayload> = new EventEmitter();
   @Output() closeUser = new EventEmitter();
