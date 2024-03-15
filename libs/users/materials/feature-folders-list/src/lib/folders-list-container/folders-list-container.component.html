@@ -11,7 +11,7 @@
       </ng-container>
 
       <ng-container *ngSwitchCase="'loaded'">
-        <users-folders-list (openFolderEmit)="openFolder($event)" [folders]="vm.folders"></users-folders-list>
+        <users-folders-list [folders]="vm.folders"></users-folders-list>
       </ng-container>
 
       <ng-container *ngSwitchCase="'error'">

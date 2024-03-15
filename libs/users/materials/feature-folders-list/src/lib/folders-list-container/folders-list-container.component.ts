@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialsFacade } from '@users/materials-data-access';
+import { Folder, MaterialsFacade } from '@users/materials-data-access';
 import { LetDirective } from '@ngrx/component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
@@ -9,7 +9,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MaterialEventService } from '../../../../services/material-event-service';
+import { MaterialStateService } from '../../../../services/material-state.service';
 
 @Component({
   selector: 'folders-list-container',
@@ -27,13 +27,12 @@ export class FoldersListContainerComponent implements OnInit {
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
   private readonly activeRoute = inject(ActivatedRoute);
-  private materialEventService: MaterialEventService<{ id: number; title: string }> = inject(MaterialEventService);
+  private materialStateService: MaterialStateService = inject(MaterialStateService);
 
-  // public loadingStatus$ = 'error';
-
-  ngOnInit(): void {
+  ngOnInit() {
     this.materialsFacade.loadFolders();
     this.subscribeToDeleteFolder();
+    this.subscribeToOpenFolder();
   }
 
   public createFolder(title: string) {
@@ -41,8 +40,7 @@ export class FoldersListContainerComponent implements OnInit {
   }
 
   private subscribeToDeleteFolder() {
-    this.materialEventService
-      .getAction$()
+    this.materialStateService.deleteFolder$
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         tap(({ id, title }) => this.openDeleteDialog({ id, title }))
@@ -50,7 +48,7 @@ export class FoldersListContainerComponent implements OnInit {
       .subscribe();
   }
 
-  private openDeleteDialog({ id, title }: { id: number; title: string }) {
+  private openDeleteDialog({ id, title }: Omit<Folder, 'created_at'>) {
     const dialogRef: MatDialogRef<DeleteFolderDialogComponent> = this.dialog.open(DeleteFolderDialogComponent, {
       data: { id, title },
     });
@@ -63,6 +61,15 @@ export class FoldersListContainerComponent implements OnInit {
             this.materialsFacade.deleteFolder(id);
           }
         })
+      )
+      .subscribe();
+  }
+
+  private subscribeToOpenFolder() {
+    this.materialStateService.openFolder$
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        tap((id) => this.openFolder(id))
       )
       .subscribe();
   }
