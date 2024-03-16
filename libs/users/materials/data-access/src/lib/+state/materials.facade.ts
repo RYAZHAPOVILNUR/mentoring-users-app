@@ -36,8 +36,4 @@ export class MaterialsFacade {
   public loadMaterials() {
     this.store.dispatch(MaterialsActions.loadMaterials());
   }
-
-  public addMaterial(material: CreateMaterial) {
-    this.store.dispatch(MaterialsActions.addMaterial({ material }));
-  }
 }

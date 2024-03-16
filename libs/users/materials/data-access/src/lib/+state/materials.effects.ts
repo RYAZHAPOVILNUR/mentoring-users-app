@@ -108,18 +108,21 @@ export const loadMaterials$ = createEffect(
   { functional: true }
 );
 
-export const addMaterial$ = createEffect(() => {
-  const actions$ = inject(Actions);
-  const apiService = inject(ApiService);
-  return actions$.pipe(
-    ofType(MaterialsActions.addMaterial),
-    switchMap(() =>
-      apiService.post<Material, CreateMaterial>(MATERIALS_API_PATHS.materials).pipe(
-        map((material) => MaterialsActions.addMaterialSuccess({ material })),
-        catchError((error) => {
-          return of(MaterialsActions.addMaterialFailure({ error }));
-        })
+export const addMaterial$ = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    return actions$.pipe(
+      ofType(MaterialsActions.addMaterial),
+      switchMap(({ material }) =>
+        apiService.post<Material, CreateMaterial>(MATERIALS_API_PATHS.materials, material).pipe(
+          map((material) => MaterialsActions.addMaterialSuccess({ material })),
+          catchError((error) => {
+            return of(MaterialsActions.addMaterialFailure({ error }));
+          })
+        )
       )
-    )
-  );
-});
+    );
+  },
+  { functional: true }
+);
