@@ -9,6 +9,7 @@ import { MATERIALS_API_PATHS } from './materials-api.constants';
 import { Store } from '@ngrx/store';
 import { selectRouteParams } from '@users/core/data-access';
 import { Material } from '../models/material.model';
+import { CreateMaterial } from '../models/create-material.model';
 
 export const loadFolders$ = createEffect(
   () => {
@@ -106,3 +107,19 @@ export const loadMaterials$ = createEffect(
   },
   { functional: true }
 );
+
+export const addMaterial$ = createEffect(() => {
+  const actions$ = inject(Actions);
+  const apiService = inject(ApiService);
+  return actions$.pipe(
+    ofType(MaterialsActions.addMaterial),
+    switchMap(() =>
+      apiService.post<Material, CreateMaterial>(MATERIALS_API_PATHS.materials).pipe(
+        map((material) => MaterialsActions.addMaterialSuccess({ material })),
+        catchError((error) => {
+          return of(MaterialsActions.addMaterialFailure({ error }));
+        })
+      )
+    )
+  );
+});

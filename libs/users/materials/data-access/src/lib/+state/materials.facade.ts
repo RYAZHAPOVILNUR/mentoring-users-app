@@ -7,6 +7,7 @@ import {
   selectLoadingStatus,
 } from './materials.selectors';
 import { MaterialsActions } from './materials.actions';
+import { CreateMaterial } from '../models/create-material.model';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
@@ -34,5 +35,9 @@ export class MaterialsFacade {
 
   public loadMaterials() {
     this.store.dispatch(MaterialsActions.loadMaterials());
+  }
+
+  public addMaterial(material: CreateMaterial) {
+    this.store.dispatch(MaterialsActions.addMaterial({ material }));
   }
 }

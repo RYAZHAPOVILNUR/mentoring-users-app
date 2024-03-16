@@ -76,6 +76,11 @@ export const materialsFeature = createFeature({
       ...state,
       status: 'error',
       error,
+    })),
+
+    on(MaterialsActions.addMaterialSuccess, (state, { material }) => ({
+      ...state,
+      materials: materialsAdapter.addOne(material, state.materials),
     }))
   ),
 });
