@@ -81,6 +81,10 @@ export const materialsFeature = createFeature({
     on(MaterialsActions.addMaterialSuccess, (state, { material }) => ({
       ...state,
       materials: materialsAdapter.addOne(material, state.materials),
+    })),
+    on(MaterialsActions.deleteMaterialSuccess, (state, { id }) => ({
+      ...state,
+      materials: materialsAdapter.removeOne(id, state.materials),
     }))
   ),
 });
