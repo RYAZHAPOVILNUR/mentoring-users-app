@@ -6,5 +6,5 @@ export const MaterialsActions = createActionGroup({
     'Load Materialss': emptyProps(),
     'Load Materialss Success': props<{ data: unknown }>(),
     'Load Materialss Failure': props<{ error: unknown }>(),
-  }
+  },
 });

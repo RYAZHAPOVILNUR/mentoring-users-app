@@ -24,10 +24,7 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "libs/core/highcharts/**/*.ts",
-          "libs/core/highcharts/**/*.html"
-        ]
+        "lintFilePatterns": ["libs/core/highcharts/**/*.ts", "libs/core/highcharts/**/*.html"]
       }
     }
   }

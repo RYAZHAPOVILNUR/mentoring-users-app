@@ -1,4 +1,3 @@
-
 .user-info {
   position: relative;
   display: flex;
@@ -44,7 +43,7 @@
   cursor: pointer;
 }
 
-.name-edit-btn{
+.name-edit-btn {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -55,13 +54,13 @@
   border: solid 1px #7e57c2;
   box-shadow: none;
 }
-.name-edit-btn>.mat-icon{
+.name-edit-btn > .mat-icon {
   height: 25px;
   width: 25px;
   font-size: 25px;
   color: #7e57c2;
 }
-.user-info-card{
+.user-info-card {
   width: 100%;
   max-width: 400px;
   display: flex;
@@ -69,10 +68,10 @@
   align-items: center;
   padding: 40px;
 }
-.user-info-items:not(.user-photo){
+.user-info-items:not(.user-photo) {
   width: 100%;
 }
-.user-info-items:nth-child(3){
+.user-info-items:nth-child(3) {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -80,16 +79,16 @@
   border-top: dotted 1px;
   margin-top: 20px;
 }
-.name-edit-btn .mat-mdc-button-touch-target{
+.name-edit-btn .mat-mdc-button-touch-target {
   width: 30px;
   height: 30px;
 }
-.user-info-items .navbar-btn{
+.user-info-items .navbar-btn {
   width: 100%;
   border: solid 1px #7e57c2;
   margin-bottom: 15px;
 }
-div.github{
+div.github {
   width: 100%;
 }
 // .change-or-zoom-photo{
@@ -102,7 +101,7 @@ div.github{
 //   background: #7e57c256;
 //   border-radius: 50%;
 // }
-.change-or-zoom-photo .change-or-zoom-photo__item{
+.change-or-zoom-photo .change-or-zoom-photo__item {
   position: absolute;
 
   width: auto;
@@ -110,22 +109,21 @@ div.github{
   cursor: pointer;
 }
 
-.change-or-zoom-photo .change-or-zoom-photo__item .mdc-fab::before{
+.change-or-zoom-photo .change-or-zoom-photo__item .mdc-fab::before {
   border: solid 1px #7e57c2;
 }
-.change-or-zoom-photo .change-or-zoom-photo__item button{
+.change-or-zoom-photo .change-or-zoom-photo__item button {
   background-color: #ffffff;
 }
-.change-or-zoom-photo .change-or-zoom-photo__item .mat-icon{
+.change-or-zoom-photo .change-or-zoom-photo__item .mat-icon {
   color: #7e57c2;
 }
 
-.change-or-zoom-photo .change-or-zoom-photo__item:nth-child(1){
+.change-or-zoom-photo .change-or-zoom-photo__item:nth-child(1) {
   top: 0;
   right: 0;
-
 }
-.change-or-zoom-photo .change-or-zoom-photo__item:nth-child(2){
+.change-or-zoom-photo .change-or-zoom-photo__item:nth-child(2) {
   top: 40px;
   right: -20px;
 }
@@ -142,7 +140,7 @@ div.github{
   width: 100%;
   height: 100%;
   background: #7e57c256;
-  transition: .1s;
+  transition: 0.1s;
   border-radius: 50%;
   &.isPhotoHovered {
     transform: scale(1);
@@ -193,7 +191,7 @@ div.github{
 }
 
 .user-info-inner {
-  & .mat-icon{
+  & .mat-icon {
     height: 40px;
     width: 40px;
     overflow: hidden;
@@ -201,24 +199,21 @@ div.github{
     color: #7e57c22b;
     margin-right: 10px;
   }
-  & div{
+  & div {
     border-bottom: dashed 1px #7e57c2;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     padding: 5px;
   }
-  & span{
+  & span {
     font-size: 16px;
     color: var(-mat-tab-header-inactive-label-text-color);
   }
-  & .name{
-
+  & .name {
   }
-  & .mail{
-
+  & .mail {
   }
-  & .city{
-
+  & .city {
   }
 }

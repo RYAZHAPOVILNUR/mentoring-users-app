@@ -2,16 +2,15 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { InputPasswordComponent } from '../input-password/input-password.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import {BehaviorSubject, debounceTime} from 'rxjs';
-import {PushPipe} from "@ngrx/component";
+import { BehaviorSubject, debounceTime } from 'rxjs';
+import { PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
-
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -27,7 +26,7 @@ import { TranslateModule } from '@ngx-translate/core';
     InputPasswordComponent,
     MatTooltipModule,
     PushPipe,
-    TranslateModule
+    TranslateModule,
   ],
   templateUrl: './password-change-dialog.component.html',
   styleUrls: ['./password-change-dialog.component.scss'],
@@ -46,7 +45,7 @@ export class PasswordChangeDialogComponent {
   public passwordsMatch$ = new BehaviorSubject(true);
 
   constructor() {
-    this.checkPasswordMatch()
+    this.checkPasswordMatch();
   }
 
   onNoClick() {
@@ -54,15 +53,10 @@ export class PasswordChangeDialogComponent {
   }
 
   checkPasswordMatch() {
-    this.formGroup.controls.confirmNewPassword
-    .valueChanges
-      .pipe(
-        debounceTime(500),
-        takeUntilDestroyed(this.destroyRef)
-        )
+    this.formGroup.controls.confirmNewPassword.valueChanges
+      .pipe(debounceTime(500), takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
         this.passwordsMatch$.next(this.formGroup.value.newPassword === this.formGroup.value.confirmNewPassword);
-      })
+      });
   }
-
 }

@@ -1,9 +1,6 @@
 <div *ngIf="users$ | ngrxPush as users">
   <div class="header">
- <span class="headerTitle">
-  <mat-icon>check_box</mat-icon>ЗАДАЧА
-  </span>
-
+    <span class="headerTitle"> <mat-icon>check_box</mat-icon>ЗАДАЧА </span>
 
     <mat-dialog-actions align="end">
       <button mat-icon-button color="accent" aria-label="Сохранить" (click)="saveChanges()">
@@ -13,28 +10,32 @@
         <mat-icon>delete</mat-icon>
       </button>
       <button mat-icon-button color="warn" aria-label="Отмена" (click)="cancel()">
-
         <mat-icon>close</mat-icon>
       </button>
     </mat-dialog-actions>
   </div>
 
-
-
-
   <mat-dialog-content class="content">
     <div class="titles">
-
-
       <mat-label>Название</mat-label>
       <mat-form-field class="mat-form-field">
-        <textarea matInput [(ngModel)]="textareaValue" cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-          cdkAutosizeMinRows="1" cdkAutosizeMaxRows="100"></textarea>
+        <textarea
+          matInput
+          [(ngModel)]="textareaValue"
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="1"
+          cdkAutosizeMaxRows="100"
+        ></textarea>
       </mat-form-field>
 
-
       <mat-label>Описание</mat-label>
-      <div [ngClass]="{'show': editStatus || !editMode, 'hide': !editStatus && editMode}">
+      <div
+        [ngClass]="{
+          show: editStatus || !editMode,
+          hide: !editStatus && editMode
+        }"
+      >
         <quill-editor class="editor" [modules]="quillEditorModules" [(ngModel)]="editorContent"></quill-editor>
         <div class="btnDiv">
           <button mat-raised-button color="primary" (click)="toggleQuill()">Сохранить</button>
@@ -42,58 +43,49 @@
         </div>
       </div>
 
-
-      <div [ngClass]="{'show': !editStatus, 'hide': editStatus}" (click)="toggleQuill()">
-        <p [innerHTML]="editorContent">{{editorContent}}</p>
+      <div [ngClass]="{ show: !editStatus, hide: editStatus }" (click)="toggleQuill()">
+        <p [innerHTML]="editorContent">{{ editorContent }}</p>
       </div>
-
     </div>
 
     <div class="taskInfo">
-
-      <mat-card class=taskInfoCard>
+      <mat-card class="taskInfoCard">
         <mat-card-header>
-          <mat-card-title>POINTS: {{totalPoint}}</mat-card-title>
+          <mat-card-title>POINTS: {{ totalPoint }}</mat-card-title>
         </mat-card-header>
         <mat-card-actions class="pointsDiv">
           <div *ngFor="let entry of storyPoint | keyvalue">
-          <button class="pointBtn" mat-button [matMenuTriggerFor]="menu">
-            <div class="pointBtnDiv">
-           <span> {{entry.key}}</span>
-            <span>{{entry.value ? entry.value : "?"}}</span>
+            <button class="pointBtn" mat-button [matMenuTriggerFor]="menu">
+              <div class="pointBtnDiv">
+                <span> {{ entry.key }}</span>
+                <span>{{ entry.value ? entry.value : '?' }}</span>
+              </div>
+            </button>
+            <mat-menu #menu="matMenu">
+              <div style="display: flex; flex-direction: row">
+                <button (click)="setPoint(entry.key, '?')" mat-menu-item>?</button>
+                <button (click)="setPoint(entry.key, '0')" mat-menu-item>0</button>
+                <button (click)="setPoint(entry.key, '0.5')" mat-menu-item>1/2</button>
+                <button (click)="setPoint(entry.key, '1')" mat-menu-item>1</button>
+              </div>
+              <div style="display: flex; flex-direction: row">
+                <button (click)="setPoint(entry.key, '2')" mat-menu-item>2</button>
+                <button (click)="setPoint(entry.key, '3')" mat-menu-item>3</button>
+                <button (click)="setPoint(entry.key, '5')" mat-menu-item>5</button>
+                <button (click)="setPoint(entry.key, '8')" mat-menu-item>8</button>
+              </div>
+              <div style="display: flex; flex-direction: row">
+                <button (click)="setPoint(entry.key, '10')" mat-menu-item>10</button>
+                <button (click)="setPoint(entry.key, '13')" mat-menu-item>13</button>
+                <button (click)="setPoint(entry.key, '20')" mat-menu-item>20</button>
+                <button (click)="setPoint(entry.key, '40')" mat-menu-item>40</button>
+              </div>
+            </mat-menu>
           </div>
-
-          </button>
-          <mat-menu #menu="matMenu">
-            <div style="display: flex; flex-direction: row;" >
-              <button (click)="setPoint(entry.key, '?')" mat-menu-item> ?</button>
-              <button (click)="setPoint(entry.key, '0')" mat-menu-item> 0</button>
-              <button (click)="setPoint(entry.key, '0.5')" mat-menu-item> 1/2</button>
-              <button (click)="setPoint(entry.key, '1')" mat-menu-item> 1</button>
-            </div>
-            <div style="display: flex; flex-direction: row;" >
-              <button (click)="setPoint(entry.key, '2')" mat-menu-item> 2</button>
-              <button (click)="setPoint(entry.key, '3')" mat-menu-item> 3</button>
-              <button (click)="setPoint(entry.key, '5')" mat-menu-item> 5</button>
-              <button  (click)="setPoint(entry.key, '8')"mat-menu-item> 8</button>
-            </div>
-            <div style="display: flex; flex-direction: row;" >
-              <button (click)="setPoint(entry.key, '10')" mat-menu-item> 10</button>
-              <button (click)="setPoint(entry.key, '13')" mat-menu-item> 13</button>
-              <button (click)="setPoint(entry.key, '20')" mat-menu-item> 20</button>
-              <button (click)="setPoint(entry.key, '40')" mat-menu-item> 40</button>
-            </div>
-          </mat-menu>
-        </div>
-
         </mat-card-actions>
       </mat-card>
 
-
-
-
-
-      <mat-card class=taskInfoCard>
+      <mat-card class="taskInfoCard">
         <mat-card-header>
           <mat-card-title>СТАТУС</mat-card-title>
         </mat-card-header>
@@ -101,16 +93,21 @@
           <button [ngSwitch]="task.status" mat-button [matMenuTriggerFor]="statusMenu">
             <span *ngSwitchCase="'new'">НОВАЯ</span>
             <span *ngSwitchCase="'progress'">В ПРОЦЕССЕ</span>
-            <span *ngSwitchCase="'accomplished'">ЗАВЕРШЕНО</span></button>
+            <span *ngSwitchCase="'accomplished'">ЗАВЕРШЕНО</span>
+          </button>
           <mat-menu #statusMenu="matMenu">
-            <button (click)="onChangeStatus('accomplished')" *ngIf="task.status !== 'accomplished'" mat-menu-item>ЗАВЕРШЕНО</button>
+            <button (click)="onChangeStatus('accomplished')" *ngIf="task.status !== 'accomplished'" mat-menu-item>
+              ЗАВЕРШЕНО
+            </button>
             <button (click)="onChangeStatus('new')" *ngIf="task.status !== 'new'" mat-menu-item>НОВАЯ</button>
-            <button (click)="onChangeStatus('progress')" *ngIf="task.status !== 'progress'" mat-menu-item>В ПРОЦЕССЕ</button>
+            <button (click)="onChangeStatus('progress')" *ngIf="task.status !== 'progress'" mat-menu-item>
+              В ПРОЦЕССЕ
+            </button>
           </mat-menu>
         </mat-card-actions>
       </mat-card>
 
-      <mat-card    class=taskInfoCard>
+      <mat-card class="taskInfoCard">
         <mat-card-header>
           <mat-card-title>ИСПОЛНИТЕЛИ</mat-card-title>
         </mat-card-header>
@@ -118,27 +115,26 @@
           <mat-list role="list">
             <mat-list-item *ngFor="let assigned of task.assignees" role="listitem">
               <div class="assignUserDiv">
-              <img class="userPhoto" [src]="assigned.photo ? assigned.photo.url:'assets/img/1.png'" />
-                <span class="spanName">{{assigned.name}}</span> <button
-                  (click)="removeAssigned(assigned.id)"><mat-icon>close</mat-icon></button>
-                </div>
+                <img class="userPhoto" [src]="assigned.photo ? assigned.photo.url : 'assets/img/1.png'" />
+                <span class="spanName">{{ assigned.name }}</span>
+                <button (click)="removeAssigned(assigned.id)">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
             </mat-list-item>
           </mat-list>
 
           <button mat-button [matMenuTriggerFor]="usersMenu">Добавить еще</button>
           <mat-menu #usersMenu="matMenu">
-
             <button (click)="addAssigned(user)" *ngFor="let user of users" mat-menu-item>
-              <img class="userPhoto" [src]="user.photo? user.photo.url:'assets/img/1.png'" />
-              <span>{{user.name}}</span>
+              <img class="userPhoto" [src]="user.photo ? user.photo.url : 'assets/img/1.png'" />
+              <span>{{ user.name }}</span>
             </button>
-
           </mat-menu>
         </mat-card-actions>
       </mat-card>
 
-
-      <mat-card class=taskInfoCard>
+      <mat-card class="taskInfoCard">
         <mat-card-header>
           <mat-card-title>ПРИОРИТЕТ</mat-card-title>
         </mat-card-header>
@@ -146,21 +142,17 @@
           <button [ngSwitch]="task.priority" mat-button [matMenuTriggerFor]="priorityMenu">
             <span *ngSwitchCase="'high'">ВЫСОКИЙ</span>
             <span *ngSwitchCase="'normal'">В СРЕДНИЙ</span>
-            <span *ngSwitchCase="'low'">НИЗКИЙ</span></button>
+            <span *ngSwitchCase="'low'">НИЗКИЙ</span>
+          </button>
           <mat-menu #priorityMenu="matMenu">
-            <button (click)="onChangePriority('high')" *ngIf="task.priority !== 'high'" mat-menu-item >ВЫСОКИЙ</button>
-            <button (click)="onChangePriority('normal')" *ngIf="task.priority !== 'normal'" mat-menu-item>СРЕДНИЙ</button>
-          <button (click)="onChangePriority('low')" *ngIf="task.priority !== 'low'" mat-menu-item>НИЗКИЙ</button>
-
+            <button (click)="onChangePriority('high')" *ngIf="task.priority !== 'high'" mat-menu-item>ВЫСОКИЙ</button>
+            <button (click)="onChangePriority('normal')" *ngIf="task.priority !== 'normal'" mat-menu-item>
+              СРЕДНИЙ
+            </button>
+            <button (click)="onChangePriority('low')" *ngIf="task.priority !== 'low'" mat-menu-item>НИЗКИЙ</button>
           </mat-menu>
         </mat-card-actions>
       </mat-card>
-
-
-
-
-
     </div>
-
   </mat-dialog-content>
 </div>

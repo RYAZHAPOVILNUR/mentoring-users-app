@@ -24,7 +24,10 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/settings/feature-change-theme/**/*.ts", "libs/settings/feature-change-theme/**/*.html"]
+        "lintFilePatterns": [
+          "libs/settings/feature-change-theme/**/*.ts",
+          "libs/settings/feature-change-theme/**/*.html"
+        ]
       }
     }
   }

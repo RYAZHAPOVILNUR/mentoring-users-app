@@ -1,8 +1,7 @@
 <mat-nav-list>
-
   <div class="user-photo-contayner" (click)="onZoomPhotoClick()">
     <div class="user-photo-wrapper">
-      <img [src]="userPhoto | ngrxPush" alt="User Photo">
+      <img [src]="userPhoto | ngrxPush" alt="User Photo" />
       <div class="photo_overlay">
         <div class="zoom_in" mat-mini-fab>
           <mat-icon>zoom_in</mat-icon>
@@ -12,7 +11,6 @@
   </div>
 
   <div class="nav-items-list">
-
     <mat-list-item class="list-item" routerLink="/profile">
       <mat-icon matListItemIcon>account_circle</mat-icon>
       <span class="button-label">{{ 'LAYOUT.SIDENAV.PROFILE' | translate }}</span>
@@ -27,7 +25,6 @@
       <mat-icon matListItemIcon>notes</mat-icon>
       <span matListItemTitle>{{ 'LAYOUT.SIDENAV.BACKLOG' | translate }}</span>
     </mat-list-item>
-
 
     <mat-list-item class="list-item" routerLink="materials">
       <mat-icon matListItemIcon>book</mat-icon>
@@ -53,7 +50,5 @@
       <mat-icon matListItemIcon>logout</mat-icon>
       <span class="button-label">{{ 'LAYOUT.SIDENAV.LOGOUT' | translate }}</span>
     </mat-list-item>
-
   </div>
-
-  </mat-nav-list>
+</mat-nav-list>

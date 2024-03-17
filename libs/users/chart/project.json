@@ -24,10 +24,7 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "libs/users/chart/chart-view/**/*.ts",
-          "libs/users/chart/chart-view/**/*.html"
-        ]
+        "lintFilePatterns": ["libs/users/chart/chart-view/**/*.ts", "libs/users/chart/chart-view/**/*.html"]
       }
     }
   }

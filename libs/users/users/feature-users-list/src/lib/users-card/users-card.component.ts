@@ -8,13 +8,12 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { UsersEntity } from '@users/core/data-access';
-import {MatTooltipModule} from '@angular/material/tooltip';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'users-card',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule, RouterModule, MatIconModule,MatTooltipModule, MatMenuModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, RouterModule, MatIconModule, MatTooltipModule, MatMenuModule],
   templateUrl: './users-card.component.html',
   styleUrls: ['./users-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,12 +26,12 @@ export class UsersCardComponent {
   loggedUser!: UsersEntity;
 
   @Output() deleteUser = new EventEmitter();
-  @Output() redirectToEdit = new EventEmitter()
+  @Output() redirectToEdit = new EventEmitter();
 
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
 
   onOpenMenu(event: Event) {
-    event.stopPropagation()
+    event.stopPropagation();
     this.trigger.openMenu();
   }
 
@@ -43,8 +42,8 @@ export class UsersCardComponent {
   redirectToEditPage(editMode: boolean, event: Event) {
     const emitData = {
       id: this.user.id,
-      editMode
-    }
-    this.redirectToEdit.emit(emitData)
+      editMode,
+    };
+    this.redirectToEdit.emit(emitData);
   }
 }

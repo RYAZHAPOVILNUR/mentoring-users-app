@@ -10,7 +10,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PushPipe } from '@ngrx/component';
 import { LanguageSwitchService } from '../../../../../../core/ui/language-switch/src';
 import { Comment } from '../../../../../data-access/src';
-import {RouterLink} from "@angular/router";
+import { RouterLink } from '@angular/router';
 @Component({
   standalone: true,
   imports: [
@@ -37,7 +37,7 @@ export class ArticleCommentComponent {
   public isDisLikeActive: boolean = false;
 
   @Input({ required: true }) comment!: Comment;
-  @Input({required: true}) userId!: number;
+  @Input({ required: true }) userId!: number;
 
   public onThumbUp() {
     this.likesCount = this.likesCount === 0 ? 1 : 0;
@@ -49,9 +49,7 @@ export class ArticleCommentComponent {
   }
 
   public get avatarSrc(): string {
-    return this.comment.author.photo
-      ? this.comment.author.photo.url
-      : 'assets/img/1.png';
+    return this.comment.author.photo ? this.comment.author.photo.url : 'assets/img/1.png';
   }
 
   public get isLikesExists(): boolean {

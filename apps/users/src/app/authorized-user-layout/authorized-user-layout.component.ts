@@ -24,7 +24,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
     MatIconModule,
     MatButtonModule,
     RouterModule,
-    NavbarComponent
+    NavbarComponent,
   ],
   templateUrl: './authorized-user-layout.component.html',
   styleUrls: ['./authorized-user-layout.component.scss'],
@@ -33,24 +33,24 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 export class AuthorizedUserLayoutComponent {
   private readonly store = inject(Store);
   private readonly facade = inject(AuthFacade);
-  public readonly breakpointObserver = inject(BreakpointObserver)
+  public readonly breakpointObserver = inject(BreakpointObserver);
 
   public readonly isAuthenticated$: Observable<boolean> = this.facade.isAuthenticated$;
   private readonly handset$ = this.breakpointObserver.observe(Breakpoints.Handset);
   private readonly handsetLandscape$ = this.breakpointObserver.observe(Breakpoints.HandsetLandscape);
 
   public readonly isMobile$ = this.handset$.pipe(
-    withLatestFrom(this.handsetLandscape$), 
+    withLatestFrom(this.handsetLandscape$),
     map(([handset, handsetLandscape]) => !!(handset.matches && !handsetLandscape.matches))
-  )
+  );
 
   opened!: boolean;
 
   public closeSidenavOnTouch(sidenav: MatSidenav) {
-    this.isMobile$.pipe(take(1)).subscribe(isMobile$ => {
-      if(isMobile$) {
-        sidenav.close()
+    this.isMobile$.pipe(take(1)).subscribe((isMobile$) => {
+      if (isMobile$) {
+        sidenav.close();
       }
-    })
+    });
   }
 }

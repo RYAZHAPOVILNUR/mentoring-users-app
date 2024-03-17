@@ -1,25 +1,14 @@
 <h2 mat-dialog-title>Создание задачи</h2>
 <mat-dialog-content>
   <mat-form-field appearance="outline">
-    <input matInput
-           type="text"
-           class="newTaskInput"
-           [(ngModel)]="task"
-           placeholder="new Task">
+    <input matInput type="text" class="newTaskInput" [(ngModel)]="task" placeholder="new Task" />
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-icon-button
-          color="accent"
-          aria-label="Согласиться"
-          (click)="create()"
-          [disabled]="!task">
+  <button mat-icon-button color="accent" aria-label="Согласиться" (click)="create()" [disabled]="!task">
     <mat-icon>done</mat-icon>
   </button>
-  <button mat-icon-button
-          (click)="cancel()"
-          color="warn"
-          aria-label="Отказаться">
+  <button mat-icon-button (click)="cancel()" color="warn" aria-label="Отказаться">
     <mat-icon>close</mat-icon>
   </button>
 </mat-dialog-actions>

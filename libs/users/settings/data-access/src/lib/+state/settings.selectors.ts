@@ -4,10 +4,6 @@ import { ISettings } from '../model/settings.interface';
 
 export const selectSettingsState = createFeatureSelector<ISettings>(SETTINGS_FEATURE_KEY);
 
-
-export const selectArticlesViewStyleType = createSelector(
-    selectSettingsState, 
-    (state: ISettings) => {
-        return state.articlesViewStyleType
-    }
-  );
+export const selectArticlesViewStyleType = createSelector(selectSettingsState, (state: ISettings) => {
+  return state.articlesViewStyleType;
+});
