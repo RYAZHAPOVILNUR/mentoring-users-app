@@ -1,5 +1,5 @@
 .menu {
-  display: grid; 
+  display: grid;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr;
   gap: 5px;
@@ -24,13 +24,13 @@
 }
 
 .button-dark-violet {
-  background: linear-gradient(to top, rgb(72,72,72) 60%, #4527a0 40%);
+  background: linear-gradient(to top, rgb(72, 72, 72) 60%, #4527a0 40%);
 }
 
 .button-dark-green {
-  background: linear-gradient(to top, rgb(72,72,72) 60%, #2e7d32 40%);
+  background: linear-gradient(to top, rgb(72, 72, 72) 60%, #2e7d32 40%);
 }
 
 .button-dark-red {
-  background: linear-gradient(to top, rgb(72,72,72) 60%, #c62828 40%);
+  background: linear-gradient(to top, rgb(72, 72, 72) 60%, #c62828 40%);
 }

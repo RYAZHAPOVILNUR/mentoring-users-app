@@ -1,76 +1,81 @@
-
 <ng-container *ngIf="vm.user">
-    <div class="user-info">
-      <button (click)="onOpenChangeProfileData()" class="name-edit-btn" mat-mini-fab>
-        <mat-icon>edit</mat-icon>
-      </button>
-      <mat-card class="user-info-card user-info-column">
-        <ng-container *ngIf="vm.isLoggedUser; else notLoggedUser">
-          <div class="user-photo user-info-items"  (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()" >
-            <img [src]="vm.user.photo ? vm.user.photo.url : 'assets/img/1.png'" alt="" class="user-photo-img">
-            <!-- <div class="change-photo-overlay">
+  <div class="user-info">
+    <button (click)="onOpenChangeProfileData()" class="name-edit-btn" mat-mini-fab>
+      <mat-icon>edit</mat-icon>
+    </button>
+    <mat-card class="user-info-card user-info-column">
+      <ng-container *ngIf="vm.isLoggedUser; else notLoggedUser">
+        <div class="user-photo user-info-items" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+          <img [src]="vm.user.photo ? vm.user.photo.url : 'assets/img/1.png'" alt="" class="user-photo-img" />
+          <!-- <div class="change-photo-overlay">
               <span class="change-photo-text">Сменить фото</span>
             </div> -->
-            <div class="change-or-zoom-photo" [class.isPhotoUnHovered]="!isPhotoHovered"  [class.isPhotoHovered]="isPhotoHovered" >
-              <span class="change-or-zoom-photo__item">
-                <button class="zoom_in" mat-mini-fab (click)="onZoomPhotoClick()">
-                  <mat-icon>zoom_in</mat-icon>
-                </button>
-              </span>
-              <span class="change-or-zoom-photo__item">
-                <button (click)="fileInput.click();" class="add_a_photo" mat-mini-fab>
-                  <mat-icon>add_a_photo</mat-icon>
-                </button>
-              </span>
-            </div>
+          <div
+            class="change-or-zoom-photo"
+            [class.isPhotoUnHovered]="!isPhotoHovered"
+            [class.isPhotoHovered]="isPhotoHovered"
+          >
+            <span class="change-or-zoom-photo__item">
+              <button class="zoom_in" mat-mini-fab (click)="onZoomPhotoClick()">
+                <mat-icon>zoom_in</mat-icon>
+              </button>
+            </span>
+            <span class="change-or-zoom-photo__item">
+              <button (click)="fileInput.click()" class="add_a_photo" mat-mini-fab>
+                <mat-icon>add_a_photo</mat-icon>
+              </button>
+            </span>
           </div>
+        </div>
+      </ng-container>
+      <ng-template #notLoggedUser>
+        <div class="user-photo user-info-items">
+          <img [src]="vm.user.photo ? vm.user.photo.url : 'assets/img/1.png'" alt="" class="user-photo-img" />
+        </div>
+      </ng-template>
+      <mat-card-content class="user-info-items">
+        <input type="file" #fileInput style="display: none" (change)="handleFileInput($event)" />
+        <div class="user-info-inner">
+          <div class="name">
+            <mat-icon>face</mat-icon>
+            <span>{{ vm.user.name }}</span>
+          </div>
+          <div class="email">
+            <mat-icon>alternate_email</mat-icon>
+            <span>{{ vm.user.email }}</span>
+          </div>
+          <div class="city">
+            <mat-icon>explore</mat-icon>
+            <span>{{ vm.user.city }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions class="user-info-items">
+        <ng-container *ngIf="vm.isLoggedUser">
+          <button mat-button class="navbar-btn" (click)="onOpenChangePassword()">
+            <mat-icon>lock-reset</mat-icon
+            ><span class="button-label">{{ 'PROFILE.USER_INFO.CHANGE_PASSWORD' | translate }}</span>
+          </button>
         </ng-container>
-        <ng-template #notLoggedUser>
-          <div class="user-photo user-info-items">
-            <img [src]="vm.user.photo ? vm.user.photo.url : 'assets/img/1.png'" alt="" class="user-photo-img">
-          </div>
-        </ng-template>
-        <mat-card-content class="user-info-items">
-          <input type="file" #fileInput style="display: none;" (change)="handleFileInput($event)">
-          <div class="user-info-inner">
-            <div class="name">
-              <mat-icon>face</mat-icon>
-             <span>{{vm.user.name}}</span> 
-            </div>
-            <div class="email">
-              <mat-icon>alternate_email</mat-icon>
-             <span>{{vm.user.email}}</span>
-            </div>
-            <div class="city">
-              <mat-icon>explore</mat-icon>
-              <span>{{vm.user.city}}</span>
-            </div>
-          </div>
-        </mat-card-content>
-        <mat-card-actions class="user-info-items">
-          <ng-container *ngIf="vm.isLoggedUser">
-            <button mat-button class="navbar-btn" (click)="onOpenChangePassword()">
-              <mat-icon>lock-reset</mat-icon><span class="button-label">{{ 'PROFILE.USER_INFO.CHANGE_PASSWORD' | translate }}</span>
+        <mat-spinner *ngIf="vm.githubStatus === 'loading'" diameter="24"></mat-spinner>
+        <ng-container *ngIf="vm.githubStatus !== 'loading'">
+          <div *ngIf="vm.githubUserName as ghUserName; else connectGithub" class="github">
+            <button mat-button class="navbar-btn" disabled>
+              <mat-icon svgIcon="github"></mat-icon>
+              <span>{{ ghUserName }}</span>
             </button>
-          </ng-container>
-          <mat-spinner *ngIf="vm.githubStatus === 'loading'" diameter="24"></mat-spinner>
-          <ng-container *ngIf="vm.githubStatus !== 'loading'">
-            <div *ngIf="vm.githubUserName as ghUserName; else connectGithub" class="github">
-              <button mat-button class="navbar-btn" disabled>
-                <mat-icon svgIcon="github"></mat-icon>
-                <span>{{ ghUserName }}</span>
-              </button>
-              <button mat-button class="navbar-btn" (click)="onDisconnectGithub()">
-                <span class="button-label">{{ 'PROFILE.USER_INFO.DISCONNECT_GITHUB' | translate }}</span>
-              </button>
-            </div>
-            <ng-template #connectGithub>
-              <button mat-button class="navbar-btn" (click)="onConnectGithub()">
-                <mat-icon svgIcon="github">edit</mat-icon><span class="button-label">{{ 'PROFILE.USER_INFO.CONNECT_GITHUB' | translate }}</span>
-              </button>
-            </ng-template>
-          </ng-container>
-        </mat-card-actions>
-      </mat-card>
-    </div>
+            <button mat-button class="navbar-btn" (click)="onDisconnectGithub()">
+              <span class="button-label">{{ 'PROFILE.USER_INFO.DISCONNECT_GITHUB' | translate }}</span>
+            </button>
+          </div>
+          <ng-template #connectGithub>
+            <button mat-button class="navbar-btn" (click)="onConnectGithub()">
+              <mat-icon svgIcon="github">edit</mat-icon
+              ><span class="button-label">{{ 'PROFILE.USER_INFO.CONNECT_GITHUB' | translate }}</span>
+            </button>
+          </ng-template>
+        </ng-container>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </ng-container>

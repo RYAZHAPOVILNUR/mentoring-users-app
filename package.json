@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "start": "nx serve users -o",
-    "build": "nx build users"
+    "build": "nx build users",
+    "format": "npx prettier --write '**/*.{ts,html,css,scss,json,md,spec.ts}'"
   },
   "private": true,
   "dependencies": {

@@ -1,22 +1,15 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { QuillModule } from 'ngx-quill'
+import { QuillModule } from 'ngx-quill';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import Quill from 'quill'
+import Quill from 'quill';
 import BlotFormatter from 'quill-blot-formatter';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormGroupDirective, NgForm } from '@angular/forms';
-import {  ArticlesFacade, CreateArticle } from '@users/users/articles/data-access';
+import { ArticlesFacade, CreateArticle } from '@users/users/articles/data-access';
 import { ArticlesCreateVm } from './articles-create-vm';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -27,7 +20,7 @@ class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
-Quill.register('modules/blotFormatter', BlotFormatter)
+Quill.register('modules/blotFormatter', BlotFormatter);
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -41,84 +34,86 @@ Quill.register('modules/blotFormatter', BlotFormatter)
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    TranslateModule
+    TranslateModule,
   ],
   templateUrl: './articles-create-ui.component.html',
   styleUrls: ['./articles-create-ui.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticlesCreateUiComponent {
-  public _vm!: ArticlesCreateVm
+  public _vm!: ArticlesCreateVm;
   private readonly articleFacade = inject(ArticlesFacade);
+
   @Input({ required: true })
   set vm(value: ArticlesCreateVm) {
-    this._vm = value
-    this.patchFormValues()
+    this._vm = value;
+    this.patchFormValues();
   }
+
   get vm() {
-    return this._vm
+    return this._vm;
   }
 
   @Output() publishArticle = new EventEmitter<CreateArticle>();
   @Output() formChange = new EventEmitter<boolean>();
 
   public formGroup = new FormGroup({
-    textEditor: new FormControl("", {
-      validators: [Validators.required, Validators.minLength(66)]
+    textEditor: new FormControl('', {
+      validators: [Validators.required, Validators.minLength(66)],
     }),
-    title: new FormControl("", {
-      validators: [Validators.required, Validators.minLength(5), Validators.maxLength(66)]
+    title: new FormControl('', {
+      validators: [Validators.required, Validators.minLength(5), Validators.maxLength(66)],
     }),
   });
 
   public formSubmitted = false;
-  public matcher = new MyErrorStateMatcher()
+  public matcher = new MyErrorStateMatcher();
 
   public quillEditorModules = {
     toolbar: [
-      [{ 'font': [] }],
+      [{ font: [] }],
       ['bold', 'italic', 'underline'],
-      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-      [{ 'color': [] }, { 'background': [] }],
-      ['link', 'image']
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      [{ color: [] }, { background: [] }],
+      ['link', 'image'],
     ],
-    blotFormatter: {}
-  }
+    blotFormatter: {},
+  };
 
   constructor() {
     this.checkChanges();
   }
 
-  public patchFormValues () {
+  public patchFormValues() {
     if (this._vm.editMode && !this.formGroup.dirty) {
       this.formGroup.patchValue({
         textEditor: this.vm.editingArticle?.content || '',
         title: this.vm.editingArticle?.title || '',
       });
     } else if (!this._vm.editMode) {
-        this.formGroup.patchValue({
-          textEditor: '',
-          title: '',
-        });
+      this.formGroup.patchValue({
+        textEditor: '',
+        title: '',
+      });
     }
   }
 
   public onSubmit(event: Event) {
     // event.preventDefault();
-    this.formSubmitted = true
-    this.formGroup.markAllAsTouched()
+    this.formSubmitted = true;
+    this.formGroup.markAllAsTouched();
     if (this.formGroup.valid) {
       const article: CreateArticle = {
         title: this.formGroup.value.title as string,
-        content: this.formGroup.value.textEditor as string
-      }
+        content: this.formGroup.value.textEditor as string,
+      };
       // this.publishArticle.emit(article)
-      if(this.vm.editMode == true) {
-        this.articleFacade.editArticle(article , this.vm.editingArticle!.id)
+      if (this.vm.editMode == true) {
+        this.articleFacade.editArticle(article, this.vm.editingArticle!.id);
       } else {
-        this.articleFacade.publishArticle(article)
+        this.articleFacade.publishArticle(article);
       }
-      console.log(article)
+      console.log(article);
     }
   }
 

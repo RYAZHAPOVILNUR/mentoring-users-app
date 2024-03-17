@@ -17,7 +17,8 @@ import { LanguageKeys, LanguageSwitchService } from '@users/users/core/ui/langua
 @Component({
   selector: 'users-register-form-ui',
   standalone: true,
-  imports: [CommonModule,
+  imports: [
+    CommonModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
@@ -27,20 +28,19 @@ import { LanguageKeys, LanguageSwitchService } from '@users/users/core/ui/langua
     MatCheckboxModule,
     InputPasswordComponent,
     TranslateModule,
-    PushPipe
+    PushPipe,
   ],
   templateUrl: './register-form-ui.component.html',
   styleUrls: ['./register-form-ui.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterFormUiComponent {
-
   public hide = true;
   public formGroup = new FormBuilder().group({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     email: new FormControl('', [Validators.required, Validators.email, Validators.minLength(3)]),
     password: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    agreement: new FormControl(false, Validators.requiredTrue)
+    agreement: new FormControl(false, Validators.requiredTrue),
   });
 
   private readonly api = inject(ApiService);
@@ -50,14 +50,13 @@ export class RegisterFormUiComponent {
   @Output() redirectToLogin = new EventEmitter();
   @Output() register = new EventEmitter<NewUser>();
 
-
   onRegister() {
     if (this.formGroup.valid) {
       const userData = {
         name: this.formGroup.value.name?.trim() as string,
         email: this.formGroup.value.email?.trim().toLowerCase() as string,
-        password: this.formGroup.value.password as string
-      }
+        password: this.formGroup.value.password as string,
+      };
       this.register.emit(userData);
     }
   }

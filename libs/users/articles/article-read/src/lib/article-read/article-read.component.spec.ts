@@ -8,7 +8,7 @@ describe('ArticleReadComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ArticleReadComponent]
+      imports: [ArticleReadComponent],
     });
     fixture = TestBed.createComponent(ArticleReadComponent);
     component = fixture.componentInstance;

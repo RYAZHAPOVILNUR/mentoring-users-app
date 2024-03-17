@@ -5,17 +5,16 @@ import { filter, map, tap } from 'rxjs';
 import { CanActivateFn } from '@angular/router';
 import { authActions } from '../+state/auth.actions';
 
-
 export const adminGuard: CanActivateFn = () => {
   const store = inject(Store);
 
   return store.select(selectIsAdmin).pipe(
-    tap(isAdmin => {
+    tap((isAdmin) => {
       if (isAdmin === null) {
         store.dispatch(authActions.getUser());
       }
     }),
-    filter(isAdmin => isAdmin !== null),
-    map(isAdmin => !!isAdmin)
+    filter((isAdmin) => isAdmin !== null),
+    map((isAdmin) => !!isAdmin)
   );
-}
+};
