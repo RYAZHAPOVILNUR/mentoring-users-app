@@ -1,0 +1,15 @@
+<mat-card class="material-item">
+  <button class="mat-button" (click)="onRevealMaterial()">
+    <div class="btn-content-div">
+      <h3>{{ material.title }}</h3>
+      <p>{{ parsedDate }}</p>
+    </div>
+    <mat-icon class="material-icon">{{ material.type }}</mat-icon>
+  </button>
+
+  <mat-card-actions class="material-card-buttons" >
+    <button mat-icon-button (click)="openDialog(material.id)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
