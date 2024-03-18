@@ -5,3 +5,4 @@ export * from './lib/+state/materials.selectors';
 export * from './lib/+state/materials.facade';
 export * from './lib/models/folder.model';
 export * from './lib/models/material.model';
+export * from './lib/models/create-material.model';

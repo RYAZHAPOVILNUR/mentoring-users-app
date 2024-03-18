@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { MaterialsActions } from './materials.actions';
 import { ApiService } from '@users/core/http';
@@ -112,16 +112,23 @@ export const addMaterial$ = createEffect(
   () => {
     const actions$ = inject(Actions);
     const apiService = inject(ApiService);
+    const store = inject(Store);
     return actions$.pipe(
       ofType(MaterialsActions.addMaterial),
-      switchMap(({ material }) =>
-        apiService.post<Material, CreateMaterial>(MATERIALS_API_PATHS.materials, material).pipe(
+      withLatestFrom(store.select(selectRouteParams)),
+      switchMap(([{ material }, params]) => {
+        const newMaterial: CreateMaterial = {
+          title: material.title,
+          material_link: material.material_link,
+          folder_id: params['id'],
+        };
+        return apiService.post<Material, CreateMaterial>(MATERIALS_API_PATHS.materials, newMaterial).pipe(
           map((material) => MaterialsActions.addMaterialSuccess({ material })),
           catchError((error) => {
             return of(MaterialsActions.addMaterialFailure({ error }));
           })
-        )
-      )
+        );
+      })
     );
   },
   { functional: true }

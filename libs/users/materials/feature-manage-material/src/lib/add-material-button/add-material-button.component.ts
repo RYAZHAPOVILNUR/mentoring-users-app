@@ -6,6 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddMaterialDialogComponent } from '../add-material-dialog/add-material-dialog.component';
+import { take, tap } from 'rxjs';
+import { MaterialStateService } from '../../../../services/material-state.service';
 
 @Component({
   selector: 'users-add-material-button',
@@ -18,11 +20,23 @@ import { AddMaterialDialogComponent } from '../add-material-dialog/add-material-
 export class AddMaterialButtonComponent {
   public readonly materialTypes = ['Видео', 'Файл PDF', 'Подкаст'];
   private readonly dialog: MatDialog = inject(MatDialog);
-  private readonly destroyRef: DestroyRef = inject(DestroyRef);
+  private readonly materialStateService: MaterialStateService = inject(MaterialStateService);
 
   public openDialog(materialType: string) {
     const dialogRef: MatDialogRef<AddMaterialDialogComponent> = this.dialog.open(AddMaterialDialogComponent, {
       data: materialType,
     });
+
+    dialogRef
+      .afterClosed()
+      .pipe(
+        take(1),
+        tap((material) => {
+          if (material) {
+            this.materialStateService.updateAddMaterial(material);
+          }
+        })
+      )
+      .subscribe();
   }
 }

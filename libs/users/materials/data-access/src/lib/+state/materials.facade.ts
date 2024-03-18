@@ -7,7 +7,7 @@ import {
   selectLoadingStatus,
 } from './materials.selectors';
 import { MaterialsActions } from './materials.actions';
-import { CreateMaterial } from '../models/create-material.model';
+import { CreateMaterial, CreateMaterialWithoutFolderId } from '../models/create-material.model';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
@@ -37,7 +37,7 @@ export class MaterialsFacade {
     this.store.dispatch(MaterialsActions.loadMaterials());
   }
 
-  public addMaterial(material: CreateMaterial) {
+  public addMaterial(material: CreateMaterialWithoutFolderId) {
     this.store.dispatch(MaterialsActions.addMaterial({ material }));
   }
 

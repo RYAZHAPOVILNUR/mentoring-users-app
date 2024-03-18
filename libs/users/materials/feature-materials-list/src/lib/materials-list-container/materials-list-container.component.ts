@@ -9,6 +9,8 @@ import { LetDirective } from '@ngrx/component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MaterialsListComponent } from '../materials-list/materials-list.component';
 import { AddMaterialButtonComponent } from '@users/feature-manage-material';
+import { MaterialStateService } from '../../../../services/material-state.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'users-materials-list-container',
@@ -33,13 +35,24 @@ export class MaterialsListContainerComponent implements OnInit {
   public readonly loadingStatus$ = this.materialsFacade.loadingStatus$;
   public readonly currentFolder$ = this.materialsFacade.currentFolder$;
   public readonly currentFolderMaterials$ = this.materialsFacade.currentFolderMaterials$;
+  private readonly materialStateService: MaterialStateService = inject(MaterialStateService);
 
   ngOnInit(): void {
     this.materialsFacade.folderContent();
     this.materialsFacade.loadMaterials();
+    this.subscribeToAddMaterial();
   }
 
   public goBack() {
     this.router.navigate(['/materials']);
+  }
+
+  private subscribeToAddMaterial() {
+    this.materialStateService.addMaterial$
+      .pipe(
+        tap((material) => console.log(material)),
+        tap((material) => this.materialsFacade.addMaterial(material))
+      )
+      .subscribe();
   }
 }
