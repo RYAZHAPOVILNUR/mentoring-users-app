@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { Material } from '@users/materials-data-access';
 
 @Component({
   selector: 'users-delete-material-dialog',
@@ -15,7 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class DeleteMaterialDialogComponent {
   private readonly dialogRef = inject(MatDialogRef<DeleteMaterialDialogComponent>);
-  public readonly dialogData = inject(MAT_DIALOG_DATA);
+  public readonly dialogData: Pick<Material, 'id' | 'title'> = inject(MAT_DIALOG_DATA);
 
   public delete() {
     this.dialogRef.close(this.dialogData.id);

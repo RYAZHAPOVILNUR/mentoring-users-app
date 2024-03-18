@@ -33,15 +33,12 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 })
 export class MaterialsListContainerComponent implements OnInit {
   private readonly router = inject(Router);
-  private readonly materialsFacade = inject(MaterialsFacade);
-  public readonly loadingStatus$ = this.materialsFacade.loadingStatus$;
-  public readonly currentFolder$ = this.materialsFacade.currentFolder$;
-  public readonly currentFolderMaterials$ = this.materialsFacade.currentFolderMaterials$;
+  public readonly materialsFacade = inject(MaterialsFacade);
   private readonly materialStateService: MaterialStateService = inject(MaterialStateService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly dialog = inject(MatDialog);
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.materialsFacade.folderContent();
     this.materialsFacade.loadMaterials();
     this.subscribeToAddMaterial();

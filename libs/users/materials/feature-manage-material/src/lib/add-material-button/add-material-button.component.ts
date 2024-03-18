@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddMaterialDialogComponent } from '../add-material-dialog/add-material-dialog.component';
-import { take, tap } from 'rxjs';
+import { first, tap } from 'rxjs';
 import { MaterialStateService } from '../../../../services/material-state.service';
 
 @Component({
@@ -30,7 +30,7 @@ export class AddMaterialButtonComponent {
     dialogRef
       .afterClosed()
       .pipe(
-        take(1),
+        first(),
         tap((material) => {
           if (material) {
             this.materialStateService.updateAddMaterial(material);

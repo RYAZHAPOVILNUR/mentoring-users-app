@@ -16,7 +16,14 @@
 
       <mat-dialog-actions>
         <button mat-flat-button mat-dialog-close>Отмена</button>
-        <button type="submit" mat-flat-button color="primary" [mat-dialog-close]="formGroup.value" (click)="save()">
+        <button
+          type="submit"
+          mat-flat-button
+          color="primary"
+          [mat-dialog-close]="formGroup.value"
+          (click)="save()"
+          [disabled]="formGroup.invalid"
+        >
           Создать
         </button>
       </mat-dialog-actions>

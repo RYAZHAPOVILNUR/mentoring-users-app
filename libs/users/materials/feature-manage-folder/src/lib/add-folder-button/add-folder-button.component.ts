@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddFolderDialogComponent } from '../add-folder-dialog/add-folder-dialog.component';
-import { take, tap } from 'rxjs';
+import { first, tap } from 'rxjs';
 import { MaterialStateService } from '../../../../services/material-state.service';
 
 @Component({
@@ -25,7 +25,7 @@ export class AddFolderButtonComponent {
     dialogRef
       .afterClosed()
       .pipe(
-        take(1),
+        first(),
         tap((folderName: string) => {
           if (folderName) {
             this.materialStateService.updateAddFolder(folderName);

@@ -1,9 +1,9 @@
 <div>
   <ng-container
     *ngrxLet="{
-      materials: currentFolderMaterials$,
-      status: loadingStatus$,
-      currentFolder: currentFolder$
+      materials: materialsFacade.currentFolderMaterials$,
+      status: materialsFacade.loadingStatus$,
+      currentFolder: materialsFacade.currentFolder$
     } as vm"
   >
     <ng-container [ngSwitch]="vm.status">

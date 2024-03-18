@@ -20,9 +20,7 @@ import { MaterialStateService } from '../../../../services/material-state.servic
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersListContainerComponent implements OnInit {
-  private readonly materialsFacade = inject(MaterialsFacade);
-  public folders$ = this.materialsFacade.folders$;
-  public loadingStatus$ = this.materialsFacade.loadingStatus$;
+  public readonly materialsFacade = inject(MaterialsFacade);
   private readonly dialog: MatDialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
