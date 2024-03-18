@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { Folder } from '../data-access';
+import { Folder, Material } from '../data-access';
 import { CreateMaterialWithoutFolderId } from '../data-access/src/lib/models/create-material.model';
 
 @Injectable({ providedIn: 'root' })
@@ -9,6 +9,7 @@ export class MaterialStateService {
   private readonly deleteFolder$$ = new Subject<Omit<Folder, 'created_at'>>();
   private readonly openFolder$$ = new Subject<number>();
   private readonly addMaterial$$ = new Subject<CreateMaterialWithoutFolderId>();
+  private readonly deleteMaterial$$ = new Subject<Pick<Material, 'id' | 'title'>>();
 
   public get addFolder$() {
     return this.addFolder$$.asObservable();
@@ -40,5 +41,13 @@ export class MaterialStateService {
 
   public updateAddMaterial(material: CreateMaterialWithoutFolderId) {
     this.addMaterial$$.next(material);
+  }
+
+  public get deleteMaterial$() {
+    return this.deleteMaterial$$.asObservable();
+  }
+
+  public updateDeleteMaterial(data: Pick<Material, 'id' | 'title'>) {
+    this.deleteMaterial$$.next(data);
   }
 }

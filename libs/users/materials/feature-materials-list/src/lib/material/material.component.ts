@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Material } from '@users/materials-data-access';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MaterialTypeIconPipe } from '../pipes/material-type-icon-pipe';
+import { MaterialStateService } from '../../../../services/material-state.service';
 
 @Component({
   selector: 'users-material',
@@ -16,9 +17,14 @@ import { MaterialTypeIconPipe } from '../pipes/material-type-icon-pipe';
 })
 export class MaterialComponent implements OnInit {
   @Input({ required: true }) public material!: Material;
+  private readonly materialStateService: MaterialStateService = inject(MaterialStateService);
 
   public getTitleTooltip(title: string): string {
     return title.length > 14 ? title : '';
+  }
+
+  public deleteMaterial() {
+    this.materialStateService.updateDeleteMaterial({ id: this.material.id, title: this.material.title });
   }
 
   ngOnInit(): void {

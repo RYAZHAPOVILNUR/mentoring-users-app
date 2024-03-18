@@ -5,7 +5,7 @@
       <span class="material__title" [matTooltip]="getTitleTooltip(material.title)">{{ material.title }}</span>
     </div>
     <div class="material__footer">
-      <mat-icon class="material__delete-icon">delete</mat-icon>
+      <mat-icon class="material__delete-icon" (click)="deleteMaterial()">delete</mat-icon>
       <span class="material__date">{{ material.created_at | date }}</span>
     </div>
   </mat-card-content>
