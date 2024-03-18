@@ -24,7 +24,7 @@ export class FoldersListContainerComponent implements OnInit {
   public folders$ = this.materialsFacade.folders$;
   public loadingStatus$ = this.materialsFacade.loadingStatus$;
   private readonly dialog: MatDialog = inject(MatDialog);
-  private readonly destroyRef: DestroyRef = inject(DestroyRef);
+  private readonly destroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
   private readonly activeRoute = inject(ActivatedRoute);
   private materialStateService: MaterialStateService = inject(MaterialStateService);
@@ -33,10 +33,16 @@ export class FoldersListContainerComponent implements OnInit {
     this.materialsFacade.loadFolders();
     this.subscribeToDeleteFolder();
     this.subscribeToOpenFolder();
+    this.subscribeToAddFolder();
   }
 
-  public createFolder(title: string) {
-    this.materialsFacade.addFolder(title);
+  private subscribeToAddFolder() {
+    this.materialStateService.addFolder$
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        tap((title: string) => this.materialsFacade.addFolder(title))
+      )
+      .subscribe();
   }
 
   private subscribeToDeleteFolder() {

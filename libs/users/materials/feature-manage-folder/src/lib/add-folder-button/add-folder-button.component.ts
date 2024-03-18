@@ -6,6 +6,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddFolderDialogComponent } from '../add-folder-dialog/add-folder-dialog.component';
 import { take, tap } from 'rxjs';
+import { MaterialStateService } from '../../../../services/material-state.service';
 
 @Component({
   selector: 'users-add-folder-button',
@@ -17,8 +18,7 @@ import { take, tap } from 'rxjs';
 })
 export class AddFolderButtonComponent {
   private readonly dialog: MatDialog = inject(MatDialog);
-
-  @Output() public readonly createFolderEmit: EventEmitter<string> = new EventEmitter<string>();
+  private readonly materialStateService = inject(MaterialStateService);
 
   public openCreateFolderDialog() {
     const dialogRef: MatDialogRef<AddFolderDialogComponent> = this.dialog.open(AddFolderDialogComponent);
@@ -26,9 +26,9 @@ export class AddFolderButtonComponent {
       .afterClosed()
       .pipe(
         take(1),
-        tap((folderName) => {
+        tap((folderName: string) => {
           if (folderName) {
-            this.createFolderEmit.emit(folderName);
+            this.materialStateService.updateAddFolder(folderName);
           }
         })
       )

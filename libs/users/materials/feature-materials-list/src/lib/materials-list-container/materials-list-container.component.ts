@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,6 +11,7 @@ import { MaterialsListComponent } from '../materials-list/materials-list.compone
 import { AddMaterialButtonComponent } from '@users/feature-manage-material';
 import { MaterialStateService } from '../../../../services/material-state.service';
 import { tap } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'users-materials-list-container',
@@ -36,6 +37,7 @@ export class MaterialsListContainerComponent implements OnInit {
   public readonly currentFolder$ = this.materialsFacade.currentFolder$;
   public readonly currentFolderMaterials$ = this.materialsFacade.currentFolderMaterials$;
   private readonly materialStateService: MaterialStateService = inject(MaterialStateService);
+  private readonly destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
     this.materialsFacade.folderContent();
@@ -50,7 +52,7 @@ export class MaterialsListContainerComponent implements OnInit {
   private subscribeToAddMaterial() {
     this.materialStateService.addMaterial$
       .pipe(
-        tap((material) => console.log(material)),
+        takeUntilDestroyed(this.destroyRef),
         tap((material) => this.materialsFacade.addMaterial(material))
       )
       .subscribe();

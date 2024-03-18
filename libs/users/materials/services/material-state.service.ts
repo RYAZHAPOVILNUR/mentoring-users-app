@@ -5,9 +5,18 @@ import { CreateMaterialWithoutFolderId } from '../data-access/src/lib/models/cre
 
 @Injectable({ providedIn: 'root' })
 export class MaterialStateService {
+  private readonly addFolder$$ = new Subject<string>();
   private readonly deleteFolder$$ = new Subject<Omit<Folder, 'created_at'>>();
   private readonly openFolder$$ = new Subject<number>();
   private readonly addMaterial$$ = new Subject<CreateMaterialWithoutFolderId>();
+
+  public get addFolder$() {
+    return this.addFolder$$.asObservable();
+  }
+
+  public updateAddFolder(title: string) {
+    this.addFolder$$.next(title);
+  }
 
   public get deleteFolder$() {
     return this.deleteFolder$$.asObservable();
