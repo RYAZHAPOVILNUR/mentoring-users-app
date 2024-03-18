@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
-import { Material, MaterialsFacade, materialsFeature } from '@users/materials-data-access';
+import { Material, MaterialsFacade } from '@users/materials-data-access';
 import { LetDirective } from '@ngrx/component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MaterialsListComponent } from '../materials-list/materials-list.component';

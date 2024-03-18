@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { catchError, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { MaterialsActions } from './materials.actions';
 import { ApiService } from '@users/core/http';
@@ -10,6 +10,7 @@ import { Store } from '@ngrx/store';
 import { selectRouteParams } from '@users/core/data-access';
 import { Material } from '../models/material.model';
 import { CreateMaterial } from '../models/create-material.model';
+import { Router } from '@angular/router';
 
 export const loadFolders$ = createEffect(
   () => {
@@ -89,6 +90,18 @@ export const loadCurrentFolder$ = createEffect(
   { functional: true }
 );
 
+export const redirectToAllFoldersOnFailure$ = createEffect(
+  () => {
+    const action$ = inject(Actions);
+    const router = inject(Router);
+    return action$.pipe(
+      ofType(MaterialsActions.currentFolderFailure),
+      tap(() => router.navigate(['/materials']))
+    );
+  },
+  { dispatch: false, functional: true }
+);
+
 export const loadMaterials$ = createEffect(
   () => {
     const actions$ = inject(Actions);
@@ -118,8 +131,7 @@ export const addMaterial$ = createEffect(
       withLatestFrom(store.select(selectRouteParams)),
       switchMap(([{ material }, params]) => {
         const newMaterial: CreateMaterial = {
-          title: material.title,
-          material_link: material.material_link,
+          ...material,
           folder_id: params['id'],
         };
         return apiService.post<Material, CreateMaterial>(MATERIALS_API_PATHS.materials, newMaterial).pipe(
