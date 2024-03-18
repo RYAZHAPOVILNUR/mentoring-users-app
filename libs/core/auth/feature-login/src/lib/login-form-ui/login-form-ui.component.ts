@@ -41,8 +41,8 @@ export class LoginFormUiComponent {
   public readonly selectedLanguage$ = this.languageSwitchService.selectedLanguage$;
 
   public formGroup = new FormBuilder().group({
-    email: new FormControl('admin@mail.ru', [Validators.required, Validators.email]),
-    password: new FormControl('sysAdmin', [Validators.required]),
+    email: new FormControl('admin@gmail.com', [Validators.required, Validators.email]),
+    password: new FormControl('12345', [Validators.required]),
   });
 
   onRedirectToSignUp() {
