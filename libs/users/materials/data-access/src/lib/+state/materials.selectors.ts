@@ -3,9 +3,9 @@ import { MaterialsState, materialsAdapter, materialsFeature } from './materials.
 import { selectRouteParams } from '@users/core/data-access';
 
 
-const { selectMaterialsState, selectEntities } = materialsFeature
+const { selectMaterialsState } = materialsFeature
 
-const { selectAll } = materialsAdapter.getSelectors();
+const { selectAll, selectEntities } = materialsAdapter.getSelectors();
 
 export const selectFolders = createSelector(
   selectMaterialsState,
@@ -13,13 +13,17 @@ export const selectFolders = createSelector(
 )
 
 export const selectFoldersEntity = createSelector(
-  selectMaterialsState, (state:MaterialsState) => selectEntities(state)
+  selectMaterialsState, (state: MaterialsState) => selectEntities(state)
 )
 
 export const selectOpenedFolder = createSelector(
   selectRouteParams,
   selectFoldersEntity,
   ({id}, entities) => entities[id] || null
+)
+
+export const selectMaterialsStatus = createSelector(
+  selectMaterialsState, (state: MaterialsState) => state.status
 )
 
 export const selectAllMaterials = createSelector(
@@ -29,5 +33,5 @@ export const selectAllMaterials = createSelector(
 export const filteredByIdMaterials = createSelector(
   selectRouteParams,
   selectAllMaterials,
-  ({id}, materials) => materials.filter(item => item.folder_id === id)
+  ({id}, materials) => materials.filter(item => item.folder_id === Number(id))
 )

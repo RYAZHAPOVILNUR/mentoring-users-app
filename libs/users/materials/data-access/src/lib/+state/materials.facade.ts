@@ -17,6 +17,8 @@ export class MaterialsFacade {
 
   public readonly filteredMaterials$ = this.store.select(materialSelectors.filteredByIdMaterials)
 
+  public readonly materialsStatus$ = this.store.select(materialSelectors.selectMaterialsStatus)
+
   loadFolders() {
     this.store.dispatch(MaterialActions.loadFolders());
   } 

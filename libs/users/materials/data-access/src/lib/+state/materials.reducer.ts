@@ -80,18 +80,24 @@ export const materialsFeature = createFeature({
         status:'error' as const
       })),
     on(MaterialActions.loadMaterials, 
-      (state) => ({...state, status:'loading' as const})
+      (state) => (
+        {
+          ...state, 
+          status:'loading' as const
+        })
       ),
     on(MaterialActions.loadMaterialsSuccess, 
       (state, {materials}) => (
-        {...state, 
+        {
+          ...state, 
           materials, 
-          status:'loading' as const
+          status:'loaded' as const
         })
       ),
     on(MaterialActions.loadMaterialsFailed, 
       (state) => (
-        {...state,
+        {
+          ...state,
           status:'error' as const
         })
       )

@@ -1,4 +1,29 @@
 
-<users-feature-materials-card *ngFor="let material of filteredMaterials$ | ngrxPush">
-</users-feature-materials-card>
-<users-feature-materials-add-btn></users-feature-materials-add-btn>
+<ng-container
+    *ngrxLet="{
+        openedFolder: openedFolder$,
+        materialsStatus: materialsStatus$,
+        filteredMaterials: filteredMaterials$
+    } as vm"
+>
+    <ng-container [ngSwitch]="vm.materialsStatus">
+        <ng-container *ngSwitchCase="'loading'">
+            <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'error'">
+            <div class="alert alert-danger" rode="aletr">
+                <h1>{{ vm.materialsStatus }}</h1>
+            </div>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'loaded'">
+            <users-material-list 
+                [vm]="vm"
+                (backOnFolders)="backOnFolders()"
+                (deleteMaterial)="deleteMaterial($event)"
+                >
+            </users-material-list>
+        </ng-container>
+    </ng-container>
+</ng-container>

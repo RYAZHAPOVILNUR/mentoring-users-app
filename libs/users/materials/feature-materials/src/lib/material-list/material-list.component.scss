@@ -1,0 +1,17 @@
+.materials-cards-flex {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-gap: 20px;
+}
+
+
+.back {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: x-large;
+}

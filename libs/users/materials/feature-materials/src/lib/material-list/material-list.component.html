@@ -1,0 +1,21 @@
+
+
+<!-- <p>{{vm.openedFolder?.title}}</p>
+<users-feature-materials-card *ngFor="let material of vm.filteredMaterials" [material]="material">
+</users-feature-materials-card> -->
+
+
+<div class="container">
+  <div class="back">
+      <button mat-icon-button (click)="onBackOnFolders()"><mat-icon>arrow_back</mat-icon></button>
+      <div class="title">{{ vm.openedFolder?.title }}</div>
+  </div>
+  <div class="materials-cards-flex">
+      <ng-container *ngFor="let material of vm.filteredMaterials">
+        <users-feature-materials-card  [material]="material">
+        </users-feature-materials-card>
+      </ng-container>
+  </div>
+</div>
+
+<users-feature-materials-add-btn></users-feature-materials-add-btn>
