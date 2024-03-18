@@ -1,0 +1,26 @@
+<ng-template #loading>
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-template>
+
+<ng-container>
+  <div class="container">
+    <div class="row">
+      <div class="materials-list-nav">
+        <button mat-icon-button (click)="navigateToMatList()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <h1 class="material-title">{{ vm.revealedFolder?.title }}</h1>
+      </div>
+      <ng-container *ngIf="vm.status === 'loaded'; else loading">
+        <div class="col-md-3 mb-3 mr-2.5" *ngFor="let material of vm.materials">
+          <users-materials-card
+            [material]="material"
+            (deleteMaterial)="onDeleteMaterial($event)"
+            (revealMaterial)="onRevealMaterial($event)"
+          />
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
+

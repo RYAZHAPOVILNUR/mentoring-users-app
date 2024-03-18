@@ -1,0 +1,15 @@
+<mat-card class="folder-item">
+  <button class="folder-btn" (dblclick)="onRevealFolder(folder.id)">
+    <mat-icon class="folder-icon">folder</mat-icon>
+    <div class="btn-content-div">
+      <h3>{{ folder.title }}</h3>
+      <p>{{ parsedDate }}</p>
+    </div>
+  </button>
+
+<mat-card-actions class="user-card-buttons" >
+  <button mat-icon-button (click)="openDialog(folder.id)">
+    <mat-icon>delete</mat-icon>
+  </button>
+</mat-card-actions>
+</mat-card>
