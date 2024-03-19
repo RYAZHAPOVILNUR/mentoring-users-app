@@ -1,10 +1,18 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CreateMaterialWithoutFolderId } from '@users/materials-data-access';
+import { MATERIAL_TYPES } from '../../../../constants/material-types.constants';
 
 @Component({
   selector: 'users-add-material-dialog',
@@ -21,7 +29,7 @@ export class AddMaterialDialogComponent {
 
   public formGroup = this._fb.group({
     title: ['', Validators.required],
-    link: ['', Validators.required],
+    link: ['', [Validators.required, this.formValidator(this.materialType)]],
   });
 
   public save() {
@@ -32,5 +40,19 @@ export class AddMaterialDialogComponent {
       };
       this._dialogRef.close(data);
     }
+  }
+
+  public formValidator(materialType: string): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const typeInfo = Object.values(MATERIAL_TYPES).find((type) => type.label === materialType);
+      console.log(
+        'typeInfo.validationRegex.test(control.value)',
+        typeInfo && typeInfo.validationRegex.test(control.value)
+      );
+      if (typeInfo && !typeInfo.validationRegex.test(control.value)) {
+        return { invalidMaterialLink: true };
+      }
+      return null;
+    };
   }
 }

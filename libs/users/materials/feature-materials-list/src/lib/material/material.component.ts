@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Material } from '@users/materials-data-access';
 import { MatCardModule } from '@angular/material/card';
@@ -15,7 +15,7 @@ import { MaterialStateService } from '../../../../services/material-state.servic
   styleUrls: ['./material.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MaterialComponent implements OnInit {
+export class MaterialComponent {
   @Input({ required: true }) public material!: Material;
   private readonly _materialStateService: MaterialStateService = inject(MaterialStateService);
 
@@ -25,9 +25,5 @@ export class MaterialComponent implements OnInit {
 
   public deleteMaterial() {
     this._materialStateService.updateDeleteMaterial({ id: this.material.id, title: this.material.title });
-  }
-
-  ngOnInit(): void {
-    console.log('material', this.material);
   }
 }
