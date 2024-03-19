@@ -12,7 +12,7 @@
   </div>
   <div class="materials-cards-flex">
       <ng-container *ngFor="let material of vm.filteredMaterials">
-        <users-feature-materials-card  [material]="material">
+        <users-feature-materials-card  [material]="material" (deleteMaterial)="onDeleteMaterial(material)">
         </users-feature-materials-card>
       </ng-container>
   </div>

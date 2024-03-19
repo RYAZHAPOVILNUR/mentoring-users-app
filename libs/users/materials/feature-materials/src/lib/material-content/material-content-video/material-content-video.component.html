@@ -1,0 +1,7 @@
+<div class="link">
+  <p mat-dialog-title>Ссылка на видео: {{ link }}</p>
+</div>
+
+<div *ngIf="getVideoId()" class="thumbnail">
+  <img [src]="'https://img.youtube.com/vi/' + getVideoId() + '/maxresdefault.jpg'">
+</div>

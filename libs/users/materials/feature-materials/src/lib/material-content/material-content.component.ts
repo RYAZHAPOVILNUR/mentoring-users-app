@@ -6,6 +6,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { IMaterial } from 'libs/users/materials/data-access/src/lib/model/folders-models';
+import { MaterialContentAudioComponent } from './material-content-audio/material-content-audio.component';
+import { MaterialContentVideoComponent } from './material-content-video/material-content-video.component';
+import { MaterialContentPdfComponent } from './material-content-pdf/material-content-pdf.component';
 
 
 @Component({
@@ -18,18 +22,38 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     MatFormFieldModule,
     MatButtonModule,
     PdfViewerModule,
-    MatIconModule
+    MatIconModule,
+    MaterialContentAudioComponent,
+    MaterialContentVideoComponent,
+    MaterialContentPdfComponent
+
   ],
   templateUrl: './material-content.component.html',
   styleUrls: ['./material-content.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialContentComponent {
-  public data = inject(MAT_DIALOG_DATA);
-  private readonly dialog = inject(MatDialog);
+  public data: { material:IMaterial } = inject(MAT_DIALOG_DATA);
   public dialogRef = inject(MatDialogRef<MaterialContentComponent>);
 
 
-  onClose(){}
+
+  public onClose(): void {
+    this.dialogRef.close();
+  }
+
+  public getMaterialType(link: string): string {
+    const extension = link.split('.').pop();
+  
+    switch(extension) {
+      case 'pdf':
+        return 'pdf';
+      case 'mp3':
+        return 'audio';
+      default:
+        return 'video';
+    }
+  }
+  
 
 }

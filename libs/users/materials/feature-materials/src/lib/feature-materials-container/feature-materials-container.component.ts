@@ -8,6 +8,8 @@ import { MaterialListComponent } from '../material-list/material-list.component'
 import { IMaterial } from 'libs/users/materials/data-access/src/lib/model/folders-models';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 
 @Component({
   selector: 'users-feature-materials-container',
@@ -24,6 +26,7 @@ import { tap } from 'rxjs';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class FeatureMaterialsContainerComponent implements OnInit {
+  private matDialog = inject(MatDialog);
   private readonly router = inject(Router);
   private readonly facade = inject(MaterialsFacade)
   public openedFolder$ = this.facade.openedFolder$
@@ -51,7 +54,19 @@ export class FeatureMaterialsContainerComponent implements OnInit {
 
 
   public deleteMaterial(material: IMaterial): void {
+    const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.matDialog.open(
+      CoreUiConfirmDialogComponent,
+      { data: { dialogText: `Вы уверены, что хотите удалить ${material.title}` } }
+    )
 
+    dialogRef.afterClosed()
+    .pipe(
+      takeUntilDestroyed(this.destroyRef),
+      tap((result: boolean) => {
+        if(result) this.facade.deleteMaterial(material.id)
+      })
+    )
+    .subscribe();
   }
 
   public backOnFolders() {

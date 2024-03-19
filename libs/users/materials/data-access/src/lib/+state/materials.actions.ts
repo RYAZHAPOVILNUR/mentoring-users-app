@@ -15,11 +15,11 @@ export const addFolderSuccess = createAction('[Material Page] Add Folder Success
 
 export const addFolderFailed = createAction('[Material Page] Add Folder Failed');
 
-export const deleteFolder = createAction('[Material Page] delete Folder', props<{ id: number }>());
+export const deleteFolder = createAction('[Material Page] Delete Folder', props<{ id: number }>());
 
-export const deleteFolderSuccess = createAction('[Material Page] delete Folder Success', props<{ id: number }>());
+export const deleteFolderSuccess = createAction('[Material Page] Delete Folder Success', props<{ id: number }>());
 
-export const deleteFolderFailed = createAction('[Material Page] delete Folder Failed');
+export const deleteFolderFailed = createAction('[Material Page] Delete Folder Failed');
 
 export const initFolderMaterials = createAction('[Folder Page] Init')
 
@@ -33,4 +33,10 @@ export const addMaterial = createAction('[Folder Page] Add Material', props<{mat
 
 export const addMaterialSuccess = createAction('[Folder Page] Add Material Success', props<{material:IMaterial}>())
 
-export const addMaterialFailed = createAction('[Folder Page] Add Material Success')
+export const addMaterialFailed = createAction('[Folder Page] Add Material Failed')
+
+export const deleteMaterial = createAction('[Folder Page] Delete Material', props<{id: number}>())
+
+export const deleteMaterialSuccess = createAction('[Folder Page] Delete Material Success', props<{id: number}>())
+
+export const deleteMaterialFailed = createAction('[Folder Page] Delete Material Failed')

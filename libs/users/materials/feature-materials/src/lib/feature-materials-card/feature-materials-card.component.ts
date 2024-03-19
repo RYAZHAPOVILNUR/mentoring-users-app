@@ -35,10 +35,37 @@ import { MaterialContentComponent } from '../material-content/material-content.c
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeatureMaterialsCardComponent {
-  private readonly destroyRef = inject(DestroyRef);
-  public dialog = inject(MatDialog);
-
-  @Input()
+  @Input({required:true})
   material!: IMaterial;
+
+
+  @Output() deleteMaterial = new EventEmitter();
+
+
+  private readonly destroyRef = inject(DestroyRef);
+  public matDialog = inject(MatDialog);
+
+
+  public onOpenMaterial(material: IMaterial){
+    const dialogRef: MatDialogRef<MaterialContentComponent> = this.matDialog.open(
+      MaterialContentComponent, { data: { material } })
+
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe()
+  }
+  
+  public dateFormat(time: number): string {
+    const date = new Date(time);
+    return `
+      ${date.getDate()} 
+      ${date.toLocaleString('default', { month: 'short' }).slice(0, -1)}
+    `
+  }
+
+  public onDeleteMaterial(material:IMaterial){
+    this.deleteMaterial.emit(material)
+  }
 
 }

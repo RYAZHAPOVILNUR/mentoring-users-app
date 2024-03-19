@@ -8,32 +8,25 @@
   </button>
 </div>
 
-<!-- PDF -->
-<!-- <ng-container *ngIf="data.material.material_link.endsWith('.pdf')">
-  <pdf-viewer
-      [src]="materialLink"
-      [render-text]="true"
-      [original-size]="false"
-      class="pdf-viewer"
-  ></pdf-viewer>
-</ng-container> -->
+<ng-container [ngSwitch]="getMaterialType(data.material.material_link)">
+  <!-- PDF -->
+  <ng-container *ngSwitchCase="'pdf'">
+    <users-material-content-pdf [link]="data.material.material_link"></users-material-content-pdf>
+  </ng-container>
 
-<!-- AUDIO -->
-<!-- <ng-container *ngIf="data.material.material_link.endsWith('.mp3')">
-  <div class="audio">
-      <audio controls>
-        <source [src]="data.material.material_link" type="audio/mp3">
-      </audio>
-  </div>
-</ng-container> -->
+  <!-- AUDIO -->
+  <ng-container *ngSwitchCase="'audio'">
+    <users-material-content-audio [link]="data.material.material_link"></users-material-content-audio>
+  </ng-container>
 
-<!-- VIDEO -->
-<!-- <ng-container *ngIf="!data.material.material_link.endsWith('.pdf') && !data.material.material_link.endsWith('.mp3')">
-  <div class="link">
-      <p mat-dialog-title>Ссылка на видео: {{ data.material.material_link }}</p>
-  </div>
-
-  <div *ngIf="getVideoId()" class="thumbnail">
-    <img [src]="'https://img.youtube.com/vi/' + getVideoId() + '/maxresdefault.jpg'">
-  </div>
-</ng-container> -->
+  <!-- VIDEO -->
+  <ng-container *ngSwitchCase="'video'">
+    <!-- <div class="link">
+        <p mat-dialog-title>Ссылка на видео: {{ data.material.material_link }}</p>
+    </div>
+    <div *ngIf="getVideoId()" class="thumbnail">
+      <img [src]="'https://img.youtube.com/vi/' + getVideoId() + '/maxresdefault.jpg'">
+    </div> -->
+    <users-material-content-video [link]="data.material.material_link"></users-material-content-video>
+  </ng-container>
+</ng-container>

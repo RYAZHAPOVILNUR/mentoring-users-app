@@ -44,7 +44,6 @@ export class FeatureMaterialsAddBtnComponent {
   }
 
   onAddMaterial(materialType: string): void {
-    console.log(materialType)
     const dialogRef: MatDialogRef<MaterialAddDialogComponent> = this.dialog
       .open(MaterialAddDialogComponent, { data: {
         materialType: materialType,

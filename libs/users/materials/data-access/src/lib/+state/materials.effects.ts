@@ -135,3 +135,26 @@ export const addMaterial = createEffect(
   },
   { functional: true }
 );
+
+
+export const deleteMaterial = createEffect(
+  () => {
+    const actions$ = inject(Actions)
+    const apiService = inject(ApiService)
+
+    return actions$.pipe(
+      ofType(MaterialsActions.deleteMaterial),
+      switchMap(
+        ({ id }) => {
+          return apiService
+            .delete<void>(`/material/${id}`)
+            .pipe(
+              map(() => {
+                return MaterialsActions.deleteMaterialSuccess({id});
+              }
+            )
+          );
+      })
+    )
+  },{ functional:true }
+)

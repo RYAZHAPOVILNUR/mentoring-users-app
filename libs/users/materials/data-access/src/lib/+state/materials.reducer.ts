@@ -100,6 +100,32 @@ export const materialsFeature = createFeature({
           ...state,
           status:'error' as const
         })
-      )
+      ),
+    on(MaterialActions.addMaterial, (state) => ({
+      ...state,
+      status:'loading' as const
+    })),
+    on(MaterialActions.addMaterialSuccess, (state, { material }) => ({
+      ...state,
+      materials: [...state.materials, material],
+      status: 'loaded' as const
+    })),
+    on(MaterialActions.addMaterialFailed, (state) => ({
+      ...state,
+      status: 'error' as const
+    })),
+    on(MaterialActions.deleteMaterial, (state) => ({
+      ...state,
+      status:'loading' as const
+    })),
+    on(MaterialActions.deleteMaterialSuccess, (state, { id }) => ({
+      ...state,
+      materials: state.materials.filter(material => material.id !== id),
+      status: 'loaded' as const
+    })),
+    on(MaterialActions.deleteMaterialFailed, (state) => ({
+      ...state,
+      status: 'error' as const
+    }))
   )
 });

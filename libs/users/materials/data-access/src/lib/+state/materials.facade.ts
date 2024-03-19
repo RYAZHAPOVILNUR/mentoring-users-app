@@ -38,4 +38,8 @@ export class MaterialsFacade {
   addNewMaterial(material:IAddMaterial){
     this.store.dispatch(MaterialActions.addMaterial({material}))
   }
+
+  deleteMaterial(id:number){
+    this.store.dispatch(MaterialActions.deleteMaterial({id}))
+  }
 }
