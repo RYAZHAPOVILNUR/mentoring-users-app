@@ -1,8 +1,8 @@
 <ng-container
   *ngrxLet="{
-  folders: folders$,
-  error: error$,
-  status: status$
+  folders: facade.folders$,
+  error: facade.error$,
+  status: facade.status$
 } as vm">
   <users-folders-list
     [vm]="vm"

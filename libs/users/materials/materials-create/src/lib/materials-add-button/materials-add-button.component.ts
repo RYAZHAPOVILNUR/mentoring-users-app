@@ -21,7 +21,7 @@ import { MatMenuModule } from '@angular/material/menu';
 export class MaterialsAddButtonComponent {
   private title!: string;
   private link!: string;
-  public dialog = inject(MatDialog);
+  private readonly dialog = inject(MatDialog);
   private readonly materialsFacade = inject(MaterialsFacade);
   private readonly destroyRef = inject(DestroyRef);
   public readonly materialTypes: string[] = ['Видео', 'Аудио', 'PDF'];
@@ -29,8 +29,8 @@ export class MaterialsAddButtonComponent {
   openAddMaterialDialog(type: string): void {
     const dialogRef: MatDialogRef<MaterialsAddDialogComponent> = this.dialog.open(MaterialsAddDialogComponent, {
       data: {
-        title: this.title,
-        material_link: this.link,
+        title: '',
+        material_link: '',
         type
       },
     });

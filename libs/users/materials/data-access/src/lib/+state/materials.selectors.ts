@@ -16,20 +16,14 @@ export const selectFolders = createSelector(
   (state) => state.folders
 );
 
-export const selectMaterials = createSelector(
-  selectMaterialsFeatureState,
-  (state) => state.materials
-)
-
 export const selectRevealedFolder = createSelector(
   selectMaterialsFeatureState,
   (state) => state.revealedFolder
-)
+);
 
-export const selectFolderMaterials = createSelector(
+export const selectFilteredMaterials = createSelector(
   selectMaterialsFeatureState,
   selectRevealedFolder,
-  (state, folder) => {
-    return state.materials.filter(material => material.folder_id === folder!.id)
-  }
-)
+  (state, folder) =>
+    state.materials.filter(material => material.folder_id === folder?.id)
+);

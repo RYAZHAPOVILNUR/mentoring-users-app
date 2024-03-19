@@ -3,20 +3,19 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ApiService } from '@users/core/http';
 import { MaterialsActions } from './materials.actions';
 import { catchError, map, of, switchMap } from 'rxjs';
-import { FolderDTO, CreateFolder, MaterialDTO, CreateMaterial } from '../interfaces';
+import { FolderDTO, CreateFolder, MaterialDTO, CreateMaterial } from '../types';
 
 export const foldersLoad = createEffect(
   () => {
     const actions$ = inject(Actions);
     const apiService = inject(ApiService);
+
     return actions$.pipe(
       ofType(MaterialsActions.loadFolders),
       switchMap(
         () => apiService.get<FolderDTO[]>('/folder').pipe(
           map(
-            (folders) => {
-              return MaterialsActions.loadFoldersSuccess({ folders });
-            }
+            (folders) => MaterialsActions.loadFoldersSuccess({ folders })
           ),
           catchError((error) => {
               console.error('Error ' + error);
@@ -36,7 +35,7 @@ export const deleteFolder = createEffect(
     return actions$.pipe(
       ofType(MaterialsActions.deleteFolder),
       switchMap(
-        ({ id }) => apiService.delete<void>(`/folder/${id}`).pipe(
+        ({ id } ) => apiService.delete(`/folder/${id}`).pipe(
           map(
             () => MaterialsActions.deleteFolderSuccess({ id })
           ),
@@ -59,15 +58,15 @@ export const addFolder = createEffect(
       ofType(MaterialsActions.addFolder),
       switchMap(
         ({ newFolder }) =>
-          apiService.post<FolderDTO, CreateFolder>('/folder',newFolder).pipe(
-          map(
-            (newFolder) => MaterialsActions.addFolderSuccess({ newFolder })
-          ),
-          catchError((error) => {
-            console.error('Error: ' + error);
-            return of(MaterialsActions.addFolderFailure({ error }))
-          })
-        )
+          apiService.post<FolderDTO, CreateFolder>('/folder', newFolder).pipe(
+            map(
+              (newFolder) => MaterialsActions.addFolderSuccess({ newFolder })
+            ),
+            catchError((error) => {
+              console.error('Error: ' + error);
+              return of(MaterialsActions.addFolderFailure({ error }));
+            })
+          )
       )
     );
   }, { functional: true }
@@ -87,13 +86,13 @@ export const loadMaterials = createEffect(
           ),
           catchError(({ error }) => {
             console.error('Error: ' + error);
-            return of(MaterialsActions.loadMaterialsFailure({ error }))
+            return of(MaterialsActions.loadMaterialsFailure({ error }));
           })
         )
       )
-    )
+    );
   }, { functional: true }
-)
+);
 
 export const deleteMaterial = createEffect(
   () => {
@@ -103,19 +102,19 @@ export const deleteMaterial = createEffect(
     return actions$.pipe(
       ofType(MaterialsActions.deleteMaterial),
       switchMap(
-        ({ id }) => apiService.delete<void>(`/material/${id}`).pipe(
+        ({ id }) => apiService.delete(`/material/${id}`).pipe(
           map(
-            () => MaterialsActions.deleteMaterialSuccess({ id }),
+            () => MaterialsActions.deleteMaterialSuccess({ id })
           ),
           catchError(({ error }) => {
             console.error('Error: ' + error);
-            return of(MaterialsActions.deleteMaterialFailure({ error }))
+            return of(MaterialsActions.deleteMaterialFailure({ error }));
           })
         )
       )
-    )
+    );
   }, { functional: true }
-)
+);
 
 export const addMaterial = createEffect(
   () => {
@@ -132,10 +131,10 @@ export const addMaterial = createEffect(
             ),
             catchError(({ error }) => {
               console.error('Error: ' + error);
-              return of(MaterialsActions.addMaterialFailure({ error }))
+              return of(MaterialsActions.addMaterialFailure({ error }));
             })
-        )
+          )
       )
-    )
-  }, { functional: true}
-)
+    );
+  }, { functional: true }
+);

@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { MaterialsActions } from './materials.actions';
-import { FolderDTO, MaterialDTO } from '../interfaces'
+import { FolderDTO, MaterialDTO } from '../types'
 
 export const MATERIALS_FEATURE_KEY = 'materials';
 export type MaterialsStatus = 'init' | 'loading' | 'loaded'

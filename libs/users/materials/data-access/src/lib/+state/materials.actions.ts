@@ -1,15 +1,12 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { FolderDTO } from '../interfaces/folder.interface';
-import { MaterialDTO } from '../interfaces/material.interface';
-import { CreateMaterial } from '../interfaces/material-create.interface';
-import { CreateFolder } from '../interfaces/folder-create.interface';
+import { FolderDTO, MaterialDTO, CreateMaterial, CreateFolder } from '../types';
 
 export const MaterialsActions = createActionGroup({
   source: 'Materials',
   events: {
     'Load Folders': emptyProps(),
     'Load Folders Success': props<{ folders: FolderDTO[] }>(),
-    'Load Folders Failure': props<{ error: any}>(),
+    'Load Folders Failure': props<{ error: any }>(),
 
     'Delete Folder': props<{ id: number }>(),
     'Delete Folder Success': props<{ id: number }>(),
@@ -29,8 +26,8 @@ export const MaterialsActions = createActionGroup({
 
     'Add Material': props<{ newMaterial: CreateMaterial}>(),
     'Add Material Success': props<{ newMaterial: MaterialDTO}>(),
-    'Add Material Failure': props<{ error: any}>(),
+    'Add Material Failure': props<{ error: any }>(),
 
-    'Reveal Folder': props<{ id: number }>(),
+    'Reveal Folder': props<{ id: number }>()
   }
 });

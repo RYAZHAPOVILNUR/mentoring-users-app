@@ -2,14 +2,13 @@ import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { MaterialsActions } from './materials.actions';
 import {
-  selectFolderMaterials,
+  selectFilteredMaterials,
   selectFolders,
   selectMaterialsFeatureError,
   selectMaterialsFeatureStatus, selectRevealedFolder
 } from './materials.selectors';
-import { CreateFolder, CreateMaterial } from '../interfaces/';
+import { CreateFolder, CreateMaterial } from '../types/';
 import { map, take, tap } from 'rxjs';
-
 
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
@@ -18,19 +17,19 @@ export class MaterialsFacade {
   public readonly status$ = this.store.select(selectMaterialsFeatureStatus);
   public readonly error$ = this.store.select(selectMaterialsFeatureError);
   public readonly revealedFolder$ = this.store.select(selectRevealedFolder);
-  public readonly filteredMaterials$ = this.store.select(selectFolderMaterials);
+  public readonly filteredMaterials$ = this.store.select(selectFilteredMaterials);
 
   constructor() {
     this.store.dispatch(MaterialsActions.loadFolders());
-    const a = JSON.parse(localStorage.getItem('revealedFolder')!);
-    a && this.store.dispatch(MaterialsActions.loadMaterials());
+    localStorage.getItem('revealedFolder')
+    && this.store.dispatch(MaterialsActions.loadMaterials());
   }
 
   deleteFolder(id: number): void {
     this.store.dispatch(MaterialsActions.deleteFolder({ id }));
   }
 
-  addFolder(newFolder: CreateFolder): void {
+  addFolder(newFolder: { title: any }): void {
     this.store.dispatch(MaterialsActions.addFolder({ newFolder }));
   }
 
@@ -40,8 +39,8 @@ export class MaterialsFacade {
       take(1),
       map(folders =>
         folders.find(folder => folder.id === id)),
-      tap(folder => {
-        localStorage.setItem('revealedFolder', JSON.stringify(folder))
+      tap(filteredFolder => {
+        localStorage.setItem('revealedFolder', JSON.stringify(filteredFolder))
         this.store.dispatch(MaterialsActions.revealFolder({ id }));
       })
     ).subscribe();
@@ -55,11 +54,13 @@ export class MaterialsFacade {
     this.revealedFolder$.pipe(
       take(1),
       tap(folder => {
-        const materialData: CreateMaterial = {
-          ...newMaterial,
-          folder_id: folder!.id
-        };
-        this.store.dispatch(MaterialsActions.addMaterial({ newMaterial: materialData }));
+        if (folder) {
+          const materialData: CreateMaterial = {
+            ...newMaterial,
+            folder_id: folder!.id
+          };
+          this.store.dispatch(MaterialsActions.addMaterial({ newMaterial: materialData }));
+        }
       })
       ).subscribe()
   }

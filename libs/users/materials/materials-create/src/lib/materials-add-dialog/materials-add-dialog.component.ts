@@ -5,13 +5,6 @@ import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { CreateMaterial } from '@users/materials/data-access';
-import { DeepReadonly } from '@users/core/utils';
-
-export type AddMaterial = DeepReadonly<{
-  title: string;
-  material_link: string;
-  type: string
-}>
 
 @Component({
   selector: 'users-materials-add-dialog',
@@ -22,18 +15,13 @@ export type AddMaterial = DeepReadonly<{
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialsAddDialogComponent {
-  public formGroup: FormGroup;
-  private formBuilder = inject(FormBuilder);
-  public dialogRef = inject(MatDialogRef<MaterialsAddDialogComponent>);
-
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: AddMaterial
-  ) {
-    this.formGroup = this.formBuilder.group({
-      title: ['', Validators.required],
-      link: ['', Validators.required]
-    });
-  }
+  private readonly dialogRef = inject(MatDialogRef<MaterialsAddDialogComponent>);
+  private readonly formBuilder = inject(FormBuilder);
+  public readonly formGroup = this.formBuilder.group({
+    title: ['', Validators.required],
+    link: ['', Validators.required]
+  });
+  constructor(@Inject(MAT_DIALOG_DATA) public readonly data: { type: string }) {}
 
   cancel(): void {
     this.dialogRef.close();
@@ -42,8 +30,8 @@ export class MaterialsAddDialogComponent {
   save(): void {
     if (this.formGroup.valid) {
       const data: Partial<CreateMaterial> = {
-        title: this.formGroup.value.title,
-        material_link: this.formGroup.value.link
+        title: this.formGroup.value.title!,
+        material_link: this.formGroup.value.link!
       }
       this.dialogRef.close(data);
     }

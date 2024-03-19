@@ -23,8 +23,9 @@ export const getFormattedDate = (timestamp: string): string => {
 })
 export class FoldersCardComponent implements OnInit{
   private readonly dialog = inject(MatDialog);
+  public parsedDate?: string;
+
   @Input({ required: true }) folder!: FolderDTO;
-  public parsedDate?: string
 
   @Output() deleteFolder = new EventEmitter<number>();
   @Output() revealFolder = new EventEmitter<number>();

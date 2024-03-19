@@ -17,17 +17,14 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoldersListContainerComponent {
-  private readonly facade = inject(MaterialsFacade);
-  public readonly folders$ = this.facade.folders$;
-  public readonly status$ = this.facade.status$;
-  public readonly error$ = this.facade.error$;
+  public readonly facade = inject(MaterialsFacade);
   private readonly router = inject(Router);
 
   constructor() {
     localStorage.removeItem('revealedFolder');
   }
 
-  onDeleteFolder(id: number) {
+  onDeleteFolder(id: number): void {
     this.facade.deleteFolder(id);
   }
 

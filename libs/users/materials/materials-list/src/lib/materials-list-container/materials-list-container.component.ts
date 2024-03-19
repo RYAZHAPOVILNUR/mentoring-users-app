@@ -18,11 +18,8 @@ import { MaterialsContentComponent } from '@users/materials/materials-content';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MaterialsListContainerComponent {
-  private readonly materialsFacade = inject(MaterialsFacade);
+  public readonly materialsFacade = inject(MaterialsFacade);
   private readonly dialog = inject(MatDialog);
-  public readonly materials$ = this.materialsFacade.filteredMaterials$;
-  public readonly status$ = this.materialsFacade.status$;
-  public readonly revealedFolder$ = this.materialsFacade.revealedFolder$;
 
   onDeleteMaterial(id: number): void {
     this.materialsFacade.deleteMaterial(id);

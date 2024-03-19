@@ -6,6 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { MatButtonModule } from '@angular/material/button';
 
+export const youTubeRegExp = /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=))([\w\-]{10,12})\b/;
+
 @Component({
   selector: 'users-materials-content',
   standalone: true,
@@ -15,17 +17,15 @@ import { MatButtonModule } from '@angular/material/button';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialsContentComponent {
-
   public readonly data: RevealMaterialData = inject(MAT_DIALOG_DATA);
-  private readonly  dialogRef = inject(MatDialogRef<MaterialsContentComponent, boolean>)
+  private readonly dialogRef = inject(MatDialogRef<MaterialsContentComponent, boolean>)
 
   close(): void {
     return this.dialogRef.close();
   }
 
   getVideoId(): string {
-    const youtubeRegex = /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=))([\w\-]{10,12})\b/;
-    const match = this.data.link.match(youtubeRegex);
+    const match = this.data.link.match(youTubeRegExp);
     return match ? match[1] || match[2] : '';
   }
 }

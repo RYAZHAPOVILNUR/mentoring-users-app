@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, Inject, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
@@ -15,17 +15,11 @@ import { MatInputModule } from '@angular/material/input';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoldersAddDialogComponent {
-  public formGroup: FormGroup;
-  private formBuilder = inject(FormBuilder);
-  public dialogRef = inject(MatDialogRef<FoldersAddDialogComponent>);
-
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { title: string }
-  ) {
-    this.formGroup = this.formBuilder.group({
-      title: ['', Validators.required]
-    });
-  }
+  private readonly formBuilder = inject(FormBuilder);
+  private readonly dialogRef = inject(MatDialogRef<FoldersAddDialogComponent>);
+  public readonly formGroup = this.formBuilder.group({
+    title: ['', Validators.required]
+  })
 
   cancel(): void {
     this.dialogRef.close();

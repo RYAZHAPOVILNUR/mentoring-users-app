@@ -1,32 +1,31 @@
 <mat-dialog-content [ngSwitch]="data.type">
-  <mat-dialog-actions class="h-20" align="center">
+  <mat-dialog-actions align="center">
     <div class="actions-container">
       <h2 mat-dialog-title>{{ data.title }}</h2>
       <button mat-icon-button tabindex="-1" (click)="close()" color="warn" aria-label="Закрыть">
         <mat-icon>close</mat-icon>
       </button>
     </div>
-
   </mat-dialog-actions>
 
   <ng-container *ngSwitchCase="'picture_as_pdf'">
-    <pdf-viewer [src]="data.link!"
+    <pdf-viewer [src]="data.link"
                 [render-text]="true"
                 [original-size]="false"
                 [scrollTop]="false"
-                style="width: 500px; height: 705px;"
-    ></pdf-viewer>
+                style="width: 500px; height: 700px;"
+    />
   </ng-container>
 
   <ng-container *ngSwitchCase="'library_music'">
-    <video controls autoplay style="height: 50px !important; width: 350px;">
+    <video controls autoplay>
       <source src="{{ data.link }}" type="audio/mpeg">
     </video>
   </ng-container>
 
   <ng-container *ngSwitchCase="'video_library'">
     <p mat-dialog-title>Ссылка на видео: {{ data.link }}</p>
-    <div *ngIf="getVideoId()" class="thumbnail">
+    <div *ngIf="getVideoId()">
       <img [src]="'https://img.youtube.com/vi/' + getVideoId() + '/maxresdefault.jpg'" width="100%" alt="video-preview">
     </div>
   </ng-container>
@@ -34,5 +33,4 @@
   <ng-container *ngSwitchDefault>
     <p mat-dialog-title>Данная ссылка недействительна или материал не существует</p>
   </ng-container>
-
 </mat-dialog-content>
