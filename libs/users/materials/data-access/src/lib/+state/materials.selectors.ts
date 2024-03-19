@@ -33,5 +33,5 @@ export const selectAllMaterials = createSelector(
 export const filteredByIdMaterials = createSelector(
   selectRouteParams,
   selectAllMaterials,
-  ({id}, materials) => materials.filter(item => item.folder_id === Number(id))
+  ({id}, materials) => materials.filter(item => item.folderId === Number(id))
 )

@@ -4,12 +4,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { MaterialsFacade } from '@users/materials/data-access';
-import { IFolder } from 'libs/users/materials/data-access/src/lib/model/folders-models';
 import { tap } from 'rxjs';
 import { PushPipe } from '@ngrx/component';
 import { MaterialFolderAddBtnComponent } from '../material-folder-add-btn/material-folder-add-btn.component';
 import { MaterialFolderItemComponent } from '../material-folder-item/material-folder-item.component';
 import { Router } from '@angular/router';
+import { FolderEntity } from 'libs/users/materials/data-access/src/lib/model/material.entity';
 
 @Component({
   selector: 'users-material-folder-container',
@@ -33,7 +33,7 @@ export class MaterialFolderContainerComponent implements OnInit{
   }
 
 
-  public deleteFolder(folder: IFolder): void {
+  public deleteFolder(folder: FolderEntity): void {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.matDialog.open(
       CoreUiConfirmDialogComponent,
       { data: { dialogText: `Вы уверены, что хотите удалить ${folder.title}` } }

@@ -10,8 +10,8 @@ import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MaterialsFacade } from '@users/materials/data-access';
-import { IAddMaterial } from 'libs/users/materials/data-access/src/lib/model/folders-models';
 import { MaterialAddDialogComponent } from '../material-add-dialog/material-add-dialog.component';
+import { MaterialEntity, AddMaterialEntity } from 'libs/users/materials/data-access/src/lib/model/material.entity';
 
 @Component({
   selector: 'users-feature-materials-add-btn',
@@ -54,10 +54,9 @@ export class FeatureMaterialsAddBtnComponent {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(result => {
         if(result) {
-          const newMaterial: IAddMaterial = {
+          const newMaterial: AddMaterialEntity = {
             title: result.materialTitle,
-            material_link: result.materialLink
-
+            link: result.materialLink,
           }
 
           this.materialsFacade.addNewMaterial(newMaterial)

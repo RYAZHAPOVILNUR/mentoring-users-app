@@ -7,8 +7,8 @@ import { MaterialFolderItemComponent } from '../../../feature-materials-folder/s
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { tap } from 'rxjs/operators';
-import { IFolder } from 'libs/users/materials/data-access/src/lib/model/folders-models';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
+import { FolderEntity } from 'libs/users/materials/data-access/src/lib/model/material.entity';
 
 @Component({
   selector: 'users-users-materials',
@@ -25,7 +25,7 @@ export class UsersMaterialsComponent implements OnInit {
   private readonly facade = inject(MaterialsFacade)
   public readonly folders$ = this.facade.folders$
 
-  public deleteFolder(folder: IFolder): void {
+  public deleteFolder(folder: FolderEntity): void {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.matDialog.open(
       CoreUiConfirmDialogComponent,
       { data: { dialogText: `Вы уверены, что хотите удалить ${folder.title}` } }

@@ -1,9 +1,9 @@
 import { LoadingStatus } from "@users/core/data-access"
 import { DeepReadonly } from "@users/core/utils"
-import { IFolder, IMaterial } from "libs/users/materials/data-access/src/lib/model/folders-models"
+import { FolderEntity, MaterialEntity } from "libs/users/materials/data-access/src/lib/model/material.entity"
 
 export type MaterialsVM = DeepReadonly<{
-  openedFolder: IFolder | null,
-  filteredMaterials: IMaterial[]
+  openedFolder: FolderEntity | null,
+  filteredMaterials: MaterialEntity[]
   materialsStatus: LoadingStatus,
 }>

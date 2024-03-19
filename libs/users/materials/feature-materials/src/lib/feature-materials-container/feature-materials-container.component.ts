@@ -5,11 +5,11 @@ import { MaterialsFacade } from '@users/materials/data-access';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { LetDirective, PushPipe } from '@ngrx/component';
 import { MaterialListComponent } from '../material-list/material-list.component';
-import { IMaterial } from 'libs/users/materials/data-access/src/lib/model/folders-models';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
+import { MaterialEntity } from 'libs/users/materials/data-access/src/lib/model/material.entity';
 
 @Component({
   selector: 'users-feature-materials-container',
@@ -53,7 +53,7 @@ export class FeatureMaterialsContainerComponent implements OnInit {
   }
 
 
-  public deleteMaterial(material: IMaterial): void {
+  public deleteMaterial(material: MaterialEntity): void {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.matDialog.open(
       CoreUiConfirmDialogComponent,
       { data: { dialogText: `Вы уверены, что хотите удалить ${material.title}` } }

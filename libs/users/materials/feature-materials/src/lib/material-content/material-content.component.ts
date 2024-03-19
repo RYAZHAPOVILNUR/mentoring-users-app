@@ -6,10 +6,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { IMaterial } from 'libs/users/materials/data-access/src/lib/model/folders-models';
 import { MaterialContentAudioComponent } from './material-content-audio/material-content-audio.component';
 import { MaterialContentVideoComponent } from './material-content-video/material-content-video.component';
 import { MaterialContentPdfComponent } from './material-content-pdf/material-content-pdf.component';
+import { MaterialEntity } from 'libs/users/materials/data-access/src/lib/model/material.entity';
 
 
 @Component({
@@ -33,7 +33,7 @@ import { MaterialContentPdfComponent } from './material-content-pdf/material-con
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialContentComponent {
-  public data: { material:IMaterial } = inject(MAT_DIALOG_DATA);
+  public data: { material:MaterialEntity } = inject(MAT_DIALOG_DATA);
   public dialogRef = inject(MatDialogRef<MaterialContentComponent>);
 
 

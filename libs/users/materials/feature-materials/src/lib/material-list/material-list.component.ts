@@ -5,7 +5,7 @@ import { FeatureMaterialsCardComponent } from '../feature-materials-card/feature
 import { FeatureMaterialsAddBtnComponent } from '../feature-materials-add-btn/feature-materials-add-btn.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { IMaterial } from 'libs/users/materials/data-access/src/lib/model/folders-models';
+import { MaterialEntity } from 'libs/users/materials/data-access/src/lib/model/material.entity';
 
 @Component({
   selector: 'users-material-list',
@@ -32,7 +32,7 @@ export class MaterialListComponent {
     this.backOnFolders.emit()
   }
 
-  public onDeleteMaterial(material: IMaterial) {
+  public onDeleteMaterial(material: MaterialEntity) {
     this.deleteMaterial.emit(material)
   }
 }

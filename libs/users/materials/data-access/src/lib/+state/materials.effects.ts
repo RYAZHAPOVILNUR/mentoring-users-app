@@ -1,38 +1,38 @@
-import { Injectable, inject } from '@angular/core';
+import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap, switchMap, withLatestFrom } from 'rxjs/operators';
-import { Observable, EMPTY, of } from 'rxjs';
+import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { of } from 'rxjs';
 import { ApiService } from '@users/core/http';
 import * as MaterialsActions from './materials.actions';
-import { IAddFolder,IAddMaterial,IFolder, IMaterial } from '../model/folders-models';
+import { AddFolderDTO, AddMaterialDTO, FolderDTO, MaterialDTO } from '../model/material-dto.model'
+import { folderDTOAdapter, materialDTOAdapter } from '../model/material-dto.adapter'
 import { Store } from '@ngrx/store';
 import { selectRouteParams } from '@users/core/data-access';
 
 
 export const loadFolders = createEffect(
   () => {
-    const actions$ = inject(Actions)
-    const apiService = inject(ApiService)
-
-  
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
 
     return actions$.pipe(
       ofType(MaterialsActions.loadFolders),
-      switchMap(
-        () => apiService.get<IFolder[]>('/folder')
-        .pipe(
-          map((folders) => MaterialsActions.loadFoldersSuccess({folders})),
+      switchMap(() =>
+        apiService.get<FolderDTO[]>('/folder').pipe(
+          // Преобразование каждого DTO в Entity
+          map(folders => folders.map(folder => folderDTOAdapter.DTOtoEntity(folder))), 
+          map(folders => MaterialsActions.loadFoldersSuccess({ folders })),
           catchError(error => {
-            console.log(error)
-            
-            return of(MaterialsActions.loadFoldersFailed())
+            console.log(error);
+            return of(MaterialsActions.loadFoldersFailed());
           })
         )
       )
-    )
+    );
+  },
+  { functional: true }
+);
 
-  },{ functional:true }
-)
 
 export const addFolder = createEffect(
   () => {
@@ -44,8 +44,9 @@ export const addFolder = createEffect(
       switchMap(
         ({ folder }) => {
           return apiService
-            .post<IFolder, IAddFolder>('/folder', folder)
+            .post<FolderDTO, AddFolderDTO>('/folder', folder)
             .pipe(
+              map(newFolder => folderDTOAdapter.DTOtoEntity(newFolder)), 
               map((newFolder) => {
                 return MaterialsActions.addFolderSuccess({ newFolder });
               })
@@ -89,8 +90,10 @@ export const loadMaterials = createEffect(
     return actions$.pipe(
       ofType(MaterialsActions.loadMaterials),
       switchMap(
-        () => apiService.get<IMaterial[]>('/material')
+        () => apiService.get<MaterialDTO[]>('/material')
         .pipe(
+          // Преобразование каждого DTO в Entity
+          map(materials => materials.map(material => materialDTOAdapter.DTOtoEntity(material))), 
           map((materials) => MaterialsActions.loadMaterialsSuccess({materials})),
           catchError(error => {
             console.log(error)
@@ -116,13 +119,15 @@ export const addMaterial = createEffect(
       switchMap(([{material}, {id}]) => {
         const folderId = Number(id);
         
-        const materialWithFolderId:IAddMaterial = {
+        const materialWithFolderId = {
           title: material.title,
-          material_link: material.material_link,
+          material_link: material.link,
           folder_id: folderId,
         };
 
-        return apiService.post<IMaterial, IAddMaterial>('/material', materialWithFolderId).pipe(
+        return apiService.post<MaterialDTO, AddMaterialDTO>('/material', materialWithFolderId)
+        .pipe(
+          map(newMaterial => materialDTOAdapter.DTOtoEntity(newMaterial)), 
           map(newMaterial => 
             MaterialsActions.addMaterialSuccess({ material: newMaterial })
           ),

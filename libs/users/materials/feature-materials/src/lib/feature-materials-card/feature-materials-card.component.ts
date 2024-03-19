@@ -15,8 +15,8 @@ import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dial
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { IMaterial } from 'libs/users/materials/data-access/src/lib/model/folders-models';
 import { MaterialContentComponent } from '../material-content/material-content.component';
+import { MaterialEntity } from 'libs/users/materials/data-access/src/lib/model/material.entity';
 
 @Component({
   selector: 'users-feature-materials-card',
@@ -36,7 +36,7 @@ import { MaterialContentComponent } from '../material-content/material-content.c
 })
 export class FeatureMaterialsCardComponent {
   @Input({required:true})
-  material!: IMaterial;
+  material!: MaterialEntity;
 
 
   @Output() deleteMaterial = new EventEmitter();
@@ -46,7 +46,7 @@ export class FeatureMaterialsCardComponent {
   public matDialog = inject(MatDialog);
 
 
-  public onOpenMaterial(material: IMaterial){
+  public onOpenMaterial(material: MaterialEntity){
     const dialogRef: MatDialogRef<MaterialContentComponent> = this.matDialog.open(
       MaterialContentComponent, { data: { material } })
 
@@ -64,7 +64,7 @@ export class FeatureMaterialsCardComponent {
     `
   }
 
-  public onDeleteMaterial(material:IMaterial){
+  public onDeleteMaterial(material:MaterialEntity){
     this.deleteMaterial.emit(material)
   }
 

@@ -1,17 +1,17 @@
 import * as MaterialActions from './materials.actions';
 import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { selectFolders } from './materials.selectors';
-import { IAddFolder, IAddMaterial, IFolder } from '../model/folders-models';
-import { materialSelectors } from '../..';
+import * as materialSelectors from './materials.selectors';
+import { AddMaterialEntity} from '../model/material.entity';
+import { AddFolderDTO } from '../model/material-dto.model';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
 
   private readonly store = inject(Store);
 
-  public readonly folders$: Observable<IFolder[]> = this.store.select(selectFolders);
+  public readonly folders$ = this.store.select(selectFolders);
 
   public readonly openedFolder$ = this.store.select(materialSelectors.selectOpenedFolder)
 
@@ -23,7 +23,7 @@ export class MaterialsFacade {
     this.store.dispatch(MaterialActions.loadFolders());
   } 
 
-  addNewFolder(folder:IAddFolder){
+  addNewFolder(folder:AddFolderDTO){
     this.store.dispatch(MaterialActions.addFolder({folder}))
   }
 
@@ -35,7 +35,7 @@ export class MaterialsFacade {
     this.store.dispatch(MaterialActions.loadMaterials())
   }
 
-  addNewMaterial(material:IAddMaterial){
+  addNewMaterial(material:AddMaterialEntity){
     this.store.dispatch(MaterialActions.addMaterial({material}))
   }
 

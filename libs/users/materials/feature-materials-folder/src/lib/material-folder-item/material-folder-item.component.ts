@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { IFolder } from 'libs/users/materials/data-access/src/lib/model/folders-models';
+import { FolderEntity } from 'libs/users/materials/data-access/src/lib/model/material.entity';
 @Component({
   selector: 'users-material-folder-item',
   standalone: true,
@@ -12,18 +12,18 @@ import { IFolder } from 'libs/users/materials/data-access/src/lib/model/folders-
   styleUrls: ['./material-folder-item.component.scss'],
 })
 export class MaterialFolderItemComponent {
-  @Input({ required: true }) folder!:IFolder;
+  @Input({ required: true }) folder!:FolderEntity;
   @Output() deleteFolder = new EventEmitter();
   @Output() openFolder = new EventEmitter();
 
   
 
 
-  onDeleteFolder(folder: IFolder) {
+  onDeleteFolder(folder: FolderEntity) {
     this.deleteFolder.emit(folder)
   }
 
-  onOpenFolder(folder:IFolder){
+  onOpenFolder(folder:FolderEntity){
     this.openFolder.emit(folder.id)
   }
 }
