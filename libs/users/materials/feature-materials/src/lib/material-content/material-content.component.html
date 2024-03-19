@@ -21,12 +21,6 @@
 
   <!-- VIDEO -->
   <ng-container *ngSwitchCase="'video'">
-    <!-- <div class="link">
-        <p mat-dialog-title>Ссылка на видео: {{ data.material.material_link }}</p>
-    </div>
-    <div *ngIf="getVideoId()" class="thumbnail">
-      <img [src]="'https://img.youtube.com/vi/' + getVideoId() + '/maxresdefault.jpg'">
-    </div> -->
     <users-material-content-video [link]="data.material.link"></users-material-content-video>
   </ng-container>
 </ng-container>
