@@ -16,14 +16,14 @@ import { MaterialStateService } from '../../../../services/material-state.servic
 })
 export class FolderComponent {
   @Input({ required: true }) public folder!: Folder;
-  private readonly materialStateService: MaterialStateService = inject(MaterialStateService);
+  private readonly _materialStateService: MaterialStateService = inject(MaterialStateService);
 
   public deleteFolder() {
-    this.materialStateService.updateDeleteFolder({ id: this.folder.id, title: this.folder.title });
+    this._materialStateService.updateDeleteFolder({ id: this.folder.id, title: this.folder.title });
   }
 
   public openFolder() {
-    this.materialStateService.updateOpenFolder(this.folder.id);
+    this._materialStateService.updateOpenFolder(this.folder.id);
   }
 
   public getTitleTooltip(title: string): string {

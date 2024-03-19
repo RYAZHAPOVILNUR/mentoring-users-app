@@ -15,11 +15,11 @@ import { CreateMaterialWithoutFolderId } from '@users/materials-data-access';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddMaterialDialogComponent {
-  private fb = inject(FormBuilder);
+  private readonly _fb = inject(FormBuilder);
+  private readonly _dialogRef = inject(MatDialogRef<AddMaterialDialogComponent>);
   public readonly materialType = inject(MAT_DIALOG_DATA);
-  private readonly dialogRef = inject(MatDialogRef<AddMaterialDialogComponent>);
 
-  public formGroup = this.fb.group({
+  public formGroup = this._fb.group({
     title: ['', Validators.required],
     link: ['', Validators.required],
   });
@@ -30,7 +30,7 @@ export class AddMaterialDialogComponent {
         title: this.formGroup.value.title.trim(),
         material_link: this.formGroup.value.link.trim(),
       };
-      this.dialogRef.close(data);
+      this._dialogRef.close(data);
     }
   }
 }

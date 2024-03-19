@@ -26,10 +26,10 @@ import { Folder } from '@users/materials-data-access';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeleteFolderDialogComponent {
-  private readonly dialogRef = inject(MatDialogRef<DeleteFolderDialogComponent>);
+  private readonly _dialogRef = inject(MatDialogRef<DeleteFolderDialogComponent>);
   public readonly dialogData: Omit<Folder, 'created_at'> = inject(MAT_DIALOG_DATA);
 
   public delete() {
-    this.dialogRef.close(this.dialogData.id);
+    this._dialogRef.close(this.dialogData.id);
   }
 }

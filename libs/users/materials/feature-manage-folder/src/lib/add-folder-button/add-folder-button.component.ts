@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,18 +17,18 @@ import { MaterialStateService } from '../../../../services/material-state.servic
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddFolderButtonComponent {
-  private readonly dialog: MatDialog = inject(MatDialog);
-  private readonly materialStateService = inject(MaterialStateService);
+  private readonly _dialog: MatDialog = inject(MatDialog);
+  private readonly _materialStateService = inject(MaterialStateService);
 
   public openCreateFolderDialog() {
-    const dialogRef: MatDialogRef<AddFolderDialogComponent> = this.dialog.open(AddFolderDialogComponent);
+    const dialogRef: MatDialogRef<AddFolderDialogComponent> = this._dialog.open(AddFolderDialogComponent);
     dialogRef
       .afterClosed()
       .pipe(
         first(),
         tap((folderName: string) => {
           if (folderName) {
-            this.materialStateService.updateAddFolder(folderName);
+            this._materialStateService.updateAddFolder(folderName);
           }
         })
       )

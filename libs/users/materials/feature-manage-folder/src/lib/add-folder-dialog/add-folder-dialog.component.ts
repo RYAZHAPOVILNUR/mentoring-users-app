@@ -25,12 +25,12 @@ import { MatInputModule } from '@angular/material/input';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddFolderDialogComponent {
+  private readonly _dialogRef = inject(MatDialogRef<AddFolderDialogComponent>);
   public folderName: FormControl = new FormControl('', Validators.required);
-  private readonly dialogRef = inject(MatDialogRef<AddFolderDialogComponent>);
 
   public save() {
     if (this.folderName.value && this.folderName.valid) {
-      this.dialogRef.close(this.folderName.value.trim());
+      this._dialogRef.close(this.folderName.value.trim());
     }
   }
 }

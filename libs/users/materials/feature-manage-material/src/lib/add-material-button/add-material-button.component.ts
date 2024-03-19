@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -18,12 +18,12 @@ import { MaterialStateService } from '../../../../services/material-state.servic
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddMaterialButtonComponent {
+  private readonly _dialog: MatDialog = inject(MatDialog);
+  private readonly _materialStateService: MaterialStateService = inject(MaterialStateService);
   public readonly materialTypes = ['Видео', 'Файл PDF', 'Подкаст'];
-  private readonly dialog: MatDialog = inject(MatDialog);
-  private readonly materialStateService: MaterialStateService = inject(MaterialStateService);
 
   public openDialog(materialType: string) {
-    const dialogRef: MatDialogRef<AddMaterialDialogComponent> = this.dialog.open(AddMaterialDialogComponent, {
+    const dialogRef: MatDialogRef<AddMaterialDialogComponent> = this._dialog.open(AddMaterialDialogComponent, {
       data: materialType,
     });
 
@@ -33,7 +33,7 @@ export class AddMaterialButtonComponent {
         first(),
         tap((material) => {
           if (material) {
-            this.materialStateService.updateAddMaterial(material);
+            this._materialStateService.updateAddMaterial(material);
           }
         })
       )

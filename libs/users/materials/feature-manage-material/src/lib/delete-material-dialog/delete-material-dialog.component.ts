@@ -15,10 +15,10 @@ import { Material } from '@users/materials-data-access';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeleteMaterialDialogComponent {
-  private readonly dialogRef = inject(MatDialogRef<DeleteMaterialDialogComponent>);
+  private readonly _dialogRef = inject(MatDialogRef<DeleteMaterialDialogComponent>);
   public readonly dialogData: Pick<Material, 'id' | 'title'> = inject(MAT_DIALOG_DATA);
 
   public delete() {
-    this.dialogRef.close(this.dialogData.id);
+    this._dialogRef.close(this.dialogData.id);
   }
 }

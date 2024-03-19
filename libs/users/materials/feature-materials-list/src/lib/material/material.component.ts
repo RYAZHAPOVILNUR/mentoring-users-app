@@ -17,14 +17,14 @@ import { MaterialStateService } from '../../../../services/material-state.servic
 })
 export class MaterialComponent implements OnInit {
   @Input({ required: true }) public material!: Material;
-  private readonly materialStateService: MaterialStateService = inject(MaterialStateService);
+  private readonly _materialStateService: MaterialStateService = inject(MaterialStateService);
 
   public getTitleTooltip(title: string): string {
     return title.length > 14 ? title : '';
   }
 
   public deleteMaterial() {
-    this.materialStateService.updateDeleteMaterial({ id: this.material.id, title: this.material.title });
+    this._materialStateService.updateDeleteMaterial({ id: this.material.id, title: this.material.title });
   }
 
   ngOnInit(): void {
