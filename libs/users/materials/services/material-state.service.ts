@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { Folder, Material } from '../data-access';
-import { CreateMaterialWithoutFolderId } from '../data-access/src/lib/models/create-material.model';
+import { CreateMaterialWithoutFolderId, Folder, Material } from '../data-access';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialStateService {
@@ -11,7 +10,7 @@ export class MaterialStateService {
   private readonly addMaterial$$ = new Subject<CreateMaterialWithoutFolderId>();
   private readonly deleteMaterial$$ = new Subject<Pick<Material, 'id' | 'title'>>();
 
-  public get addFolder$() {
+  public get addFolder$(): Observable<string> {
     return this.addFolder$$.asObservable();
   }
 
@@ -19,7 +18,7 @@ export class MaterialStateService {
     this.addFolder$$.next(title);
   }
 
-  public get deleteFolder$() {
+  public get deleteFolder$(): Observable<Omit<Folder, 'created_at'>> {
     return this.deleteFolder$$.asObservable();
   }
 
@@ -27,7 +26,7 @@ export class MaterialStateService {
     this.deleteFolder$$.next(data);
   }
 
-  public get openFolder$() {
+  public get openFolder$(): Observable<number> {
     return this.openFolder$$.asObservable();
   }
 
@@ -35,7 +34,7 @@ export class MaterialStateService {
     this.openFolder$$.next(data);
   }
 
-  public get addMaterial$() {
+  public get addMaterial$(): Observable<CreateMaterialWithoutFolderId> {
     return this.addMaterial$$.asObservable();
   }
 
@@ -43,7 +42,7 @@ export class MaterialStateService {
     this.addMaterial$$.next(material);
   }
 
-  public get deleteMaterial$() {
+  public get deleteMaterial$(): Observable<Pick<Material, 'id' | 'title'>> {
     return this.deleteMaterial$$.asObservable();
   }
 
