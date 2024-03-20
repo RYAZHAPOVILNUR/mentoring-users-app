@@ -1,6 +1,6 @@
 <mat-card class="material">
   <mat-card-content class="material__content">
-    <div class="material__header">
+    <div class="material__header" (click)="open()">
       <mat-icon class="material__icon" matTooltip="Открыть">{{ material.material_link | materialTypeIcon }}</mat-icon>
       <span class="material__title" [matTooltip]="getTitleTooltip(material.title)">{{ material.title }}</span>
     </div>

@@ -8,7 +8,11 @@ import { Material, MaterialsFacade } from '@users/materials-data-access';
 import { LetDirective } from '@ngrx/component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MaterialsListComponent } from '../materials-list/materials-list.component';
-import { AddMaterialButtonComponent, DeleteMaterialDialogComponent } from '@users/feature-manage-material';
+import {
+  AddMaterialButtonComponent,
+  DeleteMaterialDialogComponent,
+  OpenMaterialDialogComponent,
+} from '@users/feature-manage-material';
 import { MaterialStateService } from '../../../../services/material-state.service';
 import { tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -43,6 +47,7 @@ export class MaterialsListContainerComponent implements OnInit {
     this.materialsFacade.loadMaterials();
     this._subscribeToAddMaterial();
     this._subscribeToMaterialDelete();
+    this._subscribeToOpenMaterial();
   }
 
   public goBack() {
@@ -80,6 +85,30 @@ export class MaterialsListContainerComponent implements OnInit {
             this.materialsFacade.deleteMaterial(id);
           }
         })
+      )
+      .subscribe();
+  }
+
+  private _subscribeToOpenMaterial() {
+    this._materialStateService.openMaterial$
+      .pipe(
+        takeUntilDestroyed(this._destroyRef),
+        // tap(console.log),
+        tap((material) => this._openMaterialDialog(material))
+      )
+      .subscribe();
+  }
+
+  private _openMaterialDialog(material: Material) {
+    const dialogRef: MatDialogRef<OpenMaterialDialogComponent> = this._dialog.open(OpenMaterialDialogComponent, {
+      data: material,
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(
+        takeUntilDestroyed(this._destroyRef)
+        // tap(()=> null)
       )
       .subscribe();
   }

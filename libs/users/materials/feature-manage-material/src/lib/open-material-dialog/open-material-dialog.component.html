@@ -1,1 +1,25 @@
-<p>open-material-dialog works!</p>
+<ng-container>
+  <div>
+    <div>
+      <p mat-dialog-title>{{ material.title }}</p>
+      <audio controls [src]="material.material_link | resourceUrlSanitizer"></audio>
+    </div>
+    <mat-icon mat-dialog-close>close</mat-icon>
+  </div>
+</ng-container>
+
+<ng-container>
+  <div>
+    <div>
+      <p mat-dialog-title>{{ material.title }}</p>
+      <a [href]="material.material_link | resourceUrlSanitizer" target="_blank">{{ material.material_link }}</a>
+      <img [src]="getPreviewVideoImage(material.material_link) | resourceUrlSanitizer" loading="lazy" />
+    </div>
+    <mat-icon mat-dialog-close>close</mat-icon>
+  </div>
+</ng-container>
+<p>{{ material.title }}</p>
+<p>{{ material.material_link }}</p>
+<p>{{ material.id }}</p>
+<p>{{ material.folder_id }}</p>
+<p>{{ material.created_at }}</p>

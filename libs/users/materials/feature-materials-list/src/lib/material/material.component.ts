@@ -4,8 +4,8 @@ import { Material } from '@users/materials-data-access';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MaterialTypeIconPipe } from '../pipes/material-type-icon-pipe';
 import { MaterialStateService } from '../../../../services/material-state.service';
+import { MaterialTypeIconPipe } from '../pipes/material-type-icon-pipe';
 
 @Component({
   selector: 'users-material',
@@ -25,5 +25,10 @@ export class MaterialComponent {
 
   public deleteMaterial() {
     this._materialStateService.updateDeleteMaterial({ id: this.material.id, title: this.material.title });
+  }
+
+  public open() {
+    // console.log('click open MaterialComponent');
+    this._materialStateService.updateOpenMaterial(this.material);
   }
 }
