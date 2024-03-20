@@ -28,7 +28,7 @@ export class AddFolderDialogComponent {
   private readonly _dialogRef = inject(MatDialogRef<AddFolderDialogComponent>);
   public folderName: FormControl = new FormControl('', Validators.required);
 
-  public save() {
+  public save(): void {
     if (this.folderName.value && this.folderName.valid) {
       this._dialogRef.close(this.folderName.value.trim());
     }

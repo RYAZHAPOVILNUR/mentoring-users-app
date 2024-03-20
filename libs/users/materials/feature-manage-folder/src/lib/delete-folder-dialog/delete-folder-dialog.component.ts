@@ -29,7 +29,7 @@ export class DeleteFolderDialogComponent {
   private readonly _dialogRef = inject(MatDialogRef<DeleteFolderDialogComponent>);
   public readonly dialogData: Omit<Folder, 'created_at'> = inject(MAT_DIALOG_DATA);
 
-  public delete() {
+  public delete(): void {
     this._dialogRef.close(this.dialogData.id);
   }
 }

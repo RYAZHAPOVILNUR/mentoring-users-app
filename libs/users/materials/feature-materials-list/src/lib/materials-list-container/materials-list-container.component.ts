@@ -50,11 +50,11 @@ export class MaterialsListContainerComponent implements OnInit {
     this._subscribeToOpenMaterial();
   }
 
-  public goBack() {
+  public goBack(): void {
     this._router.navigate(['/materials']);
   }
 
-  private _subscribeToAddMaterial() {
+  private _subscribeToAddMaterial(): void {
     this._materialStateService.addMaterial$
       .pipe(
         takeUntilDestroyed(this._destroyRef),
@@ -63,7 +63,7 @@ export class MaterialsListContainerComponent implements OnInit {
       .subscribe();
   }
 
-  private _subscribeToMaterialDelete() {
+  private _subscribeToMaterialDelete(): void {
     this._materialStateService.deleteMaterial$
       .pipe(
         takeUntilDestroyed(this._destroyRef),
@@ -72,7 +72,7 @@ export class MaterialsListContainerComponent implements OnInit {
       .subscribe();
   }
 
-  private _openDeleteDialog({ id, title }: Pick<Material, 'id' | 'title'>) {
+  private _openDeleteDialog({ id, title }: Pick<Material, 'id' | 'title'>): void {
     const dialogRef: MatDialogRef<DeleteMaterialDialogComponent> = this._dialog.open(DeleteMaterialDialogComponent, {
       data: { id, title },
     });
@@ -89,7 +89,7 @@ export class MaterialsListContainerComponent implements OnInit {
       .subscribe();
   }
 
-  private _subscribeToOpenMaterial() {
+  private _subscribeToOpenMaterial(): void {
     this._materialStateService.openMaterial$
       .pipe(
         takeUntilDestroyed(this._destroyRef),
@@ -99,7 +99,7 @@ export class MaterialsListContainerComponent implements OnInit {
       .subscribe();
   }
 
-  private _openMaterialDialog(material: Material) {
+  private _openMaterialDialog(material: Material): void {
     const dialogRef: MatDialogRef<OpenMaterialDialogComponent> = this._dialog.open(OpenMaterialDialogComponent, {
       data: material,
     });

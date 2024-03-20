@@ -32,7 +32,7 @@ export class AddMaterialDialogComponent {
     link: ['', [Validators.required, this.formValidator(this.materialType)]],
   });
 
-  public save() {
+  public save(): void {
     if (this.formGroup.valid && this.formGroup.value.title && this.formGroup.value.link) {
       const data: CreateMaterialWithoutFolderId = {
         title: this.formGroup.value.title.trim(),

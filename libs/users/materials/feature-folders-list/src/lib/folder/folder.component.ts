@@ -18,11 +18,11 @@ export class FolderComponent {
   @Input({ required: true }) public folder!: Folder;
   private readonly _materialStateService: MaterialStateService = inject(MaterialStateService);
 
-  public deleteFolder() {
+  public deleteFolder(): void {
     this._materialStateService.updateDeleteFolder({ id: this.folder.id, title: this.folder.title });
   }
 
-  public openFolder() {
+  public openFolder(): void {
     this._materialStateService.updateOpenFolder(this.folder.id);
   }
 

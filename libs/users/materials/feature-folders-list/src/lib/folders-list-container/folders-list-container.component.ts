@@ -34,7 +34,7 @@ export class FoldersListContainerComponent implements OnInit {
     this._subscribeToAddFolder();
   }
 
-  private _subscribeToAddFolder() {
+  private _subscribeToAddFolder(): void {
     this._materialStateService.addFolder$
       .pipe(
         takeUntilDestroyed(this._destroyRef),
@@ -43,7 +43,7 @@ export class FoldersListContainerComponent implements OnInit {
       .subscribe();
   }
 
-  private _subscribeToDeleteFolder() {
+  private _subscribeToDeleteFolder(): void {
     this._materialStateService.deleteFolder$
       .pipe(
         takeUntilDestroyed(this._destroyRef),
@@ -52,7 +52,7 @@ export class FoldersListContainerComponent implements OnInit {
       .subscribe();
   }
 
-  private _openDeleteDialog({ id, title }: Omit<Folder, 'created_at'>) {
+  private _openDeleteDialog({ id, title }: Omit<Folder, 'created_at'>): void {
     const dialogRef: MatDialogRef<DeleteFolderDialogComponent> = this._dialog.open(DeleteFolderDialogComponent, {
       data: { id, title },
     });
@@ -69,7 +69,7 @@ export class FoldersListContainerComponent implements OnInit {
       .subscribe();
   }
 
-  private _subscribeToOpenFolder() {
+  private _subscribeToOpenFolder(): void {
     this._materialStateService.openFolder$
       .pipe(
         takeUntilDestroyed(this._destroyRef),
@@ -78,7 +78,7 @@ export class FoldersListContainerComponent implements OnInit {
       .subscribe();
   }
 
-  public openFolder(id: number) {
+  public openFolder(id: number): void {
     this._router.navigate([id], { relativeTo: this._activeRoute });
   }
 }

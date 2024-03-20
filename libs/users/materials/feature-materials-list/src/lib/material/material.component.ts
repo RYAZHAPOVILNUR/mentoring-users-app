@@ -23,11 +23,11 @@ export class MaterialComponent {
     return title.length > 14 ? title : '';
   }
 
-  public deleteMaterial() {
+  public deleteMaterial(): void {
     this._materialStateService.updateDeleteMaterial({ id: this.material.id, title: this.material.title });
   }
 
-  public open() {
+  public open(): void {
     // console.log('click open MaterialComponent');
     this._materialStateService.updateOpenMaterial(this.material);
   }
