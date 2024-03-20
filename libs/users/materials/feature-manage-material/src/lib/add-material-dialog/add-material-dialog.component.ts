@@ -45,14 +45,27 @@ export class AddMaterialDialogComponent {
   public formValidator(materialType: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const typeInfo = Object.values(MATERIAL_TYPES).find((type) => type.label === materialType);
-      console.log(
-        'typeInfo.validationRegex.test(control.value)',
-        typeInfo && typeInfo.validationRegex.test(control.value)
-      );
+      if (!/^https?:\/\//i.test(control.value)) {
+        return { invalidUrl: true };
+      }
       if (typeInfo && !typeInfo.validationRegex.test(control.value)) {
         return { invalidMaterialLink: true };
       }
       return null;
     };
+  }
+
+  public getLinkErrorMessage(): string {
+    const linkControl = this.formGroup.get('link');
+    if (linkControl?.hasError('required')) {
+      return 'Ссылка обязательна';
+    }
+    if (linkControl?.hasError('invalidUrl')) {
+      return 'Неверный формат URL. Адрес должен начинаться с http или https';
+    }
+    if (linkControl?.hasError('invalidMaterialLink')) {
+      return 'Ссылка не соответствует формату ожидаемого типа материала';
+    }
+    return '';
   }
 }

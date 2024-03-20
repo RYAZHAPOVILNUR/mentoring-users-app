@@ -11,7 +11,7 @@
       <mat-form-field>
         <mat-label>Ссылка</mat-label>
         <input matInput formControlName="link" required />
-        <mat-error *ngIf="formGroup.hasError('required', 'link')">Ссылка обязательна</mat-error>
+        <mat-error *ngIf="formGroup.get('link')?.errors">{{ getLinkErrorMessage() }}</mat-error>
       </mat-form-field>
 
       <mat-dialog-actions>
