@@ -99,9 +99,10 @@ export class MaterialsListContainerComponent implements OnInit {
       .subscribe();
   }
 
-  private _openMaterialDialog(material: Material): void {
+  private _openMaterialDialog(material: Omit<Material, 'folder_id'>): void {
     const dialogRef: MatDialogRef<OpenMaterialDialogComponent> = this._dialog.open(OpenMaterialDialogComponent, {
       data: material,
+      autoFocus: false,
     });
 
     dialogRef

@@ -28,4 +28,17 @@ export class OpenMaterialDialogComponent {
     const emptyImg = 'https://icon-library.com/images/photo-placeholder-icon/photo-placeholder-icon-14.jpg';
     return videoId ? `https://img.youtube.com/vi/${videoId}/sddefault.jpg` : emptyImg;
   }
+
+  public getMaterialType(url: string): string {
+    if (MATERIAL_TYPES.VIDEO.validationRegex.test(url)) {
+      return 'video';
+    }
+    if (MATERIAL_TYPES.PDF.validationRegex.test(url)) {
+      return 'pdf';
+    }
+    if (MATERIAL_TYPES.PODCAST.validationRegex.test(url)) {
+      return 'podcast';
+    }
+    return 'unknown';
+  }
 }

@@ -9,7 +9,7 @@ export class MaterialStateService {
   private readonly _openFolder$$ = new Subject<number>();
   private readonly _addMaterial$$ = new Subject<CreateMaterialWithoutFolderId>();
   private readonly _deleteMaterial$$ = new Subject<Pick<Material, 'id' | 'title'>>();
-  private readonly _openMaterial$$ = new Subject<Material>();
+  private readonly _openMaterial$$ = new Subject<Omit<Material, 'folder_id'>>();
 
   public get addFolder$(): Observable<string> {
     return this._addFolder$$.asObservable();
@@ -51,11 +51,11 @@ export class MaterialStateService {
     this._deleteMaterial$$.next(data);
   }
 
-  public get openMaterial$(): Observable<Material> {
+  public get openMaterial$(): Observable<Omit<Material, 'folder_id'>> {
     return this._openMaterial$$.asObservable();
   }
 
-  public updateOpenMaterial(material: Material) {
+  public updateOpenMaterial(material: Omit<Material, 'folder_id'>) {
     this._openMaterial$$.next(material);
   }
 }

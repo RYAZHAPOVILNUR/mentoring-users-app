@@ -1,25 +1,25 @@
-<ng-container>
-  <div>
-    <div>
-      <p mat-dialog-title>{{ material.title }}</p>
-      <audio controls [src]="material.material_link | resourceUrlSanitizer"></audio>
-    </div>
+<div class="container">
+  <div class="header">
+    <span class="title" mat-dialog-title>{{ material.title }}</span>
     <mat-icon mat-dialog-close>close</mat-icon>
   </div>
-</ng-container>
+  <div class="content">
+    <ng-container *ngIf="getMaterialType(material.material_link) === 'podcast'">
+      <audio class="audio" controls [src]="material.material_link | resourceUrlSanitizer"></audio>
+    </ng-container>
 
-<ng-container>
-  <div>
-    <div>
-      <p mat-dialog-title>{{ material.title }}</p>
-      <a [href]="material.material_link | resourceUrlSanitizer" target="_blank">{{ material.material_link }}</a>
-      <img [src]="getPreviewVideoImage(material.material_link) | resourceUrlSanitizer" loading="lazy" />
-    </div>
-    <mat-icon mat-dialog-close>close</mat-icon>
+    <ng-container class="content" *ngIf="getMaterialType(material.material_link) === 'video'">
+      <div class="video">
+        <span class="video_title">
+          Ссылка на видео:
+          <a class="video_link" [href]="material.material_link | resourceUrlSanitizer" target="_blank">
+            {{ material.material_link }}
+          </a>
+        </span>
+
+        <img [src]="getPreviewVideoImage(material.material_link) | resourceUrlSanitizer" loading="lazy" />
+      </div>
+    </ng-container>
   </div>
-</ng-container>
-<p>{{ material.title }}</p>
-<p>{{ material.material_link }}</p>
-<p>{{ material.id }}</p>
-<p>{{ material.folder_id }}</p>
-<p>{{ material.created_at }}</p>
+  <span class="date">Дата добавления: {{ material.created_at | date : 'd/MM/y' }}</span>
+</div>

@@ -28,7 +28,7 @@ export class MaterialComponent {
   }
 
   public open(): void {
-    // console.log('click open MaterialComponent');
-    this._materialStateService.updateOpenMaterial(this.material);
+    const { folder_id, ...rest } = this.material;
+    this._materialStateService.updateOpenMaterial(rest);
   }
 }
