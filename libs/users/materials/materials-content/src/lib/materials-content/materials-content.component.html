@@ -24,7 +24,7 @@
   </ng-container>
 
   <ng-container *ngSwitchCase="'video_library'">
-    <p mat-dialog-title>Ссылка на видео: {{ data.link }}</p>
+    <p mat-dialog-title>Ссылка на видео: <a [href]="data.link" target="_blank">{{ data.link }}</a></p>
     <div *ngIf="getVideoId()">
       <img [src]="'https://img.youtube.com/vi/' + getVideoId() + '/maxresdefault.jpg'" width="100%" alt="video-preview">
     </div>

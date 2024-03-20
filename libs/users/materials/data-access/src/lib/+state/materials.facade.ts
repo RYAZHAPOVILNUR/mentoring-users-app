@@ -7,8 +7,8 @@ import {
   selectMaterialsFeatureError,
   selectMaterialsFeatureStatus, selectRevealedFolder
 } from './materials.selectors';
-import { CreateFolder, CreateMaterial } from '../types/';
-import { map, take, tap } from 'rxjs';
+import { CreateMaterial } from '../types/';
+import { map, tap, first } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
@@ -36,7 +36,7 @@ export class MaterialsFacade {
   revealFolder(id: number): void {
     this.store.dispatch(MaterialsActions.loadMaterials());
     this.folders$.pipe(
-      take(1),
+      first(),
       map(folders =>
         folders.find(folder => folder.id === id)),
       tap(filteredFolder => {
@@ -52,7 +52,7 @@ export class MaterialsFacade {
 
   addMaterial(newMaterial: Omit<CreateMaterial, 'folder_id'>): void {
     this.revealedFolder$.pipe(
-      take(1),
+      first(),
       tap(folder => {
         if (folder) {
           const materialData: CreateMaterial = {

@@ -15,6 +15,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { tap } from 'rxjs';
 
 
 @Component({
@@ -44,7 +45,11 @@ export class FoldersCardComponent {
       data: { dialogText: 'Вы хотите безвозвратно удалить эту папку?' }
     });
 
-    dialogRef.afterClosed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(result =>
-      result && this.deleteFolder.emit(id));
+    dialogRef.afterClosed().pipe(
+      takeUntilDestroyed(this.destroyRef),
+      tap(result =>
+        result && this.deleteFolder.emit(id))
+    )
+      .subscribe();
   }
 }

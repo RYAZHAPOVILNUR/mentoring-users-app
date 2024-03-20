@@ -14,8 +14,10 @@ export interface MaterialsFeatureState extends EntityState<MaterialDTO>{
   status: MaterialsStatus,
   revealedFolder?: FolderDTO
 }
+
 const localStorageRevealedFolder = localStorage.getItem('revealedFolder');
 const revealedFolder = localStorageRevealedFolder ? JSON.parse(localStorageRevealedFolder) : undefined;
+
 export const initialFoldersState: MaterialsFeatureState = materialsAdapter.getInitialState({
   folders: [],
   error: null,

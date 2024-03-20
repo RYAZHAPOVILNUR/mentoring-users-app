@@ -33,9 +33,6 @@ export const selectMaterialsEntities = createSelector(
 export const selectFilteredMaterials = createSelector(
   selectMaterialsEntities,
   selectRevealedFolder,
-  (entities, folder) => {
-    return folder
-      ? Object.values(entities).filter(material => material?.folder_id === folder.id)
-      : []
-  }
+  (entities, folder) =>
+    Object.values(entities).filter(material => material?.folder_id === folder?.id) || []
 );
