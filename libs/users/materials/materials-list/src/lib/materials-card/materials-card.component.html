@@ -2,7 +2,7 @@
   <button class="mat-button" (click)="onRevealMaterial()">
     <div class="btn-content-div">
       <h3>{{ material.title }}</h3>
-      <p>{{ parsedDate }}</p>
+      <p>{{ material.created_at | date }}</p>
     </div>
     <mat-icon class="material-icon">{{ material.type }}</mat-icon>
   </button>

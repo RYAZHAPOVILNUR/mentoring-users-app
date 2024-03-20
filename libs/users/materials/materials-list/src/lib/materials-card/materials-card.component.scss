@@ -29,3 +29,14 @@ h3 {
   margin: 0;
   font-weight: bold;
 }
+
+.material-card-buttons {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.material-card:hover .material-card-buttons {
+  opacity: 1;
+  pointer-events: auto;
+}

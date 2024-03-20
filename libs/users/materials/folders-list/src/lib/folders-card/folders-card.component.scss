@@ -6,7 +6,7 @@
   border-radius: 5px;
 }
 
-.folder-item {
+.folder-card {
   display: flex;
   flex-direction: row;
   width: 250px;
@@ -28,4 +28,15 @@
 h3 {
   margin: 0;
   font-weight: bold;
+}
+
+.folder-card-buttons {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.folder-card:hover .folder-card-buttons {
+  opacity: 1;
+  pointer-events: auto;
 }

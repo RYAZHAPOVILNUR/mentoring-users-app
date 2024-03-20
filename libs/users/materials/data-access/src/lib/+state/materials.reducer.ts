@@ -1,26 +1,28 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { MaterialsActions } from './materials.actions';
 import { FolderDTO, MaterialDTO } from '../types'
+import { createEntityAdapter, EntityState } from '@ngrx/entity';
 
 export const MATERIALS_FEATURE_KEY = 'materials';
 export type MaterialsStatus = 'init' | 'loading' | 'loaded'
 
-export interface MaterialsFeatureState {
+export const materialsAdapter = createEntityAdapter<MaterialDTO>()
+
+export interface MaterialsFeatureState extends EntityState<MaterialDTO>{
   folders: FolderDTO[],
-  materials: MaterialDTO[],
   error: any,
   status: MaterialsStatus,
   revealedFolder?: FolderDTO
 }
-
-export const initialFoldersState: MaterialsFeatureState = {
+const localStorageRevealedFolder = localStorage.getItem('revealedFolder');
+const revealedFolder = localStorageRevealedFolder ? JSON.parse(localStorageRevealedFolder) : undefined;
+export const initialFoldersState: MaterialsFeatureState = materialsAdapter.getInitialState({
   folders: [],
-  materials: [],
   error: null,
   status: 'init',
-  revealedFolder: localStorage.getItem('revealedFolder') ?
-    JSON.parse(localStorage.getItem('revealedFolder')!) : undefined
-};
+  revealedFolder
+});
+
 const reducer = createReducer(
   initialFoldersState,
   on(MaterialsActions.loadFolders, state => ({
@@ -57,25 +59,21 @@ const reducer = createReducer(
     status: 'loading'
   })),
   on(MaterialsActions.loadMaterialsSuccess, (state, { materials }) => ({
-    ...state,
-    materials: materials,
-    status: 'loaded'
+    ...materialsAdapter.setAll(materials, { ...state, status: 'loaded'}),
   })),
   on(MaterialsActions.loadMaterialsFailure, (state, { error }) => ({
     ...state,
     error: error
   })),
   on(MaterialsActions.deleteMaterialSuccess, (state, { id }) => ({
-    ...state,
-    materials: state.materials.filter(material => material.id !== id)
+    ...materialsAdapter.removeOne(id, { ...state })
   })),
   on(MaterialsActions.deleteMaterialFailure, (state, { error }) => ({
     ...state,
     error: error
   })),
   on(MaterialsActions.addMaterialSuccess, (state, { newMaterial }) => ({
-    ...state,
-    materials: [...state.materials, newMaterial]
+      ...materialsAdapter.addOne(newMaterial, { ...state })
   })),
   on(MaterialsActions.addMaterialFailure, (state, { error }) => ({
     ...state,
