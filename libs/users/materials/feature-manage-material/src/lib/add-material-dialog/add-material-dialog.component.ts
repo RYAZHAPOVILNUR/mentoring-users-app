@@ -61,7 +61,7 @@ export class AddMaterialDialogComponent {
       return 'Ссылка обязательна';
     }
     if (linkControl?.hasError('invalidUrl')) {
-      return 'Неверный формат URL. Адрес должен начинаться с http или https';
+      return 'Адрес должен начинаться с http или https';
     }
     if (linkControl?.hasError('invalidMaterialLink')) {
       return 'Ссылка не соответствует формату ожидаемого типа материала';

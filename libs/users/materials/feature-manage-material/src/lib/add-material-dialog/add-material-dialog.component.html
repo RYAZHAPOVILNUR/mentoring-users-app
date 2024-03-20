@@ -14,7 +14,7 @@
         <mat-error *ngIf="formGroup.get('link')?.errors">{{ getLinkErrorMessage() }}</mat-error>
       </mat-form-field>
 
-      <mat-dialog-actions>
+      <mat-dialog-actions class="buttons">
         <button mat-flat-button mat-dialog-close>Отмена</button>
         <button
           type="submit"

@@ -25,6 +25,7 @@ export class AddMaterialButtonComponent {
   public openDialog(materialType: string) {
     const dialogRef: MatDialogRef<AddMaterialDialogComponent> = this._dialog.open(AddMaterialDialogComponent, {
       data: materialType,
+      width: '500px',
     });
 
     dialogRef

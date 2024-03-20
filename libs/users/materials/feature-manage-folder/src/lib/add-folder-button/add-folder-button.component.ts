@@ -21,7 +21,9 @@ export class AddFolderButtonComponent {
   private readonly _materialStateService = inject(MaterialStateService);
 
   public openCreateFolderDialog() {
-    const dialogRef: MatDialogRef<AddFolderDialogComponent> = this._dialog.open(AddFolderDialogComponent);
+    const dialogRef: MatDialogRef<AddFolderDialogComponent> = this._dialog.open(AddFolderDialogComponent, {
+      width: '400px',
+    });
     dialogRef
       .afterClosed()
       .pipe(
