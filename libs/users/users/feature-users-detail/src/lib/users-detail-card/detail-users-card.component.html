@@ -90,7 +90,7 @@
 
             <div class="storypoint">
                 <button (click)="storyPoint.enable()" mat-stroked-button type="button">Редактировать StoryPoint</button>              
-                <button (click)="onAddStoryPoint()" *ngIf="!storyPoint.disabled" mat-icon-button type="button"><mat-icon>done</mat-icon></button>
+                <button (click)="onAddStoryPoint()" *ngIf="!storyPoint.disabled" [disabled]="!storyPoint.valid" mat-icon-button type="button"><mat-icon>done</mat-icon></button>
                 <button (click)="storyPoint.disable()" *ngIf="!storyPoint.disabled" mat-icon-button type="button" ><mat-icon>close</mat-icon></button>
             </div>
 

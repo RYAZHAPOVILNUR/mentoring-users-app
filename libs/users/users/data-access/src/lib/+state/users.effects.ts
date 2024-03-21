@@ -149,8 +149,6 @@ export const addUserStoryPoint$ = createEffect(
       map(([{ userData, id, onSuccessAddSP}, usersEntities]) => ({
         user: {
           ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
-          name: userData.name,
-          email: userData.email,
           totalStoryPoints: userData.totalStoryPoints
         },
         onSuccessAddSP
