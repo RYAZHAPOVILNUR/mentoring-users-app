@@ -22,12 +22,6 @@ import { UsersFacade } from '@users/users/data-access';
   styleUrls: ['./users-filter.component.scss'],
 })
 export class UsersFilterComponent {
-  public usersFacade = inject(UsersFacade);
-
-  mySearch = new FormGroup({
-    name: new FormControl('')
-  })
-  onSearch(myForm: FormGroup){
-    this.usersFacade.setFilterUsers(myForm.value.name)
-  }
+  public readonly usersFacade = inject(UsersFacade);
+  public readonly searchName = new FormControl();
 }

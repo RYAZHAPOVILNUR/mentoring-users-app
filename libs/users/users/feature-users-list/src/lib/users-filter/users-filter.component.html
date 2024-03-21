@@ -1,17 +1,11 @@
-<div class="search" [formGroup]="mySearch">
+<div class="search">
     <mat-form-field class="example-full-width">
         <input 
         class="search__inp"
         matInput 
         placeholder="Я ищу..."
-        formControlName="name"
+        [formControl]="searchName"
+        (input)="usersFacade.setFilterUsers(searchName.value)"
         >
     </mat-form-field>
-    <div class="example-button-row">
-      <button
-      class="search__btn" 
-      mat-stroked-button
-      (click)="onSearch(mySearch)"
-      >Поиск</button>
-    </div>
 </div>
