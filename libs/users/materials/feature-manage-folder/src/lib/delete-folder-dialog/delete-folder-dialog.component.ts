@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { Folder } from '@users/materials-data-access';
+import { DeleteMaterialDialogComponent } from '@users/feature-manage-material';
 
 @Component({
   selector: 'users-delete-folder-dialog',
@@ -26,7 +27,9 @@ import { Folder } from '@users/materials-data-access';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeleteFolderDialogComponent {
-  private readonly _dialogRef = inject(MatDialogRef<DeleteFolderDialogComponent>);
+  private readonly _dialogRef: MatDialogRef<DeleteMaterialDialogComponent, number> = inject(
+    MatDialogRef<DeleteFolderDialogComponent>
+  );
   public readonly dialogData: Omit<Folder, 'created_at'> = inject(MAT_DIALOG_DATA);
 
   public delete(): void {

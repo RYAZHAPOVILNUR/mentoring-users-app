@@ -24,7 +24,9 @@ import { MATERIAL_TYPES } from '../../../../constants/material-types.constants';
 })
 export class AddMaterialDialogComponent {
   private readonly _fb = inject(FormBuilder);
-  private readonly _dialogRef = inject(MatDialogRef<AddMaterialDialogComponent>);
+  private readonly _dialogRef: MatDialogRef<AddMaterialDialogComponent, CreateMaterialWithoutFolderId> = inject(
+    MatDialogRef<AddMaterialDialogComponent>
+  );
   public readonly materialType = inject(MAT_DIALOG_DATA);
 
   public formGroup = this._fb.group({

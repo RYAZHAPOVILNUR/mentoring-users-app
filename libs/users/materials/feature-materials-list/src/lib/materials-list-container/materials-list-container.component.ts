@@ -42,7 +42,7 @@ export class MaterialsListContainerComponent implements OnInit {
   private readonly _dialog = inject(MatDialog);
   public readonly materialsFacade = inject(MaterialsFacade);
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.materialsFacade.folderContent();
     this.materialsFacade.loadMaterials();
     this._subscribeToAddMaterial();
@@ -104,12 +104,6 @@ export class MaterialsListContainerComponent implements OnInit {
       autoFocus: false,
     });
 
-    dialogRef
-      .afterClosed()
-      .pipe(
-        takeUntilDestroyed(this._destroyRef)
-        // tap(()=> null)
-      )
-      .subscribe();
+    dialogRef.afterClosed().pipe(takeUntilDestroyed(this._destroyRef)).subscribe();
   }
 }

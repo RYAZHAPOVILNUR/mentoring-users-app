@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { Material } from '@users/materials-data-access';
 import { MatIconModule } from '@angular/material/icon';
 import { ResourceUrlSanitizer } from '../pipes/resource-url-sanitizer';
@@ -16,7 +16,6 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OpenMaterialDialogComponent {
-  private readonly _dialogRef = inject(MatDialogRef<OpenMaterialDialogComponent>);
   public readonly material: Material = inject(MAT_DIALOG_DATA);
 
   private _extractVideoId(url: string): string | null {

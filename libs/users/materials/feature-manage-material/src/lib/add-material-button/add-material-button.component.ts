@@ -22,7 +22,7 @@ export class AddMaterialButtonComponent {
   private readonly _materialStateService: MaterialStateService = inject(MaterialStateService);
   public readonly materialTypes = ['Видео', 'Файл PDF', 'Подкаст'];
 
-  public openDialog(materialType: string) {
+  public openDialog(materialType: string): void {
     const dialogRef: MatDialogRef<AddMaterialDialogComponent> = this._dialog.open(AddMaterialDialogComponent, {
       data: materialType,
       width: '500px',

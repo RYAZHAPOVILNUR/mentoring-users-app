@@ -7,7 +7,7 @@ import {
   selectLoadingStatus,
 } from './materials.selectors';
 import { MaterialsActions } from './materials.actions';
-import { CreateMaterial, CreateMaterialWithoutFolderId } from '../models/create-material.model';
+import { CreateMaterialWithoutFolderId } from '../models/create-material.model';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
@@ -17,23 +17,23 @@ export class MaterialsFacade {
   public readonly currentFolder$ = this.store.select(selectCurrentFolder);
   public readonly currentFolderMaterials$ = this.store.select(selectCurrentFolderMaterials);
 
-  public loadFolders() {
+  public loadFolders(): void {
     this.store.dispatch(MaterialsActions.loadFolders());
   }
 
-  public addFolder(title: string) {
+  public addFolder(title: string): void {
     this.store.dispatch(MaterialsActions.addFolder({ title }));
   }
 
-  public deleteFolder(id: number) {
+  public deleteFolder(id: number): void {
     this.store.dispatch(MaterialsActions.deleteFolder({ id }));
   }
 
-  public folderContent() {
+  public folderContent(): void {
     this.store.dispatch(MaterialsActions.currentFolder());
   }
 
-  public loadMaterials() {
+  public loadMaterials(): void {
     this.store.dispatch(MaterialsActions.loadMaterials());
   }
 

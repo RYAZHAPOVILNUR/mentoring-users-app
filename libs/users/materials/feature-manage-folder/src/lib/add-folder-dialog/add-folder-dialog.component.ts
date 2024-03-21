@@ -25,7 +25,9 @@ import { MatInputModule } from '@angular/material/input';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddFolderDialogComponent {
-  private readonly _dialogRef = inject(MatDialogRef<AddFolderDialogComponent>);
+  private readonly _dialogRef: MatDialogRef<AddFolderDialogComponent, string> = inject(
+    MatDialogRef<AddFolderDialogComponent>
+  );
   public folderName: FormControl = new FormControl('', Validators.required);
 
   public save(): void {

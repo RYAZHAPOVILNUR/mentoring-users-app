@@ -27,7 +27,7 @@ export class FoldersListContainerComponent implements OnInit {
   private readonly _materialStateService: MaterialStateService = inject(MaterialStateService);
   public readonly materialsFacade = inject(MaterialsFacade);
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.materialsFacade.loadFolders();
     this._subscribeToDeleteFolder();
     this._subscribeToOpenFolder();

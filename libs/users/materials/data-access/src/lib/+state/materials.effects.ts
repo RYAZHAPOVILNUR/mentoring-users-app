@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { MaterialsActions } from './materials.actions';
 import { ApiService } from '@users/core/http';
 import { Folder } from '../models/folder.model';
-import { MATERIALS_API_PATHS } from './materials-api.constants';
+import { MATERIALS_API_PATHS } from '../constants/materials-api.constants';
 import { Store } from '@ngrx/store';
 import { selectRouteParams } from '@users/core/data-access';
 import { Material } from '../models/material.model';
