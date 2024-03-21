@@ -59,10 +59,6 @@ export const filteredUsers = createSelector(
   selectAllUsers,
   usersFilterSelector,
   (users, name) => {
-    if(name === ""){
-      return users
-    } else {
-      return users.filter((user) => user.name.toLocaleLowerCase() === name.toLocaleLowerCase())
-    }
+    return name == "" ? users : users.filter((user) => user.name.toLocaleLowerCase() === name.toLocaleLowerCase());
   }
 )
