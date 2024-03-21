@@ -1,0 +1,43 @@
+{
+  "name": "feature-manage-material",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/users/materials/feature-manage-material/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/users/materials/feature-manage-material",
+        "main": "libs/users/materials/feature-manage-material/src/index.ts",
+        "tsConfig": "libs/users/materials/feature-manage-material/tsconfig.lib.json",
+        "assets": ["libs/users/materials/feature-manage-material/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/users/materials/feature-manage-material/**/*.ts",
+          "libs/users/materials/feature-manage-material/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/users/materials/feature-manage-material/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}

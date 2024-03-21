@@ -1,11 +1,29 @@
 {
-  "name": "users-materials-data-access",
+  "name": "materials-data-access",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/users/materials/data-access/src",
-  "prefix": "users",
-  "tags": [],
   "projectType": "library",
   "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/users/materials/data-access",
+        "main": "libs/users/materials/data-access/src/index.ts",
+        "tsConfig": "libs/users/materials/data-access/tsconfig.lib.json",
+        "assets": ["libs/users/materials/data-access/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/users/materials/data-access/**/*.ts",
+          "libs/users/materials/data-access/package.json"
+        ]
+      }
+    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
@@ -19,13 +37,7 @@
           "codeCoverage": true
         }
       }
-    },
-    "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/users/materials/data-access/**/*.ts", "libs/users/materials/data-access/**/*.html"]
-      }
     }
-  }
+  },
+  "tags": []
 }

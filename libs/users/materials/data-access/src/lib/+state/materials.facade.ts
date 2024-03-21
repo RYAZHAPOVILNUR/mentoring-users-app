@@ -1,0 +1,47 @@
+import { inject, Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import {
+  selectAllFolders,
+  selectCurrentFolder,
+  selectCurrentFolderMaterials,
+  selectLoadingStatus,
+} from './materials.selectors';
+import { MaterialsActions } from './materials.actions';
+import { CreateMaterialWithoutFolderId } from '../models/create-material.model';
+
+@Injectable({ providedIn: 'root' })
+export class MaterialsFacade {
+  private readonly store = inject(Store);
+  public readonly folders$ = this.store.select(selectAllFolders);
+  public readonly loadingStatus$ = this.store.select(selectLoadingStatus);
+  public readonly currentFolder$ = this.store.select(selectCurrentFolder);
+  public readonly currentFolderMaterials$ = this.store.select(selectCurrentFolderMaterials);
+
+  public loadFolders(): void {
+    this.store.dispatch(MaterialsActions.loadFolders());
+  }
+
+  public addFolder(title: string): void {
+    this.store.dispatch(MaterialsActions.addFolder({ title }));
+  }
+
+  public deleteFolder(id: number): void {
+    this.store.dispatch(MaterialsActions.deleteFolder({ id }));
+  }
+
+  public folderContent(): void {
+    this.store.dispatch(MaterialsActions.currentFolder());
+  }
+
+  public loadMaterials(): void {
+    this.store.dispatch(MaterialsActions.loadMaterials());
+  }
+
+  public addMaterial(material: CreateMaterialWithoutFolderId) {
+    this.store.dispatch(MaterialsActions.addMaterial({ material }));
+  }
+
+  public deleteMaterial(id: number) {
+    this.store.dispatch(MaterialsActions.deleteMaterial({ id }));
+  }
+}

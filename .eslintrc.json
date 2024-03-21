@@ -37,6 +37,12 @@
         "jest": true
       },
       "rules": {}
+    },
+    {
+      "files": ["*.component.html"],
+      "parser": "@angular-eslint/template-parser",
+      "plugins": ["@angular-eslint/template"],
+      "rules": {}
     }
   ]
 }
