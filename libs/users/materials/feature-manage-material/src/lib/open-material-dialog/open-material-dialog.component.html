@@ -17,8 +17,24 @@
           </a>
         </span>
 
-        <img [src]="getPreviewVideoImage(material.material_link) | resourceUrlSanitizer" loading="lazy" />
+        <img [src]="getPreviewVideoImage(material.material_link) | resourceUrlSanitizer" loading="lazy" alt="preview" />
       </div>
+    </ng-container>
+
+    <ng-container class="content" *ngIf="getMaterialType(material.material_link) === 'pdf'">
+      <pdf-viewer
+        class="pdf"
+        [src]="material.material_link"
+        [show-all]="true"
+        [original-size]="false"
+        [autoresize]="true"
+      ></pdf-viewer>
+    </ng-container>
+
+    <ng-container class="content" *ngIf="getMaterialType(material.material_link) === 'unknown'">
+      <span class="error"
+        >Произошла ошибка при попытке загрузить файл. Убедитесь, что файл в правильном формате и не поврежден.</span
+      >
     </ng-container>
   </div>
   <span class="date">Дата добавления: {{ material.created_at | date : 'd/MM/y' }}</span>

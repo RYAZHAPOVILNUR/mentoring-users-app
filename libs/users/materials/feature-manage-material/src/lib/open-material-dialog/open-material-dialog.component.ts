@@ -1,15 +1,16 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { Material } from '@users/materials-data-access';
 import { MatIconModule } from '@angular/material/icon';
 import { ResourceUrlSanitizer } from '../pipes/resource-url-sanitizer';
 import { MATERIAL_TYPES } from '../../../../constants/material-types.constants';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @Component({
   selector: 'users-open-material-dialog',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, MatIconModule, ResourceUrlSanitizer],
+  imports: [CommonModule, MatDialogModule, MatIconModule, ResourceUrlSanitizer, PdfViewerModule],
   templateUrl: './open-material-dialog.component.html',
   styleUrls: ['./open-material-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

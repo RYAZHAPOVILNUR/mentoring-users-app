@@ -93,7 +93,6 @@ export class MaterialsListContainerComponent implements OnInit {
     this._materialStateService.openMaterial$
       .pipe(
         takeUntilDestroyed(this._destroyRef),
-        // tap(console.log),
         tap((material) => this._openMaterialDialog(material))
       )
       .subscribe();
