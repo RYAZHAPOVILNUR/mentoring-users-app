@@ -71,7 +71,10 @@ export const deleteFolder = createEffect(
             .pipe(
               map(() => {
                 return MaterialsActions.deleteFolderSuccess({id});
-              })
+              }),
+              catchError(() => 
+                of(MaterialsActions.deleteFolderFailed())
+              )
             );
       })
     )
