@@ -8,7 +8,7 @@
   </button>
 </div>
 
-<ng-container [ngSwitch]="getMaterialType(data.material.link)">
+<ng-container [ngSwitch]="data.material.link | MaterialType">
   <!-- PDF -->
   <ng-container *ngSwitchCase="'pdf'">
     <users-material-content-pdf [link]="data.material.link"></users-material-content-pdf>
@@ -24,3 +24,4 @@
     <users-material-content-video [link]="data.material.link"></users-material-content-video>
   </ng-container>
 </ng-container>
+

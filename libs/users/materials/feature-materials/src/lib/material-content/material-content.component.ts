@@ -10,6 +10,7 @@ import { MaterialContentAudioComponent } from './material-content-audio/material
 import { MaterialContentVideoComponent } from './material-content-video/material-content-video.component';
 import { MaterialContentPdfComponent } from './material-content-pdf/material-content-pdf.component';
 import { MaterialEntity } from 'libs/users/materials/data-access/src/lib/model/material.entity';
+import { MaterialTypePipe } from './pipes/MaterialType.pipe';
 
 
 @Component({
@@ -25,8 +26,8 @@ import { MaterialEntity } from 'libs/users/materials/data-access/src/lib/model/m
     MatIconModule,
     MaterialContentAudioComponent,
     MaterialContentVideoComponent,
-    MaterialContentPdfComponent
-
+    MaterialContentPdfComponent,
+    MaterialTypePipe
   ],
   templateUrl: './material-content.component.html',
   styleUrls: ['./material-content.component.scss'],
@@ -40,19 +41,6 @@ export class MaterialContentComponent {
 
   public onClose(): void {
     this.dialogRef.close();
-  }
-
-  public getMaterialType(link: string): string {
-    const extension = link.split('.').pop();
-  
-    switch(extension) {
-      case 'pdf':
-        return 'pdf';
-      case 'mp3':
-        return 'audio';
-      default:
-        return 'video';
-    }
   }
   
 
