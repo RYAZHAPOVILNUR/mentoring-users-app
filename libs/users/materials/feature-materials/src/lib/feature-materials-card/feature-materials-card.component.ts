@@ -56,13 +56,6 @@ export class FeatureMaterialsCardComponent {
       .subscribe()
   }
   
-  public dateFormat(time: number): string {
-    const date = new Date(time);
-    return `
-      ${date.getDate()} 
-      ${date.toLocaleString('default', { month: 'short' }).slice(0, -1)}
-    `
-  }
 
   public onDeleteMaterial(material:MaterialEntity){
     this.deleteMaterial.emit(material)
