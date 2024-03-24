@@ -15,7 +15,7 @@ export const materialsAdapter: EntityAdapter<FolderEntity> =
   createEntityAdapter<FolderEntity>();
 
 export const initialMaterialsState: MaterialsState = materialsAdapter.getInitialState({
-  materials:[] as MaterialEntity[],
+  materials:[],
   status: 'init'
 });
 
