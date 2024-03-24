@@ -34,7 +34,7 @@ import { MaterialEntity } from 'libs/users/materials/data-access/src/lib/model/m
 })
 export class MaterialContentComponent {
   public data: { material:MaterialEntity } = inject(MAT_DIALOG_DATA);
-  public dialogRef = inject(MatDialogRef<MaterialContentComponent>);
+  private readonly dialogRef = inject(MatDialogRef<MaterialContentComponent>);
 
 
 

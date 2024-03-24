@@ -34,7 +34,7 @@ import { MaterialEntity, AddMaterialEntity } from 'libs/users/materials/data-acc
 export class FeatureMaterialsAddBtnComponent {
   private readonly materialsFacade = inject(MaterialsFacade);
   private readonly destroyRef = inject(DestroyRef);
-  public dialog = inject(MatDialog);
+  private readonly dialog = inject(MatDialog);
 
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
 

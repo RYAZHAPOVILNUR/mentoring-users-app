@@ -29,9 +29,9 @@ export class FeatureMaterialsContainerComponent implements OnInit {
   private matDialog = inject(MatDialog);
   private readonly router = inject(Router);
   private readonly facade = inject(MaterialsFacade)
-  public openedFolder$ = this.facade.openedFolder$
-  public filteredMaterials$ = this.facade.filteredMaterials$
-  public materialsStatus$ = this.facade.materialsStatus$
+  public readonly openedFolder$ = this.facade.openedFolder$
+  public readonly filteredMaterials$ = this.facade.filteredMaterials$
+  public readonly materialsStatus$ = this.facade.materialsStatus$
   private destroyRef = inject(DestroyRef);
 
 
