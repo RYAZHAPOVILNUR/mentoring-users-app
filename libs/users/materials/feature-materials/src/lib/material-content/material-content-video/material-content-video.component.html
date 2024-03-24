@@ -2,6 +2,6 @@
   <p mat-dialog-title>Ссылка на видео: {{ link }}</p>
 </div>
 
-<div *ngIf="link | VideoId as videoId" class="thumbnail">
+<div *ngIf="link | videoId as videoId" class="thumbnail">
   <img [src]="'https://img.youtube.com/vi/' + videoId + '/maxresdefault.jpg'">
 </div>

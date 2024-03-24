@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'MaterialType',
+  name: 'materialType',
   standalone:true
 })
 export class MaterialTypePipe implements PipeTransform {

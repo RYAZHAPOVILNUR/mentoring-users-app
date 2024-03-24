@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'VideoId',
+  name: 'videoId',
   standalone: true
 })
 export class VideoIdPipe implements PipeTransform {
