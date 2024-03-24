@@ -27,7 +27,7 @@ export class MaterialFolderAddBtnComponent {
       dialogRef.afterClosed()
       .pipe(
         takeUntilDestroyed(this.destroyRef),
-        filter(folderName => !!folderName)
+        filter(Boolean)
       )
       .subscribe((folderName: string) => this.facade.addNewFolder({title:folderName}))
   };
