@@ -5,6 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/materia
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { LinkValidationPipe } from './pipes/LinkValidationPipe.pipe';
 
 @Component({
   selector: 'users-material-add-dialog',
@@ -16,7 +17,9 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatButtonModule],
+    MatButtonModule,
+    LinkValidationPipe,
+  ],
   templateUrl: './material-add-dialog.component.html',
   styleUrls: ['./material-add-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,31 +36,12 @@ export class MaterialAddDialogComponent {
     })
   }
 
-  public isLinkValid(link: string): boolean {
-    if (this.data.materialType === 'Video') {
-      const videoRegex = /[?&]v=([a-zA-Z0-9_-]{11})|\/embed\/([a-zA-Z0-9_-]{11})/
-      return videoRegex.test(link);
-    }
-
-    if (this.data.materialType === 'PDF') {
-      const pdfRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*\.pdf$/
-      return pdfRegex.test(link);
-    }
-
-    if (this.data.materialType === 'Podcast') {
-      const audioRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*\.mp3$/
-      return audioRegex.test(link);
-    }
-
-    return true;
-  }
-
   public close(): void {
     this.dialogRef.close()
   }
 
   public save(): void {
-    if (this.formGroup.valid && this.isLinkValid(this.formGroup.value.materialLink)) {
+    if (this.formGroup.valid) {
       const newMaterial = {
         materialTitle: this.formGroup.value.materialTitle,
         materialLink: this.formGroup.value.materialLink

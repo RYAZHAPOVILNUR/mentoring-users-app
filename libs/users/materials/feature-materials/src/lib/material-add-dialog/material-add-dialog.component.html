@@ -22,7 +22,7 @@
         mat-raised-button
         color="primary" 
         (click)="save()"
-        [disabled]="formGroup.invalid || !isLinkValid(this.formGroup.value.materialLink)"
+        [disabled]="formGroup.invalid || !(formGroup.value.materialLink | linkValidation:data.materialType)"
     >
     Сохранить
     </button>
