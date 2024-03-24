@@ -39,7 +39,7 @@ export class FeatureMaterialsCardComponent {
   material!: MaterialEntity;
 
 
-  @Output() deleteMaterial = new EventEmitter();
+  @Output() deleteMaterial = new EventEmitter<MaterialEntity>();
 
 
   private readonly destroyRef = inject(DestroyRef);

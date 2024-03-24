@@ -13,8 +13,8 @@ import { FolderEntity } from 'libs/users/materials/data-access/src/lib/model/mat
 })
 export class MaterialFolderItemComponent {
   @Input({ required: true }) folder!:FolderEntity;
-  @Output() deleteFolder = new EventEmitter();
-  @Output() openFolder = new EventEmitter();
+  @Output() deleteFolder = new EventEmitter<FolderEntity>();
+  @Output() openFolder = new EventEmitter<number>();
 
   
 

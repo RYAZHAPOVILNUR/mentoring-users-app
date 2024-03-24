@@ -25,8 +25,8 @@ export class MaterialListComponent {
   @Input({required: true})
   vm!: MaterialsVM;
 
-  @Output() backOnFolders = new EventEmitter();
-  @Output() deleteMaterial = new EventEmitter();
+  @Output() backOnFolders = new EventEmitter<void>();
+  @Output() deleteMaterial = new EventEmitter<MaterialEntity>();
 
   public onBackOnFolders() {
     this.backOnFolders.emit()
