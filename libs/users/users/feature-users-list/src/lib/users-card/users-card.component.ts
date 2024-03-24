@@ -29,7 +29,8 @@ export class UsersCardComponent {
   @Output() deleteUser = new EventEmitter();
   @Output() redirectToEdit = new EventEmitter()
 
-  @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
+  @ViewChild(MatMenuTrigger, { static: true }) trigger!: MatMenuTrigger;
+
 
   onOpenMenu(event: Event) {
     event.stopPropagation()
