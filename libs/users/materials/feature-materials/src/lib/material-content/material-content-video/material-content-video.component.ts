@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { VideoIdPipe } from './pipes/VideoId.pipe';
 
 @Component({
   selector: 'users-material-content-video',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, VideoIdPipe],
   templateUrl: './material-content-video.component.html',
   styleUrls: ['./material-content-video.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
