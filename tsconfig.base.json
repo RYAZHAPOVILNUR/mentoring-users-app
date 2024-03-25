@@ -52,6 +52,7 @@
       "@users/users/backlog": ["libs/users/backlog/src/index.ts"],
       "@users/users/backlog/data-access": ["libs/users/backlog/data-access/src/index.ts"],
       "@users/users/chart": ["libs/users/chart/src/index.ts"],
+      "@users/users/core/pipes": ["libs/users/core/pipes/index.ts"],
       "@users/users/core/ui/language-switch": ["libs/users/core/ui/language-switch/src/index.ts"],
       "@users/users/core/ui/theme-switch": ["libs/users/core/ui/theme-switch/src/index.ts"],
       "@users/users/data-access": ["libs/users/users/data-access/src/index.ts"],

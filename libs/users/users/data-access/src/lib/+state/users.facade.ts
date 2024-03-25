@@ -7,6 +7,7 @@ import { UsersErrors } from './users.reducer';
 import { onSuccessEditionCbType } from './users.actions';
 import { selectLoggedUser } from '@auth/data-access';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { selectUrl } from '../../../../../../core/data-access/src';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
@@ -26,6 +27,12 @@ export class UsersFacade {
    * Use the initialization action to perform one
    * or more tasks in your Effects.
    */
+
+  constructor() {
+    this.store.pipe(select(selectUrl)).subscribe(url => {
+      console.log(url); // Выведет текущий URL
+    });
+  }
   init() {
     this.store.dispatch(UsersActions.initUsers());
   }

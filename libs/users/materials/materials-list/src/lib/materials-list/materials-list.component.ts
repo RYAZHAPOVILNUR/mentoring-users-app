@@ -6,7 +6,7 @@ import { MaterialsListVM } from './materials-list-view-model';
 import { Router } from '@angular/router';
 import { MaterialsCardComponent } from '../materials-card/materials-card.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { RevealMaterialData } from '@users/materials/data-access';
+import { MaterialDTO } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-materials-list',
@@ -22,7 +22,7 @@ export class MaterialsListComponent {
   @Input({ required: true }) vm!: MaterialsListVM;
 
   @Output() deleteMaterial = new EventEmitter<number>();
-  @Output() revealMaterial = new EventEmitter<RevealMaterialData>();
+  @Output() revealMaterial = new EventEmitter<Pick<MaterialDTO, 'title' | 'material_link'>>();
 
   navigateToMatList(): void {
     this.router.navigate(['/materials']);
@@ -32,7 +32,7 @@ export class MaterialsListComponent {
     this.deleteMaterial.emit(id);
   }
 
-  onRevealMaterial(data: RevealMaterialData): void {
+  onRevealMaterial(data: Pick<MaterialDTO, 'title' | 'material_link'>): void {
     this.revealMaterial.emit(data);
   }
 }

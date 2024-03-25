@@ -4,7 +4,7 @@
       <h3>{{ material.title }}</h3>
       <p>{{ material.created_at | date }}</p>
     </div>
-    <mat-icon class="material-icon">{{ material.type }}</mat-icon>
+    <mat-icon class="material-icon">{{ material.material_link | linkAnalyzer }}</mat-icon>
   </button>
 
   <mat-card-actions class="material-card-buttons" >

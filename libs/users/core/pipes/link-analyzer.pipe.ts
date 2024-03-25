@@ -1,10 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
+@Pipe({
+  name: 'linkAnalyzer',
+  standalone: true,
 })
-export class LinkAnalyzerService {
-  analyzeLink(link: string): string {
+export class LinkAnalyzerPipe implements PipeTransform {
+
+  transform(link: string): string {
+    console.log(link, 'hi2');
     if (this.isYouTubeVideo(link)) {
       return 'video_library';
     } else if (this.isAudio(link)) {
@@ -18,7 +21,7 @@ export class LinkAnalyzerService {
 
   private isYouTubeVideo(link: string): boolean {
     if (link.includes('youtube.com') || link.includes('youtu.be')) return true;
-    const videoExtensions = ['mp4', 'avi']
+    const videoExtensions = ['mp4', 'avi'];
     return videoExtensions.some(ext => link.toLowerCase().endsWith(ext));
   }
 

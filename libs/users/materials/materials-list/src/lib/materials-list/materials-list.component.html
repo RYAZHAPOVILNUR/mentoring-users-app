@@ -9,7 +9,7 @@
         <button mat-icon-button (click)="navigateToMatList()">
           <mat-icon>arrow_back</mat-icon>
         </button>
-        <h1 class="material-title">{{ vm.revealedFolder?.title }}</h1>
+        <h1 class="material-title">{{ vm.openedFolder?.title }}</h1>
       </div>
       <ng-container *ngIf="vm.status === 'loaded'; else loading">
         <div class="col-md-3 mb-3 mr-2.5" *ngFor="let material of vm.materials">

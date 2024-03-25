@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { FolderDTO, MaterialDTO, CreateMaterial, CreateFolder } from '../types';
+import { FolderDTO, MaterialDTO, CreateMaterial } from '../types';
 
 export const MaterialsActions = createActionGroup({
   source: 'Materials',
@@ -12,9 +12,13 @@ export const MaterialsActions = createActionGroup({
     'Delete Folder Success': props<{ id: number }>(),
     'Delete Folder Failure': props<{ error: any }>(),
 
-    'Add Folder': props<{ newFolder: CreateFolder }>(),
+    'Add Folder': props<{ newFolder: Pick<FolderDTO, 'title'> }>(),
     'Add Folder Success': props<{ newFolder: FolderDTO }>(),
     'Add Folder Failure': props<{ error: any }>(),
+
+    'Open Folder': emptyProps(),
+    'Open Folder Success': props<{ folder: FolderDTO }>(),
+    'Open Folder Failure': props<{ error: any }>(),
 
     'Load Materials': emptyProps(),
     'Load Materials Success': props<{ materials: MaterialDTO[] }>(),
@@ -28,6 +32,5 @@ export const MaterialsActions = createActionGroup({
     'Add Material Success': props<{ newMaterial: MaterialDTO}>(),
     'Add Material Failure': props<{ error: any }>(),
 
-    'Reveal Folder': props<{ id: number }>()
   }
 });

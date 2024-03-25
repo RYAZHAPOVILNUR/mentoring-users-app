@@ -1,7 +1,8 @@
 <ng-container *ngrxLet="{
-  materials: materialsFacade.filteredMaterials$,
+  materials: materialsFacade.materials$,
+  openedFolder: materialsFacade.openedFolder$,
   status: materialsFacade.status$,
-  revealedFolder: materialsFacade.revealedFolder$
+  error: materialsFacade.error$
 } as vm">
   <users-materials-list
     [vm]="vm"

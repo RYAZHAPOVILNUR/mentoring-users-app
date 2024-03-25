@@ -1,14 +1,13 @@
 import { inject, Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { MaterialsActions } from './materials.actions';
 import {
-  selectFilteredMaterials,
-  selectFolders,
+  selectFolders, selectMaterials,
   selectMaterialsFeatureError,
-  selectMaterialsFeatureStatus, selectRevealedFolder
+  selectMaterialsFeatureStatus, selectOpenedFolder
 } from './materials.selectors';
-import { CreateMaterial } from '../types/';
-import { map, tap, first } from 'rxjs';
+import { CreateMaterial, FolderDTO } from '../types';
+import { first, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
@@ -16,34 +15,25 @@ export class MaterialsFacade {
   public readonly folders$ = this.store.select(selectFolders);
   public readonly status$ = this.store.select(selectMaterialsFeatureStatus);
   public readonly error$ = this.store.select(selectMaterialsFeatureError);
-  public readonly revealedFolder$ = this.store.select(selectRevealedFolder);
-  public readonly filteredMaterials$ = this.store.select(selectFilteredMaterials);
+  public readonly materials$ = this.store.select(selectMaterials);
+  public readonly openedFolder$ = this.store.select(selectOpenedFolder);
 
   constructor() {
     this.store.dispatch(MaterialsActions.loadFolders());
-    localStorage.getItem('revealedFolder')
-    && this.store.dispatch(MaterialsActions.loadMaterials());
+    this.openFolder();
   }
 
   deleteFolder(id: number): void {
     this.store.dispatch(MaterialsActions.deleteFolder({ id }));
   }
 
-  addFolder(newFolder: { title: any }): void {
+  addFolder(newFolder: { title: string }): void {
     this.store.dispatch(MaterialsActions.addFolder({ newFolder }));
   }
 
-  revealFolder(id: number): void {
+  openFolder(): void {
     this.store.dispatch(MaterialsActions.loadMaterials());
-    this.folders$.pipe(
-      first(),
-      map(folders =>
-        folders.find(folder => folder.id === id)),
-      tap(filteredFolder => {
-        localStorage.setItem('revealedFolder', JSON.stringify(filteredFolder))
-        this.store.dispatch(MaterialsActions.revealFolder({ id }));
-      })
-    ).subscribe();
+    this.store.dispatch(MaterialsActions.openFolder());
   }
 
   deleteMaterial(id: number): void {
@@ -51,17 +41,16 @@ export class MaterialsFacade {
   }
 
   addMaterial(newMaterial: Omit<CreateMaterial, 'folder_id'>): void {
-    this.revealedFolder$.pipe(
+    this.openedFolder$.pipe(
       first(),
-      tap(folder => {
-        if (folder) {
-          const materialData: CreateMaterial = {
+      tap((currentFolder) => {
+        this.store.dispatch(MaterialsActions.addMaterial({
+          newMaterial: {
             ...newMaterial,
-            folder_id: folder!.id
-          };
-          this.store.dispatch(MaterialsActions.addMaterial({ newMaterial: materialData }));
-        }
+            folder_id: currentFolder!.id
+          }
+        }));
       })
-      ).subscribe()
+    ).subscribe();
   }
 }

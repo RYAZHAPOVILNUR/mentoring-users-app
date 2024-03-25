@@ -26,5 +26,5 @@ export const selectUserById = (id: number) => createSelector(selectUsersEntities
 export const selectOpenedUser = createSelector(
   selectRouteParams,
   selectUsersEntities,
-  ({ id }, entities) => entities[id] || null
+  ({ id } , entities) => entities[id] || null
 );

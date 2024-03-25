@@ -6,7 +6,7 @@ import { FoldersAddButtonComponent } from '@users/materials/folders-create';
 import { MaterialsFacade } from '@users/materials/data-access';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
 import { LetDirective } from '@ngrx/component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'users-folders-list-container',
@@ -19,6 +19,7 @@ import { Router } from '@angular/router';
 export class FoldersListContainerComponent {
   public readonly facade = inject(MaterialsFacade);
   private readonly router = inject(Router);
+  private readonly activatedRoute = inject(ActivatedRoute)
 
   constructor() {
     localStorage.removeItem('revealedFolder');
@@ -29,7 +30,7 @@ export class FoldersListContainerComponent {
   }
 
   onRevealFolder(id: number): void {
-    this.facade.revealFolder(id);
-    this.router.navigate([`materials/${id}`]);
+    this.facade.openFolder();
+    this.router.navigate([id], { relativeTo: this.activatedRoute});
   }
 }

@@ -5,7 +5,6 @@ import {
   EventEmitter,
   inject,
   Input,
-  OnInit,
   Output
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -15,35 +14,26 @@ import { MatIconModule } from '@angular/material/icon';
 import { MaterialDTO } from '@users/materials/data-access';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { MatDialog } from '@angular/material/dialog';
-import { RevealMaterialData } from '@users/materials/data-access';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { tap } from 'rxjs';
-import { LinkAnalyzerService } from '../services/link-analyzer.service';
+import { LinkAnalyzerPipe } from '../../../../../core/pipes';
 
 @Component({
   selector: 'users-materials-card',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatCardModule, MatIconModule],
+  imports: [CommonModule, MatButtonModule, MatCardModule, MatIconModule, LinkAnalyzerPipe],
   templateUrl: './materials-card.component.html',
   styleUrls: ['./materials-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MaterialsCardComponent implements OnInit {
+export class MaterialsCardComponent {
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
-  private readonly linkAnalyzer = inject(LinkAnalyzerService);
 
   @Input({ required: true }) material!: MaterialDTO;
 
   @Output() deleteMaterial = new EventEmitter<number>();
-  @Output() revealMaterial = new EventEmitter<RevealMaterialData>();
-
-  ngOnInit(): void {
-    this.material = {
-      ...this.material,
-      type: this.linkAnalyzer.analyzeLink(this.material.material_link)
-    };
-  }
+  @Output() revealMaterial = new EventEmitter<Pick<MaterialDTO, 'title' | 'material_link'>>();
 
   openDialog(id: number): void {
     const dialogRef = this.dialog.open(CoreUiConfirmDialogComponent, {
@@ -61,8 +51,7 @@ export class MaterialsCardComponent implements OnInit {
   onRevealMaterial(): void {
     this.revealMaterial.emit({
       title: this.material.title,
-      link: this.material.material_link.trim(),
-      type: this.material.type!
+      material_link: this.material.material_link.trim()
     });
   }
 }

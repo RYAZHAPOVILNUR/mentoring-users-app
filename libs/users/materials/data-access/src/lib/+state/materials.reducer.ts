@@ -6,24 +6,21 @@ import { createEntityAdapter, EntityState } from '@ngrx/entity';
 export const MATERIALS_FEATURE_KEY = 'materials';
 export type MaterialsStatus = 'init' | 'loading' | 'loaded'
 
-export const materialsAdapter = createEntityAdapter<MaterialDTO>()
+// export const materialsAdapter = createEntityAdapter<MaterialDTO>()
 
-export interface MaterialsFeatureState extends EntityState<MaterialDTO>{
+export interface MaterialsFeatureState{
   folders: FolderDTO[],
+  materials: MaterialDTO[],
   error: any,
-  status: MaterialsStatus,
-  revealedFolder?: FolderDTO
+  status: MaterialsStatus
 }
 
-const localStorageRevealedFolder = localStorage.getItem('revealedFolder');
-const revealedFolder = localStorageRevealedFolder ? JSON.parse(localStorageRevealedFolder) : undefined;
-
-export const initialFoldersState: MaterialsFeatureState = materialsAdapter.getInitialState({
+export const initialFoldersState: MaterialsFeatureState  = {
   folders: [],
+  materials: [],
   error: null,
   status: 'init',
-  revealedFolder
-});
+};
 
 const reducer = createReducer(
   initialFoldersState,
@@ -61,30 +58,30 @@ const reducer = createReducer(
     status: 'loading'
   })),
   on(MaterialsActions.loadMaterialsSuccess, (state, { materials }) => ({
-    ...materialsAdapter.setAll(materials, { ...state, status: 'loaded'}),
+    ...state,
+    materials,
+    status: 'loaded'
   })),
   on(MaterialsActions.loadMaterialsFailure, (state, { error }) => ({
     ...state,
     error: error
   })),
   on(MaterialsActions.deleteMaterialSuccess, (state, { id }) => ({
-    ...materialsAdapter.removeOne(id, { ...state })
+    ...state,
+    materials: state.materials.filter(material => material.id !== id)
   })),
   on(MaterialsActions.deleteMaterialFailure, (state, { error }) => ({
     ...state,
     error: error
   })),
   on(MaterialsActions.addMaterialSuccess, (state, { newMaterial }) => ({
-      ...materialsAdapter.addOne(newMaterial, { ...state })
+      ...state,
+    materials: [...state.materials, newMaterial]
   })),
   on(MaterialsActions.addMaterialFailure, (state, { error }) => ({
     ...state,
     error: error
   })),
-  on(MaterialsActions.revealFolder, (state, { id }) => ({
-    ...state,
-    revealedFolder: state.folders.find(folder => folder.id === id)
-  }))
 );
 
 export function materialsReducer(state: MaterialsFeatureState | undefined, action: Action) {
