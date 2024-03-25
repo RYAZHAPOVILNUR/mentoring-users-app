@@ -5,6 +5,7 @@ import { selectFolders } from './materials.selectors';
 import * as materialSelectors from './materials.selectors';
 import { AddMaterialEntity} from '../model/material.entity';
 import { AddFolderDTO } from '../model/material-dto.model';
+import { tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
@@ -18,6 +19,17 @@ export class MaterialsFacade {
   public readonly filteredMaterials$ = this.store.select(materialSelectors.filteredByIdMaterials)
 
   public readonly materialsStatus$ = this.store.select(materialSelectors.selectMaterialsStatus)
+
+  loadOpenedFolderHandler(){
+    return this.openedFolder$.pipe(
+      tap(openedFolder => {
+        if (!openedFolder) {
+          this.loadFolders();
+        }
+      })
+    )
+  }
+
 
   loadFolders() {
     this.store.dispatch(MaterialActions.loadFolders());

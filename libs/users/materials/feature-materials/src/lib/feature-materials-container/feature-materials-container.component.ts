@@ -38,19 +38,9 @@ export class FeatureMaterialsContainerComponent implements OnInit {
 
   ngOnInit(): void {
     this.facade.loadMaterials()
-    this.subscribeToOpenedFolder()
+    this.facade.loadOpenedFolderHandler().pipe(takeUntilDestroyed(this.destroyRef)).subscribe()
   }
 
-  private subscribeToOpenedFolder(): void {
-    this.facade.openedFolder$.pipe(
-      tap(openedFolder => {
-        if (!openedFolder) {
-          this.facade.loadFolders();
-        }
-      }),
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe();
-  }
 
 
   public deleteMaterial(material: MaterialEntity): void {
