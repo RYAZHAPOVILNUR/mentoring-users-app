@@ -1,4 +1,4 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { State, createFeatureSelector, createSelector } from '@ngrx/store';
 import { USERS_FEATURE_KEY, UsersState, usersAdapter } from './users.reducer';
 import { selectQueryParam, selectQueryParams, selectRouteParams } from '@users/core/data-access';
 
@@ -48,4 +48,13 @@ export const selectOpenedUser = createSelector(
   selectRouteParams,
   selectUsersEntities,
   ({id}, entities) => entities[id] || null
+)
+export const usersFilterSelector = createSelector(
+selectUsersState,
+(state) => state.usersFilter
+)
+export const selectFilteredUsers = createSelector(
+selectAllUsers,
+usersFilterSelector,
+(users, filter) => filter.name ? users.filter(user => user.name.toLocaleLowerCase().includes(filter.name.toLocaleLowerCase())): users
 )
