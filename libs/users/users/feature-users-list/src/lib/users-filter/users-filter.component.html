@@ -1,5 +1,5 @@
 <form class="users_filter">
   <input matInput type="text" placeholder="Имя" [formControl]="filterName" />
 
-  <button (click)="filterByName()">Применить</button>
+  <button (click)="filterByName($event)">Применить</button>
 </form>

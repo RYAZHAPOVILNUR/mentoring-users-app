@@ -3,9 +3,10 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
+
 import { UsersFacade } from '@users/users/data-access';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'users-users-filter',
@@ -13,8 +14,8 @@ import { UsersFacade } from '@users/users/data-access';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatButtonModule,
     MatFormFieldModule,
+    MatInputModule
   ],
   templateUrl: './users-filter.component.html',
   styleUrls: ['./users-filter.component.scss'],
@@ -23,9 +24,8 @@ export class UsersFilterComponent {
   private usersFacade = inject(UsersFacade);
   public filterName = new FormControl<any>('', Validators.required);
 
-  
-  filterByName() {
-
+  filterByName(event: Event) {
+    event.preventDefault();
     this.usersFacade.filterUsers(this.filterName.value);
   }
 }
