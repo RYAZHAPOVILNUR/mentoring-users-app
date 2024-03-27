@@ -7,7 +7,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class LinkAnalyzerPipe implements PipeTransform {
 
   transform(link: string): string {
-    console.log(link, 'hi2');
     if (this.isYouTubeVideo(link)) {
       return 'video_library';
     } else if (this.isAudio(link)) {

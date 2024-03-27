@@ -26,12 +26,12 @@ const reducer = createReducer(
   initialFoldersState,
   on(MaterialsActions.loadFolders, state => ({
     ...state,
-    status: 'loading'
+    status: 'loading' as const
   })),
   on(MaterialsActions.loadFoldersSuccess, (state, { folders }) => ({
     ...state,
     folders: folders,
-    status: 'loaded'
+    status: 'loaded' as const
   })),
   on(MaterialsActions.loadFoldersFailure, (state, { error }) => ({
     ...state,
@@ -55,12 +55,12 @@ const reducer = createReducer(
   })),
   on(MaterialsActions.loadMaterials, state => ({
     ...state,
-    status: 'loading'
+    status: 'loading' as const
   })),
   on(MaterialsActions.loadMaterialsSuccess, (state, { materials }) => ({
     ...state,
     materials,
-    status: 'loaded'
+    status: 'loaded' as const
   })),
   on(MaterialsActions.loadMaterialsFailure, (state, { error }) => ({
     ...state,

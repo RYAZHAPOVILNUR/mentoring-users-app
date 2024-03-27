@@ -27,12 +27,6 @@ export class UsersFacade {
    * Use the initialization action to perform one
    * or more tasks in your Effects.
    */
-
-  constructor() {
-    this.store.pipe(select(selectUrl)).subscribe(url => {
-      console.log(url); // Выведет текущий URL
-    });
-  }
   init() {
     this.store.dispatch(UsersActions.initUsers());
   }

@@ -1,12 +1,12 @@
 import { inject, Injectable } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { MaterialsActions } from './materials.actions';
 import {
   selectFolders, selectMaterials,
   selectMaterialsFeatureError,
   selectMaterialsFeatureStatus, selectOpenedFolder
 } from './materials.selectors';
-import { CreateMaterial, FolderDTO } from '../types';
+import { CreateMaterial } from '../types';
 import { first, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })

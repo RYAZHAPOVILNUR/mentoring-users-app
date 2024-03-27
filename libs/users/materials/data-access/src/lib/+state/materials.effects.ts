@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ApiService } from '@users/core/http';
 import { MaterialsActions } from './materials.actions';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, filter, map, of, skip, switchMap, take } from 'rxjs';
 import { FolderDTO, MaterialDTO, CreateMaterial } from '../types';
 import { select, Store } from '@ngrx/store';
 import { selectRouteParams } from '@users/core/data-access';
@@ -73,44 +73,46 @@ export const addFolder = createEffect(
     );
   }, { functional: true }
 );
+
 export const openFolder = createEffect(
   () => {
     const actions$ = inject(Actions);
     const apiService = inject(ApiService);
-    const store = inject(Store);
+    const selectedRouteParams = inject(Store).select(selectRouteParams).pipe(skip(1));
 
     return actions$.pipe(
       ofType(MaterialsActions.openFolder),
-      switchMap(() => store.pipe(
-          select(selectRouteParams),
-          switchMap(params =>
-            apiService.get<FolderDTO>(`/folder/${params['id']}`).pipe(
-              map(folder =>
-                MaterialsActions.openFolderSuccess({ folder })
-              ),
-              catchError((error) => {
-                console.log('Error: ' + error.message.toString());
-                return of(MaterialsActions.openFolderFailure({ error }));
-              })
-            )
-          )
+      switchMap(() => selectedRouteParams),
+      filter(params => params['id'] !== undefined),
+      take(1),
+      switchMap((params) =>
+        apiService.get<FolderDTO>(`/folder/${params['id']}`).pipe(
+          map(folder =>
+            MaterialsActions.openFolderSuccess({ folder })
+          ),
+          catchError((error) => {
+              console.log('Error: ' + error.message.toString());
+              return of(MaterialsActions.openFolderFailure({ error }));
+            }
+          ),
+
         )
       )
     );
   }, { functional: true }
 );
 
+//doesn't work without switchMap in switchMap
 export const loadMaterials = createEffect(
   () => {
     const actions$ = inject(Actions);
     const apiService = inject(ApiService);
-    const store = inject(Store);
+    const selectedRouteParams = inject(Store).select(selectRouteParams);
 
     return actions$.pipe(
       ofType(MaterialsActions.loadMaterials),
       switchMap(
-        () => store.pipe(
-          select(selectRouteParams),
+        () => selectedRouteParams.pipe(
           switchMap(params =>
             apiService.get<MaterialDTO[]>('/material').pipe(
               map((materials) => {
@@ -121,9 +123,9 @@ export const loadMaterials = createEffect(
                 console.error('Error: ' + error.message.toString());
                 return of(MaterialsActions.loadMaterialsFailure({ error }));
               })
-            ))
-        ))
-    );
+            )
+          ))
+      ));
   }, { functional: true }
 );
 
