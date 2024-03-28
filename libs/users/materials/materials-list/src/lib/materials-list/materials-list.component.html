@@ -15,8 +15,8 @@
         <div class="col-md-3 mb-3 mr-2.5" *ngFor="let material of vm.materials">
           <users-materials-card
             [material]="material"
-            (deleteMaterial)="onDeleteMaterial($event)"
             (revealMaterial)="onRevealMaterial($event)"
+            (deleteMaterial)="onDeleteMaterial($event)"
           />
         </div>
       </ng-container>

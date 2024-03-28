@@ -11,4 +11,7 @@
   />
 </ng-container>
 
-<users-materials-add-button />
+<users-add-button
+  [dialogComponent]="MaterialsAddDialogComponent"
+  (afterClosed)="onAddMaterial($event)"
+/>
