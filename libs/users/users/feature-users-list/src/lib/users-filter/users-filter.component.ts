@@ -1,12 +1,27 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'users-filter',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatFormFieldModule, MatInputModule, MatButtonModule, ReactiveFormsModule],
   templateUrl: './users-filter.component.html',
   styleUrls: ['./users-filter.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersFilterComponent {}
+export class UsersFilterComponent {
+  name = new FormControl('');
+
+  @Output()
+  filterUsers = new EventEmitter<string>();
+
+  onFilterUsers() {
+    if (this.name.value) {
+      this.filterUsers.emit(this.name.value);
+    }
+  }
+}

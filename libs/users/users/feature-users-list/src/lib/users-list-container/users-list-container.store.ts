@@ -53,4 +53,8 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
       )
     );
   }
+
+  filterUsers(name: string) {
+    this.usersFacade.filterUsers(name);
+  }
 }

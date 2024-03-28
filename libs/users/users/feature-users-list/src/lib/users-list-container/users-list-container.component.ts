@@ -42,6 +42,10 @@ export class UsersListContainerComponent {
     this.componentStore.deleteUser(user);
   }
 
+  onFilterUsers(name: string) {
+    this.componentStore.filterUsers(name);
+  }
+
   onRedirectToEdit({ id, editMode }: { id: number; editMode: boolean }) {
     this.router.navigate(['/admin/users', id], {
       queryParams: { edit: editMode },
