@@ -121,6 +121,7 @@ export const loadUser = createEffect(
       ofType(UsersActions.loadUser),
       withLatestFrom(store.select(selectRouteParams)),
       switchMap(([, params]) => {
+        console.log(params);
         if (params['id']) {
           return apiService.get<UsersDTO>(`/users/${params['id']}`).pipe(
             map((user) => usersDTOAdapter.DTOtoEntity(user)),

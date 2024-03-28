@@ -1,0 +1,17 @@
+<ng-container *ngrxLet="{
+  materials: materialsFacade.materials$,
+  openedFolder: materialsFacade.openedFolder$,
+  status: materialsFacade.status$,
+  error: materialsFacade.error$
+} as vm">
+  <users-materials-list
+    [vm]="vm"
+    (deleteMaterial)="onDeleteMaterial($event)"
+    (revealMaterial)="onRevealMaterial($event)"
+  />
+</ng-container>
+
+<users-add-button
+  [dialogComponent]="MaterialsAddDialogComponent"
+  (afterClosed)="onAddMaterial($event)"
+/>

@@ -1,0 +1,16 @@
+<ng-container
+  *ngrxLet="{
+  folders: facade.folders$,
+  error: facade.error$,
+  status: facade.status$
+} as vm">
+  <users-folders-list
+    [vm]="vm"
+    (deleteFolder)="onDeleteFolder($event)"
+    (revealFolder)="onRevealFolder($event)"
+  />
+</ng-container>
+<users-add-button
+  [dialogComponent]="FoldersAddDialogComponent"
+  (afterClosed)="onAddFolder($event)"
+  />

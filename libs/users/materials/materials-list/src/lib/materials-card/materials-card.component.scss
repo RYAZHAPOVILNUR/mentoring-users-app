@@ -1,0 +1,42 @@
+.mat-button {
+  width: 160px;
+  height: 160px;
+  border: none;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.material-card {
+  display: flex;
+  flex-direction: row;
+  width: 250px;
+  margin-right: 5px !important;
+}
+
+.material-icon {
+  position: absolute;
+  top: 25%;
+  right: 60%;
+  color: #333333;
+  transform: scale(2);
+}
+
+.btn-content-div {
+  margin-top: 50px;
+}
+
+h3 {
+  margin: 0;
+  font-weight: bold;
+}
+
+.material-card-buttons {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.material-card:hover .material-card-buttons {
+  opacity: 1;
+  pointer-events: auto;
+}
