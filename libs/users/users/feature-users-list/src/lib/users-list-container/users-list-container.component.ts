@@ -43,7 +43,7 @@ export class UsersListContainerComponent {
   }
 
   onFilterUsers(name: string) {
-    this.componentStore.filterUsers(name);
+    this.usersFacade.filterUsers(name);
   }
 
   onRedirectToEdit({ id, editMode }: { id: number; editMode: boolean }) {
