@@ -23,7 +23,7 @@ import { DetailUsersCardVm } from './detail-users-card-vm';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { CreateUserDTO, UsersEntity, UserStoryPoints } from '@users/core/data-access';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { DadataApiService } from '@dadata';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs';
@@ -92,7 +92,7 @@ export class DetailUsersCardComponent implements OnInit {
 
   public totalStoryPoints = new FormControl({ value: 0, disabled: true });
 
-  @Output() addStoryPoints = new EventEmitter();
+  @Output() addStoryPoints = new EventEmitter<UserStoryPoints>();
 
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
@@ -179,7 +179,6 @@ export class DetailUsersCardComponent implements OnInit {
 
   public onAddStoryPoints() {
     this.totalStoryPoints.disable();
-
-    this.addStoryPoints.emit(this.totalStoryPoints.value || 0);
+    this.addStoryPoints.emit({ storyPoints: this.totalStoryPoints.value || 0, userId: this.vm.user?.id ?? 0 });
   }
 }

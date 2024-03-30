@@ -4,9 +4,10 @@ import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
 import { Observable, of, switchMap } from 'rxjs';
 import { UsersErrors } from './users.reducer';
-import { onSuccessEditionCbType } from './users.actions';
+import { onSuccessEditionCbType, storyPointsActions } from './users.actions';
 import { selectLoggedUser } from '@auth/data-access';
-import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { CreateUserDTO, UsersEntity, UserStoryPoints } from '@users/core/data-access';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
@@ -59,7 +60,19 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.loadUser());
   }
 
-  filterUsers(name: string): void {
+  public filterUsers(name: string): void {
     this.store.dispatch(UsersActions.setUsersFilter({ filter: { name } }));
+  }
+
+  public addStoryPoints(payload: UserStoryPoints): void {
+    this.store
+      .select(UsersSelectors.selectUserById(payload.userId))
+      .pipe(takeUntilDestroyed())
+      .subscribe((user) => {
+        if (user) {
+          const userWithStoryPoints = { ...user, totalStoryPoints: payload.storyPoints };
+          this.store.dispatch(storyPointsActions.addStoryPoints({ userWithStoryPoints }));
+        }
+      });
   }
 }
