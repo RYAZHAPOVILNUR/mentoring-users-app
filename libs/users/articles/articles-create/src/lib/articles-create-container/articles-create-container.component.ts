@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ArticlesCreateUiComponent } from '../articles-create-ui/articles-create-ui.component';
 import { CreateArticle, ArticlesActions, ArticleSelectors, Article } from '@users/users/articles/data-access';
@@ -6,7 +6,7 @@ import { Store, select } from '@ngrx/store';
 import { DeactivatableComponent } from '@users/core/utils';
 import { MatDialog } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from "@users/core/ui";
-import { Observable, filter, map, tap, withLatestFrom } from 'rxjs';
+import { Observable, filter, first, map, tap, withLatestFrom } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { selectQueryParam } from '@users/core/data-access';
 import { LetDirective } from '@ngrx/component';
@@ -23,19 +23,24 @@ import { LetDirective } from '@ngrx/component';
   styleUrls: ['./articles-create-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ArticlesCreateContainerComponent implements DeactivatableComponent {
+export class ArticlesCreateContainerComponent implements DeactivatableComponent, OnInit {
 
   private readonly store = inject(Store);
   private dialog = inject(MatDialog);
   private isFormChange = false;
+  private isEditMode = false;
   private readonly destroyRef = inject(DestroyRef);
 
   public editMode$ = this.store.pipe(
-    takeUntilDestroyed(this.destroyRef),    //Почему не происходит отписка?
-    select(selectQueryParam('mode')),
-    filter(mode => mode !== undefined),
-    tap((mode) => console.log('mode', mode)),
-    map(mode => mode === 'edit')
+    takeUntilDestroyed(this.destroyRef),    //Почему не происходит отписка?isEditModevisEditModeisEditMode
+    select(selectQueryParam('mode')),     
+    filter(mode => mode !== undefined), 
+    tap((mode) => console.log('mode', mode)),  
+    map(mode => 
+      {
+        return mode === 'edit'
+      }
+    )
   )
 
   public articleId$ = this.store.pipe(select(selectQueryParam('id')))
@@ -51,6 +56,10 @@ export class ArticlesCreateContainerComponent implements DeactivatableComponent 
       })
   );
 
+  ngOnInit(): void {
+    this.editMode$.pipe(first()).subscribe((mode) => this.isEditMode = mode);
+  }
+
   onPublishArticle(article: CreateArticle) {
     this.store.dispatch(ArticlesActions.publishArticle({ article }))
   }
@@ -62,14 +71,17 @@ export class ArticlesCreateContainerComponent implements DeactivatableComponent 
   canDeactivate() {
     if (!this.isFormChange) {
       return true
-    } else {
+    }
+    if(this.isEditMode){
       return this.dialog.open(CoreUiConfirmDialogComponent, {
         data: { dialogText: `Вы уверены что хотите покинуть данную страницу? Несохранённые изменения будут утеряны!` },
       })
-        .afterClosed()
-        .pipe(takeUntilDestroyed(this.destroyRef),
-          map((result: boolean) => result)
-        )
+      .afterClosed()
+      .pipe(takeUntilDestroyed(this.destroyRef),
+      map((result: boolean) => result),
+      )
+    } else {
+      return true
     }
   }
 
