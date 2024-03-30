@@ -1,3 +1,17 @@
-<button mat-fab color="primary" class="add-universal-fab-button" (click)="openAddDialog()">
-  <mat-icon>add</mat-icon>
-</button>
+<ng-container *ngIf="menuItems && menuItems.length > 0; else noMenuItems">
+  <button mat-fab color="primary" class="add-item-fab-button" [matMenuTriggerFor]="menu">
+    <mat-icon>add</mat-icon>
+  </button>
+</ng-container>
+
+<mat-menu #menu="matMenu" yPosition="above">
+  <ng-container *ngFor="let item of menuItems!">
+    <button mat-menu-item (click)="openAddDialog(item)">{{ item }}</button>
+  </ng-container>
+</mat-menu>
+
+<ng-template #noMenuItems>
+  <button mat-fab color="primary" class="add-item-fab-button" (click)="openAddDialog()">
+    <mat-icon>add</mat-icon>
+  </button>
+</ng-template>

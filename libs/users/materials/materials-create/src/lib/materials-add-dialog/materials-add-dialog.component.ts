@@ -2,9 +2,31 @@ import { ChangeDetectionStrategy, Component, Inject, inject } from '@angular/cor
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+  Validators
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { CreateMaterial } from '@users/materials/data-access';
+import { LinkAnalyzerPipe } from '../../../../../core/pipes';
+
+export function linkTypeValidator(type: string): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const link = control.value;
+    if (!link) return null;
+
+    const pipe = new LinkAnalyzerPipe();
+    const icon = pipe.transform(link);
+    if (pipe.mapMaterialType(icon) === type) {
+      return null;
+    }
+    return { invalidLinkType: { actual: icon } };
+  };
+}
+
 
 @Component({
   selector: 'users-materials-add-dialog',
@@ -19,7 +41,7 @@ export class MaterialsAddDialogComponent {
   private readonly formBuilder = inject(FormBuilder);
   public readonly formGroup = this.formBuilder.group({
     title: ['', Validators.required],
-    link: ['', Validators.required]
+    link: ['', [Validators.required, linkTypeValidator(this.data.type)]]
   });
   constructor(@Inject(MAT_DIALOG_DATA) public readonly data: { type: string }) {}
 
@@ -29,11 +51,8 @@ export class MaterialsAddDialogComponent {
 
   save(): void {
     if (this.formGroup.valid) {
-      const data: Partial<CreateMaterial> = {
-        title: this.formGroup.value.title!,
-        material_link: this.formGroup.value.link!
-      }
-      this.dialogRef.close(data);
+      const { title, link } = this.formGroup.value;
+      this.dialogRef.close({ title, material_link: link });
     }
   }
 }

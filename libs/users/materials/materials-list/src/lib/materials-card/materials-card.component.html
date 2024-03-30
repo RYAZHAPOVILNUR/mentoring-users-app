@@ -1,7 +1,7 @@
 <mat-card class="material-card">
   <button class="mat-button" (click)="onRevealMaterial()">
     <div class="btn-content-div">
-      <h3>{{ material.title }}</h3>
+      <h3 class="overflow-ellipsis">{{ material.title }}</h3>
       <p>{{ material.created_at | date }}</p>
     </div>
     <mat-icon class="material-icon">{{ material.material_link | linkAnalyzer }}</mat-icon>

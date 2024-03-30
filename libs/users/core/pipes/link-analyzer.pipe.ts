@@ -2,9 +2,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'linkAnalyzer',
-  standalone: true,
+  standalone: true
 })
-export class LinkAnalyzerPipe implements PipeTransform {
+export class LinkAnalyzerPipe {
 
   transform(link: string): string {
     if (this.isYouTubeVideo(link)) {
@@ -32,5 +32,18 @@ export class LinkAnalyzerPipe implements PipeTransform {
   private isDocument(link: string): boolean {
     const documentExtensions = ['.pdf', '.doc', '.docx', '.ppt', '.pptx', '.xls', '.xlsx'];
     return documentExtensions.some(ext => link.toLowerCase().endsWith(ext));
+  }
+
+  mapMaterialType(actualType: string): string {
+    switch (actualType) {
+      case 'library_music':
+        return 'Аудио';
+      case 'video_library':
+        return 'Видео';
+      case 'picture_as_pdf':
+        return 'PDF';
+      default:
+        return 'unknown';
+    }
   }
 }

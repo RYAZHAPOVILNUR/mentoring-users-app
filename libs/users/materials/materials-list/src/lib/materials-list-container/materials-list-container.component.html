@@ -13,5 +13,6 @@
 
 <users-add-button
   [dialogComponent]="MaterialsAddDialogComponent"
+  [menuItems]="['Видео','Аудио', 'PDF']"
   (afterClosed)="onAddMaterial($event)"
 />

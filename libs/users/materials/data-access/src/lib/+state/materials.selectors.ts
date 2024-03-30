@@ -1,8 +1,11 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { MaterialsFeatureState, MATERIALS_FEATURE_KEY } from './materials.reducer';
-import { selectRouteParams } from '../../../../../../core/data-access/src';
+import { MaterialsFeatureState, MATERIALS_FEATURE_KEY, materialsAdapter, foldersAdapter } from './materials.reducer';
+import { selectRouteParams } from '@users/core/data-access';
 
 export const selectMaterialsFeatureState = createFeatureSelector<MaterialsFeatureState>(MATERIALS_FEATURE_KEY);
+
+const { selectAll: selectAllFolders } = foldersAdapter.getSelectors();
+const { selectAll: selectAllMaterials } = materialsAdapter.getSelectors();
 
 export const selectMaterialsFeatureStatus = createSelector(
   selectMaterialsFeatureState,
@@ -15,12 +18,12 @@ export const selectMaterialsFeatureError = createSelector(
 );
 export const selectFolders = createSelector(
   selectMaterialsFeatureState,
-  (state) => state.folders
+  (state) => selectAllFolders(state.folders)
 );
 
 export const selectMaterials = createSelector(
   selectMaterialsFeatureState,
-  (state) => state.materials
+  (state) => selectAllMaterials(state.materials)
 )
 
 export const selectOpenedFolder = createSelector(
