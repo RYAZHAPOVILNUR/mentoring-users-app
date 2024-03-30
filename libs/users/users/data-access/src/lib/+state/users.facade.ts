@@ -2,12 +2,11 @@ import { Injectable, inject } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
-import { Observable, of, switchMap } from 'rxjs';
+import { Observable, of, switchMap, take } from 'rxjs';
 import { UsersErrors } from './users.reducer';
 import { onSuccessEditionCbType, storyPointsActions } from './users.actions';
 import { selectLoggedUser } from '@auth/data-access';
 import { CreateUserDTO, UsersEntity, UserStoryPoints } from '@users/core/data-access';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
@@ -67,7 +66,7 @@ export class UsersFacade {
   public addStoryPoints(payload: UserStoryPoints): void {
     this.store
       .select(UsersSelectors.selectUserById(payload.userId))
-      .pipe(takeUntilDestroyed())
+      .pipe(take(1))
       .subscribe((user) => {
         if (user) {
           const userWithStoryPoints = { ...user, totalStoryPoints: payload.storyPoints };
