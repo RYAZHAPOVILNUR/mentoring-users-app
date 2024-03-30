@@ -25,6 +25,6 @@ export class CoreUiConfirmDialogComponent {
   }
 
   cancel() {
-    return this.dialogRef.close(false)
+    this.dialogRef.close(false)
   }
 }
