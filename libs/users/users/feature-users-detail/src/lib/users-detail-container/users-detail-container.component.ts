@@ -84,4 +84,8 @@ export class UsersDetailComponent {
         }
       });
   }
+
+  public onAddStoryPoints(storyPoints: number) {
+    console.log('Story points added:', storyPoints);
+  }
 }

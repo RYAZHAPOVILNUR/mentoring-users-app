@@ -90,6 +90,10 @@ export class DetailUsersCardComponent implements OnInit {
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
 
+  public totalStoryPoints = new FormControl({ value: 0, disabled: true });
+
+  @Output() addStoryPoints = new EventEmitter();
+
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
     onSuccessCb: onSuccessEditionCbType;
@@ -171,5 +175,11 @@ export class DetailUsersCardComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  public onAddStoryPoints() {
+    this.totalStoryPoints.disable();
+
+    this.addStoryPoints.emit(this.totalStoryPoints.value || 0);
   }
 }
