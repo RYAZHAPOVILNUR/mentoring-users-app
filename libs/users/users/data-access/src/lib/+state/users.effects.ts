@@ -6,6 +6,7 @@ import { ApiService } from '@users/core/http';
 import { Store, select } from '@ngrx/store';
 import { selectAllUsers, selectUserById, selectUsersEntities } from './users.selectors';
 import { CreateUserDTO, UsersDTO, UsersEntity, selectRouteParams, usersDTOAdapter } from '@users/core/data-access';
+import { NotifyService } from '@users/core/notify';
 import { storyPointsActions } from './users.actions';
 
 export const userEffects = createEffect(
@@ -89,7 +90,6 @@ export const addStoryPoints = createEffect(
           map((userData) => usersDTOAdapter.DTOtoEntity(userData)),
           map((userData) => storyPointsActions.addStoryPointsSuccess({ userData })),
           catchError((error) => {
-            console.error('Error', error);
             return of(storyPointsActions.assStoryPointsFailure({ error }));
           })
         );

@@ -46,6 +46,6 @@ export const storyPointsActions = createActionGroup({
   events: {
     addStoryPoints: props<{ userWithStoryPoints: UsersEntity }>(),
     addStoryPointsSuccess: props<{ userData: UsersDTO }>(),
-    assStoryPointsFailure: props<{ error: unknown }>(),
+    assStoryPointsFailure: props<{ error: UsersErrors | null }>(),
   },
 });
