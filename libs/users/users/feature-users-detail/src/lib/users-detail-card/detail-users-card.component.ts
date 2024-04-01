@@ -68,19 +68,14 @@ export class DetailUsersCardComponent implements OnInit {
     this._vm = vm;
 
     if (vm.user) {
-      this.formGroup.patchValue({
-        name: vm.user.name,
-        email: vm.user.email,
-        username: vm.user.username,
-        city: vm.user.city,
-      });
+      const { name, email, username, city, totalStoryPoints } = vm.user;
+
+      this.formGroup.patchValue({ name, email, username, city });
+
+      totalStoryPoints && this.totalStoryPoints.setValue(totalStoryPoints);
     }
 
-    if (vm.editMode) {
-      this.formGroup.enable();
-    } else {
-      this.formGroup.disable();
-    }
+    vm.editMode ? this.formGroup.enable() : this.formGroup.disable();
   }
 
   public formGroup = new FormBuilder().group({
@@ -179,6 +174,6 @@ export class DetailUsersCardComponent implements OnInit {
 
   public onAddStoryPoints() {
     this.totalStoryPoints.disable();
-    this.addStoryPoints.emit({ storyPoints: this.totalStoryPoints.value || 0, userId: this.vm.user?.id ?? 0 });
+    this.addStoryPoints.emit({ storyPoints: this.totalStoryPoints.value ?? 0, userId: this.vm.user?.id ?? 0 });
   }
 }
