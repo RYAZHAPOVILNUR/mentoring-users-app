@@ -82,6 +82,7 @@ export const addStoryPoints = createEffect(
   () => {
     const actions$ = inject(Actions);
     const apiService = inject(ApiService);
+    const notifyService = inject(NotifyService);
 
     return actions$.pipe(
       ofType(storyPointsActions.addStoryPoints),
@@ -89,6 +90,13 @@ export const addStoryPoints = createEffect(
         return apiService.post<UsersDTO, CreateUserDTO>(`/users/${userWithStoryPoints.id}`, userWithStoryPoints).pipe(
           map((userData) => usersDTOAdapter.DTOtoEntity(userData)),
           map((userData) => storyPointsActions.addStoryPointsSuccess({ userData })),
+          tap(() =>
+            notifyService.open('Story points added successfully!', 'Close', {
+              duration: 3000,
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            })
+          ),
           catchError((error) => {
             return of(storyPointsActions.assStoryPointsFailure({ error }));
           })

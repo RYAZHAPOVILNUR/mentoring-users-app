@@ -10,7 +10,6 @@ import { PushPipe } from '@ngrx/component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   standalone: true,
@@ -23,7 +22,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatSidenavModule,
     MatIconModule,
     MatButtonModule,
-    MatSnackBarModule,
   ],
   providers: [],
   selector: 'users-root',

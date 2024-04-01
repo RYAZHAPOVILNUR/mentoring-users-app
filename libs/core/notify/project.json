@@ -1,5 +1,5 @@
 {
-  "name": "notify",
+  "name": "core-notify",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/core/notify/src",
   "prefix": "users",
