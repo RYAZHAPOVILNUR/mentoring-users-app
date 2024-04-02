@@ -15,17 +15,16 @@ import { MatInputModule } from '@angular/material/input';
     CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
   ],
   templateUrl: './users-filter.component.html',
   styleUrls: ['./users-filter.component.scss'],
 })
 export class UsersFilterComponent {
   private usersFacade = inject(UsersFacade);
-  public filterName = new FormControl<any>('', Validators.required);
+  public filterName = new FormControl<string>('', { nonNullable: true });
 
-  filterByName(event: Event) {
-    event.preventDefault();
+  filterByName() {
     this.usersFacade.filterUsers(this.filterName.value);
   }
 }

@@ -1,4 +1,9 @@
 <form class="users_filter">
-  <input matInput type="text" placeholder="Имя" [formControl]="filterName" />
-  <button (click)="filterByName($event)">Применить</button>
+  <input
+    matInput
+    type="text"
+    placeholder="Имя"
+    [formControl]="filterName"
+    (input)="filterByName()"
+  />
 </form>
