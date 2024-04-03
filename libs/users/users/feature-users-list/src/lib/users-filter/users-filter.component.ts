@@ -19,9 +19,7 @@ export class UsersFilterComponent {
   @Output()
   filterUsers = new EventEmitter<string>();
 
-  onFilterUsers() {
-    if (this.name.value) {
-      this.filterUsers.emit(this.name.value);
-    }
+  public onFilterUsers(): void {
+    this.filterUsers.emit(this.name.value ? this.name.value : '');
   }
 }
