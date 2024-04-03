@@ -63,13 +63,13 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.setUsersFilter({ filter: { name } }));
   }
 
-  public addStoryPoints(payload: UserStoryPoints): void {
+  public addStoryPoints(storyPointsData: UserStoryPoints): void {
     this.store
-      .select(UsersSelectors.selectUserById(payload.userId))
+      .select(UsersSelectors.selectUserById(storyPointsData.userId))
       .pipe(take(1))
       .subscribe((user) => {
         if (user) {
-          const userWithStoryPoints = { ...user, totalStoryPoints: payload.storyPoints };
+          const userWithStoryPoints = { ...user, totalStoryPoints: storyPointsData.storyPoints };
           this.store.dispatch(storyPointsActions.addStoryPoints({ userWithStoryPoints }));
         }
       });

@@ -63,15 +63,15 @@ export class DetailUsersCardComponent implements OnInit {
   public get vm() {
     return this._vm;
   }
+
   @Input({ required: true })
   set vm(vm: DetailUsersCardVm) {
     this._vm = vm;
 
     if (vm.user) {
-      const { name, email, username, city, totalStoryPoints } = vm.user;
+      this.formGroup.patchValue(vm.user);
 
-      this.formGroup.patchValue({ name, email, username, city });
-
+      const { totalStoryPoints } = vm.user;
       totalStoryPoints && this.totalStoryPoints.setValue(totalStoryPoints);
     }
 
@@ -85,7 +85,7 @@ export class DetailUsersCardComponent implements OnInit {
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
 
-  public totalStoryPoints = new FormControl({ value: 0, disabled: true });
+  public totalStoryPoints = new FormControl<number>({ value: 0, disabled: true });
 
   @Output() addStoryPoints = new EventEmitter<UserStoryPoints>();
 
@@ -174,6 +174,11 @@ export class DetailUsersCardComponent implements OnInit {
 
   public onAddStoryPoints() {
     this.totalStoryPoints.disable();
-    this.addStoryPoints.emit({ storyPoints: this.totalStoryPoints.value ?? 0, userId: this.vm.user?.id ?? 0 });
+
+    if (!this.vm.user?.id || !this.totalStoryPoints.value) {
+      return;
+    }
+
+    this.addStoryPoints.emit({ storyPoints: this.totalStoryPoints.value, userId: this.vm.user.id });
   }
 }
