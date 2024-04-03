@@ -1,3 +1,4 @@
+<users-filter (filterUsers)="onFilterUsers($event)"></users-filter>
 <ng-container
   *ngrxLet="{
     users: users$,
@@ -9,3 +10,4 @@
   <users-list-ui [vm]="vm" (deleteUser)="onDeleteUser($event)" (redirectToEdit)="onRedirectToEdit($event)" />
 </ng-container>
 <create-users-button></create-users-button>
+
