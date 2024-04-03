@@ -20,7 +20,7 @@ export const foldersLoad = createEffect(
             (folders) => MaterialsActions.loadFoldersSuccess({ folders })
           ),
           catchError((error) => {
-              console.error('Error ' + error.message.toString());
+              console.error('Error ' + error.message);
               return of(MaterialsActions.loadFoldersFailure({ error }));
             }
           )
@@ -42,7 +42,7 @@ export const deleteFolder = createEffect(
             () => MaterialsActions.deleteFolderSuccess({ id })
           ),
           catchError((error) => {
-            console.error('Error: ' + error.message.toString());
+            console.error('Error: ' + error.message);
             return of(MaterialsActions.deleteFolderFailure({ error }));
           })
         )
@@ -65,7 +65,7 @@ export const addFolder = createEffect(
               (newFolder) => MaterialsActions.addFolderSuccess({ newFolder })
             ),
             catchError((error) => {
-              console.error('Error: ' + error.message.toString());
+              console.error('Error: ' + error.message);
               return of(MaterialsActions.addFolderFailure({ error }));
             })
           )
@@ -91,7 +91,7 @@ export const openFolder = createEffect(
             MaterialsActions.openFolderSuccess({ folder })
           ),
           catchError((error) => {
-              console.log('Error: ' + error.message.toString());
+              console.log('Error: ' + error.message);
               return of(MaterialsActions.openFolderFailure({ error }));
             }
           ),
@@ -113,6 +113,7 @@ export const loadMaterials = createEffect(
       ofType(MaterialsActions.loadMaterials),
       switchMap(
         () => selectedRouteParams.pipe(
+          filter(params => params['id'] !== undefined),
           switchMap(params =>
             apiService.get<MaterialDTO[]>('/material').pipe(
               map((materials) => {
@@ -120,7 +121,7 @@ export const loadMaterials = createEffect(
                 return MaterialsActions.loadMaterialsSuccess({ materials: filteredMaterials });
               }),
               catchError(({ error }) => {
-                console.error('Error: ' + error.message.toString());
+                console.error('Error: ' + error.message);
                 return of(MaterialsActions.loadMaterialsFailure({ error }));
               })
             )
@@ -142,7 +143,7 @@ export const deleteMaterial = createEffect(
             () => MaterialsActions.deleteMaterialSuccess({ id })
           ),
           catchError(({ error }) => {
-            console.error('Error: ' + error.message.toString());
+            console.error('Error: ' + error.message);
             return of(MaterialsActions.deleteMaterialFailure({ error }));
           })
         )
@@ -165,7 +166,7 @@ export const addMaterial = createEffect(
               (newMaterial) => MaterialsActions.addMaterialSuccess({ newMaterial })
             ),
             catchError(({ error }) => {
-              console.error('Error: ' + error.message.toString());
+              console.error('Error: ' + error.message);
               return of(MaterialsActions.addMaterialFailure({ error }));
             })
           )

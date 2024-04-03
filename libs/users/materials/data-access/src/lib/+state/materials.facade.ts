@@ -19,10 +19,13 @@ export class MaterialsFacade {
   public readonly openedFolder$ = this.store.select(selectOpenedFolder);
 
   constructor() {
-    this.store.dispatch(MaterialsActions.loadFolders());
-    this.openFolder();
+    this.openedFolder$.pipe(tap(x => console.log(x))).subscribe()
   }
 
+
+  loadFolders(): void {
+    this.store.dispatch(MaterialsActions.loadFolders())
+  }
   deleteFolder(id: number): void {
     this.store.dispatch(MaterialsActions.deleteFolder({ id }));
   }

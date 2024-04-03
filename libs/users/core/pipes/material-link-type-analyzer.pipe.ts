@@ -1,11 +1,10 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe } from '@angular/core';
 
 @Pipe({
-  name: 'linkAnalyzer',
+  name: 'MaterialsTypeOfLink',
   standalone: true
 })
-export class LinkAnalyzerPipe {
-
+export class MaterialsTypeOfLinkPipe {
   transform(link: string): string {
     if (this.isYouTubeVideo(link)) {
       return 'video_library';
@@ -32,18 +31,5 @@ export class LinkAnalyzerPipe {
   private isDocument(link: string): boolean {
     const documentExtensions = ['.pdf', '.doc', '.docx', '.ppt', '.pptx', '.xls', '.xlsx'];
     return documentExtensions.some(ext => link.toLowerCase().endsWith(ext));
-  }
-
-  mapMaterialType(actualType: string): string {
-    switch (actualType) {
-      case 'library_music':
-        return 'Аудио';
-      case 'video_library':
-        return 'Видео';
-      case 'picture_as_pdf':
-        return 'PDF';
-      default:
-        return 'unknown';
-    }
   }
 }

@@ -1,4 +1,4 @@
-<mat-dialog-content [ngSwitch]="data.material_link | linkAnalyzer">
+<mat-dialog-content [ngSwitch]="data.material_link | MaterialsTypeOfLink">
   <mat-dialog-actions align="center">
     <div class="actions-container">
       <h2 mat-dialog-title>{{ data.title }}</h2>

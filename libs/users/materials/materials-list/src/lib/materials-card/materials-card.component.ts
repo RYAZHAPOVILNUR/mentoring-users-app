@@ -16,12 +16,12 @@ import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { MatDialog } from '@angular/material/dialog';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { tap } from 'rxjs';
-import { LinkAnalyzerPipe } from '../../../../../core/pipes';
+import { MaterialsTypeOfLinkPipe } from '../../../../../core/pipes';
 
 @Component({
   selector: 'users-materials-card',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatCardModule, MatIconModule, LinkAnalyzerPipe],
+  imports: [CommonModule, MatButtonModule, MatCardModule, MatIconModule, MaterialsTypeOfLinkPipe],
   templateUrl: './materials-card.component.html',
   styleUrls: ['./materials-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

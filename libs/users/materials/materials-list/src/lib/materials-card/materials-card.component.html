@@ -4,7 +4,7 @@
       <h3 class="overflow-ellipsis">{{ material.title }}</h3>
       <p>{{ material.created_at | date }}</p>
     </div>
-    <mat-icon class="material-icon">{{ material.material_link | linkAnalyzer }}</mat-icon>
+    <mat-icon class="material-icon">{{ material.material_link | MaterialsTypeOfLink }}</mat-icon>
   </button>
 
   <mat-card-actions class="material-card-buttons" >

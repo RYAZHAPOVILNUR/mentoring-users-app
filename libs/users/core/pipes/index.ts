@@ -1,1 +1,1 @@
-export * from './link-analyzer.pipe'
+export * from './material-link-type-analyzer.pipe'

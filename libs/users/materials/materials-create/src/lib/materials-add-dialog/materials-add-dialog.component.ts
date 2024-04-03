@@ -11,16 +11,17 @@ import {
   Validators
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { LinkAnalyzerPipe } from '../../../../../core/pipes';
+import { MaterialsTypeOfLinkPipe } from '../../../../../core/pipes';
+import { materialType } from '@users/materials/data-access'
 
 export function linkTypeValidator(type: string): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const link = control.value;
     if (!link) return null;
 
-    const pipe = new LinkAnalyzerPipe();
-    const icon = pipe.transform(link);
-    if (pipe.mapMaterialType(icon) === type) {
+    const pipe = new MaterialsTypeOfLinkPipe();
+    const icon = pipe.transform(link) as keyof typeof materialType;
+    if (materialType[icon] === type) {
       return null;
     }
     return { invalidLinkType: { actual: icon } };

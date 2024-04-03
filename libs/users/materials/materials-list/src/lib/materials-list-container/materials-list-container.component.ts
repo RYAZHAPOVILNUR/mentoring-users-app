@@ -23,6 +23,10 @@ export class MaterialsListContainerComponent {
   private readonly dialog = inject(MatDialog);
   public readonly MaterialsAddDialogComponent = MaterialsAddDialogComponent;
 
+  constructor() {
+    this.materialsFacade.openFolder();
+  }
+
   onDeleteMaterial(id: number): void {
     this.materialsFacade.deleteMaterial(id);
   }
@@ -32,6 +36,6 @@ export class MaterialsListContainerComponent {
   }
 
   onAddMaterial(newMaterial: Omit<CreateMaterial, 'folder_id'>): void {
-    this.materialsFacade.addMaterial(newMaterial)
+    this.materialsFacade.addMaterial(newMaterial);
   }
 }

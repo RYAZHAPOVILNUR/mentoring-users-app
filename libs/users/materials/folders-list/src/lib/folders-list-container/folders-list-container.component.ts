@@ -23,6 +23,10 @@ export class FoldersListContainerComponent {
   private readonly activatedRoute = inject(ActivatedRoute);
   public readonly FoldersAddDialogComponent = FoldersAddDialogComponent;
 
+  constructor() {
+    this.facade.loadFolders();
+  }
+
   onDeleteFolder(id: number): void {
     this.facade.deleteFolder(id);
   }
