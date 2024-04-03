@@ -25,9 +25,9 @@ export const deleteFolderFailed = createAction('[Material Page] Delete Folder Fa
 
 export const initFolderMaterials = createAction('[Folder Page] Init')
 
-export const loadMaterials = createAction('[Folder Page] Load Folder Materials')
+export const loadMaterials = createAction('[Folder Page] Load Folder Materials', props<{ id: number }>())
 
-export const loadMaterialsSuccess = createAction('[Folder Page] Load Folder Materials Success', props<{materials:MaterialEntity[]}>())
+export const loadMaterialsSuccess = createAction('[Folder Page] Load Folder Materials Success', props<{materials:MaterialEntity[], id:number}>())
 
 export const loadMaterialsFailed = createAction('[Folder Page] Load Folder Materials Failed')
 

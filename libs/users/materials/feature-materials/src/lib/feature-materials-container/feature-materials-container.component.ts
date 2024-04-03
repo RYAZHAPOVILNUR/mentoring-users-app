@@ -37,7 +37,6 @@ export class FeatureMaterialsContainerComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.facade.loadMaterials()
     this.facade.loadOpenedFolderHandler().pipe(takeUntilDestroyed(this.destroyRef)).subscribe()
   }
 

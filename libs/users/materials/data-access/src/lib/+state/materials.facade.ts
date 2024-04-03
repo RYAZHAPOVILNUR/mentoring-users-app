@@ -43,8 +43,8 @@ export class MaterialsFacade {
     this.store.dispatch(MaterialActions.deleteFolder({id}))
   }
 
-  loadMaterials(){
-    this.store.dispatch(MaterialActions.loadMaterials())
+  loadMaterials(id:number){
+    this.store.dispatch(MaterialActions.loadMaterials({id}))
   }
 
   addNewMaterial(material:AddMaterialEntity){

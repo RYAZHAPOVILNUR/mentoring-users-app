@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { catchError, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ApiService } from '@users/core/http';
 import * as MaterialsActions from './materials.actions';
@@ -8,6 +8,7 @@ import { AddFolderDTO, AddMaterialDTO, FolderDTO, MaterialDTO } from '../model/m
 import { folderDTOAdapter, materialDTOAdapter } from '../model/material-dto.adapter'
 import { Store } from '@ngrx/store';
 import { selectRouteParams } from '@users/core/data-access';
+import { Router } from '@angular/router';
 
 
 export const loadFolders = createEffect(
@@ -93,11 +94,11 @@ export const loadMaterials = createEffect(
     return actions$.pipe(
       ofType(MaterialsActions.loadMaterials),
       switchMap(
-        () => apiService.get<MaterialDTO[]>('/material')
+        ({id}) => apiService.get<MaterialDTO[]>('/material')
         .pipe(
           // Преобразование каждого DTO в Entity
           map(materials => materials.map(material => materialDTOAdapter.DTOtoEntity(material))), 
-          map((materials) => MaterialsActions.loadMaterialsSuccess({materials})),
+          map((materials) => MaterialsActions.loadMaterialsSuccess({materials, id})),
           catchError(error => {
             console.log(error)
             
@@ -166,3 +167,20 @@ export const deleteMaterial = createEffect(
     )
   },{ functional:true }
 )
+
+
+export const navigateToFolders = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const router = inject(Router);
+
+    return actions$.pipe(
+      ofType(MaterialsActions.loadMaterials),
+      tap(({ id }) => {
+        router.navigate(['/materials/', id]);
+      })
+    );
+  },
+  { functional: true, dispatch: false }
+);
+
