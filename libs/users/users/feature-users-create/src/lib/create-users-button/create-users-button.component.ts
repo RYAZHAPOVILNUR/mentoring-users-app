@@ -35,6 +35,7 @@ export class CreateUsersButtonComponent {
           const newUserData: CreateUserDTO = {
             name: result.name,
             email: result.email,
+            purchaseDate:Date.now()
           };
 
           this.usersFacade.addUser(newUserData);

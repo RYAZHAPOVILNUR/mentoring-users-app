@@ -22,6 +22,7 @@ export type CreateUserDTO = DeepReadonly<{
   email: string;
   city?: string;
   role?: Role;
+  purchaseDate?:number
 }>
 
 export type UsersPhoto = {
