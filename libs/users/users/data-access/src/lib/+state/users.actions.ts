@@ -26,10 +26,6 @@ export const addUser = createAction('[Users Page] Add User', props<{ userData: C
 export const addUserSuccess = createAction('[Users/Api] Add User Success', props<{ userData: UsersEntity }>());
 export const addUserFailed = createAction('[Users/Api] Add User Failed', props<{ error: any }>());
 
-// export const selectId = createAction('[Users Page] Select Id', props<{ id: number }>());
-
-// export const deleteSelectedId = createAction('[Users Page] Delete Selected Id');
-
 export const editUser = createAction('[Users Detail] Edit User', props<{ userData: CreateUserDTO; id: number; onSuccessCb: onSuccessEditionCbType }>());
 export const editUserSuccess = createAction('[Users Detail] Edit User Success', props<{ userData: UsersDTO }>());
 export const editUserFailed = createAction('[Users Detail] Edit Failed', props<{ error: UsersErrors | null }>());
@@ -42,5 +38,5 @@ export const updateUserStatus = createAction('[Users Detail] Update User Status'
 
 export const addUsersStiryPoins = createAction('[Users Detail] Add User StoryPoints', props<{userData: CreateUserDTO,
   id: number, onSuccessAddSP: onSuccessSPointCbType}>());
-export const addUsersStiryPoinsSuccess = createAction('[Users Detail] Add User StoryPoints', props<{userData: UsersDTO}>());
-export const addUsersStiryPoinsFailed = createAction('[Users Detail] Add User StoryPoints', props<{error: any}>());
+export const addUsersStiryPoinsSuccess = createAction('[Users Detail] Add User StoryPoints Success', props<{userData: UsersDTO}>());
+export const addUsersStiryPoinsFailed = createAction('[Users Detail] Add User StoryPoints Failed', props<{error: any}>());

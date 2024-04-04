@@ -89,9 +89,12 @@
             </mat-form-field>
 
             <div class="storypoint">
-                <button (click)="storyPoint.enable()" mat-stroked-button type="button">Редактировать StoryPoint</button>              
-                <button (click)="onAddStoryPoint()" *ngIf="!storyPoint.disabled" [disabled]="!storyPoint.valid" mat-icon-button type="button"><mat-icon>done</mat-icon></button>
-                <button (click)="storyPoint.disable()" *ngIf="!storyPoint.disabled" mat-icon-button type="button" ><mat-icon>close</mat-icon></button>
+                <button (click)="storyPoint.enable()" mat-stroked-button type="button">Редактировать StoryPoint</button>
+                <ng-container *ngIf="!storyPoint.disabled">
+                  <button (click)="onAddStoryPoint()" [disabled]="!storyPoint.valid" mat-icon-button type="button"><mat-icon>done</mat-icon></button>
+                  <button (click)="storyPoint.disable()" mat-icon-button type="button" ><mat-icon>close</mat-icon></button>
+                </ng-container>              
+  
             </div>
 
           </div>
@@ -129,5 +132,11 @@
 <ng-template #snackbar>
   <div class="edit-user-snackbar">
     <span>Пользователь успешно изменён!</span>
+  </div>
+</ng-template>
+
+<ng-template #snackbarStoryPoint>
+  <div class="edit-user-snackbar">
+    <span>StoryPoint успешно изменены!</span>
   </div>
 </ng-template>

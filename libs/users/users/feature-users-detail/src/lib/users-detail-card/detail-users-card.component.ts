@@ -72,7 +72,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city
       });
-      this.storyPoint.patchValue(vm.user.totalStoryPoints as number);
+      this.storyPoint.patchValue(vm.user.totalStoryPoints ?? 0);
     }
 
     if (vm.editMode) {
@@ -96,6 +96,7 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>
+  @ViewChild('snackbarStoryPoint') snackbarSPTemplateRef!: TemplateRef<any>
   private dadata = inject(DadataApiService)
   public citySuggestions = this.formGroup.controls.city.valueChanges
     .pipe(
@@ -173,10 +174,10 @@ export class DetailUsersCardComponent implements OnInit {
   }
 
   private onAddSPSuccess = () => 
-  this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
+  this.snackBar.openFromTemplate(this.snackbarSPTemplateRef, {
     duration: 2500,
     horizontalPosition: 'center',
-    verticalPosition: 'top'
+    verticalPosition: 'top',
   })
 
   onAddStoryPoint(){
