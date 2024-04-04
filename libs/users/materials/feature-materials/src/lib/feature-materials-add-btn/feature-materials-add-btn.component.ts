@@ -36,14 +36,8 @@ export class FeatureMaterialsAddBtnComponent {
   private readonly destroyRef = inject(DestroyRef);
   private readonly dialog = inject(MatDialog);
 
-  @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
 
-  public onOpenMenu(event: Event) {
-    event.stopPropagation();
-    this.trigger.openMenu();
-  }
-
-  onAddMaterial(materialType: string): void {
+  public onAddMaterial(materialType: string): void {
     const dialogRef: MatDialogRef<MaterialAddDialogComponent> = this.dialog
       .open(MaterialAddDialogComponent, { data: {
         materialType: materialType,
