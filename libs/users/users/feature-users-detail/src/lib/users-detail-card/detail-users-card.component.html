@@ -92,13 +92,7 @@
             <mat-form-field class="edit-user-field">
               <mat-label>Количество сторипоинтов</mat-label>
               <input matInput class="edit-user-input" [formControl]="storyPoints" />
-              <button
-                matButton
-                mat-icon-button
-                matSuffix
-                (click)="storyPoints.enable()"
-                *ngIf="storyPoints.disabled"
-              >
+              <button matButton mat-icon-button matSuffix (click)="storyPoints.enable()" *ngIf="storyPoints.disabled">
                 <mat-icon>add</mat-icon>
               </button>
 
@@ -154,5 +148,11 @@
 <ng-template #snackbar>
   <div class="edit-user-snackbar">
     <span>Пользователь успешно изменён!</span>
+  </div>
+</ng-template>
+
+<ng-template #snackbarStoryPoints>
+  <div class="edit-user-snackbar">
+    <span>Сторипоинты успешно изменены!</span>
   </div>
 </ng-template>
