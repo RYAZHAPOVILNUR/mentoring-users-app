@@ -1,7 +1,12 @@
-<div mat-ripple>
+<div mat-ripple (mouseenter)="toggleRemoveIcon()" (mouseleave)="toggleRemoveIcon()">
   <mat-card class="folder">
-    <mat-card-header class="folder__header">
-      <mat-icon aria-hidden="true" fontIcon="folder"></mat-icon>
+    <mat-card-header>
+      <div class="folder__header">
+        <mat-icon aria-hidden="true" fontIcon="folder"></mat-icon>
+        <mat-icon *ngIf="isDisplayRemoveIcon" (click)="onRemoveFolder()" class="remove-btn">
+          delete
+        </mat-icon>
+      </div>
     </mat-card-header>
 
     <mat-card-content>

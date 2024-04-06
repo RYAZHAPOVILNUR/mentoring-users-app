@@ -4,6 +4,6 @@
   </ng-template>
 
   <div class="container">
-    <folders-list [folders]="vm.folders"></folders-list>
+    <folders-list [folders]="vm.folders" (removeFolder)="onRemoveFolder($event)"></folders-list>
   </div>
 </ng-container>

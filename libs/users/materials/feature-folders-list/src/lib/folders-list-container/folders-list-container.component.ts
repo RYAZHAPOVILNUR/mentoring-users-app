@@ -5,22 +5,29 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { FoldersListComponent } from '../folders-list/folders-list.component';
 import { MaterialsFacade } from '@users/materials/data-access';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'folders-list-container',
   standalone: true,
-  imports: [CommonModule, FoldersListComponent, MatProgressBarModule, LetDirective],
+  imports: [CommonModule, FoldersListComponent, MatProgressBarModule, LetDirective, MatDialogModule],
   templateUrl: './folders-list-container.component.html',
   styleUrls: ['./folders-list-container.component.scss'],
 })
 export class FoldersListContainerComponent implements OnInit {
   private readonly materialsFacade = inject(MaterialsFacade);
+  public dialog = inject(MatDialog);
 
   public folders$ = this.materialsFacade.folders$;
   public isLoading$ = this.materialsFacade.isLoading$;
 
   ngOnInit(): void {
     this.materialsFacade.init();
+  }
+
+  public onRemoveFolder(id: number): void {
+    console.log(id);
+    // this.materialsFacade.removeFolder(id);
   }
 }

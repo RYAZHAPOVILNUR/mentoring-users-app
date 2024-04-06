@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { Folder } from '@users/materials/data-access';
@@ -15,4 +15,11 @@ import { FoldersCardComponent } from '../folders-card/folders-card.component';
 export class FoldersListComponent {
   @Input({ required: true })
   folders!: Folder[];
+
+  @Output()
+  removeFolder = new EventEmitter<number>();
+
+  public onRemoveFolder(id: number): void {
+    this.removeFolder.emit(id);
+  }
 }

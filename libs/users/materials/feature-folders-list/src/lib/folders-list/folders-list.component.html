@@ -1,5 +1,5 @@
 <ul class="folders-list">
   <li class="folders-item" *ngFor="let folder of folders">
-    <folders-card [folder]="folder"></folders-card>
+    <folders-card [folder]="folder" (removeFolder)="onRemoveFolder($event)"></folders-card>
   </li>
 </ul>

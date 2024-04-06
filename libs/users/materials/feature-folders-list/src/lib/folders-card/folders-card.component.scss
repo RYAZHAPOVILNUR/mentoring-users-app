@@ -3,7 +3,11 @@
   cursor: pointer;
 
   &__header {
-    margin-bottom: .5rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
   }
 
   &__title {
@@ -19,3 +23,6 @@
   }
 }
 
+.remove-btn {
+  color: #f54336;
+}
