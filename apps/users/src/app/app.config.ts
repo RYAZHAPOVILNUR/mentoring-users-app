@@ -1,4 +1,4 @@
-import { ApplicationConfig, importProvidersFrom, isDevMode } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, isDevMode, LOCALE_ID } from '@angular/core';
 import { provideRouter, withEnabledBlockingInitialNavigation } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
@@ -25,6 +25,11 @@ import { materialsEffects, materialsFeature } from '@users/materials/data-access
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
+
+import { registerLocaleData } from '@angular/common';
+import localeRu from '@angular/common/locales/ru';
+
+registerLocaleData(localeRu);
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -89,5 +94,9 @@ export const appConfig: ApplicationConfig = {
         defaultLanguage: 'en',
       })
     ),
+    {
+      provide: LOCALE_ID,
+      useValue: 'ru',
+    },
   ],
 };

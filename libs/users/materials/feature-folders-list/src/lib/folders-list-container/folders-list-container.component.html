@@ -4,8 +4,6 @@
   </ng-template>
 
   <div class="container">
-    <div class="border" *ngFor="let folder of vm.folders">
-      <p>{{ folder.title }}</p>
-    </div>
+    <folders-list [folders]="vm.folders"></folders-list>
   </div>
 </ng-container>

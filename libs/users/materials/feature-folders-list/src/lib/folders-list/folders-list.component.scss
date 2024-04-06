@@ -1,0 +1,10 @@
+.folders-list {
+  padding: 2rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-gap: 2rem;
+}
+
+.folders-item {
+  list-style: none;
+}

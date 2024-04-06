@@ -1,1 +1,5 @@
-<p>folders-list works!</p>
+<ul class="folders-list">
+  <li class="folders-item" *ngFor="let folder of folders">
+    <folders-card [folder]="folder"></folders-card>
+  </li>
+</ul>

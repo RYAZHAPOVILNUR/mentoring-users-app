@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { Folder } from '@users/materials/data-access';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';
 
 @Component({
@@ -10,4 +12,7 @@ import { FoldersCardComponent } from '../folders-card/folders-card.component';
   templateUrl: './folders-list.component.html',
   styleUrls: ['./folders-list.component.scss'],
 })
-export class FoldersListComponent {}
+export class FoldersListComponent {
+  @Input({ required: true })
+  folders!: Folder[];
+}

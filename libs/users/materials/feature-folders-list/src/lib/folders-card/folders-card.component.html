@@ -1,1 +1,12 @@
-<p>folders-card works!</p>
+<div mat-ripple>
+  <mat-card class="folder">
+    <mat-card-header class="folder__header">
+      <mat-icon aria-hidden="true" fontIcon="folder"></mat-icon>
+    </mat-card-header>
+
+    <mat-card-content>
+      <h3 class="folder__title">{{ folder.title }}</h3>
+      <p class="folder__date">{{ folder.created_at | date }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
