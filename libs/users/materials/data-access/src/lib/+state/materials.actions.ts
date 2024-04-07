@@ -7,5 +7,9 @@ export const folderActions = createActionGroup({
     LoadFolders: emptyProps(),
     LoadFoldersSuccess: props<{ folders: Folder[] }>(),
     LoadFoldersFailure: props<{ error: unknown }>(),
+
+    CreateFolder: props<{ title: string }>(),
+    CreateFolderSuccess: props<{ folder: Folder }>(),
+    CreateFolderFailure: props<{ error: unknown }>(),
   },
 });

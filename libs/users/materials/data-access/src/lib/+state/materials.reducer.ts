@@ -25,7 +25,14 @@ export const reducer = createReducer(
     folders,
     isLoading: false,
   })),
-  on(folderActions.loadFoldersFailure, (state, { error }) => ({ ...state, error, isLoading: false }))
+  on(folderActions.loadFoldersFailure, (state, { error }) => ({ ...state, error, isLoading: false })),
+  on(folderActions.createFolder, (state) => ({ ...state, isLoading: true })),
+  on(folderActions.createFolderSuccess, (state, { folder }) => ({
+    ...state,
+    folders: [...state.folders, folder],
+    isLoading: false,
+  })),
+  on(folderActions.createFolderFailure, (state, { error }) => ({ ...state, error, isLoading: false }))
 );
 
 export const materialsFeature = createFeature({

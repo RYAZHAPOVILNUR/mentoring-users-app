@@ -10,7 +10,11 @@ export class MaterialsFacade {
   public readonly folders$ = this.store.select(materialsFeature.selectFolders);
   public readonly isLoading$ = this.store.select(materialsFeature.selectIsLoading);
 
-  public init() {
+  init(): void {
     this.store.dispatch(folderActions.loadFolders());
+  }
+
+  createFolder(folderTitle: string): void {
+    this.store.dispatch(folderActions.createFolder({ title: folderTitle }));
   }
 }
