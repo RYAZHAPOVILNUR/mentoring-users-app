@@ -17,12 +17,6 @@ export const deleteFolders = createAction('[Folders] Delete Folders', props<{ id
 export const deleteFoldersSuccess = createAction('[Folders/API] Delete Folders Success', props<{ id: number }>());
 export const deleteFoldersFaild = createAction('[Folders/API] Delete Folders Faild', props<{ error: any }>());
 
-export const openFolder = createAction('[Folders] Open Foldres');
-export const openFolderSuccess = createAction('[Folders/API] Open Folders Success', props<{ materials: Material[] }>());
-export const openFolderFaild = createAction('[Folders/API] Open Folders Faild', props<{ error: any }>());
-
-
-
 export const loadMaterials = createAction('[Materials] Load Materials', props<{ folder_id: number }>());
 export const loadMaterialsSuccess = createAction('[Materials/API] Load Materials Success', props<{ materials: Material[]}>());
 export const loadMaterialsFaild = createAction('[Materials/API] Load Materials Faild', props<{ error: any }>());

@@ -1,13 +1,12 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { catchError, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as  MaterialsActions  from './materials.actions';
 import { ApiService } from '@users/core/http';
 import { Folder } from '../models/folder.model';
 import { FolderAdd } from '../models/folder-add.model';
 import { Material } from '../models/material.model';
-import { Router } from '@angular/router';
 import { MaterialAdd } from '../models/material-add.model';
 import { Store } from '@ngrx/store';
 import { selectRouteParams } from '@users/core/data-access';

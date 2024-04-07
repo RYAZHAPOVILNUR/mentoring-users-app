@@ -70,18 +70,6 @@ export const reducer = createReducer(
     error
   })),
   
-  on(MaterialsActions.openFolderSuccess, (state, { materials }) => ({
-    ...state,
-    materials: materials,
-    status: 'loaded' as const,
-  })),
-  on(MaterialsActions.openFolderFaild, ( state, { error }) => ({
-    ...state,
-    status: 'error' as const,
-    error
-  })),
-
-
   on(MaterialsActions.loadMaterials, state => ({
     ...state,
     status: 'loading' as const
