@@ -1,13 +1,13 @@
 <h2 mat-dialog-title>Create new folder</h2>
 
 <mat-dialog-content>
-  <mat-form-field style="width: 100%">
-    <mat-label>Folder title</mat-label>
-    <input matInput cdkFocusInitial placeholder="Type your folder title here" [formControl]="folderTitle">
-    <mat-error *ngIf="folderTitle.hasError('required')">
-      Folder title is <strong>required</strong>
-    </mat-error>
-  </mat-form-field>
+  <form (ngSubmit)="createNewFolder()">
+    <mat-form-field>
+      <mat-label>Folder title</mat-label>
+      <input matInput cdkFocusInitial placeholder="Type your folder title here" [formControl]="folderTitle" />
+      <mat-error *ngIf="folderTitle.hasError('required')"> Folder title is <strong>required</strong> </mat-error>
+    </mat-form-field>
+  </form>
 </mat-dialog-content>
 
 <mat-dialog-actions>

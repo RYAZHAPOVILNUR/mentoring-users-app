@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { CreateFolderButtonComponent } from '../create-folder-button/create-folder-button.component';
@@ -11,7 +11,15 @@ import { MatInputModule } from '@angular/material/input';
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'create-folder-dialog',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, MatButtonModule, MatFormFieldModule, ReactiveFormsModule, MatInputModule],
+  imports: [
+    CommonModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    FormsModule,
+  ],
   templateUrl: './create-folder-dialog.component.html',
   styleUrls: ['./create-folder-dialog.component.scss'],
 })
