@@ -29,6 +29,7 @@
       "@users/core/ui/layout": ["libs/users/core/ui/layout/src/public-api.ts"],
       "@users/core/utils": ["libs/core/utils/src/index.ts"],
       "@users/data-access": ["libs/data-access/src/index.ts"],
+      "@users/feature-folder-create": ["libs/users/materials/feature-folder-create/src/index.ts"],
       "@users/feature-users-create": ["libs/users/users/feature-users-create/src/index.ts"],
       "@users/feature-users-detail": ["libs/users/users/feature-users-detail/src/index.ts"],
       "@users/feature-users-list": ["libs/users/users/feature-users-list/src/index.ts"],
