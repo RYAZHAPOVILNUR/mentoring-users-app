@@ -4,8 +4,10 @@ import { switchMap, catchError, of, map, withLatestFrom, filter, tap } from 'rxj
 import * as UsersActions from './users.actions';
 import { ApiService } from '@users/core/http';
 import { Store, select } from '@ngrx/store';
-import { selectUsersEntities } from './users.selectors';
+import { selectAllUsers, selectUserById, selectUsersEntities } from './users.selectors';
 import { CreateUserDTO, UsersDTO, UsersEntity, selectRouteParams, usersDTOAdapter } from '@users/core/data-access';
+import { NotifyService } from '@users/core/notify';
+import { storyPointsActions } from './users.actions';
 
 export const userEffects = createEffect(
   () => {
@@ -71,6 +73,35 @@ export const addUser = createEffect(
           })
         )
       )
+    );
+  },
+  { functional: true }
+);
+
+export const addStoryPoints = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const notifyService = inject(NotifyService);
+
+    return actions$.pipe(
+      ofType(storyPointsActions.addStoryPoints),
+      switchMap(({ userWithStoryPoints }) => {
+        return apiService.post<UsersDTO, CreateUserDTO>(`/users/${userWithStoryPoints.id}`, userWithStoryPoints).pipe(
+          map((userData) => usersDTOAdapter.DTOtoEntity(userData)),
+          map((userData) => storyPointsActions.addStoryPointsSuccess({ userData })),
+          tap(() =>
+            notifyService.open('Story points added successfully!', 'Close', {
+              duration: 3000,
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            })
+          ),
+          catchError((error) => {
+            return of(storyPointsActions.assStoryPointsFailure({ error }));
+          })
+        );
+      })
     );
   },
   { functional: true }

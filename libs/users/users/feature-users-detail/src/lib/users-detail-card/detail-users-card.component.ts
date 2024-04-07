@@ -23,7 +23,7 @@ import { DetailUsersCardVm } from './detail-users-card-vm';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { CreateUserDTO, UsersEntity, UserStoryPoints } from '@users/core/data-access';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { DadataApiService } from '@dadata';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs';
@@ -63,24 +63,19 @@ export class DetailUsersCardComponent implements OnInit {
   public get vm() {
     return this._vm;
   }
+
   @Input({ required: true })
   set vm(vm: DetailUsersCardVm) {
     this._vm = vm;
 
     if (vm.user) {
-      this.formGroup.patchValue({
-        name: vm.user.name,
-        email: vm.user.email,
-        username: vm.user.username,
-        city: vm.user.city,
-      });
+      this.formGroup.patchValue(vm.user);
+
+      const { totalStoryPoints } = vm.user;
+      totalStoryPoints && this.totalStoryPoints.setValue(totalStoryPoints);
     }
 
-    if (vm.editMode) {
-      this.formGroup.enable();
-    } else {
-      this.formGroup.disable();
-    }
+    vm.editMode ? this.formGroup.enable() : this.formGroup.disable();
   }
 
   public formGroup = new FormBuilder().group({
@@ -89,6 +84,10 @@ export class DetailUsersCardComponent implements OnInit {
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
+
+  public totalStoryPoints = new FormControl<number>({ value: 0, disabled: true });
+
+  @Output() addStoryPoints = new EventEmitter<UserStoryPoints>();
 
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
@@ -171,5 +170,15 @@ export class DetailUsersCardComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  public onAddStoryPoints() {
+    this.totalStoryPoints.disable();
+
+    if (!this.vm.user?.id || !this.totalStoryPoints.value) {
+      return;
+    }
+
+    this.addStoryPoints.emit({ storyPoints: this.totalStoryPoints.value, userId: this.vm.user.id });
   }
 }

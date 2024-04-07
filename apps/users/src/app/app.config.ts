@@ -1,4 +1,4 @@
-import { ApplicationConfig, importProvidersFrom, isDevMode, LOCALE_ID } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, isDevMode } from '@angular/core';
 import { provideRouter, withEnabledBlockingInitialNavigation } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
@@ -20,6 +20,7 @@ import { articlesEffects, articlesFeature, commentsEffects, commentsFeature } fr
 import { tasksEffects, tasksFeature } from '@users/users/task/data-access';
 import { CLIENT_ID, githubApiEffects, githubApiFeature } from '@users/core/github-api/data-access';
 import { backlogFeature, backlogEffects } from '@users/users/backlog/data-access';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { materialsEffects, materialsFeature } from '@users/materials/data-access';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -98,5 +99,6 @@ export const appConfig: ApplicationConfig = {
       provide: LOCALE_ID,
       useValue: 'ru',
     },
+    MatSnackBar,
   ],
 };

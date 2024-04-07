@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
 import { UsersErrors, UsersFacade, onSuccessEditionCbType } from '@users/users/data-access';
 import { Observable, map, tap } from 'rxjs';
-import { selectQueryParam, CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { selectQueryParam, CreateUserDTO, UsersEntity, UserStoryPoints } from '@users/core/data-access';
 import { Store, select } from '@ngrx/store';
 import { LetDirective } from '@ngrx/component';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -83,5 +83,9 @@ export class UsersDetailComponent {
           this.router.navigate(['/home']);
         }
       });
+  }
+
+  public onAddStoryPoints(storyPointsData: UserStoryPoints): void {
+    this.usersFacade.addStoryPoints(storyPointsData);
   }
 }
