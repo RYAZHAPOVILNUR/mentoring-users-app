@@ -11,5 +11,9 @@ export const folderActions = createActionGroup({
     CreateFolder: props<{ title: string }>(),
     CreateFolderSuccess: props<{ folder: Folder }>(),
     CreateFolderFailure: props<{ error: unknown }>(),
+
+    RemoveFolder: props<{ folderId: number }>(),
+    RemoveFolderSuccess: props<{ folderId: number }>(),
+    RemoveFolderFailure: props<{ error: unknown }>(),
   },
 });

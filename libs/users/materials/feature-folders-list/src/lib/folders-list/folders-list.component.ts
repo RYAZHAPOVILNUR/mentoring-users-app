@@ -19,7 +19,7 @@ export class FoldersListComponent {
   @Output()
   removeFolder = new EventEmitter<number>();
 
-  public onRemoveFolder(id: number): void {
-    this.removeFolder.emit(id);
+  public removeFolderHandler(folderId: number): void {
+    this.removeFolder.emit(folderId);
   }
 }

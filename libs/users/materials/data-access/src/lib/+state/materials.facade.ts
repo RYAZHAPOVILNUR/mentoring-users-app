@@ -14,7 +14,11 @@ export class MaterialsFacade {
     this.store.dispatch(folderActions.loadFolders());
   }
 
-  createFolder(folderTitle: string): void {
+  public createFolder(folderTitle: string): void {
     this.store.dispatch(folderActions.createFolder({ title: folderTitle }));
+  }
+
+  public removeFolder(folderId: number): void {
+    this.store.dispatch(folderActions.removeFolder({ folderId }));
   }
 }

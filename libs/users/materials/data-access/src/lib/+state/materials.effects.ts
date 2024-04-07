@@ -73,3 +73,52 @@ export const displayErrorNotificationEffect = createEffect(
   },
   { functional: true, dispatch: false }
 );
+
+export const removeFolderEffect = createEffect(
+  (actions$ = inject(Actions), apiService = inject(ApiService)) => {
+    return actions$.pipe(
+      ofType(folderActions.removeFolder),
+      exhaustMap(({ folderId }) =>
+        apiService.delete<void>(`/folder/${folderId}`).pipe(
+          map(() => folderActions.removeFolderSuccess({ folderId })),
+          catchError((error) => {
+            return of(folderActions.removeFolderFailure({ error }));
+          })
+        )
+      )
+    );
+  },
+  { functional: true }
+);
+
+export const removeFolderSuccessNotificationEffect = createEffect(
+  (actions$ = inject(Actions), notify = inject(NotifyService)) => {
+    return actions$.pipe(
+      ofType(folderActions.removeFolderSuccess),
+      tap(() => {
+        notify.open('Successfully removed folder!', 'Close', {
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          duration: 3000,
+        });
+      })
+    );
+  },
+  { functional: true, dispatch: false }
+);
+
+export const removeFolderErrorNotificationEffect = createEffect(
+  (actions$ = inject(Actions), notify = inject(NotifyService)) => {
+    return actions$.pipe(
+      ofType(folderActions.removeFolderFailure),
+      tap(() => {
+        notify.open('Failed to remove folder!', 'Close', {
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          duration: 3000,
+        });
+      })
+    );
+  },
+  { functional: true, dispatch: false }
+);

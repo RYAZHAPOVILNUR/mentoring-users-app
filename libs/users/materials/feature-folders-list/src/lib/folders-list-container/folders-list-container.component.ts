@@ -1,5 +1,5 @@
 import { LetDirective } from '@ngrx/component';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
@@ -8,6 +8,7 @@ import { MaterialsFacade } from '@users/materials/data-access';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CreateFolderButtonComponent, CreateFolderDialogComponent } from '@users/feature-folder-create';
 import { createFolderDialogConfig } from '@users/feature-folder-create';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -26,7 +27,8 @@ import { createFolderDialogConfig } from '@users/feature-folder-create';
 })
 export class FoldersListContainerComponent implements OnInit {
   private readonly materialsFacade = inject(MaterialsFacade);
-  public dialog = inject(MatDialog);
+  private readonly destroyRef = inject(DestroyRef);
+  public readonly dialog = inject(MatDialog);
 
   public folders$ = this.materialsFacade.folders$;
   public isLoading$ = this.materialsFacade.isLoading$;
@@ -35,18 +37,22 @@ export class FoldersListContainerComponent implements OnInit {
     this.materialsFacade.init();
   }
 
-  public onRemoveFolder(id: number): void {
-    console.log(id);
-    // this.materialsFacade.removeFolder(id);
-  }
-
   public createFolderHandler(): void {
     const dialogRef = this.dialog.open(CreateFolderDialogComponent, createFolderDialogConfig);
 
-    dialogRef.afterClosed().subscribe((folderTitle: string) => {
-      if (folderTitle) {
-        this.materialsFacade.createFolder(folderTitle);
-      }
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((folderTitle: string) => {
+        if (folderTitle) {
+          this.materialsFacade.createFolder(folderTitle);
+        }
+      });
+  }
+
+  public removeFolderHandler(folderId: number) {
+    if (folderId) {
+      this.materialsFacade.removeFolder(folderId);
+    }
   }
 }
