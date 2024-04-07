@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UsersFilterComponent } from './users-filter.component';
+import { FoldersCardComponent } from './folders-card.component';
 
-describe('UsersFilterComponent', () => {
-  let component: UsersFilterComponent;
-  let fixture: ComponentFixture<UsersFilterComponent>;
+describe('FoldersCardComponent', () => {
+  let component: FoldersCardComponent;
+  let fixture: ComponentFixture<FoldersCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UsersFilterComponent],
+      imports: [FoldersCardComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(UsersFilterComponent);
+    fixture = TestBed.createComponent(FoldersCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

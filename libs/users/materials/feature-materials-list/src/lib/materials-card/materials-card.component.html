@@ -1,0 +1,28 @@
+<mat-card class="example-card" (dblclick)="showContent()">
+    <mat-card-header class="matcard">
+        <div class="card__title-box">
+            <div class="icon-box">
+                <mat-icon *ngIf="materials.material_link.endsWith('.mp3')">audiotrack</mat-icon>
+                <mat-icon *ngIf="materials.material_link.endsWith('.pdf')">picture_as_pdf</mat-icon>
+                <mat-icon *ngIf="materials.material_link.startsWith('https://www.youtube.com')">movie</mat-icon>
+                <mat-icon 
+                *ngIf="!materials.material_link.endsWith('mp3') && 
+                !materials.material_link.endsWith('.pdf') && 
+                !materials.material_link.startsWith('https://www.youtube.com')">warning</mat-icon>
+            </div>
+            
+            <button
+            (click)="onDeleteMaterials()"
+            class="card__title-btn" 
+            mat-icon-button>
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-card-title>   
+            <h2 class="materials__name">{{materials.title}}</h2>
+            <h3>{{materials.created_at | date: "dd/MM/yyyy"}}</h3>
+        </mat-card-title>
+    </mat-card-content>
+</mat-card>

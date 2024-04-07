@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Добавить  {{data?.materialType}}</h2>
+<mat-dialog-content [formGroup]="materialForm" class="matdialog">
+  <mat-form-field class="matinp">
+    <mat-label>Название</mat-label>
+    <input 
+    formControlName="title"
+    matInput>
+  </mat-form-field> <br>
+  <mat-form-field class="matinp">
+    <mat-label>Ссылка</mat-label>
+    <input 
+    formControlName="material_link"
+    matInput>
+  </mat-form-field> <br>
+  <small *ngIf="!materialForm.controls.material_link.valid && materialForm.controls.material_link.touched">Ссылка введена не верно</small>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="materialForm.value" [disabled]="!materialForm.valid">Ok</button>
+</mat-dialog-actions>

@@ -1,0 +1,18 @@
+
+
+<ng-container
+*ngrxLet="{
+    status: status$,
+    error: error$,
+    materials: materials$
+} as vm"
+>
+    <users-materials-list
+    [vm]="vm"
+    (content)="onShowContenr($event)"
+    (id_material)="onDeleteMaterial($event)"
+    ></users-materials-list>
+</ng-container>
+
+<users-materials-add-button></users-materials-add-button>
+

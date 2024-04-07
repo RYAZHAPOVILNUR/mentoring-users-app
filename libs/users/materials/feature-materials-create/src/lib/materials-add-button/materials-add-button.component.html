@@ -1,0 +1,21 @@
+<button [matMenuTriggerFor]="menu" class="btn__add-folders" mat-fab color="primary">
+    <mat-icon>add</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="openDialog('Audio')">
+        <mat-icon>audiotrack</mat-icon>
+        <span>Audio</span>
+    </button>
+    <button mat-menu-item (click)="openDialog('PDF')">
+        <mat-icon>picture_as_pdf</mat-icon>
+        <span>PDF</span>
+    </button>
+    <button mat-menu-item (click)="openDialog('Video')">
+        <mat-icon>movie</mat-icon>
+        <span>Video</span>
+    </button>
+</mat-menu>
+
+  
+  
+  

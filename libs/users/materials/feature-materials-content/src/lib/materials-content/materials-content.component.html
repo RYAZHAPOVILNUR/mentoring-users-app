@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>{{data.title}}</h2>
+<mat-dialog-content class="mat-typography">
+
+
+  <ng-container *ngIf="!data.material_link.endsWith('.pdf') && !data.material_link.endsWith('.mp3') && !data.material_link.startsWith('https://www.youtube.com')">
+    <h1>Пусто</h1>
+  </ng-container>
+
+  <ng-container *ngIf="data.material_link.endsWith('.pdf')">
+      <pdf-viewer class="pdf__viewer"
+      [src]="data.material_link"
+      [render-text]="true"
+      [original-size]="false"
+      Access-Control-Allow-Origin="*"
+      ></pdf-viewer>
+  </ng-container>
+
+  <ng-container *ngIf="data.material_link.endsWith('.mp3')">
+      <audio controls="controls">
+        <source src="{{data.material_link}}" type="audio/mp3">
+        <source src="{{data.material_link}}" type="audio/ogg">
+      </audio>
+  </ng-container>
+
+  <ng-container *ngIf="data.material_link.startsWith('https://www.youtube.com')">
+      <iframe width="560" height="315" 
+      [src]="extractingIdVideo()"
+      title="YouTube video player" 
+      frameborder="0"
+      allowfullscreen></iframe> <br>
+      <a href="{{data.material_link}}" target="_blank">Смотреть</a>
+  </ng-container>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

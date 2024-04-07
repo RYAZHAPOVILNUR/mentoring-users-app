@@ -1,0 +1,29 @@
+.card__title-box{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;    
+}
+.card__title-btn{
+    transition: .3s;
+    visibility: hidden;
+}
+.example-card{
+    transition: .3s;
+}
+.example-card:hover{
+    box-shadow: 0 0 10px rgba($color: #000000, $alpha: .7);
+    .card__title-btn{
+        visibility: visible;
+    }
+}
+
+.folders__name{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.folders__date{
+    font-size: 0.7em;
+}
