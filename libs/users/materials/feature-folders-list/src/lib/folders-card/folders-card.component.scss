@@ -7,7 +7,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    padding: 0.5rem 0 1rem;
   }
 
   &__title {
@@ -24,5 +24,6 @@
 }
 
 .remove-btn {
-  color: #f54336;
+  width: 24px;
+  height: 24px;
 }

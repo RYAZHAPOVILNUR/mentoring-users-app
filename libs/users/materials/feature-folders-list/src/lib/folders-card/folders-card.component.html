@@ -3,9 +3,7 @@
     <mat-card-header>
       <div class="folder__header">
         <mat-icon aria-hidden="true" fontIcon="folder"></mat-icon>
-        <mat-icon *ngIf="isDisplayRemoveIcon" (click)="onRemoveFolder()" class="remove-btn">
-          delete
-        </mat-icon>
+        <remove-folder-button *ngIf="isDisplayRemoveIcon" (removeHandler)="removeFolderHandler()" class="remove-btn" />
       </div>
     </mat-card-header>
 

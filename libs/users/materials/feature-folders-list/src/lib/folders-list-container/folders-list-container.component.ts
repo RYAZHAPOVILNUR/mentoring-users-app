@@ -1,14 +1,17 @@
 import { LetDirective } from '@ngrx/component';
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 import { FoldersListComponent } from '../folders-list/folders-list.component';
 import { MaterialsFacade } from '@users/materials/data-access';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { CreateFolderButtonComponent, CreateFolderDialogComponent } from '@users/feature-folder-create';
-import { createFolderDialogConfig } from '@users/feature-folder-create';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {
+  CreateFolderButtonComponent,
+  CreateFolderDialogComponent,
+  createFolderDialogConfig,
+} from '@users/materials/feature-folder-create';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -48,11 +51,5 @@ export class FoldersListContainerComponent implements OnInit {
           this.materialsFacade.createFolder(folderTitle);
         }
       });
-  }
-
-  public removeFolderHandler(folderId: number) {
-    if (folderId) {
-      this.materialsFacade.removeFolder(folderId);
-    }
   }
 }

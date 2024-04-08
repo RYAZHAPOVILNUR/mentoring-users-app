@@ -4,7 +4,7 @@
   </ng-template>
 
   <div class="container">
-    <folders-list [folders]="vm.folders" (removeFolder)="removeFolderHandler($event)"></folders-list>
+    <folders-list [folders]="vm.folders"></folders-list>
     <create-folder-button (createFolder)="createFolderHandler()"></create-folder-button>
   </div>
 </ng-container>
