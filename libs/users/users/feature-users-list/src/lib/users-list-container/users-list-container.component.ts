@@ -9,17 +9,21 @@ import { UsersFacade } from '@users/users/data-access';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
+import { UsersFilterComponent } from '../users-filter/users-filter.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'users-list-container',
   standalone: true,
   imports: [
+    UsersFilterComponent,
     CommonModule,
     UsersListComponent,
     MatButtonModule,
     MatDialogModule,
     LetDirective,
     CreateUsersButtonComponent,
+    ReactiveFormsModule,
   ],
   templateUrl: './users-list-container.component.html',
   styleUrls: ['./users-list-container.component.scss'],
