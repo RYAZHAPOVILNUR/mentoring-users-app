@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'remove-folder-button',
+  selector: 'ui-remove-folder-button',
   standalone: true,
   imports: [CommonModule, MatIconModule],
   templateUrl: './remove-folder-button.component.html',

@@ -2,13 +2,12 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { Folder } from '@users/materials/data-access';
-import { FoldersCardComponent } from '../folders-card/folders-card.component';
+import { FolderCardComponent } from '../folders-card/folder-card.component';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'folders-list',
+  selector: 'materials-folders-list',
   standalone: true,
-  imports: [CommonModule, FoldersCardComponent],
+  imports: [CommonModule, FolderCardComponent],
   templateUrl: './folders-list.component.html',
   styleUrls: ['./folders-list.component.scss'],
 })

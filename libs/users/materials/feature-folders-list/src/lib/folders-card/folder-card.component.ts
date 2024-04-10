@@ -8,17 +8,17 @@ import { MatDialog } from '@angular/material/dialog';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { Folder, MaterialsFacade } from '@users/materials/data-access';
-import { RemoveFolderButtonComponent, RemoveFolderDialogComponent } from '@users/materials/ui';
+import { RemoveFolderButtonComponent } from '@users/materials/ui';
+import { RemoveFolderDialogComponent } from '../remove-folder-dialog/remove-folder-dialog.component';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'folders-card',
+  selector: 'materials-folder-card',
   standalone: true,
   imports: [CommonModule, MatCardModule, MatIconModule, MatRippleModule, MatButtonModule, RemoveFolderButtonComponent],
-  templateUrl: './folders-card.component.html',
-  styleUrls: ['./folders-card.component.scss'],
+  templateUrl: './folder-card.component.html',
+  styleUrls: ['./folder-card.component.scss'],
 })
-export class FoldersCardComponent {
+export class FolderCardComponent {
   private readonly materialsFacade = inject(MaterialsFacade);
   private readonly destroyRef = inject(DestroyRef);
   public readonly dialog = inject(MatDialog);

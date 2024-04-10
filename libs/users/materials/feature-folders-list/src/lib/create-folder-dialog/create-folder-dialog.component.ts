@@ -3,13 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { CreateFolderButtonComponent } from '../create-folder-button/create-folder-button.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { CreateFolderButtonComponent } from '@users/materials/ui';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'create-folder-dialog',
+  selector: 'materials-create-folder-dialog',
   standalone: true,
   imports: [
     CommonModule,
