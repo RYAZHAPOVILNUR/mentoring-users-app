@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <form [formGroup]="formGroup" (submit)="onSubmit($event)">
+  <form [formGroup]="formGroup">
 
     <mat-form-field>
       <input type="text" autocomplete="off" placeholder="{{ 'ARTICLES.ARTICLE.HEADER' | translate }}" formControlName="title" class="input-field"
@@ -28,7 +28,8 @@
     </p>
 
     <div class="button">
-      <button mat-raised-button type="submit" color="primary">{{ vm.editMode ? ('ARTICLES.ARTICLE.EDIT' | translate) : ('ARTICLES.ARTICLE.POST' | translate) }}</button>
+      <button mat-raised-button (click)="onSubmit()" color="primary">{{ vm.editMode ? ('ARTICLES.ARTICLE.EDIT' | translate) : ('ARTICLES.ARTICLE.POST' | translate) }}</button>
+      <button mat-raised-button (click)="goToArticles()" color="primary">{{('ARTICLES.ARTICLE.CLOSE' | translate)}}</button>
     </div>
 
   </form>

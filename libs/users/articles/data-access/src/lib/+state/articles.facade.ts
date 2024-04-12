@@ -14,7 +14,7 @@ export class ArticlesFacade {
   public readonly articlesEntities$ = this.store.select(selectArticlesEntities);
 
   editArticle(articleData:CreateArticle, id:number){
-    this.store.dispatch(ArticlesActions.editArticle({articleData,id}));
+    this.store.dispatch(ArticlesActions.editArticle({articleData, id}));
   }
 
   publishArticle(article:CreateArticle){
