@@ -3,8 +3,7 @@ export default {
   displayName: 'users-users-feature-users-detail',
   preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory:
-    '../../../../coverage/libs/users/users/feature-users-detail',
+  coverageDirectory: '../../../../coverage/libs/users/users/feature-users-detail',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

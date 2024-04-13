@@ -1,11 +1,12 @@
-<ng-container *ngrxLet="{
+<ng-container
+  *ngrxLet="{
   articles: articles$,
   status: status$,
   loggedUserId: loggedUserId$,
   viewedArticle: viewedArticle$,
-} as vm">
+} as vm"
+>
   <ng-container [ngSwitch]="vm.status">
-
     <ng-container *ngSwitchCase="'loading'">
       <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
     </ng-container>
@@ -20,6 +21,5 @@
       <h1>Ошибка!</h1>
       <p>Произошла ошибка при загрузке данных.</p>
     </ng-container>
-
   </ng-container>
 </ng-container>

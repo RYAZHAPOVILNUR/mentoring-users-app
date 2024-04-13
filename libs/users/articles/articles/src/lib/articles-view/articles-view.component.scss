@@ -1,6 +1,4 @@
 .article {
-
-
   & .article-author-img,
   .article-author-name {
     cursor: pointer;
@@ -50,27 +48,23 @@
 :host::ng-deep.mat-mdc-card-header-text {
   display: none;
 }
-.articlesTypeLIST{}
+.articlesTypeLIST {
+}
 
-
-
-.articlesTypeTILE{
+.articlesTypeTILE {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   flex-wrap: wrap;
   gap: 10px;
-
 }
-.articleTypeLIST{
+.articleTypeLIST {
   max-width: 700px;
   margin: 40px auto;
-
 }
-.articleTypeTILE{
+.articleTypeTILE {
   width: 400px;
   height: 250px;
   margin: 10px;
   overflow: hidden;
 }
-

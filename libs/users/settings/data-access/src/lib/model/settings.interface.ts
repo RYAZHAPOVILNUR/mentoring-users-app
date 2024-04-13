@@ -1,3 +1,3 @@
-export interface ISettings{
-    articlesViewStyleType: string
+export interface ISettings {
+  articlesViewStyleType: string;
 }

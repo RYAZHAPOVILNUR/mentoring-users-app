@@ -12,5 +12,5 @@ export const githubApiActions = createActionGroup({
     getGithubUser: props<{ token: string }>(),
     getGithubUserFailure: props<{ error: Error }>(),
     getGithubUserSuccess: props<{ user: GithubUserDTO }>(),
-  }
+  },
 });

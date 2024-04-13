@@ -1,5 +1,5 @@
 export interface Student {
-  id?: number
-  level?: string
-  value?: number
+  id?: number;
+  level?: string;
+  value?: number;
 }

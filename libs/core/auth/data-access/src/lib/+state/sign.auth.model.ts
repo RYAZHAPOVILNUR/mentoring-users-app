@@ -1,27 +1,27 @@
-import { UsersDTO, UsersEntity } from "@users/core/data-access"
-import { DeepReadonly } from "@users/core/utils"
+import { UsersDTO, UsersEntity } from '@users/core/data-access';
+import { DeepReadonly } from '@users/core/utils';
 
 export interface SignAuthPayload {
-  email: string
-  password: string
+  email: string;
+  password: string;
 }
 
 export interface SignAuthResponse {
-  authToken: string,
-  user: UsersDTO
+  authToken: string;
+  user: UsersDTO;
 }
 
 export interface SignAuthUser {
-  authToken: string,
-  user: UsersEntity
+  authToken: string;
+  user: UsersEntity;
 }
 
 export interface RegisterResponse {
-  authToken: string
+  authToken: string;
 }
 
 export interface ChangeProfileDataResponse {
-  message: string
+  message: string;
 }
 
 export type LoggedInUserDTO = DeepReadonly<{
@@ -30,8 +30,8 @@ export type LoggedInUserDTO = DeepReadonly<{
   username: string;
   email: string;
   city: string;
-  role: 'admin' | 'user'
-}>
+  role: 'admin' | 'user';
+}>;
 
 export type LoggedInUserEntity = DeepReadonly<{
   id: number;
@@ -40,7 +40,7 @@ export type LoggedInUserEntity = DeepReadonly<{
   email: string;
   city: string;
   isAdmin: boolean;
-}>
+}>;
 
 export interface NewUser {
   name: string;
@@ -49,19 +49,19 @@ export interface NewUser {
 }
 
 export interface ChangePasswordPayload {
-  oldPassword: string
-  newPassword: string
+  oldPassword: string;
+  newPassword: string;
 }
 
 export interface ChangePasswordResponse {
-  message: string
+  message: string;
 }
 export interface ChangeProfileDataPayload {
   name?: string;
-  city?: string
+  city?: string;
   email?: string;
 }
 
 export interface ChangeProfileDataResponse {
-  message: string
+  message: string;
 }

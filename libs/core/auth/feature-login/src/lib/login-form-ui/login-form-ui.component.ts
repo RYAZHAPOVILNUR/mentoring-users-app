@@ -27,7 +27,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatCheckboxModule,
     InputPasswordComponent,
     TranslateModule,
-    PushPipe
+    PushPipe,
   ],
   templateUrl: './login-form-ui.component.html',
   styleUrls: ['./login-form-ui.component.scss'],
@@ -42,7 +42,7 @@ export class LoginFormUiComponent {
 
   public formGroup = new FormBuilder().group({
     email: new FormControl('admin@gmail.com', [Validators.required, Validators.email]),
-    password: new FormControl('12345', [Validators.required])
+    password: new FormControl('12345', [Validators.required]),
   });
 
   onRedirectToSignUp() {
@@ -53,8 +53,8 @@ export class LoginFormUiComponent {
     if (this.formGroup.valid) {
       const userData = {
         email: this.formGroup.value.email?.trim().toLowerCase(),
-        password: this.formGroup.value.password
-      }
+        password: this.formGroup.value.password,
+      };
       this.login.emit(userData);
     }
   }
@@ -62,5 +62,4 @@ export class LoginFormUiComponent {
   public onSwitchLanguage(language: LanguageKeys) {
     this.languageSwitchService.setLanguage(language);
   }
-
 }

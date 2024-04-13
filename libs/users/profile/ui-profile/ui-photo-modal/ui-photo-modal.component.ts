@@ -11,9 +11,9 @@ import { MatCardModule } from '@angular/material/card';
   styleUrls: ['./ui-photo-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UiPhotoModalComponent implements OnInit{
-    public photo = inject(MAT_DIALOG_DATA);
-    ngOnInit(){
-      console.log("photo",this.photo);
-    }
+export class UiPhotoModalComponent implements OnInit {
+  public photo = inject(MAT_DIALOG_DATA);
+  ngOnInit() {
+    console.log('photo', this.photo);
+  }
 }

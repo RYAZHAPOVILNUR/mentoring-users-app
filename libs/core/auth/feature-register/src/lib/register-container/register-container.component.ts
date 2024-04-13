@@ -14,14 +14,14 @@ import { Store } from '@ngrx/store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterContainerComponent {
-  private readonly router = inject(Router)
-  private readonly store = inject(Store)
+  private readonly router = inject(Router);
+  private readonly store = inject(Store);
 
   onRedirectToLogin() {
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login']);
   }
 
   onRegister(userData: NewUser) {
-    this.store.dispatch(authActions.register({ userData }))
+    this.store.dispatch(authActions.register({ userData }));
   }
 }

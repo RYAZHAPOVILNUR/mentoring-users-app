@@ -30,9 +30,8 @@ import { LetDirective } from '@ngrx/component';
   styleUrls: ['./articles-create-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ArticlesCreateContainerComponent
-  implements DeactivatableComponent, OnInit
-{
+
+export class ArticlesCreateContainerComponent implements DeactivatableComponent {
   private readonly store = inject(Store);
   private dialog = inject(MatDialog);
   private isFormChange = false;
@@ -89,7 +88,6 @@ export class ArticlesCreateContainerComponent
           filter((result: boolean) => result != undefined),
           map((result: boolean) => result)
         );
-      
     } else {
       return true;
     }

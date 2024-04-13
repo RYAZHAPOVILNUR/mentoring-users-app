@@ -3,8 +3,7 @@ export default {
   displayName: 'users-core-ui-language-switch',
   preset: '../../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory:
-    '../../../../../coverage/libs/users/core/ui/language-switch',
+  coverageDirectory: '../../../../../coverage/libs/users/core/ui/language-switch',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

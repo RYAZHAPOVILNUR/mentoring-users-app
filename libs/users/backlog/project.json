@@ -24,10 +24,7 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "libs/users/backlog/**/*.ts",
-          "libs/users/backlog/**/*.html"
-        ]
+        "lintFilePatterns": ["libs/users/backlog/**/*.ts", "libs/users/backlog/**/*.html"]
       }
     }
   }

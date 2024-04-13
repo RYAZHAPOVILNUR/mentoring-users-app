@@ -1,20 +1,6 @@
 <ng-container [ngSwitch]="selectedLanguage$ | ngrxPush">
-  <button
-    mat-icon-button
-    *ngSwitchCase="'ru'"
-    (click)="onSwitchLanguage('en')"
-    class="lang-switch-btn"
-  >
-    En
-  </button>
-  <button
-    mat-icon-button
-    *ngSwitchCase="'en'"
-    (click)="onSwitchLanguage('ru')"
-    class="lang-switch-btn"
-  >
-    Ru
-  </button>
+  <button mat-icon-button *ngSwitchCase="'ru'" (click)="onSwitchLanguage('en')" class="lang-switch-btn">En</button>
+  <button mat-icon-button *ngSwitchCase="'en'" (click)="onSwitchLanguage('ru')" class="lang-switch-btn">Ru</button>
 </ng-container>
 
 <div class="form-element">
@@ -27,11 +13,7 @@
       }}</span>
     </p>
 
-    <form
-      class="form-fields-wrapper"
-      [formGroup]="formGroup"
-      (ngSubmit)="onRegister()"
-    >
+    <form class="form-fields-wrapper" [formGroup]="formGroup" (ngSubmit)="onRegister()">
       <mat-label>{{ 'LAYOUT.REGISTRATION.FULLNAME' | translate }}*</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="name" />
@@ -50,9 +32,7 @@
         <mat-checkbox formControlName="agreement"></mat-checkbox>
         <div>
           <span>{{ 'LAYOUT.REGISTRATION.AGREE' | translate }} </span>
-          <span class="interactive-link"
-            >{{ 'LAYOUT.REGISTRATION.TERMS' | translate }}
-          </span>
+          <span class="interactive-link">{{ 'LAYOUT.REGISTRATION.TERMS' | translate }} </span>
           <span>{{ 'LAYOUT.REGISTRATION.AND' | translate }}</span>
           <span class="interactive-link">
             {{ 'LAYOUT.REGISTRATION.PRIVACY_POLICY' | translate }}

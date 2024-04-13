@@ -21,16 +21,13 @@ export class CoreUiConfirmDialogComponent {
   public dialogText: string = this.data.dialogText;
 
   // private dialogRef = inject(MatDialogRef<CoreUiConfirmDialogComponent, boolean>)
-
-  constructor(
-    private dialogRef: MatDialogRef<CoreUiConfirmDialogComponent, boolean>
-  ) {}
+  constructor(private dialogRef: MatDialogRef<CoreUiConfirmDialogComponent, boolean>) {}
 
   confirm() {
     this.dialogRef.close(true);
   }
 
   cancel() {
-    this.dialogRef.close(false);
+    this.dialogRef.close(false)
   }
 }
