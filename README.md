@@ -19,3 +19,8 @@ Run `npx nx connect-to-nx-cloud` to enable [remote caching](https://nx.app) and 
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
+
+# РЕВЬЮ ЗАДАЧИ ДЛЯ НАЧИНАЮЩИХ В МЕНТОРИНГЕ
+
+1. Делаете пуллреквест из ветки РЕВЬЮ_ЗАДАЧИ_ДЛЯ_НАЧИНАЮЩИХ в main
+2. В Описании пулреквеста скидываете ссылку на ГИТХАБ с проектом задачи
