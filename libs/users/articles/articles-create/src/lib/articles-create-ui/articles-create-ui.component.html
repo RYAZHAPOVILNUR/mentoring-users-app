@@ -1,10 +1,16 @@
 <div class="wrapper">
   <form [formGroup]="formGroup">
-
     <mat-form-field>
-      <input type="text" autocomplete="off" placeholder="{{ 'ARTICLES.ARTICLE.HEADER' | translate }}" formControlName="title" class="input-field"
-        matInput [errorStateMatcher]="matcher"/>
-      <mat-error *ngIf="formSubmitted && formGroup.get('title')?.hasError"> 
+      <input
+        type="text"
+        autocomplete="off"
+        placeholder="{{ 'ARTICLES.ARTICLE.HEADER' | translate }}"
+        formControlName="title"
+        class="input-field"
+        matInput
+        [errorStateMatcher]="matcher"
+      />
+      <mat-error *ngIf="formSubmitted && formGroup.get('title')?.hasError">
         {{ 'ARTICLES.ARTICLE.HEADER_SIZE' | translate }}
       </mat-error>
     </mat-form-field>
@@ -13,7 +19,7 @@
       <quill-editor
         class="editor"
         [class.light-invalid]="formSubmitted && formGroup.get('textEditor')?.invalid"
-        [styles]="{height: '400px'}"
+        [styles]="{ height: '400px' }"
         [modules]="quillEditorModules"
         placeholder=""
         defaultEmptyValue=""
@@ -22,8 +28,7 @@
       </quill-editor>
     </div>
 
-    <p class="error-message"
-      *ngIf="formSubmitted && formGroup.get('textEditor')?.invalid">
+    <p class="error-message" *ngIf="formSubmitted && formGroup.get('textEditor')?.invalid">
       {{ 'ARTICLES.ARTICLE.ARTICLE_SIZE' | translate }}
     </p>
 
@@ -31,6 +36,5 @@
       <button mat-raised-button (click)="onSubmit()" color="primary">{{ vm.editMode ? ('ARTICLES.ARTICLE.EDIT' | translate) : ('ARTICLES.ARTICLE.POST' | translate) }}</button>
       <button mat-raised-button (click)="goToArticles()" color="primary">{{('ARTICLES.ARTICLE.CLOSE' | translate)}}</button>
     </div>
-
   </form>
 </div>

@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,9 +8,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSliderModule } from '@angular/material/slider';
 import { ThemeStorage, DocsSiteTheme } from '../change-theme-storage/change-theme-storage';
 import { Subscription } from 'rxjs';
-import {map} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { StyleManager } from '../style-manager';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -30,7 +24,7 @@ import { FormsModule } from '@angular/forms';
     MatListModule,
     MatGridListModule,
     MatSliderModule,
-    FormsModule
+    FormsModule,
   ],
   templateUrl: './change-theme.component.html',
   styleUrls: ['./change-theme.component.scss'],
@@ -90,22 +84,30 @@ export class ChangeThemeComponent implements OnInit, OnDestroy {
     'orange',
     'brown',
     'blueGray',
-  ]
+  ];
 
   primaryValue = 500;
   secondaryValue = 500;
   selectedPrimaryColor: string | null = null;
   selectedSecondaryColor: string | null = null;
 
-  primaryColors = this.colors.map(color => ({color: `${color}-${this.primaryValue}`}));
-  secondaryColors = this.colors.map(color => ({color: `${color}-${this.secondaryValue}`}));
+  primaryColors = this.colors.map((color) => ({
+    color: `${color}-${this.primaryValue}`,
+  }));
+  secondaryColors = this.colors.map((color) => ({
+    color: `${color}-${this.secondaryValue}`,
+  }));
 
   primarySliderChange() {
-    this.primaryColors = this.colors.map(color => ({color: `${color}-${this.primaryValue}`}));    
+    this.primaryColors = this.colors.map((color) => ({
+      color: `${color}-${this.primaryValue}`,
+    }));
   }
 
   secondarySliderChange() {
-    this.secondaryColors = this.colors.map(color => ({color: `${color}-${this.secondaryValue}`}));
+    this.secondaryColors = this.colors.map((color) => ({
+      color: `${color}-${this.secondaryValue}`,
+    }));
   }
 
   pickPrimaryColor(color: string) {
@@ -124,17 +126,19 @@ export class ChangeThemeComponent implements OnInit, OnDestroy {
     }
   }
 
-  constructor(public styleManager: StyleManager,
+  constructor(
+    public styleManager: StyleManager,
     private themeStorage: ThemeStorage,
-    private activatedRoute: ActivatedRoute) {}
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-      this.queryParamSubscription = this.activatedRoute.queryParamMap
-        .pipe(map((params: ParamMap) => params.get('theme')))
-        .subscribe((themeName: string | null) => {
-          if (themeName) {
-            this.selectTheme(themeName);
-          }
+    this.queryParamSubscription = this.activatedRoute.queryParamMap
+      .pipe(map((params: ParamMap) => params.get('theme')))
+      .subscribe((themeName: string | null) => {
+        if (themeName) {
+          this.selectTheme(themeName);
+        }
       });
   }
 
@@ -143,7 +147,7 @@ export class ChangeThemeComponent implements OnInit, OnDestroy {
   }
 
   selectTheme(themeName: string) {
-    const theme = this.themes.find(currentTheme => currentTheme.name === themeName);
+    const theme = this.themes.find((currentTheme) => currentTheme.name === themeName);
 
     if (!theme) {
       return;

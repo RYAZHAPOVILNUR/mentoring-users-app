@@ -2,14 +2,14 @@ import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { authActions } from '@auth/data-access';
 import { Store } from '@ngrx/store';
-import { FooterComponent, HeaderComponent } from "@users/core/ui/layout";
-import {AuthFacade} from "@auth/data-access";
-import {Observable} from "rxjs";
-import {NgIf} from "@angular/common";
-import {PushPipe} from "@ngrx/component";
-import {MatSidenavModule} from "@angular/material/sidenav";
-import {MatIconModule} from "@angular/material/icon";
-import {MatButtonModule} from "@angular/material/button";
+import { FooterComponent, HeaderComponent } from '@users/core/ui/layout';
+import { AuthFacade } from '@auth/data-access';
+import { Observable } from 'rxjs';
+import { NgIf } from '@angular/common';
+import { PushPipe } from '@ngrx/component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   standalone: true,
@@ -31,8 +31,7 @@ import {MatButtonModule} from "@angular/material/button";
 export class AppComponent {
   private readonly store = inject(Store);
   private readonly facade = inject(AuthFacade);
-  public readonly isAuthenticated$: Observable<boolean> =
-    this.facade.isAuthenticated$;
+  public readonly isAuthenticated$: Observable<boolean> = this.facade.isAuthenticated$;
   opened!: boolean;
   events: string[] = [];
 

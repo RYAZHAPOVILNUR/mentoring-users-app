@@ -24,10 +24,7 @@
       "executor": "@angular-devkit/build-angular:karma",
       "options": {
         "tsConfig": "libs/users/articles/article-read/tsconfig.spec.json",
-        "polyfills": [
-          "zone.js",
-          "zone.js/testing"
-        ]
+        "polyfills": ["zone.js", "zone.js/testing"]
       }
     }
   }

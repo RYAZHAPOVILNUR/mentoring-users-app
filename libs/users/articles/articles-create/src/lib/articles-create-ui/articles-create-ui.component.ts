@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuillModule } from 'ngx-quill';
 import {
@@ -29,6 +22,7 @@ import {
   ArticlesFacade,
   CreateArticle,
 } from '@users/users/articles/data-access';
+
 import { ArticlesCreateVm } from './articles-create-vm';
 import { TranslateModule } from '@ngx-translate/core';
 import { Router } from '@angular/router';
@@ -72,6 +66,7 @@ export class ArticlesCreateUiComponent {
     this._vm = value;
     this.patchFormValues();
   }
+
   get vm() {
     return this._vm;
   }

@@ -7,7 +7,7 @@ import {
   CdkDropListGroup,
   moveItemInArray,
   transferArrayItem,
-  DragDropModule
+  DragDropModule,
 } from '@angular/cdk/drag-drop';
 import { Component, DestroyRef, EventEmitter, inject, Input, Output } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
@@ -18,14 +18,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { TasksStore } from '../tasks-view-container/tasks-list-container.store';
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { TasksCreateDialogComponent } from "../tasks-create-dialog/tasks-create-dialog.component";
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
-import { filter } from "rxjs";
-import { TasksCreateColumnDialogComponent } from "../tasks-create-column-dialog/tasks-create-column-dialog.component";
-import { TasksColumnComponent } from "./tasks-column/tasks-column.component";
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { TasksCreateDialogComponent } from '../tasks-create-dialog/tasks-create-dialog.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { filter } from 'rxjs';
+import { TasksCreateColumnDialogComponent } from '../tasks-create-column-dialog/tasks-create-column-dialog.component';
+import { TasksColumnComponent } from './tasks-column/tasks-column.component';
 import { TaskChangeDialogComponent } from '../task-change-dialog/task-change-dialog.component';
-
 
 @Component({
   selector: 'users-tasks-view',
@@ -46,34 +45,38 @@ import { TaskChangeDialogComponent } from '../task-change-dialog/task-change-dia
     MatInputModule,
     CdkDragPreview,
     DragDropModule,
-    TasksColumnComponent
-  ]
+    TasksColumnComponent,
+  ],
 })
-
 export class TasksViewComponent {
-
   private matDialog = inject(MatDialog);
-  private readonly destroyRef = inject(DestroyRef)
+  private readonly destroyRef = inject(DestroyRef);
 
-  constructor(private tasksStore: TasksStore) {
-  }
-
+  constructor(private tasksStore: TasksStore) {}
 
   @Input() columns?: IColumn[];
   @Input() colorMode?: boolean;
   @Output() updateColumns = new EventEmitter<{ columns: IColumn[] }>();
   @Output() deleteColumn = new EventEmitter<number>();
-  @Output() addTask = new EventEmitter<{ columnIndex: number, taskName: string }>();
-  @Output() deleteTask = new EventEmitter<{ columnIndex: number, taskName: string }>();
+  @Output() addTask = new EventEmitter<{
+    columnIndex: number;
+    taskName: string;
+  }>();
+  @Output() deleteTask = new EventEmitter<{
+    columnIndex: number;
+    taskName: string;
+  }>();
   @Output() changer = new EventEmitter<{ task: any }>();
-  @Output() changeColumnName = new EventEmitter<{ columnIndex: number, columnName: string }>();
-
+  @Output() changeColumnName = new EventEmitter<{
+    columnIndex: number;
+    columnName: string;
+  }>();
 
   public removeColumn(columnIndex: number) {
     this.deleteColumn.emit(columnIndex);
   }
 
-  public removeTask(taskName: string, columnIndex: number,) {
+  public removeTask(taskName: string, columnIndex: number) {
     this.deleteTask.emit({ columnIndex, taskName });
   }
 
@@ -101,57 +104,48 @@ export class TasksViewComponent {
 
     const updatedColumns = JSON.parse(JSON.stringify(this.columns));
 
-    const previousColumn = updatedColumns.find(
-      (column: IColumn) => column.columnName === previousColumnName
-    );
-    const currentColumn = updatedColumns.find(
-      (column: IColumn) => column.columnName === currentColumnName
-    );
+    const previousColumn = updatedColumns.find((column: IColumn) => column.columnName === previousColumnName);
+    const currentColumn = updatedColumns.find((column: IColumn) => column.columnName === currentColumnName);
 
     if (event.previousContainer === event.container) {
       moveItemInArray(previousColumn.tasks, prevIndex, currentIndex);
     } else {
-      transferArrayItem(
-        previousColumn.tasks,
-        currentColumn.tasks,
-        prevIndex,
-        currentIndex
-      );
+      transferArrayItem(previousColumn.tasks, currentColumn.tasks, prevIndex, currentIndex);
     }
     this.tasksStore.updateLocalColumns(updatedColumns);
   }
 
   public openAddNewTaskModal(columnIndex: number): void {
     const dialogRef: MatDialogRef<TasksCreateDialogComponent> = this.matDialog.open(TasksCreateDialogComponent, {});
-    dialogRef.afterClosed()
+    dialogRef
+      .afterClosed()
       .pipe(
         takeUntilDestroyed(this.destroyRef),
-        filter(taskName => !!taskName)
+        filter((taskName) => !!taskName)
       )
-      .subscribe((taskName: string) => this.addTask.emit({ columnIndex, taskName }))
+      .subscribe((taskName: string) => this.addTask.emit({ columnIndex, taskName }));
   }
 
   public openChangeTaskModal(task: ITask): void {
-
     const dialogRef: MatDialogRef<TaskChangeDialogComponent> = this.matDialog.open(TaskChangeDialogComponent, {
       width: '1040px',
-      data: { title: task.taskName }
+      data: { title: task.taskName },
     });
-    dialogRef.afterClosed()
-      .pipe(
-        takeUntilDestroyed(this.destroyRef),
-      )
-      .subscribe()
+    dialogRef.afterClosed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
   }
 
   public openAddNewColumnModal(): void {
-    const dialogRef: MatDialogRef<TasksCreateColumnDialogComponent> = this.matDialog.open(TasksCreateColumnDialogComponent, {});
-    dialogRef.afterClosed()
+    const dialogRef: MatDialogRef<TasksCreateColumnDialogComponent> = this.matDialog.open(
+      TasksCreateColumnDialogComponent,
+      {}
+    );
+    dialogRef
+      .afterClosed()
       .pipe(
         takeUntilDestroyed(this.destroyRef),
-        filter(column => !!column)
+        filter((column) => !!column)
       )
-      .subscribe((columnName => this.addNewColumn(columnName)))
+      .subscribe((columnName) => this.addNewColumn(columnName));
   }
 
   private addNewColumn(columnName: string): void {
@@ -169,4 +163,3 @@ export class TasksViewComponent {
     this.changeColumnName.emit({ columnName: event, columnIndex });
   }
 }
-

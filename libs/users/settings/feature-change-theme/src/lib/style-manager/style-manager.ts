@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class StyleManager {
   setStyle(key: string, href: string) {
     getLinkElementForKey(key).setAttribute('href', href);

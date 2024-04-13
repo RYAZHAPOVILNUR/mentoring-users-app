@@ -1,9 +1,5 @@
 import { UsersEntity } from './users.models';
-import {
-  usersAdapter,
-  UsersPartialState,
-  initialUsersState,
-} from './users.reducer';
+import { usersAdapter, UsersPartialState, initialUsersState } from './users.reducer';
 import * as UsersSelectors from './users.selectors';
 
 describe('Users Selectors', () => {
@@ -20,11 +16,7 @@ describe('Users Selectors', () => {
   beforeEach(() => {
     state = {
       users: usersAdapter.setAll(
-        [
-          createUsersEntity('PRODUCT-AAA'),
-          createUsersEntity('PRODUCT-BBB'),
-          createUsersEntity('PRODUCT-CCC'),
-        ],
+        [createUsersEntity('PRODUCT-AAA'), createUsersEntity('PRODUCT-BBB'), createUsersEntity('PRODUCT-CCC')],
         {
           ...initialUsersState,
           selectedId: 'PRODUCT-BBB',

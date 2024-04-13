@@ -6,11 +6,12 @@ import { SettingsActions } from './settings.actions';
 
 @Injectable()
 export class SettingsEffects {
-  loadSettings$ = createEffect(() => {    
+  loadSettings$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(SettingsActions.loadSettings),
-      switchMap(() => {        
-        const articleViewType = localStorage.getItem('articleViewType') ?? (localStorage.setItem('articleViewType', 'LIST'), 'LIST');
+      switchMap(() => {
+        const articleViewType =
+          localStorage.getItem('articleViewType') ?? (localStorage.setItem('articleViewType', 'LIST'), 'LIST');
         return of(1).pipe(
           map((e) =>
             SettingsActions.loadSettingsSuccess({
@@ -24,24 +25,21 @@ export class SettingsEffects {
     );
   });
 
-
-  setArticlesStyleType$ = createEffect(() => {    
+  setArticlesStyleType$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(SettingsActions.setArticlesStyleType),
-      switchMap(({articlesViewStyleType}) => {        
-        localStorage.setItem('articleViewType', articlesViewStyleType) 
+      switchMap(({ articlesViewStyleType }) => {
+        localStorage.setItem('articleViewType', articlesViewStyleType);
         return of(1).pipe(
           map((e) =>
-            SettingsActions.setArticlesStyleTypeSuccess({articlesViewStyleType})
+            SettingsActions.setArticlesStyleTypeSuccess({
+              articlesViewStyleType,
+            })
           )
         );
       })
     );
   });
-
-
-
-
 
   constructor(private actions$: Actions) {}
 }

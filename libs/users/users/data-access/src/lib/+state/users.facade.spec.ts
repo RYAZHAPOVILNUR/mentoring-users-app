@@ -8,12 +8,7 @@ import * as UsersActions from './users.actions';
 import { UsersEffects } from './users.effects';
 import { UsersFacade } from './users.facade';
 import { UsersEntity } from './users.models';
-import {
-  USERS_FEATURE_KEY,
-  UsersState,
-  initialUsersState,
-  usersReducer,
-} from './users.reducer';
+import { USERS_FEATURE_KEY, UsersState, initialUsersState, usersReducer } from './users.reducer';
 import * as UsersSelectors from './users.selectors';
 
 interface TestSchema {
@@ -31,20 +26,13 @@ describe('UsersFacade', () => {
   describe('used in NgModule', () => {
     beforeEach(() => {
       @NgModule({
-        imports: [
-          StoreModule.forFeature(USERS_FEATURE_KEY, usersReducer),
-          EffectsModule.forFeature([UsersEffects]),
-        ],
+        imports: [StoreModule.forFeature(USERS_FEATURE_KEY, usersReducer), EffectsModule.forFeature([UsersEffects])],
         providers: [UsersFacade],
       })
       class CustomFeatureModule {}
 
       @NgModule({
-        imports: [
-          StoreModule.forRoot({}),
-          EffectsModule.forRoot([]),
-          CustomFeatureModule,
-        ],
+        imports: [StoreModule.forRoot({}), EffectsModule.forRoot([]), CustomFeatureModule],
       })
       class RootModule {}
       TestBed.configureTestingModule({ imports: [RootModule] });

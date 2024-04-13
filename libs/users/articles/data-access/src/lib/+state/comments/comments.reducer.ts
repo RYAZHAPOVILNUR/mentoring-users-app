@@ -7,21 +7,20 @@ import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 export const commentsFeatureKey = 'comments';
 
 export interface CommentsState extends EntityState<Comment> {
-  status: LoadingStatus
-  publishStatus: LoadingStatus
+  status: LoadingStatus;
+  publishStatus: LoadingStatus;
 }
 
-export const commentsAdapter: EntityAdapter<Comment> =
-  createEntityAdapter<Comment>({
-    sortComparer: (a, b) => {
-      return Number(b.created_at) - Number(a.created_at)
-    }
-  });
+export const commentsAdapter: EntityAdapter<Comment> = createEntityAdapter<Comment>({
+  sortComparer: (a, b) => {
+    return Number(b.created_at) - Number(a.created_at);
+  },
+});
 
 export const initialCommentsState: CommentsState = commentsAdapter.getInitialState({
   status: 'init',
-  publishStatus: 'init'
-})
+  publishStatus: 'init',
+});
 
 export const commentsFeature = createFeature({
   name: 'comments',
@@ -30,7 +29,7 @@ export const commentsFeature = createFeature({
 
     on(CommentsActions.loadComments, (state) => ({
       ...state,
-      status: 'loading' as const
+      status: 'loading' as const,
     })),
 
     on(CommentsActions.loadCommentsSuccess, (state, { comments }) =>
@@ -39,26 +38,26 @@ export const commentsFeature = createFeature({
 
     on(CommentsActions.loadCommentsFailed, (state) => ({
       ...state,
-      status: 'error' as const
+      status: 'error' as const,
     })),
 
     on(CommentsActions.publishComment, (state) => ({
       ...state,
-      publishStatus: 'loading' as const
+      publishStatus: 'loading' as const,
     })),
 
     on(CommentsActions.publishCommentSuccess, (state, { comment }) =>
-      commentsAdapter.addOne(comment, { ...state, publishStatus: 'loaded' as const })
+      commentsAdapter.addOne(comment, {
+        ...state,
+        publishStatus: 'loaded' as const,
+      })
     ),
 
     on(CommentsActions.publishCommentFailed, (state) => ({
       ...state,
-      publishStatus: 'error' as const
+      publishStatus: 'error' as const,
     })),
 
-    on(CommentsActions.deleteComment, (state, { id }) => 
-      commentsAdapter.removeOne(id, state)
-    )
-  )
+    on(CommentsActions.deleteComment, (state, { id }) => commentsAdapter.removeOne(id, state))
+  ),
 });
-

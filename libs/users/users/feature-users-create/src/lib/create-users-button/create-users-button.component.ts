@@ -22,15 +22,16 @@ export class CreateUsersButtonComponent {
   private email!: string;
   public dialog = inject(MatDialog);
   private readonly usersFacade = inject(UsersFacade);
-  private readonly destroyRef = inject(DestroyRef)
+  private readonly destroyRef = inject(DestroyRef);
 
   openAddUserDialog(): void {
     const dialogRef: MatDialogRef<CreateUsersDialogComponent> = this.dialog.open(CreateUsersDialogComponent, {
       data: { name: this.name, email: this.email },
     });
-    dialogRef.afterClosed()
+    dialogRef
+      .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(result => {
+      .subscribe((result) => {
         if (result) {
           const newUserData: CreateUserDTO = {
             name: result.name,

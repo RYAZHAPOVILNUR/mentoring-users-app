@@ -10,10 +10,8 @@
       (deleteColumn)="removeColumn(columnIndex)"
       (changeColumnName)="onChangeColumnName($event, columnIndex)"
       (changeTaskModal)="openChangeTaskModal($event)"
-      >
+    >
     </users-tasks-column>
   </div>
-  <button class="addColumn" mat-raised-button (click)="openAddNewColumnModal()">
-    Add Column
-  </button>
+  <button class="addColumn" mat-raised-button (click)="openAddNewColumnModal()">Add Column</button>
 </div>

@@ -28,6 +28,6 @@ export class TasksFacade {
   }
 
   public searchTask(term: string): void {
-    this.store.dispatch(tasksAction.searchTask({term}));
+    this.store.dispatch(tasksAction.searchTask({ term }));
   }
 }

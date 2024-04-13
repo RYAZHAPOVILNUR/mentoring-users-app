@@ -1,11 +1,7 @@
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import {
-  MatDialogModule,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,7 +14,7 @@ import { UsersFacade } from '@users/users/data-access';
 import { PushPipe } from '@ngrx/component';
 import { UsersEntity } from '@users/core/data-access';
 import { skip } from 'rxjs/operators';
-import { BacklogFacade } from "@users/users/backlog/data-access";
+import { BacklogFacade } from '@users/users/backlog/data-access';
 
 interface Task {
   name: string;
@@ -55,7 +51,7 @@ interface StoryPoint {
 })
 export class TaskChangeDialogComponent {
   public readonly data: any = inject(MAT_DIALOG_DATA);
-  private readonly backlogFacade = inject(BacklogFacade)
+  private readonly backlogFacade = inject(BacklogFacade);
   private readonly usersFacade = inject(UsersFacade);
   private dialogRef = inject(MatDialogRef<TaskChangeDialogComponent>);
   public status = false;
@@ -63,19 +59,17 @@ export class TaskChangeDialogComponent {
     this.usersFacade.init();
   }
 
-  public storyPoint:StoryPoint= {
-
-     "UX":"?",
-      "DESING":"?",
-      "FRONT":"?",
-      "BACK":"?",
+  public storyPoint: StoryPoint = {
+    UX: '?',
+    DESING: '?',
+    FRONT: '?',
+    BACK: '?',
   };
-
 
   get totalPoint(): string {
     const values = Object.values(this.storyPoint);
 
-if(Object.values(this.storyPoint).every(value => value === "?")) return '?'
+    if (Object.values(this.storyPoint).every((value) => value === '?')) return '?';
 
     return values.reduce((total, currentValue) => {
       const parsedValue = parseFloat(currentValue);
@@ -85,20 +79,14 @@ if(Object.values(this.storyPoint).every(value => value === "?")) return '?'
         return total;
       }
     }, 0);
-
-
   }
-
 
   setPoint(category: string, value: string) {
-
     this.storyPoint = {
-      ...this.storyPoint, [category]: value
+      ...this.storyPoint,
+      [category]: value,
     };
   }
-
-
-
 
   public task: Task = {
     name: this.data?.title,
@@ -183,8 +171,8 @@ if(Object.values(this.storyPoint).every(value => value === "?")) return '?'
   public saveChanges(): void {
     this.backlogFacade.addBacklog({
       title: this.textareaValue,
-      description: this.editorContent
-    })
+      description: this.editorContent,
+    });
     this.dialogRef.close();
   }
 }

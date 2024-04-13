@@ -1,4 +1,4 @@
-import { Comment } from "./user-comment.model";
+import { Comment } from './user-comment.model';
 
 export interface Article {
   id: number;

@@ -1,23 +1,22 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { IBacklog } from "../model/backlog.model";
-import { backlogAction } from "./backlog.action";
-import { createEntityAdapter, EntityAdapter, EntityState } from "@ngrx/entity";
-import { LoadingStatus } from "@users/core/data-access";
-import * as UsersActions from "../../../../../users/data-access/src/lib/+state/users.actions";
-import { usersAdapter } from "@users/users/data-access";
-
+import { IBacklog } from '../model/backlog.model';
+import { backlogAction } from './backlog.action';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { LoadingStatus } from '@users/core/data-access';
+import * as UsersActions from '../../../../../users/data-access/src/lib/+state/users.actions';
+import { usersAdapter } from '@users/users/data-access';
 
 export const BACKLOG_FEATURE_KEY = 'backlogs';
 
 export interface BacklogsState extends EntityState<IBacklog> {
-  status: LoadingStatus
+  status: LoadingStatus;
 }
 
 export const backlogsAdapter: EntityAdapter<IBacklog> = createEntityAdapter<IBacklog>();
 
 export const initialBacklogsState: BacklogsState = backlogsAdapter.getInitialState({
-  status: 'init'
-})
+  status: 'init',
+});
 
 export const backlogFeature = createFeature({
   name: BACKLOG_FEATURE_KEY,
@@ -26,17 +25,18 @@ export const backlogFeature = createFeature({
     on(backlogAction.loadBacklog, (state) => {
       return {
         ...state,
-        status: 'loading' as const
+        status: 'loading' as const,
       };
     }),
     on(backlogAction.loadBacklogSuccess, (state, { backlogs }) => {
-      return backlogsAdapter.setAll(backlogs, { ...state, status: 'loaded' as const })
+      return backlogsAdapter.setAll(backlogs, {
+        ...state,
+        status: 'loaded' as const,
+      });
     }),
-    on(backlogAction.deleteBacklogSuccess, (state, { id }) =>
-      backlogsAdapter.removeOne(id, { ...state })
-    ),
+    on(backlogAction.deleteBacklogSuccess, (state, { id }) => backlogsAdapter.removeOne(id, { ...state })),
     on(backlogAction.addBacklogSuccess, (state, { backlogData }) =>
       backlogsAdapter.addOne({ ...backlogData }, { ...state })
-    ),
+    )
   ),
 });
