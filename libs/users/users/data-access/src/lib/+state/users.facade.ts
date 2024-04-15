@@ -53,8 +53,13 @@ export class UsersFacade {
       })
     );
   }
-
+  public readonly filteredUsers$ = this.store.select(
+    UsersSelectors.filtered
+  );
   loadUser() {
     this.store.dispatch(UsersActions.loadUser());
+  }
+  filterUsers(name: string) {
+    this.store.dispatch(UsersActions.filterUsers({ name }));
   }
 }

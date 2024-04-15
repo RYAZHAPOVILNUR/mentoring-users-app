@@ -3,7 +3,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { UsersFacade } from '@users/users/data-access';
 import { DeepReadonly } from '@users/core/utils';
 import { UsersVM } from '../../../../users-vm';
-import { tap } from 'rxjs';
+import { of, tap } from 'rxjs';
 import { usersVMAdapter } from '../../../../users-vm.adapter';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
@@ -32,8 +32,10 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
   }
 
   private setUsersFromGlobalToLocalStore(): void {
-    this.effect(() => this.usersFacade.allUsers$.pipe(tap((users: UsersEntity[]) => this.patchUsers(users))));
-  }
+    this.effect(
+      () => this.usersFacade.filteredUsers$.pipe(
+        tap((users: UsersEntity[]) => this.patchUsers(users))
+      ))}
 
   private patchUsers(users: UsersEntity[]): void {
     this.patchState({
@@ -54,3 +56,4 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
     );
   }
 }
+ 
