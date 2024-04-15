@@ -1,0 +1,6 @@
+<div class="users-filter" [formGroup]="formData">
+  <mat-form-field class="users-filter-field">
+    <mat-label>Введите имя пользователя</mat-label>
+    <input matInput type="text" formControlName="name" (input)="onFilterUsers()" />
+  </mat-form-field>
+</div>
