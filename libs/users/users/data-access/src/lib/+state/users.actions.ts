@@ -3,6 +3,7 @@ import { UsersErrors } from './users.reducer';
 import { CreateUserDTO, LoadingStatus, UsersDTO, UsersEntity } from '@users/core/data-access';
 
 export type onSuccessEditionCbType = () => void;
+export type onSuccessAddSPUserCbType = () => void;
 
 export const initUsers = createAction('[Users Page] Init');
 
@@ -32,6 +33,17 @@ export const editUser = createAction(
 );
 export const editUserSuccess = createAction('[Users Detail] Edit User Success', props<{ userData: UsersDTO }>());
 export const editUserFailed = createAction('[Users Detail] Edit Failed', props<{ error: UsersErrors | null }>());
+
+// TODO: StoryPoints
+export const addUserSP = createAction(
+  '[Users Detail] Add Story Points',
+  props<{ userData: CreateUserDTO; id: number; onSuccessCb: onSuccessEditionCbType }>()
+);
+export const addUserSPSuccess = createAction('[Users Detail] Add Story Points Success', props<{ user: any }>());
+export const addUserSPFailed = createAction(
+  '[Users Detail] Add Story Points Error',
+  props<{ error: UsersErrors | null }>()
+);
 
 export const loadUser = createAction('[Users Page] Load User');
 export const loadUserSuccess = createAction('[Users/Api] Load User Success', props<{ userData: UsersEntity }>());

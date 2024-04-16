@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, catchError, of, map, withLatestFrom, filter, tap } from 'rxjs';
+import { switchMap, catchError, of, map, withLatestFrom, filter, tap, take } from 'rxjs';
 import * as UsersActions from './users.actions';
 import { ApiService } from '@users/core/http';
 import { Store, select } from '@ngrx/store';
@@ -101,6 +101,29 @@ export const editUser = createEffect(
           map((userData) => ({ userData, onSuccessCb })),
           tap(({ onSuccessCb }) => onSuccessCb()),
           map(({ userData }) => UsersActions.editUserSuccess({ userData })),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(UsersActions.editUserFailed({ error }));
+          })
+        )
+      )
+    );
+  },
+  { functional: true }
+);
+
+export const addUserSPEffect = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    return actions$.pipe(
+      ofType(UsersActions.addUserSP),
+
+      switchMap(({ userData, onSuccessCb }) =>
+        apiService.post<UsersDTO, CreateUserDTO>(`/users/${userData.id}`, userData).pipe(
+          map((user) => ({ user, onSuccessCb })),
+          tap(({ onSuccessCb }) => onSuccessCb()),
+          map(({ user }) => UsersActions.addUserSPSuccess({ user })),
           catchError((error) => {
             console.error('Error', error);
             return of(UsersActions.editUserFailed({ error }));

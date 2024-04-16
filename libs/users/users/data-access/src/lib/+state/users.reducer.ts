@@ -57,6 +57,15 @@ const reducer = createReducer(
       state
     )
   ),
+  on(UsersActions.addUserSPSuccess, (state, { user }) =>
+    usersAdapter.updateOne(
+      {
+        id: user.id,
+        changes: user,
+      },
+      state
+    )
+  ),
   on(UsersActions.editUserFailed, (state, { error }) => ({
     ...state,
     status: 'error' as const,
