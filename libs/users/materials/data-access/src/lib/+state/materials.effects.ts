@@ -1,6 +1,6 @@
 import { ApiService } from '@users/core/http';
 import { inject } from '@angular/core';
-import { catchError, exhaustMap, filter, map, of, tap, withLatestFrom } from 'rxjs';
+import { catchError, exhaustMap, map, of, tap, withLatestFrom } from 'rxjs';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { selectRouteParams } from '@users/core/data-access';
@@ -132,16 +132,15 @@ export const loadMaterialsEffect = createEffect(
       ofType(materialActions.loadMaterials),
       withLatestFrom(store.select(selectRouteParams)),
       exhaustMap(([, { id }]) =>
-        apiService.get<Material[]>('/material').pipe(
-          map((materials) => {
-            materials.filter((material) => material.folder_id === id);
-
-            return materialActions.loadMaterialsSuccess({ materials });
-          }),
-          catchError((error) => {
-            return of(materialActions.loadMaterialsFailure({ error }));
-          })
-        )
+        apiService
+          .get<Material[]>('/material')
+          .pipe(map((materials) => materials.filter((material) => material.folder_id === Number(id))))
+          .pipe(
+            map((materials) => materialActions.loadMaterialsSuccess({ materials })),
+            catchError((error) => {
+              return of(materialActions.loadMaterialsFailure({ error }));
+            })
+          )
       )
     );
   },

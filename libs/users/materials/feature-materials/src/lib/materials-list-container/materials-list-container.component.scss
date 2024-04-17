@@ -1,0 +1,10 @@
+.materials-list {
+  padding: 2rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-gap: 2rem;
+}
+
+.materials-item {
+  list-style: none;
+}

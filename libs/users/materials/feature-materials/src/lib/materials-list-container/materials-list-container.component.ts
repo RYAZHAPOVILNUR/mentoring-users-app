@@ -3,16 +3,27 @@ import { CommonModule } from '@angular/common';
 import { LetDirective } from '@ngrx/component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
-import { MaterialsFacade } from '@users/materials/data-access';
+import { Material, MaterialsFacade } from '@users/materials/data-access';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
+import { FolderCardComponent } from '../../../../feature-folders-list/src/lib/folders-card/folder-card.component';
+import { MaterialsCardComponent } from '../material-card/materials-card.component';
 
 @Component({
   selector: 'materials-list-container',
   standalone: true,
-  imports: [CommonModule, LetDirective, MatProgressBarModule, MatIconModule, MatButtonModule, MatToolbarModule],
+  imports: [
+    CommonModule,
+    LetDirective,
+    MatProgressBarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatToolbarModule,
+    FolderCardComponent,
+    MaterialsCardComponent,
+  ],
   templateUrl: './materials-list-container.component.html',
   styleUrls: ['./materials-list-container.component.scss'],
 })
@@ -27,7 +38,11 @@ export class MaterialsListContainerComponent implements OnInit {
     this.materialsFacade.loadMaterials();
   }
 
-  public backToFolders() {
+  public backToFolders(): void {
     this.router.navigateByUrl('/materials');
+  }
+
+  public identify(index: number, item: Material): number {
+    return item.id;
   }
 }

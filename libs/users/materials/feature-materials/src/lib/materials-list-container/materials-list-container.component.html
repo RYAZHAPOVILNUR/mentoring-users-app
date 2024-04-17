@@ -7,6 +7,12 @@
     <button mat-icon-button (click)="backToFolders()">
       <mat-icon>arrow_back</mat-icon>
     </button>
+
+    <ul class="materials-list">
+      <li class="materials-item" *ngFor="let material of vm.materials; trackBy: identify">
+        <materials-card [material]="material"/>
+      </li>
+    </ul>
   </div>
 </ng-container>
 
