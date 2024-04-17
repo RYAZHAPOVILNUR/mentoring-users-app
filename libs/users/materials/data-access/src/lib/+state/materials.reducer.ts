@@ -1,18 +1,21 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 
 import { Folder } from '../models/folder.interface';
-import { folderActions } from './materials.actions';
+import { Material } from '../models/material.interface';
+import { folderActions, materialActions } from './materials.actions';
 
 export const materialsFeatureKey = 'materials';
 
 export interface State {
   folders: Folder[];
+  materials: Material[];
   isLoading: boolean;
   error: unknown;
 }
 
 export const initialState: State = {
   folders: [],
+  materials: [],
   isLoading: false,
   error: null,
 };
@@ -39,7 +42,15 @@ export const reducer = createReducer(
     folders: state.folders.filter((folder) => folder.id !== folderId),
     isLoading: false,
   })),
-  on(folderActions.removeFolderFailure, (state, { error }) => ({ ...state, error, isLoading: false }))
+  on(folderActions.removeFolderFailure, (state, { error }) => ({ ...state, error, isLoading: false })),
+
+  on(materialActions.loadMaterials, (state) => ({ ...state, isLoading: true })),
+  on(materialActions.loadMaterialsSuccess, (state, { materials }) => ({
+    ...state,
+    materials,
+    isLoading: false,
+  })),
+  on(materialActions.loadMaterialsFailure, (state, { error }) => ({ ...state, error, isLoading: false }))
 );
 
 export const materialsFeature = createFeature({

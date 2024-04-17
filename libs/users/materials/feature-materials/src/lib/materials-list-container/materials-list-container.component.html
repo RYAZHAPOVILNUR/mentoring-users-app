@@ -1,0 +1,9 @@
+<ng-container *ngrxLet="{ materials: materials$, isLoading: isLoading$ } as vm">
+  <ng-template [ngIf]="vm.isLoading">
+    <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+  </ng-template>
+
+  <div class="container">
+    <p>materials-list-container works!</p>
+  </div>
+</ng-container>

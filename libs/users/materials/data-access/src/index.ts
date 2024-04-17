@@ -4,3 +4,4 @@ export * from './lib/+state/materials.actions';
 export * as materialsEffects from './lib/+state/materials.effects';
 export * from './lib/models/folder.interface';
 export * from './lib/models/folder-create.interface';
+export * from './lib/models/material.interface';

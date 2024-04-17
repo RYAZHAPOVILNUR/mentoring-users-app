@@ -11,7 +11,7 @@ import { CreateFolderDialogComponent } from '../create-folder-dialog/create-fold
 import { createFolderDialogConfig } from '../create-folder-dialog/create-folder-dialog.config';
 
 @Component({
-  selector: 'materials-folders-list-container',
+  selector: 'folder-list-container',
   standalone: true,
   imports: [
     CommonModule,
@@ -33,7 +33,7 @@ export class FoldersListContainerComponent implements OnInit {
   public isLoading$ = this.materialsFacade.isLoading$;
 
   ngOnInit(): void {
-    this.materialsFacade.init();
+    this.materialsFacade.loadFolders();
   }
 
   public createFolderHandler(): void {

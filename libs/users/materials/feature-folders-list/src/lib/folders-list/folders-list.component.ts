@@ -5,7 +5,7 @@ import { Folder } from '@users/materials/data-access';
 import { FolderCardComponent } from '../folders-card/folder-card.component';
 
 @Component({
-  selector: 'materials-folders-list',
+  selector: 'folder-list',
   standalone: true,
   imports: [CommonModule, FolderCardComponent],
   templateUrl: './folders-list.component.html',

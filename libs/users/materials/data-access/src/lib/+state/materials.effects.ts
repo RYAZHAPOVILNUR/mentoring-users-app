@@ -1,12 +1,15 @@
-import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ApiService } from '@users/core/http';
 import { inject } from '@angular/core';
-import { catchError, exhaustMap, map, of, tap } from 'rxjs';
+import { catchError, exhaustMap, filter, map, of, tap, withLatestFrom } from 'rxjs';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
+import { selectRouteParams } from '@users/core/data-access';
 
-import { folderActions } from './materials.actions';
+import { NotifyService } from '@users/core/notify';
+import { folderActions, materialActions } from './materials.actions';
 import { Folder } from '../models/folder.interface';
 import { FolderCreateInterface } from '../models/folder-create.interface';
-import { NotifyService } from '@users/core/notify';
+import { Material } from '../models/material.interface';
 
 export const loadFoldersEffect = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) => {
@@ -26,7 +29,7 @@ export const loadFoldersEffect = createEffect(
 );
 
 export const createFolderEffect = createEffect(
-  (actions$ = inject(Actions), apiService = inject(ApiService), notify = inject(NotifyService)) => {
+  (actions$ = inject(Actions), apiService = inject(ApiService)) => {
     return actions$.pipe(
       ofType(folderActions.createFolder),
       exhaustMap(({ title }) =>
@@ -121,4 +124,26 @@ export const removeFolderErrorNotificationEffect = createEffect(
     );
   },
   { functional: true, dispatch: false }
+);
+
+export const loadMaterialsEffect = createEffect(
+  (action$ = inject(Actions), apiService = inject(ApiService), store = inject(Store)) => {
+    return action$.pipe(
+      ofType(materialActions.loadMaterials),
+      withLatestFrom(store.select(selectRouteParams)),
+      exhaustMap(([, { id }]) =>
+        apiService.get<Material[]>('/material').pipe(
+          map((materials) => {
+            materials.filter((material) => material.folder_id === id);
+
+            return materialActions.loadMaterialsSuccess({ materials });
+          }),
+          catchError((error) => {
+            return of(materialActions.loadMaterialsFailure({ error }));
+          })
+        )
+      )
+    );
+  },
+  { functional: true }
 );

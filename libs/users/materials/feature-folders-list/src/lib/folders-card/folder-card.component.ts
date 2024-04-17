@@ -1,5 +1,6 @@
 import { Component, DestroyRef, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
@@ -12,7 +13,7 @@ import { RemoveFolderButtonComponent } from '@users/materials/ui';
 import { RemoveFolderDialogComponent } from '../remove-folder-dialog/remove-folder-dialog.component';
 
 @Component({
-  selector: 'materials-folder-card',
+  selector: 'folder-card',
   standalone: true,
   imports: [CommonModule, MatCardModule, MatIconModule, MatRippleModule, MatButtonModule, RemoveFolderButtonComponent],
   templateUrl: './folder-card.component.html',
@@ -22,6 +23,7 @@ export class FolderCardComponent {
   private readonly materialsFacade = inject(MaterialsFacade);
   private readonly destroyRef = inject(DestroyRef);
   public readonly dialog = inject(MatDialog);
+  private readonly router = inject(Router);
 
   isDisplayRemoveIcon = false;
 
@@ -47,5 +49,9 @@ export class FolderCardComponent {
 
   public toggleRemoveIcon(): void {
     this.isDisplayRemoveIcon = !this.isDisplayRemoveIcon;
+  }
+
+  public openFolderHandler(): void {
+    this.router.navigateByUrl(`/materials/${this.folder.id}`).then();
   }
 }

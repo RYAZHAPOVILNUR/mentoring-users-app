@@ -7,7 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'materials-remove-folder-dialog',
+  selector: 'remove-folder-dialog',
   standalone: true,
   imports: [CommonModule, FormsModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule],
   templateUrl: './remove-folder-dialog.component.html',
