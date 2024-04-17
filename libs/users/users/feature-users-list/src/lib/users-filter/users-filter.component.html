@@ -1,0 +1,7 @@
+<div class="searchInput">
+<input type="text"
+       [formControl]="nameFilterControl"
+       placeholder="Имя"
+       (input)="usersFacade.setFilterUsers(nameFilterControl.value)"
+  >
+</div>
