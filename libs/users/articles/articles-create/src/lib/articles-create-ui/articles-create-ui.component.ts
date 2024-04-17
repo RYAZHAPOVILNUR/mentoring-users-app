@@ -128,18 +128,27 @@ export class ArticlesCreateUiComponent {
         title: this.formGroup.value.title as string,
         content: this.formGroup.value.textEditor as string,
       };
-      // this.publishArticle.emit(article)
+      this.publishArticle.emit(article)
       if (this.vm.editMode == true) {
         this.formChange.emit(false);
         this.articleFacade.editArticle(article, this.vm.editingArticle!.id);
       } else {
-        this.articleFacade.publishArticle(article);
+        this.router.navigate(['/articles']);
       }
       console.log(article);
     }
   }
 
   public goToArticles() {
+    const article: CreateArticle = {
+      title: this.formGroup.value.title as string,
+      content: this.formGroup.value.textEditor as string,
+    };
+    if (!this.vm.editMode) this.formChange.emit(false);
+    this.publishArticle.emit({
+      ...article,
+      articlesId: this.vm.editingArticle!.id
+    })
     this.router.navigate(['/articles']);
   }
 
