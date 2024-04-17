@@ -52,6 +52,6 @@ export class FolderCardComponent {
   }
 
   public openFolderHandler(): void {
-    this.router.navigateByUrl(`/materials/${this.folder.id}`).then();
+    this.router.navigateByUrl(`/materials/${this.folder.id}`);
   }
 }

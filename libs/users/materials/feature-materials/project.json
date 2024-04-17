@@ -2,7 +2,7 @@
   "name": "feature-materials-list",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/users/materials/feature-materials-list/src",
-  "prefix": "users",
+  "prefix": "materials",
   "tags": [],
   "projectType": "library",
   "targets": {
