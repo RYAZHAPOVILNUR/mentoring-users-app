@@ -1,0 +1,9 @@
+.users-filter {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  &-field {
+    flex: 1 0 auto;
+  }
+}
