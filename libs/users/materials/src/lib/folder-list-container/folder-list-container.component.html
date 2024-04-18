@@ -1,0 +1,9 @@
+<ng-container
+  *ngrxLet="{
+    folders: folders$,
+    status: status$,
+    error: error$
+  } as folderVm"
+>
+  <users-folder-list [folderVm]="folderVm"></users-folder-list>
+</ng-container>

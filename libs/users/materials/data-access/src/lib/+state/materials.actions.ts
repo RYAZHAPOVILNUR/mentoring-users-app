@@ -1,10 +1,22 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
+import { Folder } from '../models/folder.interface';
+import { MaterialStatus } from '../enums/materials-status.enum';
+
 export const MaterialsActions = createActionGroup({
   source: 'Materials',
   events: {
-    'Load Materialss': emptyProps(),
-    'Load Materialss Success': props<{ data: unknown }>(),
-    'Load Materialss Failure': props<{ error: unknown }>(),
-  }
+    'Load Folders': emptyProps(),
+    'Load Folders Success': props<{ folders: Folder[] }>(),
+    'Load Folders Failure': props<{
+      status: MaterialStatus.Error;
+      error: Error;
+    }>(),
+
+    'Create Folder Success': props<{ folder: Folder }>(),
+    'Create Folder Failure': props<{
+      status: MaterialStatus.Error;
+      error: Error;
+    }>(),
+  },
 });

@@ -1,1 +1,3 @@
-export * from './lib/users-materials/users-materials.component';
+import { FolderListContainerComponent } from './lib/folder-list-container/folder-list-container.component';
+
+export { FolderListContainerComponent };
