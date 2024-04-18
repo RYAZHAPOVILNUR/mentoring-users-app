@@ -21,6 +21,14 @@ export const selectEntity = createSelector(selectUsersEntities, selectSelectedId
   selectedId ? entities[selectedId] : undefined
 );
 
+export const selectUsersFilter = createSelector(selectUsersState, (state) => state.usersFilter);
+export const selectFilteredUsers = createSelector(selectUsersFilter, selectAllUsers, (usersFilter, allUsers) => {
+  if (usersFilter['name']) {
+    const lowerCaseFilterName = usersFilter['name'].toLowerCase();
+    return allUsers.filter((user) => user.name.toLowerCase().includes(lowerCaseFilterName));
+  }
+  return allUsers;
+});
 export const selectUserById = (id: number) => createSelector(selectUsersEntities, (entities) => entities[id]);
 
 export const selectOpenedUser = createSelector(

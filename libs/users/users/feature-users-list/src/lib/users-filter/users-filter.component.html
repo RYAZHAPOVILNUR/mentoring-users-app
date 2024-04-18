@@ -1,0 +1,17 @@
+<ng-container>
+  <section class="container flex flex-col">
+    <form action="" [formGroup]="usersFilterForm">
+      <h3 class="mb-0">Фильтр пользователей:</h3>
+      <mat-form-field>
+        <mat-label>Имя</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+      <div
+        class="alert alert-danger"
+        *ngIf="usersFilterForm.controls['name'].invalid && usersFilterForm.controls['name'].touched"
+      >
+        Не указано имя
+      </div>
+    </form>
+  </section>
+</ng-container>
