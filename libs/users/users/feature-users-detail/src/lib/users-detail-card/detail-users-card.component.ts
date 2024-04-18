@@ -164,7 +164,6 @@ export class DetailUsersCardComponent implements OnInit {
       },
       onSuccessAddSP: this.onAddSP,
     });
-    console.log('add');
   }
 
   onCloseUser() {

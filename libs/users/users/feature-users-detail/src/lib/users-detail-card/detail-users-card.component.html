@@ -96,6 +96,7 @@
                 placeholder="Имя пользователя"
                 formControlName="totalStoryPoints"
                 class="edit-user-input"
+                type="number"
               />
             </mat-form-field>
           </div>
@@ -104,9 +105,9 @@
               (click)="onAddStoryPoints()"
               mat-icon-button
               color="primary"
-              type="submit"
               [disabled]="formGroup.invalid || (areFieldsChanged$ | ngrxPush) === false"
-              aria-label="submit new user data"
+              aria-label="submit StoryPoints"
+
             >
               <mat-icon>add</mat-icon>
             </button>
