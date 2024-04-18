@@ -7,7 +7,7 @@ import { UsersErrors } from './users.reducer';
 import { onSuccessEditionCbType } from './users.actions';
 import { selectLoggedUser } from '@auth/data-access';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
-
+import { onSuccesAddSpType } from './users.actions';
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
   private readonly store = inject(Store);
@@ -61,5 +61,8 @@ export class UsersFacade {
   }
   filterUsers(name: string) {
     this.store.dispatch(UsersActions.filterUsers({ name }));
+  }
+  addStoryPoints(user : CreateUserDTO , id : number  ,onAddSPsuccess :onSuccesAddSpType ){
+    this.store.dispatch(UsersActions.addSP({user , id , onAddSPsuccess}))
   }
 }

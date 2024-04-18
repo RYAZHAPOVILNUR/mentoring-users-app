@@ -89,7 +89,32 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+            <mat-form-field class="edit-user-field">
+              <mat-label>StoryPoints</mat-label>
+              <input
+                matInput
+                placeholder="Имя пользователя"
+                formControlName="totalStoryPoints"
+                class="edit-user-input"
+              />
+            </mat-form-field>
           </div>
+          <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
+            <button
+              (click)="onAddStoryPoints()"
+              mat-icon-button
+              color="primary"
+              type="submit"
+              [disabled]="formGroup.invalid || (areFieldsChanged$ | ngrxPush) === false"
+              aria-label="submit new user data"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+
+            <button mat-icon-button color="warn" type="button" aria-label="Close edit mode" (click)="onCloseEditMode()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-card-actions>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
               mat-icon-button
@@ -123,4 +148,7 @@
   <div class="edit-user-snackbar">
     <span>Пользователь успешно изменён!</span>
   </div>
+</ng-template>
+<ng-template #SPsnackbar>
+  <span>StoryPoints added!</span>
 </ng-template>

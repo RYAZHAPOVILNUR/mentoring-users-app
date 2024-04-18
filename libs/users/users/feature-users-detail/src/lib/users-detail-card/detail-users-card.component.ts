@@ -12,7 +12,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { onSuccessEditionCbType } from '@users/users/data-access';
+import { onSuccesAddSpType, onSuccessEditionCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -23,7 +23,7 @@ import { DetailUsersCardVm } from './detail-users-card-vm';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { CreateUserDTO, UsersDTO, UsersEntity } from '@users/core/data-access';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { DadataApiService } from '@dadata';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs';
@@ -73,6 +73,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: vm.user.email,
         username: vm.user.username,
         city: vm.user.city,
+        totalStoryPoints: vm.user.totalStoryPoints,
       });
     }
 
@@ -88,17 +89,23 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    totalStoryPoints: new FormControl({ value: 0, disabled: true }, [Validators.required]),
   });
 
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
     onSuccessCb: onSuccessEditionCbType;
   }>();
+  @Output() addSP = new EventEmitter<{
+    user: CreateUserDTO;
+    onSuccessAddSP: onSuccesAddSpType;
+  }>();
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('SPsnackbar') SPsnackbarTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -108,6 +115,7 @@ export class DetailUsersCardComponent implements OnInit {
   );
 
   private snackBar = inject(MatSnackBar);
+
   private readonly destroyRef = inject(DestroyRef);
   public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
 
@@ -117,6 +125,12 @@ export class DetailUsersCardComponent implements OnInit {
 
   private onEditSuccess: onSuccessEditionCbType = () =>
     this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+  private onAddSP: onSuccesAddSpType = () =>
+    this.snackBar.openFromTemplate(this.SPsnackbarTemplateRef, {
       duration: 2500,
       horizontalPosition: 'center',
       verticalPosition: 'top',
@@ -131,9 +145,26 @@ export class DetailUsersCardComponent implements OnInit {
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
         purchaseDate: new Date().toString() || '',
         educationStatus: 'trainee',
+        totalStoryPoints: this.formGroup.value.totalStoryPoints || 0,
       },
       onSuccessCb: this.onEditSuccess,
     });
+  }
+  onAddStoryPoints(): void {
+    this.formGroup.disable();
+    this.addSP.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        username: this.formGroup.value.username || '',
+        city: this.formGroup.value.city || '',
+        purchaseDate: new Date().toString() || '',
+        educationStatus: 'trainee',
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        totalStoryPoints: this.formGroup.value.totalStoryPoints || 0,
+      },
+      onSuccessAddSP: this.onAddSP,
+    });
+    console.log('add');
   }
 
   onCloseUser() {

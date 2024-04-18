@@ -84,6 +84,17 @@ const reducer = createReducer(
     usersFilter: {name}
     
   })),
+  on(UsersActions.addSPsuccess , (state,{user}) => (
+    usersAdapter.updateOne({
+      id : user.id,
+      changes : user
+    },state)
+  )),
+  on(UsersActions.addSPfailure, (state,{error})=>({
+    ...state,
+    status : 'error' as const,
+    error,
+  })) 
 );
 
 export function usersReducer(state: UsersState | undefined, action: Action) {

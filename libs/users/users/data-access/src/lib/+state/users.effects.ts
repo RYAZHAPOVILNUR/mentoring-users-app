@@ -135,5 +135,42 @@ export const loadUser = createEffect(
       })
     );
   },
-  { functional: true }
-);
+  { functional: true })
+  export const addUserStoryPoints = createEffect(
+    () => {
+      const actions$ = inject(Actions);
+      const apiService = inject(ApiService);
+      const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
+      return actions$.pipe(
+        ofType(UsersActions.addSP),
+        withLatestFrom(usersEntities$),
+        filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
+        map(([{ user, id,onAddSPsuccess  }, usersEntities]) => ({
+          user: {
+            ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
+            purchaseDate: usersEntities[id]?.purchaseDate || '12.10.2023',
+            educationStatus: usersEntities[id]?.educationStatus || 'trainee',
+            totalStoryPoints: user.totalStoryPoints,
+          },onAddSPsuccess
+        })),
+        switchMap(({ user, onAddSPsuccess }) => {
+          return apiService
+            .post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user)
+            .pipe(
+              map((user) => ({ user, onAddSPsuccess })),
+              tap(( {onAddSPsuccess} ) => onAddSPsuccess()),
+              map(({user}) =>{
+                return UsersActions.addSPsuccess({ user })
+              }
+              ),
+              catchError((error) => {
+                console.error('Error', error);
+                return of(UsersActions.editUserFailed({ error }));
+              })
+            );
+        })
+      );
+    },
+    { functional: true }
+  );
+
