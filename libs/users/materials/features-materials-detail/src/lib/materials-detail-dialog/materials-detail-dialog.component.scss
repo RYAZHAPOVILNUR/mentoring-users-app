@@ -1,0 +1,16 @@
+.dialog-form {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.error-text {
+  margin-bottom: 10px;
+  color: red;
+}

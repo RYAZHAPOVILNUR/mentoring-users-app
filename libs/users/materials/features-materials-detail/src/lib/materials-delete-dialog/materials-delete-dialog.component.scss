@@ -1,0 +1,21 @@
+.dialog {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  p {
+    span {
+      color: red;
+      font-weight: 900;
+    }
+  }
+}
+
+.dialog-r {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  button {
+    width: 100%;
+  }
+}

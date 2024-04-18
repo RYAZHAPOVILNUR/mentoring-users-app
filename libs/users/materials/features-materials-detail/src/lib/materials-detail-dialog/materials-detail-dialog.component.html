@@ -1,0 +1,27 @@
+<div class="dialog-form" [formGroup]="dialogForm">
+  <h2 *ngIf="dialogData.type === 'audio'">Добавить Аудио</h2>
+  <h2 *ngIf="dialogData.type === 'video'">Добавить Видео</h2>
+  <h2 *ngIf="dialogData.type === 'pdf'">Добавить Файл</h2>
+
+  <mat-form-field>
+    <mat-label>Название</mat-label>
+    <input matInput type="text" formControlName="title" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Ссылка</mat-label>
+    <input matInput type="text" formControlName="material_link" />
+  </mat-form-field>
+
+  <div *ngIf="dialogForm.get('material_link').errors?.invalidUrl" class="error-text">
+    {{ dialogForm.get('material_link').errors.invalidUrl }}
+  </div>
+
+  <div class="footer">
+    <button mat-flat-button color="primary" [disabled]="dialogForm.invalid" type="button" (click)="onCreateMaterial()">
+      Создать
+    </button>
+    <button mat-stroked-button color="primary" (click)="dialogClose()">Отмена</button>
+  </div>
+
+  <!-- {{ dialogForm.value | json }} -->
+</div>

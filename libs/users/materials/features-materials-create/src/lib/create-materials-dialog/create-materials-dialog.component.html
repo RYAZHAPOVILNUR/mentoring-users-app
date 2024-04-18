@@ -1,0 +1,14 @@
+<div class="create-dialog-form">
+  <h2>Добавить папку</h2>
+
+  <mat-form-field>
+    <mat-label>Введите название папки</mat-label>
+    <input matInput type="text" [formControl]="title" />
+  </mat-form-field>
+  <div class="row">
+    <button mat-flat-button color="primary" type="button" (click)="createFolder()" [disabled]="title.invalid">
+      Создать
+    </button>
+    <button mat-stroked-button color="primary" type="button" (click)="diaologClose()">Закрыть</button>
+  </div>
+</div>

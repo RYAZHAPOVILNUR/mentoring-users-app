@@ -1,0 +1,9 @@
+<div class="folder" routerLink="/materials/{{ folder.id }}">
+  <mat-icon>folder</mat-icon>
+  <h3 class="folder-title">{{ folder.title }}</h3>
+  <span>{{ folder.created_at | date : 'HH:mm' }}</span>
+
+  <button mat-icon-button class="delete" (click)="onDeleteFolder($event)">
+    <mat-icon>delete</mat-icon>
+  </button>
+</div>

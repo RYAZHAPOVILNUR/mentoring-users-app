@@ -1,0 +1,11 @@
+<ng-container
+  *ngrxLet="{
+    folders: folders$,
+    status: status$,
+    error: error$
+  } as vm"
+>
+  <users-materials-list [vm]="vm" (deleteFolder)="onDeleteFolder($event)" />
+</ng-container>
+
+<users-create-materials-button />

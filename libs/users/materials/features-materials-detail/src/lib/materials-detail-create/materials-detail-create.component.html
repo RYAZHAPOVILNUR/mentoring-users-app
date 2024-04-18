@@ -1,0 +1,9 @@
+<button mat-fab color="primary" class="create-material-icon" [matMenuTriggerFor]="menu">
+  <mat-icon>add</mat-icon>
+</button>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="openAddMaterialDialog('audio')">Аудио</button>
+  <button mat-menu-item (click)="openAddMaterialDialog('video')">Видео</button>
+  <button mat-menu-item (click)="openAddMaterialDialog('pdf')">PDF</button>
+</mat-menu>

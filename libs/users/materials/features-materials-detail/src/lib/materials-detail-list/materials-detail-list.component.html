@@ -1,0 +1,21 @@
+<ng-container *ngIf="vm.status === 'loading'; else result">
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+
+<ng-template #result>
+  <ng-container *ngIf="vm.status === 'loaded'">
+    <div class="container">
+      <div class="list">
+        <ng-container *ngIf="vm.materials && vm.materials.length > 0; else empty">
+          <ng-container *ngFor="let material of vm.materials">
+            <users-materials-detail-card [material]="material" (deleteMaterial)="onDeleteMaterial(material.id)" />
+          </ng-container>
+        </ng-container>
+
+        <ng-template #empty>
+          <h1>Нет доступных материалов.</h1>
+        </ng-template>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

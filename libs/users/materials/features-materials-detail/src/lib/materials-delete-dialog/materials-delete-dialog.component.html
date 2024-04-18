@@ -1,0 +1,10 @@
+<div class="dialog">
+  <p>
+    Вы уверены что хотите удалить это материал <span>{{ data.title }}</span> ?
+  </p>
+
+  <div class="dialog-r">
+    <button mat-stroked-button color="primary" (click)="closeDialog()">Нет</button>
+    <button mat-flat-button color="primary" (click)="onDeleteMaterial()">Да</button>
+  </div>
+</div>

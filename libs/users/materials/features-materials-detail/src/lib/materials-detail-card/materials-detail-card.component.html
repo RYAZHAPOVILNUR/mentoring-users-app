@@ -1,0 +1,20 @@
+<div>
+  <mat-card class="detail-card" (click)="openFile(fileExt, material.material_link)">
+    <mat-card-content *ngIf="fileExt === 'pdf'">
+      <mat-icon>folder</mat-icon>
+      <h2 class="title">{{ material.title }}</h2>
+    </mat-card-content>
+    <mat-card-content *ngIf="fileExt === 'mp3'">
+      <mat-icon>mic</mat-icon>
+      <h2 class="title">{{ material.title }}</h2>
+    </mat-card-content>
+    <mat-card-content *ngIf="fileExt !== 'pdf' && fileExt !== 'mp3'">
+      <mat-icon>videocam</mat-icon>
+      <h2 class="title">{{ material.title }}</h2>
+    </mat-card-content>
+
+    <button (click)="openDeleteMaterialDialog($event)" mat-icon-button class="delete">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card>
+</div>

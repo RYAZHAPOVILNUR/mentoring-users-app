@@ -1,0 +1,19 @@
+.detail-card {
+  width: 100px;
+  cursor: pointer;
+  position: relative;
+}
+
+.title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+  margin: 0;
+}
+
+.delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
