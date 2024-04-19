@@ -9,6 +9,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { MaterialsCardComponent } from '../material-card/materials-card.component';
+import { CreateMaterialButtonComponent } from '../create-material-button/create-material-button.component';
 
 @Component({
   selector: 'materials-list-container',
@@ -21,6 +22,7 @@ import { MaterialsCardComponent } from '../material-card/materials-card.componen
     MatButtonModule,
     MatToolbarModule,
     MaterialsCardComponent,
+    CreateMaterialButtonComponent,
   ],
   templateUrl: './materials-list-container.component.html',
   styleUrls: ['./materials-list-container.component.scss'],

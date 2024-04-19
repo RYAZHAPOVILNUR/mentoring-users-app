@@ -18,7 +18,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "materials",
+            "prefix": ["materials", "material", "create"],
             "style": "kebab-case"
           }
         ]
