@@ -39,7 +39,7 @@ export class MaterialsListContainerComponent implements OnInit {
   }
 
   public backToFolders(): void {
-    this.router.navigateByUrl('/materials');
+    this.router.navigateByUrl('/materials').then(() => this.materialsFacade.clearMaterials());
   }
 
   public identify(index: number, item: Material): number {

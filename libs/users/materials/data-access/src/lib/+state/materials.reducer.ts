@@ -2,7 +2,7 @@ import { createFeature, createReducer, on } from '@ngrx/store';
 
 import { Folder } from '../models/folder.interface';
 import { Material } from '../models/material.interface';
-import { folderActions, materialActions } from './materials.actions';
+import { additionalActions, folderActions, materialActions } from './materials.actions';
 
 export const materialsFeatureKey = 'materials';
 
@@ -50,7 +50,8 @@ export const reducer = createReducer(
     materials,
     isLoading: false,
   })),
-  on(materialActions.loadMaterialsFailure, (state, { error }) => ({ ...state, error, isLoading: false }))
+  on(materialActions.loadMaterialsFailure, (state, { error }) => ({ ...state, error, isLoading: false })),
+  on(additionalActions.clearMaterials, (state) => ({ ...state, materials: [] }))
 );
 
 export const materialsFeature = createFeature({

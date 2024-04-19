@@ -27,3 +27,10 @@ export const materialActions = createActionGroup({
     LoadMaterialsFailure: props<{ error: unknown }>(),
   },
 });
+
+export const additionalActions = createActionGroup({
+  source: 'additional',
+  events: {
+    ClearMaterials: emptyProps(),
+  },
+});

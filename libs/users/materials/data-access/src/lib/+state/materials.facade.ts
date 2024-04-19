@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { folderActions, materialActions } from './materials.actions';
+import { additionalActions, folderActions, materialActions } from './materials.actions';
 import { materialsFeature } from './materials.reducer';
 
 @Injectable({ providedIn: 'root' })
@@ -23,7 +23,11 @@ export class MaterialsFacade {
     this.store.dispatch(folderActions.removeFolder({ folderId }));
   }
 
-  public loadMaterials() {
+  public loadMaterials(): void {
     this.store.dispatch(materialActions.loadMaterials());
+  }
+
+  public clearMaterials(): void {
+    this.store.dispatch(additionalActions.clearMaterials());
   }
 }
