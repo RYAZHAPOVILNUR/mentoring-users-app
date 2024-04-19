@@ -8,7 +8,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
-import { FolderCardComponent } from '../../../../feature-folders-list/src/lib/folders-card/folder-card.component';
 import { MaterialsCardComponent } from '../material-card/materials-card.component';
 
 @Component({
@@ -21,7 +20,6 @@ import { MaterialsCardComponent } from '../material-card/materials-card.componen
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
-    FolderCardComponent,
     MaterialsCardComponent,
   ],
   templateUrl: './materials-list-container.component.html',

@@ -8,6 +8,7 @@ export const materialsFeatureKey = 'materials';
 
 export interface State {
   folders: Folder[];
+  folder: Folder | null;
   materials: Material[];
   isLoading: boolean;
   error: unknown;
@@ -15,6 +16,7 @@ export interface State {
 
 export const initialState: State = {
   folders: [],
+  folder: null,
   materials: [],
   isLoading: false,
   error: null,
@@ -51,7 +53,7 @@ export const reducer = createReducer(
     isLoading: false,
   })),
   on(materialActions.loadMaterialsFailure, (state, { error }) => ({ ...state, error, isLoading: false })),
-  on(additionalActions.clearMaterials, (state) => ({ ...state, materials: [] }))
+  on(additionalActions.clearMaterials, () => initialState)
 );
 
 export const materialsFeature = createFeature({
