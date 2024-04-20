@@ -5,6 +5,7 @@ import * as UsersActions from './users.actions';
 import { UsersEntity } from '@users/core/data-access';
 import { LoadingStatus } from '@users/core/data-access';
 
+
 export const USERS_FEATURE_KEY = 'users';
 
 export type UsersErrors = {
@@ -16,6 +17,7 @@ export interface UsersState extends EntityState<UsersEntity> {
   selectedId?: string | number; // which Users record has been selected
   status: LoadingStatus;
   error: UsersErrors | null;
+  usersFilter: {name: string}
 }
 
 export interface UsersPartialState {
@@ -28,6 +30,7 @@ export const initialUsersState: UsersState = usersAdapter.getInitialState({
   // set initial required properties
   status: 'init',
   error: null,
+  usersFilter: {name: ''}
 });
 
 const reducer = createReducer(
@@ -44,6 +47,21 @@ const reducer = createReducer(
     status: 'error' as const,
     error,
   })),
+
+  on(UsersActions.setUsersFilter, (state, {filter}) => ({
+    ...state,
+    usersFilter: filter
+  })),
+  on(UsersActions.setUsersFilterSuccess, (state, { filter }) => ({
+    ...state,
+    usersFilter: filter
+  })),
+
+  on(UsersActions.setUsersFilterFailure, (state, { error }) => ({
+    ...state,
+    error
+  })),
+
   on(UsersActions.deleteUserSuccess, (state, { id }) => usersAdapter.removeOne(id, { ...state })),
   on(UsersActions.addUserSuccess, (state, { userData }) => usersAdapter.addOne({ ...userData }, { ...state })),
   on(UsersActions.editUserSuccess, (state, { userData }) =>

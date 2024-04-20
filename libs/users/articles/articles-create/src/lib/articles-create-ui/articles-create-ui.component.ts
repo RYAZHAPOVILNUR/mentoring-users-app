@@ -1,7 +1,16 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuillModule } from 'ngx-quill';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+  ValidatorFn,
+  AbstractControl,
+  ValidationErrors
+} from '@angular/forms';
 import Quill from 'quill';
 import BlotFormatter from 'quill-blot-formatter';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,12 +18,20 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormGroupDirective, NgForm } from '@angular/forms';
-import { ArticlesFacade, CreateArticle } from '@users/users/articles/data-access';
+import {
+  ArticlesFacade,
+  CreateArticle,
+} from '@users/users/articles/data-access';
+
 import { ArticlesCreateVm } from './articles-create-vm';
 import { TranslateModule } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && isSubmitted && control.touched);
   }
@@ -43,7 +60,7 @@ Quill.register('modules/blotFormatter', BlotFormatter);
 export class ArticlesCreateUiComponent {
   public _vm!: ArticlesCreateVm;
   private readonly articleFacade = inject(ArticlesFacade);
-
+  private readonly router = inject(Router);
   @Input({ required: true })
   set vm(value: ArticlesCreateVm) {
     this._vm = value;
@@ -59,10 +76,14 @@ export class ArticlesCreateUiComponent {
 
   public formGroup = new FormGroup({
     textEditor: new FormControl('', {
-      validators: [Validators.required, Validators.minLength(66)],
+      validators: [Validators.required, this.validateWithClearTegs()],
     }),
     title: new FormControl('', {
-      validators: [Validators.required, Validators.minLength(5), Validators.maxLength(66)],
+      validators: [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(66),
+      ],
     }),
   });
 
@@ -98,7 +119,7 @@ export class ArticlesCreateUiComponent {
     }
   }
 
-  public onSubmit(event: Event) {
+  public onSubmit() {
     // event.preventDefault();
     this.formSubmitted = true;
     this.formGroup.markAllAsTouched();
@@ -107,14 +128,38 @@ export class ArticlesCreateUiComponent {
         title: this.formGroup.value.title as string,
         content: this.formGroup.value.textEditor as string,
       };
-      // this.publishArticle.emit(article)
+      this.publishArticle.emit(article)
       if (this.vm.editMode == true) {
+        this.formChange.emit(false);
         this.articleFacade.editArticle(article, this.vm.editingArticle!.id);
       } else {
-        this.articleFacade.publishArticle(article);
+        this.router.navigate(['/articles']);
       }
       console.log(article);
     }
+  }
+
+  public goToArticles() {
+    const article: CreateArticle = {
+      title: this.formGroup.value.title as string,
+      content: this.formGroup.value.textEditor as string,
+    };
+    if (!this.vm.editMode) this.formChange.emit(false);
+    this.publishArticle.emit({
+      ...article,
+      articlesId: this.vm.editingArticle!.id
+    })
+    this.router.navigate(['/articles']);
+  }
+
+  private validateWithClearTegs(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+
+      const content = control.value.replace(/<[^>]*>/g, '');  // clear tegs 
+
+      if (content.length > 66) return null;
+      return { 'minLength': 'min length must be < 60 symbols' };
+    };
   }
 
   private checkChanges() {
@@ -131,6 +176,8 @@ export class ArticlesCreateUiComponent {
         }
       : { textEditor: '', title: '' };
 
-    return JSON.stringify(this.formGroup.value) !== JSON.stringify(initialFormValues);
+    return (
+      JSON.stringify(this.formGroup.value) !== JSON.stringify(initialFormValues)
+    );
   }
 }
