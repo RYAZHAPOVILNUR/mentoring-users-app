@@ -1,3 +1,4 @@
+
 {
   "LAYOUT": {
     "HEADER": {
@@ -70,10 +71,12 @@
     "ARTICLE": {
       "HEADER": "Header",
       "FROM": "From",
-      "EDIT": "Edit",
+      "EDIT": "Save",
+      "CLOSE": "Close",
       "POST": "Post",
       "ARTICLE_SIZE": "The post must start minimum with 66 symbols!",
       "HEADER_SIZE": "The header should contain minimum 6 symbols and maximum 60!"
     }
   }
 }
+
