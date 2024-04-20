@@ -1,0 +1,12 @@
+.folders-cards-flex {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-gap: 10px;
+}
+
+.create-folder-fab-button {
+  position: fixed !important;
+  bottom: 5em !important;
+  right: 10em !important;
+  z-index: 100;
+}

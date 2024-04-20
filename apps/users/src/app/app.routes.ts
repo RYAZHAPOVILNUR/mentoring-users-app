@@ -4,7 +4,7 @@ import { authGuard, adminGuard } from '@auth/data-access';
 import { AuthorizedUserLayoutComponent } from './authorized-user-layout/authorized-user-layout.component';
 import { UnauthorizedUserLayoutComponent } from './unauthorized-user-layout-component/unauthorized-user-layout-component.component';
 import { canDeactivateFormComponent } from '@users/core/utils';
-
+import {UsersMaterialsComponent} from '../../../../libs/users/materials/src/lib/users-materials/users-materials.component'
 const layoutAgnosticComponents = [
   {
     path: 'home',
@@ -49,7 +49,11 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'materials',
-        loadComponent: () => import('@users/materials').then((c) => c.UsersMaterialsComponent),
+        loadComponent: () => import('@users/materials/data-access').then(c => c.UsersMaterialsComponent),
+      },
+      {
+        path: 'materials/:id',
+        loadComponent: () => import('@users/materials').then(c => c.MaterialsListContainerComponent)
       },
       {
         path: 'articles',

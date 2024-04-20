@@ -14,5 +14,6 @@ export const {
   selectRouteData, // select the current route data
   selectRouteDataParam, // factory function to select a route data param
   selectUrl, // select the current url
-  selectTitle, // select the title if available
+  selectTitle,
+   // select the title if available
 } = getRouterSelectors();

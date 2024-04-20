@@ -1,0 +1,16 @@
+<div class="dialog">
+  <h1 mat-dialog-name>Создание папки</h1>
+  <div mat-dialog-content>
+    <form [formGroup]="formGroup">
+      <div class="dialog-content">
+        <mat-form-field>
+          <input matInput placeholder="Имя*" formControlName="nameFolder" />
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="cancel()">Отмена</button>
+    <button mat-raised-button color="primary" (click)="save()">Сохранить</button>
+  </div>
+</div>

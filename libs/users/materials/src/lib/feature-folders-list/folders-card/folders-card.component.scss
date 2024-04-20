@@ -1,0 +1,53 @@
+.folder-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  gap: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+}
+.folder-card:hover{
+  transform: translateY(-1px) scale(1.005) translateZ(0);
+  box-shadow: rgb(0, 0, 0) 0px 10px 10px -5px inset;
+}
+
+.folder-card-content {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+}
+
+
+.button-delete {
+  padding: 0px !important;
+  background-color: transparent;
+  border: 0;
+}
+
+.title {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  display: list-item;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0px 5px 0px 5px;
+  margin-bottom: 5px;
+}
+
+.date {
+  font-weight: 100;
+  padding: 0px 5px 0px 5px;
+}
+.button-delete:hover  {
+  transform: translateY(-1px) scale(1.005) translateZ(0);
+}
+mat-icon-button:hover {
+  transform: translateY(-1px) scale(1.005) translateZ(0); 
+}

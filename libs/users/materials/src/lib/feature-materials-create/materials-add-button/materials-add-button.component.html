@@ -1,0 +1,23 @@
+<button
+  mat-fab
+  color="primary"
+  class="create-material-fab-button"
+  matTooltip="Добавить материал"
+  (click)="onOpenMenu($event)"
+  [matMenuTriggerFor]="menu"
+>
+  <mat-icon>add</mat-icon>
+</button>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item color="accent" (click)="onAddMaterial('Видео')">Видео</button>
+
+  <button mat-menu-item color="accent" (click)="onAddMaterial('PDF')">Файл PDF</button>
+
+  <button mat-menu-item color="accent" (click)="onAddMaterial('Подкаст')">Подкаст</button>
+</mat-menu>
+<ng-template #snackbar>
+  <div class="add-folder">
+    <span>Папка успешно добавлена!</span>
+  </div>
+</ng-template>

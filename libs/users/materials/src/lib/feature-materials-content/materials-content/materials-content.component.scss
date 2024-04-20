@@ -1,0 +1,55 @@
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+
+    h1 {
+        font-size: x-large;
+        font-weight: 500;
+        margin: 0px !important;
+    }
+
+}
+
+.button-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.pdf-viewer {
+    width: 100vw;
+    height: 70vh;
+}
+
+.audio {
+    margin: 10px;
+}
+
+.link {
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 854px;
+
+    p {
+        max-width: 100%;
+        margin: 0px;
+    }
+}
+
+.thumbnail {
+    margin: 10px;
+    max-width: 854px;
+    max-height: 480px;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  .mat-mdc-dialog-surface .mdc-dialog__surface {
+    overflow: hidden;
+  }

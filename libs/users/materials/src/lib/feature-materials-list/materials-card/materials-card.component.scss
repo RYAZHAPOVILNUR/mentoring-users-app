@@ -1,0 +1,67 @@
+.material-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+}
+.material-card:hover {
+  transform: translateY(-1px) scale(1.005) translateZ(0);
+  box-shadow: rgb(0, 0, 0) 0px 10px 10px -5px inset;
+}
+.material-card-content {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+}
+
+.icons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.button-delete {
+  padding: 0px !important;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border: 0;
+}
+
+.title {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  display: list-item;
+  font-weight: 500;
+  width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0px 5px 0px 5px;
+  text-align: center;
+}
+
+.date {
+  font-weight: 100;
+  padding: 0px 5px 0px 5px;
+  text-align: center;
+}
+.mat-card {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.div-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
