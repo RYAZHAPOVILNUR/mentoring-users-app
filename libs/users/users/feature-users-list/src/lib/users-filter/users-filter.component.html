@@ -4,11 +4,11 @@
       <h3 class="mb-0">Фильтр пользователей:</h3>
       <mat-form-field>
         <mat-label>Имя</mat-label>
-        <input matInput formControlName="name" />
+        <input matInput formControlName="inputValue" (input)="getValue($event)" />
       </mat-form-field>
       <div
         class="alert alert-danger"
-        *ngIf="usersFilterForm.controls['name'].invalid && usersFilterForm.controls['name'].touched"
+        *ngIf="usersFilterForm.get('name')?.invalid && !usersFilterForm.get('name')?.hasError"
       >
         Не указано имя
       </div>

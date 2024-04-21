@@ -78,7 +78,10 @@ const reducer = createReducer(
     ...state,
     status,
   })),
-  on(UsersActions.setUsersFilter, (state, { name }: { name: string }) => ({ ...state, usersFilter: { name } }))
+  on(UsersActions.setUsersFilter, (state, { name }) => ({
+    ...state,
+    usersFilter: { name },
+  }))
 );
 
 export function usersReducer(state: UsersState | undefined, action: Action) {
