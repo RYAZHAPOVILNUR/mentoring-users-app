@@ -24,11 +24,7 @@ export class UsersFilterComponent {
     });
 
     this.usersFilterForm?.get('inputValue')?.valueChanges.subscribe((value: any) => {
-      console.log(value);
       this.usersFacade.filterUsers({ name: value });
     });
-  }
-  getValue(event: Event) {
-    console.log('setNewUserName', (event.target as HTMLTextAreaElement).value);
   }
 }
