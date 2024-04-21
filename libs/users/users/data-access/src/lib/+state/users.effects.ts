@@ -142,30 +142,30 @@ export const loadUser = createEffect(
       const apiService = inject(ApiService);
       const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
       return actions$.pipe(
-        ofType(UsersActions.addSP),
+        ofType(UsersActions.addStoryPoints),
         withLatestFrom(usersEntities$),
         filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
-        map(([{ user, id,onAddSPsuccess  }, usersEntities]) => ({
+        map(([{ user, id,onAddStoryPointCallback  }, usersEntities]) => ({
           user: {
             ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
             purchaseDate: usersEntities[id]?.purchaseDate || '12.10.2023',
             educationStatus: usersEntities[id]?.educationStatus || 'trainee',
             totalStoryPoints: user.totalStoryPoints,
-          },onAddSPsuccess
+          },onAddStoryPointCallback
         })),
-        switchMap(({ user, onAddSPsuccess }) => {
+        switchMap(({ user, onAddStoryPointCallback }) => {
           return apiService
             .post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user)
             .pipe(
-              map((user) => ({ user, onAddSPsuccess })),
-              tap(( {onAddSPsuccess} ) => onAddSPsuccess()),
+              map((user) => ({ user, onAddStoryPointCallback })),
+              tap(( {onAddStoryPointCallback} ) =>onAddStoryPointCallback()),
               map(({user}) =>{
-                return UsersActions.addSPsuccess({ user })
+                return UsersActions.addStoryPointsSuccess({ user })
               }
               ),
               catchError((error) => {
                 console.error('Error', error);
-                return of(UsersActions.editUserFailed({ error }));
+                return of(UsersActions.addStoryPointsFailure({ error }));
               })
             );
         })

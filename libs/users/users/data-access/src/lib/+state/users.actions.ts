@@ -41,6 +41,6 @@ export const updateUserStatus = createAction('[Users Detail] Update User Status'
 
 export const filterUsers = createAction('[Users filter] Filter Users' , props<{name : string}>())
 
-export const addSP = createAction('[Users Detail] Add SP ' , props<{user : CreateUserDTO  , id : number , onAddSPsuccess :onSuccesAddSpType}>())
-export const addSPsuccess = createAction('[Users Detail] Add SP Success', props<{user : UsersDTO}>())
-export const addSPfailure = createAction('[Users Detail] Add SP Failure' , props<{error : any}>())
+export const addStoryPoints = createAction('[Users Detail] Add SP ' , props<{user : CreateUserDTO  , id : number , onAddStoryPointCallback :onSuccesAddSpType}>())
+export const addStoryPointsSuccess = createAction('[Users Detail] Add SP Success', props<{user : UsersDTO}>())
+export const addStoryPointsFailure = createAction('[Users Detail] Add SP Failure' , props<{error : any}>())

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { FormsModule } from '@angular/forms';
+
 import { UsersFacade } from '@users/users/data-access';
 
 @Component({
@@ -9,12 +9,12 @@ import { UsersFacade } from '@users/users/data-access';
   standalone: true,
   templateUrl: './users-filter.component.html',
   styleUrls: ['./users-filter.component.scss'],
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule],
 })
 export class UsersFilterComponent {
   private readonly userFacade = inject(UsersFacade);
-  public filterName = new FormControl<string>('', { nonNullable: true });
+  public name = '';
   filterByName() {
-    this.userFacade.filterUsers(this.filterName.value);
+    this.userFacade.filterUsers(this.name);
   }
 }

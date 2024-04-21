@@ -1,5 +1,4 @@
 <input 
-class="text"
-[formControl]="filterName" 
+[(ngModel)]="name"
 (input)="filterByName()"
 > 

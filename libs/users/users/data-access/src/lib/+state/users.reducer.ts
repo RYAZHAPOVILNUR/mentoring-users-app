@@ -84,13 +84,13 @@ const reducer = createReducer(
     usersFilter: {name}
     
   })),
-  on(UsersActions.addSPsuccess , (state,{user}) => (
+  on(UsersActions.addStoryPointsSuccess , (state,{user}) => (
     usersAdapter.updateOne({
       id : user.id,
       changes : user
     },state)
   )),
-  on(UsersActions.addSPfailure, (state,{error})=>({
+  on(UsersActions.addStoryPointsFailure, (state,{error})=>({
     ...state,
     status : 'error' as const,
     error,

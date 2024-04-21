@@ -34,7 +34,7 @@
         <h1 class="edit-user-title">
           {{ vm.editMode ? 'Редактирование пользователя' : 'Информация пользователя' }}
         </h1>
-        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="edit-user-form">
+        <form [formGroup]="formGroup" (ngSumbit)="onSubmit()" class="edit-user-form">
           <div class="edit-user-content">
             <mat-form-field
               class="edit-user-field"
@@ -107,7 +107,6 @@
               color="primary"
               [disabled]="formGroup.invalid || (areFieldsChanged$ | ngrxPush) === false"
               aria-label="submit StoryPoints"
-
             >
               <mat-icon>add</mat-icon>
             </button>

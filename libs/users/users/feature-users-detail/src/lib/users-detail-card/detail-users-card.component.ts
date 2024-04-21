@@ -96,16 +96,16 @@ export class DetailUsersCardComponent implements OnInit {
     user: CreateUserDTO;
     onSuccessCb: onSuccessEditionCbType;
   }>();
-  @Output() addSP = new EventEmitter<{
+  @Output() addStoryPoints = new EventEmitter<{
     user: CreateUserDTO;
-    onSuccessAddSP: onSuccesAddSpType;
+    onSuccessAddStoryPoints: onSuccesAddSpType;
   }>();
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
-  @ViewChild('SPsnackbar') SPsnackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('StoryPointsSnackbar') StoryPointsSnackbarTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -129,8 +129,8 @@ export class DetailUsersCardComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'top',
     });
-  private onAddSP: onSuccesAddSpType = () =>
-    this.snackBar.openFromTemplate(this.SPsnackbarTemplateRef, {
+  private onAddStoryPointsSuccess: onSuccesAddSpType = () =>
+    this.snackBar.openFromTemplate(this.StoryPointsSnackbarTemplateRef, {
       duration: 2500,
       horizontalPosition: 'center',
       verticalPosition: 'top',
@@ -152,7 +152,7 @@ export class DetailUsersCardComponent implements OnInit {
   }
   onAddStoryPoints(): void {
     this.formGroup.disable();
-    this.addSP.emit({
+    this.addStoryPoints.emit({
       user: {
         name: this.formGroup.value.name || '',
         username: this.formGroup.value.username || '',
@@ -162,7 +162,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
         totalStoryPoints: this.formGroup.value.totalStoryPoints || 0,
       },
-      onSuccessAddSP: this.onAddSP,
+      onSuccessAddStoryPoints: this.onAddStoryPointsSuccess,
     });
   }
 
@@ -194,9 +194,7 @@ export class DetailUsersCardComponent implements OnInit {
           const formEntries = Object.entries(this.formGroup.controls);
           const isFormControlChanged = (key: string, control: FormControl) =>
             this.vm.user && this.vm.user[key as keyof UsersEntity] !== control.value;
-
           const isFieldChanged = formEntries.some(([key, control]) => isFormControlChanged(key, control));
-
           this.areFieldsChanged$.next(isFieldChanged);
         })
       )
