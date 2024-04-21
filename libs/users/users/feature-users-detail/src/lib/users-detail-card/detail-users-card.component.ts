@@ -74,6 +74,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
+      this.totalStoryPoints.setValue(vm.user.totalStoryPoints);
     }
 
     if (vm.editMode) {
@@ -89,6 +90,7 @@ export class DetailUsersCardComponent implements OnInit {
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
+  public totalStoryPoints = new FormControl({ value: 0, disabled: true });
 
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
@@ -98,7 +100,9 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
+  @Output() addStoryPoints = new EventEmitter<{ user: CreateUserDTO; onSuccess: onSuccessEditionCbType }>();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('snackbarStoryPoints') snackbarTemplateRefSP!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -121,6 +125,26 @@ export class DetailUsersCardComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'top',
     });
+  private onAddSPSuccess: onSuccessEditionCbType = () =>
+    this.snackBar.openFromTemplate(this.snackbarTemplateRefSP, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+
+  onAddStoryPoints() {
+    this.totalStoryPoints.disable();
+    console.log('this.totalStoryPoints.value', this.totalStoryPoints.value);
+
+    this.addStoryPoints.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        totalStoryPoints: this.totalStoryPoints.value || 0,
+      },
+      onSuccess: this.onAddSPSuccess,
+    });
+  }
 
   onSubmit(): void {
     this.editUser.emit({
@@ -134,6 +158,13 @@ export class DetailUsersCardComponent implements OnInit {
       },
       onSuccessCb: this.onEditSuccess,
     });
+  }
+  toggleDisableStoryPoint(isDisabled: boolean): void {
+    if (isDisabled) {
+      this.totalStoryPoints.enable();
+    } else {
+      this.totalStoryPoints.disable();
+    }
   }
 
   onCloseUser() {
