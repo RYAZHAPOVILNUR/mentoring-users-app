@@ -1,14 +1,14 @@
 <section *ngIf="userId$ | ngrxPush as userId">
   <form [formGroup]="formGroup" (submit)="onSubmitComment()">
-    <h2>{{ 'LAYOUT.ARTICALE.COMMENTS' | translate }}</h2>
+    <h2>{{ 'LAYOUT.ARTICLE.COMMENTS' | translate }}</h2>
     <mat-form-field>
       <textarea
-        placeholder="{{ 'LAYOUT.ARTICALE.WRITE_SOMETHING' | translate }}..."
+        placeholder="{{ 'LAYOUT.ARTICLE.WRITE_SOMETHING' | translate }}..."
         formControlName="commentText"
         matInput
       ></textarea>
       <mat-error *ngIf="formGroup.get('commentText')?.hasError('maxlength')">
-        {{ 'LAYOUT.ARTICALE.COMMENT_ERROR' | translate }}
+        {{ 'LAYOUT.ARTICLE.COMMENT_ERROR' | translate }}
       </mat-error>
       <button type="submit" mat-icon-button matSuffix>
         <mat-icon>send</mat-icon>

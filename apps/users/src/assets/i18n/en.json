@@ -27,16 +27,16 @@
     "REGISTRATION": {
       "YOU_HAVE_AN_ACCOUNT": "You have an account?",
       "SIGN_IN": "Sign in",
-      "FULLNAME": "Full name",
+      "FULL_NAME": "Full name",
       "EMAIL": "Email",
       "PASSWORD": "Password",
       "SIGN_UP": "Sign up",
-      "AGREE": "I agee to the",
+      "AGREE": "I agree to the",
       "TERMS": "Terms",
       "AND": "and",
       "PRIVACY_POLICY": "Privacy Policy"
     },
-    "ARTICALE": {
+    "ARTICLE": {
       "COMMENTS": "Comments",
       "COMMENT_ERROR": "The comment must be no more than 100 characters",
       "WRITE_SOMETHING": "Write something",
@@ -54,7 +54,7 @@
       "OLD_PASSWORD": "Old password",
       "NEW_PASSWORD": "New password",
       "CONFIRM_NEW_PASSWORD": "Confirm new password",
-      "DONT_MATCH": "Passwords doen't match",
+      "DONT_MATCH": "Passwords doesn't match",
       "CANSEL": "Cansel",
       "CHANGE": "Change"
     },
