@@ -96,7 +96,10 @@ export class DetailUsersCardComponent implements OnInit {
     user: CreateUserDTO;
     onSuccessCb: onSuccessEditionCbType;
   }>();
-  @Output() addStoryPoint = new EventEmitter<{ user: CreateUserDTO, onSuccessAddSP: onSuccessStoryPointCbType }>();
+  @Output() addStoryPoint = new EventEmitter<{
+    user: CreateUserDTO,
+    onSuccessAddSP: onSuccessStoryPointCbType
+  }>();
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
