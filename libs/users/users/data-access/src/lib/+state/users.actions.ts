@@ -45,6 +45,5 @@ export const setUsersFilter = createAction('[Users filter] Set Users Filter', pr
 export const addUserStoryPoint = createAction(
   '[Users Detail] Add User Story Point', props<{userData: CreateUserDTO, id: number, onSuccessAddSP: onSuccessStoryPointCbType}>()
 );
-
 export const addUserStoryPointSuccess = createAction('[Users Detail] Add User Story Point Success', props<{ userData: UsersDTO }>());
 export const addUserStoryPointFailed = createAction('[Users Detail] Add User Story Point Failed', props<{ error: UsersErrors }>());
