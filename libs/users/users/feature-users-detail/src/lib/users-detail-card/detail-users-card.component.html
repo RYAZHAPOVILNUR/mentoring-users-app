@@ -89,7 +89,50 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+
+            <mat-form-field class="edit-user-field">
+              <mat-label>StoryPoints</mat-label>
+              <input type="number"
+                 class="edit-user-input"
+                 placeholder="Введите число"
+                 matInput
+                 [formControl]="storyPoint"
+              >
+              <mat-error *ngIf="onValidateStoryPoint()">
+                Значение storypoints может быть между 0 и 21!
+              </mat-error>
+            </mat-form-field>
+
+            <div class="storypoint">
+              <button
+                (click)="storyPoint.enable()"
+                mat-stroked-button
+                type="button"
+              >
+                Редактировать StoryPoints
+              </button>
+
+              <ng-container *ngIf="!storyPoint.disabled">
+                <button
+                  (click)="onAddStoryPoint()"
+                  [disabled]="!storyPoint.valid"
+                  mat-icon-button
+                  type="button"
+                >
+                  <mat-icon fontIcon="done" />
+                </button>
+
+                <button
+                  (click)="storyPoint.disable()"
+                  mat-icon-button
+                  type="button"
+                >
+                  <mat-icon fontIcon="close" />
+                </button>
+              </ng-container>
+            </div>
           </div>
+
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
               mat-icon-button
@@ -116,6 +159,12 @@
     <h1>{{ vm.errors?.status }}</h1>
     <hr />
     Данный пользователь не найден
+  </div>
+</ng-template>
+
+<ng-template #snackbarStoryPoint>
+  <div class="edit-user-snackbar">
+    <span>StoryPoint успешно изменены!</span>
   </div>
 </ng-template>
 

@@ -12,7 +12,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { onSuccessEditionCbType } from '@users/users/data-access';
+import { onSuccessEditionCbType, onSuccessStoryPointCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -74,6 +74,8 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
+
+      this.storyPoint.patchValue(vm.user.totalStoryPoints ?? 0);
     }
 
     if (vm.editMode) {
@@ -94,11 +96,13 @@ export class DetailUsersCardComponent implements OnInit {
     user: CreateUserDTO;
     onSuccessCb: onSuccessEditionCbType;
   }>();
+  @Output() addStoryPoint = new EventEmitter<{ user: CreateUserDTO, onSuccessAddSP: onSuccessStoryPointCbType }>();
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('snackbarStoryPoint') snackbarSPTemplateRef!: TemplateRef<never>
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -107,6 +111,10 @@ export class DetailUsersCardComponent implements OnInit {
     switchMap((value) => this.dadata.getCities(value))
   );
 
+  public storyPoint = new FormControl(
+    {value: 0, disabled: true},
+    Validators.pattern('^(?:[0-9]|1[0-9]|2[01])$')
+  );
   private snackBar = inject(MatSnackBar);
   private readonly destroyRef = inject(DestroyRef);
   public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
@@ -171,5 +179,28 @@ export class DetailUsersCardComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  private onAddSPSuccess = () =>
+    this.snackBar.openFromTemplate(this.snackbarSPTemplateRef, {
+      duration: 1000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+    })
+
+  onAddStoryPoint(){
+    this.storyPoint.disable();
+    this.addStoryPoint.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        email: this.formGroup.value.email?.trim().toLocaleLowerCase() || '',
+        totalStoryPoints: this.storyPoint.value || 0,
+      },
+      onSuccessAddSP: this.onAddSPSuccess
+    });
+  }
+
+  onValidateStoryPoint(): boolean {
+    return this.storyPoint.status === 'INVALID' && this.storyPoint.touched;
   }
 }
