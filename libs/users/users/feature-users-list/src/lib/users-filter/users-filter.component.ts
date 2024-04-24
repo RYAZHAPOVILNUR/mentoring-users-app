@@ -11,7 +11,7 @@ import { Subject, debounceTime, distinctUntilChanged, fromEvent, map, takeUntil,
   styleUrls: ['./users-filter.component.scss'],
   imports: [FormsModule, ReactiveFormsModule],
 })
-export class UsersFilterComponent implements OnDestroy {
+export class UsersFilterComponent implements OnDestroy, OnInit {
   constructor(private store: Store) {}
 
   private destroy$ = new Subject<void>();
@@ -32,7 +32,6 @@ export class UsersFilterComponent implements OnDestroy {
         distinctUntilChanged(),
         tap((value) => {
           this.store.dispatch(setUsersFilter({ filter: { name: value } }));
-          console.log(value);
         })
       )
       .subscribe();
@@ -53,37 +52,5 @@ filter(event: Event) {
 
   filter() {
     this.store.dispatch(setUsersFilter({ filter: { name: this.name } }));
-  }
-}*/
-
-///3 вариант
-/*export class UsersFilterComponent implements OnInit {
-  private destroy$ = new Subject<void>();
-
-  constructor(private store: Store) {}
-
-  ngOnInit(): void {
-    this.search$
-      .pipe(
-        takeUntil(this.destroy$),
-        debounceTime(500),
-        map((event) => {
-          return (event.target as HTMLInputElement).value;
-        })
-      )
-      .subscribe((value) => {
-        this.store.dispatch(setUsersFilter({ filter: { name: value } }));
-      });
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
-  private search$ = new Subject<Event>();
-
-  filter(event: Event): void {
-    this.search$.next(event);
   }
 }*/
