@@ -54,7 +54,48 @@ export class TaskChangeDialogComponent {
   private readonly backlogFacade = inject(BacklogFacade);
   private readonly usersFacade = inject(UsersFacade);
   private dialogRef = inject(MatDialogRef<TaskChangeDialogComponent>);
+  public editMode = this.data !== null;
+
+
+  public editStatus = false;
   public status = false;
+  public users$ = this.usersFacade.selectedUsers$;
+  public status$ = this.users$.pipe(skip(1))
+  public task: Task = {
+    name: this.data?.title,
+    descriprion: this.data?.description ?? 'У тасок в меню "Задачи" с бека description не приходит',
+    priority: 'high',
+    status: 'progress',
+    assignees: [
+      {
+        id: 80,
+        name: 'Dzhavid',
+        email: 'strategy05@mail.ru',
+        username: 'Dzhavid',
+        city: '',
+        purchaseDate: new Date().toString(),
+        educationStatus: 'trainee',
+        educationTime: 0,
+        totalStoryPoints: 0,
+        photo: {
+          path: '/vault/XBYkUImp/a3wAS70PV6uO4QH5_mRMIkW22KU/bQW7WA../file-f0764d.png',
+          name: 'file-f0764d.png',
+          type: 'image',
+          size: 37021,
+          mime: 'image/jpeg',
+          meta: {
+            width: 256,
+            height: 256,
+          },
+          url: 'https://x8ki-letl-twmt.n7.xano.io/vault/XBYkUImp/a3wAS70PV6uO4QH5_mRMIkW22KU/bQW7WA../file-f0764d.png',
+        },
+        isAdmin: false,
+      },
+    ],
+  };
+  public textareaValue = this.editMode ? this.task.name : '';
+  public editorContent: string = this.editMode ? this.task.descriprion : '';
+
   constructor() {
     this.usersFacade.init();
   }
@@ -88,51 +129,26 @@ export class TaskChangeDialogComponent {
     };
   }
 
-  public task: Task = {
-    name: this.data?.title,
-    descriprion: this.data?.description ?? 'У тасок в меню "Задачи" с бека description не приходит',
-    priority: 'high',
-    status: 'progress',
-    assignees: [
-      {
-        id: 80,
-        name: 'Dzhavid',
-        email: 'strategy05@mail.ru',
-        username: 'Dzhavid',
-        city: '',
-        purchaseDate: new Date().toString(),
-        educationStatus: 'trainee',
-        educationTime: 0,
-        totalStoryPoints: 0,
-        photo: {
-          path: '/vault/XBYkUImp/a3wAS70PV6uO4QH5_mRMIkW22KU/bQW7WA../file-f0764d.png',
-          name: 'file-f0764d.png',
-          type: 'image',
-          size: 37021,
-          mime: 'image/jpeg',
-          meta: {
-            width: 256,
-            height: 256,
-          },
-          url: 'https://x8ki-letl-twmt.n7.xano.io/vault/XBYkUImp/a3wAS70PV6uO4QH5_mRMIkW22KU/bQW7WA../file-f0764d.png',
-        },
-        isAdmin: false,
-      },
-    ],
-  };
-  public editMode = this.data !== null;
-  public textareaValue = this.editMode ? this.task.name : '';
-  public editorContent: string = this.editMode ? this.task.descriprion : '';
-  public editStatus = false;
-  public users$ = this.usersFacade.allUsers$;
 
-  ngOnInit() {
-    console.log(this.data);
-    console.log('this.editMode', this.editMode);
-    this.users$.pipe(skip(1)).subscribe(() => {
-      this.status = true;
-    });
-  }
+  // public destroy$ = new Subject<void>()
+  //
+  // ngOnInit() {
+  //   this.initStatusAssignees();
+  // }
+  //
+  // ngOnDestroy(): void {
+  //   this.destroy$.next();
+  //   this.destroy$.complete();
+  // }
+  //
+  // private initStatusAssignees(): void {
+  //   this.users$.pipe(
+  //       skip(1),
+  //       first(),
+  //       tap(() => this.status = true),
+  //       takeUntil(this.destroy$)
+  //   ).subscribe();
+  // }
 
   addAssigned(assigned: UsersEntity): void {
     this.task = { ...this.task, assignees: [...this.task.assignees, assigned] };

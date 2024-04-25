@@ -1,10 +1,9 @@
 import { Injectable, inject } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
 import { Observable, of, switchMap } from 'rxjs';
-import { UsersErrors } from './users.reducer';
-import { onSuccessEditionCbType } from './users.actions';
+import { onSuccessEditionCbType} from './users.actions';
 import { selectLoggedUser } from '@auth/data-access';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
 
@@ -16,18 +15,23 @@ export class UsersFacade {
    * Combine pieces of state using createSelector,
    * and expose them as observables through the facade.
    */
-  public readonly status$ = this.store.pipe(select(UsersSelectors.selectUsersStatus));
-  public readonly allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
-  public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
-  public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
+  public readonly status$ = this.store.select(UsersSelectors.usersStatus);
+  public readonly allUsers$ = this.store.select(UsersSelectors.selectedUsers);
+  public readonly selectedUsers$ = this.store.select(UsersSelectors.allUsers);
+  public readonly openedUser$ = this.store.select(UsersSelectors.openedUser);
   public readonly loggedUser$ = this.store.select(selectLoggedUser);
-  public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError));
+  public readonly errors$= this.store.select(UsersSelectors.selectUsersError);
+  public readonly filterName$ = this.store.select(UsersSelectors.filterName);
   /**
    * Use the initialization action to perform one
    * or more tasks in your Effects.
    */
   init() {
     this.store.dispatch(UsersActions.initUsers());
+  }
+
+  filterUser(filterName: string): void {
+    this.store.dispatch(UsersActions.filterUser({ filterName }))
   }
 
   deleteUser(id: number) {

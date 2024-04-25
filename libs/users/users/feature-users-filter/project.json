@@ -1,0 +1,20 @@
+{
+  "name": "users-filter",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/users/users/feature-users-filter/src",
+  "prefix": "users",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/users/users/feature-users-filter/**/*.ts",
+          "libs/users/users/feature-users-filter/**/*.html"
+        ]
+      }
+    }
+  }
+}

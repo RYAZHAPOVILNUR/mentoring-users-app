@@ -1,4 +1,4 @@
-<div *ngIf="users$ | ngrxPush as users">
+<div *ngIf="users$ | async as users">
   <div class="header">
     <span class="headerTitle"> <mat-icon>check_box</mat-icon>ЗАДАЧА </span>
 
@@ -111,7 +111,7 @@
         <mat-card-header>
           <mat-card-title>ИСПОЛНИТЕЛИ</mat-card-title>
         </mat-card-header>
-        <mat-card-actions *ngIf="status" class="assignActions">
+        <mat-card-actions *ngIf="status$ | async" class="assignActions">
           <mat-list role="list">
             <mat-list-item *ngFor="let assigned of task.assignees" role="listitem">
               <div class="assignUserDiv">
