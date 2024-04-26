@@ -1,0 +1,10 @@
+<div>
+   <mat-form-field class="example-full-width">
+        <mat-label>Найти пользователя</mat-label>
+        <input matInput
+        id="input"
+        (input)="onFilter()"
+        [formControl] = "inputForm"
+        >
+    </mat-form-field>
+</div>

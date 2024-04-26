@@ -18,10 +18,6 @@ export const addUser = createAction('[Users Page] Add User', props<{ userData: C
 export const addUserSuccess = createAction('[Users/Api] Add User Success', props<{ userData: UsersEntity }>());
 export const addUserFailed = createAction('[Users/Api] Add User Failed', props<{ error: any }>());
 
-// export const selectId = createAction('[Users Page] Select Id', props<{ id: number }>());
-
-// export const deleteSelectedId = createAction('[Users Page] Delete Selected Id');
-
 export const editUser = createAction(
   '[Users Detail] Edit User',
   props<{
@@ -38,3 +34,4 @@ export const loadUserSuccess = createAction('[Users/Api] Load User Success', pro
 export const loadUserFailed = createAction('[Users/Api] Load User Failed', props<{ error: any }>());
 
 export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{ status: LoadingStatus }>());
+export const setUsersFilter = createAction('[User Page] Set User Filter', props<{filter: {name: string}}>());
