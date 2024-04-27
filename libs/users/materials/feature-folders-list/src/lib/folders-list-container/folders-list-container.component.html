@@ -1,0 +1,25 @@
+<ng-container
+  *ngrxLet="{
+        folders: folders$,
+        status: status$,
+        errors: errors$,
+    } as vm"
+>
+  <ng-container [ngSwitch]="vm.status">
+    <ng-container *ngSwitchCase="'loading'">
+      <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'error'">
+      <div class="alert alert-danger" rode="alert">
+        <h1>{{ vm.status }}</h1>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'loaded'">
+      <ng-container>
+        <folders-list-ui [vm]="vm"> </folders-list-ui>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</ng-container>

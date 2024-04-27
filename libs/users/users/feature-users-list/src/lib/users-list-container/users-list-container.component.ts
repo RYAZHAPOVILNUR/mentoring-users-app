@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersListComponent } from '../users-list/users-list.component';
 import { UsersListContainerStore } from './users-list-container.store';
@@ -21,7 +21,7 @@ import { UsersFilterComponent } from '../users-filter/users-filter.component';
     MatDialogModule,
     LetDirective,
     CreateUsersButtonComponent,
-    UsersFilterComponent
+    UsersFilterComponent,
   ],
   templateUrl: './users-list-container.component.html',
   styleUrls: ['./users-list-container.component.scss'],
@@ -29,7 +29,7 @@ import { UsersFilterComponent } from '../users-filter/users-filter.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [UsersListContainerStore],
 })
-export class UsersListContainerComponent {
+export class UsersListContainerComponent implements OnInit {
   private readonly componentStore = inject(UsersListContainerStore);
   public usersFacade = inject(UsersFacade);
   public readonly users$ = this.componentStore.users$;
@@ -40,6 +40,9 @@ export class UsersListContainerComponent {
 
   onDeleteUser(user: UsersVM) {
     this.componentStore.deleteUser(user);
+  }
+  ngOnInit(): void {
+    console.log(this.users$);
   }
 
   onRedirectToEdit({ id, editMode }: { id: number; editMode: boolean }) {
