@@ -14,4 +14,12 @@ export class FoldersFacade {
   public load() {
     this.store.dispatch(FoldersActions.loadFolders());
   }
+
+  public delete(id: number): void {
+    this.store.dispatch(FoldersActions.deleteFolder({ id }));
+  }
+
+  public create(title: string): void {
+    this.store.dispatch(FoldersActions.createFolder({ title }));
+  }
 }

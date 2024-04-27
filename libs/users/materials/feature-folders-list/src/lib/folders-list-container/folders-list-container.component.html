@@ -18,8 +18,9 @@
 
     <ng-container *ngSwitchCase="'loaded'">
       <ng-container>
-        <folders-list-ui [vm]="vm"> </folders-list-ui>
+        <folders-list-ui [vm]="vm" (deleteFolder)="deleteFolder($event)"> </folders-list-ui>
       </ng-container>
+      <folder-create-button />
     </ng-container>
   </ng-container>
 </ng-container>

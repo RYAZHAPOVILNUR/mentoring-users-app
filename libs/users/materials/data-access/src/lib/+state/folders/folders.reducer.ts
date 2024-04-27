@@ -5,7 +5,7 @@ import { createReducer, on } from '@ngrx/store';
 export const FOLDERS_FEATURE_KEY = 'folders';
 
 export interface Folder {
-created_at: any;
+  created_at: any;
   title: string;
   id: number;
 }
@@ -36,6 +36,32 @@ export const foldersReducer = createReducer(
     foldersAdapter.setAll(folders, { ...state, status: 'loaded' as const })
   ),
   on(FoldersActions.loadFoldersFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
+
+  on(FoldersActions.createFolder, (state) => ({
+    ...state,
+    status: 'loading' as const,
+  })),
+  on(FoldersActions.createFolderSuccess, (state, { folder }) =>
+    foldersAdapter.addOne(folder, { ...state, status: 'loaded' as const })
+  ),
+  on(FoldersActions.createFolderFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
+
+  on(FoldersActions.deleteFolder, (state) => ({
+    ...state,
+    status: 'loading' as const,
+  })),
+  on(FoldersActions.deleteFolderSuccess, (state, { id }) =>
+    foldersAdapter.removeOne(id, { ...state, status: 'loaded' as const })
+  ),
+  on(FoldersActions.deleteFolderFailed, (state, { error }) => ({
     ...state,
     status: 'error' as const,
     error,

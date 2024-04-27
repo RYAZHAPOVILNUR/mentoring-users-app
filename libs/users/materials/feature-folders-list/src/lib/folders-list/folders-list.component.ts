@@ -1,8 +1,9 @@
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';
 import { FoldersListVM } from './folder-list-view-model';
+import { Folder } from '@users/materials/data-access';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -14,6 +15,10 @@ import { FoldersListVM } from './folder-list-view-model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersListComponent {
-  @Input({ required: true })
-  vm!: FoldersListVM;
+  @Output() deleteFolder = new EventEmitter();
+  @Input() vm!: FoldersListVM;
+
+  public onDeleteFolder(folder: Folder) {
+    this.deleteFolder.emit(folder);
+  }
 }

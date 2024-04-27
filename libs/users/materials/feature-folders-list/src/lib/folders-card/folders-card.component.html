@@ -4,11 +4,11 @@
       <div class="icons">
         <mat-icon>folder</mat-icon>
         <button class="button-delete" mat-icon-button>
-          <mat-icon class="delete">delete</mat-icon>
+          <mat-icon class="delete" (click)="(deleteFolder)">delete</mat-icon>
         </button>
       </div>
       <div class="title">{{ folder.title }}</div>
-      <div class="date">{{ folder.created_at }}</div>
+      <div class="date">{{ dateFormat(folder.created_at) }}</div>
     </div>
   </mat-card-content>
 </mat-card>
