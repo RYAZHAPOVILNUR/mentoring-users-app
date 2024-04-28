@@ -15,10 +15,16 @@ import { Folder } from '@users/materials/data-access';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersListComponent {
-  @Output() deleteFolder = new EventEmitter();
   @Input() vm!: FoldersListVM;
+
+  @Output() deleteFolder = new EventEmitter();
+  @Output() openFolder = new EventEmitter<number>();
 
   public onDeleteFolder(folder: Folder) {
     this.deleteFolder.emit(folder);
+  }
+
+  public onOpenFolder(id: number) {
+    this.openFolder.emit(id);
   }
 }

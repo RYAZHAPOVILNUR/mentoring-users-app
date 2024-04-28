@@ -4,6 +4,7 @@ import { Folder, FoldersFacade } from '@users/materials/data-access';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { Router } from '@angular/router';
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'folders-card',
@@ -14,13 +15,16 @@ import { MatIconModule } from '@angular/material/icon';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersCardComponent {
-  private readonly foldersFacade = inject(FoldersFacade);
+  @Input() public folder!: Folder;
   @Output() deleteFolder = new EventEmitter();
-  @Input({ required: true })
-  folder!: Folder;
+  private readonly router = inject(Router);
 
-  public onDeleteFolder() {
-    this.deleteFolder.emit(this.folder);
+  public openFolder() {
+    this.router.navigate([`/materials/`, this.folder.id]);
+  }
+
+  public onDeleteFolder(folder: Folder) {
+    this.deleteFolder.emit(folder);
   }
 
   public dateFormat(time: number): string {

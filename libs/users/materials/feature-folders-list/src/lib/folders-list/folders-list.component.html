@@ -1,3 +1,8 @@
 <div class="wrapper">
-  <folders-card *ngFor="let folder of vm.folders" [folder]="folder" (click)="onDeleteFolder(folder)" />
+  <folders-card
+    *ngFor="let folder of vm.folders"
+    [folder]="folder"
+    (deleteFolder)="onDeleteFolder(folder)"
+    (dblclick)="onOpenFolder(folder.id)"
+  />
 </div>

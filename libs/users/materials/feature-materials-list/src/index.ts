@@ -1,2 +1,1 @@
-export * from './lib/folder-card/folder-card.component';
-export * from './lib/folders-list/folders-list.component';
+export * from './lib/materials-list-container/materials-list-container.component';
