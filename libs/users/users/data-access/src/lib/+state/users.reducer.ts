@@ -81,7 +81,16 @@ const reducer = createReducer(
   on(UsersActions.setUsersFilter, (state, { filter: { name } }) => ({
     ...state,
     usersFilter: { name }
-  }))
+  })),
+  on(UsersActions.addUserStoryPointsSuccess, (state, { userData }) => usersAdapter.updateOne({
+    id: userData.id,
+    changes: userData
+  }, state)),
+  on(UsersActions.editUserFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error
+  })),
 );
 
 export function usersReducer(state: UsersState | undefined, action: Action) {
