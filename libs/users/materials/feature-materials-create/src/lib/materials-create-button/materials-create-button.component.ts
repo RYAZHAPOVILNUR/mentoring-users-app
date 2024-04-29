@@ -62,11 +62,7 @@ export class MaterialsCreateButtonComponent {
       .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((newMaterial) => {
-        console.log('newMaterial', newMaterial);
-
-        if (newMaterial) {
-          this.materialsFacade.create(newMaterial);
-        }
+        if (newMaterial) this.materialsFacade.create(newMaterial);
       });
   }
 }

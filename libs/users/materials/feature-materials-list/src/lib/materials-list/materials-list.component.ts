@@ -31,7 +31,6 @@ export class MaterialsListComponent {
       data: { dialogText: `Вы уверены, что хотите удалить ${material.title}` },
     });
 
-    console.log('material', material);
     dialogRef
       .afterClosed()
       .pipe(

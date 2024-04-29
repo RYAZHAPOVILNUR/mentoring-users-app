@@ -21,8 +21,6 @@ export class MaterialsFacade {
   }
 
   public create(material: CreateMaterial) {
-    console.log('material', material);
-
     this.store.dispatch(MaterialsActions.createMaterial({ ...material }));
   }
 }

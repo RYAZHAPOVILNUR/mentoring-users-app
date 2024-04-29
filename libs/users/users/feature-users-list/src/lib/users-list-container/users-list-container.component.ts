@@ -29,7 +29,7 @@ import { UsersFilterComponent } from '../users-filter/users-filter.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [UsersListContainerStore],
 })
-export class UsersListContainerComponent implements OnInit {
+export class UsersListContainerComponent {
   private readonly componentStore = inject(UsersListContainerStore);
   public usersFacade = inject(UsersFacade);
   public readonly users$ = this.componentStore.users$;
@@ -40,9 +40,6 @@ export class UsersListContainerComponent implements OnInit {
 
   onDeleteUser(user: UsersVM) {
     this.componentStore.deleteUser(user);
-  }
-  ngOnInit(): void {
-    console.log(this.users$);
   }
 
   onRedirectToEdit({ id, editMode }: { id: number; editMode: boolean }) {

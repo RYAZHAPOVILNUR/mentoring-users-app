@@ -134,7 +134,6 @@ export class DetailUsersCardComponent implements OnInit {
 
   onAddStoryPoints() {
     this.totalStoryPoints.disable();
-    console.log('this.totalStoryPoints.value', this.totalStoryPoints.value);
 
     this.addStoryPoints.emit({
       user: {
