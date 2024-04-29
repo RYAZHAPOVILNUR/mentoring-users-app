@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { setUsersFilter } from '@users/users/data-access';
@@ -14,11 +15,8 @@ import { Subject, debounceTime, distinctUntilChanged, fromEvent, map, takeUntil,
 export class UsersFilterComponent implements OnDestroy, OnInit {
   constructor(private store: Store) {}
 
-  private destroy$ = new Subject<void>();
-
   ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+    takeUntilDestroyed();
   }
 
   ngOnInit(): void {
@@ -26,7 +24,6 @@ export class UsersFilterComponent implements OnDestroy, OnInit {
 
     fromEvent(inputEl, 'input')
       .pipe(
-        takeUntil(this.destroy$),
         debounceTime(600),
         map((event) => (event.target as HTMLInputElement).value),
         distinctUntilChanged(),
@@ -53,4 +50,5 @@ filter(event: Event) {
   filter() {
     this.store.dispatch(setUsersFilter({ filter: { name: this.name } }));
   }
-}*/
+}
+*/
