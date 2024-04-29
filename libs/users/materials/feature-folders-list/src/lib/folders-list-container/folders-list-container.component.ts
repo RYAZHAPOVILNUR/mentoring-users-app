@@ -2,7 +2,7 @@ import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { Folder, FoldersFacade } from '@users/materials/data-access';
 import { LetDirective } from '@ngrx/component';
 import { FolderCreateButtonComponent } from '@users/feature-folders-create';
-import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, ViewEncapsulation, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, ViewEncapsulation, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';

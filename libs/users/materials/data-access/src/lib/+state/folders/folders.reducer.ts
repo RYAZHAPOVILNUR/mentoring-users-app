@@ -10,6 +10,7 @@ export interface Folder {
   id: number;
 }
 
+
 export type FoldersErrors = {
   status: number;
   [key: string]: unknown;

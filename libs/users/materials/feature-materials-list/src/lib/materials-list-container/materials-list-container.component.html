@@ -1,1 +1,31 @@
-<p>materials-list-container works!</p>
+<script src="materials-list-container.component.ts"></script>
+<ng-container
+  *ngrxLet="{
+    materials: materials$,
+    status: status$,
+    errors: error$
+  } as vm"
+>
+  <ng-container [ngSwitch]="vm.status">
+    <ng-container *ngSwitchCase="'loading'">
+      <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'error'">
+      <div class="alert alert-danger" rode="aletr">
+        <h1>{{ vm.status }}</h1>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'loaded'">
+      <ng-container>
+        <div class="back">
+          <button mat-icon-button (click)="backOnFolders()"><mat-icon>arrow_back</mat-icon></button>
+          <div class="title">folderTitle</div>
+        </div>
+        <materials-list-ui [vm]="vm" />
+      </ng-container>
+    </ng-container>
+    <users-materials-create-button />
+  </ng-container>
+</ng-container>

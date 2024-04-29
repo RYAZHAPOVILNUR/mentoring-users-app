@@ -26,11 +26,11 @@ export class FolderCreateDialogComponent {
   public dialogRef = inject(MatDialogRef<FolderCreateDialogComponent>);
   public readonly folderNameField = new FormControl({ value: '', disabled: false });
 
-  onCancel(): void {
+  public onCancel(): void {
     this.dialogRef.close();
   }
 
-  onCreate(): void {
+  public onCreate(): void {
     this.dialogRef.close(this.folderNameField.value);
   }
 }

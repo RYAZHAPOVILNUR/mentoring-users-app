@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Folder, FoldersFacade } from '@users/materials/data-access';
+import { Folder } from '@users/materials/data-access';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,7 +20,7 @@ export class FoldersCardComponent {
   private readonly router = inject(Router);
 
   public openFolder() {
-    this.router.navigate([`/materials/`, this.folder.id]);
+    this.router.navigate([`/materials/`, this.folder.id], { state: { folderTitle: this.folder.title } });
   }
 
   public onDeleteFolder(folder: Folder) {
