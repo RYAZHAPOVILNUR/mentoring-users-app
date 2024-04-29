@@ -20,10 +20,12 @@
     <ng-container *ngSwitchCase="'loaded'">
       <ng-container>
         <div class="back">
-          <button mat-icon-button (click)="backOnFolders()"><mat-icon>arrow_back</mat-icon></button>
+          <button mat-icon-button (click)="backOnFolders()">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
           <div class="title">folderTitle</div>
         </div>
-        <materials-list-ui [vm]="vm" />
+        <materials-list-ui [vm]="vm" (deleteMaterial)="deleteMaterial($event)" />
       </ng-container>
     </ng-container>
     <users-materials-create-button />

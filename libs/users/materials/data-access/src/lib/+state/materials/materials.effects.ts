@@ -66,7 +66,7 @@ export class MaterialsEffects {
       return this.actions$.pipe(
         ofType(MaterialsActions.deleteMaterial),
         switchMap(({ id }) =>
-          this.apiService.delete<Material>(`material/${id}`).pipe(
+          this.apiService.delete<Material>(`/material/${id}`).pipe(
             map(() => MaterialsActions.deleteMaterialSuccess({ id })),
             catchError((error) => {
               return of(MaterialsActions.deleteMaterialFailed(error));

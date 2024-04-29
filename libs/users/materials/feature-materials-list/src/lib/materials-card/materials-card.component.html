@@ -7,7 +7,7 @@
         <mat-icon *ngIf="!material.material_link.endsWith('.pdf') && !material.material_link.endsWith('.mp3')"
           >ondemand_video</mat-icon
         >
-        <button mat-icon-button class="button-delete">
+        <button mat-icon-button class="button-delete" (click)="handleDeleteMaterial()">
           <mat-icon class="delete">delete</mat-icon>
         </button>
       </div>
