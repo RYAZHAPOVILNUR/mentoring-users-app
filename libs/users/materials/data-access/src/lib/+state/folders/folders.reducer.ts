@@ -2,24 +2,23 @@ import { FoldersActions } from './folders.actions';
 import { LoadingStatus } from '@users/core/data-access';
 import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
+
 export const FOLDERS_FEATURE_KEY = 'folders';
-
-export interface Folder {
-  created_at: any;
-  title: string;
-  id: number;
-}
-
 
 export type FoldersErrors = {
   status: number;
   [key: string]: unknown;
 };
-
+export interface Folder {
+  created_at: string;
+  title: string;
+  id: number;
+}
 export interface FoldersState extends EntityState<Folder> {
   status: LoadingStatus;
   error: FoldersErrors | null;
 }
+
 export const foldersAdapter: EntityAdapter<Folder> = createEntityAdapter<Folder>();
 
 export const initialFoldersState: FoldersState = foldersAdapter.getInitialState({

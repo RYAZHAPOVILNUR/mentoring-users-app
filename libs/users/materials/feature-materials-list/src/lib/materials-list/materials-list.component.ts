@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, DestroyRef, EventEmitter, Input, Ou
 import { CommonModule } from '@angular/common';
 import { MaterialsListVM } from './materials-list-view-model';
 import { MaterialsCardComponent } from '../materials-card/materials-card.component';
-import { Material, MaterialsFacade } from '@users/materials/data-access';
+import { Material } from '@users/materials/data-access';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -20,8 +20,6 @@ import { tap } from 'rxjs';
 export class MaterialsListComponent {
   @Input() vm!: MaterialsListVM;
   @Output() deleteMaterial = new EventEmitter();
-
-  private readonly materialsFacade = inject(MaterialsFacade);
 
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);

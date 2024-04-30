@@ -1,9 +1,9 @@
 <ng-container
   *ngrxLet="{
-        folders: folders$,
-        status: status$,
-        errors: errors$,
-    } as vm"
+    folders: folders$,
+    status: status$,
+    errors: errors$,
+  } as vm"
 >
   <ng-container [ngSwitch]="vm.status">
     <ng-container *ngSwitchCase="'loading'">

@@ -16,7 +16,6 @@ import { Folder } from '@users/materials/data-access';
 })
 export class FoldersListComponent {
   @Input() vm!: FoldersListVM;
-
   @Output() deleteFolder = new EventEmitter();
   @Output() openFolder = new EventEmitter<number>();
 

@@ -4,10 +4,9 @@ import { LoadingStatus } from '@users/core/data-access';
 import { MaterialsActions } from './materials.actions';
 export const MATERIAL_FEATURE_KEY = 'materials';
 type PostMaterial = 'title' | 'material_link';
-
 export interface Material {
   id: number;
-  created_at: any;
+  created_at: string;
   title: string;
   material_link: string;
   folder_id: 0;

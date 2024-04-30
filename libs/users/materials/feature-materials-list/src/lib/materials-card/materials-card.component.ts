@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Material } from '@users/materials/data-access';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MaterialsContentComponent } from '@users/materials/feature-materials-content';
 
 @Component({
@@ -27,7 +27,7 @@ export class MaterialsCardComponent {
     });
   }
 
-  public dateFormat(time: number): string {
+  public dateFormat(time: string): string {
     const date = new Date(time);
     const formattedDate = `${date.getDate()}
     ${date.toLocaleString('default', { month: 'short' }).slice(0, -1)}
