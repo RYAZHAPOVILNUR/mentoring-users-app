@@ -42,10 +42,10 @@ export class MaterialsEffects {
         withLatestFrom(this.store.select(selectRouteParams)),
         switchMap(([createMaterial, params]) =>
           this.apiService
-            .post<Material, any>('/material', {
+            .post<Material, { title: string; material_link: string; folder_id: number }>('/material', {
               title: createMaterial.title,
               material_link: createMaterial.material_link,
-              folder_id: params?.['id'],
+              folder_id: +params?.['id'],
             })
             .pipe(
               map((material) => MaterialsActions.createMaterialSuccess({ material })),

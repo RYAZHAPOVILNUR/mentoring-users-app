@@ -10,9 +10,6 @@ import {
   FormsModule,
   Validators,
   ReactiveFormsModule,
-  ValidatorFn,
-  AbstractControl,
-  ValidationErrors,
 } from '@angular/forms';
 
 @Component({
@@ -33,14 +30,14 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialsCreateDialogComponent implements OnInit {
-  public readonly dialogRef = inject(MatDialogRef<MaterialsCreateDialogComponent>);
-
-  public readonly dialogData: {
+  private readonly dialogRef = inject(MatDialogRef<MaterialsCreateDialogComponent>);
+  private readonly dialogData: {
     materialType: string;
     materialTitle: string;
     materialLink: string;
     validatationPattern: RegExp;
   } = inject(MAT_DIALOG_DATA);
+
   public materialForm!: FormGroup;
   public materialType!: string;
 

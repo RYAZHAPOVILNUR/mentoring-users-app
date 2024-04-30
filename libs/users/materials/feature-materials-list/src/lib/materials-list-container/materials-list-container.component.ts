@@ -3,11 +3,11 @@ import { MaterialsCreateButtonComponent } from './../../../../feature-materials-
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { LetDirective } from '@ngrx/component';
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Material, MaterialsFacade } from '@users/materials/data-access';
 import { MaterialsListComponent } from '../materials-list/materials-list.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
@@ -30,10 +30,17 @@ import { tap } from 'rxjs';
   styleUrls: ['./materials-list-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MaterialsListContainerComponent {
+export class MaterialsListContainerComponent implements OnInit {
   private readonly materialsFacade = inject(MaterialsFacade);
-
   private readonly router = inject(Router);
+  public folderTitle!: string;
+
+  ngOnInit(): void {
+    const state = window.history.state;
+    if (state && state.folderTitle) {
+      this.folderTitle = state.folderTitle;
+    }
+  }
 
   public readonly materials$ = this.materialsFacade.allMaterials$;
   public readonly status$ = this.materialsFacade.status$;

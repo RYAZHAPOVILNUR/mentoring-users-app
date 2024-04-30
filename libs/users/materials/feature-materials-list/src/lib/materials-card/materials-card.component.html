@@ -1,4 +1,4 @@
-<mat-card class="material-card">
+<mat-card class="material-card" (click)="openMaterial()">
   <mat-card-content class="material-card-content">
     <div class="div-card">
       <div class="icons">
@@ -7,7 +7,7 @@
         <mat-icon *ngIf="!material.material_link.endsWith('.pdf') && !material.material_link.endsWith('.mp3')"
           >ondemand_video</mat-icon
         >
-        <button mat-icon-button class="button-delete" (click)="handleDeleteMaterial()">
+        <button mat-icon-button class="button-delete" (click)="handleDeleteMaterial($event)">
           <mat-icon class="delete">delete</mat-icon>
         </button>
       </div>

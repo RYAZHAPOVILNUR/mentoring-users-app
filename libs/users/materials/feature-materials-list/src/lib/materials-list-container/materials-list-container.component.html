@@ -23,9 +23,10 @@
           <button mat-icon-button (click)="backOnFolders()">
             <mat-icon>arrow_back</mat-icon>
           </button>
-          <div class="title">folderTitle</div>
+          <div class="title">{{ folderTitle }}</div>
         </div>
-        <materials-list-ui [vm]="vm" (deleteMaterial)="deleteMaterial($event)" />
+        <p *ngIf="!vm.materials.length" class="text-center">В папке {{ folderTitle }} нет материалов</p>
+        <materials-list-ui *ngIf="vm.materials.length" [vm]="vm" (deleteMaterial)="deleteMaterial($event)" />
       </ng-container>
     </ng-container>
     <users-materials-create-button />
