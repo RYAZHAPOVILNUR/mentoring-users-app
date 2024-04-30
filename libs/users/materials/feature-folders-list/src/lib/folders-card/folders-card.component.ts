@@ -27,7 +27,7 @@ export class FoldersCardComponent {
     this.deleteFolder.emit(folder);
   }
 
-  public dateFormat(time: number): string {
+  public dateFormat(time: string): string {
     const date = new Date(time);
     const formattedDate = `${date.getDate()}
     ${date.toLocaleString('default', { month: 'short' }).slice(0, -1)}
