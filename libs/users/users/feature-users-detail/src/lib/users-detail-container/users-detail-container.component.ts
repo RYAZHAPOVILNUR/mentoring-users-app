@@ -84,4 +84,10 @@ export class UsersDetailComponent {
         }
       });
   }
+
+  onAddStoryPoints(userData: CreateUserDTO, onSuccessAddSP: onSuccessEditionCbType) {
+    this.usersFacade.addStoryPoints(userData, this.user.id, onSuccessAddSP);
+
+  }
+
 }
