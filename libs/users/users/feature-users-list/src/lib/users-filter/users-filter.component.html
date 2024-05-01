@@ -1,0 +1,6 @@
+<form [formGroup]="filterForm" class="filter">
+    <mat-form-field class="filter">
+      <mat-label>Поиск</mat-label>
+      <input (input)="applyFilter()" matInput placeholder="Имя" formControlName="filter">
+    </mat-form-field>
+</form>  
