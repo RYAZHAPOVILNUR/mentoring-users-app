@@ -147,19 +147,19 @@ export const addUserStoryPoints = createEffect(
       ofType(UsersActions.addStoryPoints),
       withLatestFrom(usersEntities$),
       filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
-      map(([{ userData, id, onSuccessAddSP }, usersEntities]) => ({
+      map(([{ userData, id, onSuccessAddStoryPoints }, usersEntities]) => ({
         user: {
           ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
-          purchaseDate: usersEntities[id]?.purchaseDate || '12.10.2023',
+          purchaseDate: usersEntities[id]?.purchaseDate || '',
           educationStatus: usersEntities[id]?.educationStatus || 'trainee',
           totalStoryPoints: userData.totalStoryPoints,
         },
-        onSuccessAddSP,
+        onSuccessAddStoryPoints,
       })),
-      switchMap(({ user, onSuccessAddSP }) => {
+      switchMap(({ user, onSuccessAddStoryPoints }) => {
         return apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
-          map((userData) => ({ userData, onSuccessAddSP })),
-          tap(({ onSuccessAddSP }) => onSuccessAddSP()),
+          map((userData) => ({ userData, onSuccessAddStoryPoints })),
+          tap(({ onSuccessAddStoryPoints }) => onSuccessAddStoryPoints()),
           map(({ userData }) => {
             return UsersActions.addStoryPointsSuccess({ userData });
           }),

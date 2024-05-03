@@ -66,9 +66,8 @@ export class UsersDetailComponent {
       queryParams: { edit: true },
     });
   }
-  onAddStoryPoints(userData: CreateUserDTO, onSuccessAddSP: onSuccessSPonCbType) {
-    this.usersFacade.addStoryPoints(userData, this.user.id, onSuccessAddSP);
-    console.log(userData.totalStoryPoints);
+  onAddStoryPoints(userData: CreateUserDTO, onSuccessAddStoryPoints: onSuccessSPonCbType) {
+    this.usersFacade.addStoryPoints(userData, this.user.id, onSuccessAddStoryPoints);
   }
 
   onDeleteUser() {

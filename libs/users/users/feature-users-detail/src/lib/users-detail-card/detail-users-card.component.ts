@@ -162,7 +162,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
         totalStoryPoints: this.totalStoryPoints.value || 0,
       },
-      onSuccessAddSP: this.onAddSPSuccess,
+      onSuccessAddStoryPoints: this.onAddSPSuccess,
     });
   }
 
