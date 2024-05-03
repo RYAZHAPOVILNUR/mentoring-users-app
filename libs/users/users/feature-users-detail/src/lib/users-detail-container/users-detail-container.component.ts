@@ -51,6 +51,10 @@ export class UsersDetailComponent {
     });
   }
 
+  public setNewPoints(points: number){
+    this.usersFacade.editPoints(points, this.user.id)
+  }
+
   onCloseUser() {
     this.router.navigate(['/admin/users']);
   }

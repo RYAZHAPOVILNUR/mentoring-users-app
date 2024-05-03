@@ -106,7 +106,25 @@
             </button>
           </mat-card-actions>
         </form>
+        <mat-form-field
+          class="edit-user-field"
+          [matTooltip]="(vm.user!.totalStoryPoints)?.toString()!"
+        >
+          <mat-label>Количество сторипоинтов:</mat-label>
+          <input matInput placeholder="Story Points*" [formControl]="storyPoints" class="edit-user-input" />
+          </mat-form-field>
       </mat-card>
+      <button mat-icon-button color="accent" class="add_btn" (click)="onAddPoints()" *ngIf="!addPointsBool && !vm.editMode">
+        <mat-icon>add</mat-icon>
+      </button>
+      <ng-container *ngIf="addPointsBool">
+        <button mat-icon-button color="primary" class="ed_btn" (click)="onPushPoints()">
+          <mat-icon>done</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" class="ed_btn" (click)="onClosePoints()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </ng-container>
     </div>
   </ng-container>
 </ng-template>

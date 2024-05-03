@@ -29,6 +29,11 @@
       "@users/core/ui/layout": ["libs/users/core/ui/layout/src/public-api.ts"],
       "@users/core/utils": ["libs/core/utils/src/index.ts"],
       "@users/data-access": ["libs/data-access/src/index.ts"],
+      "@users/feature-folder-create": ["libs/users/materials/feature-folder-create/src/index.ts"],
+      "@users/feature-folder-list": ["libs/users/materials/feature-folder-list/src/index.ts"],
+      "@users/feature-materials-content": ["libs/users/materials/feature-materials-content/src/index.ts"],
+      "@users/feature-materials-create": ["libs/users/materials/feature-materials-create/src/index.ts"],
+      "@users/feature-materials-list": ["libs/users/materials/feature-materials-list/src/index.ts"],
       "@users/feature-users-create": ["libs/users/users/feature-users-create/src/index.ts"],
       "@users/feature-users-detail": ["libs/users/users/feature-users-detail/src/index.ts"],
       "@users/feature-users-list": ["libs/users/users/feature-users-list/src/index.ts"],
@@ -60,7 +65,7 @@
       "@users/users/tasks": ["libs/users/tasks/src/index.ts"],
       "@users/users/tasks/data-acces": ["libs/users/tasks/data-acces/src/index.ts"],
       "@users/users/tasks/tasks-view": ["libs/users/tasks/tasks-view/src/index.ts"],
-      "@users/users/tasks/tasks-view-container": ["libs/users/tasks/tasks-view-container/src/index.ts"]
+      "@users/users/tasks/tasks-view-container": ["libs/users/tasks/tasks-view-container/src/index.ts"],
     }
   },
   "exclude": ["node_modules", "tmp"]

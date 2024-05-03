@@ -1,0 +1,17 @@
+<p>Добавление новой папки</p>
+<mat-form-field
+  class="edit-user-field"
+>
+  <mat-label>Название папки:</mat-label>
+  <input matInput placeholder="Название папки*" [formControl] = "inputName"/>
+</mat-form-field>
+<br>
+<div class="btns">
+    <button mat-raised-button class="button-add"
+    (click)="onCloseDialog()"
+    >Отмена</button>
+    <button mat-raised-button class="button-add" 
+    [disabled]="inputName.invalid"
+    (click)="onSave()"
+    >Сохранить</button>
+</div>

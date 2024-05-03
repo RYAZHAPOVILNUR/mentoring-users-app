@@ -60,6 +60,7 @@ export class DetailUsersCardComponent implements OnInit {
     status: 'init',
     errors: null,
   };
+  public addPointsBool = false;
   public get vm() {
     return this._vm;
   }
@@ -74,6 +75,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
+      this.storyPoints.patchValue(this.vm.user?.totalStoryPoints)
     }
 
     if (vm.editMode) {
@@ -90,6 +92,8 @@ export class DetailUsersCardComponent implements OnInit {
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
 
+  public storyPoints = new FormControl({value: this.vm.user?.totalStoryPoints, disabled: true});
+
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
     onSuccessCb: onSuccessEditionCbType;
@@ -98,6 +102,7 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
+  @Output() setNewPoints = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
@@ -134,6 +139,22 @@ export class DetailUsersCardComponent implements OnInit {
       },
       onSuccessCb: this.onEditSuccess,
     });
+  }
+
+  onAddPoints(){
+    this.storyPoints.enable();
+    this.addPointsBool = true
+  }
+
+  onClosePoints(){
+    this.storyPoints.disable();
+    this.addPointsBool = false
+  }
+
+  onPushPoints(){
+    this.setNewPoints.emit(this.storyPoints.value);
+    this.storyPoints.disable();
+    this.addPointsBool = false
   }
 
   onCloseUser() {

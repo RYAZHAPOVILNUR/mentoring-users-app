@@ -1,23 +1,60 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap } from 'rxjs/operators';
-import { Observable, EMPTY, of } from 'rxjs';
-import { MaterialsActions } from './materials.actions';
+import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
+import { Observable, EMPTY, of, OperatorFunction } from 'rxjs';
+import { ApiService } from '@users/core/http';
+import * as ActionsFolder from './materials.actions';
+import { Folder } from './interfaces';
 
-@Injectable()
-export class MaterialsEffects {
-  loadMaterialss$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(MaterialsActions.loadMaterialss),
-      concatMap(() =>
-        /** An EMPTY observable only emits completion. Replace with your own observable API request */
-        EMPTY.pipe(
-          map((data) => MaterialsActions.loadMaterialssSuccess({ data })),
-          catchError((error) => of(MaterialsActions.loadMaterialssFailure({ error })))
+
+export const loadFolders = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiSrvice = inject(ApiService);
+    return actions$.pipe(
+      ofType(ActionsFolder.initFolders),
+    switchMap(() => 
+        apiSrvice.get<Folder[]>('/folder').
+        pipe(
+          map((folders: Folder[]) => ActionsFolder.getFolders({
+            folder: folders
+          }))
         )
       )
-    );
-  });
+    )
+  },
+  {functional: true}
+);
 
-  constructor(private actions$: Actions) {}
-}
+export const deleteFolder = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiSrvice = inject(ApiService);
+    return actions$.pipe(
+      ofType(ActionsFolder.deleteFolder),
+      switchMap(({id}) => 
+      apiSrvice.delete<Folder[]>(`/folder/${id}`)
+      .pipe(
+        map(() => ActionsFolder.deleteFolderSucces({id}))
+      )
+      )
+    )
+  },
+  {functional: true}
+);
+
+export const addFolder = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiSrvice = inject(ApiService);
+    return actions$.pipe(
+      ofType(ActionsFolder.addFolder),
+      switchMap(({title}) => 
+      apiSrvice.post<Folder, {title: string}>('/folder', {title})
+      .pipe(
+        map((folder) => ActionsFolder.addFolderSucces({folder})
+      ))
+    ))
+  },
+  {functional: true}
+)

@@ -35,3 +35,4 @@ export const loadUserFailed = createAction('[Users/Api] Load User Failed', props
 
 export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{ status: LoadingStatus }>());
 export const setUsersFilter = createAction('[User Page] Set User Filter', props<{filter: {name: string}}>());
+export const setNewPoints = createAction('[User/Api] Set Points Success', props<{points: number; id: number}>())

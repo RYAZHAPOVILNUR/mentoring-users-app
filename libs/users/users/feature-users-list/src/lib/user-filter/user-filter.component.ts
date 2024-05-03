@@ -28,6 +28,5 @@ export class UserFilterComponent {
 
   onFilter(){
     this.store.dispatch(setUsersFilter({filter: {name: this.inputForm.value}}));
-    console.log('on filter', this.inputForm.value);
   }
 }
