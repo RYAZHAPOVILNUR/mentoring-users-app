@@ -150,7 +150,7 @@ export const addUserStoryPoints = createEffect(
       map(([{ userData, id, onSuccessAddStoryPoints }, usersEntities]) => ({
         user: {
           ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
-          purchaseDate: usersEntities[id]?.purchaseDate || '',
+          purchaseDate: usersEntities[id]?.purchaseDate || '11.11.2023',
           educationStatus: usersEntities[id]?.educationStatus || 'trainee',
           totalStoryPoints: userData.totalStoryPoints,
         },
