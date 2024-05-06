@@ -1,0 +1,19 @@
+<ng-container *ngrxLet="{ materials: materials$, isLoading: isLoading$ } as vm">
+  <ng-template [ngIf]="vm.isLoading">
+    <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+  </ng-template>
+
+  <div class="container">
+    <button mat-icon-button (click)="backToFolders()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+
+    <ul class="materials-list">
+      <li class="materials-item" *ngFor="let material of vm.materials; trackBy: identify">
+        <materials-card [material]="material"/>
+      </li>
+    </ul>
+
+    <create-material-button></create-material-button>
+  </div>
+</ng-container>

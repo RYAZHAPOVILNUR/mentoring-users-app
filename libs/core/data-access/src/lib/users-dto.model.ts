@@ -43,3 +43,8 @@ export type UsersPhoto = {
   };
   url: string;
 };
+
+export type UserStoryPoints = {
+  userId: number;
+  storyPoints: number;
+};

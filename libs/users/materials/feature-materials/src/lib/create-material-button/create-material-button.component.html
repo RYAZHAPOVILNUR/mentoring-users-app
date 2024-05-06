@@ -1,0 +1,11 @@
+<div class="fab-container">
+  <button mat-fab color="primary" (click)="onToggleFab()">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <div *ngIf="isButtonsVisible" class="fab-buttons">
+    <button *ngFor="let btn of buttons" mat-mini-fab (click)="onClickHandler(btn.value)">
+      <mat-icon>{{ btn.icon }}</mat-icon>
+    </button>
+  </div>
+</div>

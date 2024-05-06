@@ -1,0 +1,10 @@
+<ng-container *ngrxLet="{ folders: folders$, isLoading: isLoading$ } as vm">
+  <ng-template [ngIf]="vm.isLoading">
+    <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+  </ng-template>
+
+  <div class="container">
+    <folder-list [folders]="vm.folders"></folder-list>
+    <ui-create-folder-button (createFolder)="createFolderHandler()"></ui-create-folder-button>
+  </div>
+</ng-container>

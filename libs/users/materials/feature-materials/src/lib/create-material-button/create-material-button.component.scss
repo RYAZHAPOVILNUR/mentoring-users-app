@@ -1,0 +1,20 @@
+.fab-container {
+  position: fixed;
+  bottom: calc(64px + 1rem);
+  right: 1rem;
+  z-index: 100;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  transition: all 1s ease-in-out;
+
+  > .fab-buttons {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+
+    button {
+      margin-bottom: 1rem;
+    }
+  }
+}
