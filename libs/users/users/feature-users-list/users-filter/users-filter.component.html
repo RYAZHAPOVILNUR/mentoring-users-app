@@ -1,0 +1,4 @@
+<mat-form-field class="example-form-field" [formGroup]="filterForm">
+  <mat-label>Filter users</mat-label>
+  <input matInput type="text" formControlName="filter" (input)="applyFilter()" />
+</mat-form-field>
