@@ -58,8 +58,6 @@
               <mat-label>Имя пользователя:</mat-label>
               <input matInput placeholder="Имя пользователя" formControlName="username" class="edit-user-input">
             </mat-form-field>
-
-
             <mat-form-field class="edit-user-field"
             [matTooltip]="vm.user!.city"
             [matTooltipDisabled]="formGroup.enabled">
@@ -68,7 +66,6 @@
                      class="edit-user-input"
                      placeholder="Введите город"
                      matInput
-
                      formControlName="city"
                      [matAutocomplete]="auto">
               <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
@@ -76,6 +73,22 @@
                   {{suggestion}}
                 </mat-option>
               </mat-autocomplete>
+            </mat-form-field>
+
+           <mat-form-field class="edit-user-field" 
+            [matTooltip]="vm.user!.totalStoryPoints!.toString()"
+            [matTooltipDisabled]="formGroup.enabled">
+              <mat-label>Количество сторипоинтов:</mat-label>
+                <input type="number" [disabled]="totalStoryPoints.disabled" matInput  [formControl]="totalStoryPoints" class="edit-user-input .no-spin-buttons .mat-input-element">
+                <button *ngIf="!totalStoryPoints.disabled" type="submit" matSuffix mat-icon-button              
+                ><mat-icon>done</mat-icon>
+                </button>
+                <button *ngIf="!totalStoryPoints.disabled" (click)="totalStoryPoints.disable()" matSuffix mat-icon-button              
+                ><mat-icon>close</mat-icon>
+                </button>
+                <button *ngIf="totalStoryPoints.disabled" (click)="totalStoryPoints.enable()" matSuffix mat-icon-button              
+                ><mat-icon>add</mat-icon>
+                </button>
             </mat-form-field>
 
           </div>
@@ -112,6 +125,6 @@
 
 <ng-template #snackbar>
   <div class="edit-user-snackbar">
-    <span>Пользователь успешно изменён!</span>
+    <span>Пользователь успешно обновлен!</span>
   </div>
 </ng-template>

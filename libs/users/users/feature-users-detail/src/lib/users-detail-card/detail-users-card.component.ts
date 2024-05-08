@@ -70,9 +70,11 @@ export class DetailUsersCardComponent implements OnInit {
         name: vm.user.name,
         email: vm.user.email,
         username: vm.user.username,
-        city: vm.user.city
+        city: vm.user.city,
       });
-    }
+      
+      this.totalStoryPoints.setValue(vm.user.totalStoryPoints!)    }
+
 
     if (vm.editMode) {
       this.formGroup.enable();
@@ -87,14 +89,18 @@ export class DetailUsersCardComponent implements OnInit {
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
-
+  public totalStoryPoints = new FormControl({value: 0, disabled: true}, [Validators.required, Validators.min(0)])
+  
   @Output() editUser = new EventEmitter<{ user: CreateUserDTO, onSuccessCb: onSuccessEditionCbType }>();
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
+  // @Output() addStoryPoints = new EventEmitter();
+
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>
   private dadata = inject(DadataApiService)
+
   public citySuggestions = this.formGroup.controls.city.valueChanges
     .pipe(
       debounceTime(300),
@@ -115,6 +121,8 @@ export class DetailUsersCardComponent implements OnInit {
     this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
       duration: 2500, horizontalPosition: 'center', verticalPosition: 'top'
     })
+    
+
 
   onSubmit(): void {
     this.editUser.emit({
@@ -122,10 +130,12 @@ export class DetailUsersCardComponent implements OnInit {
         name: this.formGroup.value.name || '',
         username: this.formGroup.value.username || '',
         city: this.formGroup.value.city || '',
-        email: this.formGroup.value.email?.trim().toLowerCase() || ''
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        totalStoryPoints:  this.totalStoryPoints.value || 0
       },
       onSuccessCb: this.onEditSuccess
     });
+    this.totalStoryPoints.disable()
   }
 
   onCloseUser() {
@@ -166,4 +176,5 @@ export class DetailUsersCardComponent implements OnInit {
       )
       .subscribe()
   }
+
 }
