@@ -62,9 +62,9 @@ export class UsersDetailComponent {
     this.router.navigate(['admin/users', this.user.id], { queryParams: { edit: true } });
   }
 
-  // onAddStoryPoints(  totalStoryPoints: number, onSuccessCb: onSuccessEditionCbType) {
-  //   this.usersFacade.setStoryPoints(this.user.id, totalStoryPoints,  onSuccessCb)
-  // }
+  onAddStoryPoints(user: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
+    this.usersFacade.setStoryPoints(user, this.user.id, onSuccessCb)
+  }
 
   onDeleteUser() {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {

@@ -77,10 +77,11 @@ const reducer = createReducer(
   on(UsersActions.setUsersFilter, (state, {usersFilter}) => ({
     ...state, usersFilter
   })),
-  // on(UsersActions.setStoryPoints, (state, {totalStoryPoints, id}) => usersAdapter.updateOne({
-  //   id: userId,
-  //   changes: { totalStoryPoints }
-  // }, state))
+  on(UsersActions.setStoryPointsSuccess, (state, {userData}) => usersAdapter.updateOne({
+    id: userData.id,
+    changes: userData
+  }, state)
+),
 );
 
 export function usersReducer(state: UsersState | undefined, action: Action) {
