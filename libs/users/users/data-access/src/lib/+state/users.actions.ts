@@ -72,3 +72,18 @@ export const filterUser = createAction(
     '[Users Page] Filter Users',
     props<{ filterName: string }>()
 );
+export const editStoryPoints = createAction(
+    '[Users Detail] Edit User Story Points',
+    props<{
+        id: number;
+        totalStoryPoints: Partial<UsersEntity>
+        onSuccessCb: onSuccessEditionCbType }>()
+)
+export const editStoryPointsSuccess = createAction(
+    '[Users Detail] Edit User Story Points Success',
+    props<{ userData: UsersDTO }>()
+)
+export const editStoryPointsFailed = createAction(
+    '[Users Detail] Edit User Story Points Failed',
+    props<{ error: UsersErrors }>()
+)

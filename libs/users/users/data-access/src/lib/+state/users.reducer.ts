@@ -2,7 +2,7 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
 import * as UsersActions from './users.actions';
-import { UsersEntity } from '@users/core/data-access';
+import {UsersDTO, UsersEntity} from '@users/core/data-access';
 import { LoadingStatus } from '@users/core/data-access';
 
 export const USERS_FEATURE_KEY = 'users';
@@ -38,18 +38,23 @@ const reducer = createReducer(
     ...state,
     status: 'loading' as const,
   })),
+
   on(UsersActions.loadUsersSuccess, (state, { users }) =>
     usersAdapter.setAll(users, { ...state, status: 'loaded' as const })
   ),
+
   on(UsersActions.loadUsersFailure, (state, { error }) => ({
     ...state,
     status: 'error' as const,
     error,
   })),
+
   on(UsersActions.deleteUserSuccess, (state, { id }) =>
       usersAdapter.removeOne(id, { ...state })),
+
   on(UsersActions.addUserSuccess, (state, { userData }) =>
       usersAdapter.addOne({ ...userData }, { ...state })),
+
   on(UsersActions.editUserSuccess, (state, { userData }) =>
       usersAdapter.updateOne(
       {
@@ -59,11 +64,29 @@ const reducer = createReducer(
       state
     )
   ),
+
   on(UsersActions.editUserFailed, (state, { error }) => ({
     ...state,
     status: 'error' as const,
     error,
   })),
+
+  on(UsersActions.editStoryPoints, (state, {id, totalStoryPoints}) =>
+     usersAdapter.updateOne(
+          {
+              id: id,
+              changes: {totalStoryPoints} as Partial<UsersDTO>
+          },
+          state
+)),
+
+  on(UsersActions.editStoryPointsFailed, (state, { error }) => ({
+      ...state,
+      status: 'error' as const,
+      error,
+      })
+  ),
+
   on(UsersActions.loadUser, (state) => ({
     ...state,
     status: 'loading' as const,

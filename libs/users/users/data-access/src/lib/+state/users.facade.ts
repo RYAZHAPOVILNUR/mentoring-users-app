@@ -46,6 +46,10 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.editUser({ userData, id, onSuccessCb }));
   }
 
+  editStoryPoints(id: number, totalStoryPoints: Partial<UsersEntity>, onSuccessCb: onSuccessEditionCbType){
+    this.store.dispatch(UsersActions.editStoryPoints({id, totalStoryPoints, onSuccessCb }))
+  }
+
   getUserFromStore(id: number) {
     return this.store.select(UsersSelectors.selectUserById(id)).pipe(
       switchMap((user: UsersEntity | undefined): Observable<UsersEntity | null> => {
