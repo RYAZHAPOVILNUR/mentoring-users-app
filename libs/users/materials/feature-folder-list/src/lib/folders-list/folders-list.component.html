@@ -1,4 +1,10 @@
-<ng-container *ngFor="let folder of folders$">
-    <users-folders-card [folder]="folder">
-    </users-folders-card>
+<ng-container *ngIf="(vm.status) === 'loading'; else loadingResult">
+    <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
 </ng-container>
+
+<ng-template #loadingResult>
+    <ng-container *ngFor="let folder of vm.folders">
+        <users-folders-card [folder]="folder">
+        </users-folders-card>
+    </ng-container>
+</ng-template>

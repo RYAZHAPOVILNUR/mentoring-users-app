@@ -1,0 +1,24 @@
+p{
+    font-size: 19px;
+    font-weight: 400;
+    padding: 20px;
+}
+
+mat-form-field{
+    left: 30px;
+    position: relative;
+}
+
+.btns{
+    display: flex;
+    justify-content: space-around;
+}
+
+.button-add{
+    position: relative;
+    top: -10px;
+}
+
+.main {
+    width: 270px;
+}

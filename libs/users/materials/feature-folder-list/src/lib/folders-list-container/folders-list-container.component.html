@@ -1,5 +1,9 @@
-<ng-container 
-*ngrxLet="folders$ as folders"
+<ng-container
+*ngrxLet="{
+    folders: folders$,
+    status: status$
+} as vm"
 >
-    <users-folders-list [folders$] = "folders"></users-folders-list>
+    <users-folders-list [vm]="vm"></users-folders-list>
 </ng-container>
+

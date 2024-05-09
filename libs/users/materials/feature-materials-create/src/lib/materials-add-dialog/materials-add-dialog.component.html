@@ -1,1 +1,26 @@
-<p>materials-add-dialog works!</p>
+<div class="main">
+  <p>Добавление {{data.name}}</p>
+  <mat-form-field
+    class="edit-user-field"
+  >
+    <mat-label>Название:</mat-label>
+    <input matInput placeholder="Название*" [formControl] = "inputName"/>
+  </mat-form-field>
+  <br>
+  <mat-form-field
+    class="edit-user-field"
+  >
+    <mat-label>Ссылка:</mat-label>
+    <input matInput placeholder="Ссылка*" [formControl] = "inputRef"/>
+  </mat-form-field>
+  <br>
+  <div class="btns">
+      <button mat-raised-button class="button-add"
+      (click)="onCloseDialog()"
+      >Отмена</button>
+      <button mat-raised-button class="button-add" 
+      [disabled]="inputName.invalid || inputRef.invalid"
+      (click)="onSave()"
+      >Сохранить</button>
+  </div>
+</div>

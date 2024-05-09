@@ -12,10 +12,10 @@ import { LetDirective } from '@ngrx/component';
 })
 export class FoldersListContainerComponent implements OnInit {
   materialsFaced = inject(MaterialsFacade);
-  folders$ = this.materialsFaced.folders$
+  folders$ = this.materialsFaced.folders$;
+  status$ = this.materialsFaced.status$;
 
   ngOnInit(): void {
       this.materialsFaced.init();
   }
-
 }

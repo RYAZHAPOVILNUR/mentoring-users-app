@@ -1,0 +1,34 @@
+.body{
+    height: 100%;
+    background-color: gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title{
+    padding-top: 15px;
+    font-size: 20px;
+}
+
+.yt{
+    width: 100%;    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+img{
+    height: 90%;
+    width: 90%;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+
+audio{
+    position: relative;
+    top: 250%
+}

@@ -54,7 +54,7 @@ export const appRoutes: Route[] = [
       {
         path: 'materials/:id',
         loadComponent: () =>
-          import('@users/feature-materials-content').then((c) => c.MaterialsContentComponent)
+          import('@users/feature-materials-list').then((c) => c.MaterialsListContainerComponent)
       },
       {
         path: 'articles',

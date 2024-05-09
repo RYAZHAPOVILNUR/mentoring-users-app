@@ -1,10 +1,9 @@
-import { Injectable, inject } from '@angular/core';
+import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
-import { Observable, EMPTY, of, OperatorFunction } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { ApiService } from '@users/core/http';
 import * as ActionsFolder from './materials.actions';
-import { Folder } from './interfaces';
+import { Folder, Mat, MatRes } from './interfaces';
 
 
 export const loadFolders = createEffect(
@@ -43,6 +42,23 @@ export const deleteFolder = createEffect(
   {functional: true}
 );
 
+export const deleteMat = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiSrvice = inject(ApiService);
+    return actions$.pipe(
+      ofType(ActionsFolder.deleteMat),
+      switchMap(({id}) => 
+      apiSrvice.delete<Mat[]>(`/material/${id}`)
+      .pipe(
+        map(() => ActionsFolder.deleteMatSucces({id}))
+      )
+      )
+    )
+  },
+  {functional: true}
+);
+
 export const addFolder = createEffect(
   () => {
     const actions$ = inject(Actions);
@@ -57,4 +73,54 @@ export const addFolder = createEffect(
     ))
   },
   {functional: true}
-)
+);
+
+export const addMat = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiSrvice = inject(ApiService);
+    return actions$.pipe(
+      ofType(ActionsFolder.addMat),
+      switchMap(({res}) => 
+      apiSrvice.post<Mat, MatRes>('/material', res)
+      .pipe(
+        map((mat) => ActionsFolder.addMatSucces({mat})
+      ))
+    ))
+  },
+  {functional: true}
+);
+
+export const getFoldreId = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiSrvice = inject(ApiService);
+    return actions$.pipe(
+      ofType(ActionsFolder.getFolderId),
+      switchMap(({id}) => 
+      apiSrvice.get<Folder>(`/folder/${id}`)
+      .pipe(
+        map((folder) => ActionsFolder.getFolderIdSucces({folder}))
+      )
+      )
+    )
+  },
+  {functional: true}
+);
+
+export const getMats = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiSrvice = inject(ApiService);
+    return actions$.pipe(
+      ofType(ActionsFolder.getMat),
+      switchMap(() => 
+      apiSrvice.get<Mat[]>('/material')
+      .pipe(
+        map((mats) => ActionsFolder.getMatSucces({mats}))
+      )
+      )
+    )
+  },
+  {functional: true}
+);

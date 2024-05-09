@@ -1,1 +1,12 @@
-<p>materials-list works!</p>
+<ng-container *ngIf="vm.status=== 'loading'; else loadingResult">
+    <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+
+<ng-template #loadingResult>
+    <ng-container *ngFor="let mat of vm.mats">
+        <users-materials-card 
+        (deleteMat)="onDeleteMat($event)"
+        [mat]="mat">
+        </users-materials-card>
+    </ng-container>
+</ng-template>
