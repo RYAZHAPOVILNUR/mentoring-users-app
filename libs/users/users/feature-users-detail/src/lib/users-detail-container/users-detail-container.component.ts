@@ -50,7 +50,7 @@ export class UsersDetailComponent {
       queryParams: { edit: false },
     });
   }
-  public onEditStoryPoints(totalStoryPoints: Partial<UsersDTO>, onSuccessCb: onSuccessEditionCbType ){
+  public onEditStoryPoints(totalStoryPoints: number , onSuccessCb: onSuccessEditionCbType ){
     this.usersFacade.editStoryPoints(this.user.id, totalStoryPoints, onSuccessCb)
   };
   onCloseUser() {

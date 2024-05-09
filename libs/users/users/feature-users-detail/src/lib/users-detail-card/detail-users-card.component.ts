@@ -101,7 +101,7 @@ export class DetailUsersCardComponent implements OnInit {
   private readonly fb = inject(FormBuilder)
   public storyPointBtn = false;
   public storyPointsControl = this.fb.control(
-      { value: this.vm.user?.totalStoryPoints as number, disabled: true },
+      { value: this.vm.user?.totalStoryPoints, disabled: true },
       [Validators.pattern(/^[0-9]+$/)]
   );
   public formGroup: FormGroup<FormType<UserCardForm>> = this.fb.nonNullable.group({
@@ -109,7 +109,7 @@ export class DetailUsersCardComponent implements OnInit {
     email: [{ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]],
     username: [{ value: '', disabled: !this.vm.editMode }],
     city: [{ value: '', disabled: !this.vm.editMode }],
-    totalStoryPoints: [this.storyPointsControl.value]
+    totalStoryPoints: [this.storyPointsControl.value as number]
   });
 
   @Output() editUser = new EventEmitter<{
@@ -121,7 +121,7 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
   @Output() editStoryPoints = new EventEmitter<{
-    user:  {totalStoryPoints: Partial<UsersDTO>} ;
+    user:  {totalStoryPoints: number} ;
     onSuccessCb: onSuccessEditionCbType;
   }>();
 
@@ -167,7 +167,7 @@ export class DetailUsersCardComponent implements OnInit {
     this.storyPointsControl.disable()
     this.editStoryPoints.emit({
       user: {
-        totalStoryPoints: this.storyPointsControl.value as Partial<UsersDTO>
+        totalStoryPoints: this.storyPointsControl.value as number
       },
       onSuccessCb: this.onEditSuccess
     });

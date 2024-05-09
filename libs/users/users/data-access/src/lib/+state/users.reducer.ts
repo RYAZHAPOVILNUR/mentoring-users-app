@@ -61,19 +61,20 @@ const reducer = createReducer(
     error,
   })),
 
-  on(UsersActions.editStoryPoints, (state, {id, totalStoryPoints}) =>
-     usersAdapter.updateOne(
-          {
-              id: id,
-              changes: {totalStoryPoints} as Partial<UsersDTO>
-          },
-          state
-)),
+    on(UsersActions.editStoryPoints, (state, { id, totalStoryPoints }) =>
+        usersAdapter.updateOne(
+            {
+                id: id,
+                changes: {totalStoryPoints}
+            },
+            state
+        )
+    ),
 
   on(UsersActions.editStoryPointsFailed, (state, { error }) => ({
       ...state,
-      status: 'error' as const,
-      error,
+          status: 'error' as const,
+      error
       })
   ),
 

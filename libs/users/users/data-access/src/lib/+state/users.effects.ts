@@ -138,13 +138,13 @@ export const editStoryPoints = createEffect(
                     map(({ userData }) => UsersActions.editStoryPointsSuccess({ userData })),
                     catchError((error) => {
                         console.error('Error', error);
-                    return of(UsersActions.editUserFailed({ error }));
-                })
+                        return of(UsersActions.editUserFailed({ error }));
+                    })
+                )
             )
         )
-        )
     },
-{ functional: true }
+    { functional: true }
 );
 
 export const loadUser = createEffect(

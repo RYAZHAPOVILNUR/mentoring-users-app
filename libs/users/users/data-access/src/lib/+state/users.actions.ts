@@ -43,7 +43,7 @@ export const editStoryPoints = createAction(
     '[Users Detail] Edit User Story Points',
     props<{
         id: number;
-        totalStoryPoints: Partial<UsersEntity>
+        totalStoryPoints: number
         onSuccessCb: onSuccessEditionCbType }>()
 )
 export const editStoryPointsSuccess = createAction(
