@@ -67,17 +67,18 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailUsersCardComponent implements OnInit {
+  
   private _vm: DetailUsersCardVm = {
     editMode: false,
     user: null,
     status: 'init',
     errors: null,
   };
+
   public get vm() {
     return this._vm;
   }
-  @Input({ required: true })
-  set vm(vm: DetailUsersCardVm) {
+  @Input({ required: true }) set vm(vm: DetailUsersCardVm) {
     this._vm = vm;
 
     if (vm.user) {

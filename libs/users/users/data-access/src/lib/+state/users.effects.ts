@@ -91,8 +91,9 @@ export const editUser = createEffect(
         },
         onSuccessCb,
       })),
-      switchMap(({ user, onSuccessCb }) =>
-        apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+      switchMap(
+        ({ user, onSuccessCb }) =>
+          apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
             tap(() => onSuccessCb()),
             map((userData) => UsersActions.editUserSuccess({ userData })),
             catchError((error) => {
