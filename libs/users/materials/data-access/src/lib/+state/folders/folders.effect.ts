@@ -10,39 +10,33 @@ export class FoldersEffects {
   private readonly action$ = inject(Actions);
   private readonly apiService = inject(ApiService);
 
-  public loadFolders = createEffect(
-    () => {
-      return this.action$.pipe(
-        ofType(FoldersActions.loadFolders),
-        switchMap(() =>
-          this.apiService.get<Folder[]>('/folder').pipe(
-            map((folders) => FoldersActions.loadFoldersSuccess({ folders })),
-            catchError((error) => {
-              return of(FoldersActions.loadFoldersFailed({ error }));
-            })
-          )
+  public loadFolders = createEffect(() => {
+    return this.action$.pipe(
+      ofType(FoldersActions.loadFolders),
+      switchMap(() =>
+        this.apiService.get<Folder[]>('/folder').pipe(
+          map((folders) => FoldersActions.loadFoldersSuccess({ folders })),
+          catchError((error) => {
+            return of(FoldersActions.loadFoldersFailed({ error }));
+          })
         )
-      );
-    },
-    { functional: true }
-  );
+      )
+    );
+  });
 
-  public deleteFolder = createEffect(
-    () => {
-      return this.action$.pipe(
-        ofType(FoldersActions.deleteFolder),
-        switchMap(({ id }) =>
-          this.apiService.delete<Folder>(`/folder/${id}`).pipe(
-            map(() => FoldersActions.deleteFolderSuccess({ id })),
-            catchError((error) => {
-              return of(FoldersActions.deleteFolderFailed({ error }));
-            })
-          )
+  public deleteFolder = createEffect(() => {
+    return this.action$.pipe(
+      ofType(FoldersActions.deleteFolder),
+      switchMap(({ id }) =>
+        this.apiService.delete<Folder>(`/folder/${id}`).pipe(
+          map(() => FoldersActions.deleteFolderSuccess({ id })),
+          catchError((error) => {
+            return of(FoldersActions.deleteFolderFailed({ error }));
+          })
         )
-      );
-    },
-    { functional: true }
-  );
+      )
+    );
+  });
 
   public createFolder = createEffect(() => {
     return this.action$.pipe(

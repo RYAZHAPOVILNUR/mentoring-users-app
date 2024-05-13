@@ -9,7 +9,7 @@ import { MaterialsCreateDialogComponent } from '../materials-create-dialog/mater
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export enum MaterialsType {
-  video = 'Video',
+  video = 'video',
   pdf = 'pdf',
   podcast = 'podcast',
 }

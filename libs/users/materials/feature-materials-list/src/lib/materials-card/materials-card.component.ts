@@ -32,8 +32,10 @@ export class MaterialsCardComponent {
     const formattedDate = `${date.getDate()}
     ${date.toLocaleString('default', { month: 'short' }).slice(0, -1)}
     ${date.getFullYear()}`;
+
     return formattedDate;
   }
+
   public handleDeleteMaterial(event: Event) {
     event.stopPropagation();
     this.deleteMaterial.emit(this.material);

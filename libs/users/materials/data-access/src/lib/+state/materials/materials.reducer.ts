@@ -1,8 +1,11 @@
 import { EntityAdapter, createEntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
+
 import { LoadingStatus } from '@users/core/data-access';
 import { MaterialsActions } from './materials.actions';
+
 export const MATERIAL_FEATURE_KEY = 'materials';
+
 type PostMaterial = 'title' | 'material_link';
 export interface Material {
   id: number;
