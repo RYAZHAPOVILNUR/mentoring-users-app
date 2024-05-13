@@ -67,6 +67,9 @@ export class UsersDetailComponent {
     });
   }
 
+  onAddStoryPoints(userData: CreateUserDTO, onSuccessAddSP: onSuccessEditionCbType) {
+    this.usersFacade.addStoryPoints(userData, this.user.id, onSuccessAddSP);
+  }
   onDeleteUser() {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
       data: {

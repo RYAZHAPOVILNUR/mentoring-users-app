@@ -1,0 +1,34 @@
+<script src="materials-list-container.component.ts"></script>
+<ng-container
+  *ngrxLet="{
+    materials: materials$,
+    status: status$,
+    errors: error$
+  } as vm"
+>
+  <ng-container [ngSwitch]="vm.status">
+    <ng-container *ngSwitchCase="'loading'">
+      <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'error'">
+      <div class="alert alert-danger" rode="aletr">
+        <h1>{{ vm.status }}</h1>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'loaded'">
+      <ng-container>
+        <div class="back">
+          <button mat-icon-button (click)="backOnFolders()">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+          <div class="title">{{ folderTitle }}</div>
+        </div>
+        <p *ngIf="!vm.materials.length" class="text-center">В папке {{ folderTitle }} нет материалов</p>
+        <materials-list-ui *ngIf="vm.materials.length" [vm]="vm" (deleteMaterial)="deleteMaterial($event)" />
+      </ng-container>
+    </ng-container>
+    <users-materials-create-button />
+  </ng-container>
+</ng-container>

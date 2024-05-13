@@ -1,0 +1,7 @@
+<div class="container">
+  <div class="materials-cards-flex">
+    <ng-container *ngFor="let material of vm.materials">
+      <users-materials-card [material]="material" (deleteMaterial)="onDeleteMaterial($event)" />
+    </ng-container>
+  </div>
+</div>

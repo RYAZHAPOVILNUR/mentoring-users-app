@@ -1,0 +1,19 @@
+<div mat-dialog-content>
+  <form [formGroup]="materialForm">
+    <h1>Добавить {{ materialType }}</h1>
+    <div class="dialog-content">
+      <mat-form-field class="w-full">
+        <input matInput placeholder="Введите название файла" type="text" formControlName="title" />
+        <mat-error>Введите название папки</mat-error>
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <input matInput placeholder="Вставьте ссылку на файл" type="text" formControlName="material_link" />
+        <mat-error>Введите название папки</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Отмена</button>
+    <button mat-raised-button color="primary" (click)="onCreate()">Создать</button>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+.materials-cards-flex {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-gap: 20px;
+}
+
+.create-material-fab-button {
+  position: fixed !important;
+  bottom: 5em !important;
+  right: 10em !important;
+  z-index: 100;
+}
+
+.back {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: x-large;
+}

@@ -137,3 +137,39 @@ export const loadUser = createEffect(
   },
   { functional: true }
 );
+
+export const addUserStoryPoints = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const aoiService = inject(ApiService);
+    const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
+    return actions$.pipe(
+      ofType(UsersActions.addUserStoryPoints),
+      withLatestFrom(usersEntities$),
+      filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
+      map(([{ userData, id, onSuccess }, usersEntities]) => ({
+        user: {
+          ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
+          purchaseDate: usersEntities[id]?.purchaseDate || '12.10.2023',
+          educationStatus: usersEntities[id]?.educationStatus || 'trainee',
+          totalStoryPoints: userData.totalStoryPoints,
+        },
+        onSuccess,
+      })),
+      switchMap(({ user, onSuccess }) => {
+        return aoiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+          map((userData) => ({ userData, onSuccess })),
+          tap(({ onSuccess }) => onSuccess()),
+          map(({ userData }) => {
+            return UsersActions.addUserStoryPointsSuccess({ userData });
+          }),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(UsersActions.editUserFailed({ error }));
+          })
+        );
+      })
+    );
+  },
+  { functional: true }
+);
