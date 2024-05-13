@@ -1,10 +1,14 @@
-import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';;
+import { FolderDTO } from '@users/core/data-access'
 
 export const MaterialsActions = createActionGroup({
   source: 'Materials',
   events: {
-    'Load Materialss': emptyProps(),
-    'Load Materialss Success': props<{ data: unknown }>(),
-    'Load Materialss Failure': props<{ error: unknown }>(),
-  }
-});
+    'Init Folders': emptyProps(),
+    'Load Folders Success': props<{ folders: FolderDTO[] }>(),
+    'Load Folders Failure': props<{ error: string }>()
+    }
+  } 
+);
+
+

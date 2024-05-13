@@ -1,4 +1,3 @@
-import { TasksContainerComponent } from './../../../../libs/users/task/src/lib/tasks-view-container/tasks-view-container.component';
 import { Route } from '@angular/router';
 import { authGuard, adminGuard } from '@auth/data-access';
 import { AuthorizedUserLayoutComponent } from './authorized-user-layout/authorized-user-layout.component';
@@ -47,8 +46,9 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'materials',
-        loadComponent: () => import('@users/materials').then(c => c.UsersMaterialsComponent),
+        loadComponent: () => import('@users/materials/feature-folders-list').then(c => c.FoldersListContainerComponent),
       },
+      
       {
         path: 'articles',
         loadComponent: () => import('@users/users/articles/articles').then(c => c.ArticlesViewContainerComponent),

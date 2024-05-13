@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@auth/data-access": ["libs/core/auth/data-access/src/index.ts"],
+      "@materials/data-access": ["libs/users/materials/data-access/src/index.ts"],
       "@auth/feature-login": ["libs/core/auth/feature-login/src/index.ts"],
       "@auth/feature-register": [
         "libs/core/auth/feature-register/src/index.ts"
@@ -66,6 +67,7 @@
       "@users/settings/data-access": [
         "libs/users/settings/data-access/src/index.ts"
       ],
+      "@users/task": ["libs/users/task/src/index.ts"],
       "@users/tasks-view": ["libs/tasks-view/src/index.ts"],
       "@users/tasks/tasks-view": ["libs/tasks/tasks-view/src/index.ts"],
       "@users/users/articles/article-comments": [
