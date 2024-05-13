@@ -1,9 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import {
-  MATERIALS_FEATURE_KEY,
-  MaterialsState,
-  materialsAdapter,
-} from './materials.reducer';
+import { MATERIALS_FEATURE_KEY, MaterialsState, materialsAdapter} from './materials.reducer';
 
 // Lookup the 'Materials' feature state managed by NgRx
 export const selectMaterialsState = createFeatureSelector<MaterialsState>(
@@ -14,12 +10,12 @@ const { selectAll, selectEntities } = materialsAdapter.getSelectors();
 
 export const selectMaterialsLoaded = createSelector(
   selectMaterialsState,
-  (state: MaterialsState) => state.loaded
+  (state: MaterialsState) => state.materials
 );
 
 export const selectMaterialsError = createSelector(
   selectMaterialsState,
-  (state: MaterialsState) => state.error
+  (state: MaterialsState) => state.status
 );
 
 export const selectAllMaterials = createSelector(

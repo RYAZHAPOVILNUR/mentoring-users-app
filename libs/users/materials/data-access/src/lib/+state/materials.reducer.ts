@@ -5,9 +5,16 @@ import { FolderDTO, LoadingStatus, MaterialsDTO } from '@users/core/data-access'
 
 export const MATERIALS_FEATURE_KEY = 'materials';
 
+export type MaterialsErrors = {
+  status: number,
+  [key: string]: unknown
+}
+
 export interface MaterialsState extends EntityState<FolderDTO> {
-  materials: MaterialsDTO[];
+  selectedId?: string | number; // which Users record has been selected
   status: LoadingStatus;
+  error: MaterialsErrors | null;
+  materials: MaterialsDTO[];
 }
 
 export interface MaterialsPartialState {
@@ -17,9 +24,9 @@ export interface MaterialsPartialState {
 export const materialsAdapter: EntityAdapter<FolderDTO> =
   createEntityAdapter<FolderDTO>();
 
-export const initialMaterialsState: MaterialsState =
-  materialsAdapter.getInitialState({
+export const initialMaterialsState: MaterialsState = materialsAdapter.getInitialState({
     materials: [],
+    error: null,
     status: 'init',
   });
 
@@ -27,15 +34,16 @@ const reducer = createReducer(
   initialMaterialsState,
   on(MaterialsActions.initFolders, (state) => ({
     ...state,
-    status: false,
+    status: 'loading' as const,
     error: null,
   })),
-  on(MaterialsActions.loadMaterialsFoldersSuccess, (state, { folders }) =>
-    materialsAdapter.setAll(folders, { ...state, status: true })
+  on(MaterialsActions.loadFoldersSuccess, (state, { folders }) =>
+    materialsAdapter.setAll(folders, { ...state, status: 'loaded' as const })
   ),
-  on(MaterialsActions.loadMaterialsFoldersFailure, (state, { error }) => ({
+  on(MaterialsActions.loadFoldersFailure, (state, { error }) => ({
     ...state,
-    error,
+    status: 'error' as const,
+    error
   }))
 );
 

@@ -1,23 +1,22 @@
-import { Injectable, inject } from '@angular/core';
+import { inject } from '@angular/core';
+import { ApiService } from '@users/core/http';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, catchError, of } from 'rxjs';
-import * as MaterialsActions from './materials.actions';
-import * as MaterialsFeature from './materials.reducer';
+import { switchMap, catchError, of, map } from 'rxjs';
+import { MaterialsActions } from './materials.actions';
+import { FolderDTO } from '@users/core/data-access';
 
-@Injectable()
-export class MaterialsEffects {
-  private actions$ = inject(Actions);
 
-  init$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(MaterialsActions.initMaterials),
-      switchMap(() =>
-        of(MaterialsActions.loadMaterialsSuccess({ materials: [] }))
-      ),
-      catchError((error) => {
-        console.error('Error', error);
-        return of(MaterialsActions.loadMaterialsFailure({ error }));
-      })
-    )
+export const MaterialsEffects = createEffect(() => {
+  const actions$ = inject(Actions);
+  const apiService = inject(ApiService)
+
+  return actions$.pipe(
+    ofType(MaterialsActions.initFolders),
+    switchMap(() => {
+      return apiService.get<FolderDTO[]>('/folders').pipe(
+        map((folders) => MaterialsActions.loadFoldersSuccess({ folders })),
+        catchError((error) => of(MaterialsActions.loadFoldersFailure({ error })))
+      );
+    })
   );
-}
+}, { functional: true })

@@ -6,7 +6,7 @@ export const MaterialsActions = createActionGroup({
   events: {
     'Init Folders': emptyProps(),
     'Load Folders Success': props<{ folders: FolderDTO[] }>(),
-    'Load Folders Failure': props<{ error: string }>()
+    'Load Folders Failure': props<{ error: any }>()
     }
   } 
 );

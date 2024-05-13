@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { select, Store, Action } from '@ngrx/store';
 
-import * as MaterialsActions from './materials.actions';
+import {MaterialsActions} from './materials.actions';
 import * as MaterialsFeature from './materials.reducer';
 import * as MaterialsSelectors from './materials.selectors';
 
@@ -18,12 +18,13 @@ export class MaterialsFacade {
     select(MaterialsSelectors.selectAllMaterials)
   );
   selectedMaterials$ = this.store.pipe(select(MaterialsSelectors.selectEntity));
+  selectedFolders$ = this.store.pipe(select(MaterialsSelectors.selectMaterialsEntities));
 
   /**
    * Use the initialization action to perform one
    * or more tasks in your Effects.
    */
   init() {
-    this.store.dispatch(MaterialsActions.initMaterials());
+    this.store.dispatch(MaterialsActions.initFolders());
   }
 }
