@@ -1,0 +1,25 @@
+<ng-container>
+    <div class="container">
+        <div class="row">
+            <div>
+                <button mat-icon-button (click)="navigateToMaterialList()">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+                <h1>{{ viewModel.openedFolder?.title }}</h1>
+            </div>
+            <div class="materials">
+                <ng-container *ngIf="viewModel.status === 'loaded'; else loading">
+                    <div *ngFor="let material of viewModel.materials">
+                        <users-materials-card [material]="material" (deleteMaterial)="onDeleteMaterial($event)"
+                            (openMaterial)="onOpenMaterial($event)" />
+                    </div>
+                </ng-container>
+            </div>
+
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #loading>
+    loading. . .
+</ng-template>

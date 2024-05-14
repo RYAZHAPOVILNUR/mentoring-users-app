@@ -1,0 +1,13 @@
+<mat-card class="materials-card">
+    <button (click)="onOpenMaterial()" class="mat-button">
+        <div class="btn-content">
+            <h2>{{ material.title }}</h2>
+        </div>
+        <mat-icon class="material-icon">{{ material.type }}</mat-icon>
+    </button>
+    <mat-card-actions class="material-card-buttons">
+        <button (click)="openDeleteDialog(material.id)" mat-icon-button>
+            <mat-icon>delete</mat-icon>
+        </button>
+    </mat-card-actions>
+</mat-card>

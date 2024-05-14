@@ -1,0 +1,12 @@
+<div class="materials">
+    <ng-container *ngrxLet="{
+        materials: materials$,
+        status: status$,
+        openedFolder: openedFolder$
+       } as viewModel">
+        <users-feature-materials-list [viewModel]="viewModel" (deleteMaterial)="onDeleteMaterial($event)"
+            (openMaterial)="onOpenMaterial($event)">
+        </users-feature-materials-list>
+    </ng-container>
+    <users-materials-create class="materials-btn"></users-materials-create>
+</div>

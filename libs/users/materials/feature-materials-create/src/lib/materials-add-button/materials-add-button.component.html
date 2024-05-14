@@ -1,0 +1,12 @@
+<div>
+    <button mat-fab color="primary" [matMenuTriggerFor]="menu">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>
+<mat-menu #menu="matMenu">
+    <ng-container *ngFor="let type of materialsTypes">
+        <button mat-menu-item (click)="openAddMaterialDialog(type)">
+            {{ type }}
+        </button>
+    </ng-container>
+</mat-menu>

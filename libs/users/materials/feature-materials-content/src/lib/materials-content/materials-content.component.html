@@ -1,0 +1,33 @@
+<mat-dialog-content [ngSwitch]="data.type">
+    <div class="actions-container dialog">
+        <h2 mat-dialog-title>{{ data.title }}</h2>
+        <button (click)="close()" color="primary" mat-icon-button aria-label="close">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <ng-container *ngSwitchCase="'picture_as_pdf'">
+        <pdf-viewer [src]="data.link!" [render-text]="true" [original-size]="true" [scrollTop]="false"
+            style="width: 500px ; height: 600px">
+        </pdf-viewer>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'library_music'">
+        <audio controls>
+            <source [src]="data.link" type="audio/mp3">
+        </audio>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'video_library'">
+        <p mat-dialog-title> link to video: <a [href]="data.link">{{ data.link }}</a></p>
+
+        <div *ngIf="getVideoId()" class="thumbnail">
+            <img [src]="'https://img.youtube.com/vi/' + getVideoId() + '/maxresdefault.jpg'" width="100%"
+                alt="video-preview">
+        </div>
+    </ng-container>
+
+    <ng-container *ngSwitchDefault>
+        <p mat-dialog-title>material has not found</p>
+    </ng-container>
+</mat-dialog-content>

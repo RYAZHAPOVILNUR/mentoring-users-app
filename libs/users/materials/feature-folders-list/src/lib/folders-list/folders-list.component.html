@@ -1,0 +1,6 @@
+<div class="materials-list folder">
+    <div *ngFor="let folder of folders$ | async;">
+        <users-folders-card [folder]='folder' (openFolder)="onOpenFolder($event)"
+            (deleteFolder)="onDeleteFolder($event)"></users-folders-card>
+    </div>
+</div>
