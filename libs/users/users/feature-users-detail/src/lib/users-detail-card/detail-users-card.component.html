@@ -106,6 +106,44 @@
             </button>
           </mat-card-actions>
         </form>
+        <mat-form-field class="edit-user-field" [formGroup]="formGroup">
+          <mat-label>Количество сторипоинтов:</mat-label>
+          <input
+            matInput
+            type="number"
+            [matTooltip]="vm.totalStoryPoints.toString()"
+            formControlName="totalStoryPoints"
+            (keyup.enter)="onAddMode()"
+            (keyup.esc)="onCloseAddMode()"
+          />
+          <button
+            matSuffix
+            mat-icon-button
+            aria-label="Add"
+            (click)="onOpenAddMode()"
+            *ngIf="formGroup.controls.totalStoryPoints.disabled"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+          <button
+            matSuffix
+            mat-icon-button
+            aria-label="Done"
+            (click)="onAddMode()"
+            *ngIf="!formGroup.controls.totalStoryPoints.disabled"
+          >
+            <mat-icon>done</mat-icon>
+          </button>
+          <button
+            matSuffix
+            mat-icon-button
+            aria-label="Close"
+            (click)="onCloseAddMode()"
+            *ngIf="!formGroup.controls.totalStoryPoints.disabled"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
       </mat-card>
     </div>
   </ng-container>

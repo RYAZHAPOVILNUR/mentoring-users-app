@@ -59,6 +59,7 @@ export class DetailUsersCardComponent implements OnInit {
     user: null,
     status: 'init',
     errors: null,
+    totalStoryPoints: 0,
   };
   public get vm() {
     return this._vm;
@@ -73,6 +74,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: vm.user.email,
         username: vm.user.username,
         city: vm.user.city,
+        totalStoryPoints: vm.totalStoryPoints,
       });
     }
 
@@ -88,11 +90,16 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    totalStoryPoints: new FormControl({ value: 0, disabled: true }),
   });
 
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
     onSuccessCb: onSuccessEditionCbType;
+  }>();
+  @Output() setStoryPoints = new EventEmitter<{
+    totalStoryPoints: number;
+    userID: number;
   }>();
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
@@ -150,6 +157,22 @@ export class DetailUsersCardComponent implements OnInit {
 
   onDeleteUser() {
     this.deleteUser.emit();
+  }
+
+  onOpenAddMode() {
+    this.formGroup.get('totalStoryPoints')?.enable();
+  }
+
+  onAddMode() {
+    this.setStoryPoints.emit({
+      totalStoryPoints: this.formGroup.value.totalStoryPoints || 0,
+      userID: this.vm.user!.id,
+    });
+    this.formGroup.get('totalStoryPoints')?.disable();
+  }
+
+  onCloseAddMode() {
+    this.formGroup.get('totalStoryPoints')?.disable();
   }
 
   public onOptionClicked(selectedValue: string) {

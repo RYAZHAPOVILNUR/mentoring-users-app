@@ -34,3 +34,5 @@ export const usersFilterSelector = createSelector(selectUsersState, (state: User
 export const filteredUsers = createSelector(selectAllUsers, usersFilterSelector, (users, filter) =>
   users.filter((user) => (filter.name ? user.name.toLowerCase().includes(filter.name.toLowerCase()) : user))
 );
+
+export const totalStoryPointsSelector = createSelector(selectUsersState, (state: UsersState) => state.totalStoryPoints);

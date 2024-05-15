@@ -1,4 +1,4 @@
-import { createAction, props } from '@ngrx/store';
+import { createAction, createActionGroup, props } from '@ngrx/store';
 import { UsersErrors } from './users.reducer';
 import { CreateUserDTO, LoadingStatus, UsersDTO, UsersEntity } from '@users/core/data-access';
 
@@ -40,3 +40,12 @@ export const loadUserFailed = createAction('[Users/Api] Load User Failed', props
 export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{ status: LoadingStatus }>());
 
 export const setUsersFilter = createAction('[Users Page] Set Filter', props<{ usersFilter: { name: string } }>());
+
+export const setStoryPointsActions = createActionGroup({
+  source: 'Users Page',
+  events: {
+    setStoryPoints: props<{ totalStoryPoints: number; userID: number }>(),
+    setStoryPointsSucces: props<{ totalStoryPoints: number; userID: number }>(),
+    setStoryPointsFailed: props<{ error: any }>(),
+  },
+});

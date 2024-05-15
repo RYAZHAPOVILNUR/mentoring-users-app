@@ -137,3 +137,39 @@ export const loadUser = createEffect(
   },
   { functional: true }
 );
+
+// export const setStoryPoints = createEffect(
+//   () => {
+//     const actions$ = inject(Actions);
+//     const apiService = inject(ApiService);
+//     const usersEntities$ = inject(Store).select(selectUsersEntities);
+
+//     return actions$.pipe(
+//       ofType(UsersActions.setStoryPointsActions.setStoryPoints),
+//       withLatestFrom(usersEntities$),
+//       filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
+//       map(([{ userData, id, onSuccessCb }, usersEntities]) => ({
+//         user: {
+//           ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
+//           name: userData.name,
+//           email: userData.email,
+//           username: userData.username,
+//           city: userData.city,
+//         },
+//         onSuccessCb,
+//       })),
+//       switchMap(({ user, onSuccessCb }) =>
+//         apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+//           map((userData) => ({ userData, onSuccessCb })),
+//           tap(({ onSuccessCb }) => onSuccessCb()),
+//           map(({ userData }) => UsersActions.editUserSuccess({ userData })),
+//           catchError((error) => {
+//             console.error('Error', error);
+//             return of(UsersActions.editUserFailed({ error }));
+//           })
+//         )
+//       )
+//     );
+//   },
+//   { functional: true }
+// );

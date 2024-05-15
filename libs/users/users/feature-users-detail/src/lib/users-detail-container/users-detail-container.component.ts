@@ -43,12 +43,17 @@ export class UsersDetailComponent {
     map((params) => params === 'true')
   );
   public readonly errors$: Observable<UsersErrors | null> = this.usersFacade.errors$;
+  public readonly totalStoryPoints$: Observable<number> = this.usersFacade.totalStoryPoints$;
 
   public onEditUser(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
     this.usersFacade.editUser(userData, this.user.id, onSuccessCb);
     this.router.navigate(['/admin/users', this.user.id], {
       queryParams: { edit: false },
     });
+  }
+
+  onSetStoryPoints(totalStoryPoints: number, userID: number) {
+    this.usersFacade.setStoryPoints(totalStoryPoints, userID);
   }
 
   onCloseUser() {

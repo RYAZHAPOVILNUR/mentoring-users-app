@@ -3,7 +3,8 @@
     user: user$,
     editMode: editMode$,
     status: status$,
-    errors: errors$
+    errors: errors$,
+    totalStoryPoints: totalStoryPoints$,
   } as vm"
 >
   <detail-users-card
@@ -13,5 +14,6 @@
     (closeEditMode)="onCloseEditMode()"
     (openEditMode)="onOpenEditMode()"
     (deleteUser)="onDeleteUser()"
+    (setStoryPoints)="onSetStoryPoints($event.totalStoryPoints, $event.userID)"
   />
 </ng-container>

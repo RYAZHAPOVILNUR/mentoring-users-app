@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
+// import { setStoryPointsActions } from './users.actions';
 import { Observable, of, switchMap } from 'rxjs';
 import { UsersErrors } from './users.reducer';
 import { onSuccessEditionCbType } from './users.actions';
@@ -23,6 +24,7 @@ export class UsersFacade {
   public readonly loggedUser$ = this.store.select(selectLoggedUser);
   public readonly errors$: Observable<UsersErrors | null> = this.store.select(UsersSelectors.selectUsersError);
   public readonly filteredUsers$ = this.store.select(UsersSelectors.filteredUsers);
+  public readonly totalStoryPoints$ = this.store.select(UsersSelectors.totalStoryPointsSelector);
   /**
    * Use the initialization action to perform one
    * or more tasks in your Effects.
@@ -61,5 +63,9 @@ export class UsersFacade {
 
   filterUsers(usersFilter: { name: string | '' }) {
     this.store.dispatch(UsersActions.setUsersFilter({ usersFilter }));
+  }
+
+  setStoryPoints(totalStoryPoints: number, userID: number) {
+    this.store.dispatch(UsersActions.setStoryPointsActions.setStoryPoints({ totalStoryPoints, userID }));
   }
 }

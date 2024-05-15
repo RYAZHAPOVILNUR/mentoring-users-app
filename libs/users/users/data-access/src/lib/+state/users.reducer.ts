@@ -4,6 +4,7 @@ import { createReducer, on, Action } from '@ngrx/store';
 import * as UsersActions from './users.actions';
 import { UsersEntity } from '@users/core/data-access';
 import { LoadingStatus } from '@users/core/data-access';
+import { setStoryPointsActions } from './users.actions';
 
 export const USERS_FEATURE_KEY = 'users';
 
@@ -17,6 +18,7 @@ export interface UsersState extends EntityState<UsersEntity> {
   status: LoadingStatus;
   error: UsersErrors | null;
   usersFilter: { name: string };
+  totalStoryPoints: number;
 }
 
 export interface UsersPartialState {
@@ -30,6 +32,7 @@ export const initialUsersState: UsersState = usersAdapter.getInitialState({
   status: 'init',
   error: null,
   usersFilter: { name: '' },
+  totalStoryPoints: 0,
 });
 
 const reducer = createReducer(
@@ -81,6 +84,21 @@ const reducer = createReducer(
   on(UsersActions.setUsersFilter, (state, { usersFilter }) => ({
     ...state,
     usersFilter,
+  })),
+  on(setStoryPointsActions.setStoryPoints, (state, { totalStoryPoints, userID }) => ({
+    ...state,
+    totalStoryPoints,
+    userID,
+  })),
+  on(setStoryPointsActions.setStoryPointsSucces, (state, { totalStoryPoints, userID }) => ({
+    ...state,
+    totalStoryPoints,
+    userID,
+  })),
+  on(setStoryPointsActions.setStoryPointsFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
   }))
 );
 
