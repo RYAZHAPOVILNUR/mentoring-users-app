@@ -20,14 +20,12 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
 
   private readonly usersFacade = inject(UsersFacade);
   public formcontrolName = new FormControl<string>('', { nonNullable : true });
-  public value = '';
 
   ngOnInit(): void {
     this.formcontrolName.valueChanges.pipe(
       distinctUntilChanged(),
       debounceTime(500),
     ).subscribe(name => {
-      this.value = name;
       this.usersFacade.setUsersFilter(name);
     });
   }
