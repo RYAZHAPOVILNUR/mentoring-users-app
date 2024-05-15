@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'feature-materials-create',
+  displayName: 'materials-add-button',
   preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../../coverage/libs/users/materials/feature-materials-create',
+  coverageDirectory: '../../../../coverage/libs/users/materials/materials-add-button',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

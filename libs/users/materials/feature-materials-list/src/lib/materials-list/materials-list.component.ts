@@ -2,11 +2,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'users-feature-folders-list',
+  selector: 'users-materials-list',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './feature-folders-list.component.html',
-  styleUrls: ['./feature-folders-list.component.css'],
+  templateUrl: './materials-list.component.html',
+  styleUrls: ['./materials-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FeatureFoldersListComponent {}
+export class MaterialsListComponent {}

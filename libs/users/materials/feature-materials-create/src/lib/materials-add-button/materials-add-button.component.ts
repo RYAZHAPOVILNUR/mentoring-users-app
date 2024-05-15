@@ -2,11 +2,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'users-feature-materials-content',
+  selector: 'users-materials-add-button',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './feature-materials-content.component.html',
-  styleUrls: ['./feature-materials-content.component.css'],
+  templateUrl: './materials-add-button.component.html',
+  styleUrls: ['./materials-add-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FeatureMaterialsContentComponent {}
+export class MaterialsAddButtonComponent {}
