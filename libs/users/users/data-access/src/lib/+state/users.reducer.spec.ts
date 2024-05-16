@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 
 import * as UsersActions from './users/users.actions';
-import { UsersEntity } from './users.models';
+import { UsersEntity } from './users.interfaces';
 import { UsersState, initialUsersState, usersReducer } from './users.reducer';
 
 describe('Users Reducer', () => {

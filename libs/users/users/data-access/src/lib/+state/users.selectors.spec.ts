@@ -1,4 +1,4 @@
-import { UsersEntity } from './users.models';
+import { UsersEntity } from './users.interfaces';
 import { usersAdapter, UsersPartialState, initialUsersState } from './users.reducer';
 import * as UsersSelectors from './users.selectors';
 

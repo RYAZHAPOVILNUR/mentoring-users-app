@@ -1,0 +1,48 @@
+<mat-card
+
+>
+
+
+
+
+
+</mat-card>
+
+
+<!--<mat-card-->
+<!--  class="user-card-wrapper"-->
+<!--  (click)="redirectToEditPage(false, $event)"-->
+<!--  matTooltip="{{ user.isAdmin ? 'Admin' : 'User' }}"-->
+<!--  matTooltipClass="example-tooltip-uppercase"-->
+<!--&gt;-->
+<!--  <mat-card-content class="mat-card-content">-->
+<!--    <img [src]="user.photo ? user.photo.url : 'assets/img/1.png'" alt="" class="user-photo" />-->
+<!--    <label *ngIf="user.username; else email">{{ user.username }}</label>-->
+<!--    <ng-template #email>-->
+<!--      {{ user.email }}-->
+<!--    </ng-template>-->
+<!--    <span>{{ user.id === loggedUser.id ? 'Ментор' : 'Ученик' }}</span>-->
+<!--  </mat-card-content>-->
+
+<!--  <mat-menu #menu="matMenu">-->
+<!--    <button mat-menu-item color="accent" (click)="redirectToEditPage(true, $event)">Редактировать</button>-->
+<!--    <button-->
+<!--      mat-menu-item-->
+<!--      color="warn"-->
+<!--      [disabled]="user.isAdmin || user.id === loggedUser.id"-->
+<!--      (click)="onDeleteUser($event)"-->
+<!--    >-->
+<!--      Удалить-->
+<!--    </button>-->
+<!--  </mat-menu>-->
+
+<!--  <mat-card-actions class="user-card-buttons">-->
+<!--    <button mat-icon-button (click)="onOpenMenu($event)" [matMenuTriggerFor]="menu">-->
+<!--      <mat-icon>more_horiz</mat-icon>-->
+<!--    </button>-->
+<!--  </mat-card-actions>-->
+
+<!--  <div *ngIf="user.isAdmin" class="admin-icon">-->
+<!--    <mat-icon color="warn">verified_user</mat-icon>-->
+<!--  </div>-->
+<!--</mat-card>-->
