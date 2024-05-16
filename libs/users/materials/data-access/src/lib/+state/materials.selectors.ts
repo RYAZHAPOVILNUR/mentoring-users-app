@@ -8,33 +8,35 @@ export const selectMaterialsState = createFeatureSelector<MaterialsState>(
 
 const { selectAll, selectEntities } = materialsAdapter.getSelectors();
 
-export const selectMaterialsLoaded = createSelector(
-  selectMaterialsState,
-  (state: MaterialsState) => state.materials
-);
-
-export const selectMaterialsError = createSelector(
+export const selectFoldersError = createSelector(
   selectMaterialsState,
   (state: MaterialsState) => state.status
 );
 
-export const selectAllMaterials = createSelector(
+export const selectFolders = createSelector(
   selectMaterialsState,
   (state: MaterialsState) => selectAll(state)
 );
 
-export const selectMaterialsEntities = createSelector(
+//для работы с селекторами (все энтити)
+export const selectFoldersEntities = createSelector(
   selectMaterialsState,
   (state: MaterialsState) => selectEntities(state)
 );
 
+export const selectMaterials = createSelector(
+  selectMaterialsState,
+  (state: MaterialsState) => state.materials
+);
+
+//для работы с селекторами (все id энтити)
 export const selectSelectedId = createSelector(
   selectMaterialsState,
   (state: MaterialsState) => state.selectedId
 );
 
 export const selectEntity = createSelector(
-  selectMaterialsEntities,
+  selectFoldersEntities,
   selectSelectedId,
   (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
 );

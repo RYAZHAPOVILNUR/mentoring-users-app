@@ -35,7 +35,6 @@ const reducer = createReducer(
   on(MaterialsActions.initFolders, (state) => ({
     ...state,
     status: 'loading' as const,
-    error: null,
   })),
   on(MaterialsActions.loadFoldersSuccess, (state, { folders }) =>
     materialsAdapter.setAll(folders, { ...state, status: 'loaded' as const })

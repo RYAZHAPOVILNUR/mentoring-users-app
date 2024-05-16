@@ -33,6 +33,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideEffects(
       userEffects,
+      materialsEffects,
       authEffects,
       articlesEffects,
       tasksEffects,
