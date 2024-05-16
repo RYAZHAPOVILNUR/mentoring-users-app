@@ -12,7 +12,7 @@ import { PushPipe } from '@ngrx/component';
 import { UiPhotoModalComponent } from 'libs/users/profile/ui-profile/ui-photo-modal/ui-photo-modal.component';
 
 @Component({
-  selector: 'navbar',
+  selector: 'lib-navbar',
   standalone: true,
   imports: [
     CommonModule,
