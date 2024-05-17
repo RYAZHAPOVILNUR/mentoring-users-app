@@ -111,7 +111,6 @@
           <input
             matInput
             type="number"
-            [matTooltip]="vm.totalStoryPoints.toString()"
             formControlName="totalStoryPoints"
             (keyup.enter)="onAddMode()"
             (keyup.esc)="onCloseAddMode()"
@@ -160,5 +159,10 @@
 <ng-template #snackbar>
   <div class="edit-user-snackbar">
     <span>Пользователь успешно изменён!</span>
+  </div>
+</ng-template>
+<ng-template #snackbarStoryPoint>
+  <div class="edit-user-snackbar">
+    <span>Сторипоинты успешно изменены!</span>
   </div>
 </ng-template>

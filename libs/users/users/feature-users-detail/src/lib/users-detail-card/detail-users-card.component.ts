@@ -74,7 +74,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: vm.user.email,
         username: vm.user.username,
         city: vm.user.city,
-        totalStoryPoints: vm.totalStoryPoints,
+        totalStoryPoints: vm.user.totalStoryPoints,
       });
     }
 
@@ -100,12 +100,14 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() setStoryPoints = new EventEmitter<{
     totalStoryPoints: number;
     id: number;
+    onSuccessCb: onSuccessEditionCbType;
   }>();
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('snackbarStoryPoint') snackbarStoryPointTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -124,6 +126,12 @@ export class DetailUsersCardComponent implements OnInit {
 
   private onEditSuccess: onSuccessEditionCbType = () =>
     this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+  private onAddStoryPointSuccess: onSuccessEditionCbType = () =>
+    this.snackBar.openFromTemplate(this.snackbarStoryPointTemplateRef, {
       duration: 2500,
       horizontalPosition: 'center',
       verticalPosition: 'top',
@@ -163,10 +171,11 @@ export class DetailUsersCardComponent implements OnInit {
     this.formGroup.get('totalStoryPoints')?.enable();
   }
 
-  onAddMode() {
+  onAddMode(): void {
     this.setStoryPoints.emit({
       totalStoryPoints: this.formGroup.value.totalStoryPoints || 0,
-      id: this.vm.user!.id,
+      id: this.vm.user?.id || 0,
+      onSuccessCb: this.onAddStoryPointSuccess,
     });
     this.formGroup.get('totalStoryPoints')?.disable();
   }

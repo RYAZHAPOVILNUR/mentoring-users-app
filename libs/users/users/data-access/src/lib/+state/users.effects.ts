@@ -147,14 +147,16 @@ export const setStoryPoints = createEffect(
       ofType(UsersActions.setStoryPointsActions.setStoryPoints),
       withLatestFrom(usersEntities$),
       filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
-      map(([{ totalStoryPoints, id }, usersEntities]) => ({
+      map(([{ totalStoryPoints, id, onSuccessCb }, usersEntities]) => ({
         user: {
           ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
           totalStoryPoints: totalStoryPoints,
         },
+        onSuccessCb,
       })),
-      switchMap(({ user }) =>
+      switchMap(({ user, onSuccessCb }) =>
         apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+          tap(() => onSuccessCb()),
           map((userData) => UsersActions.editUserSuccess({ userData })),
           catchError((error) => {
             console.error('Error', error);

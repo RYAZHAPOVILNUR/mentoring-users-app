@@ -44,7 +44,7 @@ export const setUsersFilter = createAction('[Users Page] Set Filter', props<{ us
 export const setStoryPointsActions = createActionGroup({
   source: 'Users Page',
   events: {
-    setStoryPoints: props<{ totalStoryPoints: number; id: number }>(),
+    setStoryPoints: props<{ totalStoryPoints: number; id: number; onSuccessCb: onSuccessEditionCbType }>(),
     setStoryPointsSuccess: props<{ totalStoryPoints: number }>(),
     setStoryPointsFailed: props<{ error: any }>(),
   },

@@ -65,7 +65,7 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.setUsersFilter({ usersFilter }));
   }
 
-  setStoryPoints(totalStoryPoints: number, id: number) {
-    this.store.dispatch(UsersActions.setStoryPointsActions.setStoryPoints({ totalStoryPoints, id }));
+  setStoryPoints(totalStoryPoints: number, id: number, onSuccessCb: onSuccessEditionCbType) {
+    this.store.dispatch(UsersActions.setStoryPointsActions.setStoryPoints({ totalStoryPoints, id, onSuccessCb }));
   }
 }
