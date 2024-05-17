@@ -99,7 +99,7 @@ export class DetailUsersCardComponent implements OnInit {
   }>();
   @Output() setStoryPoints = new EventEmitter<{
     totalStoryPoints: number;
-    userID: number;
+    id: number;
   }>();
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
@@ -166,7 +166,7 @@ export class DetailUsersCardComponent implements OnInit {
   onAddMode() {
     this.setStoryPoints.emit({
       totalStoryPoints: this.formGroup.value.totalStoryPoints || 0,
-      userID: this.vm.user!.id,
+      id: this.vm.user!.id,
     });
     this.formGroup.get('totalStoryPoints')?.disable();
   }

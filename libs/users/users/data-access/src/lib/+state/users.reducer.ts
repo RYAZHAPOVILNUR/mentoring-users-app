@@ -85,15 +85,14 @@ const reducer = createReducer(
     ...state,
     usersFilter,
   })),
-  on(setStoryPointsActions.setStoryPoints, (state, { totalStoryPoints, userID }) => ({
+  on(setStoryPointsActions.setStoryPoints, (state, { totalStoryPoints, id }) => ({
     ...state,
     totalStoryPoints,
-    userID,
+    id,
   })),
-  on(setStoryPointsActions.setStoryPointsSucces, (state, { totalStoryPoints, userID }) => ({
+  on(setStoryPointsActions.setStoryPointsSuccess, (state, { totalStoryPoints }) => ({
     ...state,
     totalStoryPoints,
-    userID,
   })),
   on(setStoryPointsActions.setStoryPointsFailed, (state, { error }) => ({
     ...state,

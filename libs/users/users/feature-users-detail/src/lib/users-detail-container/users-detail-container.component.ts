@@ -52,8 +52,8 @@ export class UsersDetailComponent {
     });
   }
 
-  onSetStoryPoints(totalStoryPoints: number, userID: number) {
-    this.usersFacade.setStoryPoints(totalStoryPoints, userID);
+  onSetStoryPoints(totalStoryPoints: number) {
+    this.usersFacade.setStoryPoints(totalStoryPoints, this.user.id);
   }
 
   onCloseUser() {
