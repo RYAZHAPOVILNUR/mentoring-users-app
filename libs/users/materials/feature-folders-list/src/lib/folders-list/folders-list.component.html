@@ -1,5 +1,30 @@
-<div>WORKS</div>
+<ng-container *ngIf="vm.status === 'loading'; else loadingResult">
+    <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+  </ng-container>
+  
+  <ng-template #loadingResult>
+    <ng-container *ngIf="vm.status === 'loaded'; else error">
+        <div class="container">
+            <div class="row">
+              <div class="col-sm-2 mb-3" *ngFor="let folder of vm.folders">
+                <users-folders-card 
+                  [folder]="folder"
+                  (dblclick)="onFolderClick(folder)"
+                />
+              </div>
+            </div>
+          </div>
+    </ng-container>
+  </ng-template>
 
-<ul>
-    <li *ngFor="let folder of vm">
-</ul>
+  <ng-template #error>
+    <div class="alert alert-danger" role="alert">
+      <h1>{{vm.errors?.status}}</h1>
+      <hr>
+      {{vm.errors}}
+    </div>
+  </ng-template>
+
+  <users-folders-add-button (click)="onAddFolderClick()" class="absolute bottom-10 right-16" />
+  
+  

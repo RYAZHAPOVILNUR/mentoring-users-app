@@ -1,1 +1,11 @@
-<p>folders-card works!</p>
+<mat-card  class="p-2">
+  <mat-card-actions class="justify-between">
+    <mat-icon>folder</mat-icon>
+    <button  class="btn" mat-icon-button><mat-icon>delete</mat-icon></button>
+  </mat-card-actions>
+  <mat-card-header class="min-w-full">
+    <mat-card-title>{{folder.title}}</mat-card-title>
+    <mat-card-subtitle>{{folder.created_at | date: 'dd/MM/yyyy'}}</mat-card-subtitle>
+  </mat-card-header>
+</mat-card>
+  

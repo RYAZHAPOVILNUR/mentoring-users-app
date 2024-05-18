@@ -8,9 +8,14 @@ export const selectMaterialsState = createFeatureSelector<MaterialsState>(
 
 const { selectAll, selectEntities } = materialsAdapter.getSelectors();
 
-export const selectFoldersError = createSelector(
+export const selectFoldersStatus = createSelector(
   selectMaterialsState,
   (state: MaterialsState) => state.status
+);
+
+export const selectFolderErrors = createSelector(
+  selectMaterialsState,
+  (state: MaterialsState) => state.error
 );
 
 export const selectFolders = createSelector(

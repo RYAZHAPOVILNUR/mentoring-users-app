@@ -10,6 +10,8 @@ export class MaterialsFacade {
 
   public readonly allFolders$ = this.store.select(MaterialsSelectors.selectFolders)
   public readonly selectedMaterials$ = this.store.select(MaterialsSelectors.selectEntity)
+  public readonly selectStatus$ = this.store.select(MaterialsSelectors.selectFoldersStatus)
+  public readonly selectErrors$ = this.store.select(MaterialsSelectors.selectFolderErrors)
 
   init() {
     this.store.dispatch(MaterialsActions.initFolders());

@@ -1,6 +1,11 @@
-sssssssssss
-<ng-container *ngrxLet="{folders: folders$} as vm">
-    <users-folders-list [vm]="vm.folders"/>
+<ng-container 
+    *ngrxLet="{
+        folders: folders$, 
+        status: status$, 
+        errors: errors$} as vm">
+
+    <users-folders-list 
+        [vm]="vm"
+        (AddFolderEvent)="onAddFolderClick()"
+    />
 </ng-container>
-ddddddddddd
-<!-- todo -->
