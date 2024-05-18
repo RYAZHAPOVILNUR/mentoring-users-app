@@ -13,6 +13,10 @@ export const selectUsersError = createSelector(selectUsersState, (state: UsersSt
 
 export const selectAllUsers = createSelector(selectUsersState, (state: UsersState) => selectAll(state));
 
+export const selectUsersFilter = createSelector(selectUsersState, (state: UsersState) => state.userFilter);
+
+export const filteredUsers = createSelector(selectAllUsers, selectUsersFilter, (users, userFilter) => users.filter(user => userFilter.name ? user.name.toLowerCase().includes(userFilter.name.toLowerCase()) : user));
+
 export const selectUsersEntities = createSelector(selectUsersState, (state: UsersState) => selectEntities(state));
 
 export const selectSelectedId = createSelector(selectUsersState, (state: UsersState) => state.selectedId);

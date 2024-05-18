@@ -22,12 +22,17 @@ export class UsersFacade {
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
   public readonly loggedUser$ = this.store.select(selectLoggedUser);
   public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError));
+  public readonly filteredUsers$ = this.store.pipe(select(UsersSelectors.filteredUsers))
   /**
    * Use the initialization action to perform one
    * or more tasks in your Effects.
    */
   init() {
     this.store.dispatch(UsersActions.initUsers());
+  }
+
+  filterUsers(userFilter: {name: string | ''}) {
+    this.store.dispatch(UsersActions.setUsersFilter({ userFilter }))
   }
 
   deleteUser(id: number) {
