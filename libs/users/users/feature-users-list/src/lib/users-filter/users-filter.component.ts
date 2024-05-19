@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsersFacade } from '@users/users/data-access';
 
-
 @Component({
   selector: 'users-users-filter',
   standalone: true,
@@ -14,7 +13,6 @@ import { UsersFacade } from '@users/users/data-access';
 export class UsersFilterComponent {
 
   private readonly userFacade = inject(UsersFacade)
-
 
   form = new FormGroup({
     name: new FormControl('', [Validators.required])

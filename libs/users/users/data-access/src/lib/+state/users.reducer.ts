@@ -80,14 +80,17 @@ const reducer = createReducer(
     status,
   })),
 
-  on(UsersActions.setUsersFilter, (state, { userFilter }) => {
-    return {
+  on(UsersActions.setUsersFilter, (state, { userFilter }) => ({
       ...state,
       userFilter
-    }
-  })
+  })),
 
-);
+  on(UsersActions.setStoryPointsSuccess, (state, {userData}) => usersAdapter.updateOne({
+    id: userData.id,
+    changes: userData
+  }, state)
+
+));
 
 export function usersReducer(state: UsersState | undefined, action: Action) {
   return reducer(state, action);

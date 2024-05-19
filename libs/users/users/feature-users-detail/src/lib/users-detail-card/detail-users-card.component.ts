@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 import { onSuccessEditionCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -74,6 +74,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
+      this.totalStoryPoints.setValue(vm.user.totalStoryPoints)
     }
 
     if (vm.editMode) {
@@ -82,6 +83,15 @@ export class DetailUsersCardComponent implements OnInit {
       this.formGroup.disable();
     }
   }
+
+  private onAddSPSuccess: onSuccessEditionCbType = () =>
+    this.snackBar.openFromTemplate(this.snackbarSPTemplateRef, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+
+  public totalStoryPoints = new FormControl({ value: this.vm.user?.totalStoryPoints, disabled: true })
 
   public formGroup = new FormBuilder().group({
     name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
@@ -98,7 +108,15 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
+  @Output() addStoryPoints: EventEmitter<any> = new EventEmitter<{
+    user: CreateUserDTO;
+    onSuccessCb: onSuccessEditionCbType;
+  }>();
+
+
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('snackbarSP') snackbarSPTemplateRef!: TemplateRef<any>;
+
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -121,6 +139,23 @@ export class DetailUsersCardComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'top',
     });
+
+  onSubmitSP(): void {
+    this.totalStoryPoints.disable();
+    this.addStoryPoints.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        totalStoryPoints: this.totalStoryPoints.value || 0,
+      },
+      onSuccessCb: this.onAddSPSuccess,
+    });
+  }
+
+  onCloseSPEdit() {
+    this.totalStoryPoints.setValue(this.vm.user!.totalStoryPoints!);
+    this.totalStoryPoints.disable();
+  }
 
   onSubmit(): void {
     this.editUser.emit({
@@ -172,4 +207,5 @@ export class DetailUsersCardComponent implements OnInit {
       )
       .subscribe();
   }
+
 }

@@ -83,6 +83,7 @@
                 formControlName="city"
                 [matAutocomplete]="auto"
               />
+
               <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                 <mat-option *ngFor="let suggestion of citySuggestions | ngrxPush" [value]="suggestion">
                   {{ suggestion }}
@@ -105,7 +106,49 @@
               <mat-icon>close</mat-icon>
             </button>
           </mat-card-actions>
+
         </form>
+
+        <mat-form-field
+          class="edit-user-field"
+          [matTooltip]="vm.user!.totalStoryPoints!.toString()"
+          [matTooltipDisabled]="formGroup.enabled"
+        >
+          <mat-label>Количество сторипоинтов:</mat-label>
+          <input
+            type="number"
+            [disabled]="totalStoryPoints.disabled"
+            matInput
+            [formControl]="totalStoryPoints"
+            class="edit-user-input"
+          />
+          <button
+            *ngIf="!totalStoryPoints.disabled"
+            [disabled]="!totalStoryPoints.dirty"
+            (click)="onSubmitSP()"
+            matSuffix
+            mat-icon-button
+          >
+            <mat-icon>done</mat-icon>
+          </button>
+          <button
+            *ngIf="!totalStoryPoints.disabled"
+            (click)="onCloseSPEdit()"
+            matSuffix
+            mat-icon-button
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+          <button
+            *ngIf="totalStoryPoints.disabled"
+            (click)="totalStoryPoints.enable()"
+            matSuffix
+            mat-icon-button
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+        </mat-form-field>
+
       </mat-card>
     </div>
   </ng-container>
