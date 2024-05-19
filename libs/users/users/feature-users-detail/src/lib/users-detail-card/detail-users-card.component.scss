@@ -38,6 +38,14 @@
   width: 100%;
 }
 
+.edit-user-input::-webkit-outer-spin-button,
+.edit-user-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  appearance: none;
+  margin: 0;
+}
+
 .edit-user-btns-container {
   display: flex;
   justify-content: space-between;

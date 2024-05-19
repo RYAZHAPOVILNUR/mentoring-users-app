@@ -22,6 +22,18 @@ export const addUserFailed = createAction('[Users/Api] Add User Failed', props<{
 
 // export const deleteSelectedId = createAction('[Users Page] Delete Selected Id');
 
+export const addUserStoryPoints = createAction(
+  '[Users Detail] Add User StoryPoints',
+  props<{
+    userData: CreateUserDTO;
+    id: number;
+    onSuccessCb: onSuccessEditionCbType;
+  }>()
+);
+export const addUserStoryPointsSuccess = createAction('[Users Detail] Add User StoryPoints Success', props<{ userData: UsersDTO }>());
+export const addUserStoryPointsFailed = createAction('[Users Detail] Add User StoryPoints Failed', props<{ error: UsersErrors | null }>());
+
+
 export const editUser = createAction(
   '[Users Detail] Edit User',
   props<{
