@@ -3,10 +3,10 @@ import { ApiService } from '@users/core/http';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { switchMap, catchError, of, map, tap } from 'rxjs';
 import { MaterialsActions } from './materials.actions';
-import { FolderDTO } from '@users/core/data-access';
+import { CreateFolderDTO, FolderDTO } from '@users/core/data-access';
 
 
-export const MaterialsEffects = createEffect(() => {
+export const FoldersInitEffect = createEffect(() => {
   const actions$ = inject(Actions);
   const apiService = inject(ApiService)
 
@@ -24,3 +24,25 @@ export const MaterialsEffects = createEffect(() => {
     )
   );
 }, { functional: true })
+
+export const CreateFolderEffect = createEffect(() => {
+  const actions$ = inject(Actions);
+  const apiService = inject(ApiService)
+
+  return actions$.pipe(
+    ofType(MaterialsActions.addFolder),
+    switchMap(
+      ({folder}) =>
+       apiService.post<FolderDTO, CreateFolderDTO >('/folder', folder).pipe(
+        map(
+          (folder) => MaterialsActions.addFolderSuccess({ folder })),
+          tap((f) => console.log(f, 'Folder created')),
+        catchError((error) => {console.log('Error', error)
+        return of(MaterialsActions.addFolderFailure({ error }))}
+          )
+      )
+    )
+  )
+}, { functional: true })
+
+

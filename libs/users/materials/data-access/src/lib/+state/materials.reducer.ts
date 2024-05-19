@@ -43,6 +43,17 @@ const reducer = createReducer(
     ...state,
     status: 'error' as const,
     error
+  })),
+  on(MaterialsActions.addFolder, (state) => ({
+    ...state,
+    status: 'loading' as const
+  })),
+  on(MaterialsActions.addFolderSuccess, (state, { folder }) => 
+  materialsAdapter.addOne(folder, {...state, status: 'loaded' as const})),
+  on(MaterialsActions.addFolderFailure, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error
   }))
 );
 

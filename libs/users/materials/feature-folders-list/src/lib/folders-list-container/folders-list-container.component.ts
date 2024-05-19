@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   ViewEncapsulation,
   inject,
 } from '@angular/core';
@@ -8,8 +9,9 @@ import { CommonModule } from '@angular/common';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
 import { MaterialsFacade } from '@materials/data-access';
 import { LetDirective } from '@ngrx/component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FoldersAddDialogComponent } from '@users/materials/feature-folders-create';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'users-folders-list-container',
@@ -26,16 +28,24 @@ export class FoldersListContainerComponent {
   public status$ = this.foldersFacade.selectStatus$
   public errors$ = this.foldersFacade.selectErrors$
   public dialog = inject(MatDialog)
+  private destroyRef = inject(DestroyRef)
   
   constructor() {
     this.foldersFacade.init()
   }
 
   public onAddFolderClick() {
-    console.log('add folder click')
-    this.dialog.open(FoldersAddDialogComponent, {
+    const dialogRef: MatDialogRef<FoldersAddDialogComponent> = this.dialog.open(FoldersAddDialogComponent, {
       width: '300px',
       height: '200px'
+    })
+    
+    dialogRef.afterClosed()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((d) => {
+      if(d) {
+        this.foldersFacade.addFolder(d)
+      }
     })
   }
 

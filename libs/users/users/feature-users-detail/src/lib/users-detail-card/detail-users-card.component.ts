@@ -100,21 +100,12 @@ export class DetailUsersCardComponent implements OnInit {
   }
 
   public formGroup = new FormBuilder().group({
-    name: new FormControl({ value: '', disabled: !this.vm.editMode }, [
-      Validators.required,
-    ]),
-    email: new FormControl({ value: '', disabled: !this.vm.editMode }, [
-      Validators.required,
-      Validators.email,
-    ]),
+    name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
+    email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
-
-  public totalStoryPoints = new FormControl({ value: 0, disabled: true }, [
-    Validators.required,
-    Validators.min(0),
-  ]);
+  public totalStoryPoints = new FormControl({ value: 0, disabled: true }, [Validators.required, Validators.min(0)]);
 
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;

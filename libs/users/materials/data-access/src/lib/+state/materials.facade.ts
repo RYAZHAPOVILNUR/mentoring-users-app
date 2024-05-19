@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 
 import {MaterialsActions} from './materials.actions';
 import * as MaterialsSelectors from './materials.selectors';
+import { CreateFolderDTO } from '@users/core/data-access';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
@@ -15,5 +16,9 @@ export class MaterialsFacade {
 
   init() {
     this.store.dispatch(MaterialsActions.initFolders());
+  }
+
+  addFolder(folder: CreateFolderDTO) {
+    this.store.dispatch(MaterialsActions.addFolder({ folder }))
   }
 }

@@ -1,12 +1,19 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';;
-import { FolderDTO } from '@users/core/data-access'
+import { CreateFolderDTO, FolderDTO } from '@users/core/data-access'
+import { MaterialsErrors } from './materials.reducer';
 
 export const MaterialsActions = createActionGroup({
   source: 'Materials',
   events: {
     'Init Folders': emptyProps(),
     'Load Folders Success': props<{ folders: FolderDTO[] }>(),
-    'Load Folders Failure': props<{ error: any }>()
+    'Load Folders Failure': props<{ error: MaterialsErrors }>(),
+  
+    'Add Folder': props<{ folder: CreateFolderDTO }>(),
+    'Add Folder Success': props<{ folder: FolderDTO }>(),
+    'Add Folder Failure': props<{ error: MaterialsErrors }>()
+
+
     }
   } 
 );
