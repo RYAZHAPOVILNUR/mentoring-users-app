@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
-import { MaterialsFacade } from '@materials/data-access';
+import { FoldersFacade } from '@materials/data-access';
 import { LetDirective } from '@ngrx/component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FoldersAddDialogComponent } from '@users/materials/feature-folders-create';
@@ -30,7 +30,7 @@ import { CoreUiConfirmDialogComponent } from '@users/core/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersListContainerComponent {
-  private readonly foldersFacade = inject(MaterialsFacade);
+  private readonly foldersFacade = inject(FoldersFacade);
   public folders$ = this.foldersFacade.allFolders$;
   public status$ = this.foldersFacade.selectStatus$;
   public errors$ = this.foldersFacade.selectErrors$;
@@ -53,10 +53,8 @@ export class FoldersListContainerComponent {
     dialogRef
       .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((d) => {
-        if (d) {
-          this.foldersFacade.addFolder(d);
-        }
+      .subscribe((result) => {
+        result && this.foldersFacade.addFolder(result);
       });
   }
 
@@ -72,9 +70,7 @@ export class FoldersListContainerComponent {
       .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((result) => {
-        if (result) {
-          this.foldersFacade.removeFolder(folder.id);
-        }
+        result && this.foldersFacade.removeFolder(folder.id);
       });
   }
 }

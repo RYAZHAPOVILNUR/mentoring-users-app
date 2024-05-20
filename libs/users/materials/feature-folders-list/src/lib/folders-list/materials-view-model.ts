@@ -1,9 +1,9 @@
-import { MaterialsErrors } from "@materials/data-access";
-import { FolderDTO, LoadingStatus } from "@users/core/data-access";
-import { DeepReadonly } from "@users/core/utils";
+import { FoldersErrors } from '@materials/data-access';
+import { FolderDTO, LoadingStatus } from '@users/core/data-access';
+import { DeepReadonly } from '@users/core/utils';
 
 export type FoldersListVM = DeepReadonly<{
-    folders: FolderDTO[],
-    status: LoadingStatus,
-    errors: MaterialsErrors | null,
-  }>
+  folders: FolderDTO[];
+  status: LoadingStatus;
+  errors: FoldersErrors | null;
+}>;

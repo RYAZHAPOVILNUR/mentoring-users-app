@@ -1,5 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { MATERIALS_FEATURE_KEY, MaterialsState, materialsAdapter} from './materials.reducer';
+import {
+  MATERIALS_FEATURE_KEY,
+  MaterialsState,
+  materialsAdapter,
+} from './materials.reducer';
 
 // Lookup the 'Materials' feature state managed by NgRx
 export const selectMaterialsState = createFeatureSelector<MaterialsState>(
@@ -8,40 +12,35 @@ export const selectMaterialsState = createFeatureSelector<MaterialsState>(
 
 const { selectAll, selectEntities } = materialsAdapter.getSelectors();
 
-export const selectFoldersStatus = createSelector(
+export const selectMaterialsStatus = createSelector(
   selectMaterialsState,
   (state: MaterialsState) => state.status
 );
 
-export const selectFolderErrors = createSelector(
+export const selectMaterialsErrors = createSelector(
   selectMaterialsState,
   (state: MaterialsState) => state.error
 );
 
-export const selectFolders = createSelector(
+export const selectMaterials = createSelector(
   selectMaterialsState,
   (state: MaterialsState) => selectAll(state)
 );
 
 //для работы с селекторами (все энтити)
-export const selectFoldersEntities = createSelector(
+export const selectMaterialsEntities = createSelector(
   selectMaterialsState,
   (state: MaterialsState) => selectEntities(state)
 );
 
-export const selectMaterials = createSelector(
-  selectMaterialsState,
-  (state: MaterialsState) => state.materials
-);
-
 //для работы с селекторами (все id энтити)
-export const selectSelectedId = createSelector(
+export const selectSelectedMaterialId = createSelector(
   selectMaterialsState,
   (state: MaterialsState) => state.selectedId
 );
 
-export const selectEntity = createSelector(
-  selectFoldersEntities,
-  selectSelectedId,
+export const selectMaterialEntity = createSelector(
+  selectMaterialsEntities,
+  selectSelectedMaterialId,
   (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
 );

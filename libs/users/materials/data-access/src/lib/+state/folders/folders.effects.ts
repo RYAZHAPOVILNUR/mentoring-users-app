@@ -1,8 +1,8 @@
 import { inject } from '@angular/core';
 import { ApiService } from '@users/core/http';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, catchError, of, map, tap } from 'rxjs';
-import { MaterialsActions } from './materials.actions';
+import { switchMap, catchError, of, map } from 'rxjs';
+import { FoldersActions } from './folders.actions';
 import { CreateFolderDTO, FolderDTO } from '@users/core/data-access';
 
 export const FoldersInitEffect = createEffect(
@@ -11,13 +11,13 @@ export const FoldersInitEffect = createEffect(
     const apiService = inject(ApiService);
 
     return actions$.pipe(
-      ofType(MaterialsActions.initFolders),
+      ofType(FoldersActions.initFolders),
       switchMap(() =>
         apiService.get<FolderDTO[]>('/folder').pipe(
-          map((folders) => MaterialsActions.loadFoldersSuccess({ folders })),
+          map((folders) => FoldersActions.loadFoldersSuccess({ folders })),
           catchError((error) => {
             console.log('Error', error);
-            return of(MaterialsActions.loadFoldersFailure({ error }));
+            return of(FoldersActions.loadFoldersFailure({ error }));
           })
         )
       )
@@ -32,13 +32,13 @@ export const CreateFolderEffect = createEffect(
     const apiService = inject(ApiService);
 
     return actions$.pipe(
-      ofType(MaterialsActions.addFolder),
+      ofType(FoldersActions.addFolder),
       switchMap(({ folder }) =>
         apiService.post<FolderDTO, CreateFolderDTO>('/folder', folder).pipe(
-          map((folder) => MaterialsActions.addFolderSuccess({ folder })),
+          map((folder) => FoldersActions.addFolderSuccess({ folder })),
           catchError((error) => {
             console.log('Error', error);
-            return of(MaterialsActions.addFolderFailure({ error }));
+            return of(FoldersActions.addFolderFailure({ error }));
           })
         )
       )
@@ -53,13 +53,13 @@ export const RemoveFolderEffect = createEffect(
     const apiService = inject(ApiService);
 
     return actions$.pipe(
-      ofType(MaterialsActions.removeFolder),
+      ofType(FoldersActions.removeFolder),
       switchMap(({ id }) =>
         apiService.delete<void>(`/folder/${id}`).pipe(
-          map(() => MaterialsActions.removeFolderSuccess({ id })),
+          map(() => FoldersActions.removeFolderSuccess({ id })),
           catchError((error) => {
             console.log('Error', error);
-            return of(MaterialsActions.removeFolderFailure({ error }));
+            return of(FoldersActions.removeFolderFailure({ error }));
           })
         )
       )
