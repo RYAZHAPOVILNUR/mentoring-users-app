@@ -1,13 +1,15 @@
 import { Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 
-import { Folder, MaterialsFacade } from '@users/materials/data-access';
+import { Folder } from '@users/materials/data-access';
+import { FoldersFacade } from '@users/materials/data-access';
 import { RemoveFolderButtonComponent } from '@users/materials/ui';
 import { RemoveFolderDialogComponent } from '../remove-folder-dialog/remove-folder-dialog.component';
 
@@ -19,7 +21,7 @@ import { RemoveFolderDialogComponent } from '../remove-folder-dialog/remove-fold
   styleUrls: ['./folder-card.component.scss'],
 })
 export class FolderCardComponent {
-  private readonly materialsFacade = inject(MaterialsFacade);
+  private readonly foldersFacade = inject(FoldersFacade);
   public readonly dialog = inject(MatDialog);
   private readonly router = inject(Router);
 
@@ -37,7 +39,7 @@ export class FolderCardComponent {
 
     dialogRef.afterClosed().subscribe((isRemoveFolder: boolean) => {
       if (isRemoveFolder) {
-        this.materialsFacade.removeFolder(this.folder.id);
+        this.foldersFacade.removeFolder(this.folder.id);
       }
     });
   }

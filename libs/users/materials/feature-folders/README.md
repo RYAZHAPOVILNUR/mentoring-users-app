@@ -1,7 +1,7 @@
-# feature-folders-list
+# feature-folders
 
 This library was generated with [Nx](https://nx.dev).
 
 ## Running unit tests
 
-Run `nx test feature-folders-list` to execute the unit tests.
+Run `nx test feature-folders` to execute the unit tests.

@@ -14,3 +14,4 @@ describe('FoldersCardComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+})

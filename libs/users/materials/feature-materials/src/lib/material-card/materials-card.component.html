@@ -1,15 +1,18 @@
-<div mat-ripple (mouseenter)="toggleRemoveButton()" (mouseleave)="toggleRemoveButton()">
-  <mat-card class="material">
-    <mat-card-header>
-      <mat-icon aria-hidden="true" fontIcon="folder"></mat-icon>
-      <button *ngIf="isDisplayRemoveButton" mat-icon-button color="warn" class="remove-btn">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </mat-card-header>
-
-    <mat-card-content>
-      <h3 class="material__title">{{ material.title }}</h3>
-      <p class="material__date">{{ material.created_at | date }}</p>
-    </mat-card-content>
-  </mat-card>
-</div>
+<mat-card class="material-card" (click)="openMaterial()">
+  <mat-card-content class="material-card-content">
+    <div class="div-card">
+      <div class="icons">
+        <mat-icon *ngIf="material.material_link.endsWith('.pdf')">insert_drive_file</mat-icon>
+        <mat-icon *ngIf="material.material_link.endsWith('.mp3')">music_note</mat-icon>
+        <mat-icon *ngIf="!material.material_link.endsWith('.pdf') && !material.material_link.endsWith('.mp3')"
+        >ondemand_video</mat-icon
+        >
+        <button mat-icon-button class="button-delete" (click)="handleDeleteMaterial($event)">
+          <mat-icon class="delete">delete</mat-icon>
+        </button>
+      </div>
+      <div class="title">{{ material.title }}</div>
+      <div class="date">{{ dateFormat(material.created_at) }}</div>
+    </div>
+  </mat-card-content>
+</mat-card>

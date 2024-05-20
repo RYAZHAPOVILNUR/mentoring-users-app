@@ -1,0 +1,47 @@
+<section class="p-4 w-fit">
+  <div class="title">
+    <h3 class="text-white">{{ materialContent.title }}</h3>
+  </div>
+
+  <div class="button-close">
+    <button class="title-button" mat-icon-button (click)="onClose()">
+      <mat-icon class="text-white">close</mat-icon>
+    </button>
+  </div>
+
+  <ng-container [ngSwitch]="materialType">
+    <ng-container *ngSwitchCase="MaterialType.youtube">
+      <div *ngIf="getPreviewType() === PreviewType.image" class="thumbnail">
+        <img [src]="getVideoPreview()" alt="youtube preview" />
+      </div>
+
+      <div *ngIf="getPreviewType() === PreviewType.video">
+        <iframe
+          width="560"
+          height="315"
+          [src]="getPlayerPreview()"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="MaterialType.pdf">
+      <pdf-viewer
+        [src]="materialContent.material_link"
+        [render-text]="true"
+        [original-size]="false"
+        style="width: 400px; height: 500px"
+      ></pdf-viewer>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="MaterialType.audio">
+      <div class="audio">
+        <audio controls>
+          <source [src]="materialContent.material_link" type="audio/mp3" />
+        </audio>
+      </div>
+    </ng-container>
+  </ng-container>
+</section>

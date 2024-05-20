@@ -1,19 +1,33 @@
-<ng-container *ngrxLet="{ materials: materials$, isLoading: isLoading$ } as vm">
-  <ng-template [ngIf]="vm.isLoading">
-    <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
-  </ng-template>
+<ng-container
+  *ngrxLet="{
+    materials: materials$,
+    status: status$,
+    errors: error$
+  } as vm"
+>
+  <ng-container [ngSwitch]="vm.status">
+    <ng-container *ngSwitchCase="'loading'">
+      <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+    </ng-container>
 
-  <div class="container">
-    <button mat-icon-button (click)="backToFolders()">
-      <mat-icon>arrow_back</mat-icon>
-    </button>
+    <ng-container *ngSwitchCase="'error'">
+      <div class="alert alert-danger" rode="aletr">
+        <h1>{{ vm.status }}</h1>
+      </div>
+    </ng-container>
 
-    <ul class="materials-list">
-      <li class="materials-item" *ngFor="let material of vm.materials; trackBy: identify">
-        <materials-card [material]="material"/>
-      </li>
-    </ul>
-
-    <create-material-button></create-material-button>
-  </div>
+    <ng-container *ngSwitchCase="'loaded'">
+      <ng-container>
+        <div class="back">
+          <button mat-icon-button (click)="backOnFolders()">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+          <div class="title">{{ folderTitle }}</div>
+        </div>
+        <p *ngIf="!vm.materials.length" class="text-center">В папке {{ folderTitle }} нет материалов</p>
+        <materials-list-ui *ngIf="vm.materials.length" [vm]="vm" (deleteMaterial)="deleteMaterial($event)" />
+      </ng-container>
+    </ng-container>
+    <create-material-button />
+  </ng-container>
 </ng-container>

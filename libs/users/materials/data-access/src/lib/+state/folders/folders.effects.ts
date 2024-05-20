@@ -1,15 +1,10 @@
-import { ApiService } from '@users/core/http';
-import { inject } from '@angular/core';
-import { catchError, exhaustMap, map, of, tap, withLatestFrom } from 'rxjs';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
-import { selectRouteParams } from '@users/core/data-access';
-
+import { inject } from '@angular/core';
+import { ApiService } from '@users/core/http';
+import { Folder, FolderCreateInterface } from '@users/materials/data-access';
 import { NotifyService } from '@users/core/notify';
-import { folderActions, materialActions } from './materials.actions';
-import { Folder } from '../models/folder.interface';
-import { FolderCreateInterface } from '../models/folder-create.interface';
-import { Material } from '../models/material.interface';
+import { folderActions } from './folders.actions';
+import { catchError, exhaustMap, map, of, tap } from 'rxjs';
 
 export const loadFoldersEffect = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) => {
@@ -124,25 +119,4 @@ export const removeFolderErrorNotificationEffect = createEffect(
     );
   },
   { functional: true, dispatch: false }
-);
-
-export const loadMaterialsEffect = createEffect(
-  (action$ = inject(Actions), apiService = inject(ApiService), store = inject(Store)) => {
-    return action$.pipe(
-      ofType(materialActions.loadMaterials),
-      withLatestFrom(store.select(selectRouteParams)),
-      exhaustMap(([, { id }]) =>
-        apiService
-          .get<Material[]>('/material')
-          .pipe(map((materials) => materials.filter((material) => material.folder_id === Number(id))))
-          .pipe(
-            map((materials) => materialActions.loadMaterialsSuccess({ materials })),
-            catchError((error) => {
-              return of(materialActions.loadMaterialsFailure({ error }));
-            })
-          )
-      )
-    );
-  },
-  { functional: true }
 );

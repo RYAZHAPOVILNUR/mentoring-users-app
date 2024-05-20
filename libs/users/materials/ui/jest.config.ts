@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'remove-folder-button',
+  displayName: 'ui',
   preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory: '../../../../coverage/libs/users/materials/ui',

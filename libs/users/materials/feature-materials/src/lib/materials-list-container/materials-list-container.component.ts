@@ -1,48 +1,63 @@
-import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LetDirective } from '@ngrx/component';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject
+} from '@angular/core';
+import { Router } from '@angular/router';
+
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
-import { Material, MaterialsFacade } from '@users/materials/data-access';
-import { MatIconModule } from '@angular/material/icon';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { Router } from '@angular/router';
-import { MaterialsCardComponent } from '../material-card/materials-card.component';
+import { LetDirective } from '@ngrx/component';
+
+import { MaterialsFacade } from '@users/materials/data-access';
+
+import { MaterialsListComponent } from '../materials-list/materials-list.component';
 import { CreateMaterialButtonComponent } from '../create-material-button/create-material-button.component';
 
 @Component({
-  selector: 'materials-list-container',
+  selector: 'users-materials-list-container',
   standalone: true,
   imports: [
     CommonModule,
     LetDirective,
     MatProgressBarModule,
+    MaterialsListComponent,
     MatIconModule,
     MatButtonModule,
-    MatToolbarModule,
-    MaterialsCardComponent,
     CreateMaterialButtonComponent,
   ],
   templateUrl: './materials-list-container.component.html',
   styleUrls: ['./materials-list-container.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialsListContainerComponent implements OnInit {
-  private readonly router = inject(Router);
   private readonly materialsFacade = inject(MaterialsFacade);
+  private readonly router = inject(Router);
 
-  public readonly isLoading$ = this.materialsFacade.isLoading$;
-  public readonly materials$ = this.materialsFacade.materials$;
+  public readonly materials$ = this.materialsFacade.allMaterials$;
+  public readonly status$ = this.materialsFacade.status$;
+  public readonly error$ = this.materialsFacade.error$;
+
+  public folderTitle!: string;
 
   ngOnInit(): void {
-    this.materialsFacade.loadMaterials();
+    this.materialsFacade.load();
+
+    const state = window.history.state;
+    if (state && state.folderTitle) {
+      this.folderTitle = state.folderTitle;
+    }
   }
 
-  public backToFolders(): void {
-    this.router.navigateByUrl('/materials').then(() => this.materialsFacade.clearMaterials());
+  public backOnFolders() {
+    this.router.navigate([`/materials`]);
   }
 
-  public identify(index: number, item: Material): number {
-    return item.id;
+  public deleteMaterial(folderId: number): void {
+    this.materialsFacade.delete(folderId);
   }
 }
