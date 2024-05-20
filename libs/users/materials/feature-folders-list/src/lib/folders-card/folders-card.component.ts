@@ -1,13 +1,15 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
+  Output,
   ViewEncapsulation,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FolderDTO } from '@users/core/data-access';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -21,4 +23,9 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class FoldersCardComponent {
   @Input() folder!: FolderDTO;
+  @Output() deleteEvent = new EventEmitter<FolderDTO>();
+
+  public onDeleteClick(folder: FolderDTO) {
+    this.deleteEvent.emit(folder);
+  }
 }

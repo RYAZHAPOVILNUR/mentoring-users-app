@@ -5,44 +5,65 @@ import { switchMap, catchError, of, map, tap } from 'rxjs';
 import { MaterialsActions } from './materials.actions';
 import { CreateFolderDTO, FolderDTO } from '@users/core/data-access';
 
+export const FoldersInitEffect = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
 
-export const FoldersInitEffect = createEffect(() => {
-  const actions$ = inject(Actions);
-  const apiService = inject(ApiService)
-
-  return actions$.pipe(
-    ofType(MaterialsActions.initFolders),
-    switchMap(
-      () =>
-       apiService.get<FolderDTO[]>('/folder').pipe(
-        map(
-          (folders) => MaterialsActions.loadFoldersSuccess({ folders })),
-        catchError((error) => {console.log('Error', error)
-        return of(MaterialsActions.loadFoldersFailure({ error }))}
-          )
+    return actions$.pipe(
+      ofType(MaterialsActions.initFolders),
+      switchMap(() =>
+        apiService.get<FolderDTO[]>('/folder').pipe(
+          map((folders) => MaterialsActions.loadFoldersSuccess({ folders })),
+          catchError((error) => {
+            console.log('Error', error);
+            return of(MaterialsActions.loadFoldersFailure({ error }));
+          })
+        )
       )
-    )
-  );
-}, { functional: true })
+    );
+  },
+  { functional: true }
+);
 
-export const CreateFolderEffect = createEffect(() => {
-  const actions$ = inject(Actions);
-  const apiService = inject(ApiService)
+export const CreateFolderEffect = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
 
-  return actions$.pipe(
-    ofType(MaterialsActions.addFolder),
-    switchMap(
-      ({folder}) =>
-       apiService.post<FolderDTO, CreateFolderDTO >('/folder', folder).pipe(
-        map(
-          (folder) => MaterialsActions.addFolderSuccess({ folder })),
-          tap((f) => console.log(f, 'Folder created')),
-        catchError((error) => {console.log('Error', error)
-        return of(MaterialsActions.addFolderFailure({ error }))}
-          )
+    return actions$.pipe(
+      ofType(MaterialsActions.addFolder),
+      switchMap(({ folder }) =>
+        apiService.post<FolderDTO, CreateFolderDTO>('/folder', folder).pipe(
+          map((folder) => MaterialsActions.addFolderSuccess({ folder })),
+          catchError((error) => {
+            console.log('Error', error);
+            return of(MaterialsActions.addFolderFailure({ error }));
+          })
+        )
       )
-    )
-  )
-}, { functional: true })
+    );
+  },
+  { functional: true }
+);
 
+export const RemoveFolderEffect = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
 
+    return actions$.pipe(
+      ofType(MaterialsActions.removeFolder),
+      switchMap(({ id }) =>
+        apiService.delete<void>(`/folder/${id}`).pipe(
+          map(() => MaterialsActions.removeFolderSuccess({ id })),
+          catchError((error) => {
+            console.log('Error', error);
+            return of(MaterialsActions.removeFolderFailure({ error }));
+          })
+        )
+      )
+    );
+  },
+  { functional: true }
+);
