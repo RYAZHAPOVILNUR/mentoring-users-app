@@ -1,0 +1,27 @@
+.folder-card-wrapper {
+  margin: 20px;
+  width: 150px;
+  height: 120px;
+  display: flex;
+  justify-content: space-between;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
+    .icons :last-child{
+      display: block;
+      position: absolute;
+      right: 5px;
+      top: 5px;
+    }
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+.icons {
+  display: flex;
+  justify-content: space-between;
+}
+.icons :last-child {
+  display: none;
+}

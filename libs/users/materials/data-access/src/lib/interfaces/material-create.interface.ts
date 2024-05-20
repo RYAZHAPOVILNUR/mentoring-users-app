@@ -1,10 +1,7 @@
-import { LoadingStatus } from '@users/core/data-access';
-
-export interface MaterialCreateInterface {
+export interface MaterialCreate {
   id: number,
-  created_at: string,
+  created_at: Date,
   title: string,
   material_link: string,
   folder_id: number,
-  status?: LoadingStatus,
 }

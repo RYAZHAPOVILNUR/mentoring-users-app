@@ -1,6 +1,6 @@
 
-export interface FolderInterface {
+export interface Folder {
   id: number,
-  created_at: string,
+  created_at: Date,
   title: string,
 }

@@ -1,8 +1,6 @@
-import { LoadingStatus } from '@users/core/data-access';
 
-export interface FolderCreateInterface {
+export interface FolderCreate {
   id: number,
-  created_at: string,
+  created_at: Date,
   title: string,
-  status?: LoadingStatus,
 }

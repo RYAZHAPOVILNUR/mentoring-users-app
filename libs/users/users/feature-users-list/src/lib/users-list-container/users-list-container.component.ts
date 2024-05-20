@@ -28,7 +28,7 @@ import { CreateUsersButtonComponent } from '@users/feature-users-create';
   providers: [UsersListContainerStore],
 })
 export class UsersListContainerComponent {
-  private readonly componentStore = inject(UsersListContainerStore);
+  readonly componentStore = inject(UsersListContainerStore);
   public usersFacade = inject(UsersFacade);
   public readonly users$ = this.componentStore.users$;
   public readonly status$ = this.componentStore.status$;

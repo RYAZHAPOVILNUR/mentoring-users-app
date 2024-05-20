@@ -1,1 +1,20 @@
-<p>feature-folders-list1 works!</p>
+<ng-container
+  *ngrxLet="{
+    folders: facade.folders$,
+    status: facade.status$,
+  } as vm"
+>
+  <users-folders-list
+      [folders]="vm.folders"
+      [status]="vm.status"
+      (renameFolder)="onRenameFolder($event)"
+      (deleteFolder)="onDeleteFolder($event)"
+  />
+</ng-container>
+
+<users-folders-add-button/>
+
+
+
+
+
