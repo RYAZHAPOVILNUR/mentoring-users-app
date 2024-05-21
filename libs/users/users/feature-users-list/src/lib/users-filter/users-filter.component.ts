@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { debounceTime, fromEvent } from 'rxjs';
+import { debounceTime, filter, fromEvent } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { setUsersFilter } from '@users/users/data-access';
 
 @Component({
   selector: 'users-filter',
@@ -13,7 +15,7 @@ import { debounceTime, fromEvent } from 'rxjs';
   styleUrls: ['./users-filter.component.scss'],
 })
 export class UsersFilterComponent {
-
+  store = inject(Store)
 
   onFilterChanged(event: Event) {
     const target = event.target as HTMLInputElement;
@@ -23,12 +25,7 @@ export class UsersFilterComponent {
         debounceTime(500)
       )
       .subscribe(() => {
-        if (target.value.trim() === '') {
-          console.log('пусто');
-          //здесь будет получение всех пользователей как было
-        }
-        else console.log(target.value);
-        // тут мы выведем отфильтрованных пользователей
+        this.store.dispatch(setUsersFilter({ filter: { name: target.value.trim() } }))
       });
   }
 
