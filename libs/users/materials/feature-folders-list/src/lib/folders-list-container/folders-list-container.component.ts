@@ -14,6 +14,7 @@ import { FoldersAddDialogComponent } from '@users/materials/feature-folders-crea
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FolderDTO } from '@users/core/data-access';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'users-folders-list-container',
@@ -32,13 +33,14 @@ import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 export class FoldersListContainerComponent {
   private readonly foldersFacade = inject(FoldersFacade);
   private readonly materialsFacade = inject(MaterialsFacade);
+  public readonly dialog = inject(MatDialog);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly router = inject(Router);
 
   public readonly folders$ = this.foldersFacade.allFolders$;
   public readonly status$ = this.foldersFacade.selectStatus$;
   public readonly errors$ = this.foldersFacade.selectErrors$;
   public readonly materials$ = this.materialsFacade.selectMaterialsInFolder$;
-  public readonly dialog = inject(MatDialog);
-  private readonly destroyRef = inject(DestroyRef);
 
   constructor() {
     this.foldersFacade.init();
@@ -80,6 +82,7 @@ export class FoldersListContainerComponent {
 
   public onFolderClick(folder: FolderDTO) {
     this.materialsFacade.setOpenedFolderId(folder.id);
+    this.router.navigate(['materials/', folder.id]);
     // this.materials$
     //   .subscribe((d) => {
     //     console.log(d);
