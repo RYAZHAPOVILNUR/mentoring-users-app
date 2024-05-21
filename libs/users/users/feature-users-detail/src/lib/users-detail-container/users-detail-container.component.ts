@@ -51,6 +51,7 @@ export class UsersDetailComponent {
     });
   }
 
+
   onCloseUser() {
     this.router.navigate(['/admin/users']);
   }
@@ -84,4 +85,9 @@ export class UsersDetailComponent {
         }
       });
   }
+
+  onAddStoryPoints(user: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
+    this.usersFacade.setStoryPoints(user, this.user.id, onSuccessCb)
+  }
+
 }

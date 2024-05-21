@@ -76,6 +76,65 @@ export const addUser = createEffect(
   { functional: true }
 );
 
+export const loadUser = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const store = inject(Store);
+    return actions$.pipe(
+      ofType(UsersActions.loadUser),
+      withLatestFrom(store.select(selectRouteParams)),
+      switchMap(([, params]) => {
+        if (params['id']) {
+          return apiService.get<UsersDTO>(`/users/${params['id']}`).pipe(
+            map((user) => usersDTOAdapter.DTOtoEntity(user)),
+            map((userEntity) => UsersActions.loadUserSuccess({ userData: userEntity })),
+            catchError((error) => {
+              console.error('Error', error);
+              return of(UsersActions.loadUserFailed({ error }));
+            })
+          );
+        }
+        return of(UsersActions.updateUserStatus({ status: 'loading' }));
+      })
+    );
+  },
+  { functional: true }
+);
+
+export const setStoryPoints = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
+
+    return actions$.pipe(
+      ofType(UsersActions.setStoryPoints),
+      withLatestFrom(usersEntities$),
+      filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
+      map(([{ userData, id, onSuccessCb }, usersEntities]) => ({
+        user: {
+          ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
+          totalStoryPoints: userData.totalStoryPoints,
+        },
+        onSuccessCb,
+      })),
+      switchMap(({ user, onSuccessCb }) =>
+        apiService
+          .post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user)
+          .pipe(
+            tap(() => onSuccessCb()),
+            map((userData) => UsersActions.setStoryPointsSuccess({ userData })),
+            catchError((error) => {
+              console.error('Error', error);
+              return of(UsersActions.setStoryPointsFailed({ error }));
+            })
+          )
+      )
+    );
+  }, { functional: true }
+);
+
 export const editUser = createEffect(
   () => {
     const actions$ = inject(Actions);
@@ -107,32 +166,6 @@ export const editUser = createEffect(
           })
         )
       )
-    );
-  },
-  { functional: true }
-);
-
-export const loadUser = createEffect(
-  () => {
-    const actions$ = inject(Actions);
-    const apiService = inject(ApiService);
-    const store = inject(Store);
-    return actions$.pipe(
-      ofType(UsersActions.loadUser),
-      withLatestFrom(store.select(selectRouteParams)),
-      switchMap(([, params]) => {
-        if (params['id']) {
-          return apiService.get<UsersDTO>(`/users/${params['id']}`).pipe(
-            map((user) => usersDTOAdapter.DTOtoEntity(user)),
-            map((userEntity) => UsersActions.loadUserSuccess({ userData: userEntity })),
-            catchError((error) => {
-              console.error('Error', error);
-              return of(UsersActions.loadUserFailed({ error }));
-            })
-          );
-        }
-        return of(UsersActions.updateUserStatus({ status: 'loading' }));
-      })
     );
   },
   { functional: true }
