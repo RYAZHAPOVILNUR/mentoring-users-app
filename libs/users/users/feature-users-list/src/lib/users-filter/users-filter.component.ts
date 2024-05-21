@@ -28,6 +28,4 @@ export class UsersFilterComponent {
         this.store.dispatch(setUsersFilter({ filter: { name: target.value.trim() } }))
       });
   }
-
-
 }
