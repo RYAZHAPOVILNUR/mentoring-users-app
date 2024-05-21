@@ -1,3 +1,14 @@
-<users-folders-card></users-folders-card>
-<users-folders-card></users-folders-card>
-<users-folders-card></users-folders-card>
+<div class="folder-cards">
+  <mat-card class="folder" *ngFor="let folder of folders">
+    <mat-icon>folder</mat-icon>
+    <mat-card-header>
+      <mat-card-title> Name: {{folder.title}}</mat-card-title>
+      <mat-card-subtitle>Id folder: {{folder.id}}</mat-card-subtitle>
+      <mat-card-subtitle>Created: {{folder.created_at | customDate}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions>
+      <button mat-button (click)="goToFolder(folder.id)">Open</button>
+      <button mat-button (click)="removeFolder(folder.id)">Remove</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
