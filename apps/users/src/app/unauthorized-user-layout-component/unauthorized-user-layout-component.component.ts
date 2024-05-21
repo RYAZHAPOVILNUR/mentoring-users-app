@@ -11,9 +11,4 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./unauthorized-user-layout-component.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UnauthorizedUserLayoutComponent {
-
-
-
-
-}
+export class UnauthorizedUserLayoutComponent {}

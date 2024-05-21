@@ -22,8 +22,8 @@ export const usersDTOAdapter: UsersDTOAdapter = {
       ...otherFields,
       role: isAdmin ? Role.Admin : Role.User,
       // Поля ниже добавлять только при работе со СТАРЫМИ юзерами.
-      // purchaseDate: new Date().toString(),
-      // educationStatus: 'trainee',
+      purchaseDate: new Date().toString(),
+      educationStatus: 'trainee',
     };
   },
 };

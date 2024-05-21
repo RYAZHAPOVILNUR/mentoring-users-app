@@ -65,7 +65,6 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.loadUser());
   }
 
-
   setStoryPoints(userData: CreateUserDTO, id: number, onSuccessCb: onSuccessEditionCbType) {
     this.store.dispatch(
       UsersActions.setStoryPoints({ userData, id, onSuccessCb })
