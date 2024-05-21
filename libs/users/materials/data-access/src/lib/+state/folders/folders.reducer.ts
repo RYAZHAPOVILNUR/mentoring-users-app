@@ -32,6 +32,7 @@ export const initialFoldersState: FoldersState = foldersAdapter.getInitialState(
 
 const reducer = createReducer(
   initialFoldersState,
+  //Load Folders
   on(FoldersActions.initFolders, (state) => ({
     ...state,
     status: 'loading' as const,
@@ -43,7 +44,7 @@ const reducer = createReducer(
     ...state,
     status: 'error' as const,
   })),
-
+  //Add Folder
   on(FoldersActions.addFolder, (state) => ({
     ...state,
     status: 'loading' as const,
@@ -55,7 +56,7 @@ const reducer = createReducer(
     ...state,
     status: 'error' as const,
   })),
-
+  //Remove Folder
   on(FoldersActions.removeFolder, (state) => ({
     ...state,
     status: 'loading' as const,

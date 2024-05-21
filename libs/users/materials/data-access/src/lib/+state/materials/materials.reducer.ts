@@ -14,6 +14,7 @@ export interface MaterialsState extends EntityState<MaterialsDTO> {
   selectedId?: string | number; // which Users record has been selected
   status: LoadingStatus;
   error: MaterialsErrors | null;
+  openedFolderId: number | null;
 }
 
 export interface MaterialsPartialState {
@@ -27,10 +28,13 @@ export const initialMaterialsState: MaterialsState =
   materialsAdapter.getInitialState({
     error: null,
     status: 'init',
+    openedFolderId: null,
   });
 
 const reducer = createReducer(
   initialMaterialsState,
+
+  //Load Materials
   on(MaterialsActions.initMaterials, (state) => ({
     ...state,
     status: 'loading' as const,
@@ -43,17 +47,23 @@ const reducer = createReducer(
     status: 'error' as const,
   })),
 
-  on(MaterialsActions.addMaterial, (state) => ({
+  on(MaterialsActions.setOpenedFolderId, (state, { id }) => ({
     ...state,
-    status: 'loading' as const,
+    openedFolderId: id,
   })),
-  on(MaterialsActions.addMaterialSuccess, (state, { material }) =>
-    materialsAdapter.addOne(material, { ...state, status: 'loaded' as const })
-  ),
-  on(MaterialsActions.addMaterialFailure, (state) => ({
-    ...state,
-    status: 'error' as const,
-  })),
+
+  // //Add Material
+  // on(MaterialsActions.addMaterial, (state) => ({
+  //   ...state,
+  //   status: 'loading' as const,
+  // })),
+  // on(MaterialsActions.addMaterialSuccess, (state, { material }) =>
+  //   materialsAdapter.addOne(material, { ...state, status: 'loaded' as const })
+  // ),
+  // on(MaterialsActions.addMaterialFailure, (state) => ({
+  //   ...state,
+  //   status: 'error' as const,
+  // })),
 
   on(MaterialsActions.removeMaterial, (state) => ({
     ...state,

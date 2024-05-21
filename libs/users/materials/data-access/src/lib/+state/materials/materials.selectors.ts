@@ -44,3 +44,22 @@ export const selectMaterialEntity = createSelector(
   selectSelectedMaterialId,
   (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
 );
+
+export const selectOpenedFolderId = createSelector(
+  selectMaterialsState,
+  (state: MaterialsState) => state.openedFolderId
+);
+
+export const selectMaterialsInFolder = createSelector(
+  selectMaterialsEntities,
+  selectOpenedFolderId,
+  (entities, folderId) => {
+    if (folderId) {
+      return Object.values(entities).filter((material) =>
+        material ? material.folder_id === folderId : []
+      );
+    } else {
+      return [];
+    }
+  }
+);

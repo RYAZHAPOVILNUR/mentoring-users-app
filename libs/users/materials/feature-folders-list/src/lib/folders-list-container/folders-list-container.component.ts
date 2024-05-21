@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
-import { FoldersFacade } from '@materials/data-access';
+import { FoldersFacade, MaterialsFacade } from '@materials/data-access';
 import { LetDirective } from '@ngrx/component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FoldersAddDialogComponent } from '@users/materials/feature-folders-create';
@@ -31,14 +31,18 @@ import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 })
 export class FoldersListContainerComponent {
   private readonly foldersFacade = inject(FoldersFacade);
-  public folders$ = this.foldersFacade.allFolders$;
-  public status$ = this.foldersFacade.selectStatus$;
-  public errors$ = this.foldersFacade.selectErrors$;
-  public dialog = inject(MatDialog);
-  private destroyRef = inject(DestroyRef);
+  private readonly materialsFacade = inject(MaterialsFacade);
+
+  public readonly folders$ = this.foldersFacade.allFolders$;
+  public readonly status$ = this.foldersFacade.selectStatus$;
+  public readonly errors$ = this.foldersFacade.selectErrors$;
+  public readonly materials$ = this.materialsFacade.selectMaterialsInFolder$;
+  public readonly dialog = inject(MatDialog);
+  private readonly destroyRef = inject(DestroyRef);
 
   constructor() {
     this.foldersFacade.init();
+    this.materialsFacade.init();
   }
 
   public onAddFolderClick() {
@@ -72,5 +76,14 @@ export class FoldersListContainerComponent {
       .subscribe((result) => {
         result && this.foldersFacade.removeFolder(folder.id);
       });
+  }
+
+  public onFolderClick(folder: FolderDTO) {
+    this.materialsFacade.setOpenedFolderId(folder.id);
+    // this.materials$
+    //   .subscribe((d) => {
+    //     console.log(d);
+    //   })
+    //   .unsubscribe();
   }
 }

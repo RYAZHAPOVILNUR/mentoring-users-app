@@ -33,13 +33,13 @@ export const selectFoldersEntities = createSelector(
 );
 
 //для работы с селекторами (все id энтити)
-export const selectSelectedId = createSelector(
+export const selectSelectedFolderId = createSelector(
   selectFoldersState,
   (state: FoldersState) => state.selectedId
 );
 
 export const selectEntity = createSelector(
   selectFoldersEntities,
-  selectSelectedId,
+  selectSelectedFolderId,
   (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
 );

@@ -21,6 +21,10 @@ export class MaterialsFacade {
   public readonly selectErrors$ = this.store.select(
     MaterialsSelectors.selectMaterialsErrors
   );
+  public readonly selectMaterialsInFolder$ = this.store.select(
+    MaterialsSelectors.selectMaterialsInFolder
+  );
+
   public init() {
     this.store.dispatch(MaterialsActions.initMaterials());
   }
@@ -29,5 +33,8 @@ export class MaterialsFacade {
   }
   public removeMaterial(id: number) {
     this.store.dispatch(MaterialsActions.removeMaterial({ id }));
+  }
+  public setOpenedFolderId(id: number) {
+    this.store.dispatch(MaterialsActions.setOpenedFolderId({ id }));
   }
 }
