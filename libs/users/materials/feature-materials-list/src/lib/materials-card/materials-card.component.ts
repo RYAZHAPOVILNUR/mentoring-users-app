@@ -1,9 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  Input,
   ViewEncapsulation,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MaterialsDTO } from '@users/core/data-access';
 
 @Component({
   selector: 'users-materials-card',
@@ -14,4 +16,6 @@ import { CommonModule } from '@angular/common';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MaterialsCardComponent {}
+export class MaterialsCardComponent {
+  @Input({required:true}) material!: MaterialsDTO
+}

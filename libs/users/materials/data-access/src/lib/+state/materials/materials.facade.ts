@@ -12,9 +12,6 @@ export class MaterialsFacade {
   public readonly allMaterials$ = this.store.select(
     MaterialsSelectors.selectMaterials
   );
-  public readonly selectedMaterials$ = this.store.select(
-    MaterialsSelectors.selectMaterialEntity
-  );
   public readonly selectStatus$ = this.store.select(
     MaterialsSelectors.selectMaterialsStatus
   );

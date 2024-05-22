@@ -51,15 +51,7 @@ export const selectOpenedFolderId = createSelector(
 );
 
 export const selectMaterialsInFolder = createSelector(
-  selectMaterialsEntities,
+  selectMaterials,
   selectOpenedFolderId,
-  (entities, folderId) => {
-    if (folderId) {
-      return Object.values(entities).filter((material) =>
-        material ? material.folder_id === folderId : []
-      );
-    } else {
-      return [];
-    }
-  }
+  (materials, folderId) =>  materials.filter((material) => folderId ? material.folder_id === folderId : [])
 );

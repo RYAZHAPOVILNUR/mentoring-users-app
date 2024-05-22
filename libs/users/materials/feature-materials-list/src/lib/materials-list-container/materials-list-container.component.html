@@ -1,1 +1,12 @@
-<users-materials-list (closeFolderEvent)="closeFolder()" />
+<ng-container 
+  *ngrxLet="{ 
+    materials: materials$, 
+    status: status$, 
+    errors: errors$ 
+    } as vm">
+
+  <users-materials-list 
+        [vm]="vm"
+        (closeFolderEvent)="closeFolder()"
+        />
+</ng-container>

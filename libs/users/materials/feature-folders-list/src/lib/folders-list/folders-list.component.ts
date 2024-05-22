@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 import { PushPipe } from '@ngrx/component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';
-import { FoldersListVM } from './materials-view-model';
+import { FoldersListVM } from './folders-view-model';
 import { FolderDTO } from '@users/core/data-access';
 import { FoldersAddButtonComponent } from '@users/materials/feature-folders-create';
 

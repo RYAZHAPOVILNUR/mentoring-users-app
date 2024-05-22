@@ -83,10 +83,5 @@ export class FoldersListContainerComponent {
   public onFolderClick(folder: FolderDTO) {
     this.materialsFacade.setOpenedFolderId(folder.id);
     this.router.navigate(['materials/', folder.id]);
-    // this.materials$
-    //   .subscribe((d) => {
-    //     console.log(d);
-    //   })
-    //   .unsubscribe();
   }
 }
