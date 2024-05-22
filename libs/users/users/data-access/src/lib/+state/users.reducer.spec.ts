@@ -1,7 +1,6 @@
 import { Action } from '@ngrx/store';
-
-import * as UsersActions from './users/users.actions';
-import { UsersEntity } from './users.models';
+import * as UsersActions from './users.actions';
+import { UsersEntity } from '@users/core/data-access';
 import { UsersState, initialUsersState, usersReducer } from './users.reducer';
 
 describe('Users Reducer', () => {
@@ -17,7 +16,7 @@ describe('Users Reducer', () => {
 
       const result: UsersState = usersReducer(initialUsersState, action);
 
-      expect(result.loaded).toBe(true);
+      expect(result.status).toBe(true);
       expect(result.ids.length).toBe(2);
     });
   });

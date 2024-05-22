@@ -1,0 +1,5 @@
+<form [formGroup]="form" action="" #userForm="ngForm">
+  <mat-form-field>
+    <input type="text" matInput formControlName="name" (input)="saveUserFilterName()">
+  </mat-form-field>
+</form>
