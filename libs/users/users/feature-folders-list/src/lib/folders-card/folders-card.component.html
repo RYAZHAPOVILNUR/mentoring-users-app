@@ -1,11 +1,14 @@
+<button class="btn" mat-raised-button color="primary" routerLink="/materials" routerLinkActive="router-link-active">
+  К списку папок
+</button>
 <h2>Папка с id {{id}}</h2>
+<users-materials-add-button></users-materials-add-button>
 <div class="material-element">
-  <mat-card class="example-card" *ngFor="let material of materials">
+  <mat-card class="example-card" *ngFor="let material of materials | async">
     <mat-card-header>
       <mat-card-title>Материал: {{material.title}}</mat-card-title>
       <mat-card-subtitle>Создан: {{material.created_at! | customDate}}</mat-card-subtitle>
       <mat-card-subtitle>Id: {{material.id}}</mat-card-subtitle>
-
     </mat-card-header>
     <mat-card-actions>
       <button mat-button (click)="openMaterial(material.id!)">Open material</button>
@@ -13,5 +16,3 @@
     </mat-card-actions>
   </mat-card>
 </div>
-
-<users-materials-add-button></users-materials-add-button>

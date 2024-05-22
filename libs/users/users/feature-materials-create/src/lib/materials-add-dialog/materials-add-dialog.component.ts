@@ -7,7 +7,8 @@ import { MatInputModule } from '@angular/material/input';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FileType } from '@users/settings/data-access';
 import { merge } from 'highcharts';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Store } from '@ngrx/store';
+import { addMaterial } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-materials-add-dialog',
@@ -25,7 +26,7 @@ export class MaterialsAddDialogComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { folderId: number, dataType: FileType },
-    // private store: Store
+    private store: Store
   ) {
     if (data.dataType === FileType.PDF) {
       this.formTitle = 'Add pdf'
@@ -36,9 +37,7 @@ export class MaterialsAddDialogComponent {
     else if (data.dataType === FileType.MP3) {
       this.formTitle = 'Add MP3'
     }
-    // merge(this.title.statusChanges, this.title.valueChanges)
-    //   .pipe(takeUntilDestroyed())
-    //   .subscribe(() => this.updateErrorMessage());
+    merge(this.title.statusChanges, this.title.valueChanges)
   }
 
   addMaterial() {
@@ -48,12 +47,10 @@ export class MaterialsAddDialogComponent {
         "material_link": this.link.value,
         "folder_id": this.data.folderId
       }
-      console.log(newMaterial);
-
-      // this.store.dispatch(addMaterial({ inputdata: newMaterial }))
+      this.store.dispatch(addMaterial({ inputdata: newMaterial }))
     }
+    else this.updateErrorMessage()
   }
-
 
   updateErrorMessage() {
     if (this.title.hasError('required') || this.link.hasError('required')) {

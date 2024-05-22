@@ -1,5 +1,5 @@
 <div class="folder-cards">
-  <mat-card class="folder" *ngFor="let folder of folders">
+  <mat-card class="folder" *ngFor="let folder of folders | async">
     <mat-icon>folder</mat-icon>
     <mat-card-header>
       <mat-card-title> Name: {{folder.title}}</mat-card-title>

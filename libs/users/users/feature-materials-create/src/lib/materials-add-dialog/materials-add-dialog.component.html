@@ -6,7 +6,6 @@
       <input matInput placeholder="something interesting" [formControl]="title" (blur)="updateErrorMessage()" required>
       <mat-error *ngIf="title.invalid">{{ errorMessage }}</mat-error>
     </mat-form-field>
-
     <mat-form-field>
       <mat-label>Enter link of your material</mat-label>
       <input matInput placeholder="https://...." [formControl]="link" (blur)="updateErrorMessage()" required>

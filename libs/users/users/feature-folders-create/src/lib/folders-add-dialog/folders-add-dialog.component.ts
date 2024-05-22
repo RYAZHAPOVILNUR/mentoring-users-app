@@ -9,8 +9,14 @@ import { MatInputModule } from '@angular/material/input';
 @Component({
   selector: 'users-folders-add-dialog',
   standalone: true,
-  imports: [CommonModule, FormsModule,
-    MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule
+  ],
   templateUrl: './folders-add-dialog.component.html',
   styleUrls: ['./folders-add-dialog.component.scss'],
 })

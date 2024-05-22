@@ -1,5 +1,5 @@
 <div class="add-button">
-  <button mat-button [matMenuTriggerFor]="menu" #menuTrigger><mat-icon style="color: blue">cloud_upload</mat-icon></button>
+  <button matTooltip="Add new material" enabledInteractive mat-button [matMenuTriggerFor]="menu" #menuTrigger><mat-icon style="color: blue">cloud_upload</mat-icon></button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="openDialog(folderId, FileType.PDF)">Add pdf</button>
     <button mat-menu-item (click)="openDialog(folderId, FileType.VIDEO)">Add video</button>
