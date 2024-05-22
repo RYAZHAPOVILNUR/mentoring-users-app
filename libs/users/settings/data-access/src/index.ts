@@ -4,3 +4,7 @@ export * from './lib/+state/settings.reducer';
 export * from './lib/+state/settings.actions';
 export * from './lib/+state/settings.selectors';
 export * from './lib/+state/settings.facade';
+export * from './lib/model/folders.type';
+export * from './lib/model/materials.type';
+export * from './lib/model/file-type.enum';
+export * from './lib/pipe/custom-data.pipe';

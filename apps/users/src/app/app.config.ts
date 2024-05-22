@@ -4,7 +4,7 @@ import { appRoutes } from './app.routes';
 import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { API_URL } from '@users/core/http';
+import { API_URL, API_URL_METERIALS } from '@users/core/http';
 import { environment } from '../environments/environment.development';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
@@ -20,6 +20,8 @@ import { articlesEffects, articlesFeature, commentsEffects, commentsFeature } fr
 import { tasksEffects, tasksFeature } from '@users/users/task/data-access';
 import { CLIENT_ID, githubApiEffects, githubApiFeature } from '@users/core/github-api/data-access';
 import { backlogFeature, backlogEffects } from '@users/users/backlog/data-access';
+import { FolderReducer, FoldersEffects, MaterialReducer, MaterialsEffects } from '@users/materials/data-access';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -27,6 +29,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    MatSnackBar,
     provideEffects(
       userEffects,
       authEffects,
@@ -35,7 +38,9 @@ export const appConfig: ApplicationConfig = {
       commentsEffects,
       githubApiEffects,
       backlogEffects,
-      SettingsEffects
+      SettingsEffects,
+      FoldersEffects,
+      MaterialsEffects
     ),
     provideStore({
       router: routerReducer,
@@ -47,6 +52,8 @@ export const appConfig: ApplicationConfig = {
       [tasksFeature.name]: tasksFeature.reducer,
       [githubApiFeature.name]: githubApiFeature.reducer,
       [backlogFeature.name]: backlogFeature.reducer,
+      'Folders': FolderReducer,
+      'Materials': MaterialReducer
     }),
     provideRouterStore(),
     provideStoreDevtools({
@@ -61,6 +68,10 @@ export const appConfig: ApplicationConfig = {
     {
       provide: API_URL,
       useValue: environment.api_url,
+    },
+    {
+      provide: API_URL_METERIALS,
+      useValue: environment.apiMaterialUrl,
     },
     {
       provide: DADATA_TOKEN,

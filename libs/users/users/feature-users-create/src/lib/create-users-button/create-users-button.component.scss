@@ -1,0 +1,13 @@
+.add-user-fab-button {
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-20px);
+    transition: transform 0.2s ease-in-out;
+
+    &:active {
+      transform: translateY(0) rotate(360deg);
+      transition: transform 2s;
+    }
+  }
+}

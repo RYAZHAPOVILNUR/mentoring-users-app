@@ -74,6 +74,9 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
+      this.formGroup.patchValue({
+        educationTime: vm.user.educationTime != null ? vm.user.educationTime.toString() : ''
+      });
     }
 
     if (vm.editMode) {
@@ -88,6 +91,7 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    educationTime: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
 
   @Output() editUser = new EventEmitter<{
@@ -131,6 +135,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
         purchaseDate: new Date().toString() || '',
         educationStatus: 'trainee',
+        educationTime: +this.formGroup.value.educationTime!
       },
       onSuccessCb: this.onEditSuccess,
     });

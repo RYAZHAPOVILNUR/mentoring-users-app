@@ -17,6 +17,9 @@ export const userEffects = createEffect(
       // delay(1500),
       switchMap(() =>
         apiService.get<UsersDTO[]>('/users').pipe(
+          map((users) => {
+            return users.sort((a, b) => b.id - a.id);
+          }),
           map((users) =>
             UsersActions.loadUsersSuccess({
               users: users.map((user) => usersDTOAdapter.DTOtoEntity(user)),
@@ -93,11 +96,13 @@ export const editUser = createEffect(
           email: userData.email,
           username: userData.username,
           city: userData.city,
+          educationTime: userData.educationTime
         },
         onSuccessCb,
       })),
       switchMap(({ user, onSuccessCb }) =>
         apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+          // tap(userData => console.log(userData)),
           map((userData) => ({ userData, onSuccessCb })),
           tap(({ onSuccessCb }) => onSuccessCb()),
           map(({ userData }) => UsersActions.editUserSuccess({ userData })),

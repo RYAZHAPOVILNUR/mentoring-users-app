@@ -1,0 +1,17 @@
+mat-dialog-content {
+  height: 100%;
+  iframe {
+    height: 80%;
+  }
+  ngx-extended-pdf-viewer {
+    display: block;
+    height: 85%;
+  }
+  .audio {
+    display: flex;
+    justify-content: center;
+    audio {
+      scale: 2;
+    }
+  }
+}

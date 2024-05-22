@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Your material</h2>
+<mat-dialog-content class="mat-typography" *ngIf="materialData">
+  <h3>Название материала: {{materialData.title }}</h3>
+  <p>Создан: {{materialData.created_at! | customDate}}</p>
+
+  <ng-container *ngIf="materialType === FileType.MP3">
+    <div class="audio">
+      <audio controls>
+        <source src="{{materialData.material_link}}" type="audio/mpeg">
+        Ваш браузер не поддерживает воспроизведение аудио.
+      </audio>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="materialType === FileType.PDF">
+    <ngx-extended-pdf-viewer [src]="materialData.material_link"></ngx-extended-pdf-viewer>
+  </ng-container>
+
+  <ng-container *ngIf="materialType === FileType.VIDEO">
+    <iframe width="100%" height="100%" [src]="safeUrl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </ng-container>
+
+</mat-dialog-content>
