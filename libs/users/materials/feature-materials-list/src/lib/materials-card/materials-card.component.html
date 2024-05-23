@@ -1,12 +1,17 @@
-<mat-card class="example-card" (click) ="onClick()">
-    <mat-icon (click)="onDelete();$event.stopPropagation()"
-    class="mat-icon-delete"
+<mat-card 
+    class="example-card" 
+    (click) ="onClick()"
+>
+    <mat-icon 
+      (click)="onDelete();
+      $event.stopPropagation()"
+      class="mat-icon-delete"
     >delete</mat-icon>
-    <mat-icon *ngIf="type('.mp3') === true"> music_note</mat-icon>
-    <mat-icon *ngIf="type('yout') === true"> ondemand_video</mat-icon>
-    <mat-icon *ngIf="type('.pdf') === true"> insert_drive_file</mat-icon>
+    <mat-icon *ngIf="getType('.mp3') === true"> music_note</mat-icon>
+    <mat-icon *ngIf="getType('youtu') === true"> ondemand_video</mat-icon>
+    <mat-icon *ngIf="getType('.pdf') === true"> insert_drive_file</mat-icon>
     <mat-card-header>
-      <mat-card-title>{{mat.title}}</mat-card-title>
-      <mat-card-subtitle>{{date}}</mat-card-subtitle>
+      <mat-card-title>{{ mat.title }}</mat-card-title>
+      <mat-card-subtitle>{{ mat.created_at | date : "mediumDate" : "UTC + 4"}}</mat-card-subtitle>
     </mat-card-header>
-  </mat-card>
+</mat-card>

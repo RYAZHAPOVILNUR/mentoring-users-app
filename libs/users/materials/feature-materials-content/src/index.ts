@@ -1,1 +1,1 @@
-export * from './lib/materials-content/materials-content.component'
+export * from './lib/components/materials-content/materials-content.component'

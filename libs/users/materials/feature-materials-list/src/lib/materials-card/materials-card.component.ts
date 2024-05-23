@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
-import { Mat } from '@users/materials/data-access';
+import { Material } from '@users/materials/data-access';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MaterialsContentComponent } from '@users/feature-materials-content';
 
 @Component({
@@ -21,22 +21,18 @@ import { MaterialsContentComponent } from '@users/feature-materials-content';
   styleUrls: ['./materials-card.component.scss'],
 })
 export class MaterialsCardComponent {
-  public dialogAdd = inject(MatDialog)
-  @Input()mat!: Mat;
-  @Output() deleteMat = new EventEmitter();
+  private readonly dialogAdd = inject(MatDialog)
+  @Input({required: true})mat!: Material;
+  @Output() deleteMaterial: EventEmitter<number> = new EventEmitter();
 
-  public type(val: string){
+  public getType(val: string){
     return this.mat.material_link.includes(val)
   }
-  
-  get date(){
-    const date = new Date(this.mat.created_at);
-    return date.toLocaleString('default', {day: "numeric", year: "numeric", month: 'short' })
-  }
 
-  public onClick(){
-    console.log(this.mat)
+  public onClick(){    
     this.dialogAdd.open(MaterialsContentComponent, {
+      width: '80%',
+      height: '80%',
       data: {
         title: this.mat.title,
         material_link: this.mat.material_link
@@ -45,6 +41,6 @@ export class MaterialsCardComponent {
   }
 
   public onDelete(){
-    this.deleteMat.emit(this.mat.id)
+    this.deleteMaterial.emit(this.mat.id)
   }
 }

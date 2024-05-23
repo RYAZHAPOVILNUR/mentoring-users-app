@@ -114,10 +114,10 @@
           <input matInput placeholder="Story Points*" [formControl]="storyPoints" class="edit-user-input" />
           </mat-form-field>
       </mat-card>
-      <button mat-icon-button color="accent" class="add_btn" (click)="onAddPoints()" *ngIf="!addPointsBool && !vm.editMode">
+      <button mat-icon-button color="accent" class="add_btn" (click)="onAddPoints()" *ngIf="!addPoints && !vm.editMode">
         <mat-icon>add</mat-icon>
       </button>
-      <ng-container *ngIf="addPointsBool">
+      <ng-container *ngIf="addPoints">
         <button mat-icon-button color="primary" class="ed_btn" (click)="onPushPoints()">
           <mat-icon>done</mat-icon>
         </button>

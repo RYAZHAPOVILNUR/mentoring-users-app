@@ -2,23 +2,29 @@ p{
     font-size: 19px;
     font-weight: 400;
     padding: 20px;
+    display: flex;
+    justify-content: center;
 }
 
 mat-form-field{
-    left: 30px;
-    position: relative;
-}
-
-.btns{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    width: 80%;
 }
 
 .button-add{
     position: relative;
     top: -10px;
+    margin-left: 20px;
 }
 
-.main {
-    width: 270px;
+button{
+    margin-right: 20px;
+}
+
+form {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

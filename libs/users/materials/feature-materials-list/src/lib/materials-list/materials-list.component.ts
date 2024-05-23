@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Mat } from '@users/materials/data-access';
+import { Material } from '@users/materials/data-access';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MaterialsCardComponent } from '../materials-card/materials-card.component';
+import { LoadingStatus } from '@users/core/data-access';
 
 @Component({
   selector: 'users-materials-list',
@@ -16,14 +17,14 @@ import { MaterialsCardComponent } from '../materials-card/materials-card.compone
   styleUrls: ['./materials-list.component.scss'],
 })
 export class MaterialsListComponent{
-  @Input() vm!: {
-    mats: Mat[],
-    status: string
+  @Input({required: true}) vm!: {
+    mats: Material[],
+    status: LoadingStatus
   };
   
-  @Output() deleteMat = new EventEmitter();
+  @Output() delete: EventEmitter<number> = new EventEmitter();
 
-  onDeleteMat(id: number){
-    this.deleteMat.emit(id)
+  public deleteMaterial(id: number){
+    this.delete.emit(id)
   }
 }

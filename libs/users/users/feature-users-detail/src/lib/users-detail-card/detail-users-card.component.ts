@@ -60,7 +60,7 @@ export class DetailUsersCardComponent implements OnInit {
     status: 'init',
     errors: null,
   };
-  public addPointsBool = false;
+  public addPoints = false;
   public get vm() {
     return this._vm;
   }
@@ -143,18 +143,18 @@ export class DetailUsersCardComponent implements OnInit {
 
   onAddPoints(){
     this.storyPoints.enable();
-    this.addPointsBool = true
+    this.addPoints = true
   }
 
   onClosePoints(){
     this.storyPoints.disable();
-    this.addPointsBool = false
+    this.addPoints = false
   }
 
   onPushPoints(){
     this.setNewPoints.emit(this.storyPoints.value);
     this.storyPoints.disable();
-    this.addPointsBool = false
+    this.addPoints = false
   }
 
   onCloseUser() {

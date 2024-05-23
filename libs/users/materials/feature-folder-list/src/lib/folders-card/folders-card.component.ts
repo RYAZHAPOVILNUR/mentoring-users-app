@@ -13,26 +13,21 @@ import { Router } from '@angular/router';
     CommonModule,
     MatCardModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
   ],
   templateUrl: './folders-card.component.html',
   styleUrls: ['./folders-card.component.scss'],
 })
-export class FoldersCardComponent {
-  @Input() folder!: Folder;
+export class FoldersCardComponent{
+  @Input({required: true}) folder!: Folder;
   private readonly materialsFaced = inject(MaterialsFacade);
   private readonly router = inject(Router);
-
-  get date(){
-    const date = new Date(this.folder.created_at);
-    return date.toLocaleString('default', {day: "numeric", year: "numeric", month: 'short' })
-  }
-
-  onClick(){
+  
+  public onClick(){
     this.router.navigate(['/materials', this.folder.id])
   }
 
-  onDelete(){
+  public onDelete(){
     this.materialsFaced.deleteFolder(this.folder.id)
   }
 }

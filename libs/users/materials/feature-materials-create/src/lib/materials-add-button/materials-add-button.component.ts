@@ -1,11 +1,12 @@
-import { Component, inject, Input} from '@angular/core';
+import { Component, DestroyRef, inject, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MaterialsAddDialogComponent } from '../materials-add-dialog/materials-add-dialog.component';
 import { MatMenuModule } from '@angular/material/menu';
-import { Folder } from '@users/materials/data-access';
+import { Folder, MaterialsFacade } from '@users/materials/data-access';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'users-materials-add-button',
@@ -21,15 +22,23 @@ import { Folder } from '@users/materials/data-access';
   styleUrls: ['./materials-add-button.component.scss'],
 })
 export class MaterialsAddButtonComponent {
-  @Input() folder!: Folder;
-  public dialogAdd = inject(MatDialog)
+  @Input({required: true}) folder!: Folder;
+  private readonly materialFacad = inject(MaterialsFacade)
+  private readonly dialogAdd = inject(MatDialog);
+  private readonly destroyRef = inject(DestroyRef);
 
-  onAddMat(res: string){
+  public addMat(name: string){
     this.dialogAdd.open(MaterialsAddDialogComponent, {
       data: {
-        name: res,
+        name: name,
         folderId: this.folder.id
       }
-    })
+    }).afterClosed()
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe((newMaterialData) => {
+          if (newMaterialData) {
+            this.materialFacad.addMaterial(newMaterialData)
+          }
+        })
   }
 }

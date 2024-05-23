@@ -1,20 +1,18 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import * as materialsAction from './materials.actions';
-import { EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { Folder, Mat } from './interfaces';
+import { Folder, Material } from '../interfaces';
+import { LoadingStatus } from '@users/core/data-access';
 
 export const materialsFeatureKey = 'materials';
 
-export const folderAdapter: EntityAdapter<Folder> = createEntityAdapter<Folder>();
-
-export interface initState {
+export interface materialState {
   folders: Folder[],
   folder: Folder,
-  status: string,
-  mats: Mat[]
+  status: LoadingStatus,
+  mats: Material[]
 }
 
-export const initialState: initState = {
+export const initialState: materialState = {
   folders: [],
   folder: {id: 0, created_at: 0, title: ''},
   status: 'init',
@@ -25,46 +23,46 @@ export const materialsFeature = createFeature({
   name: materialsFeatureKey,
   reducer:  createReducer(
     initialState,
-    on(materialsAction.initFolders, (state: initState) => ({
+    on(materialsAction.loadFolders, (state) => ({
       ...state,
-      status: 'loading'
+      status: 'loading' as const
     })),
-    on(materialsAction.getFolders, (state: initState, {folder}) => ({
+    on(materialsAction.loadFoldersSucces, (state, {folders}) => ({
         ...state,
-        folders: folder,
-        status: 'init'
+        folders: folders,
+        status: 'loaded' as const
     })),
-    on(materialsAction.deleteFolderSucces, (state: initState, {id}) => ({
+    on(materialsAction.deleteFolderSucces, (state, {id}) => ({
         ...state,
-        folders: state.folders.filter((item) => item.id !== id)
+        folders: state.folders.filter((item: Folder) => item.id !== id)
     })),
-    on(materialsAction.deleteMatSucces, (state: initState, {id}) => ({
+    on(materialsAction.deleteMatSucces, (state, {id}) => ({
         ...state,
-        mats: state.mats.filter((item) => item.id !== id)
+        mats: state.mats.filter((item: Material) => item.id !== id)
     })),
-    on(materialsAction.addFolderSucces, (state: initState, {folder}) => ({
+    on(materialsAction.addFolderSucces, (state, {folder}) => ({
       ...state,
       folders: [...state.folders, folder]
     })),
-    on(materialsAction.getFolderId, (state: initState) => ({
+    on(materialsAction.loadFolderId, (state) => ({
       ...state,
-      status: 'loading'
+      status: 'loading' as const
     })),
-    on(materialsAction.getFolderIdSucces, (state: initState, {folder}) =>({
+    on(materialsAction.loadFolderIdSucces, (state, {folder}) =>({
       ...state,
       folder: folder,
-      status: 'init'
+      status: 'loaded' as const
     })),
-    on(materialsAction.getMat, (state: initState) => ({
+    on(materialsAction.loadMat, (state) => ({
       ...state,
-      status: 'loading'
+      status: 'loading' as const
     })),
-    on(materialsAction.getMatSucces,(state: initState, {mats}) => ({
+    on(materialsAction.loadMatSucces,(state, {mats}) => ({
       ...state,
-      status: 'init',
+      status: 'loaded' as const,
       mats: mats
     })),
-    on(materialsAction.addMatSucces, (state: initState, {mat}) => ({
+    on(materialsAction.addMatSucces, (state, {mat}) => ({
       ...state,
       mats: [...state.mats, mat]
     }))

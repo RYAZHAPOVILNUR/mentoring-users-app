@@ -1,8 +1,12 @@
-<button mat-icon-button class="add-button" color="primary" [matMenuTriggerFor]="menu">
+<button 
+  mat-icon-button class="add-button" 
+  color="primary" 
+  [matMenuTriggerFor]="menu"
+>
     <mat-icon>add</mat-icon>
 </button>
 <mat-menu #menu="matMenu">
-  <button mat-menu-item (click)="onAddMat('Видео')">Видео</button>
-  <button mat-menu-item (click)="onAddMat('Аудио')">Аудио</button>
-  <button mat-menu-item (click)="onAddMat('PDF')">PDF</button>
+  <button mat-menu-item (click)="addMat('Видео')">Видео</button>
+  <button mat-menu-item (click)="addMat('Аудио')">Аудио</button>
+  <button mat-menu-item (click)="addMat('PDF')">PDF</button>
 </mat-menu>

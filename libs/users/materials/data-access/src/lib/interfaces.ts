@@ -4,16 +4,16 @@ export interface Folder {
     title: string
   }
 
-export interface Mat {
+export interface Material {
   id: number,
-  created_at: number,
+  created_at: Date,
   title: string,
   material_link: string,
   folder_id: number
 }
 
-export interface MatRes {
-  title: string | null;
-  material_link: string | null;
+export interface MaterialRes {
+  title: string;
+  material_link: string;
   folder_id: number
 }

@@ -3,21 +3,19 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, switchMap } from 'rxjs/operators';
 import { ApiService } from '@users/core/http';
 import * as ActionsFolder from './materials.actions';
-import { Folder, Mat, MatRes } from './interfaces';
+import { Folder, Material, MaterialRes } from '../interfaces';
 
 
 export const loadFolders = createEffect(
   () => {
     const actions$ = inject(Actions);
     const apiSrvice = inject(ApiService);
-    return actions$.pipe(
-      ofType(ActionsFolder.initFolders),
-    switchMap(() => 
+    return actions$.pipe( 
+      ofType(ActionsFolder.loadFolders),
+      switchMap(() => 
         apiSrvice.get<Folder[]>('/folder').
         pipe(
-          map((folders: Folder[]) => ActionsFolder.getFolders({
-            folder: folders
-          }))
+          map((folders: Folder[]) => ActionsFolder.loadFoldersSucces({folders: folders}))
         )
       )
     )
@@ -32,10 +30,9 @@ export const deleteFolder = createEffect(
     return actions$.pipe(
       ofType(ActionsFolder.deleteFolder),
       switchMap(({id}) => 
-      apiSrvice.delete<Folder[]>(`/folder/${id}`)
-      .pipe(
-        map(() => ActionsFolder.deleteFolderSucces({id}))
-      )
+        apiSrvice.delete<Folder[]>(`/folder/${id}`).pipe(
+          map(() => ActionsFolder.deleteFolderSucces({id}))
+        )
       )
     )
   },
@@ -49,10 +46,9 @@ export const deleteMat = createEffect(
     return actions$.pipe(
       ofType(ActionsFolder.deleteMat),
       switchMap(({id}) => 
-      apiSrvice.delete<Mat[]>(`/material/${id}`)
-      .pipe(
-        map(() => ActionsFolder.deleteMatSucces({id}))
-      )
+        apiSrvice.delete<Material[]>(`/material/${id}`).pipe(
+          map(() => ActionsFolder.deleteMatSucces({id}))
+        )
       )
     )
   },
@@ -66,11 +62,11 @@ export const addFolder = createEffect(
     return actions$.pipe(
       ofType(ActionsFolder.addFolder),
       switchMap(({title}) => 
-      apiSrvice.post<Folder, {title: string}>('/folder', {title})
-      .pipe(
-        map((folder) => ActionsFolder.addFolderSucces({folder})
-      ))
-    ))
+        apiSrvice.post<Folder, {title: string}>('/folder', {title}).pipe(
+          map((folder) => ActionsFolder.addFolderSucces({folder}))
+        )
+      )
+    )
   },
   {functional: true}
 );
@@ -82,43 +78,41 @@ export const addMat = createEffect(
     return actions$.pipe(
       ofType(ActionsFolder.addMat),
       switchMap(({res}) => 
-      apiSrvice.post<Mat, MatRes>('/material', res)
-      .pipe(
-        map((mat) => ActionsFolder.addMatSucces({mat})
-      ))
-    ))
-  },
-  {functional: true}
-);
-
-export const getFoldreId = createEffect(
-  () => {
-    const actions$ = inject(Actions);
-    const apiSrvice = inject(ApiService);
-    return actions$.pipe(
-      ofType(ActionsFolder.getFolderId),
-      switchMap(({id}) => 
-      apiSrvice.get<Folder>(`/folder/${id}`)
-      .pipe(
-        map((folder) => ActionsFolder.getFolderIdSucces({folder}))
-      )
+        apiSrvice.post<Material, MaterialRes>('/material', res).pipe(
+          map((mat) => ActionsFolder.addMatSucces({mat}))
+        )
       )
     )
   },
   {functional: true}
 );
 
-export const getMats = createEffect(
+export const loadFoldreId = createEffect(
   () => {
     const actions$ = inject(Actions);
     const apiSrvice = inject(ApiService);
     return actions$.pipe(
-      ofType(ActionsFolder.getMat),
-      switchMap(() => 
-      apiSrvice.get<Mat[]>('/material')
-      .pipe(
-        map((mats) => ActionsFolder.getMatSucces({mats}))
+      ofType(ActionsFolder.loadFolderId),
+      switchMap(({id}) => 
+        apiSrvice.get<Folder>(`/folder/${id}`).pipe(
+          map((folder) => ActionsFolder.loadFolderIdSucces({folder}))
+        )
       )
+    )
+  },
+  {functional: true}
+);
+
+export const loadMats = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiSrvice = inject(ApiService);
+    return actions$.pipe(
+      ofType(ActionsFolder.loadMat),
+      switchMap(() => 
+        apiSrvice.get<Material[]>('/material').pipe(
+          map((mats) => ActionsFolder.loadMatSucces({mats}))
+        )
       )
     )
   },

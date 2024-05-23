@@ -13,15 +13,24 @@ import {MatDividerModule} from '@angular/material/divider';
 @Component({
   selector: 'users-filter',
   standalone: true,
-  imports: [CommonModule, MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, MatIconModule, MatButtonModule, MatDividerModule],
+  imports: [
+    CommonModule, 
+    MatFormFieldModule, 
+    MatInputModule, 
+    FormsModule, 
+    ReactiveFormsModule, 
+    MatIconModule, 
+    MatButtonModule, 
+    MatDividerModule
+  ],
   templateUrl: './user-filter.component.html',
   styleUrls: ['./user-filter.component.scss'],
 })
 export class UserFilterComponent {
-  private store = inject(Store);
-  inputForm: FormControl;
-  input = document.getElementById('search') as HTMLElement
+  private readonly store = inject(Store);
+  public readonly inputForm: FormControl;
 
+  
   constructor(){
     this.inputForm = new FormControl('');
   }

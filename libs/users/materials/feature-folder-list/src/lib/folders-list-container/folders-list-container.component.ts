@@ -11,11 +11,11 @@ import { LetDirective } from '@ngrx/component';
   standalone: true
 })
 export class FoldersListContainerComponent implements OnInit {
-  materialsFaced = inject(MaterialsFacade);
-  folders$ = this.materialsFaced.folders$;
-  status$ = this.materialsFaced.status$;
+  private readonly materialsFaced = inject(MaterialsFacade);
+  public readonly folders$ = this.materialsFaced.folders$;
+  public readonly status$ = this.materialsFaced.status$;
 
   ngOnInit(): void {
-      this.materialsFaced.init();
+      this.materialsFaced.loadFolders();
   }
 }

@@ -16,9 +16,9 @@ import { FoldersAddDialogComponent } from '../folders-add-dialog/folders-add-dia
   ]
 })
 export class FoldersAddButtonComponent {
-  public dialogAdd = inject(MatDialog)
+  private readonly dialogAdd = inject(MatDialog);
 
-  onAddFolder(){
+  public addFolder(){
     this.dialogAdd.open(FoldersAddDialogComponent)
   }
 }

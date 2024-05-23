@@ -20,16 +20,16 @@ import { MaterialsFacade } from '@users/materials/data-access';
   styleUrls: ['./folders-add-dialog.component.scss'],
 })
 export class FoldersAddDialogComponent {
-  public dialogRef = inject(MatDialogRef)
-  public inputName = new FormControl({value: '', disabled: false}, [Validators.required]);
-  materialsFaced = inject(MaterialsFacade);
+  private readonly dialogRef = inject(MatDialogRef)
+  public readonly inputName = new FormControl('', {nonNullable: true, validators: Validators.required});
+  private readonly materialsFaced = inject(MaterialsFacade);
 
-  onCloseDialog(){
+  public closeDialog(){
     this.dialogRef.close()
   }
 
-  onSave(){
+  public onSave(){
     this.dialogRef.close();
-    this.materialsFaced.add(this.inputName.value!)
+    this.materialsFaced.addFolder(this.inputName.value)
   }
 }

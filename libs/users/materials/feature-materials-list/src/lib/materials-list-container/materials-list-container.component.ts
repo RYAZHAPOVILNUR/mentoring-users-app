@@ -1,13 +1,15 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialsListComponent } from '../materials-list/materials-list.component';
-import { MaterialsFacade } from '@users/materials/data-access';
+import { Folder, MaterialsFacade } from '@users/materials/data-access';
 import { LetDirective } from '@ngrx/component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MaterialsAddButtonComponent } from '@users/feature-materials-create';
+import { PushPipe } from '@ngrx/component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'users-materials-list-container',
@@ -19,7 +21,8 @@ import { MaterialsAddButtonComponent } from '@users/feature-materials-create';
     MatIconModule,
     MatButtonModule,
     MatProgressBarModule,
-    MaterialsAddButtonComponent
+    MaterialsAddButtonComponent,
+    PushPipe
   ],
   templateUrl: './materials-list-container.component.html',
   styleUrls: ['./materials-list-container.component.scss'],
@@ -29,26 +32,19 @@ export class MaterialsListContainerComponent implements OnInit{
   private readonly router = inject(Router);
   public readonly mats$ = this.materialsFaced.mats$;
   public readonly status$ = this.materialsFaced.status$;
-  public readonly folderTitle$ = this.materialsFaced.folderTitle$;
-  public readonly folder$ = this.materialsFaced.folder$;
+  public readonly folder$: Observable<Folder> = this.materialsFaced.folder$;
+  private readonly folderlId: string = this.router.routerState.snapshot.url.replace('/materials/', '');
 
   ngOnInit(): void {
-    this.materialsFaced.getFolderId(this.id);
-    this.materialsFaced.getMats()
+    this.materialsFaced.loadFolderId(this.folderlId);
+    this.materialsFaced.loadMaterials()
   }
-
-  get id(){return this.router.routerState.snapshot.url.replace('/materials/', '')}
-
-  // public onDeleteMat(id: number){
-  //   this.materialsFaced.deleteMat(id)
-  // }
   
-  onBack(){    
+  public onBack(){    
     this.router.navigate(['/materials'])
   }
 
-  onDeleteMat(id: number){
-    this.materialsFaced.deleteMat(id)
-    console.log('container',id);
+  public deleteMaterial(materialId: number){
+    this.materialsFaced.deleteMaterial(materialId)
   }
 }

@@ -1,10 +1,14 @@
-<mat-card class="example-card" (click) ="onClick()">
-  <mat-icon (click)="onDelete();$event.stopPropagation()"
-  class="mat-icon-delete"
+<mat-card 
+  class="example-card" 
+  (click) ="onClick()">
+  <mat-icon 
+    (click)="onDelete();
+    $event.stopPropagation()"
+    class="mat-icon-delete"
   >delete</mat-icon>
   <mat-icon>folder</mat-icon>
   <mat-card-header>
-    <mat-card-title>{{folder.title}}</mat-card-title>
-    <mat-card-subtitle>{{date}}</mat-card-subtitle>
+    <mat-card-title>{{ folder.title }}</mat-card-title>
+    <mat-card-subtitle>{{ folder.created_at | date : "mediumDate" : "UTC + 4"}}</mat-card-subtitle>
   </mat-card-header>
 </mat-card>
