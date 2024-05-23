@@ -1,0 +1,41 @@
+<form
+  [formGroup] = "formGroup" 
+>
+  <p>Добавление {{ data.name }}</p>
+  <mat-form-field
+    class="edit-user-field"
+  >
+    <mat-label>Название:</mat-label>
+    <input 
+      class="input"
+      matInput 
+      placeholder="Название*" 
+      formControlName = "inputName"
+    />
+  </mat-form-field>
+  <br>
+  <mat-form-field
+    class="edit-user-field"
+  >
+    <mat-label>Ссылка:</mat-label>
+    <input 
+      matInput 
+      placeholder="Ссылка*" 
+      formControlName = "inputRef"
+    />
+  </mat-form-field>
+  <br>
+  <div>
+      <button 
+        mat-raised-button 
+        class="button-add"
+        (click)="onCloseDialog()"
+      >Отмена</button>
+      <button 
+        mat-raised-button 
+        class="button-add" 
+        [disabled]="formGroup.invalid"
+        (click)="save()"
+      >Сохранить</button>
+  </div>
+</form>

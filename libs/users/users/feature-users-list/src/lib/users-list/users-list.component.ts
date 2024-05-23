@@ -4,6 +4,7 @@ import { UsersListVM } from './users-list-view-model';
 import { UsersCardComponent } from '../users-card/users-card.component';
 import { UsersVM } from '../../../../users-vm';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { UserFilterComponent } from '../user-filter/user-filter.component';
 
 @Component({
   selector: 'users-list-ui',
@@ -12,7 +13,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
   styleUrls: ['./users-list.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, UsersCardComponent, MatProgressBarModule],
+  imports: [CommonModule, UsersCardComponent, MatProgressBarModule, UserFilterComponent],
 })
 export class UsersListComponent {
   @Input({ required: true })

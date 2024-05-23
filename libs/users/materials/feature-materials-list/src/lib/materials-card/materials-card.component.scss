@@ -1,0 +1,24 @@
+.example-card{
+    display: inline-block;
+    margin: 15px;
+    cursor: pointer;
+    width: 200px;
+}
+
+.mat-icon-delete{
+    float: right;
+}
+
+.mat-icon-delete:hover{
+    color: red;
+}
+
+
+mat-icon{
+    margin: 0 15px;
+}
+
+.mat-mdc-card-header {
+    display: flex;
+    padding: 0 16px;
+}

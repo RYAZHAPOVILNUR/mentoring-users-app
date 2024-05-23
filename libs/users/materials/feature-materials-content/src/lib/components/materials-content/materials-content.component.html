@@ -1,0 +1,21 @@
+<div class="body">
+    <p>{{ data.title }}</p>
+    <pdf-viewer 
+        *ngIf="data.material_link.endsWith('.pdf')"
+        [src]="data.material_link"
+        [zoom]="0.8"
+        style="width: 90%; height: 90%"
+    ></pdf-viewer>
+    <div
+        class="youTube"
+        *ngIf = "data.material_link.includes('www.youtube.com') || data.material_link.includes('youtu.be')"
+    >
+        <a [href] = "data.material_link" target="_blank"> 
+            {{ data.material_link }}
+        </a>
+        <img [src]= "data.material_link | youTubeLinkImg">
+    </div>
+    <div *ngIf="data.material_link.endsWith('.mp3')">
+        <audio [src]="data.material_link" controls></audio>
+    </div>
+</div>

@@ -137,3 +137,34 @@ export const loadUser = createEffect(
   },
   { functional: true }
 );
+
+export const editPoits = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
+
+    return actions$.pipe(
+      ofType(UsersActions.setNewPoints),
+      withLatestFrom(usersEntities$),
+      filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
+      map(([{ points, id }, usersEntities]) => ({
+        user: {
+          ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
+          totalStoryPoints: points
+        },
+      })),
+      switchMap(({ user }) =>
+        apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+          map((userData) => ({ userData })),
+          map(({ userData }) => UsersActions.editUserSuccess({ userData })),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(UsersActions.editUserFailed({ error }));
+          })
+        )
+      )
+    );
+  },
+  { functional: true }
+);
