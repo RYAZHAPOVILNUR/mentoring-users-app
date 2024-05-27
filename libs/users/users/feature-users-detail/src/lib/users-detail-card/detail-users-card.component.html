@@ -14,8 +14,8 @@
             mat-icon-button
             type="button"
             color="accent"
-            class="edit-user-button"
             *ngIf="!vm.editMode"
+            class="edit-user-button"
             (click)="onOpenEditMode()"
           >
             <mat-icon>edit</mat-icon>
@@ -24,8 +24,8 @@
             mat-icon-button
             type="button"
             color="accent"
-            class="edit-user-button"
             *ngIf="vm.editMode"
+            class="edit-user-button"
             (click)="onDeleteUser()"
           >
             <mat-icon>delete</mat-icon>
@@ -52,7 +52,12 @@
               [matTooltipDisabled]="formGroup.enabled"
             >
               <mat-label>Электронная почта:</mat-label>
-              <input matInput placeholder="Электронная почта*" formControlName="email" class="edit-user-input" />
+              <input 
+                matInput 
+                class="edit-user-input" 
+                formControlName="email" 
+                placeholder="Электронная почта*" 
+              />
               <mat-error
                 *ngIf="formGroup.get('email')?.hasError('required') || formGroup.get('email')?.hasError('email')"
               >
@@ -66,7 +71,12 @@
               [matTooltipDisabled]="formGroup.enabled"
             >
               <mat-label>Имя пользователя:</mat-label>
-              <input matInput placeholder="Имя пользователя" formControlName="username" class="edit-user-input" />
+              <input 
+                matInput 
+                class="edit-user-input" 
+                formControlName="username" 
+                placeholder="Имя пользователя" 
+              />
             </mat-form-field>
 
             <mat-form-field
@@ -76,12 +86,12 @@
             >
               <mat-label>Город:</mat-label>
               <input
-                type="text"
-                class="edit-user-input"
-                placeholder="Введите город"
                 matInput
+                type="text"
                 formControlName="city"
+                class="edit-user-input"
                 [matAutocomplete]="auto"
+                placeholder="Введите город"
               />
               <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                 <mat-option *ngFor="let suggestion of citySuggestions | ngrxPush" [value]="suggestion">
@@ -92,20 +102,61 @@
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
-              mat-icon-button
-              color="primary"
               type="submit"
-              [disabled]="formGroup.invalid || (areFieldsChanged$ | ngrxPush) === false"
+              color="primary"
+              mat-icon-button
               aria-label="submit new user data"
+              [disabled]="formGroup.invalid || (areFieldsChanged$ | ngrxPush) === false"
             >
               <mat-icon>done</mat-icon>
             </button>
 
-            <button mat-icon-button color="warn" type="button" aria-label="Close edit mode" (click)="onCloseEditMode()">
+            <button 
+              color="warn" 
+              type="button" 
+              mat-icon-button 
+              (click)="onCloseEditMode()"
+              aria-label="Close edit mode" 
+            >
               <mat-icon>close</mat-icon>
             </button>
           </mat-card-actions>
         </form>
+        <mat-form-field>
+          <mat-label>Количество сторипоинтов:</mat-label>
+          <input
+            matInput
+            type="number"
+            [formControl]="totalStoryPoints"
+          />
+          <button
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="onAddStoryPoints()"
+            *ngIf="totalStoryPoints.enabled"
+          > 
+            <mat-icon>done</mat-icon>
+          </button>
+          <button
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            *ngIf="totalStoryPoints.enabled"
+            (click)="totalStoryPoints.disable()"
+          > 
+            <mat-icon>close</mat-icon>
+          </button>
+          <button
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            *ngIf="totalStoryPoints.disabled"
+            (click)="totalStoryPoints.enable()"
+          > 
+            <mat-icon>add</mat-icon>
+          </button>
+        </mat-form-field>
       </mat-card>
     </div>
   </ng-container>
@@ -122,5 +173,11 @@
 <ng-template #snackbar>
   <div class="edit-user-snackbar">
     <span>Пользователь успешно изменён!</span>
+  </div>
+</ng-template>
+
+<ng-template #snackbarSP>
+  <div class="edit-user-snackbar">
+    <span>Сторипоинты успешно добавлены!</span>
   </div>
 </ng-template>

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { UsersFacade } from '@users/users/data-access';
@@ -15,7 +15,7 @@ import { UsersFacade } from '@users/users/data-access';
   ],
   templateUrl: './users-filter.component.html',
   styleUrls: ['./users-filter.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersFilterComponent {
   private fb = inject(FormBuilder);

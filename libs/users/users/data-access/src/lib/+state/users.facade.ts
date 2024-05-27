@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
 import { Observable, of, switchMap } from 'rxjs';
@@ -16,13 +16,13 @@ export class UsersFacade {
    * Combine pieces of state using createSelector,
    * and expose them as observables through the facade.
    */
-  public readonly status$ = this.store.pipe(select(UsersSelectors.selectUsersStatus));
-  public readonly allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
-  public readonly filteredUsers$ = this.store.pipe(select(UsersSelectors.filteredUsersSelector));
-  public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
+  public readonly status$ = this.store.select(UsersSelectors.selectUsersStatus);
+  public readonly allUsers$ = this.store.select(UsersSelectors.selectAllUsers);
+  public readonly filteredUsers$ = this.store.select(UsersSelectors.filteredUsersSelector);
+  public readonly selectedUsers$ = this.store.select(UsersSelectors.selectEntity);
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
   public readonly loggedUser$ = this.store.select(selectLoggedUser);
-  public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError));
+  public readonly errors$: Observable<UsersErrors | null> = this.store.select(UsersSelectors.selectUsersError);
   /**
    * Use the initialization action to perform one
    * or more tasks in your Effects.
@@ -37,6 +37,10 @@ export class UsersFacade {
 
   addUser(userData: CreateUserDTO) {
     this.store.dispatch(UsersActions.addUser({ userData }));
+  }
+
+  addStoryPoints(userData: CreateUserDTO, id: number, onSuccessAddSP: onSuccessEditionCbType) {
+    this.store.dispatch(UsersActions.addUserStoryPoints({ userData, id, onSuccessAddSP }));
   }
 
   editUser(userData: CreateUserDTO, id: number, onSuccessCb: onSuccessEditionCbType) {
@@ -59,7 +63,7 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.loadUser());
   }
 
-  setUsersFilter(filter: {name: string}) {
-    this.store.dispatch(UsersActions.setUsersFilter({filter}));
+  setUsersFilter(filter: { name: string }) {
+    this.store.dispatch(UsersActions.setUsersFilter({ filter }));
   }
 }

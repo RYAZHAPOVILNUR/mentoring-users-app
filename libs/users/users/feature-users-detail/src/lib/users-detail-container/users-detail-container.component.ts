@@ -1,8 +1,17 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
+import {
+  inject,
+  Component,
+  DestroyRef,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
-import { UsersErrors, UsersFacade, onSuccessEditionCbType } from '@users/users/data-access';
+import {
+  UsersErrors,
+  UsersFacade,
+  onSuccessEditionCbType,
+} from '@users/users/data-access';
 import { Observable, map, tap } from 'rxjs';
 import { selectQueryParam, CreateUserDTO, UsersEntity } from '@users/core/data-access';
 import { Store, select } from '@ngrx/store';
@@ -15,18 +24,23 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'users-detail',
   standalone: true,
-  imports: [CommonModule, DetailUsersCardComponent, MatDialogModule, LetDirective],
+  imports: [
+    CommonModule,
+    LetDirective,
+    MatDialogModule,
+    DetailUsersCardComponent,
+  ],
   templateUrl: './users-detail-container.component.html',
   styleUrls: ['./users-detail-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersDetailComponent {
-  private readonly usersFacade = inject(UsersFacade);
+  public user!: UsersEntity;
   private readonly store = inject(Store);
   private readonly router = inject(Router);
-  public user!: UsersEntity;
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly usersFacade = inject(UsersFacade);
 
   public readonly user$: Observable<UsersEntity | null> = this.usersFacade.openedUser$.pipe(
     tap((user) => {
@@ -53,6 +67,10 @@ export class UsersDetailComponent {
 
   onCloseUser() {
     this.router.navigate(['/admin/users']);
+  }
+
+  onAddStoryPoints(userData: CreateUserDTO, onSuccessAddSP: onSuccessEditionCbType){
+    this.usersFacade.addStoryPoints(userData, this.user.id, onSuccessAddSP);
   }
 
   onCloseEditMode() {
