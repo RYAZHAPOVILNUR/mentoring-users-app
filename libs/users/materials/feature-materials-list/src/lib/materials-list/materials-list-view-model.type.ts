@@ -1,8 +1,8 @@
 import { DeepReadonly } from "@users/core/utils";
 import { FolderDTO, MaterialDTO, MaterialsStatus } from "@users/materials/data-access";
 
-export type MaterialsListViewModel = DeepReadonly<{
+export type MaterialsVM = DeepReadonly<{
     materials: MaterialDTO[],
     status: MaterialsStatus,
-    openedFolder?: FolderDTO,
+    openedFolder?: FolderDTO | null,
 }>

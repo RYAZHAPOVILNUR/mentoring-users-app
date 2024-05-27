@@ -3,3 +3,13 @@
     flex-wrap: wrap;
     gap: 16px;
 }
+
+.materials {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.content-card {
+    width: 200px;
+    height: 120px;
+}

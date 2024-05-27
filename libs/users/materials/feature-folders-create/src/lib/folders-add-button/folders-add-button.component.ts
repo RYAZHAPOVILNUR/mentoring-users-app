@@ -6,6 +6,7 @@ import { FoldersAddDialogComponent } from '../folders-add-dialog/folders-add-dia
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { filter, tap } from 'rxjs';
 
 @Component({
   selector: 'users-folders-add-button',
@@ -23,7 +24,7 @@ export class FoldersAddButtonComponent {
   private readonly dialog = inject(MatDialog);
   private readonly facade = inject(MaterialFacade);
   private readonly destroyRef = inject(DestroyRef);
-  private title!: string;
+  private readonly title: string | undefined;
 
   openAddFolderDialog(): void {
     const dialogRef: MatDialogRef<FoldersAddDialogComponent> = this.dialog.open(FoldersAddDialogComponent,
@@ -31,11 +32,9 @@ export class FoldersAddButtonComponent {
         data: { title: this.title },
       });
     dialogRef.afterClosed().pipe(
-      takeUntilDestroyed(this.destroyRef))
-      .subscribe(result => {
-        if (result) {
-          this.facade.addFolder({ title: result })
-        }
-      })
+      takeUntilDestroyed(this.destroyRef),
+      filter(Boolean),
+      tap((title) => this.facade.addFolder({ title }))
+    ).subscribe()
   }
 }

@@ -29,16 +29,8 @@ export class FoldersCardComponent {
   @Input({ required: true }) folder!: FolderDTO;
 
   @Output() deleteFolder = new EventEmitter<number>();
-  @Output() openFolder = new EventEmitter<number>();
 
-  onDeleteFolder(): void {
-    this.deleteFolder.emit(this.folder.id)
+  onDeleteFolder(id: number): void {
+    this.deleteFolder.emit(id)
   }
-  onOpenFolder(): void {
-    this.openFolder.emit(this.folder.id);
-  }
-
-  // openDialog(id: number): void {
-
-  // }
 }

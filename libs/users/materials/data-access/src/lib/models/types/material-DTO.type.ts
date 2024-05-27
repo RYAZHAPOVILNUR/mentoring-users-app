@@ -6,5 +6,5 @@ export type MaterialDTO = DeepReadonly<{
     title: string;
     material_link: string,
     folder_id: number;
-    type?: string | undefined;
+    type?: string;
 }>

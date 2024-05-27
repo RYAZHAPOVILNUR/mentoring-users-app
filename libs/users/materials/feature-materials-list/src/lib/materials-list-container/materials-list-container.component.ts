@@ -32,6 +32,10 @@ export class MaterialsListContainerComponent {
     this.facade.deleteMaterial(id)
   }
 
+  constructor() {
+    this.facade.loadMaterials()
+  }
+
   onOpenMaterial(data: OpenMaterialData): void {
     this.dialog.open(MaterialsContentComponent, { data })
   }

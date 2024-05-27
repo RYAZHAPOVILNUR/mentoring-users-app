@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { MatIconModule } from '@angular/material/icon';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { MatButtonModule } from '@angular/material/button';
-import { OpenMaterialData } from '@users/materials/data-access'
+import { OpenMaterialData } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-feature-materials-content',
@@ -21,16 +21,16 @@ import { OpenMaterialData } from '@users/materials/data-access'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialsContentComponent {
-  public readonly data: OpenMaterialData = inject(MAT_DIALOG_DATA);
-  private readonly dialogRef = inject(MatDialogRef<MaterialsContentComponent, boolean>);
+  public readonly data = inject(MAT_DIALOG_DATA);
+  private readonly dialogRef = inject(MatDialogRef<MaterialsContentComponent>);
 
   close(): void {
-    return this.dialogRef.close();
+    return this.dialogRef.close()
   }
 
-  getVideoId(): string {
-    const youtubeRegex = /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=))([\w\-]{10,12})\b/;
-    const match = this.data.link.match(youtubeRegex);
+  getVideoId(): string | null {
+    const youtubeRegex = /[?&]v=([a-zA-Z0-9_-]{11})|\/embed\/([a-zA-Z0-9_-]{11})/;;
+    const match = this.data.material.material_link.match(youtubeRegex);
     return match ? match[1] || match[2] : ''
   }
 }

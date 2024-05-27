@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MaterialsAddDialogComponent } from '../materials-add-dialog/materials-add-dialog.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MaterialFacade } from '@users/materials/data-access';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'users-materials-add-button',
@@ -30,7 +31,8 @@ export class MaterialsAddButtonComponent {
   private link!: string;
   private readonly destroyRef = inject(DestroyRef);
   private readonly facade = inject(MaterialFacade);
-  public readonly materialsTypes: string[] = ['Video', 'Audio', 'PDF']
+  public readonly materialsTypes: string[] = ['Video', 'Audio', 'PDF'];
+  private readonly activateRoute = inject(ActivatedRoute)
 
   openAddMaterialDialog(type: string): void {
     const dialogRef = this.dialog.open(
@@ -40,14 +42,18 @@ export class MaterialsAddButtonComponent {
         material_link: this.link,
         type: type
       },
-    }
-    );
-    dialogRef.afterClosed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(
-      (result => {
-        if (result) {
-          this.facade.addMaterial(result)
-        }
-      })
-    )
+    });
+
+    dialogRef.afterClosed().pipe(
+      takeUntilDestroyed(this.destroyRef))
+      .subscribe(
+        (result => {
+          if (result) {
+            const folder_id = this.activateRoute.snapshot.params['id']
+            result = { ...result, folder_id }
+            this.facade.addMaterial(result)
+          }
+        })
+      )
   }
 }

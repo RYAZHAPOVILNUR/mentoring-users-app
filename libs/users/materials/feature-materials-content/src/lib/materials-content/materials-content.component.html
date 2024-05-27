@@ -1,33 +1,32 @@
-<mat-dialog-content [ngSwitch]="data.type">
-    <div class="actions-container dialog">
-        <h2 mat-dialog-title>{{ data.title }}</h2>
-        <button (click)="close()" color="primary" mat-icon-button aria-label="close">
-            <mat-icon>close</mat-icon>
-        </button>
+<div>
+    <h1 mat-dialog-title> {{ data.material.title }}</h1>
+</div>
+<div>
+    <button mat-icon-button (click)="close()">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<ng-container *ngIf="data.material.material_link.endsWith('.pdf')">
+    <pdf-viewer [src]="data.material.material_link" [render-text]="true" [original-size]="true">
+    </pdf-viewer>
+</ng-container>
+
+<ng-container *ngIf="data.material.material_link.endsWith('.mp3')">
+    <div>
+        <audio controls>
+            <source [src]="data.material.material_link" type="audio/mp3">
+        </audio>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="!data.material.material_link.endsWith('.pdf') && 
+!data.material.material_link.endsWith('.mp3')">
+    <div>
+        <p mat-dialog-title>Link to video: {{ data.material.material_link }} </p>
+    </div>
+    <div *ngIf="getVideoId()" class="thumbnail">
+        <img [src]="'https://img.youtube.com/vi/' + getVideoId() + '/maxresdefault.jpg'">
+        <video controls [src]="data.material.material_link"></video>
     </div>
 
-    <ng-container *ngSwitchCase="'picture_as_pdf'">
-        <pdf-viewer [src]="data.link!" [render-text]="true" [original-size]="true" [scrollTop]="false"
-            style="width: 500px ; height: 600px">
-        </pdf-viewer>
-    </ng-container>
-
-    <ng-container *ngSwitchCase="'library_music'">
-        <audio controls>
-            <source [src]="data.link" type="audio/mp3">
-        </audio>
-    </ng-container>
-
-    <ng-container *ngSwitchCase="'video_library'">
-        <p mat-dialog-title> link to video: <a [href]="data.link">{{ data.link }}</a></p>
-
-        <div *ngIf="getVideoId()" class="thumbnail">
-            <img [src]="'https://img.youtube.com/vi/' + getVideoId() + '/maxresdefault.jpg'" width="100%"
-                alt="video-preview">
-        </div>
-    </ng-container>
-
-    <ng-container *ngSwitchDefault>
-        <p mat-dialog-title>material has not found</p>
-    </ng-container>
-</mat-dialog-content>
+</ng-container>

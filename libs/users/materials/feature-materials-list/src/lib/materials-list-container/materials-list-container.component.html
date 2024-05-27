@@ -3,8 +3,8 @@
         materials: materials$,
         status: status$,
         openedFolder: openedFolder$
-       } as viewModel">
-        <users-feature-materials-list [viewModel]="viewModel" (deleteMaterial)="onDeleteMaterial($event)"
+       } as vm ">
+        <users-feature-materials-list [vm]="vm" (deleteMaterial)="onDeleteMaterial($event)"
             (openMaterial)="onOpenMaterial($event)">
         </users-feature-materials-list>
     </ng-container>

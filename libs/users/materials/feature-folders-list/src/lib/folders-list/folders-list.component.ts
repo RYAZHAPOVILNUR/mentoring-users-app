@@ -1,9 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';
-import { MaterialFacade } from '@users/materials/data-access';
-import { Router } from '@angular/router';
-
+import { FolderDTO, MaterialFacade } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-feature-folders-list',
@@ -17,16 +15,18 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeatureFoldersListComponent {
-  private readonly facade = inject(MaterialFacade)
-  public readonly folders$ = this.facade.folders$;
-  private readonly router = inject(Router);
+  private readonly facade = inject(MaterialFacade);
 
-  onDeleteFolder(id: number): void {
-    this.facade.deleteFolder(id);
+  @Input({ required: true }) folders!: FolderDTO[];
+
+  @Output() deleteFolder = new EventEmitter();
+  @Output() openFolder = new EventEmitter<number>();
+
+  onDeleteFolder(id: number) {
+    this.deleteFolder.emit(id)
   }
 
-  onOpenFolder(id: number): void {
-    this.facade.openFolder(id)
-    this.router.navigate([`materials/${id}`]);
+  onOpenFolder(id: number) {
+    this.openFolder.emit(id)
   }
 }

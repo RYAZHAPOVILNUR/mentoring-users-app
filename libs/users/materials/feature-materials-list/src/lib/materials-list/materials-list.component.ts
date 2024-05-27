@@ -5,7 +5,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MaterialsCardComponent } from '../materials-card/materials-card.component';
 import { OpenMaterialData } from '@users/materials/data-access';
 import { Router } from '@angular/router';
-import { MaterialsListViewModel } from './materials-list-view-model.type';
+import { MaterialsVM } from './materials-list-view-model.type';
+
 @Component({
   selector: 'users-feature-materials-list',
   standalone: true,
@@ -20,10 +21,9 @@ import { MaterialsListViewModel } from './materials-list-view-model.type';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialsListComponent {
-  @Input({ required: true }) viewModel!: MaterialsListViewModel;
+  @Input({ required: true }) vm!: MaterialsVM;
   @Output() deleteMaterial = new EventEmitter<number>();
   @Output() openMaterial = new EventEmitter<OpenMaterialData>();
-
 
   private readonly router = inject(Router);
 

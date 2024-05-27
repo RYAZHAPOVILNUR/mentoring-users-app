@@ -1,13 +1,16 @@
-<mat-card class="materials-card">
-    <button (click)="onOpenMaterial()" class="mat-button">
-        <div class="btn-content">
-            <h2>{{ material.title }}</h2>
+<mat-card class="material-card" (dblclick)="OpenMaterial(material)">
+    <mat-card-content>
+        <div>
+            <div>
+                <mat-icon *ngIf="material.material_link.endsWith('.pdf')">insert_drive_file</mat-icon>
+                <mat-icon *ngIf="material.material_link.endsWith('.mp3')">music_note</mat-icon>
+                <mat-icon *ngIf="!material.material_link.endsWith('.pdf')
+                 && !material.material_link.endsWith('.mp3')">ondemand_video</mat-icon>
+                <button mat-icon-button (click)="openDeleteDialog(material.id)">
+                    <mat-icon class="delete">delete</mat-icon>
+                </button>
+            </div>
+            <div>{{ material.title }}</div>
         </div>
-        <mat-icon class="material-icon">{{ material.type }}</mat-icon>
-    </button>
-    <mat-card-actions class="material-card-buttons">
-        <button (click)="openDeleteDialog(material.id)" mat-icon-button>
-            <mat-icon>delete</mat-icon>
-        </button>
-    </mat-card-actions>
+    </mat-card-content>
 </mat-card>
