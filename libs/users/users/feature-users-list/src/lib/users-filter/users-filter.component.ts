@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { UsersFacade } from '@users/users/data-access';
+import { Store } from '@ngrx/store';
+import { UsersFacade, selectUsersFilter } from '@users/users/data-access';
 
 @Component({
   selector: 'users-users-filter',
@@ -17,15 +18,19 @@ import { UsersFacade } from '@users/users/data-access';
   styleUrls: ['./users-filter.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersFilterComponent {
+export class UsersFilterComponent implements OnInit{
   private fb = inject(FormBuilder);
-  private readonly facad = inject(UsersFacade);   
-  form: FormGroup;
+  private readonly facad = inject(UsersFacade);
+  private readonly store = inject(Store); 
+  form!: FormGroup;
   filterName = { name: '' };
 
-  constructor() {
+  ngOnInit(): void {
     this.form = this.fb.group({
-      name: [''],
+      name: [this.filterName.name],
+    });
+    this.store.select(selectUsersFilter).subscribe(items => {
+      this.filterName.name = items.name
     });
   }
 

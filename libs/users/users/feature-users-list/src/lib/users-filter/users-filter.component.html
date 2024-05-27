@@ -1,6 +1,6 @@
 <form class="form-filter" [formGroup]="form" action="" #userForm="ngForm">
   <mat-form-field class="form-filter-mat">
     <mat-label>Поиск по имени:</mat-label>
-    <input type="text" matInput formControlName="name" (input)="saveUserFilterName()">
+    <input [(ngModel)]="filterName.name" type="text" matInput formControlName="name" (input)="saveUserFilterName()">
   </mat-form-field>
 </form>
