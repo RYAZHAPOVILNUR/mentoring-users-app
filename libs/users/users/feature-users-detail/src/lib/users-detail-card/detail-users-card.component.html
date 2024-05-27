@@ -10,24 +10,12 @@
           <button mat-icon-button aria-label="close dialog" color="accent" (click)="onCloseUser()">
             <mat-icon>arrow_back</mat-icon>
           </button>
-          <button
-            mat-icon-button
-            type="button"
-            color="accent"
-            class="edit-user-button"
-            *ngIf="!vm.editMode"
-            (click)="onOpenEditMode()"
-          >
+          <button mat-icon-button type="button" color="accent" class="edit-user-button" *ngIf="!vm.editMode"
+            (click)="onOpenEditMode()">
             <mat-icon>edit</mat-icon>
           </button>
-          <button
-            mat-icon-button
-            type="button"
-            color="accent"
-            class="edit-user-button"
-            *ngIf="vm.editMode"
-            (click)="onDeleteUser()"
-          >
+          <button mat-icon-button type="button" color="accent" class="edit-user-button" *ngIf="vm.editMode"
+            (click)="onDeleteUser()">
             <mat-icon>delete</mat-icon>
           </button>
         </div>
@@ -36,68 +24,46 @@
         </h1>
         <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="edit-user-form">
           <div class="edit-user-content">
-            <mat-form-field
-              class="edit-user-field"
-              [matTooltip]="vm.user!.name"
-              [matTooltipDisabled]="formGroup.enabled"
-            >
+            <mat-form-field class="edit-user-field" [matTooltip]="vm.user!.name"
+              [matTooltipDisabled]="formGroup.enabled">
               <mat-label>Имя:</mat-label>
               <input matInput placeholder="Имя*" formControlName="name" class="edit-user-input" />
               <mat-error *ngIf="formGroup.hasError('required', 'name')">Это поле обязательно для заполнения</mat-error>
             </mat-form-field>
 
-            <mat-form-field
-              class="edit-user-field"
-              [matTooltip]="vm.user!.email"
-              [matTooltipDisabled]="formGroup.enabled"
-            >
+            <mat-form-field class="edit-user-field" [matTooltip]="vm.user!.email"
+              [matTooltipDisabled]="formGroup.enabled">
               <mat-label>Электронная почта:</mat-label>
               <input matInput placeholder="Электронная почта*" formControlName="email" class="edit-user-input" />
               <mat-error
-                *ngIf="formGroup.get('email')?.hasError('required') || formGroup.get('email')?.hasError('email')"
-              >
+                *ngIf="formGroup.get('email')?.hasError('required') || formGroup.get('email')?.hasError('email')">
                 Введите корректную электронную почту
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field
-              class="edit-user-field"
-              [matTooltip]="vm.user!.username"
-              [matTooltipDisabled]="formGroup.enabled"
-            >
+            <mat-form-field class="edit-user-field" [matTooltip]="vm.user!.username"
+              [matTooltipDisabled]="formGroup.enabled">
               <mat-label>Имя пользователя:</mat-label>
               <input matInput placeholder="Имя пользователя" formControlName="username" class="edit-user-input" />
             </mat-form-field>
 
-            <mat-form-field
-              class="edit-user-field"
-              [matTooltip]="vm.user!.city"
-              [matTooltipDisabled]="formGroup.enabled"
-            >
+            <mat-form-field class="edit-user-field" [matTooltip]="vm.user!.city"
+              [matTooltipDisabled]="formGroup.enabled">
               <mat-label>Город:</mat-label>
-              <input
-                type="text"
-                class="edit-user-input"
-                placeholder="Введите город"
-                matInput
-                formControlName="city"
-                [matAutocomplete]="auto"
-              />
+              <input type="text" class="edit-user-input" placeholder="Введите город" matInput formControlName="city"
+                [matAutocomplete]="auto" />
               <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                 <mat-option *ngFor="let suggestion of citySuggestions | ngrxPush" [value]="suggestion">
                   {{ suggestion }}
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
-            <button
-              mat-icon-button
-              color="primary"
-              type="submit"
+            <button mat-icon-button color="primary" type="submit"
               [disabled]="formGroup.invalid || (areFieldsChanged$ | ngrxPush) === false"
-              aria-label="submit new user data"
-            >
+              aria-label="submit new user data">
               <mat-icon>done</mat-icon>
             </button>
 
@@ -106,6 +72,21 @@
             </button>
           </mat-card-actions>
         </form>
+        <mat-form-field class="example-form-field">
+          <mat-label>Количество сторипоинтов</mat-label>
+          <input matInput [formControl]="totalStoryPoints" type="number" type="text" [disabled]="false">
+          <button (click)="onAddStoryPoints()" *ngIf="!totalStoryPoints.disabled" matSuffix mat-icon-button
+            aria-label="Clear">
+            <mat-icon>move_up</mat-icon>
+          </button>
+          <button (click)="onDisable()" *ngIf="!totalStoryPoints.disabled" matSuffix mat-icon-button aria-label="Clear">
+            <mat-icon>close_small</mat-icon>
+          </button>
+          <button (click)="totalStoryPoints.enable()" *ngIf="totalStoryPoints.disabled" matSuffix mat-icon-button
+            aria-label="Clear">
+            <mat-icon>add</mat-icon>
+          </button>
+        </mat-form-field>
       </mat-card>
     </div>
   </ng-container>
@@ -122,5 +103,11 @@
 <ng-template #snackbar>
   <div class="edit-user-snackbar">
     <span>Пользователь успешно изменён!</span>
+  </div>
+</ng-template>
+
+<ng-template #snackbarStoryPoints>
+  <div class="edit-user-snackbar">
+    <span>Сторипоинты успешно обновлены!</span>
   </div>
 </ng-template>

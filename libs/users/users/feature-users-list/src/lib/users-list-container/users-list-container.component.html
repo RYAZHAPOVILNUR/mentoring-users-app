@@ -1,11 +1,10 @@
-<ng-container
-  *ngrxLet="{
+<ng-container *ngrxLet="{
     users: users$,
     status: status$,
     errors: errors$,
     loggedUser: loggedUser$
-  } as vm"
->
+  } as vm">
+  <users-filter></users-filter>
   <users-list-ui [vm]="vm" (deleteUser)="onDeleteUser($event)" (redirectToEdit)="onRedirectToEdit($event)" />
 </ng-container>
 <create-users-button></create-users-button>

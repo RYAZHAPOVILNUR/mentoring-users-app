@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Add {{ data.type }}</h1>
+<mat-dialog-content>
+    <form [formGroup]="myFormGroup">
+        <div>
+            <mat-form-field>
+                <input type="text" matInput placeholder="Name" formControlName="title">
+            </mat-form-field>
+            <mat-form-field>
+                <input type="text" matInput placeholder="Link to resource" formControlName="link">
+            </mat-form-field>
+        </div>
+    </form>
+    <div mat-dialog-actions>
+        <button mat-raised-button (click)="save()" [disabled]="myFormGroup.invalid">Save</button>
+        <button mat-button (click)="cancel()">Cancel</button>
+    </div>
+</mat-dialog-content>
