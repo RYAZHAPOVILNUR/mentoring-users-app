@@ -94,18 +94,45 @@
             <button
               mat-icon-button
               color="primary"
-              type="submit"
+              type="submittotalStoryPoints"
               [disabled]="formGroup.invalid || (areFieldsChanged$ | ngrxPush) === false"
               aria-label="submit new user data"
             >
               <mat-icon>done</mat-icon>
             </button>
-
             <button mat-icon-button color="warn" type="button" aria-label="Close edit mode" (click)="onCloseEditMode()">
               <mat-icon>close</mat-icon>
             </button>
           </mat-card-actions>
         </form>
+        <mat-form-field class="edit-user-field" >
+          <mat-label>Количество сторипоинтов:</mat-label>
+          <input matInput placeholder="Количество сторипоинтов" [formControl]="totalStorypoints" class="edit-user-input" />
+          <mat-icon
+            *ngIf="!storyPointsEditMode"
+            (click)="onOpenStoryPointsEditMode()"
+            class="input-icon"
+            matSuffix
+          >
+            add
+          </mat-icon>
+          <mat-icon
+            *ngIf="storyPointsEditMode"
+            (click)="onStoryPointsSubmit()"
+            class="input-icon"
+            matSuffix
+          >
+            check
+          </mat-icon>
+          <mat-icon
+            *ngIf="storyPointsEditMode"
+            (click)="onCloseStoryPointsEditMode()"
+            class="input-icon"
+            matSuffix
+          >
+            close
+          </mat-icon>
+        </mat-form-field>
       </mat-card>
     </div>
   </ng-container>

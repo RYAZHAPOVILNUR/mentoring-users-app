@@ -60,6 +60,8 @@ export class DetailUsersCardComponent implements OnInit {
     status: 'init',
     errors: null,
   };
+  public storyPointsEditMode = false;
+
   public get vm() {
     return this._vm;
   }
@@ -75,7 +77,6 @@ export class DetailUsersCardComponent implements OnInit {
         city: vm.user.city,
       });
     }
-
     if (vm.editMode) {
       this.formGroup.enable();
     } else {
@@ -89,6 +90,8 @@ export class DetailUsersCardComponent implements OnInit {
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
+
+  public totalStorypoints = new FormControl({value: 0, disabled: !this.storyPointsEditMode });
 
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
@@ -150,6 +153,24 @@ export class DetailUsersCardComponent implements OnInit {
 
   onDeleteUser() {
     this.deleteUser.emit();
+  }
+
+  onOpenStoryPointsEditMode() {
+    this.storyPointsEditMode = true;
+    this.totalStorypoints.enable();
+  }
+
+  onCloseStoryPointsEditMode() {
+    this.storyPointsEditMode = false;
+    this.totalStorypoints.disable();
+  }
+
+  private readonly onEditStoryPointsSuccess: onSuccessEditionCbType = () => {
+    console.log('editStoryPointsSuccess...');
+  }
+
+  onStoryPointsSubmit() {
+    console.log('storyPoints submit: ', this.totalStorypoints.value);
   }
 
   public onOptionClicked(selectedValue: string) {
