@@ -11,3 +11,12 @@
   height: 30px !important;
   margin: 5px;
 }
+
+.card {
+  transition: all 0.3s ease;
+  color: #ffffff;
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(102, 102, 102, 0.719);
+  }
+}

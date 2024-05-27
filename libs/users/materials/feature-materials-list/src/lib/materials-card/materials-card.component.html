@@ -1,24 +1,27 @@
-<mat-card class="p-2">
-    <mat-card-actions class="justify-between actions-section">
-        <mat-icon *ngIf="material.material_link.endsWith('.pdf');">
-            <span class="material-symbols-outlined">picture_as_pdf</span>
-        </mat-icon>
-        <mat-icon *ngIf="material.material_link.endsWith('.mp3')">
-            <span class="material-symbols-outlined">music_note</span>        
-        </mat-icon>
-        <mat-icon *ngIf="!material.material_link.endsWith('.mp3') && !material.material_link.endsWith('.pdf')">
-            <span class="material-symbols-outlined">play_circle</span>
-        </mat-icon>
-      <button class="btn" mat-icon-button (click)="onDeleteClick(material)">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </mat-card-actions>
-    <mat-card-header class="min-w-full">
-      <mat-card-title>{{ material.title }}</mat-card-title>
-      <mat-card-subtitle>{{
-        material.created_at | date : 'dd/MM/yyyy'
-      }}</mat-card-subtitle>
-    </mat-card-header>
+<mat-card class="p-2 card">
+  <mat-card-actions class="justify-between actions-section">
+    <mat-icon *ngIf="material.material_link.endsWith('.pdf')">
+      <span class="material-symbols-outlined">picture_as_pdf</span>
+    </mat-icon>
+    <mat-icon *ngIf="material.material_link.endsWith('.mp3')">
+      <span class="material-symbols-outlined">music_note</span>
+    </mat-icon>
+    <mat-icon
+      *ngIf="
+        !material.material_link.endsWith('.mp3') &&
+        !material.material_link.endsWith('.pdf')
+      "
+    >
+      <span class="material-symbols-outlined">play_circle</span>
+    </mat-icon>
+    <button class="btn" mat-icon-button (click)="onDeleteClick(material)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+  <mat-card-header class="min-w-full">
+    <mat-card-title>{{ material.title }}</mat-card-title>
+    <mat-card-subtitle>{{
+      material.created_at | date : 'dd/MM/yyyy'
+    }}</mat-card-subtitle>
+  </mat-card-header>
 </mat-card>
-  
-
