@@ -1,1 +1,29 @@
-<p>materials-add-dialog works!</p>
+<h2 mat-dialog-title [ngSwitch]="data">
+  <ng-template [ngSwitchCase]="'.pdf'">Добавить PDF</ng-template>
+  <ng-template [ngSwitchCase]="'.mp3'">Добавить аудио</ng-template>
+  <ng-template ngSwitchDefault>Добавить видео</ng-template>
+</h2>
+<mat-dialog-content>
+  <form [formGroup]="createMaterialForm" class="d-flex flex-column">
+    <mat-form-field>
+      <mat-label>Название</mat-label>
+      <input matInput formControlName="title" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Ссылка</mat-label>
+      <input matInput formControlName="material_link" />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<div mat-dialog-actions class="d-flex justify-content-evenly">
+  <button mat-button mat-dialog-close>Отмена</button>
+  <button
+    mat-button
+    mat-raised-button
+    color="primary"
+    [disabled]="createMaterialForm.invalid"
+    (click)="createMaterial()"
+  >
+    Создать
+  </button>
+</div>

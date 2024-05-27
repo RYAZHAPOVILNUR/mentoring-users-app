@@ -1,12 +1,15 @@
-<ng-container 
-  *ngrxLet="{ 
-    materials: materials$, 
-    status: status$, 
-    errors: errors$ 
-    } as vm">
-
-  <users-materials-list 
-        [vm]="vm"
-        (closeFolderEvent)="closeFolder()"
-        />
+<ng-container
+  *ngrxLet="{
+    materials: materials$,
+    status: status$,
+    folderName: folderName$
+  } as vm"
+>
+  <users-materials-list
+    [vm]="vm"
+    (closeFolderEvent)="closeFolder()"
+    (deleteMaterialEvent)="onDeleteClick($event)"
+    (openDialogEvent)="openDialog($event)"
+    (openMaterialEvent)="openMaterial($event)"
+  />
 </ng-container>

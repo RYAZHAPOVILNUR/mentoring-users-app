@@ -5,7 +5,7 @@ import { MaterialsErrors } from './materials.reducer';
 export const MaterialsActions = createActionGroup({
   source: 'Materials',
   events: {
-    'Init Materials': emptyProps(),
+    'Load Materials': emptyProps(),
     'Load Materials Success': props<{ materials: MaterialsDTO[] }>(),
     'Load Materials Failure': props<{ error: MaterialsErrors }>(),
 

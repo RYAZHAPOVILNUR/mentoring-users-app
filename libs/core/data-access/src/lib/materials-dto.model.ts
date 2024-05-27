@@ -13,7 +13,7 @@ export type FolderDTO = DeepReadonly<{
 export type CreateMaterialsDTO = DeepReadonly<{
   title: 'string';
   material_link: 'string';
-  folder_id: 0;
+  folder_id: number;
 }>;
 
 export type MaterialsDTO = DeepReadonly<{
@@ -21,5 +21,5 @@ export type MaterialsDTO = DeepReadonly<{
   created_at: 'now';
   title: 'string';
   material_link: 'string';
-  folder_id: 0;
+  folder_id: number;
 }>;

@@ -1,0 +1,9 @@
+.small-icon-button {
+  width: 75px !important;
+  height: 75px !important;
+  & > *[role='img'] {
+    width: 44px;
+    height: 44px;
+    font-size: 44px;
+  }
+}

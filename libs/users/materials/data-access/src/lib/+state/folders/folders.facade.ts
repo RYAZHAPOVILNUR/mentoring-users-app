@@ -21,6 +21,10 @@ export class FoldersFacade {
   public readonly selectErrors$ = this.store.select(
     FoldersSelectors.selectFolderErrors
   );
+  public readonly openedFolder$ = this.store.select(
+    FoldersSelectors.selectOpenedFolder
+  );
+
   public init() {
     this.store.dispatch(FoldersActions.initFolders());
   }

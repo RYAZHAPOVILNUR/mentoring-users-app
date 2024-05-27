@@ -4,10 +4,12 @@ import { Store } from '@ngrx/store';
 import { MaterialsActions } from './materials.actions';
 import * as MaterialsSelectors from './materials.selectors';
 import { CreateMaterialsDTO } from '@users/core/data-access';
+import { FoldersFacade } from '../folders/folders.facade';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
   private readonly store = inject(Store);
+  private readonly folderFacade = inject(FoldersFacade);
 
   public readonly allMaterials$ = this.store.select(
     MaterialsSelectors.selectMaterials
@@ -15,15 +17,11 @@ export class MaterialsFacade {
   public readonly selectStatus$ = this.store.select(
     MaterialsSelectors.selectMaterialsStatus
   );
-  public readonly selectErrors$ = this.store.select(
-    MaterialsSelectors.selectMaterialsErrors
-  );
-  public readonly selectMaterialsInFolder$ = this.store.select(
-    MaterialsSelectors.selectMaterialsInFolder
-  );
+
+  public readonly openedFolder$ = this.folderFacade.openedFolder$;
 
   public init() {
-    this.store.dispatch(MaterialsActions.initMaterials());
+    this.store.dispatch(MaterialsActions.loadMaterials());
   }
   public addMaterial(material: CreateMaterialsDTO) {
     this.store.dispatch(MaterialsActions.addMaterial({ material }));

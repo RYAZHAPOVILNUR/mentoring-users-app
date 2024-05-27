@@ -1,1 +1,17 @@
-<p>materials-add-button works!</p>
+<button mat-mini-fab class="small-icon-button" [matMenuTriggerFor]="menu">
+  <mat-icon>add</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="openDialog('.pdf')">
+    <mat-icon>picture_as_pdf</mat-icon>
+    <span>Добавить pdf</span>
+  </button>
+  <button mat-menu-item (click)="openDialog('.mp3')">
+    <mat-icon>music_note</mat-icon>
+    <span>Добавить аудио</span>
+  </button>
+  <button mat-menu-item (click)="openDialog('')">
+    <mat-icon>play_circle</mat-icon>
+    <span>Добавить видео</span>
+  </button>
+</mat-menu>

@@ -4,6 +4,7 @@ import {
   MaterialsState,
   materialsAdapter,
 } from './materials.reducer';
+// import { selectRouteParams } from '@users/core/data-access';
 
 // Lookup the 'Materials' feature state managed by NgRx
 export const selectMaterialsState = createFeatureSelector<MaterialsState>(
@@ -15,11 +16,6 @@ const { selectAll, selectEntities } = materialsAdapter.getSelectors();
 export const selectMaterialsStatus = createSelector(
   selectMaterialsState,
   (state: MaterialsState) => state.status
-);
-
-export const selectMaterialsErrors = createSelector(
-  selectMaterialsState,
-  (state: MaterialsState) => state.error
 );
 
 export const selectMaterials = createSelector(
@@ -45,13 +41,8 @@ export const selectMaterialEntity = createSelector(
   (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
 );
 
-export const selectOpenedFolderId = createSelector(
-  selectMaterialsState,
-  (state: MaterialsState) => state.openedFolderId
-);
-
-export const selectMaterialsInFolder = createSelector(
-  selectMaterials,
-  selectOpenedFolderId,
-  (materials, folderId) =>  materials.filter((material) => folderId ? material.folder_id === folderId : [])
-);
+// export const selectMaterialsInFolder = createSelector(
+//   selectMaterials,
+//   selectRouteParams,
+//   (materials, {id}) =>  materials.filter(material => material.folder_id === id)
+// );

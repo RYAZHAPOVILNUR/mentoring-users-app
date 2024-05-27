@@ -1,1 +1,36 @@
-<p>materials-content works!</p>
+<button mat-icon-button (click)="close()">
+  <mat-icon>close</mat-icon>
+</button>
+<h2 mat-dialog-title>{{ data.material_link }}</h2>
+<mat-dialog-content>
+  <ng-container *ngIf="data.material_link.endsWith('.pdf')">
+    <pdf-viewer
+      [src]="link"
+      [render-text]="true"
+      [original-size]="false"
+      class="pdf-viewer"
+    ></pdf-viewer>
+  </ng-container>
+
+  <ng-container *ngIf="data.material_link.endsWith('.mp3')">
+    <figure>
+      <figcaption>Listen to the T-Rex:</figcaption>
+      <audio controls>
+        <source [src]="link" type="audio/mp3" />
+      </audio>
+    </figure>
+  </ng-container>
+
+  <ng-container *ngIf="data.material_link.includes('youtube' || 'youtu.be')">
+    <iframe
+      width="953"
+      height="536"
+      [src]="link"
+      title="Селекторы стилей host, host-context и ng-deep в Angular"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
+  </ng-container>
+</mat-dialog-content>

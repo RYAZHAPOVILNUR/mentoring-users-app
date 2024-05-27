@@ -1,14 +1,18 @@
-<div class="p-2">
-  <h2 class="text-center text-white" mat-dialog-title>Создать папку</h2>
-  <div mat-dialog-content>
-    <mat-form-field class="w-100">
-      <mat-label>Название папки</mat-label>
-      <input matInput class="w-100" [formControl]="folderName">
-    </mat-form-field>
-  </div>
-  <div mat-dialog-actions class="d-flex justify-content-evenly">
-    <button mat-button (click)="onNoClick()">Отмена</button>
-    <button mat-button cdkFocusInitial (click)="onAddButton()" [disabled]="folderName.invalid">Добавить</button>
-  </div>
-
-</div>
+<h2 class="text-center text-white" mat-dialog-title>Создать папку</h2>
+<mat-dialog-content>
+  <mat-form-field class="w-100">
+    <mat-label>Название папки</mat-label>
+    <input matInput class="w-100" [formControl]="folderName" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions class="d-flex justify-content-evenly">
+  <button mat-button (click)="onNoClick()">Отмена</button>
+  <button
+    mat-button
+    cdkFocusInitial
+    (click)="onAddButton()"
+    [disabled]="folderName.invalid"
+  >
+    Добавить
+  </button>
+</mat-dialog-actions>

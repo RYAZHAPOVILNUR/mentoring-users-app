@@ -1,0 +1,14 @@
+.btn {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  
+  .actions-section {
+    min-height: 25px !important;
+    height: 30px !important;
+    margin: 5px;
+  }
+  
