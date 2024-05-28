@@ -12,7 +12,7 @@ export class FoldersFacade {
   public readonly allFolders$ = this.store.select(
     FoldersSelectors.selectFolders
   );
-  public readonly selectedFolders$ = this.store.select(
+  public readonly selectFoldersEntity$ = this.store.select(
     FoldersSelectors.selectEntity
   );
   public readonly selectStatus$ = this.store.select(
@@ -21,9 +21,7 @@ export class FoldersFacade {
   public readonly selectErrors$ = this.store.select(
     FoldersSelectors.selectFolderErrors
   );
-  public readonly openedFolder$ = this.store.select(
-    FoldersSelectors.selectOpenedFolder
-  );
+
 
   public init() {
     this.store.dispatch(FoldersActions.initFolders());
@@ -33,5 +31,8 @@ export class FoldersFacade {
   }
   public removeFolder(id: number) {
     this.store.dispatch(FoldersActions.removeFolder({ id }));
+  }
+  public getFolder() {
+    this.store.dispatch(FoldersActions.getFolder());
   }
 }

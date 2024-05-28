@@ -4,12 +4,10 @@ import {
   FoldersState,
   foldersAdapter,
 } from './folders.reducer';
-import { selectRouteParams } from '@users/core/data-access';
 
 // Lookup the 'Materials' feature state managed by NgRx
 export const selectFoldersState =
   createFeatureSelector<FoldersState>(FOLDERS_FEATURE_KEY);
-
 const { selectAll, selectEntities } = foldersAdapter.getSelectors();
 
 export const selectFoldersStatus = createSelector(
@@ -38,12 +36,6 @@ export const selectSelectedFolderId = createSelector(
   selectFoldersState,
   (state: FoldersState) => state.selectedId
 );
-
-export const selectOpenedFolder = createSelector(
-  selectRouteParams,
-  selectFoldersEntities,
-  ({id}, entities) => entities[id]?.title || null
-)
 
 export const selectEntity = createSelector(
   selectFoldersEntities,

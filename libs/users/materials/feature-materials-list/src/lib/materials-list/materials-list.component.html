@@ -3,18 +3,17 @@
 </ng-container>
 
 <ng-template #loadingResult>
-  <div class="d-flex">
-    <button
-      class="mr-3"
-      mat-icon-button
-      aria-label="close dialog"
-      color="accent"
-      (click)="closeFolder()"
-    >
-      <mat-icon>arrow_back</mat-icon>
-    </button>
-    <h2>{{ vm.folderName }}</h2>
-  </div>
+  <button
+    mat-fab
+    extended
+    color="primary"
+    class="btn"
+    aria-label="close dialog"
+    (click)="closeFolder()"
+  >
+    <mat-icon>arrow_back</mat-icon>
+    {{ vm.folderName[0].title }}
+  </button>
   <ng-container *ngIf="vm.status === 'loaded'">
     <div class="container">
       <div class="row">

@@ -16,5 +16,9 @@ export const FoldersActions = createActionGroup({
     'Remove Folder': props<{ id: number }>(),
     'Remove Folder Success': props<{ id: number }>(),
     'Remove Folder Failure': props<{ error: FoldersErrors }>(),
+
+    'Get Folder': emptyProps(),
+    'Get Folder Success': props<{ folder: FolderDTO }>(),
+    'Get Folder Failure': props<{ error: FoldersErrors }>(),
   },
 });

@@ -40,9 +40,3 @@ export const selectMaterialEntity = createSelector(
   selectSelectedMaterialId,
   (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
 );
-
-// export const selectMaterialsInFolder = createSelector(
-//   selectMaterials,
-//   selectRouteParams,
-//   (materials, {id}) =>  materials.filter(material => material.folder_id === id)
-// );

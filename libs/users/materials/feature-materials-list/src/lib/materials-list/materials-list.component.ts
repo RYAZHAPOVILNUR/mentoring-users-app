@@ -13,6 +13,7 @@ import { MaterialsCardComponent } from '../materials-card/materials-card.compone
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MaterialsDTO } from '@users/core/data-access';
 import { MaterialsAddButtonComponent } from '@users/materials/feature-materials-create';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'users-materials-list',
@@ -23,6 +24,7 @@ import { MaterialsAddButtonComponent } from '@users/materials/feature-materials-
     MaterialsCardComponent,
     MatProgressBarModule,
     MaterialsAddButtonComponent,
+    MatButtonModule,
   ],
   templateUrl: './materials-list.component.html',
   styleUrls: ['./materials-list.component.scss'],

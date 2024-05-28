@@ -8,13 +8,3 @@ export const dataTypeChecker = (data: string): string => {
       return '^.*(?:youtube\\.|youtu\\.be).*$';
   }
 };
-
-// export const dataType = (data: string): string => {
-//     if(data.endsWith('.pdf') ) {
-//       return 'PDF';
-//     } else if(data.endsWith('.mp3')) {
-//       return 'MP3';
-//     } else {
-//       return 'VIDEO';
-//   }
-// }

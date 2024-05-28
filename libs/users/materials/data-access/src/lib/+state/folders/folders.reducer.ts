@@ -70,7 +70,10 @@ const reducer = createReducer(
   on(FoldersActions.removeFolderFailure, (state) => ({
     ...state,
     status: 'error' as const,
-  }))
+  })),
+  on(FoldersActions.getFolderSuccess, (state, { folder }) =>
+    foldersAdapter.setOne(folder, { ...state, status: 'loaded' as const })
+  )
 );
 
 export function foldersReducer(

@@ -78,6 +78,6 @@ export class FoldersListContainerComponent {
   }
   //добавить резолвер
   public onFolderClick(folder: FolderDTO) {
-    this.router.navigate(['materials/', folder.id, folder.title]);
+    this.router.navigate(['materials/', folder.id]);
   }
 }

@@ -1,0 +1,13 @@
+.btn {
+  //   color: white !important;
+  //   background-color: rgba(255, 255, 255, 0) !important;
+  box-shadow: none !important;
+  font-size: 20px !important;
+  margin-bottom: 16px !important;
+  :hover {
+    // background-color: rgb(206, 52, 52) !important;
+    transition: all 1s ease;
+    cursor: pointer;
+    box-shadow: none !important;
+  }
+}

@@ -1,9 +1,10 @@
 import { inject } from '@angular/core';
 import { ApiService } from '@users/core/http';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, catchError, of, map } from 'rxjs';
+import { switchMap, catchError, of, map, withLatestFrom } from 'rxjs';
 import { FoldersActions } from './folders.actions';
-import { CreateFolderDTO, FolderDTO } from '@users/core/data-access';
+import { CreateFolderDTO, FolderDTO, selectRouteParams } from '@users/core/data-access';
+import { Store } from '@ngrx/store';
 
 export const FoldersInitEffect = createEffect(
   () => {
@@ -60,6 +61,29 @@ export const RemoveFolderEffect = createEffect(
           catchError((error) => {
             console.log('Error', error);
             return of(FoldersActions.removeFolderFailure({ error }));
+          })
+        )
+      )
+    );
+  },
+  { functional: true }
+);
+
+export const getFolderEffect = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const store = inject(Store);
+
+    return actions$.pipe(
+      ofType(FoldersActions.getFolder),
+      withLatestFrom(store.select(selectRouteParams)),
+      switchMap(([,{ id }]) =>
+        apiService.get<FolderDTO>(`/folder/${id}`).pipe(
+          map((folder) => FoldersActions.getFolderSuccess({ folder })),
+          catchError((error) => {
+            console.log('Error', error);
+            return of(FoldersActions.getFolderFailure({ error }));
           })
         )
       )

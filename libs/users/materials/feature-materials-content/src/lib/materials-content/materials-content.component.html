@@ -5,9 +5,14 @@
 <mat-dialog-content>
   <!-- pdf -->
   <ng-container *ngIf="data.material_link.endsWith('.pdf')">
-    <ngx-extended-pdf-viewer
+    <pdf-viewer
       [src]="data.material_link"
-    ></ngx-extended-pdf-viewer>
+      [render-text]="true"
+      [original-size]="true"
+      [scrollTop]="false"
+      style="width: 600px; height: 700px"
+    >
+    </pdf-viewer>
   </ng-container>
 
   <!-- audio -->
@@ -15,7 +20,7 @@
     <figure>
       <figcaption>{{ data.title }}</figcaption>
       <audio controls>
-        <source [src]="link" type="audio/mp3" />
+        <source [src]="data.material_link" type="audio/mp3" />
       </audio>
     </figure>
   </ng-container>

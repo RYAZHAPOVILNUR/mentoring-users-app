@@ -67,7 +67,7 @@ export const appRoutes: Route[] = [
           ),
       },
       {
-        path: 'materials/:id/:folderName',
+        path: 'materials/:id',
         loadComponent: () =>
           import('@users/materials/feature-materials-list').then(
             (c) => c.MaterialsListContainerComponent

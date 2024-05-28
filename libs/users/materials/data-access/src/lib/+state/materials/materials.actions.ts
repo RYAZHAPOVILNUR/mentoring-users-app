@@ -16,7 +16,5 @@ export const MaterialsActions = createActionGroup({
     'Remove Material': props<{ id: number }>(),
     'Remove Material Success': props<{ id: number }>(),
     'Remove Material Failure': props<{ error: MaterialsErrors }>(),
-
-    'Set Opened Folder Id': props<{ id: number }>(),
   },
 });

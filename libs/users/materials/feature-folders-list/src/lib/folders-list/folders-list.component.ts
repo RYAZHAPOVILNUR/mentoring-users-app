@@ -13,6 +13,7 @@ import { FoldersCardComponent } from '../folders-card/folders-card.component';
 import { FoldersListVM } from './folders-view-model';
 import { FolderDTO } from '@users/core/data-access';
 import { FoldersAddButtonComponent } from '@users/materials/feature-folders-create';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'users-folders-list',
@@ -23,6 +24,7 @@ import { FoldersAddButtonComponent } from '@users/materials/feature-folders-crea
     MatProgressBarModule,
     FoldersCardComponent,
     FoldersAddButtonComponent,
+    RouterModule,
   ],
   templateUrl: './folders-list.component.html',
   styleUrls: ['./folders-list.component.scss'],

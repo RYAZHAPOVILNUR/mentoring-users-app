@@ -17,8 +17,7 @@ export class MaterialsFacade {
   public readonly selectStatus$ = this.store.select(
     MaterialsSelectors.selectMaterialsStatus
   );
-
-  public readonly openedFolder$ = this.folderFacade.openedFolder$;
+  public readonly selectFolder$ = this.folderFacade.allFolders$;
 
   public init() {
     this.store.dispatch(MaterialsActions.loadMaterials());
@@ -29,7 +28,7 @@ export class MaterialsFacade {
   public removeMaterial(id: number) {
     this.store.dispatch(MaterialsActions.removeMaterial({ id }));
   }
-  public setOpenedFolderId(id: number) {
-    this.store.dispatch(MaterialsActions.setOpenedFolderId({ id }));
+  public getFolder() {
+    this.folderFacade.getFolder();
   }
 }
