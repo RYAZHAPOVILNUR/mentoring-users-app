@@ -12,17 +12,13 @@ export class FoldersFacade {
   public readonly allFolders$ = this.store.select(
     FoldersSelectors.selectFolders
   );
-  public readonly selectFoldersEntity$ = this.store.select(
-    FoldersSelectors.selectEntity
-  );
   public readonly selectStatus$ = this.store.select(
     FoldersSelectors.selectFoldersStatus
   );
   public readonly selectErrors$ = this.store.select(
     FoldersSelectors.selectFolderErrors
   );
-
-
+  
   public init() {
     this.store.dispatch(FoldersActions.initFolders());
   }

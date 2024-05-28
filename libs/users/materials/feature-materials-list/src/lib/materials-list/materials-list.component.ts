@@ -33,11 +33,9 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class MaterialsListComponent {
   @Output() public readonly closeFolderEvent = new EventEmitter();
-  @Output() public readonly deleteMaterialEvent =
-    new EventEmitter<MaterialsDTO>();
+  @Output() public readonly deleteMaterialEvent = new EventEmitter<MaterialsDTO>();
   @Output() public readonly openDialogEvent = new EventEmitter<string>();
-  @Output() public readonly openMaterialEvent =
-    new EventEmitter<MaterialsDTO>();
+  @Output() public readonly openMaterialEvent = new EventEmitter<MaterialsDTO>();
   @Input({ required: true }) public vm!: MaterialsVM;
 
   public onDeleteClick(material: MaterialsDTO) {

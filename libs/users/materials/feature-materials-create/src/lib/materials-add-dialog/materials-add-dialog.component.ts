@@ -1,25 +1,11 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  inject,
-} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogModule,
-  MatDialogRef,
-} from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { dataTypeChecker } from './data-type-check-helper';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'users-materials-add-dialog',
@@ -38,17 +24,12 @@ import { dataTypeChecker } from './data-type-check-helper';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialsAddDialogComponent {
-  private readonly dialogRef = inject(
-    MatDialogRef<MaterialsAddDialogComponent>
-  );
+  private readonly dialogRef = inject( MatDialogRef<MaterialsAddDialogComponent> );
   public readonly data: string = inject(MAT_DIALOG_DATA);
 
   public createMaterialForm = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    material_link: new FormControl('', [
-      Validators.required,
-      Validators.pattern(dataTypeChecker(this.data)),
-    ]),
+    material_link: new FormControl('', [Validators.required, Validators.pattern( dataTypeChecker(this.data) )]),
   });
 
   public createMaterial(): void {

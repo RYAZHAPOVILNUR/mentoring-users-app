@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialsListComponent } from '../materials-list/materials-list.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { MaterialsFacade } from '@materials/data-access';
 import { LetDirective } from '@ngrx/component';
 import { MaterialsDTO } from '@users/core/data-access';
@@ -31,16 +31,14 @@ import { MaterialsContentComponent } from '@users/materials/feature-materials-co
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialsListContainerComponent {
-  private readonly materialsFacade = inject(MaterialsFacade);
-  private readonly router = inject(Router);
-  private readonly dialog = inject(MatDialog);
-  private readonly destroyRef = inject(DestroyRef);
-
   constructor() {
     this.materialsFacade.init();
     this.materialsFacade.getFolder();
   }
-
+  private readonly materialsFacade = inject(MaterialsFacade);
+  private readonly router = inject(Router);
+  private readonly dialog = inject(MatDialog);
+  private readonly destroyRef = inject(DestroyRef);
   public status$ = this.materialsFacade.selectStatus$;
   public materials$ = this.materialsFacade.allMaterials$;
   public folderName$ = this.materialsFacade.selectFolder$;
@@ -62,11 +60,8 @@ export class MaterialsListContainerComponent {
       .subscribe((req) => req && this.materialsFacade.addMaterial(req));
   }
   public openMaterial(material: MaterialsDTO) {
-    console.log(material.material_link);
     this.dialog.open(MaterialsContentComponent, {
       data: material,
-      height: 'auto',
-      width: 'auto',
     });
   }
 }

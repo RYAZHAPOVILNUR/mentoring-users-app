@@ -23,13 +23,11 @@ export const selectMaterials = createSelector(
   (state: MaterialsState) => selectAll(state)
 );
 
-//для работы с селекторами (все энтити)
 export const selectMaterialsEntities = createSelector(
   selectMaterialsState,
   (state: MaterialsState) => selectEntities(state)
 );
 
-//для работы с селекторами (все id энтити)
 export const selectSelectedMaterialId = createSelector(
   selectMaterialsState,
   (state: MaterialsState) => state.selectedId

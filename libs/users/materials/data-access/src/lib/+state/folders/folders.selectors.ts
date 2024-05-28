@@ -25,13 +25,11 @@ export const selectFolders = createSelector(
   (state: FoldersState) => selectAll(state)
 );
 
-//для работы с селекторами (все энтити)
 export const selectFoldersEntities = createSelector(
   selectFoldersState,
   (state: FoldersState) => selectEntities(state)
 );
 
-//для работы с селекторами (все id энтити)
 export const selectSelectedFolderId = createSelector(
   selectFoldersState,
   (state: FoldersState) => state.selectedId

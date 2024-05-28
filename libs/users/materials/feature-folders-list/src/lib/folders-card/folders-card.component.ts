@@ -22,8 +22,8 @@ import { MatIconModule } from '@angular/material/icon';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersCardComponent {
-  @Input() folder!: FolderDTO;
-  @Output() deleteEvent = new EventEmitter<FolderDTO>();
+  @Input() public folder!: FolderDTO;
+  @Output() public deleteEvent = new EventEmitter<FolderDTO>();
 
   public onDeleteClick(folder: FolderDTO) {
     this.deleteEvent.emit(folder);

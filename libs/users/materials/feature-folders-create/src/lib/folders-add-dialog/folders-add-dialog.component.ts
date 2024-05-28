@@ -1,22 +1,8 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogModule,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import {
-  FormControl,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
@@ -41,11 +27,8 @@ export class FoldersAddDialogComponent {
   private dialogRef = inject(MatDialogRef<FoldersAddDialogComponent>);
   public readonly data: string = inject(MAT_DIALOG_DATA);
 
-  public folderName = new FormControl('', [
-    Validators.required,
-    Validators.min(0),
-  ]);
-
+  public folderName = new FormControl('', [ Validators.required, Validators.min(0) ]);
+  
   onNoClick(): void {
     this.dialogRef.close(null);
   }

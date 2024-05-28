@@ -11,12 +11,8 @@ export class MaterialsFacade {
   private readonly store = inject(Store);
   private readonly folderFacade = inject(FoldersFacade);
 
-  public readonly allMaterials$ = this.store.select(
-    MaterialsSelectors.selectMaterials
-  );
-  public readonly selectStatus$ = this.store.select(
-    MaterialsSelectors.selectMaterialsStatus
-  );
+  public readonly allMaterials$ = this.store.select(MaterialsSelectors.selectMaterials);
+  public readonly selectStatus$ = this.store.select(MaterialsSelectors.selectMaterialsStatus);
   public readonly selectFolder$ = this.folderFacade.allFolders$;
 
   public init() {

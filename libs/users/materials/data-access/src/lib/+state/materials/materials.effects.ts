@@ -3,11 +3,7 @@ import { ApiService } from '@users/core/http';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { switchMap, catchError, of, map, withLatestFrom } from 'rxjs';
 import { MaterialsActions } from './materials.actions';
-import {
-  CreateMaterialsDTO,
-  MaterialsDTO,
-  selectRouteParams,
-} from '@users/core/data-access';
+import { CreateMaterialsDTO, MaterialsDTO, selectRouteParams} from '@users/core/data-access';
 import { Store } from '@ngrx/store';
 
 export const MaterialsInitEffect = createEffect(
