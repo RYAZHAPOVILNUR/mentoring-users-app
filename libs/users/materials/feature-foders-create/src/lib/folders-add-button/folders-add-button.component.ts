@@ -7,8 +7,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { FoldersAddDialogComponent } from '../folders-add-dialog/folders-add-dialog.component';
 import { FoldersFacade } from '../../../../data-access/src/lib/+state/folders/folders.facade';
 import { FolderCreate } from 'libs/users/materials/data-access/src/lib/models/folders.interface';
-import { tap } from 'rxjs';
+import { tap, catchError } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { of } from 'rxjs';
+
 @Component({
   selector: 'users-folders-add-button',
   standalone: true,
@@ -21,16 +23,24 @@ export class FoldersAddButtonComponent {
   private foldersFacade = inject(FoldersFacade);
   private dialog = inject(MatDialog);
   private destroyRef = inject(DestroyRef);
+
   openDialog() {
     const dialogRef = this.dialog.open(FoldersAddDialogComponent, {
       width: '270px',
     });
+
     dialogRef
       .afterClosed()
       .pipe(
         takeUntilDestroyed(this.destroyRef),
-        tap((result: FolderCreate) => {
-          this.foldersFacade.createFolder(result);
+        tap((result: FolderCreate | undefined) => {
+          if (result) {
+            this.foldersFacade.createFolder(result);
+          }
+        }),
+        catchError((error) => {
+          console.error('Error creating folder:', error);
+          return of(null);
         })
       )
       .subscribe();

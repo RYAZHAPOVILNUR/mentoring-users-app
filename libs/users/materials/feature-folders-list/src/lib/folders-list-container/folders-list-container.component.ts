@@ -10,8 +10,9 @@ import { Router } from '@angular/router';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { MatDialog } from '@angular/material/dialog';
-import { tap } from 'rxjs';
+import { tap, catchError } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'users-folders-list-container',
@@ -30,6 +31,7 @@ export class FoldersListContainerComponent {
   public readonly status$ = this.foldersFacade.status$;
   public readonly error$ = this.foldersFacade.error$;
   private readonly destroyRef = inject(DestroyRef);
+
   constructor(public store: Store) {
     this.foldersFacade.load();
   }
@@ -49,10 +51,14 @@ export class FoldersListContainerComponent {
       .afterClosed()
       .pipe(
         takeUntilDestroyed(this.destroyRef),
-        tap((result) => {
+        tap((result: boolean | undefined) => {
           if (result) {
             this.foldersFacade.deleteFolder(folder.id);
           }
+        }),
+        catchError((error) => {
+          console.error('Error deleting folder:', error);
+          return of(null);
         })
       )
       .subscribe();

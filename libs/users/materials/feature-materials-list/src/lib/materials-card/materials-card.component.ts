@@ -14,7 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class MaterialsCardComponent {
   public hover = false;
-  @Input()
+  @Input({ required: true })
   material!: Material;
   @Output()
   deleteMaterial = new EventEmitter<number>();

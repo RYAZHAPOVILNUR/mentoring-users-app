@@ -5,7 +5,7 @@ import { MaterialsFacade } from '../../../../data-access/src/lib/+state/material
 import { MaterialsCardComponent } from '../materials-card/materials-card.component';
 import { LetDirective } from '@ngrx/component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MaterialsAddButtonComponent } from '../../../../feature-materials-create/src/lib/materials-add-button/materials-add-button.component';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
