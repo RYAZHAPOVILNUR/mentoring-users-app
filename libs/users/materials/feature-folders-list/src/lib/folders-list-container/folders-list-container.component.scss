@@ -1,0 +1,23 @@
+.folder-container {
+  position: relative;
+  overflow: auto;
+  max-height: 100%;
+}
+
+.folder__list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+.folder__button-container {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.folders__card {
+  cursor: pointer;
+}

@@ -1,0 +1,40 @@
+.card {
+  background: #b8b7bd;
+  width: 10rem;
+
+  &:hover {
+    opacity: 0.8;
+    transition: opacity 0.5s;
+    box-shadow: 4px 8px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .card__delete-button {
+    opacity: 0;
+    transition: opacity 1s, background 1s, border-radius 1s;
+    background: transparent;
+    border-radius: 0;
+  }
+
+  &:hover .card__delete-button {
+    opacity: 1;
+    background: rgb(157, 153, 153);
+    border-radius: 50%;
+  }
+}
+
+.card__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card__title {
+  font-weight: 500;
+  font-size: 1em;
+  margin-bottom: 5px;
+}
+
+.card__created-date {
+  font-size: 0.9em;
+}

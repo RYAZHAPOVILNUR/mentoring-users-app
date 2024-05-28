@@ -50,5 +50,6 @@
     "@nx/angular:component": {
       "style": "scss"
     }
-  }
+  },
+  "proxy": "proxy.conf.json"
 }

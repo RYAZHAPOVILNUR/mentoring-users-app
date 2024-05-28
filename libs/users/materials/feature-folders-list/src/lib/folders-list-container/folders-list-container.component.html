@@ -1,0 +1,29 @@
+<ng-container
+  *ngrxLet="{
+    folders: folders$,
+    status: status$,
+    errors: error$
+  } as vm"
+  class="folder-container"
+>
+  <ng-container *ngIf="vm.status === 'loading'">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </ng-container>
+  <ng-container *ngIf="vm.status === 'loaded'">
+    <div class="folder__list">
+      <users-folders-card
+        class="folders__card"
+        (dblclick)="openFolder(folder)"
+        (deleteFolder)="onDeleteFolder($event)"
+        [folder]="folder"
+        *ngFor="let folder of vm.folders"
+      ></users-folders-card>
+    </div>
+    <div class="folder__button-container">
+      <users-folders-add-button></users-folders-add-button>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="vm.status === 'error'">
+    <div class="folder__error-message">{{ vm.errors }}</div>
+  </ng-container>
+</ng-container>

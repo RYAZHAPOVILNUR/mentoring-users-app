@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Добавление новой папки</h2>
+<mat-dialog-content>
+  <form [formGroup]="dialogForm">
+    <mat-form-field>
+      <input formControlName="title" type="text" matInput placeholder="введите название" />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Отмена</button>
+  <button mat-button color="warn" (click)="onSave()">Сохранить</button>
+</mat-dialog-actions>

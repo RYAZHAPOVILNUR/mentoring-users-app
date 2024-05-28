@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "https://www.w3.org",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

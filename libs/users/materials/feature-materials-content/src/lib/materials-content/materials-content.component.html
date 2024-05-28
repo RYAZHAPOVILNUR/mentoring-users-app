@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>{{ data.title }}</h1>
+<div mat-dialog-content>
+  <ng-container [ngSwitch]="data.type">
+    <ng-container *ngSwitchCase="'pdf'">
+      <pdf-viewer
+        [src]="data.content"
+        [render-text]="true"
+        [original-size]="false"
+        style="width: 400px; height: 500px"
+      ></pdf-viewer>
+    </ng-container>
+    <ng-container *ngSwitchCase="'youtube'">
+      <p><span>Cслылка на видео:</span> {{ data.content }}</p>
+      <img [src]="getYoutubeThumbnail(data.content)" alt="YouTube video preview" class="youtube-thumbnail" />
+    </ng-container>
+    <ng-container *ngSwitchCase="'audio'">
+      <audio controls>
+        <source [src]="data.content" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <p>Unsupported content type</p>
+    </ng-container>
+  </ng-container>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>

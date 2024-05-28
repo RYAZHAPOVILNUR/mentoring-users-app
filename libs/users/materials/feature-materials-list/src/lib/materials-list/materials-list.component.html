@@ -1,0 +1,37 @@
+<ng-container
+  *ngrxLet="{
+    materials: materials$,
+    status: status$,
+    errors: error$
+  } as vm"
+>
+  <ng-container *ngIf="vm.status === 'loading'">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </ng-container>
+
+  <ng-container *ngIf="vm.status === 'loaded'">
+    <div class="material__header">
+      <button mat-icon-button (click)="goBack()">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </button>
+      <p>{{ folderTitle }}</p>
+    </div>
+
+    <div class="materials__container">
+      <div class="materials__card-list">
+        <users-materials-card
+          [material]="material"
+          (dblclick)="openMaterial(material)"
+          (deleteMaterial)="onDeleteMaterial($event)"
+          *ngFor="let material of vm.materials"
+        ></users-materials-card>
+      </div>
+
+      <users-materials-add-button class="add-button"></users-materials-add-button>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="vm.status === 'error'">
+    <div class="error-message">{{ vm.errors }}</div>
+  </ng-container>
+</ng-container>

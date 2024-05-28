@@ -1,4 +1,4 @@
-import { ApplicationConfig, importProvidersFrom, isDevMode } from '@angular/core';
+import { ApplicationConfig, LOCALE_ID, importProvidersFrom, isDevMode } from '@angular/core';
 import { provideRouter, withEnabledBlockingInitialNavigation } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
@@ -20,6 +20,16 @@ import { articlesEffects, articlesFeature, commentsEffects, commentsFeature } fr
 import { tasksEffects, tasksFeature } from '@users/users/task/data-access';
 import { CLIENT_ID, githubApiEffects, githubApiFeature } from '@users/core/github-api/data-access';
 import { backlogFeature, backlogEffects } from '@users/users/backlog/data-access';
+import { FoldersEffects } from '../../../../libs/users/materials/data-access/src/lib/+state/folders/folders.effects';
+import { MaterialsEffects } from '../../../../libs/users/materials/data-access/src/lib/+state/materials/materials.effects';
+import {
+  FOLDERS_FEATURE_KEY,
+  foldersReducer,
+} from 'libs/users/materials/data-access/src/lib/+state/folders/folders.reducer';
+import {
+  MATERIALS_FEATURE_KEY,
+  materialsReduser,
+} from 'libs/users/materials/data-access/src/lib/+state/materials/materials.reducer';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -35,7 +45,9 @@ export const appConfig: ApplicationConfig = {
       commentsEffects,
       githubApiEffects,
       backlogEffects,
-      SettingsEffects
+      SettingsEffects,
+      FoldersEffects,
+      MaterialsEffects
     ),
     provideStore({
       router: routerReducer,
@@ -47,6 +59,8 @@ export const appConfig: ApplicationConfig = {
       [tasksFeature.name]: tasksFeature.reducer,
       [githubApiFeature.name]: githubApiFeature.reducer,
       [backlogFeature.name]: backlogFeature.reducer,
+      [FOLDERS_FEATURE_KEY]: foldersReducer,
+      [MATERIALS_FEATURE_KEY]: materialsReduser,
     }),
     provideRouterStore(),
     provideStoreDevtools({
@@ -66,6 +80,7 @@ export const appConfig: ApplicationConfig = {
       provide: DADATA_TOKEN,
       useValue: environment.dadata_api_key,
     },
+
     {
       provide: CLIENT_ID,
       useValue: environment.github_client_id,

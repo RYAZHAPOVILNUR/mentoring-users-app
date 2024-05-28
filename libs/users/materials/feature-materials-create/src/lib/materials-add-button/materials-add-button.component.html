@@ -1,0 +1,17 @@
+<button mat-fab color="primary" [matMenuTriggerFor]="addMenu" class="add-button">
+  <mat-icon>add</mat-icon>
+</button>
+<mat-menu #addMenu="matMenu">
+  <button mat-menu-item (click)="openDialog('видео')">
+    <mat-icon>videocam</mat-icon>
+    <span>Видео</span>
+  </button>
+  <button mat-menu-item (click)="openDialog('подкаст')">
+    <mat-icon>audiotrack</mat-icon>
+    <span>Подкаст</span>
+  </button>
+  <button mat-menu-item (click)="openDialog('PDF')">
+    <mat-icon>picture_as_pdf</mat-icon>
+    <span>PDF</span>
+  </button>
+</mat-menu>

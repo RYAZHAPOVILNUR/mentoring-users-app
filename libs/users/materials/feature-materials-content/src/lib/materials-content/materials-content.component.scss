@@ -1,0 +1,20 @@
+.youtube-thumbnail {
+  display: block;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+p.youtube-link {
+  text-align: center;
+  margin-bottom: 16px;
+  color: #d22;
+  font-weight: bold;
+}
+span {
+  font-weight: bold;
+}
