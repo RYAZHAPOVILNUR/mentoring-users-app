@@ -35,6 +35,11 @@ export const selectSelectedFolderId = createSelector(
   (state: FoldersState) => state.selectedId
 );
 
+export const selectActiveFolder = createSelector(
+  selectFoldersState,
+  (state => state.activeFolder)
+)
+
 export const selectEntity = createSelector(
   selectFoldersEntities,
   selectSelectedFolderId,

@@ -30,3 +30,11 @@
   (click)="onAddFolderClick()"
   class="fixed bottom-16 right-16"
 />
+
+<ng-template #error>
+  <div class="alert alert-danger" role="alert">
+    <h1>{{vm.errors?.status}}</h1>
+    <hr>
+    {{vm.errors}}
+  </div>
+</ng-template>

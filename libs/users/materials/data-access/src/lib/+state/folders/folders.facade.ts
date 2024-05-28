@@ -12,6 +12,9 @@ export class FoldersFacade {
   public readonly allFolders$ = this.store.select(
     FoldersSelectors.selectFolders
   );
+  public readonly selectActiveFolder$ = this.store.select(
+    FoldersSelectors.selectActiveFolder
+  );
   public readonly selectStatus$ = this.store.select(
     FoldersSelectors.selectFoldersStatus
   );

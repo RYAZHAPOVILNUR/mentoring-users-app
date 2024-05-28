@@ -3,18 +3,18 @@
 </ng-container>
 
 <ng-template #loadingResult>
-  <button
-    mat-fab
-    extended
-    color="primary"
-    class="btn"
-    aria-label="close dialog"
-    (click)="closeFolder()"
-  >
-    <mat-icon>arrow_back</mat-icon>
-    {{ vm.folderName[0].title }}
-  </button>
-  <ng-container *ngIf="vm.status === 'loaded'">
+  <ng-container *ngIf="vm.status === 'loaded', else error">
+    <button
+      mat-fab
+      extended
+      color="primary"
+      class="btn"
+      aria-label="close dialog"
+      (click)="closeFolder()"
+    >
+      <mat-icon>arrow_back</mat-icon>
+      {{ vm.folderName?.title }}
+    </button>
     <div class="container">
       <div class="row">
         <ng-container *ngIf="vm.materials.length > 0">
@@ -38,3 +38,11 @@
   (addTypeEvent)="openDialog($event)"
   class="fixed bottom-16 right-16"
 />
+
+<ng-template #error>
+ <div class="alert alert-danger" role="alert">
+    <h1>{{vm.errors?.status}}</h1>
+    <hr>
+    {{vm.errors}}
+  </div>
+</ng-template>

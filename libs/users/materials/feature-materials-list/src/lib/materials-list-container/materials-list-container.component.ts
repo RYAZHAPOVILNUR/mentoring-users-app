@@ -42,6 +42,7 @@ export class MaterialsListContainerComponent {
   public status$ = this.materialsFacade.selectStatus$;
   public materials$ = this.materialsFacade.allMaterials$;
   public folderName$ = this.materialsFacade.selectFolder$;
+  public errors$ = this.materialsFacade.selectError$;
 
   public onDeleteClick(material: MaterialsDTO) {
     this.materialsFacade.removeMaterial(material.id);

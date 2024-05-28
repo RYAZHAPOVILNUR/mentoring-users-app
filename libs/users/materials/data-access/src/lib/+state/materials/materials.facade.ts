@@ -13,7 +13,9 @@ export class MaterialsFacade {
 
   public readonly allMaterials$ = this.store.select(MaterialsSelectors.selectMaterials);
   public readonly selectStatus$ = this.store.select(MaterialsSelectors.selectMaterialsStatus);
-  public readonly selectFolder$ = this.folderFacade.allFolders$;
+  public readonly selectFolder$ = this.folderFacade.selectActiveFolder$;
+  public readonly selectError$ = this.store.select(MaterialsSelectors.selectMaterialsErrors);
+  
 
   public init() {
     this.store.dispatch(MaterialsActions.loadMaterials());
