@@ -51,6 +51,14 @@ export class UsersDetailComponent {
     });
   }
 
+  public onEditStoryPoints(totalStoryPoints: number, onSuccessCb: onSuccessEditionCbType) {
+    this.usersFacade.editUserStoryPoints(
+      totalStoryPoints,
+      this.user.id,
+      onSuccessCb,
+    )
+  }
+
   onCloseUser() {
     this.router.navigate(['/admin/users']);
   }

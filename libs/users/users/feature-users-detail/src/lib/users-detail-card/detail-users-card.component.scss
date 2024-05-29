@@ -60,3 +60,14 @@ div.alert-success {
 .input-icon {
   cursor: pointer;
 }
+
+.number-input::-webkit-outer-spin-button,
+.number-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.number-input {
+  -moz-appearance: textfield;
+}

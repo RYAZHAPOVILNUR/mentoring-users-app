@@ -86,7 +86,6 @@ export const editUser = createEffect(
       ofType(UsersActions.editUser),
       withLatestFrom(usersEntities$),
       filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
-      tap((tapData) => {console.log('>>>usersEntities: ', tapData);}),
       map(([{ userData, id, onSuccessCb }, usersEntities]) => ({
         user: {
           ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
@@ -123,17 +122,17 @@ export const editUserStoryPoints = createEffect(
       ofType(UsersActions.editUserStoryPoints),
       withLatestFrom(usersEntities$),
       filter(([{id}, usersEntities]) => Boolean(usersEntities[id])),
-      map(([{id, totalStoryPoints, onSucesCB}, usersEntities]) => ({
+      map(([{id, totalStoryPoints, onSuccessCb}, usersEntities]) => ({
         user: {
           ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
           totalStoryPoints
         },
-        onSucesCB,
+        onSuccessCb,
       })),
-      switchMap(({user, onSucesCB}) =>
+      switchMap(({user, onSuccessCb}) =>
         apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
           map((userData) => UsersActions.editUserStoryPointsSuccess({userData})),
-          tap(() => onSucesCB()),
+          tap(() => onSuccessCb()),
           catchError((error) => {
             console.error('Error', error);
             return of(UsersActions.editUserStoryPointsFailed({ error }));

@@ -47,7 +47,7 @@ export const editUserStoryPoints = createAction(
   props<{
     totalStoryPoints: number;
     id: number;
-    onSucesCB: onSuccessEditionCbType;
+    onSuccessCb: onSuccessEditionCbType;
   }>()
 );
 export const editUserStoryPointsSuccess = createAction(

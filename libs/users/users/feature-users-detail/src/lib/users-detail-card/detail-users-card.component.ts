@@ -60,7 +60,6 @@ export class DetailUsersCardComponent implements OnInit {
     status: 'init',
     errors: null,
   };
-  public storyPointsEditMode = false;
 
   public get vm() {
     return this._vm;
@@ -76,6 +75,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
+      this.totalStorypoints.patchValue(vm.user.totalStoryPoints || 0);
     }
     if (vm.editMode) {
       this.formGroup.enable();
@@ -89,12 +89,16 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
-  });
+  })
 
-  public totalStorypoints = new FormControl({value: 0, disabled: !this.storyPointsEditMode });
+  public totalStorypoints = new FormControl({value: 0, disabled: true });
 
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
+    onSuccessCb: onSuccessEditionCbType;
+  }>();
+  @Output() editStoryPoints = new EventEmitter<{
+    totalStoryPoints: number;
     onSuccessCb: onSuccessEditionCbType;
   }>();
   @Output() closeUser = new EventEmitter();
@@ -102,6 +106,7 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('snackbarStoryPoints') snackbarStoryPointsTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -113,6 +118,7 @@ export class DetailUsersCardComponent implements OnInit {
   private snackBar = inject(MatSnackBar);
   private readonly destroyRef = inject(DestroyRef);
   public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
+  public isStoryPointsFieldChanged$ = new BehaviorSubject<boolean>(false);
 
   ngOnInit(): void {
     this.checkChangeFields();
@@ -124,6 +130,14 @@ export class DetailUsersCardComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'top',
     });
+
+  private readonly onEditStoryPointsSuccess: onSuccessEditionCbType = () => {
+    this.snackBar.openFromTemplate(this.snackbarStoryPointsTemplateRef, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+  }
 
   onSubmit(): void {
     this.editUser.emit({
@@ -155,22 +169,12 @@ export class DetailUsersCardComponent implements OnInit {
     this.deleteUser.emit();
   }
 
-  onOpenStoryPointsEditMode() {
-    this.storyPointsEditMode = true;
-    this.totalStorypoints.enable();
-  }
-
-  onCloseStoryPointsEditMode() {
-    this.storyPointsEditMode = false;
-    this.totalStorypoints.disable();
-  }
-
-  private readonly onEditStoryPointsSuccess: onSuccessEditionCbType = () => {
-    console.log('editStoryPointsSuccess...');
-  }
-
   onStoryPointsSubmit() {
-    console.log('storyPoints submit: ', this.totalStorypoints.value);
+    this.totalStorypoints.disable();
+    this.editStoryPoints.emit({
+      totalStoryPoints: this.totalStorypoints.value || 0,
+      onSuccessCb: this.onEditStoryPointsSuccess,
+    })
   }
 
   public onOptionClicked(selectedValue: string) {
@@ -192,5 +196,16 @@ export class DetailUsersCardComponent implements OnInit {
         })
       )
       .subscribe();
+
+    this.totalStorypoints.valueChanges
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        tap(() => {
+          this.isStoryPointsFieldChanged$.next(
+            this.vm.user?.totalStoryPoints !== this.totalStorypoints.value
+          );
+        })
+      )
+      .subscribe()
   }
 }

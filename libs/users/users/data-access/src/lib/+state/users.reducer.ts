@@ -48,7 +48,9 @@ const reducer = createReducer(
   })),
   on((UsersActions.deleteUserSuccess), (state, { id }) => usersAdapter.removeOne(id, { ...state })),
   on(UsersActions.addUserSuccess, (state, { userData }) => usersAdapter.addOne({ ...userData }, { ...state })),
-  on((UsersActions.editUserSuccess, UsersActions.editUserStoryPointsSuccess), (state, { userData }) =>
+  on(UsersActions.editUserSuccess,
+    UsersActions.editUserStoryPointsSuccess,
+    (state, { userData }) =>
     usersAdapter.updateOne(
       {
         id: userData.id,
@@ -57,7 +59,9 @@ const reducer = createReducer(
       state
     )
   ),
-  on((UsersActions.editUserFailed, UsersActions.editUserStoryPointsFailed), (state, { error }) => ({
+  on(UsersActions.editUserFailed,
+    UsersActions.editUserStoryPointsFailed,
+    (state, { error }) => ({
     ...state,
     status: 'error' as const,
     error,
