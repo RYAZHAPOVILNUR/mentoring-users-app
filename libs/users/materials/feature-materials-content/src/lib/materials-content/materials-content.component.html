@@ -6,15 +6,28 @@
         [src]="data.content"
         [render-text]="true"
         [original-size]="false"
-        style="width: 400px; height: 500px"
+        style="width: 100%; height: 500px"
       ></pdf-viewer>
     </ng-container>
     <ng-container *ngSwitchCase="'youtube'">
-      <p><span>Cслылка на видео:</span> {{ data.content }}</p>
-      <img [src]="getYoutubeThumbnail(data.content)" alt="YouTube video preview" class="youtube-thumbnail" />
+      <div class="youtube-container" *ngIf="!isVideoPlaying; else videoPlayer">
+        <img [src]="data.content | youtubeThumbnail" alt="YouTube video preview" class="youtube-thumbnail" />
+        <button mat-button class="play-button" (click)="playVideo()">Play Video</button>
+      </div>
+      <ng-template #videoPlayer>
+        <iframe
+          width="100%"
+          height="315"
+          *ngIf="videoUrl"
+          [src]="videoUrl"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </ng-template>
     </ng-container>
     <ng-container *ngSwitchCase="'audio'">
-      <audio controls>
+      <audio controls style="width: 100%">
         <source [src]="data.content" type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
