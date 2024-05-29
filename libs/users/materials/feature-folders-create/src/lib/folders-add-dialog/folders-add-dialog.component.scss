@@ -1,0 +1,16 @@
+.wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+}
+
+.folders-dailog-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.folders-dialog-form-actions {
+  display: flex;
+  justify-content: space-around;
+}

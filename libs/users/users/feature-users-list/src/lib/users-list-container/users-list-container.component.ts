@@ -17,7 +17,6 @@ import { CreateUsersButtonComponent } from '@users/feature-users-create';
   imports: [
     CommonModule,
     UsersListComponent,
-    UsersFilterComponent,
     MatButtonModule,
     MatDialogModule,
     LetDirective,
@@ -30,19 +29,20 @@ import { CreateUsersButtonComponent } from '@users/feature-users-create';
   providers: [UsersListContainerStore],
 })
 export class UsersListContainerComponent {
+  private readonly router = inject(Router);
   private readonly componentStore = inject(UsersListContainerStore);
-  public usersFacade = inject(UsersFacade);
+
+  public readonly usersFacade = inject(UsersFacade);
   public readonly users$ = this.componentStore.users$;
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;
   public readonly loggedUser$ = this.usersFacade.loggedUser$;
-  private readonly router = inject(Router);
 
-  onDeleteUser(user: UsersVM) {
+  public onDeleteUser(user: UsersVM) {
     this.componentStore.deleteUser(user);
   }
 
-  onRedirectToEdit({ id, editMode }: { id: number; editMode: boolean }) {
+  public onRedirectToEdit({ id, editMode }: { id: number; editMode: boolean }) {
     this.router.navigate(['/admin/users', id], {
       queryParams: { edit: editMode },
     });

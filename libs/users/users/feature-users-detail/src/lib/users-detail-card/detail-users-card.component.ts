@@ -128,7 +128,7 @@ export class DetailUsersCardComponent implements OnInit {
       verticalPosition: 'top',
     });
 
-  onSubmit(): void {
+  public onSubmit(): void {
     this.editUser.emit({
       user: {
         name: this.formGroup.value.name || '',
@@ -142,7 +142,7 @@ export class DetailUsersCardComponent implements OnInit {
     });
   }
 
-  onAddStoryPoints() {
+  public onAddStoryPoints() {
     this.formTotalStoryPoints.disable();
     this.addStoryPoints.emit({
       user: {
@@ -157,19 +157,19 @@ export class DetailUsersCardComponent implements OnInit {
     });
   }
 
-  onCloseUser() {
+  public onCloseUser() {
     this.closeUser.emit();
   }
 
-  onCloseEditMode() {
+  public onCloseEditMode() {
     this.closeEditMode.emit();
   }
 
-  onOpenEditMode() {
+  public onOpenEditMode() {
     this.openEditMode.emit();
   }
 
-  onDeleteUser() {
+  public onDeleteUser() {
     this.deleteUser.emit();
   }
 

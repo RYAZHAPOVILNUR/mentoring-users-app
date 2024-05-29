@@ -1,0 +1,65 @@
+<div class="wrapper">
+  <h1 mat-dialog-title>
+    {{ 'Добавление ' + materialTitle }}
+  </h1>
+  <mat-dialog-content [formGroup]="materialFormGroup">
+    <mat-form-field class="materials-dailog-form-field">
+      <input
+        type="name"
+        matInput
+        placeholder="Название файла"
+        formControlName="title"
+        tabindex="-1"
+      />
+      <mat-error>Введите название {{ materialTitle }}</mat-error>
+      <button
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        *ngIf="materialFormGroup.controls.title"
+        (click)="materialFormGroup.controls.title.setValue('')"
+        tabindex="-1"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+          type="url"
+          matInput
+          placeholder="Ссылка на файл"
+          formControlName="material_link"
+          tabindex="-1"
+        />
+        <mat-error>Введите ссылку на {{ materialTitle }}</mat-error>
+        <button
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          *ngIf="materialFormGroup.controls.material_link"
+          (click)="materialFormGroup.controls.material_link.setValue('')"
+          tabindex="-1"
+        >
+        <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+  </mat-dialog-content>
+  <div mat-dialog-actions class="materials-dialog-form-actions">
+    <button
+      mat-button
+      (click)="cancel()"
+      tabindex="-1"
+    >
+      <span>Отмена</span>
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="materialFormGroup.invalid"
+      (click)="save()"
+      tabindex="-1"
+    >
+      <span>Сохранить</span>
+    </button>
+  </div>
+</div>

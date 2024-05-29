@@ -18,16 +18,12 @@ import { CreateUserDTO } from '@users/core/data-access';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateUsersButtonComponent {
-  private name!: string;
-  private email!: string;
-  public dialog = inject(MatDialog);
   private readonly usersFacade = inject(UsersFacade);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly dialog = inject(MatDialog);
 
-  openAddUserDialog(): void {
-    const dialogRef: MatDialogRef<CreateUsersDialogComponent> = this.dialog.open(CreateUsersDialogComponent, {
-      data: { name: this.name, email: this.email },
-    });
+  public openAddUserDialog(): void {
+    const dialogRef: MatDialogRef<CreateUsersDialogComponent> = this.dialog.open(CreateUsersDialogComponent);
     dialogRef
       .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))

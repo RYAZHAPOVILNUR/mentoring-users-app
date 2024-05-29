@@ -21,9 +21,10 @@ const initialState: UsersListState = {
 export class UsersListContainerStore extends ComponentStore<UsersListState> {
   private readonly usersFacade = inject(UsersFacade);
   private readonly dialog = inject(MatDialog);
+
   public readonly users$ = this.select(({ users }) => users);
   public readonly status$ = this.select(this.usersFacade.status$, (status) => status);
-  public errors$ = this.select(this.usersFacade.errors$, (error) => error);
+  public readonly errors$ = this.select(this.usersFacade.errors$, (error) => error);
 
   constructor() {
     super(initialState);

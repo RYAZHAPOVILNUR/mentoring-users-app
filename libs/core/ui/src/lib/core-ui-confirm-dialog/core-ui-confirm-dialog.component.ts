@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   MAT_DIALOG_DATA,
@@ -20,14 +20,13 @@ export class CoreUiConfirmDialogComponent {
   public data: { dialogText: string } = inject(MAT_DIALOG_DATA);
   public dialogText: string = this.data.dialogText;
 
-  // private dialogRef = inject(MatDialogRef<CoreUiConfirmDialogComponent, boolean>)
-  constructor(private dialogRef: MatDialogRef<CoreUiConfirmDialogComponent, boolean>) {}
+  private dialogRef = inject(MatDialogRef<CoreUiConfirmDialogComponent, boolean>);
 
-  confirm() {
+  public confirm() {
     this.dialogRef.close(true);
   }
 
-  cancel() {
+  public cancel() {
     this.dialogRef.close(false)
   }
 }

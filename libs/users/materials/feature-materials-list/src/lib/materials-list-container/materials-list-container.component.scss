@@ -1,0 +1,20 @@
+.materials-list-navigation {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.folder-title {
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.materials-icon:hover {
+  cursor: pointer;
+}
+
+.materials-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}

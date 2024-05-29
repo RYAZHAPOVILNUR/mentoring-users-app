@@ -24,10 +24,10 @@ export class UsersDetailComponent {
   private readonly usersFacade = inject(UsersFacade);
   private readonly store = inject(Store);
   private readonly router = inject(Router);
-  public user!: UsersEntity;
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
 
+  public user!: UsersEntity;
   public readonly user$: Observable<UsersEntity | null> = this.usersFacade.openedUser$.pipe(
     tap((user) => {
       if (!user) {
@@ -51,27 +51,27 @@ export class UsersDetailComponent {
     });
   }
 
-  onAddStoryPoints(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
+  public onAddStoryPoints(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
     this.usersFacade.addUserStoryPoints(userData, this.user.id, onSuccessCb);
   }
 
-  onCloseUser() {
+  public onCloseUser() {
     this.router.navigate(['/admin/users']);
   }
 
-  onCloseEditMode() {
+  public onCloseEditMode() {
     this.router.navigate(['/admin/users', this.user.id], {
       queryParams: { edit: false },
     });
   }
 
-  onOpenEditMode() {
+  public onOpenEditMode() {
     this.router.navigate(['admin/users', this.user.id], {
       queryParams: { edit: true },
     });
   }
 
-  onDeleteUser() {
+  public onDeleteUser() {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
       data: {
         dialogText: `Вы уверены, что хотите удалить ${this.user.name}`,

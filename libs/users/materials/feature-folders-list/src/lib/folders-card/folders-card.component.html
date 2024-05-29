@@ -1,0 +1,19 @@
+<mat-card class="folders-card"
+  (mouseenter)="toggleDisplayItem()"
+  (mouseleave)="toggleDisplayItem()"
+  (dblclick)="onOpenMaterialsFolder(); $event.stopPropagation()"
+>
+  <mat-card-actions class="folders-card-actions">
+    <mat-icon>folder</mat-icon>
+    <mat-icon *ngIf="isDisplayItem" (click)="deleteFolder.emit(folder)">delete</mat-icon>
+  </mat-card-actions>
+  <mat-divider></mat-divider>
+  <mat-card-header class="folders-card-header">
+    <mat-card-title>
+      {{ folder.title ? folder.title : 'Безымянная папка' }}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="folders-card-content">
+    {{ folder.created_at | date }}
+  </mat-card-content>
+</mat-card>

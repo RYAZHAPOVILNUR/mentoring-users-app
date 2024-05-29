@@ -35,11 +35,11 @@ export class UsersCardComponent {
     this.trigger.openMenu();
   }
 
-  onDeleteUser(event: Event) {
+  public onDeleteUser(event: Event) {
     this.deleteUser.emit();
   }
 
-  redirectToEditPage(editMode: boolean, event: Event) {
+  public redirectToEditPage(editMode: boolean, event: Event) {
     const emitData = {
       id: this.user.id,
       editMode,

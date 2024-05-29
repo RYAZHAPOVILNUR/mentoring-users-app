@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, Inject, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
@@ -23,26 +23,22 @@ import { MatButtonModule } from '@angular/material/button';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateUsersDialogComponent {
-  public formGroup: FormGroup;
-  private formBuilder = inject(FormBuilder);
-  public dialogRef = inject(MatDialogRef<CreateUsersDialogComponent>);
+  private dialogRef = inject(MatDialogRef<CreateUsersDialogComponent>);
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { name: string; email: string }) {
-    this.formGroup = this.formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-    });
-  }
+  public readonly formGroup = new FormGroup({
+    name: new FormControl<string>('', { nonNullable : true, validators: [Validators.required, Validators.maxLength(18)] }),
+    email: new FormControl<string>('', { nonNullable : true,validators: [Validators.required, Validators.email] }),
+  });
 
-  cancel(): void {
+  public cancel(): void {
     this.dialogRef.close();
   }
 
-  save(): void {
+  public save(): void {
     if (this.formGroup.valid) {
       const formData = {
-        name: this.formGroup.value.name,
-        email: this.formGroup.value.email.trim().toLowerCase(),
+        name: this.formGroup.getRawValue().name,
+        email: this.formGroup.getRawValue().email.trim().toLowerCase(),
       };
       this.dialogRef.close(formData);
     }

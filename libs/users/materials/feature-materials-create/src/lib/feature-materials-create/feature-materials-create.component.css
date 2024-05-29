@@ -1,0 +1,16 @@
+.wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+}
+
+.materials-dailog-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.materials-dialog-form-actions {
+  display: flex;
+  justify-content: space-around;
+}

@@ -1,0 +1,25 @@
+.folders-card {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  padding: 5px;
+  word-break: break-all;
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
+}
+
+.folders-card-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 3px;
+  margin-bottom: 8px;
+}
+
+.folders-card-content {
+  margin-bottom: 5px;
+}
+
+.folders-card-actions {
+  display: flex;
+  justify-content: space-between;
+}
+

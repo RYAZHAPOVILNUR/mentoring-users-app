@@ -1,0 +1,31 @@
+<div class="wrapper">
+  <h1 mat-dialog-title>Создание новой папки</h1>
+  <mat-form-field class="folders-dailog-form-field">
+    <input
+      type="name"
+      matInput
+      placeholder="Название папки"
+      [formControl]="folderTitle"
+    />
+    <button
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      *ngIf="folderTitle.value"
+      (click)="folderTitle.setValue('')"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <div mat-dialog-actions class="folders-dialog-form-actions">
+    <button mat-button (click)="cancel()">Отмена</button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="folderTitle.invalid"
+      (click)="save()"
+    >
+      <span>Сохранить</span>
+    </button>
+  </div>
+</div>

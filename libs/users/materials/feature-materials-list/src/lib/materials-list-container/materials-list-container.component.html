@@ -1,0 +1,21 @@
+<div class="materials-list-navigation">
+  <mat-icon (click)="onRiderectToFolders()" class="materials-icon">arrow_back</mat-icon>
+  <span class="folder-title">{{ folderTitle }}</span>
+</div>
+<br>
+<ng-container
+*ngrxLet="{
+  materials: materialsAll$,
+  status: status$,
+  error: error$,
+} as vm"
+>
+  <users-materials-list
+    class="materials-list"
+    [vm]="vm"
+    (deleteMaterial)="onDeleteMaterial($event)"
+    (openMaterial)="onOpenMaterial($event)"
+  >
+  </users-materials-list>
+</ng-container>
+<users-materials-create-button></users-materials-create-button>

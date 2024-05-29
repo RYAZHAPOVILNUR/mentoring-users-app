@@ -1,0 +1,13 @@
+<button
+  mat-fab
+  [matMenuTriggerFor]="menu"
+  class="create-material-fab-button"
+>
+  <mat-icon>add</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button *ngFor="let btn of buttons" mat-menu-item (click)="openMaterialDialog(btn)">
+    <mat-icon>{{ btn.icon }}</mat-icon>
+    <span>{{ btn.title }}</span>
+  </button>
+</mat-menu>

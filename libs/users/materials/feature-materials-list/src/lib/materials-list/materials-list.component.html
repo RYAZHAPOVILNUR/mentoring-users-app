@@ -1,0 +1,21 @@
+<ng-container *ngIf="vm.status === 'loading' else loaded">
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+<ng-template #loaded>
+  <ng-container *ngIf="vm.status === 'loaded' else error">
+    <users-materials-card
+      *ngFor="let material of vm.materials"
+      [material]="material"
+      (deleteMaterial)="onDeleteMaterial($event)"
+      (openMaterial)="onOpenMaterial($event)"
+    >
+    </users-materials-card>
+  </ng-container>
+</ng-template>
+<ng-template #error>
+  <div class="alert alert-danger" role="alert">
+    <h1>{{ vm.error?.status }}</h1>
+    <hr />
+    <span>Ошибка, попробуйте еще раз.</span>
+  </div>
+</ng-template>

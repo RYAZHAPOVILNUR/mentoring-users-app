@@ -6,6 +6,7 @@
   <ng-container *ngIf="vm.status === 'loaded'; else error">
     <div class="container">
       <div class="row">
+        <users-filter></users-filter>
         <div class="col-md-4 mb-3" *ngFor="let user of vm.users">
           <users-card
             [user]="user"

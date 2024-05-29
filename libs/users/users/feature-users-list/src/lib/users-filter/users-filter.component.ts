@@ -17,7 +17,6 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
   styleUrls: ['./users-filter.component.css']
 })
 export class UsersFilterComponent implements OnInit, OnDestroy {
-
   private readonly usersFacade = inject(UsersFacade);
   public formcontrolName = new FormControl<string>('', { nonNullable : true });
 

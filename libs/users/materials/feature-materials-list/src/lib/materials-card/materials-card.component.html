@@ -1,0 +1,26 @@
+<mat-card class="materials-card"
+  (mouseenter)="toggleDisplayItem()"
+  (mouseleave)="toggleDisplayItem()"
+  (dblclick)="openMaterial.emit(material)"
+>
+  <mat-card-actions class="materials-card-actions">
+    <mat-icon *ngIf="material.material_link.endsWith('.pdf')">description</mat-icon>
+    <mat-icon *ngIf="material.material_link.endsWith('.mp3')">music_note</mat-icon>
+    <mat-icon *ngIf="!material.material_link.endsWith('.pdf') && !material.material_link.endsWith('.mp3')">movie</mat-icon>
+    <mat-icon
+      *ngIf="isDisplayItem"
+      (click)="deleteMaterial.emit(material)"
+    >
+      delete
+    </mat-icon>
+  </mat-card-actions>
+  <mat-divider></mat-divider>
+  <mat-card-header class="materials-card-header">
+    <mat-card-title>
+      {{ material.title ? material.title : 'Безымянный файл' }}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="materials-card-content">
+    {{ material.created_at | date }}
+  </mat-card-content>
+</mat-card>

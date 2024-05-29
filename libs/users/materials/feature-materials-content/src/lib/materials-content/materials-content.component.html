@@ -1,0 +1,52 @@
+<div class="wrapper">
+  <mat-dialog-actions class="materials-actions">
+    <span class="materials-content-title">{{ materialTitle }}</span>
+    <button mat-fab class="materials-actions-btn" (click)="close()"><mat-icon>close</mat-icon></button>
+  </mat-dialog-actions>
+  <mat-dialog-content [ngSwitch]="materialFormat" class="materials-content">
+
+    <ng-container *ngSwitchCase='materialType.pdf'>
+      <pdf-viewer
+        [src]="materialLink"
+        [render-text]="true"
+        [show-borders]="true"
+        [original-size]="false"
+        class="materials-content-pdf-viewer"
+      ></pdf-viewer>
+    </ng-container>
+
+    <ng-container *ngSwitchCase='materialType.video'>
+      <div class="materials-content-container" *ngIf="getPreviewType() === 'image'">
+        <a [href]="materialLink" class="materials-content-container-title">Смотри прямо сейчас по ссылке!</a>
+        <img
+        [src]="getVideoPreview()"
+        title="YouTube image preview"
+        class="materials-content-image-viewer"
+        >
+      </div>
+      <div class="materials-content-container" *ngIf="getPreviewType() === 'video'">
+        <span class="materials-content-container-title">Видео создано специально для тебя!</span>
+        <iframe
+        *ngIf="getPreviewType() === 'video'"
+        [src]="getPlayerPreview()"
+        width="600"
+        height="400"
+        title="YouTube video player"
+        frameborder="0"
+        allowfullscreen
+        >
+        </iframe>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase='materialType.podcast'>
+      <audio
+        [src]="materialLink"
+        controls
+      >
+      </audio>
+    </ng-container>
+
+  </mat-dialog-content>
+</div>
+
