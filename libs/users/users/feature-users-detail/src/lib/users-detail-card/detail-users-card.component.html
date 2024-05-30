@@ -124,7 +124,7 @@
         </form>
         <mat-form-field>
           <mat-label>Количество сторипоинтов:</mat-label>
-          <input
+          <input 
             matInput
             type="number"
             [formControl]="totalStoryPoints"
@@ -135,7 +135,7 @@
             aria-label="Clear"
             (click)="onAddStoryPoints()"
             *ngIf="totalStoryPoints.enabled"
-          > 
+          >
             <mat-icon>done</mat-icon>
           </button>
           <button
@@ -144,16 +144,16 @@
             aria-label="Clear"
             *ngIf="totalStoryPoints.enabled"
             (click)="totalStoryPoints.disable()"
-          > 
+          >
             <mat-icon>close</mat-icon>
           </button>
           <button
             matSuffix
-            mat-icon-button
             aria-label="Clear"
+            mat-icon-button
             *ngIf="totalStoryPoints.disabled"
             (click)="totalStoryPoints.enable()"
-          > 
+          >
             <mat-icon>add</mat-icon>
           </button>
         </mat-form-field>

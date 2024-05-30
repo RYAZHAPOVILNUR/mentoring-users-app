@@ -25,22 +25,22 @@ import {
   BehaviorSubject,
   distinctUntilChanged,
 } from 'rxjs';
-import { CommonModule, NgIfContext } from '@angular/common';
-import { onSuccessEditionCbType } from '@users/users/data-access';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { DetailUsersCardVm } from './detail-users-card-vm';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { DadataApiService } from '@dadata';
 import { PushPipe } from '@ngrx/component';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { DetailUsersCardVm } from './detail-users-card-vm';
+import { CommonModule, NgIfContext } from '@angular/common';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { onSuccessEditionCbType } from '@users/users/data-access';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -87,7 +87,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: vm.user.email,
         username: vm.user.username,
       });
-      this.totalStoryPoints.setValue(vm.user.totalStoryPoints);
+      this.totalStoryPoints.setValue(vm.user.totalStoryPoints)
     }
 
     if (vm.editMode) {
@@ -97,13 +97,14 @@ export class DetailUsersCardComponent implements OnInit {
     }
   }
   
-  public totalStoryPoints = new FormControl({ value: this.vm.user?.totalStoryPoints, disabled: true });
   public formGroup = new FormBuilder().group({
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
   });
+  public totalStoryPoints = new FormControl({value: this.vm.user?.totalStoryPoints, disabled: true});
+
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     filter(Boolean),
     debounceTime(200),
@@ -116,15 +117,14 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() openEditMode = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
   @Output() editUser = new EventEmitter<{ user: CreateUserDTO, onSuccessCb: onSuccessEditionCbType }>();
-  @Output() addStoryPoints = new EventEmitter<{ user: CreateUserDTO, onSuccessAddSP: onSuccessEditionCbType }>();
+  @Output() addStoryPoints = new EventEmitter<{ user: CreateUserDTO, onSuccessAddSP: onSuccessEditionCbType }>
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<string>;
   @ViewChild('snackbarSP') snackbarTemplateRefSP!: TemplateRef<string>;
 
   public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
   
-  
-  private dadata = inject(DadataApiService);
   private snackBar = inject(MatSnackBar);
+  private dadata = inject(DadataApiService);
   private readonly destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
@@ -137,25 +137,25 @@ export class DetailUsersCardComponent implements OnInit {
       verticalPosition: 'top',
       horizontalPosition: 'center',
     });
-  private onAddSPSuccess: onSuccessEditionCbType = () =>
+
+  private onSuccessAddSP: onSuccessEditionCbType = () =>
     this.snackBar.openFromTemplate(this.snackbarTemplateRefSP, {
       duration: 1000,
       verticalPosition: 'top',
       horizontalPosition: 'center',
     });
 
- 
-  onAddStoryPoints() {
+  onAddStoryPoints(): void {
     this.totalStoryPoints.disable();
     this.addStoryPoints.emit({
       user: {
         name: this.formGroup.value.name || '',
-        totalStoryPoints: this.totalStoryPoints.value || 0,
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        totalStoryPoints: this.totalStoryPoints.value || 0,
       },
-      onSuccessAddSP: this.onAddSPSuccess,
-      }
-    )}
+      onSuccessAddSP: this.onSuccessAddSP,
+    })
+  }
 
   onSubmit(): void {
     this.editUser.emit({
