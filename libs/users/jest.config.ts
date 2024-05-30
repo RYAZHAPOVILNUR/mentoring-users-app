@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'folders-list-container',
+  displayName: 'folders-list-ui-container',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory: '../../coverage/libs/users',

@@ -75,5 +75,13 @@
       "ARTICLE_SIZE": "Статья должна состоять минимум из 66 символов!",
       "HEADER_SIZE": "Заголовок должен содержать минимум 6 символов и не более 60!"
     }
+  },
+  "MATERIALS": {
+    "CREATE_FOLDER_TITLE": "Создание новой папки:",
+    "CREATE_FOLDER-SUBTITLE": "Введите имя папки",
+
+    "CREATE_FILE_TITLE": "Добавление нового файла:",
+    "CREATE_FILE_SUBTITLE": "Введите имя нового файла",
+    "CREATE_FILE_LINK": "Ссылка"
   }
 }

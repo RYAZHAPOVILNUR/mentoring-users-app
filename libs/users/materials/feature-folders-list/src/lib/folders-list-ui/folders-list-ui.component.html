@@ -1,0 +1,14 @@
+<ng-container *ngIf="status === 'loaded'; else loading">
+  <div class="container">
+
+    <div class="folders-list" *ngFor="let folder of folders">
+      <users-folders-card-ui
+        [folder]="folder"
+      />
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-template>

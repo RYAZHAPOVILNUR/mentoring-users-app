@@ -1,11 +1,8 @@
 <ng-container *ngIf="status === 'loaded'; else loading">
   <div class="container">
-    <div class="folders-list" *ngFor="let folder of folders">
-      <users-folders-card
-        [folder]="folder"
-        (renameFolder)="onRenameFolder(folder)"
-        (deleteFolder)="onDeleteFolder(folder)"
-
+    <div class="materials-list" *ngFor="let material of materials">
+      <users-materials-card-ui
+        [material]="material"
       />
     </div>
   </div>

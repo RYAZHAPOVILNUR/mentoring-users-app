@@ -1,23 +1,24 @@
 import { createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 import { Material } from '../../interfaces/material.interface';
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { materialsActions } from './materialsActions';
-import { MaterialState } from '../../interfaces/material-state.interface';
+import { materialsActions } from './materials.actions';
 
 export const MATERIALS_FEATURE_KEY = 'materials';
-export const materialsAdapter: EntityAdapter<Material> = createEntityAdapter<Material>();
-export const initialMaterialsState: MaterialState = materialsAdapter.getInitialState({
+export const materialsAdapter= createEntityAdapter<Material>();
+
+const initialState= materialsAdapter.getInitialState({
   status: 'init'}
 );
 
 export const materialsFeature = createFeature({
   name: MATERIALS_FEATURE_KEY,
   reducer: createReducer(
-    initialMaterialsState,
+    initialState,
     on(materialsActions.loadMaterials, (state) => ({
-      ...state,
-      status: 'loading'
-    })),
+        ...state,
+        status: 'loading'
+      })
+    ),
     on(materialsActions.loadMaterialsSuccess, (state, { materials })=>
       materialsAdapter.setAll(materials, {
         ...state,
@@ -29,6 +30,5 @@ export const materialsFeature = createFeature({
         status: 'error'
       })
     ),
-
-
-)})
+  )
+});

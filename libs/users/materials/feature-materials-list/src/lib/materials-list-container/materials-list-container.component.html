@@ -1,1 +1,18 @@
-<p>materials-list-component works!</p>
+<ng-container
+  *ngrxLet="{
+    materials: materialsFacade.materials$,
+    status: materialsFacade.status$,
+  } as vm"
+>
+  <users-materials-list-ui
+    [materials]="vm.materials"
+    [status]="vm.status"
+  />
+</ng-container>
+
+<button
+  class="add-material"
+  mat-icon-button
+>
+  <mat-icon>add_circle</mat-icon>
+</button>

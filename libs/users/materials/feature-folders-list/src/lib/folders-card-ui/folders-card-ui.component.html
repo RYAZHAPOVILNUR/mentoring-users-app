@@ -1,14 +1,15 @@
-<mat-card class="folder-card-wrapper">
-  <mat-card-content class="mat-card-content">
+<mat-card class="folder-card-wrapper"
+          (dblclick)="onCardClick()">
+  <mat-card-content>
     <div class="icons">
       <mat-icon>folder</mat-icon>
       <button
         mat-icon-button
-        (click)="onDeleteButtonClick($event)">
+        (click)="onDeleteButtonClick()">
         <mat-icon>delete</mat-icon>
       </button>
     </div>
-    <mat-card-title (click)="onTitleClick(folder)">
+    <mat-card-title>
       {{ folder.title }}
     </mat-card-title>
     <mat-card-subtitle>

@@ -1,20 +1,19 @@
 <ng-container
   *ngrxLet="{
-    folders: facade.folders$,
-    status: facade.status$,
+    folders: foldersFacade.folders$,
+    status: foldersFacade.status$,
   } as vm"
 >
-  <users-folders-list
-      [folders]="vm.folders"
-      [status]="vm.status"
-      (renameFolder)="onRenameFolder($event)"
-      (deleteFolder)="onDeleteFolder($event)"
+  <users-folders-list-ui
+    [folders]="vm.folders"
+    [status]="vm.status"
   />
 </ng-container>
 
-<users-folders-add-button/>
-
-
-
-
+<button
+  class="add-folder"
+  mat-icon-button
+  (click)="onAddButtonClick()">
+  <mat-icon>add_circle</mat-icon>
+</button>
 
