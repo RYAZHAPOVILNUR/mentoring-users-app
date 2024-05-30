@@ -2,11 +2,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'users-users-materials',
+  selector: 'users-materials-list-container',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './users-materials.component.html',
-  styleUrls: ['./users-materials.component.scss'],
+  templateUrl: './materials-list-container.component.html',
+  styleUrls: ['./materials-list-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersMaterialsComponent {}
+export class MaterialsListContainerComponent {}
