@@ -1,6 +1,6 @@
 <div class="materials-list-navigation">
   <mat-icon (click)="onRiderectToFolders()" class="materials-icon">arrow_back</mat-icon>
-  <span class="folder-title">{{ folderTitle }}</span>
+  <span class="folder-title">{{ folderTitle$ | ngrxPush }}</span>
 </div>
 <br>
 <ng-container
