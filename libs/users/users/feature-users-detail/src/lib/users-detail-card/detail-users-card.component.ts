@@ -117,7 +117,7 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() openEditMode = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
   @Output() editUser = new EventEmitter<{ user: CreateUserDTO, onSuccessCb: onSuccessEditionCbType }>();
-  @Output() addStoryPoints = new EventEmitter<{ user: CreateUserDTO, onSuccessAddSP: onSuccessEditionCbType }>
+  @Output() addStoryPoints = new EventEmitter<{ user: CreateUserDTO, onSuccessAddSP: onSuccessEditionCbType }>();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<string>;
   @ViewChild('snackbarSP') snackbarTemplateRefSP!: TemplateRef<string>;
 
