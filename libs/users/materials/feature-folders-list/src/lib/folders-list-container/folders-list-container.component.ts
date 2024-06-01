@@ -2,10 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/cor
 import { CommonModule } from '@angular/common';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
 import { Store } from '@ngrx/store';
-// eslint-disable-next-line @nx/enforce-module-boundaries
-import * as MaterialsActions from '../../../../data-access/src/lib/+state/materials.actions';
-// eslint-disable-next-line @nx/enforce-module-boundaries
-import { FoldersStateInterface } from '../../../../data-access/src/lib/+state/app-state.interface';
+import { MaterialsActions, MaterialsStateInterface } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-folders-list-container',
@@ -17,9 +14,10 @@ import { FoldersStateInterface } from '../../../../data-access/src/lib/+state/ap
 })
 export class FoldersListContainerComponent implements OnInit {
 
-  private store$ = inject(Store<FoldersStateInterface>);
+  private store$ = inject(Store<MaterialsStateInterface>);
 
   ngOnInit(): void {
     this.store$.dispatch(MaterialsActions.getFolders())
+    this.store$.dispatch(MaterialsActions.getMaterials())
   }
 }
