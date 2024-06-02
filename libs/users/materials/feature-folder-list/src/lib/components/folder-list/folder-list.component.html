@@ -1,0 +1,17 @@
+<ng-container *ngIf="folderVm?.status === 'LOADING'; else content">
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+
+<ng-template #content>
+  <ng-container *ngIf="folderVm?.status === 'LOADED'">
+    <div class="container">
+      <div class="folder-list">
+        <users-folder-card
+          *ngFor="let item of folderVm?.folders; trackBy: trackByFn"
+          [folder]="item"
+          (deleteFolder)="onDeleteFolder($event)"
+        ></users-folder-card>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

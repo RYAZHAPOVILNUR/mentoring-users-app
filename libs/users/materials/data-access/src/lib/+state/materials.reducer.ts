@@ -36,20 +36,23 @@ export const reducer = createReducer(
     ...state,
     status: MaterialStatus.Loading,
   })),
-  on(MaterialsActions.loadFoldersSuccess, (state, action) => ({
+  on(MaterialsActions.loadFoldersSuccess, (state, { folders }) => ({
     ...state,
-    folders: folderAdapter.setAll(action.folders, state.folders),
+    folders: folderAdapter.setAll(folders, state.folders),
     status: MaterialStatus.Loaded,
   })),
-  on(MaterialsActions.loadFoldersFailure, (state, action) => ({
+  on(MaterialsActions.loadFoldersFailure, (state, { error }) => ({
     ...state,
     status: MaterialStatus.Error,
-    error: action.error,
+    error,
   })),
-
-  on(MaterialsActions.createFolderSuccess, (state, { folder }) => ({
+  on(MaterialsActions.deleteFolderSuccess, (state, { id }) => ({
     ...state,
-    folders: folderAdapter.addOne(folder, state.folders),
+    folders: folderAdapter.removeOne(id, state.folders),
+  })),
+  on(MaterialsActions.deleteFolderFailure, (state, { error }) => ({
+    ...state,
+    error,
   }))
 );
 

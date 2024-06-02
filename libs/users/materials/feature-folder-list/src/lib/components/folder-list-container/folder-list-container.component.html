@@ -5,5 +5,8 @@
     error: error$
   } as folderVm"
 >
-  <users-folder-list [folderVm]="folderVm"></users-folder-list>
+  <users-folder-list
+    (deleteFolder)="onDeleteFolder($event)"
+    [folderVm]="folderVm"
+  ></users-folder-list>
 </ng-container>

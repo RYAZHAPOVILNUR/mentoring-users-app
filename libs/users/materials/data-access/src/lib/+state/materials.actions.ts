@@ -18,5 +18,9 @@ export const MaterialsActions = createActionGroup({
       status: MaterialStatus.Error;
       error: Error;
     }>(),
+
+    'Delete Folder': props<{ id: number }>(),
+    'Delete Folder Success': props<{ id: number }>(),
+    'Delete Folder Failure': props<{ error: Error }>(),
   },
 });

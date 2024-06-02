@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { LetDirective } from '@ngrx/component';
 import { MaterialFacade } from '@users/materials/data-access';
 import { FolderListComponent } from '../folder-list/folder-list.component';
@@ -17,12 +12,17 @@ import { FolderListComponent } from '../folder-list/folder-list.component';
   imports: [LetDirective, FolderListComponent],
 })
 export class FolderListContainerComponent implements OnInit {
-  private readonly materialFacade = inject(MaterialFacade);
   public readonly folders$ = this.materialFacade.allFolders$;
   public readonly status$ = this.materialFacade.status$;
   public readonly error$ = this.materialFacade.error$;
 
+  constructor(private readonly materialFacade: MaterialFacade) {}
+
   public ngOnInit(): void {
     this.materialFacade.loadFolders();
+  }
+
+  public onDeleteFolder(id: number) {
+    this.materialFacade.deleteFolder(id);
   }
 }
