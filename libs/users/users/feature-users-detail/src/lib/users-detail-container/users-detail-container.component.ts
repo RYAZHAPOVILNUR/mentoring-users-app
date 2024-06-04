@@ -50,6 +50,9 @@ export class UsersDetailComponent {
       queryParams: { edit: false },
     });
   }
+  public onEditTotalStoryPointsUser(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
+    this.usersFacade.editUserTotalStoryPoint(userData, this.user.id, onSuccessCb);
+  }
 
   onCloseUser() {
     this.router.navigate(['/admin/users']);

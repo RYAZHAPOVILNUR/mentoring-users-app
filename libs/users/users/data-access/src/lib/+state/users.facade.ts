@@ -43,7 +43,9 @@ export class UsersFacade {
   editUser(userData: CreateUserDTO, id: number, onSuccessCb: onSuccessEditionCbType) {
     this.store.dispatch(UsersActions.editUser({ userData, id, onSuccessCb }));
   }
-
+  editUserTotalStoryPoint(userData: CreateUserDTO, id: number, onSuccessCb: onSuccessEditionCbType) {
+    this.store.dispatch(UsersActions.setUserTotalStoryPionts({ userData, id, onSuccessCb }));
+  }
   getUserFromStore(id: number) {
     return this.store.select(UsersSelectors.selectUserById(id)).pipe(
       switchMap((user: UsersEntity | undefined): Observable<UsersEntity | null> => {

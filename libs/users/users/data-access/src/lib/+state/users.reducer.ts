@@ -81,6 +81,19 @@ const reducer = createReducer(
   on(UsersActions.setUsersFilter, (state, {filter}) => ({
     ...state,
     usersFilter : filter
+  })),
+  on(UsersActions.setUserTotalStoryPiontsSuccess,(state,{userData}) => 
+    usersAdapter.updateOne({
+        id: userData.id,
+        changes: userData
+      },
+      state
+    )
+  ),
+  on(UsersActions.setUserTotalStoryPiontsFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error
   }))
 );
 
