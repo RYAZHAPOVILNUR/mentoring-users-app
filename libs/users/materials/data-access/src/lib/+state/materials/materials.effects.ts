@@ -14,7 +14,7 @@ export const loadMaterials$ = createEffect(
       switchMap(({ id }) =>
         apiService.get<Material[]>(`/material`).pipe(
           map(materials => materials.filter(
-            material => material.folder_id === Number(id)
+            material => material.folder_id === Number(id) // todo ЗАГРУЖАТЬ ВСЕ МАТЕРИАЛЫ 1 РАЗ
           )),
           map(materials => materialsActions.loadMaterialsSuccess({ materials })),
           catchError(error => {

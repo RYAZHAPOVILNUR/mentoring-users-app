@@ -18,7 +18,7 @@ export const foldersFeature = createFeature({
         status: 'loading'
       })
     ),
-    on(foldersActions.loadFoldersSuccess, (state, { folders})=>
+    on(foldersActions.loadFoldersSuccess, (state, { folders }) =>
       foldersAdapter.setAll(folders, {
         ...state,
         status: 'loaded'
@@ -32,12 +32,12 @@ export const foldersFeature = createFeature({
     on(foldersActions.createFolderSuccess, (state, { folder }) =>
       foldersAdapter.addOne(
         { ...folder },
-        { ...state } // todo ИММУТАБЕЛЬНОСТЬ!
+        { ...state }
       )
     ),
     on(foldersActions.deleteFolderSuccess, (state, { id }) =>
-      foldersAdapter.removeOne(id,{ ...state })
-    ),
+      foldersAdapter.removeOne(id, { ...state })
+    )
   )
 });
 

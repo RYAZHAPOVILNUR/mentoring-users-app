@@ -1,0 +1,62 @@
+<mat-card>
+  <mat-dialog-content>
+    <mat-card-title>
+      {{ 'MATERIALS.CREATE_FILE_TITLE' | translate }}
+    </mat-card-title>
+    <mat-card-subtitle>
+      {{ 'MATERIALS.CREATE_FILE_SUBTITLE' | translate }}
+    </mat-card-subtitle>
+    <input
+      matInput
+      #inputTitle
+      minlength="2"
+      required
+      type="text"
+    />
+    <mat-error *ngIf="inputTitle.selectionEnd && !inputTitle.validity.valid">
+      Имя файла слишком короткое
+    </mat-error>
+
+    <mat-card-subtitle class="material-link">
+      {{ 'MATERIALS.CREATE_FILE_LINK' | translate }}
+    </mat-card-subtitle>
+    <!-- todo провалидировать эти поля чтобы пользователь не мог ввести дичь-->
+    <!-- todo добавить валидатор который будет проверять соответствует ли ссылка -->
+    <!-- todo какому либо формату, если нет - не давать сохранить форму -->
+    <input
+      [formControl]="inputLinkControl"
+      matInput
+      #inputLink
+    />
+
+    <mat-error *ngIf="inputLinkControl.hasError('required') && inputLinkControl.touched">
+      Поле обязательно для заполнения
+    </mat-error>
+    <mat-error *ngIf="inputLinkControl.hasError('minlength') && inputLinkControl.touched">
+      Поле должно содержать минимум 10 символа
+    </mat-error>
+    <mat-error *ngIf="inputLinkControl.hasError('pattern') && inputLinkControl.touched">
+      Формат файла не распознан
+    </mat-error>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button
+      mat-icon-button
+      color="accent"
+      (click)="onDoneButtonClick(inputTitle.value, inputLink.value)"
+      [disabled]="inputLinkControl.invalid || !inputTitle.validity.valid"
+    >
+      <mat-icon>done</mat-icon>
+    </button>
+
+    <button
+      mat-icon-button
+      mat-dialog-close
+      color="warn"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-dialog-actions>
+</mat-card>

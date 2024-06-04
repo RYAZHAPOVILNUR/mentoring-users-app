@@ -16,17 +16,8 @@ import { Material } from '@users/materials/data-access';
 export class MaterialsListUiComponent {
   @Input({ required: true }) materials!: Material[];
   @Input({ required: true }) status!: string;
-
-  // todo В КАКИХ СЛУЧАЯХ СТАВИМ "_" И ГДЕ? // для ПРИВАТНЫХ переменных название которых пересекается с текущими, например:
-  private _users: any;
-  get users() {
-    return this._users;
-  }
-
-  set users(users: any) {
-    this._users = users;
-  }
 }
+
 
 
 

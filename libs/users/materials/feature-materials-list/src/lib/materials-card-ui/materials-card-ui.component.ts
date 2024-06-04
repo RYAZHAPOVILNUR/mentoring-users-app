@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { Material, MaterialsState } from '@users/materials/data-access';
-import { SetIconPipe } from '../../../../../../core/pipes/set-icon.pipe';
+import { GetIconPipe } from '../../../../data-access/src/lib/pipes/get-icon.pipe';
 
 @Component({
   selector: 'users-materials-card-ui',
@@ -14,7 +14,7 @@ import { SetIconPipe } from '../../../../../../core/pipes/set-icon.pipe';
     MatButtonModule,
     MatCardModule,
     MatIconModule,
-    SetIconPipe
+    GetIconPipe
   ],
   templateUrl: './materials-card-ui.component.html',
   styleUrls: ['./materials-card-ui.component.scss'],
@@ -22,7 +22,7 @@ import { SetIconPipe } from '../../../../../../core/pipes/set-icon.pipe';
 })
 export class MaterialsCardUiComponent {
   @Input({ required: true }) material!: Material;
-  private readonly materialsState = inject(MaterialsState);
+  private readonly materialsState = inject(MaterialsState); // todo facade?
 
   onCardClick() {
     this.materialsState.openMaterial(this.material.id);

@@ -3,6 +3,7 @@ import { materialsActions } from './materials.actions';
 import { Store } from '@ngrx/store';
 import { selectMaterials, selectMaterialsStatus } from './materials.selectors';
 import { MaterialsState } from '../../services/materials-state.service';
+import { Material } from '../../interfaces/material.interface';
 
 
 @Injectable({ providedIn: 'root' })
@@ -23,4 +24,8 @@ export class MaterialsFacade {
     this.store.dispatch(materialsActions.deleteMaterial({ id }));
   }
 
+  createMaterial(material: Partial<Material>): void {
+    console.log(material);
+    this.store.dispatch(materialsActions.createMaterial({ material }));
+  }
 }

@@ -2,7 +2,7 @@
           (dblclick)="onCardClick()">
   <mat-card-content>
     <div class="icons">
-      <mat-icon>{{ material.material_link | setIcon }}</mat-icon>
+      <mat-icon>{{ material.material_link | getIcon }}</mat-icon>
       <button
         mat-icon-button
         (click)="onDeleteButtonClick()">

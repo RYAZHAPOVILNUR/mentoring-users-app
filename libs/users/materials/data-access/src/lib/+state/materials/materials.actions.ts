@@ -10,7 +10,11 @@ export const materialsActions = createActionGroup({
 
     'Delete Material': props<{ id: number }>(),
     'Delete Material Success': props<{ id: number }>(),
-    'Delete Material Failure': props<{ error: Error }>()
+    'Delete Material Failure': props<{ error: Error }>(),
+
+    'Create Material': props<{ material: Partial<Material> }>(),
+    'Create Material Success': props<{ material: Material }>(),
+    'Create Material Failure': props<{ error: Error }>()
 
 
   }

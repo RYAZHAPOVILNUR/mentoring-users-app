@@ -8,15 +8,17 @@ export * from './lib/+state/materials/materials.reducer';
 export * from './lib/+state/materials/materials.facade';
 export * from './lib/+state/materials/materials.selectors';
 
-export * from './lib/interfaces/folder-state.interface';
 export * from './lib/interfaces/folder.interface';
-export * from './lib/interfaces/material-state.interface';
 export * from './lib/interfaces/material.interface';
 
 export * from './lib/types/folder-create.type';
-export * from './lib/types/material-create.type';
 
 export * from './lib/services/materials-state.service';
+
+export * from './lib/enums/get-icon.enum';
+
+export * from './lib/pipes/get-icon.pipe';
+
 
 export * as FoldersEffects from './lib/+state/folders/folders.effects';
 export * as MaterialsEffects from './lib/+state/materials/materials.effects';
