@@ -1,37 +1,35 @@
-// import { Injectable, inject } from '@angular/core';
-// import { Store } from '@ngrx/store';
-// import { Store } from '@ngrx/store';
-// import * as MaterialsActions from './materials.actions';
-// import * as MaterialsSelectors from './materials.selectors';
+import { Injectable, inject } from '@angular/core';
+import { Store } from '@ngrx/store';
+import * as MaterialsActions from './materials.actions';
+import * as MaterialsSelectors from './materials.selectors';
 // import { Observable, of, switchMap } from 'rxjs';
 // import { MaterialsErrors } from './materials.reducer';
-// import { onSuccessEditionCbType } from './materials.actions';
 // import { selectLoggedUser } from '@auth/data-access';
 // import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
 
-// @Injectable({ providedIn: 'root' })
-// export class UsersFacade {
-//   private readonly store = inject(Store);
+@Injectable({ providedIn: 'root' })
+export class MaterialsFacade {
+  private readonly store = inject(Store);
 
-  // /**
-  //  * Combine pieces of state using createSelector,
-  //  * and expose them as observables through the facade.
-  //  */
-  // public readonly status$ = this.store.select(UsersSelectors.selectUsersStatus);
-  // public readonly allUsers$ = this.store.select(UsersSelectors.selectAllUsers);
+  /**
+   * Combine pieces of state using createSelector,
+   * and expose them as observables through the facade.
+   */
+  public readonly status$ = this.store.select(MaterialsSelectors.isLoadingSelector);
+  public readonly allFolders$ = this.store.select(MaterialsSelectors.selectAllFolders);
   // public readonly filteredUsers$ = this.store.select(UsersSelectors.filteredUsersSelector);
   // public readonly selectedUsers$ = this.store.select(UsersSelectors.selectEntity);
   // public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
   // public readonly loggedUser$ = this.store.select(selectLoggedUser);
   // public readonly errors$: Observable<UsersErrors | null> = this.store.select(UsersSelectors.selectUsersError);
-  // /**
-  //  * Use the initialization action to perform one
-  //  * or more tasks in your Effects.
-  //  */
+  /**
+   * Use the initialization action to perform one
+   * or more tasks in your Effects.
+   */
   
-  // init() {
-  //   this.store.dispatch(MaterialsActions.initMaterials());
-  // }
+  initFolders() {
+    this.store.dispatch(MaterialsActions.getFolders());
+  }
 
   // deleteUser(id: number) {
   //   this.store.dispatch(UsersActions.deleteUser({ id }));
@@ -68,4 +66,4 @@
   // setUsersFilter(filter: { name: string }) {
   //   this.store.dispatch(UsersActions.setUsersFilter({ filter }));
   // }
-// }
+}

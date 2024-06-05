@@ -2,9 +2,10 @@
 <ng-container>
   <div class="container">
     <div class="row">
-      <div class="col-md-4 mb-3" *ngFor="let material of materials$ | async">
-        <users-materials-card [material]="material"></users-materials-card>
+      <div class="col-md-4 mb-3" >
+        <users-materials-card></users-materials-card>
       </div>
     </div>
   </div>
 </ng-container>
+<!-- [material]="material" *ngFor="let material of materials$ | async" -->

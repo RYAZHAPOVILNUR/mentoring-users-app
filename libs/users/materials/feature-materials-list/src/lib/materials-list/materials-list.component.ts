@@ -12,11 +12,11 @@ import { MaterialsStateInterface, selectAllMaterials, MaterialsActions } from '@
   styleUrls: ['./materials-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MaterialsListComponent implements OnInit{
-  private store$ = inject(Store<MaterialsStateInterface>);
-  public readonly materials$ = this.store$.select(selectAllMaterials);
+export class MaterialsListComponent {
+  // private store$ = inject(Store<MaterialsStateInterface>);
+  // public readonly materials$ = this.store$.select(selectAllMaterials);
   
-  ngOnInit(): void {
-    this.store$.dispatch(MaterialsActions.getMaterials())
-  }
+  // ngOnInit(): void {
+  //   this.store$.dispatch(MaterialsActions.getMaterials())
+  // }
 }

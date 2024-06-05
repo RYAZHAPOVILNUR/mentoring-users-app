@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/cor
 import { CommonModule } from '@angular/common';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';
 import { Store } from '@ngrx/store';
-import { MaterialsStateInterface, selectAllFolders, MaterialsActions } from '@users/materials/data-access';
+import { MaterialsStateInterface, MaterialsFacade } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-folders-list',
@@ -14,9 +14,11 @@ import { MaterialsStateInterface, selectAllFolders, MaterialsActions } from '@us
 })
 export class FoldersListComponent implements OnInit{
   private readonly store$ = inject(Store<MaterialsStateInterface>);
-  public readonly folders$ = this.store$.select(selectAllFolders);
+  private readonly facade = inject(MaterialsFacade);
+
+  public readonly folders = this.facade.allFolders$;
 
   ngOnInit(): void {
-    this.store$.dispatch(MaterialsActions.getFolders())
+    this.facade.initFolders()
   }
 }

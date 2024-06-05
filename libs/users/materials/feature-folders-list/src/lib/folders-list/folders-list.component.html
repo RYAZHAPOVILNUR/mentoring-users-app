@@ -1,10 +1,7 @@
-<p>folders-list works!</p>
-<ng-container>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4 mb-3" *ngFor="let folder of folders$ | async">
-        <users-folders-card [folder]="folder"></users-folders-card>
-      </div>
+<div class="container">
+    <div class="folders-cards-flex">
+        <ng-container *ngFor="let folder of folders | async">
+            <users-folders-card [folder]="folder"></users-folders-card>
+        </ng-container>
     </div>
-  </div>
-</ng-container>
+</div>

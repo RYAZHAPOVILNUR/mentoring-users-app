@@ -11,5 +11,5 @@ import { Material } from '@users/materials/data-access';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialsCardComponent {
-  @Input({required:true})material!: Material;
+  // @Input({required:true})material!: Material;
 }
