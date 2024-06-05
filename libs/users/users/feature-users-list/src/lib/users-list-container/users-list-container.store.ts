@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { UsersFacade } from '@users/users/data-access';
 import { DeepReadonly } from '@users/core/utils';
@@ -19,26 +19,16 @@ const initialState: UsersListState = {
 
 @Injectable()
 export class UsersListContainerStore extends ComponentStore<UsersListState> {
-  private readonly usersFacade = inject(UsersFacade);
-  private readonly dialog = inject(MatDialog);
   public readonly users$ = this.select(({ users }) => users);
+  private readonly usersFacade = inject(UsersFacade);
   public readonly status$ = this.select(this.usersFacade.status$, (status) => status);
   public errors$ = this.select(this.usersFacade.errors$, (error) => error);
+  private readonly dialog = inject(MatDialog);
 
   constructor() {
     super(initialState);
     this.usersFacade.init();
     this.setUsersFromGlobalToLocalStore();
-  }
-
-  private setUsersFromGlobalToLocalStore(): void {
-    this.effect(() => this.usersFacade.allUsers$.pipe(tap((users: UsersEntity[]) => this.patchUsers(users))));
-  }
-
-  private patchUsers(users: UsersEntity[]): void {
-    this.patchState({
-      users: users.map((user) => usersVMAdapter.entityToVM(user)),
-    });
   }
 
   public deleteUser(user: UsersVM): void {
@@ -52,5 +42,15 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
         })
       )
     );
+  }
+
+  private setUsersFromGlobalToLocalStore(): void {
+    this.effect(() => this.usersFacade.filteredUsers$.pipe(tap((users: UsersEntity[]) => this.patchUsers(users))));
+  }
+
+  private patchUsers(users: UsersEntity[]): void {
+    this.patchState({
+      users: users.map((user) => usersVMAdapter.entityToVM(user)),
+    });
   }
 }
