@@ -32,7 +32,7 @@ export const selectOpenedUser = createSelector(
 export const selectUsersFilter = createSelector(selectUsersState, (state: UsersState) => state.usersFilter);
 
 export const selectFilteredUsers = createSelector(selectUsersFilter, selectAllUsers, (usersFilter, users) =>
-  usersFilter?.name
+  usersFilter.name
     ? users.filter((user) => user.name.toLocaleLowerCase().startsWith(usersFilter.name.toLocaleLowerCase()))
     : users
 );
