@@ -9,7 +9,7 @@ import {
   OnInit,
   Output,
   TemplateRef,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { onSuccessEditionCbType } from '@users/users/data-access';
@@ -63,6 +63,7 @@ export class DetailUsersCardComponent implements OnInit {
   public get vm() {
     return this._vm;
   }
+
   @Input({ required: true })
   set vm(vm: DetailUsersCardVm) {
     this._vm = vm;
@@ -106,6 +107,7 @@ export class DetailUsersCardComponent implements OnInit {
     filter(Boolean),
     switchMap((value) => this.dadata.getCities(value))
   );
+  public totalStoryPoints = new FormControl({ value: 0, disabled: true });
 
   private snackBar = inject(MatSnackBar);
   private readonly destroyRef = inject(DestroyRef);
@@ -171,5 +173,17 @@ export class DetailUsersCardComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  public onAddStoryPoints() {
+    this.totalStoryPoints.disable();
+    // this.addStoryPoints.emit({
+    //   user: {
+    //     name: this.formGroup.value.name || '',
+    //     email: this.formGroup.value.email?.trim().toLowerCase() || '',
+    //     totalStoryPoints: this.totalStoryPoints.value || 0,
+    //   },
+    //   onSuccessAddSP: this.onAddSPSuccess,
+    // });
   }
 }
