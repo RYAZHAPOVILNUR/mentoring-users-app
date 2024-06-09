@@ -5,12 +5,13 @@ import { UsersListContainerStore } from './users-list-container.store';
 import { UsersVM } from '../../../../users-vm';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { UsersFacade } from '@users/users/data-access';
+import { UsersFacade, selectFilteredUsers } from '@users/users/data-access';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
 import { UsersFilterComponent } from '../users-filter/users-filter.component';
 import { BehaviorSubject } from 'rxjs'
+import { Store } from '@ngrx/store'
 
 @Component({
   selector: 'users-list-container',
@@ -31,16 +32,15 @@ import { BehaviorSubject } from 'rxjs'
   providers: [UsersListContainerStore],
 })
 export class UsersListContainerComponent {
+  private readonly store = inject(Store);
   private readonly componentStore = inject(UsersListContainerStore);
   public usersFacade = inject(UsersFacade);
   public readonly users$ = this.componentStore.users$;
+  public readonly filteredUsers$ = this.store.select(selectFilteredUsers);
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;
   public readonly loggedUser$ = this.usersFacade.loggedUser$;
   private readonly router = inject(Router);
-
-  private filteredUsersSubject = new BehaviorSubject<UsersVM[]>([])
-  public filteredUsers$ = this.filteredUsersSubject.asObservable()
 
   onDeleteUser(user: UsersVM) {
     this.componentStore.deleteUser(user);
@@ -51,10 +51,4 @@ export class UsersListContainerComponent {
       queryParams: { edit: editMode },
     });
   }
-
-  onFilterChange(filteredUsers: UsersVM[]) {
-    this.filteredUsersSubject.next(filteredUsers);
-  }
-
-
 }

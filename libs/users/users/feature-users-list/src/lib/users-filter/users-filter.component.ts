@@ -5,6 +5,8 @@ import { UsersVM } from '@users/feature-users-create'
 import { Observable } from 'rxjs'
 import { map, startWith, switchMap } from 'rxjs/operators'
 import { UsersListContainerStore } from '../users-list-container/users-list-container.store'
+import { Store } from '@ngrx/store'
+import { selectFilteredUsers, setUsersFilter } from '@users/users/data-access'
 
 // interface User {
 //   id: number;
@@ -29,17 +31,18 @@ export class UsersFilterComponent implements OnInit {
 
   @Output() filterChange = new EventEmitter<UsersVM[]>()
 
+  private store = inject(Store);
+
   nameFilter: FormControl = new FormControl('');
 
   ngOnInit() {
-    this.filteredUsers$ = this.nameFilter.valueChanges.pipe(
-      startWith(''),
-      switchMap(name => this.filterUsers(name))
-    )
-    this.filteredUsers$.subscribe(users => {
-      this.filterChange.emit(users)
-    })
+    this.filteredUsers$ = this.store.select(selectFilteredUsers);
 
+    this.nameFilter.valueChanges.pipe(
+      startWith(''),
+    ).subscribe(name => {
+      this.store.dispatch(setUsersFilter({ filter: { name } }));
+    });
   }
 
   filterUsers(name: string): Observable<UsersVM[]> {
