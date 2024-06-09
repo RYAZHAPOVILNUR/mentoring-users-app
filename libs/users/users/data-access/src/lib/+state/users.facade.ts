@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import * as UsersActions from './users.actions';
-import { onSuccessEditionCbType } from './users.actions';
+import { onSuccessEditionCbType, onSuccessStoryPointsCbType } from './users.actions';
 import * as UsersSelectors from './users.selectors';
 import { Observable, of, switchMap } from 'rxjs';
 import { UsersErrors } from './users.reducer';
@@ -42,6 +42,10 @@ export class UsersFacade {
 
   editUser(userData: CreateUserDTO, id: number, onSuccessCb: onSuccessEditionCbType) {
     this.store.dispatch(UsersActions.editUser({ userData, id, onSuccessCb }));
+  }
+
+  addStoryPoints(userData: CreateUserDTO, id: number, onSuccessAddStoryPoints: onSuccessStoryPointsCbType) {
+    this.store.dispatch(UsersActions.addUserStoryPoints({ userData, id, onSuccessAddStoryPoints }));
   }
 
   getUserFromStore(id: number) {

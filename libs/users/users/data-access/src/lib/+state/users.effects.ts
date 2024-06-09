@@ -1,11 +1,11 @@
 import { inject } from '@angular/core';
-import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, catchError, of, map, withLatestFrom, filter, tap } from 'rxjs';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { catchError, filter, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
 import * as UsersActions from './users.actions';
 import { ApiService } from '@users/core/http';
-import { Store, select } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { selectUsersEntities } from './users.selectors';
-import { CreateUserDTO, UsersDTO, UsersEntity, selectRouteParams, usersDTOAdapter } from '@users/core/data-access';
+import { CreateUserDTO, selectRouteParams, UsersDTO, usersDTOAdapter, UsersEntity } from '@users/core/data-access';
 
 export const userEffects = createEffect(
   () => {
@@ -104,6 +104,43 @@ export const editUser = createEffect(
           catchError((error) => {
             console.error('Error', error);
             return of(UsersActions.editUserFailed({ error }));
+          })
+        )
+      )
+    );
+  },
+  { functional: true }
+);
+
+export const addUserStoryPoints = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const usersEntities$ = inject(Store).select(selectUsersEntities);
+
+    return actions$.pipe(
+      ofType(UsersActions.addUserStoryPoints),
+      withLatestFrom(usersEntities$),
+      filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
+      map(([{ userData, id, onSuccessAddStoryPoints }, usersEntities]) => ({
+        user: {
+          ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
+          purchaseDate: usersEntities[id]?.purchaseDate || '01.01.1970',
+          educationStatus: usersEntities[id]?.educationStatus || 'trainee',
+          totalStoryPoints: userData.totalStoryPoints,
+        },
+        onSuccessAddStoryPoints,
+      })),
+      switchMap(({ user, onSuccessAddStoryPoints }) =>
+        apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+          map((userData) => ({ userData, onSuccessAddStoryPoints })),
+          tap(({ onSuccessAddStoryPoints }) => onSuccessAddStoryPoints()),
+          map(({ userData }) => {
+            return UsersActions.addUserStoryPointsSuccess({ userData });
+          }),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(UsersActions.addUserStoryPointsFailed({ error }));
           })
         )
       )

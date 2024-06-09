@@ -2,10 +2,10 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
-import { UsersErrors, UsersFacade, onSuccessEditionCbType } from '@users/users/data-access';
-import { Observable, map, tap } from 'rxjs';
-import { selectQueryParam, CreateUserDTO, UsersEntity } from '@users/core/data-access';
-import { Store, select } from '@ngrx/store';
+import { onSuccessEditionCbType, onSuccessStoryPointsCbType, UsersErrors, UsersFacade } from '@users/users/data-access';
+import { map, Observable, tap } from 'rxjs';
+import { CreateUserDTO, selectQueryParam, UsersEntity } from '@users/core/data-access';
+import { select, Store } from '@ngrx/store';
 import { LetDirective } from '@ngrx/component';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
@@ -49,6 +49,10 @@ export class UsersDetailComponent {
     this.router.navigate(['/admin/users', this.user.id], {
       queryParams: { edit: false },
     });
+  }
+
+  public onAddStoryPoints(userData: CreateUserDTO, onSuccessAddStoryPoints: onSuccessStoryPointsCbType) {
+    this.usersFacade.addStoryPoints(userData, this.user.id, onSuccessAddStoryPoints);
   }
 
   onCloseUser() {
