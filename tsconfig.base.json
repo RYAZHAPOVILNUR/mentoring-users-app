@@ -33,7 +33,6 @@
       "@users/feature-users-detail": ["libs/users/users/feature-users-detail/src/index.ts"],
       "@users/feature-users-list": ["libs/users/users/feature-users-list/src/index.ts"],
       "@users/home": ["libs/users/home/src/index.ts"],
-      "@users/materials": ["libs/users/materials/src/index.ts"],
       "@users/materials/data-access": ["libs/users/materials/data-access/src/index.ts"],
       "@users/settings": ["libs/users/settings/src/index.ts"],
       "@users/settings-ui": ["libs/settings-ui/src/index.ts"],
