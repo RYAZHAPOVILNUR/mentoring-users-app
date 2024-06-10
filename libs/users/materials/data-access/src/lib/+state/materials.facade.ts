@@ -15,7 +15,7 @@ export class MaterialsFacade {
    * Combine pieces of state using createSelector,
    * and expose them as observables through the facade.
    */
-  public readonly status$ = this.store.select(MaterialsSelectors.isLoadingSelector);
+  public readonly status$ = this.store.select(MaterialsSelectors.selectStatus);
   public readonly allFolders$ = this.store.select(MaterialsSelectors.selectAllFolders);
   // public readonly filteredUsers$ = this.store.select(UsersSelectors.filteredUsersSelector);
   // public readonly selectedUsers$ = this.store.select(UsersSelectors.selectEntity);

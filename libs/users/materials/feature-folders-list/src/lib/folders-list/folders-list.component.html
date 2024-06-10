@@ -1,6 +1,9 @@
 <div class="container">
+    <ng-container *ngIf="status === 'loading'">
+        <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+    </ng-container>
     <div class="folders-cards-flex">
-        <ng-container *ngFor="let folder of folders | async">
+        <ng-container *ngFor="let folder of folders$ | async">
             <users-folders-card [folder]="folder"></users-folders-card>
         </ng-container>
     </div>

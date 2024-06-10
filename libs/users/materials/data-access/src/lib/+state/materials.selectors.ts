@@ -25,3 +25,4 @@ export const selectMaterialsState = createFeatureSelector<MaterialsStateInterfac
 
 export const selectAllMaterials = createSelector(selectMaterialsState, (state: MaterialsStateInterface) => state.materials);
 export const selectAllFolders = createSelector(selectMaterialsState, (state: MaterialsStateInterface) => state.folders);
+export const selectStatus = createSelector(selectMaterialsState, (state: MaterialsStateInterface) => state.status);
