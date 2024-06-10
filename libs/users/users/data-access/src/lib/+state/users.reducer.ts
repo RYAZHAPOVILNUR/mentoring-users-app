@@ -82,8 +82,6 @@ const reducer = createReducer(
     ...state,
     usersFilter: filter,
   }))
-
-
 );
 
 export function usersReducer(state: UsersState | undefined, action: Action) {

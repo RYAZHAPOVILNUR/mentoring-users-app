@@ -8,15 +8,6 @@ import { UsersListContainerStore } from '../users-list-container/users-list-cont
 import { Store } from '@ngrx/store'
 import { selectFilteredUsers, setUsersFilter } from '@users/users/data-access'
 
-// interface User {
-//   id: number;
-//   name: string;
-//   email: string;
-//   username: string;
-//   photo: string;
-//   isAdmin: boolean;
-// }
-
 @Component({
   selector: 'app-users-filter',
   templateUrl: './users-filter.component.html',
