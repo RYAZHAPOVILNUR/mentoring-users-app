@@ -16,6 +16,7 @@ export const materialsState: MaterialsStateInterface = {
 
 export const reducer = createReducer(
   materialsState,
+
   on(MaterialsActions.getFolders, (state) => ({
     ...state,
     status: 'loading' as const,
@@ -30,6 +31,21 @@ export const reducer = createReducer(
     status: 'error' as const,
     error,
   })),
+
+  on(MaterialsActions.addFolder, (state) => ({
+    ...state,
+    status: 'loaded' as const,
+  })),
+  on(MaterialsActions.addFolderSuccess, (state, { folderData }) => ({
+    ...state,
+    status: 'loaded' as const,
+    folders: [...state.folders,{ ...folderData}],
+  })),
+  on(MaterialsActions.addFolderFailure, (state, { error }) => ({
+    ...state, status: 'error' as const,
+    error,
+  })),
+  
   on(MaterialsActions.getMaterials, (state) => ({
     ...state,
     status: 'loading' as const,

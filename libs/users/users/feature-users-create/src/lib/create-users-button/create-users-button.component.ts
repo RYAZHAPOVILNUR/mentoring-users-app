@@ -39,7 +39,6 @@ export class CreateUsersButtonComponent {
             purchaseDate: new Date().toString(),
             educationStatus: 'trainee',
           };
-
           this.usersFacade.addUser(newUserData);
         }
       });

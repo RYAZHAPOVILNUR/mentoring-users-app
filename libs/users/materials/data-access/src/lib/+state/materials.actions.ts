@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Folder, Material } from '../materials.interface';
+import { Folder, IAddFolder, Material } from '../materials.interface';
 
 export const getFolders = createAction(
   '[Folders] Get Folders'
@@ -12,6 +12,10 @@ export const getFoldersFailure = createAction(
   '[Folders] Get Folders Failure',
   props<{ error: string }>()
 );
+
+export const addFolder = createAction('[Folders Page] Add Folder', props<{ folderData: IAddFolder }>());
+export const addFolderSuccess = createAction('[Folders Page] Add Folder Success', props<{ folderData: Folder }>());
+export const addFolderFailure = createAction('[Folders Page] Add Folder Failure', props<{ error: string }>());
 
 export const getMaterials = createAction(
   '[Materials] Get Materials'

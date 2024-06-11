@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as MaterialsActions from './materials.actions';
 import * as MaterialsSelectors from './materials.selectors';
+import { Folder } from '../materials.interface';
 // import { Observable, of, switchMap } from 'rxjs';
 // import { MaterialsErrors } from './materials.reducer';
 // import { selectLoggedUser } from '@auth/data-access';
@@ -29,6 +30,11 @@ export class MaterialsFacade {
   
   initFolders() {
     this.store.dispatch(MaterialsActions.getFolders());
+  }
+
+  addFolder(folderData: Folder) {
+    this.store.dispatch(MaterialsActions.addFolder({ folderData }));
+    // console.log('ADD FOLDER')
   }
 
   // deleteUser(id: number) {

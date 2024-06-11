@@ -8,7 +8,7 @@ import {
 } from 'rxjs';
 import * as MaterialsActions from './materials.actions';
 import { ApiService } from '@users/core/http';
-import { Folder, Material } from '../materials.interface';
+import { Folder, IAddFolder, Material } from '../materials.interface';
 
 export const foldersEffects = createEffect(
   () => {
@@ -32,24 +32,46 @@ export const foldersEffects = createEffect(
   { functional: true }
 );
 
-export const materialsEffects = createEffect(
+export const addFolder = createEffect(
   () => {
     const actions$ = inject(Actions);
     const apiService = inject(ApiService);
 
     return actions$.pipe(
-      ofType(MaterialsActions.getMaterials),
-      // delay(1500),
-      switchMap(() =>
-        apiService.get<Material[]>('/material').pipe(
-          map((materials) => MaterialsActions.getMaterialsSuccess({ materials })),
+      ofType(MaterialsActions.addFolder),
+      switchMap(({ folderData }) =>
+        apiService.post<Folder, IAddFolder>('/folder', folderData).pipe(
+          map((newFolder) =>
+            MaterialsActions.addFolderSuccess({ folderData: newFolder })
+          ),
           catchError((error) => {
-            console.error('Error', error);
-            return of(MaterialsActions.getMaterialsFailure({ error }));
+            console.log('Error', error);
+            return of(MaterialsActions.addFolderFailure({ error }))
           })
         )
       )
     );
-  },
-  { functional: true }
+  }, { functional: true }
 );
+
+// export const materialsEffects = createEffect(
+//   () => {
+//     const actions$ = inject(Actions);
+//     const apiService = inject(ApiService);
+
+//     return actions$.pipe(
+//       ofType(MaterialsActions.getMaterials),
+//       // delay(1500),
+//       switchMap(() =>
+//         apiService.get<Material[]>('/material').pipe(
+//           map((materials) => MaterialsActions.getMaterialsSuccess({ materials })),
+//           catchError((error) => {
+//             console.error('Error', error);
+//             return of(MaterialsActions.getMaterialsFailure({ error }));
+//           })
+//         )
+//       )
+//     );
+//   },
+//   { functional: true }
+// );

@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';
 import { MaterialsFacade } from '@users/materials/data-access';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { AddFolderComponent } from '../add-folder/add-folder.component';
+
 @Component({
   selector: 'users-folders-list',
   standalone: true,
-  imports: [CommonModule, FoldersCardComponent, MatProgressBarModule],
+  imports: [CommonModule, FoldersCardComponent, MatProgressBarModule, AddFolderComponent],
   templateUrl: './folders-list.component.html',
   styleUrls: ['./folders-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
