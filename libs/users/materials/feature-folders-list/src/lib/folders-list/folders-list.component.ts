@@ -22,6 +22,5 @@ export class FoldersListComponent implements OnInit{
   ngOnInit(): void {
     this.facade.initFolders()
     this.status$.subscribe(value => this.status = value)
-    console.log(this.status)
   }
 }
