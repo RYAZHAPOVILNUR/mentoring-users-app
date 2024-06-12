@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
+import { MaterialsFacade } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-folders-list-container',
@@ -11,4 +12,11 @@ import { FoldersListComponent } from '../folders-list/folders-list.component';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FoldersListContainerComponent {}
+export class FoldersListContainerComponent {
+  private readonly materialsFacade = inject(MaterialsFacade);
+  private readonly allFolders$ = this.materialsFacade.allFolders$;
+
+  constructor() {
+    this.materialsFacade.loadFolders();
+  }
+}
