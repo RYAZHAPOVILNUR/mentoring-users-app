@@ -7,6 +7,7 @@ import { ChangePasswordPayload, ChangeProfileDataPayload } from './+state/sign.a
 @Injectable({ providedIn: 'root' })
 export class AuthFacade {
   store = inject(Store);
+
   isAuthenticated$ = this.store.pipe(select(AuthSelectors.selectIsAuthenticated));
   user$ = this.store.pipe(select(AuthSelectors.selectLoggedUser));
   isAdmin$ = this.store.pipe(select(AuthSelectors.selectIsAdmin));

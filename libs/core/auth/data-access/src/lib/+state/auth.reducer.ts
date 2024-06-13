@@ -36,6 +36,7 @@ export const authFeature = createFeature({
     on(authActions.login, (state) => ({
       ...state,
       authStatus: 'loading' as const,
+
     })),
     on(authActions.loginSuccess, (state, { res }) => ({
       ...state,
@@ -43,6 +44,24 @@ export const authFeature = createFeature({
       authToken: res.authToken,
       loggedUser: res.user,
     })),
+
+
+    on(authActions.getTotalStoryPoints,(state)=>({
+      ...state,
+      authStatus: 'loading' as const,
+    })),
+
+    on(authActions.getTotalStoryPointsSuccess,(state, {user})=>({
+      ...state,
+      authStatus: 'loaded' as const,
+      loggedUser: user
+    })),
+
+    on(authActions.getTotalStoryPointsFailure,(state, {error})=>({
+      ...state,
+      authStatus: 'error' as const,
+    })),
+
     on(authActions.getUser, (state) => ({
       ...state,
     })),

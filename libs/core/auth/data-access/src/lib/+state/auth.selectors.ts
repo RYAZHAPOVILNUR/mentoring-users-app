@@ -3,7 +3,7 @@ import { authFeature, authFeatureKey, AuthState } from './auth.reducer';
 import { LoadingStatus, UsersEntity } from '@users/core/data-access';
 
 // export const selectUsersState =
-//   createFeatureSelector<AuthState>(authFeatureKey);
+// createFeatureSelector<AuthState>(authFeatureKey);
 
 export const { selectAuthStatus, selectAuthToken, selectError, selectLoggedUser, selectAuthState } = authFeature;
 

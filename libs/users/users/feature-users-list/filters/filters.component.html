@@ -1,0 +1,10 @@
+<p>filters works!</p>
+<form class="example-form" [formGroup]="myForm">
+  <mat-form-field class="example-full-width">
+    <mat-label>Name</mat-label>
+    <input matInput #message maxlength="256" placeholder="Name is..." formControlName="myInput" (keydown)="filteredUsers()">
+    <mat-hint align="start"><strong>Try to find a user </strong> </mat-hint>
+    <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+  </mat-form-field>
+</form>
+
