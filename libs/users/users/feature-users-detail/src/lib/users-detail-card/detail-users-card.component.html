@@ -106,6 +106,26 @@
             </button>
           </mat-card-actions>
         </form>
+
+        {{ storyPoint.countStoryPoint }}
+        <mat-form-field class="edit-user-field">
+          <mat-label>Количество сторипоинтов</mat-label>
+          <input
+            class="edit-user-input"
+            [(ngModel)]="storyPoint.countStoryPoint"
+            matInput
+            [disabled]="storyPoint.isDisabled"
+          />
+          <button *ngIf="storyPoint.isDisabled" matSuffix mat-icon-button (click)="clickIconAdd()">
+            <mat-icon>add</mat-icon>
+          </button>
+          <button *ngIf="!storyPoint.isDisabled" matSuffix mat-icon-button (click)="clickIconCheck()">
+            <mat-icon>check</mat-icon>
+          </button>
+          <button *ngIf="!storyPoint.isDisabled" matSuffix mat-icon-button (click)="clickIconClose()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
       </mat-card>
     </div>
   </ng-container>

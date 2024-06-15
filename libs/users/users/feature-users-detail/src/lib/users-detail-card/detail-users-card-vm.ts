@@ -7,3 +7,9 @@ export type DetailUsersCardVm = {
   user: UsersEntity | null;
   errors: UsersErrors | null;
 };
+
+export type StoryPoint = {
+  isDisabled: boolean;
+  countStoryPoint: number;
+  saveCountStoryPoint: number;
+}

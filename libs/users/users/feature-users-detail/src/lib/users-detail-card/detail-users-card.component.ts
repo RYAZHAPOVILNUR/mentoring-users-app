@@ -19,7 +19,7 @@ import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { DetailUsersCardVm } from './detail-users-card-vm';
+import { DetailUsersCardVm, StoryPoint } from './detail-users-card-vm';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -54,6 +54,23 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailUsersCardComponent implements OnInit {
+  public storyPoint: StoryPoint = {
+    isDisabled: true,
+    countStoryPoint: 0,
+    saveCountStoryPoint: 0,
+  };
+  clickIconAdd() {
+    this.storyPoint.isDisabled = false;
+    this.storyPoint.saveCountStoryPoint = this.storyPoint.countStoryPoint;
+  }
+  clickIconCheck() {
+    this.storyPoint.isDisabled = true;
+  }
+  clickIconClose() {
+    this.storyPoint.isDisabled = true;
+    this.storyPoint.countStoryPoint = this.storyPoint.saveCountStoryPoint;
+  }
+
   private _vm: DetailUsersCardVm = {
     editMode: false,
     user: null,
