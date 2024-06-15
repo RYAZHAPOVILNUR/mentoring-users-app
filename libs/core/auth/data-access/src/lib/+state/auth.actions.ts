@@ -19,7 +19,6 @@ export const authActions = createActionGroup({
     registerSuccess: props<{ authToken: string }>(),
     getUserSuccess: props<{ user: UsersEntity }>(),
     loginSuccess: props<{ res: SignAuthUser }>(),
-    getTotalStoryPointsSuccess: props<{ user: UsersEntity }>(),
 
 
     changeProfileData: props<{ data: ChangeProfileDataPayload }>(),
@@ -29,7 +28,6 @@ export const authActions = createActionGroup({
     getUser: emptyProps(),
     logout: emptyProps(),
     login: props<{ userData: SignAuthPayload }>(),
-    getTotalStoryPoints: props<{ id: number }>(),
 
 
 
@@ -39,6 +37,5 @@ export const authActions = createActionGroup({
     registerFailure: props<{ error: Error }>(),
     getUserFailure: props<{ error: Error }>(),
     loginFailure: props<{ error: Error }>(),
-    getTotalStoryPointsFailure: props<{ error: Error }>(),
   },
 });

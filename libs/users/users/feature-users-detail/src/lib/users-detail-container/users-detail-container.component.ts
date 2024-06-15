@@ -49,6 +49,7 @@ export class UsersDetailComponent {
     this.router.navigate(['/admin/users', this.user.id], {
       queryParams: { edit: false },
     });
+    // console.log(typeof userData.totalStoryPoints);
   }
 
   onCloseUser() {

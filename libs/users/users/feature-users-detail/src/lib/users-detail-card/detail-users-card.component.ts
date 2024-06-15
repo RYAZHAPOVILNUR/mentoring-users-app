@@ -133,7 +133,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
         purchaseDate: new Date().toString() || '',
         educationStatus: 'trainee',
-        totalStoryPoints: this.formGroup.value.totalStoryPoints || undefined
+        totalStoryPoints: Number(this.formGroup.value.totalStoryPoints)
       },
       onSuccessCb: this.onEditSuccess,
     });

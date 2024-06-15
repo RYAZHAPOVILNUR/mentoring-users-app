@@ -64,7 +64,7 @@
       "NAME": "Name",
       "EMAIL": "Email",
       "CITY": "City",
-      "TOTALSTORYPOINTS": "TotalStoryPoints",
+      "TOTALSTORYPOINTS": "Total Story Points",
       "CHANGE": "Change"
     }
   },

@@ -74,32 +74,6 @@ export const getUserEffect$ = createEffect(
   { functional: true }
 );
 
-export const  getTotalStoryPointsEffect$ = createEffect(
-  (
-    actions$ = inject(Actions),
-    api = inject(ApiService),
-    localStorageJwtService = inject(LocalStorageJwtService),
-    store = inject(Store)
-  ) =>
-    actions$.pipe(
-      ofType(authActions.getTotalStoryPoints),
-      withLatestFrom(store.select(selectAuthStatus)),
-      switchMap(([{ id }, authStatus]) =>
-        localStorageJwtService.getItem() && authStatus !== 'loaded'
-          ? api.get<UsersDTO>(`/users/${id}`).pipe(
-            map((userDTO) =>
-              authActions.getTotalStoryPointsSuccess({
-                user: usersDTOAdapter.DTOtoEntity(userDTO),
-              })
-            ),
-            catchError((error) => of(authActions.getTotalStoryPointsFailure({ error })))
-          )
-          : of()
-      )
-    ),
-  { functional: true }
-);
-
 export const registerEffect$ = createEffect(
   (actions$ = inject(Actions), api = inject(ApiService)) => {
     return actions$.pipe(

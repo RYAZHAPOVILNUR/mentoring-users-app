@@ -45,23 +45,6 @@ export const authFeature = createFeature({
       loggedUser: res.user,
     })),
 
-
-    on(authActions.getTotalStoryPoints,(state)=>({
-      ...state,
-      authStatus: 'loading' as const,
-    })),
-
-    on(authActions.getTotalStoryPointsSuccess,(state, {user})=>({
-      ...state,
-      authStatus: 'loaded' as const,
-      loggedUser: user
-    })),
-
-    on(authActions.getTotalStoryPointsFailure,(state, {error})=>({
-      ...state,
-      authStatus: 'error' as const,
-    })),
-
     on(authActions.getUser, (state) => ({
       ...state,
     })),
