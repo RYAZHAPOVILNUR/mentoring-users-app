@@ -54,23 +54,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailUsersCardComponent implements OnInit {
-  public storyPoint: StoryPoint = {
-    isDisabled: true,
-    countStoryPoint: 0,
-    saveCountStoryPoint: 0,
-  };
-  clickIconAdd() {
-    this.storyPoint.isDisabled = false;
-    this.storyPoint.saveCountStoryPoint = this.storyPoint.countStoryPoint;
-  }
-  clickIconCheck() {
-    this.storyPoint.isDisabled = true;
-  }
-  clickIconClose() {
-    this.storyPoint.isDisabled = true;
-    this.storyPoint.countStoryPoint = this.storyPoint.saveCountStoryPoint;
-  }
-
   private _vm: DetailUsersCardVm = {
     editMode: false,
     user: null,
@@ -91,6 +74,9 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
+      if (vm.user.totalStoryPoints) {
+        this.storyPoint.countStoryPoint = vm.user.totalStoryPoints;
+      }
     }
 
     if (vm.editMode) {
@@ -151,6 +137,46 @@ export class DetailUsersCardComponent implements OnInit {
       },
       onSuccessCb: this.onEditSuccess,
     });
+  }
+
+  public storyPoint: StoryPoint = {
+    isDisabled: true,
+    countStoryPoint: 0,
+    saveCountStoryPoint: 0,
+  };
+
+  clickIconAdd() {
+    this.storyPoint.saveCountStoryPoint = this.storyPoint.countStoryPoint;
+    this.storyPoint.isDisabled = false;
+  }
+
+  clickIconCheck() {
+    if (!this.storyPoint.countStoryPoint) {
+      this.storyPoint.countStoryPoint = 0;
+    }
+    if (typeof this.storyPoint.countStoryPoint === 'string') {
+      this.storyPoint.countStoryPoint = Number.parseInt(this.storyPoint.countStoryPoint);
+    }
+
+    this.storyPoint.isDisabled = true;
+
+    this.editUser.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        username: this.formGroup.value.username || '',
+        city: this.formGroup.value.city || '',
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        purchaseDate: new Date().toString() || '',
+        educationStatus: 'trainee',
+        totalStoryPoints: this.storyPoint.countStoryPoint,
+      },
+      onSuccessCb: this.onEditSuccess,
+    });
+  }
+
+  clickIconClose() {
+    this.storyPoint.countStoryPoint = this.storyPoint.saveCountStoryPoint;
+    this.storyPoint.isDisabled = true;
   }
 
   onCloseUser() {

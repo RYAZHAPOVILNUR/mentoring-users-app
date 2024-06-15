@@ -21,9 +21,9 @@ export class UsersFacade {
   public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
   public readonly loggedUser$ = this.store.select(selectLoggedUser);
-  public readonly filteredUsers$ = this.store.select(UsersSelectors.selectFilterUsers)
+  public readonly filteredUsers$ = this.store.select(UsersSelectors.selectFilterUsers);
   public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError));
-  
+
   /**
    * Use the initialization action to perform one
    * or more tasks in your Effects.
