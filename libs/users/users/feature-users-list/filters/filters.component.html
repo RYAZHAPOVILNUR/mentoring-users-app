@@ -4,5 +4,7 @@
     <input matInput #inputFilter maxlength="256" placeholder="Name is..." (input)="filteredUsers(inputFilter.value)">
     <mat-hint align="start"><strong>Try to find a user </strong> </mat-hint>
     <mat-hint align="end">{{inputFilter.value.length}} / 256</mat-hint>
+
+    // filters
   </mat-form-field>
 </form>
