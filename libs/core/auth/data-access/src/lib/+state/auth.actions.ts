@@ -20,6 +20,7 @@ export const authActions = createActionGroup({
     getUserSuccess: props<{ user: UsersEntity }>(),
     loginSuccess: props<{ res: SignAuthUser }>(),
 
+
     changeProfileData: props<{ data: ChangeProfileDataPayload }>(),
     changePassword: props<{ data: ChangePasswordPayload }>(),
     uploadImage: props<{ image: any }>(),
@@ -27,6 +28,8 @@ export const authActions = createActionGroup({
     getUser: emptyProps(),
     logout: emptyProps(),
     login: props<{ userData: SignAuthPayload }>(),
+
+
 
     changeProfileDataFailure: props<{ error: Error }>(),
     changePasswordFailure: props<{ error: Error }>(),

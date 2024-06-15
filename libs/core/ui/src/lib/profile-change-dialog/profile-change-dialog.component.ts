@@ -40,5 +40,6 @@ export class ProfileChangeDialogComponent {
     name: new FormControl(this.userEntityData.name, [Validators.required]),
     city: new FormControl(this.userEntityData.city, [Validators.required]),
     email: new FormControl(this.userEntityData.email, [Validators.required, Validators.email]),
+    totalStoryPoints: new FormControl(this.userEntityData.totalStoryPoints, [Validators.required]),
   });
 }

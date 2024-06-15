@@ -9,6 +9,10 @@ export const initUsers = createAction('[Users Page] Init');
 export const loadUsersSuccess = createAction('[Users/API] Load Users Success', props<{ users: UsersEntity[] }>());
 
 export const loadUsersFailure = createAction('[Users/API] Load Users Failure', props<{ error: any }>());
+export const setUsersFilter = createAction('[Users] Sets UsersFilter', props<{ filter: { name: string } }>());
+export const setUsersFilterSuccess = createAction('[Users/Api] Sets UsersFilter Success', props<{ filter: { name: string } }>());
+export const setUsersFilterFailure = createAction('[Users/Api] Sets UsersFilter Failure', props<{error: any}>());
+
 
 export const deleteUser = createAction('[Users Page] Delete User', props<{ id: number }>());
 export const deleteUserSuccess = createAction('[Users/Api] Delete User Success', props<{ id: number }>());

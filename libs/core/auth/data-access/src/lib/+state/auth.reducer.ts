@@ -36,6 +36,7 @@ export const authFeature = createFeature({
     on(authActions.login, (state) => ({
       ...state,
       authStatus: 'loading' as const,
+
     })),
     on(authActions.loginSuccess, (state, { res }) => ({
       ...state,
@@ -43,6 +44,7 @@ export const authFeature = createFeature({
       authToken: res.authToken,
       loggedUser: res.user,
     })),
+
     on(authActions.getUser, (state) => ({
       ...state,
     })),

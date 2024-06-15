@@ -9,18 +9,22 @@ import { UsersFacade } from '@users/users/data-access';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
+import { FiltersComponent } from '../../../filters/filters.component';
+
+
 
 @Component({
   selector: 'users-list-container',
   standalone: true,
-  imports: [
-    CommonModule,
-    UsersListComponent,
-    MatButtonModule,
-    MatDialogModule,
-    LetDirective,
-    CreateUsersButtonComponent,
-  ],
+    imports: [
+        CommonModule,
+        UsersListComponent,
+        MatButtonModule,
+        MatDialogModule,
+        LetDirective,
+        CreateUsersButtonComponent,
+        FiltersComponent
+    ],
   templateUrl: './users-list-container.component.html',
   styleUrls: ['./users-list-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
