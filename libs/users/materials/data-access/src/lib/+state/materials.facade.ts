@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import * as MaterialSelectors from './materials.selectors';
 import { MaterialsActions } from './materials.actions';
+import { CreateFolderInput } from '../models/create-folder.type';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialFacade {
@@ -25,5 +26,9 @@ export class MaterialFacade {
 
   deleteFolder(id: number) {
     this.store.dispatch(MaterialsActions.deleteFolder({ id }));
+  }
+
+  createFolder(createFolderInput: CreateFolderInput) {
+    this.store.dispatch(MaterialsActions.createFolder({ createFolderInput }));
   }
 }

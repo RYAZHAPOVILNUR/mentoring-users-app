@@ -21,6 +21,9 @@
         "libs/core/auth/feature-register/src/index.ts"
       ],
       "@dadata": ["libs/core/dadata/src/index.ts"],
+      "@materials/feature-folder-create": [
+        "libs/users/materials/feature-folder-create/src/index.ts"
+      ],
       "@materials/feature-folder-list": [
         "libs/users/materials/feature-folder-list/src/index.ts"
       ],

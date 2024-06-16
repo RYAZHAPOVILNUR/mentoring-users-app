@@ -2,6 +2,7 @@ import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
 import { Folder } from '../models/folder.interface';
 import { MaterialStatus } from '../enums/materials-status.enum';
+import { CreateFolderInput } from '../models/create-folder.type';
 
 export const MaterialsActions = createActionGroup({
   source: 'Materials',
@@ -13,7 +14,8 @@ export const MaterialsActions = createActionGroup({
       error: Error;
     }>(),
 
-    'Create Folder Success': props<{ folder: Folder }>(),
+    'Create Folder': props<{ createFolderInput: CreateFolderInput }>(),
+    'Create Folder Success': props<{ createFolderInput: CreateFolderInput }>(),
     'Create Folder Failure': props<{
       status: MaterialStatus.Error;
       error: Error;

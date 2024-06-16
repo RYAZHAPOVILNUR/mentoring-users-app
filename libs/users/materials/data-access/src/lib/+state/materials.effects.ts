@@ -7,7 +7,7 @@ import { MaterialsActions } from './materials.actions';
 import { Folder } from '../models/folder.interface';
 import { MaterialStatus } from '../enums/materials-status.enum';
 
-export const loadMaterials$ = createEffect(
+export const loadFolders$ = createEffect(
   () => {
     const actions$ = inject(Actions);
     const apiService = inject(ApiService);
@@ -57,3 +57,13 @@ export const deleteFolder$ = createEffect(
   },
   { functional: true }
 );
+
+export const createFolder$ = createEffect(() => {
+  const actions$ = inject(Actions);
+  const apiService = inject(ApiService);
+
+  return actions$.pipe(
+    ofType(MaterialsActions.createFolder),
+    switchMap(({ folder }) => apiService.post())
+  );
+});
