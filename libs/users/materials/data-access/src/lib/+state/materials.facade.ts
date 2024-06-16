@@ -6,6 +6,7 @@ import { MaterialsActions } from './materials.actions';
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
   private readonly store = inject(Store);
+  public readonly foldersStatus$ = this.store.select(MaterialsSelectors.selectFoldersStatus);
   public readonly allFolders$ = this.store.select(MaterialsSelectors.selectAllFolders);
 
   public loadFolders() {

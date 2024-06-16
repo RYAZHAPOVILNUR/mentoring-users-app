@@ -1,1 +1,5 @@
-<users-folders-card></users-folders-card>
+<div class="container">
+  <ng-container *ngFor="let folder of folders">
+    <users-folders-card [folder]="folder"></users-folders-card>
+  </ng-container>
+</div>

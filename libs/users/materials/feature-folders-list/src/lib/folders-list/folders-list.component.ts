@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';
+import { Folder } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-folders-list',
@@ -11,4 +12,6 @@ import { FoldersCardComponent } from '../folders-card/folders-card.component';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FoldersListComponent {}
+export class FoldersListComponent {
+  @Input({ required: true }) folders!: Folder[];
+}

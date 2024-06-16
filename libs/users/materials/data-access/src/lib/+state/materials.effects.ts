@@ -8,23 +8,20 @@ import { Folder } from '../models/folder.model';
 
 @Injectable()
 export class MaterialsEffects {
-  loadFolders = createEffect(
-    () => {
-      const actions$ = inject(Actions);
-      const apiService = inject(ApiService);
+  loadFolders = createEffect(() => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
 
-      return actions$.pipe(
-        ofType(MaterialsActions.loadFolders),
-        switchMap(() =>
-          apiService.get<Folder[]>('/folder').pipe(
-            map((folders) => MaterialsActions.loadFoldersSuccess({ folders })),
-            catchError((error) => of(MaterialsActions.loadMaterialsFailure({ error })))
-          )
+    return actions$.pipe(
+      ofType(MaterialsActions.loadFolders),
+      switchMap(() =>
+        apiService.get<Folder[]>('/folder').pipe(
+          map((folders) => MaterialsActions.loadFoldersSuccess({ folders })),
+          catchError((error) => of(MaterialsActions.loadMaterialsFailure({ error })))
         )
-      );
-    },
-    { functional: true }
-  );
+      )
+    );
+  });
 
   loadMaterials$ = createEffect(() => {
     return this.actions$.pipe(
