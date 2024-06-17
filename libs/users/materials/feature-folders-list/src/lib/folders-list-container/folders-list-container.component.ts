@@ -4,11 +4,12 @@ import { FoldersListComponent } from '../folders-list/folders-list.component';
 import { MaterialsFacade } from '@users/materials/data-access';
 import { LetDirective } from '@ngrx/component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { FoldersAddButtonComponent } from '@users/materials/feature-folders-create';
 
 @Component({
   selector: 'users-folders-list-container',
   standalone: true,
-  imports: [CommonModule, FoldersListComponent, LetDirective, MatProgressBarModule],
+  imports: [CommonModule, FoldersListComponent, LetDirective, MatProgressBarModule, FoldersAddButtonComponent],
   templateUrl: './folders-list-container.component.html',
   styleUrls: ['./folders-list-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
