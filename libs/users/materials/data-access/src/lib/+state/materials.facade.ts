@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import * as MaterialsSelectors from './materials.selectors';
 import { MaterialsActions } from './materials.actions';
 import { FolderAdd } from '../models/folder-add.model';
+import { Folder } from '../models/folder.model';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
@@ -16,5 +17,9 @@ export class MaterialsFacade {
 
   public addFolder(folder: FolderAdd) {
     this.store.dispatch(MaterialsActions.addFolder({ folder }));
+  }
+
+  public deleteFolder(folder: Folder) {
+    this.store.dispatch(MaterialsActions.deleteFolder({ folder }));
   }
 }

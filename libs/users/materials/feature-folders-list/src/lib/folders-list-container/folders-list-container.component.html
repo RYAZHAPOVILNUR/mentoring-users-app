@@ -9,7 +9,7 @@
       </div>
     </ng-container>
     <ng-container *ngSwitchCase="'loaded'">
-      <users-folders-list [folders]="vm.allFolders"></users-folders-list>
+      <users-folders-list (deleteFolder)="deleteFolder($event)" [folders]="vm.allFolders" />
     </ng-container>
   </ng-container>
 </ng-container>

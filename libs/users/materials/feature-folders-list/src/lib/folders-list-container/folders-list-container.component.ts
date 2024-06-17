@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
-import { MaterialsFacade } from '@users/materials/data-access';
+import { Folder, MaterialsFacade } from '@users/materials/data-access';
 import { LetDirective } from '@ngrx/component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FoldersAddButtonComponent } from '@users/materials/feature-folders-create';
@@ -22,5 +22,9 @@ export class FoldersListContainerComponent {
 
   constructor() {
     this.materialsFacade.loadFolders();
+  }
+
+  public deleteFolder(folder: Folder) {
+    this.materialsFacade.deleteFolder(folder);
   }
 }

@@ -23,3 +23,9 @@ mat-card {
     transition: opacity 0.3s ease;
   }
 }
+
+.icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
