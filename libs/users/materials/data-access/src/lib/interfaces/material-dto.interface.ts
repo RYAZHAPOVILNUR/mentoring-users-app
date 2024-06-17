@@ -1,4 +1,4 @@
-export interface Material {
+export interface MaterialDTO {
   id: number,
   created_at: Date,
   title: string,

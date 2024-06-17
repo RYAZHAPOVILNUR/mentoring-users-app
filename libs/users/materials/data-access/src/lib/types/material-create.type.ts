@@ -1,6 +1,3 @@
-// export type MaterialCreate = Pick<Material, ['title', 'material_link']>
-//
-//
-// type Pick<T, K extends keyof T> = {
-//   [P in K]: T[P];
-// };
+import { MaterialEntity } from '../interfaces/material-entity.interface';
+
+export type MaterialCreate = Pick<MaterialEntity, 'title' | 'materialLink' | 'folderId'>

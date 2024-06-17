@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { Material, MaterialsState } from '@users/materials/data-access';
-import { GetIconPipe } from '../../../../data-access/src/lib/pipes/get-icon.pipe';
+import { GetIconPipe, MaterialDTO, MaterialsFacade } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-materials-card-ui',
@@ -21,14 +20,14 @@ import { GetIconPipe } from '../../../../data-access/src/lib/pipes/get-icon.pipe
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MaterialsCardUiComponent {
-  @Input({ required: true }) material!: Material;
-  private readonly materialsState = inject(MaterialsState); // todo facade?
+  @Input({ required: true }) material!: MaterialDTO;
+  private readonly materialsFacade = inject(MaterialsFacade);
 
   onCardClick() {
-    this.materialsState.openMaterial(this.material.id);
+    this.materialsFacade.openMaterial(this.material.id);
   }
 
   onDeleteButtonClick() {
-    this.materialsState.deleteMaterial(this.material.id);
+    this.materialsFacade.deleteMaterial(this.material.id);
   }
 }

@@ -1,21 +1,20 @@
 
 mat-card {
-  width: 500px;
-  height: 300px;
+  width: 600px;
+  height: 350px;
 }
+
 
 mat-form-field {
   width: 100%;
 }
 
-mat-error {
-  display: block;
-  position: relative;
-  margin-top: 5px;
-  font-size: small;
-
+mat-card-subtitle {
+  margin: 5px 20px 0 10px;
 }
 
-.material-link {
-  margin-top: 15px;
+mat-error > div {
+  display: flex;
+
+
 }

@@ -4,8 +4,7 @@ import { LetDirective } from '@ngrx/component';
 import { FoldersListUiComponent } from '@users/materials/feature-folders-list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { ActivatedRoute } from '@angular/router';
-import { Material, MaterialsFacade } from '@users/materials/data-access';
+import { MaterialCreate, MaterialsFacade } from '@users/materials/data-access';
 import { MaterialsListUiComponent } from '../materials-list-ui/materials-list-ui.component';
 import { filter, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -28,22 +27,13 @@ import { AddMaterialDialogUiComponent } from '../add-material-dialog-ui/add-mate
 })
 export class MaterialsListContainerComponent {
   readonly materialsFacade = inject(MaterialsFacade);
-  private readonly activatedRoute = inject(ActivatedRoute);
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
-  // todo this.folderId не должен существовать, у селекторов и у эффектов
-  //  есть доступ к queryParams (routeParams), они справятся без передачи ненужных данных!
-  readonly folderId: number | undefined = Number(this.activatedRoute.snapshot.params['id']);
 
   constructor() {
-    this.loadMaterialsByFolderId();
+    this.materialsFacade.loadMaterials();
     this.deleteMaterialHandler();
-  }
-
-  private loadMaterialsByFolderId(): void {
-    // if (!this.isCorrectFolderId)
-    if (!this.folderId) return; // todo this.folderId
-    this.materialsFacade.loadMaterials(this.folderId); // todo this.folderId
+    this.openMaterialHandler();
   }
 
   private deleteMaterialHandler(): void {
@@ -53,13 +43,14 @@ export class MaterialsListContainerComponent {
     ).subscribe();
   }
 
-  onAddButtonClick(): void {
-    if (!this.folderId) return; // todo this.folderId
+  private openMaterialHandler(): void {
+    this.materialsFacade.openMaterialHandler$.pipe(takeUntilDestroyed()).subscribe();
+  }
 
+  onAddButtonClick(): void {
     const dialogRef = this.dialog
-      .open<AddMaterialDialogUiComponent, number, Partial<Material>>(
-        AddMaterialDialogUiComponent,
-        { data: this.folderId } // todo this.folderId
+      .open<AddMaterialDialogUiComponent, never, MaterialCreate>(
+        AddMaterialDialogUiComponent
       );
 
     dialogRef.afterClosed().pipe(
@@ -68,5 +59,4 @@ export class MaterialsListContainerComponent {
       takeUntilDestroyed(this.destroyRef)
     ).subscribe();
   }
-
 }

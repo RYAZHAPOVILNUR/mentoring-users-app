@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { authGuard, adminGuard } from '@auth/data-access';
+import { adminGuard, authGuard } from '@auth/data-access';
 import { AuthorizedUserLayoutComponent } from './authorized-user-layout/authorized-user-layout.component';
 import { UnauthorizedUserLayoutComponent } from './unauthorized-user-layout-component/unauthorized-user-layout-component.component';
 import { canDeactivateFormComponent } from '@users/core/utils';
@@ -7,8 +7,8 @@ import { canDeactivateFormComponent } from '@users/core/utils';
 const layoutAgnosticComponents = [
   {
     path: 'home',
-    loadComponent: () => import('@users/home').then((c) => c.HomeComponent),
-  },
+    loadComponent: () => import('@users/home').then((c) => c.HomeComponent)
+  }
 ];
 
 export const appRoutes: Route[] = [
@@ -23,75 +23,75 @@ export const appRoutes: Route[] = [
         children: [
           {
             path: 'users',
-            loadComponent: () => import('@users/feature-users-list').then((c) => c.UsersListContainerComponent),
+            loadComponent: () => import('@users/feature-users-list').then((c) => c.UsersListContainerComponent)
           },
           {
             path: 'users/:id',
-            loadComponent: () => import('@users/feature-users-detail').then((c) => c.UsersDetailComponent),
-          },
-        ],
+            loadComponent: () => import('@users/feature-users-detail').then((c) => c.UsersDetailComponent)
+          }
+        ]
       },
       {
         path: 'profile',
-        loadComponent: () => import('@users/users/profile/feature-profile').then((c) => c.ProfileContainerComponent),
+        loadComponent: () => import('@users/users/profile/feature-profile').then((c) => c.ProfileContainerComponent)
       },
       {
         path: 'profile/:id',
         loadComponent: () =>
-          import('@users/users/profile/feature-profile').then((c) => c.UserProfileContainerComponent),
+          import('@users/users/profile/feature-profile').then((c) => c.UserProfileContainerComponent)
       },
       {
         path: 'article-editor',
         loadComponent: () =>
           import('@users/users/articles/articles-create').then((c) => c.ArticlesCreateContainerComponent),
-        canDeactivate: [canDeactivateFormComponent],
+        canDeactivate: [canDeactivateFormComponent]
       },
       {
         path: 'folders',
-        loadComponent: () => import('@users/materials/feature-folders-list').then((c) => c.FoldersListContainerComponent),
+        loadComponent: () => import('@users/materials/feature-folders-list').then((c) => c.FoldersListContainerComponent)
       },
       {
-        path: 'files/:id',
-        loadComponent: () => import('@users/materials/feature-materials-list').then((c) => c.MaterialsListContainerComponent),
+        path: 'files/:id', // todo rename
+        loadComponent: () => import('@users/materials/feature-materials-list').then((c) => c.MaterialsListContainerComponent)
       },
       {
         path: 'articles',
-        loadComponent: () => import('@users/users/articles/articles').then((c) => c.ArticlesViewContainerComponent),
+        loadComponent: () => import('@users/users/articles/articles').then((c) => c.ArticlesViewContainerComponent)
       },
       {
         path: 'articles/:id',
-        loadComponent: () => import('@users/users/articles/article-read').then((c) => c.ArticleReadContainerComponent),
+        loadComponent: () => import('@users/users/articles/article-read').then((c) => c.ArticleReadContainerComponent)
       },
       {
         path: 'tasks',
-        loadComponent: () => import('@users/users/task').then((c) => c.TasksContainerComponent),
+        loadComponent: () => import('@users/users/task').then((c) => c.TasksContainerComponent)
       },
       {
         path: 'settings',
-        loadComponent: () => import('@users/settings').then((c) => c.SettingsComponent),
+        loadComponent: () => import('@users/settings').then((c) => c.SettingsComponent)
       },
       {
         path: 'chart',
-        loadComponent: () => import('@users/users/chart').then((c) => c.ChartViewComponent),
+        loadComponent: () => import('@users/users/chart').then((c) => c.ChartViewComponent)
       },
       {
         path: 'backlog',
-        loadComponent: () => import('@users/users/backlog').then((c) => c.BacklogComponent),
+        loadComponent: () => import('@users/users/backlog').then((c) => c.BacklogComponent)
       },
-      ...layoutAgnosticComponents,
-    ],
+      ...layoutAgnosticComponents
+    ]
   },
   {
     path: 'guest',
     component: UnauthorizedUserLayoutComponent,
-    children: [...layoutAgnosticComponents],
+    children: [...layoutAgnosticComponents]
   },
   {
     path: 'login',
-    loadComponent: () => import('@auth/feature-login').then((c) => c.LoginContainerComponent),
+    loadComponent: () => import('@auth/feature-login').then((c) => c.LoginContainerComponent)
   },
   {
     path: 'signup',
-    loadComponent: () => import('@auth/feature-register').then((c) => c.RegisterContainerComponent),
-  },
+    loadComponent: () => import('@auth/feature-register').then((c) => c.RegisterContainerComponent)
+  }
 ];

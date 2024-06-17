@@ -79,9 +79,11 @@
   "MATERIALS": {
     "CREATE_FOLDER_TITLE": "Создание новой папки:",
     "CREATE_FOLDER-SUBTITLE": "Введите имя папки",
-
     "CREATE_FILE_TITLE": "Добавление нового файла:",
     "CREATE_FILE_SUBTITLE": "Введите имя нового файла",
-    "CREATE_FILE_LINK": "Ссылка"
+    "CREATE_FILE_LINK": "Ссылка",
+    "VALIDATION_REQUIRED": "Поле обязательно для заполнения",
+    "VALIDATION_MIN_LENGTH": "Поле должно содержать больше символов",
+    "VALIDATION_PATTERN": "Ссылка указана некорректно"
   }
 }

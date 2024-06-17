@@ -6,47 +6,41 @@
     <mat-card-subtitle>
       {{ 'MATERIALS.CREATE_FILE_SUBTITLE' | translate }}
     </mat-card-subtitle>
-    <input
-      matInput
-      #inputTitle
-      minlength="2"
-      required
-      type="text"
-    />
-    <mat-error *ngIf="inputTitle.selectionEnd && !inputTitle.validity.valid">
-      Имя файла слишком короткое
-    </mat-error>
+    <form [formGroup]="materialFormGroup">
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          formControlName="materialTitle"
+        />
+        <mat-error *ngIf="materialFormGroup.get('materialTitle')?.invalid">
+          {{ materialFormGroupService.getErrorMessage('materialTitle') }}
+        </mat-error>
+      </mat-form-field>
 
-    <mat-card-subtitle class="material-link">
-      {{ 'MATERIALS.CREATE_FILE_LINK' | translate }}
-    </mat-card-subtitle>
-    <!-- todo провалидировать эти поля чтобы пользователь не мог ввести дичь-->
-    <!-- todo добавить валидатор который будет проверять соответствует ли ссылка -->
-    <!-- todo какому либо формату, если нет - не давать сохранить форму -->
-    <input
-      [formControl]="inputLinkControl"
-      matInput
-      #inputLink
-    />
-
-    <mat-error *ngIf="inputLinkControl.hasError('required') && inputLinkControl.touched">
-      Поле обязательно для заполнения
-    </mat-error>
-    <mat-error *ngIf="inputLinkControl.hasError('minlength') && inputLinkControl.touched">
-      Поле должно содержать минимум 10 символа
-    </mat-error>
-    <mat-error *ngIf="inputLinkControl.hasError('pattern') && inputLinkControl.touched">
-      Формат файла не распознан
-    </mat-error>
-
+      <mat-card-subtitle class="material-link">
+        {{ 'MATERIALS.CREATE_FILE_LINK' | translate }}
+      </mat-card-subtitle>
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          formControlName="materialLink"
+        />
+        <mat-error *ngIf="materialFormGroup.get('materialLink')?.invalid">
+          {{ materialFormGroupService.getErrorMessage('materialLink') }}
+        </mat-error>
+      </mat-form-field>
+    </form>
   </mat-dialog-content>
 
   <mat-dialog-actions align="end">
     <button
       mat-icon-button
       color="accent"
-      (click)="onDoneButtonClick(inputTitle.value, inputLink.value)"
-      [disabled]="inputLinkControl.invalid || !inputTitle.validity.valid"
+      [disabled]="materialFormGroup.get('materialTitle')?.invalid
+      || materialFormGroup.get('materialLink')?.invalid"
+      (click)="onDoneButtonClick()"
     >
       <mat-icon>done</mat-icon>
     </button>

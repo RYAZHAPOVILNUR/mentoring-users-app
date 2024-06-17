@@ -2,16 +2,14 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular
 import { CommonModule } from '@angular/common';
 import { FoldersListUiComponent } from '../folders-list-ui/folders-list-ui.component';
 import { LetDirective } from '@ngrx/component';
-import { UsersListComponent } from '@users/feature-users-list';
-import { CreateUsersButtonComponent } from '@users/feature-users-create';
 import { FoldersFacade } from '@users/materials/data-access';
-import { AddFolderDialogUiComponent } from '@users/core/ui';
 import { MatDialog } from '@angular/material/dialog';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter, tap } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
+import { AddFolderDialogUiComponent } from '../add-folders-dialog-ui/add-folder-dialog-ui.component';
 
 
 @Component({
@@ -20,8 +18,6 @@ import { Router } from '@angular/router';
     CommonModule,
     FoldersListUiComponent,
     LetDirective,
-    UsersListComponent,
-    CreateUsersButtonComponent,
     MatButtonModule,
     MatIconModule
   ],

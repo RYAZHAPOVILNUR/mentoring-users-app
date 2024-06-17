@@ -5,12 +5,17 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { TranslateModule } from '@ngx-translate/core';
-import { AddFolderDialogUiComponent } from '@users/materials/feature-folders-list';
-import { Material } from '@users/materials/data-access';
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ErrorsKey, ERRORSS, MaterialDTO, MaterialFormGroup, MaterialsFacade } from '@users/materials/data-access';
+import { ReactiveFormsModule } from '@angular/forms';
 
-type AddDialogRef = MatDialogRef<AddFolderDialogUiComponent, Partial<Material>>
+function validationErrorsFactory(translateService: TranslateService): { [key in ErrorsKey]: string } {
+  return {
+    required: translateService.instant('MATERIALS.VALIDATION_REQUIRED'),
+    minlength: translateService.instant('MATERIALS.VALIDATION_MIN_LENGTH'),
+    pattern: translateService.instant('MATERIALS.VALIDATION_PATTERN')
+  };
+}
 
 @Component({
   standalone: true,
@@ -22,25 +27,29 @@ type AddDialogRef = MatDialogRef<AddFolderDialogUiComponent, Partial<Material>>
     MatIconModule,
     MatInputModule,
     TranslateModule,
-    FormsModule,
     ReactiveFormsModule
   ],
   templateUrl: './add-material-dialog-ui.component.html',
   styleUrls: ['./add-material-dialog-ui.component.scss'],
+  providers: [
+    MaterialFormGroup,
+    {
+      provide: ERRORSS,
+      useFactory: validationErrorsFactory,
+      deps: [TranslateService]
+    }
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddMaterialDialogUiComponent {
-  private readonly dialogRef: AddDialogRef = inject(MatDialogRef);
+  readonly facade = inject(MaterialsFacade);
+  readonly dialogRef: MatDialogRef<AddMaterialDialogUiComponent, Partial<MaterialDTO>> = inject(MatDialogRef);
+  readonly materialFormGroupService = inject(MaterialFormGroup);
+  readonly materialFormGroup = this.materialFormGroupService.getMaterialFormGroup();
 
-  readonly inputLinkControl = new FormControl('', [
-    Validators.required,
-    Validators.minLength(10),
-    Validators.pattern(/\.mp3$|\.pdf$|youtube|youtu.be/)
-  ]);
-
-  onDoneButtonClick(title: string, material_link: string): void {
+  onDoneButtonClick(): void {
+    const title = this.materialFormGroup.controls.materialTitle.value;
+    const material_link = this.materialFormGroup.controls.materialLink.value; // todo JS ПЕРЕМЕННЫЕ НЕ МОГУТ ИДТИ ЧЕРЕЗ ПОДЧЕРКИВАНИЕ БЛЯДЬ
     this.dialogRef.close({ title, material_link });
   }
-
 }
-
