@@ -31,9 +31,20 @@ export const reducer = createReducer(
       status: 'loaded' as const,
     })
   ),
-  on(MaterialsActions.loadFoldersFailure, (state, action) => ({
+  on(MaterialsActions.loadFoldersFailure, (state, { error }) => ({
     ...state,
     status: 'error' as const,
+    error,
+  })),
+  on(MaterialsActions.addFolderSuccess, (state, { folder }) =>
+    materialsAdapter.addOne(folder, {
+      ...state,
+    })
+  ),
+  on(MaterialsActions.addFolderFailure, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
   }))
 );
 

@@ -5,6 +5,7 @@ import { EMPTY, of } from 'rxjs';
 import { MaterialsActions } from './materials.actions';
 import { ApiService } from '@users/core/http';
 import { Folder } from '../models/folder.model';
+import { FolderAdd } from '../models/folder-add.model';
 
 @Injectable()
 export class MaterialsEffects {
@@ -17,6 +18,21 @@ export class MaterialsEffects {
       switchMap(() =>
         apiService.get<Folder[]>('/folder').pipe(
           map((folders) => MaterialsActions.loadFoldersSuccess({ folders })),
+          catchError((error) => of(MaterialsActions.loadMaterialsFailure({ error })))
+        )
+      )
+    );
+  });
+
+  addFolder = createEffect(() => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+
+    return actions$.pipe(
+      ofType(MaterialsActions.addFolder),
+      switchMap(({ folder }) =>
+        apiService.post<Folder, FolderAdd>('/folder', folder).pipe(
+          map((folder) => MaterialsActions.addFolderSuccess({ folder })),
           catchError((error) => of(MaterialsActions.loadMaterialsFailure({ error })))
         )
       )
