@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { GetIconPipe, MaterialDTO, MaterialsFacade } from '@users/materials/data-access';
+import { GetIconPipe, MaterialEntity, MaterialsFacade } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-materials-card-ui',
@@ -20,7 +20,7 @@ import { GetIconPipe, MaterialDTO, MaterialsFacade } from '@users/materials/data
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MaterialsCardUiComponent {
-  @Input({ required: true }) material!: MaterialDTO;
+  @Input({ required: true }) material!: MaterialEntity;
   private readonly materialsFacade = inject(MaterialsFacade);
 
   onCardClick() {

@@ -1,6 +1,6 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { MaterialCreate } from '../../types/material-create.type';
 import { MaterialEntity } from '../../interfaces/material-entity.interface';
+import { MaterialCreate } from '../../types/material-create.type';
 
 export const materialsActions = createActionGroup({
   source: 'Materials',

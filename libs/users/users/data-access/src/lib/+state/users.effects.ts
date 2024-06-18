@@ -1,11 +1,11 @@
 import { inject } from '@angular/core';
-import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, catchError, of, map, withLatestFrom, filter, tap } from 'rxjs';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { catchError, filter, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
 import * as UsersActions from './users.actions';
 import { ApiService } from '@users/core/http';
-import { Store, select } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { selectUsersEntities } from './users.selectors';
-import { CreateUserDTO, UsersDTO, UsersEntity, selectRouteParams, usersDTOAdapter } from '@users/core/data-access';
+import { CreateUserDTO, selectRouteParams, UsersDTO, usersDTOAdapter, UsersEntity } from '@users/core/data-access';
 
 export const userEffects = createEffect(
   () => {
@@ -19,7 +19,7 @@ export const userEffects = createEffect(
         apiService.get<UsersDTO[]>('/users').pipe(
           map((users) =>
             UsersActions.loadUsersSuccess({
-              users: users.map((user) => usersDTOAdapter.DTOtoEntity(user)),
+              users: users.map((user) => usersDTOAdapter.DTOtoEntity(user))
             })
           ),
           catchError((error) => {
@@ -86,15 +86,16 @@ export const editUser = createEffect(
       ofType(UsersActions.editUser),
       withLatestFrom(usersEntities$),
       filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
-      map(([{ userData, id, onSuccessCb }, usersEntities]) => ({
+      map(([{ userData, id, onSuccessCb },
+             usersEntities]) => ({
         user: {
           ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
           name: userData.name,
           email: userData.email,
           username: userData.username,
-          city: userData.city,
+          city: userData.city
         },
-        onSuccessCb,
+        onSuccessCb
       })),
       switchMap(({ user, onSuccessCb }) =>
         apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(

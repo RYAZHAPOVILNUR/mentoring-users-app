@@ -1,16 +1,16 @@
-import { MATERIALS_FEATURE_KEY, materialsAdapter } from './materials.reducer';
+import { MATERIALS_FEATURE_KEY, materialsSelector } from './materials.reducer';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { EntityState } from '@ngrx/entity';
-import { MaterialDTO } from '../../interfaces/material-dto.interface';
 import { LoadingStatus, selectRouteParams } from '@users/core/data-access';
+import { MaterialEntity } from '../../interfaces/material-entity.interface';
 
 
-const { selectAll, selectEntities } = materialsAdapter.getSelectors();
+const { selectAll, selectEntities } = materialsSelector.getSelectors();
 
 //const folderId: number | undefined = Number(this.activatedRoute.snapshot.params['id']);
 
 
-interface MaterialState extends EntityState<MaterialDTO> {
+interface MaterialState extends EntityState<MaterialEntity> {
   status: LoadingStatus;
 }
 
@@ -37,6 +37,6 @@ export const selectMaterialsByFolderId = createSelector(
   selectMaterials,
   ({ id }, entities) =>
     entities.filter((entity) =>
-      entity.folder_id === Number(id)
+      entity.folderId === Number(id)
     )
 );

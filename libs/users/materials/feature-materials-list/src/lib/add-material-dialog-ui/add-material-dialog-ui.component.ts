@@ -6,7 +6,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { ErrorsKey, ERRORSS, MaterialDTO, MaterialFormGroup, MaterialsFacade } from '@users/materials/data-access';
+import { ErrorsKey, ERRORSS, MaterialEntity, MaterialFormGroup, MaterialsFacade } from '@users/materials/data-access';
 import { ReactiveFormsModule } from '@angular/forms';
 
 function validationErrorsFactory(translateService: TranslateService): { [key in ErrorsKey]: string } {
@@ -43,13 +43,13 @@ function validationErrorsFactory(translateService: TranslateService): { [key in 
 })
 export class AddMaterialDialogUiComponent {
   readonly facade = inject(MaterialsFacade);
-  readonly dialogRef: MatDialogRef<AddMaterialDialogUiComponent, Partial<MaterialDTO>> = inject(MatDialogRef);
+  readonly dialogRef: MatDialogRef<AddMaterialDialogUiComponent, Partial<MaterialEntity>> = inject(MatDialogRef);
   readonly materialFormGroupService = inject(MaterialFormGroup);
   readonly materialFormGroup = this.materialFormGroupService.getMaterialFormGroup();
 
   onDoneButtonClick(): void {
     const title = this.materialFormGroup.controls.materialTitle.value;
-    const material_link = this.materialFormGroup.controls.materialLink.value; // todo JS ПЕРЕМЕННЫЕ НЕ МОГУТ ИДТИ ЧЕРЕЗ ПОДЧЕРКИВАНИЕ БЛЯДЬ
-    this.dialogRef.close({ title, material_link });
+    const materialLink = this.materialFormGroup.controls.materialLink.value;
+    this.dialogRef.close({ title, materialLink }); // todo а обещал MaterialCreate!
   }
 }

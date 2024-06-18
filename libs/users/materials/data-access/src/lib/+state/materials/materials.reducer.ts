@@ -1,12 +1,12 @@
 import { createEntityAdapter } from '@ngrx/entity';
-import { MaterialDTO } from '../../interfaces/material-dto.interface';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { materialsActions } from './materials.actions';
+import { MaterialEntity } from '../../interfaces/material-entity.interface';
 
 export const MATERIALS_FEATURE_KEY = 'materials';
-export const materialsAdapter = createEntityAdapter<MaterialDTO>();
+export const materialsSelector = createEntityAdapter<MaterialEntity>();
 
-const initialState = materialsAdapter.getInitialState({
+const initialState = materialsSelector.getInitialState({
   status: 'init'
 });
 
@@ -28,7 +28,7 @@ export const materialsFeature = createFeature({
     ),
 
     on(materialsActions.loadMaterialsSuccess, (state, { materials }) =>
-      materialsAdapter.setAll(materials, {
+      materialsSelector.setAll(materials, {
         ...state,
         status: 'loaded'
       })
@@ -39,13 +39,13 @@ export const materialsFeature = createFeature({
       })
     ),
     on(materialsActions.createMaterialSuccess, (state, { material }) =>
-      materialsAdapter.addOne(
+      materialsSelector.addOne(
         { ...material },
         { ...state }
       )
     ),
     on(materialsActions.deleteMaterialSuccess, (state, { id }) =>
-      materialsAdapter.removeOne(id, { ...state })
+      materialsSelector.removeOne(id, { ...state })
     )
   )
 });

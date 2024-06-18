@@ -1,0 +1,22 @@
+<mat-card>
+  <mat-dialog-content>
+    <mat-card-title>
+      {{ 'MATERIALS.CREATE_FOLDER_TITLE'  | translate }}
+    </mat-card-title>
+    <mat-card-subtitle>
+      {{ 'MATERIALS.CREATE_FOLDER-SUBTITLE' | translate }}
+    </mat-card-subtitle>
+    <input
+      matInput
+      #inputElement
+    />
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-icon-button (click)="onDoneButtonClick(inputElement.value)" color="accent" aria-label="Готово">
+      <mat-icon>done</mat-icon>
+    </button>
+    <button mat-icon-button mat-dialog-close color="warn" aria-label="Отмена">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-dialog-actions>
+</mat-card>

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FoldersCardUiComponent } from '@users/materials/feature-folders-list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MaterialsCardUiComponent } from '../materials-card-ui/materials-card-ui.component';
-import { MaterialDTO } from '@users/materials/data-access';
+import { MaterialEntity } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-materials-list-ui',
@@ -14,7 +14,7 @@ import { MaterialDTO } from '@users/materials/data-access';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MaterialsListUiComponent {
-  @Input({ required: true }) materials!: MaterialDTO[];
+  @Input({ required: true }) materials!: MaterialEntity[];
   @Input({ required: true }) status!: string;
 }
 
