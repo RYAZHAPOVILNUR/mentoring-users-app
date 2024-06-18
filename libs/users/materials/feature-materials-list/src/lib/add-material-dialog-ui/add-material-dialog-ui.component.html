@@ -1,56 +1,53 @@
-<mat-card>
-  <mat-dialog-content>
-    <mat-card-title>
-      {{ 'MATERIALS.CREATE_FILE_TITLE' | translate }}
-    </mat-card-title>
-    <mat-card-subtitle>
-      {{ 'MATERIALS.CREATE_FILE_SUBTITLE' | translate }}
-    </mat-card-subtitle>
-    <form [formGroup]="materialFormGroup">
-      <mat-form-field>
-        <input
-          matInput
-          type="text"
-          formControlName="materialTitle"
-        />
-        <mat-error *ngIf="materialFormGroup.get('materialTitle')?.invalid">
-          {{ materialFormGroupService.getErrorMessage('materialTitle') }}
-        </mat-error>
-      </mat-form-field>
+<div mat-dialog-content>
+  <h1 mat-card-title>
+    {{ 'MATERIALS.CREATE_FILE_TITLE' | translate }}
+  </h1>
+  <h3 mat-card-subtitle>
+    {{ 'MATERIALS.CREATE_FILE_SUBTITLE' | translate }}
+  </h3>
+  <form [formGroup]="materialFormGroup">
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        formControlName="materialTitle"
+      />
+      <mat-error *ngIf="getErrorMessage('materialTitle')">
+        {{ getErrorMessage('materialTitle') }}
+      </mat-error>
+    </mat-form-field>
 
-      <mat-card-subtitle class="material-link">
-        {{ 'MATERIALS.CREATE_FILE_LINK' | translate }}
-      </mat-card-subtitle>
-      <mat-form-field>
-        <input
-          matInput
-          type="text"
-          formControlName="materialLink"
-        />
-        <mat-error *ngIf="materialFormGroup.get('materialLink')?.invalid">
-          {{ materialFormGroupService.getErrorMessage('materialLink') }}
-        </mat-error>
-      </mat-form-field>
-    </form>
-  </mat-dialog-content>
+    <h3 mat-card-subtitle class="material-link">
+      {{ 'MATERIALS.CREATE_FILE_LINK' | translate }}
+    </h3>
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        formControlName="materialLink"
+      />
+      <mat-error *ngIf="getErrorMessage('materialLink')">
+        {{ getErrorMessage('materialLink') }}
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
 
-  <mat-dialog-actions align="end">
-    <button
-      mat-icon-button
-      color="accent"
-      [disabled]="materialFormGroup.get('materialTitle')?.invalid
-      || materialFormGroup.get('materialLink')?.invalid"
-      (click)="onDoneButtonClick()"
-    >
-      <mat-icon>done</mat-icon>
-    </button>
+<div mat-dialog-actions align="end">
+  <button
+    mat-icon-button
+    color="accent"
+    [disabled]="materialFormGroup.invalid"
+    (click)="onDoneButtonClick()"
+  >
+    <mat-icon>done</mat-icon>
+  </button>
 
-    <button
-      mat-icon-button
-      mat-dialog-close
-      color="warn"
-    >
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-dialog-actions>
-</mat-card>
+  <button
+    mat-icon-button
+    mat-dialog-close
+    color="warn"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>>

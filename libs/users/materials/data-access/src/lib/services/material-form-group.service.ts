@@ -1,11 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ErrorsKey, ERRORSS } from '../enums/ErrorsKey.enum';
 
 @Injectable()
 export class MaterialFormGroup {
   private readonly fb = inject(FormBuilder);
-  private readonly validationErrors = inject(ERRORSS);
 
   getMaterialFormGroup() {
     return this.fb.nonNullable.group({
@@ -15,18 +13,9 @@ export class MaterialFormGroup {
       ]],
       materialLink: ['', [
         Validators.required,
-        Validators.minLength(9),
         Validators.pattern(/^(?=.*http).*\.(mp3|pdf)$|^(?=.*http).*(youtube|youtu\.be)/)
       ]]
     });
-  }
-
-  getErrorMessage(fieldName: string): string {
-    const field = this.getMaterialFormGroup().get(fieldName);
-    if (!field) return '';
-    const key = Object.values(ErrorsKey).find((key) => field.hasError(key));
-    if (!key) return '';
-    return this.validationErrors[key];
   }
 }
 

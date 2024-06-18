@@ -6,7 +6,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { ErrorsKey, ERRORSS, MaterialEntity, MaterialFormGroup, MaterialsFacade } from '@users/materials/data-access';
+import { ErrorsKey, ERRORSS, MaterialCreate, MaterialEntity, MaterialFormGroup, MaterialsFacade } from '@users/materials/data-access';
 import { ReactiveFormsModule } from '@angular/forms';
 
 function validationErrorsFactory(translateService: TranslateService): { [key in ErrorsKey]: string } {
@@ -46,10 +46,22 @@ export class AddMaterialDialogUiComponent {
   readonly dialogRef: MatDialogRef<AddMaterialDialogUiComponent, Partial<MaterialEntity>> = inject(MatDialogRef);
   readonly materialFormGroupService = inject(MaterialFormGroup);
   readonly materialFormGroup = this.materialFormGroupService.getMaterialFormGroup();
+  private readonly validationErrors = inject(ERRORSS);
 
   onDoneButtonClick(): void {
-    const title = this.materialFormGroup.controls.materialTitle.value;
-    const materialLink = this.materialFormGroup.controls.materialLink.value;
-    this.dialogRef.close({ title, materialLink }); // todo а обещал MaterialCreate!
+    const material = {
+      title: this.materialFormGroup.controls.materialTitle.value,
+      materialLink: this.materialFormGroup.controls.materialLink.value,
+      folderId: 0
+    } as MaterialCreate;
+    this.dialogRef.close(material); // todo а обещал MaterialCreate!
+  }
+
+  getErrorMessage(fieldName: string): string {
+    const field = this.materialFormGroup.get(fieldName);
+    if (!field) return '';
+    const key = Object.values(ErrorsKey).find((key) => field.hasError(key));
+    if (!key) return '';
+    return this.validationErrors[key];
   }
 }

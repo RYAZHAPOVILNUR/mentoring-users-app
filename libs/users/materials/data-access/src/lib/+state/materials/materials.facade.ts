@@ -3,7 +3,6 @@ import { materialsActions } from './materials.actions';
 import { Store } from '@ngrx/store';
 import { selectMaterialsByFolderId, selectMaterialsStatus } from './materials.selectors';
 import { MaterialsState } from '../../services/materials-state.service';
-import { tap } from 'rxjs';
 import { MaterialCreate } from '../../types/material-create.type';
 
 @Injectable({ providedIn: 'root' })
@@ -12,10 +11,7 @@ export class MaterialsFacade {
   private materialsState = inject(MaterialsState);
   readonly status$ = this.store.select(selectMaterialsStatus);
   readonly materialsInFolder$ = this.store.select(selectMaterialsByFolderId);
-  readonly deleteMaterial$ = this.materialsState.deleteMaterial$;
-  readonly openMaterialHandler$ = this.materialsState.openMaterial$.pipe(
-    tap((id) => this.openMaterial(id))
-  );
+  readonly openMaterialHandler$ = this.materialsState.openMaterial$;
 
   loadMaterials(): void {
     this.store.dispatch(materialsActions.loadMaterials());

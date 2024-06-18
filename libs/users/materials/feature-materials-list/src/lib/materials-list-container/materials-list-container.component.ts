@@ -18,8 +18,10 @@ import { AddMaterialDialogUiComponent } from '../add-material-dialog-ui/add-mate
     CommonModule,
     LetDirective,
     FoldersListUiComponent,
-    MatButtonModule, MatIconModule,
-    MaterialsListUiComponent, MatMenuModule
+    MatButtonModule,
+    MatIconModule,
+    MaterialsListUiComponent,
+    MatMenuModule
   ],
   templateUrl: './materials-list-container.component.html',
   styleUrls: ['./materials-list-container.component.scss'],
@@ -32,19 +34,14 @@ export class MaterialsListContainerComponent {
 
   constructor() {
     this.materialsFacade.loadMaterials();
-    this.deleteMaterialHandler();
+    //  this.deleteMaterialHandler();
     this.openMaterialHandler();
   }
 
-  private deleteMaterialHandler(): void {
-    this.materialsFacade.deleteMaterial$.pipe(
-      tap((id) => this.materialsFacade.deleteMaterial(id)),
-      takeUntilDestroyed()
-    ).subscribe();
-  }
-
   private openMaterialHandler(): void {
-    this.materialsFacade.openMaterialHandler$.pipe(takeUntilDestroyed()).subscribe();
+    this.materialsFacade.openMaterialHandler$.pipe(
+      tap((id) => console.log(id))
+    ).subscribe();
   }
 
   onAddButtonClick(): void {
