@@ -18,7 +18,7 @@ export class MaterialsEffects {
       switchMap(() =>
         apiService.get<Folder[]>('/folder').pipe(
           map((folders) => MaterialsActions.loadFoldersSuccess({ folders })),
-          catchError((error) => of(MaterialsActions.loadMaterialsFailure({ error })))
+          catchError((error) => of(MaterialsActions.loadFoldersFailure({ error })))
         )
       )
     );
@@ -33,7 +33,22 @@ export class MaterialsEffects {
       switchMap(({ folder }) =>
         apiService.post<Folder, FolderAdd>('/folder', folder).pipe(
           map((folder) => MaterialsActions.addFolderSuccess({ folder })),
-          catchError((error) => of(MaterialsActions.loadMaterialsFailure({ error })))
+          catchError((error) => of(MaterialsActions.addFolderFailure({ error })))
+        )
+      )
+    );
+  });
+
+  deleteFolder = createEffect(() => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+
+    return actions$.pipe(
+      ofType(MaterialsActions.deleteFolder),
+      switchMap(({ id }) =>
+        apiService.delete<void>(`/folder/${id}`).pipe(
+          map(() => MaterialsActions.deleteFolderSuccess({ id })),
+          catchError((error) => of(MaterialsActions.deleteFolderFailure({ error })))
         )
       )
     );

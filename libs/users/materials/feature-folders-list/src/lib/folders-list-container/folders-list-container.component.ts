@@ -25,6 +25,6 @@ export class FoldersListContainerComponent {
   }
 
   public deleteFolder(folder: Folder) {
-    this.materialsFacade.deleteFolder(folder);
+    this.materialsFacade.deleteFolder(folder.id);
   }
 }

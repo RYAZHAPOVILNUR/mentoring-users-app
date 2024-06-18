@@ -45,6 +45,16 @@ export const reducer = createReducer(
     ...state,
     status: 'error' as const,
     error,
+  })),
+  on(MaterialsActions.deleteFolderSuccess, (state, { id }) =>
+    materialsAdapter.removeOne(id, {
+      ...state,
+    })
+  ),
+  on(MaterialsActions.deleteFolderFailure, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
   }))
 );
 

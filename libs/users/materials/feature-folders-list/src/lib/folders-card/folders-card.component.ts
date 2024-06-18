@@ -24,7 +24,7 @@ export class FoldersCardComponent {
     return `${month} ${date.getDate()}, ${date.getFullYear()}`; // (Month D, YYYY)
   }
 
-  public onDelete(folder: Folder) {
+  public onDelete(folder: Folder): void {
     this.deleteFolder.emit(folder);
   }
 }

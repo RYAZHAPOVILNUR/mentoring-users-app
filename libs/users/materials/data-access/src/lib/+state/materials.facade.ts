@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import * as MaterialsSelectors from './materials.selectors';
 import { MaterialsActions } from './materials.actions';
 import { FolderAdd } from '../models/folder-add.model';
-import { Folder } from '../models/folder.model';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
@@ -11,15 +10,15 @@ export class MaterialsFacade {
   public readonly foldersStatus$ = this.store.select(MaterialsSelectors.selectFoldersStatus);
   public readonly allFolders$ = this.store.select(MaterialsSelectors.selectAllFolders);
 
-  public loadFolders() {
+  public loadFolders(): void {
     this.store.dispatch(MaterialsActions.loadFolders());
   }
 
-  public addFolder(folder: FolderAdd) {
+  public addFolder(folder: FolderAdd): void {
     this.store.dispatch(MaterialsActions.addFolder({ folder }));
   }
 
-  public deleteFolder(folder: Folder) {
-    this.store.dispatch(MaterialsActions.deleteFolder({ folder }));
+  public deleteFolder(id: number): void {
+    this.store.dispatch(MaterialsActions.deleteFolder({ id }));
   }
 }
