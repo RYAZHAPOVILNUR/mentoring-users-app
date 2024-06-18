@@ -5,6 +5,7 @@ import { Folder, MaterialsFacade } from '@users/materials/data-access';
 import { LetDirective } from '@ngrx/component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FoldersAddButtonComponent } from '@users/materials/feature-folders-create';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'users-folders-list-container',
@@ -19,12 +20,17 @@ export class FoldersListContainerComponent {
   private readonly materialsFacade = inject(MaterialsFacade);
   public readonly allFolders$ = this.materialsFacade.allFolders$;
   public readonly foldersStatus$ = this.materialsFacade.foldersStatus$;
+  private readonly router = inject(Router);
 
   constructor() {
     this.materialsFacade.loadFolders();
   }
 
-  public deleteFolder(folder: Folder) {
+  public deleteFolder(folder: Folder): void {
     this.materialsFacade.deleteFolder(folder.id);
+  }
+
+  openFolder(id: number): void {
+    this.router.navigate([`/materials/`, id]);
   }
 }

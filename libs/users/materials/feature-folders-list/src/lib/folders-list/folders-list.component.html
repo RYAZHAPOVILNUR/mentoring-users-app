@@ -1,5 +1,9 @@
 <div class="container">
   <ng-container *ngFor="let folder of folders">
-    <users-folders-card (deleteFolder)="onDeleteFolder(folder)" [folder]="folder" />
+    <users-folders-card
+      (deleteFolder)="onDeleteFolder(folder)"
+      (dblclick)="onOpenFolder(folder.id)"
+      [folder]="folder"
+    />
   </ng-container>
 </div>
