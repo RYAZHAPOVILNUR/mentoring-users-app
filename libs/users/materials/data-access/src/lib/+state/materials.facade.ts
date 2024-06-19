@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as MaterialsActions from './materials.actions';
 import * as MaterialsSelectors from './materials.selectors';
-import { Folder } from '../materials.interface';
+import { Folder } from './types/materials.interface';
 // import { Observable, of, switchMap } from 'rxjs';
 // import { MaterialsErrors } from './materials.reducer';
 // import { selectLoggedUser } from '@auth/data-access';
@@ -18,7 +18,6 @@ export class MaterialsFacade {
    */
   public readonly status$ = this.store.select(MaterialsSelectors.selectStatus);
   public readonly allFolders$ = this.store.select(MaterialsSelectors.selectAllFolders);
-  // public readonly filteredUsers$ = this.store.select(UsersSelectors.filteredUsersSelector);
   // public readonly selectedUsers$ = this.store.select(UsersSelectors.selectEntity);
   // public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
   // public readonly loggedUser$ = this.store.select(selectLoggedUser);
@@ -34,20 +33,11 @@ export class MaterialsFacade {
 
   addFolder(folderData: Folder) {
     this.store.dispatch(MaterialsActions.addFolder({ folderData }));
-    // console.log('ADD FOLDER')
   }
 
-  // deleteUser(id: number) {
-  //   this.store.dispatch(UsersActions.deleteUser({ id }));
-  // }
-
-  // addUser(userData: CreateUserDTO) {
-  //   this.store.dispatch(UsersActions.addUser({ userData }));
-  // }
-
-  // addStoryPoints(userData: CreateUserDTO, id: number, onSuccessAddSP: onSuccessEditionCbType) {
-  //   this.store.dispatch(UsersActions.addUserStoryPoints({ userData, id, onSuccessAddSP }));
-  // }
+  deleteFolder(id: number) {
+    this.store.dispatch(MaterialsActions.deleteFolder({ id }));
+  }
 
   // editUser(userData: CreateUserDTO, id: number, onSuccessCb: onSuccessEditionCbType) {
   //   this.store.dispatch(UsersActions.editUser({ userData, id, onSuccessCb }));
@@ -69,7 +59,4 @@ export class MaterialsFacade {
   //   this.store.dispatch(UsersActions.loadUser());
   // }
 
-  // setUsersFilter(filter: { name: string }) {
-  //   this.store.dispatch(UsersActions.setUsersFilter({ filter }));
-  // }
 }

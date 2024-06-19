@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import * as MaterialsActions from './materials.actions';
-import { MaterialsStateInterface } from '../materials-state.interface';
+import { MaterialsStateInterface } from './types/materials-state.interface';
 
 export type MaterialsErrors = {
   status: number;
@@ -34,7 +34,7 @@ export const reducer = createReducer(
 
   on(MaterialsActions.addFolder, (state) => ({
     ...state,
-    status: 'loaded' as const,
+    status: 'loading' as const,
   })),
   on(MaterialsActions.addFolderSuccess, (state, { folderData }) => ({
     ...state,
@@ -46,6 +46,23 @@ export const reducer = createReducer(
     error,
   })),
   
+  on(MaterialsActions.deleteFolder, (state) => ({
+    ...state,
+    status: 'loading' as const,
+  })),
+
+  on(MaterialsActions.deleteFolderSuccess, (state, { id }) => ({
+    ...state,
+    status: 'loaded' as const,
+    folders: state.folders.filter(v => v.id !== id),
+  })),
+
+  on(MaterialsActions.deleteFolderFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
+
   on(MaterialsActions.getMaterials, (state) => ({
     ...state,
     status: 'loading' as const,
@@ -59,7 +76,7 @@ export const reducer = createReducer(
     ...state,
     status: 'error' as const,
     error,
-  }))
+  })),
 )
 
 export function materialsReducer(state: MaterialsStateInterface | undefined, action: Action) {

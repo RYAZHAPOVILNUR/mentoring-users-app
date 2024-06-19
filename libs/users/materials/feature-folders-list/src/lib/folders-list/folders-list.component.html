@@ -4,7 +4,7 @@
     </ng-container>
     <div class="folders-cards-flex">
         <ng-container *ngFor="let folder of folders$ | async">
-            <users-folders-card [folder]="folder"></users-folders-card>
+            <users-folders-card (deleteFolder)="onDeleteFolder(folder)" [folder]="folder"></users-folders-card>
         </ng-container>
     </div>
 </div>

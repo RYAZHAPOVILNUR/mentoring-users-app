@@ -3,7 +3,7 @@
       <div class="div-card">
           <div class="icons">
               <mat-icon color="primary">folder</mat-icon>
-              <button mat-icon-button color="primary"><mat-icon class="delete">delete</mat-icon></button>
+              <button mat-icon-button color="primary" (click)="onDeleteFolder($event)"><mat-icon class="delete">delete</mat-icon></button>
           </div>
           <div class="title">{{ folder.title }}</div>
           <div class="date">{{ folder.created_at | date }}</div>
