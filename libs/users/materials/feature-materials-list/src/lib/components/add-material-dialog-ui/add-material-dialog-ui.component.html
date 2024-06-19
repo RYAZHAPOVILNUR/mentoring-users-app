@@ -10,10 +10,10 @@
       <input
         matInput
         type="text"
-        formControlName="materialTitle"
+        formControlName="title"
       />
-      <mat-error *ngIf="getErrorMessage('materialTitle')">
-        {{ getErrorMessage('materialTitle') }}
+      <mat-error *ngIf="getErrorMessage('title') as errorMessage">
+        {{ errorMessage }}
       </mat-error>
     </mat-form-field>
 
@@ -26,8 +26,8 @@
         type="text"
         formControlName="materialLink"
       />
-      <mat-error *ngIf="getErrorMessage('materialLink')">
-        {{ getErrorMessage('materialLink') }}
+      <mat-error *ngIf="getErrorMessage('materialLink') as errorMessage">
+        {{ errorMessage }}
       </mat-error>
     </mat-form-field>
   </form>

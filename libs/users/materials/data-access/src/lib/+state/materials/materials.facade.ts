@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { materialsActions } from './materials.actions';
 import { Store } from '@ngrx/store';
 import { selectMaterialsByFolderId, selectMaterialsStatus } from './materials.selectors';
-import { MaterialsState } from '../../services/materials-state.service';
+import { MaterialsState } from '../../services/materials.state';
 import { MaterialCreate } from '../../types/material-create.type';
 
 @Injectable({ providedIn: 'root' })

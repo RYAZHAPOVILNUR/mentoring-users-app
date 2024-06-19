@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectFolders, selectFoldersStatus } from './folders.selectors';
 import { foldersActions } from './folders.actions';
-import { MaterialsState } from '../../services/materials-state.service';
+import { MaterialsState } from '../../services/materials.state';
 
 @Injectable({ providedIn: 'root' })
 export class FoldersFacade {

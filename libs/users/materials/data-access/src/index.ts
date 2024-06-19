@@ -15,13 +15,10 @@ export * from './lib/interfaces/material-entity.interface';
 export * from './lib/types/folder-create.type';
 export * from './lib/types/material-create.type';
 
-export * from './lib/services/materials-state.service';
+export * from './lib/services/materials.state';
 export * from './lib/services/material-form-group.service';
 
-export * from './lib/enums/get-icon.enum';
 export * from './lib/enums/ErrorsKey.enum';
-
-export * from './lib/pipes/get-icon.pipe';
 
 export * from './lib/materials-dto-entity.adapter';
 

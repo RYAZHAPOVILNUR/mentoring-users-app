@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FoldersListUiComponent } from '../folders-list-ui/folders-list-ui.component';
+import { FoldersListUiComponent } from './components/folders-list-ui/folders-list-ui.component';
 import { LetDirective } from '@ngrx/component';
 import { FoldersFacade } from '@users/materials/data-access';
 import { MatDialog } from '@angular/material/dialog';
@@ -9,7 +9,7 @@ import { filter, tap } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
-import { AddFolderDialogUiComponent } from '../add-folders-dialog-ui/add-folder-dialog-ui.component';
+import { AddFolderDialogUiComponent } from './components/add-folders-dialog-ui/add-folder-dialog-ui.component';
 
 
 @Component({
@@ -57,7 +57,7 @@ export class FoldersListContainerComponent {
 
   openFolderHandler(): void {
     this.foldersFacade.openFolder$.pipe(
-      tap((id) => this.router.navigate(['/files', id])),
+      tap((id) => this.router.navigate(['/material', id])),
       takeUntilDestroyed()
     ).subscribe();
   }

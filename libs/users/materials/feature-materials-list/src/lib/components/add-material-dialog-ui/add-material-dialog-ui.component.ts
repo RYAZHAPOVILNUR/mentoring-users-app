@@ -1,13 +1,15 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, InjectionToken } from '@angular/core';
+import { NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { ErrorsKey, ERRORSS, MaterialCreate, MaterialEntity, MaterialFormGroup, MaterialsFacade } from '@users/materials/data-access';
+import { ErrorsKey, MaterialForm, MaterialFormGroupService } from '@users/materials/data-access';
 import { ReactiveFormsModule } from '@angular/forms';
+
+const ERRORSS = new InjectionToken<{ [key in ErrorsKey]: string }>('errors');
 
 function validationErrorsFactory(translateService: TranslateService): { [key in ErrorsKey]: string } {
   return {
@@ -17,10 +19,12 @@ function validationErrorsFactory(translateService: TranslateService): { [key in 
   };
 }
 
+type AddMaterialDialogRef = MatDialogRef<AddMaterialDialogUiComponent, MaterialForm>;
+
 @Component({
   standalone: true,
   imports: [
-    CommonModule,
+    NgIf,
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
@@ -32,7 +36,7 @@ function validationErrorsFactory(translateService: TranslateService): { [key in 
   templateUrl: './add-material-dialog-ui.component.html',
   styleUrls: ['./add-material-dialog-ui.component.scss'],
   providers: [
-    MaterialFormGroup,
+    MaterialFormGroupService,
     {
       provide: ERRORSS,
       useFactory: validationErrorsFactory,
@@ -42,26 +46,23 @@ function validationErrorsFactory(translateService: TranslateService): { [key in 
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddMaterialDialogUiComponent {
-  readonly facade = inject(MaterialsFacade);
-  readonly dialogRef: MatDialogRef<AddMaterialDialogUiComponent, Partial<MaterialEntity>> = inject(MatDialogRef);
-  readonly materialFormGroupService = inject(MaterialFormGroup);
-  readonly materialFormGroup = this.materialFormGroupService.getMaterialFormGroup();
   private readonly validationErrors = inject(ERRORSS);
+  private readonly dialogRef: AddMaterialDialogRef = inject(MatDialogRef);
+  readonly materialFormGroup = inject(MaterialFormGroupService).getMaterialFormGroup();
 
   onDoneButtonClick(): void {
-    const material = {
-      title: this.materialFormGroup.controls.materialTitle.value,
-      materialLink: this.materialFormGroup.controls.materialLink.value,
-      folderId: 0
-    } as MaterialCreate;
-    this.dialogRef.close(material); // todo а обещал MaterialCreate!
+    const { title, materialLink } = this.materialFormGroup.getRawValue();
+    this.dialogRef.close({
+      title,
+      materialLink
+    });
   }
 
-  getErrorMessage(fieldName: string): string {
-    const field = this.materialFormGroup.get(fieldName);
-    if (!field) return '';
+// todo БОЛЬШЕ это сколько? вывести пользователю нормальную инфу в виде "Введите минимум N символов, сейчас P"
+  getErrorMessage(fieldName: keyof MaterialForm): string {
+    const field = this.materialFormGroup.get(fieldName)!;
     const key = Object.values(ErrorsKey).find((key) => field.hasError(key));
     if (!key) return '';
-    return this.validationErrors[key];
+    return this.validationErrors[key] ?? '';
   }
 }

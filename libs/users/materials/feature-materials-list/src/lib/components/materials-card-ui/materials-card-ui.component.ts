@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { GetIconPipe, MaterialEntity, MaterialsFacade } from '@users/materials/data-access';
+import { MaterialEntity, MaterialsFacade } from '@users/materials/data-access';
+import { GetIconPipe } from '../../pipes/get-icon.pipe';
 
 @Component({
   selector: 'users-materials-card-ui',

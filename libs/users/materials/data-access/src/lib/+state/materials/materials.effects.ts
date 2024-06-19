@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, withLatestFrom } from 'rxjs/operators';
+import { filter, map, withLatestFrom } from 'rxjs/operators';
 import { catchError, of, switchMap } from 'rxjs';
 import { materialsActions } from './materials.actions';
 import { ApiService } from '@users/core/http';
@@ -51,9 +51,10 @@ export const createMaterial$ = createEffect((
   return actions$.pipe(
     ofType(materialsActions.createMaterial),
     withLatestFrom(store.select(selectRouteParams)),
+    filter(([_, params]) => params['id']),
     map(([{ material }, params]) => ({
       ...material,
-      folderId: Number!(params['id']) // todo undefined
+      folderId: Number(params['id'])
     })),
     map((material) => materialsAdapter.entityToDTO(material)),
     switchMap((material) =>

@@ -6,7 +6,7 @@ import { LoadingStatus } from '@users/core/data-access';
 
 const { selectAll, selectEntities } = foldersAdapter.getSelectors();
 
-interface FolderState extends EntityState<Folder> { // todo
+interface FolderState extends EntityState<Folder> {
   status: LoadingStatus;
 }
 
