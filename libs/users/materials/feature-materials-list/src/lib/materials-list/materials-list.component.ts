@@ -4,6 +4,7 @@ import {
   EventEmitter,
   inject,
   Input,
+  OnInit,
   Output,
   ViewEncapsulation,
 } from '@angular/core';
@@ -25,11 +26,15 @@ import { MaterialsCardComponent } from '../materials-card/materials-card.compone
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MaterialsListComponent {
+export class MaterialsListComponent implements OnInit {
   @Input({ required: true }) vm!: MaterialsVM;
   @Output() deleteMaterial = new EventEmitter<Material>();
   @Output() goToFolders = new EventEmitter();
   private readonly router = inject(Router);
+
+  ngOnInit() {
+    console.log(this.vm.folderMaterials);
+  }
 
   public onGoToFolders(): void {
     this.goToFolders.emit();

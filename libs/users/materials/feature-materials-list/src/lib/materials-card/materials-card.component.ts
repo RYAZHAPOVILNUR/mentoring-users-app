@@ -17,6 +17,9 @@ import { MatIconModule } from '@angular/material/icon';
 export class MaterialsCardComponent {
   @Input({ required: true }) material!: Material;
   @Output() private readonly deleteMaterial = new EventEmitter<Material>();
+  public readonly videoRegex = /^(youtu.be|youtube.com)/;
+  public readonly audioRegex = /.mp3$/;
+  public readonly pdfRegex = /.pdf$/;
 
   public onDelete(material: Material): void {
     this.deleteMaterial.emit(material);
