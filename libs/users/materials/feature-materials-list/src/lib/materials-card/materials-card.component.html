@@ -3,9 +3,9 @@
     <div class="icons">
       <mat-icon>file</mat-icon>
       <button (click)="onDelete(material)" mat-icon-button aria-label="Icon button with a delete icon">
-        <mat-icon>delete</mat-icon>
+        <mat-icon class="delete-icon">delete</mat-icon>
       </button>
-    </div>
+    </header>
     <h4>{{ material.title }}</h4>
     <p>{{ material.created_at | date }}</p>
   </mat-card-content>

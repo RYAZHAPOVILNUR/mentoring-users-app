@@ -2,7 +2,7 @@ mat-card {
   &:hover {
     cursor: pointer;
 
-    .delete {
+    .delete-icon {
       opacity: 1;
     }
 
@@ -28,4 +28,8 @@ mat-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  .delete-icon {
+    opacity: 0;
+  }
 }
