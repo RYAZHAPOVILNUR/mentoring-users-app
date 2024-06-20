@@ -1,0 +1,7 @@
+<mat-form-field class="users-filter">
+  <mat-label>Search</mat-label>
+ <input matInput type="text" [formControl]="searchUser">
+ <button *ngIf="searchUser.value" matSuffix mat-icon-button aria-label="Clear" (click)="clearInput()">
+  <mat-icon>close</mat-icon>
+ </button>
+</mat-form-field>
