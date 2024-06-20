@@ -7,6 +7,6 @@
       </button>
     </div>
     <h4>{{ folder.title }}</h4>
-    <p>{{ formattedDate }}</p>
+    <p>{{ folder.created_at | date }}</p>
   </mat-card-content>
 </mat-card>

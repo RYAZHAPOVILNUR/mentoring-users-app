@@ -18,12 +18,6 @@ export class FoldersCardComponent {
   @Input({ required: true }) folder!: Folder;
   @Output() private readonly deleteFolder = new EventEmitter<Folder>();
 
-  get formattedDate(): string {
-    const date = new Date(this.folder.created_at);
-    const month = date.toLocaleString('default', { month: 'short' });
-    return `${month} ${date.getDate()}, ${date.getFullYear()}`; // (Month D, YYYY)
-  }
-
   public onDelete(folder: Folder): void {
     this.deleteFolder.emit(folder);
   }
