@@ -28,7 +28,7 @@ export class MaterialsListContainerComponent {
   private readonly router = inject(Router);
   private readonly materialsFacade = inject(MaterialsFacade);
   public readonly openedFolder$ = this.materialsFacade.openedFolder$;
-  public readonly allMaterials$ = this.materialsFacade.allMaterials$;
+  public readonly folderMaterials$ = this.materialsFacade.folderMaterials$;
   public readonly materialsStatus$ = this.materialsFacade.materialsStatus$;
 
   constructor() {

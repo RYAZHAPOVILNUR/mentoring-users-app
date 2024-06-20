@@ -3,24 +3,24 @@ import { MaterialsActions } from './materials.actions';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { LoadingStatus } from '@users/core/data-access';
 import { Folder } from '../models/folder.model';
+import { Material } from '../models/material.model';
 
 export const materialsFeatureKey = 'materials';
 
 export interface MaterialsState extends EntityState<Folder> {
+  materials: Material[];
   status: LoadingStatus;
 }
 
 export const materialsAdapter: EntityAdapter<Folder> = createEntityAdapter<Folder>();
 
-export const initialState: MaterialsState = materialsAdapter.getInitialState({
+export const initialMaterialsState: MaterialsState = materialsAdapter.getInitialState({
+  materials: [],
   status: 'init',
 });
 
 export const reducer = createReducer(
-  initialState,
-  on(MaterialsActions.loadMaterials, (state) => state),
-  on(MaterialsActions.loadMaterialsSuccess, (state, action) => state),
-  on(MaterialsActions.loadMaterialsFailure, (state, action) => state),
+  initialMaterialsState,
   on(MaterialsActions.loadFolders, (state) => ({
     ...state,
     status: 'loading' as const,
@@ -52,6 +52,20 @@ export const reducer = createReducer(
     })
   ),
   on(MaterialsActions.deleteFolderFailure, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
+  on(MaterialsActions.loadMaterials, (state) => ({
+    ...state,
+    status: 'loading' as const,
+  })),
+  on(MaterialsActions.loadMaterialsSuccess, (state, { materials }) => ({
+    ...state,
+    materials,
+    status: 'loaded' as const,
+  })),
+  on(MaterialsActions.loadMaterialsFailure, (state, { error }) => ({
     ...state,
     status: 'error' as const,
     error,

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve users -o",
+    "start": "nx serve users",
     "build": "nx build users",
     "format": "npx prettier --write '**/*.{ts,html,css,scss,json,md,spec.ts}'"
   },

@@ -2,8 +2,15 @@ header {
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 h1 {
   margin: 0;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+  grid-gap: 1.25rem;
 }

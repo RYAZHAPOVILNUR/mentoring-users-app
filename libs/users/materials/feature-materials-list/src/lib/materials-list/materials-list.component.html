@@ -1,7 +1,17 @@
-<header>
-  <button (click)="onGoToFolders()" mat-icon-button aria-label="Icon-button with an arrow_back icon">
-    <mat-icon>arrow_back</mat-icon>
-  </button>
-  <h1>{{ vm.openedFolder?.title }}</h1>
-</header>
-<p>materials-list works!</p>
+<div class="container">
+  <header>
+    <button (click)="onGoToFolders()" mat-icon-button aria-label="Icon-button with an arrow_back icon">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>{{ vm.openedFolder?.title }}</h1>
+  </header>
+  <main>
+    <ng-container *ngFor="let material of vm.folderMaterials">
+      <users-materials-card
+        (deleteMaterial)="onDeleteMaterial(material)"
+        (dblclick)="onOpenMaterial(material.id)"
+        [material]="material"
+      />
+    </ng-container>
+  </main>
+</div>

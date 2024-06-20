@@ -13,6 +13,7 @@ export class MaterialsFacade {
   public readonly openedFolder$ = this.store.select(MaterialsSelectors.selectOpenedFolder);
   public readonly materialsStatus$ = this.store.select(MaterialsSelectors.selectMaterialsStatus);
   public readonly allMaterials$ = this.store.select(MaterialsSelectors.selectAllMaterials);
+  public readonly folderMaterials$ = this.store.select(MaterialsSelectors.selectFolderMaterials);
 
   public loadFolders(): void {
     this.store.dispatch(MaterialsActions.loadFolders());

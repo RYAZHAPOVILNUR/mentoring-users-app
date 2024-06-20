@@ -26,3 +26,9 @@ export const selectOpenedFolder = createSelector(
 export const selectMaterialsStatus = createSelector(selectMaterialsState, (state: MaterialsState) => state.status);
 
 export const selectAllMaterials = createSelector(selectMaterialsState, (state: MaterialsState) => state.materials);
+
+export const selectFolderMaterials = createSelector(
+  selectMaterialsState,
+  selectOpenedFolder,
+  (state: MaterialsState, folder) => state.materials.filter((material) => material.folder_id === folder?.id)
+);

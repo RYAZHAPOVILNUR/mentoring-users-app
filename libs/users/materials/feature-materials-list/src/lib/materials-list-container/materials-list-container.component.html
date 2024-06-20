@@ -1,5 +1,5 @@
 <ng-container
-  *ngrxLet="{ openedFolder: openedFolder$, materialsStatus: materialsStatus$, allMaterials: allMaterials$ } as vm"
+  *ngrxLet="{ openedFolder: openedFolder$, materialsStatus: materialsStatus$, folderMaterials: folderMaterials$ } as vm"
 >
   <ng-container [ngSwitch]="vm.materialsStatus">
     <ng-container *ngSwitchCase="'loading'">
@@ -17,4 +17,3 @@
 </ng-container>
 
 <!--<users-materials-add-button />-->
-<p>materials-list-container works!</p>

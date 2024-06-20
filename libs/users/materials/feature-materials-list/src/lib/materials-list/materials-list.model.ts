@@ -5,5 +5,5 @@ import { Folder, Material } from '@users/materials/data-access';
 export type MaterialsVM = DeepReadonly<{
   openedFolder: Folder | null;
   materialsStatus: LoadingStatus;
-  allMaterials: Material[];
+  folderMaterials: Material[];
 }>;
