@@ -1,3 +1,11 @@
+<div class="materials-header">
+  <button mat-icon-button (click)="onBackButtonClick()">
+    <mat-icon>arrow_back_ios</mat-icon>
+  </button>
+  <span>{{ getTitle() }}</span>
+</div>
+
+
 <ng-container
   *ngrxLet="{
     materials: materialsFacade.materialsInFolder$,

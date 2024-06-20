@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
+export interface FolderData {
+  id: number;
+  title: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class MaterialsState {
   private readonly deleteFolder$$ = new Subject<number>();
-  private readonly openFolder$$ = new Subject<number>();
+  private readonly openFolder$$ = new Subject<FolderData>();
   private readonly deleteMaterial$$ = new Subject<number>();
   private readonly openMaterial$$ = new Subject<number>();
 
@@ -19,8 +24,8 @@ export class MaterialsState {
     this.deleteFolder$$.next(id);
   }
 
-  openFolder(id: number): void {
-    this.openFolder$$.next(id);
+  openFolder(id: number, title: string): void {
+    this.openFolder$$.next({ id, title });
   }
 
   openMaterial(id: number): void {

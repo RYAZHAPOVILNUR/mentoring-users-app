@@ -27,7 +27,7 @@ export class FoldersCardUiComponent {
   private readonly materialsState = inject(MaterialsState);
 
   onCardClick(): void {
-    this.materialsState.openFolder(this.folder.id);
+    this.materialsState.openFolder(this.folder.id, this.folder.title);
   }
 
   onDeleteButtonClick(): void {

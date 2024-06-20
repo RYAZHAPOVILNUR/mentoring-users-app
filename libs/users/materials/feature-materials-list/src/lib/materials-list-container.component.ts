@@ -4,13 +4,14 @@ import { LetDirective } from '@ngrx/component';
 import { FoldersListUiComponent } from '@users/materials/feature-folders-list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MaterialCreate, MaterialsFacade } from '@users/materials/data-access';
+import { Folder, MaterialCreate, MaterialsFacade } from '@users/materials/data-access';
 import { MaterialsListUiComponent } from './components/materials-list-ui/materials-list-ui.component';
 import { filter, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialog } from '@angular/material/dialog';
 import { AddMaterialDialogUiComponent } from './components/add-material-dialog-ui/add-material-dialog-ui.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -31,10 +32,11 @@ export class MaterialsListContainerComponent {
   readonly materialsFacade = inject(MaterialsFacade);
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
 
   constructor() {
     this.materialsFacade.loadMaterials();
-    //  this.deleteMaterialHandler();
     this.openMaterialHandler();
   }
 
@@ -56,4 +58,14 @@ export class MaterialsListContainerComponent {
       takeUntilDestroyed(this.destroyRef)
     ).subscribe();
   }
+
+  onBackButtonClick() {
+    this.router.navigate(['/folders']);
+  }
+
+  getTitle(): { title: Folder['title'] } {
+    return this.route.snapshot.params['title'];
+  }
+
 }
+

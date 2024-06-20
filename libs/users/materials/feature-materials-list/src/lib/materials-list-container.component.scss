@@ -1,3 +1,15 @@
+.materials-header {
+  & span {
+    font-size: 30px;
+    position: absolute;
+    top: 30px;
+    left: 100px;
+    right: 100px;
+    text-align: center;
+  }
+}
+
+
 .add-material {
   position: fixed !important;
   bottom: 6% !important;
@@ -5,10 +17,11 @@
   z-index: 100;
   height: 70px;
   width: 70px;
+
+  & mat-icon {
+    font-size: 40px;
+    height: 40px;
+    width: 40px;
+  }
 }
 
-mat-icon {
-  font-size: 40px;
-  height: 40px;
-  width: 40px;
-}
