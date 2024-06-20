@@ -51,7 +51,7 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('@users/materials/feature-folders-list').then((c) => c.FoldersListContainerComponent)
       },
       {
-        path: 'material/:id/:title',
+        path: 'material/:id', // todo где id?
         loadComponent: () => import('@users/materials/feature-materials-list').then((c) => c.MaterialsListContainerComponent)
       },
       {

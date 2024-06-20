@@ -1,5 +1,5 @@
-import { MaterialDTO } from './interfaces/material-dto.interface';
-import { MaterialEntity } from './interfaces/material-entity.interface';
+import { MaterialDTO } from '../interfaces/material-dto.interface';
+import { MaterialEntity } from '../interfaces/material-entity.interface';
 
 type MaterialsDtoEntityAdapter = {
   DTOtoEntity(dto: MaterialDTO): MaterialEntity;

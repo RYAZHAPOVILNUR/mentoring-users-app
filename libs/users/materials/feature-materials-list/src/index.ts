@@ -5,4 +5,4 @@ export * from './lib/components/add-material-dialog-ui/add-material-dialog-ui.co
 
 export * from './lib/pipes/get-icon.pipe';
 
-export * from './lib/enums/get-icon.enum';
+export * from './lib/enums/material-icon.enum';

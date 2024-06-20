@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { LetDirective } from '@ngrx/component';
 import { FoldersListUiComponent } from '@users/materials/feature-folders-list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { Folder, MaterialCreate, MaterialsFacade } from '@users/materials/data-access';
+import { MaterialCreate, MaterialsFacade } from '@users/materials/data-access';
 import { MaterialsListUiComponent } from './components/materials-list-ui/materials-list-ui.component';
 import { filter, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -16,7 +15,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   standalone: true,
   imports: [
-    CommonModule,
     LetDirective,
     FoldersListUiComponent,
     MatButtonModule,
@@ -34,6 +32,7 @@ export class MaterialsListContainerComponent {
   private readonly destroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
+  readonly folderTitle?: string = this.route.snapshot.queryParams['title']; // todo type
 
   constructor() {
     this.materialsFacade.loadMaterials();
@@ -60,12 +59,7 @@ export class MaterialsListContainerComponent {
   }
 
   onBackButtonClick() {
-    this.router.navigate(['/folders']);
+    this.router.navigateByUrl('/folders');
   }
-
-  getTitle(): { title: Folder['title'] } {
-    return this.route.snapshot.params['title'];
-  }
-
 }
 

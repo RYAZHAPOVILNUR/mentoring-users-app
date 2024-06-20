@@ -1,4 +1,4 @@
-export enum getIcon {
+export enum MaterialIcon {
   MP3 = 'music_note',
   PDF = 'picture_as_pdf',
   YOUTUBE = 'movie',

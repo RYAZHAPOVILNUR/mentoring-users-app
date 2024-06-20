@@ -9,6 +9,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ErrorsKey, MaterialForm, MaterialFormGroupService } from '@users/materials/data-access';
 import { ReactiveFormsModule } from '@angular/forms';
 
+// todo место полная хуйня:
 const ERRORSS = new InjectionToken<{ [key in ErrorsKey]: string }>('errors');
 
 function validationErrorsFactory(translateService: TranslateService): { [key in ErrorsKey]: string } {

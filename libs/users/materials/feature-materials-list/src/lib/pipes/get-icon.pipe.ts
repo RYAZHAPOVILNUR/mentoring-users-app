@@ -1,29 +1,24 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { getIcon } from '../enums/get-icon.enum';
-
-export type GetIcon = `${getIcon}`;
+import { MaterialIcon } from '../enums/material-icon.enum';
 
 @Pipe({
-  name: 'getIcon',
+  name: 'materialIcon',
   standalone: true
 })
-export class GetIconPipe implements PipeTransform {
-  transform(url: string): GetIcon {
+export class MaterialIconPipe implements PipeTransform {
+  transform(url: string): MaterialIcon {
 
-    const checkers: { [key: string]: boolean } = {
-      audio: url.endsWith('.mp3'),
-      pdf: url.endsWith('.pdf'),
-      video: /youtube/i.test(url) || /youtu\.be/i.test(url)
+    const extensionMaterial: Record<MaterialIcon, boolean> = { // todo имя переменной содержит глагол.
+      [MaterialIcon.MP3]: url.endsWith('.mp3'),
+      [MaterialIcon.PDF]: url.endsWith('.pdf'),
+      [MaterialIcon.YOUTUBE]: /youtube/i.test(url) || /youtu\.be/i.test(url),
+      [MaterialIcon.OTHER]: true
     };
 
-    const iconCase: { [key in keyof typeof checkers]: GetIcon } = {
-      audio: getIcon.MP3,
-      pdf: getIcon.PDF,
-      video: getIcon.YOUTUBE
-    };
+    const extensionMaterialKey = Object.keys(extensionMaterial).find( // todo имя переменной содержит глагол.
+      key => extensionMaterial[key as MaterialIcon]
+    )!;
 
-    const trueKey: string | undefined = Object.keys(checkers).find(key => checkers[key]);
-
-    return trueKey ? iconCase[trueKey] : getIcon.OTHER;
+    return extensionMaterialKey as MaterialIcon;
   }
 }

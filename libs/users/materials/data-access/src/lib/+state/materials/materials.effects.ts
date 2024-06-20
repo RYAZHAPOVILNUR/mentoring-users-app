@@ -9,7 +9,7 @@ import { selectRouteParams } from '@users/core/data-access';
 import { Store } from '@ngrx/store';
 import { selectMaterialsState } from './materials.selectors';
 import { materialsSelector } from './materials.reducer';
-import { materialsAdapter } from '../../materials-dto-entity.adapter';
+import { materialsAdapter } from '../../adapters/materials-dto-entity.adapter';
 
 const { selectAll } = materialsSelector.getSelectors();
 

@@ -20,7 +20,7 @@ export * from './lib/services/material-form-group.service';
 
 export * from './lib/enums/ErrorsKey.enum';
 
-export * from './lib/materials-dto-entity.adapter';
+export * from './lib/adapters/materials-dto-entity.adapter';
 
 export * as FoldersEffects from './lib/+state/folders/folders.effects';
 export * as MaterialsEffects from './lib/+state/materials/materials.effects';

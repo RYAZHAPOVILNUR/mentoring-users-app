@@ -57,7 +57,9 @@ export class FoldersListContainerComponent {
 
   openFolderHandler(): void {
     this.foldersFacade.openFolder$.pipe(
-      tap(({ id, title }) => this.router.navigate(['/material', id, title])),
+      tap((id) => this.router.navigate(
+        ['/material', id]
+      )),
       takeUntilDestroyed()
     ).subscribe();
   }
