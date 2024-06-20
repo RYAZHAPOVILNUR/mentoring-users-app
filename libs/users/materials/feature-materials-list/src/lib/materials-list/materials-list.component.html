@@ -9,7 +9,7 @@
     <ng-container *ngFor="let material of vm.folderMaterials">
       <users-materials-card
         (deleteMaterial)="onDeleteMaterial(material)"
-        (dblclick)="onOpenMaterial(material.id)"
+        (dblclick)="onOpenMaterial(material)"
         [material]="material"
       />
     </ng-container>

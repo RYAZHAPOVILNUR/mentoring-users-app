@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   EventEmitter,
   inject,
   Input,
@@ -12,10 +13,12 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Material } from '@users/materials/data-access';
 import { MaterialsVM } from './materials-list.model';
-import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { FoldersCardComponent } from '@users/materials/feature-folders-list';
 import { MaterialsCardComponent } from '../materials-card/materials-card.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MaterialsContentComponent } from '@users/materials/feature-materials-content';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'users-materials-list',
@@ -30,7 +33,8 @@ export class MaterialsListComponent implements OnInit {
   @Input({ required: true }) vm!: MaterialsVM;
   @Output() deleteMaterial = new EventEmitter<Material>();
   @Output() goToFolders = new EventEmitter();
-  private readonly router = inject(Router);
+  private readonly dialog = inject(MatDialog);
+  private readonly destroyRef = inject(DestroyRef);
 
   ngOnInit() {
     console.log(this.vm.folderMaterials);
@@ -44,5 +48,11 @@ export class MaterialsListComponent implements OnInit {
     this.deleteMaterial.emit(material);
   }
 
-  public onOpenMaterial(id: number): void {}
+  public onOpenMaterial(material: Material): void {
+    const dialogRef = this.dialog.open(MaterialsContentComponent, {
+      data: material,
+    });
+
+    dialogRef.afterClosed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
+  }
 }
