@@ -4,4 +4,13 @@
     <button mat-button mat-dialog-close>Close</button>
   </mat-card-actions>
 </header>
-<mat-dialog-content> This dialog showcases the title, close, content and actions elements.</mat-dialog-content>
+<mat-dialog-content>
+  <ng-container *ngIf="regex.pdf.test(data.material_link)">
+    <pdf-viewer
+      [src]="pdfSrc"
+      [render-text]="true"
+      [original-size]="false"
+      style="width: 900px; height: 500px"
+    ></pdf-viewer>
+  </ng-container>
+</mat-dialog-content>

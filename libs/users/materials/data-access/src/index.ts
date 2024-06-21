@@ -7,3 +7,4 @@ export * from './lib/+state/materials.effects';
 export * from './lib/models/folder.model';
 export * from './lib/models/folder-add.model';
 export * from './lib/models/material.model';
+export * from './lib/regex';
