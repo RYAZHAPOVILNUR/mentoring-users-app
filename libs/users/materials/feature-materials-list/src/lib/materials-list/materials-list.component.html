@@ -1,0 +1,15 @@
+<div>
+    <div class="header">
+        <button mat-icon-button (click)="onBackButton()"><mat-icon>arrow_back</mat-icon></button>
+        <h1 style="font-size: 36px">{{vm.openedFolder?.title}}</h1>
+    </div>
+    <div class="content">
+        <ng-container *ngFor="let material of vm.materials">
+            <users-materials-card 
+                [material] = "material"
+                (deleteMaterial) = "onDeleteMaterial($event)"
+                (dblclick)="onOpenMaterial(material)"
+            />
+        </ng-container>
+    </div>
+</div>

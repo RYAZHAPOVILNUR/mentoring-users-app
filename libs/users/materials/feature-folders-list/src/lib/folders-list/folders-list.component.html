@@ -1,0 +1,10 @@
+
+<ng-container *ngFor="let folder of vm.folders" >
+    <users-folders-card 
+        [folder]="folder" 
+        (deleteFolder)="onDeleteFolderList($event)"
+        (dblclick)="onOpenFolder(folder.id)"
+    >
+    </users-folders-card>
+</ng-container>
+<users-folders-add-button></users-folders-add-button>
