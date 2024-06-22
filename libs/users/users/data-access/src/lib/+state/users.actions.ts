@@ -51,6 +51,3 @@ export const addStoryPoints = createAction(
 );
 export const addUserStoryPointsSuccess = createAction('[Users Detail] Add User StoryPoints Success', props<{ userData:UsersDTO }>());
 export const addUserStoryPointsFailed = createAction('[Users Detail] Add User StoryPoints Failed', props<{ error: any }>());
-
-
-
