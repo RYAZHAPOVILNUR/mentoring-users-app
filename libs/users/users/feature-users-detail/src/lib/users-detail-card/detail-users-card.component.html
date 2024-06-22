@@ -89,6 +89,55 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+
+            <mat-form-field
+              class="edit-user-field"
+              [matTooltip]="String(vm.user!.totalStoryPoints)"
+              [matTooltipDisabled]="formGroup.enabled"
+            >
+              <mat-label>Количество сторипоинтов</mat-label>
+              <input
+                type="number"
+                class="edit-user-input"
+                matInput
+                formControlName="totalStoryPoints"
+              />
+              <button
+                (click)="formGroup.controls.totalStoryPoints.enable()"
+                *ngIf="formGroup.controls.totalStoryPoints.disabled"
+                matSuffix
+                mat-icon-button
+                type="button"
+                aria-label="Add story points"
+                color="accent"
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+
+              <button
+                (click)="formGroup.controls.totalStoryPoints.disable()"
+                *ngIf="!formGroup.controls.totalStoryPoints.disabled"
+                matSuffix
+                mat-icon-button
+                type="button"
+                aria-label="Close story points"
+                color="warn"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+
+              <button
+                *ngIf="!formGroup.controls.totalStoryPoints.disabled"
+                (click)="onAddStoryPoints()"
+                matSuffix
+                mat-icon-button
+                type="button"
+                aria-label="Confirm add story points"
+                color="primary"
+              >
+                <mat-icon>check</mat-icon>
+              </button>
+            </mat-form-field>
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
@@ -116,6 +165,12 @@
     <h1>{{ vm.errors?.status }}</h1>
     <hr />
     Данный пользователь не найден
+  </div>
+</ng-template>
+
+<ng-template #storyPointsSnackbar>
+  <div class="edit-user-snackbar">
+    <span>Сторипоинты успешно добавлены</span>
   </div>
 </ng-template>
 
