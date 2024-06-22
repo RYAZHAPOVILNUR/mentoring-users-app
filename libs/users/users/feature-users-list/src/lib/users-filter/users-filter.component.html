@@ -1,0 +1,10 @@
+<div class="content">
+  <mat-form-field class="example-form-field">
+    <mat-label>Найти пользователя</mat-label>
+        <input matInput #inputFilter type="text" (input)="onInputChange(inputFilter.value)">
+    <button *ngIf="inputFilter.value" matSuffix mat-icon-button aria-label="Clear" (click)="inputFilter.value = ''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+
