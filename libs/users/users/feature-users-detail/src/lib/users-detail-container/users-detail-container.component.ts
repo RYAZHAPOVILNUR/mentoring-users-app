@@ -51,6 +51,10 @@ export class UsersDetailComponent {
     });
   }
 
+  public onAddStoryPoints(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
+    this.usersFacade.addStoryPoints(userData, this.user.id, onSuccessCb)
+  }
+
   onCloseUser() {
     this.router.navigate(['/admin/users']);
   }

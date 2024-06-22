@@ -17,6 +17,7 @@ export interface UsersState extends EntityState<UsersEntity> {
   status: LoadingStatus;
   error: UsersErrors | null;
   usersFilter: {name: string};
+  storyPoints: number;
 }
 
 export interface UsersPartialState {
@@ -30,6 +31,7 @@ export const initialUsersState: UsersState = usersAdapter.getInitialState({
   status: 'init',
   error: null,
   usersFilter: {name: ''},
+  storyPoints: 0,
 });
 
 const reducer = createReducer(
@@ -58,6 +60,15 @@ const reducer = createReducer(
     )
   ),
   on(UsersActions.editUserFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
+  on(UsersActions.addUserStoryPointsSuccess, (state, { userData }) => usersAdapter.updateOne({
+    id: userData.id,
+    changes: userData,
+  }, state)),
+  on(UsersActions.addUserStoryPointsFailed, (state, { error}) => ({
     ...state,
     status: 'error' as const,
     error,
