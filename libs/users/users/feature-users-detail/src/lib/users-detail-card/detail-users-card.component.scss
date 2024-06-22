@@ -1,58 +1,79 @@
 .edit-user-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .user-avatar {
-  border-radius: 50%;
-  width: 200px;
-  height: 200px;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
 }
 
 .edit-user-card {
-  width: 400px;
-  padding: 20px;
+    width: 400px;
+    padding: 20px;
 }
 
 .close-button-container {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 .edit-user-title {
-  font-size: 24px;
-  margin-bottom: 20px;
+    font-size: 24px;
+    margin-bottom: 20px;
 }
 
 .edit-user-form {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .edit-user-content {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .edit-user-field {
-  width: 100%;
+    width: 100%;
 }
 
 .edit-user-btns-container {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 div.alert-success {
-  position: absolute;
-  text-align: center;
-  width: 400px;
-  top: 3em;
-  z-index: 1;
+    position: absolute;
+    text-align: center;
+    width: 400px;
+    top: 3em;
+    z-index: 1;
 }
 
 .edit-user-snackbar {
-  display: flex;
-  justify-content: center;
-  color: white;
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+/* Убрать стрелочки в Chrome, Safari, Edge, Opera */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Убрать стрелочки в Firefox */
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+.edit-user-field {
+    display: flex;
+    align-items: center;
+}
+
+.edit-user-input {
+    flex: 1;
 }

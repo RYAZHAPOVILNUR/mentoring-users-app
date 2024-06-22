@@ -3,6 +3,7 @@ import { UsersErrors } from './users.reducer';
 import { CreateUserDTO, LoadingStatus, UsersDTO, UsersEntity } from '@users/core/data-access';
 
 export type onSuccessEditionCbType = () => void;
+export type onSuccessSPonCbType = () => void;
 
 export const initUsers = createAction('[Users Page] Init');
 
@@ -23,12 +24,12 @@ export const addUserFailed = createAction('[Users/Api] Add User Failed', props<{
 // export const deleteSelectedId = createAction('[Users Page] Delete Selected Id');
 
 export const editUser = createAction(
-  '[Users Detail] Edit User',
-  props<{
-    userData: CreateUserDTO;
-    id: number;
-    onSuccessCb: onSuccessEditionCbType;
-  }>()
+    '[Users Detail] Edit User',
+    props<{
+        userData: CreateUserDTO;
+        id: number;
+        onSuccessCb: onSuccessEditionCbType;
+    }>()
 );
 export const editUserSuccess = createAction('[Users Detail] Edit User Success', props<{ userData: UsersDTO }>());
 export const editUserFailed = createAction('[Users Detail] Edit Failed', props<{ error: UsersErrors | null }>());
@@ -39,4 +40,17 @@ export const loadUserFailed = createAction('[Users/Api] Load User Failed', props
 
 export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{ status: LoadingStatus }>());
 
-export const filterUsers = createAction('[Users Filter] Filet Users', props<{ filter:{name: string} }>());
+export const filterUsers = createAction('[Users Filter] Filet Users', props<{ filter: { name: string } }>());
+
+export const addUserStoryPoints = createAction(
+    '[Users Detail] Add User StoryPoints',
+    props<{ userData: CreateUserDTO; id: number; onSuccessAddSP: onSuccessSPonCbType }>()
+);
+export const addUserStoryPointsSuccess = createAction(
+    '[Users Detail] Add User StoryPoints Success',
+    props<{ userData: UsersDTO }>()
+);
+export const addUserStoryPointsFailed = createAction(
+    '[Users Detail] Add User StoryPoints Failed',
+    props<{ error: any }>()
+);

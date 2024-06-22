@@ -18,27 +18,25 @@ export const selectUsersEntities = createSelector(selectUsersState, (state: User
 export const selectSelectedId = createSelector(selectUsersState, (state: UsersState) => state.selectedId);
 
 export const selectEntity = createSelector(selectUsersEntities, selectSelectedId, (entities, selectedId) =>
-  selectedId ? entities[selectedId] : undefined
+    selectedId ? entities[selectedId] : undefined
 );
 
-export const selectUsersFilter = createSelector(
-  selectUsersState,
-  (state: UsersState) => state.usersFilter
+export const selectUsersFilter = createSelector(selectUsersState, (state: UsersState) => state.usersFilter);
+
+export const filteredUsers = createSelector(selectAllUsers, selectUsersFilter, (users, { name }) =>
+    name ? users.filter(user => user.name.toLowerCase().startsWith(name.toLowerCase())) : users
 );
 
-export const filteredUsers = createSelector(
-  selectAllUsers,
-  selectUsersFilter,
-  (users, {name}) =>
-    name
-      ? users.filter(user => user.name.toLowerCase().startsWith(name.toLowerCase()))
-      : users
-);
-
-export const selectUserById = (id: number) => createSelector(selectUsersEntities, (entities) => entities[id]);
+export const selectUserById = (id: number) => createSelector(selectUsersEntities, entities => entities[id]);
 
 export const selectOpenedUser = createSelector(
-  selectRouteParams,
-  selectUsersEntities,
-  ({ id }, entities) => entities[id] || null
+    selectRouteParams,
+    selectUsersEntities,
+    ({ id }, entities) => entities[id] || null
+);
+
+export const UserTotalStoryPoints = createSelector(
+    selectRouteParams,
+    selectUsersEntities,
+    ({ id }, entities) => entities[id] || null
 );
