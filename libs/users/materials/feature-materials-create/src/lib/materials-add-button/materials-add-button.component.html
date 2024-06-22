@@ -1,1 +1,10 @@
-<p>materials-add-button works!</p>
+<div class="floating-button">
+  <button [matMenuTriggerFor]="menu" #menuTrigger mat-fab color="accent" aria-label="Icon button with a plus icon">
+    <mat-icon>add</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu" yPosition="above">
+    <button mat-menu-item (click)="openDialog(MaterialType.Video)">Видео</button>
+    <button mat-menu-item (click)="openDialog(MaterialType.Pdf)">Файл PDF</button>
+    <button mat-menu-item (click)="openDialog(MaterialType.Audio)">Подкаст</button>
+  </mat-menu>
+</div>

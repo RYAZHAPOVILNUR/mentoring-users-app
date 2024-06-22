@@ -7,6 +7,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Material, MaterialsFacade } from '@users/materials/data-access';
 import { Router } from '@angular/router';
 import { MaterialsListComponent } from '../materials-list/materials-list.component';
+import { MaterialsAddButtonComponent } from '@users/materials/feature-materials-create';
 
 @Component({
   selector: 'users-materials-list-container',
@@ -18,6 +19,7 @@ import { MaterialsListComponent } from '../materials-list/materials-list.compone
     LetDirective,
     MatProgressBarModule,
     MaterialsListComponent,
+    MaterialsAddButtonComponent,
   ],
   templateUrl: './materials-list-container.component.html',
   styleUrls: ['./materials-list-container.component.scss'],
