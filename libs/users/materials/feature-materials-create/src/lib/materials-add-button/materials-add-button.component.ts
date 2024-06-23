@@ -18,7 +18,7 @@ import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 })
 export class MaterialsAddButtonComponent {
   @ViewChild('menuTrigger') menuTrigger!: MatMenuTrigger;
-
+  protected readonly MaterialType = MaterialType;
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
   private readonly materialsFacade = inject(MaterialsFacade);
@@ -43,6 +43,4 @@ export class MaterialsAddButtonComponent {
         }
       });
   }
-
-  protected readonly MaterialType = MaterialType;
 }

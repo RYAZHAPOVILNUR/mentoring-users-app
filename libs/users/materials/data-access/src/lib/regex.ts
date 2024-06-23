@@ -1,5 +1,5 @@
 export const regex = {
-  video: /youtu.be|youtube.com/,
-  audio: /.mp3$/,
-  pdf: /.pdf$/,
+  video: /[?&]v=([a-zA-Z0-9_-]{11})|\/embed\/([a-zA-Z0-9_-]{11})/,
+  audio: /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*\.mp3$/,
+  pdf: /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*\.pdf$/,
 };

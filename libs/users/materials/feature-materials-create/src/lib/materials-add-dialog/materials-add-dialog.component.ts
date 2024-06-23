@@ -1,9 +1,11 @@
-import { Component, inject, ViewEncapsulation } from '@angular/core';
+import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MaterialType } from '@users/materials/data-access';
+import { MaterialsValidators } from '../materials-validators';
 
 @Component({
   selector: 'users-materials-add-dialog',
@@ -13,21 +15,23 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./materials-add-dialog.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class MaterialsAddDialogComponent {
+export class MaterialsAddDialogComponent implements OnInit {
+  protected readonly MaterialType = MaterialType;
   public type!: string;
   private readonly dialogRef = inject(MatDialogRef<MaterialsAddDialogComponent>);
-
   private readonly fb = inject(FormBuilder);
-  public readonly formGroup = this.fb.group({
-    title: ['', Validators.required],
-    url: ['', Validators.required],
-  });
+  public formGroup!: FormGroup;
+
+  ngOnInit() {
+    this.formGroup = this.fb.group({
+      title: ['', Validators.required],
+      url: ['', [Validators.required, MaterialsValidators.ofType(this.type)]],
+    });
+  }
 
   public onAddMaterial() {
     if (this.formGroup.valid) {
       this.dialogRef.close(this.formGroup.value);
     }
   }
-
-  private validateUrl();
 }

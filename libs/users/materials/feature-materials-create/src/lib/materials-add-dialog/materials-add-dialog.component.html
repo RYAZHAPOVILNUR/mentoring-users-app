@@ -1,8 +1,8 @@
 <form (ngSubmit)="onAddMaterial()" [formGroup]="formGroup">
   <ng-container [ngSwitch]="this.type">
-    <h2 mat-dialog-title *ngSwitchCase="'video'">Добавить видео</h2>
-    <h2 mat-dialog-title *ngSwitchCase="'audio'">Добавить подкаст</h2>
-    <h2 mat-dialog-title *ngSwitchCase="'pdf'">Добавить pdf файл</h2>
+    <h2 mat-dialog-title *ngSwitchCase="MaterialType.Video">Добавить видео</h2>
+    <h2 mat-dialog-title *ngSwitchCase="MaterialType.Audio">Добавить подкаст</h2>
+    <h2 mat-dialog-title *ngSwitchCase="MaterialType.Pdf">Добавить pdf файл</h2>
   </ng-container>
 
   <mat-dialog-content>
@@ -16,6 +16,9 @@
       <mat-form-field>
         <mat-label>Ссылка</mat-label>
         <input formControlName="url" matInput />
+        <mat-error *ngIf="formGroup.get('url')?.errors?.['invalidUrl']">
+          Url does not match material type [{{ formGroup.get('url')?.errors?.['invalidUrl'] }}]
+        </mat-error>
       </mat-form-field>
     </div>
   </mat-dialog-content>
