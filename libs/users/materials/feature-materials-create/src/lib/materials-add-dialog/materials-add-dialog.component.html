@@ -1,5 +1,5 @@
 <form (ngSubmit)="onAddMaterial()" [formGroup]="formGroup">
-  <ng-container [ngSwitch]="this.type">
+  <ng-container [ngSwitch]="data.type">
     <h2 mat-dialog-title *ngSwitchCase="MaterialType.Video">Добавить видео</h2>
     <h2 mat-dialog-title *ngSwitchCase="MaterialType.Audio">Добавить подкаст</h2>
     <h2 mat-dialog-title *ngSwitchCase="MaterialType.Pdf">Добавить pdf файл</h2>

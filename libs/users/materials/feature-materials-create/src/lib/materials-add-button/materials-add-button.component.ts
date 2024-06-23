@@ -22,16 +22,14 @@ export class MaterialsAddButtonComponent {
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
   private readonly materialsFacade = inject(MaterialsFacade);
-  private title!: MaterialType;
 
   public openDialog(type: string): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.restoreFocus = false;
-    dialogConfig.data = { title: this.title };
+    dialogConfig.data = { type };
 
     const dialogRef = this.dialog.open(MaterialsAddDialogComponent, dialogConfig);
-    dialogRef.componentInstance.type = type;
 
     dialogRef
       .afterClosed()
