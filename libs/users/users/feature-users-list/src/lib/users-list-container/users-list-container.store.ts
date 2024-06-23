@@ -9,6 +9,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { UsersEntity } from '@users/core/data-access';
 
+
 type UsersListState = DeepReadonly<{
   users: UsersVM[];
 }>;
@@ -24,7 +25,7 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
   public readonly users$ = this.select(({ users }) => users);
   public readonly status$ = this.select(this.usersFacade.status$, (status) => status);
   public errors$ = this.select(this.usersFacade.errors$, (error) => error);
-
+  
   constructor() {
     super(initialState);
     this.usersFacade.init();

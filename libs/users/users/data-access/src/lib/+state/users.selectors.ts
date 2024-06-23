@@ -28,3 +28,21 @@ export const selectOpenedUser = createSelector(
   selectUsersEntities,
   ({ id }, entities) => entities[id] || null
 );
+// export const selectUsersState = createFeatureSelector<UsersState>('users');
+
+export const usersFilterSelector = createSelector(selectUsersState, (state: UsersState) => state.usersFilter);
+
+export const allUsersSelector = createSelector(
+  selectUsersState,
+  (state: UsersState) => state.users
+);
+export const filteredUsers = createSelector(
+  allUsersSelector,
+  usersFilterSelector,
+  (users, filter) => {
+    if (!filter.name) {
+      return users;
+    }
+    return users.filter(user => user.name.includes(filter.name));
+  }
+);
