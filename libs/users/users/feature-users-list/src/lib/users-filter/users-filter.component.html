@@ -1,0 +1,7 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <mat-label>Поиск по имени</mat-label>
+    <input (input)="filterName()" [formControl]="name" type="text" matInput />
+  </mat-form-field>
+  <button (click)="clearInput()" class="mat-filter-button" mat-raised-button>Удалить</button>
+</form>
