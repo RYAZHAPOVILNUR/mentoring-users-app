@@ -16,13 +16,13 @@ interface Filter {
   styleUrls: ['./users-filter.component.scss'],
 })
 export class UsersFilterComponent {
-  private readonly UsersFacade = inject(UsersFacade)
+  private readonly usersFacade = inject(UsersFacade)
 
   onInputChange(event: string) {
     const filter: Filter = {
       filter: { name: event }
     }
 
-    this.UsersFacade.onSubmitFilters(filter)
+    this.usersFacade.onSubmitFilters(filter)
   }
 }
