@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
 import { UsersFilterComponent } from '../users-filter/users-filter.component';
-import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'users-list-container',
@@ -22,7 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatDialogModule,
     LetDirective,
     CreateUsersButtonComponent,
-    UsersFilterComponent,ReactiveFormsModule
+    UsersFilterComponent,
   ],
   templateUrl: './users-list-container.component.html',
   styleUrls: ['./users-list-container.component.scss'],
@@ -44,8 +43,10 @@ export class UsersListContainerComponent {
   }
 
   onRedirectToEdit({ id, editMode }: { id: number; editMode: boolean }) {
-    this.router.navigate(['/admin/users', id], {
-      queryParams: { edit: editMode },
-    });
+    this.router.navigate(['/admin/users', id], { queryParams: { edit: editMode } });
+  }
+
+  onAppliedFilter(filter: { filter: { name: string } }): void {
+    this.usersFacade.filterUsers(filter);
   }
 }

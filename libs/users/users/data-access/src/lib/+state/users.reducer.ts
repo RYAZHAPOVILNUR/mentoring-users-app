@@ -17,7 +17,7 @@ export interface UsersState extends EntityState<UsersEntity> {
   selectedId?: string | number; // which Users record has been selected
   status: LoadingStatus;
   error: UsersErrors | null;
-  users: any[];
+  // users: any[];
   usersFilter: { name: string };
 }
 
@@ -81,9 +81,12 @@ const reducer = createReducer(
     ...state,
     status,
   })),
-  on(setUsersFilter, (state, { filter }) => ({
+  on(UsersActions.setUsersFilter, (state, { filter }) =>
+    ({
     ...state,
-    usersFilter: filter
+    usersFilter: {
+      name: filter.name
+    }
   }))
 );
 
