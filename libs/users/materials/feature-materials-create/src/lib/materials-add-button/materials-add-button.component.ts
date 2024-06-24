@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MaterialsAddDialogComponent } from '../materials-add-dialog/materials-add-dialog.component';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
+import { MaterialAdd } from '../../../../data-access/src/lib/models/material-add.model';
 
 @Component({
   selector: 'users-materials-add-button',
@@ -37,7 +38,11 @@ export class MaterialsAddButtonComponent {
       .subscribe((result) => {
         this.menuTrigger?.focus();
         if (result) {
-          this.materialsFacade.addMaterial(result);
+          const newMaterial: MaterialAdd = {
+            title: result.title,
+            material_link: result.url,
+          };
+          this.materialsFacade.addMaterial(newMaterial);
         }
       });
   }

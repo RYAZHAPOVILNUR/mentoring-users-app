@@ -1,12 +1,15 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { MaterialsActions } from './materials.actions';
 import { ApiService } from '@users/core/http';
 import { Folder } from '../models/folder.model';
 import { FolderAdd } from '../models/folder-add.model';
 import { Material } from '../models/material.model';
+import { MaterialAdd } from '../models/material-add.model';
+import { Store } from '@ngrx/store';
+import { selectRouteParams } from '@users/core/data-access';
 
 @Injectable()
 export class MaterialsEffects {
@@ -65,6 +68,45 @@ export class MaterialsEffects {
         apiService.get<Material[]>('/material').pipe(
           map((materials) => MaterialsActions.loadMaterialsSuccess({ materials })),
           catchError((error) => of(MaterialsActions.loadFoldersFailure({ error })))
+        )
+      )
+    );
+  });
+
+  addMaterial = createEffect(() => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const store = inject(Store);
+
+    return actions$.pipe(
+      ofType(MaterialsActions.addMaterial),
+      withLatestFrom(store.select(selectRouteParams)),
+      switchMap(([{ material }, params]) => {
+        const folderId = Number(params['id']);
+
+        const materialWithFolderId: MaterialAdd = {
+          ...material,
+          folder_id: folderId,
+        };
+
+        return apiService.post<Material, MaterialAdd>('/material', materialWithFolderId).pipe(
+          map((material) => MaterialsActions.addMaterialSuccess({ material })),
+          catchError((error) => of(MaterialsActions.addMaterialFailure({ error })))
+        );
+      })
+    );
+  });
+
+  deleteMaterial = createEffect(() => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+
+    return actions$.pipe(
+      ofType(MaterialsActions.deleteMaterial),
+      switchMap(({ id }) =>
+        apiService.delete<void>(`/material/${id}`).pipe(
+          map(() => MaterialsActions.deleteMaterialSuccess({ id })),
+          catchError((error) => of(MaterialsActions.deleteMaterialFailure({ error })))
         )
       )
     );

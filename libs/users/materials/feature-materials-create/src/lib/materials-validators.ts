@@ -8,7 +8,6 @@ export class MaterialsValidators {
   static ofType(type: string): ValidatorFn {
     // returns a function which takes an Anstract control as an input
     return (control: AbstractControl): { [key: string]: any } | null => {
-      console.log({ type }, { control });
       if (control.value) {
         switch (type) {
           case MaterialType.Audio:

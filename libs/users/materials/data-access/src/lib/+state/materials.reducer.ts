@@ -69,6 +69,24 @@ export const reducer = createReducer(
     ...state,
     status: 'error' as const,
     error,
+  })),
+  on(MaterialsActions.addMaterialSuccess, (state, { material }) => ({
+    ...state,
+    materials: [...state.materials, material],
+  })),
+  on(MaterialsActions.addMaterialFailure, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
+  on(MaterialsActions.deleteMaterialSuccess, (state, { id }) => ({
+    ...state,
+    materials: state.materials.filter((material) => material.id !== id),
+  })),
+  on(MaterialsActions.deleteMaterialFailure, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
   }))
 );
 
