@@ -12,7 +12,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { onSuccessEditionCbType } from '@users/users/data-access';
+import { onSuccessEditionCbType, UsersFacade } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -100,6 +100,7 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() deleteUser = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
+  private usersFacade = inject(UsersFacade);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
     distinctUntilChanged(),
