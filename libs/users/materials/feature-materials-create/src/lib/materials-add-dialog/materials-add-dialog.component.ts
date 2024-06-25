@@ -29,7 +29,7 @@ export class MaterialsAddDialogComponent implements OnInit {
     });
   }
 
-  public onAddMaterial() {
+  public onAddMaterial(): void {
     if (this.formGroup.valid) {
       this.dialogRef.close(this.formGroup.value);
     }

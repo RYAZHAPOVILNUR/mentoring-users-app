@@ -17,10 +17,9 @@ import { MatIconModule } from '@angular/material/icon';
 export class MaterialsCardComponent {
   @Input({ required: true }) material!: Material;
   @Output() private readonly deleteMaterial = new EventEmitter<Material>();
+  protected readonly regex = regex;
 
   public onDelete(material: Material): void {
     this.deleteMaterial.emit(material);
   }
-
-  protected readonly regex = regex;
 }

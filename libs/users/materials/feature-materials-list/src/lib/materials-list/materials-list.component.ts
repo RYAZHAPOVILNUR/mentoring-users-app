@@ -5,7 +5,6 @@ import {
   EventEmitter,
   inject,
   Input,
-  OnInit,
   Output,
   ViewEncapsulation,
 } from '@angular/core';
@@ -29,16 +28,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MaterialsListComponent implements OnInit {
+export class MaterialsListComponent {
   @Input({ required: true }) vm!: MaterialsVM;
   @Output() deleteMaterial = new EventEmitter<Material>();
   @Output() goToFolders = new EventEmitter();
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
-
-  ngOnInit() {
-    console.log(this.vm.folderMaterials);
-  }
 
   public onGoToFolders(): void {
     this.goToFolders.emit();

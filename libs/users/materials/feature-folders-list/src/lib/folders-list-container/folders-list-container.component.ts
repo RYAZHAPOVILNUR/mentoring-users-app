@@ -18,8 +18,8 @@ import { Router } from '@angular/router';
 })
 export class FoldersListContainerComponent {
   private readonly materialsFacade = inject(MaterialsFacade);
-  public readonly allFolders$ = this.materialsFacade.allFolders$;
   public readonly foldersStatus$ = this.materialsFacade.foldersStatus$;
+  public readonly allFolders$ = this.materialsFacade.allFolders$;
   private readonly router = inject(Router);
 
   constructor() {
@@ -30,7 +30,7 @@ export class FoldersListContainerComponent {
     this.materialsFacade.deleteFolder(folder.id);
   }
 
-  openFolder(id: number): void {
+  public openFolder(id: number): void {
     this.router.navigate([`/materials/`, id]);
   }
 }

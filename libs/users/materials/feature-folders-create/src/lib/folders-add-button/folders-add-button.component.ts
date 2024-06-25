@@ -20,15 +20,12 @@ export class FoldersAddButtonComponent {
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
   private readonly materialsFacade = inject(MaterialsFacade);
-  private title!: string;
 
   public openDialog(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.data = { title: this.title };
 
     const dialogRef = this.dialog.open(FoldersAddDialogComponent, dialogConfig);
-
     dialogRef
       .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
