@@ -7,7 +7,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { Material, regex } from '@users/materials/data-access';
 import { SafePipe } from 'safe-pipe';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'users-materials-content',
@@ -21,9 +20,9 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export class MaterialsContentComponent {
   public readonly data: Material = inject(MAT_DIALOG_DATA);
   public readonly regex = regex;
-  protected safeVideoUrl: SafeResourceUrl;
 
-  constructor(private sanitizer: DomSanitizer) {
-    this.safeVideoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.data.material_link as string);
+  public getEmbedUrl() {
+    const matches = this.data.material_link.match(regex.video);
+    return 'https://www.youtube.com/embed/' + matches?.[1];
   }
 }

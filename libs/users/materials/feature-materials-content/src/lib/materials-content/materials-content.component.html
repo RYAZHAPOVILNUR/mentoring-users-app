@@ -17,6 +17,6 @@
     <audio controls src="{{ data.material_link }}"></audio>
   </ng-container>
   <ng-container *ngIf="regex.video.test(data.material_link)">
-    <iframe width="420" height="315" src="{{ safeVideoUrl }}"></iframe>
+    <iframe width="420" height="315" [src]="getEmbedUrl() | safe : 'resourceUrl'"></iframe>
   </ng-container>
 </mat-dialog-content>
