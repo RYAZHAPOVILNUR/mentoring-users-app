@@ -12,10 +12,15 @@ export type UsersErrors = {
   [key: string]: unknown;
 };
 
+export interface UsersFilter {
+  name: string;
+}
+
 export interface UsersState extends EntityState<UsersEntity> {
   selectedId?: string | number; // which Users record has been selected
   status: LoadingStatus;
   error: UsersErrors | null;
+  filterUsers?: UsersFilter;
 }
 
 export interface UsersPartialState {
@@ -75,7 +80,11 @@ const reducer = createReducer(
   on(UsersActions.updateUserStatus, (state, { status }) => ({
     ...state,
     status,
-  }))
+  })),
+  on(UsersActions.setUsersFilter,(state, { filter }) => ({
+    ...state,
+    filterUsers: filter,
+  })),
 );
 
 export function usersReducer(state: UsersState | undefined, action: Action) {
