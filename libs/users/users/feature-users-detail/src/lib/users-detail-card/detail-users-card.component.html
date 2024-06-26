@@ -106,6 +106,35 @@
             </button>
           </mat-card-actions>
         </form>
+        <mat-form-field class="edit-user-field">
+          <mat-label>Добавить сторипоинты:</mat-label>
+          <input matInput type="number" [disabled]="false" placeholder="0" [formControl]="totalStoryPoints" />
+        </mat-form-field>
+        <button  mat-icon-button color="warn" type="button"
+          (click)="onAddStoryPoints()"
+          *ngIf="!totalStoryPoints.disabled"
+          matSuffix
+          aria-label="Clear">
+          <mat-icon>done</mat-icon>
+        </button>
+        <button
+          (click)="totalStoryPoints.disable()"
+          *ngIf="!totalStoryPoints.disabled"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <button
+          (click)="totalStoryPoints.enable()"
+          *ngIf="totalStoryPoints.disabled"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
       </mat-card>
     </div>
   </ng-container>
@@ -122,5 +151,10 @@
 <ng-template #snackbar>
   <div class="edit-user-snackbar">
     <span>Пользователь успешно изменён!</span>
+  </div>
+</ng-template>
+<ng-template #snackbarStoryPoints>
+  <div class="edit-user-snackbar">
+    <span>Сторипоинт успешно обновлен</span>
   </div>
 </ng-template>
