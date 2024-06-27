@@ -19,6 +19,10 @@ export class MaterialsFacade {
     this.store.dispatch(MaterialsActions.loadFolders());
   }
 
+  public loadFolder(): void {
+    this.store.dispatch(MaterialsActions.loadFolder());
+  }
+
   public addFolder(folder: FolderAdd): void {
     this.store.dispatch(MaterialsActions.addFolder({ folder }));
   }

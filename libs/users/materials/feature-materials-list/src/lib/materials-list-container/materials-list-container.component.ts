@@ -34,6 +34,7 @@ export class MaterialsListContainerComponent {
   public readonly folderMaterials$ = this.materialsFacade.folderMaterials$;
 
   constructor() {
+    this.materialsFacade.loadFolder();
     this.materialsFacade.loadMaterials();
   }
 

@@ -28,6 +28,25 @@ export class MaterialsEffects {
     );
   });
 
+  loadFolder = createEffect(() => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const store = inject(Store);
+
+    return actions$.pipe(
+      ofType(MaterialsActions.loadFolder),
+      withLatestFrom(store.select(selectRouteParams)),
+      switchMap(([, params]) => {
+        const id = Number(params['id']);
+
+        return apiService.get<Folder>(`/folder/${id}`).pipe(
+          map((folder) => MaterialsActions.loadFolderSuccess({ folder })),
+          catchError((error) => of(MaterialsActions.loadFolderFailure({ error })))
+        );
+      })
+    );
+  });
+
   addFolder = createEffect(() => {
     const actions$ = inject(Actions);
     const apiService = inject(ApiService);
@@ -62,7 +81,7 @@ export class MaterialsEffects {
     const actions$ = inject(Actions);
     const apiService = inject(ApiService);
 
-    return this.actions$.pipe(
+    return actions$.pipe(
       ofType(MaterialsActions.loadMaterials),
       switchMap(() =>
         apiService.get<Material[]>('/material').pipe(
