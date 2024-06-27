@@ -1,0 +1,46 @@
+.folder-card {
+  height: 10rem;
+
+  &:hover {
+    .delete-icon {
+      opacity: 1;
+    }
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  mat-card-content {
+    height: 100%;
+    display: grid;
+
+    h4 {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .delete-icon {
+    opacity: 0;
+  }
+}

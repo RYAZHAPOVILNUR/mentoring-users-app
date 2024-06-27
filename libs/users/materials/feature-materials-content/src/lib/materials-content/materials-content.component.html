@@ -1,0 +1,24 @@
+<header>
+  <h2 mat-dialog-title>{{ data.title }}</h2>
+  <mat-card-actions>
+    <button mat-icon-button mat-dialog-close>
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-actions>
+</header>
+<mat-dialog-content>
+  <ng-container *ngIf="regex.pdf.test(data.material_link)">
+    <pdf-viewer
+      [src]="data.material_link"
+      [render-text]="true"
+      [original-size]="false"
+      style="width: 900px; height: 500px"
+    ></pdf-viewer>
+  </ng-container>
+  <ng-container *ngIf="regex.audio.test(data.material_link)">
+    <audio controls src="{{ data.material_link }}"></audio>
+  </ng-container>
+  <ng-container *ngIf="regex.video.test(data.material_link)">
+    <iframe width="640" height="360" [src]="getEmbedUrl() | safe : 'resourceUrl'"></iframe>
+  </ng-container>
+</mat-dialog-content>

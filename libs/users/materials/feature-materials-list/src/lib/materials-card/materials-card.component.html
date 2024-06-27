@@ -1,0 +1,17 @@
+<mat-card class="material-card">
+  <mat-card-content>
+    <header class="icons">
+      <ng-container [ngSwitch]="true">
+        <mat-icon *ngSwitchCase="regex.pdf.test(material.material_link)">picture_as_pdf</mat-icon>
+        <mat-icon *ngSwitchCase="regex.audio.test(material.material_link)">music_note</mat-icon>
+        <mat-icon *ngSwitchCase="regex.video.test(material.material_link)">ondemand_video</mat-icon>
+        <mat-icon *ngSwitchDefault>question_mark</mat-icon>
+      </ng-container>
+      <button (click)="onDelete(material)" mat-icon-button aria-label="Icon button with a delete icon">
+        <mat-icon class="delete-icon">delete</mat-icon>
+      </button>
+    </header>
+    <h4>{{ material.title }}</h4>
+    <p>{{ material.created_at | date }}</p>
+  </mat-card-content>
+</mat-card>

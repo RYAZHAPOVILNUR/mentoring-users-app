@@ -1,0 +1,12 @@
+<mat-card class="folder-card">
+  <mat-card-content>
+    <header class="icons">
+      <mat-icon>folder</mat-icon>
+      <button (click)="onDelete(folder)" mat-icon-button aria-label="Icon button with a delete icon">
+        <mat-icon class="delete-icon">delete</mat-icon>
+      </button>
+    </header>
+    <h4>{{ folder.title }}</h4>
+    <p>{{ folder.created_at | date }}</p>
+  </mat-card-content>
+</mat-card>
