@@ -106,6 +106,18 @@
             </button>
           </mat-card-actions>
         </form>
+        <div class="add-sp">
+          <mat-form-field class="edit-user-field">
+            <mat-label>Добавить сторипоинты:</mat-label>
+            <input matInput type="number" [disabled]="false" placeholder="0" [formControl]="totalStoryPoints" />
+          </mat-form-field>
+          <button  mat-icon-button color="primary" type="button"
+            (click)="onAddStoryPoints()"
+            matSuffix
+            aria-label="Clear">
+            <mat-icon>done</mat-icon>
+          </button>
+        </div>
       </mat-card>
     </div>
   </ng-container>
