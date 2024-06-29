@@ -1,0 +1,20 @@
+<mat-card class="folders-card">
+  <mat-card-content>
+    <div class="d-flex justify-content-between align-items-center">
+      <mat-icon color="accent">folder</mat-icon>
+      <button
+        mat-icon-button
+        class="delete-button"
+        aria-label="delete button"
+        (click)="onDeleteFolder()"
+        color="accent"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <div [matTooltip]="folder.title">
+      <b>{{ folder.title | truncate : 10 }}</b>
+    </div>
+    <div>{{folder.created_at | multiLangDate : 'dd MMM y' | ngrxPush }}</div>
+  </mat-card-content>
+</mat-card>

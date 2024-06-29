@@ -1,0 +1,24 @@
+.folders-card {
+  width: 130px;
+  height: 110px;
+  position: relative;
+  cursor: pointer;
+  & .delete-button {
+    right: 0;
+    top: 0;
+    width: 35px;
+    height: 35px;
+    visibility: hidden;
+    position: relative;
+    & mat-icon {
+      position: absolute;
+      transform: translate(-50%, -50%);
+    }
+  }
+  &:hover {
+    background-color: rgba(0,0,0,0.001);
+    & .delete-button {
+      visibility: visible;
+    }
+  }
+}

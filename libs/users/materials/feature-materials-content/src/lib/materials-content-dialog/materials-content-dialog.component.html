@@ -1,0 +1,13 @@
+<h1 mat-dialog-title class="dialog-title">{{material.title}}</h1>
+<mat-dialog-actions class="content-close">
+  <button mat-icon-button mat-dialog-close aria-label="Close">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-dialog-actions>
+<mat-dialog-content class="material-content-dialog">
+  <div [ngSwitch]="materialType">
+    <users-pdf-content *ngSwitchCase="materialTypes.Pdf" [material]="material" />
+    <users-podcast-content *ngSwitchCase="materialTypes.Podcast" [material]="material" />
+    <users-video-content *ngSwitchCase="materialTypes.Video" [material]="material" />
+  </div>
+</mat-dialog-content>

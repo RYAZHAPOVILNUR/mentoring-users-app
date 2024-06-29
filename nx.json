@@ -50,5 +50,8 @@
     "@nx/angular:component": {
       "style": "scss"
     }
+  },
+  "workspaceLayout": {
+    "projectNameAndRootFormat": "as-provided"
   }
 }
