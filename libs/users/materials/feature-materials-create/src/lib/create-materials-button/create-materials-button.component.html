@@ -1,0 +1,29 @@
+<button
+  color="primary"
+  class="create-folders-button"
+  mat-fab aria-label="Add material"
+  matTooltip="{{'MATERIALS.MATERIAL.ADD_MATERIAL' | translate}}"
+  [matMenuTriggerFor]="menu"
+>
+  <mat-icon>add</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button
+    mat-menu-item
+    (click)="openAddMaterialDialog(MaterialType.Video)"
+  >
+  {{'MATERIALS.MATERIAL.TYPE.VIDEO' | translate}}
+  </button>
+  <button
+    mat-menu-item
+    (click)="openAddMaterialDialog(MaterialType.Pdf)"
+  >
+  {{'MATERIALS.MATERIAL.TYPE.PDF' | translate}}
+  </button>
+  <button
+    mat-menu-item
+    (click)="openAddMaterialDialog(MaterialType.Podcast)"
+  >
+  {{'MATERIALS.MATERIAL.TYPE.PODCAST' | translate}}
+  </button>
+</mat-menu>

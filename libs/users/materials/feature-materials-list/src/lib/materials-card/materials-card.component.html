@@ -1,0 +1,20 @@
+<mat-card class="materials-card">
+  <mat-card-content>
+    <div class="d-flex justify-content-between align-items-center">
+      <mat-icon color="accent">{{material | materialIcon}}</mat-icon>
+      <button
+        mat-icon-button
+        class="delete-button"
+        aria-label="delete button"
+        (click)="onDeleteMaterial($event)"
+        color="accent"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <div [matTooltip]="material.title">
+      <b>{{ material.title | truncate : 11 }}</b>
+    </div>
+    <div>{{material.createdAt | multiLangDate : 'dd MMM y' | ngrxPush }}</div>
+  </mat-card-content>
+</mat-card>

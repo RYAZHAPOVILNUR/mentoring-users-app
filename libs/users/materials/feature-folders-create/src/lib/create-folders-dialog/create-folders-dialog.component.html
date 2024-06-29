@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>{{'MATERIALS.FOLDER.ADD_FOLDER_DIALOG_TITLE' | translate}}</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>{{'MATERIALS.FOLDER.TITLE_LABEL' | translate}}</mat-label>
+    <input matInput [formControl]="folderTitle">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="cancel()">
+    {{'MATERIALS.CANCEL' | translate}}
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="save()"
+    [disabled]="folderTitle.invalid"
+  >
+    {{'MATERIALS.SAVE' | translate}}
+  </button>
+</mat-dialog-actions>

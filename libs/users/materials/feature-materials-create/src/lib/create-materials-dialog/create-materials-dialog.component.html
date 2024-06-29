@@ -1,0 +1,44 @@
+<h2 mat-dialog-title>
+  {{'MATERIALS.ADD' | translate}}
+  {{'MATERIALS.MATERIAL.TYPE.' + materialData.materialType | translate}}
+</h2>
+<mat-dialog-content>
+  <form [formGroup]="formGroup" class="form-wrapper">
+    <mat-form-field>
+      <mat-label>{{'MATERIALS.MATERIAL.TITLE_LABEL' | translate}}</mat-label>
+      <input matInput formControlName="title">
+      <mat-error *ngIf="formGroup.controls.title.hasError('required') && 
+        (formGroup.controls.title.touched || formGroup.controls.title.dirty)
+      ">
+        {{'MATERIALS.MATERIAL.REQUIRED' | translate}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>{{'MATERIALS.MATERIAL.LINK_LABEL' | translate}}</mat-label>
+      <input matInput formControlName="materialLink">
+      <mat-error *ngIf="formGroup.controls.materialLink.hasError('required') && 
+        (formGroup.controls.materialLink.touched || formGroup.controls.materialLink.dirty)
+      ">
+        {{'MATERIALS.MATERIAL.REQUIRED' | translate}}
+      </mat-error>
+      <mat-error *ngIf="formGroup.controls.materialLink.hasError('incorrectLink') && 
+        (formGroup.controls.materialLink.touched || formGroup.controls.materialLink.dirty)
+      ">
+        {{'MATERIALS.MATERIAL.INCORRECT_LINK' | translate}}
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>
+    {{'MATERIALS.CANCEL' | translate}}
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="formGroup.invalid"
+    (click)="save()"
+  >
+    {{'MATERIALS.SAVE' | translate}}
+  </button>
+</mat-dialog-actions>
