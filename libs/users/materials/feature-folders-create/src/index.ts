@@ -1,1 +1,1 @@
-export * from './lib/feature-folders-create/feature-folders-create.component';
+export * from './lib/folders-add-button/folders-add-button.component';

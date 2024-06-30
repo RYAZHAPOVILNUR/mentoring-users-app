@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './folders-list.component.html',
-  styleUrls: ['./feature-folders-list.component.scss'],
+  styleUrls: ['./folders-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersListComponent {}

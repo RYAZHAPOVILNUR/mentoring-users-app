@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FeatureFoldersCreateComponent } from './feature-folders-create.component';
+import { FoldersAddButtonComponent } from './folders-add-button.component';
 
 describe('FeatureFoldersCreateComponent', () => {
-  let component: FeatureFoldersCreateComponent;
-  let fixture: ComponentFixture<FeatureFoldersCreateComponent>;
+  let component: FoldersAddButtonComponent;
+  let fixture: ComponentFixture<FoldersAddButtonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FeatureFoldersCreateComponent],
+      imports: [FoldersAddButtonComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(FeatureFoldersCreateComponent);
+    fixture = TestBed.createComponent(FoldersAddButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'feature-folders-create',
+  displayName: 'folders-add-button',
   preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../../coverage/libs/users/materials/feature-folders-create',
+  coverageDirectory: '../../../../coverage/libs/users/materials/folders-add-button',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
