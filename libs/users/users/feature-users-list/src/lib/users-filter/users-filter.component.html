@@ -1,3 +1,9 @@
-<div>
-  <input matInput formControl="nameControl" placeholder="Имя" />
+<div class="container">
+  <form [formGroup]="filterForm" (ngSubmit)="applyFilter()" class="users-filter-form">
+    <div class="users-filter-form-item">
+      <mat-form-field class="users-filter-input">
+        <input formControlName="name" matInput id="filterName" type="text" placeholder="Поиск..." />
+      </mat-form-field>
+    </div>
+  </form>
 </div>

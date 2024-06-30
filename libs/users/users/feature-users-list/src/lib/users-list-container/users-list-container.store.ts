@@ -9,7 +9,6 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { UsersEntity } from '@users/core/data-access';
 
-
 type UsersListState = DeepReadonly<{
   users: UsersVM[];
 }>;
@@ -25,7 +24,7 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
   public readonly users$ = this.select(({ users }) => users);
   public readonly status$ = this.select(this.usersFacade.status$, (status) => status);
   public errors$ = this.select(this.usersFacade.errors$, (error) => error);
-  
+
   constructor() {
     super(initialState);
     this.usersFacade.init();
@@ -33,7 +32,7 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
   }
 
   private setUsersFromGlobalToLocalStore(): void {
-    this.effect(() => this.usersFacade.allUsers$.pipe(tap((users: UsersEntity[]) => this.patchUsers(users))));
+    this.effect(() => this.usersFacade.filteredUsers$.pipe(tap((users: UsersEntity[]) => this.patchUsers(users))));
   }
 
   private patchUsers(users: UsersEntity[]): void {
