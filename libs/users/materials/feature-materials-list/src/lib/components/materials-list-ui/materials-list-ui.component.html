@@ -1,13 +1,24 @@
+<ng-template #loading>
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-template>
+
 <ng-container *ngIf="status === 'loaded'; else loading">
+  <div class="header">
+    <button mat-icon-button (click)="onBackButtonClick()">
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+    <span class="folder-title">
+      {{ folder?.title }}
+    </span>
+  </div>
+
   <div class="container">
     <div class="materials-list" *ngFor="let material of materials">
-      <users-materials-card-ui
-        [material]="material"
-      />
+      <users-materials-card-ui [material]="material" />
     </div>
   </div>
 </ng-container>
 
-<ng-template #loading>
-  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
-</ng-template>
+<button class="add-material" mat-icon-button (click)="onAddButtonClick()">
+  <mat-icon>add_circle</mat-icon>
+</button>

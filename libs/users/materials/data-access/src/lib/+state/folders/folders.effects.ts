@@ -4,18 +4,31 @@ import { ApiService } from '@users/core/http';
 import { foldersActions } from './folders.actions';
 import { catchError, of, switchMap } from 'rxjs';
 import { Folder } from '../../interfaces/folder.interface';
-import { map } from 'rxjs/operators';
+import { map, withLatestFrom } from 'rxjs/operators';
 import { FolderCreate } from '../../types/folder-create.type';
+import { selectFoldersState } from './folders.selectors';
+import { Store } from '@ngrx/store';
+import { foldersSelector } from './folders.reducer';
+
+const { selectAll } = foldersSelector.getSelectors();
+
 
 export const loadFolders$ = createEffect(
   (actions$ = inject(Actions),
+   store = inject(Store),
    apiService = inject(ApiService)) =>
     actions$.pipe(
       ofType(foldersActions.loadFolders),
-      switchMap(() =>
-        apiService.get<Folder[]>('/folder').pipe(
-          map((folders) => foldersActions.loadFoldersSuccess({ folders })),
-          catchError((error) => {
+      withLatestFrom(store.select(selectFoldersState)),
+      map(([_, state]) =>
+        state.status === 'init'
+          ? apiService.get<Folder[]>(`/folder`)//.pipe(tap(() => console.log('дёрнули бэк')))
+          : of(selectAll(state))
+      ),
+      switchMap((source$) =>
+        source$.pipe(
+          map(folders => foldersActions.loadFoldersSuccess({ folders })),
+          catchError(error => {
             console.error('Error', error);
             return of(foldersActions.loadFoldersFailure({ error }));
           })

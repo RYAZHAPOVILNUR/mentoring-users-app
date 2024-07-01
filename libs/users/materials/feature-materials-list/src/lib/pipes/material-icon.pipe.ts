@@ -1,6 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { MaterialIcon } from '../enums/material-icon.enum';
 
+
 @Pipe({
   name: 'materialIcon',
   standalone: true
@@ -8,17 +9,17 @@ import { MaterialIcon } from '../enums/material-icon.enum';
 export class MaterialIconPipe implements PipeTransform {
   transform(url: string): MaterialIcon {
 
-    const extensionMaterial: Record<MaterialIcon, boolean> = { // todo имя переменной содержит глагол.
+    const iconCondition: Record<MaterialIcon, boolean> = {
       [MaterialIcon.MP3]: url.endsWith('.mp3'),
       [MaterialIcon.PDF]: url.endsWith('.pdf'),
       [MaterialIcon.YOUTUBE]: /youtube/i.test(url) || /youtu\.be/i.test(url),
       [MaterialIcon.OTHER]: true
     };
 
-    const extensionMaterialKey = Object.keys(extensionMaterial).find( // todo имя переменной содержит глагол.
-      key => extensionMaterial[key as MaterialIcon]
+    const matchedIcon = Object.keys(iconCondition).find(
+      key => iconCondition[key as MaterialIcon]
     )!;
 
-    return extensionMaterialKey as MaterialIcon;
+    return matchedIcon as MaterialIcon;
   }
 }

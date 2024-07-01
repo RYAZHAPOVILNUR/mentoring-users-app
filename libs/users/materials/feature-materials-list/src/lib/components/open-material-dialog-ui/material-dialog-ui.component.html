@@ -1,0 +1,35 @@
+<div class="header" mat-dialog-title>
+  <span>
+   {{ material.title }}
+  </span>
+  <button
+    mat-icon-button
+    mat-dialog-close
+    color="accent"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+
+<mat-dialog-content class="file-viewer">
+  <ng-container [ngSwitch]="material.materialLink | materialIcon">
+    <div class="container-mp3" *ngSwitchCase="materialIcon.MP3">
+      <audio class="audio" controls>
+        <source [src]="material.materialLink" type="audio/mpeg">
+      </audio>
+    </div>
+    <div class="container-pdf" style='position: relative; ' *ngSwitchCase="materialIcon.PDF">
+      <pdf-viewer [src]="material.materialLink"
+                  class="pdf" />
+    </div>
+    <div class="container-video" *ngSwitchCase="materialIcon.YOUTUBE">
+      <iframe
+        [src]="material.materialLink | transformYoutubeLink"
+        allowfullscreen
+        class="youtube-iframe"
+      >
+      </iframe>
+    </div>
+  </ng-container>
+</mat-dialog-content>

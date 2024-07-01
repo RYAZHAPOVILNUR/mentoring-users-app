@@ -1,7 +1,7 @@
 .material-card-wrapper {
   margin: 20px;
   width: 150px;
-  height: 120px;
+  height: 140px;
   display: flex;
   justify-content: space-between;
   user-select: none;
@@ -30,4 +30,10 @@
 
 .icons :last-child {
   display: none;
+}
+
+mat-card-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

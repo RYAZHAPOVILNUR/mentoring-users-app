@@ -1,48 +1,37 @@
 .folder-card-wrapper {
   margin: 20px;
-  // todo почему размеры заданы жестко?
-  //  это ведёт к переполнению карточки когда в ней много контента
   width: 150px;
   height: 120px;
   display: flex;
   justify-content: space-between;
   user-select: none;
 
-  .icons {
-    display: flex;
-    justify-content: space-between;
-  }
 
-  .icons :last-child { // todo это работает?) зачем это нужно?
-    display: none;
-  }
-
-  mat-card-title {
+  .title {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
 
+  .icons {
+    display: flex;
+    justify-content: space-between;
 
-  &:hover {
-    cursor: pointer;
-    opacity: 0.8;
-
-    .icons {
-      justify-content: space-between;
+    :last-child { // todo почему без &? изучить зачем в scss используется символ &
+      display: none;
     }
 
-    .icons :last-child { // todo это работает?) зачем это нужно?
-      display: block;
-      position: absolute;
-      right: 5px;
-      top: 5px;
-    }
+    &:hover {
+      cursor: pointer;
+      opacity: 0.8;
 
-    &::before {
-      opacity: 1; // todo зачем это нужно?
+      :last-child { // todo почему без &?
+        display: block;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+      }
     }
   }
+
 }
-
-

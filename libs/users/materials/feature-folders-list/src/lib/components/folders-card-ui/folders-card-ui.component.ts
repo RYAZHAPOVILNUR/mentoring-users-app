@@ -5,7 +5,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { Folder, MaterialsState } from '@users/materials/data-access';
+import { Folder, MaterialsFacade } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-folders-card-ui',
@@ -24,13 +24,13 @@ import { Folder, MaterialsState } from '@users/materials/data-access';
 })
 export class FoldersCardUiComponent {
   @Input({ required: true }) folder!: Folder;
-  private readonly materialsState = inject(MaterialsState);
+  private readonly materialsFacade = inject(MaterialsFacade);
 
   onCardClick(): void {
-    this.materialsState.openFolder(this.folder.id);
+    this.materialsFacade.emitOpenFolder(this.folder.id);
   }
 
   onDeleteButtonClick(): void {
-    this.materialsState.deleteFolder(this.folder.id);
+    this.materialsFacade.emitDeleteFolder(this.folder.id);
   }
 }

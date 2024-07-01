@@ -1,23 +1,13 @@
-<div class="materials-header">
-  <button mat-icon-button (click)="onBackButtonClick()">
-    <mat-icon>arrow_back_ios</mat-icon>
-  </button>
-  <span>{{ folderTitle }}</span>
-</div>
-
-
 <ng-container
   *ngrxLet="{
-    materials: materialsFacade.materialsInFolder$,
-    status: materialsFacade.status$,
+    materials: materialsFacade.selectedMaterials$,
+    status: materialsFacade.materialsStatus$,
+    folder: materialsFacade.selectedFolder$
   } as vm"
 >
   <users-materials-list-ui
     [materials]="vm.materials"
     [status]="vm.status"
+    [folder]="vm.folder"
   />
 </ng-container>
-
-<button class="add-material" mat-icon-button (click)="onAddButtonClick()">
-  <mat-icon>add_circle</mat-icon>
-</button>

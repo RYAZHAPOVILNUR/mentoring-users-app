@@ -1,3 +1,7 @@
+<ng-template #loading>
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-template>
+
 <ng-container *ngIf="status === 'loaded'; else loading">
   <div class="container">
 
@@ -9,6 +13,10 @@
   </div>
 </ng-container>
 
-<ng-template #loading>
-  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
-</ng-template>
+<button
+  class="add-folder"
+  mat-icon-button
+  (click)="onAddButtonClick()">
+  <mat-icon>add_circle</mat-icon>
+</button>
+

@@ -4,8 +4,9 @@ import { Folder } from '../../interfaces/folder.interface';
 import { foldersActions } from './folders.actions';
 
 export const FOLDERS_FEATURE_KEY = 'folders';
-export const foldersAdapter: EntityAdapter<Folder> = createEntityAdapter<Folder>();
-export const initialFoldersState = foldersAdapter.getInitialState({
+export const foldersSelector: EntityAdapter<Folder> = createEntityAdapter<Folder>();
+
+const initialFoldersState = foldersSelector.getInitialState({
   status: 'init'
 });
 
@@ -15,11 +16,11 @@ export const foldersFeature = createFeature({
     initialFoldersState,
     on(foldersActions.loadFolders, (state) => ({
         ...state,
-        status: 'loading'
+        status: state.status === 'init' ? 'init' : 'loading'
       })
     ),
     on(foldersActions.loadFoldersSuccess, (state, { folders }) =>
-      foldersAdapter.setAll(folders, {
+      foldersSelector.setAll(folders, {
         ...state,
         status: 'loaded'
       })
@@ -30,13 +31,13 @@ export const foldersFeature = createFeature({
       })
     ),
     on(foldersActions.createFolderSuccess, (state, { folder }) =>
-      foldersAdapter.addOne(
+      foldersSelector.addOne(
         { ...folder },
         { ...state }
       )
     ),
     on(foldersActions.deleteFolderSuccess, (state, { id }) =>
-      foldersAdapter.removeOne(id, { ...state })
+      foldersSelector.removeOne(id, { ...state })
     )
   )
 });

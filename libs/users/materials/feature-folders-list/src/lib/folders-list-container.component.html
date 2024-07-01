@@ -1,7 +1,7 @@
 <ng-container
   *ngrxLet="{
-    folders: foldersFacade.folders$,
-    status: foldersFacade.status$,
+    folders: materialsFacade.folders$,
+    status: materialsFacade.foldersStatus$,
   } as vm"
 >
   <users-folders-list-ui
@@ -10,10 +10,5 @@
   />
 </ng-container>
 
-<button
-  class="add-folder"
-  mat-icon-button
-  (click)="onAddButtonClick()">
-  <mat-icon>add_circle</mat-icon>
-</button>
+
 

@@ -1,12 +1,21 @@
-<div mat-dialog-content>
-  <h1 mat-card-title>
-    {{ 'MATERIALS.CREATE_FILE_TITLE' | translate }}
-  </h1>
-  <h3 mat-card-subtitle>
-    {{ 'MATERIALS.CREATE_FILE_SUBTITLE' | translate }}
-  </h3>
+<mat-dialog-content>
+  <div class="header">
+    <h2 mat-dialog-title>
+      {{ 'MATERIALS.CREATE_FILE_TITLE' | translate }}
+    </h2>
+  </div>
   <form [formGroup]="materialFormGroup">
+    <!--  todo ControlValueAccessor  -->
+    <!--    <text-field -->
+    <!--      [label]="  {{ 'MATERIALS.CREATE_FILE_SUBTITLE' | translate }}" -->
+    <!--      formControlName="title"    -->
+    <!--    ></text-field>-->
+    <!--    <text-field [label]="" formControlName="materialLink"></text-field>-->
+
     <mat-form-field>
+      <mat-label>
+        {{ 'MATERIALS.CREATE_FILE_SUBTITLE' | translate }}
+      </mat-label>
       <input
         matInput
         type="text"
@@ -17,10 +26,10 @@
       </mat-error>
     </mat-form-field>
 
-    <h3 mat-card-subtitle class="material-link">
-      {{ 'MATERIALS.CREATE_FILE_LINK' | translate }}
-    </h3>
     <mat-form-field>
+      <mat-label>
+        {{ 'MATERIALS.CREATE_FILE_LINK' | translate }}
+      </mat-label>
       <input
         matInput
         type="text"
@@ -31,9 +40,9 @@
       </mat-error>
     </mat-form-field>
   </form>
-</div>
+</mat-dialog-content>
 
-<div mat-dialog-actions align="end">
+<mat-dialog-actions align="end">
   <button
     mat-icon-button
     color="accent"
@@ -50,4 +59,4 @@
   >
     <mat-icon>close</mat-icon>
   </button>
-</div>>
+</mat-dialog-actions>

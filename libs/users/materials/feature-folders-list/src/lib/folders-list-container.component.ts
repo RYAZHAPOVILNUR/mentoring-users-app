@@ -1,21 +1,18 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FoldersListUiComponent } from './components/folders-list-ui/folders-list-ui.component';
 import { LetDirective } from '@ngrx/component';
-import { FoldersFacade } from '@users/materials/data-access';
+import { MaterialsFacade } from '@users/materials/data-access';
 import { MatDialog } from '@angular/material/dialog';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { filter, tap } from 'rxjs';
+import { filter, Observable, switchMap, tap } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { AddFolderDialogUiComponent } from './components/add-folders-dialog-ui/add-folder-dialog-ui.component';
 
-
 @Component({
   standalone: true,
   imports: [
-    CommonModule,
     FoldersListUiComponent,
     LetDirective,
     MatButtonModule,
@@ -26,37 +23,23 @@ import { AddFolderDialogUiComponent } from './components/add-folders-dialog-ui/a
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoldersListContainerComponent {
-  readonly foldersFacade = inject(FoldersFacade);
+  readonly materialsFacade = inject(MaterialsFacade);
   private readonly dialog = inject(MatDialog);
-  private readonly destroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
 
   constructor() {
-    this.foldersFacade.loadFolders();
-    this.deleteFolderHandler();
-    this.openFolderHandler();
+    this.materialsFacade.loadFolders();
+    this.initHandlers();
   }
 
-  onAddButtonClick(): void {
-    const dialogRef = this.dialog
-      .open<AddFolderDialogUiComponent, never, string>(AddFolderDialogUiComponent);
-    dialogRef.afterClosed()
-      .pipe(
-        filter(Boolean),
-        tap((title) => this.foldersFacade.createFolder(title)),
-        takeUntilDestroyed(this.destroyRef)
-      ).subscribe();
+  private initHandlers(): void {
+    this.initDeleteFolderHandler();
+    this.initOpenFolderHandler();
+    this.initCreateFolderHandler();
   }
 
-  deleteFolderHandler(): void {
-    this.foldersFacade.deleteFolder$.pipe(
-      tap((id) => this.foldersFacade.deleteFolder(id)),
-      takeUntilDestroyed()
-    ).subscribe();
-  }
-
-  openFolderHandler(): void {
-    this.foldersFacade.openFolder$.pipe(
+  initOpenFolderHandler(): void {
+    this.materialsFacade.folderOpen$.pipe(
       tap((id) => this.router.navigate(
         ['/material', id]
       )),
@@ -64,5 +47,25 @@ export class FoldersListContainerComponent {
     ).subscribe();
   }
 
+  initDeleteFolderHandler(): void {
+    this.materialsFacade.folderDelete$.pipe(
+      tap((id) => this.materialsFacade.deleteFolder(id)),
+      takeUntilDestroyed()
+    ).subscribe();
+  }
 
+  initCreateFolderHandler(): void {
+    this.materialsFacade.folderCreateDialogOpen$.pipe(
+      switchMap(this.openCreateDialog.bind(this)),
+      tap((title) => this.materialsFacade.createFolder(title)),
+      takeUntilDestroyed()
+    ).subscribe();
+  }
+
+  private openCreateDialog(): Observable<string> {
+    const dialogRef = this.dialog
+      .open<AddFolderDialogUiComponent, never, string>(AddFolderDialogUiComponent);
+
+    return dialogRef.afterClosed().pipe(filter(Boolean));
+  }
 }

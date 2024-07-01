@@ -10,165 +10,62 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": [
-      "es2020",
-      "dom"
-    ],
+    "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@auth/data-access": [
-        "libs/core/auth/data-access/src/index.ts"
-      ],
-      "@auth/feature-login": [
-        "libs/core/auth/feature-login/src/index.ts"
-      ],
-      "@auth/feature-register": [
-        "libs/core/auth/feature-register/src/index.ts"
-      ],
-      "@dadata": [
-        "libs/core/dadata/src/index.ts"
-      ],
-      "@users/core/dadata": [
-        "libs/core/dadata/src/index.ts"
-      ],
-      "@users/core/data-access": [
-        "libs/core/data-access/src/index.ts"
-      ],
-      "@users/core/github-api": [
-        "libs/core/github-api/src/index.ts"
-      ],
-      "@users/core/github-api/data-access": [
-        "libs/core/github-api/data-access/src/index.ts"
-      ],
-      "@users/core/highcharts": [
-        "libs/core/highcharts/src/index.ts"
-      ],
-      "@users/core/http": [
-        "libs/core/http/src/index.ts"
-      ],
-      "@users/core/ui": [
-        "libs/core/ui/src/index.ts"
-      ],
-      "@users/core/ui/layout": [
-        "libs/users/core/ui/layout/src/public-api.ts"
-      ],
-      "@users/core/utils": [
-        "libs/core/utils/src/index.ts"
-      ],
-      "@users/data-access": [
-        "libs/data-access/src/index.ts"
-      ],
-      "@users/feature-users-create": [
-        "libs/users/users/feature-users-create/src/index.ts"
-      ],
-      "@users/feature-users-detail": [
-        "libs/users/users/feature-users-detail/src/index.ts"
-      ],
-      "@users/feature-users-list": [
-        "libs/users/users/feature-users-list/src/index.ts"
-      ],
-      "@users/home": [
-        "libs/users/home/src/index.ts"
-      ],
-      "@users/materials": [
-        "libs/users/materials/src/index.ts"
-      ],
-      "@users/materials/data-access": [
-        "libs/users/materials/data-access/src/index.ts"
-      ],
-      "@users/materials/feature-folders-list": [
-        "libs/users/materials/feature-folders-list/src/index.ts"
-      ],
-      "@users/materials/feature-materials-content": [
-        "libs/users/materials/feature-materials-content/src/index.ts"
-      ],
-      "@users/materials/feature-materials-list": [
-        "libs/users/materials/feature-materials-list/src/index.ts"
-      ],
-      "@users/settings": [
-        "libs/users/settings/src/index.ts"
-      ],
-      "@users/settings-ui": [
-        "libs/settings-ui/src/index.ts"
-      ],
-      "@users/settings/data-access": [
-        "libs/users/settings/data-access/src/index.ts"
-      ],
-      "@users/tasks-view": [
-        "libs/tasks-view/src/index.ts"
-      ],
-      "@users/tasks/tasks-view": [
-        "libs/tasks/tasks-view/src/index.ts"
-      ],
-      "@users/users/articles/article-comments": [
-        "libs/users/articles/article-comments/src/index.ts"
-      ],
-      "@users/users/articles/article-read": [
-        "libs/users/articles/article-read/src/index.ts"
-      ],
-      "@users/users/articles/articles": [
-        "libs/users/articles/articles/src/index.ts"
-      ],
-      "@users/users/articles/articles-create": [
-        "libs/users/articles/articles-create/src/index.ts"
-      ],
-      "@users/users/articles/data-access": [
-        "libs/users/articles/data-access/src/index.ts"
-      ],
-      "@users/users/backlog": [
-        "libs/users/backlog/src/index.ts"
-      ],
-      "@users/users/backlog/data-access": [
-        "libs/users/backlog/data-access/src/index.ts"
-      ],
-      "@users/users/chart": [
-        "libs/users/chart/src/index.ts"
-      ],
-      "@users/users/core/ui/language-switch": [
-        "libs/users/core/ui/language-switch/src/index.ts"
-      ],
-      "@users/users/core/ui/theme-switch": [
-        "libs/users/core/ui/theme-switch/src/index.ts"
-      ],
-      "@users/users/data-access": [
-        "libs/users/users/data-access/src/index.ts"
-      ],
-      "@users/users/profile/data-access": [
-        "libs/users/profile/data-access/src/index.ts"
-      ],
-      "@users/users/profile/feature-profile": [
-        "libs/users/profile/feature-profile/src/index.ts"
-      ],
-      "@users/users/settings/feature-change-theme": [
-        "libs/users/settings/feature-change-theme/src/index.ts"
-      ],
-      "@users/users/settings/settings-ui": [
-        "libs/users/settings/settings-ui/src/index.ts"
-      ],
-      "@users/users/task": [
-        "libs/users/task/src/index.ts"
-      ],
-      "@users/users/task/data-access": [
-        "libs/users/task/data-access/src/index.ts"
-      ],
-      "@users/users/tasks": [
-        "libs/users/tasks/src/index.ts"
-      ],
-      "@users/users/tasks/data-acces": [
-        "libs/users/tasks/data-acces/src/index.ts"
-      ],
-      "@users/users/tasks/tasks-view": [
-        "libs/users/tasks/tasks-view/src/index.ts"
-      ],
-      "@users/users/tasks/tasks-view-container": [
-        "libs/users/tasks/tasks-view-container/src/index.ts"
-      ]
+      "@auth/data-access": ["libs/core/auth/data-access/src/index.ts"],
+      "@auth/feature-login": ["libs/core/auth/feature-login/src/index.ts"],
+      "@auth/feature-register": ["libs/core/auth/feature-register/src/index.ts"],
+      "@dadata": ["libs/core/dadata/src/index.ts"],
+      "@users/config": ["libs/core/config/src/index.ts"],
+      "@users/core/dadata": ["libs/core/dadata/src/index.ts"],
+      "@users/core/data-access": ["libs/core/data-access/src/index.ts"],
+      "@users/core/github-api": ["libs/core/github-api/src/index.ts"],
+      "@users/core/github-api/data-access": ["libs/core/github-api/data-access/src/index.ts"],
+      "@users/core/highcharts": ["libs/core/highcharts/src/index.ts"],
+      "@users/core/http": ["libs/core/http/src/index.ts"],
+      "@users/core/ui": ["libs/core/ui/src/index.ts"],
+      "@users/core/ui/layout": ["libs/users/core/ui/layout/src/public-api.ts"],
+      "@users/core/utils": ["libs/core/utils/src/index.ts"],
+      "@users/data-access": ["libs/data-access/src/index.ts"],
+      "@users/feature-users-create": ["libs/users/users/feature-users-create/src/index.ts"],
+      "@users/feature-users-detail": ["libs/users/users/feature-users-detail/src/index.ts"],
+      "@users/feature-users-list": ["libs/users/users/feature-users-list/src/index.ts"],
+      "@users/home": ["libs/users/home/src/index.ts"],
+      "@users/materials": ["libs/users/materials/src/index.ts"],
+      "@users/materials/data-access": ["libs/users/materials/data-access/src/index.ts"],
+      "@users/materials/feature-folders-list": ["libs/users/materials/feature-folders-list/src/index.ts"],
+      "@users/materials/feature-materials-content": ["libs/users/materials/feature-materials-content/src/index.ts"],
+      "@users/materials/feature-materials-list": ["libs/users/materials/feature-materials-list/src/index.ts"],
+      "@users/settings": ["libs/users/settings/src/index.ts"],
+      "@users/settings-ui": ["libs/settings-ui/src/index.ts"],
+      "@users/settings/data-access": ["libs/users/settings/data-access/src/index.ts"],
+      "@users/tasks-view": ["libs/tasks-view/src/index.ts"],
+      "@users/tasks/tasks-view": ["libs/tasks/tasks-view/src/index.ts"],
+      "@users/users/articles/article-comments": ["libs/users/articles/article-comments/src/index.ts"],
+      "@users/users/articles/article-read": ["libs/users/articles/article-read/src/index.ts"],
+      "@users/users/articles/articles": ["libs/users/articles/articles/src/index.ts"],
+      "@users/users/articles/articles-create": ["libs/users/articles/articles-create/src/index.ts"],
+      "@users/users/articles/data-access": ["libs/users/articles/data-access/src/index.ts"],
+      "@users/users/backlog": ["libs/users/backlog/src/index.ts"],
+      "@users/users/backlog/data-access": ["libs/users/backlog/data-access/src/index.ts"],
+      "@users/users/chart": ["libs/users/chart/src/index.ts"],
+      "@users/users/core/ui/language-switch": ["libs/users/core/ui/language-switch/src/index.ts"],
+      "@users/users/core/ui/theme-switch": ["libs/users/core/ui/theme-switch/src/index.ts"],
+      "@users/users/data-access": ["libs/users/users/data-access/src/index.ts"],
+      "@users/users/profile/data-access": ["libs/users/profile/data-access/src/index.ts"],
+      "@users/users/profile/feature-profile": ["libs/users/profile/feature-profile/src/index.ts"],
+      "@users/users/settings/feature-change-theme": ["libs/users/settings/feature-change-theme/src/index.ts"],
+      "@users/users/settings/settings-ui": ["libs/users/settings/settings-ui/src/index.ts"],
+      "@users/users/task": ["libs/users/task/src/index.ts"],
+      "@users/users/task/data-access": ["libs/users/task/data-access/src/index.ts"],
+      "@users/users/tasks": ["libs/users/tasks/src/index.ts"],
+      "@users/users/tasks/data-acces": ["libs/users/tasks/data-acces/src/index.ts"],
+      "@users/users/tasks/tasks-view": ["libs/users/tasks/tasks-view/src/index.ts"],
+      "@users/users/tasks/tasks-view-container": ["libs/users/tasks/tasks-view-container/src/index.ts"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }

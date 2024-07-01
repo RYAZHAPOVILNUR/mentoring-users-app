@@ -6,21 +6,15 @@ import { MaterialEntity } from '../../interfaces/material-entity.interface';
 export const MATERIALS_FEATURE_KEY = 'materials';
 export const materialsSelector = createEntityAdapter<MaterialEntity>();
 
-const initialState = materialsSelector.getInitialState({
+const initialMaterialState = materialsSelector.getInitialState({
   status: 'init'
 });
 
 export const materialsFeature = createFeature({
   name: MATERIALS_FEATURE_KEY,
   reducer: createReducer(
-    initialState,
-
-    // on(materialsActions.loadMaterials, (state) => ({
-    //     ...state,
-    //     status: 'loading'
-    //   })
-    // ),
-
+    initialMaterialState,
+    
     on(materialsActions.loadMaterials, (state) => ({
         ...state,
         status: state.status === 'init' ? 'init' : 'loading'

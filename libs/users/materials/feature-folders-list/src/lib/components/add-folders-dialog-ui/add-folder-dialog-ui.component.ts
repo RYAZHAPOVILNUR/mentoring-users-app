@@ -1,29 +1,22 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
-import { MatCardModule } from '@angular/material/card';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { MatButtonModule } from '@angular/material/button';
 
 type AddDialogRef = MatDialogRef<AddFolderDialogUiComponent, string>
 
 @Component({
   standalone: true,
   imports: [
-    CommonModule,
-    MatButtonModule,
     MatDialogModule,
+    MatButtonModule,
     MatIconModule,
-    MatDatepickerModule,
     MatInputModule,
-    MatCardModule,
-    ReactiveFormsModule,
     TranslateModule,
-    FormsModule
+    FormsModule  // todo зачем нужен этот модуль? изучить.
   ],
   templateUrl: './add-folder-dialog-ui.component.html',
   styleUrls: ['./add-folder-dialog-ui.component.scss'],
@@ -32,7 +25,7 @@ type AddDialogRef = MatDialogRef<AddFolderDialogUiComponent, string>
 export class AddFolderDialogUiComponent {
   private readonly dialogRef: AddDialogRef = inject(MatDialogRef);
 
-  onDoneButtonClick(title: string) {
+  onDoneButtonClick(title: string): void {
     this.dialogRef.close(title);
   }
 }

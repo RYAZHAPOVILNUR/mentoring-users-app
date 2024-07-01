@@ -1,27 +1,25 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { LetDirective } from '@ngrx/component';
 import { FoldersListUiComponent } from '@users/materials/feature-folders-list';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MaterialCreate, MaterialsFacade } from '@users/materials/data-access';
+import { MaterialCreate, MaterialEntity, MaterialsFacade } from '@users/materials/data-access';
 import { MaterialsListUiComponent } from './components/materials-list-ui/materials-list-ui.component';
-import { filter, tap } from 'rxjs';
+import { filter, Observable, switchMap, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { MatMenuModule } from '@angular/material/menu';
 import { MatDialog } from '@angular/material/dialog';
 import { AddMaterialDialogUiComponent } from './components/add-material-dialog-ui/add-material-dialog-ui.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { MaterialDialogUiComponent } from './components/open-material-dialog-ui/material-dialog-ui.component';
+import { MaterialIconPipe } from './pipes/material-icon.pipe';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   standalone: true,
   imports: [
-    LetDirective,
     FoldersListUiComponent,
-    MatButtonModule,
-    MatIconModule,
     MaterialsListUiComponent,
-    MatMenuModule
+    LetDirective,
+    MatButtonModule
   ],
+  providers: [MaterialIconPipe],
   templateUrl: './materials-list-container.component.html',
   styleUrls: ['./materials-list-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -29,37 +27,74 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class MaterialsListContainerComponent {
   readonly materialsFacade = inject(MaterialsFacade);
   private readonly dialog = inject(MatDialog);
-  private readonly destroyRef = inject(DestroyRef);
-  private readonly router = inject(Router);
-  private readonly route = inject(ActivatedRoute);
-  readonly folderTitle?: string = this.route.snapshot.queryParams['title']; // todo type
+  private readonly materialIconPipe = inject(MaterialIconPipe);
+
 
   constructor() {
-    this.materialsFacade.loadMaterials();
-    this.openMaterialHandler();
+    this.loadData();
+    this.initHandlers();
   }
 
-  private openMaterialHandler(): void {
-    this.materialsFacade.openMaterialHandler$.pipe(
-      tap((id) => console.log(id))
+  private loadData(): void {
+    this.materialsFacade.loadFolders();
+    this.materialsFacade.loadMaterials();
+  }
+
+  private initHandlers(): void {
+    this.initOpenMaterialHandler();
+    this.initCreateMaterialHandler();
+    this.initDeleteMaterialHandler();
+  }
+
+  private initOpenMaterialHandler(): void {
+    this.materialsFacade.materialOpen$.pipe(
+      switchMap((material) => this.openDialog(material)),
+      tap((material) => this.materialsFacade.openMaterial(material)),
+      takeUntilDestroyed()
     ).subscribe();
   }
 
-  onAddButtonClick(): void {
+  private openDialog(material: MaterialEntity): Observable<MaterialEntity> {
+    const dialogRef = this.dialog
+      .open<MaterialDialogUiComponent, MaterialEntity, MaterialEntity>(
+        MaterialDialogUiComponent, {
+          data: material,
+          height: '80vh',
+          width: '100vw',
+          maxWidth: '100vw',
+          maxHeight: '80vh',
+          autoFocus: false
+        }
+      );
+
+    return dialogRef.afterClosed().pipe(filter(Boolean));
+  }
+
+  private initDeleteMaterialHandler(): void {
+    this.materialsFacade.folderDelete$.pipe(
+      tap((id) => this.materialsFacade.deleteMaterial(id)),
+      takeUntilDestroyed()
+    ).subscribe();
+  }
+
+  private initCreateMaterialHandler(): void {
+    this.materialsFacade.materialCreateDialogOpen$.pipe(
+      switchMap(this.openCreateDialog.bind(this)),
+      tap((material) => this.materialsFacade.createMaterial(material)),
+      takeUntilDestroyed()
+    ).subscribe();
+  }
+
+  private openCreateDialog(): Observable<MaterialCreate> {
     const dialogRef = this.dialog
       .open<AddMaterialDialogUiComponent, never, MaterialCreate>(
         AddMaterialDialogUiComponent
       );
 
-    dialogRef.afterClosed().pipe(
-      filter(Boolean),
-      tap((material) => this.materialsFacade.createMaterial(material)),
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe();
-  }
-
-  onBackButtonClick() {
-    this.router.navigateByUrl('/folders');
+    return dialogRef.afterClosed().pipe(filter(Boolean));
   }
 }
+
+
+
 

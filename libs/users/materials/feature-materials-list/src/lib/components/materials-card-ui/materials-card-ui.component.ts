@@ -1,20 +1,20 @@
 import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MaterialEntity, MaterialsFacade } from '@users/materials/data-access';
-import { MaterialIconPipe } from '../../pipes/get-icon.pipe';
+import { MaterialIconPipe } from '../../pipes/material-icon.pipe';
 
 @Component({
   selector: 'users-materials-card-ui',
   standalone: true,
   imports: [
-    CommonModule,
     MatButtonModule,
     MatCardModule,
     MatIconModule,
-    MaterialIconPipe
+    MaterialIconPipe,
+    DatePipe
   ],
   templateUrl: './materials-card-ui.component.html',
   styleUrls: ['./materials-card-ui.component.scss'],
@@ -25,10 +25,10 @@ export class MaterialsCardUiComponent {
   private readonly materialsFacade = inject(MaterialsFacade);
 
   onCardClick() {
-    this.materialsFacade.openMaterial(this.material.id);
+    this.materialsFacade.emitOpenMaterial(this.material);
   }
 
   onDeleteButtonClick() {
-    this.materialsFacade.deleteMaterial(this.material.id);
+    this.materialsFacade.emitDeleteMaterial(this.material.id);
   }
 }

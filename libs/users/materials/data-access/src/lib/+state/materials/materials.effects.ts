@@ -7,14 +7,13 @@ import { ApiService } from '@users/core/http';
 import { MaterialDTO } from '../../interfaces/material-dto.interface';
 import { selectRouteParams } from '@users/core/data-access';
 import { Store } from '@ngrx/store';
-import { selectMaterialsState } from './materials.selectors';
 import { materialsSelector } from './materials.reducer';
 import { materialsAdapter } from '../../adapters/materials-dto-entity.adapter';
+import { selectMaterialsState } from './materials.selectors';
 
 const { selectAll } = materialsSelector.getSelectors();
 
-
-export const loadMaterialsApi$ = createEffect(
+export const loadMaterials$ = createEffect(
   (actions$ = inject(Actions),
    store = inject(Store),
    apiService = inject(ApiService)) =>
@@ -44,11 +43,10 @@ export const loadMaterialsApi$ = createEffect(
 );
 
 export const createMaterial$ = createEffect((
-  actions$ = inject(Actions),
-  apiService = inject(ApiService),
-  store = inject(Store)
-) => {
-  return actions$.pipe(
+    actions$ = inject(Actions),
+    apiService = inject(ApiService),
+    store = inject(Store)
+  ) => actions$.pipe(
     ofType(materialsActions.createMaterial),
     withLatestFrom(store.select(selectRouteParams)),
     filter(([_, params]) => params['id']),
@@ -67,8 +65,8 @@ export const createMaterial$ = createEffect((
         })
       )
     )
-  );
-}, { functional: true });
+  ), { functional: true }
+);
 
 export const deleteMaterial$ = createEffect((
     actions$ = inject(Actions),
@@ -88,33 +86,3 @@ export const deleteMaterial$ = createEffect((
   { functional: true }
 );
 
-
-// export const loadMaterialsApi$ = createEffect(
-//   (actions$ = inject(Actions),
-//    apiService = inject(ApiService)) =>
-//     actions$.pipe(
-//       ofType(materialsActions.loadMaterialsApi),
-//       switchMap(() =>
-//         apiService.get<Material[]>(`/material`).pipe(
-//           map(materials => materialsActions.loadMaterialsSuccess({ materials })),
-//           catchError(error => {
-//             console.error('Error', error);
-//             return of(materialsActions.loadMaterialsFailure({ error }));
-//           })
-//         )
-//       )
-//     ),
-//   { functional: true }
-// );
-
-// export const loadMaterials$ = createEffect(
-//   (actions$ = inject(Actions),
-//    store = inject(Store)) =>
-//     actions$.pipe(
-//       ofType(materialsActions.loadMaterials),
-//       withLatestFrom(store.select(selectMaterialsStatus)),
-//       filter(([_, status]) => status === 'init'),
-//       map(() => materialsActions.loadMaterialsApi())
-//     ),
-//   { functional: true }
-// );

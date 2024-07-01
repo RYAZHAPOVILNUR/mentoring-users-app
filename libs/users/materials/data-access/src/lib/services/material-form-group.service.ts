@@ -24,6 +24,7 @@ export class MaterialFormGroupService {
       ]],
       materialLink: ['', [
         Validators.required,
+        Validators.minLength(10),
         Validators.pattern(/^(?=.*http).*\.(mp3|pdf)$|^(?=.*http).*(youtube|youtu\.be)/)
       ]]
     });

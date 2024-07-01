@@ -15,6 +15,7 @@ export const materialsActions = createActionGroup({
 
     'Create Material': props<{ material: MaterialCreate }>(),
     'Create Material Success': props<{ material: MaterialEntity }>(),
-    'Create Material Failure': props<{ error: Error }>()
+    'Create Material Failure': props<{ error: Error }>(),
+    'otsosal': emptyProps()
   }
 });
