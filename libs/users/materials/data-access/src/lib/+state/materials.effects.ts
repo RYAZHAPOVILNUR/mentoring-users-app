@@ -3,7 +3,10 @@ import { inject } from '@angular/core';
 import { ApiService } from '@users/core/http';
 import {MaterialsActions} from './materials.actions';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
-import { FolderType } from '../models/folder.model';
+import { Folder } from '../models/folder.model';
+import { FolderAdd } from '../models/folder-add.model';
+import _default from 'chart.js/dist/plugins/plugin.title';
+import id = _default.id;
 
 export const loadFolders = createEffect(
   () => {
@@ -12,7 +15,7 @@ export const loadFolders = createEffect(
     return actions$.pipe(
       ofType(MaterialsActions.loadFolders),
       switchMap(() =>
-        apiService.get<FolderType[]>('/folder').pipe(
+        apiService.get<Folder[]>('/folder').pipe(
           map((folders) => MaterialsActions.loadFoldersSuccess({ folders })),
           catchError((error) => {
             console.error('Error', error);
@@ -33,6 +36,25 @@ export const deleteFolder = createEffect(
       switchMap(({id}) => {
         return apiService.delete<void>(`/folder/${id}`).pipe(
           map(() => MaterialsActions.deleteFolderSuccess({ id })),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(MaterialsActions.deleteFolderFailure({error}));
+          })
+        );
+      })
+    );
+  }, {functional: true}
+);
+
+export const addFolder = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    return actions$.pipe(
+      ofType(MaterialsActions.addFolder),
+      switchMap(({title}) => {
+        return apiService.post<Folder, FolderAdd>('/folder', title).pipe(
+          map((folder) => MaterialsActions.addFolderSuccess({ folder })),
           catchError((error) => {
             console.error('Error', error);
             return of(MaterialsActions.deleteFolderFailure({error}));

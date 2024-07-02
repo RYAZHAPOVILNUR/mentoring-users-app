@@ -1,15 +1,15 @@
 import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
 import { MaterialsActions } from './materials.actions';
-import { FolderType } from '../models/folder.model';
-import { MaterialType } from '../models/material.model';
+import { Folder } from '../models/folder.model';
+import { Material } from '../models/material.model';
 import { LoadingStatus } from '@users/core/data-access';
 import { EntityState, createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 
 export const MATERIALS_FEATURE_KEY = 'materials';
-export const materialsAdapter: EntityAdapter<FolderType> = createEntityAdapter<FolderType>();
+export const materialsAdapter: EntityAdapter<Folder> = createEntityAdapter<Folder>();
 
-export interface State extends EntityState<FolderType> {
-  materials: MaterialType[];
+export interface State extends EntityState<Folder> {
+  materials: Material[];
   error: Error | null;
   status: LoadingStatus;
 }

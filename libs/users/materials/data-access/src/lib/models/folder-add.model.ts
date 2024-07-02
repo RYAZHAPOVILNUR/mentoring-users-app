@@ -1,3 +1,3 @@
-export type FolderAddType = {
+export type FolderAdd = {
   title: string;
 }

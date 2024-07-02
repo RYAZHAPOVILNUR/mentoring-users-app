@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FolderType } from '@users/materials/data-access';
+import { Folder } from '@users/materials/data-access';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,10 +14,9 @@ import { MatButtonModule } from '@angular/material/button';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersCardComponent {
-
   @Input({required: true})
-  folder!: FolderType;
-  @Output() folderToDelete = new EventEmitter<FolderType>();
+  folder!: Folder;
+  @Output() folderToDelete = new EventEmitter<Folder>();
 
   public dateFormat(time: string): string {
     const date = new Date(time);
@@ -26,7 +25,7 @@ export class FoldersCardComponent {
     ${date.getFullYear()}`;
   }
 
-  public onDeleteFolder(folder: FolderType) {
+  public onDeleteFolder(folder: Folder) {
     this.folderToDelete.emit(folder);
   }
 }
