@@ -1,23 +1,44 @@
-import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap } from 'rxjs/operators';
-import { Observable, EMPTY, of } from 'rxjs';
-import { MaterialsActions } from './materials.actions';
+import { inject } from '@angular/core';
+import { ApiService } from '@users/core/http';
+import {MaterialsActions} from './materials.actions';
+import { catchError, map, of, switchMap, tap } from 'rxjs';
+import { FolderType } from '../models/folder.model';
 
-@Injectable()
-export class MaterialsEffects {
-  loadMaterialss$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(MaterialsActions.loadMaterialss),
-      concatMap(() =>
-        /** An EMPTY observable only emits completion. Replace with your own observable API request */
-        EMPTY.pipe(
-          map((data) => MaterialsActions.loadMaterialssSuccess({ data })),
-          catchError((error) => of(MaterialsActions.loadMaterialssFailure({ error })))
+export const loadFolders = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    return actions$.pipe(
+      ofType(MaterialsActions.loadFolders),
+      switchMap(() =>
+        apiService.get<FolderType[]>('/folder').pipe(
+          map((folders) => MaterialsActions.loadFoldersSuccess({ folders })),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(MaterialsActions.loadFoldersFailure({ error }));
+          })
         )
       )
     );
-  });
+  }, {functional: true}
+);
 
-  constructor(private actions$: Actions) {}
-}
+export const deleteFolder = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    return actions$.pipe(
+      ofType(MaterialsActions.deleteFolder),
+      switchMap(({id}) => {
+        return apiService.delete<void>(`/folder/${id}`).pipe(
+          map(() => MaterialsActions.deleteFolderSuccess({ id })),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(MaterialsActions.deleteFolderFailure({error}));
+          })
+        );
+      })
+    );
+  }, {functional: true}
+);

@@ -1,1 +1,11 @@
-<p>feature-folders-list works!</p>
+<div class="folders-container">
+  <div class="folders-cards-list">
+    <ng-container *ngFor="let folder of folders">
+      <users-folder-card
+        [folder]="folder"
+        (folderToDelete)="onDeleteFolder(folder)"
+      ></users-folder-card>
+    </ng-container>
+  </div>
+</div>
+
