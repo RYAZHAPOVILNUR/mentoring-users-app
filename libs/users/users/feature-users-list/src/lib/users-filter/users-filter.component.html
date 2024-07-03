@@ -1,0 +1,10 @@
+<form [formGroup]="filterFormGroup" class="filter-form">
+  <mat-form-field appearance="outline">
+    <input
+      (input)="filterUsersByName()"
+      formControlName="name"
+      type="text"
+      matInput
+      placeholder="Введите имя">
+  </mat-form-field>
+</form>
