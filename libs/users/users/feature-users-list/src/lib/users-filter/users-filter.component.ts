@@ -1,11 +1,13 @@
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
 
 @Component({
   selector: 'users-filter',
   standalone: true,
   templateUrl: './users-filter.component.html',
-  imports: [ReactiveFormsModule]
+  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule]
   // styleUrls: ['./users-list-container.component.scss'],
 })
 
