@@ -16,7 +16,7 @@ export * from './lib/types/material-create.type';
 export * from './lib/services/materials.state';
 export * from './lib/services/material-form-group.service';
 
-export * from '../../../../core/data-access/src/lib/enums/ErrorsKey.enum';
+export * from '../../../../core/data-access/src/lib/enums/errors-key.enum';
 
 export * from './lib/adapters/materials-dto-entity.adapter';
 

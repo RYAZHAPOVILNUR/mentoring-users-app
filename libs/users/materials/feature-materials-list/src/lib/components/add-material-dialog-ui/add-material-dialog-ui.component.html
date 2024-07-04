@@ -4,41 +4,18 @@
       {{ 'MATERIALS.CREATE_FILE_TITLE' | translate }}
     </h2>
   </div>
-  <form [formGroup]="materialFormGroup">
-    <!--  todo ControlValueAccessor  -->
-    <!--    <text-field -->
-    <!--      [label]="  {{ 'MATERIALS.CREATE_FILE_SUBTITLE' | translate }}" -->
-    <!--      formControlName="title"    -->
-    <!--    ></text-field>-->
-    <!--    <text-field [label]="" formControlName="materialLink"></text-field>-->
+  <form class="input-group" [formGroup]="materialFormGroup">
 
-    <mat-form-field>
-      <mat-label>
-        {{ 'MATERIALS.CREATE_FILE_SUBTITLE' | translate }}
-      </mat-label>
-      <input
-        matInput
-        type="text"
-        formControlName="title"
-      />
-      <mat-error *ngIf="getErrorMessage('title') as errorMessage">
-        {{ errorMessage }}
-      </mat-error>
-    </mat-form-field>
+    <users-input-field
+      formControlName="title"
+      [label]="'MATERIALS.CREATE_FILE_SUBTITLE' | translate"
+    />
 
-    <mat-form-field>
-      <mat-label>
-        {{ 'MATERIALS.CREATE_FILE_LINK' | translate }}
-      </mat-label>
-      <input
-        matInput
-        type="text"
-        formControlName="materialLink"
-      />
-      <mat-error *ngIf="getErrorMessage('materialLink') as errorMessage">
-        {{ errorMessage }}
-      </mat-error>
-    </mat-form-field>
+    <users-input-field
+      formControlName="materialLink"
+      [label]="'MATERIALS.CREATE_FILE_LINK' | translate"
+    />
+
   </form>
 </mat-dialog-content>
 

@@ -5,7 +5,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   name: 'transformYoutubeLink',
   standalone: true
 })
-export class TransformYoutubeLinkPipe implements PipeTransform { //  todo TransformYoutubeLinkPipe?
+export class TransformYoutubeLinkPipe implements PipeTransform {
   private readonly sanitizer = inject(DomSanitizer);
 
   /**

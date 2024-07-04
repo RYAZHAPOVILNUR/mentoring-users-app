@@ -16,7 +16,7 @@ type AddDialogRef = MatDialogRef<AddFolderDialogUiComponent, string>
     MatIconModule,
     MatInputModule,
     TranslateModule,
-    FormsModule  // todo зачем нужен этот модуль? изучить.
+    FormsModule
   ],
   templateUrl: './add-folder-dialog-ui.component.html',
   styleUrls: ['./add-folder-dialog-ui.component.scss'],

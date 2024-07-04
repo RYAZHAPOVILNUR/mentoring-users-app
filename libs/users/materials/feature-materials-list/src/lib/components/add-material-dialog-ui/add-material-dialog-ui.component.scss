@@ -1,17 +1,13 @@
 .header {
   display: flex;
   flex-direction: column;
+
+  .mat-dialog-title {
+    font-size: 24px;
+  }
 }
 
-mat-form-field {
-  width: 100%;
-}
-
-.mat-card-title {
-  font-size: 24px;
-}
-
-.mat-card-subtitle {
-  margin: 20px 20px 0 10px;
-  font-size: 18px;
+.input-group {
+  display: flex;
+  flex-direction: column;
 }

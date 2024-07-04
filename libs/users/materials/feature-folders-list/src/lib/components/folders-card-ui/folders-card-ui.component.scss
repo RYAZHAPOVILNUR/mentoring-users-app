@@ -17,7 +17,7 @@
     display: flex;
     justify-content: space-between;
 
-    :last-child { // todo почему без &? изучить зачем в scss используется символ &
+    :last-child {
       display: none;
     }
 
@@ -25,7 +25,7 @@
       cursor: pointer;
       opacity: 0.8;
 
-      :last-child { // todo почему без &?
+      :last-child {
         display: block;
         position: absolute;
         right: 5px;
