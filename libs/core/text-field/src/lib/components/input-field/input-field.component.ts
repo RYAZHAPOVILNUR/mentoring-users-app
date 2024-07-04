@@ -2,26 +2,8 @@ import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/
 import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { NgIf } from '@angular/common';
-import { VALIDATION_ERRORS, validationErrorsFactory } from '@users/config';
 import { TranslateService } from '@ngx-translate/core';
-import { ValidationErrors } from '../../abstract/validation-errors.abstract';
-
-
-// @Component({
-//   selector: 'users-sasat',
-//   standalone: true,
-//   imports: [
-//     ReactiveFormsModule
-//   ],
-//   template: `
-//     <input [formControl]="control">
-//     <span>{{ errorMessage }}</span>
-//   `
-// })
-// class MyComponent extends ValidationErrorsAbstract {
-//   // control = new FormControl('sasat');
-//   // sosatChlen = () => 'hyi' as const;
-// }
+import { VALIDATION_ERRORS, ValidationErrors, validationErrorsFactory } from '@users/core/utils';
 
 @Component({
   selector: 'users-input-field',
@@ -57,20 +39,8 @@ export class InputFieldComponent extends ValidationErrors implements ControlValu
   control?: AbstractControl;
   isDisabled = false;
 
-  // private readonly service = inject(Methods);
-
   onChange!: (_: string) => void;
   onTouched!: () => void;
-
-  // obj = {
-  //   required: 'ОШИБКА, ПОШЁЛ НАХУЙ',
-  //   minlength: 'minlength',
-  //   pattern: ''
-  // };
-
-  // message() {
-  //   return this.service.getErrorMessage(this.control!, this.obj);
-  // }
 
   @Input() label = '';
 

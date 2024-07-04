@@ -1,25 +1,21 @@
-<mat-dialog-content>
+<mat-dialog-content class="add-folder-dialog">
   <h2 mat-dialog-title>
     {{ 'MATERIALS.CREATE_FOLDER_TITLE'  | translate }}
   </h2>
-  <mat-form-field>
-    <mat-label>
-      {{ 'MATERIALS.CREATE_FOLDER-SUBTITLE' | translate }}
-    </mat-label>
-    <input
-      matInput
-      required
-      #inputElement
-    />
-  </mat-form-field>
+
+  <users-input-field
+    class="input-field"
+    [label]="'MATERIALS.CREATE_FOLDER-SUBTITLE' | translate"
+    [formControl]="folderNameControl"
+  />
 
   <mat-dialog-actions align="end">
     <button
       mat-icon-button
       color="accent"
       aria-label="Готово"
-      (click)="onDoneButtonClick(inputElement.value)"
-      [disabled]="!inputElement.value"
+      (click)="onDoneButtonClick()"
+      [disabled]="folderNameControl.invalid"
     >
       <mat-icon>done</mat-icon>
     </button>

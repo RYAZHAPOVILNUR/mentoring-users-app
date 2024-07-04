@@ -1,37 +1,39 @@
 .folder-card-wrapper {
   margin: 20px;
   width: 150px;
-  height: 120px;
+  height: 140px;
   display: flex;
   justify-content: space-between;
   user-select: none;
 
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
 
-  .title {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
-  .icons {
-    display: flex;
-    justify-content: space-between;
-
-    :last-child {
-      display: none;
+    .icons :last-child {
+      display: block;
+      position: absolute;
+      right: 5px;
+      top: 5px;
     }
 
-    &:hover {
-      cursor: pointer;
-      opacity: 0.8;
-
-      :last-child {
-        display: block;
-        position: absolute;
-        right: 5px;
-        top: 5px;
-      }
+    &::before {
+      opacity: 1;
     }
   }
+}
 
+.icons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icons :last-child {
+  display: none;
+}
+
+.title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

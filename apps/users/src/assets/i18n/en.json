@@ -77,11 +77,13 @@
     }
   },
   "MATERIALS": {
-    "CREATE_FOLDER_TITLE": "Создание новой папки: (еще не переведено) ",
-    "CREATE_FOLDER-SUBTITLE": "Введите имя папки  (еще не переведено) ",
-
-    "CREATE_FILE_TITLE": "Добавление нового файла:  (еще не переведено) ",
-    "CREATE_FILE_SUBTITLE": "Введите имя нового файла  (еще не переведено) ",
-    "CREATE_FILE_LINK": "Ссылка  (еще не переведено) "
+    "CREATE_FOLDER_TITLE": "Creating a new folder",
+    "CREATE_FOLDER-SUBTITLE": "Enter a folder name",
+    "CREATE_FILE_TITLE": "Adding a new file:  ",
+    "CREATE_FILE_SUBTITLE": "Enter a name for the new file: ",
+    "CREATE_FILE_LINK": "Link ",
+    "VALIDATION_REQUIRED": "Required field",
+    "VALIDATION_MIN_LENGTH": "Not enough characters",
+    "VALIDATION_PATTERN": "The link is incorrect"
   }
 }

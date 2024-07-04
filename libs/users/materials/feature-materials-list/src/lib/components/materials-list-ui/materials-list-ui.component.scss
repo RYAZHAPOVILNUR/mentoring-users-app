@@ -2,8 +2,8 @@
   height: 60px;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Размещает кнопки по краям */
-  padding: 0 16px; /* Добавляет отступы, чтобы кнопка не прилипала к краям */
+  justify-content: space-between;
+  padding: 0 16px;
   position: relative;
 }
 
@@ -11,8 +11,8 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  margin: 0; /* Убирает дефолтные отступы h1 */
-  white-space: nowrap; /* Предотвращает перенос текста */
+  margin: 0;
+  white-space: nowrap;
   font-size: 26px;
 }
 

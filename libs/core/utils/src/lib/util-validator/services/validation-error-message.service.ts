@@ -1,6 +1,6 @@
+import { Injectable } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { inject, Injectable } from '@angular/core';
-import { VALIDATION_ERRORS, ValidationErrorsKey } from '@users/config';
+import { ValidationErrorsKey } from '@users/core/utils';
 
 @Injectable({ providedIn: 'root' })
 export class ErrorMessageService {
@@ -24,22 +24,5 @@ export class ErrorMessageService {
 
     return errors[ValidationErrorsKey.MIN_LENGTH] +
       `, сейчас: ${actualLength} символов, нужно: ${requiredLength}`;
-  }
-}
-
-export abstract class ValidationErrors {
-  abstract control?: AbstractControl;
-  private readonly validationErrors = inject(VALIDATION_ERRORS);
-  private readonly methods = inject(ErrorMessageService);
-  // abstract sosatChlen: () => 'hyi';
-  // validate(control: AbstractControl): void {
-  //   this._control = control;
-  // }
-  // constructor(private readonly myControl: AbstractControl) {}
-
-  get errorMessage(): string {
-    if (!this.control) return '';
-
-    return this.methods.getErrorMessage(this.control, this.validationErrors);
   }
 }

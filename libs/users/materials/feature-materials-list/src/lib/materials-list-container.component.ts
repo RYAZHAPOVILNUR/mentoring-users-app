@@ -27,7 +27,6 @@ import { MatButtonModule } from '@angular/material/button';
 export class MaterialsListContainerComponent {
   readonly materialsFacade = inject(MaterialsFacade);
   private readonly dialog = inject(MatDialog);
-  private readonly materialIconPipe = inject(MaterialIconPipe);
 
 
   constructor() {
