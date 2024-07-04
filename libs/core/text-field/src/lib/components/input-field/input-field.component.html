@@ -1,0 +1,14 @@
+<mat-form-field class="input-element">
+  <mat-label>{{ label }}</mat-label>
+  <input
+    matInput
+    type="text"
+    [(ngModel)]="value"
+    [disabled]="isDisabled"
+    (blur)="onTouched()"
+  />
+
+  <mat-hint class="error-message" *ngIf="errorMessage as error">
+    {{ error }}
+  </mat-hint>
+</mat-form-field>
