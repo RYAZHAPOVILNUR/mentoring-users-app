@@ -62,4 +62,8 @@ export class UsersFacade {
   loadUser() {
     this.store.dispatch(UsersActions.loadUser());
   }
+
+  // addUserSP(userData: CreateUserDTO, id: number, onSuccessAddSP: onSuccessEditionCbType) {
+  //   this.store.dispatch(UsersActions.addUserStoryPoints({userData, id, onSuccessAddSP}))
+  // }
 }

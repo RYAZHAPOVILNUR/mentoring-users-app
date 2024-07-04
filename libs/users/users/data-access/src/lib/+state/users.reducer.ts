@@ -85,6 +85,12 @@ const reducer = createReducer(
     ...state,
     filterUsers: filter,
   })),
+  // on(UsersActions.addUserStoryPointsSuccess, (state, {userData})=>
+  //   usersAdapter.updateOne({
+  //       id: userData.id,
+  //       changes: userData
+  //     }, state
+  //   )),
 );
 
 export function usersReducer(state: UsersState | undefined, action: Action) {
