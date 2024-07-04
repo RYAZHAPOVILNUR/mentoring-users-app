@@ -7,8 +7,6 @@ import { MaterialEntity } from '../../interfaces/material-entity.interface';
 
 const { selectAll, selectEntities } = materialsSelector.getSelectors();
 
-//const folderId: number | undefined = Number(this.activatedRoute.snapshot.params['id']);
-
 
 interface MaterialState extends EntityState<MaterialEntity> {
   status: LoadingStatus;
