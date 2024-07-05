@@ -1,1 +1,23 @@
-<p>materials-card works!</p>
+<mat-card class="material-card">
+  <mat-card-content>
+    <div class="material-card__icons">
+      <div [ngSwitch]="defineFileType(material.material_link)">
+        <ng-container *ngSwitchCase="'pdf'">
+          <mat-icon>insert_drive_file</mat-icon>
+        </ng-container>
+        <ng-container *ngSwitchCase="'audio'">
+          <mat-icon>music_note</mat-icon>
+        </ng-container>
+        <ng-container *ngSwitchCase="'video'">
+          <mat-icon>ondemand_video</mat-icon>
+        </ng-container>
+      </div>
+      <button class="delete-btn" mat-icon-button (click)="onDeleteMaterial(material)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+
+    <div class="material-card__title">{{material.title}}</div>
+    <div>{{ dateFormat(material.created_at)}}</div>
+  </mat-card-content>
+</mat-card>

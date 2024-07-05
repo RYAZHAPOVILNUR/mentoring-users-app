@@ -11,13 +11,18 @@
     align-items: center;
     justify-content: space-between;
   }
+  &__title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 .delete-btn {
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s, opacity 0.3s linear;
-  padding: 0px !important;
+  padding: 0;
   width: 30px;
   height: 30px;
 }

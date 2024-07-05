@@ -1,1 +1,28 @@
-<p>materials-add-dialog works!</p>
+<h1 mat-dialog-title>Добавить {{data}}</h1>
+<form [formGroup]="formGroup">
+  <div class="form__fields">
+  <mat-form-field>
+    <mat-label>Название</mat-label>
+    <input matInput formControlName="title">
+    <mat-error>Введите название</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Ссылка</mat-label>
+    <input matInput formControlName="material_link">
+    <mat-error>Введите ссылку</mat-error>
+  </mat-form-field>
+  </div>
+
+  <div class="form__btns">
+    <button
+      mat-button
+      mat-dialog-close
+    >Отмена</button>
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="formGroup.invalid || !linkValidator(this.formGroup.value.material_link!)"
+      (click)="onAddMaterial()"
+    >Сохранить</button>
+  </div>
+</form>

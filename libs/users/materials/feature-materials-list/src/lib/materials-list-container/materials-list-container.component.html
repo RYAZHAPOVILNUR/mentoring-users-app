@@ -1,1 +1,29 @@
-<p>feature-materials-list works!</p>
+<ng-container
+  *ngrxLet="{
+    materials: materials$,
+    materialsStatus: materialsStatus$,
+    openedFolder: openedFolder$,
+  } as vm"
+>
+  <ng-container [ngSwitch]="vm.materialsStatus">
+    <ng-container *ngSwitchCase="'loading'">
+      <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'error'">
+      <div class="alert alert-danger">
+        <h1>Error!</h1>
+        <h2>{{ vm.materialsStatus }}</h2>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'loaded'">
+      <users-materials-list
+        [vm]="vm"
+        (deleteMaterial)="onDeleteFolder($event)"
+        (backToFolders)="onBackToFolders()"
+      >
+      </users-materials-list>
+    </ng-container>
+  </ng-container>
+</ng-container>

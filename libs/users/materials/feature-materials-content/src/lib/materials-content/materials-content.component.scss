@@ -1,0 +1,55 @@
+:host {
+  display: block;
+  padding: 10px;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.material-title {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.material-close-button {
+  position: absolute;
+  right: 0;
+  height: 30px;
+  width: 30px;
+}
+
+.pdf-viewer {
+  height: 45vh;
+  width: 75vh;
+}
+
+.main-container {
+  display: flex;
+  justify-content: center;
+}
+
+.video-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.video-title {
+  max-width: 600px;
+  margin: 0;
+  padding: 0;
+}
+
+.video-img{
+  max-width: 600px;
+
+  & img {
+    width: 100%;
+  }
+}

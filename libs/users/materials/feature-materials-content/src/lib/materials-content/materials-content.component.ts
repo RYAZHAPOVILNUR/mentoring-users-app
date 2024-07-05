@@ -1,12 +1,37 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { Material, regexFileType } from '@users/materials/data-access';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @Component({
   selector: 'users-materials-content',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatDialogModule, MatIconModule, MatButtonModule, PdfViewerModule],
   templateUrl: './materials-content.component.html',
   styleUrls: ['./materials-content.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MaterialsContentComponent {}
+export class MaterialsContentComponent {
+  public readonly data: Material = inject(MAT_DIALOG_DATA);
+
+  public getVideoId() {
+    const videoId = this.data.material_link.match(regexFileType.video);
+    return videoId ? videoId[1] : null;
+  }
+
+  defineLinkType(link: string) {
+    if(regexFileType.video.test(link)) {
+      return 'video';
+    }
+    if(regexFileType.audio.test(link)) {
+      return 'audio';
+    }
+    if(regexFileType.pdf.test(link)) {
+      return 'pdf';
+    }
+    return undefined;
+  }
+}

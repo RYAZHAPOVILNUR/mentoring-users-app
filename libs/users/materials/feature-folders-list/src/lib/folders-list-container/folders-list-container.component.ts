@@ -7,6 +7,7 @@ import { LetDirective } from '@ngrx/component';
 import { MatDialog } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'users-folders-list-container',
@@ -20,14 +21,16 @@ export class FoldersListContainerComponent implements OnInit {
   private readonly materialsFacade = inject(MaterialsFacade);
 
   public readonly allFolders$ = this.materialsFacade.allFolders$;
-  public readonly foldersStatus$ = this.materialsFacade.foldersStatus$;
+  public readonly materialsStatus$ = this.materialsFacade.materialsStatus$;
 
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
 
+  private readonly router = inject(Router);
+
   public onDeleteFolder(folder: Folder) {
     const dialogRef = this.dialog.open(CoreUiConfirmDialogComponent, {
-      data: {diologText: `Вы уверены, что хотите удалить ${folder.title}`}
+      data: {dialogText: `Вы уверены, что хотите удалить ${folder.title}`}
     });
 
     dialogRef
@@ -36,6 +39,10 @@ export class FoldersListContainerComponent implements OnInit {
       .subscribe((result) => {
         if(result) this.materialsFacade.deleteFolder(folder.id)
       })
+  }
+
+  public openFolder(id: number) {
+    this.router.navigate(['/materials/', id]);
   }
 
   ngOnInit() {

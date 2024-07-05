@@ -1,1 +1,18 @@
-<p>materials-list works!</p>
+<div class="materials-container">
+  <div class="materials-header">
+    <button mat-icon-button (click)="onBackToFolders()"><mat-icon>arrow_back</mat-icon></button>
+    <div>{{vm.openedFolder?.title}}</div>
+  </div>
+  <div class="materials-card-list">
+  <ng-container *ngFor="let material of vm.materials">
+    <users-materials-card
+      [material]="material"
+      (backOnFolders)="onBackToFolders()"
+      (deleteMaterial)="onDeleteMaterial(material)"
+      (dblclick)="viewMaterial(material)"
+    ></users-materials-card>
+  </ng-container>
+  </div>
+</div>
+<users-materials-add-button class="add-materials-btn"></users-materials-add-button>
+

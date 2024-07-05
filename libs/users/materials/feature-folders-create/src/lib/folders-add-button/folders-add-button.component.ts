@@ -22,9 +22,7 @@ export class FoldersAddButtonComponent {
   public dialog = inject(MatDialog);
 
   openAddFolderDialog() {
-    const dialogRef = this.dialog.open(FoldersAddDialogComponent, {
-      width: '400px',
-    });
+    const dialogRef = this.dialog.open(FoldersAddDialogComponent, {});
 
     dialogRef
       .afterClosed()

@@ -1,0 +1,33 @@
+.material-card {
+  width: 150px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  position: relative;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  &__icons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.delete-btn {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s linear;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+}
+
+.material-card:hover .delete-btn {
+  visibility: visible;
+  opacity: 1;
+}

@@ -1,1 +1,14 @@
-<p>materials-add-button works!</p>
+<button
+  mat-fab
+  color="primary"
+  matTooltip="Добавить материал"
+  [matMenuTriggerFor]="menu"
+>
+  <mat-icon>add</mat-icon>
+</button>
+<mat-menu #menu>
+  <button mat-menu-item (click)="onOpenAddMaterialDialog('видео')">Видео</button>
+  <button mat-menu-item (click)="onOpenAddMaterialDialog('PDF')">Файл PDF</button>
+  <button mat-menu-item (click)="onOpenAddMaterialDialog('подкаст')">Подкаст</button>
+</mat-menu>
+

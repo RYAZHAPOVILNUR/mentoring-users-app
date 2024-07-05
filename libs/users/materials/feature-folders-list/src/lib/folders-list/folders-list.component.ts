@@ -14,16 +14,21 @@ import { FoldersAddButtonComponent } from '@users/materials/feature-folders-crea
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersListComponent implements OnInit {
-  private readonly facade = inject(MaterialsFacade);
+  private readonly materialsFacade = inject(MaterialsFacade);
   @Input({required: true})
   folders!: Folder[];
   @Output() folderToDelete = new EventEmitter<Folder>();
+  @Output() folderToOpen = new EventEmitter<number>();
 
   public onDeleteFolder(folder: Folder) {
     this.folderToDelete.emit(folder);
   }
 
+  public onOpenFolder(folder: Folder) {
+    this.folderToOpen.emit(folder.id);
+  }
+
   ngOnInit() {
-    this.facade.initFolders();
+    this.materialsFacade.initFolders();
   }
 }

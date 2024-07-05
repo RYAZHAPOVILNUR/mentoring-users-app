@@ -1,4 +1,4 @@
-import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
+import { createFeature, createReducer, on } from '@ngrx/store';
 import { MaterialsActions } from './materials.actions';
 import { Folder } from '../models/folder.model';
 import { Material } from '../models/material.model';
@@ -22,8 +22,8 @@ export const initialState: State = materialsAdapter.getInitialState({
 
 export const reducer = createReducer(
   initialState,
-  // Folders
 
+  // Folder
   on(MaterialsActions.loadFolders, (state) => ({
     ...state,
     status: 'loading' as const,
@@ -40,7 +40,10 @@ export const reducer = createReducer(
   on(MaterialsActions.addFolderSuccess, (state, {folder}) =>
     materialsAdapter.addOne(folder, {...state, status: 'loaded' as const}),
   ),
-  on(MaterialsActions.addFolderFailure, (state, {error}) => ({ ...state, error, status: 'error' as const,
+  on(MaterialsActions.addFolderFailure, (state, {error}) => ({
+    ...state,
+    error,
+    status: 'error' as const,
   })),
   on(MaterialsActions.deleteFolder, (state) => ({
     ...state,
@@ -53,8 +56,7 @@ export const reducer = createReducer(
     ...state, error, status: 'error' as const,
   })),
 
-  // Materials
-
+  // Material
   on(MaterialsActions.loadMaterials, (state) => ({
     ...state,
     status: 'loading' as const,

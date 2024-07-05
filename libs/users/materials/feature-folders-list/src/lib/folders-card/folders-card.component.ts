@@ -17,6 +17,7 @@ export class FoldersCardComponent {
   @Input({required: true})
   folder!: Folder;
   @Output() folderToDelete = new EventEmitter<Folder>();
+  @Output() folderToOpen = new EventEmitter<number>();
 
   public dateFormat(time: string): string {
     const date = new Date(time);
@@ -27,5 +28,9 @@ export class FoldersCardComponent {
 
   public onDeleteFolder(folder: Folder) {
     this.folderToDelete.emit(folder);
+  }
+
+  public onOpenFolder(folder: Folder) {
+    this.folderToOpen.emit(folder.id);
   }
 }

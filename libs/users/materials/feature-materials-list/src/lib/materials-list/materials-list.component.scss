@@ -1,0 +1,23 @@
+.materials-container {
+  margin: 0 300px;
+}
+
+.materials-card-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.add-materials-btn {
+  position: fixed;
+  bottom: 5em;
+  right: 300px;
+}
+
+.materials-header {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}

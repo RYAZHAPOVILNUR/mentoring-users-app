@@ -3,7 +3,19 @@
   padding: 30px;
 }
 
+.folders-add-title {
+  margin-bottom: 30px;
+  padding: 0;
+}
+
 .form__btns {
   display: flex;
   gap: 30px;
+}
+
+.folders-add-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

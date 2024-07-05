@@ -1,20 +1,23 @@
-<h2 class="folders-add-title" mat-card-title>Добавление новой папки</h2>
-<form class="folders-add-form" [formGroup]="myFormGroup">
-  <mat-form-field>
-    <mat-label>Название папки</mat-label>
-    <input matInput formControlName="name">
-    <mat-error>Введите название</mat-error>
-  </mat-form-field>
-  <div class="form__btns">
-    <button
-      mat-button
-      mat-dialog-close
-    >Отмена</button>
-    <button
-      mat-button
-      color="primary"
-      (click)="onAddFolder()"
-      [disabled]="myFormGroup.invalid"
-    >Сохранить</button>
-  </div>
-</form>
+<div class="folders-add-wrapper">
+  <h1 class="folders-add-title" mat-dialog-title>Добавление новой папки</h1>
+  <form class="folders-add-form" [formGroup]="myFormGroup">
+    <mat-form-field>
+      <mat-label>Название папки</mat-label>
+      <input matInput formControlName="name">
+      <mat-error>Введите название</mat-error>
+    </mat-form-field>
+    <div class="form__btns">
+      <button
+        mat-button
+        mat-dialog-close
+      >Отмена</button>
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="onAddFolder()"
+        [disabled]="myFormGroup.invalid"
+      >Сохранить</button>
+    </div>
+  </form>
+</div>
+

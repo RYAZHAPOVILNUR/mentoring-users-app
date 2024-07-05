@@ -1,0 +1,16 @@
+:host {
+  display: block;
+  padding: 30px;
+}
+
+.form__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.form__btns {
+  display: flex;
+  gap: 10px;
+}

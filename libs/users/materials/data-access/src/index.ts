@@ -2,6 +2,9 @@ export * from './lib/models/folder.model';
 export * from './lib/models/folder-add.model';
 export * from './lib/models/material.model';
 export * from './lib/models/material-add.model';
+export * from './lib/models/material-type-regex';
+export * from './lib/models/material-list-vm.model'
+export * from './lib/models/material-form.model';
 export * as materialsEffects from './lib/+state/materials.effects';
 export * from './lib/+state/materials.actions';
 export * from './lib/+state/materials.reducer';
