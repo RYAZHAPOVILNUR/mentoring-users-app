@@ -12,14 +12,14 @@ type AddDialogRef = MatDialogRef<AddFolderDialogUiComponent, string>
 @Component({
   standalone: true,
   imports: [
-    MatDialogModule,
     MatButtonModule,
     MatIconModule,
     MatInputModule,
     TranslateModule,
     FormsModule,
     InputFieldComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule
   ],
   templateUrl: './add-folder-dialog-ui.component.html',
   styleUrls: ['./add-folder-dialog-ui.component.scss'],

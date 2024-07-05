@@ -20,6 +20,10 @@ export * from './lib/adapters/materials-dto-entity.adapter';
 
 export * from './lib/materials.facade';
 
+export * from './lib/services/material-form-group.service';
+export * from './lib/services/materials.state';
+
+
 export * as FoldersEffects from './lib/+state/folders/folders.effects';
 export * as MaterialsEffects from './lib/+state/materials/materials.effects';
 
