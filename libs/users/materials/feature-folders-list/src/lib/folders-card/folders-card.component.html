@@ -7,6 +7,6 @@
       </button>
     </div>
     <div class="folder-card__title">{{folder.title}}</div>
-    <div>{{dateFormat(folder.created_at)}}</div>
+    <div>{{folder.created_at | date : 'MMMM d, y'}}</div>
   </mat-card-content>
 </mat-card>

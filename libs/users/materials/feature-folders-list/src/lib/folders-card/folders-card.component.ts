@@ -4,11 +4,12 @@ import { Folder } from '@users/materials/data-access';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'users-folder-card',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule],
+  imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule, TranslateModule],
   templateUrl: './folders-card.component.html',
   styleUrls: ['./folders-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,13 +19,6 @@ export class FoldersCardComponent {
   folder!: Folder;
   @Output() folderToDelete = new EventEmitter<Folder>();
   @Output() folderToOpen = new EventEmitter<number>();
-
-  public dateFormat(time: string): string {
-    const date = new Date(time);
-    return `${date.getDate()}
-    ${date.toLocaleString('default', { month: 'short' }).slice(0, -1)}
-    ${date.getFullYear()}`;
-  }
 
   public onDeleteFolder(folder: Folder) {
     this.folderToDelete.emit(folder);
