@@ -35,15 +35,15 @@ export const deleteFolder = createEffect(
     const apiService = inject(ApiService);
     return actions$.pipe(
       ofType(MaterialsActions.deleteFolder),
-      switchMap(({id}) => {
-        return apiService.delete<void>(`/folder/${id}`).pipe(
+      switchMap(({id}) =>
+        apiService.delete<void>(`/folder/${id}`).pipe(
           map(() => MaterialsActions.deleteFolderSuccess({ id })),
           catchError((error) => {
             console.error('Error', error);
             return of(MaterialsActions.deleteFolderFailure({error}));
           })
-        );
-      })
+        )
+      )
     );
   }, {functional: true}
 );
@@ -54,20 +54,18 @@ export const addFolder = createEffect(
     const apiService = inject(ApiService);
     return actions$.pipe(
       ofType(MaterialsActions.addFolder),
-      switchMap(({title}) => {
-        return apiService.post<Folder, FolderAdd>('/folder', title).pipe(
+      switchMap(({title}) =>
+        apiService.post<Folder, FolderAdd>('/folder', title).pipe(
           map((folder) => MaterialsActions.addFolderSuccess({ folder })),
           catchError((error) => {
             console.error('Error', error);
             return of(MaterialsActions.deleteFolderFailure({error}));
           })
-        );
-      })
+        )
+      )
     );
   }, {functional: true}
 );
-
-
 
 export const loadMaterials = createEffect(
   () => {
@@ -94,15 +92,15 @@ export const deleteMaterial = createEffect(
     const apiService = inject(ApiService);
     return actions$.pipe(
       ofType(MaterialsActions.deleteMaterial),
-      switchMap(({id}) => {
-        return apiService.delete<void>(`/material/${id}`).pipe(
+      switchMap(({id}) =>
+        apiService.delete<void>(`/material/${id}`).pipe(
           map(() => MaterialsActions.deleteMaterialSuccess({ id })),
           catchError((error) => {
             console.error('Error', error);
             return of(MaterialsActions.deleteMaterialFailure({error}));
           })
-        );
-      })
+        )
+      )
     );
   }, {functional: true}
 );
@@ -119,15 +117,15 @@ export const addMaterial = createEffect(
         ...material,
         folder_id: Number(params['id'])
       })),
-      switchMap((material) => {
-        return apiService.post<Material, MaterialAdd>(`/material`, material).pipe(
+      switchMap((material) =>
+        apiService.post<Material, MaterialAdd>(`/material`, material).pipe(
           map((material) => MaterialsActions.addMaterialSuccess({ material })),
           catchError((error) => {
             console.error('Error', error);
             return of(MaterialsActions.addMaterialFailure({error}));
           })
-        );
-      })
+        )
+      )
     );
   }, {functional: true}
 );

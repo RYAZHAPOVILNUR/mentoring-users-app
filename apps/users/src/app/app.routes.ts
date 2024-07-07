@@ -4,7 +4,6 @@ import { authGuard, adminGuard } from '@auth/data-access';
 import { AuthorizedUserLayoutComponent } from './authorized-user-layout/authorized-user-layout.component';
 import { UnauthorizedUserLayoutComponent } from './unauthorized-user-layout-component/unauthorized-user-layout-component.component';
 import { canDeactivateFormComponent } from '@users/core/utils';
-import { FoldersListComponent } from '@users/materials/feature-folders-list';
 
 const layoutAgnosticComponents = [
   {

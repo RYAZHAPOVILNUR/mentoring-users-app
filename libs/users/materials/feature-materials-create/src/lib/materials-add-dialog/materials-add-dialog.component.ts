@@ -25,7 +25,7 @@ export class MaterialsAddDialogComponent {
   private readonly dialogRef = inject(MatDialogRef);
   public readonly data: string = inject(MAT_DIALOG_DATA);
 
-  public readonly formGroup: FormGroup<MaterialFormType<MaterialAdd>> = this.fb.group({
+  public readonly formGroup: FormGroup<MaterialFormType<Omit<MaterialAdd, 'folder_id'>>> = this.fb.group({
     title: ['', Validators.required],
     material_link: ['', Validators.required],
   });

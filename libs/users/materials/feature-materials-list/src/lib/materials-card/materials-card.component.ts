@@ -35,11 +35,4 @@ export class MaterialsCardComponent {
         return true;
     }
   }
-
-  public dateFormat(time: string): string {
-    const date = new Date(time);
-    return `${date.getDate()}
-    ${date.toLocaleString('default', { month: 'short' }).slice(0, -1)}
-    ${date.getFullYear()}`;
-  }
 }

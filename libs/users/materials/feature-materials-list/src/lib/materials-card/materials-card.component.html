@@ -18,6 +18,6 @@
     </div>
 
     <div class="material-card__title">{{material.title}}</div>
-    <div>{{ dateFormat(material.created_at)}}</div>
+    <div>{{ material.created_at | date : 'MMMM d, y'}}</div>
   </mat-card-content>
 </mat-card>

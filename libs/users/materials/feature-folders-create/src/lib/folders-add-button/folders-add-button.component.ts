@@ -29,8 +29,7 @@ export class FoldersAddButtonComponent {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(result => {
         if(result) {
-          const data: FolderAdd = { title: result.name };
-          this.materialsFacade.addFolder(data);
+          this.materialsFacade.addFolder({title: result.name});
         }
       })
   }
