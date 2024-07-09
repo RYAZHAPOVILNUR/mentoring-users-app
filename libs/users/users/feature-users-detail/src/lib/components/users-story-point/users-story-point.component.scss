@@ -1,0 +1,19 @@
+.input-element {
+  width: 100%;
+}
+
+.button {
+  position: absolute;
+
+  &.addButton {
+    right: 5%;
+  }
+
+  &.closeButton {
+    right: 5%;
+  }
+
+  &.doneButton {
+    right: 15%;
+  }
+}

@@ -17,7 +17,6 @@ import { MatCardModule } from '@angular/material/card';
 import {
   FormBuilder,
   FormControl,
-  FormGroup,
   FormsModule,
   ReactiveFormsModule,
   Validators
@@ -29,20 +28,15 @@ import { DetailUsersCardVm } from './detail-users-card-vm';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { CreateUserDTO, UsersDTO} from '@users/core/data-access';
+import { CreateUserDTO, UsersDTO } from '@users/core/data-access';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { DadataApiService } from '@dadata';
-import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, map, switchMap, tap} from 'rxjs';
+import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs';
 import { PushPipe } from '@ngrx/component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { UsersStoryPointComponent } from '../users-story-point/users-story-point.component';
 
 type UserCardForm = Pick<UsersDTO, 'city' | 'name' | 'email' | 'username' | 'totalStoryPoints'>
-
-export type FormType<T> = {
-  [P in keyof T]: T[P] extends 'object'
-      ? FormGroup<FormType<T[P]>>
-      : FormControl<T[P]>;
-};
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -62,6 +56,7 @@ export type FormType<T> = {
     MatSnackBarModule,
     MatAutocompleteModule,
     PushPipe,
+    UsersStoryPointComponent
   ],
   templateUrl: './detail-users-card.component.html',
   styleUrls: ['./detail-users-card.component.scss'],
@@ -77,18 +72,14 @@ export class DetailUsersCardComponent implements OnInit {
   public get vm() {
     return this._vm;
   }
+
   @Input({ required: true })
   set vm(vm: DetailUsersCardVm) {
     this._vm = vm;
 
     if (vm.user) {
-      this.formGroup.patchValue({
-        name: vm.user.name,
-        email: vm.user.email,
-        username: vm.user.username,
-        city: vm.user.city,
-      });
-      this.storyPointsControl.patchValue(this.vm.user?.totalStoryPoints as number );
+      const { name, email, username, city } = vm.user;
+      this.formGroup.patchValue({ name, email, username, city });
     }
 
     if (vm.editMode) {
@@ -98,18 +89,12 @@ export class DetailUsersCardComponent implements OnInit {
     }
   }
 
-  private readonly fb = inject(FormBuilder)
-  public storyPointBtn = false;
-  public storyPointsControl = this.fb.control(
-      { value: this.vm.user?.totalStoryPoints, disabled: true },
-      [Validators.pattern(/^[0-9]+$/)]
-  );
-  public formGroup: FormGroup<FormType<UserCardForm>> = this.fb.nonNullable.group({
+  private readonly fb = inject(FormBuilder);
+  public formGroup = this.fb.nonNullable.group({
     name: [{ value: '', disabled: !this.vm.editMode }, [Validators.required]],
     email: [{ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]],
     username: [{ value: '', disabled: !this.vm.editMode }],
-    city: [{ value: '', disabled: !this.vm.editMode }],
-    totalStoryPoints: [this.storyPointsControl.value as number]
+    city: [{ value: '', disabled: !this.vm.editMode }]
   });
 
   @Output() editUser = new EventEmitter<{
@@ -121,7 +106,7 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
   @Output() editStoryPoints = new EventEmitter<{
-    user:  {totalStoryPoints: number} ;
+    totalStoryPoints: number,
     onSuccessCb: onSuccessEditionCbType;
   }>();
 
@@ -160,23 +145,11 @@ export class DetailUsersCardComponent implements OnInit {
         educationStatus: 'trainee',
       },
       onSuccessCb: this.onEditSuccess
-    })
-  }
-  onSubmitStoryPoints() {
-    this.storyPointBtn = false;
-    this.storyPointsControl.disable()
-    this.editStoryPoints.emit({
-      user: {
-        totalStoryPoints: this.storyPointsControl.value as number
-      },
-      onSuccessCb: this.onEditSuccess
     });
   }
 
-  onCloseStoryPoints() {
-    this.storyPointsControl.disable();
-    this.storyPointBtn = false;
-    this.storyPointsControl.patchValue(this.vm.user?.totalStoryPoints as number );
+  emitStoryPoint(storyPoint: number): void {
+    this.editStoryPoints.emit({ totalStoryPoints: storyPoint, onSuccessCb: this.onEditSuccess });
   }
 
   onCloseUser() {
@@ -218,5 +191,4 @@ export class DetailUsersCardComponent implements OnInit {
       )
       .subscribe();
   }
-  protected readonly String = String;
 }

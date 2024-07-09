@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
-import { UsersErrors, UsersFacade, onSuccessEditionCbType } from '@users/users/data-access';
-import { Observable, map, tap } from 'rxjs';
-import { selectQueryParam, CreateUserDTO, UsersEntity, UsersDTO} from '@users/core/data-access';
-import { Store, select } from '@ngrx/store';
+import { DetailUsersCardComponent } from './components/users-detail-card/detail-users-card.component';
+import { onSuccessEditionCbType, UsersErrors, UsersFacade } from '@users/users/data-access';
+import { map, Observable, tap } from 'rxjs';
+import { CreateUserDTO, selectQueryParam, UsersEntity } from '@users/core/data-access';
+import { select, Store } from '@ngrx/store';
 import { LetDirective } from '@ngrx/component';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
@@ -50,9 +50,10 @@ export class UsersDetailComponent {
       queryParams: { edit: false },
     });
   }
-  public onEditStoryPoints(totalStoryPoints: number , onSuccessCb: onSuccessEditionCbType ){
-    this.usersFacade.editStoryPoints(this.user.id, totalStoryPoints, onSuccessCb)
+  public onEditStoryPoints(totalStoryPoints: number, onSuccessCb: onSuccessEditionCbType): void {
+    this.usersFacade.editStoryPoints(this.user.id, totalStoryPoints, onSuccessCb);
   };
+
   onCloseUser() {
     this.router.navigate(['/admin/users']);
   }

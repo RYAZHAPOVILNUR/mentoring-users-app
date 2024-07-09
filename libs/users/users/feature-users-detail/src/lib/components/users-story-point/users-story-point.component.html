@@ -1,0 +1,43 @@
+<mat-form-field class="input-element">
+  <mat-label>{{ 'USERS.DETAIL.STORY_POINT.QUANTITY' | translate }}</mat-label>
+  <input
+    matInput
+    type="text"
+    [formControl]="storyPointsControl"
+  />
+  <mat-error *ngIf="storyPointsControl.hasError('pattern')">
+    {{ 'в поле можно вводить только цифры' }}
+  </mat-error>
+</mat-form-field>
+
+<ng-container *ngIf="storyPointsControl.disabled">
+  <button
+    class="button addButton"
+    matSuffix
+    mat-icon-button
+    (click)="onAddButtonClick()"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+</ng-container>
+
+<ng-container *ngIf="storyPointsControl.enabled">
+  <button
+    class="button doneButton"
+    matSuffix
+    mat-icon-button
+    (click)="onDoneButtonClick()"
+    [disabled]="storyPointsControl.invalid"
+  >
+    <mat-icon>done</mat-icon>
+  </button>
+
+  <button
+    class="button closeButton"
+    matSuffix
+    mat-icon-button
+    (click)="onCloseButtonClick()"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</ng-container>
