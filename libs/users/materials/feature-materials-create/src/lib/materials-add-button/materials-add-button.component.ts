@@ -8,6 +8,7 @@ import { MaterialsFacade } from '@users/materials/data-access';
 import { MatDialog } from '@angular/material/dialog';
 import { MaterialsAddDialogComponent } from '../materials-add-dialog/materials-add-dialog.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MaterialFileType } from '@users/utils';
 
 @Component({
   selector: 'users-materials-add-button',
@@ -21,15 +22,15 @@ export class MaterialsAddButtonComponent {
   private readonly materialsFacade = inject(MaterialsFacade);
   private readonly destroyRef = inject(DestroyRef);
   private readonly dialog = inject(MatDialog);
+  public readonly MaterialFileType = MaterialFileType;
 
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
 
-  onOpenAddMaterialDialog(materialType: string) {
+  onOpenAddMaterialDialog(materialType: MaterialFileType) {
     const dialogRef = this.dialog.open<MaterialsAddDialogComponent>(MaterialsAddDialogComponent, {
       restoreFocus: false,
       data: materialType,
     });
-
     dialogRef
       .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))

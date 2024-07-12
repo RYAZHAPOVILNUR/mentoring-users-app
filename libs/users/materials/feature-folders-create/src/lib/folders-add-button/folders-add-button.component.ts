@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
-import { FolderAdd, MaterialsFacade } from '@users/materials/data-access';
+import { MaterialsFacade } from '@users/materials/data-access';
 import { FoldersAddDialogComponent } from '../folders-add-dialog/folders-add-dialog.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 

@@ -65,7 +65,8 @@
       "@users/users/tasks": ["libs/users/tasks/src/index.ts"],
       "@users/users/tasks/data-acces": ["libs/users/tasks/data-acces/src/index.ts"],
       "@users/users/tasks/tasks-view": ["libs/users/tasks/tasks-view/src/index.ts"],
-      "@users/users/tasks/tasks-view-container": ["libs/users/tasks/tasks-view-container/src/index.ts"]
+      "@users/users/tasks/tasks-view-container": ["libs/users/tasks/tasks-view-container/src/index.ts"],
+      "@users/utils": ["libs/users/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

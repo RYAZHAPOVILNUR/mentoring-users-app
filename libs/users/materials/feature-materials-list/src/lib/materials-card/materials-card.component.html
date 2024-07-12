@@ -1,14 +1,14 @@
 <mat-card class="material-card">
   <mat-card-content>
     <div class="material-card__icons">
-      <div [ngSwitch]="defineFileType(material.material_link)">
-        <ng-container *ngSwitchCase="'pdf'">
+      <div [ngSwitch]="defineLinkType(material.material_link)">
+        <ng-container *ngSwitchCase="MaterialFileType.Pdf">
           <mat-icon>insert_drive_file</mat-icon>
         </ng-container>
-        <ng-container *ngSwitchCase="'audio'">
+        <ng-container *ngSwitchCase="MaterialFileType.Audio">
           <mat-icon>music_note</mat-icon>
         </ng-container>
-        <ng-container *ngSwitchCase="'video'">
+        <ng-container *ngSwitchCase="MaterialFileType.Video">
           <mat-icon>ondemand_video</mat-icon>
         </ng-container>
       </div>

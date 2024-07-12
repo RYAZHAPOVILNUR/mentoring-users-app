@@ -11,8 +11,8 @@
     </button>
   </div>
 
-  <ng-container [ngSwitch]="defineLinkType(data.material_link)">
-    <ng-container *ngSwitchCase="'audio'">
+  <ng-container [ngSwitch]="defineLinkType">
+    <ng-container *ngSwitchCase="MaterialFileType.Audio">
       <div class="main-container">
         <audio controls>
           <source [src]="data.material_link" type="audio/mp3">
@@ -20,7 +20,7 @@
       </div>
     </ng-container>
 
-    <ng-container *ngSwitchCase="'pdf'">
+    <ng-container *ngSwitchCase="MaterialFileType.Pdf">
       <div class="main-container">
         <pdf-viewer
           [src]="data.material_link"
@@ -31,7 +31,7 @@
       </div>
     </ng-container>
 
-    <ng-container *ngSwitchCase="'video'">
+    <ng-container *ngSwitchCase="MaterialFileType.Video">
       <div class="main-container">
         <div class="video-wrapper">
           <div class="video-title" mat-dialog-title>Ссылка на видео: {{data.material_link}}</div>
@@ -43,5 +43,3 @@
     </ng-container>
   </ng-container>
 </div>
-
-

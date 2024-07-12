@@ -17,15 +17,15 @@ export class FoldersListComponent implements OnInit {
   private readonly materialsFacade = inject(MaterialsFacade);
   @Input({required: true})
   folders!: Folder[];
-  @Output() folderToDelete = new EventEmitter<Folder>();
-  @Output() folderToOpen = new EventEmitter<number>();
+  @Output() deleteFolder = new EventEmitter<Folder>();
+  @Output() openFolder = new EventEmitter<number>();
 
   public onDeleteFolder(folder: Folder) {
-    this.folderToDelete.emit(folder);
+    this.deleteFolder.emit(folder);
   }
 
   public onOpenFolder(folder: Folder) {
-    this.folderToOpen.emit(folder.id);
+    this.openFolder.emit(folder.id);
   }
 
   ngOnInit() {

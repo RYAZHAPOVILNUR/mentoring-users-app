@@ -5,12 +5,11 @@ import {
   EventEmitter,
   inject,
   Input,
-  OnInit,
   Output
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialsCardComponent } from '../materials-card/materials-card.component';
-import { Material, MaterialListVM, MaterialsFacade } from '@users/materials/data-access';
+import { Material, MaterialListVM } from '@users/materials/data-access';
 import { MaterialsAddButtonComponent } from '@users/materials/feature-materials-create';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -26,8 +25,7 @@ import { MaterialsContentComponent } from '@users/materials/feature-materials-co
   styleUrls: ['./materials-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MaterialsListComponent implements OnInit{
-  private readonly materialsFacade = inject(MaterialsFacade);
+export class MaterialsListComponent {
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
 
@@ -53,9 +51,5 @@ export class MaterialsListComponent implements OnInit{
 
   public onBackToFolders() {
     this.backToFolders.emit();
-  }
-
-  ngOnInit() {
-    this.materialsFacade.loadMaterials();
   }
 }

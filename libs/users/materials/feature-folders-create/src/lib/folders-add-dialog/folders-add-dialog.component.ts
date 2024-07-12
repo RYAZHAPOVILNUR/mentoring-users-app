@@ -29,7 +29,7 @@ export class FoldersAddDialogComponent {
   private readonly dialogRef = inject(MatDialogRef);
 
   public readonly myFormGroup = this.fb.group({
-    name: ['', [Validators.required,]],
+    name: ['', Validators.required],
   });
 
   public onAddFolder() {

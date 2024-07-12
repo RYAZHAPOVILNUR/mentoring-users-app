@@ -21,7 +21,7 @@ export class FoldersListContainerComponent implements OnInit {
   private readonly materialsFacade = inject(MaterialsFacade);
 
   public readonly allFolders$ = this.materialsFacade.allFolders$;
-  public readonly materialsStatus$ = this.materialsFacade.materialsStatus$;
+  public readonly foldersStatus$ = this.materialsFacade.foldersStatus$;
 
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);

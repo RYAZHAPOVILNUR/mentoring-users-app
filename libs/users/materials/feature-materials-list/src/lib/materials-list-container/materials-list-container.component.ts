@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialsListComponent } from '../materials-list/materials-list.component';
 import { Folder, MaterialsFacade } from '@users/materials/data-access';
@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./materials-list-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MaterialsListContainerComponent {
+export class MaterialsListContainerComponent implements OnInit{
   private readonly materialsFacade = inject(MaterialsFacade);
   public readonly materialsStatus$ = this.materialsFacade.materialsStatus$;
   public readonly materials$ = this.materialsFacade.materials$;
@@ -42,5 +42,9 @@ export class MaterialsListContainerComponent {
 
   public onBackToFolders() {
     this.router.navigate(['/materials']);
+  }
+
+  ngOnInit() {
+    this.materialsFacade.loadMaterials();
   }
 }

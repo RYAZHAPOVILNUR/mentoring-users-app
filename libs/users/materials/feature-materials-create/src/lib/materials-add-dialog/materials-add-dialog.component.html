@@ -1,4 +1,14 @@
-<h1 mat-dialog-title>Добавить {{data}}</h1>
+<ng-container [ngSwitch]="data">
+  <ng-container *ngSwitchCase="MaterialFileType.Video">
+    <h1 mat-dialog-title>Добавить видео</h1>
+  </ng-container>
+  <ng-container *ngSwitchCase="MaterialFileType.Audio">
+    <h1 mat-dialog-title>Добавить подкаст</h1>
+  </ng-container>
+  <ng-container *ngSwitchCase="MaterialFileType.Pdf">
+    <h1 mat-dialog-title>Добавить PDF</h1>
+  </ng-container>
+</ng-container>
 <form [formGroup]="formGroup">
   <div class="form__fields">
   <mat-form-field>
@@ -21,7 +31,7 @@
     <button
       mat-flat-button
       color="primary"
-      [disabled]="formGroup.invalid || !linkValidator(this.formGroup.value.material_link!)"
+      [disabled]="formGroup.invalid"
       (click)="onAddMaterial()"
     >Сохранить</button>
   </div>
