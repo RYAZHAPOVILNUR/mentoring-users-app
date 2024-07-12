@@ -12,7 +12,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { onSuccessEditionCbType } from '@users/users/data-access';
+import { onSuccessEditionCbType, onSuccessStoryPointsType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -74,6 +74,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
+      this.totalStoryPoints.setValue(vm.user.totalStoryPoints ?? 0);
     }
 
     if (vm.editMode) {
@@ -82,6 +83,8 @@ export class DetailUsersCardComponent implements OnInit {
       this.formGroup.disable();
     }
   }
+
+  public totalStoryPoints = new FormControl({ value: 0, disabled: true });
 
   public formGroup = new FormBuilder().group({
     name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
@@ -98,6 +101,11 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
+  @Output() addStoryPoints = new EventEmitter<{
+    user: CreateUserDTO;
+    onSuccessAddStoryPoints: onSuccessStoryPointsType;
+  }>();
+  @ViewChild('snackbarStoryPoints') snackbarTemplateRefStoryPoints!: TemplateRef<any>;
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
@@ -117,6 +125,13 @@ export class DetailUsersCardComponent implements OnInit {
 
   private onEditSuccess: onSuccessEditionCbType = () =>
     this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+
+  private onAddStoryPointsSuccess: onSuccessEditionCbType = () =>
+    this.snackBar.openFromTemplate(this.snackbarTemplateRefStoryPoints, {
       duration: 2500,
       horizontalPosition: 'center',
       verticalPosition: 'top',
@@ -150,6 +165,22 @@ export class DetailUsersCardComponent implements OnInit {
 
   onDeleteUser() {
     this.deleteUser.emit();
+  }
+
+  onAddStoryPoints() {
+    this.totalStoryPoints.disable();
+    this.addStoryPoints.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        username: this.formGroup.value.username || '',
+        city: this.formGroup.value.city || '',
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        purchaseDate: new Date().toString() || '',
+        educationStatus: 'trainee',
+        totalStoryPoints: this.totalStoryPoints.value ?? 0,
+      },
+      onSuccessAddStoryPoints: this.onAddStoryPointsSuccess
+    });
   }
 
   public onOptionClicked(selectedValue: string) {

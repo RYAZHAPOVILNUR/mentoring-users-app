@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
-import { UsersErrors, UsersFacade, onSuccessEditionCbType } from '@users/users/data-access';
+import { UsersErrors, UsersFacade, onSuccessEditionCbType, onSuccessStoryPointsType } from '@users/users/data-access';
 import { Observable, map, tap } from 'rxjs';
 import { selectQueryParam, CreateUserDTO, UsersEntity } from '@users/core/data-access';
 import { Store, select } from '@ngrx/store';
@@ -49,6 +49,10 @@ export class UsersDetailComponent {
     this.router.navigate(['/admin/users', this.user.id], {
       queryParams: { edit: false },
     });
+  }
+
+  onAddStoryPoints(userData: CreateUserDTO, onSuccessAddStoryPoints: onSuccessStoryPointsType) {
+    this.usersFacade.addStoryPoints(userData, this.user.id, onSuccessAddStoryPoints);
   }
 
   onCloseUser() {
