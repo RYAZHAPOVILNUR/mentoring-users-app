@@ -28,10 +28,13 @@
 .edit-user-form {
   display: flex;
   flex-direction: column;
+  margin-bottom: 30px;
 }
 
-.edit-user-content {
-  margin-bottom: 20px;
+input[matinput]::-webkit-outer-spin-button,
+input[matinput]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .edit-user-field {
@@ -41,6 +44,8 @@
 .edit-user-btns-container {
   display: flex;
   justify-content: space-between;
+  padding: 0 8px;
+  min-height: auto;
 }
 
 div.alert-success {
@@ -55,4 +60,8 @@ div.alert-success {
   display: flex;
   justify-content: center;
   color: white;
+}
+
+mat-icon {
+  transform: scale(1.5);
 }

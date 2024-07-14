@@ -74,6 +74,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
+      this.totalStoryPoints.setValue(vm.user.totalStoryPoints);
     }
 
     if (vm.editMode) {
@@ -90,15 +91,44 @@ export class DetailUsersCardComponent implements OnInit {
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
 
+  public totalStoryPoints = new FormControl({ value: 0, disabled: true });
+
+  onStoryPointsSubmit() {
+    if (this.totalStoryPoints.disabled) {
+      this.totalStoryPoints.enable();
+    } else {
+      this.editStoryPoints.emit({
+        user: {
+          name: this.formGroup.value.name || '',
+          username: this.formGroup.value.username || '',
+          city: this.formGroup.value.city || '',
+          email: this.formGroup.value.email?.trim().toLowerCase() || '',
+          purchaseDate: new Date().toString() || '',
+          educationStatus: 'trainee',
+          totalStoryPoints: this.totalStoryPoints.value || 0
+        },
+        onSuccessCb: this.onEditStoryPointsSuccess,
+      });
+      this.totalStoryPoints.disable();
+    }
+  }
+
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
     onSuccessCb: onSuccessEditionCbType;
   }>();
+
+  @Output() editStoryPoints = new EventEmitter<{
+    user: CreateUserDTO;
+    onSuccessCb: onSuccessEditionCbType;
+  }>();
+
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('snackbarSP') snackbarSPTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -117,6 +147,13 @@ export class DetailUsersCardComponent implements OnInit {
 
   private onEditSuccess: onSuccessEditionCbType = () =>
     this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+
+  private onEditStoryPointsSuccess: onSuccessEditionCbType = () =>
+    this.snackBar.openFromTemplate(this.snackbarSPTemplateRef, {
       duration: 2500,
       horizontalPosition: 'center',
       verticalPosition: 'top',

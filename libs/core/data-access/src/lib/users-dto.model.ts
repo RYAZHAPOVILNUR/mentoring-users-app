@@ -14,7 +14,7 @@ export type UsersDTO = DeepReadonly<{
   purchaseDate: string;
   educationStatus: string;
   educationTime?: number;
-  totalStoryPoints?: number;
+  totalStoryPoints: number;
   photo?: UsersPhoto | null;
 }>;
 
