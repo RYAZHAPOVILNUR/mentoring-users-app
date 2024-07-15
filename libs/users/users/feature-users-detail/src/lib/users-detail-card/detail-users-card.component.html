@@ -90,6 +90,55 @@
               </mat-autocomplete>
             </mat-form-field>
           </div>
+
+          <mat-form-field
+            class="edit-user-field"
+            [matTooltip]="vm.user!.totalStoryPoints?.toString() ?? ''"
+            [matTooltipDisabled]="formGroup.enabled"
+          >
+            <mat-label>Количество сторипойнтов:</mat-label>
+
+            <input
+              matInput
+              placeholder="Количество сторипойнтов"
+              [formControl]="totalStoryPoints"
+              class="edit-user-input"
+              />
+
+            <button
+              *ngIf="totalStoryPoints.disabled"
+              (click)="totalStoryPoints.enable()"
+              mat-icon-button
+              color="warn" type="button"
+              aria-label="Close edit mode"
+              matSuffix>
+              <mat-icon>add</mat-icon>
+            </button>
+
+            <button
+              *ngIf="!totalStoryPoints.disabled"
+              mat-icon-button
+              color="primary"
+              type="submit"
+              aria-label="submit new user data"
+              matSuffix
+              (click)="onSubmitStoryPoints()"
+            >
+              <mat-icon>done</mat-icon>
+            </button>
+
+            <button
+              *ngIf="!totalStoryPoints.disabled"
+              (click)="onCloseEditModeStoryPoints()"
+              mat-icon-button
+              color="warn"
+              type="button"
+              aria-label="Close edit mode"
+              matSuffix>
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
               mat-icon-button
@@ -122,5 +171,11 @@
 <ng-template #snackbar>
   <div class="edit-user-snackbar">
     <span>Пользователь успешно изменён!</span>
+  </div>
+</ng-template>
+
+<ng-template #snackbarStoryPoints>
+  <div class="edit-user-snackbar">
+    <span>Сторипоинты успешно обновлены!</span>
   </div>
 </ng-template>

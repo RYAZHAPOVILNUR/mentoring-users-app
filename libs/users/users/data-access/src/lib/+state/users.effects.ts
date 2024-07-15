@@ -6,6 +6,7 @@ import { ApiService } from '@users/core/http';
 import { Store, select } from '@ngrx/store';
 import { selectUsersEntities } from './users.selectors';
 import { CreateUserDTO, UsersDTO, UsersEntity, selectRouteParams, usersDTOAdapter } from '@users/core/data-access';
+import { editUserStoryPointsFailed, editUserStoryPointsSuccess, onSuccessEditionCbType } from './users.actions';
 
 export const userEffects = createEffect(
   () => {
@@ -104,6 +105,39 @@ export const editUser = createEffect(
           catchError((error) => {
             console.error('Error', error);
             return of(UsersActions.editUserFailed({ error }));
+          })
+        )
+      )
+    );
+  },
+  { functional: true }
+);
+
+export const editUserStoryPoints = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
+
+    return actions$.pipe(
+      ofType(UsersActions.editUserStoryPoints),
+      withLatestFrom(usersEntities$),
+      filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
+      map(([{ userData, id, onSuccessCbStoryPoints }, usersEntities]) => ({
+        user: {
+          ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
+          totalStoryPoints: userData.totalStoryPoints
+        },
+        onSuccessCbStoryPoints,
+      })),
+      switchMap(({ user, onSuccessCbStoryPoints }) =>
+        apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+          map((userData) => ({ userData, onSuccessCbStoryPoints })),
+          tap(({ onSuccessCbStoryPoints }) => onSuccessCbStoryPoints()),
+          map(({ userData }) => UsersActions.editUserStoryPointsSuccess({ userData })),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(UsersActions.editUserStoryPointsFailed({ error }));
           })
         )
       )
