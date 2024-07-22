@@ -89,6 +89,47 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+            <mat-form-field class="edit-user-field">
+              <mat-label>Количество сторипоинтов:</mat-label>
+              <input
+                type="number"
+                class="edit-user-input"
+                placeholder="Количество сторипоинтов"
+                matInput
+                formControlName="totalStoryPoints"
+              />
+              <button
+                *ngIf="totalStoryPointsButtonsVisible && !totalStoryPointsControl?.disabled"
+                type="button"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                [disabled]="formGroup.invalid || (areFieldsChanged$ | ngrxPush) === false"
+                (click)="submitTotalStoryPoints()"
+              >
+                <mat-icon>done</mat-icon>
+              </button>
+              <button
+                *ngIf="totalStoryPointsButtonsVisible && !totalStoryPointsControl?.disabled"
+                type="button"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="disableTotalStoryPoints()"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+              <button
+                *ngIf="totalStoryPointsButtonsVisible && !totalStoryPointsControl?.enabled"
+                type="button"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="enableTotalStoryPoints()"
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+            </mat-form-field>
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
@@ -122,5 +163,11 @@
 <ng-template #snackbar>
   <div class="edit-user-snackbar">
     <span>Пользователь успешно изменён!</span>
+  </div>
+</ng-template>
+
+<ng-template #storyPointsSnackbar>
+  <div class="edit-user-snackbar">
+    <span>Сторипоинты успешно обновлены!</span>
   </div>
 </ng-template>

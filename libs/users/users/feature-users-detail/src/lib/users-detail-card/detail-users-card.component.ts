@@ -73,6 +73,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: vm.user.email,
         username: vm.user.username,
         city: vm.user.city,
+        totalStoryPoints: vm.user.totalStoryPoints,
       });
     }
 
@@ -88,7 +89,11 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    totalStoryPoints: new FormControl({ value: 0, disabled: !this.vm.editMode }),
   });
+
+  public readonly totalStoryPointsControl = this.formGroup.get('totalStoryPoints');
+  public totalStoryPointsButtonsVisible = true;
 
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
@@ -99,6 +104,7 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('storyPointsSnackbar') storyPointsSnackbarTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -115,12 +121,21 @@ export class DetailUsersCardComponent implements OnInit {
     this.checkChangeFields();
   }
 
-  private onEditSuccess: onSuccessEditionCbType = () =>
+  private onEditSuccess: onSuccessEditionCbType = () => {
     this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
       duration: 2500,
       horizontalPosition: 'center',
       verticalPosition: 'top',
     });
+  };
+
+  private onEditStoryPointsSuccess: onSuccessEditionCbType = () => {
+    this.snackBar.openFromTemplate(this.storyPointsSnackbarTemplateRef, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+  };
 
   onSubmit(): void {
     this.editUser.emit({
@@ -129,11 +144,13 @@ export class DetailUsersCardComponent implements OnInit {
         username: this.formGroup.value.username || '',
         city: this.formGroup.value.city || '',
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        totalStoryPoints: this.formGroup.value.totalStoryPoints || 0,
         purchaseDate: new Date().toString() || '',
         educationStatus: 'trainee',
       },
       onSuccessCb: this.onEditSuccess,
     });
+    this.totalStoryPointsButtonsVisible = true;
   }
 
   onCloseUser() {
@@ -142,14 +159,44 @@ export class DetailUsersCardComponent implements OnInit {
 
   onCloseEditMode() {
     this.closeEditMode.emit();
+    this.totalStoryPointsButtonsVisible = true;
   }
 
   onOpenEditMode() {
     this.openEditMode.emit();
+    this.totalStoryPointsButtonsVisible = false;
   }
 
   onDeleteUser() {
     this.deleteUser.emit();
+  }
+
+  enableTotalStoryPoints() {
+    if (this.totalStoryPointsControl) {
+      this.totalStoryPointsControl.enable();
+    }
+  }
+
+  disableTotalStoryPoints() {
+    if (this.totalStoryPointsControl) {
+      this.totalStoryPointsControl.disable();
+    }
+  }
+
+  submitTotalStoryPoints() {
+    if (this.totalStoryPointsControl) {
+      this.totalStoryPointsControl.disable();
+    }
+    this.editUser.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        totalStoryPoints: this.formGroup.value.totalStoryPoints || 0,
+        purchaseDate: new Date().toString() || '',
+        educationStatus: 'trainee',
+      },
+      onSuccessCb: this.onEditStoryPointsSuccess,
+    });
   }
 
   public onOptionClicked(selectedValue: string) {
