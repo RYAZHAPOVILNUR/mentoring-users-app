@@ -12,7 +12,6 @@ import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'users-detail',
   standalone: true,
   imports: [CommonModule, DetailUsersCardComponent, MatDialogModule, LetDirective],
@@ -83,5 +82,9 @@ export class UsersDetailComponent {
           this.router.navigate(['/home']);
         }
       });
+  }
+  public onEditStoryPoints(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType): void {
+    this.usersFacade.editStoryPoints(userData, this.user.id, onSuccessCb);
+    this.router.navigate(['admin/users', this.user.id], { queryParams: { edit: false }});
   }
 }

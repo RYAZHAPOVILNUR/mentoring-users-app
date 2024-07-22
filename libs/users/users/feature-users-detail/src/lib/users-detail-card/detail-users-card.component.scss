@@ -32,6 +32,22 @@
 
 .edit-user-content {
   margin-bottom: 20px;
+
+  .story-points-wrapper {
+    margin-top: 25px;
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .story-points-actions {
+      position: absolute;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      top: 0;
+      right: 0;
+    }
+  }
 }
 
 .edit-user-field {

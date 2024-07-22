@@ -31,7 +31,6 @@ import { PushPipe } from '@ngrx/component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'detail-users-card',
   standalone: true,
   imports: [
@@ -89,7 +88,8 @@ export class DetailUsersCardComponent implements OnInit {
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
-
+  public totalStoryPointsField: FormControl = new FormControl({ value: 0, disabled: true });
+  public isStoryPointsEditable: boolean = false;
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
     onSuccessCb: onSuccessEditionCbType;
@@ -99,6 +99,8 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @Output() editStoryPoints = new EventEmitter<{ user: CreateUserDTO, onSuccessCb: onSuccessEditionCbType }>();
+  @ViewChild('snackbarEditStoryPoints') snackbarEditStoryPointsTemplateRef!: TemplateRef<any>
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -172,4 +174,43 @@ export class DetailUsersCardComponent implements OnInit {
       )
       .subscribe();
   }
+  public editStoryPointsToggle(): void {
+    this.isStoryPointsEditable = !this.isStoryPointsEditable;
+
+    if (this.isStoryPointsEditable) {
+      this.totalStoryPointsField.enable();
+    } else {
+      this.totalStoryPointsField.setValue(this._vm.user!.totalStoryPoints);
+      this.totalStoryPointsField.disable();
+    }
+  }
+
+  public onInputOnlyNumbers(event: Event): void {
+    const input: HTMLInputElement = event.target as HTMLInputElement;
+    input.value = input.value.replace(/[^0-9]/g, '');
+    this.totalStoryPointsField.setValue(input.value);
+  }
+
+  public onEditStoryPoints(): void {
+    const editStoryPointsValue = this.totalStoryPointsField.value;
+    this.editStoryPoints.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        username: this.formGroup.value.username || '',
+        city: this.formGroup.value.city || '',
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        purchaseDate: this.vm.user?.purchaseDate || new Date().toString(),
+        educationStatus: this.vm.user?.educationStatus || 'trainee',
+        totalStoryPoints: +editStoryPointsValue
+      },
+      onSuccessCb: this.onEditStoryPointsSuccess
+    });
+    this.isStoryPointsEditable = false;
+    this.totalStoryPointsField.disable();
+  }
+
+  private onEditStoryPointsSuccess: onSuccessEditionCbType = () =>
+    this.snackBar.openFromTemplate(this.snackbarEditStoryPointsTemplateRef, {
+      duration: 2500, horizontalPosition: 'center', verticalPosition: 'top'
+    });
 }
