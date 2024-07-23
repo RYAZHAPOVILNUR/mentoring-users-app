@@ -134,3 +134,35 @@ export const loadUser = createEffect(
   },
   { functional: true }
 );
+export const addUserStoryPoints = createEffect(() => {
+  const actions$: Actions = inject(Actions);
+  const apiService: ApiService = inject(ApiService);
+  const store: Store = inject(Store);
+  const usersEntities$ = store.select(selectUsersEntities);
+
+  return actions$.pipe(
+    ofType(UsersActions.addUserStoryPoints),
+    withLatestFrom(usersEntities$),
+    filter(([editStoryPointsPayload, usersEntities]) => !!usersEntities[editStoryPointsPayload.id]),
+    map(([addUserStoryPointsActionPayload, usersEntities]) => ({
+      user: {
+        ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[addUserStoryPointsActionPayload.id]),
+        name: addUserStoryPointsActionPayload.userData.name,
+        email: addUserStoryPointsActionPayload.userData.email,
+        username: addUserStoryPointsActionPayload.userData.username,
+        city: addUserStoryPointsActionPayload.userData.city,
+        totalStoryPoints: addUserStoryPointsActionPayload.userData.totalStoryPoints
+      },
+      onSuccessCb: addUserStoryPointsActionPayload.onSuccessCb
+    })),
+    switchMap(
+      ({ user, onSuccessCb}) =>
+        apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+          map((userData: UsersDTO) => ({ userData, onSuccessCb })),
+          tap(({ onSuccessCb }) => onSuccessCb()),
+          map(({ userData }) => UsersActions.addUserStoryPointsSuccess({ userData })),
+          catchError((error) => of(UsersActions.addUserStoryPointsFailed({ error })))
+        )
+    )
+  )
+}, { functional: true });
