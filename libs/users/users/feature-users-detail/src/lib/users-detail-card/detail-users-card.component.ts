@@ -8,6 +8,7 @@ import {
   Input,
   OnInit,
   Output,
+  signal,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
@@ -54,6 +55,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailUsersCardComponent implements OnInit {
+  public isEditPoints = signal<boolean>(false);
+
   private _vm: DetailUsersCardVm = {
     editMode: false,
     user: null,
@@ -73,6 +76,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: vm.user.email,
         username: vm.user.username,
         city: vm.user.city,
+        totalStoryPoints: vm.user.totalStoryPoints,
       });
     }
 
@@ -88,6 +92,7 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    totalStoryPoints: new FormControl({ value: 0, disabled: !this.isEditPoints() }),
   });
 
   @Output() editUser = new EventEmitter<{
@@ -98,7 +103,9 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
-  @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @Output() addPoint = new EventEmitter();
+  @ViewChild('snackbarUser') snackbarUserTemplateRef!: TemplateRef<any>;
+  @ViewChild('snackbarPoints') snackbarPointTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -116,11 +123,39 @@ export class DetailUsersCardComponent implements OnInit {
   }
 
   private onEditSuccess: onSuccessEditionCbType = () =>
-    this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
+    this.snackBar.openFromTemplate(this.snackbarUserTemplateRef, {
       duration: 2500,
       horizontalPosition: 'center',
       verticalPosition: 'top',
     });
+
+  private onАddPointSuccess: onSuccessEditionCbType = () =>
+    this.snackBar.openFromTemplate(this.snackbarPointTemplateRef, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+
+  onAddPoint(): void {
+    this.isEditPoints.set(!this.isEditPoints());
+
+    this.addPoint.emit({
+      user: {
+        totalStoryPoints: this.formGroup.value.totalStoryPoints || '',
+      },
+      onSuccessAPs: this.onАddPointSuccess,
+    });
+  }
+
+  editPoints() {
+    this.isEditPoints.set(!this.isEditPoints());
+
+    if (this.isEditPoints()) {
+      this.formGroup.get('totalStoryPoints')?.enable();
+    } else {
+      this.formGroup.get('totalStoryPoints')?.disable();
+    }
+  }
 
   onSubmit(): void {
     this.editUser.emit({
