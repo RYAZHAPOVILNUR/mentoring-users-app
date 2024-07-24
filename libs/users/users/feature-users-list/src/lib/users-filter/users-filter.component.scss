@@ -1,0 +1,16 @@
+.filter-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    align-items: center;
+    
+    &__input {
+        width: 310px;
+        margin-top: 5px;
+    
+    }
+    
+    &__label {
+        text-transform: uppercase;
+    }
+}
