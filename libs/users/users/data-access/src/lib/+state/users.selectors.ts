@@ -28,3 +28,12 @@ export const selectOpenedUser = createSelector(
   selectUsersEntities,
   ({ id }, entities) => entities[id] || null
 );
+
+export const usersFilterSelector = createSelector(selectUsersState, (state: UsersState) => state.usersFilter)
+
+export const filteredUsers = createSelector(selectAllUsers, usersFilterSelector, (users, filter) => 
+  filter.name === '' ?
+    users
+  : 
+    users.filter(user => user.name.toLowerCase() === filter.name.toLowerCase())
+);

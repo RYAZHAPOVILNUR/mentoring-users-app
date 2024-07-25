@@ -1,0 +1,10 @@
+<form [formGroup]="form" class="form">
+  <label class="form-label" for="name">Фильтр по имени:</label>
+  <input
+    class="form-input"
+    type="text"
+    placeholder="Имя"
+    formControlName="name"
+  >
+  <button class="form-button" (click)="filterUsers()">Отфильтровать</button>
+</form>
