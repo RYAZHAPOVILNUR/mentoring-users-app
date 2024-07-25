@@ -38,6 +38,7 @@ export class CreateUsersButtonComponent {
             email: result.email,
             purchaseDate: new Date().toString(),
             educationStatus: 'trainee',
+            totalStoryPoints: 0
           };
 
           this.usersFacade.addUser(newUserData);
