@@ -13,11 +13,11 @@ export class UsersFilterComponent {
   private readonly fb = inject(FormBuilder)
   private readonly usersFacade = inject(UsersFacade)
 
-  private readonly form: FormGroup = this.fb.group({
+  public readonly form: FormGroup = this.fb.group({
     name: ['', Validators.required],
   })
 
-  private filterUsers() {
+  public filterUsers() {
     this.usersFacade.filterUsers(this.form.value)
   }
 }
