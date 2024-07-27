@@ -43,3 +43,6 @@ export type UsersPhoto = {
   };
   url: string;
 };
+export type FilterKey = {
+  name: string;
+};
