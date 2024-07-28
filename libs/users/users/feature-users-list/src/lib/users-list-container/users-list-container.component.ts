@@ -30,7 +30,7 @@ import { CreateUsersButtonComponent } from '@users/feature-users-create';
 export class UsersListContainerComponent {
   private readonly componentStore = inject(UsersListContainerStore);
   public usersFacade = inject(UsersFacade);
-  public readonly users$ = this.componentStore.users$;
+  public readonly users$  = this.componentStore.users$;
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;
   public readonly loggedUser$ = this.usersFacade.loggedUser$;

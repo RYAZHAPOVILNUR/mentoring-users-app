@@ -1,6 +1,6 @@
 <div *ngIf="users$ | ngrxPush as users">
   <div class="header">
-    <span class="headerTitle"> <mat-icon>check_box</mat-icon>ЗАДАЧА </span>
+    <span class="headerTitle"><mat-icon>check_box</mat-icon>ЗАДАЧА</span>
 
     <mat-dialog-actions align="end">
       <button mat-icon-button color="accent" aria-label="Сохранить" (click)="saveChanges()">
@@ -18,7 +18,7 @@
   <mat-dialog-content class="content">
     <div class="titles">
       <mat-label>Название</mat-label>
-      <mat-form-field class="mat-form-field">
+      <mat-form-field>
         <textarea
           matInput
           [(ngModel)]="textareaValue"
@@ -54,10 +54,10 @@
           <mat-card-title>POINTS: {{ totalPoint }}</mat-card-title>
         </mat-card-header>
         <mat-card-actions class="pointsDiv">
-          <div *ngFor="let entry of storyPoint | keyvalue">
+          <div *ngFor="let entry of storyPoint| keyvalue">
             <button class="pointBtn" mat-button [matMenuTriggerFor]="menu">
               <div class="pointBtnDiv">
-                <span> {{ entry.key }}</span>
+                <span>{{ entry.key }}</span>
                 <span>{{ entry.value ? entry.value : '?' }}</span>
               </div>
             </button>
@@ -141,14 +141,12 @@
         <mat-card-actions>
           <button [ngSwitch]="task.priority" mat-button [matMenuTriggerFor]="priorityMenu">
             <span *ngSwitchCase="'high'">ВЫСОКИЙ</span>
-            <span *ngSwitchCase="'normal'">В СРЕДНИЙ</span>
+            <span *ngSwitchCase="'normal'">СРЕДНИЙ</span>
             <span *ngSwitchCase="'low'">НИЗКИЙ</span>
           </button>
           <mat-menu #priorityMenu="matMenu">
             <button (click)="onChangePriority('high')" *ngIf="task.priority !== 'high'" mat-menu-item>ВЫСОКИЙ</button>
-            <button (click)="onChangePriority('normal')" *ngIf="task.priority !== 'normal'" mat-menu-item>
-              СРЕДНИЙ
-            </button>
+            <button (click)="onChangePriority('normal')" *ngIf="task.priority !== 'normal'" mat-menu-item>СРЕДНИЙ</button>
             <button (click)="onChangePriority('low')" *ngIf="task.priority !== 'low'" mat-menu-item>НИЗКИЙ</button>
           </mat-menu>
         </mat-card-actions>

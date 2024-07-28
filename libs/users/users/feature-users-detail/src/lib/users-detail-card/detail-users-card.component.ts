@@ -11,24 +11,24 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { onSuccessEditionCbType } from '@users/users/data-access';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { DetailUsersCardVm } from './detail-users-card-vm';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { DadataApiService } from '@dadata';
-import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs';
-import { PushPipe } from '@ngrx/component';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {CommonModule} from '@angular/common';
+import {onSuccessEditionCbType, onSuccessSPonCbType} from '@users/users/data-access';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
+import {DetailUsersCardVm} from './detail-users-card-vm';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {CreateUserDTO, UsersEntity} from '@users/core/data-access';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {DadataApiService} from '@dadata';
+import {BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap} from 'rxjs';
+import {PushPipe} from '@ngrx/component';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -60,13 +60,14 @@ export class DetailUsersCardComponent implements OnInit {
     status: 'init',
     errors: null,
   };
+
   public get vm() {
     return this._vm;
   }
-  @Input({ required: true })
+
+  @Input({required: true})
   set vm(vm: DetailUsersCardVm) {
     this._vm = vm;
-
     if (vm.user) {
       this.formGroup.patchValue({
         name: vm.user.name,
@@ -74,6 +75,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
+      this.totalStoryPoints.setValue(vm.user.totalStoryPoints ?? null);
     }
 
     if (vm.editMode) {
@@ -84,10 +86,12 @@ export class DetailUsersCardComponent implements OnInit {
   }
 
   public formGroup = new FormBuilder().group({
-    name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
-    email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
-    username: new FormControl({ value: '', disabled: !this.vm.editMode }),
-    city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    name: new FormControl({value: '', disabled: !this.vm.editMode}, [Validators.required]),
+    email: new FormControl({value: '', disabled: !this.vm.editMode}, [Validators.required, Validators.email]),
+    username: new FormControl({value: '', disabled: !this.vm.editMode}),
+    city: new FormControl({value: '', disabled: !this.vm.editMode}),
+    purchaseDate: new FormControl({value: '', disabled: !this.vm.editMode}),
+    educationStatus: new FormControl({value: '', disabled: !this.vm.editMode}),
   });
 
   @Output() editUser = new EventEmitter<{
@@ -95,10 +99,14 @@ export class DetailUsersCardComponent implements OnInit {
     onSuccessCb: onSuccessEditionCbType;
   }>();
   @Output() closeUser = new EventEmitter();
+  @Output() addStoryPoints = new EventEmitter<{ user: CreateUserDTO, onSuccessAddSP: onSuccessSPonCbType }>();
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
+
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('snackbarStoryPoints') snackbarTemplateRefSP!: TemplateRef<any>;
+
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -107,6 +115,7 @@ export class DetailUsersCardComponent implements OnInit {
     switchMap((value) => this.dadata.getCities(value))
   );
 
+  public totalStoryPoints = new FormControl({value: 0, disabled: true});
   private snackBar = inject(MatSnackBar);
   private readonly destroyRef = inject(DestroyRef);
   public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
@@ -122,6 +131,28 @@ export class DetailUsersCardComponent implements OnInit {
       verticalPosition: 'top',
     });
 
+  private onAddSPSuccess: onSuccessSPonCbType = () =>
+    this.snackBar.openFromTemplate(this.snackbarTemplateRefSP, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+
+  onAddStoryPoints() {
+    this.totalStoryPoints.disable();
+    this.addStoryPoints.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        city: this.formGroup.value.city || '',
+        totalStoryPoints: this.totalStoryPoints.value || 0,
+        purchaseDate: this.formGroup.value.purchaseDate || '',
+        educationStatus: this.formGroup.value.educationStatus || ''
+      },
+      onSuccessAddSP: this.onAddSPSuccess
+    });
+  }
+
   onSubmit(): void {
     this.editUser.emit({
       user: {
@@ -129,8 +160,8 @@ export class DetailUsersCardComponent implements OnInit {
         username: this.formGroup.value.username || '',
         city: this.formGroup.value.city || '',
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
-        purchaseDate: new Date().toString() || '',
-        educationStatus: 'trainee',
+        purchaseDate: this.formGroup.value.purchaseDate || '',
+        educationStatus: this.formGroup.value.educationStatus || ''
       },
       onSuccessCb: this.onEditSuccess,
     });
@@ -173,3 +204,4 @@ export class DetailUsersCardComponent implements OnInit {
       .subscribe();
   }
 }
+

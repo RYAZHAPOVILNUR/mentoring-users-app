@@ -1,11 +1,11 @@
-import { inject } from '@angular/core';
-import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, catchError, of, map, withLatestFrom, filter, tap } from 'rxjs';
+import {inject} from '@angular/core';
+import {createEffect, Actions, ofType} from '@ngrx/effects';
+import {switchMap, catchError, of, map, withLatestFrom, filter, tap} from 'rxjs';
 import * as UsersActions from './users.actions';
-import { ApiService } from '@users/core/http';
-import { Store, select } from '@ngrx/store';
-import { selectUsersEntities } from './users.selectors';
-import { CreateUserDTO, UsersDTO, UsersEntity, selectRouteParams, usersDTOAdapter } from '@users/core/data-access';
+import {ApiService} from '@users/core/http';
+import {Store, select} from '@ngrx/store';
+import {selectUsersEntities} from './users.selectors';
+import {CreateUserDTO, UsersDTO, UsersEntity, selectRouteParams, usersDTOAdapter} from '@users/core/data-access';
 
 export const userEffects = createEffect(
   () => {
@@ -24,13 +24,13 @@ export const userEffects = createEffect(
           ),
           catchError((error) => {
             console.error('Error', error);
-            return of(UsersActions.loadUsersFailure({ error }));
+            return of(UsersActions.loadUsersFailure({error}));
           })
         )
       )
     );
   },
-  { functional: true }
+  {functional: true}
 );
 
 export const deleteUser = createEffect(
@@ -40,18 +40,18 @@ export const deleteUser = createEffect(
     return actions$.pipe(
       ofType(UsersActions.deleteUser),
       // delay(1500),
-      switchMap(({ id }) =>
+      switchMap(({id}) =>
         apiService.delete<void>(`/users/${id}`).pipe(
-          map(() => UsersActions.deleteUserSuccess({ id })),
+          map(() => UsersActions.deleteUserSuccess({id})),
           catchError((error) => {
             console.error('Error', error);
-            return of(UsersActions.deleteUserFailed({ error }));
+            return of(UsersActions.deleteUserFailed({error}));
           })
         )
       )
     );
   },
-  { functional: true }
+  {functional: true}
 );
 
 export const addUser = createEffect(
@@ -61,19 +61,19 @@ export const addUser = createEffect(
     return actions$.pipe(
       ofType(UsersActions.addUser),
       // delay(1500),
-      switchMap(({ userData }) =>
+      switchMap(({userData}) =>
         apiService.post<UsersDTO, CreateUserDTO>('/users', userData).pipe(
           map((user) => usersDTOAdapter.DTOtoEntity(user)),
-          map((userEntity) => UsersActions.addUserSuccess({ userData: userEntity })),
+          map((userEntity) => UsersActions.addUserSuccess({userData: userEntity})),
           catchError((error) => {
             console.error('Error', error);
-            return of(UsersActions.addUserFailed({ error }));
+            return of(UsersActions.addUserFailed({error}));
           })
         )
       )
     );
   },
-  { functional: true }
+  {functional: true}
 );
 
 export const editUser = createEffect(
@@ -85,8 +85,8 @@ export const editUser = createEffect(
     return actions$.pipe(
       ofType(UsersActions.editUser),
       withLatestFrom(usersEntities$),
-      filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
-      map(([{ userData, id, onSuccessCb }, usersEntities]) => ({
+      filter(([{id}, usersEntities]) => Boolean(usersEntities[id])),
+      map(([{userData, id, onSuccessCb}, usersEntities]) => ({
         user: {
           ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
           name: userData.name,
@@ -96,20 +96,58 @@ export const editUser = createEffect(
         },
         onSuccessCb,
       })),
-      switchMap(({ user, onSuccessCb }) =>
+      switchMap(({user, onSuccessCb}) =>
         apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
-          map((userData) => ({ userData, onSuccessCb })),
-          tap(({ onSuccessCb }) => onSuccessCb()),
-          map(({ userData }) => UsersActions.editUserSuccess({ userData })),
+          map((userData) => ({userData, onSuccessCb})),
+          tap(({onSuccessCb}) => onSuccessCb()),
+          map(({userData}) => UsersActions.editUserSuccess({userData})),
           catchError((error) => {
             console.error('Error', error);
-            return of(UsersActions.editUserFailed({ error }));
+            return of(UsersActions.editUserFailed({error}));
           })
         )
       )
     );
   },
-  { functional: true }
+  {functional: true}
+);
+
+export const addUserStoryPoints = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
+    return actions$.pipe(
+      ofType(UsersActions.addUserStoryPoints),
+      withLatestFrom(usersEntities$),
+      filter(([{id}, usersEntities]) => Boolean(usersEntities[id])),
+      map(([{userData, id, onSuccessAddSP}, usersEntities]) => ({
+        user: {
+          ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
+          purchaseDate: usersEntities[id]?.purchaseDate || '12.10.2023',
+          educationStatus: usersEntities[id]?.educationStatus || 'trainee',
+          totalStoryPoints: userData.totalStoryPoints,
+        }, onSuccessAddSP
+      })),
+      switchMap(({user, onSuccessAddSP}) => {
+        return apiService
+          .post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user)
+          .pipe(
+            map((userData) => ({userData, onSuccessAddSP})),
+            tap(({onSuccessAddSP}) => onSuccessAddSP()),
+            map(({userData}) => {
+                return UsersActions.addUserStoryPointsSuccess({userData})
+              }
+            ),
+            catchError((error) => {
+              console.error('Error', error);
+              return of(UsersActions.editUserFailed({error}));
+            })
+          );
+      })
+    );
+  },
+  {functional: true}
 );
 
 export const loadUser = createEffect(
@@ -124,16 +162,16 @@ export const loadUser = createEffect(
         if (params['id']) {
           return apiService.get<UsersDTO>(`/users/${params['id']}`).pipe(
             map((user) => usersDTOAdapter.DTOtoEntity(user)),
-            map((userEntity) => UsersActions.loadUserSuccess({ userData: userEntity })),
+            map((userEntity) => UsersActions.loadUserSuccess({userData: userEntity})),
             catchError((error) => {
               console.error('Error', error);
-              return of(UsersActions.loadUserFailed({ error }));
+              return of(UsersActions.loadUserFailed({error}));
             })
           );
         }
-        return of(UsersActions.updateUserStatus({ status: 'loading' }));
+        return of(UsersActions.updateUserStatus({status: 'loading'}));
       })
     );
   },
-  { functional: true }
+  {functional: true}
 );

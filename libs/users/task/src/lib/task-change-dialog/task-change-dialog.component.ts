@@ -15,6 +15,11 @@ import { PushPipe } from '@ngrx/component';
 import { UsersEntity } from '@users/core/data-access';
 import { skip } from 'rxjs/operators';
 import { BacklogFacade } from '@users/users/backlog/data-access';
+import {Chart,Tooltip,defaults} from "chart.js";
+
+Chart.register(Tooltip);
+
+const numbers = defaults.animations['numbers'];
 
 interface Task {
   name: string;
@@ -175,4 +180,9 @@ export class TaskChangeDialogComponent {
     });
     this.dialogRef.close();
   }
+
+
+
+  protected readonly Tooltip = Tooltip;
+  protected readonly numbers = numbers;
 }

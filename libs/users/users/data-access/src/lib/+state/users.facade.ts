@@ -1,14 +1,14 @@
-import { Injectable, inject } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import {Injectable, inject} from '@angular/core';
+import {select, Store} from '@ngrx/store';
 import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
-import { Observable, of, switchMap } from 'rxjs';
-import { UsersErrors } from './users.reducer';
-import { onSuccessEditionCbType } from './users.actions';
-import { selectLoggedUser } from '@auth/data-access';
-import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import {Observable, of, switchMap} from 'rxjs';
+import {UsersErrors} from './users.reducer';
+import {onSuccessEditionCbType} from './users.actions';
+import {selectLoggedUser} from '@auth/data-access';
+import {CreateUserDTO, UsersEntity} from '@users/core/data-access';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class UsersFacade {
   private readonly store = inject(Store);
 
@@ -22,6 +22,7 @@ export class UsersFacade {
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
   public readonly loggedUser$ = this.store.select(selectLoggedUser);
   public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError));
+
   /**
    * Use the initialization action to perform one
    * or more tasks in your Effects.
@@ -31,15 +32,19 @@ export class UsersFacade {
   }
 
   deleteUser(id: number) {
-    this.store.dispatch(UsersActions.deleteUser({ id }));
+    this.store.dispatch(UsersActions.deleteUser({id}));
   }
 
   addUser(userData: CreateUserDTO) {
-    this.store.dispatch(UsersActions.addUser({ userData }));
+    this.store.dispatch(UsersActions.addUser({userData}));
   }
 
   editUser(userData: CreateUserDTO, id: number, onSuccessCb: onSuccessEditionCbType) {
-    this.store.dispatch(UsersActions.editUser({ userData, id, onSuccessCb }));
+    this.store.dispatch(UsersActions.editUser({userData, id, onSuccessCb}));
+  }
+
+  addStoryPoints(userData: CreateUserDTO, id: number, onSuccessAddSP: onSuccessEditionCbType) {
+    this.store.dispatch(UsersActions.addUserStoryPoints({userData, id, onSuccessAddSP}));
   }
 
   getUserFromStore(id: number) {
