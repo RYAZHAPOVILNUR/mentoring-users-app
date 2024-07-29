@@ -1,4 +1,6 @@
-<mat-form-field class="col-12">
-  <mat-label>Поиск по имени ученика</mat-label>
-  <input matInput />
-</mat-form-field>
+<form [formGroup]="usersFilterForm">
+  <mat-form-field class="col-md-6">
+    <mat-label>Поиск по имени ученика</mat-label>
+    <input matInput formControlName="name" (input)="setUsersFilter()" />
+  </mat-form-field>
+</form>
