@@ -1,53 +1,52 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, takeUntil, timer } from 'rxjs';
+import { BehaviorSubject, Subject, takeUntil, timer } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TimerService implements OnDestroy {
-  private timer$!: Observable<number>;
   private timerStop$ = new Subject<void>();
   public timerCount$ = new BehaviorSubject<string>(this.getInitialTime());
   private counter = 0;
   public isToggled = false;
-  public time = {};
 
-  startTimer() {
+  public startTimer(): void {
     this.isToggled = true;
-    this.timer$ = timer(0, 1000);
-    this.timer$.pipe(takeUntil(this.timerStop$)).subscribe(() => {
-      this.counter = this.getTimeFromLocalStorage();
-      this.counter++;
-      this.timerCount$.next(this.formatTime(this.counter));
-      this.setTimeToLocalStorage(this.counter);
-    });
+    timer(0, 1000)
+      .pipe(takeUntil(this.timerStop$))
+      .subscribe(() => {
+        this.counter = this.getTimeFromLocalStorage();
+        this.counter++;
+        this.timerCount$.next(this.formatTime(this.counter));
+        this.setTimeToLocalStorage(this.counter);
+      });
   }
 
-  pauseTimer() {
+  public pauseTimer(): void {
     this.isToggled = false;
     this.timerStop$.next();
   }
 
-  stopTimer() {
+  public stopTimer(): void {
     this.counter = 0;
     this.timerCount$.next(this.formatTime(this.counter));
     this.timerStop$.next();
     this.removeTimeFromLocalStorage();
   }
 
-  private getTimeFromLocalStorage() {
+  private getTimeFromLocalStorage(): number {
     return Number(localStorage.getItem('timer'));
   }
 
-  private setTimeToLocalStorage(time: number) {
+  private setTimeToLocalStorage(time: number): void {
     localStorage.setItem('timer', time.toString());
   }
 
-  private removeTimeFromLocalStorage() {
+  private removeTimeFromLocalStorage(): void {
     localStorage.removeItem('timer');
   }
 
-  getInitialTime() {
+  private getInitialTime(): string {
     const savedTime = this.getTimeFromLocalStorage();
     if (savedTime) {
       return this.formatTime(savedTime);
@@ -62,14 +61,14 @@ export class TimerService implements OnDestroy {
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
 
-    return `${days}д ${hours}ч ${this.pad(minutes)}:${this.pad(secs)}`;
+    return `${days}д ${hours}ч ${this.setPad(minutes)}:${this.setPad(secs)}`;
   }
 
-  private pad(value: number): string {
+  private setPad(value: number): string {
     return value < 10 ? `0${value}` : `${value}`;
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.timerStop$.complete();
     this.timerCount$.complete();
   }

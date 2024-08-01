@@ -1,12 +1,17 @@
-<p>profile-timer works!</p>
-<span>{{ count$ | async }}</span>
-<button type="button" (click)="!isToggled ? onStartTimer() : onPauseTimer()">
-  {{ !isToggled ? 'Старт' : 'Пауза'}}
-</button>
-<!-- <button *ngIf="(isToggled$ | async) === false; else pauseButton" type="button" (click)="onStartTimer()">
-  Старт
-</button>
-<ng-template #pauseButton>
-  <button type="button" (click)="onPauseTimer()">Пауза</button>
-</ng-template> -->
-<button type="button" (click)="onResetTimer()">Стоп</button>
+<h3 class="timer-title">Таймер</h3>
+<p class="timer-time">{{ count$ | async }}</p>
+<div class="timer-buttons">
+  <button
+    mat-raised-button class="mat-primary"
+    (click)="!isToggled ? onStartTimer() : onPauseTimer()"
+  >
+    {{ !isToggled ? 'Старт' : 'Пауза'}}
+  </button>
+  <button
+    mat-raised-button class="mat-warn"
+    (click)="onResetTimer()"
+  >
+    Стоп
+  </button>
+</div>
+
