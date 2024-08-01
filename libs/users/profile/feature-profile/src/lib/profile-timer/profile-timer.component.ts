@@ -21,7 +21,7 @@ export class ProfileTimerComponent {
     this.isToggled = this.timerService.isToggled;
   }
 
-  onPauseTimer(): void {
+  public onPauseTimer(): void {
     this.timerService.pauseTimer();
     this.isToggled = this.timerService.isToggled;
   }
