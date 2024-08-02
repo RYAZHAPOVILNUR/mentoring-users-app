@@ -1,0 +1,30 @@
+.material-card {
+  width: 150px;
+  margin-bottom: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #444444;
+
+    .material-btn-delete {
+      opacity: 1;
+    }
+  }
+}
+
+.material-icon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.material-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.material-btn-delete {
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s linear;
+}

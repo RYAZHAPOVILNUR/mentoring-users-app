@@ -1,0 +1,30 @@
+.folder-card {
+  width: 150px;
+  margin-bottom: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #444444;
+
+    .folder-btn-delete {
+      opacity: 1;
+    }
+  }
+}
+
+.folder-icon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.folder-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.folder-btn-delete {
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s linear;
+}

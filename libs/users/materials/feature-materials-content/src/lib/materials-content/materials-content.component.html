@@ -1,0 +1,20 @@
+<div class="content-title">
+  <h2 mat-dialog-title>{{ data.title }}</h2>
+  <button class="btn-close" mat-fab color="primary" (click)="cancel()">
+    <mat-icon class="btn-icon-close">close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content>
+  <ng-container *ngIf="regexMaterials.video.test(data.material_link)">
+    <iframe width="560" height="315" [src]="getVideoId()"></iframe>
+  </ng-container>
+
+  <ng-container *ngIf="regexMaterials.audio.test(data.material_link)">
+    <audio controls [src]="data.material_link" type="audio/mp3"></audio>
+  </ng-container>
+
+  <ng-container *ngIf="regexMaterials.pdf.test(data.material_link)">
+    <pdf-viewer class="pdf-viewer" [src]="data.material_link" [render-text]="true" [original-size]="false" />
+  </ng-container>
+</mat-dialog-content>

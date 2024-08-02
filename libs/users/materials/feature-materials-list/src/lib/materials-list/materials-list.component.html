@@ -1,0 +1,29 @@
+<ng-container *ngIf="vm.materialsStatus === 'loading'; else loadingResult">
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+
+<ng-template #loadingResult>
+  <ng-container *ngIf="vm.materialsStatus === 'loaded'; else error">
+    <div class="material-btn-back">
+      <button mat-icon-button (click)="onBackToFolders()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h1>{{ vm.openedFolder?.title }}</h1>
+    </div>
+    <div class="material-container">
+      <ng-container *ngFor="let material of vm.openedMaterial">
+        <users-materials-card
+          [material]="material"
+          (dblclick)="onOpenMaterial(material)"
+          (deleteMaterial)="onDeleteMaterial(material)"
+        />
+      </ng-container>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #error>
+  <div class="alert alert-danger" role="alert">
+    <h1>{{ vm.materialsStatus }}</h1>
+  </div>
+</ng-template>

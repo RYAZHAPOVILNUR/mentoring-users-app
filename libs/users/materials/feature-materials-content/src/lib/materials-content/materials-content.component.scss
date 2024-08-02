@@ -1,0 +1,21 @@
+.content-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-close {
+  width: 30px;
+  height: 30px;
+  margin: 0 16px 10px 0;
+}
+
+.btn-icon-close {
+  width: 10px;
+  height: 10px;
+}
+
+.pdf-viewer {
+  height: 350px;
+  width: 600px;
+}

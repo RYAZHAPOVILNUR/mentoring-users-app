@@ -1,0 +1,24 @@
+<h1 mat-dialog-title *ngIf="data === eMaterialFile.video">Добавить видео</h1>
+<h1 mat-dialog-title *ngIf="data === eMaterialFile.audio">Добавить подкаст</h1>
+<h1 mat-dialog-title *ngIf="data === eMaterialFile.pdf">Добавить PDF</h1>
+
+<div mat-dialog-content>
+  <form [formGroup]="materialsForm">
+    <div class="material-input">
+      <mat-form-field>
+        <input matInput placeholder="Название*" formControlName="title" />
+        <mat-error>Введите название</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Ссылка*" formControlName="link" />
+        <mat-error>Введите ссылку</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" [disabled]="materialsForm.invalid" (click)="save()">Сохранить</button>
+  <button mat-button (click)="cancel()">Отмена</button>
+</div>

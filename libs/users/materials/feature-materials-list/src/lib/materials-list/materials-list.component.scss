@@ -1,0 +1,14 @@
+.material-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  grid-gap: 1.25rem;
+}
+
+.material-btn-back {
+  display: flex;
+  margin-bottom: 20px;
+
+  h1 {
+    padding: 7px 0;
+  }
+}

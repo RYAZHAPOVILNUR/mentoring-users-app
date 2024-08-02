@@ -1,0 +1,14 @@
+<mat-card class="folder-card">
+  <mat-card-content (dblclick)="onOpenFolder(folder)">
+    <div class="folder-icon">
+      <mat-icon>folder</mat-icon>
+
+      <button class="folder-btn-delete" mat-icon-button (click)="onDeleteFolder(folder)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+
+    <div class="folder-title">{{ folder.title }}</div>
+    <div>{{ folder.created_at | date : 'MMM d, y' }}</div>
+  </mat-card-content>
+</mat-card>

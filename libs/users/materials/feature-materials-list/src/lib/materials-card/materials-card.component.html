@@ -1,0 +1,16 @@
+<mat-card class="material-card">
+  <mat-card-content>
+    <div class="material-icon">
+      <mat-icon *ngIf="regexMaterials.video.test(material.material_link)">ondemand_video</mat-icon>
+      <mat-icon *ngIf="regexMaterials.audio.test(material.material_link)">music_note</mat-icon>
+      <mat-icon *ngIf="regexMaterials.pdf.test(material.material_link)">picture_as_pdf</mat-icon>
+
+      <button class="material-btn-delete" mat-icon-button (click)="onDeleteMaterial(material)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+
+    <div class="material-title">{{ material.title }}</div>
+    <div>{{ material.created_at | date : 'MMMM d, y' }}</div>
+  </mat-card-content>
+</mat-card>

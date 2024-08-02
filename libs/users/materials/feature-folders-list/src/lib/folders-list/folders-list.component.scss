@@ -1,0 +1,5 @@
+.folders-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  grid-gap: 1.25rem;
+}
