@@ -1,0 +1,25 @@
+.mat-card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.folders-card-title {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.folders-card-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.folders-card-deleteBtn {
+  display: none;
+}
+
+.mat-card-content:hover .folders-card-deleteBtn {
+  display: block;
+  cursor: pointer;
+}
