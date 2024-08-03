@@ -89,7 +89,25 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+
+            <mat-form-field
+              class="edit-user-field"
+              [matTooltip]="vm.user!.name"
+              [matTooltipDisabled]="formGroup.enabled"
+            >
+              <mat-label>Количество сторипоинтов: </mat-label>
+              <input
+                matInput
+                placeholder="Количество сторипоинтов"
+                formControlName="totalStoryPoints"
+                class="edit-user-input"
+              />
+              <button matSuffix mat-icon-button type="button" aria-label="Add" (click)="enableStoryPointsEditing()">
+                <mat-icon>add</mat-icon>
+              </button>
+            </mat-form-field>
           </div>
+
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
               mat-icon-button
