@@ -73,8 +73,8 @@ export class DetailUsersCardComponent implements OnInit {
         email: vm.user.email,
         username: vm.user.username,
         city: vm.user.city,
-        totalStoryPoints: vm.user.totalStoryPoints,
       });
+      this.totalStoryPoints.setValue(vm.user.totalStoryPoints || 0)
     }
 
     if (vm.editMode) {
@@ -89,8 +89,9 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
-    totalStoryPoints: new FormControl({ value: 0, disabled: !this.vm.editMode }),
   });
+
+  public totalStoryPoints = new FormControl({value: 0, disabled: true})
 
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
@@ -133,7 +134,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
         purchaseDate: new Date().toString() || '',
         educationStatus: 'trainee',
-        totalStoryPoints: this.formGroup.value.totalStoryPoints || 0,
+        totalStoryPoints: this.totalStoryPoints.value || 0,
       },
       onSuccessCb: this.onEditSuccess,
     });
@@ -174,9 +175,5 @@ export class DetailUsersCardComponent implements OnInit {
         })
       )
       .subscribe();
-  }
-
-  enableStoryPointsEditing() {
-    this.formGroup.controls.totalStoryPoints.enable();
   }
 }
