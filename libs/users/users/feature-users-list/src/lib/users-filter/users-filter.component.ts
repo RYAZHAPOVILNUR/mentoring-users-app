@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'users-filter',
@@ -8,7 +9,8 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
   styleUrls: ['./users-filter.component.scss'],
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
