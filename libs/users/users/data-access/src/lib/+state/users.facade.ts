@@ -57,4 +57,8 @@ export class UsersFacade {
   loadUser() {
     this.store.dispatch(UsersActions.loadUser());
   }
+
+  editTotalStoryPoints(totalStoryPoints: number, id: number, onSuccessCb: onSuccessEditionCbType) {
+    this.store.dispatch(UsersActions.editTotalStoryPoints({totalStoryPoints, id, onSuccessCb}))
+  }
 }

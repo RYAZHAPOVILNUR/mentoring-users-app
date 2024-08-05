@@ -74,7 +74,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
-      this.totalStoryPoints.setValue(vm.user.totalStoryPoints || 0)
+      this.totalStoryPoints.setValue(vm.user.totalStoryPoints || 0);
     }
 
     if (vm.editMode) {
@@ -86,15 +86,26 @@ export class DetailUsersCardComponent implements OnInit {
 
   public formGroup = new FormBuilder().group({
     name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
-    email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
+    email: new FormControl({ value: '', disabled: !this.vm.editMode }, [
+      Validators.required,
+      Validators.email,
+      Validators.pattern(/^\S+@\S+\.\S+$/),
+    ]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
 
-  public totalStoryPoints = new FormControl({value: 0, disabled: true})
+  public totalStoryPoints = new FormControl({ value: 0, disabled: true }, [
+    Validators.required,
+    Validators.pattern(/^[0-9]\d*$/),
+  ]);
 
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
+    onSuccessCb: onSuccessEditionCbType;
+  }>();
+  @Output() editTotalStoryPoints = new EventEmitter<{
+    totalStoryPoints: number;
     onSuccessCb: onSuccessEditionCbType;
   }>();
   @Output() closeUser = new EventEmitter();
@@ -113,9 +124,11 @@ export class DetailUsersCardComponent implements OnInit {
   private snackBar = inject(MatSnackBar);
   private readonly destroyRef = inject(DestroyRef);
   public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
+  public isTotalStoryPointsChanged$ = new BehaviorSubject<boolean>(false);
 
   ngOnInit(): void {
     this.checkChangeFields();
+    this.checkChangeTotalStoryPoints();
   }
 
   private onEditSuccess: onSuccessEditionCbType = () =>
@@ -134,7 +147,6 @@ export class DetailUsersCardComponent implements OnInit {
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
         purchaseDate: new Date().toString() || '',
         educationStatus: 'trainee',
-        totalStoryPoints: this.totalStoryPoints.value || 0,
       },
       onSuccessCb: this.onEditSuccess,
     });
@@ -175,5 +187,30 @@ export class DetailUsersCardComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  private checkChangeTotalStoryPoints() {
+    this.totalStoryPoints.valueChanges
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        tap(() => {
+          const isValueChanged = Number(this.totalStoryPoints.value) !== this.vm.user?.totalStoryPoints;
+          this.isTotalStoryPointsChanged$.next(isValueChanged);
+        })
+      )
+      .subscribe();
+  }
+
+  onEditTotalStoryPoints() {
+    this.editTotalStoryPoints.emit({
+      totalStoryPoints: Number(this.totalStoryPoints.value) || 0,
+      onSuccessCb: this.onEditSuccess,
+    });
+    this.totalStoryPoints.disable();
+  }
+
+  onCloseEditTotalStoryPoints() {
+    this.totalStoryPoints.setValue(this.vm.user?.totalStoryPoints || 0);
+    this.totalStoryPoints.disable();
   }
 }

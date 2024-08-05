@@ -89,8 +89,6 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
-
-            
           </div>
 
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
@@ -100,60 +98,69 @@
               type="submit"
               [disabled]="formGroup.invalid || (areFieldsChanged$ | ngrxPush) === false"
               aria-label="submit new user data"
-              matTooltip="Accept Changes"
+              matTooltip="Accept"
             >
               <mat-icon>done</mat-icon>
             </button>
 
-            <button mat-icon-button color="warn" type="button" aria-label="Dismiss Changes and Close" (click)="onCloseEditMode()" matTooltip="Close Edit Mode">
+            <button
+              mat-icon-button
+              color="warn"
+              type="button"
+              aria-label="Dismiss Changes"
+              (click)="onCloseEditMode()"
+              matTooltip="Dismiss"
+            >
               <mat-icon>close</mat-icon>
             </button>
           </mat-card-actions>
         </form>
-        <mat-form-field
-              class="edit-user-field"
-              [matTooltip]="totalStoryPoints.value?.toString() || ''"
-              [matTooltipDisabled]="totalStoryPoints.enabled"
-            >
-              <mat-label>Количество сторипоинтов: </mat-label>
-              <input
-                matInput
-                placeholder="Количество сторипоинтов"
-                [formControl]="totalStoryPoints"
-                class="edit-user-input"
-              />
-              <button 
-                matSuffix 
-                mat-icon-button 
-                type="button" 
-                aria-label="Done" 
-                *ngIf="totalStoryPoints.enabled" 
-                (click)="totalStoryPoints.disable()"
-              >
-                <mat-icon>done</mat-icon>
-              </button>
-              <button 
-                matSuffix 
-                mat-icon-button 
-                type="button" 
-                aria-label="Close" 
-                *ngIf="totalStoryPoints.enabled" 
-                (click)="totalStoryPoints.disable()"
-              >
-                <mat-icon>close</mat-icon>
-              </button>
-              <button 
-                matSuffix 
-                mat-icon-button 
-                type="button" 
-                aria-label="Add" 
-                *ngIf="totalStoryPoints.disabled" 
-                (click)="totalStoryPoints.enable()"
-              >
-                <mat-icon>add</mat-icon>
-              </button>
-              
-            </mat-form-field>
+
+        <mat-form-field class="edit-user-field">
+          <mat-label>Количество сторипоинтов: </mat-label>
+          <input
+            matInput
+            placeholder="Количество сторипоинтов"
+            [formControl]="totalStoryPoints"
+            class="edit-user-input"
+          />
+          <button
+            matSuffix
+            mat-icon-button
+            type="button"
+            aria-label="Done"
+            matTooltip="Accept"
+            [disabled]="totalStoryPoints.errors || (isTotalStoryPointsChanged$ | ngrxPush) === false"
+            *ngIf="totalStoryPoints.enabled"
+            (click)="onEditTotalStoryPoints()"
+          >
+            <mat-icon>done</mat-icon>
+          </button>
+          <button
+            matSuffix
+            mat-icon-button
+            type="button"
+            aria-label="Close"
+            matTooltip="Dismiss"
+            *ngIf="totalStoryPoints.enabled"
+            (click)="onCloseEditTotalStoryPoints()"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+          <button
+            matSuffix
+            mat-icon-button
+            type="button"
+            aria-label="Add"
+            matTooltip="Add"
+            *ngIf="totalStoryPoints.disabled"
+            (click)="totalStoryPoints.enable()"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+          <mat-error *ngIf="totalStoryPoints.hasError('required')">Это поле обязательно для заполнения</mat-error>
+          <mat-error *ngIf="totalStoryPoints.hasError('pattern')">Пожалуйста, введите число</mat-error>
+        </mat-form-field>
       </mat-card>
     </div>
   </ng-container>
