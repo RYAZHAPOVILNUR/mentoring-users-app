@@ -1,0 +1,29 @@
+<mat-dialog-content>
+  <h2>{{ data.title }}</h2>
+
+  <button mat-icon-button (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <ng-container *ngIf="data.material_link.endsWith('mp3')">
+    <audio controls>
+      <source [src]="data.material_link" type="audio/mp3" />
+    </audio>
+  </ng-container>
+
+  <ng-container *ngIf="data.material_link.endsWith('pdf')">
+    <pdf-viewer
+      src="https://api.arya.ai/images/test.pdf"
+      [render-text]="true"
+      [original-size]="false"
+      class="pdf-viewer"
+    ></pdf-viewer>
+  </ng-container>
+
+  <ng-container *ngIf="!data.material_link.endsWith('mp3') && !data.material_link.endsWith('pdf')">
+    <h3>{{ data.material_link }}</h3>
+    <div *ngIf="getVideoId()" class="thumbnail">
+      <img [src]="'https://img.youtube.com/vi/' + getVideoId() + '/maxresdefault.jpg'" alt="Video Preview" />
+    </div>
+  </ng-container>
+</mat-dialog-content>

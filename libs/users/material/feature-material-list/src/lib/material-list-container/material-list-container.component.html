@@ -1,0 +1,16 @@
+<ng-container
+  *ngrxLet="{
+    folderName: folderName$,
+    materials: materials$,
+    errors: error$,
+    status: status$,
+  } as mvm"
+>
+  <users-material-list
+    (toFolderList)="onToFolderList()"
+    (openMaterial)="onOpenMaterial($event)"
+    (deleteMaterial)="onDeleteMaterial($event)"
+    [mvm]="mvm"
+  ></users-material-list>
+  <users-material-add-button class="button-add"></users-material-add-button>
+</ng-container>

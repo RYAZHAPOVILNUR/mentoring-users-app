@@ -9,6 +9,7 @@ import { environment } from '../environments/environment.development';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
 import { USERS_FEATURE_KEY, usersReducer, userEffects } from '@users/users/data-access';
+import { MATERIAL_FEATURE_KEY, materialReducer, materialEffect } from '@users/material';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -29,6 +30,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideEffects(
       userEffects,
+      materialEffect,
       authEffects,
       articlesEffects,
       tasksEffects,
@@ -40,6 +42,7 @@ export const appConfig: ApplicationConfig = {
     provideStore({
       router: routerReducer,
       [USERS_FEATURE_KEY]: usersReducer,
+      [MATERIAL_FEATURE_KEY]: materialReducer,
       [settingsFeature.name]: settingsFeature.reducer,
       [authFeature.name]: authFeature.reducer,
       [articlesFeature.name]: articlesFeature.reducer,

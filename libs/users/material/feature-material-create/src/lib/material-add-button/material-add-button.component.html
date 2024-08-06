@@ -1,0 +1,17 @@
+<button mat-icon-button [matMenuTriggerFor]="menu">
+  <mat-icon>add</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="openAddMaterialDialog('Video')">
+    <mat-icon>play_circle_filled</mat-icon>
+    <span>Видео</span>
+  </button>
+  <button mat-menu-item (click)="openAddMaterialDialog('Audio')">
+    <mat-icon>music_note</mat-icon>
+    <span>Аудио</span>
+  </button>
+  <button mat-menu-item (click)="openAddMaterialDialog('PDF')">
+    <mat-icon>picture_as_pdf</mat-icon>
+    <span>Файл PDF</span>
+  </button>
+</mat-menu>

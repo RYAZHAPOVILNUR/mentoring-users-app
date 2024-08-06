@@ -1,0 +1,25 @@
+<ng-container *ngIf="fvm.status === 'loading'; else loadingFolders">
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+
+<ng-template #loadingFolders>
+  <ng-container *ngIf="fvm.status === 'loaded'; else error">
+    <div class="folder-list">
+      <ng-container *ngFor="let folder of fvm.folders">
+        <users-folder-card
+          (redirectMaterial)="onRedirectMaterial($event)"
+          (deleteFolder)="onDeleteFolder($event)"
+          [folder]="folder"
+        ></users-folder-card>
+      </ng-container>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #error>
+  <div class="alert alert-danger" role="alert">
+    <h1>{{ fvm.errors?.status }}</h1>
+    <hr />
+    {{ fvm.errors }}
+  </div>
+</ng-template>

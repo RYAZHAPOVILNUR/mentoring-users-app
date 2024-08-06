@@ -1,0 +1,16 @@
+.pdf-viewer {
+  width: 800px;
+  height: 600px;
+  margin: 20px;
+}
+
+.thumbnail {
+  margin: 10px;
+  max-width: 854px;
+  max-height: 480px;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}

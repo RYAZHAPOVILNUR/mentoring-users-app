@@ -1,0 +1,14 @@
+<ng-container
+  *ngrxLet="{
+    folders: folders$,
+    status: status$,
+    errors: error$,
+  } as fvm"
+>
+  <users-folder-list
+    [fvm]="fvm"
+    (redirectMaterial)="onRedirectMaterial($event)"
+    (deleteFolder)="onDeleteFolder($event)"
+  ></users-folder-list>
+  <users-folder-add-button class="add-button" matTooltip="Добавить папку"></users-folder-add-button>
+</ng-container>

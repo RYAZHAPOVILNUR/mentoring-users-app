@@ -1,0 +1,29 @@
+<ng-container *ngIf="mvm.status === 'loading'; else loadingMaterials">
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+
+<ng-template #loadingMaterials>
+  <h3>{{ mvm.folderName }}</h3>
+  <ng-container *ngIf="mvm.status === 'loaded'; else error">
+    <div class="material-list">
+      <ng-container *ngFor="let material of mvm.materials">
+        <users-material-card
+          (openMaterial)="onOpenMaterial($event)"
+          (deleteMaterial)="onDeleteMaterial($event)"
+          [material]="material"
+        ></users-material-card>
+      </ng-container>
+    </div>
+  </ng-container>
+  <button mat-icon-button class="button-back" (click)="onToFolderList()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+</ng-template>
+
+<ng-template #error>
+  <div class="alert alert-danger" role="alert">
+    <h1>{{ mvm.errors?.status }}</h1>
+    <hr />
+    {{ mvm.errors }}
+  </div>
+</ng-template>

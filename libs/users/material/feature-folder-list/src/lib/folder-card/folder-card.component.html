@@ -1,0 +1,8 @@
+<div class="folder" (dblclick)="onRedirectMaterial()">
+  <mat-icon class="folder__icon">folder</mat-icon>
+  <span class="folder__title">{{ folder.title }}</span>
+  <span class="folder__title">{{ showDate() }}</span>
+  <button class="folder__close" mat-icon-button type="button" (click)="onDeleteFolder()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</div>

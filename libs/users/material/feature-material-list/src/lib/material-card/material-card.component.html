@@ -1,0 +1,17 @@
+<ng-container *ngIf="material">
+  <div class="material" (click)="onOpenMaterial()">
+    <button mat-icon-button type="button" class="material__close" (click)="onDeleteMaterial()">
+      <mat-icon>clear</mat-icon>
+    </button>
+
+    <mat-icon *ngIf="material.material_link.endsWith('.pdf')" class="material__icon">picture_as_pdf</mat-icon>
+    <mat-icon *ngIf="material.material_link.endsWith('.mp3')" class="material__icon">music_note</mat-icon>
+    <mat-icon
+      *ngIf="!material.material_link.endsWith('.pdf') && !material.material_link.endsWith('.mp3')"
+      class="material__icon"
+      >play_circle_filled</mat-icon
+    >
+
+    <span class="material__name">{{ material.title }}</span>
+  </div>
+</ng-container>

@@ -1,0 +1,36 @@
+.material {
+  display: flex;
+  flex-direction: column;
+  width: 120px;
+  height: 100px;
+  padding: 10px;
+  align-items: start;
+  border-radius: 10px;
+  position: relative;
+
+  &:hover {
+    background-color: rgb(104, 101, 101);
+
+    .material__close {
+      opacity: 1;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 2%;
+    left: 51%;
+    opacity: 0;
+  }
+
+  &__icon {
+    font-size: 45px;
+    width: 45px;
+    height: 45px;
+    margin-bottom: 10px;
+  }
+
+  &__name {
+    font-size: 15px;
+  }
+}
