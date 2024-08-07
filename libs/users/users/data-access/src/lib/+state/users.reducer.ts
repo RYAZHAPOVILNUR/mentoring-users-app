@@ -75,7 +75,7 @@ const reducer = createReducer(
   on(UsersActions.updateUserStatus, (state, { status }) => ({
     ...state,
     status,
-  }))
+  })),
 );
 
 export function usersReducer(state: UsersState | undefined, action: Action) {

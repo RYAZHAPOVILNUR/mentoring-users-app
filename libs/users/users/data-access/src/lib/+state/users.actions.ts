@@ -38,3 +38,11 @@ export const loadUserSuccess = createAction('[Users/Api] Load User Success', pro
 export const loadUserFailed = createAction('[Users/Api] Load User Failed', props<{ error: any }>());
 
 export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{ status: LoadingStatus }>());
+
+export const updateUserStoryPoints = createAction(
+  '[Users Detail] Update User Story Points',
+   props<{
+    userData: CreateUserDTO;
+    id: number;
+    onSuccessCb: onSuccessEditionCbType;
+}>())

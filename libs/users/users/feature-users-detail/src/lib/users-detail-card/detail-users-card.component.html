@@ -89,22 +89,55 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
-            <mat-form-field
-            class="edit-user-field"
-            [matTooltip]="vm.user!.totalStoryPoints!.toString()"
-            [matTooltipDisabled]="formGroup.enabled"
-            >
-              <mat-label>Сторипоинты:</mat-label>
-              <input 
-              type="number"
-              class="edit-user-input"
-              placeholder="Введите кол-во сторипоинтов"
-              matInput
-              formControlName="storyPoints"
-              [matAutocomplete]="auto"
+            <form [formGroup]="storyPointsInput" (ngSubmit)="onSubmit()" class="edit-user-storyPoints">
+              <mat-form-field
+              class="edit-user-field"
+              [matTooltip]="vm.user!.totalStoryPoints!.toString()"
+              [matTooltipDisabled]="formGroup.enabled"
               >
-              <mat-error></mat-error>
-            </mat-form-field>
+                <mat-label>Сторипоинты:</mat-label>
+                <input 
+                class="edit-user-input"
+                placeholder="Введите кол-во сторипоинтов"
+                matInput
+                formControlName="storyPoints"
+                [matAutocomplete]="auto"
+                >
+                <button
+                  *ngIf="this.storyPointsInput.controls['storyPoints'].disabled"
+                  mat-icon-button
+                  matSuffix
+                  type="button"
+                  color="accent"
+                  class="edit-storyPoints-button add"
+                  (click)="onStoryPointsEditModeOn()"
+                >
+                  <mat-icon>add</mat-icon>
+                </button>
+                <button
+                  *ngIf="this.storyPointsInput.controls['storyPoints'].enabled"
+                  mat-icon-button
+                  matSuffix
+                  type="submit"
+                  color="accent"
+                  class="edit-storyPoints-button done"
+                  (click)="onStoryPointsSubmit()"
+                >
+                  <mat-icon>done</mat-icon>
+                </button>
+                <button
+                  *ngIf="this.storyPointsInput.controls['storyPoints'].enabled"
+                  mat-icon-button
+                  matSuffix
+                  type="button"
+                  color="accent"
+                  class="edit-storyPoints-button cancel"
+                  (click)="onStoryPointsEditModeOff()"
+                >
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-form-field>
+            </form>
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
