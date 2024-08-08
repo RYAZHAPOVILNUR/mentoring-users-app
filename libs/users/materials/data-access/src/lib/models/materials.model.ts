@@ -1,4 +1,4 @@
-export interface Materials {
+export interface Material {
   id: number,
   created_at: string,
   title: string,

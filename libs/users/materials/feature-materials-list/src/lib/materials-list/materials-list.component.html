@@ -1,1 +1,33 @@
-<p>materials-list works!</p>
+<ng-container *ngIf="vm.status === 'loading'; else loadingResult">
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+  <button mat-icon-button aria-label="close dialog" (click)="onBackBtn()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+</ng-container>
+
+<ng-template #loadingResult>
+  <button mat-icon-button aria-label="close dialog" (click)="onBackBtn()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <ng-container *ngIf="vm.status === 'loaded'; else error">
+    <div class="container">
+      <div class="row">
+        <div class="col materials-card-wrap" *ngFor="let material of vm.materials">
+          <users-materials-card (deleteMaterial)="onDeleteMaterial($event)" [material]="material"/>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #error>
+  <button mat-icon-button aria-label="close dialog" (click)="onBackBtn()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <div class="alert alert-danger" role="alert">
+    <h1>{{ vm.errors?.status }}</h1>
+    <hr />
+    {{ vm.errors }}
+  </div>
+</ng-template>
+<users-materials-add-button></users-materials-add-button>

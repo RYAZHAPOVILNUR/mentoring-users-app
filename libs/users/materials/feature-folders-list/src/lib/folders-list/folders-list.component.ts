@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Folder, MaterialsErrors } from '@users/materials/data-access';
 import { LoadingStatus } from '@users/core/data-access';
@@ -24,4 +24,15 @@ type Vm = {
 export class FoldersListComponent {
   @Input({ required: true })
   vm!: Vm;
+
+  @Output() deleteFolder = new EventEmitter();
+  @Output() openFolder = new EventEmitter();
+
+  public onDeleteFolder(event: Event) {
+    this.deleteFolder.emit(event)
+  }
+
+  public onOpenFolder(event: Event) {
+    this.openFolder.emit(event)
+  }
 }

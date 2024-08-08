@@ -1,9 +1,18 @@
+.folders-card {
+  &:hover {
+    cursor: pointer;
+    transition: opacity 0.3s;
+    opacity: 0.7;
+  }
+}
+
 .mat-card-content {
   display: flex;
   flex-direction: column;
 }
 
 .folders-card-title {
+  cursor: pointer;
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;

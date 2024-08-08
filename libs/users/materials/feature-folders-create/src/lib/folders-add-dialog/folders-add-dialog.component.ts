@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { CreateUsersDialogComponent } from 'libs/users/users/feature-users-create/src/lib/create-users-dialog/create-users-dialog.component';
+import { FoldersAddButtonComponent } from '../folders-add-button/folders-add-button.component';
 
 @Component({
   selector: 'users-folders-add-dialog',
@@ -26,7 +26,7 @@ import { CreateUsersDialogComponent } from 'libs/users/users/feature-users-creat
 export class FoldersAddDialogComponent {
   public formGroup: FormGroup;
   private readonly fb = inject(FormBuilder);
-  private dialogRef = inject(MatDialogRef<CreateUsersDialogComponent, {title: string}>)
+  private dialogRef = inject(MatDialogRef<FoldersAddButtonComponent, {title: string}>)
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { title: string }) {
     this.formGroup = this.fb.group({

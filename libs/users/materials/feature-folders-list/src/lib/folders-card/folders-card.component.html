@@ -1,8 +1,8 @@
-<mat-card>
+<mat-card class="folders-card" (click)="onOpenFolder($event)">
   <mat-card-content class="mat-card-content">
     <div class="folders-card-top">
       <mat-icon>folder</mat-icon>
-      <mat-icon class="folders-card-deleteBtn">delete</mat-icon>
+      <mat-icon class="folders-card-deleteBtn" (click)="onDeleteFolder($event)">delete</mat-icon>
     </div>
     <label class="folders-card-title">{{ folder.title }}</label>
     <span>{{ folder.created_at | date:'d MMMM y' }}</span>
