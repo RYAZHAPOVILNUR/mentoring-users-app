@@ -73,8 +73,10 @@ export class DetailUsersCardComponent implements OnInit {
         email: vm.user.email,
         username: vm.user.username,
         city: vm.user.city,
-        storyPoints: vm.user.totalStoryPoints?.toString()
       });
+      this.storyPointsInput.patchValue({
+        storyPoints: vm.user.totalStoryPoints?.toString()
+      })
     }
 
     if (vm.editMode) {
@@ -84,13 +86,20 @@ export class DetailUsersCardComponent implements OnInit {
     }
   }
 
+  public storyPointsDisabled = true;
+
+  public addStoryPointsBtn: HTMLElement = ViewChild('#add')
+
   public formGroup = new FormBuilder().group({
     name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
-    storyPoints: new FormControl({ value: '', disabled: !this.vm.editMode })
   });
+
+  public storyPointsInput = new FormBuilder().group({
+    storyPoints: new FormControl({ value: '', disabled: this.storyPointsDisabled })
+  })
 
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
@@ -100,6 +109,10 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
+  @Output() editStoryPoints = new EventEmitter<{
+    user: CreateUserDTO;
+    onSuccessCb: onSuccessEditionCbType;
+  }>();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
@@ -133,7 +146,22 @@ export class DetailUsersCardComponent implements OnInit {
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
         purchaseDate: new Date().toString() || '',
         educationStatus: 'trainee',
-        totalStoryPoints: Number(this.formGroup.value.storyPoints) || 0
+        totalStoryPoints: Number(this.storyPointsInput.value.storyPoints) || 0
+      },
+      onSuccessCb: this.onEditSuccess,
+    });
+  }
+
+  onSubmitStoryPoints(): void {
+    this.editStoryPoints.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        username: this.formGroup.value.username || '',
+        city: this.formGroup.value.city || '',
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        purchaseDate: new Date().toString() || '',
+        educationStatus: 'trainee',
+        totalStoryPoints: Number(this.storyPointsInput.value.storyPoints) || 0
       },
       onSuccessCb: this.onEditSuccess,
     });
@@ -174,5 +202,16 @@ export class DetailUsersCardComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  public onStoryPointsEditModeOn() {
+    this.storyPointsInput.enable()
+  }
+  public onStoryPointsEditModeOff() {
+    this.storyPointsInput.disable()
+  }
+  public onStoryPointsSubmit() {
+    this.onSubmitStoryPoints()
+    this.onStoryPointsEditModeOff()
   }
 }
