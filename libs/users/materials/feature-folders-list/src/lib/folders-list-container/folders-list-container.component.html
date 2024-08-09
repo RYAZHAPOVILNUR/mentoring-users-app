@@ -1,2 +1,8 @@
-<p>folders-list-container works!</p>
-<folders-list></folders-list>
+<ng-container
+  *ngrxLet="{
+    folders: allFolders$,
+    loadingStatus: loadingStatus$,
+  } as vm"
+>
+  <folders-list [vm]="vm" />
+</ng-container>

@@ -1,87 +1,69 @@
-// .folders-card-wrapper {
-//   display: flex;
-//   flex-direction: column;
-//   position: relative;
-//   &:hover {
-//     cursor: pointer;
-//     &::before {
-//       opacity: 1;
-//     }
-//   }
+.folders-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  &:hover {
+    cursor: pointer;
+    &::before {
+      opacity: 1;
+    }
+  }
 
-//   &::before {
-//     content: '';
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     width: 100%;
-//     height: 100%;
-//     background-color: rgba(0, 0, 0, 0.07);
-//     opacity: 0;
-//     transition: opacity 0.3s ease;
-//   }
-// }
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.07);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+}
 
 // .user-card-wrapper:active::before {
 // }
 
-// .mat-card-content {
-//   width: 100%;
-//   flex-grow: 1;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: flex-start;
-//   gap: 10px;
-//   margin: 20px 0;
-//   & label {
-//     font-size: 18px;
-//     font-weight: 500;
-//   }
-//   & img {
-//     border-radius: 50%;
-//     margin-bottom: 10px;
-//   }
-//   & span {
-//     color: rgb(166, 165, 165);
-//     font-size: 14px;
-//     margin-bottom: 10px;
-//   }
-// }
-
-// .user-photo {
-//   width: 6rem;
-//   height: 6rem;
-// }
-
-// .user-card-buttons {
-//   position: absolute;
-//   top: 5px;
-//   right: 5px;
-//   padding: 0;
-//   & button {
-//     font-size: 12px;
-//     text-transform: uppercase;
-//   }
-// }
-
-.folder-icon {
-  font-size: 50px;
-  height: 50px;
-  width: 50px;
+mat-card{
+  cursor: pointer;
 }
 
-.folder-title {
-  font-size: 16px;
-  font-weight: 500;
-  margin-bottom: 15px;
-  // overflow: hidden;
-  // width:100px;
-  // display: -webkit-box;
-  // -webkit-line-clamp: 3;
-  // -webkit-box-orient: vertical;
+.mat-card-content {
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  margin: 20px 0;
+  & label {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    cursor: pointer;
+  }
+  & span {
+    color: rgb(166, 165, 165);
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  & mat-icon {
+    font-size: 2.5rem;
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+
 }
 
-// .oleg {
-//   background-color: black;
-//   margin-bottom: 10px;
-// }
+.user-card-buttons {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 0;
+  & button {
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+}

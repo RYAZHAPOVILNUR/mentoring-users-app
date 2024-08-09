@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -6,6 +6,12 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { Folder } from 'libs/users/materials/data-access/src/lib/models/folder.model';
+// import { registerLocaleData } from '@angular/common';
+// import localeRu from '@angular/common/locales/ru'
+
+// registerLocaleData(localeRu)
+import '@angular/common/locales/global/ru'
 
 
 @Component({
@@ -17,5 +23,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersCardComponent {
-  text = 'Test Text';
+  @Input({required: true})
+  folder!: Folder;
 }
