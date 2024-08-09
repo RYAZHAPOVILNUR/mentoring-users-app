@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { materialsActions } from './materials.actions';
 import * as materialsSelectors from './materials.selectors'
+import { AddFolder } from '../models/add-folder.model';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
@@ -20,6 +21,10 @@ export class MaterialsFacade {
    */
   init() {
     this.store.dispatch(materialsActions.initMaterials())
+  };
+
+  addNewFolder(newFolderData: AddFolder) {
+    this.store.dispatch(materialsActions.addNewFolder({newFolderData}))
   }
 }
 

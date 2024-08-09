@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { LetDirective } from '@ngrx/component';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
 import { MaterialsFacade } from '@users/materials/data-access';
+import { FoldersAddButtonComponent } from '@users/feature-folders-create';
 
 @Component({
   selector: 'folders-list-container',
   standalone: true,
-  imports: [CommonModule, LetDirective, FoldersListComponent],
+  imports: [CommonModule, LetDirective, FoldersListComponent, FoldersAddButtonComponent],
   templateUrl: './folders-list-container.component.html',
   styleUrls: ['./folders-list-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
