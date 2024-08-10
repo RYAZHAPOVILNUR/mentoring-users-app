@@ -4,17 +4,17 @@
 
 <ng-template #loadingResult>
   <ng-container *ngIf="vm.loadingStatus === 'loaded'; else error">
-
+    <div class="container">
+      <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xxl-6">
+          <folders-card
+            *ngFor="let folder of vm.folders"
+            [folder]="folder"
+            (deleteFolder)="onDeleteFolder(folder)"
+          />
+      </div>
+    </div>
   </ng-container>
 </ng-template>
-<div class="container">
-  <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6">
-    <div *ngFor="let folder of vm.folders">
-      <folders-card  [folder]="folder" />
-    </div>
-
-  </div>
-</div>
 
 <ng-template #error>
   <div class="alert alert-danger" role="alert">

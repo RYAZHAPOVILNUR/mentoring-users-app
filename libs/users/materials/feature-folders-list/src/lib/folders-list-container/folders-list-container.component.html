@@ -4,6 +4,9 @@
     loadingStatus: loadingStatus$,
   } as vm"
 >
-  <folders-list [vm]="vm" />
+  <folders-list
+    [vm]="vm"
+    (deleteFolder)="onDeleteFolder($event)"
+  />
 </ng-container>
 <folders-add-button></folders-add-button>

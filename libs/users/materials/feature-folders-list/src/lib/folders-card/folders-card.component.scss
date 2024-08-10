@@ -1,4 +1,4 @@
-.folders-card-wrapper {
+.folder-card-wrapper {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -43,6 +43,10 @@ mat-card{
     font-weight: 500;
     margin-bottom: 1rem;
     cursor: pointer;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
   }
   & span {
     color: rgb(166, 165, 165);
@@ -57,7 +61,7 @@ mat-card{
 
 }
 
-.user-card-buttons {
+.folder-card-buttons {
   position: absolute;
   top: 5px;
   right: 5px;

@@ -9,8 +9,11 @@ export const materialsActions = createActionGroup({
     initMaterialsSuccess: props<{folders: Folder[]}>(),
     initMaterialsFailure: emptyProps(),
     loadAllFolders: emptyProps(),
-    loadFoldersFailure: emptyProps(),
+    loadFoldersFailure: props<{ error: any }>(),
     addNewFolder: props<{newFolderData: AddFolder}>(),
-    addFolderSuccess: props<{newFolder: Folder}>()
+    addFolderSuccess: props<{newFolder: Folder}>(),
+    deleteFolder: props<{id: number}>(),
+    deleteFolderSuccess: props<{id: number}>(),
+    deleteFolderFailed: props<{ error: any }>(),
   },
 });

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,4 +25,10 @@ import '@angular/common/locales/global/ru'
 export class FoldersCardComponent {
   @Input({required: true})
   folder!: Folder;
+
+  @Output() deleteFolder = new EventEmitter();
+
+  onDeleteFolder() {
+    this.deleteFolder.emit()
+  }
 }

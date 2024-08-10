@@ -31,13 +31,31 @@ export const addNewFolder = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) => {
     return actions$.pipe(
       ofType(materialsActions.addNewFolder),
-      switchMap(({newFolderData}) =>
-      apiService.post<Folder, AddFolder>('/folder', newFolderData).pipe(
-        tap(newFolder => console.log(newFolder)),
-        map((newFolder) => materialsActions.addFolderSuccess({newFolder}))
+      switchMap(({ newFolderData }) =>
+        apiService.post<Folder, AddFolder>('/folder', newFolderData).pipe(
+          tap((newFolder) => console.log(newFolder)),
+          map((newFolder) => materialsActions.addFolderSuccess({ newFolder }))
+        )
       )
-    )
-    )
+    );
   },
-  {functional: true}
-)
+  { functional: true }
+);
+
+export const deleteFolder = createEffect(
+  (actions$ = inject(Actions), apiService = inject(ApiService)) => {
+    return actions$.pipe(
+      ofType(materialsActions.deleteFolder),
+      switchMap(({ id }) =>
+        apiService.delete<void>(`/folder/${id}`).pipe(
+          map(() => materialsActions.deleteFolderSuccess({ id })),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(materialsActions.deleteFolderFailed({ error }));
+          })
+        )
+      )
+    );
+  },
+  { functional: true }
+);
