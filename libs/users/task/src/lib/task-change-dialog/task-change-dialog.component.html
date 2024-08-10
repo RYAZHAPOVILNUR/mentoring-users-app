@@ -1,15 +1,15 @@
 <div *ngIf="users$ | ngrxPush as users">
   <div class="header">
-    <span class="headerTitle"> <mat-icon>check_box</mat-icon>ЗАДАЧА </span>
+    <span class="headerTitle"><mat-icon>check_box</mat-icon>ЗАДАЧА</span>
 
     <mat-dialog-actions align="end">
-      <button mat-icon-button color="accent" aria-label="Сохранить" (click)="saveChanges()">
+      <button (click)="saveChanges()" aria-label="Сохранить" color="accent" mat-icon-button>
         <mat-icon>done</mat-icon>
       </button>
-      <button mat-icon-button color="accent" aria-label="Удалить" (click)="saveChanges()">
+      <button (click)="saveChanges()" aria-label="Удалить" color="accent" mat-icon-button>
         <mat-icon>delete</mat-icon>
       </button>
-      <button mat-icon-button color="warn" aria-label="Отмена" (click)="cancel()">
+      <button (click)="cancel()" aria-label="Отмена" color="warn" mat-icon-button>
         <mat-icon>close</mat-icon>
       </button>
     </mat-dialog-actions>
@@ -18,14 +18,14 @@
   <mat-dialog-content class="content">
     <div class="titles">
       <mat-label>Название</mat-label>
-      <mat-form-field class="mat-form-field">
+      <mat-form-field>
         <textarea
-          matInput
-          [(ngModel)]="textareaValue"
-          cdkTextareaAutosize
           #autosize="cdkTextareaAutosize"
-          cdkAutosizeMinRows="1"
+          [(ngModel)]="textareaValue"
           cdkAutosizeMaxRows="100"
+          cdkAutosizeMinRows="1"
+          cdkTextareaAutosize
+          matInput
         ></textarea>
       </mat-form-field>
 
@@ -36,14 +36,14 @@
           hide: !editStatus && editMode
         }"
       >
-        <quill-editor class="editor" [modules]="quillEditorModules" [(ngModel)]="editorContent"></quill-editor>
+        <quill-editor [(ngModel)]="editorContent" [modules]="quillEditorModules" class="editor"></quill-editor>
         <div class="btnDiv">
-          <button mat-raised-button color="primary" (click)="toggleQuill()">Сохранить</button>
-          <button mat-stroked-button color="accent" (click)="toggleQuill()">Отмена</button>
+          <button (click)="toggleQuill()" color="primary" mat-raised-button>Сохранить</button>
+          <button (click)="toggleQuill()" color="accent" mat-stroked-button>Отмена</button>
         </div>
       </div>
 
-      <div [ngClass]="{ show: !editStatus, hide: editStatus }" (click)="toggleQuill()">
+      <div (click)="toggleQuill()" [ngClass]="{ show: !editStatus, hide: editStatus }">
         <p [innerHTML]="editorContent">{{ editorContent }}</p>
       </div>
     </div>
@@ -54,10 +54,10 @@
           <mat-card-title>POINTS: {{ totalPoint }}</mat-card-title>
         </mat-card-header>
         <mat-card-actions class="pointsDiv">
-          <div *ngFor="let entry of storyPoint | keyvalue">
-            <button class="pointBtn" mat-button [matMenuTriggerFor]="menu">
+          <div *ngFor="let entry of storyPoint| keyvalue">
+            <button [matMenuTriggerFor]="menu" class="pointBtn" mat-button>
               <div class="pointBtnDiv">
-                <span> {{ entry.key }}</span>
+                <span>{{ entry.key }}</span>
                 <span>{{ entry.value ? entry.value : '?' }}</span>
               </div>
             </button>
@@ -90,7 +90,7 @@
           <mat-card-title>СТАТУС</mat-card-title>
         </mat-card-header>
         <mat-card-actions>
-          <button [ngSwitch]="task.status" mat-button [matMenuTriggerFor]="statusMenu">
+          <button [matMenuTriggerFor]="statusMenu" [ngSwitch]="task.status" mat-button>
             <span *ngSwitchCase="'new'">НОВАЯ</span>
             <span *ngSwitchCase="'progress'">В ПРОЦЕССЕ</span>
             <span *ngSwitchCase="'accomplished'">ЗАВЕРШЕНО</span>
@@ -115,7 +115,7 @@
           <mat-list role="list">
             <mat-list-item *ngFor="let assigned of task.assignees" role="listitem">
               <div class="assignUserDiv">
-                <img class="userPhoto" [src]="assigned.photo ? assigned.photo.url : 'assets/img/1.png'" />
+                <img [src]="assigned.photo ? assigned.photo.url : 'assets/img/1.png'" class="userPhoto" />
                 <span class="spanName">{{ assigned.name }}</span>
                 <button (click)="removeAssigned(assigned.id)">
                   <mat-icon>close</mat-icon>
@@ -124,10 +124,10 @@
             </mat-list-item>
           </mat-list>
 
-          <button mat-button [matMenuTriggerFor]="usersMenu">Добавить еще</button>
+          <button [matMenuTriggerFor]="usersMenu" mat-button>Добавить еще</button>
           <mat-menu #usersMenu="matMenu">
             <button (click)="addAssigned(user)" *ngFor="let user of users" mat-menu-item>
-              <img class="userPhoto" [src]="user.photo ? user.photo.url : 'assets/img/1.png'" />
+              <img [src]="user.photo ? user.photo.url : 'assets/img/1.png'" class="userPhoto" />
               <span>{{ user.name }}</span>
             </button>
           </mat-menu>
@@ -139,15 +139,14 @@
           <mat-card-title>ПРИОРИТЕТ</mat-card-title>
         </mat-card-header>
         <mat-card-actions>
-          <button [ngSwitch]="task.priority" mat-button [matMenuTriggerFor]="priorityMenu">
+          <button [matMenuTriggerFor]="priorityMenu" [ngSwitch]="task.priority" mat-button>
             <span *ngSwitchCase="'high'">ВЫСОКИЙ</span>
-            <span *ngSwitchCase="'normal'">В СРЕДНИЙ</span>
+            <span *ngSwitchCase="'normal'">СРЕДНИЙ</span>
             <span *ngSwitchCase="'low'">НИЗКИЙ</span>
           </button>
           <mat-menu #priorityMenu="matMenu">
             <button (click)="onChangePriority('high')" *ngIf="task.priority !== 'high'" mat-menu-item>ВЫСОКИЙ</button>
-            <button (click)="onChangePriority('normal')" *ngIf="task.priority !== 'normal'" mat-menu-item>
-              СРЕДНИЙ
+            <button (click)="onChangePriority('normal')" *ngIf="task.priority !== 'normal'" mat-menu-item>СРЕДНИЙ
             </button>
             <button (click)="onChangePriority('low')" *ngIf="task.priority !== 'low'" mat-menu-item>НИЗКИЙ</button>
           </mat-menu>

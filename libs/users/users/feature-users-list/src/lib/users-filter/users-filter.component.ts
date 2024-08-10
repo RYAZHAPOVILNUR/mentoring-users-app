@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'users-filter',
@@ -12,14 +12,14 @@ import { MatIconModule } from '@angular/material/icon';
     ReactiveFormsModule,
     MatIconModule
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class UsersFilterComponent {
+  @Output() filter = new EventEmitter();
   private readonly fb = inject(FormBuilder)
   public readonly filterUsers = this.fb.control('', [Validators.required])
 
-  @Output() filter = new EventEmitter();
   constructor() {
     this.filterUsers.valueChanges.pipe(
       debounceTime(1000),
