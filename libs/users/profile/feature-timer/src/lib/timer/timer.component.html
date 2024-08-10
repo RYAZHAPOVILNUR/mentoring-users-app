@@ -1,0 +1,11 @@
+<ng-container *ngIf="timer$ | async as time">
+  <div class="timer">
+    <span class="timer__value">{{ time.days }}</span
+    >days <span class="timer__value">{{ time.hours }}</span
+    >hours <span class="timer__value">{{ time.minutes }}</span
+    >minutes <span class="timer__value">{{ time.seconds }}</span
+    >seconds
+  </div>
+  <button *ngIf="isTimerOn$.getValue()" (click)="start()">{{ 'Запустить отсчет' }}</button>
+  <button *ngIf="!isTimerOn$.getValue()" (click)="stop()">{{ 'Остановить отсчет' }}</button>
+</ng-container>

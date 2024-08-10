@@ -15,12 +15,13 @@ import { LetDirective } from '@ngrx/component';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
+import { TimerComponent } from '@users/timer';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'profile-container',
   standalone: true,
-  imports: [FeatureUserInfoComponent, LetDirective, CommonModule],
+  imports: [FeatureUserInfoComponent, LetDirective, CommonModule, TimerComponent],
   templateUrl: './profile-container.component.html',
   styleUrls: ['./profile-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
