@@ -6,11 +6,12 @@ import { Folder, MaterialsFacade } from '@users/materials/data-access';
 import { FoldersAddButtonComponent } from '@users/feature-folders-create';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'folders-list-container',
   standalone: true,
-  imports: [CommonModule, LetDirective, FoldersListComponent, FoldersAddButtonComponent],
+  imports: [CommonModule, LetDirective, FoldersListComponent, FoldersAddButtonComponent, MatSnackBarModule],
   templateUrl: './folders-list-container.component.html',
   styleUrls: ['./folders-list-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -30,11 +30,12 @@ export const initMaterials = createEffect(
 export const addNewFolder = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) => {
     return actions$.pipe(
-      ofType(materialsActions.addNewFolder),
-      switchMap(({ newFolderData }) =>
+      ofType(materialsActions.addFolder),
+      switchMap(({ newFolderData, onSuccessSnackbar }) =>
         apiService.post<Folder, AddFolder>('/folder', newFolderData).pipe(
-          tap((newFolder) => console.log(newFolder)),
-          map((newFolder) => materialsActions.addFolderSuccess({ newFolder }))
+          map((newFolder) => ({ newFolder, onSuccessSnackbar })),
+          tap(({onSuccessSnackbar}) => onSuccessSnackbar()),
+          map(({newFolder}) => materialsActions.addFolderSuccess({ newFolder }))
         )
       )
     );

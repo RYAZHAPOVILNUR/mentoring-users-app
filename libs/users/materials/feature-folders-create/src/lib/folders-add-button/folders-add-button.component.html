@@ -1,3 +1,9 @@
 <button mat-fab color="primary" class="add-folder-fab-button" (click)="openAddUserDialog()">
   <mat-icon>add</mat-icon>
 </button>
+
+<ng-template #snackbarAddFolderSuccess>
+  <div class="folders-list-snackbar">
+    <span>Папка успешно добавлена!</span>
+  </div>
+</ng-template>
