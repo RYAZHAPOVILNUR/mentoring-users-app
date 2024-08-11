@@ -1,7 +1,9 @@
 <mat-card class="material-card">
   <mat-card-content class="mat-card-content">
     <div class="material-card-top">
-      <mat-icon>folder</mat-icon>
+      <mat-icon *ngIf="material.material_link.split('.').includes('mp3')">music_note</mat-icon>
+      <mat-icon *ngIf="material.material_link.split('.').includes('youtube')">ondemand_video</mat-icon>
+      <mat-icon *ngIf="material.material_link.split('.').includes('pdf')">insert_drive_file</mat-icon>
       <mat-icon class="material-card-deleteBtn" (click)="onDeleteMaterial($event)">delete</mat-icon>
     </div>
     <label class="material-card-title">{{ material.title }}</label>

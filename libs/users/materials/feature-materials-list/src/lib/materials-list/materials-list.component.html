@@ -9,11 +9,12 @@
   <button mat-icon-button aria-label="close dialog" (click)="onBackBtn()">
     <mat-icon>arrow_back</mat-icon>
   </button>
+  <h1 class="folder-title">{{folderTitle}}</h1>
   <ng-container *ngIf="vm.status === 'loaded'; else error">
     <div class="container">
       <div class="row">
         <div class="col materials-card-wrap" *ngFor="let material of vm.materials">
-          <users-materials-card (deleteMaterial)="onDeleteMaterial($event)" [material]="material"/>
+          <users-materials-card (click)="onOpenMaterialDialog(material)" (deleteMaterial)="onDeleteMaterial($event)" [material]="material"/>
         </div>
       </div>
     </div>
@@ -21,9 +22,6 @@
 </ng-template>
 
 <ng-template #error>
-  <button mat-icon-button aria-label="close dialog" (click)="onBackBtn()">
-    <mat-icon>arrow_back</mat-icon>
-  </button>
   <div class="alert alert-danger" role="alert">
     <h1>{{ vm.errors?.status }}</h1>
     <hr />

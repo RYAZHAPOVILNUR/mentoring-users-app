@@ -1,0 +1,27 @@
+.material-dialog-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 10px;
+}
+
+.material-dialog-title-wrap {
+  width: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+.material-dialog-title {
+  margin-left: 8%;
+}
+
+.material-video-preview {
+  display: flex;
+  justify-content: center;
+}
+
+.pdf-viewer {
+  width: 840px;
+  height: 410px;
+}

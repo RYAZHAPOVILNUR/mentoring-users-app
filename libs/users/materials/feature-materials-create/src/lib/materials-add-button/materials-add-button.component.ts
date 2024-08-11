@@ -7,8 +7,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { CreateMaterial, MaterialsFacade } from '@users/materials/data-access';
 import { MaterialsAddDialogComponent } from '../materials-add-dialog/materials-add-dialog.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { select } from '@ngrx/store';
-import { selectRouteParams } from '@users/core/data-access';
 
 @Component({
   selector: 'users-materials-add-button',
@@ -27,14 +25,9 @@ import { selectRouteParams } from '@users/core/data-access';
 export class MaterialsAddButtonComponent {
   private readonly title!: string;
   private readonly url!: string;
-  private readonly folderId = select(selectRouteParams)
   private readonly materialsFacade = inject(MaterialsFacade);
   private readonly destroyRef = inject(DestroyRef);
   public dialog = inject(MatDialog);
-
-  constructor() {
-    console.log(Number(window.location.href.split('/').pop()));
-  }
 
   openAddMaterialDialog(event: Event): void {
     const button = event.target as HTMLButtonElement;

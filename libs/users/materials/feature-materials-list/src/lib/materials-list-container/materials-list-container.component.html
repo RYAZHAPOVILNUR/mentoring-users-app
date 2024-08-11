@@ -5,5 +5,5 @@
     errors: errors$
   } as vm"
 >
-<users-materials-list [vm]="vm" (deleteMaterial)="onDeleteMaterial($event)" (back)="onBackBtn()"></users-materials-list>
+<users-materials-list [folderTitle]="folderTitle" [vm]="vm" (openMaterialDialog)="onOpenMaterialDialog($event)" (deleteMaterial)="onDeleteMaterial($event)" (back)="onBackBtn()"></users-materials-list>
 </ng-container>
