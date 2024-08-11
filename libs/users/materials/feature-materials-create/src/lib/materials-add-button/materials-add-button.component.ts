@@ -29,7 +29,7 @@ export class MaterialsAddButtonComponent {
   private readonly destroyRef = inject(DestroyRef);
   public dialog = inject(MatDialog);
 
-  openAddMaterialDialog(event: Event): void {
+  public openAddMaterialDialog(event: Event): void {
     const button = event.target as HTMLButtonElement;
     const dialogRef: MatDialogRef<MaterialsAddDialogComponent> = this.dialog.open(MaterialsAddDialogComponent, {
       data: {

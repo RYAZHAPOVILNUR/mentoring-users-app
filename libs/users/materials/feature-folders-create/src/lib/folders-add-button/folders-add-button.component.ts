@@ -21,7 +21,7 @@ export class FoldersAddButtonComponent {
   private readonly destroyRef = inject(DestroyRef);
   public dialog = inject(MatDialog);
 
-  openAddFolderDialog(): void {
+  public openAddFolderDialog(): void {
     const dialogRef: MatDialogRef<FoldersAddDialogComponent> = this.dialog.open(FoldersAddDialogComponent, {
       data: {title: this.title},
     });

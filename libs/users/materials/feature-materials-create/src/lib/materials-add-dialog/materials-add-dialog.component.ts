@@ -35,11 +35,11 @@ export class MaterialsAddDialogComponent {
     })
   }
 
-  cancel(): void {
+  public cancel(): void {
     this.dialogRef.close();
   }
 
-  save(): void {
+  public save(): void {
     if (this.formGroup.valid) {
       const formData = {
         title: this.formGroup.value.title,
