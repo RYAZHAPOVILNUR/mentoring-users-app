@@ -11,7 +11,7 @@ export const materialsActions = createActionGroup({
     initMaterialsFailure: emptyProps(),
     loadAllFolders: emptyProps(),
     loadFoldersFailure: props<{ error: any }>(),
-    addFolder: props<{newFolderData: AddFolder; showSuccessSnackbar: showSnackbarType}>(),
+    addFolder: props<{newFolderData: AddFolder; showSnackbarAddFolderSuccess: showSnackbarType}>(),
     addFolderSuccess: props<{newFolder: Folder}>(),
     deleteFolder: props<{id: number, showSnackbarDeleteFolderSuccess: showSnackbarType}>(),
     deleteFolderSuccess: props<{id: number}>(),

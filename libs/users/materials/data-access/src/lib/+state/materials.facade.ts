@@ -24,8 +24,8 @@ export class MaterialsFacade {
     this.store.dispatch(materialsActions.initMaterials())
   };
 
-  addNewFolder(newFolderData: AddFolder, showSuccessSnackbar: showSnackbarType) {
-    this.store.dispatch(materialsActions.addFolder({newFolderData, showSuccessSnackbar}))
+  addNewFolder(newFolderData: AddFolder, showSnackbarAddFolderSuccess: showSnackbarType) {
+    this.store.dispatch(materialsActions.addFolder({newFolderData, showSnackbarAddFolderSuccess}))
   }
 
   deleteFolder(id: number, showSnackbarDeleteFolderSuccess: showSnackbarType) {
