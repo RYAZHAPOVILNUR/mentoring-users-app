@@ -1,21 +1,19 @@
+<mat-card matTooltip="matTooltip" matTooltipClass="example-tooltip-uppercase" class="folder-card-wrapper mb-4" (click)="onRedirectToMaterialsPage()">
+  <mat-card-content class="mat-card-content">
+    <mat-icon class="folder-icon">folder</mat-icon>
+    <label>{{ folder.title }}</label>
+    <ng-template #email> 'ng-template #email' </ng-template>
+    <span>Создана: {{ folder.created_at | date : 'dd MMM yyyy' }}</span>
+  </mat-card-content>
 
-    <mat-card matTooltip="matTooltip" matTooltipClass="example-tooltip-uppercase" class="folder-card-wrapper mb-4">
-      <mat-card-content class="mat-card-content">
-        <mat-icon class="folder-icon">folder</mat-icon>
-        <label>{{folder.title}}</label>
-        <ng-template #email> 'ng-template #email' </ng-template>
-        <span>Создана: {{folder.created_at | date:'dd MMM yyyy'}}</span>
-      </mat-card-content>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item color="accent">Переименовать</button>
+    <button mat-menu-item color="warn" (click)="onDeleteFolder()">Удалить</button>
+  </mat-menu>
 
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item color="accent">Переименовать</button>
-        <button mat-menu-item color="warn" (click)="onDeleteFolder()">Удалить</button>
-      </mat-menu>
-
-      <mat-card-actions class="folder-card-buttons">
-        <button mat-icon-button [matMenuTriggerFor]="menu">
-          <mat-icon>more_horiz</mat-icon>
-        </button>
-      </mat-card-actions>
-    </mat-card>
-
+  <mat-card-actions class="folder-card-buttons">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_horiz</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

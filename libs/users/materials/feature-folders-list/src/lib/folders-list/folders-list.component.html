@@ -10,6 +10,7 @@
             *ngFor="let folder of vm.folders"
             [folder]="folder"
             (deleteFolder)="onDeleteFolder(folder)"
+            (redirectToMaterialsPage)="onRedirectToMaterialsPage(folder.id)"
           />
       </div>
     </div>

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatMenuTrigger } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Folder } from 'libs/users/materials/data-access/src/lib/models/folder.model';
@@ -27,8 +26,13 @@ export class FoldersCardComponent {
   folder!: Folder;
 
   @Output() deleteFolder = new EventEmitter();
+  @Output() redirectToMaterialsPage = new EventEmitter()
 
   onDeleteFolder() {
     this.deleteFolder.emit()
+  }
+
+  onRedirectToMaterialsPage() {
+    this.redirectToMaterialsPage.emit()
   }
 }

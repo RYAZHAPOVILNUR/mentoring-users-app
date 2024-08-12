@@ -29,6 +29,7 @@ export class FoldersListComponent {
   @ViewChild('snackbarDeleteFolderSuccess') snackbarTemplateRef!: TemplateRef<any>;
 
   @Output() deleteFolder = new EventEmitter()
+  @Output() redirectToMaterialsPage = new EventEmitter()
 
   onDeleteFolder(folder: Folder) {
     this.deleteFolder.emit({folder: folder, showSnackbarDeleteFolderSuccess: this.showSnackbarDeleteFolderSuccess})
@@ -41,5 +42,8 @@ export class FoldersListComponent {
       verticalPosition: 'top',
     });
 
+    onRedirectToMaterialsPage(id: number) {
+      this.redirectToMaterialsPage.emit(id)
+    }
 }
 

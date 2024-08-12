@@ -7,6 +7,7 @@
   <folders-list
     [vm]="vm"
     (deleteFolder)="onDeleteFolder($event.folder, $event.showSnackbarDeleteFolderSuccess)"
+    (redirectToMaterialsPage)="onRedirectToMaterialsPage($event)"
   />
 </ng-container>
 <folders-add-button></folders-add-button>
