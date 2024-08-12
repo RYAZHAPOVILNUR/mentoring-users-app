@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialsListComponent } from "../materials-list/materials-list.component";
+import { MaterialsFacade } from '@users/materials/data-access';
 
 @Component({
   selector: 'materials-list-container',
@@ -10,4 +11,10 @@ import { MaterialsListComponent } from "../materials-list/materials-list.compone
   styleUrls: ['./materials-list-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MaterialsListContainerComponent {}
+export class MaterialsListContainerComponent {
+  private readonly materialsFacade = inject(MaterialsFacade)
+
+  constructor() {
+    this.materialsFacade.loadMaterials()
+  }
+}

@@ -6,6 +6,7 @@ import { materialsActions } from './materials.actions';
 import { ApiService } from '@users/core/http';
 import { Folder } from '../models/folder.model';
 import { AddFolder } from '../models/add-folder.model';
+import { Material } from '../models/material.model';
 
 export const initMaterials = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) => {
@@ -15,7 +16,6 @@ export const initMaterials = createEffect(
         apiService.get<Folder[]>('/folder').pipe(
           tap((folders) => console.log('effect, folders', folders)),
           map((folders) => materialsActions.initMaterialsSuccess({ folders })),
-
           catchError((error) => {
             console.error('Error', error);
             return of(materialsActions.initMaterialsFailure());
@@ -54,6 +54,25 @@ export const deleteFolder = createEffect(
           catchError((error) => {
             console.error('Error', error);
             return of(materialsActions.deleteFolderFailed({ error }));
+          })
+        )
+      )
+    );
+  },
+  { functional: true }
+);
+
+export const loadMaterials = createEffect(
+  (actions$ = inject(Actions), apiService = inject(ApiService)) => {
+    return actions$.pipe(
+      ofType(materialsActions.loadMaterials),
+      switchMap(() =>
+        apiService.get<Material[]>('/material').pipe(
+          tap((materials) => console.log('effect, materials', materials)),
+          map((materials) => materialsActions.loadMaterialsSuccess({ materials })),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(materialsActions.loadMaterialsFailure());
           })
         )
       )

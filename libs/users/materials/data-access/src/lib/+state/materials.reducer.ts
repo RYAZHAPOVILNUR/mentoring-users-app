@@ -31,5 +31,7 @@ export const materialsFeature = createFeature({
     ),
     on(materialsActions.addFolderSuccess, (state, { newFolder }) => materialsAdapter.addOne(newFolder, state)),
     on(materialsActions.deleteFolderSuccess, (state, { id }) => materialsAdapter.removeOne(id, state)),
+    on(materialsActions.loadMaterials, (state) => ({ ...state, loadingStatus: 'loading' as const })),
+    on(materialsActions.loadMaterialsSuccess, (state, { materials }) => ({...state, materials, loadingStatus: 'loaded' as const}))
   )
 });

@@ -31,5 +31,9 @@ export class MaterialsFacade {
   deleteFolder(id: number, showSnackbarDeleteFolderSuccess: showSnackbarType) {
     this.store.dispatch(materialsActions.deleteFolder({id, showSnackbarDeleteFolderSuccess}))
   }
+
+  loadMaterials() {
+    this.store.dispatch(materialsActions.loadMaterials())
+  };
 }
 
