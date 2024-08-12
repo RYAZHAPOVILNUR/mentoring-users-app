@@ -6,7 +6,7 @@
 >
   <folders-list
     [vm]="vm"
-    (deleteFolder)="onDeleteFolder($event)"
+    (deleteFolder)="onDeleteFolder($event.folder, $event.showSnackbarDeleteFolderSuccess)"
   />
 </ng-container>
 <folders-add-button></folders-add-button>

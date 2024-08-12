@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LetDirective } from '@ngrx/component';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
-import { Folder, MaterialsFacade } from '@users/materials/data-access';
+import { Folder, MaterialsFacade, showSnackbarType} from '@users/materials/data-access';
 import { FoldersAddButtonComponent } from '@users/feature-folders-create';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
@@ -18,21 +18,21 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 })
 export class FoldersListContainerComponent {
   private readonly materialsFacade = inject(MaterialsFacade);
-  private readonly dialog = inject(MatDialog)
+  private readonly dialog = inject(MatDialog);
   public readonly allFolders$ = this.materialsFacade.allFolders$;
-  public readonly loadingStatus$ = this.materialsFacade.loadingStatus$
+  public readonly loadingStatus$ = this.materialsFacade.loadingStatus$;
 
   constructor() {
     this.materialsFacade.init();
   }
 
-  onDeleteFolder(folder: Folder) {
+  onDeleteFolder(folder: Folder, showSnackbarDeleteFolderSuccess: showSnackbarType) {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
       data: {dialogText: `Вы уверены, что хотите удалить «${folder.title}»?`}
     });
     dialogRef.afterClosed().subscribe((result) => {
       if(result) {
-        this.materialsFacade.deleteFolder(folder.id)
+        this.materialsFacade.deleteFolder(folder.id, showSnackbarDeleteFolderSuccess)
       }
     })
   }

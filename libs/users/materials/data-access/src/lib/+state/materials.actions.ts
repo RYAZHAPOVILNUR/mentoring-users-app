@@ -1,8 +1,7 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { Folder } from '../models/folder.model';
 import { AddFolder } from '../models/add-folder.model';
-
-export type onSuccessSnackbarType = () => void;
+import { showSnackbarType } from '../models/showSnackbarType.model';
 
 export const materialsActions = createActionGroup({
   source: 'Materials',
@@ -12,9 +11,9 @@ export const materialsActions = createActionGroup({
     initMaterialsFailure: emptyProps(),
     loadAllFolders: emptyProps(),
     loadFoldersFailure: props<{ error: any }>(),
-    addFolder: props<{newFolderData: AddFolder; onSuccessSnackbar: onSuccessSnackbarType}>(),
+    addFolder: props<{newFolderData: AddFolder; showSuccessSnackbar: showSnackbarType}>(),
     addFolderSuccess: props<{newFolder: Folder}>(),
-    deleteFolder: props<{id: number}>(),
+    deleteFolder: props<{id: number, showSnackbarDeleteFolderSuccess: showSnackbarType}>(),
     deleteFolderSuccess: props<{id: number}>(),
     deleteFolderFailed: props<{ error: any }>(),
   },

@@ -1,8 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { materialsActions, onSuccessSnackbarType } from './materials.actions';
+import { materialsActions } from './materials.actions';
 import * as materialsSelectors from './materials.selectors'
 import { AddFolder } from '../models/add-folder.model';
+import { showSnackbarType } from '../models/showSnackbarType.model';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
@@ -23,12 +24,12 @@ export class MaterialsFacade {
     this.store.dispatch(materialsActions.initMaterials())
   };
 
-  addNewFolder(newFolderData: AddFolder, onSuccessSnackbar: onSuccessSnackbarType) {
-    this.store.dispatch(materialsActions.addFolder({newFolderData, onSuccessSnackbar}))
+  addNewFolder(newFolderData: AddFolder, showSuccessSnackbar: showSnackbarType) {
+    this.store.dispatch(materialsActions.addFolder({newFolderData, showSuccessSnackbar}))
   }
 
-  deleteFolder(id: number) {
-    this.store.dispatch(materialsActions.deleteFolder({id}))
+  deleteFolder(id: number, showSnackbarDeleteFolderSuccess: showSnackbarType) {
+    this.store.dispatch(materialsActions.deleteFolder({id, showSnackbarDeleteFolderSuccess}))
   }
 }
 

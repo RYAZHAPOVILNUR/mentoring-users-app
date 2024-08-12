@@ -31,11 +31,11 @@ export const addNewFolder = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) => {
     return actions$.pipe(
       ofType(materialsActions.addFolder),
-      switchMap(({ newFolderData, onSuccessSnackbar }) =>
+      switchMap(({ newFolderData, showSuccessSnackbar }) =>
         apiService.post<Folder, AddFolder>('/folder', newFolderData).pipe(
-          map((newFolder) => ({ newFolder, onSuccessSnackbar })),
-          tap(({onSuccessSnackbar}) => onSuccessSnackbar()),
-          map(({newFolder}) => materialsActions.addFolderSuccess({ newFolder }))
+          map((newFolder) => ({ newFolder, showSuccessSnackbar })),
+          tap(({ showSuccessSnackbar }) => showSuccessSnackbar()),
+          map(({ newFolder }) => materialsActions.addFolderSuccess({ newFolder }))
         )
       )
     );
@@ -47,9 +47,10 @@ export const deleteFolder = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) => {
     return actions$.pipe(
       ofType(materialsActions.deleteFolder),
-      switchMap(({ id }) =>
+      switchMap(({ id, showSnackbarDeleteFolderSuccess }) =>
         apiService.delete<void>(`/folder/${id}`).pipe(
           map(() => materialsActions.deleteFolderSuccess({ id })),
+          tap(() => showSnackbarDeleteFolderSuccess()),
           catchError((error) => {
             console.error('Error', error);
             return of(materialsActions.deleteFolderFailed({ error }));

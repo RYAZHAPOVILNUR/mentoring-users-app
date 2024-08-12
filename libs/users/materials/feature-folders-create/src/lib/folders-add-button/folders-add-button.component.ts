@@ -25,7 +25,7 @@ export class FoldersAddButtonComponent {
 
   @ViewChild('snackbarAddFolderSuccess') snackbarTemplateRef!: TemplateRef<any>;
 
-  private onAddFolderSuccess = () =>
+  private showSuccessSnackbar = () =>
     this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
       duration: 2500,
       horizontalPosition: 'center',
@@ -47,7 +47,7 @@ export class FoldersAddButtonComponent {
           const newFolderData: AddFolder = {
             title: result.title,
           };
-          this.materialsFacade.addNewFolder(newFolderData, this.onAddFolderSuccess)
+          this.materialsFacade.addNewFolder(newFolderData, this.showSuccessSnackbar)
         }
       })
   }
