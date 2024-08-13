@@ -18,4 +18,14 @@ import { Material } from '@users/materials/data-access';
 export class MaterialsCardComponent {
   @Input({required: true})
   material!: Material;
+
+  pickIcon() {
+    if(this.material.material_link.endsWith('.pdf')) {
+      return 'picture_as_pdf'
+    }
+    if(this.material.material_link.endsWith('.mp3')) {
+      return 'audio_file'
+    }
+    return 'ondemand_video'
+  }
 }

@@ -7,8 +7,14 @@
 <ng-template #loadingResult>
   <div class="container">
     <ng-container *ngIf="vm.loadingStatus === 'loaded'; else error">
-      
-      <h1><strong>{{vm.openedFolder?.title || 'Папка без названия'}}</strong></h1>
+
+      <div class="card-header">
+        <button mat-icon-button aria-label="close dialog" color="accent" (click)="onRedirectToFoldersList()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <h1><strong>{{vm.openedFolder?.title || 'Папка без названия'}}</strong></h1>
+      </div>
+
 
       <ng-container *ngIf="vm.materials.length === 0">
         <h2>Эта папка пуста...</h2>

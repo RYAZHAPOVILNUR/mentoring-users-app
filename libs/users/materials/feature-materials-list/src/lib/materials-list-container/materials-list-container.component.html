@@ -5,6 +5,9 @@
     loadingStatus: loadingStatus$,
   } as vm"
 >
-  <materials-list [vm]="vm"/>
+  <materials-list
+    [vm]="vm"
+    (redirectToFoldersList)="onRedirectToFoldersList()"
+  />
 </ng-container>
 

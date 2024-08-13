@@ -23,5 +23,5 @@ export const selectOpenedFolder = createSelector(
 export const selectFoldersMaterials = createSelector(
   selectAllMaterials,
   selectRouteParams,
-  (materials, { id }) =>  materials.filter((material) => Number(material.folder_id) === Number(id))
+  (materials, { id }) =>  materials.filter((material) => Number(material.folder_id) === Number(id) && material.material_link !== 'string')
 )

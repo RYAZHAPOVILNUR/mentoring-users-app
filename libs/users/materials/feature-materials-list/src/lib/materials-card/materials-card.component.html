@@ -1,6 +1,6 @@
-<mat-card [matTooltip]="material.title" matTooltipClass="example-tooltip-uppercase" class="card-wrapper mb-4" >
+<mat-card [matTooltip]="material.material_link" matTooltipClass="example-tooltip-uppercase" class="card-wrapper mb-4" >
   <mat-card-content class="mat-card-content">
-    <mat-icon class="icon">disabled_visible</mat-icon>
+    <mat-icon class="icon">{{pickIcon()}}</mat-icon>
     <label>{{ material.title }}</label>
     <ng-template #email> 'ng-template #email' </ng-template>
     <span>Создан: {{ material.created_at | date : 'dd MMM yyyy' }}</span>
