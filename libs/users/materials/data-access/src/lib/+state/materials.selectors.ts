@@ -1,10 +1,27 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import * as fromMaterials from './materials.reducer';
+import { materialsFeatureKey, MaterialsState, materialsAdapter } from './materials.reducer';
+import { selectRouteParams } from '@users/core/data-access';
 
-export const selectMaterialsState = createFeatureSelector<fromMaterials.MaterialsState>(fromMaterials.materialsFeatureKey);
+export const selectMaterialsState = createFeatureSelector<MaterialsState>(materialsFeatureKey);
 
-const {selectAll} = fromMaterials.materialsAdapter.getSelectors()
+const {selectAll, selectEntities} = materialsAdapter.getSelectors()
 
-export const selectAllFolders = createSelector(selectMaterialsState, (state: fromMaterials.MaterialsState) => selectAll(state) )
+export const selectAllFolders = createSelector(selectMaterialsState, (state: MaterialsState) => selectAll(state) )
 
-export const selecLoadingStatus = createSelector(selectMaterialsState, (state: fromMaterials.MaterialsState) => state.loadingStatus)
+export const selecLoadingStatus = createSelector(selectMaterialsState, (state: MaterialsState) => state.loadingStatus)
+
+export const selectAllMaterials = createSelector(selectMaterialsState, (state: MaterialsState) => state.materials)
+
+export const selectFoldersEntities = createSelector(selectMaterialsState, (state: MaterialsState) => selectEntities(state))
+
+export const selectOpenedFolder = createSelector(
+  selectRouteParams,
+  selectFoldersEntities,
+  ({ id }, foldersEntities) => foldersEntities[id] || null
+)
+
+export const selectFoldersMaterials = createSelector(
+  selectAllMaterials,
+  selectRouteParams,
+  (materials, { id }) =>  materials.filter((material) => Number(material.folder_id) === Number(id))
+)

@@ -40,7 +40,6 @@ export class FoldersListContainerComponent {
   }
 
   onRedirectToMaterialsPage(id: number) {
-    console.log('id in container', id);
     this.router.navigate(['/materials/', id])
   }
 }

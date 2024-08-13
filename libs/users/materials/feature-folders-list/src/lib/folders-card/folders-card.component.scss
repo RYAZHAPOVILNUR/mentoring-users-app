@@ -1,4 +1,4 @@
-.folder-card-wrapper {
+.card-wrapper {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -61,7 +61,7 @@ mat-card{
 
 }
 
-.folder-card-buttons {
+.card-buttons {
   position: absolute;
   top: 5px;
   right: 5px;

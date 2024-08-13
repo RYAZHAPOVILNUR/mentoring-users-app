@@ -1,8 +1,33 @@
-<div class="container">
-  <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xxl-6">
-    <materials-card></materials-card>
-    <materials-card></materials-card>
-    <materials-card></materials-card>
-    <materials-card></materials-card>
+<ng-container *ngIf="vm.loadingStatus === 'loading'; else loadingResult">
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+
+
+
+<ng-template #loadingResult>
+  <div class="container">
+    <ng-container *ngIf="vm.loadingStatus === 'loaded'; else error">
+      
+      <h1><strong>{{vm.openedFolder?.title || 'Папка без названия'}}</strong></h1>
+
+      <ng-container *ngIf="vm.materials.length === 0">
+        <h2>Эта папка пуста...</h2>
+      </ng-container>
+
+      <ng-container *ngIf="vm.materials.length > 0">
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xxl-6">
+          <materials-card *ngFor="let material of vm.materials" [material]="material" />
+        </div>
+
+      </ng-container>
+    </ng-container>
   </div>
-</div>
+</ng-template>
+
+<ng-template #error>
+  <div class="alert alert-danger" role="alert">
+    <h1>{{ 'Сюда что-то типа того -- vm.errors?.status' }}</h1>
+    <hr />
+    {{ 'Сюда что-то типа того -- vm.errors' }}
+  </div>
+</ng-template>

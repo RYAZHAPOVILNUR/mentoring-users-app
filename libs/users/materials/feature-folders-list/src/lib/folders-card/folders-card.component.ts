@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu';
+import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Folder } from 'libs/users/materials/data-access/src/lib/models/folder.model';
@@ -27,6 +27,13 @@ export class FoldersCardComponent {
 
   @Output() deleteFolder = new EventEmitter();
   @Output() redirectToMaterialsPage = new EventEmitter()
+
+  @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
+
+  onOpenMenu(event: Event) {
+    event.stopPropagation();
+    this.trigger.openMenu();
+  }
 
   onDeleteFolder() {
     this.deleteFolder.emit()

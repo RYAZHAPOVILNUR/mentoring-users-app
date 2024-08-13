@@ -1,9 +1,9 @@
-<mat-card matTooltip="matTooltip" matTooltipClass="example-tooltip-uppercase" class="card-wrapper mb-4" >
+<mat-card [matTooltip]="material.title" matTooltipClass="example-tooltip-uppercase" class="card-wrapper mb-4" >
   <mat-card-content class="mat-card-content">
-    <mat-icon class="icon">folder</mat-icon>
-    <label>{{ 'Название материала 1111' }}</label>
+    <mat-icon class="icon">disabled_visible</mat-icon>
+    <label>{{ material.title }}</label>
     <ng-template #email> 'ng-template #email' </ng-template>
-    <span>Создана: {{ 'folder.created_at | date :'  }}</span>
+    <span>Создан: {{ material.created_at | date : 'dd MMM yyyy' }}</span>
   </mat-card-content>
 
   <mat-menu #menu="matMenu">
