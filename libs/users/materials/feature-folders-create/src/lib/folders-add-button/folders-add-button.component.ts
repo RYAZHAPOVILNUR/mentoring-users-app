@@ -17,7 +17,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersAddButtonComponent {
-  private name!: string;
   public dialog = inject(MatDialog)
   private readonly destroyRef = inject(DestroyRef);
   private readonly materialsFacade = inject(MaterialsFacade)

@@ -1,0 +1,22 @@
+
+    <div class="modal-container">
+      <div class="header">
+        <h1 mat-dialog-title>{{ title }}</h1>
+        <mat-dialog-actions>
+          <button mat-icon-button mat-dialog-close  aria-label="close dialog" matTooltip="Close" color="accent" (click)="onCloseMaterialFile()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-dialog-actions>
+      </div>
+      <mat-dialog-content class="mat-typography">
+        <h3>Ссылка на материал: {{ link }}</h3>
+        <pdf-viewer
+          class="pdf-viewer"
+          src="https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf"
+          [render-text]="true"
+          [original-size]="false"
+          [fit-to-page]="true"
+        ></pdf-viewer>
+      </mat-dialog-content>
+    </div>
+

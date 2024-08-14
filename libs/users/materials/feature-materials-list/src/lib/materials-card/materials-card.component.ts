@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,6 +18,13 @@ import { Material } from '@users/materials/data-access';
 export class MaterialsCardComponent {
   @Input({required: true})
   material!: Material;
+
+  @Output() openMaterialFile = new EventEmitter()
+
+
+  onOpenMaterialFile() {
+    this.openMaterialFile.emit()
+  }
 
   pickIcon() {
     if(this.material.material_link.endsWith('.pdf')) {

@@ -1,6 +1,6 @@
-<mat-card [matTooltip]="material.material_link" matTooltipClass="example-tooltip-uppercase" class="card-wrapper mb-4" >
+<mat-card [matTooltip]="material.material_link" matTooltipClass="example-tooltip-uppercase" class="card-wrapper mb-4" (click)="onOpenMaterialFile()">
   <mat-card-content class="mat-card-content">
-    <mat-icon class="icon">{{pickIcon()}}</mat-icon>
+    <mat-icon class="icon">{{ pickIcon() }}</mat-icon>
     <label>{{ material.title }}</label>
     <ng-template #email> 'ng-template #email' </ng-template>
     <span>Создан: {{ material.created_at | date : 'dd MMM yyyy' }}</span>
@@ -8,7 +8,7 @@
 
   <mat-menu #menu="matMenu">
     <button mat-menu-item color="accent">Переименовать</button>
-    <button mat-menu-item color="warn" >Удалить</button>
+    <button mat-menu-item color="warn">Удалить</button>
   </mat-menu>
 
   <mat-card-actions class="card-buttons">
