@@ -8,6 +8,7 @@ import {
   ArticleSelectors,
   CommentsActions,
   commentsSelectors,
+  CreateComment,
 } from '../../../../data-access/src';
 import { selectQueryParam, selectRouteParam } from '../../../../../../core/data-access/src';
 import { map, Observable, withLatestFrom, take } from 'rxjs';
@@ -18,6 +19,11 @@ import { ArticleCommentsComponent } from '../article-comments/article-comments.c
 import { selectLoggedUserId } from '../../../../../../core/auth/data-access/src';
 import { selectComments } from '../../../../data-access/src/lib/+state/comments/comments.selectors';
 import { selectOpenedArticle } from 'libs/users/articles/data-access/src/lib/+state/articles.selectors';
+
+export type EditedComment = {
+  comment: CreateComment,
+  commentId: number
+}
 
 @Component({
   selector: 'article-read-container',
@@ -53,7 +59,10 @@ export class ArticleReadContainerComponent {
         author_id: Number(authorId),
         article_id: Number(article?.id),
         text: commentText,
+        like_user_ids: [],
+        dislike_user_ids: [],
       };
+
       this.store.dispatch(CommentsActions.publishComment({ comment }));
     });
   }
@@ -62,5 +71,13 @@ export class ArticleReadContainerComponent {
     this.openedArticle$.pipe(take(1), withLatestFrom(this.articleId$)).subscribe(([, params]) => {
       this.store.dispatch(CommentsActions.loadComments({ articleId: params['id'] }));
     });
+  }
+
+  public onThumbUp(editedComment: EditedComment) {
+    this.store.dispatch(CommentsActions.editCommentLike(editedComment))
+  }
+
+  public onThumbDown(editedComment: EditedComment) {
+    this.store.dispatch(CommentsActions.editCommentDisLike(editedComment))
   }
 }

@@ -18,8 +18,10 @@
         <article-comments
           [comments]="vm.comments"
           [status]="vm.commentsStatus"
+          (thumbUp)="onThumbUp($event)"
+          (thumbDown)="onThumbDown($event)"
           (submitComment)="onSubmitComment($event)"
-        >
+          >
         </article-comments>
       </ng-container>
     </ng-container>

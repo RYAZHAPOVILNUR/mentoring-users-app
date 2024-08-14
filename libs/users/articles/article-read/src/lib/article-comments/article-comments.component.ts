@@ -40,6 +40,8 @@ export class ArticleCommentsComponent {
   @Input() comments!: Comment[];
   @Input() status!: LoadingStatus;
   @Output() submitComment = new EventEmitter<string>();
+  @Output() thumbUp = new EventEmitter();
+  @Output() thumbDown = new EventEmitter();
 
   private authFacade = inject(AuthFacade);
 
@@ -49,12 +51,20 @@ export class ArticleCommentsComponent {
     commentText: new FormControl('', [Validators.maxLength(100)]),
   });
 
-  onSubmitComment() {
+  public onSubmitComment() {
     if (this.formGroup.valid && this.formGroup.value.commentText) {
       this.submitComment.emit(this.formGroup.value.commentText);
       this.formGroup.reset();
       return;
     }
     return;
+  }
+
+  public onThumbUp(event: Event) {
+    this.thumbUp.emit(event)
+  }
+
+  public onThumbDown(event: Event) {
+    this.thumbDown.emit(event)
   }
 }

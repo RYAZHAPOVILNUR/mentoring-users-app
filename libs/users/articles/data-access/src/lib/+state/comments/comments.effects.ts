@@ -43,6 +43,70 @@ export const publishComment$ = createEffect(
   { functional: true }
 );
 
+export const editCommentLike$ = createEffect(
+  (actions$ = inject(Actions), auth$ = inject(AuthFacade), apiService = inject(ApiService)) => {
+    return actions$.pipe(
+      ofType(CommentsActions.editCommentLike),
+      withLatestFrom(auth$.user$),
+      switchMap(([{ comment, commentId }, user]) => {
+        const author = {
+          id: user.id,
+          name: user.name,
+          username: user.username,
+          photo: {
+            url: user.photo!.url,
+          },
+        };
+
+        return apiService.post<Comment, CreateComment>(`/comments/${commentId}`, comment).pipe(
+          map((comment) =>
+            CommentsActions.editCommentLikeSuccess({
+              comment: { ...comment, author },
+            })
+          ),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(CommentsActions.editCommentLikeFilure({ error }));
+          })
+        );
+      })
+    );
+  },
+  { functional: true }
+);
+
+export const editCommentDisLike$ = createEffect(
+  (actions$ = inject(Actions), auth$ = inject(AuthFacade), apiService = inject(ApiService)) => {
+    return actions$.pipe(
+      ofType(CommentsActions.editCommentDisLike),
+      withLatestFrom(auth$.user$),
+      switchMap(([{ comment, commentId }, user]) => {
+        const author = {
+          id: user.id,
+          name: user.name,
+          username: user.username,
+          photo: {
+            url: user.photo!.url,
+          },
+        };
+
+        return apiService.post<Comment, CreateComment>(`/comments/${commentId}`, comment).pipe(
+          map((comment) =>
+            CommentsActions.editCommentDisLikeSuccess({
+              comment: { ...comment, author },
+            })
+          ),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(CommentsActions.editCommentDisLikeFilure({ error }));
+          })
+        );
+      })
+    );
+  },
+  { functional: true }
+);
+
 export const loadComments$ = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) => {
     return actions$.pipe(

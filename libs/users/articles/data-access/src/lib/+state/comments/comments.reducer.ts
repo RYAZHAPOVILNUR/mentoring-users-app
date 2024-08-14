@@ -33,7 +33,10 @@ export const commentsFeature = createFeature({
     })),
 
     on(CommentsActions.loadCommentsSuccess, (state, { comments }) =>
-      commentsAdapter.setAll(comments, { ...state, status: 'loaded' as const })
+      commentsAdapter.setAll(comments, {
+        ...state,
+        status: 'loaded' as const 
+      })
     ),
 
     on(CommentsActions.loadCommentsFailed, (state) => ({
@@ -56,6 +59,38 @@ export const commentsFeature = createFeature({
     on(CommentsActions.publishCommentFailed, (state) => ({
       ...state,
       publishStatus: 'error' as const,
+    })),
+
+    on(CommentsActions.editCommentLikeSuccess, (state, { comment }) => 
+      commentsAdapter.updateOne(
+        {
+          id: comment.id,
+          changes: comment,
+        },
+        state
+      )
+    ),
+
+    on(CommentsActions.editCommentLikeFilure, (state, { error }) => ({
+      ...state,
+      status: 'error' as const,
+      error,
+    })),
+
+    on(CommentsActions.editCommentDisLikeSuccess, (state, { comment }) => 
+      commentsAdapter.updateOne(
+        {
+          id: comment.id,
+          changes: comment,
+        },
+        state
+      )
+    ),
+
+    on(CommentsActions.editCommentDisLikeFilure, (state, { error }) => ({
+      ...state,
+      status: 'error' as const,
+      error,
     })),
 
     on(CommentsActions.deleteComment, (state, { id }) => commentsAdapter.removeOne(id, state))
