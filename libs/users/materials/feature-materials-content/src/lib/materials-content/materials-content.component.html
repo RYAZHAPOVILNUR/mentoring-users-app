@@ -1,5 +1,9 @@
 
-    <div class="modal-container">
+<div class="modal-container">
+  <div class="video">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/mVjYG9TSN88?si=GLFJMnv3sS-evpKt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+  </div>
       <div class="header">
         <h1 mat-dialog-title>{{ title }}</h1>
         <mat-dialog-actions>
@@ -8,8 +12,8 @@
           </button>
         </mat-dialog-actions>
       </div>
-      <mat-dialog-content class="mat-typography">
-        <h3>Ссылка на материал: {{ link }}</h3>
+      <mat-dialog-content>
+        <h3><a target="_blank" [href]="link">Ссылка на материал</a></h3>
         <pdf-viewer
           class="pdf-viewer"
           src="https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf"
