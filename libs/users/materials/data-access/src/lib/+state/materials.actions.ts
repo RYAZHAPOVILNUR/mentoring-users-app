@@ -10,7 +10,7 @@ export const MaterialsActions = createActionGroup({
     'Load Materialss Failure': props<{ error: unknown }>(),
 
     'Add Folder': props<{ folderData: CreateFolder }>(),
-    'Add Folder Success': props<{ folderData: Folder }>(),
+    'Add Folder Success': props<{ folderData: Folder[] }>(),
     'Add Folder Failed': props<{  error: any  }>(),
   },
 });

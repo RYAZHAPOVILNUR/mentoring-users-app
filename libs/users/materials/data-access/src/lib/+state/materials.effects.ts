@@ -18,7 +18,7 @@ export class MaterialsEffects {
         ofType(MaterialsActions.addFolder),
         concatMap(
           ({folderData}) =>
-            apiService.post<Folder, CreateFolder>('/folder', folderData).pipe(
+            apiService.post<Folder[], CreateFolder>('/folder', folderData).pipe(
             map((folderData) =>
               MaterialsActions.addFolderSuccess({folderData})),
             catchError((error) => {
