@@ -1,0 +1,15 @@
+.thum-up-icon {
+  color: gray;
+}
+
+.like-active {
+  color: #7e57c2;
+}
+
+.likes-count {
+  font-size: 16px;
+}
+
+.mat-card-header {
+  cursor: pointer;
+}/*# sourceMappingURL=article-comment.component.css.map */

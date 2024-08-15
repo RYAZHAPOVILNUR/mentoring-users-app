@@ -1,0 +1,26 @@
+.cropper-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
+  padding: 0 15px;
+}
+
+.dialog-header mat-icon:hover {
+  color: blue;
+  cursor: pointer;
+}
+
+image-cropper {
+  max-width: 50vw;
+}
+
+button {
+  margin-bottom: 10px;
+}/*# sourceMappingURL=cropper-dialog.component.css.map */

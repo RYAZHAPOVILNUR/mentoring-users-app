@@ -1,0 +1,27 @@
+.home-wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.home-wrapper__about {
+  display: flex;
+}
+.home-wrapper__text {
+  margin-right: 20px;
+}
+.home-wrapper__text h2 {
+  font-size: 25px;
+}
+.home-wrapper__charts {
+  display: flex;
+  column-gap: 20px;
+}
+
+.home-icon {
+  height: 80px;
+  width: 80px;
+  font-size: 80px;
+}/*# sourceMappingURL=home.component.css.map */

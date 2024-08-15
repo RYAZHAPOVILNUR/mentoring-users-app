@@ -1,0 +1,203 @@
+.user-info {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-photo {
+  position: relative; /* Add this to make the overlay position relative to the photo container */
+  width: 8rem;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 20px;
+}
+
+.user-photo-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+}
+
+.change-photo-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 9999px;
+}
+
+.user-photo:hover .change-photo-overlay {
+  opacity: 1;
+}
+
+.change-photo-text {
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.name-edit-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: solid 1px #7e57c2;
+  box-shadow: none;
+}
+
+.name-edit-btn > .mat-icon {
+  height: 25px;
+  width: 25px;
+  font-size: 25px;
+  color: #7e57c2;
+}
+
+.user-info-card {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+}
+
+.user-info-items:not(.user-photo) {
+  width: 100%;
+}
+
+.user-info-items:nth-child(3) {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border-top: dotted 1px;
+  margin-top: 20px;
+}
+
+.name-edit-btn .mat-mdc-button-touch-target {
+  width: 30px;
+  height: 30px;
+}
+
+.user-info-items .navbar-btn {
+  width: 100%;
+  border: solid 1px #7e57c2;
+  margin-bottom: 15px;
+}
+
+div.github {
+  width: 100%;
+}
+
+.change-or-zoom-photo .change-or-zoom-photo__item {
+  position: absolute;
+  width: auto;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.change-or-zoom-photo .change-or-zoom-photo__item .mdc-fab::before {
+  border: solid 1px #7e57c2;
+}
+
+.change-or-zoom-photo .change-or-zoom-photo__item button {
+  background-color: #ffffff;
+}
+
+.change-or-zoom-photo .change-or-zoom-photo__item .mat-icon {
+  color: #7e57c2;
+}
+
+.change-or-zoom-photo .change-or-zoom-photo__item:nth-child(1) {
+  top: 0;
+  right: 0;
+}
+
+.change-or-zoom-photo .change-or-zoom-photo__item:nth-child(2) {
+  top: 40px;
+  right: -20px;
+}
+
+.change-or-zoom-photo {
+  display: block;
+  visibility: hidden;
+  transform: scale(0.3);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(126, 87, 194, 0.337254902);
+  transition: 0.1s;
+  border-radius: 50%;
+}
+.change-or-zoom-photo.isPhotoHovered {
+  transform: scale(1);
+  visibility: visible;
+}
+.change-or-zoom-photo.isPhotoHovered .change-or-zoom-photo__item {
+  animation: fadeIn 0.5s ease forwards;
+}
+.change-or-zoom-photo.isPhotoHovered .change-or-zoom-photo__item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.change-or-zoom-photo.isPhotoHovered .change-or-zoom-photo__item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.change-or-zoom-photo.isPhotoUnHovered .change-or-zoom-photo__item {
+  animation: fadeOut 0.3s ease forwards;
+}
+.change-or-zoom-photo.isPhotoUnHovered .change-or-zoom-photo__item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.change-or-zoom-photo.isPhotoUnHovered .change-or-zoom-photo__item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.user-info-inner .mat-icon {
+  height: 40px;
+  width: 40px;
+  overflow: hidden;
+  font-size: 40px;
+  color: rgba(126, 87, 194, 0.168627451);
+  margin-right: 10px;
+}
+.user-info-inner div {
+  border-bottom: dashed 1px #7e57c2;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5px;
+}
+.user-info-inner span {
+  font-size: 16px;
+  color: var(-mat-tab-header-inactive-label-text-color);
+}/*# sourceMappingURL=feature-user-info.component.css.map */

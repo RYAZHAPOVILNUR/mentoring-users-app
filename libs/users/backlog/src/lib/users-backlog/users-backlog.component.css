@@ -1,0 +1,29 @@
+.backlog-item {
+  border: 1px solid rgba(147, 147, 147, 0.2);
+  border-radius: 3px;
+  margin-bottom: 0.25rem;
+  margin-top: 0.25rem;
+}
+.backlog-item .backlog-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.backlog-item .user-story-name {
+  display: inline;
+  margin: 0;
+}
+.backlog-item .backlog-item-actions {
+  display: flex;
+  align-items: center;
+}
+.backlog-item .more_actions {
+  margin-left: 10px;
+}
+
+.backlog-inProgress {
+  margin-right: 50px;
+}
+.backlog-inProgress .expand_more {
+  vertical-align: text-bottom;
+}/*# sourceMappingURL=users-backlog.component.css.map */

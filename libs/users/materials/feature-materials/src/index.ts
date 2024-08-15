@@ -1,4 +1,3 @@
-export * from './lib/feature-materials.module';
 export * from './lib/materials-add-button/materials-add-button.component';
 export * from './lib/materials-card/materials-card.component';
 export * from './lib/materials-list-container/materials-list-container.component';

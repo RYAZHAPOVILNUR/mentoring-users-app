@@ -1,0 +1,15 @@
+.settings {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.langBtnsDiv {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.themeIcon {
+  margin: 0 auto;
+}/*# sourceMappingURL=settings.component.css.map */

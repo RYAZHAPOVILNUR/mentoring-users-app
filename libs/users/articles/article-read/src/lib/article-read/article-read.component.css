@@ -1,0 +1,28 @@
+.article {
+  max-width: 960px;
+  margin: 40px auto;
+}
+.article .article-header {
+  padding: 20px 20px 0 20px;
+  margin-bottom: 10px;
+}
+.article .article-header .article-title {
+  font-size: 24px;
+}
+.article .article-header .article-subtitle {
+  font-weight: 400;
+}
+.article .article-content {
+  padding: 0 20px 5px 20px;
+  font-size: 16px;
+}
+.article .article-content article {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.article .ql-editor {
+  padding: 0;
+  padding-bottom: 10px;
+}/*# sourceMappingURL=article-read.component.css.map */

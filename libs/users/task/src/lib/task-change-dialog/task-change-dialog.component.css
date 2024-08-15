@@ -1,0 +1,102 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header .headerTitle {
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.content mat-form-field {
+  width: 100%;
+}
+.content .editor {
+  width: 100%;
+}
+.content .editor .btnDiv {
+  display: flex;
+  gap: 5px;
+}
+.content .titles {
+  width: 100%;
+}
+.content .titles .show {
+  display: block;
+}
+.content .titles .hide {
+  display: none;
+}
+.content .taskInfo {
+  min-width: 200px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+.content .taskInfo .taskInfoCard {
+  width: 100%;
+  border: 1px solid;
+}
+
+.userPhoto {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.assignActions {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.assignUserDiv {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.spanName {
+  display: inline-block;
+  width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pointsDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.pointBtn {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+}
+.pointBtn .pointBtnDiv {
+  width: 160px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.totalValue {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}/*# sourceMappingURL=task-change-dialog.component.css.map */
