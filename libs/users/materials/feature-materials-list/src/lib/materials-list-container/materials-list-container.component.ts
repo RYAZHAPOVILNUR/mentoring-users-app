@@ -37,7 +37,7 @@ export class MaterialsListContainerComponent {
   onOpenMaterialFile(material: MaterialVM) {
     const dialogRef: MatDialogRef<MaterialsContentComponent> = this.dialog.open(
       MaterialsContentComponent, {
-        data: {material}
+        data: material
       }
     );
     dialogRef

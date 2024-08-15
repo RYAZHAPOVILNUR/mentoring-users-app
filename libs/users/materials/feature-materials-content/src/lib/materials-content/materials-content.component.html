@@ -1,32 +1,47 @@
-
 <div class="modal-container">
-  <div class="audio">
-    <audio controls>
-      <source [src]="data.material.material_link" type="audio/mp3">
-    </audio>
-</div>
-
-  <div class="video">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/mVjYG9TSN88?si=GLFJMnv3sS-evpKt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
+  <div class="modal-header">
+    <h1 mat-dialog-title>{{ title }}</h1>
+    <mat-dialog-actions>
+      <button mat-icon-button mat-dialog-close aria-label="close dialog" matTooltip="Close" color="accent">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-dialog-actions>
   </div>
-      <div class="header">
-        <h1 mat-dialog-title>{{ title }}</h1>
-        <mat-dialog-actions>
-          <button mat-icon-button mat-dialog-close  aria-label="close dialog" matTooltip="Close" color="accent" (click)="onCloseMaterialFile()">
-            <mat-icon>close</mat-icon>
-          </button>
-        </mat-dialog-actions>
-      </div>
-      <mat-dialog-content>
-        <h3><a target="_blank" [href]="link">Ссылка на материал</a></h3>
+
+  <mat-dialog-content>
+
+  <!-- AUDIO -->
+    <div class="audio" *ngIf="fileType === 'audio'">
+        <audio controls>
+          <source [src]="materialLink" type="audio/mp3" />
+        </audio>
+    </div>
+
+    <!-- PDF -->
+    <div *ngIf="fileType === 'pdf'">
+        <h3><a target="_blank" [href]="materialLink">Ссылка на материал</a></h3>
         <pdf-viewer
           class="pdf-viewer"
-          src="https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf"
+          [src]="materialLink"
           [render-text]="true"
           [original-size]="false"
           [fit-to-page]="true"
         ></pdf-viewer>
-      </mat-dialog-content>
     </div>
 
+    <!-- VIDEO -->
+    <div class="video" *ngIf="fileType === 'video'">
+        <iframe
+          width="560"
+          height="315"
+          [src]="getYoutubeEmbedLink(materialLink)"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+        <p>Pipe works - {{materialLink | toYoutubeEmbedLinkPipe}}</p>
+    </div>
+
+  </mat-dialog-content>
+</div>
