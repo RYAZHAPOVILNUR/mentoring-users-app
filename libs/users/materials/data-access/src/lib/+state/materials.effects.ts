@@ -1,12 +1,12 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap, switchMap, tap } from 'rxjs/operators';
+import { catchError, map, concatMap, switchMap, tap, filter } from 'rxjs/operators';
 import { Observable, EMPTY, of } from 'rxjs';
 import { materialsActions } from './materials.actions';
 import { ApiService } from '@users/core/http';
 import { Folder } from '../models/folder.model';
 import { AddFolder } from '../models/add-folder.model';
-import { Material } from '../models/material.model';
+import { MaterialDTO, materialsDTOAdapter } from '@users/core/data-access';
 
 export const initMaterials = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) => {
@@ -62,14 +62,20 @@ export const deleteFolder = createEffect(
   { functional: true }
 );
 
+// This effect gets materials from server and loads to state only valid materials, ignoring materials with links starts with not 'http'. This filter needs only wile server gives invalid materials.
 export const loadMaterials = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) => {
     return actions$.pipe(
       ofType(materialsActions.loadMaterials),
       switchMap(() =>
-        apiService.get<Material[]>('/material').pipe(
-          tap((materials) => console.log('effect, materials', materials)),
-          map((materials) => materialsActions.loadMaterialsSuccess({ materials })),
+        apiService.get<MaterialDTO[]>('/material').pipe(
+          tap((materialsDTO) => console.log('effect, materialsDTO', materialsDTO)),
+          map((unfilteredMaterialsDTO) => unfilteredMaterialsDTO.filter(unfilteredMaterial => unfilteredMaterial.material_link.startsWith('http'))),
+          map((materialsDTO) => {
+            const materials = materialsDTO.map((materialDTO) => materialsDTOAdapter.DTOtoVM(materialDTO))
+            console.log('materialVM in Effects', materials);
+            return materialsActions.loadMaterialsSuccess({materials})
+          }),
           catchError((error) => {
             console.error('Error', error);
             return of(materialsActions.loadMaterialsFailure());

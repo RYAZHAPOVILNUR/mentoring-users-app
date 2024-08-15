@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Material } from '@users/materials/data-access';
+import { MaterialVM } from '@users/materials/data-access';
 
 @Component({
   selector: 'materials-card',
@@ -17,10 +17,7 @@ import { Material } from '@users/materials/data-access';
 })
 export class MaterialsCardComponent {
   @Input({required: true})
-  material!: Material;
-
-  @Input({required: true})
-  fileType!: string;
+  material!: MaterialVM;
 
   @Output() openMaterialFile = new EventEmitter()
 

@@ -3,12 +3,12 @@ import { createFeature, createReducer, on } from '@ngrx/store';
 import { LoadingStatus } from '@users/core/data-access';
 import { materialsActions } from './materials.actions';
 import { Folder } from '../models/folder.model';
-import { Material } from '../models/material.model';
+import { MaterialVM } from '../models/material.model';
 
 export const materialsFeatureKey = 'materials';
 
 export interface MaterialsState extends EntityState<Folder>{
-  materials: Material[],
+  materials: MaterialVM[],
   loadingStatus: LoadingStatus,
   error: null,
 }

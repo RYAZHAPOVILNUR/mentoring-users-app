@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular
 import { CommonModule } from '@angular/common';
 import { LetDirective } from '@ngrx/component';
 import { MaterialsListComponent } from '../materials-list/materials-list.component';
-import { Material, MaterialsFacade } from '@users/materials/data-access';
+import { MaterialVM, MaterialsFacade } from '@users/materials/data-access';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MaterialsContentComponent } from '@users/feature-materials-content';
@@ -34,10 +34,10 @@ export class MaterialsListContainerComponent {
     this.router.navigate(['/materials'])
   }
 
-  onOpenMaterialFile(material: Material, fileType: string) {
+  onOpenMaterialFile(material: MaterialVM) {
     const dialogRef: MatDialogRef<MaterialsContentComponent> = this.dialog.open(
       MaterialsContentComponent, {
-        data: {material, fileType}
+        data: {material}
       }
     );
     dialogRef

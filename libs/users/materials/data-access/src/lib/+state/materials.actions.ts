@@ -2,7 +2,7 @@ import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { Folder } from '../models/folder.model';
 import { AddFolder } from '../models/add-folder.model';
 import { showSnackbarType } from '../models/showSnackbarType.model';
-import { Material } from '../models/material.model';
+import { MaterialVM } from '../models/material.model';
 
 export const materialsActions = createActionGroup({
   source: 'Materials',
@@ -18,7 +18,7 @@ export const materialsActions = createActionGroup({
     deleteFolderSuccess: props<{id: number}>(),
     deleteFolderFailed: props<{ error: any }>(),
     loadMaterials: emptyProps(),
-    loadMaterialsSuccess: props<{materials: Material[]}>(),
+    loadMaterialsSuccess: props<{materials: MaterialVM[]}>(),
     loadMaterialsFailure: emptyProps(),
   },
 });

@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MaterialsCardComponent } from '../materials-card/materials-card.component';
 import { MaterialsListVM } from '../materials-list-vm';
-import { Material } from '@users/materials/data-access';
+import { MaterialVM } from '@users/materials/data-access';
 
 @Component({
   selector: 'materials-list',
@@ -32,18 +32,8 @@ export class MaterialsListComponent {
     this.redirectToFoldersList.emit();
   }
 
-  onOpenMaterialFile(material: Material) {
-    const fileType = this.specifyFileType(material.material_link)
-    this.openMaterialFile.emit({material, fileType});
+  onOpenMaterialFile(material: MaterialVM) {
+    this.openMaterialFile.emit({material});
   }
 
-  specifyFileType(materialLink: string) {
-    if(materialLink.endsWith('.pdf')) {
-      return 'pdf'
-    }
-    if(materialLink.endsWith('.mp3')) {
-      return 'audio'
-    }
-    return 'video'
-  }
 }
