@@ -33,6 +33,17 @@ export class MaterialsListComponent {
   }
 
   onOpenMaterialFile(material: Material) {
-    this.openMaterialFile.emit(material);
+    const fileType = this.specifyFileType(material.material_link)
+    this.openMaterialFile.emit({material, fileType});
+  }
+
+  specifyFileType(materialLink: string) {
+    if(materialLink.endsWith('.pdf')) {
+      return 'pdf'
+    }
+    if(materialLink.endsWith('.mp3')) {
+      return 'audio'
+    }
+    return 'video'
   }
 }

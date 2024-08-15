@@ -34,10 +34,10 @@ export class MaterialsListContainerComponent {
     this.router.navigate(['/materials'])
   }
 
-  onOpenMaterialFile(material: Material) {
+  onOpenMaterialFile(material: Material, fileType: string) {
     const dialogRef: MatDialogRef<MaterialsContentComponent> = this.dialog.open(
       MaterialsContentComponent, {
-        data: {material}
+        data: {material, fileType}
       }
     );
     dialogRef

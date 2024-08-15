@@ -1,6 +1,8 @@
 <mat-card [matTooltip]="material.material_link" matTooltipClass="example-tooltip-uppercase" class="card-wrapper mb-4" (click)="onOpenMaterialFile()">
   <mat-card-content class="mat-card-content">
-    <mat-icon class="icon">{{ pickIcon() }}</mat-icon>
+    <mat-icon class="icon" *ngIf="fileType === 'pdf'">picture_as_pdf</mat-icon>
+    <mat-icon class="icon" *ngIf="fileType === 'audio'">audio_file</mat-icon>
+    <mat-icon class="icon" *ngIf="fileType === 'video'">ondemand_video</mat-icon>
     <label>{{ material.title }}</label>
     <ng-template #email> 'ng-template #email' </ng-template>
     <span>Создан: {{ material.created_at | date : 'dd MMM yyyy' }}</span>

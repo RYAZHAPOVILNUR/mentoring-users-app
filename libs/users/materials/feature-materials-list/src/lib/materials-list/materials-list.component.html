@@ -5,7 +5,7 @@
 <ng-template #loadingResult>
   <div class="container">
     <ng-container *ngIf="vm.loadingStatus === 'loaded'; else error">
-      <div class="card-header">
+      <div class="folders-header">
         <button mat-icon-button aria-label="close dialog" color="accent" (click)="onRedirectToFoldersList()">
           <mat-icon>arrow_back</mat-icon>
         </button>
@@ -20,7 +20,7 @@
 
       <ng-container *ngIf="vm.materials.length > 0">
         <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xxl-6">
-          <materials-card *ngFor="let material of vm.materials" [material]="material" (openMaterialFile)="onOpenMaterialFile(material)" />
+          <materials-card *ngFor="let material of vm.materials" [material]="material" (openMaterialFile)="onOpenMaterialFile(material)" [fileType]="specifyFileType(material.material_link)"/>
         </div>
       </ng-container>
     </ng-container>

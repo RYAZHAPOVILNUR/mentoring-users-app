@@ -8,7 +8,7 @@
   <materials-list
     [vm]="vm"
     (redirectToFoldersList)="onRedirectToFoldersList()"
-    (openMaterialFile)="onOpenMaterialFile($event)"
+    (openMaterialFile)="onOpenMaterialFile($event.material, $event.fileType)"
   />
 </ng-container>
 
