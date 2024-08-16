@@ -1,0 +1,7 @@
+<div class="timer">
+  <p class="timer-reflection">{{ timer.days }}д {{ timer.hours }}ч {{ timer.min }}:{{ timer.sec }}</p>
+  <div class="buttons">
+    <button class="button" (click)="startStopTimer()">{{isRunning ? 'Стоп' : 'Старт'}}</button>
+    <button class="button" (click)="resetTimer()">Сброс</button>
+  </div>
+</div>
