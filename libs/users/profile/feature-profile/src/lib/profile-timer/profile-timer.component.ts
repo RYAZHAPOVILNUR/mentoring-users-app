@@ -12,18 +12,18 @@ import { Timer, TimerService } from '../profile-timer.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileTimerComponent implements OnDestroy {
-  private timerService = inject(TimerService)
-  private changeDestroy = inject(ChangeDetectorRef);
-  public timer!: Timer;
+  private timerService = inject(TimerService);
+  private changeDetection = inject(ChangeDetectorRef);
   private subscriptions = new Subscription();
+  public timer!: Timer;
   public isRunning = this.timerService.isRunning;
-  
+
   constructor() {
     this.subscriptions.add(
       this.timerService.timer$.subscribe(
-        (val: Timer) => {
-          this.timer = val
-          this.changeDestroy.markForCheck()
+        (val) => {
+        this.timer = val;
+        this.changeDetection.markForCheck();
         }
       )
     )
@@ -43,7 +43,7 @@ export class ProfileTimerComponent implements OnDestroy {
     this.timerService.resetTimer()
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }
 }

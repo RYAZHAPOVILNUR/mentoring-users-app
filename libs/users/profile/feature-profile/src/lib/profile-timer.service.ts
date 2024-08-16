@@ -22,7 +22,7 @@ export class TimerService {
     );
   }
 
-  
+
   public startTimer(): void {
     if (this.isRunning) {
       return
@@ -32,7 +32,7 @@ export class TimerService {
       .subscribe((val) => {
         this.time$.next(val)
         this.setTimeToLocalStorage(val)
-      })
+    })
     this.isRunning = true;
   }
 
@@ -41,20 +41,20 @@ export class TimerService {
     this.timerSubscription.unsubscribe();
     this.isRunning = false;
   }
-
+  
   public resetTimer(): void {
     this.timerSubscription.unsubscribe();
     this.lastStopedTime = 0;
     this.time$.next(0);
-    this.removeTimeFromLocalStorage()
+    this.removeTimeFromLocalStorage();
     this.isRunning = false;
   }
 
-  private transformSeconds(value: number): Timer {
-    const sec = value % 60;
-    const min = Math.floor(value / 60) % 60;
-    const hours = Math.floor(value / 3600) % 24;
-    const days = Math.floor(value / 86400);
+  private transformSeconds(time: number): Timer {
+    const sec = time % 60;
+    const min = Math.floor((time / 60) % 60);
+    const hours = Math.floor((time / 3600) % 24);
+    const days = Math.floor(time / (3600 * 24))
 
     return {
       sec: this.addTrailingZeros(sec),
@@ -63,18 +63,9 @@ export class TimerService {
       days: String(days),
     }
   }
-  
-  private addTrailingZeros(val: number) {
-    return `${val < 10 ? '0' + val : val}`
-  }
 
-  private getInitialTime(): number {
-    const savedTime = this.getTimeFromLocalStorage();
-    if (savedTime) {
-      return savedTime;
-    } else {
-      return 0;
-    }
+  private addTrailingZeros(val: number): string {
+    return `${val < 10 ? '0' + val : val}`
   }
 
   private getTimeFromLocalStorage(): number {
@@ -82,10 +73,19 @@ export class TimerService {
   }
 
   private setTimeToLocalStorage(time: number): void {
-    localStorage.setItem('timer', time.toString());
+    localStorage.setItem('timer', String(time));
   }
 
   private removeTimeFromLocalStorage(): void {
     localStorage.removeItem('timer');
+  }
+
+  private getInitialTime() {
+    const savedTime = this.getTimeFromLocalStorage();
+    if (savedTime) {
+      return savedTime
+    } else {
+      return 0
+    }
   }
 }
