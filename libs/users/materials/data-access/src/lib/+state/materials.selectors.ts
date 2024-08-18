@@ -19,3 +19,7 @@ export const selectOpenedFolder = createSelector(
   selectFoldersEntities,
   ({ id }, entities) => entities[id] || null
 );
+
+export const selectMaterialsStatus = createSelector(selectMaterialsState, (state: MaterialsState) => state.status);
+
+export const selectAllMaterials = createSelector(selectMaterialsState, (state: MaterialsState) => state.materials);

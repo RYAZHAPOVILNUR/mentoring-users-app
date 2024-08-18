@@ -1,9 +1,9 @@
 import { Injectable, inject } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-
+import { Store } from '@ngrx/store';
 import * as MaterialsActions from './materials.actions';
 import * as MaterialsSelectors from './materials.selectors';
 import { IAddFolder } from '../models/folder-add.model';
+import { IAddMaterial } from '../models/material-add.model';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
@@ -11,6 +11,8 @@ export class MaterialsFacade {
   public readonly foldersStatus$ = this.store.select(MaterialsSelectors.selectFoldersStatus);
   public readonly allFolders$ = this.store.select(MaterialsSelectors.selectAllFolders);
   public readonly openedFolder$ = this.store.select(MaterialsSelectors.selectOpenedFolder);
+  public readonly materialsStatus$ = this.store.select(MaterialsSelectors.selectMaterialsStatus);
+  public readonly allMaterials$ = this.store.select(MaterialsSelectors.selectAllMaterials);
 
   loadFolders() {
     this.store.dispatch(MaterialsActions.loadFolders());
@@ -20,5 +22,15 @@ export class MaterialsFacade {
   }
   addFolder(folder: IAddFolder) {
     this.store.dispatch(MaterialsActions.addFolder({ folder }));
+  }
+
+  loadMaterials() {
+    this.store.dispatch(MaterialsActions.loadMaterials());
+  }
+  deleteMaterial(id: number) {
+    this.store.dispatch(MaterialsActions.deleteMaterial({ id }));
+  }
+  addMaterial(material: IAddMaterial) {
+    this.store.dispatch(MaterialsActions.addMaterial({ material }));
   }
 }
