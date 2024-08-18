@@ -1,0 +1,11 @@
+.add-button {
+  position: fixed !important;
+  bottom: 6em !important;
+  right: 10em !important;
+  z-index: 100;
+}
+
+.snackbar {
+  display: flex;
+  justify-content: center;
+}

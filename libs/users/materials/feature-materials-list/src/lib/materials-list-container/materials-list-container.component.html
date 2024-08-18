@@ -1,6 +1,6 @@
 <ng-container
   *ngrxLet="{
-    openedFolder: openedFolder$,
+    openedFolderTitle: openedFolderTitle$,
     materials: foldersMaterials$,
     loadingStatus: loadingStatus$,
   } as vm"
@@ -11,4 +11,5 @@
     (openMaterialFile)="onOpenMaterialFile($event)"
   />
 </ng-container>
+<materials-add-button />
 

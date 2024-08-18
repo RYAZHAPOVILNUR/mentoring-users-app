@@ -4,6 +4,7 @@ import { materialsActions } from './materials.actions';
 import * as materialsSelectors from './materials.selectors'
 import { AddFolder } from '../models/add-folder.model';
 import { showSnackbarType } from '../models/showSnackbarType.model';
+import { AddNewMaterial } from '../models/add-new-material.model';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
@@ -16,7 +17,7 @@ export class MaterialsFacade {
   public readonly allFolders$ = this.store.select(materialsSelectors.selectAllFolders)
   public readonly loadingStatus$ = this.store.select(materialsSelectors.selecLoadingStatus)
   public readonly foldersMaterials$ = this.store.select(materialsSelectors.selectFoldersMaterials)
-  public readonly openedFolder$ = this.store.select(materialsSelectors.selectOpenedFolder)
+  public readonly openedFolderTitle$ = this.store.select(materialsSelectors.selectOpenedFolderTitle)
 
       /**
    * Use the initialization action to perform one
@@ -37,5 +38,9 @@ export class MaterialsFacade {
   loadMaterials() {
     this.store.dispatch(materialsActions.loadMaterials())
   };
+
+  addMaterial(material: AddNewMaterial) {
+    this.store.dispatch(materialsActions.addMaterial({material}))
+  }
 }
 

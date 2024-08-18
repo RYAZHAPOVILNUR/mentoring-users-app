@@ -14,10 +14,10 @@ export const selectAllMaterials = createSelector(selectMaterialsState, (state: M
 
 export const selectFoldersEntities = createSelector(selectMaterialsState, (state: MaterialsState) => selectEntities(state))
 
-export const selectOpenedFolder = createSelector(
+export const selectOpenedFolderTitle = createSelector(
   selectRouteParams,
   selectFoldersEntities,
-  ({ id }, foldersEntities) => foldersEntities[id] || null
+  ({ id }, foldersEntities) => foldersEntities[id]?.title || null
 )
 
 export const selectFoldersMaterials = createSelector(

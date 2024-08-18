@@ -1,1 +1,15 @@
-<p>materials-add-button works!</p>
+<button mat-fab color="primary" class="add-button" [matMenuTriggerFor]="menu">
+  <mat-icon>add</mat-icon>
+</button>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="openAddMaterialDialog('video')">Видео</button>
+  <button mat-menu-item (click)="openAddMaterialDialog('pdf')">Файл PDF</button>
+  <button mat-menu-item (click)="openAddMaterialDialog('audio')">Подкаст</button>
+</mat-menu>
+
+<!-- <ng-template #snackbarAddMaterialSuccess>
+  <div class="snackbar">
+    <span>Папка успешно добавлена!</span>
+  </div>
+</ng-template> -->

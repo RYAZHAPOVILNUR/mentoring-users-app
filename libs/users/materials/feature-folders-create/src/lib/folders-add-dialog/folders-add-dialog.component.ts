@@ -21,7 +21,7 @@ export class FoldersAddDialogComponent {
   public formGroup: FormGroup = this.formBuilder.group({
     title: ['', Validators.required],
   });
-  public dialogRef = inject(MatDialogRef<FoldersAddDialogComponent>);
+  public readonly dialogRef = inject(MatDialogRef<FoldersAddDialogComponent>);
 
   cancel(): void {
     this.dialogRef.close();

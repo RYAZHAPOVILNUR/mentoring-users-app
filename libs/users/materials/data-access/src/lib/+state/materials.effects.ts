@@ -1,12 +1,15 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap, switchMap, tap, filter } from 'rxjs/operators';
+import { catchError, map, concatMap, switchMap, tap, filter, withLatestFrom } from 'rxjs/operators';
 import { Observable, EMPTY, of } from 'rxjs';
 import { materialsActions } from './materials.actions';
 import { ApiService } from '@users/core/http';
 import { Folder } from '../models/folder.model';
 import { AddFolder } from '../models/add-folder.model';
 import { MaterialDTO, materialsDTOAdapter } from '@users/core/data-access';
+import { selectRouteParams } from '@users/core/data-access';
+import { Store } from '@ngrx/store';
+import { AddNewMaterial } from '../models/add-new-material.model';
 
 export const initMaterials = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) => {
@@ -27,7 +30,7 @@ export const initMaterials = createEffect(
   { functional: true }
 );
 
-export const addNewFolder = createEffect(
+export const addFolder = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) => {
     return actions$.pipe(
       ofType(materialsActions.addFolder),
@@ -53,7 +56,7 @@ export const deleteFolder = createEffect(
           tap(() => showSnackbarDeleteFolderSuccess()),
           catchError((error) => {
             console.error('Error', error);
-            return of(materialsActions.deleteFolderFailed({ error }));
+            return of(materialsActions.deleteFolderFailure({ error }));
           })
         )
       )
@@ -86,3 +89,33 @@ export const loadMaterials = createEffect(
   },
   { functional: true }
 );
+
+export const addMaterial = createEffect(
+  (actions$ = inject(Actions), apiService = inject(ApiService), store = inject(Store)) => {
+    return actions$.pipe(
+      ofType(materialsActions.addMaterial),
+      withLatestFrom(store.select(selectRouteParams)),
+      tap(([{material}, params]) => {
+        console.log('material in ef', material);
+        console.log('params id in ef', params['id'] );
+      }),
+      switchMap(([{material}, params]) => {
+        const newMaterial = {
+          ...material,
+          folder_id: Number(params['id'])
+        }
+        console.log('newMaterial', newMaterial);
+
+        return apiService.post<MaterialDTO, AddNewMaterial>('/material', newMaterial).pipe(
+          map((material) => materialsActions.addMaterialSuccess({material})),
+          catchError((error) => {
+            console.log('Error', error);
+            return of(materialsActions.addMaterialFailure())
+          })
+        )
+      })
+    )
+  },
+  { functional: true}
+)
+

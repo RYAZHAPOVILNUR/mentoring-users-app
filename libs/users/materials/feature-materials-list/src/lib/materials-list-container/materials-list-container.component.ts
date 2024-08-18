@@ -7,11 +7,12 @@ import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MaterialsContentComponent } from '@users/feature-materials-content';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MaterialsAddButtonComponent } from '@users/feature-materials-create';
 
 @Component({
   selector: 'materials-list-container',
   standalone: true,
-  imports: [CommonModule, MaterialsListComponent, LetDirective],
+  imports: [CommonModule, MaterialsListComponent, LetDirective, MaterialsAddButtonComponent],
   templateUrl: './materials-list-container.component.html',
   styleUrls: ['./materials-list-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,11 +24,12 @@ export class MaterialsListContainerComponent {
   private readonly destroyRef = inject(DestroyRef);
   public readonly foldersMaterials$ = this.materialsFacade.foldersMaterials$;
   public readonly loadingStatus$ = this.materialsFacade.loadingStatus$
-  public readonly openedFolder$ = this.materialsFacade.openedFolder$
+  public readonly openedFolderTitle$ = this.materialsFacade.openedFolderTitle$
 
   constructor() {
     this.materialsFacade.loadMaterials();
-    this.foldersMaterials$.subscribe(foldersMaterials => console.log('foldersMaterials in container', foldersMaterials))
+    console.log('materials list container run');
+
   }
 
   onRedirectToFoldersList() {

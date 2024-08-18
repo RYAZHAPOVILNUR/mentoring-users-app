@@ -3,6 +3,8 @@ import { Folder } from '../models/folder.model';
 import { AddFolder } from '../models/add-folder.model';
 import { showSnackbarType } from '../models/showSnackbarType.model';
 import { MaterialVM } from '../models/material.model';
+import { AddNewMaterial } from '../models/add-new-material.model';
+import { MaterialDTO } from '@users/core/data-access';
 
 export const materialsActions = createActionGroup({
   source: 'Materials',
@@ -16,9 +18,12 @@ export const materialsActions = createActionGroup({
     addFolderSuccess: props<{newFolder: Folder}>(),
     deleteFolder: props<{id: number, showSnackbarDeleteFolderSuccess: showSnackbarType}>(),
     deleteFolderSuccess: props<{id: number}>(),
-    deleteFolderFailed: props<{ error: any }>(),
+    deleteFolderFailure: props<{ error: any }>(),
     loadMaterials: emptyProps(),
     loadMaterialsSuccess: props<{materials: MaterialVM[]}>(),
     loadMaterialsFailure: emptyProps(),
+    addMaterial: props<{material: AddNewMaterial}>(),
+    addMaterialSuccess: props<{material: MaterialDTO}>(),
+    addMaterialFailure: emptyProps(),
   },
 });
