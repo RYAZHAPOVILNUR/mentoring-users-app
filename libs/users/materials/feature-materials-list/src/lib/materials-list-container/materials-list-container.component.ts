@@ -2,12 +2,14 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular
 import { CommonModule } from '@angular/common';
 import { LetDirective } from '@ngrx/component';
 import { MaterialsListComponent } from '../materials-list/materials-list.component';
-import { MaterialVM, MaterialsFacade } from '@users/materials/data-access';
+import { Folder, MaterialVM, MaterialsFacade } from '@users/materials/data-access';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MaterialsContentComponent } from '@users/feature-materials-content';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MaterialsAddButtonComponent } from '@users/feature-materials-create';
+import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'materials-list-container',
@@ -22,14 +24,20 @@ export class MaterialsListContainerComponent {
   private readonly router = inject(Router)
   public dialog = inject(MatDialog)
   private readonly destroyRef = inject(DestroyRef);
+  public openedFolder!: Folder;
   public readonly foldersMaterials$ = this.materialsFacade.foldersMaterials$;
   public readonly loadingStatus$ = this.materialsFacade.loadingStatus$
-  public readonly openedFolderTitle$ = this.materialsFacade.openedFolderTitle$
+
+  public readonly openedFolder$: Observable<Folder | null> = this.materialsFacade.openedFolder$.pipe(
+    tap((folder) => {
+      if (!folder) {
+        this.materialsFacade.init();
+      }
+    })
+  );
 
   constructor() {
     this.materialsFacade.loadMaterials();
-    console.log('materials list container run');
-
   }
 
   onRedirectToFoldersList() {
@@ -48,3 +56,4 @@ export class MaterialsListContainerComponent {
       .subscribe()
   }
 }
+

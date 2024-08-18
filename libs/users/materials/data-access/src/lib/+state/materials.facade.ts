@@ -17,7 +17,7 @@ export class MaterialsFacade {
   public readonly allFolders$ = this.store.select(materialsSelectors.selectAllFolders)
   public readonly loadingStatus$ = this.store.select(materialsSelectors.selecLoadingStatus)
   public readonly foldersMaterials$ = this.store.select(materialsSelectors.selectFoldersMaterials)
-  public readonly openedFolderTitle$ = this.store.select(materialsSelectors.selectOpenedFolderTitle)
+  public readonly openedFolder$ = this.store.select(materialsSelectors.selectOpenedFolder)
 
       /**
    * Use the initialization action to perform one
