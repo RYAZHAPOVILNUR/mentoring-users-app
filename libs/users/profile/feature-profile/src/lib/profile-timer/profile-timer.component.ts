@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Timer, TimerService } from '../profile-timer.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'users-profile-timer',
@@ -11,21 +12,24 @@ import { Timer, TimerService } from '../profile-timer.service';
   styleUrls: ['./profile-timer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileTimerComponent implements OnDestroy {
+export class ProfileTimerComponent {
   private timerService = inject(TimerService);
   private changeDetection = inject(ChangeDetectorRef);
-  private subscriptions = new Subscription();
-  public timer!: Timer;
+  public timer$ = new BehaviorSubject<Timer>(
+    {
+      sec: '0',
+      min: '0',
+      hours: '0',
+      days: '0'
+    }
+  )
   public isRunning = this.timerService.isRunning;
 
   constructor() {
-    this.subscriptions.add(
-      this.timerService.timer$.subscribe(
-        (val) => {
-        this.timer = val;
-        this.changeDetection.markForCheck();
-        }
-      )
+    this.timerService.timer$.pipe(takeUntilDestroyed()).subscribe(
+      (val) => {
+      this.timer$.next(val);
+      }
     )
   }
 
@@ -41,9 +45,5 @@ export class ProfileTimerComponent implements OnDestroy {
   public resetTimer(): void {
     this.isRunning = false;
     this.timerService.resetTimer()
-  }
-
-  public ngOnDestroy() {
-    this.subscriptions.unsubscribe();
   }
 }
