@@ -66,7 +66,7 @@ export const deleteFolder = createEffect(
   { functional: true }
 );
 
-// This effect gets materials from server and loads to state only valid materials, ignoring materials with links starts with not 'http'. This filter needs only wile server gives invalid materials.
+// Этот эффект получает материалы с сервера, и загружает в стейт только те из них, у которых валидная ссылка (содержит http в начале строки). Фильтр нужен только до тех пор, пока сервер отдает некорректные материалы.
 export const loadMaterials = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) => {
     return actions$.pipe(
