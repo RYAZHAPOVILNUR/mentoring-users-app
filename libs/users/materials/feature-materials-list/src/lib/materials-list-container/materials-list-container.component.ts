@@ -10,6 +10,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MaterialsAddButtonComponent } from '@users/feature-materials-create';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 
 @Component({
   selector: 'materials-list-container',
@@ -30,8 +31,11 @@ export class MaterialsListContainerComponent {
 
   public readonly openedFolder$: Observable<Folder | null> = this.materialsFacade.openedFolder$.pipe(
     tap((folder) => {
-      if (!folder) {
-        this.materialsFacade.init();
+      // if (!folder) {
+      //   this.materialsFacade.init();
+      // }
+      if(!folder) {
+        this.materialsFacade.loadFolder()
       }
     })
   );
@@ -54,6 +58,18 @@ export class MaterialsListContainerComponent {
       .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe()
+  }
+
+  onDeleteMaterial(material: MaterialVM) {
+    const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
+      data: { dialogText: `Вы уверены, что хотите удалить «${material.title}»?` },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.materialsFacade.deleteMaterial(material.id)
+      }
+    });
+
   }
 }
 

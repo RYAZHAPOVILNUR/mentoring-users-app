@@ -35,8 +35,17 @@ export const materialsFeature = createFeature({
     on(materialsActions.loadMaterialsSuccess, (state, { materials }) => ({...state, materials, loadingStatus: 'loaded' as const})),
     on(materialsActions.addMaterialSuccess, (state, { material }) => ({
       ...state,
-      materials: {...state.materials, material},
+      materials: [...state.materials, material],
       loadingStatus: 'loaded' as const,
-     }))
+     })
+    ),
+    on(materialsActions.deleteMaterialSuccess, (state, { id }) => {
+      const materials = state.materials.filter((material) => material.id !== id)
+      return {
+        ...state,
+        materials: [...materials],
+      }
+    }),
+    on(materialsActions.loadFolderSuccess, (state, {folder}) => materialsAdapter.addOne(folder, state))
   )
 });

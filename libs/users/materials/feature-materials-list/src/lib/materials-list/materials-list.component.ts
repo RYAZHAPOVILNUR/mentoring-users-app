@@ -10,13 +10,7 @@ import { MaterialVM } from '@users/materials/data-access';
 @Component({
   selector: 'materials-list',
   standalone: true,
-  imports: [
-    CommonModule,
-    MaterialsCardComponent,
-    MatProgressBarModule,
-    MatIconModule,
-    MatButtonModule,
-  ],
+  imports: [CommonModule, MaterialsCardComponent, MatProgressBarModule, MatIconModule, MatButtonModule],
   templateUrl: './materials-list.component.html',
   styleUrls: ['./materials-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,6 +21,7 @@ export class MaterialsListComponent {
 
   @Output() redirectToFoldersList = new EventEmitter();
   @Output() openMaterialFile = new EventEmitter();
+  @Output() deleteMaterial = new EventEmitter();
 
   constructor() {
     console.log('materials list run');
@@ -37,7 +32,10 @@ export class MaterialsListComponent {
   }
 
   onOpenMaterialFile(material: MaterialVM) {
-    this.openMaterialFile.emit({material});
+    this.openMaterialFile.emit({ material });
   }
 
+  onDeleteMaterial(material: MaterialVM) {
+    this.deleteMaterial.emit(material)
+  }
 }

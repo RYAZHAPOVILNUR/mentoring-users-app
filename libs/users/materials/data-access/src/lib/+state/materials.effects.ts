@@ -10,6 +10,7 @@ import { MaterialDTO, materialsDTOAdapter } from '@users/core/data-access';
 import { selectRouteParams } from '@users/core/data-access';
 import { Store } from '@ngrx/store';
 import { AddNewMaterial } from '../models/add-new-material.model';
+import { MaterialVM } from '../models/material.model';
 
 export const initMaterials = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) => {
@@ -72,7 +73,6 @@ export const loadMaterials = createEffect(
       ofType(materialsActions.loadMaterials),
       switchMap(() =>
         apiService.get<MaterialDTO[]>('/material').pipe(
-          tap((materialsDTO) => console.log('effect, materialsDTO', materialsDTO)),
           map((unfilteredMaterialsDTO) => unfilteredMaterialsDTO.filter(unfilteredMaterial => unfilteredMaterial.material_link.startsWith('http'))),
           map((materialsDTO) => {
             const materials = materialsDTO.map((materialDTO) => materialsDTOAdapter.DTOtoVM(materialDTO))
@@ -106,14 +106,57 @@ export const addMaterial = createEffect(
         }
         console.log('newMaterial', newMaterial);
 
-        return apiService.post<MaterialDTO, AddNewMaterial>('/material', newMaterial).pipe(
-          map((material) => materialsActions.addMaterialSuccess({material})),
+        return apiService.post<MaterialVM, AddNewMaterial>('/material', newMaterial).pipe(
+          map((materialDTO) => {
+            const material = materialsDTOAdapter.DTOtoVM(materialDTO)
+            return materialsActions.addMaterialSuccess({material})
+          }),
           catchError((error) => {
             console.log('Error', error);
             return of(materialsActions.addMaterialFailure())
           })
         )
       })
+    )
+  },
+  { functional: true}
+);
+
+export const deleteMaterial = createEffect(
+  (actions$ = inject(Actions), apiService = inject(ApiService)) => {
+    return actions$.pipe(
+      ofType(materialsActions.deleteMaterial),
+      switchMap(({id}) =>
+        apiService.delete<void>(`/material/${id}`).pipe(
+          map(() => materialsActions.deleteMaterialSuccess({ id })),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(materialsActions.deleteMaterialFailure({ error }));
+          })
+        )
+      )
+    )
+  },
+  { functional: true }
+);
+
+export const loadFolder = createEffect(
+  (actions$ = inject(Actions), apiService = inject(ApiService), store = inject(Store)) => {
+    return actions$.pipe(
+      ofType(materialsActions.loadFolder),
+      withLatestFrom(store.select(selectRouteParams)),
+      switchMap(([, params]) =>{
+        console.log('params in effects', params)
+        return apiService.get<Folder>(`/folder/${params['id']}`).pipe(
+          map((folder) => materialsActions.loadFolderSuccess({folder})),
+          catchError((error) => {
+            console.log('Error', error);
+            return of(materialsActions.loadFolderFailure(error))
+
+          } )
+        )
+      }
+      )
     )
   },
   { functional: true}
