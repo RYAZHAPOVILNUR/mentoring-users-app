@@ -45,7 +45,7 @@ export class FoldersAddButtonComponent {
           const newFolderData: AddFolder = {
             title: result.title,
           };
-          this.materialsFacade.addNewFolder(newFolderData, this.showSnackbarAddFolderSuccess)
+          this.materialsFacade.addFolder(newFolderData, this.showSnackbarAddFolderSuccess)
         }
       })
   }

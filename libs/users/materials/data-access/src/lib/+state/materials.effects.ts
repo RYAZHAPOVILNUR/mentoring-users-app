@@ -35,8 +35,8 @@ export const addFolder = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) => {
     return actions$.pipe(
       ofType(materialsActions.addFolder),
-      switchMap(({ newFolderData, showSnackbarAddFolderSuccess }) =>
-        apiService.post<Folder, AddFolder>('/folder', newFolderData).pipe(
+      switchMap(({ folderData, showSnackbarAddFolderSuccess }) =>
+        apiService.post<Folder, AddFolder>('/folder', folderData).pipe(
           map((newFolder) => ({ newFolder, showSnackbarAddFolderSuccess })),
           tap(({ showSnackbarAddFolderSuccess }) => showSnackbarAddFolderSuccess()),
           map(({ newFolder }) => materialsActions.addFolderSuccess({ newFolder }))

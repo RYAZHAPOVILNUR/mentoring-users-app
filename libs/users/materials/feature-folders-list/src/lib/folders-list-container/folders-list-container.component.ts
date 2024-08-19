@@ -25,7 +25,7 @@ export class FoldersListContainerComponent {
   public readonly loadingStatus$ = this.materialsFacade.loadingStatus$;
 
   constructor() {
-    this.materialsFacade.init();
+    this.materialsFacade.initMaterials();
   }
 
   onDeleteFolder(folder: Folder, showSnackbarDeleteFolderSuccess: showSnackbarType) {

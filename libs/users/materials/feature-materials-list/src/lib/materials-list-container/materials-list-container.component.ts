@@ -31,9 +31,6 @@ export class MaterialsListContainerComponent {
 
   public readonly openedFolder$: Observable<Folder | null> = this.materialsFacade.openedFolder$.pipe(
     tap((folder) => {
-      // if (!folder) {
-      //   this.materialsFacade.init();
-      // }
       if(!folder) {
         this.materialsFacade.loadFolder()
       }
