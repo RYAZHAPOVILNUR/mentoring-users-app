@@ -38,6 +38,7 @@ const reducer = createReducer(
         status: 'error' as const,
         error,
     })),
+    on(FoldersActions.addFolderSuccess, (state, { folder }) => foldersAdapter.addOne({ ...folder }, { ...state })),
 );
 
 export function foldersReducer(state: FoldersState | undefined, action: Action) {

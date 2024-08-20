@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
 import { FoldersFacade } from '@users/materials/data-access';
 import { LetDirective } from '@ngrx/component';
+import { CreateFoldersButtonComponent } from '@users/feature-folders-create';
 
 @Component({
   selector: 'users-folders-list-container',
   standalone: true,
-  imports: [CommonModule, FoldersListComponent, LetDirective],
+  imports: [CommonModule, FoldersListComponent, LetDirective, CreateFoldersButtonComponent],
   templateUrl: './folders-list-container.component.html',
   styleUrls: ['./folders-list-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,10 +21,6 @@ export class FoldersListContainerComponent implements OnInit {
   
   public FoldersFacade = inject(FoldersFacade);
   public readonly folders$ = this.FoldersFacade.allFolders$;
-  // public readonly status$ = this.componentStore.status$;
-  // public readonly errors$ = this.componentStore.errors$;
-  // public readonly loggedUser$ = this.usersFacade.loggedUser$;
-  // private readonly router = inject(Router);
 
   ngAfterViewChecked(): void {
     console.log(this.folders$);
