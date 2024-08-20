@@ -22,14 +22,22 @@
   }
 }
 
-// .user-card-wrapper:active::before {
-// }
-
 mat-card{
   cursor: pointer;
 }
 
-.mat-card-content {
+.card-header {
+  display: flex;
+  flex-direction: row;
+}
+
+.folder-icon {
+  font-size: 3rem;
+  height: 3rem;
+  width: 3rem;
+}
+
+.card-content {
   width: 100%;
   flex-grow: 1;
   display: flex;
@@ -53,12 +61,6 @@ mat-card{
     font-size: 14px;
     margin-bottom: 10px;
   }
-  & mat-icon {
-    font-size: 2.5rem;
-    height: 2.5rem;
-    width: 2.5rem;
-  }
-
 }
 
 .card-buttons {

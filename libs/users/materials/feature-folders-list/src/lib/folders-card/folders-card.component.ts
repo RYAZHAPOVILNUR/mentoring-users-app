@@ -6,22 +6,23 @@ import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Folder } from 'libs/users/materials/data-access/src/lib/models/folder.model';
+import { LocaleDateFormatPipe } from '@users/pipes';
 // import { registerLocaleData } from '@angular/common';
 // import localeRu from '@angular/common/locales/ru'
-
 // registerLocaleData(localeRu)
-import '@angular/common/locales/global/ru'
 
 
 @Component({
   selector: 'folders-card',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, MatTooltipModule, MatMenuModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, MatTooltipModule, MatMenuModule, LocaleDateFormatPipe],
   templateUrl: './folders-card.component.html',
   styleUrls: ['./folders-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersCardComponent {
+  public showButton: boolean = false;
+
   @Input({required: true})
   folder!: Folder;
 
@@ -31,11 +32,12 @@ export class FoldersCardComponent {
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
 
   onOpenMenu(event: Event) {
-    event.stopPropagation();
+
     this.trigger.openMenu();
   }
 
-  onDeleteFolder() {
+  onDeleteFolder(event: Event) {
+    event.stopPropagation();
     this.deleteFolder.emit()
   }
 

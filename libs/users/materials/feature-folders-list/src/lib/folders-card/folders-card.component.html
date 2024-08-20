@@ -1,19 +1,18 @@
-<mat-card matTooltip="{{folder.id}}" matTooltipClass="example-tooltip-uppercase" class="card-wrapper mb-4" (click)="onRedirectToMaterialsPage()">
-  <mat-card-content class="mat-card-content">
-    <mat-icon class="icon">folder</mat-icon>
+<mat-card
+  class="card-wrapper mb-4"
+  (click)="onRedirectToMaterialsPage()"
+  (mouseover)="showButton = true"
+  (mouseleave)="showButton = false"
+>
+  <mat-card-content class="card-content">
+    <div class="card-header">
+      <mat-icon class="folder-icon">folder</mat-icon>
+      <button mat-icon-button [hidden]="!showButton" class="card-buttons"  (click)="onDeleteFolder($event)">
+        <mat-icon class="delete-icon">delete</mat-icon>
+      </button>
+    </div>
     <label>{{ folder.title }}</label>
     <ng-template #email> 'ng-template #email' </ng-template>
-    <span>Создана: {{ folder.created_at | date : 'dd MMM yyyy' }}</span>
+    <span>Создана: {{ folder.created_at | localeDateFormat }}</span>
   </mat-card-content>
-
-  <mat-card-actions class="card-buttons">
-    <button mat-icon-button (click)="onOpenMenu($event)" [matMenuTriggerFor]="menu">
-      <mat-icon>more_horiz</mat-icon>
-    </button>
-  </mat-card-actions>
 </mat-card>
-
-<mat-menu #menu="matMenu">
-  <button mat-menu-item color="accent">Переименовать</button>
-  <button mat-menu-item color="warn" (click)="onDeleteFolder()">Удалить</button>
-</mat-menu>
