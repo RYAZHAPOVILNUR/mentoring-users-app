@@ -2,11 +2,12 @@ import { AfterViewChecked, ChangeDetectionStrategy, Component, Input, OnInit } f
 import { CommonModule } from '@angular/common';
 import { FoldersVM } from '../..';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'users-folders-card',
   standalone: true,
-  imports: [CommonModule, MatCardModule],
+  imports: [CommonModule, MatCardModule, MatIconModule],
   templateUrl: './folders-card.component.html',
   styleUrls: ['./folders-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

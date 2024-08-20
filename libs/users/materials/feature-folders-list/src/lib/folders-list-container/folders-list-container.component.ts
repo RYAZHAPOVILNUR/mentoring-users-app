@@ -13,8 +13,21 @@ import { LetDirective } from '@ngrx/component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class FoldersListContainerComponent  {
-
+export class FoldersListContainerComponent implements OnInit {
+  ngOnInit(): void {
+    this.FoldersFacade.init();
+  }
+  
   public FoldersFacade = inject(FoldersFacade);
   public readonly folders$ = this.FoldersFacade.allFolders$;
+  // public readonly status$ = this.componentStore.status$;
+  // public readonly errors$ = this.componentStore.errors$;
+  // public readonly loggedUser$ = this.usersFacade.loggedUser$;
+  // private readonly router = inject(Router);
+
+  ngAfterViewChecked(): void {
+    console.log(this.folders$);
+    // console.log(this.folders$.subscribe((state) => this.getValue(state)))
+  }
+
 }
