@@ -6,11 +6,12 @@ import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MaterialVM } from '@users/materials/data-access';
+import { LocaleDateFormatPipe } from '@users/pipes';
 
 @Component({
   selector: 'materials-card',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, MatTooltipModule, MatMenuModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, MatTooltipModule, MatMenuModule, LocaleDateFormatPipe],
   templateUrl: './materials-card.component.html',
   styleUrls: ['./materials-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

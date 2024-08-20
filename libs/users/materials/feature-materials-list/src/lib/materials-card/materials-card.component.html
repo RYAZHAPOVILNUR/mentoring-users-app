@@ -5,7 +5,7 @@
     <mat-icon class="icon" *ngIf="material.fileType === 'video'">ondemand_video</mat-icon>
     <label>{{ material.title }}</label>
     <ng-template #email> 'ng-template #email' </ng-template>
-    <span>Создан: {{ material.created_at | date : 'dd MMM yyyy' }}</span>
+    <span>Создан: {{ material.created_at | localeDateFormat }}</span>
   </mat-card-content>
 
   <mat-card-actions class="card-buttons">

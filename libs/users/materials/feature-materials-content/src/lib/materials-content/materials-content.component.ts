@@ -8,13 +8,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { ToYoutubeEmbedLinkPipe } from './youtube-embed-video-link.pipe';
+import { YoutubeEmbedLinkPipe } from '@users/pipes';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'materials-content',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, PdfViewerModule, MatIconModule, MatButtonModule, MatTooltipModule, ToYoutubeEmbedLinkPipe],
+  imports: [CommonModule, MatDialogModule, PdfViewerModule, MatIconModule, MatButtonModule, MatTooltipModule, YoutubeEmbedLinkPipe],
   templateUrl: './materials-content.component.html',
   styleUrls: ['./materials-content.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -28,9 +28,7 @@ export class MaterialsContentComponent {
 
   getYoutubeEmbedLink(value: string) {
     const result = value.match(/(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=))([\w\-]{10,12})\b/)
-
     const videoID = result? result[1] : ''
-
     return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoID}`)
   }
 }
