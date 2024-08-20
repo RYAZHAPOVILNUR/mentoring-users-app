@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Добавление нового материала</h1>
+<h1 mat-dialog-title>Добавить {{data.materialType}}</h1>
 <div mat-dialog-content>
   <form [formGroup]="formGroup">
     <div class="dialog-content">
@@ -7,7 +7,7 @@
         <mat-error>Название обязательно</mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Ссылка на материал*" formControlName="link" />
+        <input matInput placeholder="Ссылка на материал" formControlName="link" />
         <mat-error>Введите корректную ссылку</mat-error>
       </mat-form-field>
     </div>

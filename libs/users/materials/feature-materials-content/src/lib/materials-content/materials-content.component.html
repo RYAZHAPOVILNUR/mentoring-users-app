@@ -9,7 +9,6 @@
   </div>
 
   <mat-dialog-content>
-
   <!-- AUDIO -->
     <div class="audio" *ngIf="fileType === 'audio'">
         <audio controls>
@@ -25,7 +24,7 @@
           [src]="materialLink"
           [render-text]="true"
           [original-size]="false"
-          [fit-to-page]="true"
+          style="height: 600px; width: 800px;"
         ></pdf-viewer>
     </div>
 
@@ -42,6 +41,5 @@
         ></iframe>
         <p>Pipe works - {{materialLink | toYoutubeEmbedLinkPipe}}</p>
     </div>
-
   </mat-dialog-content>
 </div>

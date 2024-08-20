@@ -29,13 +29,6 @@ export class MaterialsAddButtonComponent {
     console.log('add button run');
   }
 
-  // private showSnackbarAddMaterialSuccess = () =>
-  //   this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
-  //     duration: 2500,
-  //     horizontalPosition: 'center',
-  //     verticalPosition: 'top',
-  //   });
-
   openAddMaterialDialog(materialType: string){
     const dialogRef: MatDialogRef<MaterialsAddDialogComponent> = this.dialog.open(
       MaterialsAddDialogComponent, {
@@ -47,7 +40,6 @@ export class MaterialsAddButtonComponent {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((result) => {
         if(result) {
-          console.log('result after colse dialog in add button comp', result);
           const material = {
             title: result.title,
             material_link: result.link
