@@ -22,17 +22,17 @@ import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 })
 export class MaterialsListContainerComponent {
   private readonly materialsFacade = inject(MaterialsFacade);
-  private readonly router = inject(Router)
-  public dialog = inject(MatDialog)
+  private readonly router = inject(Router);
+  public dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
   public openedFolder!: Folder;
   public readonly foldersMaterials$ = this.materialsFacade.foldersMaterials$;
-  public readonly loadingStatus$ = this.materialsFacade.loadingStatus$
-
+  public readonly loadingStatus$ = this.materialsFacade.loadingStatus$;
+  public readonly error$ = this.materialsFacade.error$;
   public readonly openedFolder$: Observable<Folder | null> = this.materialsFacade.openedFolder$.pipe(
     tap((folder) => {
-      if(!folder) {
-        this.materialsFacade.loadFolder()
+      if (!folder) {
+        this.materialsFacade.loadFolder();
       }
     })
   );
@@ -42,19 +42,14 @@ export class MaterialsListContainerComponent {
   }
 
   onRedirectToFoldersList() {
-    this.router.navigate(['/materials'])
+    this.router.navigate(['/materials']);
   }
 
   onOpenMaterialFile(material: MaterialVM) {
-    const dialogRef: MatDialogRef<MaterialsContentComponent> = this.dialog.open(
-      MaterialsContentComponent, {
-        data: material
-      }
-    );
-    dialogRef
-      .afterClosed()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe()
+    const dialogRef: MatDialogRef<MaterialsContentComponent> = this.dialog.open(MaterialsContentComponent, {
+      data: material,
+    });
+    dialogRef.afterClosed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
   }
 
   onDeleteMaterial(material: MaterialVM) {
@@ -63,10 +58,8 @@ export class MaterialsListContainerComponent {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.materialsFacade.deleteMaterial(material.id)
+        this.materialsFacade.deleteMaterial(material.id);
       }
     });
-
   }
 }
-

@@ -29,9 +29,14 @@
 
 <ng-template #error>
   <div class="alert alert-danger" role="alert">
-    <h1>{{ 'Сюда что-то типа того -- vm.errors?.status' }}</h1>
+    <h1>Ошибка {{ vm.error?.status }}</h1>
     <hr />
-    {{ 'Сюда что-то типа того -- vm.errors' }}
+    <p *ngIf="vm.error?.status === 400 || vm.error?.status === 404 ">Такой папки не существует</p>
+    <p *ngIf="vm.error?.status === 429">Слишком много запросов на сервер с вашего адреса, попробуйте зайти на страницу позже</p>
+    <button mat-flat-button aria-label="close dialog" (click)="onRedirectToFoldersList()">
+      На страницу с папками
+    </button>
+
   </div>
 </ng-template>
 

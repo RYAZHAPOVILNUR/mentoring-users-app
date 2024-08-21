@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap, switchMap, tap, filter, withLatestFrom } from 'rxjs/operators';
-import { Observable, EMPTY, of } from 'rxjs';
+import { catchError, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { of } from 'rxjs';
 import { materialsActions } from './materials.actions';
 import { ApiService } from '@users/core/http';
 import { Folder } from '../models/folder.model';
@@ -22,7 +22,7 @@ export const initMaterials = createEffect(
           map((folders) => materialsActions.initMaterialsSuccess({ folders })),
           catchError((error) => {
             console.error('Error', error);
-            return of(materialsActions.initMaterialsFailure());
+            return of(materialsActions.initMaterialsFailure({error}));
           })
         )
       )
@@ -81,7 +81,7 @@ export const loadMaterials = createEffect(
           }),
           catchError((error) => {
             console.error('Error', error);
-            return of(materialsActions.loadMaterialsFailure());
+            return of(materialsActions.loadMaterialsFailure({error}));
           })
         )
       )
@@ -95,17 +95,11 @@ export const addMaterial = createEffect(
     return actions$.pipe(
       ofType(materialsActions.addMaterial),
       withLatestFrom(store.select(selectRouteParams)),
-      tap(([{material}, params]) => {
-        console.log('material in ef', material);
-        console.log('params id in ef', params['id'] );
-      }),
       switchMap(([{material}, params]) => {
         const newMaterial = {
           ...material,
           folder_id: Number(params['id'])
         }
-        console.log('newMaterial', newMaterial);
-
         return apiService.post<MaterialVM, AddNewMaterial>('/material', newMaterial).pipe(
           map((materialDTO) => {
             const material = materialsDTOAdapter.DTOtoVM(materialDTO)
@@ -151,8 +145,7 @@ export const loadFolder = createEffect(
           map((folder) => materialsActions.loadFolderSuccess({folder})),
           catchError((error) => {
             console.log('Error', error);
-            return of(materialsActions.loadFolderFailure(error))
-
+            return of(materialsActions.loadFolderFailure({error}))
           } )
         )
       }

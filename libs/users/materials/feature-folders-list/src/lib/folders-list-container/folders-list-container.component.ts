@@ -23,6 +23,7 @@ export class FoldersListContainerComponent {
   private readonly router = inject(Router)
   public readonly allFolders$ = this.materialsFacade.allFolders$;
   public readonly loadingStatus$ = this.materialsFacade.loadingStatus$;
+  public readonly error$ = this.materialsFacade.error$
 
   constructor() {
     this.materialsFacade.initMaterials();

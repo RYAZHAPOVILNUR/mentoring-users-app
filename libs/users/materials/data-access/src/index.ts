@@ -7,4 +7,5 @@ export * from './lib/+state/materials.actions';
 export * from './lib/models/show-snackbar-type.model';
 export * from './lib/models/material.model';
 export * from './lib/models/add-new-material.model';
+export * from './lib/models/materials-error.model'
 export * as materialsEffects from './lib/+state/materials.effects';

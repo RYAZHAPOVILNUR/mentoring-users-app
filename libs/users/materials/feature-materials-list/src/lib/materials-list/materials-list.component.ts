@@ -23,10 +23,6 @@ export class MaterialsListComponent {
   @Output() openMaterialFile = new EventEmitter();
   @Output() deleteMaterial = new EventEmitter();
 
-  constructor() {
-    console.log('materials list run');
-  }
-
   onRedirectToFoldersList() {
     this.redirectToFoldersList.emit();
   }

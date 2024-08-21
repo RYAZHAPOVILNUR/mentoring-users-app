@@ -25,8 +25,9 @@
 
 <ng-template #error>
   <div class="alert alert-danger" role="alert">
-    <h1>{{ 'Сюда что-то типа того -- vm.errors?.status' }}</h1>
+    <h1>Ошибка {{ vm.error?.status }}</h1>
     <hr />
-    {{ 'Сюда что-то типа того -- vm.errors' }}
+    <p *ngIf="vm.error?.status === 404">Такой страницы не существует</p>
+    <p *ngIf="vm.error?.status === 429">Слишком много запросов на сервер с вашего адреса, попробуйте зайти на страницу позже</p>
   </div>
 </ng-template>

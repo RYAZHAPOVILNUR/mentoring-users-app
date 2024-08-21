@@ -25,13 +25,6 @@ export class MaterialsCardComponent {
   @Output() openMaterialFile = new EventEmitter()
   @Output() deleteMaterial = new EventEmitter()
 
-  @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
-
-  onOpenMenu(event: Event) {
-    event.stopPropagation();
-    this.trigger.openMenu();
-  }
-
   onOpenMaterialFile() {
     this.openMaterialFile.emit()
   }
