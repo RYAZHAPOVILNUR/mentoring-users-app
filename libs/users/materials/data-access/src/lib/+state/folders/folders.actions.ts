@@ -11,3 +11,7 @@ export const loadFoldersFailure = createAction('[Folders/API] Load Folders Failu
 export const addFolder = createAction('[Folders Page] Add Folder', props<{ folderData: CreateFolderDTO; }>());
 export const addFolderSuccess = createAction('[Folders/Api] Add Folder Success', props<{ folder: FolderType; }>());
 export const addFolderFailed = createAction('[Folders/Api] Add Folder Failed', props<{ error: any; }>());
+
+export const deleteFolder = createAction('[Folders Page] Delete Folder', props<{ folderId: number }>());
+export const deleteFolderSuccess = createAction('Folders/Api] Delete Folder Success', props<{ folderId: number }>());
+export const deleteFolderFailed = createAction('[Folders/Api] Delete Folder Failed', props<{ error: any }>());

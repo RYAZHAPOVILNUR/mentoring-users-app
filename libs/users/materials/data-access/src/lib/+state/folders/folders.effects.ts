@@ -5,7 +5,7 @@ import * as FoldersActions from './folders.actions';
 
 import { ApiService } from '@users/core/http';
 
-import { FoldersEntity } from './folders.reducer';
+import { FoldersEntity } from '../folders/folders.reducer';
 import { CreateFolderDTO, FolderType } from '@users/core/data-access';
 
 export const foldersEffects = createEffect(
@@ -45,6 +45,26 @@ export const addFolder = createEffect(
           catchError((error) => {
             console.error('Error', error);
             return of(FoldersActions.addFolderFailed({ error }));
+          })
+        )
+      )
+    );
+  },
+  { functional: true }
+);
+
+export const deleteFolder = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    return actions$.pipe(
+      ofType(FoldersActions.deleteFolder),
+      switchMap(({ folderId }) =>
+        apiService.delete<void>(`/folder/${folderId}`).pipe(
+          map(() => FoldersActions.deleteFolderSuccess({ folderId })),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(FoldersActions.deleteFolderFailed({ error }));
           })
         )
       )

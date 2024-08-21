@@ -22,9 +22,7 @@ export class FoldersListContainerComponent implements OnInit {
   public FoldersFacade = inject(FoldersFacade);
   public readonly folders$ = this.FoldersFacade.allFolders$;
 
-  ngAfterViewChecked(): void {
-    console.log(this.folders$);
-    // console.log(this.folders$.subscribe((state) => this.getValue(state)))
+  onDeleteFolder(folderId: number) {
+    this.FoldersFacade.deleteFolder(folderId);
   }
-
 }

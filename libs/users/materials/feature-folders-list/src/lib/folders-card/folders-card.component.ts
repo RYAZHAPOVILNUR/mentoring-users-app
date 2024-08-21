@@ -1,4 +1,4 @@
-import { AfterViewChecked, ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoldersVM } from '../..';
 import { MatCardModule } from '@angular/material/card';
@@ -12,11 +12,14 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./folders-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FoldersCardComponent implements OnInit {
+export class FoldersCardComponent {
   @Input({ required: true }) folder!: FoldersVM;
 
-  ngOnInit(): void {
-    console.log(this.folder);
-    // console.log(this.folders$.subscribe((state) => this.getValue(state)))
+  showDeleteButton = false;
+
+  @Output() deleteFolder = new EventEmitter();
+
+  onDeleteFolder(event: Event) {
+    this.deleteFolder.emit();
   }
 }

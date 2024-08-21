@@ -1,6 +1,5 @@
-import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FoldersFacade } from '@users/materials/data-access';
 import { DeepReadonly } from '@users/core/utils';
 import { FoldersEntity } from '@users/materials/data-access';
 import { FoldersCardComponent } from "../folders-card/folders-card.component";
@@ -16,6 +15,11 @@ import { FoldersCardComponent } from "../folders-card/folders-card.component";
 
 export class FoldersListComponent {
   @Input({ required: true }) vm!: FoldersListVM;
+  @Output() deleteFolder = new EventEmitter();
+
+  onDeleteFolder(folderId: number) {
+    this.deleteFolder.emit(folderId);
+  }
 }
 
 export type FoldersListVM = DeepReadonly<{

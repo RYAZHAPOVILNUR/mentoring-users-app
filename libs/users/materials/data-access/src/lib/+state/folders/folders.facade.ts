@@ -15,8 +15,12 @@ export class FoldersFacade {
         this.store.dispatch(FoldersActions.initFolders());
         this.allFolders$.subscribe(res => console.log(res));
     }
-    
+
     addFolder(folderData: CreateFolderDTO) {
         this.store.dispatch(FoldersActions.addFolder({ folderData }));
+    }
+
+    deleteFolder(folderId: number) {
+        this.store.dispatch(FoldersActions.deleteFolder({ folderId }));
     }
 }

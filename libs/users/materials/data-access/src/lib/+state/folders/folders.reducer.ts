@@ -39,6 +39,7 @@ const reducer = createReducer(
         error,
     })),
     on(FoldersActions.addFolderSuccess, (state, { folder }) => foldersAdapter.addOne({ ...folder }, { ...state })),
+    on(FoldersActions.deleteFolderSuccess, (state, { folderId }) => foldersAdapter.removeOne(folderId, { ...state })),
 );
 
 export function foldersReducer(state: FoldersState | undefined, action: Action) {
