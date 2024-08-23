@@ -6,7 +6,7 @@ import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dial
 import { MaterialsAddDialogComponent } from '../materials-add-dialog/materials-add-dialog.component';
 import { MaterialsFacade } from '@users/materials/data-access';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -21,13 +21,8 @@ export class MaterialsAddButtonComponent {
   public dialog = inject(MatDialog)
   private readonly destroyRef = inject(DestroyRef);
   private readonly materialsFacade = inject(MaterialsFacade)
-  // private snackBar = inject(MatSnackBar); Если эта штука есть, но нигде не используется, то выдает ошибку
 
   @ViewChild('snackbarAddMaterialSuccess') snackbarTemplateRef!: TemplateRef<any>;
-
-  constructor() {
-    console.log('add button run');
-  }
 
   openAddMaterialDialog(materialType: string){
     const dialogRef: MatDialogRef<MaterialsAddDialogComponent> = this.dialog.open(

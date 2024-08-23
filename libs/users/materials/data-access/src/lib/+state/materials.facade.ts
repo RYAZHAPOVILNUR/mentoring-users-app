@@ -24,8 +24,8 @@ export class MaterialsFacade {
    * Use the initialization action to perform one
    * or more tasks in your Effects.
    */
-  initMaterials() {
-    this.store.dispatch(materialsActions.initMaterials());
+  loadFolders() {
+    this.store.dispatch(materialsActions.loadFolders());
   }
 
   loadFolder() {

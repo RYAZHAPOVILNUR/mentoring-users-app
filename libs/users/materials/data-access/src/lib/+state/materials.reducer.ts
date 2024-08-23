@@ -25,11 +25,11 @@ export const materialsFeature = createFeature({
   name: materialsFeatureKey,
   reducer: createReducer(
     materialsInitialState,
-    on(materialsActions.initMaterials, (state) => ({ ...state, loadingStatus: 'loading' as const })),
-    on(materialsActions.initMaterialsSuccess, (state, { folders }) =>
+    on(materialsActions.loadFolders, (state) => ({ ...state, loadingStatus: 'loading' as const })),
+    on(materialsActions.loadFoldersSuccess, (state, { folders }) =>
       materialsAdapter.setAll(folders, { ...state, loadingStatus: 'loaded' as const, error: null })
     ),
-    on(materialsActions.initMaterialsFailure, (state, { error }) => ({
+    on(materialsActions.loadFoldersFailure, (state, { error }) => ({
       ...state,
       loadingStatus: 'error' as const,
       error,

@@ -15,14 +15,13 @@ import { MaterialVM } from '../models/material.model';
 export const initMaterials = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) => {
     return actions$.pipe(
-      ofType(materialsActions.initMaterials),
+      ofType(materialsActions.loadFolders),
       switchMap(() =>
         apiService.get<Folder[]>('/folder').pipe(
-          tap((folders) => console.log('effect, folders', folders)),
-          map((folders) => materialsActions.initMaterialsSuccess({ folders })),
+          map((folders) => materialsActions.loadFoldersSuccess({ folders })),
           catchError((error) => {
             console.error('Error', error);
-            return of(materialsActions.initMaterialsFailure({error}));
+            return of(materialsActions.loadFoldersFailure({error}));
           })
         )
       )
@@ -76,7 +75,6 @@ export const loadMaterials = createEffect(
           map((unfilteredMaterialsDTO) => unfilteredMaterialsDTO.filter(unfilteredMaterial => unfilteredMaterial.material_link.startsWith('http'))),
           map((materialsDTO) => {
             const materials = materialsDTO.map((materialDTO) => materialsDTOAdapter.DTOtoVM(materialDTO))
-            console.log('materialVM in Effects', materials);
             return materialsActions.loadMaterialsSuccess({materials})
           }),
           catchError((error) => {
@@ -107,7 +105,7 @@ export const addMaterial = createEffect(
           }),
           catchError((error) => {
             console.log('Error', error);
-            return of(materialsActions.addMaterialFailure())
+            return of(materialsActions.addMaterialFailure({ error }))
           })
         )
       })
@@ -140,7 +138,7 @@ export const loadFolder = createEffect(
       ofType(materialsActions.loadFolder),
       withLatestFrom(store.select(selectRouteParams)),
       switchMap(([, params]) =>{
-        console.log('params in effects', params)
+        console.log('params in effects loadFolder', params)
         return apiService.get<Folder>(`/folder/${params['id']}`).pipe(
           map((folder) => materialsActions.loadFolderSuccess({folder})),
           catchError((error) => {

@@ -20,13 +20,13 @@ import { Router } from '@angular/router';
 export class FoldersListContainerComponent {
   private readonly materialsFacade = inject(MaterialsFacade);
   private readonly dialog = inject(MatDialog);
-  private readonly router = inject(Router)
+  private readonly router = inject(Router);
   public readonly allFolders$ = this.materialsFacade.allFolders$;
   public readonly loadingStatus$ = this.materialsFacade.loadingStatus$;
-  public readonly error$ = this.materialsFacade.error$
+  public readonly error$ = this.materialsFacade.error$;
 
   constructor() {
-    this.materialsFacade.initMaterials();
+    this.materialsFacade.loadFolders();
   }
 
   onDeleteFolder(folder: Folder, showSnackbarDeleteFolderSuccess: showSnackbarType) {
@@ -41,6 +41,6 @@ export class FoldersListContainerComponent {
   }
 
   onRedirectToMaterialsPage(id: number) {
-    this.router.navigate(['/materials/', id])
+    this.router.navigate(['/materials/', id]);
   }
 }

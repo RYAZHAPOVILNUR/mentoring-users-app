@@ -55,10 +55,6 @@ export class MaterialsAddDialogComponent {
     }
   }
 
-  constructor() {
-    console.log('data materialType', this.data.materialType);
-  }
-
   linkValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const link = control.value;
