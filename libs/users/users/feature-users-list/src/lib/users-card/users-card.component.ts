@@ -9,11 +9,12 @@ import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { UsersEntity } from '@users/core/data-access';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'users-card',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule, RouterModule, MatIconModule, MatTooltipModule, MatMenuModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, RouterModule, MatIconModule, MatTooltipModule, MatMenuModule, TranslateModule],
   templateUrl: './users-card.component.html',
   styleUrls: ['./users-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

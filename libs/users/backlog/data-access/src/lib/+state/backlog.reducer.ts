@@ -2,7 +2,7 @@ import { createFeature, createReducer, on } from '@ngrx/store';
 import { IBacklog } from '../model/backlog.model';
 import { backlogAction } from './backlog.action';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { LoadingStatus } from '@users/core/data-access';
+import { LoadingStatus } from '@users/core/data-access'
 import * as UsersActions from '../../../../../users/data-access/src/lib/+state/users.actions';
 import { usersAdapter } from '@users/users/data-access';
 

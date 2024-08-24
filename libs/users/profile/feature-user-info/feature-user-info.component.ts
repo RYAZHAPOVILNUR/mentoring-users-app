@@ -1,4 +1,4 @@
-import { UiPhotoModalComponent } from 'libs/users/profile/ui-profile/ui-photo-modal/ui-photo-modal.component';
+import { UiPhotoModalComponent } from '../../../../libs/users/profile/ui-profile/ui-photo-modal/ui-photo-modal.component';
 import { AuthFacade, ChangePasswordPayload, ChangeProfileDataPayload } from '../../../core/auth/data-access/src';
 import { ChangeDetectionStrategy, Component, Input, OnInit, DestroyRef, ChangeDetectorRef } from '@angular/core';
 import { PasswordChangeDialogComponent, ProfileChangeDialogComponent } from '../../../core/ui/src';

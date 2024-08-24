@@ -10,7 +10,7 @@
     <ng-template #email>
       {{ user.email }}
     </ng-template>
-    <span>{{ user.id === loggedUser.id ? 'Ментор' : 'Ученик' }}</span>
+    <span>{{ user.id === loggedUser.id ? 'Ментор' : 'Ученик'  | translate }}</span>
   </mat-card-content>
 
   <mat-menu #menu="matMenu">
