@@ -1,4 +1,4 @@
-import { selectRouteParams } from '@users/core/data-access';
+import { selectRouteParams} from '../../../../../../core/data-access/src';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store, select } from '@ngrx/store';
@@ -17,7 +17,6 @@ import { ArticleReadComponent } from '../article-read/article-read.component';
 import { ArticleCommentsComponent } from '../article-comments/article-comments.component';
 import { selectLoggedUserId } from '../../../../../../core/auth/data-access/src';
 import { selectComments } from '../../../../data-access/src/lib/+state/comments/comments.selectors';
-import { selectOpenedArticle } from 'libs/users/articles/data-access/src/lib/+state/articles.selectors';
 
 @Component({
   selector: 'article-read-container',
