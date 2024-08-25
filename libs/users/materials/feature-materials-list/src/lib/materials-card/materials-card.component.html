@@ -1,15 +1,15 @@
 <mat-card
   class="card-wrapper mb-4"
   (click)="onOpenMaterialFile()"
-  (mouseover)="showButton = true"
-  (mouseleave)="showButton = false"
+  (mouseover)="showDeleteButton = true"
+  (mouseleave)="showDeleteButton = false"
 >
   <mat-card-content class="card-content">
     <div class="card-header">
       <mat-icon class="folder-icon" *ngIf="material.fileType === 'pdf'">picture_as_pdf</mat-icon>
       <mat-icon class="folder-icon" *ngIf="material.fileType === 'audio'">audio_file</mat-icon>
       <mat-icon class="folder-icon" *ngIf="material.fileType === 'video'">ondemand_video</mat-icon>
-      <button mat-icon-button [hidden]="!showButton" class="card-buttons"  (click)="onDeleteMaterial($event)">
+      <button mat-icon-button [hidden]="!showDeleteButton" class="card-buttons"  (click)="onDeleteMaterial($event)">
         <mat-icon  class="delete-icon">delete</mat-icon>
       </button>
     </div>

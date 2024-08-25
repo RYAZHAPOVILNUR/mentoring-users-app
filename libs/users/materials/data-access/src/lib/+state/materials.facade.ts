@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { materialsActions } from './materials.actions';
 import * as materialsSelectors from './materials.selectors';
 import { AddFolder } from '../models/add-folder.model';

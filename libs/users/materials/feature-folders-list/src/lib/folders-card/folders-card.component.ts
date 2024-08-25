@@ -7,10 +7,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Folder } from 'libs/users/materials/data-access/src/lib/models/folder.model';
 import { LocaleDateFormatPipe } from '@users/pipes';
-// import { registerLocaleData } from '@angular/common';
-// import localeRu from '@angular/common/locales/ru'
-// registerLocaleData(localeRu)
-
 
 @Component({
   selector: 'folders-card',
@@ -32,7 +28,6 @@ export class FoldersCardComponent {
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
 
   onOpenMenu(event: Event) {
-
     this.trigger.openMenu();
   }
 

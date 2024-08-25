@@ -17,7 +17,7 @@ import { LocaleDateFormatPipe } from '@users/pipes';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialsCardComponent {
-  public showButton: boolean = false;
+  public showDeleteButton: boolean = false;
 
   @Input({required: true})
   material!: MaterialVM;

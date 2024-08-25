@@ -13,7 +13,6 @@ export const materialsActions = createActionGroup({
     loadFoldersSuccess: props<{ folders: Folder[] }>(),
     loadFoldersFailure: props<{ error: any }>(),
 
-    // туду удалить, т. к. не использую в итоге
     loadFolder: emptyProps(),
     loadFolderSuccess: props<{ folder: Folder }>(),
     loadFolderFailure: props<{ error: any }>(),

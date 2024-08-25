@@ -8,7 +8,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MaterialsContentComponent } from '@users/feature-materials-content';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MaterialsAddButtonComponent } from '@users/feature-materials-create';
-import { tap } from 'rxjs/operators';
+import { first, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 
@@ -29,27 +29,35 @@ export class MaterialsListContainerComponent {
   public readonly foldersMaterials$ = this.materialsFacade.foldersMaterials$;
   public readonly loadingStatus$ = this.materialsFacade.loadingStatus$;
   public readonly error$ = this.materialsFacade.error$;
-  // public readonly openedFolder$ = this.materialsFacade.openedFolder$
-  public readonly openedFolder$: Observable<Folder | null> = this.materialsFacade.openedFolder$.pipe(
-    tap((folder) => {
-      console.log('openedFolder runs in mat list cont');
-      if (!folder) {
-        this.materialsFacade.loadFolders();
-      }
-    })
-  );
+  public readonly openedFolder$ = this.materialsFacade.openedFolder$
+  // public readonly openedFolder$: Observable<Folder | null> = this.materialsFacade.openedFolder$.pipe(
+  //   tap((folder) => {
+  //     console.log('openedFolder runs in mat list cont', folder);
+  //     if (!folder) {
+  //       this.materialsFacade.loadFolders();
+  //     }
+  //   })
+  // );
+  // public readonly openedFolder$: Observable<Folder | null> = this.materialsFacade.openedFolder$.pipe(
+  //   tap((folder) => {
+  //     console.log('openedFolder runs in mat list cont', folder);
+  //     if (!folder) {
+  //       this.materialsFacade.loadFolder();
+  //     }
+  //   })
+  // );
 
   constructor() {
-    // this.openedFolder$.pipe(takeUntilDestroyed()).subscribe(
-    //   (folder) => {
-    //     console.log('openedFolder runs in mat list cont constr');
-    //     if (!folder) {
-    //     this.materialsFacade.loadFolder();
-    //   }
-    //   }
-    // )
-
-    this.materialsFacade.loadMaterials();
+    this.openedFolder$.pipe(takeUntilDestroyed()).subscribe(
+      (folder) => {
+        if(folder) {
+          this.materialsFacade.loadMaterials();
+        }
+        if (!folder) {
+        this.materialsFacade.loadFolder();
+      }
+      }
+    )
   }
 
   onRedirectToFoldersList() {
