@@ -25,13 +25,12 @@ export class MaterialsListContainerComponent {
   private readonly router = inject(Router);
   public dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
-  public openedFolder!: Folder;
+
   public readonly foldersMaterials$ = this.materialsFacade.foldersMaterials$;
   public readonly loadingStatus$ = this.materialsFacade.loadingStatus$;
   public readonly error$ = this.materialsFacade.error$;
-
+  
   private isPageLoaded = false
-
   public readonly openedFolder$: Observable<Folder | null> = this.materialsFacade.openedFolder$.pipe(
     tap((folder) => {
       if (!folder) {

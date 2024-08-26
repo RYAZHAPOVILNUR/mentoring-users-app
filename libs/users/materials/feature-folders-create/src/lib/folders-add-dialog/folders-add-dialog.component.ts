@@ -21,7 +21,6 @@ export class FoldersAddDialogComponent {
     title: ['', Validators.required],
   });
 
-
   cancel(): void {
     this.dialogRef.close();
   }

@@ -71,9 +71,5 @@ export const materialsFeature = createFeature({
       loadingStatus: 'error' as const,
       error,
     })),
-    on(materialsActions.updateLoadingStatus, (state, { loadingStatus }) => ({
-      ...state,
-      loadingStatus
-    })),
   ),
 });

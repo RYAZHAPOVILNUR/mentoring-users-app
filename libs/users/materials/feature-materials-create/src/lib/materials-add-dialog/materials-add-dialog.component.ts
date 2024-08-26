@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import {
   ReactiveFormsModule,
   FormBuilder,
@@ -35,7 +35,7 @@ export class MaterialsAddDialogComponent {
   public readonly data = inject(MAT_DIALOG_DATA);
   private readonly formBuilder = inject(FormBuilder);
   public readonly dialogRef = inject(MatDialogRef<MaterialsAddDialogComponent>);
-  public readonly youTubeLinkRegExp = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(?:-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|live\/|v\/)?)([\w\-]+)(\S+)?$/
+  private readonly youTubeLinkRegExp = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(?:-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|live\/|v\/)?)([\w\-]+)(\S+)?$/
 
   public formGroup: FormGroup = this.formBuilder.group({
     title: ['', Validators.required],
@@ -70,7 +70,6 @@ export class MaterialsAddDialogComponent {
       if (this.data.materialType == 'видео') {
         isCorrectFileType = this.youTubeLinkRegExp.test(link)
       }
-
       let isLinkValid = isLink && isCorrectFileType;
 
       return isLinkValid ? null : { linkInvalid: true };

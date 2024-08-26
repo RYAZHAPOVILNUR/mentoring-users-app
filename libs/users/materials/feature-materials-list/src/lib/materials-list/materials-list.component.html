@@ -4,6 +4,7 @@
 
 <ng-template #loadingResult>
   <div class="container">
+
     <ng-container *ngIf="vm.loadingStatus === 'loaded'; else error">
       <div class="folders-header">
         <button mat-icon-button aria-label="close dialog" color="accent" (click)="onRedirectToFoldersList()">
@@ -23,6 +24,7 @@
           <materials-card *ngFor="let material of vm.materials" [material]="material" (openMaterialFile)="onOpenMaterialFile(material)" (deleteMaterial)="onDeleteMaterial(material)"/>
         </div>
       </ng-container>
+
     </ng-container>
   </div>
 </ng-template>
@@ -36,7 +38,6 @@
     <button mat-flat-button aria-label="close dialog" (click)="onRedirectToFoldersList()">
       На страницу с папками
     </button>
-
   </div>
 </ng-template>
 
