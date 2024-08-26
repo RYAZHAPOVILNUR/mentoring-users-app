@@ -4,8 +4,7 @@ import { Observable } from 'rxjs';
 import { API_URL } from './api-url.token';
 
 @Injectable({ providedIn: 'root' })
-export class
-ApiService {
+export class ApiService {
   private readonly http = inject(HttpClient);
   private readonly apiUrl = inject(API_URL);
 
