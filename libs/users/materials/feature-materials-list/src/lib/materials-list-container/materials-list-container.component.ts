@@ -8,7 +8,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MaterialsContentComponent } from '@users/feature-materials-content';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MaterialsAddButtonComponent } from '@users/feature-materials-create';
-import { first, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 
@@ -29,36 +29,22 @@ export class MaterialsListContainerComponent {
   public readonly foldersMaterials$ = this.materialsFacade.foldersMaterials$;
   public readonly loadingStatus$ = this.materialsFacade.loadingStatus$;
   public readonly error$ = this.materialsFacade.error$;
-  public readonly openedFolder$ = this.materialsFacade.openedFolder$
-  // public readonly openedFolder$: Observable<Folder | null> = this.materialsFacade.openedFolder$.pipe(
-  //   tap((folder) => {
-  //     console.log('openedFolder runs in mat list cont', folder);
-  //     if (!folder) {
-  //       this.materialsFacade.loadFolders();
-  //     }
-  //   })
-  // );
-  // public readonly openedFolder$: Observable<Folder | null> = this.materialsFacade.openedFolder$.pipe(
-  //   tap((folder) => {
-  //     console.log('openedFolder runs in mat list cont', folder);
-  //     if (!folder) {
-  //       this.materialsFacade.loadFolder();
-  //     }
-  //   })
-  // );
 
-  constructor() {
-    this.openedFolder$.pipe(takeUntilDestroyed()).subscribe(
-      (folder) => {
-        if(folder) {
-          this.materialsFacade.loadMaterials();
-        }
-        if (!folder) {
-        this.materialsFacade.loadFolder();
+  private isPageLoaded = false
+
+  public readonly openedFolder$: Observable<Folder | null> = this.materialsFacade.openedFolder$.pipe(
+    tap((folder) => {
+      if (!folder) {
+        if(this.isPageLoaded === false){
+          this.materialsFacade.loadFolder();
+        } else return
       }
+      if (folder) {
+        this.materialsFacade.loadMaterials();
+        this.isPageLoaded = true
       }
-    )
-  }
+    })
+  );
 
   onRedirectToFoldersList() {
     this.router.navigate(['/materials']);

@@ -4,7 +4,7 @@ import { AddFolder } from '../models/add-folder.model';
 import { showSnackbarType } from '../models/show-snackbar-type.model';
 import { MaterialVM } from '../models/material.model';
 import { AddNewMaterial } from '../models/add-new-material.model';
-import { MaterialDTO } from '@users/core/data-access';
+import { LoadingStatus } from '@users/core/data-access';
 
 export const materialsActions = createActionGroup({
   source: 'Materials',
@@ -36,5 +36,7 @@ export const materialsActions = createActionGroup({
     deleteMaterial: props<{ id: number }>(),
     deleteMaterialSuccess: props<{ id: number }>(),
     deleteMaterialFailure: props<{ error: any }>(),
+
+    updateLoadingStatus: props<{loadingStatus: LoadingStatus}>(),
   },
 });

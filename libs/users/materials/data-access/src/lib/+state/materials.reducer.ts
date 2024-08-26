@@ -70,6 +70,10 @@ export const materialsFeature = createFeature({
       ...state,
       loadingStatus: 'error' as const,
       error,
-    }))
+    })),
+    on(materialsActions.updateLoadingStatus, (state, { loadingStatus }) => ({
+      ...state,
+      loadingStatus
+    })),
   ),
 });

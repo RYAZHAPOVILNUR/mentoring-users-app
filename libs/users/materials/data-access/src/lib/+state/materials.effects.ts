@@ -21,7 +21,7 @@ export const initMaterials = createEffect(
           map((folders) => materialsActions.loadFoldersSuccess({ folders })),
           catchError((error) => {
             console.error('Error', error);
-            return of(materialsActions.loadFoldersFailure({error}));
+            return of(materialsActions.loadFoldersFailure({ error }));
           })
         )
       )
@@ -72,14 +72,16 @@ export const loadMaterials = createEffect(
       ofType(materialsActions.loadMaterials),
       switchMap(() =>
         apiService.get<MaterialDTO[]>('/material').pipe(
-          map((unfilteredMaterialsDTO) => unfilteredMaterialsDTO.filter(unfilteredMaterial => unfilteredMaterial.material_link.startsWith('http'))),
+          map((unfilteredMaterialsDTO) =>
+            unfilteredMaterialsDTO.filter((unfilteredMaterial) => unfilteredMaterial.material_link.startsWith('http'))
+          ),
           map((materialsDTO) => {
-            const materials = materialsDTO.map((materialDTO) => materialsDTOAdapter.DTOtoVM(materialDTO))
-            return materialsActions.loadMaterialsSuccess({materials})
+            const materials = materialsDTO.map((materialDTO) => materialsDTOAdapter.DTOtoVM(materialDTO));
+            return materialsActions.loadMaterialsSuccess({ materials });
           }),
           catchError((error) => {
             console.error('Error', error);
-            return of(materialsActions.loadMaterialsFailure({error}));
+            return of(materialsActions.loadMaterialsFailure({ error }));
           })
         )
       )
@@ -93,32 +95,32 @@ export const addMaterial = createEffect(
     return actions$.pipe(
       ofType(materialsActions.addMaterial),
       withLatestFrom(store.select(selectRouteParams)),
-      switchMap(([{material}, params]) => {
+      switchMap(([{ material }, params]) => {
         const newMaterial = {
           ...material,
-          folder_id: Number(params['id'])
-        }
+          folder_id: Number(params['id']),
+        };
         return apiService.post<MaterialVM, AddNewMaterial>('/material', newMaterial).pipe(
           map((materialDTO) => {
-            const material = materialsDTOAdapter.DTOtoVM(materialDTO)
-            return materialsActions.addMaterialSuccess({material})
+            const material = materialsDTOAdapter.DTOtoVM(materialDTO);
+            return materialsActions.addMaterialSuccess({ material });
           }),
           catchError((error) => {
             console.log('Error', error);
-            return of(materialsActions.addMaterialFailure({ error }))
+            return of(materialsActions.addMaterialFailure({ error }));
           })
-        )
+        );
       })
-    )
+    );
   },
-  { functional: true}
+  { functional: true }
 );
 
 export const deleteMaterial = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) => {
     return actions$.pipe(
       ofType(materialsActions.deleteMaterial),
-      switchMap(({id}) =>
+      switchMap(({ id }) =>
         apiService.delete<void>(`/material/${id}`).pipe(
           map(() => materialsActions.deleteMaterialSuccess({ id })),
           catchError((error) => {
@@ -127,7 +129,7 @@ export const deleteMaterial = createEffect(
           })
         )
       )
-    )
+    );
   },
   { functional: true }
 );
@@ -137,19 +139,16 @@ export const loadFolder = createEffect(
     return actions$.pipe(
       ofType(materialsActions.loadFolder),
       withLatestFrom(store.select(selectRouteParams)),
-      switchMap(([, params]) =>{
-        console.log('params in effects loadFolder', params)
+      switchMap(([, params]) => {
         return apiService.get<Folder>(`/folder/${params['id']}`).pipe(
-          map((folder) => materialsActions.loadFolderSuccess({folder})),
+          map((folder) => materialsActions.loadFolderSuccess({ folder })),
           catchError((error) => {
             console.log('Error', error);
-            return of(materialsActions.loadFolderFailure({error}))
-          } )
-        )
-      }
-      )
-    )
+            return of(materialsActions.loadFolderFailure({ error }));
+          })
+        );
+      })
+    );
   },
-  { functional: true}
-)
-
+  { functional: true }
+);
