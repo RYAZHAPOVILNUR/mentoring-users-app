@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoldersVM } from '../..';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+
 
 @Component({
   selector: 'users-folders-card',
@@ -18,8 +19,13 @@ export class FoldersCardComponent {
   showDeleteButton = false;
 
   @Output() deleteFolder = new EventEmitter();
+  @Output() openFolder = new EventEmitter();
 
-  onDeleteFolder(event: Event) {
-    this.deleteFolder.emit();
+  onDeleteFolder(folderId: number) {
+    this.deleteFolder.emit(folderId);
+  }
+
+  onOpenFolder(id: number) {
+    this.openFolder.emit(id);
   }
 }

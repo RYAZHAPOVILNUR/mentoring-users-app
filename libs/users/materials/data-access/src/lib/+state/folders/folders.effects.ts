@@ -19,11 +19,11 @@ export const foldersEffects = createEffect(
       switchMap(() =>
         apiService.get<FoldersEntity[]>('/folder').pipe(
           map((folders) =>
-            FoldersActions.loadFoldersSuccess({ folders }),
+            FoldersActions.initFoldersSuccess({ folders }),
           ),
           catchError((error) => {
             console.error('Error', error);
-            return of(FoldersActions.loadFoldersFailure({ error }));
+            return of(FoldersActions.initFoldersFailure({ error }));
           })
         )
       )

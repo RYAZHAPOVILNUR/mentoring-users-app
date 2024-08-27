@@ -1,9 +1,10 @@
 import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
-import { FoldersFacade } from '@users/materials/data-access';
+import { MaterialsFacade } from '@users/materials/data-access';
 import { LetDirective } from '@ngrx/component';
 import { CreateFoldersButtonComponent } from '@users/feature-folders-create';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'users-folders-list-container',
@@ -16,13 +17,18 @@ import { CreateFoldersButtonComponent } from '@users/feature-folders-create';
 
 export class FoldersListContainerComponent implements OnInit {
   ngOnInit(): void {
-    this.FoldersFacade.init();
+    this.MaterialsFacade.initFolders();
   }
-  
-  public FoldersFacade = inject(FoldersFacade);
-  public readonly folders$ = this.FoldersFacade.allFolders$;
+
+  public MaterialsFacade = inject(MaterialsFacade);
+  public readonly folders$ = this.MaterialsFacade.allFolders$;
+  private readonly router = inject(Router);
 
   onDeleteFolder(folderId: number) {
-    this.FoldersFacade.deleteFolder(folderId);
+    this.MaterialsFacade.deleteFolder(folderId);
+  }
+
+  onOpenFolder(id: number) {
+    this.router.navigate(['/materials', id]);
   }
 }

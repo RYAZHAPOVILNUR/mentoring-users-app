@@ -4,3 +4,4 @@ export * from './lib/users-dto.model';
 export * from './lib/users-dto.adapter';
 export * from './lib/users.entity';
 export * from './lib/folders-dto.model';
+export * from './lib/materials-dto.model';

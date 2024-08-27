@@ -1,4 +1,4 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import * as fromMaterials from './materials.reducer';
+import { MATERIALS_FEATURE_KEY, MaterialsState } from './materials.reducer';
 
-export const selectMaterialsState = createFeatureSelector<fromMaterials.State>(fromMaterials.materialsFeatureKey);
+export const selectMaterialsState = createFeatureSelector<MaterialsState>(MATERIALS_FEATURE_KEY);

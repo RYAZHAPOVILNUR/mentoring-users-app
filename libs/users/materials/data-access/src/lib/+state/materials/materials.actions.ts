@@ -1,10 +1,11 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import { MaterialType } from '@users/core/data-access';
 
 export const MaterialsActions = createActionGroup({
-  source: 'Materials',
+  source: 'materials',
   events: {
-    'Load Materialss': emptyProps(),
-    'Load Materialss Success': props<{ data: unknown }>(),
-    'Load Materialss Failure': props<{ error: unknown }>(),
+    'Load Materials': emptyProps(),
+    'Load Materials Success': props<{ materials: MaterialType[] }>(),
+    'Load Materials Failure': props<{ error: Error }>(),
   },
 });

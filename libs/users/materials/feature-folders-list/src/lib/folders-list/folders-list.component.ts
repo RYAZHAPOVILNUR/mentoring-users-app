@@ -16,9 +16,14 @@ import { FoldersCardComponent } from "../folders-card/folders-card.component";
 export class FoldersListComponent {
   @Input({ required: true }) vm!: FoldersListVM;
   @Output() deleteFolder = new EventEmitter();
+  @Output() openFolder = new EventEmitter();
 
   onDeleteFolder(folderId: number) {
     this.deleteFolder.emit(folderId);
+  }
+
+  onOpenFolder(folderId: number) {
+    this.openFolder.emit(folderId);
   }
 }
 

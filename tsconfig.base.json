@@ -37,6 +37,7 @@
       "@users/materials": ["libs/users/materials/src/index.ts"],
       "@users/materials/data-access": ["libs/users/materials/data-access/src/index.ts"],
       "@users/materials/feature-folders-list": ["libs/users/materials/feature-folders-list/src/index.ts"],
+      "@users/materials/feature-materials-list": ["libs/users/materials/feature-materials-list/src/index.ts"],
       "@users/settings": ["libs/users/settings/src/index.ts"],
       "@users/settings-ui": ["libs/settings-ui/src/index.ts"],
       "@users/settings/data-access": ["libs/users/settings/data-access/src/index.ts"],

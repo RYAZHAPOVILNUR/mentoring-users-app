@@ -16,7 +16,6 @@ export interface FoldersEntity {
     title: string;
 };
 
-
 export const foldersAdapter: EntityAdapter<FoldersEntity> = createEntityAdapter<FoldersEntity>();
 
 export const initialUsersState: FoldersState = foldersAdapter.getInitialState({
@@ -30,10 +29,10 @@ const reducer = createReducer(
         ...state,
         status: 'loading' as const,
     })),
-    on(FoldersActions.loadFoldersSuccess, (state, { folders }) =>
+    on(FoldersActions.initFoldersSuccess, (state, { folders }) =>
         foldersAdapter.setAll(folders, { ...state, status: 'loaded' as const })
     ),
-    on(FoldersActions.loadFoldersFailure, (state, { error }) => ({
+    on(FoldersActions.initFoldersFailure, (state, { error }) => ({
         ...state,
         status: 'error' as const,
         error,

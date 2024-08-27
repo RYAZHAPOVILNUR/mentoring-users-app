@@ -1,23 +1,31 @@
-import { Injectable } from '@angular/core';
+import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap } from 'rxjs/operators';
-import { Observable, EMPTY, of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 import { MaterialsActions } from './materials.actions';
+import { ApiService } from '@users/core/http';
+import { MaterialsEntity } from './materials.reducer';
 
-@Injectable()
-export class MaterialsEffects {
-  loadMaterialss$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(MaterialsActions.loadMaterialss),
-      concatMap(() =>
-        /** An EMPTY observable only emits completion. Replace with your own observable API request */
-        EMPTY.pipe(
-          map((data) => MaterialsActions.loadMaterialssSuccess({ data })),
-          catchError((error) => of(MaterialsActions.loadMaterialssFailure({ error })))
+export const materialsEffects = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+
+    return actions$.pipe(
+      ofType(MaterialsActions.loadMaterials),
+      // delay(1500),
+      switchMap(() =>
+        apiService.get<MaterialsEntity[]>('/material').pipe(
+          map((materials) =>
+            MaterialsActions.loadMaterialsSuccess({ materials }),
+          ),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(MaterialsActions.loadMaterialsFailure({ error }));
+          })
         )
       )
     );
-  });
-
-  constructor(private actions$: Actions) {}
-}
+  },
+  { functional: true }
+);
