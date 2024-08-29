@@ -4,13 +4,16 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class ProfileTimerService {
-  private hours = 0;
-  private minutes = 0;
-  private seconds = 0;
+  // private hours = 0;
+  // private minutes = 0;
+
+  timeInLocalStorage = Number(this.getTimeFromLocalStorage())
+
+  private seconds = this.timeInLocalStorage || 0;
 
   public isWorking = new BehaviorSubject<boolean>(false);
 
-  private timeInSecondsSubject$ = new BehaviorSubject<number>(0)
+  private timeInSecondsSubject$ = new BehaviorSubject<number>(this.seconds)
   public timeInSeconds$ = this.timeInSecondsSubject$.asObservable()
 
   private timerID: number | undefined = undefined;
@@ -57,7 +60,7 @@ export class ProfileTimerService {
   }
 
   setTimeToLocalStorage(time: number) {
-    localStorage.setItem('timeInSeconds', time.toString());
+    localStorage.setItem('timer', time.toString());
   }
 
   //   startCountdown() {
