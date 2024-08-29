@@ -17,6 +17,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProfileTimerComponent} from '@users/users/profile/feature-profile-timer'
+import {MatDividerModule} from '@angular/material/divider'
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -34,6 +35,7 @@ import { ProfileTimerComponent} from '@users/users/profile/feature-profile-timer
     FormsModule,
     TranslateModule,
     ProfileTimerComponent,
+    MatDividerModule,
   ],
   templateUrl: './feature-user-info.component.html',
   styleUrls: ['./feature-user-info.component.scss'],
@@ -61,7 +63,7 @@ export class FeatureUserInfoComponent implements OnInit {
       'github',
       this.domSanitizer.bypassSecurityTrustResourceUrl(`assets/icons/github.svg`)
     );
-    of(this.vm.githubUserName).subscribe(console.log);
+    // of(this.vm.githubUserName).subscribe(console.log);
   }
   onOpenChangePassword() {
     const dialogRef = this.dialog.open(PasswordChangeDialogComponent);

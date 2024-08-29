@@ -1,1 +1,17 @@
-<p>profile-timer works!</p>
+<div class="timer-container">
+  <div class="timer-header" >
+    <div class="timer-title">Time tracker</div>
+    <p class="timer-clock">{{timeInSeconds$ | async | secondsToTime }}</p>
+  </div>
+  <mat-card-actions>
+    <button mat-button (click)="onStartTimer()">
+      <mat-icon>play_arrow</mat-icon>
+      <mat-icon>pause</mat-icon>
+      Старт</button>
+    <button mat-button (click)="onPauseTimer()">
+      <mat-icon>stop</mat-icon>
+      Сбросить
+    </button>
+  </mat-card-actions>
+</div>
+
