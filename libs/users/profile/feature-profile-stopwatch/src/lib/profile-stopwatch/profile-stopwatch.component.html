@@ -1,7 +1,7 @@
 <div class="stopwatch-container">
   <div class="stopwatch-header" >
     <div class="stopwatch-title">Time tracker</div>
-    <p class="stopwatch-clock">{{timeInSeconds$ | async | secondsToTime }}</p>
+    <p class="stopwatch-clock">{{stopwatchTime$ | async }}</p>
   </div>
   <mat-card-actions>
     <button mat-button (click)="onStartStopwatch()">

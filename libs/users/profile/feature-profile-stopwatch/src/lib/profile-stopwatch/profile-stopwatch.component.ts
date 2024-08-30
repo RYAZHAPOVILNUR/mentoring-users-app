@@ -5,13 +5,12 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider'
 import { MatIconModule } from '@angular/material/icon';
 import { ProfileStopwatchService } from '../profile-stopwatch-service/profile-stopwatch.service';
-import { SecondsToTimePipe } from './seconds-to-time.pipe';
 
 
 @Component({
   selector: 'profile-stopwatch',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule, MatDividerModule, MatIconModule, SecondsToTimePipe],
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatDividerModule, MatIconModule],
   templateUrl: './profile-stopwatch.component.html',
   styleUrls: ['./profile-stopwatch.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,7 +18,7 @@ import { SecondsToTimePipe } from './seconds-to-time.pipe';
 export class ProfileStopwatchComponent {
   private profileStopwatchService = inject(ProfileStopwatchService)
 
-  public timeInSeconds$ = this.profileStopwatchService.timeInSeconds$
+  public stopwatchTime$ = this.profileStopwatchService.stopwatchTime$
 
   onStartStopwatch() {
     this.profileStopwatchService.playStopwatch()
