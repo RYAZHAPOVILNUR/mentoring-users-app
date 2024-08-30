@@ -1,7 +1,7 @@
 {
-  "name": "profile-timer",
+  "name": "profile-stopwatch",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/users/profile/feature-profile-timer/src",
+  "sourceRoot": "libs/users/profile/feature-profile-stopwatch/src",
   "prefix": "users",
   "tags": [],
   "projectType": "library",
@@ -10,7 +10,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/users/profile/feature-profile-timer/jest.config.ts",
+        "jestConfig": "libs/users/profile/feature-profile-stopwatch/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -25,8 +25,8 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "libs/users/profile/feature-profile-timer/**/*.ts",
-          "libs/users/profile/feature-profile-timer/**/*.html"
+          "libs/users/profile/feature-profile-stopwatch/**/*.ts",
+          "libs/users/profile/feature-profile-stopwatch/**/*.html"
         ]
       }
     }

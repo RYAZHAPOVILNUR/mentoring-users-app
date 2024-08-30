@@ -4,28 +4,28 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider'
 import { MatIconModule } from '@angular/material/icon';
-import { ProfileTimerService } from '../profile-timer-service/profile-timer.service';
+import { ProfileStopwatchService } from '../profile-stopwatch-service/profile-stopwatch.service';
 import { SecondsToTimePipe } from './seconds-to-time.pipe';
 
 
 @Component({
-  selector: 'profile-timer',
+  selector: 'profile-stopwatch',
   standalone: true,
   imports: [CommonModule, MatCardModule, MatButtonModule, MatDividerModule, MatIconModule, SecondsToTimePipe],
-  templateUrl: './profile-timer.component.html',
-  styleUrls: ['./profile-timer.component.scss'],
+  templateUrl: './profile-stopwatch.component.html',
+  styleUrls: ['./profile-stopwatch.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileTimerComponent {
-  private profileTimerService = inject(ProfileTimerService)
+export class ProfileStopwatchComponent {
+  private profileStopwatchService = inject(ProfileStopwatchService)
 
-  public timeInSeconds$ = this.profileTimerService.timeInSeconds$
+  public timeInSeconds$ = this.profileStopwatchService.timeInSeconds$
 
-  onStartTimer() {
-    this.profileTimerService.playTimer()
+  onStartStopwatch() {
+    this.profileStopwatchService.playStopwatch()
   }
 
-  onPauseTimer() {
-    this.profileTimerService.pauseTimer()
+  onPauseStopwatch() {
+    this.profileStopwatchService.pauseStopwatch()
   }
 }

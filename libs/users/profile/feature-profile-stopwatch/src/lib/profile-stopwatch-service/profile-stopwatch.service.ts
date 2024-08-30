@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class ProfileTimerService {
+export class ProfileStopwatchService {
   // private hours = 0;
   // private minutes = 0;
 
@@ -16,20 +16,20 @@ export class ProfileTimerService {
   private timeInSecondsSubject$ = new BehaviorSubject<number>(this.seconds)
   public timeInSeconds$ = this.timeInSecondsSubject$.asObservable()
 
-  private timerID: number | undefined = undefined;
+  private stopwatchID: number | undefined = undefined;
 
   constructor() {
     this.isWorking.subscribe((isWorking) => {
       if (isWorking) {
         console.log('isWorking = true');
-        if (this.timerID !== undefined) {
-          clearInterval(this.timerID);
+        if (this.stopwatchID !== undefined) {
+          clearInterval(this.stopwatchID);
         }
-        this.timerID = setInterval(() => this.startCountdownSecondsOnly(), 1000);
-        // this.timerID = setInterval(() => this.startCountdown(), 1000)
+        this.stopwatchID = setInterval(() => this.startCountdownSecondsOnly(), 1000);
+        // this.stopwatchID = setInterval(() => this.startCountdown(), 1000)
       } else {
         console.log('isWorking = false');
-        clearInterval(this.timerID);
+        clearInterval(this.stopwatchID);
       }
     });
   }
@@ -40,11 +40,11 @@ export class ProfileTimerService {
     this.setTimeToLocalStorage(this.seconds)
   }
 
-  playTimer() {
+  playStopwatch() {
     this.isWorking.next(true);
   }
 
-  pauseTimer() {
+  pauseStopwatch() {
     this.isWorking.next(false);
   }
 
@@ -56,11 +56,11 @@ export class ProfileTimerService {
   }
 
   getTimeFromLocalStorage(): string | null {
-    return localStorage.getItem('timer') || null;
+    return localStorage.getItem('stopwatch') || null;
   }
 
   setTimeToLocalStorage(time: number) {
-    localStorage.setItem('timer', time.toString());
+    localStorage.setItem('stopwatch', time.toString());
   }
 
   //   startCountdown() {
