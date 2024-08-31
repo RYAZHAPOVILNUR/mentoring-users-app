@@ -3,13 +3,17 @@
     <div class="stopwatch-title">Time tracker</div>
     <p class="stopwatch-clock">{{stopwatchTime$ | async }}</p>
   </div>
-  <mat-card-actions>
-    <button mat-button (click)="onStartStopwatch()">
+  <mat-card-actions *ngrxLet="isStopWatchRunning$ as isStopWatchRunning">
+    <button mat-button *ngIf="isStopWatchRunning === false" (click)="onStartStopwatch()">
       <mat-icon>play_arrow</mat-icon>
+      Старт
+    </button>
+    <button mat-button  *ngIf="isStopWatchRunning === true" (click)="onPauseStopwatch()">
       <mat-icon>pause</mat-icon>
-      Старт</button>
-    <button mat-button (click)="onPauseStopwatch()">
-      <mat-icon>stop</mat-icon>
+      Пауза
+    </button>
+    <button mat-button>
+      <mat-icon>restart_alt</mat-icon>
       Сбросить
     </button>
   </mat-card-actions>
