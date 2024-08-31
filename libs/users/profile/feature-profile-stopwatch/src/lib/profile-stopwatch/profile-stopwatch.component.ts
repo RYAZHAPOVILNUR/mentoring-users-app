@@ -22,11 +22,11 @@ export class ProfileStopwatchComponent {
   public stopwatchTime$ = this.profileStopwatchService.stopwatchTime$
   public isStopWatchRunning$ = this.profileStopwatchService.isStopwatchRunning$
 
-  onStartStopwatch() {
-    this.profileStopwatchService.startStopwatch()
-  }
+  onStart() {
+    this.profileStopwatchService.start()
+      }
 
-  onPauseStopwatch() {
-    this.profileStopwatchService.pauseStopwatch()
+  onPause() {
+    this.profileStopwatchService.pause()
   }
 }

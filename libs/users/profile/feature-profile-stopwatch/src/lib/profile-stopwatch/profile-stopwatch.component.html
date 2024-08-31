@@ -4,11 +4,11 @@
     <p class="stopwatch-clock">{{stopwatchTime$ | async }}</p>
   </div>
   <mat-card-actions *ngrxLet="isStopWatchRunning$ as isStopWatchRunning">
-    <button mat-button *ngIf="isStopWatchRunning === false" (click)="onStartStopwatch()">
+    <button mat-button *ngIf="isStopWatchRunning === false" (click)="onStart()">
       <mat-icon>play_arrow</mat-icon>
       Старт
     </button>
-    <button mat-button  *ngIf="isStopWatchRunning === true" (click)="onPauseStopwatch()">
+    <button mat-button  *ngIf="isStopWatchRunning === true" (click)="onPause()">
       <mat-icon>pause</mat-icon>
       Пауза
     </button>
