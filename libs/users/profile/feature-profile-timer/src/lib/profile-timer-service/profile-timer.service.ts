@@ -2,7 +2,7 @@
 // import { BehaviorSubject } from 'rxjs';
 // import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-// export type StopwatchTime = {
+// export type TimerTime = {
 //   hours: number;
 //   minutes: number;
 //   seconds: number;
@@ -10,23 +10,23 @@
 // @Injectable({
 //   providedIn: 'root',
 // })
-// export class ProfileStopwatchService {
+// export class ProfileTimerService {
 //   private hours = 0;
 //   private minutes = 0;
 //   private seconds = 0;
-//   private initialStopwatchTime = this.getTimeFromLocalStorage();
+//   private initialTimerTime = this.getTimeFromLocalStorage();
 
-//   private isStopwatchRunningSubject$ = new BehaviorSubject<boolean>(false);
-//   public isStopwatchRunning$ = this.isStopwatchRunningSubject$.asObservable();
+//   private isTimerRunningSubject$ = new BehaviorSubject<boolean>(false);
+//   public isTimerRunning$ = this.isTimerRunningSubject$.asObservable();
 
-//   private stopwatchTimeSubject$ = new BehaviorSubject<string>(this.initialStopwatchTime);
-//   public stopwatchTime$ = this.stopwatchTimeSubject$.asObservable();
+//   private timerTimeSubject$ = new BehaviorSubject<string>(this.initialTimerTime);
+//   public timerTime$ = this.timerTimeSubject$.asObservable();
 
 //   private setIntervalID: number | undefined = undefined;
 
 //   constructor() {
-//     this.isStopwatchRunning$.pipe(takeUntilDestroyed()).subscribe((isStopwatchRunning) => {
-//       if (isStopwatchRunning) {
+//     this.isTimerRunning$.pipe(takeUntilDestroyed()).subscribe((isTimerRunning) => {
+//       if (isTimerRunning) {
 //         if (this.setIntervalID !== undefined) {
 //           clearInterval(this.setIntervalID);
 //         }
@@ -38,15 +38,15 @@
 //   }
 
 //   public start() {
-//     this.isStopwatchRunningSubject$.next(true);
+//     this.isTimerRunningSubject$.next(true);
 //   }
 
 //   public pause() {
-//     this.isStopwatchRunningSubject$.next(false);
+//     this.isTimerRunningSubject$.next(false);
 //   }
 
 //   private getTimeFromLocalStorage(): string {
-//     const data = localStorage.getItem('stopwatch');
+//     const data = localStorage.getItem('timer');
 //     if (data) {
 //       let timeInLocalStorage = JSON.parse(data);
 //       this.hours = timeInLocalStorage.hours;
@@ -60,13 +60,13 @@
 //   }
 
 //   private setTimeToLocalStorage() {
-//     const stopwatchTimeObject = {
+//     const timerTimeObject = {
 //       hours: this.hours,
 //       minutes: this.minutes,
 //       seconds: this.seconds,
 //     };
-//     const stopwatchTimeObjectJSON = JSON.stringify(stopwatchTimeObject);
-//     localStorage.setItem('stopwatch', stopwatchTimeObjectJSON);
+//     const timerTimeObjectJSON = JSON.stringify(timerTimeObject);
+//     localStorage.setItem('timer', timerTimeObjectJSON);
 //   }
 
 //   private startCountdown() {
@@ -81,7 +81,7 @@
 //         this.hours++;
 //       }
 //     }
-//     this.stopwatchTimeSubject$.next(this.getActualTimeString());
+//     this.timerTimeSubject$.next(this.getActualTimeString());
 //     this.setTimeToLocalStorage();
 //   }
 
@@ -109,7 +109,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-export type StopwatchTime = {
+export type TimerTime = {
   hours: number;
   minutes: number;
   seconds: number;
@@ -117,43 +117,43 @@ export type StopwatchTime = {
 @Injectable({
   providedIn: 'root',
 })
-export class ProfileStopwatchService {
+export class ProfileTimerService {
   private hours = 0;
   private minutes = 0;
   private seconds = 0;
-  private initialStopwatchTime = this.getTimeFromLocalStorage();
+  private initialTimerTime = this.getTimeFromLocalStorage();
 
-  private isStopwatchRunningSubject$ = new BehaviorSubject<boolean>(false);
-  public isStopwatchRunning$ = this.isStopwatchRunningSubject$.asObservable();
+  private isTimerRunningSubject$ = new BehaviorSubject<boolean>(false);
+  public isTimerRunning$ = this.isTimerRunningSubject$.asObservable();
 
-  private stopwatchTimeSubject$ = new BehaviorSubject<string>(this.initialStopwatchTime);
-  public stopwatchTime$ = this.stopwatchTimeSubject$.asObservable();
+  private timerTimeSubject$ = new BehaviorSubject<string>(this.initialTimerTime);
+  public timerTime$ = this.timerTimeSubject$.asObservable();
 
   private setIntervalID: number | undefined = undefined;
 
-  private startStopwatch() {
+  private startTimer() {
     if (this.setIntervalID !== undefined) {
       clearInterval(this.setIntervalID);
     }
     this.setIntervalID = setInterval(() => this.startCountdown(), 1000);
   }
 
-  private stopStopwatch() {
+  private stopTimer() {
     clearInterval(this.setIntervalID)
   }
 
   public start() {
-    this.isStopwatchRunningSubject$.next(true);
-    this.startStopwatch()
+    this.isTimerRunningSubject$.next(true);
+    this.startTimer()
   }
 
   public pause() {
-    this.isStopwatchRunningSubject$.next(false);
-    this.stopStopwatch()
+    this.isTimerRunningSubject$.next(false);
+    this.stopTimer()
   }
 
   private getTimeFromLocalStorage(): string {
-    const data = localStorage.getItem('stopwatch');
+    const data = localStorage.getItem('timer');
     if (data) {
       let timeInLocalStorage = JSON.parse(data);
       this.hours = timeInLocalStorage.hours;
@@ -167,13 +167,13 @@ export class ProfileStopwatchService {
   }
 
   private setTimeToLocalStorage() {
-    const stopwatchTimeObject = {
+    const timerTimeObject = {
       hours: this.hours,
       minutes: this.minutes,
       seconds: this.seconds,
     };
-    const stopwatchTimeObjectJSON = JSON.stringify(stopwatchTimeObject);
-    localStorage.setItem('stopwatch', stopwatchTimeObjectJSON);
+    const timerTimeObjectJSON = JSON.stringify(timerTimeObject);
+    localStorage.setItem('timer', timerTimeObjectJSON);
   }
 
   private startCountdown() {
@@ -188,7 +188,7 @@ export class ProfileStopwatchService {
         this.hours++;
       }
     }
-    this.stopwatchTimeSubject$.next(this.getActualTimeString());
+    this.timerTimeSubject$.next(this.getActualTimeString());
     this.setTimeToLocalStorage();
   }
 

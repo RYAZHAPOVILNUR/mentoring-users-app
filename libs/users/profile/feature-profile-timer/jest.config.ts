@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'profile-stopwatch',
+  displayName: 'profile-timer',
   preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../../coverage/libs/users/profile/feature-profile-stopwatch',
+  coverageDirectory: '../../../../coverage/libs/users/profile/feature-profile-timer',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

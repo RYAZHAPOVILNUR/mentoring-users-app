@@ -53,7 +53,7 @@
       "@users/users/data-access": ["libs/users/users/data-access/src/index.ts"],
       "@users/users/profile/data-access": ["libs/users/profile/data-access/src/index.ts"],
       "@users/users/profile/feature-profile": ["libs/users/profile/feature-profile/src/index.ts"],
-      "@users/users/profile/feature-profile-stopwatch": ["libs/users/profile/feature-profile-stopwatch/src/index.ts"],
+      "@users/users/profile/feature-profile-timer": ["libs/users/profile/feature-profile-timer/src/index.ts"],
       "@users/users/settings/feature-change-theme": ["libs/users/settings/feature-change-theme/src/index.ts"],
       "@users/users/settings/settings-ui": ["libs/users/settings/settings-ui/src/index.ts"],
       "@users/users/task": ["libs/users/task/src/index.ts"],

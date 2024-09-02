@@ -16,7 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
-import { ProfileStopwatchComponent} from '@users/users/profile/feature-profile-stopwatch'
+import { ProfileTimerComponent} from '@users/users/profile/feature-profile-timer'
 import {MatDividerModule} from '@angular/material/divider'
 
 @Component({
@@ -34,7 +34,7 @@ import {MatDividerModule} from '@angular/material/divider'
     CommonModule,
     FormsModule,
     TranslateModule,
-    ProfileStopwatchComponent,
+    ProfileTimerComponent,
     MatDividerModule,
   ],
   templateUrl: './feature-user-info.component.html',

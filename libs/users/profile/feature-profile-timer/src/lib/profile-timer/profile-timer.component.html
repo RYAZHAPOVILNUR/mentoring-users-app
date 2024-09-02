@@ -1,0 +1,21 @@
+<div class="timer-container">
+  <div class="timer-header" >
+    <div class="timer-title">Time tracker</div>
+    <p class="timer-clock">{{timerTime$ | async }}</p>
+  </div>
+  <mat-card-actions *ngrxLet="isTimerRunning$ as isTimerRunning">
+    <button mat-button *ngIf="isTimerRunning === false" (click)="onStart()">
+      <mat-icon>play_arrow</mat-icon>
+      Старт
+    </button>
+    <button mat-button  *ngIf="isTimerRunning === true" (click)="onPause()">
+      <mat-icon>pause</mat-icon>
+      Пауза
+    </button>
+    <button mat-button>
+      <mat-icon>restart_alt</mat-icon>
+      Сбросить
+    </button>
+  </mat-card-actions>
+</div>
+
