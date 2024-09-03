@@ -1,7 +1,7 @@
 <div class="timer-container">
   <div class="timer-header" >
     <div class="timer-title">Time tracker</div>
-    <p class="timer-clock">{{timerTime$ | async }}</p>
+    <p class="timer-clock">{{timerTime$ | async | secondsToTime}}</p>
   </div>
   <mat-card-actions *ngrxLet="isTimerRunning$ as isTimerRunning">
     <button mat-button *ngIf="isTimerRunning === false" (click)="onStart()">
