@@ -9,6 +9,7 @@
     {{ 'LAYOUT.HEADER.USERS' | translate }}
   </button>
   <span class="spacer"></span>
+  <button mat-button routerLink="/profile"><mat-icon>timer</mat-icon>{{seconds$ | async | secondsToTime}}</button>
   <button mat-icon-button routerLink="/profile">
     <mat-icon matListItemIcon>account_circle</mat-icon>
   </button>

@@ -11,6 +11,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { PushPipe } from '@ngrx/component';
 import { LanguageKeys, LanguageSwitchService } from '@users/users/core/ui/language-switch';
 import { ChangeThemeComponentHeader } from '@users/users/settings/feature-change-theme';
+import { ProfileTimerService, SecondsToTimePipe } from '@users/users/profile/feature-profile-timer';
+
 
 @Component({
   selector: 'lib-header',
@@ -25,6 +27,7 @@ import { ChangeThemeComponentHeader } from '@users/users/settings/feature-change
     MatMenuModule,
     PushPipe,
     ChangeThemeComponentHeader,
+    SecondsToTimePipe
   ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
@@ -35,6 +38,9 @@ export class HeaderComponent {
   public readonly isAuthenticated$: Observable<boolean> = this.facade.isAuthenticated$;
   public readonly isAdmin$: Observable<boolean | null> = this.facade.isAdmin$;
   public readonly selectedLanguage$ = this.languageSwitchService.selectedLanguage$;
+
+  private profileTimerService = inject(ProfileTimerService)
+  public seconds$ = this.profileTimerService.seconds$
 
   @Output() sidenavToggle = new EventEmitter();
 
