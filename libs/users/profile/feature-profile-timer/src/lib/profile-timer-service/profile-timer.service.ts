@@ -10,6 +10,7 @@ export class ProfileTimerService implements OnDestroy {
 
   private destroy$ = new Subject<boolean>();
   private interval$ = interval(1000);
+  // private interval$ = interval(1000).pipe(takeUntil(this.destroy$));
 
   private isRunningSubject$ = new BehaviorSubject<boolean>(this.isRunning);
   public isRunning$ = this.isRunningSubject$.asObservable();
@@ -18,8 +19,6 @@ export class ProfileTimerService implements OnDestroy {
   public seconds$ = this.secondsSubject$.asObservable();
 
   constructor() {
-    console.log('constr runs');
-
     if (this.isRunning) {
       this.startCountdown();
     }
