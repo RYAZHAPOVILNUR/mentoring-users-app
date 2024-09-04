@@ -30,5 +30,9 @@ export class ProfileTimerComponent {
   onPause() {
     this.profileTimerService.pause()
   }
+
+  onReset() {
+    this.profileTimerService.reset()
+  }
 }
 

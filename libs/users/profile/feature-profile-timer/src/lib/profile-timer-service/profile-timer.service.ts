@@ -1,11 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Subject, interval, takeUntil } from 'rxjs';
 
-export type TimerTime = {
-  hours: number;
-  minutes: number;
-  seconds: number;
-};
 @Injectable({
   providedIn: 'root',
 })
@@ -23,8 +18,10 @@ export class ProfileTimerService implements OnDestroy {
   public seconds$ = this.secondsSubject$.asObservable();
 
   constructor() {
+    console.log('constr runs');
+
     if (this.isRunning) {
-      this.startCountdown()
+      this.startCountdown();
     }
   }
 
@@ -38,19 +35,25 @@ export class ProfileTimerService implements OnDestroy {
     this.stopCountdown();
   }
 
+  public reset() {
+    this.isRunningSubject$.next(false);
+    this.seconds = 0;
+    this.isRunning = false;
+    this.stopCountdown();
+    this.secondsSubject$.next(this.seconds)
+  }
+
   private startCountdown() {
     this.interval$.pipe(takeUntil(this.destroy$)).subscribe(() => {
       this.seconds += 1;
-      console.log('this.seconds in startCountdown', this.seconds);
-
       this.secondsSubject$.next(this.seconds);
-      this.setTimerStateToLocalStorage(this.seconds, true);
+      this.updateLocalStorage(this.seconds, true);
     });
   }
 
   private stopCountdown() {
     this.destroy$.next(true);
-    this.setTimerStateToLocalStorage(this.seconds, false);
+    this.updateLocalStorage(this.seconds, false);
   }
 
   private getSecondsFromLocalStorage() {
@@ -67,12 +70,12 @@ export class ProfileTimerService implements OnDestroy {
     } else return false;
   }
 
-  private setTimerStateToLocalStorage(valueInSeconds: number, isRunning: boolean) {
+  private updateLocalStorage(valueInSeconds: number, isRunning: boolean) {
     const timerTimeObjectJSON = JSON.stringify({ valueInSeconds, isRunning });
     localStorage.setItem('timer', timerTimeObjectJSON);
   }
 
   ngOnDestroy() {
-    // this.destroy$.next(true)
+     this.destroy$.next(true)
   }
 }
