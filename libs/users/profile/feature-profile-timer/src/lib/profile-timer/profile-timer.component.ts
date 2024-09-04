@@ -20,8 +20,8 @@ import { SecondsToTimePipe } from './seconds-to-time.pipe';
 export class ProfileTimerComponent {
   private profileTimerService = inject(ProfileTimerService)
 
-  public timerTime$ = this.profileTimerService.timerTime$
-  public isTimerRunning$ = this.profileTimerService.isTimerRunning$
+  public seconds$ = this.profileTimerService.seconds$
+  public isRunning$ = this.profileTimerService.isRunning$
 
   onStart() {
     this.profileTimerService.start()

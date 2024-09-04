@@ -1,14 +1,14 @@
 <div class="timer-container">
   <div class="timer-header" >
     <div class="timer-title">Time tracker</div>
-    <p class="timer-clock">{{timerTime$ | async | secondsToTime}}</p>
+    <p class="timer-clock">{{seconds$ | async | secondsToTime}}</p>
   </div>
-  <mat-card-actions *ngrxLet="isTimerRunning$ as isTimerRunning">
-    <button mat-button *ngIf="isTimerRunning === false" (click)="onStart()">
+  <mat-card-actions *ngrxLet="isRunning$ as isRunning">
+    <button mat-button *ngIf="isRunning === false" (click)="onStart()">
       <mat-icon>play_arrow</mat-icon>
       Старт
     </button>
-    <button mat-button  *ngIf="isTimerRunning === true" (click)="onPause()">
+    <button mat-button  *ngIf="isRunning === true" (click)="onPause()">
       <mat-icon>pause</mat-icon>
       Пауза
     </button>

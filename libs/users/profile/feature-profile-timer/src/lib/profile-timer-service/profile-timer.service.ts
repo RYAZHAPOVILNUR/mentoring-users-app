@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Subject, interval, takeUntil } from 'rxjs';
 
 export type TimerTime = {
@@ -9,60 +9,70 @@ export type TimerTime = {
 @Injectable({
   providedIn: 'root',
 })
-export class ProfileTimerService {
-  private seconds = 0;
-  private initialTimerTime = 0;
+export class ProfileTimerService implements OnDestroy {
+  private seconds = this.getSecondsFromLocalStorage();
+  private isRunning = this.getIsRunningFromLocalStorage();
 
   private destroy$ = new Subject<boolean>();
   private interval$ = interval(1000);
 
-  private isTimerRunningSubject$ = new BehaviorSubject<boolean>(false);
-  public isTimerRunning$ = this.isTimerRunningSubject$.asObservable();
+  private isRunningSubject$ = new BehaviorSubject<boolean>(this.isRunning);
+  public isRunning$ = this.isRunningSubject$.asObservable();
 
-  private timerTimeSubject$ = new BehaviorSubject<number>(this.initialTimerTime);
-  public timerTime$ = this.timerTimeSubject$.asObservable();
+  private secondsSubject$ = new BehaviorSubject<number>(this.seconds);
+  public seconds$ = this.secondsSubject$.asObservable();
 
-  private startTimer() {
-    this.interval$.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      this.seconds += 1;
-      this.timerTimeSubject$.next(this.seconds);
-      this.setTimerStateToLocalStorage(true);
-    });
-  }
-
-  private stopTimer() {
-    this.isTimerRunningSubject$.next(false);
-    this.destroy$.next(true);
+  constructor() {
+    if (this.isRunning) {
+      this.startCountdown()
+    }
   }
 
   public start() {
-    this.isTimerRunningSubject$.next(true);
-    this.startTimer();
+    this.isRunningSubject$.next(true);
+    this.startCountdown();
   }
 
   public pause() {
-    this.isTimerRunningSubject$.next(false);
-    this.stopTimer();
-    this.setTimerStateToLocalStorage(false);
+    this.isRunningSubject$.next(false);
+    this.stopCountdown();
   }
 
-  secondsToTimeString(seconds: number) {
-    let hours = Math.floor(seconds / 3600);
-    let minutes = Math.floor((seconds - hours * 3600) / 60);
-    seconds = seconds - hours * 3600 - minutes * 60;
+  private startCountdown() {
+    this.interval$.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.seconds += 1;
+      console.log('this.seconds in startCountdown', this.seconds);
 
-    const h = hours < 10 ? '0' + hours : hours;
-    const m = minutes < 10 ? '0' + minutes : minutes;
-    const s = seconds < 10 ? '0' + seconds : seconds;
-    return `${h}:${m}:${s}`;
+      this.secondsSubject$.next(this.seconds);
+      this.setTimerStateToLocalStorage(this.seconds, true);
+    });
   }
 
-  private setTimerStateToLocalStorage(state: boolean) {
-    const timerState = {
-      timeInSeconds: this.seconds,
-      state: state,
-    };
-    const timerTimeObjectJSON = JSON.stringify(timerState);
+  private stopCountdown() {
+    this.destroy$.next(true);
+    this.setTimerStateToLocalStorage(this.seconds, false);
+  }
+
+  private getSecondsFromLocalStorage() {
+    const data = localStorage.getItem('timer');
+    if (data) {
+      return JSON.parse(data).valueInSeconds;
+    } else return 0;
+  }
+
+  private getIsRunningFromLocalStorage() {
+    const data = localStorage.getItem('timer');
+    if (data) {
+      return JSON.parse(data).isRunning;
+    } else return false;
+  }
+
+  private setTimerStateToLocalStorage(valueInSeconds: number, isRunning: boolean) {
+    const timerTimeObjectJSON = JSON.stringify({ valueInSeconds, isRunning });
     localStorage.setItem('timer', timerTimeObjectJSON);
+  }
+
+  ngOnDestroy() {
+    // this.destroy$.next(true)
   }
 }
