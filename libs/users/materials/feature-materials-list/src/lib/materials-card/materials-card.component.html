@@ -1,1 +1,12 @@
-<p>material-card works!</p>
+<mat-card class="materials-card-wrapper">
+  <mat-card-content class="mat-card-content">
+    <mat-icon class="material-icon">{{ getFileType(material.material_link) }}</mat-icon>
+    <label>{{ material.title }}</label>
+    <span>{{ material.created_at | date : 'dd.MM.yyyy' }}</span>
+  </mat-card-content>
+  <mat-card-actions class="material-card-actions">
+    <button mat-icon-button>
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

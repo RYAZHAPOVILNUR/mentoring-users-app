@@ -1,1 +1,7 @@
-<p>materials-list-container works!</p>
+<ng-container
+  *ngrxLet="{
+      materials: currentMaterials$,
+    } as vm"
+>
+  <users-materials-list [vm]="vm" />
+</ng-container>

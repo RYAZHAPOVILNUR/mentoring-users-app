@@ -28,8 +28,14 @@ export const initialMaterialState: MaterialsState = materialsAdapter.getInitialS
 export const reducer = createReducer(
   initialMaterialState,
   on(MaterialsActions.loadMaterials, (state) => state),
-  on(MaterialsActions.loadMaterialsSuccess, (state, action) => state),
-  on(MaterialsActions.loadMaterialsFailure, (state, action) => state)
+  on(MaterialsActions.loadMaterialsSuccess, (state, { materials }) =>
+    materialsAdapter.setAll(materials, { ...state, status: 'loaded' as const })
+  ),
+  on(MaterialsActions.loadMaterialsFailure, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
 );
 
 export function materialsReducer(state: MaterialsState | undefined, action: Action) {
