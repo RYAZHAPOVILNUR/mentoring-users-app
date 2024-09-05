@@ -10,7 +10,6 @@ export class ProfileTimerService implements OnDestroy {
 
   private destroy$ = new Subject<boolean>();
   private interval$ = interval(1000);
-  // private interval$ = interval(1000).pipe(takeUntil(this.destroy$));
 
   private isRunningSubject$ = new BehaviorSubject<boolean>(this.isRunning);
   public isRunning$ = this.isRunningSubject$.asObservable();
@@ -20,29 +19,12 @@ export class ProfileTimerService implements OnDestroy {
 
   constructor() {
     if (this.isRunning) {
-      this.startCountdown();
+      this.start();
     }
   }
 
   public start() {
     this.isRunningSubject$.next(true);
-    this.startCountdown();
-  }
-
-  public pause() {
-    this.isRunningSubject$.next(false);
-    this.stopCountdown();
-  }
-
-  public reset() {
-    this.isRunningSubject$.next(false);
-    this.seconds = 0;
-    this.isRunning = false;
-    this.stopCountdown();
-    this.secondsSubject$.next(this.seconds)
-  }
-
-  private startCountdown() {
     this.interval$.pipe(takeUntil(this.destroy$)).subscribe(() => {
       this.seconds += 1;
       this.secondsSubject$.next(this.seconds);
@@ -50,15 +32,25 @@ export class ProfileTimerService implements OnDestroy {
     });
   }
 
-  private stopCountdown() {
+  public pause() {
+    this.isRunningSubject$.next(false);
     this.destroy$.next(true);
+    this.updateLocalStorage(this.seconds, false);
+  }
+
+  public reset() {
+    this.isRunningSubject$.next(false);
+    this.destroy$.next(true);
+    this.seconds = 0;
+    this.isRunning = false;
+    this.secondsSubject$.next(this.seconds);
     this.updateLocalStorage(this.seconds, false);
   }
 
   private getSecondsFromLocalStorage() {
     const data = localStorage.getItem('timer');
     if (data) {
-      return JSON.parse(data).valueInSeconds;
+      return JSON.parse(data).seconds;
     } else return 0;
   }
 
@@ -69,12 +61,12 @@ export class ProfileTimerService implements OnDestroy {
     } else return false;
   }
 
-  private updateLocalStorage(valueInSeconds: number, isRunning: boolean) {
-    const timerTimeObjectJSON = JSON.stringify({ valueInSeconds, isRunning });
+  private updateLocalStorage(seconds: number, isRunning: boolean) {
+    const timerTimeObjectJSON = JSON.stringify({ seconds, isRunning });
     localStorage.setItem('timer', timerTimeObjectJSON);
   }
 
   ngOnDestroy() {
-     this.destroy$.next(true)
+    this.destroy$.next(true);
   }
 }
