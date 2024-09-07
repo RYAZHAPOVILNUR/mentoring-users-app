@@ -9,9 +9,15 @@
         <users-folder-card
           *ngFor="let item of folderVm?.folders; trackBy: trackByFn"
           [folder]="item"
-          (deleteFolder)="onDeleteFolder($event)"
+          (deleteFolder)="deleteFolder.emit($event)"
+          (openFolder)="openFolder.emit($event)"
         ></users-folder-card>
       </div>
+
+      <users-folder-add-button
+        class="folder-list__folder-add-button"
+        (click)="showFolderCreateDialog()"
+      ></users-folder-add-button>
     </div>
   </ng-container>
 </ng-template>

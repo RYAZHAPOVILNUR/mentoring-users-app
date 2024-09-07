@@ -1,13 +1,17 @@
-<mat-card class="folder-card" usersDeleteFolderVision>
-  <div class="folder-card__folder_content">
+<mat-card
+  class="folder-card"
+  usersDeleteIconVision
+  (usersDoubleClick)="openFolder.emit(folder)"
+>
+  <div class="folder-card__folder-content">
     <mat-icon>folder</mat-icon>
     <span>{{ folder.title }}</span>
-    <span>{{ folder.created_at | formatDate }}</span>
+    <span>{{ folder.created_at | date }}</span>
   </div>
   <button
     mat-icon-button
-    class="folder-card__delete-button"
-    (click)="onDeleteFolder(folder.id)"
+    class="delete-icon-button"
+    (click)="deleteFolder.emit(folder.id)"
   >
     <mat-icon>delete</mat-icon>
   </button>

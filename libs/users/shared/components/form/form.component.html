@@ -1,0 +1,10 @@
+<form [formGroup]="formGroup" class="form">
+  <mat-form-field *ngFor="let formField of formFields">
+    <mat-label>{{ formField.label }}</mat-label>
+    <input
+      matInput
+      [formControlName]="formField.key"
+      [placeholder]="formField.placeholder"
+    />
+  </mat-form-field>
+</form>

@@ -1,0 +1,12 @@
+<button mat-icon-button [matMenuTriggerFor]="menu">
+  <mat-icon>add</mat-icon>
+</button>
+<mat-menu #menu>
+  <button
+    mat-menu-item
+    *ngFor="let option of options"
+    (click)="optionSelected.emit(option.value)"
+  >
+    {{ option.label }}
+  </button>
+</mat-menu>

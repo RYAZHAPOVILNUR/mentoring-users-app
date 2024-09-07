@@ -1,0 +1,23 @@
+<ng-container *ngIf="materialVm.status === 'LOADING'; else content">
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+
+<ng-template #content>
+  <ng-container *ngIf="materialVm.status === 'LOADED'">
+    <div class="container">
+      <h2>{{ materialVm.openedFolder?.title }}</h2>
+      <div class="material-list">
+        <users-material-card
+          *ngFor="let item of materialVm.materials; trackBy: trackByFn"
+          [material]="item"
+          (deleteMaterial)="deleteMaterial.emit($event)"
+        ></users-material-card>
+      </div>
+
+      <users-material-add-button
+        class="material-list__material-add-button"
+        (optionSelected)="onOptionSelected($event)"
+      ></users-material-add-button>
+    </div>
+  </ng-container>
+</ng-template>

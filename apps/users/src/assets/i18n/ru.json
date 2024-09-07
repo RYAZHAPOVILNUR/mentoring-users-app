@@ -77,14 +77,39 @@
     }
   },
   "MATERIALS": {
-    "FOLDER": {
+    "FOLDER-CREATE-DIALOG": {
       "HEADER": "Добавление новой папки",
       "FORM": {
-        "FORM-FIELDS": {
-          "NAME": {
-            "LABEL": "Название",
+        "FIELDS": {
+          "TITLE": {
+            "LABEL": "Название папки",
             "PLACEHOLDER": "Введите название папки"
           }
+        }
+      },
+      "ACTIONS": {
+        "SAVE": "Добавить",
+        "CLOSE": "Закрыть"
+      }
+    },
+    "MATERIAL": {
+      "MATERIAL-CREATE-DIALOG": {
+        "HEADER": "Добавление нового материала",
+        "FORM": {
+          "FIELDS": {
+            "TITLE": {
+              "LABEL": "Заголовок материала",
+              "PLACEHOLDER": "Введите заголовок материала"
+            },
+            "MATERIAL-LINK": {
+              "LABEL": "Ссылка на материал",
+              "PLACEHOLDER": "Введите ссылку на материал"
+            }
+          }
+        },
+        "ACTIONS": {
+          "SAVE": "Добавить",
+          "CLOSE": "Закрыть"
         }
       }
     }

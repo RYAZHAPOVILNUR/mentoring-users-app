@@ -1,0 +1,14 @@
+<mat-card usersDeleteIconVision class="material-card">
+  <div class="material-card__material-content">
+    <mat-icon>{{ icon }}</mat-icon>
+    <span>{{ material.title }}</span>
+    <span>{{ material.created_at | date }}</span>
+  </div>
+  <button
+    mat-icon-button
+    class="delete-icon-button"
+    (click)="deleteMaterial.emit(material.id)"
+  >
+    <mat-icon>delete</mat-icon>
+  </button>
+</mat-card>

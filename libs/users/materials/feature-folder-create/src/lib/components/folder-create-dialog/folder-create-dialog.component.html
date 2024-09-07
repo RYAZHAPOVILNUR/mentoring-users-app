@@ -1,0 +1,17 @@
+<mat-dialog-content mat-dialog-content>
+  <span>{{ headerTranslationKey | translate }}</span>
+  <users-form
+    [form]="formGroup"
+    [formFields]="formFields"
+    [key]="formKey"
+  ></users-form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="save()" [disabled]="formGroup.invalid">
+    {{ saveTranslationKey | translate }}
+  </button>
+  <button mat-button (click)="close()">
+    {{ cancelTranslationKey | translate }}
+  </button>
+</mat-dialog-actions>

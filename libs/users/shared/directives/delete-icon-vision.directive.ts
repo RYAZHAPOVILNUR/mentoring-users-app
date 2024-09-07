@@ -2,14 +2,14 @@ import { Directive, HostBinding, HostListener } from '@angular/core';
 
 @Directive({
   standalone: true,
-  selector: '[usersDeleteFolderVision]',
+  selector: '[usersDeleteIconVision]',
 })
-export class DeleteFolderVisibilityDirective {
+export class DeleteIconVisionDirective {
   private isHidden = true;
   @HostBinding('class')
-  public get deleteButtonCssClass(): { [key: string]: boolean } {
+  public get deleteButtonClass(): { [key: string]: boolean } {
     return {
-      'folder-delete-visibility': this.isHidden,
+      'delete-button-visibility': this.isHidden,
     };
   }
 

@@ -33,3 +33,8 @@ export const selectMaterials = createSelector(
   selectMaterialState,
   (state: MaterialsState) => selectAllMaterials(state.materials)
 );
+
+export const selectOpenedFolder = createSelector(
+  selectMaterialState,
+  (state: MaterialsState) => state.openedFolder
+);
