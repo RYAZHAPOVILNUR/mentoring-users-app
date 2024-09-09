@@ -30,6 +30,5 @@ export class MaterialsFacade {
 
     loadMaterials() {
         this.store.dispatch(MaterialsActions.loadMaterials());
-        this.allMaterials$.subscribe(res => console.log(res));
     }
 }

@@ -12,10 +12,9 @@ export const selectMaterialsError = createSelector(selectMaterialsState, (state:
 
 export const selectAllMaterials = createSelector(selectMaterialsState, (state: MaterialsState) => selectAll(state));
 
-// export const selectCurrentMaterials = createSelector(selectMaterialsState, (state: MaterialsState) => selectAll(state));
-
 export const selectCurrentMaterials = createSelector(
     selectAllMaterials,
     selectOpenedFolder,
-    (materials) => materials
+    (materials, folder) => materials && folder ? materials.filter((material) => material.folder_id === folder.id) : []
+    // (materials, folder) => materials && folder ? console.log(materials.map((material) => material.folder_id)) : []
 );
