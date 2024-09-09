@@ -1,0 +1,12 @@
+<ng-container
+  *ngrxLet="{
+    folder: folder$,
+  }"
+>
+</ng-container>
+<ul>
+  <li *ngFor="let material of (folder$ | async)">
+    {{ material.title }}
+  </li>
+</ul>
+<users-create-folders-button></users-create-folders-button>

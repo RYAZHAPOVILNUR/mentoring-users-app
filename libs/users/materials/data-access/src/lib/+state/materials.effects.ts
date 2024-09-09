@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap } from 'rxjs/operators';
+import { catchError, map, concatMap, tap } from 'rxjs/operators';
 import { Observable, EMPTY, of } from 'rxjs';
 import { MaterialsActions } from './materials.actions';
 import { ApiService } from '@users/core/http';
@@ -14,13 +14,15 @@ export class MaterialsEffects {
       const actions$ = inject(Actions);
       const apiService = inject(ApiService);
 
+    // actions$.subscribe(console.log);
       return actions$.pipe(
         ofType(MaterialsActions.addFolder),
         concatMap(
-          ({folderData}) =>
-            apiService.post<Folder[], CreateFolder>('/folder', folderData).pipe(
-            map((folderData) =>
-              MaterialsActions.addFolderSuccess({folderData})),
+          ({ folder }) =>
+            apiService.post<Folder, CreateFolder>('/folder', folder).pipe(
+              tap(data => console.log('Data received from API:', data)),
+              map((folders: Folder) =>
+              MaterialsActions.addFolderSuccess({ folderData: folders })),
             catchError((error) => {
               return of(MaterialsActions.addFolderFailed({error: error.message}))
             })

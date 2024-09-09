@@ -35,7 +35,7 @@ export const reducer = createReducer(
     status: 'loading' as const,
   })),
   on(MaterialsActions.addFolderSuccess, (state, { folderData }) =>
-    materialsAdapter.setAll(folderData, {
+    materialsAdapter.addOne(folderData, {
       ...state,
       status: 'loaded' as const
     })
