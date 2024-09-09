@@ -6,17 +6,17 @@
     </button>
   </mat-dialog-actions>
 
-  <ng-container *ngSwitchCase="video"
+  <ng-container *ngSwitchCase="type.Video"
     ><users-material-content-video
       [videoSrc]="dialogData.material.material_link"
     ></users-material-content-video
   ></ng-container>
-  <ng-container *ngSwitchCase="audio"
+  <ng-container *ngSwitchCase="type.Podcast"
     ><users-material-content-audio
       [audioSrc]="dialogData.material.material_link"
     ></users-material-content-audio
   ></ng-container>
-  <ng-container *ngSwitchCase="pdf"
+  <ng-container *ngSwitchCase="type.Pdf"
     ><users-material-content-pdf
       [pdfSrc]="dialogData.material.material_link"
     ></users-material-content-pdf

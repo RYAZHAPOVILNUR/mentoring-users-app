@@ -35,7 +35,5 @@ export class MaterialContentModalComponent {
     inject(MAT_DIALOG_DATA);
   public readonly dialogRef = inject(MatDialogRef);
 
-  public video: MaterialType = MaterialType.Video;
-  public audio: MaterialType = MaterialType.Podcast;
-  public pdf: MaterialType = MaterialType.Pdf;
+  public readonly type: typeof MaterialType = MaterialType;
 }

@@ -57,7 +57,6 @@ export class MaterialAddDialogComponent {
 
   public save() {
     const formValue = this.formGroup.getRawValue();
-    console.log(this.dialogData.parentFolderId);
     this.addMaterialFormService.createMaterial({
       ...formValue[this.key],
       folderId: this.dialogData.parentFolderId,
