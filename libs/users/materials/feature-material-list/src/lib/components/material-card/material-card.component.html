@@ -1,4 +1,8 @@
-<mat-card usersDeleteIconVision class="material-card">
+<mat-card
+  usersDeleteIconVision
+  class="material-card"
+  (usersDoubleClick)="showMaterialContentModal()"
+>
   <div class="material-card__material-content">
     <mat-icon>{{ icon }}</mat-icon>
     <span>{{ material.title }}</span>

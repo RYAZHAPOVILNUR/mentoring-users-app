@@ -4,7 +4,8 @@
     grid-gap: 16px;
 
     &__material-add-button {
-        display: block;
-        margin-top: 20px;
+        position: fixed;
+        bottom: 100px;
+        right: 20px;
     }
 }

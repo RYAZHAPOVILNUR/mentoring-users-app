@@ -1,0 +1,5 @@
+<h2 mat-dialog-title class="title">
+  {{ 'MATERIALS.MATERIAL.MATERIAL-CONTENT.VIDEO.TITLE' | translate
+  }}<a [href]="videoSrc" target="_blank">{{ videoSrc }}</a>
+</h2>
+<iframe width="1000" height="500" [src]="videoSrc | videoSrcSanitize"></iframe>

@@ -35,7 +35,6 @@ export class FolderListContainerComponent implements OnInit {
   }
 
   public onOpenFolder(folder: Folder) {
-    console.log(folder);
     this.materialFacade.setOpenedFolder(folder);
     this.router.navigate(['/materials', folder.id]);
   }

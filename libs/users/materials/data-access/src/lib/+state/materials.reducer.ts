@@ -52,17 +52,27 @@ export const reducer = createReducer(
     status: MaterialStatus.Error,
     error,
   })),
+  on(MaterialsActions.deleteFolder, (state) => ({
+    ...state,
+    status: MaterialStatus.Loading,
+  })),
   on(MaterialsActions.deleteFolderSuccess, (state, { id }) => ({
     ...state,
     folders: folderAdapter.removeOne(id, state.folders),
+    status: MaterialStatus.Loaded,
   })),
   on(MaterialsActions.deleteFolderFailure, (state, { error }) => ({
     ...state,
     error,
   })),
+  on(MaterialsActions.createFolder, (state) => ({
+    ...state,
+    status: MaterialStatus.Loading,
+  })),
   on(MaterialsActions.createFolderSuccess, (state, { folder }) => ({
     ...state,
     folders: folderAdapter.addOne(folder, state.folders),
+    status: MaterialStatus.Loaded,
   })),
   on(MaterialsActions.createFolderFailure, (state, { error }) => ({
     ...state,
@@ -77,17 +87,31 @@ export const reducer = createReducer(
     materials: materialAdapter.setAll(materials, state.materials),
     status: MaterialStatus.Loaded,
   })),
+  on(MaterialsActions.loadMaterialsFailure, (state, { error }) => ({
+    ...state,
+    error,
+  })),
+  on(MaterialsActions.createMaterial, (state) => ({
+    ...state,
+    status: MaterialStatus.Loading,
+  })),
   on(MaterialsActions.createMaterialSuccess, (state, { material }) => ({
     ...state,
     materials: materialAdapter.addOne(material, state.materials),
+    status: MaterialStatus.Loaded,
   })),
   on(MaterialsActions.createMaterialFailure, (state, { error }) => ({
     ...state,
     error,
   })),
+  on(MaterialsActions.deleteMaterial, (state) => ({
+    ...state,
+    status: MaterialStatus.Loading,
+  })),
   on(MaterialsActions.deleteMaterialSuccess, (state, { id }) => ({
     ...state,
     materials: materialAdapter.removeOne(id, state.materials),
+    status: MaterialStatus.Loaded,
   })),
   on(MaterialsActions.deleteMaterialFailure, (state, { error }) => ({
     ...state,

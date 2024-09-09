@@ -15,6 +15,7 @@ import { DeleteIconVisionDirective } from '../../../../../../shared/directives/d
 import { MaterialType } from 'libs/users/materials/feature-materials-create/src/lib/enums/material-type.enum';
 import { MaterialValidationService } from 'libs/users/materials/feature-materials-create/src/lib/services/material-validation.service';
 import { DoubleClickActionDirective } from 'libs/users/shared/directives/double-click-action.directive';
+import { MaterialContentModalService } from 'libs/users/materials/feature-material-content/src/lib/services/material-content-modal.service';
 
 @Component({
   standalone: true,
@@ -22,7 +23,7 @@ import { DoubleClickActionDirective } from 'libs/users/shared/directives/double-
   templateUrl: './material-card.component.html',
   styleUrls: ['./material-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [MaterialValidationService],
+  providers: [MaterialValidationService, MaterialContentModalService],
   imports: [
     CommonModule,
     MatIconModule,
@@ -36,13 +37,16 @@ export class MaterialCardComponent {
   private readonly materialValidationService = inject(
     MaterialValidationService
   );
+  private readonly materialContentModalService = inject(
+    MaterialContentModalService
+  );
 
   @Input() material!: Material;
   @Output() deleteMaterial = new EventEmitter<number>();
 
   private readonly materialsIconMap = new Map<MaterialType, string>([
-    [MaterialType.Video, 'video_library'],
-    [MaterialType.Podcast, 'library_music'],
+    [MaterialType.Video, 'video_file'],
+    [MaterialType.Podcast, 'music_video'],
     [MaterialType.Pdf, 'picture_as_pdf'],
   ]);
 
@@ -54,5 +58,14 @@ export class MaterialCardComponent {
 
   public get icon() {
     return this.materialsIconMap.get(this.materialType);
+  }
+
+  public showMaterialContentModal() {
+    this.materialContentModalService
+      .showMaterialContentModal({
+        material: this.material,
+        type: this.materialType,
+      })
+      .subscribe();
   }
 }

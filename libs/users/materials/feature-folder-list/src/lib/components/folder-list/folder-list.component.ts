@@ -1,5 +1,4 @@
 import { CommonModule } from '@angular/common';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -14,7 +13,6 @@ import { FolderCardComponent } from '../fodler-card/folder-card.component';
 import { Folder } from 'libs/users/materials/data-access/src/lib/models/folder.interface';
 import { MaterialStatus } from 'libs/users/materials/data-access/src/lib/enums/materials-status.enum';
 import { FolderAddButtonComponent } from './../../../../../feature-folder-create/src/lib/components/folder-add-button/folder-add-button.component';
-import { CreateFolderDialogService } from '../../../../../feature-folder-create/src/lib/services/create-folder-dialog.service';
 
 interface FolderVm {
   folders: Folder[];
@@ -28,7 +26,6 @@ interface FolderVm {
   templateUrl: './folder-list.component.html',
   styleUrls: ['./folder-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [CreateFolderDialogService],
   imports: [
     CommonModule,
     MatProgressBarModule,
@@ -37,8 +34,6 @@ interface FolderVm {
   ],
 })
 export class FolderListComponent {
-  private readonly createFolderDialogService: CreateFolderDialogService =
-    inject(CreateFolderDialogService);
   @Input() public folderVm: FolderVm | null = null;
 
   @Output() public readonly deleteFolder = new EventEmitter<number>();
@@ -48,8 +43,4 @@ export class FolderListComponent {
     _index,
     entity: Folder
   ): number => entity.id;
-
-  public showFolderCreateDialog() {
-    this.createFolderDialogService.showFolderCreateDialog().subscribe();
-  }
 }

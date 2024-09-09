@@ -64,7 +64,6 @@ export class AddMaterialFormService {
   private buildMaterialDto(
     formValue: AddMaterialFormValue
   ): CreateMaterialInput {
-    console.log(formValue);
     return {
       title: formValue.title,
       material_link: formValue.materialLink,

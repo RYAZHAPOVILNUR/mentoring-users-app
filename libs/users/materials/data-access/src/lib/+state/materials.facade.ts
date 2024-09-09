@@ -51,7 +51,6 @@ export class MaterialFacade {
   }
 
   createMaterial(createMaterialInput: CreateMaterialInput) {
-    console.log(createMaterialInput);
     this.store.dispatch(
       MaterialsActions.createMaterial({ createMaterialInput })
     );

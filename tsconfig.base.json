@@ -39,6 +39,9 @@
       "@users/core/ui/layout": ["libs/users/core/ui/layout/src/public-api.ts"],
       "@users/core/utils": ["libs/core/utils/src/index.ts"],
       "@users/data-access": ["libs/data-access/src/index.ts"],
+      "@users/feature-material-content": [
+        "libs/users/materials/feature-material-content/src/index.ts"
+      ],
       "@users/feature-material-list": [
         "libs/users/materials/feature-material-list/src/index.ts"
       ],
