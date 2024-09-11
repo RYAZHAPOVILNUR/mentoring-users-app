@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import * as FoldersSelectors from './lib/+state/folders/folders.selectors';
 import * as FoldersActions from './lib/+state/folders/folders.actions';
-import { CreateFolderDTO } from '@users/core/data-access';
+import { CreateFolderDTO, CreateMaterialDTO } from '@users/core/data-access';
 import * as MaterialsSelectors from './lib/+state/materials/materials.selectors';
 import { MaterialsActions } from './lib/+state/materials/materials.actions';
 
@@ -30,5 +30,9 @@ export class MaterialsFacade {
 
     loadMaterials() {
         this.store.dispatch(MaterialsActions.loadMaterials());
+    }
+
+    addMaterial(materialData: CreateMaterialDTO) {
+        this.store.dispatch(MaterialsActions.addMaterial({ materialData }));
     }
 }

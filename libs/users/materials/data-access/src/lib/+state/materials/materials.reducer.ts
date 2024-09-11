@@ -36,6 +36,7 @@ export const reducer = createReducer(
     status: 'error' as const,
     error,
   })),
+  on(MaterialsActions.addMaterialSuccess, (state, { material }) => materialsAdapter.addOne({ ...material }, { ...state })),
 );
 
 export function materialsReducer(state: MaterialsState | undefined, action: Action) {
