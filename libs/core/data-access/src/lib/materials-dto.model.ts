@@ -15,6 +15,6 @@ export type MaterialType = {
 
 export enum MaterialFileType {
     video = 'видео',
-    podcast = 'подкаст',
-    pdf = 'PDF'
+    podcast = 'mp3',
+    pdf = 'pdf'
 }
