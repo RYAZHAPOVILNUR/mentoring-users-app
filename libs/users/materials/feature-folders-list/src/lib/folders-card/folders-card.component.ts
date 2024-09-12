@@ -21,7 +21,8 @@ export class FoldersCardComponent {
   @Output() deleteFolder = new EventEmitter();
   @Output() openFolder = new EventEmitter();
 
-  onDeleteFolder(folderId: number) {
+  onDeleteFolder(event: Event, folderId: number) {
+    event.stopPropagation();
     this.deleteFolder.emit(folderId);
   }
 

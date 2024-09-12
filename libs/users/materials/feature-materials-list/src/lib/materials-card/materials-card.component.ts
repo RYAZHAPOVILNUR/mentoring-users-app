@@ -18,7 +18,8 @@ export class MaterialsCardComponent {
   @Output() deleteMaterial = new EventEmitter();
   showDeleteButton = false;
 
-  onDeleteMaterial(materialId: number) {
+  onDeleteMaterial(event: Event, materialId: number) {
+    event.stopPropagation();
     this.deleteMaterial.emit(materialId);
   }
 

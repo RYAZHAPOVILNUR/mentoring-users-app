@@ -5,7 +5,7 @@
     <span>{{ folder.created_at | date : 'dd.MM.yyyy' }}</span>
   </mat-card-content>
   <mat-card-actions class="folder-card-actions">
-    <button mat-icon-button *ngIf="showDeleteButton" (click)="onDeleteFolder(folder.id)">
+    <button mat-icon-button *ngIf="showDeleteButton" (click)="onDeleteFolder($event, folder.id)">
       <mat-icon>delete</mat-icon>
     </button>
   </mat-card-actions>
