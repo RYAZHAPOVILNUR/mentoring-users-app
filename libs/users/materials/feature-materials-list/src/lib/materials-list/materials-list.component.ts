@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DeepReadonly } from '@users/core/utils';
-import { MaterialsEntity } from '@users/materials/data-access';
 import { MaterialsCardComponent } from '../materials-card/materials-card.component';
+import { MaterialsListVM } from './materials-list-view-model';
 
 @Component({
   selector: 'users-materials-list',
@@ -21,9 +20,3 @@ export class MaterialsListComponent {
     this.deleteMaterial.emit(materialId);
   }
 }
-
-export type MaterialsListVM = DeepReadonly<{
-  materials: MaterialsVM[];
-}>;
-
-export type MaterialsVM = DeepReadonly<MaterialsEntity>;

@@ -4,7 +4,7 @@ import { selectOpenedFolder } from '../folders/folders.selectors';
 
 export const selectMaterialsState = createFeatureSelector<MaterialsState>(MATERIALS_FEATURE_KEY);
 
-const { selectAll, selectEntities } = materialsAdapter.getSelectors();
+const { selectAll } = materialsAdapter.getSelectors();
 
 export const selectMaterialsStatus = createSelector(selectMaterialsState, (state: MaterialsState) => state.status);
 
@@ -16,5 +16,4 @@ export const selectCurrentMaterials = createSelector(
     selectAllMaterials,
     selectOpenedFolder,
     (materials, folder) => materials && folder ? materials.filter((material) => material.folder_id === folder.id) : []
-    // (materials, folder) => materials && folder ? console.log(materials.map((material) => material.folder_id)) : []
 );

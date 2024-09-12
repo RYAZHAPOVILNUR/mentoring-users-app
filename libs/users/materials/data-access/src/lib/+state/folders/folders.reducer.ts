@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from "@ngrx/entity";
 import { Action, createReducer, on } from "@ngrx/store";
 import { LoadingStatus } from "@users/core/data-access";
-import * as FoldersActions from './folders.actions';
+import { FoldersActions } from './folders.actions';
 
 export const FOLDERS_FEATURE_KEY = 'folders';
 

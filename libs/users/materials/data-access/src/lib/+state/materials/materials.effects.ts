@@ -4,9 +4,9 @@ import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { MaterialsActions } from './materials.actions';
 import { ApiService } from '@users/core/http';
-import { MaterialsEntity } from './materials.reducer';
 import { MaterialType, CreateMaterialDTO, selectRouteParams } from '@users/core/data-access';
 import { Store } from '@ngrx/store';
+import { MaterialsEntity } from './materials.types';
 
 export const materialsEffects = createEffect(
   () => {
@@ -57,7 +57,6 @@ export const addMaterial = createEffect(
   },
   { functional: true }
 );
-
 
 export const deleteMaterial = createEffect(
   () => {

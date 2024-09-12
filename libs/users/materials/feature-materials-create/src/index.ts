@@ -1,2 +1,2 @@
-export * from './lib/feature-materials-create/create-materials-button/create-materials-button.component';
-export * from './lib/feature-materials-create/create-materials-dialog/create-materials-dialog.component';
+export * from './lib/create-materials-button/create-materials-button.component';
+export * from './lib/create-materials-dialog/create-materials-dialog.component';

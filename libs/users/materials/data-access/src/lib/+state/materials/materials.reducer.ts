@@ -1,7 +1,8 @@
-import { Action, createFeature, createReducer, on } from '@ngrx/store';
+import { Action, createReducer, on } from '@ngrx/store';
 import { MaterialsActions } from './materials.actions';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { LoadingStatus } from '@users/core/data-access';
+import { MaterialsEntity } from './materials.types';
 
 export const MATERIALS_FEATURE_KEY = 'materials';
 
@@ -9,14 +10,6 @@ export interface MaterialsState extends EntityState<MaterialsEntity> {
   status: LoadingStatus;
   error: Error | null;
 }
-
-export interface MaterialsEntity {
-  id: number;
-  created_at: string;
-  title: string;
-  material_link: string;
-  folder_id: number;
-};
 
 export const materialsAdapter: EntityAdapter<MaterialsEntity> = createEntityAdapter<MaterialsEntity>();
 

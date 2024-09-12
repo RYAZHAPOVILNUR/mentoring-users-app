@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import * as FoldersSelectors from './lib/+state/folders/folders.selectors';
-import * as FoldersActions from './lib/+state/folders/folders.actions';
+import { FoldersActions } from './lib/+state/folders/folders.actions';
 import { CreateFolderDTO, CreateMaterialDTO } from '@users/core/data-access';
 import * as MaterialsSelectors from './lib/+state/materials/materials.selectors';
 import { MaterialsActions } from './lib/+state/materials/materials.actions';

@@ -1,17 +1,20 @@
-import { createAction, props } from '@ngrx/store';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { FoldersEntity } from './folders.reducer';
 import { CreateFolderDTO, FolderType } from '@users/core/data-access';
 
-export type onSuccessEditionCbType = () => void;
+export const FoldersActions = createActionGroup({
+    source: 'folders',
+    events: {
+        'Init Folders': emptyProps(),
+        'Init Folders Success': props<{ folders: FoldersEntity[]; }>(),
+        'Init Folders Failure': props<{ error: Error; }>(),
 
-export const initFolders = createAction('[Folders Page] Init Folders');
-export const initFoldersSuccess = createAction('[Folders/API] Init Folders Success', props<{ folders: FoldersEntity[]; }>());
-export const initFoldersFailure = createAction('[Folders/API] Init Folders Failure', props<{ error: any; }>());
+        'Add Folder': props<{ folderData: CreateFolderDTO; }>(),
+        'Add Folder Success': props<{ folder: FolderType; }>(),
+        'Add Folder Failed': props<{ error: Error; }>(),
 
-export const addFolder = createAction('[Folders Page] Add Folder', props<{ folderData: CreateFolderDTO; }>());
-export const addFolderSuccess = createAction('[Folders/Api] Add Folder Success', props<{ folder: FolderType; }>());
-export const addFolderFailed = createAction('[Folders/Api] Add Folder Failed', props<{ error: any; }>());
-
-export const deleteFolder = createAction('[Folders Page] Delete Folder', props<{ folderId: number }>());
-export const deleteFolderSuccess = createAction('Folders/Api] Delete Folder Success', props<{ folderId: number }>());
-export const deleteFolderFailed = createAction('[Folders/Api] Delete Folder Failed', props<{ error: any }>());
+        'Delete Folder': props<{ folderId: number; }>(),
+        'Delete Folder Success': props<{ folderId: number; }>(),
+        'Delete Folder Failed': props<{ error: Error; }>(),
+    }
+});
