@@ -22,4 +22,8 @@ export class MaterialsListContainerComponent implements OnInit {
   public readonly folders$ = this.MaterialsFacade.allFolders$;
   public readonly currentFolder$ = this.MaterialsFacade.allFolders$;
   public readonly currentMaterials$ = this.MaterialsFacade.currentMaterials$;
+
+  onDeleteMaterial(materialId: number) {
+    this.MaterialsFacade.deleteMaterial(materialId);
+  }
 }

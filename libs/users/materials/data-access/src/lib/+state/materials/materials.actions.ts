@@ -11,5 +11,9 @@ export const MaterialsActions = createActionGroup({
     'Add Material': props<{ materialData: CreateMaterialDTO; }>(),
     'Add Material Success': props<{ material: MaterialType; }>(),
     'Add Material Failed': props<{ error: Error; }>(),
+
+    'Delete Material': props<{ materialId: number; }>(),
+    'Delete Material Success': props<{ materialId: number; }>(),
+    'Delete Material Failed': props<{ error: Error; }>(),
   }
 });

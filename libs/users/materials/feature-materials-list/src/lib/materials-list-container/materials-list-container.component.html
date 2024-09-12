@@ -3,6 +3,6 @@
       materials: currentMaterials$,
     } as vm"
 >
-  <users-materials-list [vm]="vm" />
+  <users-materials-list [vm]="vm" (deleteMaterial)="onDeleteMaterial($event)"/>
 </ng-container>
 <users-create-materials-button></users-create-materials-button>

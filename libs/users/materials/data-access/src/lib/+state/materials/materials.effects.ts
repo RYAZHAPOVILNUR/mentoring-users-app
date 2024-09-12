@@ -57,3 +57,24 @@ export const addMaterial = createEffect(
   },
   { functional: true }
 );
+
+
+export const deleteMaterial = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    return actions$.pipe(
+      ofType(MaterialsActions.deleteMaterial),
+      switchMap(({ materialId }) =>
+        apiService.delete<void>(`/material/${materialId}`).pipe(
+          map(() => MaterialsActions.deleteMaterialSuccess({ materialId })),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(MaterialsActions.deleteMaterialFailed({ error }));
+          })
+        )
+      )
+    );
+  },
+  { functional: true }
+);

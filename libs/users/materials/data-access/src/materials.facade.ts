@@ -35,4 +35,8 @@ export class MaterialsFacade {
     addMaterial(materialData: CreateMaterialDTO) {
         this.store.dispatch(MaterialsActions.addMaterial({ materialData }));
     }
+
+    deleteMaterial(materialId: number) {
+        this.store.dispatch(MaterialsActions.deleteMaterial({ materialId }));
+    }
 }

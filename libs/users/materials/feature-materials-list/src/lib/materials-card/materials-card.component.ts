@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialsVM } from '../..';
 import { MatCardModule } from '@angular/material/card';
@@ -15,6 +15,12 @@ import { MatIconModule } from '@angular/material/icon';
 
 export class MaterialsCardComponent {
   @Input({ required: true }) material!: MaterialsVM;
+  @Output() deleteMaterial = new EventEmitter();
+  showDeleteButton = false;
+
+  onDeleteMaterial(materialId: number) {
+    this.deleteMaterial.emit(materialId);
+  }
 
   getFileType = (url: string) => {
     if (url.endsWith('pdf')) {

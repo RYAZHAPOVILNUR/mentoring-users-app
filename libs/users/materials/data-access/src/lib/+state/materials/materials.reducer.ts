@@ -37,6 +37,7 @@ export const reducer = createReducer(
     error,
   })),
   on(MaterialsActions.addMaterialSuccess, (state, { material }) => materialsAdapter.addOne({ ...material }, { ...state })),
+  on(MaterialsActions.deleteMaterialSuccess, (state, { materialId }) => materialsAdapter.removeOne(materialId, { ...state })),
 );
 
 export function materialsReducer(state: MaterialsState | undefined, action: Action) {
