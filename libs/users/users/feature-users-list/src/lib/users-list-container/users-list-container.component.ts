@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersListComponent } from '../users-list/users-list.component';
 import { UsersListContainerStore } from './users-list-container.store';
@@ -9,6 +9,9 @@ import { UsersFacade } from '@users/users/data-access';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
+import { UsersFilterComponent } from '../users-filter/users-filter.component';
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { User } from '../../../../../../../apps/users/src/app/user.interface';
 
 @Component({
   selector: 'users-list-container',
@@ -20,6 +23,7 @@ import { CreateUsersButtonComponent } from '@users/feature-users-create';
     MatDialogModule,
     LetDirective,
     CreateUsersButtonComponent,
+    UsersFilterComponent
   ],
   templateUrl: './users-list-container.component.html',
   styleUrls: ['./users-list-container.component.scss'],
@@ -27,7 +31,9 @@ import { CreateUsersButtonComponent } from '@users/feature-users-create';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [UsersListContainerStore],
 })
-export class UsersListContainerComponent {
+export class UsersListContainerComponent implements OnInit  {
+  users: User[] = []
+  filteredUsers: User[] = []
   private readonly componentStore = inject(UsersListContainerStore);
   public usersFacade = inject(UsersFacade);
   public readonly users$ = this.componentStore.users$;
@@ -35,6 +41,10 @@ export class UsersListContainerComponent {
   public readonly errors$ = this.componentStore.errors$;
   public readonly loggedUser$ = this.usersFacade.loggedUser$;
   private readonly router = inject(Router);
+
+  ngOnInit() {
+    this.filteredUsers = this.users
+  }
 
   onDeleteUser(user: UsersVM) {
     this.componentStore.deleteUser(user);
@@ -44,5 +54,8 @@ export class UsersListContainerComponent {
     this.router.navigate(['/admin/users', id], {
       queryParams: { edit: editMode },
     });
+  }
+  onNameFilter(filterValue: string) {
+    this.filteredUsers = this.users.filter(user => user.name.toLowerCase().includes(filterValue.toLowerCase()))
   }
 }
