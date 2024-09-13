@@ -7,18 +7,18 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './users-filter.component.html',
-  styleUrls: ['./users-filter.component.scss'],
+  styleUrls: ['./users-filter.component.scss']
 })
 export class UsersFilterComponent implements OnInit {
-  nameControl = new FormControl('', [Validators.required])
+  nameControl = new FormControl('', [Validators.required]);
 
-  @Output() nameFilter = new EventEmitter<string>()
+  @Output() nameFilter = new EventEmitter<string>();
 
   ngOnInit(): void {
     this.nameControl.valueChanges.subscribe(value => {
       if (value) {
-        this.nameFilter.emit(value)
+        this.nameFilter.emit(value);
       }
-    })
+    });
   }
 }

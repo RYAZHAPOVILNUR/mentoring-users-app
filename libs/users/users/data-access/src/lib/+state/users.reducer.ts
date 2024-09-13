@@ -16,7 +16,7 @@ export interface UsersState extends EntityState<UsersEntity> {
   selectedId?: string | number; // which Users record has been selected
   status: LoadingStatus;
   error: UsersErrors | null;
-  usersFilter: {name: string};
+  usersFilter: { name: string };
 }
 
 export interface UsersPartialState {
@@ -29,14 +29,14 @@ export const initialUsersState: UsersState = usersAdapter.getInitialState({
   // set initial required properties
   status: 'init',
   error: null,
-  usersFilter: {name: ''},
+  usersFilter: { name: '' }
 });
 
 const reducer = createReducer(
   initialUsersState,
   on(UsersActions.initUsers, (state) => ({
     ...state,
-    status: 'loading' as const,
+    status: 'loading' as const
   })),
   on(UsersActions.loadUsersSuccess, (state, { users }) =>
     usersAdapter.setAll(users, { ...state, status: 'loaded' as const })
@@ -44,15 +44,17 @@ const reducer = createReducer(
   on(UsersActions.loadUsersFailure, (state, { error }) => ({
     ...state,
     status: 'error' as const,
-    error,
+    error
   })),
-  on(UsersActions.deleteUserSuccess, (state, { id }) => usersAdapter.removeOne(id, { ...state })),
-  on(UsersActions.addUserSuccess, (state, { userData }) => usersAdapter.addOne({ ...userData }, { ...state })),
+  on(UsersActions.deleteUserSuccess, (state, { id }) =>
+    usersAdapter.removeOne(id, { ...state })),
+  on(UsersActions.addUserSuccess, (state, { userData }) =>
+    usersAdapter.addOne({ ...userData }, { ...state })),
   on(UsersActions.editUserSuccess, (state, { userData }) =>
     usersAdapter.updateOne(
       {
         id: userData.id,
-        changes: userData,
+        changes: userData
       },
       state
     )
@@ -60,11 +62,11 @@ const reducer = createReducer(
   on(UsersActions.editUserFailed, (state, { error }) => ({
     ...state,
     status: 'error' as const,
-    error,
+    error
   })),
   on(UsersActions.loadUser, (state) => ({
     ...state,
-    status: 'loading' as const,
+    status: 'loading' as const
   })),
   on(UsersActions.loadUserSuccess, (state, { userData }) =>
     usersAdapter.addOne({ ...userData }, { ...state, status: 'loaded' as const })
@@ -72,15 +74,15 @@ const reducer = createReducer(
   on(UsersActions.loadUserFailed, (state, { error }) => ({
     ...state,
     status: 'error' as const,
-    error,
+    error
   })),
   on(UsersActions.updateUserStatus, (state, { status }) => ({
     ...state,
-    status,
+    status
   })),
   on(UsersActions.setUsersFilter, (state, { filter }) => ({
     ...state,
-    usersFilter: filter,
+    usersFilter: filter
   }))
 );
 

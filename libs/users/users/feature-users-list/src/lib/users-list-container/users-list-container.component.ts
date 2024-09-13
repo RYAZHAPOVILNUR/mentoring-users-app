@@ -11,7 +11,7 @@ import { LetDirective } from '@ngrx/component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
 import { UsersFilterComponent } from '../users-filter/users-filter.component';
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import { User } from '../../../../../../../apps/users/src/app/user.interface';
+import { UsersEntity } from '@users/core/data-access';
 
 @Component({
   selector: 'users-list-container',
@@ -29,11 +29,10 @@ import { User } from '../../../../../../../apps/users/src/app/user.interface';
   styleUrls: ['./users-list-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [UsersListContainerStore],
+  providers: [UsersListContainerStore]
 })
-export class UsersListContainerComponent implements OnInit  {
-  users: User[] = []
-  filteredUsers: User[] = []
+export class UsersListContainerComponent implements OnInit {
+  filteredUsers: UsersEntity[] = [];
   private readonly componentStore = inject(UsersListContainerStore);
   public usersFacade = inject(UsersFacade);
   public readonly users$ = this.componentStore.users$;
@@ -43,7 +42,9 @@ export class UsersListContainerComponent implements OnInit  {
   private readonly router = inject(Router);
 
   ngOnInit() {
-    this.filteredUsers = this.users
+    this.usersFacade.filteredUsers$.subscribe(users => {
+      this.filteredUsers = users;
+    });
   }
 
   onDeleteUser(user: UsersVM) {
@@ -52,10 +53,11 @@ export class UsersListContainerComponent implements OnInit  {
 
   onRedirectToEdit({ id, editMode }: { id: number; editMode: boolean }) {
     this.router.navigate(['/admin/users', id], {
-      queryParams: { edit: editMode },
+      queryParams: { edit: editMode }
     });
   }
-  onNameFilter(filterValue: string) {
-    this.filteredUsers = this.users.filter(user => user.name.toLowerCase().includes(filterValue.toLowerCase()))
+
+  onNameFilter(name: string) {
+    this.usersFacade.setNameFilter({ name });
   }
 }

@@ -14,16 +14,19 @@ type UsersListState = DeepReadonly<{
 }>;
 
 const initialState: UsersListState = {
-  users: [],
+  users: []
 };
 
 @Injectable()
 export class UsersListContainerStore extends ComponentStore<UsersListState> {
   private readonly usersFacade = inject(UsersFacade);
   private readonly dialog = inject(MatDialog);
-  public readonly users$ = this.select(({ users }) => users);
-  public readonly status$ = this.select(this.usersFacade.status$, (status) => status);
-  public errors$ = this.select(this.usersFacade.errors$, (error) => error);
+  public readonly users$ = this.select(
+    ({ users }) => users);
+  public readonly status$ = this.select(
+    this.usersFacade.status$, (status) => status);
+  public errors$ = this.select(
+    this.usersFacade.errors$, (error) => error);
 
   constructor() {
     super(initialState);
@@ -32,19 +35,21 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
   }
 
   private setUsersFromGlobalToLocalStore(): void {
-    this.effect(() => this.usersFacade.allUsers$.pipe(tap((users: UsersEntity[]) => this.patchUsers(users))));
+    this.effect(() => this.usersFacade.filteredUsers$.pipe(
+      tap((users: UsersEntity[]) => this.patchUsers(users))));
   }
 
   private patchUsers(users: UsersEntity[]): void {
     this.patchState({
-      users: users.map((user) => usersVMAdapter.entityToVM(user)),
+      users: users.map((user) => usersVMAdapter.entityToVM(user))
     });
   }
 
   public deleteUser(user: UsersVM): void {
-    const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
-      data: { dialogText: `Вы уверены, что хотите удалить ${user.name}` },
-    });
+    const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> =
+      this.dialog.open(CoreUiConfirmDialogComponent, {
+        data: { dialogText: `Вы уверены, что хотите удалить ${user.name}` }
+      });
     this.effect(() =>
       dialogRef.afterClosed().pipe(
         tap((result: boolean) => {
