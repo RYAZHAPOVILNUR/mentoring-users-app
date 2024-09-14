@@ -17,13 +17,20 @@ export class UsersFacade {
    * Combine pieces of state using createSelector,
    * and expose them as observables through the facade.
    */
-  public readonly status$ = this.store.pipe(select(UsersSelectors.selectUsersStatus));
-  public readonly allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
-  public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
-  public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
-  public readonly loggedUser$ = this.store.select(selectLoggedUser);
-  public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError));
-  public readonly filteredUsers$ = this.store.select(filteredUsersSelector);
+  public readonly status$ =
+    this.store.pipe(select(UsersSelectors.selectUsersStatus));
+  public readonly allUsers$ =
+    this.store.pipe(select(UsersSelectors.selectAllUsers));
+  public readonly selectedUsers$ =
+    this.store.pipe(select(UsersSelectors.selectEntity));
+  public readonly openedUser$ =
+    this.store.select(UsersSelectors.selectOpenedUser);
+  public readonly loggedUser$ =
+    this.store.select(selectLoggedUser);
+  public readonly errors$: Observable<UsersErrors | null> =
+    this.store.pipe(select(UsersSelectors.selectUsersError));
+  public readonly filteredUsers$ =
+    this.store.select(filteredUsersSelector);
 
   /**
    * Use the initialization action to perform one

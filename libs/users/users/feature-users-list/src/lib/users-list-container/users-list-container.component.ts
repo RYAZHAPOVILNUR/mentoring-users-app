@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersListComponent } from '../users-list/users-list.component';
 import { UsersListContainerStore } from './users-list-container.store';
@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
 import { UsersFilterComponent } from '../users-filter/users-filter.component';
+
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import { UsersEntity } from '@users/core/data-access';
 
 @Component({
   selector: 'users-list-container',
@@ -31,8 +31,7 @@ import { UsersEntity } from '@users/core/data-access';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [UsersListContainerStore]
 })
-export class UsersListContainerComponent implements OnInit {
-  filteredUsers: UsersEntity[] = [];
+export class UsersListContainerComponent {
   private readonly componentStore = inject(UsersListContainerStore);
   public usersFacade = inject(UsersFacade);
   public readonly users$ = this.componentStore.users$;
@@ -40,12 +39,7 @@ export class UsersListContainerComponent implements OnInit {
   public readonly errors$ = this.componentStore.errors$;
   public readonly loggedUser$ = this.usersFacade.loggedUser$;
   private readonly router = inject(Router);
-
-  ngOnInit() {
-    this.usersFacade.filteredUsers$.subscribe(users => {
-      this.filteredUsers = users;
-    });
-  }
+  public readonly filteredUsers$ = this.usersFacade.filteredUsers$;
 
   onDeleteUser(user: UsersVM) {
     this.componentStore.deleteUser(user);
@@ -57,7 +51,7 @@ export class UsersListContainerComponent implements OnInit {
     });
   }
 
-  onNameFilter(name: string) {
-    this.usersFacade.setNameFilter({ name });
+  onNameFilter(name: string | null) {
+    this.usersFacade.setNameFilter({ name: name ?? '' });
   }
 }

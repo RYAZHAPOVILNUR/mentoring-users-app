@@ -1,4 +1,12 @@
-<div>
-  <label for="nameFilter">Имя</label>
-  <input id="nameFilter" [formControl]="nameControl" placeholder="Введите имя для фильтрации">
-</div>
+<form [formGroup]="filterForm" class="filter-form">
+  <mat-form-field>
+    <mat-label>Имя</mat-label>
+    <input matInput formControlName="name" placeholder="Введите имя для фильтрации">
+    <button
+      [hidden]="!showClearButton"
+      matSuffix mat-icon-button aria-label="Clear"
+      (click)="clearInput()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</form>
