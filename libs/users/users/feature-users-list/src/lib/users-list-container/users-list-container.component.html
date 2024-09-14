@@ -6,7 +6,10 @@
     loggedUser: loggedUser$
   } as vm"
 >
-  <users-filter (nameFilter)="onNameFilter($event)"></users-filter>
+  <users-filter
+    (nameFilter)="onNameFilter($event)">
+  </users-filter>
+
   <users-list-ui
     [vm]="vm" (deleteUser)="onDeleteUser($event)"
     (redirectToEdit)="onRedirectToEdit($event)"
