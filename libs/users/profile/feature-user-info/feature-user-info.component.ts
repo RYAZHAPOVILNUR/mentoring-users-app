@@ -1,9 +1,18 @@
 import { UiPhotoModalComponent } from 'libs/users/profile/ui-profile/ui-photo-modal/ui-photo-modal.component';
 import { AuthFacade, ChangePasswordPayload, ChangeProfileDataPayload } from '../../../core/auth/data-access/src';
-import { ChangeDetectionStrategy, Component, Input, OnInit, DestroyRef, ChangeDetectorRef } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  DestroyRef,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { PasswordChangeDialogComponent, ProfileChangeDialogComponent } from '../../../core/ui/src';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
-import { EventEmitter, Output, inject } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -14,7 +23,7 @@ import { CommonModule } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { of } from 'rxjs';
+import { map, of, Subscription, tap, timer } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -38,20 +47,28 @@ import { TranslateModule } from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeatureUserInfoComponent implements OnInit {
-  private readonly dialog = inject(MatDialog);
-  private readonly destroyRef = inject(DestroyRef);
-  private readonly authFacade = inject(AuthFacade);
-  private matIconRegistry = inject(MatIconRegistry);
-  private domSanitizer = inject(DomSanitizer);
-
   @Input({ required: true }) vm!: ProfileFormVm;
-
   @Output() loadPhoto: EventEmitter<File> = new EventEmitter<File>();
   @Output() connectGithub: EventEmitter<void> = new EventEmitter();
   @Output() disconnectGithub: EventEmitter<void> = new EventEmitter();
-
   public photo: any;
   public isPhotoHovered?: boolean;
+  private readonly dialog = inject(MatDialog);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly authFacade = inject(AuthFacade);
+  private readonly changeDetector = inject(ChangeDetectorRef);
+  private matIconRegistry = inject(MatIconRegistry);
+  private domSanitizer = inject(DomSanitizer);
+  private timerSubscriber: Subscription | null = null;
+  private isRunning = false;
+  private readonly initialTimerValues = {
+    seconds: 0,
+    minutes: 0,
+    hours: 0,
+    days: 0,
+  };
+
+  public timerValues = JSON.parse(localStorage.getItem('timer') || `${this.initialTimerValues}`);
 
   ngOnInit(): void {
     this.photo = this.vm.user.photo ? this.vm.user.photo.url : '';
@@ -61,6 +78,7 @@ export class FeatureUserInfoComponent implements OnInit {
     );
     of(this.vm.githubUserName).subscribe(console.log);
   }
+
   onOpenChangePassword() {
     const dialogRef = this.dialog.open(PasswordChangeDialogComponent);
     dialogRef
@@ -122,5 +140,41 @@ export class FeatureUserInfoComponent implements OnInit {
     this.dialog.open(UiPhotoModalComponent, {
       data: this.vm.user.photo ? this.vm.user.photo.url : '',
     });
+  }
+
+  onStartTimer() {
+    if (this.isRunning != false) return;
+    this.isRunning = true;
+    this.timerSubscriber = timer(0, 1000)
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        map(() => this.timerValues.seconds + 1),
+        map((seconds) => {
+          return {
+            seconds: seconds % 60,
+            minutes: Math.floor(seconds / 60) % 60,
+            hours: Math.floor(seconds / (60 * 60)) % 24,
+            days: Math.floor(seconds / (60 * 60 * 24)),
+          };
+        }),
+        tap((timer) => {
+          this.timerValues = timer;
+          localStorage.setItem('timer', JSON.stringify(timer));
+          this.changeDetector.markForCheck();
+        })
+      )
+      .subscribe();
+  }
+
+  onPauseTimer() {
+    this.isRunning = false;
+    this.timerSubscriber?.unsubscribe();
+  }
+
+  onClearTimer() {
+    this.isRunning = false;
+    this.timerSubscriber?.unsubscribe();
+    localStorage.removeItem('timer');
+    this.timerValues = this.initialTimerValues;
   }
 }
