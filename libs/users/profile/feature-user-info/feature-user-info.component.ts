@@ -44,6 +44,7 @@ export class FeatureUserInfoComponent implements OnInit {
   private matIconRegistry = inject(MatIconRegistry);
   private domSanitizer = inject(DomSanitizer);
 
+
   @Input({ required: true }) vm!: ProfileFormVm;
 
   @Output() loadPhoto: EventEmitter<File> = new EventEmitter<File>();
