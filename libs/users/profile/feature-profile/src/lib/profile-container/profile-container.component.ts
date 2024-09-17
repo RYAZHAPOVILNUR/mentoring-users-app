@@ -1,12 +1,12 @@
 import {
-  githubApiActions,
   GithubApiService,
+  githubApiActions,
   selectGithubStatus,
   selectGithubUserName,
 } from '@users/core/github-api/data-access';
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { authActions, selectAuthStatus, selectLoggedUser } from '@auth/data-access';
-import { selectQueryParam, UsersEntity } from '@users/core/data-access';
+import { UsersEntity, selectQueryParam } from '@users/core/data-access';
 import { FeatureUserInfoComponent } from '../../../../feature-user-info/feature-user-info.component';
 import { CropperDialogComponent } from '@users/core/ui';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -26,16 +26,16 @@ import { Store } from '@ngrx/store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileContainerComponent implements OnInit {
-  public readonly user!: UsersEntity;
-  public readonly isLoggedUser = of(true);
   private readonly store = inject(Store);
+  private destroyRef = inject(DestroyRef);
+  public readonly user!: UsersEntity;
+  private readonly dialog = inject(MatDialog);
+  private readonly githubApiService = inject(GithubApiService);
   public readonly user$ = this.store.select(selectLoggedUser);
   public readonly status$ = this.store.select(selectAuthStatus);
   public readonly githubUserName$ = this.store.select(selectGithubUserName);
   public readonly githubStatus$ = this.store.select(selectGithubStatus);
-  private destroyRef = inject(DestroyRef);
-  private readonly dialog = inject(MatDialog);
-  private readonly githubApiService = inject(GithubApiService);
+  public readonly isLoggedUser = of(true);
 
   ngOnInit() {
     this.store

@@ -47,9 +47,7 @@
     "USER_INFO": {
       "CONNECT_GITHUB": "Привязать Гитхаб",
       "DISCONNECT_GITHUB": "Отвязать Гитхаб",
-      "CHANGE_PASSWORD": "Сменить пароль",
-      "TIMER_HOURS": "ч",
-      "TIMER_DAYS": "д"
+      "CHANGE_PASSWORD": "Сменить пароль"
     },
     "PASSWORD_CHANGE": {
       "FILL_THE_FORM": "Заполните поля для смены пароля",
