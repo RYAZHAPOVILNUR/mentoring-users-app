@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { of } from 'rxjs';
+import { map, of, Subscription, tap, timer } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -53,6 +53,17 @@ export class FeatureUserInfoComponent implements OnInit {
 
   public photo: any;
   public isPhotoHovered?: boolean;
+  private readonly changeDetector = inject(ChangeDetectorRef);
+  private timerSubscriber: Subscription | null = null;
+  private isRunning = false;
+  private readonly initialTimerValues = {
+    seconds: 0,
+    minutes: 0,
+    hours: 0,
+    days: 0,
+  };
+
+  public timerValues = JSON.parse(localStorage.getItem('timer') || `${this.initialTimerValues}`);
 
   ngOnInit(): void {
     this.photo = this.vm.user.photo ? this.vm.user.photo.url : '';
@@ -123,5 +134,41 @@ export class FeatureUserInfoComponent implements OnInit {
     this.dialog.open(UiPhotoModalComponent, {
       data: this.vm.user.photo ? this.vm.user.photo.url : '',
     });
+  }
+
+  onStartTimer() {
+    if (this.isRunning != false) return;
+    this.isRunning = true;
+    this.timerSubscriber = timer(0, 1000)
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        map(() => this.timerValues.seconds + 1),
+        map((seconds) => {
+          return {
+            seconds: seconds % 60,
+            minutes: Math.floor(seconds / 60) % 60,
+            hours: Math.floor(seconds / (60 * 60)) % 24,
+            days: Math.floor(seconds / (60 * 60 * 24)),
+          };
+        }),
+        tap((timer) => {
+          this.timerValues = timer;
+          localStorage.setItem('timer', JSON.stringify(timer));
+          this.changeDetector.markForCheck();
+        })
+      )
+      .subscribe();
+  }
+
+  onPauseTimer() {
+    this.isRunning = false;
+    this.timerSubscriber?.unsubscribe();
+  }
+
+  onClearTimer() {
+    this.isRunning = false;
+    this.timerSubscriber?.unsubscribe();
+    localStorage.removeItem('timer');
+    this.timerValues = this.initialTimerValues;
   }
 }
