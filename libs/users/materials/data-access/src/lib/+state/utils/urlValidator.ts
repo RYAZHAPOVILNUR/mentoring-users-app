@@ -1,6 +1,8 @@
 import { MaterialFileType } from "@users/core/data-access";
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 
+export const YTRegExp = /http\:\/\/www\.youtube\.com\/watch\?v=([\w-]{11})/;
+
 export function urlValidator(fileType: MaterialFileType): ValidatorFn {
     console.log(fileType);
     return (control: AbstractControl) => {

@@ -1,4 +1,4 @@
-<mat-card class="materials-card-wrapper" (mouseover)="showDeleteButton = true" (mouseleave)="showDeleteButton = false">
+<mat-card class="materials-card-wrapper" (mouseover)="showDeleteButton = true" (mouseleave)="showDeleteButton = false" (click)="openMaterialViewer()">
   <mat-card-content class="mat-card-content">
     <mat-icon class="material-icon">{{ getFileType(material.material_link) }}</mat-icon>
     <label>{{ material.title }}</label>
