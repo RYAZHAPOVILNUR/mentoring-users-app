@@ -67,10 +67,12 @@ export const editUserFailed = createAction(
 
 export const loadUser = createAction(
   '[Users Page] Load User');
+
 export const loadUserSuccess = createAction(
   '[Users/Api] Load User Success',
   props<{ userData: UsersEntity }>()
 );
+
 export const loadUserFailed = createAction(
   '[Users/Api] Load User Failed',
   props<{ error: any }>()

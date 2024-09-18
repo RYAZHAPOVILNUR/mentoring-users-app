@@ -106,6 +106,7 @@ export class DetailUsersCardComponent implements OnInit {
     filter(Boolean),
     switchMap((value) => this.dadata.getCities(value))
   );
+  public totalStoryPoints = new FormControl({value: 0, disabled: true})
 
   private snackBar = inject(MatSnackBar);
   private readonly destroyRef = inject(DestroyRef);
@@ -172,4 +173,8 @@ export class DetailUsersCardComponent implements OnInit {
       )
       .subscribe();
   }
+  public onAddStoryPoints() {
+    this.totalStoryPoints.disable()
+  }
+
 }
