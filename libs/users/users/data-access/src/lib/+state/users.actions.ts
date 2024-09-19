@@ -13,7 +13,7 @@ export const loadUsersSuccess = createAction(
 
 export const loadUsersFailure = createAction(
   '[Users/API] Load Users Failure',
-  props<{ error: any }>()
+  props<{ error: UsersErrors | null }>()
 );
 
 export const deleteUser = createAction(
@@ -28,7 +28,7 @@ export const deleteUserSuccess = createAction(
 
 export const deleteUserFailed = createAction(
   '[Users/Api] Delete User Failed',
-  props<{ error: any }>()
+  props<{ error: UsersErrors | null }>()
 );
 
 export const addUser = createAction(
@@ -43,7 +43,7 @@ export const addUserSuccess = createAction(
 
 export const addUserFailed = createAction(
   '[Users/Api] Add User Failed',
-  props<{ error: any }>()
+  props<{ error: UsersErrors | null }>()
 );
 
 export const editUser = createAction(
@@ -75,7 +75,7 @@ export const loadUserSuccess = createAction(
 
 export const loadUserFailed = createAction(
   '[Users/Api] Load User Failed',
-  props<{ error: any }>()
+  props<{ error: UsersErrors | null }>()
 );
 
 export const updateUserStatus = createAction(
@@ -87,3 +87,18 @@ export const setUsersFilter = createAction(
   '[Users] Set Users Filter',
   props<{ filter: { name: string } }>()
 );
+
+export const addStoryPoints = createAction(
+  '[Users Detail] Add StoryPoints',
+  props<{userData: CreateUserDTO, id: number}>()
+);
+
+export const addStoryPointsSuccess = createAction(
+  '[Users Detail] Add StoryPointsSuccess',
+  props<{ userData: UsersDTO }>()
+);
+
+export const addStoryPointsFailed = createAction(
+  '[Users Detail] Add StoryPointsFailed',
+  props<{ error: UsersErrors | null }>()
+)

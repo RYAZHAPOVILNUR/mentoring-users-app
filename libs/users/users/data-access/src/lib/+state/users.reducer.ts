@@ -4,6 +4,7 @@ import { createReducer, on, Action } from '@ngrx/store';
 import * as UsersActions from './users.actions';
 import { UsersEntity } from '@users/core/data-access';
 import { LoadingStatus } from '@users/core/data-access';
+import { state } from '@angular/animations';
 
 export const USERS_FEATURE_KEY = 'users';
 
@@ -83,8 +84,8 @@ const reducer = createReducer(
   on(UsersActions.setUsersFilter, (state, { filter }) => ({
     ...state,
     usersFilter: filter
-  }))
-);
+  })),
+)
 
 export function usersReducer(state: UsersState | undefined, action: Action) {
   return reducer(state, action);
