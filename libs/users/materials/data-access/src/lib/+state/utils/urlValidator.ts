@@ -1,28 +1,28 @@
 import { MaterialFileType } from "@users/core/data-access";
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 
-export const YTRegExp = /http\:\/\/www\.youtube\.com\/watch\?v=([\w-]{11})/;
+export const LinkRegEx = {
+    VIDEO_REGEX: /(youtube\.com\/watch\?v=|youtu\.be\/)([0-9A-Za-z_-]{10}[048AEIMQUYcgkosw])/,
+    PDF_REGEX: /^http(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?(.pdf)$/,
+    MP3_REGEX: /^(https?|ftp|file):\/\/(www.)?(.*?)\.(mp3)$/
+};
 
 export function urlValidator(fileType: MaterialFileType): ValidatorFn {
-    console.log(fileType);
     return (control: AbstractControl) => {
         const URL = control.value as string;
 
-        const pattern = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
-        const YTpattern = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
-
-        const isValid = pattern.test(URL);
-
-        if (isValid) {
-            console.log(URL, fileType, URL.endsWith(fileType));
-            if (URL.endsWith(fileType)) {
-                return null; // Pdf and mp3 validation passed
-            } else if (fileType === 'видео' && YTpattern.test(URL)) {
-                return null; // YT validation passed
+        if (URL) {
+            if (fileType === 'видео') {
+                return LinkRegEx.VIDEO_REGEX.test(URL) ? null : { wrongURL: true };
             }
-            return { urlValidator: true }; // Validation fails
-        } else {
-            return { urlValidator: true }; // Validation fails
+            if (fileType === 'pdf') {
+                return LinkRegEx.PDF_REGEX.test(URL) ? null : { wrongURL: true };
+            }
+            if (fileType === 'mp3') {
+                return LinkRegEx.MP3_REGEX.test(URL) ? null : { wrongURL: true };
+            }
         }
+
+        return { required: true };
     };
-}
+};
