@@ -19,7 +19,7 @@ export const userEffects = createEffect(
         apiService.get<UsersDTO[]>('/users').pipe(
           map((users) =>
             UsersActions.loadUsersSuccess({
-              users: users.map((user) => usersDTOAdapter.DTOtoEntity(user)),
+              users: users.map((user) => usersDTOAdapter.DTOtoEntity(user))
             })
           ),
           catchError((error) => {
@@ -92,9 +92,9 @@ export const editUser = createEffect(
           name: userData.name,
           email: userData.email,
           username: userData.username,
-          city: userData.city,
+          city: userData.city
         },
-        onSuccessCb,
+        onSuccessCb
       })),
       switchMap(({ user, onSuccessCb }) =>
         apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
@@ -136,4 +136,43 @@ export const loadUser = createEffect(
     );
   },
   { functional: true }
+);
+
+export const addStoryPoints = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
+    return actions$.pipe(
+      ofType(UsersActions.addUserStoryPoints),
+      withLatestFrom(usersEntities$),
+      filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
+      map(([{ userData, id, onSuccessAddSP }, usersEntities]) => ({
+        user: {
+          ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
+          totalStoryPoints: userData.totalStoryPoints
+        }, onSuccessAddSP
+      })),
+      switchMap(({ user, onSuccessAddSP }) => {
+        return apiService.post<UsersDTO, CreateUserDTO>(
+          `/users/${user.id}`, user
+        ).pipe(
+          map((userData) => ({ userData, onSuccessAddSP })),
+          tap(({ onSuccessAddSP }) => onSuccessAddSP),
+          map(({ userData }) => {
+              return UsersActions.addUserStoryPointsSuccess({
+                userData
+              });
+            }
+          ),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(UsersActions.addUserStoryPointsFailed({
+              error
+            }));
+          })
+        );
+      })
+    );
+  }, {functional: true}
 );

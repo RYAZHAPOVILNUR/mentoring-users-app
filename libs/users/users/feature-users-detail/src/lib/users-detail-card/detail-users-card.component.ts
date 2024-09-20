@@ -175,6 +175,8 @@ export class DetailUsersCardComponent implements OnInit {
   }
   public onAddStoryPoints() {
     this.totalStoryPoints.disable()
+    this.totalStoryPoints.setValue(this.vm.user?.totalStoryPoints ?? 0)
+
   }
 
 }
