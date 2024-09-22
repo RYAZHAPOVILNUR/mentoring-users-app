@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CreateFoldersDialogComponent } from '../create-folders-dialog/create-folders-dialog.component';
-import { CreateFolder, MaterialsFacade, Folder  } from '@users/materials/data-access';
+import { CreateFolder, MaterialsFacade } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-create-folders-button',
@@ -30,7 +30,7 @@ export class CreateFoldersButtonComponent {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((result) => {
         if (result) {
-          const newMaterialData: Folder = {
+          const newMaterialData: CreateFolder = {
             title: result.title,
           };
           this.materialsFacade.addFolder(newMaterialData);

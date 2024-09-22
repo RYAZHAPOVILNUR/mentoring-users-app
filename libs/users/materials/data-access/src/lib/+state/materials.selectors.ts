@@ -6,17 +6,24 @@ export const selectMaterialsState =
 
 const { selectAll, selectEntities } = materialsAdapter.getSelectors();
 
-export const selectMaterialsStatus = createSelector(
+
+// folders
+export const selectFoldersStatus = createSelector(
   selectMaterialsState,
   (state: MaterialsState) => state.status
 );
 
-export const selectAllMaterials = createSelector(
+export const selectAllFolders = createSelector(
   selectMaterialsState,
   (state: MaterialsState) => selectAll(state)
 );
 
-export const selectMaterialsError = createSelector(
+export const selectEntitiesFolders = createSelector(
+  selectMaterialsState,
+  (state: MaterialsState) => selectEntities(state)
+);
+
+export const selectFoldersError = createSelector(
   selectMaterialsState,
   (state: MaterialsState) => state.error
 );

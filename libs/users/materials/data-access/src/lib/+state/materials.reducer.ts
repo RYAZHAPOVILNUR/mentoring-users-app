@@ -47,6 +47,23 @@ export const reducer = createReducer(
     })
   ),
 
+  on(MaterialsActions.loadFolders, (state) => ({
+    ...state,
+    status: 'loading' as const,
+  })),
+  on(MaterialsActions.loadFoldersSuccess, (state, { folderData }) =>
+    materialsAdapter.setAll(folderData, {
+      ...state,
+      status: 'loaded' as const
+    })
+  ),
+  on(MaterialsActions.loadFoldersFailed, (state) => ({
+      ...state,
+      status: 'error' as const,
+      error: null
+    })
+  ),
+
 
   on(MaterialsActions.loadMaterialss, (state) => state),
   on(MaterialsActions.loadMaterialssSuccess, (state, action) => state),

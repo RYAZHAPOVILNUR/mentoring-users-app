@@ -20,13 +20,34 @@ export class MaterialsEffects {
         concatMap(
           ({ folder }) =>
             apiService.post<Folder, CreateFolder>('/folder', folder).pipe(
-              tap(data => console.log('Data received from API:', data)),
+              // tap(data => console.log('Data received from API:', data)),
               map((folders: Folder) =>
               MaterialsActions.addFolderSuccess({ folderData: folders })),
             catchError((error) => {
               return of(MaterialsActions.addFolderFailed({error: error.message}))
             })
           )
+        )
+      )
+    }, {functional: true}
+  );
+
+  loadFolder = createEffect(
+    () => {
+      const actions$ = inject(Actions);
+      const apiService = inject(ApiService);
+
+      return actions$.pipe(
+        ofType(MaterialsActions.loadFolders),
+        concatMap(
+          () =>
+            apiService.get<Folder[]>('/folder').pipe(
+              map((folders: Folder[]) =>
+                MaterialsActions.loadFoldersSuccess({ folderData: folders })),
+              catchError((error) => {
+                return of(MaterialsActions.loadFoldersFailed({error: error.message}))
+              })
+            )
         )
       )
     }, {functional: true}

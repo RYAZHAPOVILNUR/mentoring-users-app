@@ -15,24 +15,13 @@ import { MatInputModule } from '@angular/material/input';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateFoldersDialogComponent {
-  public formGroup: FormGroup;
   private readonly dialogRef = inject(MatDialogRef<CreateFoldersDialogComponent>);
-  // private data: { title: string } = inject(MAT_DIALOG_DATA);
+  private data: { title: string } = inject(MAT_DIALOG_DATA);
   private readonly formBuilder = inject(FormBuilder);
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { title: string }) {
-    // this.formGroup = this.formBuilder.group({
-    //   name: ['', Validators.required],
-    //   email: ['', [Validators.required, Validators.email]],
-    // });
-    this.formGroup = this.formBuilder.group({
-      title: ['', Validators.required],
-    });
-  }
-
-  // public formGroup = this.formBuilder.group({
-  //   title: ['', Validators.required],
-  // });
+  public formGroup = this.formBuilder.group({
+    title: ['', Validators.required],
+  });
 
   public cancel(): void {
     this.dialogRef.close();

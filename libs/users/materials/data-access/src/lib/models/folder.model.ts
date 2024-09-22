@@ -1,5 +1,7 @@
-export interface Folder {
-  id?: number,
-  created_at?: string,
+import { DeepReadonly } from '@users/core/utils';
+
+export type Folder = DeepReadonly<{
+  id: number,
+  created_at: string,
   title: string
-}
+}>
