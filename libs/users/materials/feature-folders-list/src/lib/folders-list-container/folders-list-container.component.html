@@ -1,12 +1,12 @@
+<!--<users-folders-list [vm]="allFolders$ | ngrxPush"></users-folders-list>-->
+
 <ng-container
   *ngrxLet="{
-    folder: folder$,
-  }"
+    folders: allFolders$,
+    status: status$,
+    errors: errors$
+  } as vm"
 >
+  <users-folders-list [vm]="vm" />
 </ng-container>
-<ul>
-  <li *ngFor="let material of (folder$ | async)">
-    {{ material.title }}
-  </li>
-</ul>
 <users-create-folders-button></users-create-folders-button>

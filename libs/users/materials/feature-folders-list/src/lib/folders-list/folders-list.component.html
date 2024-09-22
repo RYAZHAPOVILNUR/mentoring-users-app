@@ -1,1 +1,13 @@
-<p>folders-list works!</p>
+<ng-container *ngIf="vm.status === 'loading'; else loadingResult">
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+
+<ng-template #loadingResult>
+  <ng-container *ngIf="vm.status === 'loaded'; else error">
+    {{ vm | json }}
+  </ng-container>
+</ng-template>
+
+<ng-template #error>
+  Ошибка
+</ng-template>
