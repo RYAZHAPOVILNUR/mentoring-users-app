@@ -9,13 +9,19 @@ import {
   OnInit,
   Output,
   TemplateRef,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { onSuccessEditionCbType } from '@users/users/data-access';
+import { onSuccessEditionCbType, onSuccessSPonCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -26,7 +32,14 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { DadataApiService } from '@dadata';
-import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  switchMap,
+  tap
+} from 'rxjs';
 import { PushPipe } from '@ngrx/component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -47,22 +60,23 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     MatTooltipModule,
     MatSnackBarModule,
     MatAutocompleteModule,
-    PushPipe,
+    PushPipe
   ],
   templateUrl: './detail-users-card.component.html',
   styleUrls: ['./detail-users-card.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailUsersCardComponent implements OnInit {
   private _vm: DetailUsersCardVm = {
     editMode: false,
     user: null,
     status: 'init',
-    errors: null,
+    errors: null
   };
   public get vm() {
     return this._vm;
   }
+
   @Input({ required: true })
   set vm(vm: DetailUsersCardVm) {
     this._vm = vm;
@@ -72,8 +86,9 @@ export class DetailUsersCardComponent implements OnInit {
         name: vm.user.name,
         email: vm.user.email,
         username: vm.user.username,
-        city: vm.user.city,
+        city: vm.user.city
       });
+      this.totalStoryPoints.setValue(this.vm.user?.totalStoryPoints ?? 0);
     }
 
     if (vm.editMode) {
@@ -87,7 +102,7 @@ export class DetailUsersCardComponent implements OnInit {
     name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
-    city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    city: new FormControl({ value: '', disabled: !this.vm.editMode })
   });
 
   @Output() editUser = new EventEmitter<{
@@ -98,7 +113,12 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
+  @Output() addStoryPoints = new EventEmitter<{
+    user: CreateUserDTO;
+    onSuccessAddSP: onSuccessSPonCbType
+  }>();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('snackbarStoryPoints') snackbarTemplateRefSP!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -106,11 +126,10 @@ export class DetailUsersCardComponent implements OnInit {
     filter(Boolean),
     switchMap((value) => this.dadata.getCities(value))
   );
-  public totalStoryPoints = new FormControl({value: 0, disabled: true})
-
   private snackBar = inject(MatSnackBar);
   private readonly destroyRef = inject(DestroyRef);
   public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
+  public totalStoryPoints = new FormControl({ value: 0, disabled: true });
 
   ngOnInit(): void {
     this.checkChangeFields();
@@ -120,8 +139,16 @@ export class DetailUsersCardComponent implements OnInit {
     this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
       duration: 2500,
       horizontalPosition: 'center',
-      verticalPosition: 'top',
+      verticalPosition: 'top'
     });
+
+  private onAddSPSuccess: onSuccessSPonCbType = () => {
+    this.snackBar.openFromTemplate(this.snackbarTemplateRefSP, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
+    });
+  };
 
   onSubmit(): void {
     this.editUser.emit({
@@ -131,9 +158,9 @@ export class DetailUsersCardComponent implements OnInit {
         city: this.formGroup.value.city || '',
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
         purchaseDate: new Date().toString() || '',
-        educationStatus: 'trainee',
+        educationStatus: 'trainee'
       },
-      onSuccessCb: this.onEditSuccess,
+      onSuccessCb: this.onEditSuccess
     });
   }
 
@@ -166,17 +193,24 @@ export class DetailUsersCardComponent implements OnInit {
           const isFormControlChanged = (key: string, control: FormControl) =>
             this.vm.user && this.vm.user[key as keyof UsersEntity] !== control.value;
 
-          const isFieldChanged = formEntries.some(([key, control]) => isFormControlChanged(key, control));
+          const isFieldChanged = formEntries.some(([key, control]) =>
+            isFormControlChanged(key, control));
 
           this.areFieldsChanged$.next(isFieldChanged);
         })
       )
       .subscribe();
   }
+
   public onAddStoryPoints() {
-    this.totalStoryPoints.disable()
-    this.totalStoryPoints.setValue(this.vm.user?.totalStoryPoints ?? 0)
-
+    this.totalStoryPoints.disable();
+    this.addStoryPoints.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        totalStoryPoints: this.totalStoryPoints.value || 0
+      },
+      onSuccessAddSP: this.onAddSPSuccess
+    });
   }
-
 }

@@ -91,7 +91,7 @@ export const setUsersFilter = createAction(
 
 export const addUserStoryPoints = createAction(
   '[Users Detail] Add StoryPoints',
-  props<{userData: CreateUserDTO, id: number, onSuccessAddSP: onSuccessSPonCbType }>()
+  props<{ userData: CreateUserDTO, id: number, onSuccessAddSP: onSuccessSPonCbType }>()
 );
 
 export const addUserStoryPointsSuccess = createAction(
@@ -102,4 +102,4 @@ export const addUserStoryPointsSuccess = createAction(
 export const addUserStoryPointsFailed = createAction(
   '[Users Detail] Add StoryPointsFailed',
   props<{ error: UsersErrors | null }>()
-)
+);

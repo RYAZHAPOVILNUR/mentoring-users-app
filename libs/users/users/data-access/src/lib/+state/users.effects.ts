@@ -5,7 +5,10 @@ import * as UsersActions from './users.actions';
 import { ApiService } from '@users/core/http';
 import { Store, select } from '@ngrx/store';
 import { selectUsersEntities } from './users.selectors';
-import { CreateUserDTO, UsersDTO, UsersEntity, selectRouteParams, usersDTOAdapter } from '@users/core/data-access';
+import {
+  CreateUserDTO, UsersDTO, UsersEntity,
+  selectRouteParams, usersDTOAdapter
+} from '@users/core/data-access';
 
 export const userEffects = createEffect(
   () => {
@@ -158,7 +161,7 @@ export const addStoryPoints = createEffect(
           `/users/${user.id}`, user
         ).pipe(
           map((userData) => ({ userData, onSuccessAddSP })),
-          tap(({ onSuccessAddSP }) => onSuccessAddSP),
+          tap(({ onSuccessAddSP }) => onSuccessAddSP()),
           map(({ userData }) => {
               return UsersActions.addUserStoryPointsSuccess({
                 userData
@@ -174,5 +177,5 @@ export const addStoryPoints = createEffect(
         );
       })
     );
-  }, {functional: true}
+  }, { functional: true }
 );

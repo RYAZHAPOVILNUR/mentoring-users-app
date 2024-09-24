@@ -2,7 +2,12 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
-import { UsersErrors, UsersFacade, onSuccessEditionCbType } from '@users/users/data-access';
+import {
+  UsersErrors,
+  UsersFacade,
+  onSuccessEditionCbType,
+  onSuccessSPonCbType
+} from '@users/users/data-access';
 import { Observable, map, tap } from 'rxjs';
 import { selectQueryParam, CreateUserDTO, UsersEntity } from '@users/core/data-access';
 import { Store, select } from '@ngrx/store';
@@ -18,7 +23,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   imports: [CommonModule, DetailUsersCardComponent, MatDialogModule, LetDirective],
   templateUrl: './users-detail-container.component.html',
   styleUrls: ['./users-detail-container.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UsersDetailComponent {
   private readonly usersFacade = inject(UsersFacade);
@@ -47,7 +52,7 @@ export class UsersDetailComponent {
   public onEditUser(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
     this.usersFacade.editUser(userData, this.user.id, onSuccessCb);
     this.router.navigate(['/admin/users', this.user.id], {
-      queryParams: { edit: false },
+      queryParams: { edit: false }
     });
   }
 
@@ -57,21 +62,22 @@ export class UsersDetailComponent {
 
   onCloseEditMode() {
     this.router.navigate(['/admin/users', this.user.id], {
-      queryParams: { edit: false },
+      queryParams: { edit: false }
     });
   }
 
   onOpenEditMode() {
     this.router.navigate(['admin/users', this.user.id], {
-      queryParams: { edit: true },
+      queryParams: { edit: true }
     });
   }
 
   onDeleteUser() {
-    const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
+    const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> =
+      this.dialog.open(CoreUiConfirmDialogComponent, {
       data: {
-        dialogText: `Вы уверены, что хотите удалить ${this.user.name}`,
-      },
+        dialogText: `Вы уверены, что хотите удалить ${this.user.name}`
+      }
     });
 
     dialogRef
@@ -83,5 +89,9 @@ export class UsersDetailComponent {
           this.router.navigate(['/home']);
         }
       });
+  }
+
+  onAddStoryPoints(userData: CreateUserDTO, onSuccessAddSP: onSuccessSPonCbType) {
+    this.usersFacade.addUserStoryPoints(userData, this.user.id, onSuccessAddSP);
   }
 }
