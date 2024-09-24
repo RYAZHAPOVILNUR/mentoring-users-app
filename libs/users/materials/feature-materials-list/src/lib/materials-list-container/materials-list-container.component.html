@@ -4,6 +4,6 @@
       folder: currentFolder$,
     } as vm"
 >
-  <users-materials-list [vm]="vm" (deleteMaterial)="onDeleteMaterial($event)"/>
+  <users-materials-list [vm]="vm" (deleteMaterial)="onDeleteMaterial($event)"(backToFolders)="onBackToFolders()"/>
 </ng-container>
 <users-create-materials-button></users-create-materials-button>

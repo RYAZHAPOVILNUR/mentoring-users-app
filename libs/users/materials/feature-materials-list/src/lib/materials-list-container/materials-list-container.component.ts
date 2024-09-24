@@ -4,6 +4,7 @@ import { MaterialsFacade } from '@users/materials/data-access';
 import { MaterialsListComponent } from '../..';
 import { LetDirective } from '@ngrx/component';
 import { CreateMaterialsButtonComponent } from '@users/feature-materials-create';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'users-materials-list-container',
@@ -19,11 +20,16 @@ export class MaterialsListContainerComponent implements OnInit {
   }
 
   public MaterialsFacade = inject(MaterialsFacade);
+  private readonly router = inject(Router);
   public readonly folders$ = this.MaterialsFacade.allFolders$;
   public readonly currentMaterials$ = this.MaterialsFacade.currentMaterials$;
   public readonly currentFolder$ = this.MaterialsFacade.currentFolder$;
 
   onDeleteMaterial(materialId: number) {
     this.MaterialsFacade.deleteMaterial(materialId);
+  }
+
+  public onBackToFolders(): void {
+    this.router.navigate(['/materials']);
   }
 }
