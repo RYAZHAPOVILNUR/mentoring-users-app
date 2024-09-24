@@ -1,0 +1,9 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  .folder-title {
+    font-weight: 500;
+    align-self: center;
+  }
+}

@@ -17,5 +17,8 @@ export const selectFoldersEntities = createSelector(selectFoldersState, (state: 
 export const selectOpenedFolder = createSelector(
     selectRouteParams,
     selectFoldersEntities,
-    ({ id }, entities) => entities[id] || null
+    ({ id }, entities) => {
+        console.log({id}, entities);
+        return entities[id] || null;
+    }
 );

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { LinkRegEx, MaterialsVM } from '@users/materials/data-access';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MaterialsViewerComponent } from '../materials-viewer/materials-viewer.component';
 
 @Component({

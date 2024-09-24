@@ -15,7 +15,6 @@ export const foldersEffects = createEffect(
 
     return actions$.pipe(
       ofType(FoldersActions.initFolders),
-      // delay(1500),
       switchMap(() =>
         apiService.get<FoldersEntity[]>('/folder').pipe(
           map((folders) =>
@@ -57,6 +56,7 @@ export const deleteFolder = createEffect(
   () => {
     const actions$ = inject(Actions);
     const apiService = inject(ApiService);
+    
     return actions$.pipe(
       ofType(FoldersActions.deleteFolder),
       switchMap(({ folderId }) =>

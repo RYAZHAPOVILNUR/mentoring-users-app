@@ -1,6 +1,7 @@
 <ng-container
   *ngrxLet="{
       materials: currentMaterials$,
+      folder: currentFolder$,
     } as vm"
 >
   <users-materials-list [vm]="vm" (deleteMaterial)="onDeleteMaterial($event)"/>

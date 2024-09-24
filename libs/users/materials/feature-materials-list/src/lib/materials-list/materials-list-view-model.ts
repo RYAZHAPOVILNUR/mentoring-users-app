@@ -1,6 +1,7 @@
 import { DeepReadonly } from '@users/core/utils';
-import { MaterialsVM } from '@users/materials/data-access';
+import { FoldersEntity, MaterialsVM } from '@users/materials/data-access';
 
 export type MaterialsListVM = DeepReadonly<{
-  materials: MaterialsVM[];
+  materials: MaterialsVM[],
+  folder: FoldersEntity | null;
 }>;

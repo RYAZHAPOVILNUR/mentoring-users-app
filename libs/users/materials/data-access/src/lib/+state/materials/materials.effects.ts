@@ -15,7 +15,6 @@ export const materialsEffects = createEffect(
 
     return actions$.pipe(
       ofType(MaterialsActions.loadMaterials),
-      // delay(1500),
       switchMap(() =>
         apiService.get<MaterialsEntity[]>('/material').pipe(
           map((materials) =>
