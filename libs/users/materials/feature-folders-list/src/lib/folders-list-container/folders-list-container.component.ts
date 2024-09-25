@@ -1,10 +1,14 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
-import { MaterialsFacade } from '@users/materials/data-access';
+import { FoldersEntity, MaterialsFacade } from '@users/materials/data-access';
 import { LetDirective } from '@ngrx/component';
 import { CreateFoldersButtonComponent } from '@users/feature-folders-create';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { CoreUiConfirmDialogComponent } from '@users/core/ui';
+import { UsersVM } from '@users/feature-users-create';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'users-folders-list-container',
@@ -23,9 +27,18 @@ export class FoldersListContainerComponent implements OnInit {
   public MaterialsFacade = inject(MaterialsFacade);
   public readonly folders$ = this.MaterialsFacade.allFolders$;
   private readonly router = inject(Router);
+  private readonly dialog = inject(MatDialog);
 
-  onDeleteFolder(folderId: number) {
-    this.MaterialsFacade.deleteFolder(folderId);
+  onDeleteFolder(folder: FoldersEntity) {
+    const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
+      data: { dialogText: `Вы уверены, что хотите удалить ${folder.title}?` },
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.MaterialsFacade.deleteFolder(folder.id);
+      }
+    });
   }
 
   onOpenFolder(id: number) {

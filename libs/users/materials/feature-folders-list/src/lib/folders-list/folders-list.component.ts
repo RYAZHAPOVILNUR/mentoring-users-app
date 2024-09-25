@@ -18,8 +18,8 @@ export class FoldersListComponent {
   @Output() deleteFolder = new EventEmitter();
   @Output() openFolder = new EventEmitter();
 
-  onDeleteFolder(folderId: number) {
-    this.deleteFolder.emit(folderId);
+  onDeleteFolder(folder: FoldersEntity) {
+    this.deleteFolder.emit(folder);
   }
 
   onOpenFolder(folderId: number) {

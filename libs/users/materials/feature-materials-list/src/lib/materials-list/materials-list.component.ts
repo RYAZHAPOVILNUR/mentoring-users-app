@@ -4,6 +4,7 @@ import { MaterialsCardComponent } from '../materials-card/materials-card.compone
 import { MaterialsListVM } from './materials-list-view-model';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MaterialsEntity } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-materials-list',
@@ -19,8 +20,8 @@ export class MaterialsListComponent {
   @Output() deleteMaterial = new EventEmitter();
   @Output() backToFolders = new EventEmitter();
 
-  onDeleteMaterial(materialId: number) {
-    this.deleteMaterial.emit(materialId);
+  onDeleteMaterial(material: MaterialsEntity) {
+    this.deleteMaterial.emit(material);
   }
 
   public onBackToFolders(): void {

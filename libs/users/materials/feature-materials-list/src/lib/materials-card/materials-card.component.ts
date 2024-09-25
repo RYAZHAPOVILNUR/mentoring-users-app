@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, DestroyRef, EventEmitter, inject, I
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { LinkRegEx, MaterialsVM } from '@users/materials/data-access';
+import { LinkRegEx, MaterialsEntity, MaterialsVM } from '@users/materials/data-access';
 import { MatDialog } from '@angular/material/dialog';
 import { MaterialsViewerComponent } from '../materials-viewer/materials-viewer.component';
 
@@ -23,9 +23,9 @@ export class MaterialsCardComponent {
   showDeleteButton = false;
   regEx = LinkRegEx;
 
-  onDeleteMaterial(event: Event, materialId: number) {
+  onDeleteMaterial(event: Event, material: MaterialsEntity) {
     event.stopPropagation();
-    this.deleteMaterial.emit(materialId);
+    this.deleteMaterial.emit(material);
   }
 
   openMaterialViewer(): void {

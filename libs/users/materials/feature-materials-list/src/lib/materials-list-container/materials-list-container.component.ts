@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialsFacade } from '@users/materials/data-access';
+import { MaterialsEntity, MaterialsFacade } from '@users/materials/data-access';
 import { MaterialsListComponent } from '../..';
 import { LetDirective } from '@ngrx/component';
 import { CreateMaterialsButtonComponent } from '@users/feature-materials-create';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 
 @Component({
   selector: 'users-materials-list-container',
@@ -24,9 +26,18 @@ export class MaterialsListContainerComponent implements OnInit {
   public readonly folders$ = this.MaterialsFacade.allFolders$;
   public readonly currentMaterials$ = this.MaterialsFacade.currentMaterials$;
   public readonly currentFolder$ = this.MaterialsFacade.currentFolder$;
+  private readonly dialog = inject(MatDialog);
 
-  onDeleteMaterial(materialId: number) {
-    this.MaterialsFacade.deleteMaterial(materialId);
+  onDeleteMaterial(material: MaterialsEntity) {
+    const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
+      data: { dialogText: `Вы уверены, что хотите удалить ${material.title}?` },
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.MaterialsFacade.deleteMaterial(material.id);
+      }
+    });
   }
 
   public onBackToFolders(): void {

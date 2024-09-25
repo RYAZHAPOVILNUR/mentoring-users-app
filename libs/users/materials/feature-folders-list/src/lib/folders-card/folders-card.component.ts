@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FoldersVM } from '../..';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { FoldersEntity } from '@users/materials/data-access';
 
 
 @Component({
@@ -21,9 +22,9 @@ export class FoldersCardComponent {
   @Output() deleteFolder = new EventEmitter();
   @Output() openFolder = new EventEmitter();
 
-  onDeleteFolder(event: Event, folderId: number) {
+  onDeleteFolder(event: Event, folder: FoldersEntity) {
     event.stopPropagation();
-    this.deleteFolder.emit(folderId);
+    this.deleteFolder.emit(folder);
   }
 
   onOpenFolder(id: number) {
