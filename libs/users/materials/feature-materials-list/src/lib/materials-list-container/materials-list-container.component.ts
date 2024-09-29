@@ -16,8 +16,14 @@ import { CoreUiConfirmDialogComponent } from '@users/core/ui';
   styleUrls: ['./materials-list-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+
 export class MaterialsListContainerComponent implements OnInit {
   ngOnInit(): void {
+    this.foldersStatus.subscribe((status) => {
+      if (status === 'init') {
+        this.MaterialsFacade.initFolders();
+      }
+    });
     this.MaterialsFacade.loadMaterials();
   }
 
@@ -27,6 +33,7 @@ export class MaterialsListContainerComponent implements OnInit {
   public readonly currentMaterials$ = this.MaterialsFacade.currentMaterials$;
   public readonly currentFolder$ = this.MaterialsFacade.currentFolder$;
   private readonly dialog = inject(MatDialog);
+  public readonly foldersStatus = this.MaterialsFacade.status$;
 
   onDeleteMaterial(material: MaterialsEntity) {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
