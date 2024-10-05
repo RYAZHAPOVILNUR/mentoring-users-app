@@ -11,10 +11,12 @@ import { UsersEntity } from '@users/core/data-access';
 
 type UsersListState = DeepReadonly<{
   users: UsersVM[];
+  usersFilter: { name: string };
 }>;
 
 const initialState: UsersListState = {
   users: [],
+  usersFilter: { name: '' },
 };
 
 @Injectable()
@@ -32,7 +34,9 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
   }
 
   private setUsersFromGlobalToLocalStore(): void {
-    this.effect(() => this.usersFacade.allUsers$.pipe(tap((users: UsersEntity[]) => this.patchUsers(users))));
+    this.effect(() => this.usersFacade.filteredUsers$.pipe(tap((users: UsersEntity[]) => {
+      this.patchUsers(users)
+    })));
   }
 
   private patchUsers(users: UsersEntity[]): void {
@@ -52,5 +56,9 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
         })
       )
     );
+  }
+
+  public updateFilter(filter: { name: string }): void {
+    this.patchState({ usersFilter: filter });
   }
 }
