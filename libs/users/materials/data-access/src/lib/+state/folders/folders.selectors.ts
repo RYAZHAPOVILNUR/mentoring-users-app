@@ -14,6 +14,11 @@ export const selectAllFolders = createSelector(selectFoldersState, (state: Folde
 
 export const selectFoldersEntities = createSelector(selectFoldersState, (state: FoldersState) => selectEntities(state));
 
+export const selectIsFoldersLoaded = createSelector(
+    selectFoldersStatus,
+    (status) => status === 'loaded'
+);
+
 export const selectOpenedFolder = createSelector(
     selectRouteParams,
     selectFoldersEntities,

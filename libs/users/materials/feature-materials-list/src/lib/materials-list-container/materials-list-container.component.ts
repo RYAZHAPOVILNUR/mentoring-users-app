@@ -19,11 +19,6 @@ import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 
 export class MaterialsListContainerComponent implements OnInit {
   ngOnInit(): void {
-    this.foldersStatus.subscribe((status) => {
-      if (status === 'init') {
-        this.MaterialsFacade.initFolders();
-      }
-    });
     this.MaterialsFacade.loadMaterials();
   }
 
