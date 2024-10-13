@@ -1,1 +1,11 @@
-<p>folders-list-container works!</p>
+<ng-container
+  *ngrxLet="{
+    folders: folders$,
+
+  } as folderVm"
+>
+  <users-folders-list [folderVm]="folderVm"/>
+</ng-container>
+
+<!--status: status$,-->
+<!--error: errors$-->

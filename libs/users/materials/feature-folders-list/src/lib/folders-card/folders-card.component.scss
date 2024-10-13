@@ -1,0 +1,18 @@
+.mat-chip-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+.folder-icon {
+  font-size: 30px;
+  height: 30px;
+  width: 30px;
+}
+label {
+  font-weight: 500;
+  font-size: 17px;
+}
+

@@ -1,1 +1,4 @@
-<p>folders-list works!</p>
+<div *ngFor="let folder of folderVm.folders">
+  <users-folders-card [folder]="folder" />
+  <span>{{ folder.created_at  | date : 'dd.MM.yyyy'}}</span>
+</div>

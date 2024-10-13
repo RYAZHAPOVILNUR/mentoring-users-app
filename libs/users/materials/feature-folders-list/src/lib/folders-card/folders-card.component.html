@@ -1,1 +1,11 @@
-<p>folders-card works!</p>
+<mat-chip-set>
+  <mat-chip>
+    <button mat-button>
+      <mat-icon class="folder-icon">{{ isFolderEmpty ? 'folder_open' : 'folder' }}</mat-icon>
+    </button>
+    <label>{{ folder.title }}</label>
+
+  </mat-chip>
+<!--  <div>{{ folder.created_at | date : 'dd.MM.yyyy'}}</div>-->
+</mat-chip-set>
+
