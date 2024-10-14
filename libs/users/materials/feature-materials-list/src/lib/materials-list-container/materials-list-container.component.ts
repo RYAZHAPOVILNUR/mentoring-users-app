@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialsEntity, MaterialsFacade } from '@users/materials/data-access';
+import { MaterialsEntity, materialsFacade } from '@users/materials/data-access';
 import { MaterialsListComponent } from '../..';
 import { LetDirective } from '@ngrx/component';
 import { CreateMaterialsButtonComponent } from '@users/feature-materials-create';
@@ -19,16 +19,16 @@ import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 
 export class MaterialsListContainerComponent implements OnInit {
   ngOnInit(): void {
-    this.MaterialsFacade.loadMaterials();
+    this.materialsFacade.loadMaterials();
   }
 
-  public MaterialsFacade = inject(MaterialsFacade);
+  public materialsFacade = inject(materialsFacade);
   private readonly router = inject(Router);
-  public readonly folders$ = this.MaterialsFacade.allFolders$;
-  public readonly currentMaterials$ = this.MaterialsFacade.currentMaterials$;
-  public readonly currentFolder$ = this.MaterialsFacade.currentFolder$;
+  public readonly folders$ = this.materialsFacade.allFolders$;
+  public readonly currentMaterials$ = this.materialsFacade.currentMaterials$;
+  public readonly currentFolder$ = this.materialsFacade.currentFolder$;
   private readonly dialog = inject(MatDialog);
-  public readonly foldersStatus = this.MaterialsFacade.status$;
+  public readonly foldersStatus = this.materialsFacade.status$;
 
   onDeleteMaterial(material: MaterialsEntity) {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
@@ -37,7 +37,7 @@ export class MaterialsListContainerComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
-        this.MaterialsFacade.deleteMaterial(material.id);
+        this.materialsFacade.deleteMaterial(material.id);
       }
     });
   }

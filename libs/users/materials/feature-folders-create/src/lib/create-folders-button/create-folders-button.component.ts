@@ -5,7 +5,7 @@ import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dial
 import { CreateFoldersDialogComponent } from '../create-folders-dialog/create-folders-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MaterialsFacade } from '@users/materials/data-access';
+import { materialsFacade } from '@users/materials/data-access';
 import { CreateFolderDTO } from '@users/core/data-access';
 
 @Component({
@@ -20,7 +20,7 @@ import { CreateFolderDTO } from '@users/core/data-access';
 export class CreateFoldersButtonComponent {
   private name!: string;
   public dialog = inject(MatDialog);
-  private readonly MaterialsFacade = inject(MaterialsFacade);
+  private readonly materialsFacade = inject(materialsFacade);
   private readonly destroyRef = inject(DestroyRef);
 
   openAddFolderDialog(): void {
@@ -38,7 +38,7 @@ export class CreateFoldersButtonComponent {
 
           };
 
-          this.MaterialsFacade.addFolder(newFolderData);
+          this.materialsFacade.addFolder(newFolderData);
         }
       });
   }

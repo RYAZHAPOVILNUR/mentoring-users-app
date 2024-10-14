@@ -16,11 +16,10 @@ import { FoldersEntity } from '@users/materials/data-access';
 })
 export class FoldersCardComponent {
   @Input({ required: true }) folder!: FoldersVM;
-
-  showDeleteButton = false;
-
   @Output() deleteFolder = new EventEmitter();
   @Output() openFolder = new EventEmitter();
+
+  showDeleteButton = false;
 
   onDeleteFolder(event: Event, folder: FoldersEntity) {
     event.stopPropagation();

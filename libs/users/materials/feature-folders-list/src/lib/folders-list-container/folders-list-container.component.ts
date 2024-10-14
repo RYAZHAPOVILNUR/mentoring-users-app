@@ -1,14 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
-import { FoldersEntity, MaterialsFacade } from '@users/materials/data-access';
+import { FoldersEntity, materialsFacade } from '@users/materials/data-access';
 import { LetDirective } from '@ngrx/component';
 import { CreateFoldersButtonComponent } from '@users/feature-folders-create';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
-import { UsersVM } from '@users/feature-users-create';
-import { tap } from 'rxjs';
 
 @Component({
   selector: 'users-folders-list-container',
@@ -21,11 +19,11 @@ import { tap } from 'rxjs';
 
 export class FoldersListContainerComponent implements OnInit {
   ngOnInit(): void {
-    this.MaterialsFacade.initFolders();
+    this.materialsFacade.initFolders();
   }
 
-  public MaterialsFacade = inject(MaterialsFacade);
-  public readonly folders$ = this.MaterialsFacade.allFolders$;
+  public materialsFacade = inject(materialsFacade);
+  public readonly folders$ = this.materialsFacade.allFolders$;
   private readonly router = inject(Router);
   private readonly dialog = inject(MatDialog);
 
@@ -36,7 +34,7 @@ export class FoldersListContainerComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
-        this.MaterialsFacade.deleteFolder(folder.id);
+        this.materialsFacade.deleteFolder(folder.id);
       }
     });
   }

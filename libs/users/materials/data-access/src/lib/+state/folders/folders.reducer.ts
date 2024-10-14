@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from "@ngrx/entity";
 import { Action, createReducer, on } from "@ngrx/store";
 import { LoadingStatus } from "@users/core/data-access";
-import { FoldersActions } from './folders.actions';
+import { foldersActions } from './folders.actions';
 
 export const FOLDERS_FEATURE_KEY = 'folders';
 
@@ -25,34 +25,34 @@ export const initialUsersState: FoldersState = foldersAdapter.getInitialState({
 
 const reducer = createReducer(
     initialUsersState,
-    on(FoldersActions.initFolders, (state) => ({
+    on(foldersActions.initFolders, (state) => ({
         ...state,
         status: 'loading' as const,
     })),
-    on(FoldersActions.initFoldersSuccess, (state, { folders }) =>
+    on(foldersActions.initFoldersSuccess, (state, { folders }) =>
         foldersAdapter.setAll(folders, { ...state, status: 'loaded' as const })
     ),
-    on(FoldersActions.initFoldersFailure, (state, { error }) => ({
+    on(foldersActions.initFoldersFailure, (state, { error }) => ({
         ...state,
         status: 'error' as const,
         error,
     })),
-    on(FoldersActions.addFolderSuccess, (state, { folder }) => foldersAdapter.addOne({ ...folder }, { ...state })),
-    on(FoldersActions.addFolderFailed, (state, { error }) => {
+    on(foldersActions.addFolderSuccess, (state, { folder }) => foldersAdapter.addOne({ ...folder }, { ...state })),
+    on(foldersActions.addFolderFailed, (state, { error }) => {
         return {
             ...state,
             status: 'error' as const,
             error,
         };
     }),
-    on(FoldersActions.deleteFolder, (state) => {
+    on(foldersActions.deleteFolder, (state) => {
         return {
             ...state,
             status: 'loading' as const,
         };
     }),
-    on(FoldersActions.deleteFolderSuccess, (state, { folderId }) => foldersAdapter.removeOne(folderId, { ...state })),
-    on(FoldersActions.deleteFolderFailed, (state, { error }) => {
+    on(foldersActions.deleteFolderSuccess, (state, { folderId }) => foldersAdapter.removeOne(folderId, { ...state })),
+    on(foldersActions.deleteFolderFailed, (state, { error }) => {
         return {
             ...state,
             status: 'error' as const,

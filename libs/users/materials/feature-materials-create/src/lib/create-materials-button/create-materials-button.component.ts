@@ -5,7 +5,7 @@ import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dial
 import { CreateMaterialsDialogComponent } from '../create-materials-dialog/create-materials-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MaterialsFacade } from '@users/materials/data-access';
+import { materialsFacade } from '@users/materials/data-access';
 import { CreateMaterialDTO, MaterialFileType } from '@users/core/data-access';
 import { MatMenuModule } from '@angular/material/menu';
 
@@ -17,10 +17,9 @@ import { MatMenuModule } from '@angular/material/menu';
   styleUrls: ['./create-materials-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
 export class CreateMaterialsButtonComponent {
   public dialog = inject(MatDialog);
-  private readonly MaterialsFacade = inject(MaterialsFacade);
+  private readonly materialsFacade = inject(materialsFacade);
   private readonly destroyRef = inject(DestroyRef);
   public readonly fileType = MaterialFileType;
 
@@ -39,7 +38,7 @@ export class CreateMaterialsButtonComponent {
             material_link: result.link,
           };
 
-          this.MaterialsFacade.addMaterial(newMaterialData);
+          this.materialsFacade.addMaterial(newMaterialData);
         }
       });
   }

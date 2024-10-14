@@ -2,7 +2,7 @@ import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { FoldersEntity } from './folders.reducer';
 import { CreateFolderDTO, FolderType } from '@users/core/data-access';
 
-export const FoldersActions = createActionGroup({
+export const foldersActions = createActionGroup({
     source: 'folders',
     events: {
         'Init Folders': emptyProps(),

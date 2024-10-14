@@ -1,13 +1,13 @@
 import { Injectable, inject } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import * as FoldersSelectors from './lib/+state/folders/folders.selectors';
-import { FoldersActions } from './lib/+state/folders/folders.actions';
+import { foldersActions } from './lib/+state/folders/folders.actions';
 import { CreateFolderDTO, CreateMaterialDTO } from '@users/core/data-access';
 import * as MaterialsSelectors from './lib/+state/materials/materials.selectors';
 import { MaterialsActions } from './lib/+state/materials/materials.actions';
 
 @Injectable({ providedIn: 'root' })
-export class MaterialsFacade {
+export class materialsFacade {
     private readonly store = inject(Store);
 
     public readonly status$ = this.store.pipe(select(FoldersSelectors.selectFoldersStatus));
@@ -17,15 +17,15 @@ export class MaterialsFacade {
     public readonly currentMaterials$ = this.store.pipe(select(MaterialsSelectors.selectCurrentMaterials));
 
     initFolders() {
-        this.store.dispatch(FoldersActions.initFolders());
+        this.store.dispatch(foldersActions.initFolders());
     }
 
     addFolder(folderData: CreateFolderDTO) {
-        this.store.dispatch(FoldersActions.addFolder({ folderData }));
+        this.store.dispatch(foldersActions.addFolder({ folderData }));
     }
 
     deleteFolder(folderId: number) {
-        this.store.dispatch(FoldersActions.deleteFolder({ folderId }));
+        this.store.dispatch(foldersActions.deleteFolder({ folderId }));
     }
 
     loadMaterials() {

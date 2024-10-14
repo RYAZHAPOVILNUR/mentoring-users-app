@@ -51,6 +51,3 @@ export class CreateMaterialsDialogComponent {
     }
   }
 }
-
-
-

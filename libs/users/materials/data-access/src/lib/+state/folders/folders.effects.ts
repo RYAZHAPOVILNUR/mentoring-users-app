@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { switchMap, catchError, of, map } from 'rxjs';
-import { FoldersActions } from './folders.actions';
+import { foldersActions } from './folders.actions';
 
 import { ApiService } from '@users/core/http';
 
@@ -14,15 +14,15 @@ export const foldersEffects = createEffect(
     const apiService = inject(ApiService);
 
     return actions$.pipe(
-      ofType(FoldersActions.initFolders),
+      ofType(foldersActions.initFolders),
       switchMap(() =>
         apiService.get<FoldersEntity[]>('/folder').pipe(
           map((folders) =>
-            FoldersActions.initFoldersSuccess({ folders }),
+            foldersActions.initFoldersSuccess({ folders }),
           ),
           catchError((error) => {
             console.error('Error', error);
-            return of(FoldersActions.initFoldersFailure({ error }));
+            return of(foldersActions.initFoldersFailure({ error }));
           })
         )
       )
@@ -37,13 +37,13 @@ export const addFolder = createEffect(
     const apiService = inject(ApiService);
 
     return actions$.pipe(
-      ofType(FoldersActions.addFolder),
+      ofType(foldersActions.addFolder),
       switchMap(({ folderData }) =>
         apiService.post<FolderType, CreateFolderDTO>('/folder', folderData).pipe(
-          map((folderEntity) => FoldersActions.addFolderSuccess({ folder: folderEntity })),
+          map((folderEntity) => foldersActions.addFolderSuccess({ folder: folderEntity })),
           catchError((error) => {
             console.error('Error', error);
-            return of(FoldersActions.addFolderFailed({ error }));
+            return of(foldersActions.addFolderFailed({ error }));
           })
         )
       )
@@ -58,13 +58,13 @@ export const deleteFolder = createEffect(
     const apiService = inject(ApiService);
     
     return actions$.pipe(
-      ofType(FoldersActions.deleteFolder),
+      ofType(foldersActions.deleteFolder),
       switchMap(({ folderId }) =>
         apiService.delete<void>(`/folder/${folderId}`).pipe(
-          map(() => FoldersActions.deleteFolderSuccess({ folderId })),
+          map(() => foldersActions.deleteFolderSuccess({ folderId })),
           catchError((error) => {
             console.error('Error', error);
-            return of(FoldersActions.deleteFolderFailed({ error }));
+            return of(foldersActions.deleteFolderFailed({ error }));
           })
         )
       )

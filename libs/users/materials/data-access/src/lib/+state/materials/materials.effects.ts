@@ -8,7 +8,7 @@ import { MaterialType, CreateMaterialDTO, selectRouteParams } from '@users/core/
 import { Store } from '@ngrx/store';
 import { MaterialsEntity } from './materials.types';
 import * as FoldersSelectors from '../folders/folders.selectors';
-import { FoldersActions } from '../folders/folders.actions';
+import { foldersActions } from '../folders/folders.actions';
 
 export const materialsInit = createEffect(
   () => {
@@ -17,7 +17,7 @@ export const materialsInit = createEffect(
 
     return actions$.pipe(
       ofType(MaterialsActions.loadMaterials),
-      map(() => FoldersActions.initFolders()),
+      map(() => foldersActions.initFolders()),
       takeUntil(store.select(FoldersSelectors.selectIsFoldersLoaded).pipe(filter(Boolean)))
     );
   },
