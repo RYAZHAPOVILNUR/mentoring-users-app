@@ -1,18 +1,29 @@
-.mat-chip-content {
-  flex-grow: 1;
+.folders-card {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height: 200px;
+  width: 200px;
+}
+.mat-card-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
-  margin: 20px 0;
+  margin: 10px 0;
 }
 .folder-icon {
-  font-size: 30px;
-  height: 30px;
-  width: 30px;
+  font-size: 50px;
+  height: 50px;
+  width: 50px;
 }
 label {
   font-weight: 500;
   font-size: 17px;
+  text-align: center;
 }
-
+.folders-date {
+  font-size: 15px;
+  text-align: center;
+}

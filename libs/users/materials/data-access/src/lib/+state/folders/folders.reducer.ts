@@ -1,8 +1,8 @@
 import { Action, createFeature, createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { IFolder } from '../../models/folder.interface';
 import { LoadingStatus } from '../../models/loading-status.enum';
 import { FoldersActions } from './folders.actions';
+import { IFolder } from '../../models/folder.interface';
 // import { FolderState } from '@users/materials/data-access';
 
 // export const foldersFeatureKey = 'folders';

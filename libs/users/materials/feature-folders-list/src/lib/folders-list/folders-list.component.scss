@@ -1,3 +1,6 @@
-span {
-  font-size: 15px;
+.folders-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  row-gap: 30px;
+  column-gap: 50px;
 }

@@ -3,14 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { DeepReadonly } from '@users/core/utils';
 import { IFolder } from '../../../../data-access/src/lib/models/folder.interface';
-
-// interface FolderListVm {
-//   folders: IFolder[];
-//   status: LoadingStatus;
-//   error: Error | null;
-// }
+import { DeepReadonly } from '@users/core/utils';
 
 @Component({
   selector: 'users-folders-list',
