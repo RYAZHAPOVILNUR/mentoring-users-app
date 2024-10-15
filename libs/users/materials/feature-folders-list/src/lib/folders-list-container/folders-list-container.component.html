@@ -4,7 +4,10 @@
 
   } as folderVm"
 >
-  <users-folders-list [folderVm]="folderVm"/>
+  <users-folders-list
+    [folderVm]="folderVm"
+    (deleteFolderEvent)="onDeleteFolder($event)"
+  />
 </ng-container>
 
 <!--status: status$,-->

@@ -23,6 +23,10 @@ export class FoldersListContainerComponent implements OnInit {
   public FoldersFacade = inject(FoldersFacade);
   public readonly folders$: Observable<FoldersVM[]> = this.FoldersFacade.folders$;
 
+  onDeleteFolder(folderId: number): void {
+    this.FoldersFacade.deleteFolder(folderId)
+  }
+
   ngAfterViewChecked(): void {
     console.log(this.folders$);
   }

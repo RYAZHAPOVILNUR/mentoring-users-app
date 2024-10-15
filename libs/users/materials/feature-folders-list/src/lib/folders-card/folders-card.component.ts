@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
@@ -15,8 +15,12 @@ import { MatCardModule } from '@angular/material/card';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoldersCardComponent {
-  isFolderEmpty = true
+  public isFolderEmpty = true
 
-  @Input({required: true})
-  folder!: IFolder;
+  @Input({required: true}) folder!: IFolder;
+  @Output() deleteFolderEvent = new EventEmitter<number>();
+
+  public onFolderDelete(folder: IFolder): void {
+    this.deleteFolderEvent.emit(folder.id)
+  }
 }

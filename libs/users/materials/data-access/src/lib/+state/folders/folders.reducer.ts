@@ -1,18 +1,16 @@
-import { Action, createFeature, createReducer, on } from '@ngrx/store';
+import { createFeature, createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { LoadingStatus } from '../../models/loading-status.enum';
 import { FoldersActions } from './folders.actions';
 import { IFolder } from '../../models/folder.interface';
-// import { FolderState } from '@users/materials/data-access';
 
-// export const foldersFeatureKey = 'folders';
 
-// export const FOLDERS_FEATURE_KEY = 'folders';
 export interface FoldersState extends EntityState<IFolder> {
   folders: IFolder[];
   status: LoadingStatus;
   error: Error | null;
 }
+
 export const foldersAdapter: EntityAdapter<IFolder> = createEntityAdapter<IFolder>();
 
 export const initialFoldersState: FoldersState = foldersAdapter.getInitialState({
@@ -24,8 +22,6 @@ export const initialFoldersState: FoldersState = foldersAdapter.getInitialState(
 export const foldersFeature = createFeature({
   name: 'folders',
   reducer: createReducer(
-
-// const reducer = createReducer(
     initialFoldersState,
     on(FoldersActions.loadFolders, (state) => ({
         ...state,
@@ -33,19 +29,41 @@ export const foldersFeature = createFeature({
       }
     )),
     on(FoldersActions.loadFoldersSuccess, (state, { folders }) => ({
-        ...state,
-        folders: folders
+      ...state,
+      folders: folders
     })),
     on(FoldersActions.loadFoldersFailure, (state, action) => ({
         ...state,
         status: LoadingStatus.Error,
         error: action.error
       }
-    ))
+    )),
+    on(FoldersActions.deleteFolder, (state) => ({
+      ...state,
+      status: LoadingStatus.Loading,
+      error: null
+    })),
+    on(FoldersActions.deleteFolderSuccess, (state, { folderId }) => ({
+      ...state,
+      folders: state.folders.filter(folder => folder.id !== folderId),
+      status: LoadingStatus.Loaded,
+      error: null
+    })),
+    on(FoldersActions.deleteFolderFailure, (state, action) => ({
+      ...state,
+      error: action.error
+    })),
+    on(FoldersActions.addFolder, (state, { folder }) => ({
+      ...state,
+      folders: [...state.folders, folder]
+    })),
+    on(FoldersActions.addFolderSuccess, (state, { folder }) => ({
+      ...state,
+      folders: [...state.folders, folder]
+    })),
+    on(FoldersActions.addFolderFailure, (state, { error }) => ({
+      ...state,
+      error: error
+    }))
   )
 });
-
-
-// export function foldersReducer(state: FoldersState | undefined, action: Action) {
-//   return reducer(state, action);
-// }
