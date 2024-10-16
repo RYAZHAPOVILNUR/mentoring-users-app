@@ -6,7 +6,7 @@ import { IFolder } from '../../models/folder.interface';
 import { of } from 'rxjs';
 import { LoadingStatus } from '../../models/loading-status.enum';
 import { FoldersActions } from './folders.actions';
-import { error } from 'ng-packagr/lib/utils/log';
+import { CreateFolderDTO } from '../../models/folders-dto.model';
 
 
 export const loadFolders$ = createEffect(
@@ -16,13 +16,9 @@ export const loadFolders$ = createEffect(
 
     return actions$.pipe(
       ofType(FoldersActions.loadFolders),
-      tap(() => console.log('Effect triggered')),
       switchMap(() =>
         api.get<IFolder[]>('/folder').pipe(
-          tap(() => console.log('API request sent')),
-          tap((folders) => console.log('effect, folders', folders)),
           map(folders => {
-            console.log('Folders from API:', folders);
             return FoldersActions.loadFoldersSuccess({ folders });
           }),
           catchError((error) => {
@@ -45,13 +41,14 @@ export const addFolder$ = createEffect(
 
     return actions$.pipe(
       ofType(FoldersActions.addFolder),
-      switchMap(({ folder }) =>
-        api.post('/folder', folder).pipe(
+      switchMap(({ folderData }) =>
+        api.post<IFolder, CreateFolderDTO>('/folder', folderData).pipe(
           map(folderEntity => {
-              return FoldersActions.addFolderSuccess({ folder: folder });
+              return FoldersActions.addFolderSuccess({ folder: folderEntity });
             }
           ),
           catchError((error => {
+              console.error('Error', error);
               return of(FoldersActions.addFolderFailure({ error }));
             })
           )
@@ -72,9 +69,8 @@ export const deleteFolder$ = createEffect(
             return FoldersActions.deleteFolderSuccess({ folderId });
           }),
           catchError((error => {
-            return of(FoldersActions.deleteFolderFailure({
-              error
-            }));
+            console.error('Error', error);
+            return of(FoldersActions.deleteFolderFailure({ error }));
           }))
         )
       )

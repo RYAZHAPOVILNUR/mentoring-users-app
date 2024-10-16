@@ -18,9 +18,9 @@ export class FoldersCardComponent {
   public isFolderEmpty = true
 
   @Input({required: true}) folder!: IFolder;
-  @Output() deleteFolderEvent = new EventEmitter<number>();
+  @Output() deleteFolder = new EventEmitter<number>();
 
   public onFolderDelete(folder: IFolder): void {
-    this.deleteFolderEvent.emit(folder.id)
+    this.deleteFolder.emit(folder.id)
   }
 }

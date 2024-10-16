@@ -3,7 +3,7 @@
     <div *ngFor="let folder of folderVm.folders">
       <users-folders-card
         [folder]="folder"
-        (deleteFolderEvent)="onDeleteFolder(folder.id)"
+        (deleteFolder)="onDeleteFolder(folder.id)"
       />
     </div>
   </div>

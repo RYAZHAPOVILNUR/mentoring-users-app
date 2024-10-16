@@ -18,10 +18,10 @@ import { Store } from '@ngrx/store';
 export class FoldersListComponent {
   store = inject(Store)
   @Input({ required: true }) folderVm!: FoldersListVM
-  @Output() deleteFolderEvent = new EventEmitter<number>();
+  @Output() deleteFolder = new EventEmitter<number>();
 
   public onDeleteFolder(folderId: number): void {
-    this.deleteFolderEvent.emit(folderId);
+    this.deleteFolder.emit(folderId);
   }
 }
 export type FoldersListVM = DeepReadonly<{

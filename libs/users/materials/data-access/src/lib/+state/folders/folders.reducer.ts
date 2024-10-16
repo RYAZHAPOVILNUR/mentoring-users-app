@@ -4,9 +4,7 @@ import { LoadingStatus } from '../../models/loading-status.enum';
 import { FoldersActions } from './folders.actions';
 import { IFolder } from '../../models/folder.interface';
 
-
 export interface FoldersState extends EntityState<IFolder> {
-  folders: IFolder[];
   status: LoadingStatus;
   error: Error | null;
 }
@@ -14,7 +12,6 @@ export interface FoldersState extends EntityState<IFolder> {
 export const foldersAdapter: EntityAdapter<IFolder> = createEntityAdapter<IFolder>();
 
 export const initialFoldersState: FoldersState = foldersAdapter.getInitialState({
-  folders: [],
   status: LoadingStatus.Init,
   error: null
 });
@@ -25,44 +22,59 @@ export const foldersFeature = createFeature({
     initialFoldersState,
     on(FoldersActions.loadFolders, (state) => ({
         ...state,
-        status: LoadingStatus.Loading
+        status: LoadingStatus.Loading,
+        error: null
       }
     )),
-    on(FoldersActions.loadFoldersSuccess, (state, { folders }) => ({
-      ...state,
-      folders: folders
-    })),
-    on(FoldersActions.loadFoldersFailure, (state, action) => ({
+    on(FoldersActions.loadFoldersSuccess, (state, { folders }) =>
+      foldersAdapter.setAll(folders, {
+        ...state,
+        status: LoadingStatus.Loaded,
+        error: null
+      })
+    ),
+    on(FoldersActions.loadFoldersFailure, (state, { error }) => ({
         ...state,
         status: LoadingStatus.Error,
-        error: action.error
+        error: error
       }
     )),
-    on(FoldersActions.deleteFolder, (state) => ({
-      ...state,
-      status: LoadingStatus.Loading,
-      error: null
-    })),
-    on(FoldersActions.deleteFolderSuccess, (state, { folderId }) => ({
-      ...state,
-      folders: state.folders.filter(folder => folder.id !== folderId),
-      status: LoadingStatus.Loaded,
-      error: null
-    })),
-    on(FoldersActions.deleteFolderFailure, (state, action) => ({
-      ...state,
-      error: action.error
-    })),
-    on(FoldersActions.addFolder, (state, { folder }) => ({
-      ...state,
-      folders: [...state.folders, folder]
-    })),
-    on(FoldersActions.addFolderSuccess, (state, { folder }) => ({
-      ...state,
-      folders: [...state.folders, folder]
-    })),
+
+    on(FoldersActions.addFolder, (state, { folderData }) => ({
+        ...state,
+        status: LoadingStatus.Loading,
+        error: null
+      })
+    ),
+    on(FoldersActions.addFolderSuccess, (state, { folder }) =>
+      foldersAdapter.addOne(folder, {
+        ...state,
+        status: LoadingStatus.Loaded,
+        error: null
+      })
+    ),
     on(FoldersActions.addFolderFailure, (state, { error }) => ({
       ...state,
+      status: LoadingStatus.Error,
+      error: error
+    })),
+
+    on(FoldersActions.deleteFolder, (state) => ({
+      ...state,
+      status: LoadingStatus.Deleting,
+      error: null
+    })),
+    on(FoldersActions.deleteFolderSuccess, (state, { folderId }) =>
+      foldersAdapter.removeOne(folderId, {
+          ...state,
+          status: LoadingStatus.Loaded,
+          error: null
+        }
+      )
+    ),
+    on(FoldersActions.deleteFolderFailure, (state, { error }) => ({
+      ...state,
+      status: LoadingStatus.Error,
       error: error
     }))
   )

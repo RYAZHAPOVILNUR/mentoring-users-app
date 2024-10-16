@@ -3,6 +3,8 @@ import { select, Store } from '@ngrx/store';
 import * as FoldersSelectors from './folders.selectors';
 import { FoldersActions } from './folders.actions';
 import { IFolder } from '../../models/folder.interface';
+import { Observable } from 'rxjs';
+import { CreateFolderDTO } from '../../models/folders-dto.model';
 
 @Injectable({ providedIn: 'root' })
 export class FoldersFacade {
@@ -12,7 +14,7 @@ export class FoldersFacade {
     FoldersSelectors.selectFoldersStatus)
   );
 
-  public readonly folders$ = this.store.pipe(select(
+  public readonly folders$: Observable<IFolder[]> = this.store.pipe(select(
     FoldersSelectors.selectFolders)
   );
 
@@ -25,8 +27,8 @@ export class FoldersFacade {
     this.store.dispatch(FoldersActions.loadFolders());
   };
 
-  public addFolder(folder: IFolder) {
-    this.store.dispatch(FoldersActions.addFolder({ folder }))
+  public addFolder(folderData: CreateFolderDTO) {
+    this.store.dispatch(FoldersActions.addFolder({ folderData }));
   }
 
   public deleteFolder(folderId: number): void {

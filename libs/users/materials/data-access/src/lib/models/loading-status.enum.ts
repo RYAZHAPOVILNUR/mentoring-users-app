@@ -3,4 +3,5 @@ export enum LoadingStatus {
   Loaded = 'LOADED',
   Init = 'INIT',
   Error = 'ERROR',
+  Deleting = 'DELETING',
 }

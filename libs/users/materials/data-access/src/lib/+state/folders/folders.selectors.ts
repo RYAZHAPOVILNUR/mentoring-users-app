@@ -1,15 +1,13 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {  foldersAdapter, foldersFeature, FoldersState } from './folders.reducer';
+import { FoldersVM } from '@users/materials/feature-folders-list';
 
-// const {selectAll} = foldersAdapter.getSelectors()
+const { selectAll } = foldersAdapter.getSelectors()
 
 
 export const selectFolders = createSelector(
   foldersFeature.selectFoldersState,
-  (state: FoldersState) => {
-    console.log('Select Folders State:', state);
-    return state.folders
-  }
+  (state: FoldersState) => selectAll(state)
 );
 export const selectFoldersStatus = createSelector(
   foldersFeature.selectFoldersState,
