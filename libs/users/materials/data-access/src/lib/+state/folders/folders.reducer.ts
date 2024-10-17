@@ -40,14 +40,14 @@ export const foldersFeature = createFeature({
       }
     )),
 
-    on(FoldersActions.addFolder, (state, { folderData }) => ({
+    on(FoldersActions.addFolder, (state) => ({
         ...state,
         status: LoadingStatus.Loading,
         error: null
       })
     ),
     on(FoldersActions.addFolderSuccess, (state, { folder }) =>
-      foldersAdapter.addOne(folder, {
+      foldersAdapter.addOne( folder, {
         ...state,
         status: LoadingStatus.Loaded,
         error: null

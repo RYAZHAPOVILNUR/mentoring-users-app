@@ -5,8 +5,8 @@
     </button>
     <label>{{ folder.title }}</label>
   </mat-card-content>
-  <div class="folders-date">{{ folder.created_at | date : 'dd.MM.yyyy'}}</div>
-  <button mat-button (click)="onFolderDelete(folder)">
+  <div class="folders-date">{{ folder.created_at | date : 'dd.MM.yyyy' }}</div>
+  <button mat-button class="delete-button" (click)="onFolderDelete(folder)">
     <mat-icon>delete</mat-icon>
   </button>
 </mat-card>

@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';
-import { FoldersListComponent, FoldersVM } from '../folders-list/folders-list.component';
+import { FoldersListComponent } from '../folders-list/folders-list.component';
 import { LetDirective } from '@ngrx/component';
 import { FoldersFacade } from '../../../../data-access/src/lib/+state/folders/folders.facade';
 import { Observable } from 'rxjs';
@@ -19,11 +19,9 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoldersListContainerComponent implements OnInit {
-  @Output() addFolder = new EventEmitter<IFolder>()
 
   public foldersFacade = inject(FoldersFacade);
   public readonly folders$: Observable<IFolder[]> = this.foldersFacade.folders$;
-
 
   ngOnInit() {
     this.foldersFacade.loadFolders()

@@ -43,9 +43,8 @@ export const addFolder$ = createEffect(
       ofType(FoldersActions.addFolder),
       switchMap(({ folderData }) =>
         api.post<IFolder, CreateFolderDTO>('/folder', folderData).pipe(
-          map(folderEntity => {
-              return FoldersActions.addFolderSuccess({ folder: folderEntity });
-            }
+          map((folderEntity) =>
+            FoldersActions.addFolderSuccess({ folder: folderEntity })
           ),
           catchError((error => {
               console.error('Error', error);

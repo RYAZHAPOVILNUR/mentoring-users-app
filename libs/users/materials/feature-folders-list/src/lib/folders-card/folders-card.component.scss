@@ -5,17 +5,22 @@
   justify-content: center;
   height: 200px;
   width: 200px;
+  position: relative;
 
   &:hover {
     cursor: pointer;
-
-    .delete {
+    .delete-button {
       opacity: 1;
+      display: inline-block;
+      position: absolute;
+      top: 20px;
     }
-
     &::before {
       opacity: 1;
     }
+  }
+  .delete-button {
+    display: none;
   }
 
   &::before {

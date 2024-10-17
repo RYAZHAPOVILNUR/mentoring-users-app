@@ -15,12 +15,12 @@ import { MatCardModule } from '@angular/material/card';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoldersCardComponent {
-  public isFolderEmpty = true
+  public isFolderEmpty = true;
 
-  @Input({required: true}) folder!: IFolder;
+  @Input({ required: true }) folder!: IFolder;
   @Output() deleteFolder = new EventEmitter<number>();
 
   public onFolderDelete(folder: IFolder): void {
-    this.deleteFolder.emit(folder.id)
+    this.deleteFolder.emit(folder.id);
   }
 }
