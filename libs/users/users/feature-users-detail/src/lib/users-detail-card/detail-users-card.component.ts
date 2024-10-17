@@ -73,6 +73,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: vm.user.email,
         username: vm.user.username,
         city: vm.user.city,
+        totalStoryPoints: vm.user.totalStoryPoints ? vm.user.totalStoryPoints.toString() : '',
       });
     }
 
@@ -83,17 +84,27 @@ export class DetailUsersCardComponent implements OnInit {
     }
   }
 
+  enableTotalStoryPoints() {
+    this.formGroup.get('totalStoryPoints')?.enable();
+  }
+
+  disableTotalStoryPoints() {
+    this.formGroup.get('totalStoryPoints')?.disable();
+  }
+
   public formGroup = new FormBuilder().group({
     name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    totalStoryPoints: new FormControl({value: '', disabled: true}, [Validators.pattern('^[1-9][0-9]*$')])
   });
 
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
     onSuccessCb: onSuccessEditionCbType;
   }>();
+  @Output() addUserStorypoint = new EventEmitter();
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
@@ -129,10 +140,17 @@ export class DetailUsersCardComponent implements OnInit {
         username: this.formGroup.value.username || '',
         city: this.formGroup.value.city || '',
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        totalStoryPoints: Number(this.formGroup.value.totalStoryPoints) || 0, 
         purchaseDate: new Date().toString() || '',
         educationStatus: 'trainee',
       },
       onSuccessCb: this.onEditSuccess,
+    });
+  }
+
+  onAddUserStorypoint(): void {
+    this.addUserStorypoint.emit({
+      totalStoryPoints:  Number(this.formGroup.value.totalStoryPoints), 
     });
   }
 
