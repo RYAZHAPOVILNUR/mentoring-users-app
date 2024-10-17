@@ -217,3 +217,23 @@ div.github {
   & .city {
   }
 }
+
+.user-timer {
+  display: flex;
+  align-items: center;
+}
+
+.timer-schedule-button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  margin: 5px 0 0 5px;
+
+  :hover {
+    color: #bebebe;
+  }
+}

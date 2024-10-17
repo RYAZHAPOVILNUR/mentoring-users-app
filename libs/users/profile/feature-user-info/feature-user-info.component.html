@@ -76,6 +76,26 @@
           </ng-template>
         </ng-container>
       </mat-card-actions>
+      <mat-card-content class="user-timer">
+        <ng-container *ngIf="isTimerScheduleButton; else isTimerButtons">
+          <div>Счётчик часов:</div>
+          <button class="timer-schedule-button" title="Старт" (click)="startTimer()">
+            <mat-icon>schedule</mat-icon>
+          </button>
+        </ng-container>
+        <ng-template #isTimerButtons>
+          <span>{{ timer$ | async | timerFormat }}</span>
+          <button class="timer-schedule-button" title="Старт" (click)="startTimer()">
+            <mat-icon>play_arrow</mat-icon>
+          </button>
+          <button class="timer-schedule-button" title="Стоп" (click)="stopTimer()">
+            <mat-icon>pause</mat-icon>
+          </button>
+          <button class="timer-schedule-button" title="Сбросить" (click)="resetTimer()">
+            <mat-icon>stop</mat-icon>
+          </button>
+        </ng-template>
+      </mat-card-content>
     </mat-card>
   </div>
 </ng-container>
