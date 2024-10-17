@@ -1,0 +1,18 @@
+.dialog-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+
+  button {
+    background: none;
+    border: none;
+    outline: none;
+  }
+}
+
+.pdf-container {
+  display: block;
+  height: 500px;
+  width: 500px;
+}

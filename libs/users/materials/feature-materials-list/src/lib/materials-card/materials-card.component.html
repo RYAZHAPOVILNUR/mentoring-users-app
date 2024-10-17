@@ -1,0 +1,21 @@
+<mat-card
+  class="materials-card-wrapper"
+  (mouseover)="showDeleteButton = true"
+  (mouseleave)="showDeleteButton = false"
+  (click)="openMaterialViewer()"
+>
+  <mat-card-content class="mat-card-content">
+    <ng-container [ngSwitch]="fileType">
+      <mat-icon *ngSwitchCase="MaterialFileType.video" class="material-icon">movie</mat-icon>
+      <mat-icon *ngSwitchCase="MaterialFileType.podcast" class="material-icon">queue_music</mat-icon>
+      <mat-icon *ngSwitchCase="MaterialFileType.pdf" class="material-icon">picture_as_pdf</mat-icon>
+    </ng-container>
+    <label>{{ material.title }}</label>
+    <span>{{ material.created_at | date : 'dd.MM.yyyy' }}</span>
+  </mat-card-content>
+  <mat-card-actions class="material-card-actions">
+    <button mat-icon-button *ngIf="showDeleteButton" (click)="onDeleteMaterial($event, material)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

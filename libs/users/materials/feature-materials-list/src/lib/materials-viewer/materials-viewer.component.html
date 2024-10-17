@@ -1,0 +1,18 @@
+<div mat-dialog-title class="dialog-title">
+  <h1>{{ data.title }}</h1>
+  <button (click)="cancel()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-dialog-content>
+  <ng-container *ngIf="regEx.PDF_REGEX.test(data.material_link)">
+    <pdf-viewer [src]="data.material_link" [render-text]="true" class="pdf-container" [fit-to-page]="true">
+    </pdf-viewer>
+  </ng-container>
+  <ng-container *ngIf="regEx.MP3_REGEX.test(data.material_link)">
+    <audio controls [src]="data.material_link" type="audio/mp3"></audio>
+  </ng-container>
+  <ng-container *ngIf="regEx.VIDEO_REGEX.test(data.material_link)">
+    <img [src]="getVideoPreview(data.material_link)" width="600" height="400" />
+  </ng-container>
+</mat-dialog-content>
