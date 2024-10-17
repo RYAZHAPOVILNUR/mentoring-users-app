@@ -5,9 +5,11 @@
   (click)="openMaterialViewer()"
 >
   <mat-card-content class="mat-card-content">
-    <mat-icon *ngIf="regEx.VIDEO_REGEX.test(material.material_link)" class="material-icon">movie</mat-icon>
-    <mat-icon *ngIf="regEx.MP3_REGEX.test(material.material_link)" class="material-icon">queue_music</mat-icon>
-    <mat-icon *ngIf="regEx.PDF_REGEX.test(material.material_link)" class="material-icon">picture_as_pdf</mat-icon>
+    <ng-container [ngSwitch]="fileType">
+      <mat-icon *ngSwitchCase="MaterialFileType.video" class="material-icon">movie</mat-icon>
+      <mat-icon *ngSwitchCase="MaterialFileType.podcast" class="material-icon">queue_music</mat-icon>
+      <mat-icon *ngSwitchCase="MaterialFileType.pdf" class="material-icon">picture_as_pdf</mat-icon>
+    </ng-container>
     <label>{{ material.title }}</label>
     <span>{{ material.created_at | date : 'dd.MM.yyyy' }}</span>
   </mat-card-content>

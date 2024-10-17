@@ -24,9 +24,10 @@ export class CreateMaterialsButtonComponent {
   public readonly fileType = MaterialFileType;
 
   openAddMaterialDialog(fileType: MaterialFileType): void {
-    const dialogRef: MatDialogRef<CreateMaterialsDialogComponent> = this.dialog.open(CreateMaterialsDialogComponent, {
-      data: fileType,
-    });
+    const dialogRef: MatDialogRef<CreateMaterialsDialogComponent> = this.dialog.open<CreateMaterialsDialogComponent, MaterialFileType, CreateMaterialDTO>
+      (CreateMaterialsDialogComponent, {
+        data: fileType,
+      });
 
     dialogRef
       .afterClosed()

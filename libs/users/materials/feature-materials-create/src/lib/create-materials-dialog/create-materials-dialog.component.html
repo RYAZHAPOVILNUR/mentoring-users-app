@@ -9,7 +9,7 @@
       <mat-form-field>
         <input matInput placeholder="Ссылка*" formControlName="link" />
         <mat-error *ngIf="formGroup.get('link')?.hasError('required')">Ссылка обязательна</mat-error>
-        <mat-error *ngIf="formGroup.get('link')!.hasError('wrongURL')">Неверная ссылка</mat-error>
+        <mat-error *ngIf="formGroup.get('link')?.hasError('wrongURL')">Неверная ссылка</mat-error>
       </mat-form-field>
     </div>
   </form>
