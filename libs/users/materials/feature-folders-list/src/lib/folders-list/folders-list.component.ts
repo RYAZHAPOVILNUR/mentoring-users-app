@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { IFolder } from '../../../../data-access/src/lib/models/folder.interface';
+import { IFolder } from '@users/materials/data-access';
 import { DeepReadonly } from '@users/core/utils';
-import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'users-folders-list',
@@ -16,19 +15,14 @@ import { Store } from '@ngrx/store';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoldersListComponent {
-  store = inject(Store)
-  @Input({ required: true }) folderVm!: FoldersListVM
+  @Input({ required: true }) folderVm!: FoldersListVM;
   @Output() deleteFolder = new EventEmitter<number>();
 
   public onDeleteFolder(folderId: number): void {
     this.deleteFolder.emit(folderId);
   }
 }
-export type FoldersListVM = DeepReadonly<{
-  folders: FoldersVM[];
-  // status: string;
-  // error: Error | null
 
-}>;
+export type FoldersListVM = DeepReadonly<{ folders: FoldersVM[]; }>;
 
 export type FoldersVM = DeepReadonly<IFolder>;

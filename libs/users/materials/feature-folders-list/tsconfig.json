@@ -8,12 +8,6 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-//    "baseUrl": ".",
-//    "paths": {
-//      "@models/*": ["../data-access/src/lib/models/*"],
-//      "@lib/*": ["../data-access/src/lib/*"],
-//      "@utils/*": ["../../../../libs/core/utils/src/"]
-//    }
   },
   "files": [],
   "include": [],

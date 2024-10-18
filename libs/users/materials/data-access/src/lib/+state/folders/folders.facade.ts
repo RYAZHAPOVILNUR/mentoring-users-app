@@ -2,9 +2,9 @@ import { inject, Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import * as FoldersSelectors from './folders.selectors';
 import { FoldersActions } from './folders.actions';
-import { IFolder } from '../../models/folder.interface';
+import { IFolder } from '@users/materials/data-access';
 import { Observable } from 'rxjs';
-import { CreateFolderDTO } from '../../models/folders-dto.model';
+import { CreateFolderDTO } from '@users/materials/data-access';
 
 @Injectable({ providedIn: 'root' })
 export class FoldersFacade {

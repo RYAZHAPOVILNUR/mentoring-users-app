@@ -1,21 +1,22 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { IFolder } from '../../models/folder.interface';
 import { LoadingStatus } from '../../models/loading-status.enum';
+import { IMaterial } from '../../models/material.interface';
+import { CreateFolderDTO } from '../../models/folders-dto.model';
 
 export const MaterialsActions = createActionGroup({
   source: 'Materials',
   events: {
-    'Load Folders': emptyProps(),
-    'Load Folders Success': props<{ folders: IFolder[] }>(),
-    'Load Folders Failure': props<{
+    'Load Materials': emptyProps(),
+    'Load Materials Success': props<{ materials: IMaterial[] }>(),
+    'Load Materials Failure': props<{
       status: LoadingStatus.Error;
       error: Error;
     }>(),
-
-    'Create Folder Success': props<{ folder: IFolder }>(),
-    'Create Folder Failure': props<{
-      status: LoadingStatus.Error;
-      error: Error;
-    }>(),
-  },
+    'Add Material': props<{ materialData: CreateFolderDTO }>(),
+    'Add Materials Success': props<{ material: IMaterial }>(),
+    'Add Materials Failure': props<{ error: Error; }>(),
+    'Delete Material': props<{ materialId: number }>(),
+    'Delete Materials Success': props<{ materialId: number }>(),
+    'Delete Materials Failure': props<{ error: Error }>()
+  }
 });

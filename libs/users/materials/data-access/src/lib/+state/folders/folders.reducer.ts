@@ -1,8 +1,8 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { LoadingStatus } from '../../models/loading-status.enum';
+import { LoadingStatus } from '@users/materials/data-access';
 import { FoldersActions } from './folders.actions';
-import { IFolder } from '../../models/folder.interface';
+import { IFolder } from '@users/materials/data-access';
 
 export interface FoldersState extends EntityState<IFolder> {
   status: LoadingStatus;
@@ -39,7 +39,6 @@ export const foldersFeature = createFeature({
         error: error
       }
     )),
-
     on(FoldersActions.addFolder, (state) => ({
         ...state,
         status: LoadingStatus.Loading,
@@ -47,7 +46,7 @@ export const foldersFeature = createFeature({
       })
     ),
     on(FoldersActions.addFolderSuccess, (state, { folder }) =>
-      foldersAdapter.addOne( folder, {
+      foldersAdapter.addOne(folder, {
         ...state,
         status: LoadingStatus.Loaded,
         error: null
@@ -58,7 +57,6 @@ export const foldersFeature = createFeature({
       status: LoadingStatus.Error,
       error: error
     })),
-
     on(FoldersActions.deleteFolder, (state) => ({
       ...state,
       status: LoadingStatus.Deleting,

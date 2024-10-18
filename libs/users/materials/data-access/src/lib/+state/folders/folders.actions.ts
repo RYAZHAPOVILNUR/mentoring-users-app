@@ -1,7 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { IFolder } from '../../models/folder.interface';
-import { LoadingStatus } from '../../models/loading-status.enum';
-import { CreateFolderDTO } from '../../models/folders-dto.model';
+import { IFolder, LoadingStatus, CreateFolderDTO } from '@users/materials/data-access';
 
 export const FoldersActions = createActionGroup({
   source: 'Folders',

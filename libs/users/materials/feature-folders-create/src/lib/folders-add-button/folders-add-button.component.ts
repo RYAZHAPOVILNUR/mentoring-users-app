@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FoldersAddDialogComponent } from '../folders-add-dialog/folders-add-dialog.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { CreateFolderDTO } from '../../../../data-access/src/lib/models/folders-dto.model';
+import { CreateFolderDTO } from '@users/materials/data-access';
 import { FoldersFacade } from '../../../../data-access/src/lib/+state/folders/folders.facade';
 import { fromEvent, map, Observable, startWith } from 'rxjs';
 import { PushPipe } from '@ngrx/component';
@@ -19,9 +19,8 @@ import { PushPipe } from '@ngrx/component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoldersAddButtonComponent {
-  private name!: string;
+  private name: string[] = [];
   public isSticky$: Observable<boolean>;
-
   public readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
   private readonly foldersFacade = inject(FoldersFacade);
