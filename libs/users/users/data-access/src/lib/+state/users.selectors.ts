@@ -11,7 +11,17 @@ export const selectUsersStatus = createSelector(selectUsersState, (state: UsersS
 
 export const selectUsersError = createSelector(selectUsersState, (state: UsersState) => state.error);
 
+export const selectUsersFilter = createSelector(selectUsersState, (state: UsersState) => state.usersFilter);
+
 export const selectAllUsers = createSelector(selectUsersState, (state: UsersState) => selectAll(state));
+
+export const usersFilterSelector = createSelector(
+  selectAllUsers,
+  selectUsersFilter,
+  (users, filter) => users.filter(
+    user => filter.name ? user.name.toLowerCase().includes(
+      filter.name.toLowerCase() ): user)
+);
 
 export const selectUsersEntities = createSelector(selectUsersState, (state: UsersState) => selectEntities(state));
 
@@ -26,5 +36,5 @@ export const selectUserById = (id: number) => createSelector(selectUsersEntities
 export const selectOpenedUser = createSelector(
   selectRouteParams,
   selectUsersEntities,
-  ({ id }, entities) => entities[id] || null
+  ({ id }, entities) => entities[id] ?? null
 );
