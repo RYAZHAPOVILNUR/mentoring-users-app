@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { IFolder } from '@users/materials/data-access';
+import { FoldersDTO } from '@users/materials/data-access';
 import { DeepReadonly } from '@users/core/utils';
 
 @Component({
@@ -17,12 +17,16 @@ import { DeepReadonly } from '@users/core/utils';
 export class FoldersListComponent {
   @Input({ required: true }) folderVm!: FoldersListVM;
   @Output() deleteFolder = new EventEmitter<number>();
+  @Output() openFolder = new EventEmitter<number>();
 
   public onDeleteFolder(folderId: number): void {
     this.deleteFolder.emit(folderId);
+  }
+  public onOpenFolder(folderId: number): void {
+    this.openFolder.emit(folderId);
   }
 }
 
 export type FoldersListVM = DeepReadonly<{ folders: FoldersVM[]; }>;
 
-export type FoldersVM = DeepReadonly<IFolder>;
+export type FoldersVM = DeepReadonly<FoldersDTO>;

@@ -1,12 +1,19 @@
 <mat-card class="folders-card">
   <mat-card-content class="mat-card-content">
-    <button mat-button>
+    <button
+      mat-button
+      (dblclick)="onFolderOpen(folder.id)"
+    >
       <mat-icon class="folder-icon">{{ isFolderEmpty ? 'folder' : 'folder_open' }}</mat-icon>
     </button>
     <label>{{ folder.title }}</label>
   </mat-card-content>
   <div class="folders-date">{{ folder.created_at | date : 'dd.MM.yyyy' }}</div>
-  <button mat-button class="delete-button" (click)="onFolderDelete(folder)">
+  <button
+    mat-button
+    class="delete-button"
+    (click)="onFolderDelete(folder)"
+  >
     <mat-icon>delete</mat-icon>
   </button>
 </mat-card>

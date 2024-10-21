@@ -1,17 +1,14 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { IFolder, LoadingStatus, CreateFolderDTO } from '@users/materials/data-access';
+import { CreateFolderDTO, FoldersEntity } from '@users/materials/data-access';
 
 export const FoldersActions = createActionGroup({
   source: 'Folders',
   events: {
     'Load Folders': emptyProps(),
-    'Load Folders Success': props<{ folders: IFolder[] }>(),
-    'Load Folders Failure': props<{
-      status: LoadingStatus.Error;
-      error: Error
-    }>(),
+    'Load Folders Success': props<{ folders: FoldersEntity[] }>(),
+    'Load Folders Failure': props<{ error: Error }>(),
     'Add Folder': props<{ folderData: CreateFolderDTO }>(),
-    'Add Folder Success': props<{ folder: IFolder }>(),
+    'Add Folder Success': props<{ folder: FoldersEntity }>(),
     'Add Folder Failure': props<{ error: Error }>(),
     'Delete Folder': props<{ folderId: number }>(),
     'Delete Folder Success': props<{ folderId: number }>(),

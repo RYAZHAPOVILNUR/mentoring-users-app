@@ -1,19 +1,26 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { MaterialsActions } from './materials.actions';
-import { LoadingStatus } from '../../models/loading-status.enum';
+import { LoadingStatus } from '@users/materials/data-access';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { IMaterial } from '../../models/material.interface';
 import { foldersAdapter } from '../folders/folders.reducer';
 
-export const materialsAdapter: EntityAdapter<IMaterial> = createEntityAdapter<IMaterial>();
+export interface MaterialsEntity {
+  id: number;
+  created_at: string;
+  title: string;
+  material_link: string;
+  folder_id: number;
+}
 
-export interface MaterialsState extends EntityState<IMaterial> {
+export const materialsAdapter: EntityAdapter<MaterialsEntity> = createEntityAdapter<MaterialsEntity>();
+
+export interface MaterialsState extends EntityState<MaterialsEntity> {
   status: LoadingStatus;
   error: Error | null;
 }
 
 export const initialMaterialsState: MaterialsState = materialsAdapter.getInitialState({
-  status: LoadingStatus.Init,
+  status: 'init',
   error: null
 });
 
@@ -23,58 +30,58 @@ export const materialsFeature = createFeature({
     initialMaterialsState,
     on(MaterialsActions.loadMaterials, (state) => ({
         ...state,
-        status: LoadingStatus.Loading,
+        status: 'loading',
         error: null
       }
     )),
     on(MaterialsActions.loadMaterialsSuccess, (state, { materials }) =>
       materialsAdapter.setAll(materials, {
         ...state,
-        status: LoadingStatus.Loaded,
+        status: 'loaded',
         error: null
       })
     ),
     on(MaterialsActions.loadMaterialsFailure, (state, { error }) => ({
         ...state,
-        status: LoadingStatus.Error,
+        status: 'error',
         error: error
       }
     )),
     on(MaterialsActions.addMaterial, (state) => ({
         ...state,
-        status: LoadingStatus.Loading,
+        status: 'loading',
         error: null
       })
     ),
     on(MaterialsActions.addMaterialsSuccess, (state, { material }) =>
       materialsAdapter.addOne(material, {
         ...state,
-        status: LoadingStatus.Loaded,
+        status: 'loaded',
         error: null
       })
     ),
     on(MaterialsActions.addMaterialsFailure, (state, { error }) => ({
         ...state,
-        status: LoadingStatus.Error,
+        status: 'error',
         error: error
       }
     )),
     on(MaterialsActions.deleteMaterial, (state) => ({
       ...state,
-      status: LoadingStatus.Deleting,
+      status: 'deleting',
       error: null
     })),
     on(MaterialsActions.deleteMaterialsSuccess, (state, { materialId }) =>
       foldersAdapter.removeOne(materialId, {
           ...state,
-          status: LoadingStatus.Loaded,
+          status: 'loaded',
           error: null
         }
       )
     ),
     on(MaterialsActions.deleteMaterialsFailure, (state, { error }) => ({
       ...state,
-      status: LoadingStatus.Error,
+      status: 'error',
       error: error
     }))
   )

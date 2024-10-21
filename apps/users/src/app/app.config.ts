@@ -16,15 +16,24 @@ import { authEffects, authFeature, tokenInterceptor } from '@auth/data-access';
 import { SettingsEffects, settingsFeature } from '@users/settings/data-access';
 import { DADATA_TOKEN } from '@users/core/dadata';
 import { provideQuillConfig } from 'ngx-quill/config';
-import { articlesEffects, articlesFeature, commentsEffects, commentsFeature } from '@users/users/articles/data-access';
-import { tasksEffects, tasksFeature } from '@users/users/task/data-access';
-import { CLIENT_ID, githubApiEffects, githubApiFeature } from '@users/core/github-api/data-access';
-import { backlogFeature, backlogEffects } from '@users/users/backlog/data-access';
-import { materialsFeature, materialsEffects, foldersEffects } from '@users/materials/data-access';
 import {
-  foldersFeature,
-  // FOLDERS_FEATURE_KEY, , foldersReducer
-} from '../../../../libs/users/materials/data-access/src/lib/+state/folders/folders.reducer';
+  articlesEffects,
+  articlesFeature,
+  commentsEffects,
+  commentsFeature
+} from '@users/users/articles/data-access';
+import { tasksEffects, tasksFeature } from '@users/users/task/data-access';
+import {
+  CLIENT_ID, githubApiEffects,
+  githubApiFeature
+} from '@users/core/github-api/data-access';
+import { backlogFeature, backlogEffects } from '@users/users/backlog/data-access';
+import {
+  materialsFeature,
+  materialsEffects,
+  foldersEffects,
+  foldersFeature
+} from '@users/materials/data-access';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -55,8 +64,7 @@ export const appConfig: ApplicationConfig = {
       [githubApiFeature.name]: githubApiFeature.reducer,
       [backlogFeature.name]: backlogFeature.reducer,
       [materialsFeature.name]: materialsFeature.reducer,
-      [foldersFeature.name]: foldersFeature.reducer,
-      // [FOLDERS_FEATURE_KEY]: foldersReducer,
+      [foldersFeature.name]: foldersFeature.reducer
     }),
     provideRouterStore(),
     provideStoreDevtools({
@@ -64,37 +72,37 @@ export const appConfig: ApplicationConfig = {
       logOnly: !isDevMode(),
       autoPause: true,
       trace: false,
-      traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
+      traceLimit: 75 // maximum stack trace frames to be stored (in case trace option was provided as true)
     }),
     provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
     provideHttpClient(withInterceptors([tokenInterceptor])),
     {
       provide: API_URL,
-      useValue: environment.api_url,
+      useValue: environment.api_url
     },
     {
       provide: DADATA_TOKEN,
-      useValue: environment.dadata_api_key,
+      useValue: environment.dadata_api_key
     },
     {
       provide: CLIENT_ID,
-      useValue: environment.github_client_id,
+      useValue: environment.github_client_id
     },
     provideAnimations(),
     provideQuillConfig({
       modules: {
-        syntax: true,
-      },
+        syntax: true
+      }
     }),
     importProvidersFrom(
       TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
           useFactory: HttpLoaderFactory,
-          deps: [HttpClient],
+          deps: [HttpClient]
         },
-        defaultLanguage: 'en',
+        defaultLanguage: 'en'
       })
-    ),
-  ],
+    )
+  ]
 };

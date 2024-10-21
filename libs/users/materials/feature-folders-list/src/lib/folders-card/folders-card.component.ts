@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
-import { IFolder } from '../../../../data-access/src/lib/models/folder.interface';
+import { FoldersDTO } from '@users/materials/data-access';
 import { MatCardModule } from '@angular/material/card';
 
 @Component({
@@ -17,10 +17,14 @@ import { MatCardModule } from '@angular/material/card';
 export class FoldersCardComponent {
   public isFolderEmpty = true;
 
-  @Input({ required: true }) folder!: IFolder;
+  @Input({ required: true }) folder!: FoldersDTO;
   @Output() deleteFolder = new EventEmitter<number>();
+  @Output() openFolder = new EventEmitter<number>();
 
-  public onFolderDelete(folder: IFolder): void {
+  public onFolderDelete(folder: FoldersDTO): void {
     this.deleteFolder.emit(folder.id);
+  }
+  public onFolderOpen(id: number): void {
+    this.openFolder.emit(id)
   }
 }

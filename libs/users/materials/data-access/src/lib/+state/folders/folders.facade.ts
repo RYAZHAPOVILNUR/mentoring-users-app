@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import * as FoldersSelectors from './folders.selectors';
 import { FoldersActions } from './folders.actions';
-import { IFolder } from '@users/materials/data-access';
+import { FoldersEntity } from '@users/materials/data-access';
 import { Observable } from 'rxjs';
 import { CreateFolderDTO } from '@users/materials/data-access';
 
@@ -14,7 +14,7 @@ export class FoldersFacade {
     FoldersSelectors.selectFoldersStatus)
   );
 
-  public readonly folders$: Observable<IFolder[]> = this.store.pipe(select(
+  public readonly folders$: Observable<FoldersEntity[]> = this.store.pipe(select(
     FoldersSelectors.selectFolders)
   );
 

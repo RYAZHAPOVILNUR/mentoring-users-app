@@ -3,13 +3,32 @@
   <form [formGroup]="foldersFormGroup">
     <div class="dialog-content">
       <mat-form-field class="folder-title">
-        <input  matInput placeholder="Название" formControlName="title" />
+        <input
+          matInput
+          type="text"
+          placeholder="Название"
+          formControlName="title"
+        />
+        <button
+          *ngIf="foldersFormGroup.value.title"
+          class="clear-input-button"
+          (click)="foldersFormGroup.reset()"
+          mat-icon-button matSuffix aria-label="Clear"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
         <mat-error>Название обязательно</mat-error>
       </mat-form-field>
     </div>
   </form>
 </div>
 <div mat-dialog-actions class="add-folder-actions">
-  <button mat-flat-button color="warn" (click)="onCancel()"><mat-icon>cancel</mat-icon>Отмена</button>
-  <button type="submit" mat-flat-button color="primary" (click)="onSave()"><mat-icon>save</mat-icon>Сохранить</button>
+  <button mat-flat-button color="warn" (click)="onCancel()">
+    <mat-icon>cancel</mat-icon>
+    Отмена
+  </button>
+  <button type="submit" mat-flat-button color="primary" (click)="onSave()">
+    <mat-icon>save</mat-icon>
+    Сохранить
+  </button>
 </div>

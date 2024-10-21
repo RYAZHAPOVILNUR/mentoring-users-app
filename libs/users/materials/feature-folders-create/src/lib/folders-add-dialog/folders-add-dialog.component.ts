@@ -16,27 +16,27 @@ import { MatButtonModule } from '@angular/material/button';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoldersAddDialogComponent {
-  private fb = inject(FormBuilder)
+  private fb = inject(FormBuilder);
   public dialogRef = inject(MatDialogRef);
-  public data: { name: string } = inject(MAT_DIALOG_DATA)
+  public data: { name: string } = inject(MAT_DIALOG_DATA);
 
   public readonly foldersFormGroup = this.fb.group({
-    title: ['',[
+    title: ['', [
       Validators.required,
       Validators.minLength(3),
-      Validators.maxLength(20)]],
-  })
+      Validators.maxLength(20)]]
+  });
 
   public onSave(): void {
     if (this.foldersFormGroup.valid) {
       const formData = {
-        title: this.foldersFormGroup.value.title?.trim() || '',
-      }
+        title: this.foldersFormGroup.value.title?.trim() || ''
+      };
       this.dialogRef.close(formData);
     }
   }
 
   public onCancel(): void {
-    this.dialogRef.close()
+    this.dialogRef.close();
   }
 }

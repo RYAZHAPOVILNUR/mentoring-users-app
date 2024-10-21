@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
 import { LetDirective } from '@ngrx/component';
-import { FoldersFacade } from '../../../../data-access/src/lib/+state/folders/folders.facade';
+import { FoldersEntity, FoldersFacade } from '@users/materials/data-access';
 import { Observable } from 'rxjs';
-import { IFolder } from '@users/materials/data-access';
 import { FoldersAddButtonComponent } from '@users/materials/feature-folders-create';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'users-folders-list-container',
@@ -18,7 +18,8 @@ import { FoldersAddButtonComponent } from '@users/materials/feature-folders-crea
 })
 export class FoldersListContainerComponent implements OnInit {
   public foldersFacade = inject(FoldersFacade);
-  public readonly folders$: Observable<IFolder[]> = this.foldersFacade.folders$;
+  public readonly folders$: Observable<FoldersEntity[]> = this.foldersFacade.folders$;
+  public readonly router = inject(Router)
 
   ngOnInit() {
     this.foldersFacade.loadFolders();
@@ -26,5 +27,8 @@ export class FoldersListContainerComponent implements OnInit {
 
   onDeleteFolder(folderId: number): void {
     this.foldersFacade.deleteFolder(folderId);
+  }
+  onOpenFolder(id: number) {
+    this.router.navigate(['/materials', id]);
   }
 }
