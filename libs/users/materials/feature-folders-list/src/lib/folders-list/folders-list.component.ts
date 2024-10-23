@@ -30,3 +30,4 @@ export class FoldersListComponent {
 export type FoldersListVM = DeepReadonly<{ folders: FoldersVM[]; }>;
 
 export type FoldersVM = DeepReadonly<FoldersDTO>;
+

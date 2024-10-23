@@ -1,1 +1,14 @@
-<p>materials-card works!</p>
+<mat-card class="materials-card">
+  <mat-card-content class="mat-card-content">
+    <mat-icon></mat-icon>
+    <label>{{ material }}</label>
+  <div class="folders-date">{{ material.created_at | date : 'dd.MM.yyyy' }}</div>
+  </mat-card-content>
+  <button
+    mat-button
+    class="delete-button"
+    (click)="onMaterialDelete(material)"
+  >
+    <mat-icon>delete</mat-icon>
+  </button>
+</mat-card>
