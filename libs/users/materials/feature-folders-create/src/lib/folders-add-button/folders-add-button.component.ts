@@ -6,9 +6,10 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FoldersAddDialogComponent } from '../folders-add-dialog/folders-add-dialog.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CreateFolderDTO } from '@users/materials/data-access';
-import { FoldersFacade } from '../../../../data-access/src/lib/+state/folders/folders.facade';
-import { fromEvent, map, Observable, startWith } from 'rxjs';
+import { FoldersFacade } from '@users/materials/data-access';
+import { Observable } from 'rxjs';
 import { PushPipe } from '@ngrx/component';
+import { StickyButtonService } from '@users/core/ui';
 
 @Component({
   selector: 'users-folders-add-button',
@@ -20,7 +21,7 @@ import { PushPipe } from '@ngrx/component';
 })
 export class FoldersAddButtonComponent {
   private name: string[] = [];
-  public isSticky$: Observable<boolean>;
+  public isSticky$: Observable<boolean> = inject(StickyButtonService).isSticky$;
   public readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
   private readonly foldersFacade = inject(FoldersFacade);
@@ -41,18 +42,5 @@ export class FoldersAddButtonComponent {
           this.foldersFacade.addFolder(newFolder);
         }
       });
-  }
-
-  constructor() {
-    this.isSticky$ = fromEvent(window, 'scroll').pipe(
-      map(() => this.isButtonSticky()),
-      startWith(this.isButtonSticky())
-    );
-  }
-
-  private isButtonSticky(): boolean {
-    const scrollTop = window.scrollY || document.documentElement.scrollTop;
-
-    return scrollTop + window.innerHeight < document.body.offsetHeight - 100;
   }
 }

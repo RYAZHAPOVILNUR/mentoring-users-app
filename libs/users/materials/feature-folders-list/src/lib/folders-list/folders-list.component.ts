@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { FoldersDTO } from '@users/materials/data-access';
-import { DeepReadonly } from '@users/core/utils';
+import { FoldersListVM } from './folders-list.vm';
 
 @Component({
   selector: 'users-folders-list',
@@ -27,7 +26,5 @@ export class FoldersListComponent {
   }
 }
 
-export type FoldersListVM = DeepReadonly<{ folders: FoldersVM[]; }>;
 
-export type FoldersVM = DeepReadonly<FoldersDTO>;
 

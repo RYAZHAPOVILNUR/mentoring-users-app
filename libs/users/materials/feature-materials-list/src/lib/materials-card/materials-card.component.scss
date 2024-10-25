@@ -1,0 +1,12 @@
+.materials-card {
+  display: flex;
+  flex-direction: row;
+  padding: 20px 0 15px 5px;
+
+  &mat-card-content {
+    display: flex;
+    flex-direction: column;
+    column-gap: 5px;
+    align-items: center;
+  }
+}

@@ -1,1 +1,12 @@
-<p>materials-content works!</p>
+<div *ngIf="material">
+  <ng-container ngSwitch="material.type">
+    <iframe *ngSwitchCase="'video'" width="560" height="315" [src]="sanitizedUrl"
+            allowfullscreen></iframe>
+    <pdf-viewer *ngSwitchCase="'pdf'" [src]="sanitizedUrl" [render-text]="true"/>
+    <audio *ngSwitchCase="'podcast'" controls>
+      <source [src]="sanitizedUrl" type="audio/mpeg">
+      Ваш браузер не поддерживает audio.
+    </audio>
+    <div *ngSwitchDefault>Неизвестный тип материала</div>
+  </ng-container>
+</div>

@@ -1,1 +1,34 @@
-<p>materials-add-dialog works!</p>
+<h1 mat-dialog-title>Добавление нового материала</h1>
+<div mat-dialog-content>
+  <form [formGroup]="materialsFormGroup">
+    <div class="dialog-content">
+      <mat-form-field>
+        <mat-label>Название</mat-label>
+        <input matInput formControlName="title">
+        <mat-error>Название обязательно</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Тип материала</mat-label>
+        <mat-select formControlName="type">
+          <mat-option value="video">Видео</mat-option>
+          <mat-option value="pdf">Файл PDF</mat-option>
+          <mat-option value="podcast">Подкаст</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Ссылка</mat-label>
+        <input matInput formControlName="material_link">
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions class="add-folder-actions">
+  <button mat-flat-button color="warn" (click)="onCancel()">
+    <mat-icon>cancel</mat-icon>
+    Отмена
+  </button>
+  <button type="submit" mat-flat-button color="primary" (click)="onSave()">
+    <mat-icon>save</mat-icon>
+    Сохранить
+  </button>
+</div>

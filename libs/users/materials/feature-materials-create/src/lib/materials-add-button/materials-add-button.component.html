@@ -1,1 +1,5 @@
-<p>materials-add-button works!</p>
+<button mat-fab color="primary" class="add-material-button"
+        [class.sticky]="isSticky$ | ngrxPush"
+        (click)="openAddMaterialDialog()">
+  <mat-icon>add</mat-icon>
+</button>

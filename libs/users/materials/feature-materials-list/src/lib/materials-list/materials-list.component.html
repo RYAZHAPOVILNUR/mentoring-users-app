@@ -1,1 +1,11 @@
-<p>materials-list works!</p>
+<div>
+  <div>
+    <div *ngFor="let material of materialVm.materials">
+      <users-materials-card
+        [material]="material"
+        (deleteMaterial)="onDeleteMaterial(material.id)"
+      >
+      </users-materials-card>
+    </div>
+  </div>
+</div>

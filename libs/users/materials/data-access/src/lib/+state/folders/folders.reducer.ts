@@ -5,8 +5,8 @@ import { FoldersActions } from './folders.actions';
 
 export interface FoldersEntity {
   id: number;
-  created_at: string;
   title: string;
+  created_at: string;
 }
 export interface FoldersState extends EntityState<FoldersEntity> {
   status: LoadingStatus;

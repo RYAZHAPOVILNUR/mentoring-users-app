@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
 import { LetDirective } from '@ngrx/component';
-import { FoldersEntity, FoldersFacade } from '@users/materials/data-access';
+import { FoldersFacade } from '@users/materials/data-access';
 import { Observable } from 'rxjs';
 import { FoldersAddButtonComponent } from '@users/materials/feature-folders-create';
 import { Router } from '@angular/router';
+import { FoldersVM } from '@users/materials';
 
 @Component({
   selector: 'users-folders-list-container',
@@ -18,17 +19,17 @@ import { Router } from '@angular/router';
 })
 export class FoldersListContainerComponent implements OnInit {
   public foldersFacade = inject(FoldersFacade);
-  public readonly folders$: Observable<FoldersEntity[]> = this.foldersFacade.folders$;
+  public readonly folders$: Observable<FoldersVM[]> = this.foldersFacade.folders$;
   public readonly router = inject(Router)
 
   ngOnInit() {
     this.foldersFacade.loadFolders();
   }
 
-  onDeleteFolder(folderId: number): void {
+  public onDeleteFolder(folderId: number): void {
     this.foldersFacade.deleteFolder(folderId);
   }
-  onOpenFolder(id: number) {
+  public onOpenFolder(id: number) {
     this.router.navigate(['/materials', id]);
   }
 }
