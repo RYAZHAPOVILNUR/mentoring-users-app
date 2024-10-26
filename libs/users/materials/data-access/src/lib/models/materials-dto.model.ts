@@ -7,6 +7,6 @@ export type MaterialsDTO = FoldersDTO & {
 export type CreateMaterialDTO = {
   title: string;
   material_link: string;
-  folder_id?: number;
+  folder_id: number;
   type: 'video' | 'pdf' | 'podcast'
 }

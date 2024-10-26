@@ -8,7 +8,7 @@ const { selectAll } = materialsAdapter.getSelectors();
 export const selectMaterialsByFolder = (folderId: number) => createSelector(
   materialsFeature.selectMaterialsState,
   (state: MaterialsState): MaterialsVM[] => selectAll(state)
-    .filter(material => material.folder_id === folderId)
+    .filter(material => material.folder_id == folderId)
     .map(material => materialsVMAdapter.entityToVM(material))
 );
 
@@ -23,5 +23,6 @@ export const selectMaterialError = createSelector(
 // export const selectCurrentMaterial = createSelector(
 //   selectMaterialsByFolder,
 //   selectOpenFolder,
-//   (materials) => materials
+//   (materials, folder) =>
+//     materials && folder ? materials.filter((material) => material.folder_id === fodler.id) : []
 // );

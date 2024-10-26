@@ -10,7 +10,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { PushPipe } from '@ngrx/component';
 import { MatIconModule } from '@angular/material/icon';
 
-
 @Component({
   selector: 'users-materials-add-button',
   standalone: true,
@@ -38,14 +37,12 @@ export class MaterialsAddButtonComponent {
         if (result) {
           const newMaterial: CreateMaterialDTO = {
             title: result.title,
-            material_link: result.result.link,
+            material_link: result.material_link,
             folder_id: result.folderId,
             type: result.type
           };
-
           this.materialsFacade.addMaterial(newMaterial);
         }
       });
   }
-
 }

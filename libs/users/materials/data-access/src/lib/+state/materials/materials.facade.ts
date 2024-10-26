@@ -9,7 +9,6 @@ import {
 import { MaterialsActions } from './materials.actions';
 import { Observable } from 'rxjs';
 import { selectFolders, selectOpenFolder } from '../folders/folders.selectors';
-import { FoldersActions } from '../folders/folders.actions';
 import { CreateMaterialDTO } from '../../models/materials-dto.model';
 import { MaterialsVM } from '@users/materials';
 
@@ -28,12 +27,7 @@ export class MaterialsFacade {
   }
 
   public loadMaterials(folderId: number): void {
-    console.log('Dispatching loadMaterials action');
     this.store.dispatch(MaterialsActions.loadMaterials({ folderId }));
-  }
-
-  public loadFolders() {
-    this.store.dispatch(FoldersActions.loadFolders());
   }
 
   public addMaterial(materialData: CreateMaterialDTO) {

@@ -2,9 +2,9 @@
   *ngrxLet="{
     materials: materials$
   } as materialVm">
-  <users-materials-add-button></users-materials-add-button>
   <users-materials-list
     [materialVm]="materialVm"
     (deleteMaterial)="onDeleteMaterial($event)" >
   </users-materials-list>
 </ng-container>
+<users-materials-add-button></users-materials-add-button>

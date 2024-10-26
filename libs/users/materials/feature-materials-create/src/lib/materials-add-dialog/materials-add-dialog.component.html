@@ -5,7 +5,9 @@
       <mat-form-field>
         <mat-label>Название</mat-label>
         <input matInput formControlName="title">
-        <mat-error>Название обязательно</mat-error>
+        <mat-error *ngIf="materialsFormGroup.controls['title'].hasError('required')">
+          Название обязательно
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Тип материала</mat-label>
@@ -18,6 +20,9 @@
       <mat-form-field>
         <mat-label>Ссылка</mat-label>
         <input matInput formControlName="material_link">
+        <mat-error *ngIf="materialsFormGroup.controls['material_link'].hasError('required')">
+          Ссылка обязательна
+        </mat-error>
       </mat-form-field>
     </div>
   </form>

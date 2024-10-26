@@ -6,4 +6,5 @@ export type MaterialsVM = DeepReadonly<Pick<MaterialsEntity,
   materialLink: string;
   createdAt: string;
   folderId: number;
+  type: 'video' | 'pdf' | 'podcast'
 };

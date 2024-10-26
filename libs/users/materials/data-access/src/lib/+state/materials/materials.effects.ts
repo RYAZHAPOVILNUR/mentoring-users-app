@@ -1,12 +1,13 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { MaterialsActions } from './materials.actions';
 import { ApiService } from '@users/core/http';
-import { MaterialsDTO } from '../../models/materials-dto.model';
-import { CreateFolderDTO } from '../../models/folders-dto.model';
+import { CreateMaterialDTO, MaterialsDTO } from '../../models/materials-dto.model';
 import { MaterialsEntity } from './materials.reducer';
+import { selectRouteParams } from '@users/core/data-access';
+import { Store } from '@ngrx/store';
 
 export const loadMaterials$ = createEffect(
   () => {
@@ -33,26 +34,29 @@ export const loadMaterials$ = createEffect(
   { functional: true }
 );
 
-export const addMaterial$ = createEffect(
-  () => {
-    const actions$ = inject(Actions);
-    const api = inject(ApiService);
+export const addMaterial$ = createEffect(() => {
+  const actions$ = inject(Actions);
+  const api = inject(ApiService);
+  const store = inject(Store)
+  return actions$.pipe(
+    ofType(MaterialsActions.addMaterial),
+    withLatestFrom(store.select(selectRouteParams)),
+    switchMap(([{ materialData }, params]) => {
+      console.log('Sending data to API:', materialData);
+      return api.post<MaterialsEntity, CreateMaterialDTO>('/material', {
+        ...materialData,
+        folder_id: Number(params['id'])
+      }).pipe(
+        map((materialEntity) => MaterialsActions.addMaterialsSuccess({ material: materialEntity })),
+        catchError((error) => {
+          console.error('Error from API:', error);
+          return of(MaterialsActions.addMaterialsFailure({ error }));
+        })
+      );
+    })
+  );
+}, { functional: true });
 
-    return actions$.pipe(
-      ofType(MaterialsActions.addMaterial),
-      switchMap(({ materialData }) =>
-        api.post<MaterialsEntity, CreateFolderDTO>('/material', materialData).pipe(
-          map((materialEntity) =>
-            MaterialsActions.addMaterialsSuccess({ material: materialEntity })
-          ),
-          catchError((error => {
-              console.error('Error', error);
-              return of(MaterialsActions.addMaterialsFailure({ error }));
-            })
-          )
-        )));
-  }, { functional: true }
-);
 
 export const deleteMaterial$ = createEffect(
   () => {
