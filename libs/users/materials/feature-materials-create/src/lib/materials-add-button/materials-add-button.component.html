@@ -1,5 +1,14 @@
-<button mat-fab color="primary" class="add-material-button"
-        [class.sticky]="isSticky$ | ngrxPush"
-        (click)="openAddMaterialDialog()">
+<button
+  mat-fab
+  color="primary"
+  class="add-material-button"
+  [matMenuTriggerFor]="menu"
+  [class.sticky]="isSticky$ | ngrxPush"
+>
   <mat-icon>add</mat-icon>
 </button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="openAddMaterialDialog(fileType.video)">Видео</button>
+  <button mat-menu-item (click)="openAddMaterialDialog(fileType.pdf)">Документ</button>
+  <button mat-menu-item (click)="openAddMaterialDialog(fileType.podcast)">Подкаст</button>
+</mat-menu>
