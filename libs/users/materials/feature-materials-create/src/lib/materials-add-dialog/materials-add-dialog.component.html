@@ -1,25 +1,33 @@
-<h1 mat-dialog-title>Добавление нового материала</h1>
+<h1 mat-dialog-title>Добавить {{ data.fileType }}</h1>
 <div mat-dialog-content>
   <form [formGroup]="materialsFormGroup">
     <div class="dialog-content">
-      <mat-form-field>
+      <mat-form-field class="material-field">
         <mat-label>Название</mat-label>
         <input matInput formControlName="title">
+        <button
+          *ngIf="materialsFormGroup.value.title"
+          class="clear-input-button"
+          (click)="materialsFormGroup.reset()"
+          mat-icon-button matSuffix aria-label="Clear"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
         <mat-error *ngIf="materialsFormGroup.controls['title'].hasError('required')">
           Название обязательно
         </mat-error>
       </mat-form-field>
-      <mat-form-field>
-        <mat-label>Тип материала</mat-label>
-        <mat-select formControlName="type">
-          <mat-option value="video">Видео</mat-option>
-          <mat-option value="pdf">Файл PDF</mat-option>
-          <mat-option value="podcast">Подкаст</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
+      <mat-form-field class="material-field">
         <mat-label>Ссылка</mat-label>
-        <input matInput formControlName="material_link">
+        <input class="material-input" matInput formControlName="material_link">
+        <button
+          *ngIf="materialsFormGroup.value.material_link"
+          class="clear-input-button"
+          (click)="materialsFormGroup.reset()"
+          mat-icon-button matSuffix aria-label="Clear"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
         <mat-error *ngIf="materialsFormGroup.controls['material_link'].hasError('required')">
           Ссылка обязательна
         </mat-error>
@@ -27,7 +35,7 @@
     </div>
   </form>
 </div>
-<div mat-dialog-actions class="add-folder-actions">
+<div mat-dialog-actions class="add-materials-actions">
   <button mat-flat-button color="warn" (click)="onCancel()">
     <mat-icon>cancel</mat-icon>
     Отмена

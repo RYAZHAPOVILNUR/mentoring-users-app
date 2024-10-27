@@ -37,7 +37,7 @@ export class MaterialsListContainerComponent implements OnInit {
   public materials$!: Observable<MaterialsVM[]>;
   private route = inject(ActivatedRoute);
   private dialog = inject(MatDialog);
-  public router = inject(Router)
+  public router = inject(Router);
 
 
   public folderId$ = this.route.paramMap.pipe(
@@ -87,6 +87,6 @@ export class MaterialsListContainerComponent implements OnInit {
   }
 
   public onBackClick(): void {
-    this.router.navigate(['/materials'])
+    this.router.navigate(['/materials']);
   }
 }

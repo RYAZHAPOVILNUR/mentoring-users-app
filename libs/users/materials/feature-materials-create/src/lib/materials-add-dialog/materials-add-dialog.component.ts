@@ -35,10 +35,9 @@ export class MaterialsAddDialogComponent {
   public readonly materialsFormGroup = this.fb.group({
     title: ['', [
       Validators.required,
-      Validators.minLength(3),
       Validators.maxLength(20)
     ]],
-    type: ['', Validators.required],
+    type: [this.data.fileType, Validators.required],
     material_link: ['', Validators.required]
   });
 
@@ -48,9 +47,9 @@ export class MaterialsAddDialogComponent {
     if (this.materialsFormGroup.valid && folderId !== null) {
       const materialData: CreateMaterialDTO = {
         title: formValue.title ?? '',
-        type: (formValue.type as 'video' | 'pdf' | 'podcast') ?? 'video',
+        // type: (formValue.type as 'video' | 'pdf' | 'podcast') ?? 'video',
         material_link: formValue.material_link ?? '',
-        folder_id: folderId
+        // folder_id: folderId
       };
       this.materialsFacade.addMaterial(materialData);
       this.dialogRef.close(materialData);
