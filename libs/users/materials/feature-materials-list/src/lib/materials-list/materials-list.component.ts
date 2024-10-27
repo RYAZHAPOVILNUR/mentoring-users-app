@@ -2,11 +2,13 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { CommonModule } from '@angular/common';
 import { MaterialsCardComponent } from '../materials-card/materials-card.component';
 import { MaterialsListVM } from './materials-list.vm';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'users-materials-list',
   standalone: true,
-  imports: [CommonModule, MaterialsCardComponent],
+  imports: [CommonModule, MaterialsCardComponent, MatButtonModule, MatIconModule],
   templateUrl: './materials-list.component.html',
   styleUrls: ['./materials-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

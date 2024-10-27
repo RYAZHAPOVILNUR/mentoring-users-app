@@ -1,10 +1,15 @@
 <ng-container
   *ngrxLet="{
-    materials: materials$
+    materials: materials$,
   } as materialVm">
+  <button class="back-button" mat-button
+          (click)="onBackClick()">
+    <mat-icon>arrow_back</mat-icon>
+    Назад
+  </button>
   <users-materials-list
     [materialVm]="materialVm"
-    (deleteMaterial)="onDeleteMaterial($event)" >
+    (deleteMaterial)="onDeleteMaterial($event)">
   </users-materials-list>
 </ng-container>
 <users-materials-add-button></users-materials-add-button>

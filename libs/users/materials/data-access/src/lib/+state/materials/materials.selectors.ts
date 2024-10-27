@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import { materialsAdapter, materialsFeature, MaterialsState } from './materials.reducer';
-import { selectOpenFolder } from '../folders/folders.selectors';
+// import { selectOpenFolder } from '../folders/folders.selectors';
 import { MaterialsVM, materialsVMAdapter } from '@users/materials';
 
 const { selectAll } = materialsAdapter.getSelectors();

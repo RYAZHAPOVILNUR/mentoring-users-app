@@ -6,12 +6,14 @@ import { MaterialsListComponent } from '../materials-list/materials-list.compone
 import { FoldersAddButtonComponent } from '@users/materials/feature-folders-create';
 import { map, Observable, of, switchMap, take, tap } from 'rxjs';
 import { MaterialsVM } from '@users/materials';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   MaterialsAddButtonComponent,
   MaterialsAddDialogComponent
 } from '@users/materials/feature-materials-create';
 import { MatDialog } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'users-materials-list-container',
@@ -22,7 +24,9 @@ import { MatDialog } from '@angular/material/dialog';
     MaterialsListComponent,
     FoldersAddButtonComponent,
     MaterialsAddButtonComponent,
-    MaterialsAddDialogComponent
+    MaterialsAddDialogComponent,
+    MatButtonModule,
+    MatIconModule
   ],
   templateUrl: './materials-list-container.component.html',
   styleUrls: ['./materials-list-container.component.scss'],
@@ -32,7 +36,9 @@ export class MaterialsListContainerComponent implements OnInit {
   public materialsFacade = inject(MaterialsFacade);
   public materials$!: Observable<MaterialsVM[]>;
   private route = inject(ActivatedRoute);
-  private dialog = inject(MatDialog)
+  private dialog = inject(MatDialog);
+  public router = inject(Router)
+
 
   public folderId$ = this.route.paramMap.pipe(
     map(params => {
@@ -61,26 +67,26 @@ export class MaterialsListContainerComponent implements OnInit {
       tap(folderId => console.log('Folder ID before opening dialog:', folderId))
     )
       .subscribe(folderId => {
-      if (folderId !== null) {
-        console.log('Folder ID before opening dialog:', folderId);
-        const dialogRef = this.dialog.open(MaterialsAddDialogComponent, {
-          data: { folderId }
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
-          if (result) {
-            console.log('Material added', result);
-            this.materialsFacade.loadMaterials(folderId);
-          }
-        });
-      } else {
-        console.error('Folder ID is null');
-      }
-    });
+        if (folderId !== null) {
+          const dialogRef = this.dialog.open(MaterialsAddDialogComponent, {
+            data: { folderId }
+          });
+          dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+              this.materialsFacade.loadMaterials(folderId);
+            }
+          });
+        } else {
+          console.error('Folder ID is null');
+        }
+      });
   }
-
 
   public onDeleteMaterial(materialId: number): void {
     this.materialsFacade.deleteMaterial(materialId);
+  }
+
+  public onBackClick(): void {
+    this.router.navigate(['/materials'])
   }
 }

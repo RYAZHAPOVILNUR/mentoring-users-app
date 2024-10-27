@@ -1,4 +1,4 @@
-import { DeepReadonly } from '../../core/utils/src';
+import { DeepReadonly } from '@users/core/utils';
 import { MaterialsEntity } from './data-access/src';
 
 export type MaterialsVM = DeepReadonly<Pick<MaterialsEntity,

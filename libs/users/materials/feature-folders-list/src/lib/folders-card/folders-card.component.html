@@ -4,9 +4,9 @@
       mat-button
       (dblclick)="onFolderOpen(folder.id)"
     >
-      <mat-icon class="folder-icon">{{ isFolderEmpty ? 'folder' : 'folder_open' }}</mat-icon>
+      <mat-icon class="folder-icon">{{ isFolderEmpty ? 'folder_open' : 'folder' }}</mat-icon>
     </button>
-    <label>{{ folder.title }}</label>
+    <label class="folder-label">{{ folder.title }}</label>
   </mat-card-content>
   <div class="folders-date">{{ folder.createdAt | date : 'dd.MM.yyyy' }}</div>
   <button

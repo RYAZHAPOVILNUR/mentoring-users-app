@@ -9,16 +9,19 @@
 
   &:hover {
     cursor: pointer;
+
     .delete-button {
       opacity: 1;
       display: inline-block;
       position: absolute;
       top: 20px;
     }
+
     &::before {
       opacity: 1;
     }
   }
+
   .delete-button {
     display: none;
   }
@@ -50,7 +53,7 @@
   width: 50px;
 }
 
-label {
+.folder-label {
   font-weight: 500;
   font-size: 17px;
   text-align: center;

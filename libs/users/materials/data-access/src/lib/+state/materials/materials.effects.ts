@@ -16,11 +16,8 @@ export const loadMaterials$ = createEffect(
 
     return actions$.pipe(
       ofType(MaterialsActions.loadMaterials),
-      tap(() => console.log('Effect triggered')),
       switchMap(() =>
         api.get<MaterialsDTO[]>('/material').pipe(
-          tap(() => console.log('API request sent')),
-          tap((materials) => console.log('effect, materials', materials)),
           map((materials) => MaterialsActions.loadMaterialsSuccess({ materials })),
           catchError((error) => {
             console.error('Error', error);
@@ -42,7 +39,6 @@ export const addMaterial$ = createEffect(() => {
     ofType(MaterialsActions.addMaterial),
     withLatestFrom(store.select(selectRouteParams)),
     switchMap(([{ materialData }, params]) => {
-      console.log('Sending data to API:', materialData);
       return api.post<MaterialsEntity, CreateMaterialDTO>('/material', {
         ...materialData,
         folder_id: Number(params['id'])
