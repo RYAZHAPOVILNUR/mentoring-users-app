@@ -1,5 +1,6 @@
-<div *ngIf="material">
-  <ng-container ngSwitch="material.type">
+<div *ngIf="data.type as type">
+  <p>Current Type in ngSwitch: {{ type }}</p>
+  <ng-container [ngSwitch]="type.toString()">
     <iframe *ngSwitchCase="'video'" width="560" height="315" [src]="sanitizedUrl"
             allowfullscreen></iframe>
     <pdf-viewer *ngSwitchCase="'pdf'" [src]="sanitizedUrl" [render-text]="true"/>
@@ -7,6 +8,6 @@
       <source [src]="sanitizedUrl" type="audio/mpeg">
       Ваш браузер не поддерживает audio.
     </audio>
-    <div *ngSwitchDefault>Неизвестный тип материала</div>
+    <div *ngSwitchDefault>Неподдерживаемый тип файла: {{ type }}</div>
   </ng-container>
 </div>

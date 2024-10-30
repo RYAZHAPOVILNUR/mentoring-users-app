@@ -13,16 +13,20 @@ export const loadMaterials$ = createEffect(
   () => {
     const actions$ = inject(Actions);
     const api = inject(ApiService);
-
     return actions$.pipe(
       ofType(MaterialsActions.loadMaterials),
       switchMap(() =>
         api.get<MaterialsDTO[]>('/material').pipe(
-          map((materials) => MaterialsActions.loadMaterialsSuccess({ materials })),
+          map((materials) => {
+            const materialsEntities: MaterialsEntity[] = materials.map(material => ({
+              ...material,
+              preview: material.preview
+            }));
+            return MaterialsActions.loadMaterialsSuccess({ materials: materialsEntities });
+          }),
           catchError((error) => {
             console.error('Error', error);
-            return of(MaterialsActions.loadMaterialsFailure({ error })
-            );
+            return of(MaterialsActions.loadMaterialsFailure({ error }));
           })
         )
       )
@@ -30,6 +34,7 @@ export const loadMaterials$ = createEffect(
   },
   { functional: true }
 );
+
 
 export const addMaterial$ = createEffect(() => {
   const actions$ = inject(Actions);
