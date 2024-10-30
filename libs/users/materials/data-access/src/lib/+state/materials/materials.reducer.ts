@@ -5,6 +5,7 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { foldersAdapter } from '../folders/folders.reducer';
 
 export interface MaterialsEntity {
+  preview: string;
   id: number;
   created_at: string;
   title: string;
@@ -21,7 +22,7 @@ export interface MaterialsState extends EntityState<MaterialsEntity> {
 
 export const initialMaterialsState: MaterialsState = materialsAdapter.getInitialState({
   status: 'init',
-  error: null
+  error: null,
 });
 
 export const materialsFeature = createFeature({
@@ -83,6 +84,17 @@ export const materialsFeature = createFeature({
       ...state,
       status: 'error',
       error: error
+    })),
+    on(MaterialsActions.loadMaterialsPreview, (state, { materialId }) => {
+      const material = state.entities[materialId];
+      if (material) {
+        const updatedMaterial = { ...material, preview: 'new preview url' };
+        return materialsAdapter.updateOne(
+          { id: materialId, changes: updatedMaterial },
+          { ...state }
+        );
+      }
+      return state;
     }))
-  )
-});
+  }
+);

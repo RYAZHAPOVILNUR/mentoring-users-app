@@ -1,9 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import {
-  // selectCurrentMaterial,
-  selectMaterialError, selectMaterialsByFolder,
-
+  selectFolderNameById,
+  selectMaterialError,
+  selectMaterialPreviewById,
+  selectMaterialsByFolder,
   selectMaterialStatus
 } from './materials.selectors';
 import { MaterialsActions } from './materials.actions';
@@ -25,6 +26,10 @@ export class MaterialsFacade {
     return this.store.pipe(select(selectMaterialsByFolder(folderId)));
   }
 
+  public getFolderNameById(folderId: number): Observable<string | null> {
+    return this.store.select(selectFolderNameById(folderId));
+  }
+
   public loadMaterials(folderId: number): void {
     this.store.dispatch(MaterialsActions.loadMaterials({ folderId }));
   }
@@ -35,5 +40,13 @@ export class MaterialsFacade {
 
   public deleteMaterial(materialId: number): void {
     this.store.dispatch(MaterialsActions.deleteMaterial({ materialId }));
+  }
+
+  public getMaterialPreview(materialId: number): Observable<string | null> {
+    return this.store.select(selectMaterialPreviewById(materialId));
+  }
+
+  public loadMaterialsPreview(materialId: number): void {
+    this.store.dispatch(MaterialsActions.loadMaterialsPreview({ materialId }));
   }
 }

@@ -13,6 +13,8 @@ export const MaterialsActions = createActionGroup({
     'Add Materials Failure': props<{ error: Error; }>(),
     'Delete Material': props<{ materialId: number }>(),
     'Delete Materials Success': props<{ materialId: number }>(),
-    'Delete Materials Failure': props<{ error: Error }>()
+    'Delete Materials Failure': props<{ error: Error }>(),
+    'Load Materials Preview': props<{ materialId: number }>(),
+    'Load Materials Preview Success': props<{ materialId: number; preview: string }>(),
   }
 });

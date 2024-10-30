@@ -1,19 +1,20 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialsFacade } from '@users/materials/data-access';
 import { LetDirective } from '@ngrx/component';
 import { MaterialsListComponent } from '../materials-list/materials-list.component';
 import { FoldersAddButtonComponent } from '@users/materials/feature-folders-create';
-import { map, Observable, of, switchMap, take, tap } from 'rxjs';
+import { map, Observable, of, switchMap, take } from 'rxjs';
 import { MaterialsVM } from '@users/materials';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   MaterialsAddButtonComponent,
   MaterialsAddDialogComponent
 } from '@users/materials/feature-materials-create';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'users-materials-list-container',
@@ -26,7 +27,8 @@ import { MatIconModule } from '@angular/material/icon';
     MaterialsAddButtonComponent,
     MaterialsAddDialogComponent,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule,
   ],
   templateUrl: './materials-list-container.component.html',
   styleUrls: ['./materials-list-container.component.scss'],
@@ -38,12 +40,23 @@ export class MaterialsListContainerComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private dialog = inject(MatDialog);
   public router = inject(Router);
-
+  public destroyRef = inject(DestroyRef);
 
   public folderId$ = this.route.paramMap.pipe(
     map(params => {
       const folderIdParam = params.get('id');
       return folderIdParam ? +folderIdParam : null;
+    })
+  );
+
+  public folderName$ = this.folderId$.pipe(
+    switchMap(folderId => {
+      if (folderId !== null) {
+        return this.materialsFacade.getFolderNameById(folderId);
+      } else {
+        console.error('Folder ID is null');
+      }
+      return of(null);
     })
   );
 
@@ -57,14 +70,14 @@ export class MaterialsListContainerComponent implements OnInit {
           console.error('Folder ID is null');
           return of([]);
         }
-      })
+      }),
+      takeUntilDestroyed(this.destroyRef)
     );
   }
 
   public onAddMaterial(): void {
     this.folderId$.pipe(
-      take(1),
-      tap(folderId => console.log('Folder ID before opening dialog:', folderId))
+      take(1)
     )
       .subscribe(folderId => {
         if (folderId !== null) {
