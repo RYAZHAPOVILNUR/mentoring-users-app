@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FoldersVM } from '@users/materials';
 import { MaterialsFacade } from '@users/materials/data-access';
+import { FoldersFacade } from '@users/materials/data-access';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -28,13 +29,16 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class FoldersCardComponent implements OnInit {
   public isFolderEmpty = true;
   public materialsFacade = inject(MaterialsFacade);
+  public foldersFacade = inject(FoldersFacade);
   private destroyRef = inject(DestroyRef);
+  public folderIcon: string = 'folder_open'
 
   @Input({ required: true }) folder!: FoldersVM;
   @Output() deleteFolder = new EventEmitter<number>();
   @Output() openFolder = new EventEmitter<number>();
 
   ngOnInit(): void {
+    this.updateFolderIconStatus();
     this.checkIfFolderIsEmpty();
   }
 
@@ -43,6 +47,15 @@ export class FoldersCardComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(materials => {
         this.isFolderEmpty = materials.length === 0;
+        this.folderIcon = this.isFolderEmpty ? 'folder_open' : 'folder';
+      });
+  }
+
+  private updateFolderIconStatus(): void {
+    this.materialsFacade.getMaterialsByFolder(this.folder.id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(materials => {
+        this.folderIcon = materials.length === 0 ? 'folder' : 'folder_open';
       });
   }
 

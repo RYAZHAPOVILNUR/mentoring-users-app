@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnChanges, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialsVM } from '@users/materials';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -14,30 +14,13 @@ import { AbstractControl, ValidatorFn } from '@angular/forms';
   styleUrls: ['./materials-content.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MaterialsContentComponent implements OnInit, OnChanges{
+export class MaterialsContentComponent {
   @Input({ required: true }) material!: MaterialsVM;
   private sanitizer = inject(DomSanitizer);
   public data: { type: string, url: string} = inject(MAT_DIALOG_DATA)
-  public cdr = inject(ChangeDetectorRef)
 
   get sanitizedUrl(): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(this.getEmbeddedUrl(this.data.url));
-  }
-
-  ngOnChanges() {
-    console.log('Data changed in MaterialsContentComponent:', this.data);
-  }
-
-  ngOnInit() {
-    console.log('Data received in MaterialsContentComponent:', this.data);
-    console.log('Current file type:', this.data.type);
-    console.log('Sanitized URL:', this.sanitizedUrl);
-    this.cdr.detectChanges();
-
-    const supportedTypes = ['video', 'pdf', 'podcast'];
-    if (!supportedTypes.includes(this.data.type)) {
-      console.warn('Unsupported type:', this.data.type); // Логирование неподдерживаемого типа
-    }
   }
 
   private getEmbeddedUrl(url: string): string {
@@ -48,10 +31,9 @@ export class MaterialsContentComponent implements OnInit, OnChanges{
       const videoId = url.split('youtu.be/')[1];
       return `https://www.youtube.com/embed/${videoId}`;
     } else if (url.includes('youtube.com/playlist?list=')) {
-      // Если это плейлист, вы можете решить, как обрабатывать это
-      return ''; // Или добавить логику для встраивания плейлистов
+      return '';
     }
-    return url; // Возвращаем оригинальную ссылку, если это не видео YouTube
+    return url;
   }
 
 }
@@ -60,7 +42,6 @@ export const LinkRegEx = {
   PDF_REGEX: /^http(s?):\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?(.pdf)$/,
   MP3_REGEX: /^(https?|ftp|file):\/\/(www.)?(.*?)\.(mp3)$/
 };
-
 
 export function materialUrlValidator(fileType: 'video' | 'pdf' | 'mp3'): ValidatorFn {
   return (control: AbstractControl) => {
@@ -81,5 +62,5 @@ export function materialUrlValidator(fileType: 'video' | 'pdf' | 'mp3'): Validat
 
     return { required: true };
   };
-};
+}
 

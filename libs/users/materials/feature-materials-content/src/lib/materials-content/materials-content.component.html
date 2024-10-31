@@ -1,10 +1,10 @@
-<div *ngIf="data.type as type">
-  <p>Current Type in ngSwitch: {{ type }}</p>
-  <ng-container [ngSwitch]="type.toString()">
-    <iframe *ngSwitchCase="'video'" width="560" height="315" [src]="sanitizedUrl"
+<div *ngIf="data.type as type" class="material-content-wrapper">
+  <ng-container [ngSwitch]="type" class="material-content">
+    <iframe *ngSwitchCase="'video'" width="1200" height="800" [src]="sanitizedUrl"
             allowfullscreen></iframe>
-    <pdf-viewer *ngSwitchCase="'pdf'" [src]="sanitizedUrl" [render-text]="true"/>
-    <audio *ngSwitchCase="'podcast'" controls>
+    <iframe *ngSwitchCase="'pdf'" width="1200" height="800" [src]="sanitizedUrl"
+            allowfullscreen></iframe>
+    <audio *ngSwitchCase="'podcast'" controls class="audio-player">
       <source [src]="sanitizedUrl" type="audio/mpeg">
       Ваш браузер не поддерживает audio.
     </audio>
