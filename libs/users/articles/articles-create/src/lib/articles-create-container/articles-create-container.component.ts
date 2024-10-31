@@ -58,8 +58,6 @@ export class ArticlesCreateContainerComponent implements DeactivatableComponent 
 
   onPublishArticle(article: CreateArticle) {
     this.article = article;
-    console.log(this.article);
-    
   }
 
   onFormChange(isFormChage: boolean) {

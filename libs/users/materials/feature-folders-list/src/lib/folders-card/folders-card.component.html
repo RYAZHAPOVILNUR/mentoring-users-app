@@ -4,7 +4,7 @@
       mat-button
       (dblclick)="onFolderOpen(folder.id)"
     >
-      <mat-icon class="folder-icon">{{ isFolderEmpty ? 'folder_open' : 'folder' }}</mat-icon>
+      <mat-icon class="folder-icon">{{ folderIcon }}</mat-icon>
     </button>
     <label class="folder-label">{{ folder.title }}</label>
   </mat-card-content>

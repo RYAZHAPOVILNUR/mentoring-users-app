@@ -1,4 +1,4 @@
-import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import { createActionGroup, props } from '@ngrx/store';
 import { MaterialsEntity } from './materials.reducer';
 import { CreateMaterialDTO } from '../../models/materials-dto.model';
 

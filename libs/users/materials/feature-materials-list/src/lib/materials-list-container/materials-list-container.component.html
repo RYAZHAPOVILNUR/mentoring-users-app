@@ -11,11 +11,6 @@
   <div class="folder-name" *ngIf="materialVm.folderName as folderName">
     <h2 mat-dialog-title>{{ folderName }}</h2>
   </div>
-<!--  <div *ngFor="let material of materials$ | async">-->
-<!--    <span>{{ material.title }}</span>-->
-<!--    <img [src]="material.preview" alt="{{ material.title}} Preview" *ngIf="material.preview">-->
-<!--    <button (click)="openMaterial(material)">Открыть</button>-->
-<!--  </div>-->
   <users-materials-list
     [materialVm]="materialVm"
     (deleteMaterial)="onDeleteMaterial($event)">

@@ -28,7 +28,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     MaterialsAddDialogComponent,
     MatButtonModule,
     MatIconModule,
-    MatDialogModule,
+    MatDialogModule
   ],
   templateUrl: './materials-list-container.component.html',
   styleUrls: ['./materials-list-container.component.scss'],

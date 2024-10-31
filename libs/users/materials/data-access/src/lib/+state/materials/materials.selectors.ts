@@ -1,6 +1,5 @@
 import { createSelector } from '@ngrx/store';
 import { materialsAdapter, materialsFeature, MaterialsState } from './materials.reducer';
-// import { selectOpenFolder } from '../folders/folders.selectors';
 import { MaterialsVM, materialsVMAdapter } from '@users/materials';
 import { selectFolders } from '../folders/folders.selectors';
 
@@ -36,9 +35,3 @@ export const selectMaterialPreviewById = (materialId: number) => createSelector(
     return material ? material.preview || '' : '';
   }
 )
-// export const selectCurrentMaterial = createSelector(
-//   selectMaterialsByFolder,
-//   selectOpenFolder,
-//   (materials, folder) =>
-//     materials && folder ? materials.filter((material) => material.folder_id === fodler.id) : []
-// );
