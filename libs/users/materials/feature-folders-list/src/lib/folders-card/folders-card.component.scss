@@ -10,11 +10,12 @@
   &:hover {
     cursor: pointer;
 
-    .delete-button {
+    .delete-folder-button {
       opacity: 1;
       display: inline-block;
       position: absolute;
       top: 20px;
+      right: 20px;
     }
 
     &::before {
@@ -22,7 +23,7 @@
     }
   }
 
-  .delete-button {
+  .delete-folder-button {
     display: none;
   }
 

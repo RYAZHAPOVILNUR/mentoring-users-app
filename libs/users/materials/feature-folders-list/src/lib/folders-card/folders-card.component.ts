@@ -31,7 +31,7 @@ export class FoldersCardComponent implements OnInit {
   public materialsFacade = inject(MaterialsFacade);
   public foldersFacade = inject(FoldersFacade);
   private destroyRef = inject(DestroyRef);
-  public folderIcon: string = 'folder_open'
+  public folderIcon: string = 'folder_open';
 
   @Input({ required: true }) folder!: FoldersVM;
   @Output() deleteFolder = new EventEmitter<number>();

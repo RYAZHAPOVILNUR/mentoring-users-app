@@ -5,7 +5,9 @@ import { MaterialsListVM } from './materials-list.vm';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MaterialsVM } from '@users/materials';
-import { MaterialsContentComponent } from '@users/materials/feature-materials-content';
+import {
+  MaterialsContentComponent
+} from '@users/materials/feature-materials-content';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({

@@ -1,12 +1,10 @@
 <div>
   <div class="materials-cards">
     <div *ngFor="let material of materialVm.materials"
-      (dblclick)="openMaterial(material)"
-    >
+      (dblclick)="openMaterial(material)">
       <users-materials-card
         [material]="material"
-        (deleteMaterial)="onDeleteMaterial(material.id)"
-      >
+        (deleteMaterial)="onDeleteMaterial(material.id)">
       </users-materials-card>
     </div>
   </div>

@@ -20,7 +20,6 @@ function determineMaterialType(link: string): 'video' | 'pdf' | 'podcast' | 'unk
 
 export const materialsVMAdapter: MaterialsVMAdapter = {
   entityToVM({ id, title, material_link, created_at, folder_id }) {
-    const type = determineMaterialType(material_link);
     return {
       id,
       title,

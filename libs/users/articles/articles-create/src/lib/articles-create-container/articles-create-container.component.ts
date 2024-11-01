@@ -19,7 +19,7 @@ import { LetDirective } from '@ngrx/component';
   styleUrls: ['./articles-create-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ArticlesCreateContainerComponent implements DeactivatableComponent {
+export class ArticlesCreateContainerComponent implements DeactivatableComponent, OnInit {
   private readonly store = inject(Store);
   private dialog = inject(MatDialog);
   private dialogText = '';
