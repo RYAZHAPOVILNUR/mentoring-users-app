@@ -4,12 +4,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MaterialsVM } from '@users/materials';
-import { LinkRegEx } from '@users/materials/feature-materials-content';
+import { LinkRegEx, MaterialsContentComponent } from '@users/materials/feature-materials-content';
 
 @Component({
   selector: 'users-materials-card',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatCardModule, MatIconModule],
+  imports: [CommonModule, MatButtonModule, MatCardModule, MatIconModule, MaterialsContentComponent],
   templateUrl: './materials-card.component.html',
   styleUrls: ['./materials-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

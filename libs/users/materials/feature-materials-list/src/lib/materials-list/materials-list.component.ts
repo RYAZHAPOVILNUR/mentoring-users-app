@@ -13,7 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'users-materials-list',
   standalone: true,
-  imports: [CommonModule, MaterialsCardComponent, MatButtonModule, MatIconModule],
+  imports: [CommonModule, MaterialsCardComponent, MatButtonModule, MatIconModule, MaterialsContentComponent],
   templateUrl: './materials-list.component.html',
   styleUrls: ['./materials-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
