@@ -21,10 +21,8 @@ export class FoldersListComponent {
   public onDeleteFolder(folderId: number): void {
     this.deleteFolder.emit(folderId);
   }
+
   public onOpenFolder(folderId: number): void {
     this.openFolder.emit(folderId);
   }
 }
-
-
-

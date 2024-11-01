@@ -33,4 +33,3 @@ export class FoldersListContainerComponent implements OnInit {
     this.router.navigate(['/materials', id]);
   }
 }
-

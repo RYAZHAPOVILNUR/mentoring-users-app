@@ -15,13 +15,13 @@ import { LinkRegEx } from '@users/materials/feature-materials-content';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MaterialsCardComponent {
-  @Input({ required: true }) material!: MaterialsVM
+  @Input({ required: true }) material!: MaterialsVM;
   @Output() deleteMaterial = new EventEmitter<number>();
   public fileIcons: { [key: string]: string } = {
     video: 'movie',
     mp3: 'queue_music',
     pdf: 'picture_as_pdf'
-  }
+  };
 
   getFileIcon(materialLink: string): string | null {
     if (LinkRegEx.VIDEO_REGEX.test(materialLink)) return this.fileIcons['video'];
@@ -31,6 +31,6 @@ export class MaterialsCardComponent {
   }
 
   public onMaterialDelete(material: MaterialsVM): void {
-    this.deleteMaterial.emit(material.id)
+    this.deleteMaterial.emit(material.id);
   }
 }

@@ -35,8 +35,8 @@ export class MaterialsContentComponent {
     }
     return url;
   }
-
 }
+
 export const LinkRegEx = {
   VIDEO_REGEX: /(youtube\.com\/watch\?v=|youtu\.be\/)([0-9A-Za-z_-]{10}[048AEIMQUYcgkosw])/,
   PDF_REGEX: /^http(s?):\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?(.pdf)$/,
@@ -46,7 +46,6 @@ export const LinkRegEx = {
 export function materialUrlValidator(fileType: 'video' | 'pdf' | 'mp3'): ValidatorFn {
   return (control: AbstractControl) => {
     const url = control.value as string;
-
     if (url) {
       switch (fileType) {
         case 'video':
@@ -59,8 +58,6 @@ export function materialUrlValidator(fileType: 'video' | 'pdf' | 'mp3'): Validat
           return { wrongURL: true };
       }
     }
-
     return { required: true };
   };
 }
-
