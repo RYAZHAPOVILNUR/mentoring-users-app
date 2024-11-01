@@ -1,0 +1,22 @@
+:host {
+  width: 100%;
+}
+
+.timer-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top: dotted 1px;
+  padding-top: 20px;
+
+  .timer {
+    font-size: 20px;
+  }
+
+  .timer-btns {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+  }
+}

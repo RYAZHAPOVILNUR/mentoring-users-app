@@ -1,0 +1,9 @@
+<div class="timer-container">
+  <p class="timer">{{ (timerData$ | async)! | formatTime }}</p>
+  <div class="timer-btns">
+    <button mat-raised-button color="primary" [disabled]="isRunning | async" (click)="startCount()">Старт</button>
+    <button mat-raised-button color="primary" [disabled]="(isRunning | async) === false" (click)="stopCount()">
+      Стоп
+    </button>
+  </div>
+</div>
