@@ -70,12 +70,13 @@
           </div>
           <ng-template #connectGithub>
             <button mat-button class="navbar-btn" (click)="onConnectGithub()">
-              <mat-icon svgIcon="github">edit</mat-icon
-              ><span class="button-label">{{ 'PROFILE.USER_INFO.CONNECT_GITHUB' | translate }}</span>
+              <mat-icon svgIcon="github">edit</mat-icon>
+              <span class="button-label">{{ 'PROFILE.USER_INFO.CONNECT_GITHUB' | translate }}</span>
             </button>
           </ng-template>
         </ng-container>
       </mat-card-actions>
+      <users-task-timer />
     </mat-card>
   </div>
 </ng-container>
