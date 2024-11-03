@@ -22,12 +22,4 @@ export class UsersFilterComponent implements OnInit {
       console.log(v); 
     });
   }
-  
-
-
-  // filter(){
-  //   this.usersFacade.filterUser(this.form.value.nameFilter ?? '')
-  // }
-
-
 }
