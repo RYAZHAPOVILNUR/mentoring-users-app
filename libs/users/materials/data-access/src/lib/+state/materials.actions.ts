@@ -16,6 +16,10 @@ export const MaterialsActions = createActionGroup({
     'Add Folder': props<{ folder: CreateFolder }>(),
     'Add Folder Success': props<{ folderData: Folder }>(),
     'Add Folder Failed': props<{  error: any  }>(),
+
+    'Delete Folder': props<{ id: number }>(),
+    'Delete Folder Success': props<{ id: number }>(),
+    'Delete Folder Failed': props<{ error: any }>(),
   },
 });
 // export const addFolder = createAction('[Materials Page] Add Folder', props<{ folderData: CreateFolder }>());

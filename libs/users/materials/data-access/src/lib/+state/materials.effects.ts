@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, concatMap, tap } from 'rxjs/operators';
-import { Observable, EMPTY, of } from 'rxjs';
+import { EMPTY, of, switchMap } from 'rxjs';
 import { MaterialsActions } from './materials.actions';
 import { ApiService } from '@users/core/http';
 import { CreateFolder } from '../models/create-folder.model';
@@ -51,6 +51,28 @@ export class MaterialsEffects {
         )
       )
     }, {functional: true}
+  );
+
+  deleteFolder = createEffect(
+    () => {
+      const actions$ = inject(Actions);
+      const apiService = inject(ApiService);
+
+      return actions$.pipe(
+        ofType(MaterialsActions.deleteFolder),
+        // delay(1500),
+        switchMap(({ id }) =>
+          apiService.delete<void>(`/folder/${id}`).pipe(
+            map(() => MaterialsActions.deleteFolderSuccess({ id })),
+            catchError((error) => {
+              console.error('Error', error);
+              return of(MaterialsActions.deleteFolderFailed({ error }));
+            })
+          )
+        )
+      );
+    },
+    { functional: true }
   );
 
 

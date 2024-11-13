@@ -4,7 +4,6 @@ import { MaterialsActions } from './materials.actions';
 import { selectAllFolders, selectFoldersError, selectFoldersStatus } from './materials.selectors';
 import { CreateFolder } from '../models/create-folder.model';
 
-
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
   private readonly store = inject(Store);
@@ -20,4 +19,7 @@ export class MaterialsFacade {
     this.store.dispatch(MaterialsActions.addFolder({ folder: materialsFolder }));
   }
 
+  public deleteFolder(id: number) {
+    this.store.dispatch(MaterialsActions.deleteFolder({ id }));
+  }
 }

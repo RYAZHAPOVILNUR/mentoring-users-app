@@ -64,6 +64,7 @@ export const reducer = createReducer(
     })
   ),
 
+  on(MaterialsActions.deleteFolderSuccess, (state, { id }) => materialsAdapter.removeOne(id, { ...state })),
 
   on(MaterialsActions.loadMaterialss, (state) => state),
   on(MaterialsActions.loadMaterialssSuccess, (state, action) => state),

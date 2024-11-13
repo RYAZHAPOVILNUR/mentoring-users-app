@@ -1,1 +1,14 @@
-<p>folders-list-card works!</p>
+<mat-card class="folder-card" (click)="onOpenFolder($event)">
+  <mat-card-content>
+    <mat-icon>folder</mat-icon>
+  </mat-card-content>
+  <label>
+    {{ folder.title }}
+  </label>
+  <label>
+    {{ folder.created_at | date }}
+  </label>
+  <button mat-icon-button class="folder-card_icons" (click)="onDeleteFolder($event)">
+    <mat-icon class="icons_button-delete">delete</mat-icon>
+  </button>
+</mat-card>

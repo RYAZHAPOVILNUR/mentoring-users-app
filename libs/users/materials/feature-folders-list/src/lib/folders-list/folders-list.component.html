@@ -4,17 +4,14 @@
 
 <ng-template #loadingResult>
   <ng-container *ngIf="vm.status === 'loaded'; else error">
-<!--    {{ vm | json }}-->
     <div class="container">
       <div class="row">
-        <div class="col-md-4 mb-3" *ngFor="let folder of vm.folders">
-          {{ folder | json }}
-<!--          <users-card-->
-<!--            [user]="user"-->
-<!--            [loggedUser]="vm.loggedUser"-->
-<!--            (deleteUser)="onDeleteUser(user)"-->
-<!--            (redirectToEdit)="onRedirectToEdit($event)"-->
-<!--          />-->
+        <div class="col-6 col-md-2 mb-3" *ngFor="let folder of vm.folders">
+          <users-folders-list-card
+            [folder]="folder"
+            (deleteFolder)="onDeleteFolder(folder)"
+            (openFolder)="onOpenFolder($event)"
+          />
         </div>
       </div>
     </div>
