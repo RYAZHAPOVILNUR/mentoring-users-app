@@ -2,8 +2,7 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
 import * as UsersActions from './users.actions';
-import { UsersEntity } from '@users/core/data-access';
-import { LoadingStatus } from '@users/core/data-access';
+import { UsersEntity, LoadingStatus } from '@users/core/data-access';
 
 export const USERS_FEATURE_KEY = 'users';
 
@@ -75,7 +74,16 @@ const reducer = createReducer(
   on(UsersActions.updateUserStatus, (state, { status }) => ({
     ...state,
     status,
-  }))
+  })),
+  on(UsersActions.addStoryPointSuccess, (state, { user }) => 
+     usersAdapter.updateOne(
+       {
+         id: user.id,
+         changes: user,
+       },
+       state
+    )
+  )
 );
 
 export function usersReducer(state: UsersState | undefined, action: Action) {

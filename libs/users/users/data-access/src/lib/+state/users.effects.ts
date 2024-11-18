@@ -6,6 +6,7 @@ import { ApiService } from '@users/core/http';
 import { Store, select } from '@ngrx/store';
 import { selectUsersEntities } from './users.selectors';
 import { CreateUserDTO, UsersDTO, UsersEntity, selectRouteParams, usersDTOAdapter } from '@users/core/data-access';
+import { error } from 'highcharts';
 
 export const userEffects = createEffect(
   () => {
@@ -134,6 +135,38 @@ export const loadUser = createEffect(
         return of(UsersActions.updateUserStatus({ status: 'loading' }));
       })
     );
+  },
+  { functional: true }
+);
+
+export const addStoryPoint = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
+    return actions$.pipe( 
+      ofType(UsersActions.addStoryPoint),
+      withLatestFrom(usersEntities$),
+      filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
+      map(([{ user, onSuccessAddSP, id }, usersEntities]) => ({
+        user: {
+          ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
+          totalStoryPoints: user.totalStoryPoints
+        },
+        onSuccessAddSP,
+      })),
+      switchMap(({user, onSuccessAddSP}) =>
+        apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, { ...user, totalStoryPoints: Number(user.totalStoryPoints) }).pipe(
+          map((user) => ({ user, onSuccessAddSP })),
+          tap(({onSuccessAddSP}) => onSuccessAddSP()),
+          map(({user}) => UsersActions.addStoryPointSuccess({ user })),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(UsersActions.addStoryPointFailed({ error }));
+          })
+        )
+      )
+    )
   },
   { functional: true }
 );
