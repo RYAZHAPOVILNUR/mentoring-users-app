@@ -28,3 +28,9 @@ export const selectOpenedUser = createSelector(
   selectUsersEntities,
   ({ id }, entities) => entities[id] || null
 );
+
+export const usersFilterSelector = createSelector(selectUsersState, (state: UsersState) => state.usersFilter);
+export const filteredUsers = createSelector(usersFilterSelector,selectAllUsers,
+  (usersFilter, allUsers) => usersFilter.name
+    ? allUsers.filter((user) => user.name.startsWith(usersFilter.name)) :
+    allUsers);
