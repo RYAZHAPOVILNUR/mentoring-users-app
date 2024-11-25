@@ -1,0 +1,12 @@
+<mat-card class="folder-card" (click)="onOpenFolder(folder.id)">
+  <mat-card-content class="folder-card-content">
+    <div class="icons">
+      <mat-icon class="folder-icon">folder</mat-icon>
+      <button mat-icon-button class="delete-button" (click)="onDeleteFolder(folder)" >
+        <mat-icon  class="delete">delete</mat-icon>
+      </button>
+    </div>
+    <div class="title">{{ folder.title }}</div>
+    <div class="date">{{ dateFormat(folder.created_at) }}</div>
+  </mat-card-content>
+</mat-card>

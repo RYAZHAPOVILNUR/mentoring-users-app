@@ -1,0 +1,31 @@
+<ng-container *ngrxLet="{materials: materials$, status: status$} as vm">
+  <ng-container [ngSwitch]="vm.status">
+    <div class="back" *ngIf="folderTitle$ | async as folderTitle">
+      <button mat-icon-button (click)="backOnFolders()"><mat-icon>arrow_back</mat-icon></button>
+      <span class="title">{{ folderTitle }}</span>
+    </div>
+    <ng-container *ngSwitchCase="'loading'">
+      <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'error'">
+      <div class="alert alert-danger" rode="alert">
+        <h1>{{ vm.status}}</h1>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'loaded'">
+      <ng-container>
+        <users-materials-list
+          [materials]="vm.materials"
+          (deleteMaterial)="deleteMaterial($event)"
+        ></users-materials-list>
+
+
+      </ng-container>
+    </ng-container>
+
+  </ng-container>
+  </ng-container>
+
+<users-materials-add-button></users-materials-add-button>
