@@ -15,8 +15,12 @@ import { MatIconModule } from '@angular/material/icon';
 export class MaterialsCardComponent {
   @Input() material!: MaterialDTO;
   @Output() deleteMaterial = new EventEmitter();
+  @Output() openMaterial = new EventEmitter();
   onDeleteMaterial(id: number) {
     this.deleteMaterial.emit(id);
+  }
+  onOpenMaterial(material: MaterialDTO) {
+    this.openMaterial.emit(material);
   }
   dateFormat(time: number): string {
     const date = new Date(time);

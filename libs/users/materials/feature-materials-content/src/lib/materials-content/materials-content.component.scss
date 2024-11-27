@@ -1,0 +1,25 @@
+.pdf-viewer {
+  width: 800px;
+  height: 600px;
+  margin: 20px;
+}
+
+.material_content{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.audio{
+  margin: 15px 15px 20px;
+}
+
+.youtube{
+  margin: 15px 15px 20px;
+  &__link{
+    font-size: 22px;
+    font-weight: 500;
+    color: white;
+    margin-bottom: 15px;
+  }
+}

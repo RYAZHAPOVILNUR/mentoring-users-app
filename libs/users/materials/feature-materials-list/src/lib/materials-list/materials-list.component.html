@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
       <div class="col-md-2 mb-3" *ngFor="let material of materials">
-        <users-materials-card [material]="material" (deleteMaterial)="onDeleteMaterial(material)"></users-materials-card>
+        <users-materials-card [material]="material" (deleteMaterial)="onDeleteMaterial(material)" (openMaterial)="onOpenMaterial(material)"></users-materials-card>
       </div>
   </div>
 </div>

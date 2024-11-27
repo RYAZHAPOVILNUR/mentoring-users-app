@@ -13,8 +13,11 @@ import { MaterialsCardComponent } from '../materials-card/materials-card.compone
 export class MaterialsListComponent {
   @Input({ required: true }) materials!: MaterialDTO[];
   @Output() deleteMaterial = new EventEmitter();
-
+  @Output() openMaterial = new EventEmitter();
   onDeleteMaterial(material: MaterialDTO) {
     this.deleteMaterial.emit(material);
+  }
+  onOpenMaterial(material: MaterialDTO) {
+    this.openMaterial.emit(material);
   }
 }
