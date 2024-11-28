@@ -24,7 +24,7 @@ export const selectEntity = createSelector(selectUsersEntities, selectSelectedId
 export const selectUserById = (id: number) => createSelector(selectUsersEntities, (entities) => entities[id]);
 
 export const selectUsersFilter = createSelector(selectUsersState, (state: UsersState) => state.usersFilter);
-export const filteredUsers = createSelector(
+export const selectFilteredUsers = createSelector(
   selectAllUsers,
   selectUsersFilter,
   (users, filter) => users.filter(
