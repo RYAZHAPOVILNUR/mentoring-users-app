@@ -23,6 +23,14 @@ export const selectEntity = createSelector(selectUsersEntities, selectSelectedId
 
 export const selectUserById = (id: number) => createSelector(selectUsersEntities, (entities) => entities[id]);
 
+export const selectUsersFilter = createSelector(selectUsersState, (state: UsersState) => state.usersFilter);
+export const filteredUsers = createSelector(
+  selectAllUsers,
+  selectUsersFilter,
+  (users, filter) => users.filter(
+    user => filter.name ? user.name.toLowerCase().includes(
+      filter.name.toLowerCase() ): user)
+)
 export const selectOpenedUser = createSelector(
   selectRouteParams,
   selectUsersEntities,
