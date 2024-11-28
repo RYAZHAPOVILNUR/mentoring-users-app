@@ -1,1 +1,8 @@
 <h1>Work work work!</h1>
+<div>
+    <form [formGroup]= "form">
+        <label for="name">Имя:</label>
+        <input id="name" formControlName="nameValue" placeholder="Введите имя:">
+        <button type="submit" (click)="onHandle()">Фильтровать</button>
+    </form>
+</div>
