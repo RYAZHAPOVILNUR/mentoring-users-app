@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-
+import { UsersFacade } from '@users/users/data-access';
 @Component({
     selector: 'users-filter',
     standalone: true,
@@ -12,13 +12,18 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
   export class UsersFilterComponent implements OnInit {
     form = new FormGroup({nameValue: new FormControl('')});
+
+    private readonly usersFasade = inject(UsersFacade);
     ngOnInit(): void {
-      console.log(this.form.value)
+      this.form.valueChanges.subscribe(value => {
+        const filteredValue = (value.nameValue ?? '').replace(/\s/g, ''); 
+  
+        if (value.nameValue !== filteredValue) {
+          this.form.get('nameValue')?.setValue(filteredValue, { emitEvent: false });
+        }
+        this.usersFasade.filterUser(filteredValue);
+      });
     }
 
-    onHandle(){
-      console.log(this.form.value)
-     
-    }
   }
   
