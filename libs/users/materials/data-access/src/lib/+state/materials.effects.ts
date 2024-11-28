@@ -1,11 +1,12 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, concatMap, tap } from 'rxjs/operators';
-import { EMPTY, of, switchMap } from 'rxjs';
+import { of, switchMap } from 'rxjs';
 import { MaterialsActions } from './materials.actions';
 import { ApiService } from '@users/core/http';
 import { CreateFolder } from '../models/create-folder.model';
 import { Folder } from '../models/folder.model';
+import { Material } from '../models/material.model';
 
 @Injectable()
 export class MaterialsEffects {
@@ -42,6 +43,7 @@ export class MaterialsEffects {
         concatMap(
           () =>
             apiService.get<Folder[]>('/folder').pipe(
+
               map((folders: Folder[]) =>
                 MaterialsActions.loadFoldersSuccess({ folderData: folders })),
               catchError((error) => {
@@ -76,20 +78,31 @@ export class MaterialsEffects {
   );
 
 
-  loadMaterialss$ = createEffect(() => {
-    const actions$ = inject(Actions);
+// Materials
+  loadMaterial = createEffect(
+    () => {
+      const actions$ = inject(Actions);
+      const apiService = inject(ApiService);
 
-    return actions$.pipe(
-      ofType(MaterialsActions.loadMaterialss),
-      concatMap(() =>
-        /** An EMPTY observable only emits completion. Replace with your own observable API request */
-        EMPTY.pipe(
-          map((data) => MaterialsActions.loadMaterialssSuccess({ data })),
-          catchError((error) => of(MaterialsActions.loadMaterialssFailure({ error })))
+      // actions$.subscribe(console.log);
+
+      return actions$.pipe(
+        ofType(MaterialsActions.loadMaterials),
+        concatMap(
+          () =>
+            apiService.get<Material[]>('/material').pipe(
+              // tap(data => console.log('Data received from API:', data)),
+              map((materials) =>
+                MaterialsActions.loadMaterialsSuccess({ materials })),
+              catchError((error) => {
+                return of(MaterialsActions.loadMaterialsFailure({error: error.message}))
+              })
+            )
         )
       )
-    );
-  });
+    }, {functional: true}
+  );
+
 
 
 }

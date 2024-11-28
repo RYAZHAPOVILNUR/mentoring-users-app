@@ -6,3 +6,4 @@ export * from './lib/+state/materials.effects';
 export * from './lib/models/create-folder.model';
 export * from './lib/models/create-material.model';
 export * from './lib/models/folder.model';
+export * from './lib/models/material.model';
