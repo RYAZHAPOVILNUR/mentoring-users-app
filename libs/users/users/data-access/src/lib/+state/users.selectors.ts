@@ -17,6 +17,16 @@ export const selectUsersEntities = createSelector(selectUsersState, (state: User
 
 export const selectSelectedId = createSelector(selectUsersState, (state: UsersState) => state.selectedId);
 
+export const selectUsersFilterSelector = createSelector(selectUsersState, (state: UsersState) => state.usersFilter);
+
+export const selectFilteredUsers = createSelector(selectAllUsers, selectUsersFilterSelector, (users, filter) => {
+  // Если filter.name пустой, возвращаем всех пользователей
+  if (!filter.name) {
+    return users;
+  }
+  return users.filter((el) => el.name === filter.name);
+});
+
 export const selectEntity = createSelector(selectUsersEntities, selectSelectedId, (entities, selectedId) =>
   selectedId ? entities[selectedId] : undefined
 );

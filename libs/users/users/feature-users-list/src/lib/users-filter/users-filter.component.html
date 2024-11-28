@@ -1,0 +1,5 @@
+<h1>Фильтрация</h1>
+<div [formGroup]="filterGroup">
+  <input type="text" formControlName="name" />
+  <button (click)="onFilterChanged()">Применить</button>
+</div>
