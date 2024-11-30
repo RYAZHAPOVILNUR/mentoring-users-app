@@ -154,6 +154,10 @@ export class DetailUsersCardComponent implements OnInit {
     this.deleteUser.emit();
   }
 
+  onAddStoryPoints(){
+    console.log('work')
+  }
+
   public onOptionClicked(selectedValue: string) {
     this.formGroup.get('city')?.setValue(selectedValue);
   }
