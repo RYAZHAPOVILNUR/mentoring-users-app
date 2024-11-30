@@ -89,6 +89,21 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+            <mat-form-field
+            class="edit-user-field"
+            [matTooltip]="vm.user!.city"
+            [matTooltipDisabled]="formGroup.enabled"
+          >
+            <mat-label>Количество сторипоинтов</mat-label>
+            <input
+              type="number"
+              class="edit-user-input"
+              placeholder="Введите поинты"
+              matInput
+              [formControl]="allStoryPoints"
+              [matAutocomplete]="auto"
+            />
+          </mat-form-field>
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
