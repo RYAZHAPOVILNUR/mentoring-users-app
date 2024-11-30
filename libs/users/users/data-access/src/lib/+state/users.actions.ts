@@ -39,4 +39,8 @@ export const loadUserFailed = createAction('[Users/Api] Load User Failed', props
 
 export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{ status: LoadingStatus }>());
 
-export const setUsersFilter = createAction('[Filter User] Filter User Success', props<{ name: string }>())
+export const setUsersFilter = createAction('[Filter User] Filter User Success', props<{ name: string }>());
+
+export const addStoryPoint = createAction('[Users Detail] Add Story Point', props<{ userData: UsersDTO, id: number, onSuccessCb: onSuccessEditionCbType; }>());
+export const addStoryPointSuccess = createAction('[Users Detail] Add Story Point Success', props<{userData: UsersDTO}>());
+export const addStoryPointFailed = createAction('[Users Detail] Add Story Point Failed', props<{ error: any }>());
