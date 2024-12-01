@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
+import { TimerComponent } from '../feature-profile/src';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -32,6 +33,7 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     FormsModule,
     TranslateModule,
+    TimerComponent
   ],
   templateUrl: './feature-user-info.component.html',
   styleUrls: ['./feature-user-info.component.scss'],
@@ -52,6 +54,7 @@ export class FeatureUserInfoComponent implements OnInit {
 
   public photo: any;
   public isPhotoHovered?: boolean;
+
 
   ngOnInit(): void {
     this.photo = this.vm.user.photo ? this.vm.user.photo.url : '';
@@ -123,4 +126,5 @@ export class FeatureUserInfoComponent implements OnInit {
       data: this.vm.user.photo ? this.vm.user.photo.url : '',
     });
   }
+
 }

@@ -1,0 +1,7 @@
+<div class="timer-container">
+  <button (click)="toggleTimer()">
+   <mat-icon class="timerBtnIcon"> {{ isRunning ? 'stop' : 'play_arrow' }}</mat-icon>
+  </button>
+  <button (click)="resetTimer()" ><mat-icon class="timerBtnIcon">history</mat-icon></button>
+  <p class="timer">{{ timerService.timeInSeconds | timeFormat }}</p>
+</div>
