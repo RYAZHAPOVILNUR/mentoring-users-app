@@ -23,7 +23,6 @@ export class UsersFacade {
   public readonly loggedUser$ = this.store.select(selectLoggedUser);
   public readonly filteredUsers$ = this.store.select(UsersSelectors.filteredUsers);
   public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError));
-  
 
   /**
    * Use the initialization action to perform one
@@ -62,6 +61,6 @@ export class UsersFacade {
   }
 
   filterUsers(name: string) {
-   this.store.dispatch(UsersActions.setUsersFilter({name}));
- }
+    this.store.dispatch(UsersActions.setUsersFilter({ name }));
+  }
 }
