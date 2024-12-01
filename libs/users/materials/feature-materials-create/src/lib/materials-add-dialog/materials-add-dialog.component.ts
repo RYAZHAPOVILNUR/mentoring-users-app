@@ -24,6 +24,7 @@ import { MatInputModule } from '@angular/material/input';
 export class MaterialsAddDialogComponent {
   public formGroup: FormGroup;
   private formBuilder = inject(FormBuilder);
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { name: string },
     private dialogRef: MatDialogRef<MaterialsAddDialogComponent>
@@ -33,6 +34,7 @@ export class MaterialsAddDialogComponent {
       material_link: ['', Validators.required],
     });
   }
+  
   cancel(): void {
     this.dialogRef.close();
   }
