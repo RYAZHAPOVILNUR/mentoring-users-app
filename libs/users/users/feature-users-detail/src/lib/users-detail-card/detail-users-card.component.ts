@@ -12,7 +12,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { onSuccessEditionCbType } from '@users/users/data-access';
+import { onSuccessEditionCbType, onSuccessSPonCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -74,6 +74,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
+      this.storyPointsFromControl.setValue(vm.user.totalStoryPoints);
     }
 
     if (vm.editMode) {
@@ -89,7 +90,6 @@ export class DetailUsersCardComponent implements OnInit {
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
-
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
     onSuccessCb: onSuccessEditionCbType;
@@ -121,7 +121,31 @@ export class DetailUsersCardComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'top',
     });
+  private onAddSPSuccess: onSuccessSPonCbType = () =>
+    this.snackBar.openFromTemplate(this.snackbarStoryPoints, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
 
+  public storyPointsFromControl = new FormControl({value: 0, disabled: true});
+  @ViewChild('snackbarStoryPoints') snackbarStoryPoints!: TemplateRef<any>;
+  @Output() addStoryPoints = new EventEmitter<{ user: CreateUserDTO, onSuccessSPonCbType: onSuccessSPonCbType }>();
+  onAddStoryPoints(): void {
+    this.storyPointsFromControl.disable();
+    this.addStoryPoints.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        username: this.formGroup.value.username || '',
+        city: this.formGroup.value.city || '',
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        purchaseDate: new Date().toString() || '',
+        educationStatus: 'trainee',
+        totalStoryPoints: this.storyPointsFromControl.value || 0,
+      },
+      onSuccessSPonCbType: this.onAddSPSuccess
+    });
+  }
   onSubmit(): void {
     this.editUser.emit({
       user: {

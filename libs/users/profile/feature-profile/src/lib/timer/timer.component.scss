@@ -1,0 +1,17 @@
+.timer-container {
+  display: flex;
+  align-items: center;
+  &>button{
+    background: none;
+    border: none;
+    & .timerBtnIcon{
+      height: 40px;
+      width: 40px;
+      overflow: hidden;
+      font-size: 40px;
+    }
+  }
+  & .timer {
+    font-size: 30px;
+  }
+}

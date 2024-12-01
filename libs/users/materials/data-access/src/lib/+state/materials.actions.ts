@@ -1,10 +1,23 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import { AddMaterialDTO, MaterialDTO } from '../models/material.model';
 
 export const MaterialsActions = createActionGroup({
   source: 'Materials',
   events: {
-    'Load Materialss': emptyProps(),
-    'Load Materialss Success': props<{ data: unknown }>(),
-    'Load Materialss Failure': props<{ error: unknown }>(),
+    loadMaterials: emptyProps(),
+    loadMaterialsSuccess: props<{ materials: MaterialDTO[] }>(),
+    loadMaterialsFailure: props<{ error: Error }>(),
+
+    addMaterial: props<{material: AddMaterialDTO}>(),
+    addMaterialSuccess: props<{material: AddMaterialDTO}>(),
+    addMaterialFailure: props<{error: Error}>(),
+
+    deleteMaterial: props<{id: number}>(),
+    deleteMaterialSuccess: props<{id: number}>(),
+    deleteMaterialFailure: props<{error: Error}>(),
+
+    loadMaterial: emptyProps(),
+    loadMaterialSuccess: props<{materials:MaterialDTO}>(),
+    loadMaterialFailure: props<{error: Error}>(),
   },
 });
