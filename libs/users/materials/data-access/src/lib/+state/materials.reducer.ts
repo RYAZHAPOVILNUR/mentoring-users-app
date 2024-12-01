@@ -1,20 +1,32 @@
-import { createFeature, createReducer, on } from '@ngrx/store';
+import { MaterialDTO } from '../models/material.model';
+import { createReducer, on } from '@ngrx/store';
 import { MaterialsActions } from './materials.actions';
+import { LoadingStatus } from '@users/core/data-access';
 
 export const materialsFeatureKey = 'materials';
 
-export interface State {}
+export interface MaterialsState {
+  materials: MaterialDTO[];
+  status: LoadingStatus;
+  error?: Error | null;
+}
 
-export const initialState: State = {};
+export const materialInitialState: MaterialsState = {
+  materials: [],
+  status: 'init',
+  error: null,
+};
 
-export const reducer = createReducer(
-  initialState,
-  on(MaterialsActions.loadMaterialss, (state) => state),
-  on(MaterialsActions.loadMaterialssSuccess, (state, action) => state),
-  on(MaterialsActions.loadMaterialssFailure, (state, action) => state)
+export const materialsReducer = createReducer(
+  materialInitialState,
+  on(MaterialsActions.loadMaterials, (state) => ({ ...state, status: 'loading' })),
+  on(MaterialsActions.loadMaterialsSuccess, (state, { materials }) => ({
+    ...state,
+    materials,
+    status: 'loaded',
+  })),
+  on(MaterialsActions.loadMaterialsFailure, (state, { error }) => ({
+    ...state,
+    error
+  }))
 );
-
-export const materialsFeature = createFeature({
-  name: materialsFeatureKey,
-  reducer,
-});

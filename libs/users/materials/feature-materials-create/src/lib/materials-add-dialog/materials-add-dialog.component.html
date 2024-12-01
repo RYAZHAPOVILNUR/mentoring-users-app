@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Добавление нового материала</h1>
+<div mat-dialog-content>
+  <form [formGroup]="formGroup">
+    <div class="dialog-content">
+      <mat-form-field>
+        <input matInput placeholder="Название*" formControlName="title" />
+        <mat-error>Название обязательно</mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input matInput placeholder="Ссылка*" formControlName="material_link" />
+        <mat-error>Ссылка обязательно</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions class="add-folders-actions">
+  <button mat-button (click)="cancel()">Отмена</button>
+  <button mat-raised-button color="primary" (click)="save()" [disabled]="formGroup.invalid">Сохранить</button>
+</div>
