@@ -8,6 +8,7 @@
 >
   <detail-users-card
     [vm]="vm"
+    (addStoryPoints)="onAddStoryPoints($event.user, $event.onSuccessAddSP)"
     (editUser)="onEditUser($event.user, $event.onSuccessCb)"
     (closeUser)="onCloseUser()"
     (closeEditMode)="onCloseEditMode()"

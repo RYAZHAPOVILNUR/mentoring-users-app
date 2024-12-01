@@ -4,6 +4,8 @@ import { CreateUserDTO, LoadingStatus, UsersDTO, UsersEntity } from '@users/core
 
 export type onSuccessEditionCbType = () => void;
 
+export type onSuccessSPonCbType = () => void;
+
 export const initUsers = createAction('[Users Page] Init');
 
 export const loadUsersSuccess = createAction('[Users/API] Load Users Success', props<{ users: UsersEntity[] }>());
@@ -23,6 +25,21 @@ export const setUsersFilter = createAction('[Users Page] Filter Users', props<{ 
 // export const selectId = createAction('[Users Page] Select Id', props<{ id: number }>());
 
 // export const deleteSelectedId = createAction('[Users Page] Delete Selected Id');
+
+export const addUserStoryPoints = createAction(
+  '[Users Detail] Add User StoryPoints',
+  props<{ userData: CreateUserDTO; id: number; onSuccessAddSP: onSuccessSPonCbType }>()
+);
+
+export const addUserStoryPointsSuccess = createAction(
+  '[Users Detail] Add User StoryPoints Success',
+  props<{ userData: UsersDTO }>()
+);
+
+export const addUserStoryPointsFailed = createAction(
+  '[Users Detail] Add User StoryPoints Failed',
+  props<{ error: any }>()
+);
 
 export const editUser = createAction(
   '[Users Detail] Edit User',
