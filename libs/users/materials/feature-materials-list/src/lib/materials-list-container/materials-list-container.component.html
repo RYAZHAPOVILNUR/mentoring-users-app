@@ -1,1 +1,11 @@
+<ng-container
+  *ngrxLet="{
+    materials: materials$,
+    openedFolder: openedFolder$,
+    status: status$,
+    errors: errors$
+  } as vm"
+>
+  <users-materials-list [vm]="vm" ></users-materials-list>
+</ng-container>
 <users-create-materials-button></users-create-materials-button>

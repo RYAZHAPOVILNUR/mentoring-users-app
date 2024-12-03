@@ -1,0 +1,39 @@
+.material-card {
+  width: 100%;
+  &:hover {
+    cursor: pointer;
+    transition: opacity 0.3s;
+    opacity: 0.7;
+  }
+}
+
+.mat-card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.material-card-title {
+  cursor: pointer;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.material-card-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.material-card-deleteBtn {
+  display: none;
+}
+
+.mat-card-content:hover .material-card-deleteBtn {
+  display: block;
+  cursor: pointer;
+}
+
+//.mat-mdc-card {
+//  height: 100%;
+//}

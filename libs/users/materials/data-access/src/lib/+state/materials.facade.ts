@@ -7,11 +7,10 @@ import {
   selectAllMaterials,
   selectFoldersError,
   selectFoldersStatus, selectMaterialsErrors,
-  selectMaterialsStatus
+  selectMaterialsStatus,
+  selectOpenedFolder
 } from './materials.selectors';
 import { CreateFolder } from '../models/create-folder.model';
-import { MaterialsErrors } from './materials.reducer';
-import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
@@ -20,6 +19,7 @@ export class MaterialsFacade {
   public readonly status$ = this.store.select(selectFoldersStatus);
   public readonly allFolders$ = this.store.select(selectAllFolders);
   public readonly error$ = this.store.select(selectFoldersError);
+  public readonly openedFolder$ = this.store.select(selectOpenedFolder);
 
   public readonly allMaterials$ = this.store.select(selectAllMaterials);
   public readonly materialsStatus$ = this.store.select(selectMaterialsStatus);

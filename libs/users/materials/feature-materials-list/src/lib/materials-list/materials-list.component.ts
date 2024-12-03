@@ -1,12 +1,20 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MaterialsListVM } from './materials-list-view-model';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MaterialsListCardComponent } from '../materials-list-card/materials-list-card.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'users-materials-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatIconModule, MatButtonModule, MaterialsListCardComponent, MatProgressBarModule],
   templateUrl: './materials-list.component.html',
   styleUrls: ['./materials-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MaterialsListComponent {}
+export class MaterialsListComponent {
+  @Input({required: true})
+  vm!: MaterialsListVM;
+}

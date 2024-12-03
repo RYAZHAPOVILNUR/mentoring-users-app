@@ -1,12 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap, tap } from 'rxjs/operators';
+import { catchError, map, concatMap, tap, withLatestFrom } from 'rxjs/operators';
 import { of, switchMap } from 'rxjs';
 import { MaterialsActions } from './materials.actions';
 import { ApiService } from '@users/core/http';
 import { CreateFolder } from '../models/create-folder.model';
 import { Folder } from '../models/folder.model';
 import { Material } from '../models/material.model';
+import { Store } from '@ngrx/store';
+import { selectRouteParams } from '@users/core/data-access';
 
 @Injectable()
 export class MaterialsEffects {
@@ -76,6 +78,29 @@ export class MaterialsEffects {
     },
     { functional: true }
   );
+
+  openFolder = createEffect(
+    () => {
+      const actions$ = inject(Actions);
+      const apiService = inject(ApiService);
+      const store = inject(Store);
+
+      return actions$.pipe(
+        ofType(MaterialsActions.openFolder),
+        withLatestFrom(store.select(selectRouteParams)),
+        switchMap(([, params]) => {
+          return apiService.get<Folder>(`/folder/${params['id']}`)
+            .pipe(
+              map((folder) => MaterialsActions.openFolderSuccess({ folder })),
+              catchError((error) => {
+                console.log('Error', error);
+                return of(MaterialsActions.openFolderFailed({ error }))
+              })
+            )
+        })
+      )
+    }, {functional: true}
+  )
 
 
 // Materials

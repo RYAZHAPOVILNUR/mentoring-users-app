@@ -80,10 +80,19 @@ export const reducer = createReducer(
     )
   })),
 
+  on(MaterialsActions.openFolderSuccess, (state, { folder }) => ({
+    ...state,
+      folders: foldersAdapter.addOne(
+        { ...folder },
+        { ...state.folders }
+      )
+  })),
+
   on(MaterialsActions.deleteFolderSuccess, (state, { id }) => ({
     ...state,
     folders: foldersAdapter.removeOne(id, { ...state.folders }),
   })),
+
 
 
   // Materials

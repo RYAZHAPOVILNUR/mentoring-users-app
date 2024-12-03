@@ -3,15 +3,15 @@ import {
   foldersAdapter,
   MATERIALS_FEATURE_KEY,
   materialsAdapter,
-  materialsFeature,
   MaterialsState
 } from './materials.reducer';
 import { selectRouteParams } from '@users/core/data-access';
+import { EntityState } from '@ngrx/entity';
 
 export const selectFeatureState =
   createFeatureSelector<MaterialsState>(MATERIALS_FEATURE_KEY);
 
-const { selectAll: selectAllFolder } = foldersAdapter.getSelectors();
+const { selectAll: selectAllFolder, selectEntities: selectEntitiesFolder } = foldersAdapter.getSelectors();
 const { selectAll: selectAllMaterial } = materialsAdapter.getSelectors();
 
 // Начальное состояние
@@ -39,6 +39,17 @@ export const selectFoldersError = createSelector(
   selectFeatureState,
   (state: MaterialsState) => state.folders.error
 );
+
+export const selectFoldersEntities = createSelector(
+  selectFoldersState,
+  selectEntitiesFolder
+)
+
+export const selectOpenedFolder = createSelector(
+  selectRouteParams,
+  selectFoldersEntities,
+  ({id}, entities) => entities[id] || null
+)
 
 // Materials
 export const selectAllMaterials = createSelector(
