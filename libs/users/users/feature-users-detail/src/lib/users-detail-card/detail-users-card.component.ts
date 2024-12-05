@@ -12,7 +12,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { onSuccessEditionCbType } from '@users/users/data-access';
+import { onSuccessEditionCbType, onSuccessSPonCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -74,6 +74,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
+      this.allStoryPoints.patchValue(vm.user.totalStoryPoints?? 0);
     }
 
     if (vm.editMode) {
@@ -90,10 +91,7 @@ export class DetailUsersCardComponent implements OnInit {
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
 
-  public allStoryPoints = new FormControl(
-    {value: 0, disabled: true},
-    [Validators.pattern('^[0-9]*$')]
-  )
+  public allStoryPoints = new FormControl({value: 0, disabled: true});
 
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
@@ -103,7 +101,13 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
+  @Output() addStoryPoint = new EventEmitter<{
+    user: CreateUserDTO;
+    onSuccessSPAdd: onSuccessSPonCbType;
+  }>();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('storyPoint') storyPointTemplateRef!: TemplateRef<any>;
+  
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -141,6 +145,13 @@ export class DetailUsersCardComponent implements OnInit {
     });
   }
 
+  private onAddSPointSuccess: onSuccessSPonCbType = () =>
+    this.snackBar.openFromTemplate(this.storyPointTemplateRef, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+
   onCloseUser() {
     this.closeUser.emit();
   }
@@ -158,7 +169,19 @@ export class DetailUsersCardComponent implements OnInit {
   }
 
   onAddStoryPoints(){
-    console.log('work')
+    this.allStoryPoints.disable();
+    this.addStoryPoint.emit({
+      user:{
+        name: this.formGroup.value.name ?? '',
+        email: this.formGroup.value.email?.trim().toLowerCase() ?? '',
+        totalStoryPoints: this.allStoryPoints.value ?? 0,
+        username: this.formGroup.value.username?? '',
+        city: this.formGroup.value.city?? '',
+        purchaseDate: new Date().toString() || '',
+        educationStatus: 'trainee',
+      },
+      onSuccessSPAdd: this.onAddSPointSuccess,
+    });
   }
 
   public onOptionClicked(selectedValue: string) {
