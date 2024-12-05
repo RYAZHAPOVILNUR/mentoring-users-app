@@ -15,5 +15,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="cancel()">Отмена</button>
-  <button mat-raised-button color="primary" (click)="save()" [disabled]="formGroup.invalid">Сохранить</button>
+  <button mat-raised-button color="primary" (click)="save()" [disabled]="formGroup.invalid || !isLinkValid(this.formGroup.value.url ?? 'string')">Сохранить</button>
 </div>

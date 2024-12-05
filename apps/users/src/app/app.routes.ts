@@ -1,10 +1,8 @@
-import { TasksContainerComponent } from './../../../../libs/users/task/src/lib/tasks-view-container/tasks-view-container.component';
 import { Route } from '@angular/router';
 import { authGuard, adminGuard } from '@auth/data-access';
 import { AuthorizedUserLayoutComponent } from './authorized-user-layout/authorized-user-layout.component';
 import { UnauthorizedUserLayoutComponent } from './unauthorized-user-layout-component/unauthorized-user-layout-component.component';
 import { canDeactivateFormComponent } from '@users/core/utils';
-import { MaterialsListContainerComponent } from '@users/materials/feature-materials-list';
 
 const layoutAgnosticComponents = [
   {

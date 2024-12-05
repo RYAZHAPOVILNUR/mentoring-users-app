@@ -1,12 +1,12 @@
 <ng-container *ngIf="vm.status === 'loading'; else loadingResult">
   <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
-  <button mat-icon-button aria-label="close dialog" >
+  <button mat-icon-button aria-label="close dialog" (click)="onBackBtn()">
     <mat-icon>arrow_back</mat-icon>
   </button>
 </ng-container>
 
 <ng-template #loadingResult class="tem">
-  <button mat-icon-button aria-label="close dialog">
+  <button mat-icon-button aria-label="close dialog" (click)="onBackBtn()">
     <mat-icon>arrow_back</mat-icon>
   </button>
   <div class="title">{{ vm.openedFolder?.title }}</div>

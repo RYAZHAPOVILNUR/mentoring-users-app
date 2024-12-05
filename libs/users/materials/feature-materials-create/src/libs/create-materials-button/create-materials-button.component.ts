@@ -43,7 +43,7 @@ export class CreateMaterialsButtonComponent {
             folder_id: Number(window.location.href.split('/').pop()),
           };
 
-          // this.materialsFacade.addMaterial(newMaterialData)
+          this.materialsFacade.addMaterial(newMaterialData)
         }
       })
   }

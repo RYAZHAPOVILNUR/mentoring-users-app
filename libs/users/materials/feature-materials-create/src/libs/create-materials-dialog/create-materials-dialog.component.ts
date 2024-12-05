@@ -24,6 +24,25 @@ export class CreateMaterialsDialogComponent {
     url: ['', Validators.required],
   });
 
+  public isLinkValid(link: string): boolean {
+    if (this.data.buttonText === 'Видео') {
+      const videoRegex = /[?&]v=([a-zA-Z0-9_-]{11})|\/embed\/([a-zA-Z0-9_-]{11})/
+      return videoRegex.test(link);
+    }
+
+    if (this.data.buttonText === 'PDF') {
+      const pdfRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*\.pdf$/
+      return pdfRegex.test(link);
+    }
+
+    if (this.data.buttonText === 'Подкаст') {
+      const audioRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*\.mp3$/
+      return audioRegex.test(link);
+    }
+
+    return true;
+  }
+
   public cancel(): void {
     this.dialogRef.close();
   }

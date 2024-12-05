@@ -9,6 +9,7 @@ import { Folder } from '../models/folder.model';
 import { Material } from '../models/material.model';
 import { Store } from '@ngrx/store';
 import { selectRouteParams } from '@users/core/data-access';
+import { CreateMaterial } from '../models/create-material.model';
 
 @Injectable()
 export class MaterialsEffects {
@@ -128,6 +129,46 @@ export class MaterialsEffects {
     }, {functional: true}
   );
 
+  addMaterial = createEffect(
+    () => {
+      const actions$ = inject(Actions);
+      const apiService = inject(ApiService);
 
+      return actions$.pipe(
+        ofType(MaterialsActions.addMaterials),
+        concatMap(
+          ({ materials }) =>
+            apiService.post<Material, CreateMaterial>('/material', materials).pipe(
+              map((materials: Material) =>
+                MaterialsActions.addMaterialsSuccess({ materials })),
+              catchError((error) => {
+                return of(MaterialsActions.addMaterialsFailed({error: error.message}))
+              })
+            )
+        )
+      )
+    }, {functional: true}
+  );
+
+  deleteMaterial = createEffect(
+    () => {
+      const actions$ = inject(Actions);
+      const apiService = inject(ApiService);
+
+      return actions$.pipe(
+        ofType(MaterialsActions.deleteMaterial),
+        switchMap(({ id }) =>
+          apiService.delete<void>(`/material/${id}`).pipe(
+            map(() => MaterialsActions.deleteMaterialSuccess({ id })),
+            catchError((error) => {
+              console.error('Error', error);
+              return of(MaterialsActions.deleteMaterialFailed({ error }));
+            })
+          )
+        )
+      );
+    },
+    { functional: true }
+  );
 
 }

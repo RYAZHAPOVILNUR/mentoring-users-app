@@ -118,6 +118,14 @@ export const reducer = createReducer(
       error
     }
   })),
+
+  on(MaterialsActions.addMaterialsSuccess, (state, { materials }) =>({
+    ...state,
+    materials: materialsAdapter.addOne(
+      { ...materials },
+      { ...state.materials }
+    )
+  })),
 );
 
 export const materialsFeature = createFeature({

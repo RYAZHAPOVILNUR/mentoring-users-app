@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialsListVM } from './materials-list-view-model';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,4 +17,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 export class MaterialsListComponent {
   @Input({required: true})
   vm!: MaterialsListVM;
+
+  @Output() back = new EventEmitter();
+
+  public onBackBtn() {
+    this.back.emit()
+  }
 }

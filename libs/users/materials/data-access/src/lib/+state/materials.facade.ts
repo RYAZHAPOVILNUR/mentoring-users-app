@@ -11,6 +11,7 @@ import {
   selectOpenedFolder
 } from './materials.selectors';
 import { CreateFolder } from '../models/create-folder.model';
+import { CreateMaterial } from '../models/create-material.model';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
@@ -40,5 +41,9 @@ export class MaterialsFacade {
 
   public loadMaterials() {
     this.store.dispatch(MaterialsActions.loadMaterials());
+  }
+
+  public addMaterial(newMaterialData: CreateMaterial) {
+    this.store.dispatch(MaterialsActions.addMaterials({materials: newMaterialData}));
   }
 }
