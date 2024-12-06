@@ -126,6 +126,11 @@ export const reducer = createReducer(
       { ...state.materials }
     )
   })),
+
+  on(MaterialsActions.deleteMaterialSuccess, (state, { id }) => ({
+    ...state,
+    materials: materialsAdapter.removeOne(id, { ...state.materials }),
+  })),
 );
 
 export const materialsFeature = createFeature({

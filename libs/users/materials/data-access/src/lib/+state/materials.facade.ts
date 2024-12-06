@@ -46,4 +46,8 @@ export class MaterialsFacade {
   public addMaterial(newMaterialData: CreateMaterial) {
     this.store.dispatch(MaterialsActions.addMaterials({materials: newMaterialData}));
   }
+
+  public deleteMaterial(id: number) {
+    this.store.dispatch(MaterialsActions.deleteMaterial({ id }));
+  }
 }

@@ -4,7 +4,7 @@
       <mat-icon *ngIf="material.material_link.split('.').includes('mp3')">music_note</mat-icon>
       <mat-icon *ngIf="!material.material_link.endsWith('.pdf') && !material.material_link.endsWith('.mp3')">ondemand_video</mat-icon>
       <mat-icon *ngIf="material.material_link.split('.').includes('pdf')">insert_drive_file</mat-icon>
-      <mat-icon class="material-card-deleteBtn" >delete</mat-icon>
+      <mat-icon class="material-card-deleteBtn" (click)="onDeleteMaterial($event)">delete</mat-icon>
     </div>
     <label class="material-card-title">{{ material.title }}</label>
     <span>{{ material.created_at | date:'d MMMM y' }}</span>

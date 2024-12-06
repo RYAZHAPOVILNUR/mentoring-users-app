@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Material } from '@users/materials/data-access';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,4 +15,11 @@ import { MatCardModule } from '@angular/material/card';
 export class MaterialsListCardComponent {
   @Input({required: true})
   material!: Material;
+
+  @Output() deleteMaterial = new EventEmitter();
+
+  public onDeleteMaterial(event: Event) {
+    event.stopPropagation();
+    this.deleteMaterial.emit(this.material)
+  }
 }

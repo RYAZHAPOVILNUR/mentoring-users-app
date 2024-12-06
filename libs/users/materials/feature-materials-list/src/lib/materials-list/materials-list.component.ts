@@ -19,8 +19,13 @@ export class MaterialsListComponent {
   vm!: MaterialsListVM;
 
   @Output() back = new EventEmitter();
+  @Output() deleteMaterial = new EventEmitter();
 
   public onBackBtn() {
     this.back.emit()
+  }
+
+  public onDeleteMaterial(event: Event) {
+    this.deleteMaterial.emit(event)
   }
 }

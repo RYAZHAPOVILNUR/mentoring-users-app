@@ -14,7 +14,7 @@
     <div class="container">
       <div class="row">
         <div class="col materials-card-wrap" *ngFor="let material of vm.materials">
-          <users-materials-list-card [material]="material"/>
+          <users-materials-list-card [material]="material" (deleteMaterial)="onDeleteMaterial($event)"/>
         </div>
       </div>
     </div>
