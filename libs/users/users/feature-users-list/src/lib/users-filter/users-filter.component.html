@@ -1,5 +1,6 @@
 <div class="container">
-  <form class="user-filter-form" [formGroup]="form" (input)="filterUsers()">
-    <input class="user-filter-input" type="text" placeholder="Имя" formControlName="name">
-  </form>
+<mat-form-field class="user-filter-form">
+  <mat-label>Имя</mat-label>
+  <input matInput [formControl]="form" (input)="filterUsers()">
+</mat-form-field>
 </div>

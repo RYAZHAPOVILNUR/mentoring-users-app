@@ -40,4 +40,4 @@ export const loadUserFailed = createAction('[Users/Api] Load User Failed', props
 
 export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{ status: LoadingStatus }>());
 
-export const setUsersFilter = createAction('[Users Detail] SetUsersFilter', props<UsersFilter>());
+export const setUsersFilter = createAction('[Users Detail] Set Users Filter', props<UsersFilter>());

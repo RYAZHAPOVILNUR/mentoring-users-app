@@ -39,7 +39,7 @@ const reducer = createReducer(
     status: 'loading' as const,
   })),
   on(UsersActions.loadUsersSuccess, (state, { users }) =>
-    usersAdapter.setAll(users, { ...state, status: 'loaded' as const })
+    usersAdapter.setAll(users, { ...state, status: 'loaded' as const, usersFilter: {name: ''} })
   ),
   on(UsersActions.loadUsersFailure, (state, { error }) => ({
     ...state,
