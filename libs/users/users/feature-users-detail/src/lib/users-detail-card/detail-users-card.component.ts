@@ -12,7 +12,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { onSuccessEditionCbType } from '@users/users/data-access';
+import { onSuccessAddSP, onSuccessEditionCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -74,6 +74,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
+      this.totalUserStoryPoints.setValue(vm.user.totalStoryPoints ?? 0)
     }
 
     if (vm.editMode) {
@@ -89,6 +90,7 @@ export class DetailUsersCardComponent implements OnInit {
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
+  public totalUserStoryPoints = new FormControl({ value: 0, disabled: true}, [ Validators.required, Validators.pattern("^[0-9]*$")]);
 
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
@@ -98,7 +100,9 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
+  @Output() addUserStoryPoints = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('snackbarStoryPoints') snackbarStoryPoints!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -171,5 +175,18 @@ export class DetailUsersCardComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  private onSuccessAddSP() {
+    this.snackBar.openFromTemplate(this.snackbarStoryPoints, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+  }
+
+  public onAddStoryPoints() {
+    this.totalUserStoryPoints.disable();
+    this.addUserStoryPoints.emit({userStoryPoints: this.totalUserStoryPoints.value, onSuccessAddSP : this.onSuccessAddSP.bind(this)});
   }
 }
