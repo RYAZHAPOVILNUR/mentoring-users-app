@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MaterialsContentComponent } from '@users/materials/feature-materials-content';
 
 @Component({
   selector: 'users-materials-list-container',
@@ -37,10 +38,6 @@ export class MaterialsListContainerComponent {
     this.router.navigate(['/materials']);
   }
 
-  // public onOpenMaterialDialog(event: Event) {
-  //   this.dialog.open(MaterialsContentComponent, {data: { material: event } });
-  // }
-
   public onDeleteMaterial(material: Material): void {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> =
       this.dialog.open(CoreUiConfirmDialogComponent, {
@@ -52,5 +49,16 @@ export class MaterialsListContainerComponent {
       .subscribe((result: boolean) => {
         if (result) this.materialsFacade.deleteMaterial(material.id);
       })
+  }
+
+  public onOpenMaterialDialog(material: Material): void {
+    const dialogRef: MatDialogRef<MaterialsContentComponent> =
+      this.dialog.open(MaterialsContentComponent, {
+        data: { material }
+      });
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe()
   }
 }

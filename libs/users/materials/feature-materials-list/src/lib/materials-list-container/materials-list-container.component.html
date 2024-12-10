@@ -6,6 +6,11 @@
     errors: errors$
   } as vm"
 >
-  <users-materials-list [vm]="vm" (back)="onBackBtn()" (deleteMaterial)="onDeleteMaterial($event)"></users-materials-list>
+  <users-materials-list [vm]="vm"
+                        (back)="onBackBtn()"
+                        (deleteMaterial)="onDeleteMaterial($event)"
+                        (openMaterialDialog)="onOpenMaterialDialog($event)">
+
+  </users-materials-list>
 </ng-container>
 <users-create-materials-button></users-create-materials-button>

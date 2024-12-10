@@ -30,8 +30,8 @@ export class CreateMaterialsDialogComponent {
       return videoRegex.test(link);
     }
 
-    if (this.data.buttonText === 'PDF') {
-      const pdfRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*\.pdf$/
+    if (this.data.buttonText === 'Файл PDF') {
+      const pdfRegex = /.*\.pdf/
       return pdfRegex.test(link);
     }
 
@@ -53,7 +53,7 @@ export class CreateMaterialsDialogComponent {
         title: this.formGroup.value.title,
         url: this.formGroup.value.url,
       }
-      this.dialogRef.close(formData)
+      this.dialogRef.close(formData);
     }
   }
 }

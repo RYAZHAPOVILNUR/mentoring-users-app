@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MaterialsListCardComponent } from '../materials-list-card/materials-list-card.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { Material } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-materials-list',
@@ -20,6 +21,7 @@ export class MaterialsListComponent {
 
   @Output() back = new EventEmitter();
   @Output() deleteMaterial = new EventEmitter();
+  @Output() openMaterialDialog = new EventEmitter();
 
   public onBackBtn() {
     this.back.emit()
@@ -27,5 +29,9 @@ export class MaterialsListComponent {
 
   public onDeleteMaterial(event: Event) {
     this.deleteMaterial.emit(event)
+  }
+
+  public onOpenMaterialDialog(material: Material) {
+    this.openMaterialDialog.emit(material)
   }
 }

@@ -10,6 +10,7 @@ import { PushPipe } from '@ngrx/component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @Component({
   standalone: true,
@@ -22,6 +23,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatSidenavModule,
     MatIconModule,
     MatButtonModule,
+    PdfViewerModule
   ],
   providers: [],
   selector: 'users-root',
