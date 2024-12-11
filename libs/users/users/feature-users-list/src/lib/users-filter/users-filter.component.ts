@@ -23,11 +23,5 @@ export class UsersFilterComponent {
     this.filterFormControl.valueChanges.pipe(filter((value): value is string => value !== null)).subscribe((value) => {
       return this.usersFacade.filterUsers(value);
     });
-
-    // this.subscription.add(filterSubscription);
   }
-
-  // ngOnDestroy(): void {
-  //   this.subscription.unsubscribe();
-  // }
 }
