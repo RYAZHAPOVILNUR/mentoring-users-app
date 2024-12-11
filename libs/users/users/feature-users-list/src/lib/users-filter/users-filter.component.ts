@@ -4,7 +4,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { debounceTime, distinctUntilChanged, filter, Subscription } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 import { UsersFacade } from '@users/users/data-access';
 
 @Component({
@@ -17,7 +17,6 @@ import { UsersFacade } from '@users/users/data-access';
 export class UsersFilterComponent {
   public filterFormControl = new FormControl('');
   private usersFacade = inject(UsersFacade);
-  private subscription: Subscription = new Subscription();
 
   ngOnInit(): void {
     this.filterFormControl.valueChanges.pipe(filter((value): value is string => value !== null)).subscribe((value) => {
