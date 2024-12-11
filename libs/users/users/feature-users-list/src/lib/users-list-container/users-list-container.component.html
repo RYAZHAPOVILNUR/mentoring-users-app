@@ -6,6 +6,10 @@
     loggedUser: loggedUser$
   } as vm"
 >
+   <div class = "search__container">
+     <users-filter></users-filter>
+   </div>
+
   <users-list-ui [vm]="vm" (deleteUser)="onDeleteUser($event)" (redirectToEdit)="onRedirectToEdit($event)" />
 </ng-container>
 <create-users-button></create-users-button>
