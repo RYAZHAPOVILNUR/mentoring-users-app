@@ -1,0 +1,8 @@
+<div [formGroup]="filteredUsersForm"
+     class="form-filter">
+  <input
+    formControlName="name"
+    placeholder="Введите имя"
+    class="form-filter_placeholder"
+  (input)="filterByName()">
+</div>
