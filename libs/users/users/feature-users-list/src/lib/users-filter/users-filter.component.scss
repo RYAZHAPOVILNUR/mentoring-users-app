@@ -1,0 +1,7 @@
+.user-name-input {
+  display: flex;
+  justify-content: flex-end;
+  &__form-field {
+    width: 400px;
+  }
+}
