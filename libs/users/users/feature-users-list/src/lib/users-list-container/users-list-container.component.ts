@@ -9,6 +9,8 @@ import { UsersFacade } from '@users/users/data-access';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
+import { UsersFilterComponent } from '../users-filter/users-filter.component';
+import { BehaviorSubject, combineLatest, map } from 'rxjs';
 
 @Component({
   selector: 'users-list-container',
@@ -20,6 +22,7 @@ import { CreateUsersButtonComponent } from '@users/feature-users-create';
     MatDialogModule,
     LetDirective,
     CreateUsersButtonComponent,
+    UsersFilterComponent
   ],
   templateUrl: './users-list-container.component.html',
   styleUrls: ['./users-list-container.component.scss'],
@@ -35,6 +38,24 @@ export class UsersListContainerComponent {
   public readonly errors$ = this.componentStore.errors$;
   public readonly loggedUser$ = this.usersFacade.loggedUser$;
   private readonly router = inject(Router);
+
+  private readonly filterNameSubject = new BehaviorSubject<string | null>(null);
+  public readonly filteredUsers$ = combineLatest([
+    this.users$,
+    this.filterNameSubject.asObservable(),
+  ]).pipe(
+    map(([users, filterName]) =>
+      filterName
+        ? users.filter((user) =>
+          user.name.toLowerCase().includes(filterName.toLowerCase())
+        )
+        : users
+    )
+  );
+
+  onFilterName(filterName: string | null) {
+    this.filterNameSubject.next(filterName);
+  }
 
   onDeleteUser(user: UsersVM) {
     this.componentStore.deleteUser(user);
