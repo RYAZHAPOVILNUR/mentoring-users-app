@@ -1,6 +1,7 @@
 <div class="container">
   <form class="user-name-input">
-    <mat-form-field class="user-name-input__form-field">
+    <mat-spinner *ngIf="(isLoading$ | async)" class="user-name-input__spinner"></mat-spinner>
+    <mat-form-field subscriptSizing="dynamic" class="user-name-input__form-field">
       <mat-label>Enter user name</mat-label>
       <input matInput placeholder="Example: Ivan" value="Sushi"
              [formControl]="userNameInput">

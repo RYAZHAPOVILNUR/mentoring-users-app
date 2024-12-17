@@ -1,7 +1,16 @@
 .user-name-input {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 15px;
+
   &__form-field {
     width: 400px;
+  }
+
+  &__spinner {
+    width: 30px !important;
+    height: 30px !important;
+    margin-right: 10px;
   }
 }
