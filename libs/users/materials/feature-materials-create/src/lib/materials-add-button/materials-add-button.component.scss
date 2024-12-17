@@ -1,0 +1,11 @@
+.fab-container {
+  position: fixed;
+  bottom: 70px;
+  right: 70px;
+  z-index: 1000;
+}
+
+mat-menu {
+  display: flex;
+  flex-direction: column;
+}

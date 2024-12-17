@@ -1,0 +1,22 @@
+<div class="fab-container">
+  <!-- Кнопка с иконкой "+" -->
+  <button mat-fab color="primary" [matMenuTriggerFor]="menu">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <!-- Меню с кнопками -->
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="openDialogMaterial('PDF')">
+      <mat-icon>picture_as_pdf</mat-icon>
+      <span>Файл PDF</span>
+    </button>
+    <button mat-menu-item (click)="openDialogMaterial('Видео')">
+      <mat-icon>movie</mat-icon>
+      <span>Видео</span>
+    </button>
+    <button mat-menu-item (click)="openDialogMaterial('Подкаст')">
+      <mat-icon>mic</mat-icon>
+      <span>Подкаст</span>
+    </button>
+  </mat-menu>
+</div>
