@@ -42,13 +42,11 @@ export class UsersFilterComponent {
         tap(() => {
           if (this.userNameInput.dirty || this.userNameInput.touched) {
             this.isLoading$.next(true);
-            console.log('tap1');
           }
         }),
         switchMap((name: string) =>
           timer(500).pipe(
             tap(() => {
-              console.log('tap2');
               this.usersFacade.usersFilterActivate(name);
               this.isLoading$.next(false);
             })
