@@ -1,0 +1,14 @@
+.buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+}
+
+mat-form-field {
+  flex: 1;
+  max-width: 230px;
+}

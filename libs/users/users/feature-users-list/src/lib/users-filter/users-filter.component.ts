@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -11,15 +11,14 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, ReactiveFormsModule],
 })
-export class UsersFilterComponent {
+export class UsersFilterComponent implements OnInit {
   public filterGroup = new FormGroup({
     name: new FormControl(''),
   });
 
   @Output() filterChanged = new EventEmitter();
 
-  public onFilterChanged(): void {
-    const filterValue = this.filterGroup.value.name;
-    this.filterChanged.emit(filterValue);
+  ngOnInit(): void {
+    this.filterGroup.get('name')?.valueChanges.subscribe((value) => this.filterChanged.emit(value));
   }
 }

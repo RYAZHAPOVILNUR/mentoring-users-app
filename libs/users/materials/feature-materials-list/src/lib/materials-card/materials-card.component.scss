@@ -1,0 +1,20 @@
+.material-card {
+  position: relative;
+}
+
+.icons .delete-button {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.material-card:hover .delete-button {
+  opacity: 1;
+}
+
+.title {
+  white-space: nowrap; /* Убирает перенос текста */
+  overflow: hidden; /* Обрезает текст, если он выходит за границы */
+  text-overflow: ellipsis; /* Добавляет многоточие в конце обрезанного текста */
+  display: block; /* Требуется для корректной работы */
+  max-width: 100%; /* Задайте ширину контейнера для ограничения */
+}

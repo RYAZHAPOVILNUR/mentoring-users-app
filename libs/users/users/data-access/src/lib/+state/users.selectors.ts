@@ -24,7 +24,7 @@ export const selectFilteredUsers = createSelector(selectAllUsers, selectUsersFil
   if (!filter.name) {
     return users;
   }
-  return users.filter((el) => el.name === filter.name);
+  return users.filter((el) => el.name && el.name.includes(filter.name));
 });
 
 export const selectEntity = createSelector(selectUsersEntities, selectSelectedId, (entities, selectedId) =>

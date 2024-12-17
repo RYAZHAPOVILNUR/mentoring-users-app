@@ -1,0 +1,34 @@
+<div class="title">
+  <h1 mat-dialog-title>{{ data.material.title }}</h1>
+</div>
+
+<div class="button-close">
+  <button class="title-button" mat-icon-button (click)="onClose()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<ng-container *ngIf="data.material.material_link.endsWith('pdf')">
+  <div class="pdf-viewer">
+    <pdf-viewer [src]="data.material.material_link" [render-text]="true" [show-all]="true" style="display: block">
+    </pdf-viewer>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="data.material.material_link.endsWith('mp3')">
+  <div class="audio">
+    <audio controls>
+      <source [src]="data.material.material_link" type="audio/mp3" />
+    </audio>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!data.material.material_link.endsWith('pdf') && !data.material.material_link.endsWith('mp3')">
+  <div class="link">
+    <p mat-dialog-title>Ссылка на видео: {{ data.material.material_link }}</p>
+  </div>
+
+  <div class="youtube-preview">
+    <img [src]="getYoutubeThumbnail(data.material.material_link)" alt="Видео превью" />
+  </div>
+</ng-container>

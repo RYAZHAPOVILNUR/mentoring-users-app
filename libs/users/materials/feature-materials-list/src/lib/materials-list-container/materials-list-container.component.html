@@ -1,0 +1,15 @@
+<div class="back">
+  <button mat-icon-button (click)="onBackOnFolders()"><mat-icon>arrow_back</mat-icon></button>
+  <h1>{{ openedFolderTitle$ | async }}</h1>
+</div>
+
+<ng-container
+  *ngrxLet="{
+    materials: allMaterials$,
+    status: materialsStatus$
+  } as vm"
+>
+  <users-materials-list [vm]="vm" (deleteMaterial)="deleteMaterial($event)"></users-materials-list
+></ng-container>
+
+<users-materials-add-button></users-materials-add-button>

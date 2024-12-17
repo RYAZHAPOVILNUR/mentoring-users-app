@@ -1,0 +1,40 @@
+.title {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+
+  h1 {
+    font-size: x-large;
+    font-weight: 500;
+  }
+}
+
+.button-close {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: -65px;
+  margin-right: 10px;
+}
+
+.audio {
+  margin: 15px;
+}
+
+.youtube-preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    max-width: 1000px;
+    max-height: 500px;
+    margin-bottom: 15px;
+  }
+}
+
+.pdf-viewer {
+  width: 800px;
+  height: 600px;
+  margin: 20px;
+}
