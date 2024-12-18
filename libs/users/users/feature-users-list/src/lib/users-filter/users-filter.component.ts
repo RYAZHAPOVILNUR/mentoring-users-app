@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { BehaviorSubject, debounceTime, Subject, switchMap, takeUntil, tap, timer } from 'rxjs';
 import { UsersFacade } from '@users/users/data-access';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'users-filter',
@@ -28,16 +29,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 })
 export class UsersFilterComponent {
   public usersFacade = inject(UsersFacade);
-
   public isLoading$ = new BehaviorSubject<boolean>(false);
-
   public readonly userNameInput = new FormControl('', {
     nonNullable: true,
   });
 
-  private destroy$ = new Subject<void>();
-
-  ngOnInit(): void {
+  constructor() {
     this.userNameInput.valueChanges
       .pipe(
         debounceTime(1000),
@@ -52,12 +49,8 @@ export class UsersFilterComponent {
             })
           )
         ),
-        takeUntil(this.destroy$)
+        takeUntilDestroyed()
       )
       .subscribe();
-  }
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }
