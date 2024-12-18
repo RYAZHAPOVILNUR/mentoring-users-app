@@ -1,15 +1,15 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnDestroy } from '@angular/core';
 import { AsyncPipe, CommonModule, NgIf } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { BehaviorSubject, debounceTime, map, startWith, switchMap, tap, timer } from 'rxjs';
+import { BehaviorSubject, debounceTime, Subject, switchMap, takeUntil, tap, timer } from 'rxjs';
 import { UsersFacade } from '@users/users/data-access';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
-  selector: 'users-users-filter',
+  selector: 'users-filter',
   standalone: true,
   imports: [
     NgIf,
@@ -35,14 +35,14 @@ export class UsersFilterComponent {
     nonNullable: true,
   });
 
+  private destroy$ = new Subject<void>();
+
   ngOnInit(): void {
     this.userNameInput.valueChanges
       .pipe(
         debounceTime(1000),
         tap(() => {
-          if (this.userNameInput.dirty || this.userNameInput.touched) {
-            this.isLoading$.next(true);
-          }
+          this.isLoading$.next(true);
         }),
         switchMap((name: string) =>
           timer(500).pipe(
@@ -52,8 +52,12 @@ export class UsersFilterComponent {
             })
           )
         ),
-        startWith('')
+        takeUntil(this.destroy$)
       )
       .subscribe();
+  }
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
