@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.apiData.getData().subscribe((data) => {
-      console.log(data);
       // this.studentsData = data
     });
   }

@@ -47,4 +47,8 @@ export class UsersListContainerComponent {
       queryParams: { edit: editMode },
     });
   }
+
+  facedeQuery(name: string) {
+    this.usersFacade.usersFilterActivate(name);
+  }
 }
