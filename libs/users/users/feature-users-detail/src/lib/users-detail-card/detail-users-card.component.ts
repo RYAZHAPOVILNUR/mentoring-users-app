@@ -73,9 +73,11 @@ export class DetailUsersCardComponent implements OnInit {
         email: vm.user.email,
         username: vm.user.username,
         city: vm.user.city,
+        totalStoryPoints: vm.user.totalStoryPoints,
       });
     }
 
+    console.log(vm);
     if (vm.editMode) {
       this.formGroup.enable();
     } else {
@@ -88,6 +90,7 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    totalStoryPoints: new FormControl({ value: 0, disabled: !this.vm.editMode }),
   });
 
   @Output() editUser = new EventEmitter<{
@@ -128,6 +131,7 @@ export class DetailUsersCardComponent implements OnInit {
         name: this.formGroup.value.name || '',
         username: this.formGroup.value.username || '',
         city: this.formGroup.value.city || '',
+        totalStoryPoints: this.formGroup.value.totalStoryPoints || 0,
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
         purchaseDate: new Date().toString() || '',
         educationStatus: 'trainee',

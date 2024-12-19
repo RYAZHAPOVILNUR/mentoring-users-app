@@ -17,10 +17,19 @@ import { UsersFacade } from '@users/users/data-access';
 export class UsersFilterComponent {
   public filterFormControl = new FormControl('');
   private usersFacade = inject(UsersFacade);
+  private subscription: Subscription = new Subscription();
 
   ngOnInit(): void {
-    this.filterFormControl.valueChanges.pipe(filter((value): value is string => value !== null)).subscribe((value) => {
-      return this.usersFacade.filterUsers(value);
-    });
+    this.subscription.add(
+      this.filterFormControl.valueChanges
+        .pipe(filter((value): value is string => value !== null))
+        .subscribe((value) => {
+          return this.usersFacade.filterUsers(value);
+        })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
