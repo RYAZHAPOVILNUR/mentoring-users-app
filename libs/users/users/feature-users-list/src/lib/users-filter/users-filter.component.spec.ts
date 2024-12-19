@@ -15,7 +15,7 @@ describe('UsersFilterComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should render correctly', () => {
     expect(component).toBeTruthy();
   });
 });

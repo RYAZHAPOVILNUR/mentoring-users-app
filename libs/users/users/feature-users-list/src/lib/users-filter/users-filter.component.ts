@@ -1,11 +1,12 @@
-import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { filter, Subscription } from 'rxjs';
+import { MatInputModule } from '@angular/material/input';
 import { UsersFacade } from '@users/users/data-access';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'users-filter',
@@ -16,20 +17,15 @@ import { UsersFacade } from '@users/users/data-access';
 })
 export class UsersFilterComponent {
   public filterFormControl = new FormControl('');
-  private usersFacade = inject(UsersFacade);
-  private subscription: Subscription = new Subscription();
+  private readonly usersFacade = inject(UsersFacade);
+  destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    this.subscription.add(
-      this.filterFormControl.valueChanges
-        .pipe(filter((value): value is string => value !== null))
-        .subscribe((value) => {
-          return this.usersFacade.filterUsers(value);
-        })
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.filterFormControl.valueChanges
+      .pipe(
+        filter((value): value is string => value !== null),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe((value) => this.usersFacade.filterUsers(value));
   }
 }

@@ -89,29 +89,6 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
-            <mat-form-field
-              class="edit-user-field"
-              [matTooltip]='""+vm.user!.totalStoryPoints'
-              [matTooltipDisabled]="formGroup.enabled"
-            >
-              <mat-label>Количество сторипоинтов:</mat-label>
-              <input
-                type="number"
-                class="edit-user-input"
-                placeholder="0"
-                matInput
-                formControlName="totalStoryPoints"
-              />
-              <button mat-icon-button matSuffix type="button" aria-label="open edit totalStoryPoints field" *ngIf="!vm.editMode" (click)="onCloseUser()">
-                <mat-icon>add</mat-icon>
-              </button>
-              <button mat-icon-button matSuffix type="button" aria-label="submit updated totalStoryPoints"  *ngIf="vm.editMode"(click)="onCloseUser()">
-                <mat-icon>done</mat-icon>
-              </button>
-              <button mat-icon-button matSuffix color="warn" type="button" aria-label="close edit totalStoryPoints mode" *ngIf="vm.editMode" (click)="onCloseUser()">
-                <mat-icon>close</mat-icon>
-              </button>
-            </mat-form-field>
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
