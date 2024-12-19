@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { AsyncPipe, CommonModule, NgIf } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -35,22 +35,7 @@ export class UsersFilterComponent {
   @Output()
   public usersFilter = new EventEmitter();
 
-  // private checkInputValue() {
-  //   let isInputRequired = false;
-  //   isInputRequired = true;
-  //
-  //   const storedValue = localStorage.getItem('usersFilterValue');
-  //   if (storedValue === '' || storedValue === null) {
-  //     localStorage.removeItem('usersFilterValue');
-  //   } else {
-  //     // this.userNameInput.setValue('');
-  //     this.userNameInput.setValue(storedValue as string);
-  //   }
-  // }
-
   constructor() {
-    // this.checkInputValue();
-
     this.userNameInput.valueChanges
       .pipe(
         debounceTime(1000),
@@ -68,5 +53,9 @@ export class UsersFilterComponent {
         takeUntilDestroyed()
       )
       .subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.usersFilter.emit('');
   }
 }
