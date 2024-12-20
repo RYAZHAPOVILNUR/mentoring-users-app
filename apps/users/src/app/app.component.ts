@@ -4,7 +4,7 @@ import { authActions } from '@auth/data-access';
 import { Store } from '@ngrx/store';
 import { FooterComponent, HeaderComponent } from '@users/core/ui/layout';
 import { AuthFacade } from '@auth/data-access';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { NgIf } from '@angular/common';
 import { PushPipe } from '@ngrx/component';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -37,5 +37,6 @@ export class AppComponent {
 
   constructor() {
     this.store.dispatch(authActions.getUser());
+
   }
 }

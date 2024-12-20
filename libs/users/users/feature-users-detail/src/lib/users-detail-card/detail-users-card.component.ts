@@ -12,7 +12,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { onSuccessEditionCbType } from '@users/users/data-access';
+import { onSuccessAddStoryPointsType, onSuccessEditionCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -90,6 +90,8 @@ export class DetailUsersCardComponent implements OnInit {
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
 
+  public totalStoryPoint = new FormControl({value: 0,disabled: true},[])
+
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
     onSuccessCb: onSuccessEditionCbType;
@@ -98,7 +100,12 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
+  @Output() addStoryPoint = new EventEmitter<{
+    user: CreateUserDTO,
+    onSuccessCb: onSuccessAddStoryPointsType
+  }>
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('storyPoints') snackbarTemplateRefADP!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -122,6 +129,14 @@ export class DetailUsersCardComponent implements OnInit {
       verticalPosition: 'top',
     });
 
+  private onAddPointsSuccess: onSuccessAddStoryPointsType = () => {
+    this.snackBar.openFromTemplate(this.snackbarTemplateRefADP,{
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
+    })
+  }
+
   onSubmit(): void {
     this.editUser.emit({
       user: {
@@ -134,6 +149,19 @@ export class DetailUsersCardComponent implements OnInit {
       },
       onSuccessCb: this.onEditSuccess,
     });
+  }
+
+  onAddStoryPoint() {
+    this.totalStoryPoint.disable()
+    this.addStoryPoint.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        email: this.formGroup.value.email || '',
+        totalStoryPoints: this.totalStoryPoint.value || 0
+
+      },
+      onSuccessCb: this.onAddPointsSuccess
+    })
   }
 
   onCloseUser() {
