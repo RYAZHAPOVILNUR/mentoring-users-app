@@ -16,6 +16,7 @@ export class UsersFacade {
    * Combine pieces of state using createSelector,
    * and expose them as observables through the facade.
    */
+  public readonly filteredUsers$ = this.store.pipe(select(UsersSelectors.filteredUsers));
   public readonly status$ = this.store.pipe(select(UsersSelectors.selectUsersStatus));
   public readonly allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
   public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
@@ -56,5 +57,9 @@ export class UsersFacade {
 
   loadUser() {
     this.store.dispatch(UsersActions.loadUser());
+  }
+
+  filterUser(filter: string) {
+    this.store.dispatch(UsersActions.setUsersFilter({ filter }));
   }
 }

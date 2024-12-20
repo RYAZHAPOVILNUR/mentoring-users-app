@@ -7,6 +7,8 @@ export const selectUsersState = createFeatureSelector<UsersState>(USERS_FEATURE_
 
 const { selectAll, selectEntities } = usersAdapter.getSelectors();
 
+export const selectUsersFilter = createSelector(selectUsersState, (state: UsersState) => state.usersFilter);
+
 export const selectUsersStatus = createSelector(selectUsersState, (state: UsersState) => state.status);
 
 export const selectUsersError = createSelector(selectUsersState, (state: UsersState) => state.error);
@@ -22,6 +24,14 @@ export const selectEntity = createSelector(selectUsersEntities, selectSelectedId
 );
 
 export const selectUserById = (id: number) => createSelector(selectUsersEntities, (entities) => entities[id]);
+
+export const filteredUsers = createSelector(selectAllUsers, selectUsersFilter, (allUsers, filter) => {
+  if (filter.name.trim() === '') {
+    return allUsers;
+  } else {
+    return allUsers.filter((user) => user.name.toLowerCase().includes(filter.name.toLowerCase()));
+  }
+});
 
 export const selectOpenedUser = createSelector(
   selectRouteParams,
