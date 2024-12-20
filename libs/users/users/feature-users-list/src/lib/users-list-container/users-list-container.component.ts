@@ -39,24 +39,6 @@ export class UsersListContainerComponent {
   public readonly loggedUser$ = this.usersFacade.loggedUser$;
   private readonly router = inject(Router);
 
-  private readonly filterNameSubject = new BehaviorSubject<string | null>(null);
-  public readonly filteredUsers$ = combineLatest([
-    this.users$,
-    this.filterNameSubject.asObservable(),
-  ]).pipe(
-    map(([users, filterName]) =>
-      filterName
-        ? users.filter((user) =>
-          user.name.toLowerCase().includes(filterName.toLowerCase())
-        )
-        : users
-    )
-  );
-
-  onFilterName(filterName: string | null) {
-    this.filterNameSubject.next(filterName);
-  }
-
   onDeleteUser(user: UsersVM) {
     this.componentStore.deleteUser(user);
   }
