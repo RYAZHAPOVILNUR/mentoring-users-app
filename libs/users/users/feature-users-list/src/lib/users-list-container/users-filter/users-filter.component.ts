@@ -1,10 +1,8 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsersFacade } from '@users/users/data-access';
-import { debounceTime } from 'rxjs';
-
-
+import { debounceTime, Subscription } from 'rxjs';
 
 @Component({
   selector: 'users-filter',
@@ -15,15 +13,18 @@ import { debounceTime } from 'rxjs';
   imports: [MatInputModule, ReactiveFormsModule, FormsModule],
   providers: [],
 })
-export class UsersFilterComponent implements OnInit {
-  filterUser = new FormControl('');
-  userFacade = inject(UsersFacade)
+export class UsersFilterComponent implements OnInit, OnDestroy {
+  readonly filterUser = new FormControl('');
+  readonly userFacade = inject(UsersFacade);
+  valueChanges!: Subscription;
 
   ngOnInit(): void {
-    this.filterUser.valueChanges.pipe(debounceTime(300)).subscribe((value) => {
-      if(value !== null){
-        this.userFacade.filteredUser(value)
-      }
+    this.valueChanges = this.filterUser.valueChanges.pipe(debounceTime(300)).subscribe((value) => {
+      value ? this.userFacade.filteredUser(value) : '';
     });
+  }
+
+  ngOnDestroy() {
+    this.valueChanges.unsubscribe();
   }
 }

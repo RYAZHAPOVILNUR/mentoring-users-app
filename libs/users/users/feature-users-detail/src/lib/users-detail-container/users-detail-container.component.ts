@@ -1,15 +1,15 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
-import { UsersErrors, UsersFacade, onSuccessEditionCbType } from '@users/users/data-access';
-import { Observable, map, tap } from 'rxjs';
-import { selectQueryParam, CreateUserDTO, UsersEntity } from '@users/core/data-access';
-import { Store, select } from '@ngrx/store';
-import { LetDirective } from '@ngrx/component';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { CoreUiConfirmDialogComponent } from '@users/core/ui';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { LetDirective } from '@ngrx/component';
+import { select, Store } from '@ngrx/store';
+import { CreateUserDTO, selectQueryParam, UsersEntity } from '@users/core/data-access';
+import { CoreUiConfirmDialogComponent } from '@users/core/ui';
+import { onSuccessEditionCbType, UsersErrors, UsersFacade } from '@users/users/data-access';
+import { map, Observable, tap } from 'rxjs';
+import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector

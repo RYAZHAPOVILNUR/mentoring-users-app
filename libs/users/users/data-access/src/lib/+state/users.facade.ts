@@ -1,12 +1,12 @@
-import { Injectable, inject } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import * as UsersActions from './users.actions';
-import * as UsersSelectors from './users.selectors';
-import { Observable, of, switchMap } from 'rxjs';
-import { UsersErrors } from './users.reducer';
-import { onSuccessEditionCbType } from './users.actions';
+import { inject, Injectable } from '@angular/core';
 import { selectLoggedUser } from '@auth/data-access';
+import { select, Store } from '@ngrx/store';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { Observable, of, switchMap } from 'rxjs';
+import * as UsersActions from './users.actions';
+import { onSuccessEditionCbType } from './users.actions';
+import { UsersErrors } from './users.reducer';
+import * as UsersSelectors from './users.selectors';
 import { filteredUsers } from './users.selectors';
 
 @Injectable({ providedIn: 'root' })
