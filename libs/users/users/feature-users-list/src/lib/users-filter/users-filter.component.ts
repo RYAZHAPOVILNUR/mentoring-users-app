@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'users-filter',
@@ -10,16 +10,25 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
   imports: [ReactiveFormsModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersFilterComponent {
+export class UsersFilterComponent implements OnInit, OnDestroy {
   private readonly fb = inject(FormBuilder);
+  private readonly destroy$ = new Subject<void>();
   public readonly filterUsers = this.fb.control('', [Validators.required]);
 
-  @Output() filt = new EventEmitter();
-  constructor() {
-    this.filterUsers.valueChanges.pipe(debounceTime(1000), distinctUntilChanged()).subscribe((value) => {
-      if (value !== null) {
-        this.filt.emit(value);
-      }
-    });
+  @Output() filterChanged = new EventEmitter<string>();
+
+  ngOnInit(): void {
+    this.filterUsers.valueChanges
+      .pipe(debounceTime(1000), distinctUntilChanged(), takeUntil(this.destroy$))
+      .subscribe((value) => {
+        if (value !== null) {
+          this.filterChanged.emit(value);
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
