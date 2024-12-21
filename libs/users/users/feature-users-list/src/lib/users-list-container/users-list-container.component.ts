@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersListComponent } from '../users-list/users-list.component';
 import { UsersListContainerStore } from './users-list-container.store';
@@ -9,6 +9,8 @@ import { UsersFacade } from '@users/users/data-access';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
+import { UsersFilterComponent } from '../users-filter/users-filter.component';
+import { UsersCardComponent } from '../users-card/users-card.component';
 
 @Component({
   selector: 'users-list-container',
@@ -20,6 +22,8 @@ import { CreateUsersButtonComponent } from '@users/feature-users-create';
     MatDialogModule,
     LetDirective,
     CreateUsersButtonComponent,
+    UsersFilterComponent,
+    UsersCardComponent,
   ],
   templateUrl: './users-list-container.component.html',
   styleUrls: ['./users-list-container.component.scss'],
@@ -34,6 +38,7 @@ export class UsersListContainerComponent {
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;
   public readonly loggedUser$ = this.usersFacade.loggedUser$;
+  public readonly filteredUsers$ = this.usersFacade.filteredUsers$;
   private readonly router = inject(Router);
 
   onDeleteUser(user: UsersVM) {
@@ -44,5 +49,9 @@ export class UsersListContainerComponent {
     this.router.navigate(['/admin/users', id], {
       queryParams: { edit: editMode },
     });
+  }
+
+  onFilterUsersList(filter: string) {
+    this.usersFacade.filterUsers({ name: filter })
   }
 }
