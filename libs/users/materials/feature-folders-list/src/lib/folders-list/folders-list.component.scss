@@ -1,0 +1,16 @@
+.add_btn {
+  position: absolute;
+  right: 320px;
+  bottom: 20px;
+  background: #2e7d32;
+  color: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 0px 5px 3px rgba(0, 0, 0, 0.19);
+  width: 70px;
+  height: 70px;
+}
+
+.folders_container {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}

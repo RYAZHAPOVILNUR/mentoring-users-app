@@ -1,0 +1,23 @@
+<ng-container  *ngrxLet="{
+  materials: materials$,
+  status: status$
+} as vm" >
+
+  <ng-container [ngSwitch]="vm.status">
+
+    <ng-container *ngSwitchCase="'loading'">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'error'">
+      <div>
+        <h1>{{vm.status}}</h1>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'loaded'">
+      <users-materials-list [materials]="vm.materials"></users-materials-list>
+    </ng-container>
+  </ng-container>
+
+</ng-container>

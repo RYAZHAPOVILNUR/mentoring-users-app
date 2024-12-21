@@ -1,0 +1,32 @@
+.folder-link {
+  text-decoration: none;
+}
+
+.folder {
+  width: 130px;
+  height: 100px;
+  background-color: #aaa4a4;
+  border-radius: 5px;
+  padding: 10px;
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+}
+.folder-title {
+  font-size: 15px;
+  font-weight: 400;
+}
+.icons {
+  display: flex;
+  justify-content: space-between;
+}
+.folder-delete mat-icon {
+  font-size: 20px;
+
+}
+
+.delete {
+  width: 130px;
+}
+
+
+

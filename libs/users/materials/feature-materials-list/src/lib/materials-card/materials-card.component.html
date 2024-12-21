@@ -1,0 +1,12 @@
+  <div class="folder">
+    <div class="icons">
+      <mat-icon class="folder-img" *ngIf="material.material_link.endsWith('.pdf')"><span class="material-icons-outlined">insert_drive_file</span></mat-icon>
+      <mat-icon class="folder-delete" *ngIf="material.material_link.includes('www.youtube.com')"><span class="material-icons-outlined">play_circle</span></mat-icon>
+      <mat-icon class="folder-delete" *ngIf="material.material_link.endsWith('.mp3')"><span class="material-icons-outlined">music_note</span></mat-icon>
+      <mat-icon class="folder-delete"><span class="material-icons-outlined">delete</span></mat-icon>
+
+    </div>
+    <div class="folder-title">{{material.title}}</div>
+    <div class="folder-date">{{material.created_at}}</div>
+  </div>
+

@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'users-materials',
-  preset: '../../../jest.preset.js',
+  displayName: 'feature-materials-list',
+  preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../coverage/libs/users/materials',
+  coverageDirectory: '../../../../coverage/libs/users/materials/feature-materials-list',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

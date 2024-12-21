@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="back-arrow">
+    <button (click)="goBack()" mat-icon-button>
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span>20.19</span>
+  </div>
+
+  <div class="materials_wrapper">
+  <ng-container *ngFor="let material of materials">
+      <users-materials-card [material]="material"></users-materials-card>
+  </ng-container>
+  </div>
+
+
+  <button mat-icon-button class="add_btn">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
