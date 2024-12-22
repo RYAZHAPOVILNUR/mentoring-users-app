@@ -21,7 +21,9 @@ export class UsersFacade {
   public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
   public readonly loggedUser$ = this.store.select(selectLoggedUser);
-  public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError));
+  public readonly errors$: Observable<UsersErrors | null> = 
+  this.store.pipe(select(UsersSelectors.selectUsersError));
+  public readonly filteredUsers$ = this.store.select(UsersSelectors.filteredUsers);
   /**
    * Use the initialization action to perform one
    * or more tasks in your Effects.
@@ -56,5 +58,16 @@ export class UsersFacade {
 
   loadUser() {
     this.store.dispatch(UsersActions.loadUser());
+  }
+  filterUser(name: string) {
+    this.store.dispatch(UsersActions.setUsersFilter({ name }));
+  }
+
+  addUserStoryPoints(
+    userData: CreateUserDTO,
+    id: number,
+    onSuccessCbStoryPoints: UsersActions.onSuccessStoryPointsCbType
+  ) {
+    this.store.dispatch(UsersActions.addUserStoryPoints({ userData, id, onSuccessCbStoryPoints }));
   }
 }

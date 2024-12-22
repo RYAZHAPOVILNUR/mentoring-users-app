@@ -1,7 +1,7 @@
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,6 +15,11 @@ import { PushPipe } from '@ngrx/component';
 import { UsersEntity } from '@users/core/data-access';
 import { skip } from 'rxjs/operators';
 import { BacklogFacade } from '@users/users/backlog/data-access';
+import { Chart, defaults, Tooltip } from 'chart.js';
+
+Chart.register(Tooltip);
+
+const numbers = defaults.animations['numbers'];
 
 interface Task {
   name: string;
@@ -51,13 +56,7 @@ interface StoryPoint {
 })
 export class TaskChangeDialogComponent {
   public readonly data: any = inject(MAT_DIALOG_DATA);
-  private readonly backlogFacade = inject(BacklogFacade);
-  private readonly usersFacade = inject(UsersFacade);
-  private dialogRef = inject(MatDialogRef<TaskChangeDialogComponent>);
   public status = false;
-  constructor() {
-    this.usersFacade.init();
-  }
 
   public storyPoint: StoryPoint = {
     UX: '?',
@@ -65,28 +64,6 @@ export class TaskChangeDialogComponent {
     FRONT: '?',
     BACK: '?',
   };
-
-  get totalPoint(): string {
-    const values = Object.values(this.storyPoint);
-
-    if (Object.values(this.storyPoint).every((value) => value === '?')) return '?';
-
-    return values.reduce((total, currentValue) => {
-      const parsedValue = parseFloat(currentValue);
-      if (!isNaN(parsedValue)) {
-        return total + parsedValue;
-      } else {
-        return total;
-      }
-    }, 0);
-  }
-
-  setPoint(category: string, value: string) {
-    this.storyPoint = {
-      ...this.storyPoint,
-      [category]: value,
-    };
-  }
 
   public task: Task = {
     name: this.data?.title,
@@ -124,7 +101,47 @@ export class TaskChangeDialogComponent {
   public textareaValue = this.editMode ? this.task.name : '';
   public editorContent: string = this.editMode ? this.task.descriprion : '';
   public editStatus = false;
+  public quillEditorModules = {
+    toolbar: [
+      [{ font: [] }],
+      ['bold', 'italic', 'underline'],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      [{ color: [] }, { background: [] }],
+      ['link', 'image'],
+    ],
+  };
+  protected readonly Tooltip = Tooltip;
+  protected readonly numbers = numbers;
+  private readonly backlogFacade = inject(BacklogFacade);
+  private readonly usersFacade = inject(UsersFacade);
   public users$ = this.usersFacade.allUsers$;
+  private dialogRef = inject(MatDialogRef<TaskChangeDialogComponent>);
+
+  constructor() {
+    this.usersFacade.init();
+  }
+
+  get totalPoint(): string {
+    const values = Object.values(this.storyPoint);
+
+    if (Object.values(this.storyPoint).every((value) => value === '?')) return '?';
+
+    return values.reduce((total, currentValue) => {
+      const parsedValue = parseFloat(currentValue);
+      if (!isNaN(parsedValue)) {
+        return total + parsedValue;
+      } else {
+        return total;
+      }
+    }, 0);
+  }
+
+  setPoint(category: string, value: string) {
+    this.storyPoint = {
+      ...this.storyPoint,
+      [category]: value,
+    };
+  }
 
   ngOnInit() {
     console.log(this.data);
@@ -153,16 +170,6 @@ export class TaskChangeDialogComponent {
     this.editMode = true;
     this.editStatus = !this.editStatus;
   }
-
-  public quillEditorModules = {
-    toolbar: [
-      [{ font: [] }],
-      ['bold', 'italic', 'underline'],
-      [{ list: 'ordered' }, { list: 'bullet' }],
-      [{ color: [] }, { background: [] }],
-      ['link', 'image'],
-    ],
-  };
 
   public cancel(): void {
     this.dialogRef.close();
