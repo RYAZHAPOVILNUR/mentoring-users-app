@@ -4,6 +4,9 @@ import { CreateUserDTO, LoadingStatus, UsersDTO, UsersEntity } from '@users/core
 
 export type onSuccessEditionCbType = () => void;
 export type onSuccessStoryPointsCbType = () => void;
+export type UsersFilter = {
+  name: string;
+};
 
 export const initUsers = createAction('[Users Page] Init');
 
@@ -40,7 +43,7 @@ export const loadUserFailed = createAction('[Users/Api] Load User Failed', props
 
 export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{ status: LoadingStatus }>());
 
-export const setUsersFilter = createAction('[Users Page] Filter Users', props<{ name: string }>());
+export const setUsersFilter = createAction('[Users Page] Filter Users', props<UsersFilter>());
 
 export const addUserStoryPoints = createAction(
   '[Users Detail] Add User Story Points',
