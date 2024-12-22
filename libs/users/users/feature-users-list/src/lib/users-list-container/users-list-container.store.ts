@@ -31,6 +31,19 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
     this.setUsersFromGlobalToLocalStore();
   }
 
+<<<<<<< HEAD
+=======
+  private setUsersFromGlobalToLocalStore(): void {
+   this.effect(() => this.usersFacade.filteredUsers$.pipe(tap((users: UsersEntity[]) => this.patchUsers(users))));
+  }
+
+  private patchUsers(users: UsersEntity[]): void {
+    this.patchState({
+      users: users.map((user) => usersVMAdapter.entityToVM(user)),
+    });
+  }
+
+>>>>>>> b5eb36a0bc5b8437c99a21b3a9fb457e97d1fbc0
   public deleteUser(user: UsersVM): void {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
       data: { dialogText: `Вы уверены, что хотите удалить ${user.name}` },
@@ -43,6 +56,7 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
       )
     );
   }
+<<<<<<< HEAD
   private setUsersFromGlobalToLocalStore(): void {
     this.effect(() => this.usersFacade.filteredUsers$.pipe(tap((users: UsersEntity[]) => this.patchUsers(users))));
   }
@@ -52,4 +66,6 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
       users: users.map((user) => usersVMAdapter.entityToVM(user))
     });
   }
+=======
+>>>>>>> b5eb36a0bc5b8437c99a21b3a9fb457e97d1fbc0
 }

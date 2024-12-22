@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .input {
     border: 1px solid #ddd;
     width: 160px;
@@ -14,3 +15,20 @@
       }
     }
   }
+=======
+.filter-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  align-items: center;
+
+  &__input {
+    width: 310px;
+    margin-top: 5px;
+  }
+
+  &__label {
+    text-transform: uppercase;
+  }
+}
+>>>>>>> b5eb36a0bc5b8437c99a21b3a9fb457e97d1fbc0

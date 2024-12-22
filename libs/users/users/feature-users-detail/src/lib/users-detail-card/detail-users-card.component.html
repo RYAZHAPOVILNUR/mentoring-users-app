@@ -91,6 +91,7 @@
             </mat-form-field>
 
             <mat-form-field class="edit-user-field">
+<<<<<<< HEAD
               <mat-label>Количество сторипоинтов:</mat-label>
               <input
                 matInput
@@ -127,6 +128,44 @@
                 <mat-icon>add</mat-icon>
               </button>
             </mat-form-field>
+=======
+             <mat-label>Количество сторипоинтов:</mat-label>
+             <input
+               matInput
+               placeholder="0"
+               class="edit-user-input"
+               [formControl]="totalStoryPoints"
+               [disabled]="false"
+             />
+             <button
+               (click)="onAddStoryPoint()"
+               *ngIf="!totalStoryPoints.disabled"
+               matSuffix
+               mat-icon-button
+               aria-label="done"
+             >
+               <mat-icon>done</mat-icon>
+             </button>
+             <button
+               (click)="totalStoryPoints.disable()"
+               *ngIf="!totalStoryPoints.disabled"
+               matSuffix
+               mat-icon-button
+               aria-label="close"
+             >
+               <mat-icon>close</mat-icon>
+             </button>
+             <button
+               (click)="totalStoryPoints.enable()"
+               *ngIf="totalStoryPoints.disabled"
+               matSuffix
+               mat-icon-button
+               aria-label="add"
+             >
+               <mat-icon>add</mat-icon>
+             </button>
+           </mat-form-field>
+>>>>>>> b5eb36a0bc5b8437c99a21b3a9fb457e97d1fbc0
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
@@ -164,7 +203,13 @@
 </ng-template>
 
 <ng-template #snackbarStoryPoints>
+<<<<<<< HEAD
   <div class="edit-user-snackbar">
     <span>Сторипоинт успешно добавлен!</span>
   </div>
+=======
+ <div class="edit-user-snackbar">
+   <span>Сторипоинт успешно добавлен!</span>
+ </div>
+>>>>>>> b5eb36a0bc5b8437c99a21b3a9fb457e97d1fbc0
 </ng-template>

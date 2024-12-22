@@ -9,7 +9,11 @@ import { UsersFacade } from '@users/users/data-access';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
+<<<<<<< HEAD
 import { UsersFilterComponent } from '../users-filter/users-filter.component';
+=======
+import { UsersFilterComponent } from "../users-filter/users-filter.component";
+>>>>>>> b5eb36a0bc5b8437c99a21b3a9fb457e97d1fbc0
 
 @Component({
   selector: 'users-list-container',
@@ -22,7 +26,11 @@ import { UsersFilterComponent } from '../users-filter/users-filter.component';
     LetDirective,
     CreateUsersButtonComponent,
     UsersFilterComponent
+<<<<<<< HEAD
 ],
+=======
+  ],
+>>>>>>> b5eb36a0bc5b8437c99a21b3a9fb457e97d1fbc0
   templateUrl: './users-list-container.component.html',
   styleUrls: ['./users-list-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
@@ -51,4 +59,10 @@ export class UsersListContainerComponent {
   onFilterUsers(name: string) {
     this.usersFacade.filterUser(name);
   }
+<<<<<<< HEAD
+=======
+  onFilter(name: string) {
+   this.usersFacade.filterUsers(name);
+ }
+>>>>>>> b5eb36a0bc5b8437c99a21b3a9fb457e97d1fbc0
 }

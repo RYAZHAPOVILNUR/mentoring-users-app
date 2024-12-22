@@ -4,9 +4,12 @@ import { CreateUserDTO, LoadingStatus, UsersDTO, UsersEntity } from '@users/core
 
 export type onSuccessEditionCbType = () => void;
 export type onSuccessStoryPointsCbType = () => void;
+<<<<<<< HEAD
 export type UsersFilter = {
   name: string;
 };
+=======
+>>>>>>> b5eb36a0bc5b8437c99a21b3a9fb457e97d1fbc0
 
 export const initUsers = createAction('[Users Page] Init');
 
@@ -43,6 +46,7 @@ export const loadUserFailed = createAction('[Users/Api] Load User Failed', props
 
 export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{ status: LoadingStatus }>());
 
+<<<<<<< HEAD
 export const setUsersFilter = createAction('[Users Page] Filter Users', props<UsersFilter>());
 
 export const addUserStoryPoints = createAction(
@@ -61,4 +65,24 @@ export const addUserStoryPointsSuccess = createAction(
 export const addUserStoryPointsFailed = createAction(
   '[Users Detail] Add User Story Points Failed',
   props<{ error: UsersErrors | null }>()
+=======
+export const setUsersFilter = createAction('[Users Filter] Filter Users', props<{name: string}>());
+
+export const addUserStoryPoints = createAction(
+ '[Users Detail] Add User Story Points',
+ props<{
+   userData: CreateUserDTO;
+   id: number;
+   onSuccessCbStoryPoints: onSuccessStoryPointsCbType }>()
+);
+
+export const addUserStoryPointsSuccess = createAction(
+ '[Users Detail] Add User Story Points Success',
+ props<{ userData: UsersDTO }>()
+);
+
+export const addUserStoryPointsFailed = createAction(
+ '[Users Detail] Add User Story Points Failed',
+ props<{ error: UsersErrors | null }>()
+>>>>>>> b5eb36a0bc5b8437c99a21b3a9fb457e97d1fbc0
 );

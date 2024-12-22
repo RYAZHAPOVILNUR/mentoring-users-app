@@ -100,12 +100,19 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
   @Output() addUserStoryPoint = new EventEmitter<{
+<<<<<<< HEAD
     user: CreateUserDTO;
     onSuccessStoryPoints: onSuccessStoryPointsCbType;
   }>();
+=======
+   user: CreateUserDTO;
+   onSuccessStoryPoints: onSuccessStoryPointsCbType;
+ }>();
+>>>>>>> b5eb36a0bc5b8437c99a21b3a9fb457e97d1fbc0
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
   @ViewChild('snackbarStoryPoints') snackbarTemplateSPRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
+  @ViewChild('snackbarStoryPoints') snackbarTemplateSPRef!: TemplateRef<any>;
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
     distinctUntilChanged(),
@@ -146,6 +153,25 @@ export class DetailUsersCardComponent implements OnInit {
         onSuccessStoryPoints: this.onAddSuccessStoryPoints,
       });
     }
+
+    private onAddSuccessStoryPoints: onSuccessStoryPointsCbType = () =>
+     this.snackBar.openFromTemplate(this.snackbarTemplateSPRef, {
+       duration: 1200,
+       horizontalPosition: 'right',
+       verticalPosition: 'top',
+     });
+ 
+   public onAddStoryPoint(): void {
+     this.totalStoryPoints.disable();
+     this.addUserStoryPoint.emit({
+       user: {
+         name: this.formGroup.value.name || '',
+         email: this.formGroup.value.email?.trim().toLowerCase() || '',
+         totalStoryPoints: this.totalStoryPoints.value || 0,
+       },
+       onSuccessStoryPoints: this.onAddSuccessStoryPoints,
+     });
+   }
 
   onSubmit(): void {
     this.editUser.emit({

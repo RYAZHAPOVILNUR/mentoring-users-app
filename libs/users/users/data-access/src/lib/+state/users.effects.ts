@@ -161,6 +161,10 @@ export const addUserStoryPoints = createEffect(
           tap(({ onSuccessCbStoryPoints }) => onSuccessCbStoryPoints()),
           map(({ userData }) => UsersActions.addUserStoryPointsSuccess({ userData })),
           catchError((error) => {
+<<<<<<< HEAD
+=======
+            console.error('Error', error);
+>>>>>>> b5eb36a0bc5b8437c99a21b3a9fb457e97d1fbc0
             return of(UsersActions.addUserStoryPointsFailed({ error }));
           })
         )
