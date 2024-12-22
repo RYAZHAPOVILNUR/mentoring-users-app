@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsersListVM } from './users-list-view-model';
-import { UsersCardComponent } from '../users-card/users-card.component';
-import { UsersVM } from '../../../../users-vm';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { UsersVM } from '../../../../users-vm';
+import { UsersCardComponent } from '../users-card/users-card.component';
+import { UsersListVM } from './users-list-view-model';
 
 @Component({
   selector: 'users-list-ui',
