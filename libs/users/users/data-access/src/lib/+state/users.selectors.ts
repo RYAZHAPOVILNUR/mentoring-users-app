@@ -34,8 +34,3 @@ export const selectUsersFilter = createSelector(selectUsersState, (state: UsersS
 export const selectFilteredUsers = createSelector(selectUsersFilter, selectAllUsers, (usersFilter, allUsers) =>
   allUsers.filter((user) => user.name.toLowerCase().includes(usersFilter.name.toLowerCase()))
 );
-// old vers...
-// if (!usersFilter.name.trim()) {
-//   return allUsers;
-// }
-// return allUsers.filter((user) => user.name.includes(usersFilter.name.toLowerCase()));

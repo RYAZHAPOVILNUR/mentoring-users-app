@@ -26,7 +26,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { DadataApiService } from '@dadata';
-import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, of, switchMap, tap } from 'rxjs';
 import { PushPipe } from '@ngrx/component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -63,6 +63,10 @@ export class DetailUsersCardComponent implements OnInit {
   public get vm() {
     return this._vm;
   }
+
+  // private storyPointsSubject$ = new BehaviorSubject<number | undefined>(this.vm.user?.totalStoryPoints);
+  // public storyPoints$ = this.storyPointsSubject$.asObservable();
+
   @Input({ required: true })
   set vm(vm: DetailUsersCardVm) {
     this._vm = vm;
@@ -73,6 +77,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: vm.user.email,
         username: vm.user.username,
         city: vm.user.city,
+        totalStoryPoints: vm.user.totalStoryPoints,
       });
     }
 
@@ -81,13 +86,58 @@ export class DetailUsersCardComponent implements OnInit {
     } else {
       this.formGroup.disable();
     }
+
+    this.isStoryPointEnable$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value) => {
+      if (value) {
+        this.formGroup.get('totalStoryPoints')?.enable();
+      } else {
+        this.formGroup.get('totalStoryPoints')?.disable();
+      }
+    });
+  }
+
+  private isStoryPointEnableSubject$ = new BehaviorSubject<boolean>(false);
+  public isStoryPointEnable$ = this.isStoryPointEnableSubject$.asObservable();
+
+  public disableStoryPointInput() {
+    this.isStoryPointEnableSubject$.next(!this.isStoryPointEnableSubject$.value);
+
+    if (this.formGroup.get('totalStoryPoints')?.value !== this.vm.user?.totalStoryPoints) {
+      this.formGroup.get('totalStoryPoints')?.reset();
+      this.formGroup.get('totalStoryPoints')?.setValue(this.vm.user?.totalStoryPoints);
+    }
+  }
+
+  public doneStoryPointBtn() {
+    if (Number(this.formGroup.get('totalStoryPoints')?.value) === Number(this.vm.user?.totalStoryPoints)) {
+      this.disableStoryPointInput();
+    }
   }
 
   public formGroup = new FormBuilder().group({
-    name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
-    email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
+    name: new FormControl(
+      {
+        value: '',
+        disabled: !this.vm.editMode,
+      },
+      [Validators.required]
+    ),
+    email: new FormControl(
+      {
+        value: '',
+        disabled: !this.vm.editMode,
+      },
+      [Validators.required, Validators.email]
+    ),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    totalStoryPoints: new FormControl(
+      {
+        value: this.vm.user?.totalStoryPoints,
+        disabled: !this.vm.editMode,
+      },
+      [Validators.required, Validators.pattern(/^(0|[1-9][0-9]*)$/), Validators.maxLength(2)]
+    ),
   });
 
   @Output() editUser = new EventEmitter<{
@@ -129,6 +179,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: this.formGroup.value.username || '',
         city: this.formGroup.value.city || '',
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        totalStoryPoints: this.formGroup.value.totalStoryPoints ?? undefined,
         purchaseDate: new Date().toString() || '',
         educationStatus: 'trainee',
       },
