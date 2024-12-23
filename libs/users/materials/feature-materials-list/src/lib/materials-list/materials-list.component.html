@@ -1,0 +1,28 @@
+<div class="folder-title-wrapper">
+    <button mat-icon-button class="backspace-button" (click)="onBackToFolders()">
+      <mat-icon class="backspace-icon">arrow_back</mat-icon>
+    </button>
+    <span class="folder-title">{{ vm.openFolder?.title }}</span>
+  </div>
+  
+  <ng-container *ngIf="vm.status === 'loading'; else loadingResult">
+    <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+  </ng-container>
+  
+  <ng-template #loadingResult>
+    <ng-container *ngIf="vm.status === 'loaded'; else error">
+      <div class="material-list-container">
+        <div *ngFor="let material of vm.openMaterial">
+          <users-materials-card [material]="material" (deleteMaterial)="onDeleteMaterial(material)" (dblclick)="onOpenMaterial(material)" />
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>
+  
+  <ng-template #error>
+    <div class="alert alert-danger" role="alert">
+      <h1>{{ vm.errors?.status }}</h1>
+      <hr />
+      {{ vm.errors }}
+    </div>
+  </ng-template>
