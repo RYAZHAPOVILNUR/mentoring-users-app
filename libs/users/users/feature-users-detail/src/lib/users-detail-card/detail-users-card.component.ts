@@ -75,11 +75,8 @@ export class DetailUsersCardComponent implements OnInit {
         city: vm.user.city,
       });
     }
-    if (vm.editMode) {
-      this.formGroup.enable();
-    } else {
-      this.formGroup.disable();
-    }
+    if (vm.editMode) this.formGroup.enable();
+    this.formGroup.disable();
   }
 
   public formGroup = new FormBuilder().group({
