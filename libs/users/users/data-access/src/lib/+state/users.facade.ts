@@ -58,7 +58,7 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.loadUser());
   }
 
-  addUserStoryPoints(userData: {id: number, userStoryPoints: number, onSuccessAddSP:onSuccessAddSP}) {
-    this.store.dispatch(UsersActions.addUserStoryPoints(userData))
+  addUserStoryPoints(userData: { id: number; userStoryPoints: number; onSuccessAddSP: onSuccessAddSP }) {
+    this.store.dispatch(UsersActions.addUserStoryPoints(userData));
   }
 }

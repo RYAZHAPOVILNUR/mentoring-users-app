@@ -89,11 +89,10 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
-<!--        ////////////////   -->
 
             <mat-form-field class="edit-user-field">
               <mat-label>Количество сторипоинтов</mat-label>
-              <input type="nunmber" matInput [formControl]="totalUserStoryPoints">
+              <input type="number" matInput [formControl]="totalUserStoryPoints" />
               <button
                 *ngIf="totalUserStoryPoints.enabled"
                 (click)="onAddStoryPoints()"
@@ -123,11 +122,6 @@
                 <mat-icon>add</mat-icon>
               </button>
             </mat-form-field>
-
-
-
-
-<!--         ///////////////////   -->
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button

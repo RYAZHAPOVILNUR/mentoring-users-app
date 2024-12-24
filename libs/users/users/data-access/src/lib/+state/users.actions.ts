@@ -6,6 +6,12 @@ export type onSuccessEditionCbType = () => void;
 
 export type onSuccessAddSP = () => void;
 
+export interface IUserStoryPoints {
+  userStoryPoints: number;
+  id: number;
+  onSuccessAddSP: onSuccessAddSP;
+}
+
 export const initUsers = createAction('[Users Page] Init');
 
 export const loadUsersSuccess = createAction('[Users/API] Load Users Success', props<{ users: UsersEntity[] }>());
@@ -20,13 +26,18 @@ export const addUser = createAction('[Users Page] Add User', props<{ userData: C
 export const addUserSuccess = createAction('[Users/Api] Add User Success', props<{ userData: UsersEntity }>());
 export const addUserFailed = createAction('[Users/Api] Add User Failed', props<{ error: any }>());
 
-export const addUserStoryPoints = createAction('[User Page] Add User Story Points', props<{ userStoryPoints: number, id: number, onSuccessAddSP: onSuccessAddSP}>());
-export const addUserStoryPointsSuccess = createAction('[User Page] Add User Story Points Success', props<{userData: UsersDTO}>())
-export const addUserStoryPointsFailed = createAction('[User Page] Add User Story Points Failed', props<{error: any}>())
-
-// export const selectId = createAction('[Users Page] Select Id', props<{ id: number }>());
-
-// export const deleteSelectedId = createAction('[Users Page] Delete Selected Id');
+export const addUserStoryPoints = createAction(
+  '[User Page] Add User Story Points',
+  props<IUserStoryPoints>()
+);
+export const addUserStoryPointsSuccess = createAction(
+  '[User Page] Add User Story Points Success',
+  props<{ userData: UsersDTO }>()
+);
+export const addUserStoryPointsFailed = createAction(
+  '[User Page] Add User Story Points Failed',
+  props<{ error: any }>()
+);
 
 export const editUser = createAction(
   '[Users Detail] Edit User',
