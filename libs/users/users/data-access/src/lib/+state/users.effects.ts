@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, catchError, of, map, withLatestFrom, filter, tap } from 'rxjs';
+import { switchMap, catchError, of, map, withLatestFrom, filter, tap, delay } from 'rxjs';
 import * as UsersActions from './users.actions';
 import { ApiService } from '@users/core/http';
 import { Store, select } from '@ngrx/store';
@@ -14,7 +14,7 @@ export const userEffects = createEffect(
 
     return actions$.pipe(
       ofType(UsersActions.initUsers),
-      // delay(1500),
+      delay(1500),
       switchMap(() =>
         apiService.get<UsersDTO[]>('/users').pipe(
           map((users) =>
@@ -39,7 +39,7 @@ export const deleteUser = createEffect(
     const apiService = inject(ApiService);
     return actions$.pipe(
       ofType(UsersActions.deleteUser),
-      // delay(1500),
+      delay(1500),
       switchMap(({ id }) =>
         apiService.delete<void>(`/users/${id}`).pipe(
           map(() => UsersActions.deleteUserSuccess({ id })),
@@ -60,7 +60,7 @@ export const addUser = createEffect(
     const apiService = inject(ApiService);
     return actions$.pipe(
       ofType(UsersActions.addUser),
-      // delay(1500),
+      delay(1500),
       switchMap(({ userData }) =>
         apiService.post<UsersDTO, CreateUserDTO>('/users', userData).pipe(
           map((user) => usersDTOAdapter.DTOtoEntity(user)),
@@ -161,7 +161,6 @@ export const addUserStoryPoints = createEffect(
           tap(({ onSuccessCbStoryPoints }) => onSuccessCbStoryPoints()),
           map(({ userData }) => UsersActions.addUserStoryPointsSuccess({ userData })),
           catchError((error) => {
-            console.error('Error', error);
             return of(UsersActions.addUserStoryPointsFailed({ error }));
           })
         )

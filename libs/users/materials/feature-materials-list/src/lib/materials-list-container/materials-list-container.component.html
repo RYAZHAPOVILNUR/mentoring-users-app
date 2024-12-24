@@ -1,0 +1,9 @@
+<ng-container *ngrxLet="{
+    openMaterial: openMaterial$,
+    status: status$,
+    errors: errors$,
+    openFolder: openFolder$
+} as vm">
+<users-materials-list [vm]="vm" (backToFolder)="onBackToFolders()" (deleteMaterial)="onDeleteMaterial($event)" (openMaterial)="onOpenMaterial($event)"/>
+</ng-container>
+<users-materials-add-button></users-materials-add-button>
