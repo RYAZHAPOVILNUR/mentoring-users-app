@@ -112,7 +112,7 @@
               type="button"
               mat-icon-button
               matSuffix
-              (click)="disableStoryPointInput()"
+              (click)="resetStoryPointInput()"
             >
               <mat-icon>add</mat-icon>
             </button>
@@ -123,7 +123,7 @@
               [disabled]="formGroup.get('totalStoryPoints')?.invalid || !formGroup.get('totalStoryPoints')?.dirty"
               mat-icon-button
               matSuffix
-              (click)="doneStoryPointBtn()"
+              (click)="doneStoryPointInputBtn()"
             >
               <mat-icon>done</mat-icon>
             </button>
@@ -133,7 +133,7 @@
               type="button"
               mat-icon-button
               matSuffix
-              (click)="disableStoryPointInput()"
+              (click)="closeStoryPointInputBtn()"
             >
               <mat-icon>close</mat-icon>
             </button>

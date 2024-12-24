@@ -99,18 +99,23 @@ export class DetailUsersCardComponent implements OnInit {
   private isStoryPointEnableSubject$ = new BehaviorSubject<boolean>(false);
   public isStoryPointEnable$ = this.isStoryPointEnableSubject$.asObservable();
 
-  public disableStoryPointInput() {
+  public resetStoryPointInput(reset = 'none') {
     this.isStoryPointEnableSubject$.next(!this.isStoryPointEnableSubject$.value);
-
-    if (this.formGroup.get('totalStoryPoints')?.value !== this.vm.user?.totalStoryPoints) {
+    if (reset === 'true') {
       this.formGroup.get('totalStoryPoints')?.reset();
       this.formGroup.get('totalStoryPoints')?.setValue(this.vm.user?.totalStoryPoints);
     }
   }
 
-  public doneStoryPointBtn() {
+  public closeStoryPointInputBtn() {
+    if (this.formGroup.get('totalStoryPoints')?.value !== this.vm.user?.totalStoryPoints) {
+      this.resetStoryPointInput('true');
+    }
+  }
+
+  public doneStoryPointInputBtn() {
     if (Number(this.formGroup.get('totalStoryPoints')?.value) === Number(this.vm.user?.totalStoryPoints)) {
-      this.disableStoryPointInput();
+      this.resetStoryPointInput();
     }
   }
 
@@ -136,7 +141,7 @@ export class DetailUsersCardComponent implements OnInit {
         value: this.vm.user?.totalStoryPoints,
         disabled: !this.vm.editMode,
       },
-      [Validators.required, Validators.pattern(/^(0|[1-9][0-9]*)$/), Validators.maxLength(2)]
+      [Validators.required, Validators.pattern(/^(0|[1-9][0-9]*)$/)]
     ),
   });
 
