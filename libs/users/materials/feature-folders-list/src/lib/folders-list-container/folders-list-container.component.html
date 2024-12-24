@@ -1,27 +1,26 @@
 <ng-container
-*ngrxLet="{
-  folders: folders$,
-  status: status$
-} as vm"
+  *ngrxLet="{
+    folders: folders$,
+    status: status$
+  } as vm"
 >
   <ng-container [ngSwitch]="vm.status">
-    <ng-container  *ngSwitchCase="'loading'">
+    <ng-container *ngSwitchCase="'loading'">
       <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-
     </ng-container>
 
-    <ng-container  *ngSwitchCase="'error'">
+    <ng-container *ngSwitchCase="'error'">
       <div>
-        <h1>{{vm.status}}</h1>
+        <h1>{{ vm.status }}</h1>
       </div>
     </ng-container>
 
-    <ng-container  *ngSwitchCase="'loaded'">
-      <users-folders-list [folders]="vm.folders" (addFolder)="addFolder($event)" (deleteFolder)="onDeleteFolder($event)"></users-folders-list>
+    <ng-container *ngSwitchCase="'loaded'">
+      <users-folders-list
+        [folders]="vm.folders"
+        (addFolder)="addFolder($event)"
+        (deleteFolder)="onDeleteFolder($event)"
+      ></users-folders-list>
     </ng-container>
-
-
-
   </ng-container>
-
 </ng-container>

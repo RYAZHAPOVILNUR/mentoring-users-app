@@ -1,8 +1,8 @@
 <div class="container">
   <div class="folders_container">
-  <ng-container *ngFor="let folder of folders">
-    <users-folders-card [folder]="folder" (deleteFolderById)="onDeleteFolder($event)"></users-folders-card>
-  </ng-container>
+    <ng-container *ngFor="let folder of folders">
+      <users-folders-card [folder]="folder" (deleteFolderById)="onDeleteFolder($event)"></users-folders-card>
+    </ng-container>
   </div>
 
   <button class="add_btn" mat-icon-button (click)="openDialog()">

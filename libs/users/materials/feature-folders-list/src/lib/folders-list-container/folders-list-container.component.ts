@@ -16,21 +16,21 @@ import { IFolder } from '@users/materials/data-access';
   styleUrls: ['./folders-list-container.component.scss'],
 })
 export class FoldersListContainerComponent {
-  materialsFacade = inject(MaterialsFacade);
-  confirmDialog = inject(MatDialog);
+  private materialsFacade = inject(MaterialsFacade);
+  public confirmDialog = inject(MatDialog);
 
-  folders$ = this.materialsFacade.folders$;
-  status$ = this.materialsFacade.status$;
+  public folders$ = this.materialsFacade.folders$;
+  public status$ = this.materialsFacade.status$;
 
   constructor() {
     this.materialsFacade.init();
   }
 
-  addFolder(folderName: string): void {
-      this.materialsFacade.addFolder(folderName);
+  public addFolder(folderName: string): void {
+    this.materialsFacade.addFolder(folderName);
   }
 
-  onDeleteFolder({ id, title }: IFolder): void {
+  public onDeleteFolder({ id, title }: IFolder): void {
     const dialogRef = this.confirmDialog.open(CoreUiConfirmDialogComponent, {
       data: {
         dialogText: `Вы уверены, что хотите удалить ${title}`,
@@ -44,4 +44,3 @@ export class FoldersListContainerComponent {
     });
   }
 }
-

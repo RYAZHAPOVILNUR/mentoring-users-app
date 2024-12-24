@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { IFolder } from '@users/materials/data-access'
+import { IFolder } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-folders-card',
@@ -13,11 +13,10 @@ import { IFolder } from '@users/materials/data-access'
   styleUrls: ['./folders-card.component.scss'],
 })
 export class FoldersCardComponent {
-
   @Input() folder!: IFolder;
 
   @Output() deleteFolderById = new EventEmitter();
-  deleteFolder(event: MouseEvent, folder: IFolder): void {
+  public deleteFolder(event: MouseEvent, folder: IFolder): void {
     event.stopPropagation();
     event.preventDefault();
     this.deleteFolderById.emit(folder);

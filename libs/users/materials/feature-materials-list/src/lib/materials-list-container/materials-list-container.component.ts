@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialsListComponent } from '../materials-list/materials-list.component';
-import { MaterialsFacade } from '../../../../data-access/src/lib/+state/materials.facade';
+import { MaterialsFacade } from '@users/materials/data-access';
 import { LetDirective } from '@ngrx/component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
@@ -14,11 +14,16 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialsListContainerComponent {
-  materialsFacade = inject(MaterialsFacade);
-  materials$ = this.materialsFacade.materials$;
-  status$ = this.materialsFacade.status$;
+  public materialsFacade = inject(MaterialsFacade);
+  public materials$ = this.materialsFacade.materials$;
+  public status$ = this.materialsFacade.status$;
+  public error$ = this.materialsFacade.error$;
 
   constructor() {
     this.materialsFacade.loadMaterials();
+  }
+
+  public onDeleteMaterial(id: number): void {
+    this.materialsFacade.deleteMaterial(id);
   }
 }

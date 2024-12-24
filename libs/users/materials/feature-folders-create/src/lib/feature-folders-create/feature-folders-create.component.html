@@ -2,10 +2,10 @@
 <mat-dialog-content class="dialog">
   <mat-form-field class="dialog_field">
     <mat-label>Название папки</mat-label>
-    <input matInput [formControl]="folderName"  />
+    <input matInput [formControl]="folderName" />
   </mat-form-field>
   <div>
-  <button mat-button mat-dialog-close>Отменить</button>
-  <button mat-button (click)="saveFolderName()" [disabled]="folderName.invalid">Сохранить</button>
+    <button mat-button mat-dialog-close>Отменить</button>
+    <button mat-button (click)="saveFolderName()" [disabled]="folderName.invalid">Сохранить</button>
   </div>
 </mat-dialog-content>

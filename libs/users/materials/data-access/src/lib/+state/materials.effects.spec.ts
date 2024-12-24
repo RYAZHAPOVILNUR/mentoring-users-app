@@ -8,7 +8,6 @@ describe('MaterialsEffects', () => {
   let actions$: Observable<any>;
   let effects: MaterialsEffects;
 
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [MaterialsEffects, provideMockActions(() => actions$)],

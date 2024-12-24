@@ -4,19 +4,20 @@ import { selectRouteParams } from '@users/core/data-access';
 
 export const selectMaterialsState = createFeatureSelector<MaterialsState>(materialsFeatureKey);
 
-const {selectAll , selectEntities} = materialsAdapter.getSelectors();
+const { selectAll, selectEntities } = materialsAdapter.getSelectors();
 
-
-export  const selectMaterialsStatus = createSelector(selectMaterialsState, (state: MaterialsState) => state.status);
+export const selectMaterialsStatus = createSelector(selectMaterialsState, (state: MaterialsState) => state.status);
 export const selectAllFolders = createSelector(selectMaterialsState, (state) => selectAll(state));
 
-export  const selectFoldersEntities = createSelector(
-  selectMaterialsState, (state: MaterialsState) => selectEntities(state),
-)
+export const selectFoldersEntities = createSelector(selectMaterialsState, (state: MaterialsState) =>
+  selectEntities(state)
+);
 
 export const selectAllMaterials = createSelector(selectMaterialsState, (state: MaterialsState) => state.materials);
 export const selectOpenedFolder = createSelector(
   selectRouteParams,
   selectFoldersEntities,
-  ({id}, entities) => entities[id] || null
-)
+  ({ id }, entities) => entities[id] || null
+);
+
+export const selectError = createSelector(selectMaterialsState, (state: MaterialsState) => state.error);

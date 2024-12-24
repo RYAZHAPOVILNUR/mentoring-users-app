@@ -15,24 +15,23 @@ import { IFolder } from '@users/materials/data-access';
   styleUrls: ['./folders-list.component.scss'],
 })
 export class FoldersListComponent {
-  dialog = inject(MatDialog);
-  @Input({required: true}) folders!: IFolder[];
+  private dialog = inject(MatDialog);
+  @Input({ required: true }) folders!: IFolder[];
 
   @Output() addFolder = new EventEmitter<string>();
   @Output() deleteFolder = new EventEmitter();
 
-  openDialog(): void {
+  public openDialog(): void {
     const dialogRef = this.dialog.open(FeatureFoldersCreateComponent);
 
     dialogRef.afterClosed().subscribe((folderName: string) => {
       if (folderName) {
         this.addFolder.emit(folderName);
       }
-    })
+    });
   }
 
-  onDeleteFolder(folder: IFolder): void {
+  public onDeleteFolder(folder: IFolder): void {
     this.deleteFolder.emit(folder);
   }
 }
-

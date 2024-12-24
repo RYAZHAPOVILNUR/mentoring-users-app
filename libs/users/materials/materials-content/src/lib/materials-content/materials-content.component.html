@@ -1,0 +1,35 @@
+<div class="title_wrapper">
+  <h1>{{ data.title }}</h1>
+</div>
+<button class="close_btn" mat-icon-button mat-dialog-close>
+  <mat-icon>close</mat-icon>
+</button>
+
+<div class="content">
+  <ng-container *ngIf="data.material_link.endsWith('.mp3')">
+    <div class="audio">
+      <audio controls>
+        <source [src]="data.material_link" type="audio/mp3" />
+      </audio>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="data.material_link.endsWith('.pdf')">
+    <div class="pdf_wrapper">
+      <pdf-viewer
+        [src]="data.material_link"
+        [render-text]="true"
+        [original-size]="false"
+        style="width: 100%; height: 500px"
+      >
+      </pdf-viewer>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="data.material_link.includes('youtube.com')">
+    <h1>Ссылка на видео: {{ data.material_link }}</h1>
+    <div class="video">
+      <iframe [src]="sanitizedUrl" width="560" height="315" frameborder="0" allowfullscreen> </iframe>
+    </div>
+  </ng-container>
+</div>

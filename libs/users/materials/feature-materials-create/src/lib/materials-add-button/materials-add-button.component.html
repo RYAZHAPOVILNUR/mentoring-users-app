@@ -1,0 +1,6 @@
+<button class="add_btn" mat-icon-button [matMenuTriggerFor]="aboveMenu"><mat-icon>add</mat-icon></button>
+<mat-menu #aboveMenu="matMenu" yPosition="above">
+  <button mat-menu-item (click)="openDialog('Видео')">Видео</button>
+  <button mat-menu-item (click)="openDialog('PDF')">Файл PDF</button>
+  <button mat-menu-item (click)="openDialog('Подкаст')">Подкаст mp3</button>
+</mat-menu>
