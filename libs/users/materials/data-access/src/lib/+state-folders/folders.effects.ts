@@ -34,7 +34,7 @@ export const deleteFolder = createEffect(
     const apiService = inject(ApiService);
     return actions$.pipe(
       ofType(FolderActions.deleteFolder),
-      // delay(1500),
+      delay(1500),
       switchMap(({ id }) =>
         apiService.delete<void>(`/folder/${id}`).pipe(
           map(() => FolderActions.deleteFolderSuccess({ id })),
