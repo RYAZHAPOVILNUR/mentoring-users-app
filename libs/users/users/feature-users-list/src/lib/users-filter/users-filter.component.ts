@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { MatInputModule } from '@angular/material/input';
@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
   styleUrls: ['./users-filter.component.scss'],
   standalone: true,
   imports: [ReactiveFormsModule, MatInputModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersFilterComponent {
   store = inject(Store);
