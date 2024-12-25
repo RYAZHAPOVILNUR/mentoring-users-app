@@ -74,6 +74,7 @@ export class UsersDetailComponent {
       },
     });
 
+
     dialogRef
       .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -84,4 +85,9 @@ export class UsersDetailComponent {
         }
       });
   }
+  onEditStoryPoints(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
+    this.usersFacade.editStoryPoints(userData, onSuccessCb)
+
+  }
+
 }

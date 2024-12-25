@@ -61,4 +61,8 @@ export class UsersFacade {
   updateFilterSelector(filter: string){
     this.store.dispatch(UsersActions.updateFilter({filter: filter}));
   }
+
+  editStoryPoints(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType){
+    this.store.dispatch(UsersActions.editStoryPoints({userData, onSuccessCb}))
+  }
 }

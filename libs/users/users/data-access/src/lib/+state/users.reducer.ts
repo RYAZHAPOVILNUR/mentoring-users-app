@@ -4,6 +4,7 @@ import { createReducer, on, Action } from '@ngrx/store';
 import * as UsersActions from './users.actions';
 import { UsersEntity } from '@users/core/data-access';
 import { LoadingStatus } from '@users/core/data-access';
+import { state } from '@angular/animations';
 
 export const USERS_FEATURE_KEY = 'users';
 
@@ -81,6 +82,17 @@ const reducer = createReducer(
   on(UsersActions.updateFilter, (state, { filter }) => ({
     ...state,
     filter: filter,
+  })),
+  on(UsersActions.editStoryPointsSuccess, (state, { userData }) => usersAdapter.updateOne(
+    {
+      id: userData.id,
+      changes: userData,
+    }, state
+  )),
+  on(UsersActions.editStoryPointsFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
   }))
 );
 

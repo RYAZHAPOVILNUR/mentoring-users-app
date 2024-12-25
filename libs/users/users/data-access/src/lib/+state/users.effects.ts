@@ -6,6 +6,8 @@ import { ApiService } from '@users/core/http';
 import { Store, select } from '@ngrx/store';
 import { selectUsersEntities } from './users.selectors';
 import { CreateUserDTO, UsersDTO, UsersEntity, selectRouteParams, usersDTOAdapter } from '@users/core/data-access';
+import { onSuccessEditionCbType } from './users.actions';
+import { error } from 'ng-packagr/lib/utils/log';
 
 export const userEffects = createEffect(
   () => {
@@ -137,3 +139,29 @@ export const loadUser = createEffect(
   },
   { functional: true }
 );
+
+export const editStoryPoint = createEffect(() => {
+  const actions$ = inject(Actions);
+  const apiService = inject(ApiService);
+  const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
+
+  return actions$.pipe(
+    ofType(UsersActions.editStoryPoints),
+    switchMap(({ userData, onSuccessCb }) =>
+      apiService.post<UsersDTO, CreateUserDTO>(
+        `/users/${userData.id}`,
+        { ...userData }
+      ).pipe(
+        map(userData =>
+          UsersActions.editStoryPointsSuccess({ userData })
+        ),
+        tap(()=>onSuccessCb()),
+        catchError((error)=>{
+          console.error('Error', error);
+          return of(UsersActions.editStoryPointsFailed({error}))
+        })
+      )
+    )
+  );
+}, { functional: true });
+

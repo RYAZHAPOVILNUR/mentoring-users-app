@@ -89,6 +89,78 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+
+
+
+
+
+            <mat-form-field
+              class="edit-user-field"
+
+            >
+              <mat-label>Story Points</mat-label>
+              <input
+                [formControl]="totalStoryPoints"
+                matInput placeholder="Story points"
+                class="edit-user-input"
+                type="text"
+              />
+
+              <button
+                mat-icon-button
+                type="button"
+                color="accent"
+                class="edit-user-button__st"
+                matSuffix
+                *ngIf="!isStoryPointsEdit"
+                (click)="editStoryPointToggle(); "
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+
+
+
+
+<!--              STORYPOINTS-->
+
+
+
+
+              <ng-container *ngIf="isStoryPointsEdit" matSuffix>
+              <button
+                mat-icon-button
+                type="button"
+                color="primary"
+                class="edit-user-button__st"
+                matSuffix
+
+                [disabled]="totalStoryPoints.invalid"
+                (click)="onEditStoryPoints(); editStoryPointToggle()"
+              >
+                <mat-icon>done</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                type="button"
+                color="primary"
+                class="edit-user-button__st"
+                matSuffix
+
+                (click)="this.totalStoryPoints.setValue(this.vm.user?.totalStoryPoints || 0); editStoryPointToggle()"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+            </ng-container>
+            </mat-form-field>
+
+
+
+
+            <!--              STORYPOINTS-->
+
+
+
+
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
@@ -122,5 +194,11 @@
 <ng-template #snackbar>
   <div class="edit-user-snackbar">
     <span>Пользователь успешно изменён!</span>
+  </div>
+</ng-template>
+
+<ng-template #snackbarStoryPoints>
+  <div class="edit-user-snackbar">
+    <span>Стори поинты успешно изменены!</span>
   </div>
 </ng-template>
