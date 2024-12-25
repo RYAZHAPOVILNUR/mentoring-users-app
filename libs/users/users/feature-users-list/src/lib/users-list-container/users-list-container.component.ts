@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersListComponent } from '../users-list/users-list.component';
 import { UsersListContainerStore } from './users-list-container.store';
@@ -52,6 +52,6 @@ export class UsersListContainerComponent {
   }
 
   onFilterUsersList(filter: string) {
-    this.usersFacade.filterUsers({ name: filter })
+    this.usersFacade.filterUsers({ name: filter });
   }
 }

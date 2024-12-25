@@ -13,10 +13,12 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [ReactiveFormsModule, NgIf, MatInputModule, MatButtonModule],
 })
 export class UsersFilterComponent {
-  userFilterForm!: FormGroup;
+  public userFilterForm!: FormGroup;
+  @Output() filterUsersWidow = new EventEmitter<string>();
 
   constructor(public fb: FormBuilder) {
     this.createFilterForm();
+    this.setupFilterChanges();
   }
 
   private createFilterForm() {
@@ -25,12 +27,14 @@ export class UsersFilterComponent {
     });
   }
 
-  @Output() filterUsersWidow = new EventEmitter<string>();
-
-  public onFilterUsers(event: Event) {
-    event.preventDefault();
-    const filterValue = this.userFilterForm.value.name;
-    this.filterUsersWidow.emit(filterValue);
+  public setupFilterChanges() {
+    this.userFilterForm.get('name')?.valueChanges.subscribe((value) => {
+      if (value === '') {
+        this.filterUsersWidow.emit('');
+      } else {
+        this.filterUsersWidow.emit(value);
+      }
+    });
   }
 }
 
