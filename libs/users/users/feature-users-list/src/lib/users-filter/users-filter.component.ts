@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
+import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { UsersFacade } from '@users/users/data-access';
+import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'users-filter',
@@ -12,15 +13,30 @@ import { UsersFacade } from '@users/users/data-access';
   imports: [MatInputModule, MatFormFieldModule, ReactiveFormsModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersFilterComponent {
+export class UsersFilterComponent implements OnInit, OnDestroy {
   private readonly usersFacade = inject(UsersFacade);
+  private destroy$ = new Subject<void>();
+  public form: FormGroup;
 
-  public form = new FormGroup({
-    name: new FormControl(''),
-  });
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      name: [''],
+    });
+  }
 
-  onChange() {
-    const name = this.form.value.name || '';
-    this.usersFacade.filterUsers(name);
+  ngOnInit(): void {
+    this.usersFacade.userFilterValue$.subscribe((filter) => this.form.patchValue({ name: filter.name }));
+    this.form
+      .get('name')
+      ?.valueChanges.pipe(debounceTime(500), distinctUntilChanged(), takeUntil(this.destroy$))
+      .subscribe((name) => {
+        const filterValue = name || '';
+        this.usersFacade.filterUsers(filterValue);
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

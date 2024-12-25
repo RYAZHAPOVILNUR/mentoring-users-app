@@ -1,16 +1,16 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsersListComponent } from '../users-list/users-list.component';
-import { UsersListContainerStore } from './users-list-container.store';
-import { UsersVM } from '../../../../users-vm';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { UsersFacade } from '@users/users/data-access';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
-import { CreateUsersButtonComponent } from '@users/feature-users-create';
-import { UsersFilterComponent } from '../users-filter/users-filter.component';
 import { Store } from '@ngrx/store';
+import { CreateUsersButtonComponent } from '@users/feature-users-create';
+import { UsersFacade } from '@users/users/data-access';
+import { UsersVM } from '../../../../users-vm';
+import { UsersFilterComponent } from '../users-filter/users-filter.component';
+import { UsersListComponent } from '../users-list/users-list.component';
+import { UsersListContainerStore } from './users-list-container.store';
 
 @Component({
   selector: 'users-list-container',
