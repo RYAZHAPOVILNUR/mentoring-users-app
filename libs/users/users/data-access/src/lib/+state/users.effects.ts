@@ -1,11 +1,11 @@
 import { inject } from '@angular/core';
-import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, catchError, of, map, withLatestFrom, filter, tap } from 'rxjs';
-import * as UsersActions from './users.actions';
-import { ApiService } from '@users/core/http';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store, select } from '@ngrx/store';
-import { selectUsersEntities } from './users.selectors';
 import { CreateUserDTO, UsersDTO, UsersEntity, selectRouteParams, usersDTOAdapter } from '@users/core/data-access';
+import { ApiService } from '@users/core/http';
+import { catchError, filter, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
+import * as UsersActions from './users.actions';
+import { selectUsersEntities } from './users.selectors';
 
 export const userEffects = createEffect(
   () => {
@@ -132,6 +132,42 @@ export const loadUser = createEffect(
           );
         }
         return of(UsersActions.updateUserStatus({ status: 'loading' }));
+      })
+    );
+  },
+  { functional: true }
+);
+
+export const addUserStoryPoints = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
+    return actions$.pipe(
+      ofType(UsersActions.addStoryPoints),
+      withLatestFrom(usersEntities$),
+      filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
+      map(([{ userData, id, onSuccessAddSP }, usersEntities]) => ({
+        user: {
+          ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
+          purchaseDate: usersEntities[id]?.purchaseDate || 'defaultDate',
+          educationStatus: usersEntities[id]?.educationStatus || 'trainee',
+          totalStoryPoints: userData.totalStoryPoints,
+        },
+        onSuccessAddSP,
+      })),
+      switchMap(({ user, onSuccessAddSP }) => {
+        return apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+          map((userData) => ({ userData, onSuccessAddSP })),
+          tap(({ onSuccessAddSP }) => onSuccessAddSP()),
+          map(({ userData }) => {
+            return UsersActions.addStoryPointsSuccess({ userData });
+          }),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(UsersActions.editUserFailed({ error }));
+          })
+        );
       })
     );
   },

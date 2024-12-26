@@ -1,15 +1,15 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
+import { LetDirective } from '@ngrx/component';
+import { Store, select } from '@ngrx/store';
+import { CreateUserDTO, UsersEntity, selectQueryParam } from '@users/core/data-access';
+import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { UsersErrors, UsersFacade, onSuccessEditionCbType } from '@users/users/data-access';
 import { Observable, map, tap } from 'rxjs';
-import { selectQueryParam, CreateUserDTO, UsersEntity } from '@users/core/data-access';
-import { Store, select } from '@ngrx/store';
-import { LetDirective } from '@ngrx/component';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { CoreUiConfirmDialogComponent } from '@users/core/ui';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -49,6 +49,10 @@ export class UsersDetailComponent {
     this.router.navigate(['/admin/users', this.user.id], {
       queryParams: { edit: false },
     });
+  }
+
+  onAddStoryPoints(userData: CreateUserDTO, onSuccessAddSP: onSuccessEditionCbType) {
+    this.usersFacade.addStoryPoints(userData, this.user.id, onSuccessAddSP);
   }
 
   onCloseUser() {
