@@ -38,7 +38,6 @@ export const loadBacklogs$ = createEffect(
             return backlogAction.loadBacklogSuccess({ backlogs });
           }),
           catchError((error) => {
-            console.error('Error', error);
             return of(error);
           })
         )

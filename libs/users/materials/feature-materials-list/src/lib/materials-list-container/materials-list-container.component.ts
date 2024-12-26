@@ -21,6 +21,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   providers: [MaterialsListContainerStore],
 })
 export class MaterialsListContainerComponent {
+  
   private readonly componentStore = inject(MaterialsListContainerStore);
   private readonly router = inject(Router);
   private readonly dialog = inject(MatDialog);

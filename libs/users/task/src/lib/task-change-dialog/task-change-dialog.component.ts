@@ -126,14 +126,7 @@ export class TaskChangeDialogComponent {
 
     if (Object.values(this.storyPoint).every((value) => value === '?')) return '?';
 
-    return values.reduce((total, currentValue) => {
-      const parsedValue = parseFloat(currentValue);
-      if (!isNaN(parsedValue)) {
-        return total + parsedValue;
-      } else {
-        return total;
-      }
-    }, 0);
+    return values.reduce((total, currentValue) => total + (parseFloat(currentValue) || 0), 0);
   }
 
   setPoint(category: string, value: string) {
@@ -144,8 +137,6 @@ export class TaskChangeDialogComponent {
   }
 
   ngOnInit() {
-    console.log(this.data);
-    console.log('this.editMode', this.editMode);
     this.users$.pipe(skip(1)).subscribe(() => {
       this.status = true;
     });

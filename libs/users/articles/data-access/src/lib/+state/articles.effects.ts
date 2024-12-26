@@ -19,7 +19,6 @@ export const publishArticle$ = createEffect(
           tap(() => router.navigate(['/articles'])),
           map(() => ArticlesActions.publishArticleSuccess),
           catchError((error) => {
-            console.error('Error', error);
             return of(ArticlesActions.publishArticleFailed({ error }));
           })
         )
@@ -37,7 +36,6 @@ export const loadArticles$ = createEffect(
         apiService.get<Article[]>('/articles').pipe(
           map((articles) => ArticlesActions.loadArticlesSuccess({ articles })),
           catchError((error) => {
-            console.error('Error', error);
             return of(ArticlesActions.loadArticlesFailed({ error }));
           })
         )
@@ -54,7 +52,6 @@ export const getArticleForEdit$ = createEffect(
         return apiService.get<Article>(`/articles/${id}`).pipe(
           map((article) => ArticlesActions.getArticleForEditSuccess({ article })),
           catchError((error) => {
-            console.error('Error', error);
             return of(ArticlesActions.getArticleForEditFailed({ error }));
           })
         );
@@ -76,7 +73,6 @@ export const getArticleForRead$ = createEffect(
         return apiService.get<Article>(`/articles/${params['id']}`).pipe(
           map((article) => ArticlesActions.getArticleForReadSuccess({ article })),
           catchError((error) => {
-            console.error('Error', error);
             return of(ArticlesActions.getArticleForReadFailed({ error }));
           })
         );
@@ -109,7 +105,6 @@ export const editArticle$ = createEffect(
           map((articles) => ({ articles })),
           map(({ articles }) => ArticlesActions.editArticleSuccess({ articles })),
           catchError((error) => {
-            console.error('Error', error);
             return of(ArticlesActions.editArticleFailed({ error }));
           })
         )

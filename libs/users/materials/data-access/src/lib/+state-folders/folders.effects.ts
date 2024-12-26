@@ -18,7 +18,6 @@ export const folderEffects = createEffect(
             return FolderActions.loadFoldersSuccess({ folders });
           }),
           catchError((error) => {
-            console.error('Error', error);
             return of(FolderActions.loadFoldersFailure({ error }));
           })
         )
@@ -39,7 +38,6 @@ export const deleteFolder = createEffect(
         apiService.delete<void>(`/folder/${id}`).pipe(
           map(() => FolderActions.deleteFolderSuccess({ id })),
           catchError((error) => {
-            console.error('Error', error);
             return of(FolderActions.deleteFolderFailed({ error }));
           })
         )
@@ -60,7 +58,6 @@ export const addFolder = createEffect(
         apiService.post<FoldersType, AddFoldersType>('/folder', title).pipe(
           map((folder) => FolderActions.addFolderSuccess({ folder })),
           catchError((error) => {
-            console.error('Error', error);
             return of(FolderActions.addFolderFailed({ error }));
           })
         )

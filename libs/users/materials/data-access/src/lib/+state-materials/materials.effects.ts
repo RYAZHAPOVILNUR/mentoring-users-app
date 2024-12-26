@@ -21,7 +21,6 @@ export const MaterialEffects = createEffect(
             return MaterialActions.loadMaterialsSuccess({ materials });
           }),
           catchError((error) => {
-            console.error('Error', error);
             return of(MaterialActions.loadMaterialsFailure({ error }));
           })
         )
@@ -41,7 +40,6 @@ export const deleteMaterials = createEffect(
         apiService.delete<void>(`/material/${id}`).pipe(
           map(() => MaterialActions.deleteMaterialsSuccess({ id })),
           catchError((error) => {
-            console.error('Error', error);
             return of(MaterialActions.deleteMaterialsFailure({ error }));
           })
         )
@@ -68,7 +66,6 @@ export const addMaterials = createEffect(
         apiService.post<MaterialsType, AddMaterialsType>(`/material`, materialData).pipe(
           map((material) => MaterialActions.addMaterialsSuccess({ material })),
           catchError((error) => {
-            console.error('Error', error);
             return of(MaterialActions.addMaterialsFailed({ error }));
           })
         )

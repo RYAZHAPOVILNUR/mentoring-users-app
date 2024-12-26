@@ -33,7 +33,6 @@ export const publishComment$ = createEffect(
             })
           ),
           catchError((error) => {
-            console.error('Error', error);
             return of(CommentsActions.publishCommentFailed({ error }));
           })
         );
@@ -51,7 +50,6 @@ export const loadComments$ = createEffect(
         apiService.get<Comment[]>(`/commentsByArticle/${articleId}`).pipe(
           map((comments) => CommentsActions.loadCommentsSuccess({ comments })),
           catchError((error) => {
-            console.error('Error', error);
             return of(CommentsActions.loadCommentsFailed({ error }));
           })
         )
@@ -68,7 +66,6 @@ export const deleteComment$ = createEffect(
         return apiService.delete<number>(`/comments/${id}`).pipe(
           map(() => CommentsActions.deleteCommentSuccess({ id })),
           catchError((error) => {
-            console.error('Error', error);
             return of(CommentsActions.deleteCommentFailed({ error }));
           })
         );
