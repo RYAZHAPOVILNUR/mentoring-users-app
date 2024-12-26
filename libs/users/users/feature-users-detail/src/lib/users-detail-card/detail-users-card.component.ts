@@ -64,9 +64,6 @@ export class DetailUsersCardComponent implements OnInit {
     return this._vm;
   }
 
-  // private storyPointsSubject$ = new BehaviorSubject<number | undefined>(this.vm.user?.totalStoryPoints);
-  // public storyPoints$ = this.storyPointsSubject$.asObservable();
-
   @Input({ required: true })
   set vm(vm: DetailUsersCardVm) {
     this._vm = vm;
@@ -108,15 +105,19 @@ export class DetailUsersCardComponent implements OnInit {
   }
 
   public closeStoryPointInputBtn() {
-    if (this.formGroup.get('totalStoryPoints')?.value !== this.vm.user?.totalStoryPoints) {
-      this.resetStoryPointInput('true');
-    }
+    this.resetStoryPointInput('true');
   }
 
   public doneStoryPointInputBtn() {
-    if (Number(this.formGroup.get('totalStoryPoints')?.value) === Number(this.vm.user?.totalStoryPoints)) {
+    if (
+      Number(this.formGroup.get('totalStoryPoints')?.value) === Number(this.vm.user?.totalStoryPoints) ||
+      this.vm.editMode
+    ) {
       this.resetStoryPointInput();
+      return;
     }
+    this.onSubmit();
+    this.resetStoryPointInput('true');
   }
 
   public formGroup = new FormBuilder().group({
@@ -141,7 +142,7 @@ export class DetailUsersCardComponent implements OnInit {
         value: this.vm.user?.totalStoryPoints,
         disabled: !this.vm.editMode,
       },
-      [Validators.required, Validators.pattern(/^(0|[1-9][0-9]*)$/)]
+      [Validators.required, Validators.pattern(/^(0|[1-9][0-9]*)$/), Validators.maxLength(3)]
     ),
   });
 
@@ -180,11 +181,11 @@ export class DetailUsersCardComponent implements OnInit {
   onSubmit(): void {
     this.editUser.emit({
       user: {
-        name: this.formGroup.value.name || '',
-        username: this.formGroup.value.username || '',
-        city: this.formGroup.value.city || '',
-        email: this.formGroup.value.email?.trim().toLowerCase() || '',
-        totalStoryPoints: this.formGroup.value.totalStoryPoints ?? undefined,
+        name: this.formGroup.getRawValue().name || '',
+        username: this.formGroup.getRawValue().username || '',
+        city: this.formGroup.getRawValue().city || '',
+        email: this.formGroup.getRawValue().email?.trim().toLowerCase() || '',
+        totalStoryPoints: this.formGroup.getRawValue().totalStoryPoints || 0,
         purchaseDate: new Date().toString() || '',
         educationStatus: 'trainee',
       },

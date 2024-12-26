@@ -82,6 +82,8 @@ export const editUser = createEffect(
     const apiService = inject(ApiService);
     const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
 
+    console.log('effetc usersEdit');
+
     return actions$.pipe(
       ofType(UsersActions.editUser),
       withLatestFrom(usersEntities$),
@@ -93,6 +95,7 @@ export const editUser = createEffect(
           email: userData.email,
           username: userData.username,
           city: userData.city,
+          totalStoryPoints: userData.totalStoryPoints,
         },
         onSuccessCb,
       })),
