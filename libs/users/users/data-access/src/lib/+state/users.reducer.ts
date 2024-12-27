@@ -1,9 +1,8 @@
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { createReducer, on, Action } from '@ngrx/store';
+import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
+import { Action, createReducer, on } from '@ngrx/store';
 
+import { LoadingStatus, UsersEntity } from '@users/core/data-access';
 import * as UsersActions from './users.actions';
-import { UsersEntity } from '@users/core/data-access';
-import { LoadingStatus } from '@users/core/data-access';
 
 export const USERS_FEATURE_KEY = 'users';
 
@@ -58,6 +57,14 @@ const reducer = createReducer(
     )
   ),
   on(UsersActions.editUserFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
+  on(UsersActions.editUserSPSuccess, (state, { userData }) =>
+    usersAdapter.updateOne({ id: userData.id, changes: userData }, state)
+  ),
+  on(UsersActions.editUserSPFailed, (state, { error }) => ({
     ...state,
     status: 'error' as const,
     error,

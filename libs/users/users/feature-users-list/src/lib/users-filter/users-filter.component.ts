@@ -16,13 +16,9 @@ import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 export class UsersFilterComponent implements OnInit, OnDestroy {
   private readonly usersFacade = inject(UsersFacade);
   private destroy$ = new Subject<void>();
-  public form: FormGroup;
-
-  constructor(private fb: FormBuilder) {
-    this.form = this.fb.group({
-      name: [''],
-    });
-  }
+  public form = new FormBuilder().group({
+    name: [''],
+  });
 
   ngOnInit(): void {
     this.usersFacade.userFilterValue$.subscribe((filter) => this.form.patchValue({ name: filter.name }));
@@ -30,8 +26,7 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
       .get('name')
       ?.valueChanges.pipe(debounceTime(500), distinctUntilChanged(), takeUntil(this.destroy$))
       .subscribe((name) => {
-        const filterValue = name || '';
-        this.usersFacade.filterUsers(filterValue);
+        this.usersFacade.filterUsers(name || '');
       });
   }
 
