@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { UsersFilter } from '@users/users/data-access';
 
 @Component({
   selector: 'users-filter',
@@ -13,10 +14,10 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [ReactiveFormsModule, NgIf, MatInputModule, MatButtonModule],
 })
 export class UsersFilterComponent {
-  public userFilterForm!: FormGroup;
-  @Output() filterUsersWidow = new EventEmitter<string>();
+  @Output() filterUsersWindow = new EventEmitter<UsersFilter>();
 
-  constructor(public fb: FormBuilder) {
+  public userFilterForm!: FormGroup;
+  constructor(private fb: FormBuilder) {
     this.createFilterForm();
     this.setupFilterChanges();
   }
@@ -28,12 +29,9 @@ export class UsersFilterComponent {
   }
 
   public setupFilterChanges() {
-    this.userFilterForm.get('name')?.valueChanges.subscribe((value) => {
-      if (value === '') {
-        this.filterUsersWidow.emit('');
-      } else {
-        this.filterUsersWidow.emit(value);
-      }
+    this.userFilterForm.get('name')?.valueChanges.subscribe((value: string) => {
+      const filter: UsersFilter = { name: value };
+      this.filterUsersWindow.emit(filter);
     });
   }
 }

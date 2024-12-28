@@ -7,7 +7,7 @@
   } as vm"
 >
   <users-filter
-    (filterUsersWidow)="onFilterUsersList($event)"
+    (filterUsersWindow)="onFilterUsersList($event)"
   />
   <users-list-ui [vm]="vm" (deleteUser)="onDeleteUser($event)" (redirectToEdit)="onRedirectToEdit($event)" />
 </ng-container>

@@ -5,7 +5,7 @@ import { UsersListContainerStore } from './users-list-container.store';
 import { UsersVM } from '../../../../users-vm';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { UsersFacade } from '@users/users/data-access';
+import { UsersFacade, UsersFilter } from '@users/users/data-access';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
@@ -51,7 +51,10 @@ export class UsersListContainerComponent {
     });
   }
 
-  onFilterUsersList(filter: string) {
-    this.usersFacade.filterUsers({ name: filter });
+  onFilterUsersList(filter: UsersFilter) {
+    this.router.navigate([], {
+      queryParams: filter,
+    });
+    this.usersFacade.filterUsers(filter);
   }
 }

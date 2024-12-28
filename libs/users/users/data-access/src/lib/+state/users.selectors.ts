@@ -34,12 +34,15 @@ export const filteredUsers = createSelector(
   selectAllUsers,
   usersFilterSelector,
   (allUsers, usersFilter) => {
-    if(usersFilter) {
-      return allUsers.filter(user =>
+    // if (usersFilter) allUsers.filter((user) => user.name.toLowerCase().includes(usersFilter.name.toLowerCase()))
+    // return allUsers;
+
+    if(usersFilter) { return allUsers.filter(user =>
         user.name.toLowerCase().includes(usersFilter.name.toLowerCase())
-    );
-  } else {
-    return allUsers;
+      );
+    } else {
+      return allUsers;
     }
   }
 );
+

@@ -25,6 +25,7 @@
       "@users/core/github-api/data-access": ["libs/core/github-api/data-access/src/index.ts"],
       "@users/core/highcharts": ["libs/core/highcharts/src/index.ts"],
       "@users/core/http": ["libs/core/http/src/index.ts"],
+      "@users/core/ruslan": ["libs/core/src/index.ts"],
       "@users/core/ui": ["libs/core/ui/src/index.ts"],
       "@users/core/ui/layout": ["libs/users/core/ui/layout/src/public-api.ts"],
       "@users/core/utils": ["libs/core/utils/src/index.ts"],
