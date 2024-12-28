@@ -29,12 +29,10 @@ export const selectOpenedUser = createSelector(
   selectUsersEntities,
   ({ id }, entities) => entities[id] || null
 );
-export function filtredUsers(filtredUsers: any): import('rxjs').OperatorFunction<any, any> {
-  throw new Error('Function not implemented.');
-}
+
 export const usersFilterSelector = createSelector(selectUsersState, (state: UsersState) => state.usersFilter);
 
-export const filtredUsersSelector = createSelector(selectAllUsers, usersFilterSelector, (allUsers, usersfFilter) => {
+export const filteredUsersSelector = createSelector(selectAllUsers, usersFilterSelector, (allUsers, usersfFilter) => {
   if (!usersfFilter.name) {
     return allUsers;
   }

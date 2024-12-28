@@ -4,7 +4,7 @@ import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
 import { Observable, of, switchMap } from 'rxjs';
 import { UsersErrors } from './users.reducer';
-import { onSuccessEditionCbType } from './users.actions';
+import { onSuccessEditionCbType, onSuccessPonCbType } from './users.actions';
 import { selectLoggedUser } from '@auth/data-access';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
 
@@ -18,7 +18,7 @@ export class UsersFacade {
    */
   public readonly status$ = this.store.pipe(select(UsersSelectors.selectUsersStatus));
   public readonly allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
-  public readonly filteredUsers$ = this.store.select(UsersSelectors.filtredUsersSelector);
+  public readonly filteredUsers$ = this.store.select(UsersSelectors.filteredUsersSelector);
   public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
   public readonly loggedUser$ = this.store.select(selectLoggedUser);
@@ -61,5 +61,9 @@ export class UsersFacade {
 
   filterUsers(filter: { name: string }) {
     this.store.dispatch(UsersActions.filterUsers({ filter }));
+  }
+
+  addStoryPointsToUser(userData: CreateUserDTO, id: number, onSuccessAddSP: onSuccessPonCbType) {
+    this.store.dispatch(UsersActions.addStoryPoints({ userData, id, onSuccessAddSP }));
   }
 }
