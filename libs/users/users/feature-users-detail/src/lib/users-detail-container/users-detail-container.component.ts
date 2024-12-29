@@ -89,5 +89,8 @@ export class UsersDetailComponent {
     this.usersFacade.editStoryPoints(userData, onSuccessCb)
 
   }
+  public updateFilter(filter: string): void{
+    this.router.navigate([], { queryParams: { filter }, queryParamsHandling: 'merge' });
+  }
 
 }

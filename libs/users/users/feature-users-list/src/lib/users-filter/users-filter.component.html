@@ -1,5 +1,17 @@
 <div class = "search__container">
-  <form [formGroup]="form" (ngSubmit)="usersFilter()">
-  <input formControlName="filter" type="search" placeholder="search user">
-  </form>
+
+  <mat-form-field
+  class="edit-user-field">
+  <input
+    [formControl]="usersFilter"
+    matInput placeholder="search user"
+    class="edit-user-input"
+    type="text"
+
+  />
+    <mat-icon matSuffix>search</mat-icon>
+    <ng-container *ngIf="true">
+      <mat-icon matSuffix>done</mat-icon>
+    </ng-container>
+  </mat-form-field>
 </div>

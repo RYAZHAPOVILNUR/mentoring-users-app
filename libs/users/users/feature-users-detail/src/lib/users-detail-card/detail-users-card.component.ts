@@ -94,7 +94,7 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
-    // totalStoryPoints: new FormControl({ value: this.vm.user?.totalStoryPoints || 0, disabled: true }, [Validators.min(0), Validators.pattern('^[0-9]*$')] ),
+
   });
   public totalStoryPoints = new FormControl({ value: this.vm.user?.totalStoryPoints || 0, disabled: true }, [Validators.min(0), Validators.pattern('^[0-9]*$')])
 
@@ -191,9 +191,10 @@ export class DetailUsersCardComponent implements OnInit {
           id: this.vm.user?.id || null,
           name: this.vm.user?.name || '',
           email: this.vm.user?.email || '',
-
+          username: this.vm.user?.username || '',
           purchaseDate: new Date().toString() || '',
           educationStatus: 'trainee',
+          city: this.vm.user?.city || '',
           totalStoryPoints: Number(this.totalStoryPoints.value) || this.vm.user?.totalStoryPoints
 
         },

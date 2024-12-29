@@ -13,21 +13,7 @@ export const selectUsersStatus = createSelector(selectUsersState, (state: UsersS
 export const selectUsersError = createSelector(selectUsersState, (state: UsersState) => state.error);
 
 export const selectAllUsers = createSelector(selectUsersState, (state: UsersState) =>{
-  let users = selectAll(state);
-  if (state.filter !== null) {
-    const filter = state.filter.toLowerCase(); // Приводим фильтр к нижнему регистру
-    // Условие фильтрации: ищем пользователей, у которых имя или email содержит фильтр
-    users = users.filter(
-      user =>
-        user.name.toLowerCase().includes(filter) ||
-        user.email.toLowerCase().includes(filter)
-    );
-    return users;
-  }else{
-    return users;
-  }
-
-
+    return selectAll(state);
 
 })
 
@@ -47,3 +33,21 @@ export const selectOpenedUser = createSelector(
   selectUsersEntities,
   ({ id }, entities) => entities[id] || null
 );
+
+export const usersFilterSelector = createSelector(
+  selectUsersState,
+  (state: UsersState) => state.usersFilter
+)
+export const filteredUsers = createSelector(selectAllUsers,usersFilterSelector, (state, usersFilter ) =>{
+  let users = state
+
+    const filter = usersFilter.filter.toLowerCase();
+    users = users.filter(
+      user =>
+        user.name.toLowerCase().includes(filter) ||
+        user.email.toLowerCase().includes(filter)
+    );
+
+    return users.length !==0 ? users : state
+
+})

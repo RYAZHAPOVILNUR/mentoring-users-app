@@ -142,13 +142,12 @@ export const loadUser = createEffect(
 
 export const editStoryPoint = createEffect(() => {
   const actions$ = inject(Actions);
-  const apiService = inject(ApiService);
-  const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
+  const httpService = inject(ApiService);
 
   return actions$.pipe(
     ofType(UsersActions.editStoryPoints),
     switchMap(({ userData, onSuccessCb }) =>
-      apiService.post<UsersDTO, CreateUserDTO>(
+      httpService.post<UsersDTO, CreateUserDTO>(
         `/users/${userData.id}`,
         { ...userData }
       ).pipe(
