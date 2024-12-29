@@ -1,12 +1,12 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
-import { MaterialsType } from "libs/users/settings/feature-change-theme/src/lib/style-manager/style-manager";
-import { regexMaterials } from 'libs/users/materials/data-access/src/lib/constants-enums/materials-regex';
-import { MatIconModule } from '@angular/material/icon';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { materialsValidation } from 'libs/users/materials/data-access/src/lib/constants-enums/materials-validation';
+import { MaterialsType } from "libs/users/settings/feature-change-theme/src/lib/style-manager/style-manager";
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @Component({
   selector: 'users-materials-content',
@@ -19,10 +19,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class MaterialsContentComponent {
   private readonly DomSanitizer = inject(DomSanitizer);
   public data: MaterialsType = inject(MAT_DIALOG_DATA);
-  public regexMaterials = regexMaterials;
+  public materialsValidation = materialsValidation;
 
   public getVideoURL() {
-    const id = this.data.material_link.match(regexMaterials.video);
+    const id = this.data.material_link.match(materialsValidation.video);
     const trustedUrl = 'https://www.youtube.com/embed/';
 
     return id ? this.DomSanitizer.bypassSecurityTrustResourceUrl(trustedUrl + `${id[1]}`) : '';

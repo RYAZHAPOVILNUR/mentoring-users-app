@@ -30,7 +30,6 @@ export const initialUsersState: UsersState = usersAdapter.getInitialState({
   // set initial required properties
   status: 'init',
   error: null,
-  usersFilter: { name: '' },
   filter: { name: '' },
 });
 

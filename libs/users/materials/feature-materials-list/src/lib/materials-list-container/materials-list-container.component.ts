@@ -1,15 +1,15 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialsListComponent } from '../materials-list/materials-list.component';
-import { MaterialsAddButtonComponent } from '@users/users/materials/feature-materials-create';
-import { Router } from '@angular/router';
-import { FoldersFacade, MaterialsFacade } from '@users/materials/data-access';
-import { LetDirective } from '@ngrx/component';
-import { MaterialsListContainerStore } from './materials-list.container.store';
-import { MaterialsVM } from 'libs/users/materials/view-models/materials-vm';
-import { MatDialog } from '@angular/material/dialog';
-import { MaterialsContentComponent } from '@users/users/materials/feature-materials-content';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { LetDirective } from '@ngrx/component';
+import { FoldersFacade, MaterialsFacade } from '@users/materials/data-access';
+import { MaterialsContentComponent } from '@users/users/materials/feature-materials-content';
+import { MaterialsAddButtonComponent } from '@users/users/materials/feature-materials-create';
+import { MaterialsVM } from 'libs/users/materials/view-models/materials-vm';
+import { MaterialsListComponent } from '../materials-list/materials-list.component';
+import { MaterialsListContainerStore } from './materials-list.container.store';
 
 @Component({
   selector: 'users-materials-list-container',
@@ -28,6 +28,7 @@ export class MaterialsListContainerComponent {
   private readonly destroyRef = inject(DestroyRef);
   private readonly MaterialsFacade = inject(MaterialsFacade);
   private readonly FoldersFacade = inject(FoldersFacade);
+  
   public readonly materials$ = this.componentStore.materials$;
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;

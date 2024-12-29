@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import * as folderSelector from './folders.selectors';
+import { Observable } from 'rxjs';
 import * as folderActions from './folders.actions';
 import { FoldersErrors } from './folders.reducer';
-import { Observable } from 'rxjs';
+import * as folderSelector from './folders.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class FoldersFacade {

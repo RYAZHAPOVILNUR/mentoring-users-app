@@ -15,11 +15,11 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
   imports: [CommonModule, UsersCardComponent, MatProgressBarModule],
 })
 export class UsersListComponent {
-  @Input({ required: true })
-  vm!: UsersListVM;
-
   @Output() deleteUser = new EventEmitter();
   @Output() redirectToEdit = new EventEmitter();
+
+  @Input({ required: true })
+  vm!: UsersListVM;
 
   onDeleteUser(user: UsersVM) {
     this.deleteUser.emit(user);

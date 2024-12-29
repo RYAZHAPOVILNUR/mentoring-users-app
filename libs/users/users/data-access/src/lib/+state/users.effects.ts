@@ -22,13 +22,11 @@ export const userEffects = createEffect(
               users: users.map((user) => usersDTOAdapter.DTOtoEntity(user)),
             })
           ),
-          catchError((error) => {
-            return of(UsersActions.loadUsersFailure({ error }));
-          })
-        )
-      )
-    );
-  },
+          catchError((error) => of(UsersActions.loadUsersFailure({ error })))
+         )
+       )
+     );
+   },
   { functional: true }
 );
 
@@ -63,13 +61,11 @@ export const addUser = createEffect(
         apiService.post<UsersDTO, CreateUserDTO>('/users', userData).pipe(
           map((user) => usersDTOAdapter.DTOtoEntity(user)),
           map((userEntity) => UsersActions.addUserSuccess({ userData: userEntity })),
-          catchError((error) => {
-            return of(UsersActions.addUserFailed({ error }));
-          })
-        )
-      )
-    );
-  },
+          catchError((error) => of(UsersActions.addUserFailed({ error })))
+         )
+       )
+     );
+   },
   { functional: true }
 );
 
@@ -98,13 +94,11 @@ export const editUser = createEffect(
           map((userData) => ({ userData, onSuccessCb })),
           tap(({ onSuccessCb }) => onSuccessCb()),
           map(({ userData }) => UsersActions.editUserSuccess({ userData })),
-          catchError((error) => {
-            return of(UsersActions.editUserFailed({ error }));
-          })
-        )
-      )
-    );
-  },
+          catchError((error) => of(UsersActions.editUserFailed({ error })))
+         )
+       )
+     );
+   },
   { functional: true }
 );
 
@@ -113,23 +107,21 @@ export const loadUser = createEffect(
     const actions$ = inject(Actions);
     const apiService = inject(ApiService);
     const store = inject(Store);
+
     return actions$.pipe(
       ofType(UsersActions.loadUser),
       withLatestFrom(store.select(selectRouteParams)),
-      switchMap(([, params]) => {
-        if (params['id']) {
-          return apiService.get<UsersDTO>(`/users/${params['id']}`).pipe(
-            map((user) => usersDTOAdapter.DTOtoEntity(user)),
-            map((userEntity) => UsersActions.loadUserSuccess({ userData: userEntity })),
-            catchError((error) => {
-              return of(UsersActions.loadUserFailed({ error }));
-            })
-          );
-        }
-        return of(UsersActions.updateUserStatus({ status: 'loading' }));
-      })
-    );
-  },
+      switchMap(([, params]) =>
+        params['id']
+          ? apiService.get<UsersDTO>(`/users/${params['id']}`).pipe(
+              map((user) => usersDTOAdapter.DTOtoEntity(user)),
+              map((userEntity) => UsersActions.loadUserSuccess({ userData: userEntity })),
+              catchError((error) => of(UsersActions.loadUserFailed({ error })))
+            )
+          : of(UsersActions.updateUserStatus({ status: 'loading' }))
+         )
+       );
+     },
   { functional: true }
 );
 
@@ -155,9 +147,9 @@ export const addUserStoryPoints = createEffect(
           tap(() => onSuccessCbStoryPoints()),
           map((userData) => UsersActions.addUserStoryPointsSuccess({ userData })),
           catchError((error) => of(UsersActions.addUserStoryPointsFailed({ error })))
+          )
         )
-      )
-    );
-  },
+      );
+    },
   { functional: true }
 );

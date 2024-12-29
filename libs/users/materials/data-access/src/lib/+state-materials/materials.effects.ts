@@ -1,12 +1,12 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, of, switchMap, withLatestFrom } from 'rxjs';
-import * as MaterialActions from './materials.actions';
-import { ApiService } from '@users/core/http';
-import { AddMaterialsType } from '../models/material.type';
-import { MaterialsType } from "libs/users/settings/feature-change-theme/src/lib/style-manager/style-manager";
 import { Store } from '@ngrx/store';
 import { selectRouteParams } from '@users/core/data-access';
+import { ApiService } from '@users/core/http';
+import { MaterialsType } from "libs/users/settings/feature-change-theme/src/lib/style-manager/style-manager";
+import { catchError, map, of, switchMap, withLatestFrom } from 'rxjs';
+import { AddMaterialsType } from '../models/material.type';
+import * as MaterialActions from './materials.actions';
 
 export const MaterialEffects = createEffect(
   () => {

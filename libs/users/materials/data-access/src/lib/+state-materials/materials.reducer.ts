@@ -1,8 +1,8 @@
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { createReducer, on, createFeature } from '@ngrx/store';
-import * as MaterialActions from './materials.actions';
-import { MaterialsType } from "libs/users/settings/feature-change-theme/src/lib/style-manager/style-manager";
+import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
+import { createFeature, createReducer, on } from '@ngrx/store';
 import { LoadingStatus } from '@users/core/data-access';
+import { MaterialsType } from "libs/users/settings/feature-change-theme/src/lib/style-manager/style-manager";
+import * as MaterialActions from './materials.actions';
 
 export const MATERIALS_FEATURE_KEY = 'materials';
 

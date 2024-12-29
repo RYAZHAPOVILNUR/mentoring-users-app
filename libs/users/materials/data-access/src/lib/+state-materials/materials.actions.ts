@@ -1,6 +1,6 @@
-import { props, createAction } from '@ngrx/store';
-import { AddMaterialsType } from '../models/material.type';
+import { createAction, props } from '@ngrx/store';
 import { MaterialsType } from "libs/users/settings/feature-change-theme/src/lib/style-manager/style-manager";
+import { AddMaterialsType } from '../models/material.type';
 
 export const initMaterials = createAction('[Materials Page] Init');
 export const loadMaterialsSuccess = createAction('[Materials/API] Load Materials Success', props<{ materials: MaterialsType[] }>());

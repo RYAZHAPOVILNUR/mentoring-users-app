@@ -1,12 +1,12 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { LetDirective } from '@ngrx/component';
+import { FoldersFacade } from '@users/materials/data-access';
 import { FoldersAddButtonComponent } from 'libs/users/materials/feature-folders-create/src/lib/folders-add-button/folders-add-button.component';
+import { FoldersVM } from 'libs/users/materials/view-models/folders-vm';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
 import { FoldersListContainerStore } from './folders-list-container.store';
-import { FoldersFacade } from '@users/materials/data-access';
-import { LetDirective } from '@ngrx/component';
-import { FoldersVM } from 'libs/users/materials/view-models/folders-vm';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'users-folder-list-container',
@@ -32,5 +32,4 @@ export class FoldersListContainerComponent {
   public onRedirectToFolder(id: number) {
     this.router.navigate(['/materials', id]);
   }
-  
 }

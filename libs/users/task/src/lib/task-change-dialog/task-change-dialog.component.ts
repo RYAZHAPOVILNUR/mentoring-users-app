@@ -123,10 +123,7 @@ export class TaskChangeDialogComponent {
 
   get totalPoint(): string {
     const values = Object.values(this.storyPoint);
-
-    if (Object.values(this.storyPoint).every((value) => value === '?')) return '?';
-
-    return values.reduce((total, currentValue) => total + (parseFloat(currentValue) || 0), 0);
+    return values.every(value => value === '?') ? '?' : values.reduce((total, currentValue) => total + (parseFloat(currentValue) || 0), 0).toString();
   }
 
   setPoint(category: string, value: string) {

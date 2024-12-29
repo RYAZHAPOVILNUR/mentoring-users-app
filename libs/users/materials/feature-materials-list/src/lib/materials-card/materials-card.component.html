@@ -1,11 +1,11 @@
 <div class="material">
     <div class="material-card__container">
         <div class="material-card__icon-container">
-            <mat-icon *ngIf="regexMaterials.pdf.test(material.material_link)"
+            <mat-icon *ngIf="materialsValidation.pdf.test(material.material_link)"
                 class="material-card__icon">picture_as_pdf</mat-icon>
-            <mat-icon *ngIf="regexMaterials.video.test(material.material_link)"
+            <mat-icon *ngIf="materialsValidation.video.test(material.material_link)"
                 class="material-card__icon">video_library</mat-icon>
-            <mat-icon *ngIf="regexMaterials.audio.test(material.material_link)"
+            <mat-icon *ngIf="materialsValidation.audio.test(material.material_link)"
                 class="material-card__icon">music_note</mat-icon>
             <button mat-icon-button class="material-card__button-delete" (click)="OnDeleteMaterial(material)">
                 <mat-icon>delete</mat-icon>

@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { FoldersType } from 'libs/users/materials/data-access/src/lib/models/folder.type';
+import { FoldersVM } from 'libs/users/materials/view-models/folders-vm';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';
 import { FoldersListVM } from './folders-list-view-model';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { FoldersVM } from 'libs/users/materials/view-models/folders-vm';
-import { FoldersType } from 'libs/users/materials/data-access/src/lib/models/folder.type';
 
 @Component({
   selector: 'users-folder-list',
@@ -16,7 +16,7 @@ import { FoldersType } from 'libs/users/materials/data-access/src/lib/models/fol
 })
 export class FoldersListComponent {
   @Input({ required: true })
-  vm!: FoldersListVM;
+  public vm!: FoldersListVM;
 
   @Output() deleteFolder = new EventEmitter();
   @Output() redirectToFolder = new EventEmitter();

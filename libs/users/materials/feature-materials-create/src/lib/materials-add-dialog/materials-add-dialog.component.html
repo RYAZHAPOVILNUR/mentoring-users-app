@@ -10,7 +10,7 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Укажите ссылку</mat-label>
-            <input matInput formControlName="link" (invalid)="regexMaterials" />
+            <input matInput formControlName="link" (invalid)="materialsValidation" />
             <mat-error>Укажите корректную ссылку</mat-error>
         </mat-form-field>
     </form>

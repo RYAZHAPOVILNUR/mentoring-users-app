@@ -22,7 +22,7 @@ export class UsersFilterComponent implements OnDestroy {
     this.filterUsers.valueChanges
       .pipe(debounceTime(1000), distinctUntilChanged(), takeUntil(this.destroy$))
       .subscribe((value) => {
-        if (value !== null) this.filter.emit(value);
+        value !== null && this.filter.emit(value);
       });
   }
 

@@ -6,13 +6,13 @@
         </button>
     </div>
     <mat-dialog-content>
-        <ng-container *ngIf="regexMaterials.audio.test(data.material_link)">
+        <ng-container *ngIf="materialsValidation.audio.test(data.material_link)">
             <audio class="materials-audio-content" type="audio/mp3" controls [src]="data.material_link"></audio>
         </ng-container>
-        <ng-container *ngIf="regexMaterials.video.test(data.material_link)">
+        <ng-container *ngIf="materialsValidation.video.test(data.material_link)">
             <iframe [src]="getVideoURL()" allowfullscreen class="materials-video-content"></iframe>
         </ng-container>
-        <ng-container *ngIf="regexMaterials.pdf.test(data.material_link)">
+        <ng-container *ngIf="materialsValidation.pdf.test(data.material_link)">
             <pdf-viewer class="materials-pdf-content" [src]="data.material_link" [render-text]="true" [original-size]="false" />
         </ng-container>
     </mat-dialog-content>

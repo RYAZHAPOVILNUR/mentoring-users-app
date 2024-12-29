@@ -1,13 +1,13 @@
 import { inject, Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ComponentStore } from '@ngrx/component-store';
+import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { DeepReadonly } from '@users/core/utils';
-import { MaterialsType } from "libs/users/settings/feature-change-theme/src/lib/style-manager/style-manager";
 import { FoldersFacade, MaterialsFacade } from '@users/materials/data-access';
+import { MaterialsVM } from 'libs/users/materials/view-models/materials-vm';
+import { MaterialsType } from 'libs/users/settings/feature-change-theme/src/lib/style-manager/style-manager';
 import { tap } from 'rxjs';
 import { MaterialsVMAdapter } from '../../../../view-models/materials-vm.adapter';
-import { MaterialsVM } from 'libs/users/materials/view-models/materials-vm';
-import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 
 type MaterialsListState = DeepReadonly<{
   materials: MaterialsType[];
@@ -52,7 +52,7 @@ export class MaterialsListContainerStore extends ComponentStore<MaterialsListSta
     this.effect(() =>
       dialogRef.afterClosed().pipe(
         tap((result: boolean) => {
-          if (result) this.MaterialsFacade.deleteMaterial(material.id);
+          result && this.MaterialsFacade.deleteMaterial(material.id);
         })
       )
     );

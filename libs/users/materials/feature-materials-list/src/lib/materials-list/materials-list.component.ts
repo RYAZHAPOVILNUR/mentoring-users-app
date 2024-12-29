@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { materialsListVM } from './materials-list-view-model';
+import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MaterialsCardComponent } from '../materials-card/materials-card.component';
 import { MaterialsVM } from 'libs/users/materials/view-models/materials-vm';
+import { MaterialsCardComponent } from '../materials-card/materials-card.component';
+import { materialsListVM } from './materials-list-view-model';
 
 @Component({
   selector: 'users-materials-list',
@@ -16,12 +16,12 @@ import { MaterialsVM } from 'libs/users/materials/view-models/materials-vm';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialsListComponent {
-  @Input({ required: true })
-  vm!: materialsListVM;
-
   @Output() backToFolder = new EventEmitter();
   @Output() deleteMaterial = new EventEmitter();
   @Output() openMaterial = new EventEmitter();
+
+  @Input({ required: true })
+  public vm!: materialsListVM;
 
   public onBackToFolders(): void {
     this.backToFolder.emit();

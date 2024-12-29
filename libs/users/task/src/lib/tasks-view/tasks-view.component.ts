@@ -53,9 +53,6 @@ export class TasksViewComponent {
   private readonly destroyRef = inject(DestroyRef);
 
   constructor(private tasksStore: TasksStore) {}
-
-  @Input() columns?: IColumn[];
-  @Input() colorMode?: boolean;
   @Output() updateColumns = new EventEmitter<{ columns: IColumn[] }>();
   @Output() deleteColumn = new EventEmitter<number>();
   @Output() addTask = new EventEmitter<{
@@ -71,6 +68,9 @@ export class TasksViewComponent {
     columnIndex: number;
     columnName: string;
   }>();
+
+  @Input() columns?: IColumn[];
+  @Input() colorMode?: boolean;
 
   public removeColumn(columnIndex: number) {
     this.deleteColumn.emit(columnIndex);

@@ -1,10 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as materialSelector from './materials.selectors';
-import * as materialActions from './materials.actions';
-import { MaterialsErrors } from './materials.reducer';
 import { Observable } from 'rxjs';
 import { AddMaterialsType } from '../models/material.type';
+import * as materialActions from './materials.actions';
+import { MaterialsErrors } from './materials.reducer';
+import * as materialSelector from './materials.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
