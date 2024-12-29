@@ -23,7 +23,6 @@ export const userEffects = createEffect(
             })
           ),
           catchError((error) => {
-            console.error('Error', error);
             return of(UsersActions.loadUsersFailure({ error }));
           })
         )
@@ -44,7 +43,6 @@ export const deleteUser = createEffect(
         apiService.delete<void>(`/users/${id}`).pipe(
           map(() => UsersActions.deleteUserSuccess({ id })),
           catchError((error) => {
-            console.error('Error', error);
             return of(UsersActions.deleteUserFailed({ error }));
           })
         )
@@ -66,7 +64,6 @@ export const addUser = createEffect(
           map((user) => usersDTOAdapter.DTOtoEntity(user)),
           map((userEntity) => UsersActions.addUserSuccess({ userData: userEntity })),
           catchError((error) => {
-            console.error('Error', error);
             return of(UsersActions.addUserFailed({ error }));
           })
         )
@@ -102,7 +99,6 @@ export const editUser = createEffect(
           tap(({ onSuccessCb }) => onSuccessCb()),
           map(({ userData }) => UsersActions.editUserSuccess({ userData })),
           catchError((error) => {
-            console.error('Error', error);
             return of(UsersActions.editUserFailed({ error }));
           })
         )
@@ -126,7 +122,6 @@ export const loadUser = createEffect(
             map((user) => usersDTOAdapter.DTOtoEntity(user)),
             map((userEntity) => UsersActions.loadUserSuccess({ userData: userEntity })),
             catchError((error) => {
-              console.error('Error', error);
               return of(UsersActions.loadUserFailed({ error }));
             })
           );
@@ -164,7 +159,6 @@ export const addUserStoryPoints = createEffect(
             return UsersActions.addStoryPointsSuccess({ userData });
           }),
           catchError((error) => {
-            console.error('Error', error);
             return of(UsersActions.editUserFailed({ error }));
           })
         );

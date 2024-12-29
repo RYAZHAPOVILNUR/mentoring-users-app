@@ -16,8 +16,8 @@ import { filter, Subject, takeUntil } from 'rxjs';
   styleUrls: ['./users-filter.component.scss'],
 })
 export class UsersFilterComponent {
-  public readonly filterUsers = new FormControl('');
   private readonly usersFacade = inject(UsersFacade);
+  public readonly filterUsers = new FormControl('');
   private readonly onDestroy$ = new Subject<void>();
 
   ngOnInit(): void {
