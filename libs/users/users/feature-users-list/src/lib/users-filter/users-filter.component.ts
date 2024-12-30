@@ -26,6 +26,6 @@ export class UsersFilterComponent {
         filter((value): value is string => value !== null),
         takeUntilDestroyed(this.destroyRef)
       )
-      .subscribe((value) => this.usersFacade.filterUsers(value));
+      .subscribe((value) => this.usersFacade.filterUsers({ name: value }));
   }
 }

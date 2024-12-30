@@ -4,6 +4,10 @@ import { UsersErrors } from './users.reducer';
 
 export type onSuccessEditionCbType = () => void;
 
+export type usersFilter = {
+  name: string;
+};
+
 export const initUsers = createAction('[Users Page] Init');
 
 export const loadUsersSuccess = createAction('[Users/API] Load Users Success', props<{ users: UsersEntity[] }>());
@@ -39,4 +43,4 @@ export const loadUserFailed = createAction('[Users/Api] Load User Failed', props
 
 export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{ status: LoadingStatus }>());
 
-export const setUsersFilter = createAction('[Users Page] Filter Users', props<{ filter: { name: string } }>());
+export const setUsersFilter = createAction('[Users Page] Filter Users', props<{ filter: usersFilter }>());
