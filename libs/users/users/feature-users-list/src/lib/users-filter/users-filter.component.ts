@@ -16,9 +16,9 @@ import { filter } from 'rxjs';
   styleUrls: ['./users-filter.component.scss'],
 })
 export class UsersFilterComponent {
-  public filterFormControl = new FormControl('');
+  public readonly filterFormControl = new FormControl('');
   private readonly usersFacade = inject(UsersFacade);
-  destroyRef = inject(DestroyRef);
+  private readonly destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
     this.filterFormControl.valueChanges

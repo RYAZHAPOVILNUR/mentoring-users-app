@@ -4,7 +4,7 @@ import { UsersErrors } from './users.reducer';
 
 export type onSuccessEditionCbType = () => void;
 
-export type usersFilter = {
+export type UsersFilter = {
   name: string;
 };
 
@@ -43,4 +43,4 @@ export const loadUserFailed = createAction('[Users/Api] Load User Failed', props
 
 export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{ status: LoadingStatus }>());
 
-export const setUsersFilter = createAction('[Users Page] Filter Users', props<{ filter: usersFilter }>());
+export const setUsersFilter = createAction('[Users Page] Filter Users', props<{ filter: UsersFilter }>());
