@@ -25,6 +25,7 @@ export const appRoutes: Route[] = [
           {
             path: 'users',
             loadComponent: () => import('@users/feature-users-list').then((c) => c.UsersListContainerComponent),
+
           },
           {
             path: 'users/:id',

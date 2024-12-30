@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl,  FormsModule, ReactiveFormsModule,  } from '@angular/forms';
 import {UsersFacade} from '@users/users/data-access';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
@@ -7,14 +7,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { select, Store } from '@ngrx/store';
 import { selectQueryParam } from '@users/core/data-access';
 import { map } from 'rxjs';
-import { AsyncPipe, NgIf } from '@angular/common';
-import {usersFilter} from '@users/users/data-access';
+import {  NgIf } from '@angular/common';
+
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'users-filter',
   templateUrl: './users-filter.component.html',
   styleUrls: ['./users-filter.component.scss'],
-  imports: [FormsModule, ReactiveFormsModule, MatInputModule, MatIconModule, NgIf],
+  imports: [FormsModule, ReactiveFormsModule, MatInputModule, MatIconModule, NgIf, MatButtonModule],
   standalone: true,
 })
 export class UsersFilterComponent implements OnInit {
@@ -44,5 +45,7 @@ export class UsersFilterComponent implements OnInit {
       queryParamsHandling: 'merge',
     });
   }
-
+  public hasText(): boolean {
+    return !!this.usersFilter.value?.trim();
+  }
 }

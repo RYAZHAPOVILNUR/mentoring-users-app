@@ -9,9 +9,20 @@
     type="text"
 
   />
-    <mat-icon matSuffix>search</mat-icon>
-    <ng-container *ngIf="true">
-      <mat-icon matSuffix>done</mat-icon>
+    <ng-container *ngIf="!hasText()" matSuffix>
+    <mat-icon >search</mat-icon>
+    </ng-container>
+    <ng-container *ngIf="hasText()" matSuffix>
+      <button
+        mat-icon-button
+        type="button"
+        color="primary"
+        class="edit-user-button__st"
+        matSuffix
+        (click)="usersFilter.reset()">
+        <mat-icon >close</mat-icon>
+      </button>
+
     </ng-container>
   </mat-form-field>
 </div>

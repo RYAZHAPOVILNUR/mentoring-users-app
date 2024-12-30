@@ -94,7 +94,6 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
-
   });
   public totalStoryPoints = new FormControl({ value: this.vm.user?.totalStoryPoints || 0, disabled: true }, [Validators.min(0), Validators.pattern('^[0-9]*$')])
 
