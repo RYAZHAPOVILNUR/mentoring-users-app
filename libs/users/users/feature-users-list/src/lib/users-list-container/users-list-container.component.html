@@ -6,7 +6,7 @@
     loggedUser: loggedUser$
   } as vm"
 >
-  <users-filter (usersFilter)="queryToFacade($event)"></users-filter>
+  <users-filter (usersFilter)="onUsersFilter($event)"></users-filter>
   <users-list-ui [vm]="vm" (deleteUser)="onDeleteUser($event)"
                  (redirectToEdit)="onRedirectToEdit($event)" />
 </ng-container>

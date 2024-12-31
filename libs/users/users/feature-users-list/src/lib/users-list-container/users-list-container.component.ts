@@ -48,7 +48,7 @@ export class UsersListContainerComponent {
     });
   }
 
-  queryToFacade(name: string) {
-    this.usersFacade.usersFilterActivate(name);
+  onUsersFilter(name: string) {
+    this.usersFacade.onUsersFilter({ filter: { name } });
   }
 }

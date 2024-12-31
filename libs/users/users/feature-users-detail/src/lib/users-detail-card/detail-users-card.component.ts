@@ -26,7 +26,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { DadataApiService } from '@dadata';
-import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, of, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs';
 import { PushPipe } from '@ngrx/component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -98,26 +98,26 @@ export class DetailUsersCardComponent implements OnInit {
 
   public resetStoryPointInput(reset = 'none') {
     this.isStoryPointEnableSubject$.next(!this.isStoryPointEnableSubject$.value);
-    if (reset === 'true') {
+    if (reset === 'reset') {
       this.formGroup.get('totalStoryPoints')?.reset();
       this.formGroup.get('totalStoryPoints')?.setValue(this.vm.user?.totalStoryPoints);
     }
   }
 
   public closeStoryPointInputBtn() {
-    this.resetStoryPointInput('true');
+    this.resetStoryPointInput('reset');
   }
 
   public doneStoryPointInputBtn() {
-    if (
+    const isStoryPointsEqual =
       Number(this.formGroup.get('totalStoryPoints')?.value) === Number(this.vm.user?.totalStoryPoints) ||
-      this.vm.editMode
-    ) {
+      this.vm.editMode;
+    if (isStoryPointsEqual) {
       this.resetStoryPointInput();
-      return;
+    } else {
+      this.onSubmit();
+      this.resetStoryPointInput('reset');
     }
-    this.onSubmit();
-    this.resetStoryPointInput('true');
   }
 
   public formGroup = new FormBuilder().group({
