@@ -1,9 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { UsersFacade } from '@users/users/data-access';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Store } from '@ngrx/store';
+import { UsersFacade } from '@users/users/data-access';
 
 
 @Component({
@@ -16,8 +17,9 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 })
 export class UsersFilterComponent implements OnInit {
   private readonly usersFacade = inject(UsersFacade)
-  private readonly destroyRef = inject(DestroyRef);
+  private readonly store = inject(Store)
   usersFilter = new FormControl('');
+  private readonly destroyRef = inject(DestroyRef);
 
   ngOnInit() {
     this.usersFilter.valueChanges
