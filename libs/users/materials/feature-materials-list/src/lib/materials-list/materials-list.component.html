@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="back-arrow">
+    <button (click)="goBack()" mat-icon-button>
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span>20.19</span>
+  </div>
+
+  <div class="materials_wrapper">
+    <ng-container *ngFor="let material of materials">
+      <users-materials-card [material]="material" (deleteMaterial)="onDeleteMaterial($event)"></users-materials-card>
+    </ng-container>
+  </div>
+
+  <users-materials-add-button></users-materials-add-button>
+</div>

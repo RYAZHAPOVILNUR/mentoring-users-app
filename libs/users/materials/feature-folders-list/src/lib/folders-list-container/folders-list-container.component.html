@@ -1,0 +1,31 @@
+<ng-container
+  *ngrxLet="{
+    folders: folders$,
+    status: status$,
+    error: error$
+  } as vm"
+>
+  <div [ngSwitch]="vm.status">
+    <div *ngSwitchCase="'loading'">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+    <div *ngSwitchCase="'error'">
+      <div>
+        <div class="alert alert-danger" role="alert">
+          <h1>Ошибка {{ vm.error?.status }}</h1>
+          <hr />
+          {{vm.error?.message}}
+        </div>
+      </div>
+
+    </div>
+
+    <div *ngSwitchCase="'loaded'">
+      <users-folders-list
+        [folders]="vm.folders"
+        (addFolder)="addFolder($event)"
+        (deleteFolder)="onDeleteFolder($event)"
+      ></users-folders-list>
+    </div>
+  </div>
+</ng-container>

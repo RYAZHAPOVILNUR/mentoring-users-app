@@ -1,0 +1,9 @@
+.dialog {
+  width: 400px;
+  height: 200px;
+  padding: 20px;
+}
+
+.dialog_field {
+  width: 100%;
+}
