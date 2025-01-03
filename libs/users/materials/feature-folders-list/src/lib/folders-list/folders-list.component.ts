@@ -15,7 +15,7 @@ import { IFolder } from '@users/materials/data-access';
   styleUrls: ['./folders-list.component.scss'],
 })
 export class FoldersListComponent {
-  private dialog = inject(MatDialog);
+  private readonly dialog = inject(MatDialog);
   @Input({ required: true }) folders!: IFolder[];
 
   @Output() addFolder = new EventEmitter<string>();

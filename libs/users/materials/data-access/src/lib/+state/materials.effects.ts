@@ -21,7 +21,7 @@ export const MaterialsEffects = createEffect(
         apiService.get<IMaterial[]>('/material').pipe(
           map((materials) =>
             MaterialsActions.loadMaterialsSuccess({
-              materials: materials.filter((material) => material.folder_id === +params['id']),
+              materials: materials.filter((material) => material.folderId === +params['id']),
             })
           ),
           catchError((error) => of(MaterialsActions.loadMaterialsFailure({ error })))
@@ -47,7 +47,7 @@ export const addMaterial = createEffect(
 
         const editedMaterial = {
           ...materials,
-          folder_id: folderId,
+          folderId: folderId,
         };
         return apiService
           .post<IMaterial, IAddMaterial>('/material', editedMaterial)
@@ -103,11 +103,10 @@ export const deleteFolder = createEffect(
 
     return actions$.pipe(
       ofType(MaterialsActions.deleteMaterialsFolder),
-      switchMap(({ folder_id }) =>
-        apiService.delete(`/folder/${folder_id}`).pipe(
-          tap((data) => console.log(data)),
-          map(() => MaterialsActions.deleteMaterialsFolderSuccess({ folder_id: folder_id }))
-        )
+      switchMap(({ folderId }) =>
+        apiService
+          .delete(`/folder/${folderId}`)
+          .pipe(map(() => MaterialsActions.deleteMaterialsFolderSuccess({ folderId: folderId })))
       )
     );
   },

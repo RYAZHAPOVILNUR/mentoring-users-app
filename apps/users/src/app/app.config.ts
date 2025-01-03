@@ -50,7 +50,6 @@ export const appConfig: ApplicationConfig = {
       [githubApiFeature.name]: githubApiFeature.reducer,
       [backlogFeature.name]: backlogFeature.reducer,
       [materialsFeature.name]: materialsFeature.reducer,
-
     }),
     provideRouterStore(),
     provideStoreDevtools({

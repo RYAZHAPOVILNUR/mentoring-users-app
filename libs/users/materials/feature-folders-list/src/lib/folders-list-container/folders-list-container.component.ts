@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
 import { MaterialsFacade } from '../../../../data-access/src/lib/+state/materials.facade';
@@ -15,14 +15,15 @@ import { IFolder } from '@users/materials/data-access';
   templateUrl: './folders-list-container.component.html',
   styleUrls: ['./folders-list-container.component.scss'],
 })
-export class FoldersListContainerComponent {
-  private materialsFacade = inject(MaterialsFacade);
-  public confirmDialog = inject(MatDialog);
+export class FoldersListContainerComponent implements OnInit {
+  private readonly materialsFacade = inject(MaterialsFacade);
+  public readonly confirmDialog = inject(MatDialog);
 
   public folders$ = this.materialsFacade.folders$;
   public status$ = this.materialsFacade.status$;
+  public error$ = this.materialsFacade.error$
 
-  constructor() {
+  ngOnInit() {
     this.materialsFacade.init();
   }
 

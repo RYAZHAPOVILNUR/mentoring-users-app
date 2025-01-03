@@ -20,8 +20,8 @@ export class MaterialsFacade {
     this.store.dispatch(MaterialsActions.addMaterialsFolder({ title: folder }));
   }
 
-  deleteFolder(folder_id: number): void {
-    this.store.dispatch(MaterialsActions.deleteMaterialsFolder({ folder_id: folder_id }));
+  deleteFolder(folderId: number): void {
+    this.store.dispatch(MaterialsActions.deleteMaterialsFolder({ folderId: folderId }));
   }
 
   loadMaterials(): void {

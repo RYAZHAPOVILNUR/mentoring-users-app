@@ -14,7 +14,7 @@ import { MatMenuModule } from '@angular/material/menu';
   styleUrls: ['./materials-add-button.component.scss'],
 })
 export class MaterialsAddButtonComponent {
-  readonly dialog = inject(MatDialog);
+  private readonly dialog = inject(MatDialog);
 
   public openDialog(title: string): void {
     this.dialog.open(MaterialsAddDialogComponent, { data: title });

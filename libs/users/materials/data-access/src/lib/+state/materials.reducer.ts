@@ -4,13 +4,14 @@ import { LoadingStatus } from '@users/core/data-access';
 import { IFolder } from '../models/folder.model';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { IMaterial } from '../models/material.model';
+import { HttpErrorResponse } from '@angular/common/http';
 
 export const materialsFeatureKey = 'materials';
 
 export interface MaterialsState extends EntityState<IFolder> {
   status: LoadingStatus;
   materials: IMaterial[];
-  error: null;
+  error: HttpErrorResponse | null;
 }
 export const materialsAdapter: EntityAdapter<IFolder> = createEntityAdapter<IFolder>();
 
@@ -38,8 +39,8 @@ export const reducer = createReducer(
   on(MaterialsActions.addMaterialsFolderSuccess, (state, { folder }) =>
     materialsAdapter.addOne({ ...folder }, { ...state })
   ),
-  on(MaterialsActions.deleteMaterialsFolderSuccess, (state, { folder_id }) =>
-    materialsAdapter.removeOne(folder_id, { ...state })
+  on(MaterialsActions.deleteMaterialsFolderSuccess, (state, { folderId }) =>
+    materialsAdapter.removeOne(folderId, { ...state })
   ),
   on(MaterialsActions.deleteMaterialsFolderFailure, (state, { error }) => ({
     ...state,
