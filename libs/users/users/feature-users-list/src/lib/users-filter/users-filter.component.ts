@@ -54,11 +54,6 @@ export class UsersFilterComponent {
       )
       .subscribe();
   }
-  // debounceTime(300),
-  // // Отсеиваем одинаковые подряд значения
-  // distinctUntilChanged(),
-  // // Начинаем поток с текущего значения поля
-  // startWith('')
 
   ngOnDestroy(): void {
     this.usersFilter.emit('');

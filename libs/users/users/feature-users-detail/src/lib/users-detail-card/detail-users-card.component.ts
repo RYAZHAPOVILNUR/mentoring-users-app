@@ -96,27 +96,27 @@ export class DetailUsersCardComponent implements OnInit {
   private isStoryPointEnableSubject$ = new BehaviorSubject<boolean>(false);
   public isStoryPointEnable$ = this.isStoryPointEnableSubject$.asObservable();
 
-  public resetStoryPointInput(reset = 'none') {
+  public resetStoryPoint(reset = false) {
     this.isStoryPointEnableSubject$.next(!this.isStoryPointEnableSubject$.value);
-    if (reset === 'reset') {
+    if (reset) {
       this.formGroup.get('totalStoryPoints')?.reset();
       this.formGroup.get('totalStoryPoints')?.setValue(this.vm.user?.totalStoryPoints);
     }
   }
 
-  public closeStoryPointInputBtn() {
-    this.resetStoryPointInput('reset');
+  public onStoryPointClose() {
+    this.resetStoryPoint(true);
   }
 
-  public doneStoryPointInputBtn() {
+  public onStoryPointSubmit() {
     const isStoryPointsEqual =
       Number(this.formGroup.get('totalStoryPoints')?.value) === Number(this.vm.user?.totalStoryPoints) ||
       this.vm.editMode;
     if (isStoryPointsEqual) {
-      this.resetStoryPointInput();
+      this.resetStoryPoint();
     } else {
       this.onSubmit();
-      this.resetStoryPointInput('reset');
+      this.resetStoryPoint(true);
     }
   }
 
