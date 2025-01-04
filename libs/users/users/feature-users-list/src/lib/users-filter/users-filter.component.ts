@@ -29,6 +29,6 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.usersFacade.setFilters({ name: '' });  // Очистка фильтра через фасад
+    this.usersFacade.setFilters({ name: '' });
   }
 }
