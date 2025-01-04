@@ -5,7 +5,6 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { UsersFacade } from '@users/users/data-access';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 
-
 @Component({
   selector: 'users-users-filter',
   standalone: true,

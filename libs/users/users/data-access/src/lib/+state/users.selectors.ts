@@ -46,6 +46,3 @@ export const selectFilteredUsers = createSelector(
     )
   }
 )
-
-
-
