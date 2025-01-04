@@ -162,13 +162,13 @@ export class DetailUsersCardComponent implements OnInit {
   }
 
   onEditStoryPoints() {
+    this.formGroup.get('totalStoryPoints')?.disable();
     this.editStoryPoints.emit({
       user: {
         totalStoryPoints: this.formGroup.value.totalStoryPoints || 0,
       },
       onSuccessCb: this.onEditStoryPointsSuccess,
     });
-    this.formGroup.get('totalStoryPoints')?.disable();
   }
 
   onDeleteUser() {

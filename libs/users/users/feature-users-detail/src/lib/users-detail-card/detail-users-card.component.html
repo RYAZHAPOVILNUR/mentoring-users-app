@@ -117,7 +117,7 @@
             <button mat-icon-button matSuffix type="button" *ngIf="this.formGroup.get('totalStoryPoints')?.enabled && !vm.editMode" aria-label="Save updated storypoints" (click)="onEditStoryPoints()">
               <mat-icon>done</mat-icon>
             </button>
-            <button mat-icon-button matSuffix color="warn" type="button" *ngIf="this.formGroup.get('totalStoryPoints')?.enabled && !vm.editMode" aria-label="Close edit storypoints mode" (click)="onCloseUser()">
+            <button mat-icon-button matSuffix color="warn" type="button" *ngIf="this.formGroup.get('totalStoryPoints')?.enabled && !vm.editMode" aria-label="Close edit storypoints mode" (click)="this.formGroup.get('totalStoryPoints')?.disable()">
               <mat-icon>close</mat-icon>
             </button>
             </mat-form-field>
