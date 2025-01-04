@@ -54,7 +54,7 @@ export class UsersFacade {
         }
       })
     );
-  }
+   }
 
   loadUser() {
     this.store.dispatch(UsersActions.loadUser());
