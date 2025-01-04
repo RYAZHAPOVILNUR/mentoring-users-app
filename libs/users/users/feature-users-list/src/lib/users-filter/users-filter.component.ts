@@ -17,7 +17,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 export class UsersFilterComponent implements OnInit {
   private readonly usersFacade = inject(UsersFacade)
   private readonly destroyRef = inject(DestroyRef);
-  usersFilter = new FormControl('');
+  public readonly usersFilter = new FormControl('');
 
   ngOnInit() {
     this.usersFilter.valueChanges
