@@ -73,6 +73,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: vm.user.email,
         username: vm.user.username,
         city: vm.user.city,
+        totalStoryPoints: vm.user.totalStoryPoints,
       });
     }
 
@@ -88,10 +89,15 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    totalStoryPoints: new FormControl({ value: 0, disabled: true }),
   });
 
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
+    onSuccessCb: onSuccessEditionCbType;
+  }>();
+  @Output() editStoryPoints = new EventEmitter<{
+    user: Partial<CreateUserDTO>;
     onSuccessCb: onSuccessEditionCbType;
   }>();
   @Output() closeUser = new EventEmitter();
@@ -99,6 +105,7 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('storyPointsSnackbar') snackbarSPTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -115,12 +122,17 @@ export class DetailUsersCardComponent implements OnInit {
     this.checkChangeFields();
   }
 
-  private onEditSuccess: onSuccessEditionCbType = () =>
-    this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
+  private showSnackbar(template: TemplateRef<any>) {
+    this.snackBar.openFromTemplate(template, {
       duration: 2500,
       horizontalPosition: 'center',
       verticalPosition: 'top',
     });
+  }
+
+  private onEditSuccess: onSuccessEditionCbType = () => this.showSnackbar(this.snackbarTemplateRef);
+
+  private onEditStoryPointsSuccess: onSuccessEditionCbType = () => this.showSnackbar(this.snackbarSPTemplateRef);
 
   onSubmit(): void {
     this.editUser.emit({
@@ -128,6 +140,7 @@ export class DetailUsersCardComponent implements OnInit {
         name: this.formGroup.value.name || '',
         username: this.formGroup.value.username || '',
         city: this.formGroup.value.city || '',
+        totalStoryPoints: this.formGroup.value.totalStoryPoints || 0,
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
         purchaseDate: new Date().toString() || '',
         educationStatus: 'trainee',
@@ -146,6 +159,16 @@ export class DetailUsersCardComponent implements OnInit {
 
   onOpenEditMode() {
     this.openEditMode.emit();
+  }
+
+  onEditStoryPoints() {
+    this.editStoryPoints.emit({
+      user: {
+        totalStoryPoints: this.formGroup.value.totalStoryPoints || 0,
+      },
+      onSuccessCb: this.onEditStoryPointsSuccess,
+    });
+    this.formGroup.get('totalStoryPoints')?.disable();
   }
 
   onDeleteUser() {

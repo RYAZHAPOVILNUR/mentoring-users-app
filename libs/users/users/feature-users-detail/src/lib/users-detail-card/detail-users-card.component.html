@@ -89,6 +89,38 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+
+            <mat-form-field
+              class="edit-user-field"
+              [matTooltip]="vm.user!.city"
+              [matTooltipDisabled]="formGroup.enabled"
+            >
+              <mat-label>Количество сторипоинтов:</mat-label>
+              <input
+                type="text"
+                class="edit-user-input"
+                placeholder="0"
+                matInput
+                formControlName="totalStoryPoints"
+              />
+              <button
+              mat-icon-button
+              matSuffix
+              type="submit"
+              *ngIf="this.formGroup.get('totalStoryPoints')?.disabled"
+              aria-label="Open edit storypoints mode"
+              (click)="this.formGroup.get('totalStoryPoints')?.enable()"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+
+            <button mat-icon-button matSuffix type="button" *ngIf="this.formGroup.get('totalStoryPoints')?.enabled && !vm.editMode" aria-label="Save updated storypoints" (click)="onEditStoryPoints()">
+              <mat-icon>done</mat-icon>
+            </button>
+            <button mat-icon-button matSuffix color="warn" type="button" *ngIf="this.formGroup.get('totalStoryPoints')?.enabled && !vm.editMode" aria-label="Close edit storypoints mode" (click)="onCloseUser()">
+              <mat-icon>close</mat-icon>
+            </button>
+            </mat-form-field>
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
@@ -122,5 +154,11 @@
 <ng-template #snackbar>
   <div class="edit-user-snackbar">
     <span>Пользователь успешно изменён!</span>
+  </div>
+</ng-template>
+
+<ng-template #storyPointsSnackbar>
+  <div class="edit-user-snackbar">
+    <span>Сторипоинты успешно обновлены!</span>
   </div>
 </ng-template>
