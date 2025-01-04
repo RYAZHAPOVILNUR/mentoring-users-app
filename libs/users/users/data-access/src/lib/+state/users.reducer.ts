@@ -16,7 +16,7 @@ export interface UsersState extends EntityState<UsersEntity> {
   selectedId?: string | number; // which Users record has been selected
   status: LoadingStatus;
   error: UsersErrors | null;
-  usersFilter: {name: string};
+  usersFilter: UsersActions.UsersFilter;
 }
 
 export interface UsersPartialState {

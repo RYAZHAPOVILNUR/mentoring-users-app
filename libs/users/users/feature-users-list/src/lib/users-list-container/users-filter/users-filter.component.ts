@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { UsersFacade } from '@users/users/data-access';
+import * as UsersActions from '@users/users/data-access';
 
 @Component({
   selector: 'users-filter',
@@ -29,8 +30,7 @@ export class UsersFilterComponent {
 
   public onSubmit() {
     const filterName: string = this.usersFilter.value.name || '';
-    this.userFacade.filterUsers(filterName);
+    const filter: UsersActions.UsersFilter = {name: filterName};
+    this.userFacade.filterUsers(filter);
   }
-
-
 }
