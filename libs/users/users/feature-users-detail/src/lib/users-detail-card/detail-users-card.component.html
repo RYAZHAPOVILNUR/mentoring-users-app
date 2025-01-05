@@ -89,6 +89,15 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+
+            <mat-form-field class="edit-user-field">
+              <mat-label>Стори поинты</mat-label>
+              <mat-select formControlName="totalStoryPoints">
+                <mat-option *ngFor="let number of fibonacciNumbers" [value]="number">
+                  {{ number }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button

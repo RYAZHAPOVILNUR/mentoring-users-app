@@ -12,6 +12,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatSelectModule } from '@angular/material/select';
 import { onSuccessEditionCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -48,6 +49,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     MatSnackBarModule,
     MatAutocompleteModule,
     PushPipe,
+    MatSelectModule
   ],
   templateUrl: './detail-users-card.component.html',
   styleUrls: ['./detail-users-card.component.scss'],
@@ -73,6 +75,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: vm.user.email,
         username: vm.user.username,
         city: vm.user.city,
+        totalStoryPoints: vm.user.totalStoryPoints,
       });
     }
 
@@ -88,6 +91,7 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    totalStoryPoints: new FormControl<number | null>({ value: null, disabled: !this.vm.editMode })
   });
 
   @Output() editUser = new EventEmitter<{
@@ -110,9 +114,11 @@ export class DetailUsersCardComponent implements OnInit {
   private snackBar = inject(MatSnackBar);
   private readonly destroyRef = inject(DestroyRef);
   public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
+  public fibonacciNumbers: number[] = [];
 
   ngOnInit(): void {
     this.checkChangeFields();
+    this.fibonacciNumbers = this.generateFibonacci(21)
   }
 
   private onEditSuccess: onSuccessEditionCbType = () =>
@@ -131,6 +137,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
         purchaseDate: new Date().toString() || '',
         educationStatus: 'trainee',
+        totalStoryPoints: this.formGroup.value.totalStoryPoints || 0,
       },
       onSuccessCb: this.onEditSuccess,
     });
@@ -171,5 +178,22 @@ export class DetailUsersCardComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  private generateFibonacci(max: number): number[] {
+    let fib = [0, 1]; // Начинаем с [0, 1]
+    let prev = 1;     // Предыдущее число (1)
+    let current = 1;  // Текущее число (1)
+
+    while (current <= max) {
+      const next = prev + current; // Вычисляем следующее число
+      prev = current; // Сдвигаем предыдущее значение
+      current = next; // Сдвигаем текущее значение
+      if (current <= max) {
+        fib = [...fib, current]; // Добавляем только если текущее число не больше max
+      }
+    }
+
+    return fib;
   }
 }
