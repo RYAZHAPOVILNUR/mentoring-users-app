@@ -1,5 +1,11 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { selectQueryParam, selectQueryParams, selectRouteParams, UsersEntity } from '@users/core/data-access';
+import {
+  selectQueryParam,
+  selectQueryParams,
+  selectRouteParams,
+  UsersEntity,
+  UsersFilter,
+} from '@users/core/data-access';
 import { filter, Observable } from 'rxjs';
 import { USERS_FEATURE_KEY, usersAdapter, UsersState } from './users.reducer';
 
@@ -35,6 +41,6 @@ export const selectUsersFilter = createSelector(selectUsersState, (state: UsersS
 export const selectFilteredUsers = createSelector(
   selectUsersFilter,
   selectAllUsers,
-  (filter: { name: string }, allUsers: UsersEntity[]): UsersEntity[] =>
+  (filter: UsersFilter, allUsers: UsersEntity[]): UsersEntity[] =>
     !filter.name ? allUsers : allUsers.filter((user) => user.name.toLowerCase().includes(filter.name.toLowerCase()))
 );

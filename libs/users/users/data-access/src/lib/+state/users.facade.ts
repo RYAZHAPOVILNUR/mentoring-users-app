@@ -6,7 +6,7 @@ import { Observable, of, switchMap } from 'rxjs';
 import { UsersErrors } from './users.reducer';
 import { onSuccessEditionCbType } from './users.actions';
 import { selectLoggedUser } from '@auth/data-access';
-import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { CreateUserDTO, UsersEntity, UsersFilter } from '@users/core/data-access';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
@@ -60,7 +60,7 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.loadUser());
   }
 
-  filterUsers(name: string) {
-    this.store.dispatch(UsersActions.setUsersFilter({ filter: { name } }));
+  filterUsers(filters: UsersFilter) {
+    this.store.dispatch(UsersActions.setUsersFilter({ filter: filters }));
   }
 }

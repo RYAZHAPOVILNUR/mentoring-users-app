@@ -26,7 +26,7 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
       .get('name')
       ?.valueChanges.pipe(debounceTime(500), distinctUntilChanged(), takeUntil(this.destroy$))
       .subscribe((name) => {
-        this.usersFacade.filterUsers(name || '');
+        this.usersFacade.filterUsers({ name: name || '' });
       });
   }
 
