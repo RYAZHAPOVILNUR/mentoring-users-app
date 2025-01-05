@@ -99,7 +99,6 @@ export const editUserSP = createEffect(
           tap(({ onSuccessCb }) => onSuccessCb()),
           map(({ userData }) => UsersActions.editUserSPSuccess({ userData })),
           catchError((error) => {
-            console.log('Error', error);
             return of(UsersActions.editUserSPFailed({ error }));
           })
         )
