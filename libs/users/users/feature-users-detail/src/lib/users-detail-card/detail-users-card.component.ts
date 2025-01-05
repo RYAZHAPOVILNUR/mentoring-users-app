@@ -181,16 +181,16 @@ export class DetailUsersCardComponent implements OnInit {
   }
 
   private generateFibonacci(max: number): number[] {
-    let fib = [0, 1]; // Начинаем с [0, 1]
-    let prev = 1;     // Предыдущее число (1)
-    let current = 1;  // Текущее число (1)
+    let fib = [0, 1];
+    let prev = 1;
+    let current = 1;
 
     while (current <= max) {
-      const next = prev + current; // Вычисляем следующее число
-      prev = current; // Сдвигаем предыдущее значение
-      current = next; // Сдвигаем текущее значение
+      const next = prev + current;
+      prev = current;
+      current = next;
       if (current <= max) {
-        fib = [...fib, current]; // Добавляем только если текущее число не больше max
+        fib = [...fib, current];
       }
     }
 
