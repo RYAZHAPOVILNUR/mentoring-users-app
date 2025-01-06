@@ -4,10 +4,10 @@ import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
 import { Observable, of, switchMap } from 'rxjs';
 import { UsersErrors } from './users.reducer';
-import { onSuccessEditionCbType } from './users.actions';
+import { addUserStoryPoints, onSuccessEditionCbType, onSuccessSPonCbType } from './users.actions';
 import { selectLoggedUser } from '@auth/data-access';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
-import { IUsersFilter } from '../../../../utils/users-filter.interface';
+import { IUsersFilter } from '../utils/users-filter.interface';
 import { selectFilteredUsers } from './users.selectors';
 
 @Injectable({ providedIn: 'root' })
@@ -44,6 +44,10 @@ export class UsersFacade {
 
   editUser(userData: CreateUserDTO, id: number, onSuccessCb: onSuccessEditionCbType) {
     this.store.dispatch(UsersActions.editUser({ userData, id, onSuccessCb }));
+  }
+
+  public addStoryPoints(userData: CreateUserDTO, id: number, onSuccessAddSP: onSuccessSPonCbType) {
+    this.store.dispatch(UsersActions.addUserStoryPoints({ userData, id, onSuccessAddSP }));
   }
 
   getUserFromStore(id: number) {

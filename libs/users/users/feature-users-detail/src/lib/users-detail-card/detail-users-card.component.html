@@ -101,43 +101,43 @@
           
           </div>
           
-          <mat-form-field class="edit-user-field"
-                          [matTooltip]="'Story Points: ' + vm.user!.totalStoryPoints"
-                          [matTooltipDisabled]="formGroup.enabled">
-            <mat-label>Сторипоинты:</mat-label>
-            <input matInput type="text" formControlName="totalStoryPoints"
-                   class="edit-user-input" />
-            <button
-              *ngIf="(isStoryPointEnable$ | async) === false"
-              type="button"
-              mat-icon-button
-              matSuffix
-              (click)="resetStoryPoint()"
-            >
-              <mat-icon>add</mat-icon>
-            </button>
-            
-            <button
-              *ngIf="(isStoryPointEnable$ | async)"
-              type="button"
-              [disabled]="formGroup.get('totalStoryPoints')?.invalid || !formGroup.get('totalStoryPoints')?.dirty"
-              mat-icon-button
-              matSuffix
-              (click)="onStoryPointSubmit()"
-            >
-              <mat-icon>done</mat-icon>
-            </button>
-            
-            <button
-              *ngIf="(isStoryPointEnable$ | async)"
-              type="button"
-              mat-icon-button
-              matSuffix
-              (click)="onStoryPointClose()"
-            >
-              <mat-icon>close</mat-icon>
-            </button>
-          </mat-form-field>
+<!--          <mat-form-field class="edit-user-field"-->
+<!--                          [matTooltip]="'Story Points: ' + vm.user!.totalStoryPoints"-->
+<!--                          [matTooltipDisabled]="formGroup.enabled">-->
+<!--            <mat-label>Сторипоинты:</mat-label>-->
+<!--            <input matInput type="text" formControlName="totalStoryPoints"-->
+<!--                   class="edit-user-input" />-->
+<!--            <button-->
+<!--              *ngIf="(isStoryPointEnable$ | async) === false"-->
+<!--              type="button"-->
+<!--              mat-icon-button-->
+<!--              matSuffix-->
+<!--              (click)="resetStoryPoint()"-->
+<!--            >-->
+<!--              <mat-icon>add</mat-icon>-->
+<!--            </button>-->
+<!--            -->
+<!--            <button-->
+<!--              *ngIf="(isStoryPointEnable$ | async)"-->
+<!--              type="button"-->
+<!--              [disabled]="formGroup.get('totalStoryPoints')?.invalid || !formGroup.get('totalStoryPoints')?.dirty"-->
+<!--              mat-icon-button-->
+<!--              matSuffix-->
+<!--              (click)="onStoryPointSubmit()"-->
+<!--            >-->
+<!--              <mat-icon>done</mat-icon>-->
+<!--            </button>-->
+<!--            -->
+<!--            <button-->
+<!--              *ngIf="(isStoryPointEnable$ | async)"-->
+<!--              type="button"-->
+<!--              mat-icon-button-->
+<!--              matSuffix-->
+<!--              (click)="onStoryPointClose()"-->
+<!--            >-->
+<!--              <mat-icon>close</mat-icon>-->
+<!--            </button>-->
+<!--          </mat-form-field>-->
           
           <mat-card-actions class="edit-user-btns-container"
                             *ngIf="vm.editMode">
@@ -157,6 +157,45 @@
             </button>
           </mat-card-actions>
         </form>
+        
+        <mat-form-field class="edit-user-field"
+                        [matTooltip]="'Story Points: ' + vm.user!.totalStoryPoints"
+                        [matTooltipDisabled]="totalStoryPoints.enabled">
+          <mat-label>Сторипоинты:</mat-label>
+          <input matInput type="text" [formControl]="totalStoryPoints"
+                 class="edit-user-input" />
+          <button
+            *ngIf="(isStoryPointEnable$ | async) === false"
+            type="button"
+            mat-icon-button
+            matSuffix
+            (click)="resetStoryPoints()"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+          
+          <button
+            *ngIf="(isStoryPointEnable$ | async)"
+            type="button"
+            [disabled]="totalStoryPoints.invalid || !totalStoryPoints.dirty"
+            mat-icon-button
+            matSuffix
+            (click)="onStoryPointSubmit()"
+          >
+            <mat-icon>done</mat-icon>
+          </button>
+          
+          <button
+            *ngIf="(isStoryPointEnable$ | async)"
+            type="button"
+            mat-icon-button
+            matSuffix
+            (click)="onStoryPointClose()"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+        
       </mat-card>
     </div>
   </ng-container>
@@ -173,5 +212,11 @@
 <ng-template #snackbar>
   <div class="edit-user-snackbar">
     <span>Пользователь успешно изменён!</span>
+  </div>
+</ng-template>
+
+<ng-template #snackbarStoryPoints>
+  <div class="edit-user-snackbar">
+    <span>Сторипоинты успешно обновлены!</span>
   </div>
 </ng-template>

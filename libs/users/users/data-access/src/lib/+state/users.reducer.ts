@@ -4,8 +4,13 @@ import { createReducer, on, Action } from '@ngrx/store';
 import * as UsersActions from './users.actions';
 import { UsersEntity } from '@users/core/data-access';
 import { LoadingStatus } from '@users/core/data-access';
-import { setUsersFilter } from './users.actions';
-import { IUsersFilter } from '../../../../utils/users-filter.interface';
+import {
+  addUserStoryPoints,
+  addUserStoryPointsFailed,
+  addUserStoryPointsSuccess,
+  setUsersFilter,
+} from './users.actions';
+import { IUsersFilter } from '../utils/users-filter.interface';
 
 export const USERS_FEATURE_KEY = 'users';
 
@@ -89,6 +94,20 @@ const reducer = createReducer(
   on(UsersActions.setUsersFilter, (state, { name }) => ({
     ...state,
     usersFilter: { filter: { name } },
+  })),
+  on(UsersActions.addUserStoryPointsSuccess, (state, { userData }) =>
+    usersAdapter.updateOne(
+      {
+        id: userData.id,
+        changes: userData,
+      },
+      state
+    )
+  ),
+  on(UsersActions.addUserStoryPointsFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
   }))
 );
 
