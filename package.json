@@ -63,7 +63,7 @@
     "@nx/web": "^16.6.0",
     "@nx/workspace": "^16.6.0",
     "@schematics/angular": "~16.0.0",
-    "@types/jest": "^29.4.0",
+    "@types/jest": "^29.5.14",
     "@types/node": "16.11.7",
     "@types/quill": "^2.0.10",
     "@typescript-eslint/eslint-plugin": "^5.58.0",

@@ -1,0 +1,6 @@
+<div class="filter-container">
+  <form [formGroup]="form" class="filter-form">
+    <input type="text" formControlName="name" placeholder="Введите имя для поиска">
+  </form> 
+  <button mat-raised-button (click)="onFilter()" class="find">Найти</button>
+</div>

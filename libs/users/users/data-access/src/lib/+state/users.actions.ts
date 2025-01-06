@@ -4,6 +4,8 @@ import { CreateUserDTO, LoadingStatus, UsersDTO, UsersEntity } from '@users/core
 
 export type onSuccessEditionCbType = () => void;
 
+export type onSuccessStorypointsCbType = () => void;
+
 export const initUsers = createAction('[Users Page] Init');
 
 export const loadUsersSuccess = createAction('[Users/API] Load Users Success', props<{ users: UsersEntity[] }>());
@@ -38,3 +40,26 @@ export const loadUserSuccess = createAction('[Users/Api] Load User Success', pro
 export const loadUserFailed = createAction('[Users/Api] Load User Failed', props<{ error: any }>());
 
 export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{ status: LoadingStatus }>());
+
+export const setUsersFilter = createAction(
+  '[Users filter] Filter Users Success', 
+  props<{ filter: { name: string} }>()
+);
+
+export const addUserStorypoints = createAction(
+  '[Users Detail] Add User Storypoints',
+  props<{
+    userData: CreateUserDTO;
+    id: number;
+    onSuccessAddStorypoints: onSuccessStorypointsCbType 
+  }>()
+);
+export const addUserStorypointsSuccess = createAction(
+  '[Users Detail] Add User Storypoints Success',
+  props<{ userData: UsersDTO }>()
+ );
+ 
+ export const addUserStorypointsFailed = createAction(
+  '[Users Detail] Add User Storypoints Failed',
+  props<{ error: UsersErrors | null }>()
+ );
