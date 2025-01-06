@@ -13,6 +13,7 @@ export interface FoldersState extends EntityState<FoldersType> {
 
 export type FoldersErrors = {
   status: number;
+  message: string;
   [key: string]: unknown;
 };
 
@@ -38,7 +39,10 @@ export const foldersFeature = createFeature({
     on(FolderActions.loadFoldersFailure, (state, { error }) => ({
       ...state,
       status: 'error' as const,
-      error,
+      error: {
+        status: error.statusCode || 500,
+        message: error.message,
+      },
     })),
     on(FolderActions.deleteFolderSuccess, (state, { id }) => FoldersAdapter.removeOne(id, { ...state })),
     on(FolderActions.addFolderSuccess, (state, { folder }) => FoldersAdapter.addOne({ ...folder }, { ...state }))
