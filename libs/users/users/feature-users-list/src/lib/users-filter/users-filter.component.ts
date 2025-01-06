@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./users-filter.component.scss'],
   standalone: true,
   imports: [ReactiveFormsModule, MatButtonModule],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UsersFilterComponent {
   @Output() filterUser = new EventEmitter<string>();
@@ -15,12 +16,6 @@ export class UsersFilterComponent {
   public form = new FormGroup({
     name: new FormControl(''),
   });
-
-  ngOnInit() {
-    this.form = new FormGroup({
-      name: new FormControl(''),
-    });
-  }
 
   onFilter() {
     const name = this.form.get('name')?.value || '';

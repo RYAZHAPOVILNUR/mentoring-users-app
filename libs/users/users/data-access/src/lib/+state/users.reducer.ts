@@ -78,10 +78,19 @@ const reducer = createReducer(
     ...state,
     status,
   })),
-  on(UsersActions.setUsersFilter, (state, { name }) => ({
+  on(UsersActions.setUsersFilter, (state, { filter: name },) => ({
   ...state,
-    usersFilter: { name },
+    usersFilter: name,
   })),
+  on(UsersActions.addUserStorypoints, ( state) => ({
+    ...state,
+    status: 'loading' as const,
+  })),
+  on(UsersActions.addUserStorypointsSuccess, (state, { userData }) => 
+  usersAdapter.updateOne({ 
+    id: userData.id,
+    changes: userData, 
+  }, {...state, status: 'loaded' as const }))
 );
 
 export function usersReducer(state: UsersState | undefined, action: Action) {

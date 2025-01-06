@@ -90,6 +90,25 @@
               </mat-autocomplete>
             </mat-form-field>
           </div>
+
+          <mat-form-field
+          class="edit-user-field">
+          <mat-label>Количество сторипоинтов</mat-label>
+          <input matInput placeholder="Количество сторипоинтов" [formControl]="totalStorypoints" class="edit-user-input" />
+
+          <button mat-icon-button area-label="add storypoints" matSuffix *ngIf="totalStorypoints.disabled" (click)="totalStorypoints.enable()">
+             <mat-icon>add</mat-icon>
+          </button>
+
+          <button mat-icon-button area-label="add storypoints" matSuffix *ngIf="!totalStorypoints.disabled" (click)="onAddStorypoints()">
+            <mat-icon>done</mat-icon>
+         </button>
+
+         <button mat-icon-button area-label="add storypoints" matSuffix *ngIf="!totalStorypoints.disabled" (click)="totalStorypoints.reset()">
+          <mat-icon>close</mat-icon>
+       </button>
+        </mat-form-field>
+
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
               mat-icon-button
