@@ -6,7 +6,7 @@
     loggedUser: loggedUser$
   } as vm"
 >
-  <users-users-filter (UserFilter)="onFilterUser($event)"></users-users-filter>
+  <users-users-filter (UserFilter)="onUserFilter($event)"/>
   <users-list-ui [vm]="vm" (deleteUser)="onDeleteUser($event)" (redirectToEdit)="onRedirectToEdit($event)"/>
 </ng-container>
 <create-users-button></create-users-button>

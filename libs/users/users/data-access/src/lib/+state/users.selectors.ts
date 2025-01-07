@@ -13,18 +13,12 @@ export const selectUsersError = createSelector(selectUsersState, (state: UsersSt
 
 export const selectAllUsers = createSelector(selectUsersState, (state: UsersState) => selectAll(state));
 
-export const usersFilterSelector = createSelector(selectUsersState, (state: UsersState) => state.usersFilter);
+export const selectUsersFilter = createSelector(selectUsersState, (state: UsersState) => state.usersFilter);
 
-export const filteredUsers = createSelector(
-  usersFilterSelector,
-  selectAllUsers, 
-  (usersFilter, allUsers) => {
-    if (!usersFilter.name?.trim()) return allUsers
-    return allUsers.filter(
-     (user) => user.name.toLowerCase().includes(usersFilter.name.toLowerCase()) 
-    );
-}
-);
+export const selectFilteredUsers = createSelector(selectUsersFilter, selectAllUsers, (usersFilter, allUsers) => {
+  if (!usersFilter.name?.trim()) return allUsers;
+  return allUsers.filter((user) => user.name.toLowerCase().includes(usersFilter.name.toLowerCase()));
+});
 
 export const selectUsersEntities = createSelector(selectUsersState, (state: UsersState) => selectEntities(state));
 

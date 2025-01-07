@@ -7,7 +7,7 @@ import * as UsersActions from './users.actions';
 import { onSuccessEditionCbType } from './users.actions';
 import { UsersErrors } from './users.reducer';
 import * as UsersSelectors from './users.selectors';
-import { filteredUsers } from './users.selectors';
+import { selectFilteredUsers } from './users.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
@@ -23,7 +23,7 @@ export class UsersFacade {
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
   public readonly loggedUser$ = this.store.select(selectLoggedUser);
   public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError));
-  public readonly filteredUsers$ = this.store.select(filteredUsers)
+  public readonly filteredUsers$ = this.store.select(selectFilteredUsers);
   /**
    * Use the initialization action to perform one
    * or more tasks in your Effects.
@@ -59,7 +59,7 @@ export class UsersFacade {
   loadUser() {
     this.store.dispatch(UsersActions.loadUser());
   }
-   onUsersFilter(name: UsersFilter) {
-    this.store.dispatch(UsersActions.setUsersFilter({name}))
+  onUsersFilter(name: UsersFilter) {
+    this.store.dispatch(UsersActions.setUsersFilter({ name }));
   }
 }

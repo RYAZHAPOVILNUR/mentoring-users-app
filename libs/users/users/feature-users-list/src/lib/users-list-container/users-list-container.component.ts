@@ -48,7 +48,7 @@ export class UsersListContainerComponent {
       queryParams: { edit: editMode },
     });
   }
-  onFilterUser(name: UsersFilter) {
+  onUserFilter(name: UsersFilter) {
     this.usersFacade.onUsersFilter(name)
   }
 }
