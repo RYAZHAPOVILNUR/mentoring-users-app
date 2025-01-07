@@ -2,6 +2,7 @@ import { inject } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { switchMap, catchError, of, map, withLatestFrom, filter, tap } from 'rxjs';
 import * as UsersActions from './users.actions';
+import { editUserStoryPointsSuccess, editUserStoryPointsFailed } from './users.actions';
 import { ApiService } from '@users/core/http';
 import { Store, select } from '@ngrx/store';
 import { selectUsersEntities } from './users.selectors';
@@ -127,9 +128,9 @@ export const editUserStoryPoints = createEffect(
         apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
           map((userData) => ({ userData, onSuccessCb })),
           tap(({ onSuccessCb }) => onSuccessCb()),
-          map(({ userData }) => UsersActions.editUserStoryPointsSuccess({ userData })),
+          map(({ userData }) => editUserStoryPointsSuccess({ userData })),
           catchError((error) => {
-            return of(UsersActions.editUserStoryPointsFailed({ error }));
+            return of(editUserStoryPointsFailed({ error }));
           })
         )
       )

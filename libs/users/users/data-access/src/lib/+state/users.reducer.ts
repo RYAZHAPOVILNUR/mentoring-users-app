@@ -5,6 +5,8 @@ import * as UsersActions from './users.actions';
 import { UsersEntity } from '@users/core/data-access';
 import { LoadingStatus } from '@users/core/data-access';
 
+import { editUserStoryPointsSuccess, editUserStoryPointsFailed } from './users.actions';
+
 export const USERS_FEATURE_KEY = 'users';
 
 export type UsersErrors = {
@@ -76,7 +78,7 @@ const reducer = createReducer(
     ...state,
     status,
   })),
-  on(UsersActions.editUserStoryPointsSuccess, (state, { userData }) =>
+  on(editUserStoryPointsSuccess, (state, { userData }) =>
     usersAdapter.updateOne(
       {
         id: userData.id,
@@ -85,7 +87,7 @@ const reducer = createReducer(
       state
     )
   ),
-  on(UsersActions.editUserStoryPointsFailed, (state, { error }) => ({
+  on(editUserStoryPointsFailed, (state, { error }) => ({
     ...state,
     status: 'error' as const,
     error,
