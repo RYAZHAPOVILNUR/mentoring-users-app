@@ -50,7 +50,8 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'materials',
-        loadComponent: () => import('@users/materials').then((c) => c.UsersMaterialsComponent),
+        loadComponent: () => import('@materials/feature-folder-list').then((c) => c.FoldersListContainerComponent),
+
       },
       {
         path: 'articles',

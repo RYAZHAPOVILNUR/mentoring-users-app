@@ -7,7 +7,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { API_URL } from '@users/core/http';
 import { environment } from '../environments/environment.development';
 import { provideEffects } from '@ngrx/effects';
-import { provideStore } from '@ngrx/store';
+import { provideStore, provideState } from '@ngrx/store';
 import { USERS_FEATURE_KEY, usersReducer, userEffects } from '@users/users/data-access';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
@@ -20,6 +20,9 @@ import { articlesEffects, articlesFeature, commentsEffects, commentsFeature } fr
 import { tasksEffects, tasksFeature } from '@users/users/task/data-access';
 import { CLIENT_ID, githubApiEffects, githubApiFeature } from '@users/core/github-api/data-access';
 import { backlogFeature, backlogEffects } from '@users/users/backlog/data-access';
+import * as fromFolders from 'libs/users/materials/data-access/src/lib/folders-state/folders.reducer';
+import * as FoldersEffects from 'libs/users/materials/data-access/src/lib/folders-state/folders.effects';
+import { FoldersFacade } from 'libs/users/materials/data-access/src/lib/folders-state/folders.facade';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -27,6 +30,10 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideEffects(FoldersEffects),
+    provideState(fromFolders.FOLDERS_FEATURE_KEY, fromFolders.foldersReducer),
+    FoldersFacade,
+
     provideEffects(
       userEffects,
       authEffects,
