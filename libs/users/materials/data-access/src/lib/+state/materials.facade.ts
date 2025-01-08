@@ -1,27 +1,26 @@
 import { Injectable, inject } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
 import { MaterialsActions } from './materials.actions';
 import { selectFolders, selectFoldersError, selectFoldersStatus } from './materials.selectors';
-import { State, IFolder, IAddFolder } from './materials.reducer';
+import { State, IAddFolder } from './materials.reducer';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
-  private readonly store = inject(Store<State>);
+  private readonly store = inject(Store);
 
-  public readonly folders$: Observable<IFolder[]> = this.store.pipe(select(selectFolders));
-  public readonly status$ = this.store.pipe(select(selectFoldersStatus));
-  public readonly error$ = this.store.pipe(select(selectFoldersError));
+  public readonly folders$ = this.store.select(selectFolders);
+  public readonly status$ = this.store.select(selectFoldersStatus);
+  public readonly error$ = this.store.select(selectFoldersError);
 
-  loadFolders() {
+  loadFolders(): void {
     this.store.dispatch(MaterialsActions.loadFolders());
   }
 
-  addFolder(folder: IAddFolder) {
+  addFolder(folder: IAddFolder): void {
     this.store.dispatch(MaterialsActions.addFolder({ folder }));
   }
 
-  deleteFolder(id: string) {
+  deleteFolder(id: string): void {
     this.store.dispatch(MaterialsActions.deleteFolder({ id }));
   }
 

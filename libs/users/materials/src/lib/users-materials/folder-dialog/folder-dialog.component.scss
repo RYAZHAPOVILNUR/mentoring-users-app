@@ -21,10 +21,15 @@ input {
 }
 
 mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   min-width: 300px;
+  margin: 20px 0;
 }
 
 mat-dialog-actions {
-  padding: 16px 0;
+  padding: 16px;
   gap: 8px;
+  margin-bottom: 0;
 }

@@ -3,6 +3,7 @@ import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 
+
 @Component({
   selector: 'users-delete-dialog',
   standalone: true,
@@ -15,7 +16,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./delete-dialog.component.scss']
 })
 export class DeleteDialogComponent {
-  private dialogRef = inject(MatDialogRef<DeleteDialogComponent>);
+  private readonly dialogRef = inject(MatDialogRef<DeleteDialogComponent>);
 
   onConfirm(): void {
     this.dialogRef.close(true);

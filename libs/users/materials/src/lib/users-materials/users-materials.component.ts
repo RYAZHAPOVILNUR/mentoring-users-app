@@ -33,12 +33,12 @@ import { FolderContentComponent } from './folder-content/folder-content.componen
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersMaterialsComponent implements OnInit {
-  private dialog = inject(MatDialog);
-  private materialsFacade = inject(MaterialsFacade);
+  private readonly dialog = inject(MatDialog);
+  private readonly materialsFacade = inject(MaterialsFacade);
 
-  folders$ = this.materialsFacade.folders$;
-  status$ = this.materialsFacade.status$;
-  error$ = this.materialsFacade.error$;
+  readonly folders$ = this.materialsFacade.folders$;
+  readonly status$ = this.materialsFacade.status$;
+  readonly error$ = this.materialsFacade.error$;
   selectedFolder: IFolder | null = null;
 
   ngOnInit() {
@@ -51,11 +51,11 @@ export class UsersMaterialsComponent implements OnInit {
       disableClose: true
     });
 
-    dialogRef.afterClosed().subscribe((result?: { name: string; title: string }) => {
+    dialogRef.afterClosed().subscribe((result?: { title: string }) => {
       if (result) {
         console.log('Creating folder:', result);
         this.materialsFacade.addFolder({ 
-          name: result.name,
+          name: result.title,
           title: result.title 
         });
       }

@@ -18,8 +18,8 @@ import { MaterialsFacade } from '@users/materials/data-access';
 })
 export class FolderContentComponent {
   @Input() folder!: IFolder;
-  @Output() backClick = new EventEmitter<void>();
-  private materialsFacade = inject(MaterialsFacade);
+  @Output() readonly backClick = new EventEmitter<void>();
+  private readonly materialsFacade = inject(MaterialsFacade);
 
   onBack(): void {
     this.backClick.emit();
