@@ -1,0 +1,13 @@
+<div class="folder-content">
+  <div class="folder-header">
+    <button mat-icon-button (click)="onBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2>{{ folder.title || folder.name }}</h2>
+  </div>
+
+  <div class="content-container">
+    <!-- Здесь будет содержимое папки -->
+    <p class="empty-message">Папка пуста</p>
+  </div>
+</div> 

@@ -1,0 +1,90 @@
+.materials-container {
+  padding: 20px;
+}
+
+.materials-header {
+  margin-bottom: 20px;
+}
+
+.folders-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+  padding: 16px;
+}
+
+.folder-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  height: 60px;
+
+  &:hover {
+    background-color: #e0e0e0;
+  }
+
+  .delete-container {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .delete-button {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    padding: 2px;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    mat-icon {
+      font-size: 12px;
+      width: 12px;
+      height: 12px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &:hover {
+      border-radius: 50%;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &:hover .delete-button {
+    opacity: 1;
+  }
+
+  .folder-icon {
+    font-size: 36px;
+    margin-right: 8px;
+  }
+
+  .folder-name {
+    font-size: 14px;
+  }
+}
+
+.no-folders {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 32px;
+  color: #666;
+  font-style: italic;
+}

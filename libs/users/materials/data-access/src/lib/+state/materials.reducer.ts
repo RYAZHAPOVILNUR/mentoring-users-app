@@ -1,20 +1,101 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { MaterialsActions } from './materials.actions';
 
-export const materialsFeatureKey = 'materials';
+export const MATERIALS_FEATURE_KEY = 'materials';
 
-export interface State {}
+export interface IFolder {
+  id: string;
+  name: string;
+  title?: string;
+}
 
-export const initialState: State = {};
+export interface IAddFolder {
+  name: string;
+  title?: string;
+}
 
-export const reducer = createReducer(
+export interface MaterialsError {
+  message: string;
+  statusCode?: number;
+  error?: string;
+}
+
+export interface State {
+  folders: IFolder[];
+  selectedFolder: IFolder | null;
+  error: MaterialsError | null;
+  status: 'init' | 'loading' | 'loaded' | 'error';
+}
+
+export const initialState: State = {
+  folders: [],
+  selectedFolder: null,
+  error: null,
+  status: 'init',
+};
+
+export const materialsReducer = createReducer(
   initialState,
-  on(MaterialsActions.loadMaterialss, (state) => state),
-  on(MaterialsActions.loadMaterialssSuccess, (state, action) => state),
-  on(MaterialsActions.loadMaterialssFailure, (state, action) => state)
+  
+  // Load Folders
+  on(MaterialsActions.loadFolders, (state) => ({
+    ...state,
+    status: 'loading' as const,
+  })),
+  
+  on(MaterialsActions.loadFoldersSuccess, (state, { folders }) => ({
+    ...state,
+    folders,
+    error: null,
+    status: 'loaded' as const,
+  })),
+  
+  on(MaterialsActions.loadFoldersFailure, (state, { error }) => ({
+    ...state,
+    error,
+    status: 'error' as const,
+  })),
+
+  // Add Folder
+  on(MaterialsActions.addFolder, (state) => ({
+    ...state,
+    status: 'loading' as const,
+  })),
+
+  on(MaterialsActions.addFolderSuccess, (state, { folder }) => ({
+    ...state,
+    folders: [...state.folders, folder],
+    error: null,
+    status: 'loaded' as const,
+  })),
+
+  on(MaterialsActions.addFolderFailure, (state, { error }) => ({
+    ...state,
+    error,
+    status: 'error' as const,
+  })),
+
+  // Delete Folder
+  on(MaterialsActions.deleteFolder, (state) => ({
+    ...state,
+    status: 'loading' as const,
+  })),
+
+  on(MaterialsActions.deleteFolderSuccess, (state, { id }) => ({
+    ...state,
+    folders: state.folders.filter(folder => folder.id !== id),
+    error: null,
+    status: 'loaded' as const,
+  })),
+
+  on(MaterialsActions.deleteFolderFailure, (state, { error }) => ({
+    ...state,
+    error,
+    status: 'error' as const,
+  }))
 );
 
 export const materialsFeature = createFeature({
-  name: materialsFeatureKey,
-  reducer,
+  name: MATERIALS_FEATURE_KEY,
+  reducer: materialsReducer,
 });

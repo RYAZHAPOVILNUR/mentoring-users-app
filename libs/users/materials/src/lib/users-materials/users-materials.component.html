@@ -1,1 +1,45 @@
-<p>users-materials works!</p>
+<div class="materials-container">
+  <ng-container *ngIf="!selectedFolder">
+    <div class="materials-header">
+      <button mat-raised-button color="primary" (click)="openNewFolderDialog()">
+        <mat-icon>create_new_folder</mat-icon>
+        Добавить папку
+      </button>
+    </div>
+
+    <div class="folders-list">
+      <ng-container *ngIf="status$ | async as status">
+        <div *ngIf="status === 'loading'" class="loading">
+          Загрузка папок...
+        </div>
+        
+        <ng-container *ngIf="status === 'loaded'">
+          <ng-container *ngIf="folders$ | async as folders">
+            <div *ngFor="let folder of folders" class="folder-item" (dblclick)="onFolderDoubleClick(folder)">
+              <div class="delete-container">
+                <button mat-icon-button class="delete-button" (click)="deleteFolder(folder); $event.stopPropagation()">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+              <mat-icon class="folder-icon">folder</mat-icon>
+              <span class="folder-name">{{ folder?.title || folder.name }}</span>
+            </div>
+            <div *ngIf="folders.length === 0" class="no-folders">
+              Нет папок
+            </div>
+          </ng-container>
+        </ng-container>
+
+        <div *ngIf="status === 'error' && (error$ | async) as error" class="error">
+          {{ error.message }}
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+
+  <users-folder-content 
+    *ngIf="selectedFolder"
+    [folder]="selectedFolder"
+    (backClick)="selectedFolder = null"
+  ></users-folder-content>
+</div>

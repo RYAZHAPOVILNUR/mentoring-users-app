@@ -20,6 +20,7 @@ import { articlesEffects, articlesFeature, commentsEffects, commentsFeature } fr
 import { tasksEffects, tasksFeature } from '@users/users/task/data-access';
 import { CLIENT_ID, githubApiEffects, githubApiFeature } from '@users/core/github-api/data-access';
 import { backlogFeature, backlogEffects } from '@users/users/backlog/data-access';
+import { materialsFeature, MaterialsEffects } from '@users/materials/data-access';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -35,7 +36,8 @@ export const appConfig: ApplicationConfig = {
       commentsEffects,
       githubApiEffects,
       backlogEffects,
-      SettingsEffects
+      SettingsEffects,
+      MaterialsEffects
     ),
     provideStore({
       router: routerReducer,
@@ -47,6 +49,7 @@ export const appConfig: ApplicationConfig = {
       [tasksFeature.name]: tasksFeature.reducer,
       [githubApiFeature.name]: githubApiFeature.reducer,
       [backlogFeature.name]: backlogFeature.reducer,
+      [materialsFeature.name]: materialsFeature.reducer,
     }),
     provideRouterStore(),
     provideStoreDevtools({
@@ -54,10 +57,11 @@ export const appConfig: ApplicationConfig = {
       logOnly: !isDevMode(),
       autoPause: true,
       trace: false,
-      traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
+      traceLimit: 75,
     }),
     provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
     provideHttpClient(withInterceptors([tokenInterceptor])),
+    provideAnimations(),
     {
       provide: API_URL,
       useValue: environment.api_url,

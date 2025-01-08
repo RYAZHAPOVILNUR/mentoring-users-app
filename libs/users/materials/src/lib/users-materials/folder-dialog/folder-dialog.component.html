@@ -1,0 +1,15 @@
+<form [formGroup]="folderForm" (ngSubmit)="onSubmit()">
+  <h2 mat-dialog-title>Создать новую папку</h2>
+  
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Название папки</mat-label>
+      <input matInput formControlName="title" placeholder="Введите название">
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="onCancel()">Отмена</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!folderForm.valid">Создать</button>
+  </mat-dialog-actions>
+</form>
