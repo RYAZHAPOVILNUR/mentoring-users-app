@@ -1,0 +1,29 @@
+.custom-dialog{
+  display: flex;
+  height: 170px;
+  width: 250px;
+
+  align-items: center;
+  flex-direction: column;
+
+}
+.folder__input
+{
+  margin-top: 25px;
+  width: 80%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+
+  &:focus {
+    border-color: #3f51b5;
+    outline: none;
+  }
+}
+.folder__buttons-container{
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}

@@ -1,0 +1,19 @@
+<button mat-fab
+        color="primary"
+        class="add-user-fab-button"
+        [matMenuTriggerFor]="menu" >
+         <mat-icon>add</mat-icon>
+</button>
+
+<mat-menu #menu='matMenu' class="custom-menu" >
+  <button mat-menu-item>
+    <mat-icon>music_note</mat-icon>
+    <span>music</span></button>
+  <button mat-menu-item>
+    <mat-icon>movie</mat-icon>
+    <span>video</span></button>
+  <button mat-menu-item>
+    <mat-icon>menu_book</mat-icon>
+    <span>pdf</span></button>
+</mat-menu>
+

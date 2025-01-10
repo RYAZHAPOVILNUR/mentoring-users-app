@@ -1,8 +1,8 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
-import * as FoldersActions from 'libs/users/materials/data-access/src/lib/folders-state/folders.actions';
-import { FoldersEntity } from 'libs/users/materials/data-access/src/lib/folders-state/folders.models';
+import * as FoldersActions from './folders.actions';
+import { FoldersEntity } from './folders.models';
 
 export const FOLDERS_FEATURE_KEY = 'folders';
 
@@ -29,7 +29,14 @@ const reducer = createReducer(
   on(FoldersActions.loadFoldersSuccess, (state, { folders }) =>
     foldersAdapter.setAll(folders, { ...state, loaded: true })
   ),
-  on(FoldersActions.loadFoldersFailure, (state, { error }) => ({ ...state, error }))
+  on(FoldersActions.loadFoldersFailure, (state, { error }) => ({ ...state, error })),
+
+  on(FoldersActions.addFolderSuccess, (state, { folder }) => foldersAdapter.addOne(folder, state)),
+  on(FoldersActions.addFolderFailure, (state, { error }) => ({ ...state, error })),
+  on(FoldersActions.deleteFolderSuccess, (state, {id})=>
+    foldersAdapter.removeOne(id, { ...state }),
+  ),
+  on(FoldersActions.deleteFolderFailure, (state, { error }) => ({ ...state, error })),
 );
 
 export function foldersReducer(state: FoldersState | undefined, action: Action) {

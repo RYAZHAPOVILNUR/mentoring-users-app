@@ -1,2 +1,14 @@
 
 <users-create-folder-button></users-create-folder-button>
+
+<div class="folders__container">
+<ng-container *ngrxLet="folders$ as folders"  >
+  <div ></div>
+  <div *ngFor="let folder of folders"
+  >
+    <users-folders-state-list [folder] = folder class="folders__item"></users-folders-state-list>
+
+  </div>
+
+</ng-container>
+</div>

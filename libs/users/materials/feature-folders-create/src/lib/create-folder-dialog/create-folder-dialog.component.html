@@ -1,1 +1,16 @@
-<p>create-folder-dialog works!</p>
+
+<div class="custom-dialog"
+>
+
+
+  <input
+  [formControl]="folderTitle"
+  type="text"
+  class="folder__input"
+  >
+  <div class =  "folder__buttons-container">
+
+    <button (click)="cancelDialog()">cancel</button><button (click)="closeDialog()" >save</button>
+  </div>
+</div>
+

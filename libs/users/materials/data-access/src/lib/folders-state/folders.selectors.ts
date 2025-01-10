@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { FOLDERS_FEATURE_KEY, FoldersState, foldersAdapter } from 'libs/users/materials/data-access/src/lib/folders-state/folders.reducer';
+import { FOLDERS_FEATURE_KEY, FoldersState, foldersAdapter } from './folders.reducer';
 
 // Lookup the 'Folders' feature state managed by NgRx
 export const selectFoldersState = createFeatureSelector<FoldersState>(FOLDERS_FEATURE_KEY);

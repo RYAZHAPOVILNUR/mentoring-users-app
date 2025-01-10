@@ -20,9 +20,12 @@ import { articlesEffects, articlesFeature, commentsEffects, commentsFeature } fr
 import { tasksEffects, tasksFeature } from '@users/users/task/data-access';
 import { CLIENT_ID, githubApiEffects, githubApiFeature } from '@users/core/github-api/data-access';
 import { backlogFeature, backlogEffects } from '@users/users/backlog/data-access';
-import * as fromFolders from 'libs/users/materials/data-access/src/lib/folders-state/folders.reducer';
-import * as FoldersEffects from 'libs/users/materials/data-access/src/lib/folders-state/folders.effects';
-import { FoldersFacade } from 'libs/users/materials/data-access/src/lib/folders-state/folders.facade';
+import * as fromFolders from '@users/materials/data-access';
+import { FoldersEffects } from '@users/materials/data-access';
+import { FoldersFacade } from '@users/materials/data-access';
+import * as fromMaterials from '@users/materials/data-access';
+import { MaterialsEffects } from '@users/materials/data-access';
+import { MaterialsFacade } from '@users/materials/data-access';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -30,6 +33,9 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideEffects(MaterialsEffects),
+    provideState(fromMaterials.MATERIALS_FEATURE_KEY, fromMaterials.materialsReducer),
+    MaterialsFacade,
     provideEffects(FoldersEffects),
     provideState(fromFolders.FOLDERS_FEATURE_KEY, fromFolders.foldersReducer),
     FoldersFacade,

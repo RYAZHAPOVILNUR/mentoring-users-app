@@ -20,11 +20,18 @@ export class CreateFolderButtonComponent {
   private readonly dialog: MatDialog = inject(MatDialog)
 
   openDialog(){
-    const dialogRef = this.dialog.open(CreateFolderDialogComponent, {})
+    const dialogRef = this.dialog.open(CreateFolderDialogComponent, {
+
+
+    })
+    dialogRef.afterClosed().subscribe(folder => {
+      if (folder) {
+        this.facade.addFolder(folder)
+      }
+
+    })
   }
 
-  ini(){
-    this.facade.init()
-  }
+
 
 }

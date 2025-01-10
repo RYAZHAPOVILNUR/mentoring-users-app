@@ -4,13 +4,12 @@ import { switchMap, catchError, of } from 'rxjs';
 import * as FoldersActions from './folders.actions';
 import * as FoldersFeature from './folders.reducer';
 import { ApiService } from '@users/core/http';
-import {FoldersEntity} from 'libs/users/materials/data-access/src/lib/folders-state/folders.models';
+import {FoldersEntity} from './folders.models'
 import { map } from 'rxjs/operators';
+import {CreateFolderDTO} from "../models/folders-dto.models"
 
 
-
-
-  export const initFolders = createEffect(() =>{
+export const initFolders = createEffect(() =>{
     const httpService = inject(ApiService)
     const actions$ = inject(Actions)
     return actions$.pipe(
@@ -27,3 +26,40 @@ import { map } from 'rxjs/operators';
     );
   }, { functional: true });
 
+  export const addFolder = createEffect(()=>{
+    const httpService = inject(ApiService)
+    const actions$ = inject(Actions)
+    return actions$.pipe(
+      ofType(FoldersActions.addFolder),
+      switchMap(({title}) =>
+        httpService.post<FoldersEntity ,CreateFolderDTO>('/folder',
+          {title: title}).pipe(
+            map((folder)=>{
+             return FoldersActions.addFolderSuccess({folder})
+            }),
+          catchError((error)=>{
+            return of(FoldersActions.addFolderFailure({ error }));
+            }
+          )
+        )
+
+      )
+    )
+  }, { functional: true });
+
+export const deleteFolder = createEffect(()=>{
+  const httpService = inject(ApiService)
+  const actions$ = inject(Actions)
+  return actions$.pipe(
+    ofType(FoldersActions.deleteFolder),
+    switchMap(({id}) =>
+      httpService.delete(`/folder/${id}`).pipe(
+        map(()=>
+        FoldersActions.deleteFolderSuccess({id})),
+        catchError((error)=>{
+          return of(FoldersActions.deleteFolderFailure({ error }));
+        })
+      ),
+    )
+  )
+}, {functional: true });

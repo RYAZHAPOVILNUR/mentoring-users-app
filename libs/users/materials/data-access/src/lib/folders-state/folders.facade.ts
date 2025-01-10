@@ -1,9 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { select, Store, Action } from '@ngrx/store';
 
-import * as FoldersActions from 'libs/users/materials/data-access/src/lib/folders-state/folders.actions';
-import * as FoldersFeature from 'libs/users/materials/data-access/src/lib/folders-state/folders.reducer';
-import * as FoldersSelectors from 'libs/users/materials/data-access/src/lib/folders-state/folders.selectors';
+import * as FoldersActions from './folders.actions';
+;
+import * as FoldersSelectors from './folders.selectors';
 
 @Injectable()
 export class FoldersFacade {
@@ -23,5 +23,12 @@ export class FoldersFacade {
    */
   init() {
     this.store.dispatch(FoldersActions.initFolders());
+  }
+
+  addFolder(title: string){
+    this.store.dispatch(FoldersActions.addFolder({ title }));
+  }
+  deleteFolder(id: number){
+    this.store.dispatch(FoldersActions.deleteFolder({ id }));
   }
 }
