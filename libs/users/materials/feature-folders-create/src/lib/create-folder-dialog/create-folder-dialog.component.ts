@@ -25,8 +25,6 @@ export class CreateFolderDialogComponent {
     this.dialogRef.close();
   }
 
-  deleteFolder(){
-    return 0
-  }
+
 
 }

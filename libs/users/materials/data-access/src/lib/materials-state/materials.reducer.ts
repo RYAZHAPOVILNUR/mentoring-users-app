@@ -29,7 +29,10 @@ const reducer = createReducer(
   on(MaterialsActions.loadMaterialsSuccess, (state, { materials }) =>
     materialsAdapter.setAll(materials, { ...state, loaded: true })
   ),
-  on(MaterialsActions.loadMaterialsFailure, (state, { error }) => ({ ...state, error }))
+  on(MaterialsActions.loadMaterialsFailure, (state, { error }) => ({ ...state, error })),
+  on(MaterialsActions.addMaterialSuccess, (state, { material }) => materialsAdapter.addOne(material, state)),
+  on(MaterialsActions.addMaterialFailure, (state, { error }) => ({ ...state, error })),
+
 );
 
 export function materialsReducer(state: MaterialsState | undefined, action: Action) {

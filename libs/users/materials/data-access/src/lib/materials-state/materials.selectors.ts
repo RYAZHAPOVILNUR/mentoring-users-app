@@ -1,5 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { MATERIALS_FEATURE_KEY, MaterialsState, materialsAdapter } from './materials.reducer';
+import { Dictionary } from '@ngrx/entity';
+import { MaterialsEntity } from './materials.models';
+import { filter } from 'rxjs';
 
 // Lookup the 'Materials' feature state managed by NgRx
 export const selectMaterialsState = createFeatureSelector<MaterialsState>(MATERIALS_FEATURE_KEY);
@@ -21,3 +24,9 @@ export const selectSelectedId = createSelector(selectMaterialsState, (state: Mat
 export const selectEntity = createSelector(selectMaterialsEntities, selectSelectedId, (entities, selectedId) =>
   selectedId ? entities[selectedId] : undefined
 );
+
+export const selectMaterialsByFolderId = createSelector(selectAllMaterials, (state: MaterialsEntity[], props:{folderID : number})=>
+  state.filter((material)=>
+   material.folder_id === props.folderID)
+
+)

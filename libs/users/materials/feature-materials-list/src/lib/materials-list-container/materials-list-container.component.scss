@@ -1,0 +1,18 @@
+.list{
+  width: 100%;
+  max-width: 1500px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: flex-start;
+  justify-items: center;
+  margin: auto;
+  padding-left: 90px;
+}
+.list__item{
+  width: 150px;
+  height: 150px;
+  display: flex;
+  position: relative;
+}
+

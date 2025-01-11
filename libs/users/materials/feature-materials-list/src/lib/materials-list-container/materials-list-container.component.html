@@ -1,4 +1,10 @@
-<p>materials-list-container works!</p>
+<div class="list">
+  <ng-container *ngrxLet="materials$ as materials">
+    <div *ngFor="let material of materials">
+      <users-materials-list [material$]="material" class="list__item"></users-materials-list>
+    </div>
+  </ng-container>
+</div>
+<users-create-materials-button [folder_id]="folder_id" ></users-create-materials-button>
 
 
-<users-create-materials-button></users-create-materials-button>

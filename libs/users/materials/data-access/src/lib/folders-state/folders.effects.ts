@@ -2,7 +2,6 @@ import { inject } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { switchMap, catchError, of } from 'rxjs';
 import * as FoldersActions from './folders.actions';
-import * as FoldersFeature from './folders.reducer';
 import { ApiService } from '@users/core/http';
 import {FoldersEntity} from './folders.models'
 import { map } from 'rxjs/operators';

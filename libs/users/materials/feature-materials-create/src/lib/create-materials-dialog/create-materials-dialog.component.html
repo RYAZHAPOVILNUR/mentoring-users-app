@@ -1,1 +1,7 @@
-<p>create-materials-dialog works!</p>
+<form [formGroup]="formGroup" class="custom-dialog" >
+  <input formControlName="title" class="folder__input">
+  <input formControlName="material_link" class="folder__input">
+  <div>
+    <button (click)="onSubmit()" class="folder__buttons-container"> save</button>
+  </div>
+</form>

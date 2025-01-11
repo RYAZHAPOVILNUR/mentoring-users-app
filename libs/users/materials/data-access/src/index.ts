@@ -13,3 +13,5 @@ export * from "./lib/materials-state/materials.models";
 export * from "./lib/materials-state/materials.facade"
 export * as MaterialsEffects from "./lib/materials-state/materials.effects"
 export * from "./lib/models/materials-dto.models"
+
+export *  from "./lib/services/materials.service"
