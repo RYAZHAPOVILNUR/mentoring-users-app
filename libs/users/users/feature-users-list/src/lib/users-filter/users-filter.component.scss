@@ -1,0 +1,20 @@
+.input_cont {
+    width: 1320px;
+    margin: 0 auto;
+    padding: 0 12px;
+    margin-bottom: 50px;
+
+    input {
+        width: 300px;
+        padding: 7px;
+        border-radius: 5px;
+    }
+
+    button {
+        background-color: #673ab7;
+        color: white;
+        padding: 5px;
+        margin-left: 15px;
+        border-radius: 5px;
+    }
+}

@@ -1,0 +1,7 @@
+<div class="input_cont">
+  <form [formGroup]="form" (ngSubmit)="submitFormUser()">
+    <h2>Имя</h2>
+    <input placeholder="Введите имя ..." formControlName="name" />
+    <button [disabled]="form.invalid" type="submit">Подтвердить</button>
+  </form>
+</div>
