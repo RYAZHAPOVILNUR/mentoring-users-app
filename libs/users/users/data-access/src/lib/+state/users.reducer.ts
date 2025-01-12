@@ -77,10 +77,7 @@ const reducer = createReducer(
     status,
   })),
   on(UsersActions.addUserStoryPointsSuccess,(state,{userData}) =>
-    usersAdapter.updateOne({
-      id: userData.id,
-      changes: userData
-    },state),
+    usersAdapter.updateOne({ id: userData.id, changes: userData }, state)
   ),
   on(UsersActions.addUserStoryPointsFailed, (state, { error }) => ({
     ...state,

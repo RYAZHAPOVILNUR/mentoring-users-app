@@ -44,7 +44,6 @@ export const deleteUser = createEffect(
         apiService.delete<void>(`/users/${id}`).pipe(
           map(() => UsersActions.deleteUserSuccess({ id })),
           catchError((error) => {
-            console.error('Error', error);
             return of(UsersActions.deleteUserFailed({ error }));
           })
         )
@@ -147,11 +146,11 @@ export const storyPoint = createEffect(
     return actions$.pipe(
       ofType(UsersActions.addUserStoryPoints),
       withLatestFrom(usersEntities$),
-      filter(([{id},usersEntities]) => Boolean(usersEntities[id])),
-      map(([{id, userData, onSuccessAddSP},usersEntities]) => {
+      filter(([{ userData }, usersEntities]) => Boolean(usersEntities[userData.id])),
+      map(([{ userData, onSuccessAddSP }, usersEntities]) => {
         return {
           user: {
-            ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
+            ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[userData.id]),
             totalStoryPoints: userData.totalStoryPoints,
           },
           onSuccessAddSP

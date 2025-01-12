@@ -23,7 +23,7 @@ import { DetailUsersCardVm } from './detail-users-card-vm';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { CreateUserDTO, UsersEntity, UserStoryPoint } from '@users/core/data-access';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { DadataApiService } from '@dadata';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs';
@@ -90,7 +90,7 @@ export class DetailUsersCardComponent implements OnInit {
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
 
-  public totalStoryPoint = new FormControl({value: 0,disabled: true},[])
+  public totalStoryPoint = new FormControl({ value: 0,disabled: true },[])
 
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
@@ -101,7 +101,7 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
   @Output() addStoryPoint = new EventEmitter<{
-    user: CreateUserDTO,
+    user: UserStoryPoint,
     onSuccessCb: onSuccessAddStoryPointsType
   }>
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
@@ -155,10 +155,10 @@ export class DetailUsersCardComponent implements OnInit {
     this.totalStoryPoint.disable()
     this.addStoryPoint.emit({
       user: {
+        id: 0,
         name: this.formGroup.value.name || '',
         email: this.formGroup.value.email || '',
         totalStoryPoints: this.totalStoryPoint.value || 0
-
       },
       onSuccessCb: this.onAddPointsSuccess
     })

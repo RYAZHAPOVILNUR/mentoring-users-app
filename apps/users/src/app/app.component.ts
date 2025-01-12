@@ -37,6 +37,5 @@ export class AppComponent {
 
   constructor() {
     this.store.dispatch(authActions.getUser());
-
   }
 }

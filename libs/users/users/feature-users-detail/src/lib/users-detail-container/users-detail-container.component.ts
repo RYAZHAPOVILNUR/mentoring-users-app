@@ -9,7 +9,7 @@ import {
   onSuccessAddStoryPointsType
 } from '@users/users/data-access';
 import { Observable, map, tap } from 'rxjs';
-import { selectQueryParam, CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { selectQueryParam, CreateUserDTO, UsersEntity, UserStoryPoint } from '@users/core/data-access';
 import { Store, select } from '@ngrx/store';
 import { LetDirective } from '@ngrx/component';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -90,7 +90,12 @@ export class UsersDetailComponent {
       });
   }
 
-  onAddStoryPoints(user: CreateUserDTO, onSuccessCb: onSuccessAddStoryPointsType) {
-    this.usersFacade.addStoryPoints(user,this.user.id,onSuccessCb)
+  onAddStoryPoints(user: UserStoryPoint, onSuccessCb: onSuccessAddStoryPointsType) {
+    const userId = this.user.id;
+    const userStoryPoint: UserStoryPoint = {
+      ...user,
+    }
+    userStoryPoint.id = userId;
+    this.usersFacade.addStoryPoints(userStoryPoint ,onSuccessCb)
   }
 }
