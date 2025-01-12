@@ -34,7 +34,11 @@ export const userFilter = createSelector(selectUsersState,(state: UsersState) =>
 export const filteredUsers = createSelector(
   selectAllUsers,
   userFilter,
-  (users,filter) => {
-    return users.filter((user) => user.name.toLowerCase().includes(filter.name.toLowerCase()))
+  (users, { name }) => {
+    if(name){
+      return users.filter((user) => user.name.toLowerCase().includes(name.toLowerCase()))
+    } else {
+      return users
+    }
   }
 )
