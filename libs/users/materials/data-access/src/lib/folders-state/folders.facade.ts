@@ -31,4 +31,7 @@ export class FoldersFacade {
   deleteFolder(id: number){
     this.store.dispatch(FoldersActions.deleteFolder({ id }));
   }
+  getFolderById(id: number){
+    return this.store.select(FoldersSelectors.selectFolderById(id));
+  }
 }

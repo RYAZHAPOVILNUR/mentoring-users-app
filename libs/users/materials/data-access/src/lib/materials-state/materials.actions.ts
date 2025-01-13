@@ -14,3 +14,6 @@ export const loadMaterialsFailure = createAction('[Materials/API] Load Materials
 export const addMaterial = createAction('[Materials/API] Add Material', props<{material: CreateMaterialDTO }>());
 export const addMaterialSuccess = createAction('[Materials/API] Add Material Success', props<{material: MaterialsEntity}>());
 export const addMaterialFailure = createAction('[Materials/API] Add Material Failure', props<{ error: string }>());
+export const deleteMaterial = createAction('[Materials/API] Delete Folder]', props<{id:number}>())
+export const deleteMaterialSuccess = createAction('[Materials/API] Delete Material Success', props<{id:number}>())
+export const deleteMaterialFailure = createAction('[Materials/API] Delete Material Failure]', props<{ error: string }>());

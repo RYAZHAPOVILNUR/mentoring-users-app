@@ -8,6 +8,7 @@
   justify-items: center;
   margin: auto;
   padding-left: 90px;
+  position: relative;
 }
 .list__item{
   width: 150px;
@@ -15,4 +16,13 @@
   display: flex;
   position: relative;
 }
-
+.folder__title{
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 35px;
+  font-family: "Unica One", arial, helvetica, sans-serif;
+  font-weight: bold;
+  margin-left: 40px;
+  margin-top: 40px;
+}

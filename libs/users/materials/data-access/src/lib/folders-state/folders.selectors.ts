@@ -19,3 +19,5 @@ export const selectSelectedId = createSelector(selectFoldersState, (state: Folde
 export const selectEntity = createSelector(selectFoldersEntities, selectSelectedId, (entities, selectedId) =>
   selectedId ? entities[selectedId] : undefined
 );
+
+export const selectFolderById = (id: number)=> createSelector(selectFoldersEntities, (entities)=> entities[id]);

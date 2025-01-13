@@ -1,4 +1,3 @@
-
 <button class="card" >
   <div class="card__container">
     <div class="card__logo">
@@ -15,7 +14,7 @@
         <div class="card__icon"><mat-icon>help_outline</mat-icon></div>
       </ng-container>
 
-      <button class="delete__button"><mat-icon>delete</mat-icon></button>
+      <button class="delete__button" (click)="deleteMaterial(material$?.id, $event)" ><mat-icon>delete</mat-icon></button>
     </div>
 
     <div class="card__title">

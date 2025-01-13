@@ -10,6 +10,7 @@ import { MaterialsService } from '../services/materials.service';
 import { CreateMaterialDTO } from '../models/materials-dto.models';
 
 export const initMaterials = createEffect(()=>{
+
   const httpService = inject(ApiService);
   const actions$ = inject(Actions);
   const materialsService= inject(MaterialsService);
@@ -36,9 +37,11 @@ export const initMaterials = createEffect(()=>{
 }, {functional: true})
 
 export const addMaterial = createEffect(()=>{
+
   const httpService = inject(ApiService);
   const actions$ = inject(Actions);
-    const materialsService= inject(MaterialsService);
+  const materialsService= inject(MaterialsService);
+
   return actions$.pipe(
     ofType(MaterialsActions.addMaterial),
     switchMap(({material})=>
@@ -48,6 +51,24 @@ export const addMaterial = createEffect(()=>{
         return of(MaterialsActions.addMaterialFailure({error}))
       })
     ))
+  )
+  },
+  {functional: true})
+
+export const deleteMaterial = createEffect(()=>{
+  const httpService = inject(ApiService)
+  const actions$ = inject(Actions)
+
+  return actions$.pipe(
+    ofType(MaterialsActions.deleteMaterial),
+    switchMap(({id})=>
+      httpService.delete(`/material/${id}`).pipe(
+        map(()=> MaterialsActions.deleteMaterialSuccess({id})),
+        catchError((error)=>{
+          return of(MaterialsActions.deleteMaterialFailure({error}))
+        })
+      )
+    )
   )
   },
   {functional: true}

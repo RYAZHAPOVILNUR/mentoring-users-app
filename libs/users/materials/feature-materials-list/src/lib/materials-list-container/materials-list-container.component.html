@@ -1,3 +1,4 @@
+
 <div class="list">
   <ng-container *ngrxLet="materials$ as materials">
     <div *ngFor="let material of materials">
@@ -5,6 +6,11 @@
     </div>
   </ng-container>
 </div>
+
 <users-create-materials-button [folder_id]="folder_id" ></users-create-materials-button>
 
-
+<div class="folder__title">
+<ng-container *ngrxLet="folder$ as folder">
+  {{folder?.title}}
+</ng-container>
+</div>
