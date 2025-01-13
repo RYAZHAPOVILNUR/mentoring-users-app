@@ -1,6 +1,7 @@
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { createReducer, on, Action } from '@ngrx/store';
+import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
+import { Action, createReducer, on } from '@ngrx/store';
 
+import { LoadingStatus, UsersEntity, UsersFilter } from '@users/core/data-access';
 import * as UsersActions from './users.actions';
 import { UsersEntity, UsersFilter } from '@users/core/data-access';
 import { LoadingStatus } from '@users/core/data-access';
@@ -58,6 +59,14 @@ const reducer = createReducer(
     )
   ),
   on(UsersActions.editUserFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
+  on(UsersActions.editUserSPSuccess, (state, { userData }) =>
+    usersAdapter.updateOne({ id: userData.id, changes: userData }, state)
+  ),
+  on(UsersActions.editUserSPFailed, (state, { error }) => ({
     ...state,
     status: 'error' as const,
     error,

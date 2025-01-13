@@ -1,10 +1,12 @@
-import { Injectable, inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { selectLoggedUser } from '@auth/data-access';
 import { select, Store } from '@ngrx/store';
-import * as UsersActions from './users.actions';
-import * as UsersSelectors from './users.selectors';
+import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
 import { Observable, of, switchMap } from 'rxjs';
-import { UsersErrors } from './users.reducer';
+import * as UsersActions from './users.actions';
 import { onSuccessEditionCbType } from './users.actions';
+import { UsersErrors } from './users.reducer';
+import * as UsersSelectors from './users.selectors';
 import { selectLoggedUser } from '@auth/data-access';
 import { CreateUserDTO, UsersEntity, UsersFilter } from '@users/core/data-access';
 
@@ -42,6 +44,10 @@ export class UsersFacade {
 
   editUser(userData: CreateUserDTO, id: number, onSuccessCb: onSuccessEditionCbType) {
     this.store.dispatch(UsersActions.editUser({ userData, id, onSuccessCb }));
+  }
+
+  editUserSP(totalStoryPoints: number, id: number, onSuccessCb: onSuccessEditionCbType) {
+    this.store.dispatch(UsersActions.editUserSP({ totalStoryPoints, id, onSuccessCb }));
   }
 
   getUserFromStore(id: number) {

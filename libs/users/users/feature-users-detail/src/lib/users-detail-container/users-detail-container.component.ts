@@ -1,15 +1,15 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LetDirective } from '@ngrx/component';
+import { Store, select } from '@ngrx/store';
+import { CreateUserDTO, UsersEntity, selectQueryParam } from '@users/core/data-access';
+import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { UsersErrors, UsersFacade, onSuccessEditionCbType } from '@users/users/data-access';
 import { Observable, map, tap } from 'rxjs';
-import { selectQueryParam, CreateUserDTO, UsersEntity } from '@users/core/data-access';
-import { Store, select } from '@ngrx/store';
-import { LetDirective } from '@ngrx/component';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { CoreUiConfirmDialogComponent } from '@users/core/ui';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -27,6 +27,7 @@ export class UsersDetailComponent {
   public user!: UsersEntity;
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly route = inject(ActivatedRoute);
 
   public readonly user$: Observable<UsersEntity | null> = this.usersFacade.openedUser$.pipe(
     tap((user) => {
@@ -42,12 +43,25 @@ export class UsersDetailComponent {
     select(selectQueryParam('edit')),
     map((params) => params === 'true')
   );
+  public readonly editSPMode$: Observable<boolean> = this.store.pipe(
+    select(selectQueryParam('editSP')),
+    map((params) => params === 'true')
+  );
   public readonly errors$: Observable<UsersErrors | null> = this.usersFacade.errors$;
 
   public onEditUser(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
+    const editSPValue = this.route.snapshot.queryParamMap.get('editSP');
     this.usersFacade.editUser(userData, this.user.id, onSuccessCb);
     this.router.navigate(['/admin/users', this.user.id], {
-      queryParams: { edit: false },
+      queryParams: { edit: false, editSP: editSPValue },
+    });
+  }
+
+  public onEditUserSP(totalStoryPoints: number, id: number, onSuccessCb: onSuccessEditionCbType) {
+    const editValue = this.route.snapshot.queryParamMap.get('edit');
+    this.usersFacade.editUserSP(totalStoryPoints, id, onSuccessCb);
+    this.router.navigate(['/admin/users', this.user.id], {
+      queryParams: { edit: editValue, editSP: false },
     });
   }
 
@@ -56,14 +70,30 @@ export class UsersDetailComponent {
   }
 
   onCloseEditMode() {
+    const editSPValue = this.route.snapshot.queryParamMap.get('editSP');
     this.router.navigate(['/admin/users', this.user.id], {
-      queryParams: { edit: false },
+      queryParams: { edit: false, editSP: editSPValue },
+    });
+  }
+
+  onCloseEditSPMode() {
+    const editValue = this.route.snapshot.queryParamMap.get('edit');
+    this.router.navigate(['/admin/users', this.user.id], {
+      queryParams: { edit: editValue, editSP: false },
     });
   }
 
   onOpenEditMode() {
+    const editSPValue = this.route.snapshot.queryParamMap.get('editSP');
     this.router.navigate(['admin/users', this.user.id], {
-      queryParams: { edit: true },
+      queryParams: { edit: true, editSP: editSPValue },
+    });
+  }
+
+  onOpenEditSPMode() {
+    const editValue = this.route.snapshot.queryParamMap.get('edit');
+    this.router.navigate(['admin/users', this.user.id], {
+      queryParams: { edit: editValue, editSP: true },
     });
   }
 

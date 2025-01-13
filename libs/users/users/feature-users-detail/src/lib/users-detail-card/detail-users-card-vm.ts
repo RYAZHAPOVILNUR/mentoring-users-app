@@ -3,6 +3,7 @@ import { UsersErrors } from '@users/users/data-access';
 
 export type DetailUsersCardVm = {
   editMode: boolean;
+  editSPMode: boolean;
   status: LoadingStatus;
   user: UsersEntity | null;
   errors: UsersErrors | null;
