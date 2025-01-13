@@ -3,10 +3,6 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Store } from '@ngrx/store';
 import { setUsersFilter } from 'libs/users/users/data-access/src/lib/+state/users.actions';
 
-// export interface Filter {
-//   name: string | undefined;
-// }
-
 @Component({
   selector: 'app-users-filter',
   templateUrl: './users-filter.component.html',
@@ -23,7 +19,7 @@ export class UsersFilterComponent {
   });
 
   submitFormUser() {
-    const name = this.form.value.name;
+    const name: string = this.form.value.name ?? '';
     this.store.dispatch(setUsersFilter({ filter: { name } }));
   }
 }

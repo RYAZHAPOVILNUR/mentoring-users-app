@@ -3,7 +3,6 @@ import { USERS_FEATURE_KEY, UsersState, usersAdapter } from './users.reducer';
 import { selectQueryParam, selectQueryParams, selectRouteParams } from '@users/core/data-access';
 import { state } from '@angular/animations';
 
-// Lookup the 'Users' feature state managed by NgRx
 export const selectUsersState = createFeatureSelector<UsersState>(USERS_FEATURE_KEY);
 
 const { selectAll, selectEntities } = usersAdapter.getSelectors();

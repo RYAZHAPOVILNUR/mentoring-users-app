@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   ChangeDetectionStrategy,
   Component,
@@ -15,7 +14,7 @@ import { CommonModule } from '@angular/common';
 import { onSuccessEditionCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormsModule, MaxLengthValidator, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -31,7 +30,6 @@ import { PushPipe } from '@ngrx/component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'detail-users-card',
   standalone: true,
   imports: [
@@ -88,6 +86,7 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    storypoint: new FormControl({value: null, disabled: !this.vm.editMode}, [Validators.required, Validators.maxLength(2)])
   });
 
   @Output() editUser = new EventEmitter<{
@@ -129,6 +128,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: this.formGroup.value.username || '',
         city: this.formGroup.value.city || '',
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        totalStoryPoints: this.formGroup.value.storypoint || undefined,
         purchaseDate: new Date().toString() || '',
         educationStatus: 'trainee',
       },

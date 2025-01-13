@@ -41,7 +41,6 @@
               [matTooltip]="vm.user!.name"
               [matTooltipDisabled]="formGroup.enabled"
             >
-              <mat-label>Имя:</mat-label>
               <input matInput placeholder="Имя*" formControlName="name" class="edit-user-input" />
               <mat-error *ngIf="formGroup.hasError('required', 'name')">Это поле обязательно для заполнения</mat-error>
             </mat-form-field>
@@ -88,6 +87,14 @@
                   {{ suggestion }}
                 </mat-option>
               </mat-autocomplete>
+            </mat-form-field>
+            <mat-form-field
+              class="edit-user-field"
+              [matTooltip]="vm.user!.totalStoryPoints!.toString()"
+              [matTooltipDisabled]="formGroup.enabled"
+            >
+              <mat-label>Количество сторипоинтов:</mat-label>
+              <input matInput placeholder="0" formControlName="storypoint" class="edit-user-input" />
             </mat-form-field>
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
