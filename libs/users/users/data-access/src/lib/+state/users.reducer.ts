@@ -3,8 +3,6 @@ import { Action, createReducer, on } from '@ngrx/store';
 
 import { LoadingStatus, UsersEntity, UsersFilter } from '@users/core/data-access';
 import * as UsersActions from './users.actions';
-import { UsersEntity, UsersFilter } from '@users/core/data-access';
-import { LoadingStatus } from '@users/core/data-access';
 
 export const USERS_FEATURE_KEY = 'users';
 
