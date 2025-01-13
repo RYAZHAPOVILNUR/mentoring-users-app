@@ -7,6 +7,8 @@ import * as UsersActions from './users.actions';
 import { onSuccessEditionCbType } from './users.actions';
 import { UsersErrors } from './users.reducer';
 import * as UsersSelectors from './users.selectors';
+import { selectLoggedUser } from '@auth/data-access';
+import { CreateUserDTO, UsersEntity, UsersFilter } from '@users/core/data-access';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
@@ -64,7 +66,7 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.loadUser());
   }
 
-  filterUsers(name: string) {
-    this.store.dispatch(UsersActions.setUsersFilter({ filter: { name } }));
+  filterUsers(filter: UsersFilter) {
+    this.store.dispatch(UsersActions.setUsersFilter({ filter }));
   }
 }
