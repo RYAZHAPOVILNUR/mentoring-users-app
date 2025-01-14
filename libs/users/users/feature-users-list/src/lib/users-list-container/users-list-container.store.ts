@@ -23,7 +23,14 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
   private readonly dialog = inject(MatDialog);
   public readonly users$ = this.select(({ users }) => users);
   public readonly status$ = this.select(this.usersFacade.status$, (status) => status);
+  // public filteredusers$ = this.usersFacade.filteredUsers$;
+
   public errors$ = this.select(this.usersFacade.errors$, (error) => error);
+  public filteredUsers$ = this.select(  
+    this.usersFacade.filteredUsers$, // Массив с селектором
+    (filteredUsers) => filteredUsers // Проектор, который возвращает значение из массива
+  );
+  
 
   constructor() {
     super(initialState);
@@ -32,7 +39,7 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
   }
 
   private setUsersFromGlobalToLocalStore(): void {
-    this.effect(() => this.usersFacade.allUsers$.pipe(tap((users: UsersEntity[]) => this.patchUsers(users))));
+    this.effect(() => this.usersFacade.filteredUsers$.pipe(tap((users: UsersEntity[]) => this.patchUsers(users))));
   }
 
   private patchUsers(users: UsersEntity[]): void {
@@ -40,6 +47,7 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
       users: users.map((user) => usersVMAdapter.entityToVM(user)),
     });
   }
+
 
   public deleteUser(user: UsersVM): void {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
