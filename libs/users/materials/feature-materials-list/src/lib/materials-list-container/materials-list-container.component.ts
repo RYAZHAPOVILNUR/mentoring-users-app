@@ -35,9 +35,7 @@ export class MaterialsListContainerComponent implements OnInit {
   public readonly folder$:Observable<FoldersEntity | undefined>
 
   constructor() {
-
     this.folder$ = this.foldersFacade.getFolderById(this.folder_id);
-
   }
 
   ngOnInit(): void {
