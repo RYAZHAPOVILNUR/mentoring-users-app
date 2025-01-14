@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { setUsersFilter } from '@users/users/data-access';
-
-// eslint-disable-next-line @nx/enforce-module-boundaries
-//import { User } from '../../../../../../../apps/users/src/app/user.interface';
 
 @Component({
   selector: 'users-filter',
