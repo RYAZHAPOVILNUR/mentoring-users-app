@@ -127,6 +127,6 @@ export const addUserStoryPointsSuccess = createAction(
 export const addUserStoryPointsFailed = createAction(
   '[User Detail] Add User StoryPoints Failed',
   props<{
-    error: any;
+    error: UsersErrors | null;
   }>()
 );

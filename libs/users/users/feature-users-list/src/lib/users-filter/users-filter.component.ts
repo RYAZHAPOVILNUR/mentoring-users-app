@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { AsyncPipe, CommonModule, NgIf } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -26,7 +26,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrls: ['./users-filter.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersFilterComponent {
+export class UsersFilterComponent implements OnDestroy {
   public isLoading$ = new BehaviorSubject<boolean>(false);
   public readonly userNameInput = new FormControl('', {
     nonNullable: true,
