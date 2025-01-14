@@ -1,0 +1,59 @@
+:host {
+    display: block;
+    margin-bottom: 20px;
+  }
+  
+  form {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  mat-form-field {
+    flex: 1;
+    .mat-input-element {
+      padding: 10px 12px;
+      font-size: 14px;
+      border-radius: 25px;
+      border: 1px solid #ccc;
+      transition: border-color 0.3s ease;
+    }
+  
+    .mat-input-element:focus {
+      border-color: #1976d2;
+    }
+  
+    mat-label {
+      font-size: 14px;
+      color: #333;
+    }
+  }
+  
+  button {
+    padding: 8px 12px;
+    background-color: transparent;
+    border: 1px solid #1976d2;
+    color: #1976d2;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s, color 0.3s;
+  
+    &:hover {
+      background-color: #1976d2;
+      color: white;
+    }
+  
+    &:disabled {
+      background-color: #e0e0e0;
+      color: #bdbd  bd;
+      cursor: not-allowed;
+    }
+  }
+  
+  .wrap{
+    display: flex;
+    text-align: center;
+    gap: 15px;
+    justify-content: center;
+  }
