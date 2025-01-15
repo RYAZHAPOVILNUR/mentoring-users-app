@@ -47,10 +47,10 @@ export const appRoutes: Route[] = [
           import('@users/users/articles/articles-create').then((c) => c.ArticlesCreateContainerComponent),
         canDeactivate: [canDeactivateFormComponent],
       },
-      {
-        path: 'materials',
-        loadComponent: () => import('@users/materials').then((c) => c.UsersMaterialsComponent),
-      },
+      // {
+      //   path: 'materials',
+      //   loadComponent: () => import('@users/materials').then((c) => c.UsersMaterialsComponent),
+      // },
       {
         path: 'articles',
         loadComponent: () => import('@users/users/articles/articles').then((c) => c.ArticlesViewContainerComponent),
