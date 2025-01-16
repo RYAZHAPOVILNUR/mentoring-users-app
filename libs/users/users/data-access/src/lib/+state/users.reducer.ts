@@ -4,6 +4,7 @@ import { createReducer, on, Action } from '@ngrx/store';
 import * as UsersActions from './users.actions';
 import { UsersEntity } from '@users/core/data-access';
 import { LoadingStatus } from '@users/core/data-access';
+import { state } from '@angular/animations';
 
 export const USERS_FEATURE_KEY = 'users';
 
@@ -16,6 +17,7 @@ export interface UsersState extends EntityState<UsersEntity> {
   selectedId?: string | number; // which Users record has been selected
   status: LoadingStatus;
   error: UsersErrors | null;
+  usersFilter: { name: string };
 }
 
 export interface UsersPartialState {
@@ -25,9 +27,9 @@ export interface UsersPartialState {
 export const usersAdapter: EntityAdapter<UsersEntity> = createEntityAdapter<UsersEntity>();
 
 export const initialUsersState: UsersState = usersAdapter.getInitialState({
-  // set initial required properties
   status: 'init',
   error: null,
+  usersFilter: { name: '' },
 });
 
 const reducer = createReducer(
@@ -75,6 +77,24 @@ const reducer = createReducer(
   on(UsersActions.updateUserStatus, (state, { status }) => ({
     ...state,
     status,
+  })),
+  on(UsersActions.setUsersFilter, (state, { filter }) => ({
+    ...state,
+    usersFilter: filter,
+  })),
+  on(UsersActions.updateTotalStoryPointsSuccess, (state, { userId, totalStoryPoints }) =>
+    usersAdapter.updateOne(
+      {
+        id: userId,
+        changes: { totalStoryPoints },
+      },
+      state
+    )
+  ),
+  on(UsersActions.updateTotalStoryPointsFailure, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
   }))
 );
 

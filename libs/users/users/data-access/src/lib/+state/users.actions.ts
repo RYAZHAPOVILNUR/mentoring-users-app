@@ -18,10 +18,6 @@ export const addUser = createAction('[Users Page] Add User', props<{ userData: C
 export const addUserSuccess = createAction('[Users/Api] Add User Success', props<{ userData: UsersEntity }>());
 export const addUserFailed = createAction('[Users/Api] Add User Failed', props<{ error: any }>());
 
-// export const selectId = createAction('[Users Page] Select Id', props<{ id: number }>());
-
-// export const deleteSelectedId = createAction('[Users Page] Delete Selected Id');
-
 export const editUser = createAction(
   '[Users Detail] Edit User',
   props<{
@@ -38,3 +34,18 @@ export const loadUserSuccess = createAction('[Users/Api] Load User Success', pro
 export const loadUserFailed = createAction('[Users/Api] Load User Failed', props<{ error: any }>());
 
 export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{ status: LoadingStatus }>());
+
+export const setUsersFilter = createAction('[Users Filter] Set Users Filter', props<{ filter: { name: string } }>());
+
+export const updateTotalStoryPoints = createAction(
+  '[Users/API] Update Total Story Points',
+  props<{ userId: number; totalStoryPoints: number }>()
+);
+export const updateTotalStoryPointsSuccess = createAction(
+  '[Users/API] Update Total Story Points Success',
+  props<{ userId: number; totalStoryPoints: number }>()
+);
+export const updateTotalStoryPointsFailure = createAction(
+  '[Users/API] Update Total Story Points Failure',
+  props<{ error: any }>()
+);
