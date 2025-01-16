@@ -11,10 +11,17 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { onSuccessEditionCbType } from '@users/users/data-access';
+import { onSuccessEditionCbType, UsersFacade } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { FormBuilder, FormControl, FormsModule, MaxLengthValidator, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormsModule,
+  MaxLengthValidator,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -71,6 +78,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: vm.user.email,
         username: vm.user.username,
         city: vm.user.city,
+        storypoint: vm.user.totalStoryPoints,
       });
     }
 
@@ -86,7 +94,10 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
-    storypoint: new FormControl({value: null, disabled: !this.vm.editMode}, [Validators.required, Validators.maxLength(2)])
+    storypoint: new FormControl({ value: '', disabled: true } as FormControl, [
+      Validators.required,
+      Validators.maxLength(2),
+    ]),
   });
 
   @Output() editUser = new EventEmitter<{
@@ -96,6 +107,7 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
+  @Output() OpenEditModeForStorypoint = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
@@ -109,6 +121,7 @@ export class DetailUsersCardComponent implements OnInit {
   private snackBar = inject(MatSnackBar);
   private readonly destroyRef = inject(DestroyRef);
   public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
+  public usersFacade = inject(UsersFacade);
 
   ngOnInit(): void {
     this.checkChangeFields();
@@ -128,12 +141,51 @@ export class DetailUsersCardComponent implements OnInit {
         username: this.formGroup.value.username || '',
         city: this.formGroup.value.city || '',
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
-        totalStoryPoints: this.formGroup.value.storypoint || undefined,
+        totalStoryPoints: this.formGroup.value.storypoint || null,
         purchaseDate: new Date().toString() || '',
         educationStatus: 'trainee',
       },
       onSuccessCb: this.onEditSuccess,
     });
+  }
+
+  onOpenEditMode() {
+    this.openEditMode.emit();
+  }
+
+  /////////////
+
+  areActionsActive = false;
+
+  onCloseEditModeForStorypoint() {
+    this.areActionsActive = false;
+    this.formGroup.get('storypoint')?.disable();
+  }
+
+  onSubmitStoryPoint() {
+    const userId = this.vm.user?.id;
+    const totalStoryPoints = this.formGroup.get('storypoint')?.value;
+
+    if (userId !== undefined && totalStoryPoints !== undefined) {
+      this.usersFacade.updateTotalStoryPoints(userId, totalStoryPoints);
+    }
+    this.areActionsActive = false;
+    this.formGroup.get('storypoint')?.disable();
+  }
+
+  constructor() {
+    const userId = this.vm.user?.id;
+    const totalStoryPoints = this.formGroup.get('storypoint')?.value;
+
+    console.log('userId: ', userId);
+    console.log('totalStoryPoints: ', totalStoryPoints);
+  }
+
+  /////////////
+
+  onEditButtonClick() {
+    this.areActionsActive = true;
+    this.formGroup.get('storypoint')?.enable();
   }
 
   onCloseUser() {
@@ -142,10 +194,6 @@ export class DetailUsersCardComponent implements OnInit {
 
   onCloseEditMode() {
     this.closeEditMode.emit();
-  }
-
-  onOpenEditMode() {
-    this.openEditMode.emit();
   }
 
   onDeleteUser() {

@@ -35,5 +35,5 @@ export const filteredUsers = createSelector(usersFilterSelector, selectAllUsers,
   if (!usersFilter.name || usersFilter.name.trim() === '') {
     return allUsers;
   }
-  return allUsers.filter((user) => user.name.includes(String(usersFilter.name)));
+  return allUsers.filter((user) => user.name.includes(usersFilter.name));
 });

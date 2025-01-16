@@ -35,4 +35,17 @@ export const loadUserFailed = createAction('[Users/Api] Load User Failed', props
 
 export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{ status: LoadingStatus }>());
 
-export const setUsersFilter = createAction('[Users Filter] Set Users Filter', props<{ filter: { name: string} }>());
+export const setUsersFilter = createAction('[Users Filter] Set Users Filter', props<{ filter: { name: string } }>());
+
+export const updateTotalStoryPoints = createAction(
+  '[Users/API] Update Total Story Points',
+  props<{ userId: number; totalStoryPoints: number }>()
+);
+export const updateTotalStoryPointsSuccess = createAction(
+  '[Users/API] Update Total Story Points Success',
+  props<{ userId: number; totalStoryPoints: number }>()
+);
+export const updateTotalStoryPointsFailure = createAction(
+  '[Users/API] Update Total Story Points Failure',
+  props<{ error: any }>()
+);

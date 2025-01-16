@@ -88,14 +88,49 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+
             <mat-form-field
-              class="edit-user-field"
+              class="edit-user-field fieldOfStoryPoint"
               [matTooltip]="vm.user!.totalStoryPoints!.toString()"
               [matTooltipDisabled]="formGroup.enabled"
             >
               <mat-label>Количество сторипоинтов:</mat-label>
               <input matInput placeholder="0" formControlName="storypoint" class="edit-user-input" />
             </mat-form-field>
+
+            <mat-card-actions class="edit-user-btns-container-storypoint" *ngIf="areActionsActive">
+              <button
+                mat-icon-button
+                color="primary"
+                type="submit"
+                [disabled]="formGroup.invalid || (areFieldsChanged$ | ngrxPush) === false"
+                aria-label="submit new user data"
+                (click)="onSubmitStoryPoint()"
+              >
+                <mat-icon>done</mat-icon>
+              </button>
+
+              <button
+                mat-icon-button
+                color="warn"
+                type="button"
+                aria-label="Close edit mode"
+                (click)="onCloseEditModeForStorypoint()"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-card-actions>
+
+            <button
+              mat-icon-button
+              type="button"
+              color="warn"
+              class="edit-user-button-plus"
+              *ngIf="!areActionsActive"
+              (click)="onEditButtonClick()"
+            >
+              <mat-icon class="plus">add</mat-icon>
+            </button>
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button

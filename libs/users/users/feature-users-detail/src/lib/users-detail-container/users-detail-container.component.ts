@@ -67,6 +67,12 @@ export class UsersDetailComponent {
     });
   }
 
+  onOpenEditModeForStorypoint() {
+    this.router.navigate(['admin/users/storypoint', this.user.id], {
+      queryParams: { edit: true },
+    });
+  }
+
   onDeleteUser() {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
       data: {

@@ -6,6 +6,7 @@ import { ApiService } from '@users/core/http';
 import { Store, select } from '@ngrx/store';
 import { selectUsersEntities } from './users.selectors';
 import { CreateUserDTO, UsersDTO, UsersEntity, selectRouteParams, usersDTOAdapter } from '@users/core/data-access';
+import { error } from 'highcharts';
 
 export const userEffects = createEffect(
   () => {
@@ -38,7 +39,6 @@ export const deleteUser = createEffect(
     const apiService = inject(ApiService);
     return actions$.pipe(
       ofType(UsersActions.deleteUser),
-      // delay(1500),
       switchMap(({ id }) =>
         apiService.delete<void>(`/users/${id}`).pipe(
           map(() => UsersActions.deleteUserSuccess({ id })),
@@ -92,6 +92,7 @@ export const editUser = createEffect(
           email: userData.email,
           username: userData.username,
           city: userData.city,
+          // totalStoryPoints: userData.totalStoryPoints
         },
         onSuccessCb,
       })),
@@ -132,6 +133,24 @@ export const loadUser = createEffect(
         }
         return of(UsersActions.updateUserStatus({ status: 'loading' }));
       })
+    );
+  },
+  { functional: true }
+);
+
+export const updateTotalStoryPointsEffect = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+
+    return actions$.pipe(
+      ofType(UsersActions.updateTotalStoryPoints),
+      switchMap(({ userId, totalStoryPoints }) =>
+        apiService.post(`/users/${userId}/totalStoryPoints`, { totalStoryPoints }).pipe(
+          map(() => UsersActions.updateTotalStoryPointsSuccess({ userId, totalStoryPoints })),
+          catchError((error) => of(UsersActions.updateTotalStoryPointsFailure({ error })))
+        )
+      )
     );
   },
   { functional: true }

@@ -17,7 +17,7 @@ export interface UsersState extends EntityState<UsersEntity> {
   selectedId?: string | number; // which Users record has been selected
   status: LoadingStatus;
   error: UsersErrors | null;
-  usersFilter: {name: string };
+  usersFilter: { name: string };
 }
 
 export interface UsersPartialState {
@@ -78,9 +78,23 @@ const reducer = createReducer(
     ...state,
     status,
   })),
-  on(UsersActions.setUsersFilter, (state, {filter}) => ({
+  on(UsersActions.setUsersFilter, (state, { filter }) => ({
     ...state,
-    usersFilter: filter,    
+    usersFilter: filter,
+  })),
+  on(UsersActions.updateTotalStoryPointsSuccess, (state, { userId, totalStoryPoints }) =>
+    usersAdapter.updateOne(
+      {
+        id: userId,
+        changes: { totalStoryPoints },
+      },
+      state
+    )
+  ),
+  on(UsersActions.updateTotalStoryPointsFailure, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
   }))
 );
 
