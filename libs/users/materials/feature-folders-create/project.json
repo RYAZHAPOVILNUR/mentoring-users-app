@@ -1,5 +1,5 @@
 {
-  "name": "feature-folders-create",
+  "name": "users-materials-feature-folders-create",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/users/materials/feature-folders-create/src",
   "prefix": "users",

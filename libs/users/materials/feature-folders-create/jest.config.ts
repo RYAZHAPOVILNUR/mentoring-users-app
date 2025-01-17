@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'feature-folders-create',
+  displayName: 'users-materials-feature-folders-create',
   preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory: '../../../../coverage/libs/users/materials/feature-folders-create',

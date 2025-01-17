@@ -1,0 +1,19 @@
+This is materials!
+(feature-folders-list/folders-list-container.component/folders-list.component)
+<mat-card class="folder-card-wrapper" (mouseenter)="showIcon(true)"
+          (mouseleave)="showIcon(false)">
+  
+  <mat-card-content class="folder-card-content">
+    <mat-icon fontIcon="folder" class="folder-card-content__icon"
+    ></mat-icon>
+    <div class="folder-card-content__title">title</div>
+    <div class="folder-card-content__date">sfdsdfds</div>
+  
+  </mat-card-content>
+  
+  <mat-card-actions class="folder-card-buttons">
+    <button mat-icon-button class="folder-card-buttons__btn" *ngIf="isIconVisible$ | async">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
