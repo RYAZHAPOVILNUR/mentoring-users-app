@@ -9,7 +9,7 @@ import {
   OnInit,
   Output,
   TemplateRef,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { onSuccessEditionCbType } from '@users/users/data-access';
@@ -54,7 +54,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailUsersCardComponent implements OnInit {
-  private _vm: DetailUsersCardVm = {
+private _vm: DetailUsersCardVm = {
     editMode: false,
     user: null,
     status: 'init',
@@ -74,6 +74,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
+      this.totalStoryPointsForm.setValue(vm.user.totalStoryPoints ?? 0)
     }
 
     if (vm.editMode) {
@@ -94,11 +95,16 @@ export class DetailUsersCardComponent implements OnInit {
     user: CreateUserDTO;
     onSuccessCb: onSuccessEditionCbType;
   }>();
+  @Output() addStoryPoints = new EventEmitter<{
+    user: CreateUserDTO;
+    onSuccessAddSP: onSuccessEditionCbType;
+  }>();
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('storyPointsSnackbar') snackbarTemplateRefSP!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -107,6 +113,7 @@ export class DetailUsersCardComponent implements OnInit {
     switchMap((value) => this.dadata.getCities(value))
   );
 
+  public totalStoryPointsForm = new FormControl<number | null>({ value: 0, disabled: true});
   private snackBar = inject(MatSnackBar);
   private readonly destroyRef = inject(DestroyRef);
   public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
@@ -121,6 +128,35 @@ export class DetailUsersCardComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'top',
     });
+
+  private onAddSPSuccess: onSuccessEditionCbType = () =>
+    this.snackBar.openFromTemplate(this.snackbarTemplateRefSP, {
+      duration: 1500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    })
+
+  public disableStoryPointsInput(): void {
+    this.totalStoryPointsForm.setValue(this.vm.user?.totalStoryPoints ?? 0);
+    this.totalStoryPointsForm.disable();
+  }
+
+  public onAddStoryPoints(): void {
+    this.totalStoryPointsForm.disable();
+    this.addStoryPoints.emit({
+      user: {
+        id: this.vm.user?.id || null,
+        name: this.vm.user?.name || '',
+        email: this.vm.user?.email || '',
+        username: this.vm.user?.username || '',
+        city: this.formGroup.value.city || '',
+        purchaseDate: new Date().toString() || '',
+        educationStatus: 'trainee',
+        totalStoryPoints: Number(this.totalStoryPointsForm.value) ?? this.vm.user?.totalStoryPoints,
+      },
+      onSuccessAddSP: this.onAddSPSuccess,
+    })
+  }
 
   onSubmit(): void {
     this.editUser.emit({

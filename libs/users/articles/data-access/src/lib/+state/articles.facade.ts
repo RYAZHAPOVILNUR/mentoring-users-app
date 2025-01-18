@@ -12,9 +12,8 @@ export class ArticlesFacade {
   public readonly articles$: Observable<Article[]> = this.store.select(selectArticles);
   public readonly articlesEntities$ = this.store.select(selectArticlesEntities);
 
-
-  editArticle(articleData:CreateArticle, id:number){
-    this.store.dispatch(ArticlesActions.editArticle({articleData, id}));
+  editArticle(articleData: CreateArticle, id: number) {
+    this.store.dispatch(ArticlesActions.editArticle({ articleData, id }));
   }
 
   publishArticle(article: CreateArticle) {

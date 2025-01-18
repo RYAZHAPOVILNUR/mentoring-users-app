@@ -89,6 +89,51 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+
+            <mat-form-field
+              class="edit-user-field">
+              <mat-label>Количество сторипоинтов:</mat-label>
+              <input
+                matInput
+                class="edit-user-input"
+                placeholder="Количество сторипоинтов"
+                [formControl]="totalStoryPointsForm"
+              />
+
+              <div matSuffix>
+                <button
+                  mat-icon-button
+                  type="button"
+                  color="accent"
+                  class="edit-user-button"
+                  (click)="totalStoryPointsForm.enable()"
+                  *ngIf="totalStoryPointsForm.disabled"
+                >
+                  <mat-icon>add</mat-icon>
+                </button>
+                <button
+                  *ngIf="totalStoryPointsForm.enabled"
+                  (click)="onAddStoryPoints()"
+                  mat-icon-button
+                  color="primary"
+                  aria-label="submit story points input"
+                >
+                  <mat-icon>done</mat-icon>
+                </button>
+
+                <button
+                  *ngIf="totalStoryPointsForm.enabled"
+                  (click)="disableStoryPointsInput()"
+                  mat-icon-button
+                  color="warn"
+                  type="button"
+                  aria-label="cancel story points input"
+                >
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+            </mat-form-field>
+
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
@@ -122,5 +167,11 @@
 <ng-template #snackbar>
   <div class="edit-user-snackbar">
     <span>Пользователь успешно изменён!</span>
+  </div>
+</ng-template>
+
+<ng-template #storyPointsSnackbar>
+  <div class="edit-user-snackbar">
+    <span>Сторипоинты успешно добавлены!</span>
   </div>
 </ng-template>
