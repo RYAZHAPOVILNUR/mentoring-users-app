@@ -11,6 +11,7 @@ import { LetDirective } from '@ngrx/component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
 import { UsersFilterComponent } from '../users-filter/users-filter.component';
 import { UsersCardComponent } from '../users-card/users-card.component';
+import { UsersEntity } from '@users/core/data-access';
 
 @Component({
   selector: 'users-list-container',

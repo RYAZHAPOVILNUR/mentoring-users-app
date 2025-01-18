@@ -59,7 +59,6 @@ export class ArticlesCreateContainerComponent implements DeactivatableComponent 
   onPublishArticle(article: CreateArticle) {
     this.article = article;
     console.log(this.article);
-    
   }
 
   onFormChange(isFormChage: boolean) {
@@ -83,8 +82,10 @@ export class ArticlesCreateContainerComponent implements DeactivatableComponent 
         tap((result) => {
           if (this.article && result) this.store.dispatch(ArticlesActions.publishArticle({ article: this.article }));
 
-          if(this.article && this.article.articlesId && result) {
-            this.store.dispatch(ArticlesActions.editArticle({ articleData: this.article, id: this.article.articlesId }));
+          if (this.article && this.article.articlesId && result) {
+            this.store.dispatch(
+              ArticlesActions.editArticle({ articleData: this.article, id: this.article.articlesId })
+            );
           }
         }),
         map((result: boolean) => result)

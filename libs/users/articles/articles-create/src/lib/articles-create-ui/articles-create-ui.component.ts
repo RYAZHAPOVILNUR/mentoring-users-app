@@ -9,7 +9,7 @@ import {
   Validators,
   ValidatorFn,
   AbstractControl,
-  ValidationErrors
+  ValidationErrors,
 } from '@angular/forms';
 import Quill from 'quill';
 import BlotFormatter from 'quill-blot-formatter';
@@ -18,20 +18,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormGroupDirective, NgForm } from '@angular/forms';
-import {
-  ArticlesFacade,
-  CreateArticle,
-} from '@users/users/articles/data-access';
+import { ArticlesFacade, CreateArticle } from '@users/users/articles/data-access';
 
 import { ArticlesCreateVm } from './articles-create-vm';
 import { TranslateModule } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 
 class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(
-    control: FormControl | null,
-    form: FormGroupDirective | NgForm | null
-  ): boolean {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && isSubmitted && control.touched);
   }
@@ -79,11 +73,7 @@ export class ArticlesCreateUiComponent {
       validators: [Validators.required, this.validateWithClearTegs()],
     }),
     title: new FormControl('', {
-      validators: [
-        Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(66),
-      ],
+      validators: [Validators.required, Validators.minLength(5), Validators.maxLength(66)],
     }),
   });
 
@@ -128,7 +118,7 @@ export class ArticlesCreateUiComponent {
         title: this.formGroup.value.title as string,
         content: this.formGroup.value.textEditor as string,
       };
-      this.publishArticle.emit(article)
+      this.publishArticle.emit(article);
       if (this.vm.editMode == true) {
         this.formChange.emit(false);
         this.articleFacade.editArticle(article, this.vm.editingArticle!.id);
@@ -147,18 +137,17 @@ export class ArticlesCreateUiComponent {
     if (!this.vm.editMode) this.formChange.emit(false);
     this.publishArticle.emit({
       ...article,
-      articlesId: this.vm.editingArticle!.id
-    })
+      articlesId: this.vm.editingArticle!.id,
+    });
     this.router.navigate(['/articles']);
   }
 
   private validateWithClearTegs(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-
-      const content = control.value.replace(/<[^>]*>/g, '');  // clear tegs 
+      const content = control.value.replace(/<[^>]*>/g, ''); // clear tegs
 
       if (content.length > 66) return null;
-      return { 'minLength': 'min length must be < 60 symbols' };
+      return { minLength: 'min length must be < 60 symbols' };
     };
   }
 
@@ -176,8 +165,6 @@ export class ArticlesCreateUiComponent {
         }
       : { textEditor: '', title: '' };
 
-    return (
-      JSON.stringify(this.formGroup.value) !== JSON.stringify(initialFormValues)
-    );
+    return JSON.stringify(this.formGroup.value) !== JSON.stringify(initialFormValues);
   }
 }

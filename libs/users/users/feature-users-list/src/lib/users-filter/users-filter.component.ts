@@ -15,8 +15,8 @@ import { UsersFilter } from '@users/users/data-access';
 })
 export class UsersFilterComponent {
   @Output() filterUsersWindow = new EventEmitter<UsersFilter>();
-
   public userFilterForm!: FormGroup;
+
   constructor(private fb: FormBuilder) {
     this.createFilterForm();
     this.setupFilterChanges();
@@ -35,5 +35,3 @@ export class UsersFilterComponent {
     });
   }
 }
-
-
