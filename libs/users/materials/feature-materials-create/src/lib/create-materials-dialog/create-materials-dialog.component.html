@@ -1,7 +1,8 @@
 <form [formGroup]="formGroup" class="custom-dialog" >
-  <input formControlName="title" class="folder__input">
-  <input formControlName="material_link" class="folder__input">
+  <input formControlName="title" class="folder__input" placeholder="title">
+  <input formControlName="material_link" class="folder__input" placeholder="link">
   <div>
-    <button (click)="onSubmit()" class="folder__buttons-container"> save</button>
+    <button mat-button style="margin-top: 5px; border: 1px solid lightgrey;"  [disabled]="formGroup.invalid"  (click)="onSubmit()" class="folder__buttons-container"> add </button>
   </div>
+
 </form>
