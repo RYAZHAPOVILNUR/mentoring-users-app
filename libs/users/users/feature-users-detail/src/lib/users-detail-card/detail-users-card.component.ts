@@ -94,7 +94,7 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
-    storypoint: new FormControl({ value: '', disabled: true } as FormControl, [
+    storypoint: new FormControl({ value: 0, disabled: !this.vm.editMode }, [
       Validators.required,
       Validators.maxLength(2),
     ]),
@@ -141,7 +141,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: this.formGroup.value.username || '',
         city: this.formGroup.value.city || '',
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
-        totalStoryPoints: this.formGroup.value.storypoint || null,
+        totalStoryPoints: this.formGroup.value.storypoint || undefined,
         purchaseDate: new Date().toString() || '',
         educationStatus: 'trainee',
       },
@@ -157,36 +157,34 @@ export class DetailUsersCardComponent implements OnInit {
 
   areActionsActive = false;
 
+  onEditButtonClick() {
+    this.areActionsActive = true;
+    this.formGroup.get('storypoint')?.enable();
+  }
   onCloseEditModeForStorypoint() {
     this.areActionsActive = false;
     this.formGroup.get('storypoint')?.disable();
   }
 
   onSubmitStoryPoint() {
-    const userId = this.vm.user?.id;
-    const totalStoryPoints = this.formGroup.get('storypoint')?.value;
+    this.editUser.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        username: this.formGroup.value.username || '',
+        city: this.formGroup.value.city || '',
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        totalStoryPoints: this.formGroup.value.storypoint || undefined,
+        purchaseDate: new Date().toString() || '',
+        educationStatus: 'trainee',
+      },
+      onSuccessCb: this.onEditSuccess,
+    });
 
-    if (userId !== undefined && totalStoryPoints !== undefined) {
-      this.usersFacade.updateTotalStoryPoints(userId, totalStoryPoints);
-    }
     this.areActionsActive = false;
     this.formGroup.get('storypoint')?.disable();
   }
 
-  constructor() {
-    const userId = this.vm.user?.id;
-    const totalStoryPoints = this.formGroup.get('storypoint')?.value;
-
-    console.log('userId: ', userId);
-    console.log('totalStoryPoints: ', totalStoryPoints);
-  }
-
   /////////////
-
-  onEditButtonClick() {
-    this.areActionsActive = true;
-    this.formGroup.get('storypoint')?.enable();
-  }
 
   onCloseUser() {
     this.closeUser.emit();

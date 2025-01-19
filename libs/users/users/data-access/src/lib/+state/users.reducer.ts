@@ -82,11 +82,11 @@ const reducer = createReducer(
     ...state,
     usersFilter: filter,
   })),
-  on(UsersActions.updateTotalStoryPointsSuccess, (state, { userId, totalStoryPoints }) =>
+  on(UsersActions.updateTotalStoryPointsSuccess, (state, { userId, user }) =>
     usersAdapter.updateOne(
       {
         id: userId,
-        changes: { totalStoryPoints },
+        changes: user
       },
       state
     )

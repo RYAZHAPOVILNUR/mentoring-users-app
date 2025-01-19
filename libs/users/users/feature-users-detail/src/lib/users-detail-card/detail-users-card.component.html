@@ -89,6 +89,10 @@
               </mat-autocomplete>
             </mat-form-field>
 
+
+
+            <!--  -->
+
             <mat-form-field
               class="edit-user-field fieldOfStoryPoint"
               [matTooltip]="vm.user!.totalStoryPoints!.toString()"
@@ -97,7 +101,7 @@
               <mat-label>Количество сторипоинтов:</mat-label>
               <input matInput placeholder="0" formControlName="storypoint" class="edit-user-input" />
             </mat-form-field>
-
+<!--  -->
             <mat-card-actions class="edit-user-btns-container-storypoint" *ngIf="areActionsActive">
               <button
                 mat-icon-button
@@ -120,7 +124,7 @@
                 <mat-icon>close</mat-icon>
               </button>
             </mat-card-actions>
-
+<!--  -->
             <button
               mat-icon-button
               type="button"
@@ -131,6 +135,7 @@
             >
               <mat-icon class="plus">add</mat-icon>
             </button>
+ <!--  -->
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button

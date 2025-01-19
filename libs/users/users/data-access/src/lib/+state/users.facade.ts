@@ -6,7 +6,7 @@ import { Observable, of, switchMap } from 'rxjs';
 import { UsersErrors } from './users.reducer';
 import { onSuccessEditionCbType } from './users.actions';
 import { selectLoggedUser } from '@auth/data-access';
-import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { CreateUserDTO, UsersDTO, UsersEntity } from '@users/core/data-access';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
@@ -52,7 +52,7 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.loadUser());
   }
 
-  updateTotalStoryPoints(userId: number, totalStoryPoints: number) {
-    this.store.dispatch(UsersActions.updateTotalStoryPoints({ userId, totalStoryPoints }));
+  updateTotalStoryPoints(userId: number, user: UsersDTO) {
+    this.store.dispatch(UsersActions.updateTotalStoryPoints({ userId, user }));
   }
 }

@@ -39,11 +39,11 @@ export const setUsersFilter = createAction('[Users Filter] Set Users Filter', pr
 
 export const updateTotalStoryPoints = createAction(
   '[Users/API] Update Total Story Points',
-  props<{ userId: number; totalStoryPoints: number }>()
+  props<{ userId: number; user: UsersDTO   }>()
 );
 export const updateTotalStoryPointsSuccess = createAction(
   '[Users/API] Update Total Story Points Success',
-  props<{ userId: number; totalStoryPoints: number }>()
+  props<{ userId: number; user: UsersDTO }>()
 );
 export const updateTotalStoryPointsFailure = createAction(
   '[Users/API] Update Total Story Points Failure',

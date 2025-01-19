@@ -92,7 +92,7 @@ export const editUser = createEffect(
           email: userData.email,
           username: userData.username,
           city: userData.city,
-          // totalStoryPoints: userData.totalStoryPoints
+          totalStoryPoints: userData.totalStoryPoints,
         },
         onSuccessCb,
       })),
@@ -138,20 +138,20 @@ export const loadUser = createEffect(
   { functional: true }
 );
 
-export const updateTotalStoryPointsEffect = createEffect(
-  () => {
-    const actions$ = inject(Actions);
-    const apiService = inject(ApiService);
+// export const updateTotalStoryPointsEffect = createEffect(
+//   () => {
+//     const actions$ = inject(Actions);
+//     const apiService = inject(ApiService);
 
-    return actions$.pipe(
-      ofType(UsersActions.updateTotalStoryPoints),
-      switchMap(({ userId, totalStoryPoints }) =>
-        apiService.post(`/users/${userId}/totalStoryPoints`, { totalStoryPoints }).pipe(
-          map(() => UsersActions.updateTotalStoryPointsSuccess({ userId, totalStoryPoints })),
-          catchError((error) => of(UsersActions.updateTotalStoryPointsFailure({ error })))
-        )
-      )
-    );
-  },
-  { functional: true }
-);
+//     return actions$.pipe(
+//       ofType(UsersActions.updateTotalStoryPoints),
+//       switchMap(({ userId, user }) =>
+//         apiService.post(`/users/${userId}`,  user ).pipe(
+//           map(() => UsersActions.updateTotalStoryPointsSuccess({ userId, user})),
+//           catchError((error) => of(UsersActions.updateTotalStoryPointsFailure({ error })))
+//         )
+//       )
+//     );
+//   },
+//   { functional: true }
+// );
