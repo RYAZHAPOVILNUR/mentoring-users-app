@@ -12,7 +12,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { onSuccessEditionCbType, onSuccessStoryPointsCbType } from '@users/users/data-access';
+import { onSuccessEditionCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -97,7 +97,6 @@ export class DetailUsersCardComponent implements OnInit {
   }>();
   @Output() editStoryPoints = new EventEmitter<{
     user: CreateUserDTO;
-    onSuccessStoryPointsCb: onSuccessStoryPointsCbType;
   }>();
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
@@ -129,12 +128,6 @@ export class DetailUsersCardComponent implements OnInit {
       verticalPosition: 'top',
     });
 
-  private onEditStoryPointsSuccess: onSuccessStoryPointsCbType = () =>
-    this.snackBar.openFromTemplate(this.snackbarStoryPointsTemplateRef, {
-      duration: 2500,
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-    })
   onAddStoryPoints() {
     this.totalStoryPoints.disable()
     this.editStoryPoints.emit({
@@ -143,7 +136,6 @@ export class DetailUsersCardComponent implements OnInit {
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
         totalStoryPoints: this.totalStoryPoints.value || 0,
       },
-      onSuccessStoryPointsCb: this.onEditStoryPointsSuccess
     })
   }
 

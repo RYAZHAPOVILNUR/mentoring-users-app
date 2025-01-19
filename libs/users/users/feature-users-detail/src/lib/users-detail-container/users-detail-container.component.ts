@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
-import { UsersErrors, UsersFacade, onSuccessEditionCbType, onSuccessStoryPointsCbType } from '@users/users/data-access';
+import { UsersErrors, UsersFacade, onSuccessEditionCbType } from '@users/users/data-access';
 import { Observable, map, tap } from 'rxjs';
 import { selectQueryParam, CreateUserDTO, UsersEntity } from '@users/core/data-access';
 import { Store, select } from '@ngrx/store';
@@ -22,6 +23,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class UsersDetailComponent {
   private readonly usersFacade = inject(UsersFacade);
+  private readonly snackBar = inject(MatSnackBar)
   private readonly store = inject(Store);
   private readonly router = inject(Router);
   public user!: UsersEntity;
@@ -51,8 +53,13 @@ export class UsersDetailComponent {
     });
   }
 
-  public onEditStoryPoints(userStoryPoints: CreateUserDTO, onSuccessStoryPointsCb: onSuccessStoryPointsCbType) {
-    this.usersFacade.editUserStoryPoint(userStoryPoints, this.user.id, onSuccessStoryPointsCb)
+  public onEditStoryPoints(userStoryPoints: CreateUserDTO,) {
+    this.usersFacade.editUserStoryPoint(userStoryPoints, this.user.id)
+    this.snackBar.open('Сторипоинты успешно добавленны', '', {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
   }
 
   onCloseUser() {

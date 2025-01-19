@@ -96,6 +96,7 @@
               />
 
               <button mat-icon-button matSuffix
+                      type="button"
                       color="accent"
                       aria-label="Enable storyPoints input"
                       *ngIf="totalStoryPoints.disabled"
@@ -105,6 +106,7 @@
               </button>
 
               <button mat-icon-button matSuffix
+                      type="button"
                       aria-label="Confirm storyPoints"
                       *ngIf="!totalStoryPoints.disabled"
                       (click)="onAddStoryPoints()"
@@ -113,9 +115,10 @@
               </button>
 
               <button mat-icon-button matSuffix
+                      type="button"
                       aria-label="Reset storyPoints"
                       *ngIf="!totalStoryPoints.disabled"
-                      (click)="totalStoryPoints.reset()"
+                      (click)="totalStoryPoints.disable()"
                       color="warn"
               >
                 <mat-icon>close</mat-icon>
@@ -157,8 +160,3 @@
   </div>
 </ng-template>
 
-<ng-template #snackbarStoryPoints>
-  <div class="edit-user-snackbar">
-    <span>Сторипоинты успешно добавленны</span>
-  </div>
-</ng-template>

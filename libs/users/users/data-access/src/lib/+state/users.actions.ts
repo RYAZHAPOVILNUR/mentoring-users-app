@@ -4,8 +4,6 @@ import { CreateUserDTO, LoadingStatus, UsersDTO, UsersEntity } from '@users/core
 
 export type onSuccessEditionCbType = () => void;
 
-export type onSuccessStoryPointsCbType = () => void;
-
 export const initUsers = createAction('[Users Page] Init');
 
 export const loadUsersSuccess = createAction('[Users/API] Load Users Success', props<{ users: UsersEntity[] }>());
@@ -39,7 +37,6 @@ export const editUserStoryPoints = createAction(
   props<{
     userStoryPoints: CreateUserDTO;
     id: number;
-    onSuccessStoryPointsCb: onSuccessStoryPointsCbType;
   }>()
 );
 export const editUserStoryPointsSuccess = createAction('[Users Detail StoryPoints] Edit StoryPoints Success', props<{ userStoryPoints: UsersDTO }>());
