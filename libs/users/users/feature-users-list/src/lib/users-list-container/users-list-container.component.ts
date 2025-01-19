@@ -9,6 +9,7 @@ import { UsersFacade } from '@users/users/data-access';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
+import { UsersFilterComponent } from '../users-filter/users-filter.component';
 
 @Component({
   selector: 'users-list-container',
@@ -20,6 +21,7 @@ import { CreateUsersButtonComponent } from '@users/feature-users-create';
     MatDialogModule,
     LetDirective,
     CreateUsersButtonComponent,
+    UsersFilterComponent,
   ],
   templateUrl: './users-list-container.component.html',
   styleUrls: ['./users-list-container.component.scss'],
@@ -29,7 +31,7 @@ import { CreateUsersButtonComponent } from '@users/feature-users-create';
 })
 export class UsersListContainerComponent {
   private readonly componentStore = inject(UsersListContainerStore);
-  public usersFacade = inject(UsersFacade);
+  private readonly usersFacade = inject(UsersFacade);
   public readonly users$ = this.componentStore.users$;
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;

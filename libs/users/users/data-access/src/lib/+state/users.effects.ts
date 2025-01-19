@@ -137,3 +137,24 @@ export const loadUser = createEffect(
   },
   { functional: true }
 );
+
+export const editStoryPoint = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const httpService = inject(ApiService);
+
+    return actions$.pipe(
+      ofType(UsersActions.editStoryPoints),
+      switchMap(({ userData, onSuccessCb }) =>
+        httpService.post<UsersDTO, CreateUserDTO>(`/users/${userData.id}`, { ...userData }).pipe(
+          map((userData) => UsersActions.editStoryPointsSuccess({ userData })),
+          tap(() => onSuccessCb()),
+          catchError((error) => {
+            return of(UsersActions.editStoryPointsFailed({ error }));
+          })
+        )
+      )
+    );
+  },
+  { functional: true }
+);

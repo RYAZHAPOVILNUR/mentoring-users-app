@@ -1,0 +1,55 @@
+.card{
+  width: 150px;
+  height: 100px;
+  border: 1px solid lightgray;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  background-color: lightgray;
+  margin: auto;
+  &:hover{
+    background-color: gray;
+  }
+}
+.card__container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  width: 100%;
+}
+.card__logo{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.card__title{
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: flex-start;
+
+}
+.card__title span{
+  text-align: left;
+  margin-left: 12px;
+}
+
+.card__icon{
+  margin-left: 12px;
+  margin-top: 5px;
+}
+.delete__button{
+  border-radius: 50%;
+  background: none;
+  opacity: 0;
+  border: none;
+  margin-right: 10px;
+  &:hover{
+    background-color: lightgray;
+    opacity: 1;
+  }
+}
+.delete__button mat-icon{
+  margin-top: 5px;
+}

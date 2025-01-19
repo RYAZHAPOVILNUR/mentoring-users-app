@@ -11,11 +11,14 @@ export type UsersErrors = {
   status: number;
   [key: string]: unknown;
 };
+export type usersFilter = { name: string };
 
 export interface UsersState extends EntityState<UsersEntity> {
   selectedId?: string | number; // which Users record has been selected
   status: LoadingStatus;
   error: UsersErrors | null;
+
+  usersFilter: usersFilter;
 }
 
 export interface UsersPartialState {
@@ -28,6 +31,7 @@ export const initialUsersState: UsersState = usersAdapter.getInitialState({
   // set initial required properties
   status: 'init',
   error: null,
+  usersFilter: { name: '' },
 });
 
 const reducer = createReducer(
@@ -75,6 +79,24 @@ const reducer = createReducer(
   on(UsersActions.updateUserStatus, (state, { status }) => ({
     ...state,
     status,
+  })),
+  on(UsersActions.editStoryPointsSuccess, (state, { userData }) =>
+    usersAdapter.updateOne(
+      {
+        id: userData.id,
+        changes: userData,
+      },
+      state
+    )
+  ),
+  on(UsersActions.editStoryPointsFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
+  on(UsersActions.setUsersFilter, (state, { usersFilter }) => ({
+    ...state,
+    usersFilter: usersFilter,
   }))
 );
 

@@ -1,0 +1,2063 @@
+[33mcommit 01c14e0905dceeccad80852ce4fd21a3caa43170[m[33m ([m[1;36mHEAD[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Merge: 47067c4 14aadea
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Sat Apr 20 16:09:41 2024 +0500
+
+    Merge pull request #240 from GLiNKO15/bugfixArticles
+    
+    Bugfix articles
+
+[33mcommit 14aadeabd31b248433612eabf68b0a7dfcc230c4[m
+Author: Artem Baranov <artembaranov656@gmail.com>
+Date:   Thu Apr 18 01:11:57 2024 +0800
+
+    bugFix in articles
+
+[33mcommit af1276ae12138a76bf19ddbd0674633792c77289[m
+Merge: f58eadb 47067c4
+Author: Artem Baranov <137224608+GLiNKO15@users.noreply.github.com>
+Date:   Sat Apr 13 19:49:02 2024 +0800
+
+    Merge branch 'main' into bugfixArticles
+
+[33mcommit f58eadbcccb109c35c3f1566d76a994bdc065a3d[m
+Author: Artem Baranov <artembaranov656@gmail.com>
+Date:   Sat Apr 13 01:36:00 2024 +0800
+
+    bugfix dialog window
+
+[33mcommit 26d6a60aa68b9a5ab89fb20cf0c372f852b6b8c6[m
+Author: Artem Baranov <artembaranov656@gmail.com>
+Date:   Sun Mar 31 00:55:50 2024 +0800
+
+    bugfix dialog window, when create new articles
+
+[33mcommit 47067c4f09a2947e01aef7b51ccd84fde28cc94d[m
+Merge: 4362c0f 5954512
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Sun Mar 17 20:57:28 2024 +0600
+
+    Merge pull request #211 from airatmm/prettier
+    
+    prettier
+
+[33mcommit 5954512b9fc00f5cb597d15da772eb5a90481f36[m
+Author: airatmm <airatmm@gmail.com>
+Date:   Mon Feb 26 22:05:19 2024 +0400
+
+    script format
+
+[33mcommit cd24dc07c26f68766b5bc6aa0375cfce8b0ff606[m
+Author: airatmm <airatmm@gmail.com>
+Date:   Mon Feb 26 21:52:44 2024 +0400
+
+    prettier printWidth: 120
+
+[33mcommit db91e647ebb2da0673ad7662d07303c25fc325e8[m
+Author: airatmm <airatmm@gmail.com>
+Date:   Mon Feb 26 21:40:23 2024 +0400
+
+    prettier script
+
+[33mcommit be7004e384e4db42b7f834c261c9c291282dfad2[m
+Author: airatmm <airatmm@gmail.com>
+Date:   Mon Feb 26 21:37:58 2024 +0400
+
+    prettier json + scripts format in package.json
+
+[33mcommit 7055bb9b348d2cd422a217ba4861ece862e4b05b[m
+Author: airatmm <airatmm@gmail.com>
+Date:   Mon Feb 26 21:28:47 2024 +0400
+
+    prettier
+
+[33mcommit 4362c0f195a946e57ac37f613d21144c1e0b9dc2[m
+Merge: 6783d94 6bbdd91
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Tue Jan 30 19:31:57 2024 +0600
+
+    Merge pull request #183 from batnd/#11-border-login-password
+    
+    Fixed bug #11 - Границы поля логина и пароля становятся невидимыми
+
+[33mcommit 6bbdd9160f3d333e1fdce2d3b2038d89e9950831[m
+Author: Nikita Batrakov <arch.batrakov@gmail.com>
+Date:   Wed Jan 24 17:36:18 2024 +0600
+
+    Fixed bug #11 - Границы поля логина и пароля становятся невидимыми
+
+[33mcommit 6783d94e0d4178629a9c6d260c7b0395d40753b5[m
+Merge: 91dbd9e 47d9024
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Fri Jan 19 15:54:45 2024 +0600
+
+    Merge pull request #177 from svyatoplamya/dto_works
+    
+    dto_works
+
+[33mcommit 47d9024de4668ed1f875746b68e2b9b2db6387fc[m
+Author: tsendoku <mukhutdinov.stas@gmail.com>
+Date:   Thu Jan 18 16:51:12 2024 +0300
+
+    dto_works
+
+[33mcommit 91dbd9e0902ae4660ce20216f07ee9ca15f8e43d[m
+Merge: c1a7cf0 09570bc
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Tue Nov 21 18:22:49 2023 +0600
+
+    Merge pull request #157 from Royres/main
+    
+    Update header.component.html
+
+[33mcommit 09570bc5e7d406fb62f9bccf80097041426c7c89[m
+Author: Royres <mrroyres@gmail.com>
+Date:   Sat Nov 11 12:18:08 2023 +0300
+
+    Update header.component.html
+
+[33mcommit c1a7cf08ee75c647cc237b4c16d39240e7bd5958[m
+Author: ryazhapov-ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Thu Nov 2 16:22:08 2023 +0600
+
+    Revert "Добавил возможность загрузки и отображения папок и материалов(Пока только PDF)"
+    
+    This reverts commit 4d2ed8b8ecd091589c259bfb22c145b04a5b9ad1.
+
+[33mcommit 4328d157f101681a13db44412cd39b03ebed8a03[m
+Merge: 037e8cf 4d2ed8b
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Wed Nov 1 18:32:18 2023 +0600
+
+    Merge pull request #149 from RYAZHAPOVILNUR/addMaterials
+    
+    Added the ability to download and display folders and materials
+
+[33mcommit 4d2ed8b8ecd091589c259bfb22c145b04a5b9ad1[m
+Author: Sultanefendi <sedredinovich@gmail.com>
+Date:   Tue Oct 31 12:27:55 2023 +0300
+
+    Добавил возможность загрузки и отображения папок и материалов(Пока только PDF)
+
+[33mcommit 037e8cf02bce319db7ba8077a2c48e588cfa4589[m
+Merge: 036e77f 67911fd
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Thu Oct 19 11:29:18 2023 +0600
+
+    Merge pull request #145 from Pikhtyarev/task-#8-settings-theme-change
+    
+    Task #8 settings theme change
+
+[33mcommit 036e77f35c69fd4ae3b324f64a51e13767667cea[m
+Merge: 070c1bf 2a4dced
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Thu Oct 19 11:19:15 2023 +0600
+
+    Merge pull request #146 from RYAZHAPOVILNUR/debugComment
+    
+    Debug comment
+
+[33mcommit 2a4dcedd8ce00968e284567c344f909dbdb52862[m
+Merge: 561fb68 070c1bf
+Author: Sultanefendi <sedredinovich@gmail.com>
+Date:   Tue Oct 17 17:19:39 2023 +0300
+
+    Merge branch 'main' of https://github.com/RYAZHAPOVILNUR/mentoring-users-app into debugComment
+
+[33mcommit 561fb68c004e742615f163499c1fefef17c41b32[m
+Author: Sultanefendi <sedredinovich@gmail.com>
+Date:   Tue Oct 17 17:19:20 2023 +0300
+
+    fixed bugs related to comments and article
+
+[33mcommit 67911fdada18256852aed8b53117a1b0afa93c99[m
+Author: Pikhtyarev <pihtyarevv@mail.ru>
+Date:   Tue Oct 17 16:29:34 2023 +0300
+
+    Решение конфликтов
+
+[33mcommit a677e9992eb5b5c28ab2d55c1fe517adb0edd7e7[m
+Author: Pikhtyarev <pihtyarevv@mail.ru>
+Date:   Tue Oct 17 14:29:23 2023 +0300
+
+    Решение конфликтов
+
+[33mcommit 4af57838fc874ec279cd784d5667bfcb87ddb8c3[m
+Merge: 070c1bf de1d21e
+Author: Pikhtyarev <pihtyarevv@mail.ru>
+Date:   Tue Oct 17 14:28:54 2023 +0300
+
+    Merge branch 'task-#80-colors-settings' of https://github.com/Pikhtyarev/mentoring-users-app into task-#8-settings-theme-change
+
+[33mcommit de1d21e19dcb4f014b0083caaa75bcd7117c13d1[m
+Author: Pikhtyarev <pihtyarevv@mail.ru>
+Date:   Tue Oct 17 12:50:32 2023 +0300
+
+    Слияние с main
+
+[33mcommit 070c1bf18e7b8aabdbbc5b1618c9cb3d2085ad52[m
+Merge: fe861e9 fe35c6f
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Tue Oct 17 11:17:12 2023 +0600
+
+    Merge pull request #142 from youngGeek19/#37
+    
+    refactor#37(add lang switch) добавил смену языка
+
+[33mcommit fe35c6f416a23c922c23d25b9976f152429784c1[m
+Merge: 885a322 fe861e9
+Author: yngk <112459144+youngGeek19@users.noreply.github.com>
+Date:   Mon Oct 16 16:59:00 2023 +0300
+
+    Merge branch 'main' into #37
+
+[33mcommit fe861e9f1df117c19bbf69d54d85339964dbeca8[m
+Merge: 4d7cb2a 99f3421
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Mon Oct 16 19:35:13 2023 +0600
+
+    Merge pull request #141 from Ridook/task-27-profile-chande-dialog
+    
+    Task 27 profile change dialog
+
+[33mcommit 885a322d3381b7e442050433fa6e3383c30205bb[m
+Author: youngeek19 <lenar.rashitov@internet.ru>
+Date:   Mon Oct 16 16:32:04 2023 +0300
+
+    refactor#37(add lang switch) добавил смену языка
+
+[33mcommit 99f34212e0f46faa50e37cc76324baa32f390898[m
+Author: Ridook <ndgtpx@gmail.com>
+Date:   Mon Oct 16 14:34:57 2023 +0300
+
+    добавил ширину модалки
+
+[33mcommit 4d7cb2a4f21ce2696622a20ce3ebf528a9f7c0ac[m
+Merge: 895a33e 85a4935
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Mon Oct 16 13:15:17 2023 +0600
+
+    Merge pull request #140 from Ridook/fix-bug
+    
+    Fix bug
+
+[33mcommit 85a49356f5e1a4f2035bc881dd547002f4316bad[m
+Author: Ridook <ndgtpx@gmail.com>
+Date:   Mon Oct 16 10:09:07 2023 +0300
+
+    fix-bug
+
+[33mcommit 74c1e29f8b3de84e16629ecd16f3ec7493a9a862[m
+Author: Ridook <ndgtpx@gmail.com>
+Date:   Mon Oct 16 10:08:14 2023 +0300
+
+    fix-bug
+
+[33mcommit 90409bd45294d0e5588acaeda7f3f535503c0f5f[m
+Author: Ridook <ndgtpx@gmail.com>
+Date:   Mon Oct 16 09:55:31 2023 +0300
+
+    исправил ошибку
+
+[33mcommit 895a33e9acddff397173684fbbcaa3c56c2e0c38[m
+Merge: 99cd07d 48d9ebf
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Mon Oct 16 08:50:53 2023 +0600
+
+    Merge pull request #138 from bitmatzery/#35-Add-translation-of-article
+    
+    Task #35 Add translation for article page
+
+[33mcommit 48d9ebf3eeb5ba9fb8b5c7ce4661696d163dc3e6[m
+Merge: 6d85776 99cd07d
+Author: bitmatzery <bitmatzery@gmail.com>
+Date:   Sun Oct 15 19:30:13 2023 +0300
+
+    Merge branch 'main' of https://github.com/RYAZHAPOVILNUR/mentoring-users-app into #35-Add-translation-of-article
+
+[33mcommit 6d85776b503536d13a6b59e02e16229364ac1e83[m
+Merge: c024039 18a9227
+Author: bitmatzery <bitmatzery@gmail.com>
+Date:   Sun Oct 15 18:57:53 2023 +0300
+
+    Merge branch '#35-Add-translation-of-article' of https://github.com/bitmatzery/mentoring-users-app into #35-Add-translation-of-article
+
+[33mcommit c02403984da1da0cb320b4050e0597ebfb079c85[m
+Author: bitmatzery <bitmatzery@gmail.com>
+Date:   Fri Oct 13 11:03:24 2023 +0300
+
+    #35 Add translation for article page
+
+[33mcommit 30a94c56aca9ffd3de81f713711d57d274372172[m
+Author: bitmatzery <bitmatzery@gmail.com>
+Date:   Thu Oct 12 15:05:17 2023 +0300
+
+    #34 Add translation of registration page
+
+[33mcommit df6eca9f0bbb197ba5a475314cc91871049bdd41[m
+Author: Grayd-WebDev <grayd2@yandex.ru>
+Date:   Wed Oct 11 15:12:19 2023 +0300
+
+    выполнено
+
+[33mcommit 231dd3eaca3a67a52380ab40caf9060a4aa7245e[m
+Author: Seynaro <xamzatseynaro@gmail.com>
+Date:   Wed Oct 11 12:54:50 2023 +0300
+
+    #33
+    Добавить перевод страницы логина
+
+[33mcommit b76f070705295cecc2bbf062de7b72739b70d719[m
+Author: Seynaro <xamzatseynaro@gmail.com>
+Date:   Wed Oct 11 10:53:24 2023 +0300
+
+    #31
+    Убрать из профиля лишний блок
+
+[33mcommit f6eda9ed6c625b50bc493811b4cad82db50087c6[m
+Author: youngeek19 <lenar.rashitov@internet.ru>
+Date:   Mon Oct 9 22:55:12 2023 +0300
+
+    feature(materials): пустой раздел Материалы
+
+[33mcommit b5657dd0c5b7255b832b91965c7eb4f4f891db83[m
+Author: Pikhtyarev <pihtyarevv@mail.ru>
+Date:   Sun Oct 15 16:55:07 2023 +0300
+
+    Custom theme
+
+[33mcommit 99cd07d48f997a79b4fa1fecfcd40bbc6cbcab02[m
+Merge: d1f3979 1abfd14
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Sun Oct 15 14:26:10 2023 +0600
+
+    Merge pull request #139 from RYAZHAPOVILNUR/#26-user-layout
+    
+    исправленная верстка пользователя
+
+[33mcommit d1f3979e0ffbb36c4fbd1ab757c9b9fdaeb4b83e[m
+Merge: 25a844d 3f1d98b
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Sun Oct 15 14:22:48 2023 +0600
+
+    Merge pull request #136 from RYAZHAPOVILNUR/backlog
+    
+    Backlog
+
+[33mcommit 3f1d98b70af11b878bb5cf624d6c3c5597fff451[m
+Merge: a7be971 25a844d
+Author: rashidovD <61225454+rashidovD@users.noreply.github.com>
+Date:   Sun Oct 15 11:09:17 2023 +0300
+
+    Merge branch 'main' into backlog
+    
+    # Conflicts:
+    #       apps/users/src/app/app.config.ts
+    #       libs/users/core/ui/layout/src/lib/navbar/navbar.component.html
+
+[33mcommit 25a844d469ba79f341b924390d47ba80ec15206a[m
+Merge: 7b2a45d 2506bdd
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Sun Oct 15 13:56:48 2023 +0600
+
+    Merge pull request #135 from RYAZHAPOVILNUR/addSettings
+    
+    Add settings
+
+[33mcommit a7be9714b424ba2c1807bcdf9943015767c8404f[m
+Author: rashidovD <61225454+rashidovD@users.noreply.github.com>
+Date:   Sat Oct 14 20:35:18 2023 +0300
+
+    убрал лишние логи и комментарии
+
+[33mcommit 1abfd14bac0fc25f991fd68e2b4a4df9fb38df7c[m
+Author: nurlybeknurmukhan <nnzh2001@gmail.com>
+Date:   Fri Oct 13 15:35:27 2023 +0600
+
+    исправленная верстка пользователя
+
+[33mcommit 18a92271d4ff199d5de1e92a1aa9db05eaf8acd2[m
+Author: bitmatzery <bitmatzery@gmail.com>
+Date:   Fri Oct 13 11:03:24 2023 +0300
+
+    #35 Add translation for article page
+
+[33mcommit 2506bddfa1e5923d07bb3529263e8a268268fb46[m
+Merge: 00ded50 7b2a45d
+Author: Sultanefendi <sedredinovich@gmail.com>
+Date:   Fri Oct 13 01:04:18 2023 +0300
+
+    Resolved conflicts
+
+[33mcommit 00ded505ca235efcf495d2b2dbbcf34393f9fd26[m
+Author: Sultanefendi <sedredinovich@gmail.com>
+Date:   Thu Oct 12 20:21:06 2023 +0300
+
+    added a change to the article display style
+
+[33mcommit 7b2a45d977c8716712800a30df654102e9c48abe[m
+Merge: c1d0767 60ccaed
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Thu Oct 12 22:58:01 2023 +0600
+
+    Merge pull request #134 from bitmatzery/#34-Add-translation-of-registration-page
+    
+    #34 Add translation of registration page
+
+[33mcommit c6b567a9dae64617996273cc209162c56aeaf9aa[m
+Merge: 974db14 84dd539
+Author: rashidovD <61225454+rashidovD@users.noreply.github.com>
+Date:   Thu Oct 12 19:56:14 2023 +0300
+
+    Merge branch 'main' into backlog
+    
+    # Conflicts:
+    #       apps/users/src/assets/i18n/en.json
+    #       apps/users/src/assets/i18n/ru.json
+    #       libs/users/core/ui/layout/src/lib/navbar/navbar.component.html
+
+[33mcommit c1d076732fe0c28fd7184446de78afb3c3785a23[m
+Merge: 84dd539 2107ca7
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Thu Oct 12 22:56:05 2023 +0600
+
+    Merge pull request #133 from KroookJS/32-task-edit-profile
+    
+    edit text profile: theme
+
+[33mcommit 974db14b21a6dfc515a1d14626749c339cd10dc1[m
+Author: rashidovD <61225454+rashidovD@users.noreply.github.com>
+Date:   Thu Oct 12 19:50:22 2023 +0300
+
+    сделал удаление добавление задач в беклоге
+
+[33mcommit 74039afc3404afa723f6a607f16e48482f070f1f[m
+Author: Sultanefendi <sedredinovich@gmail.com>
+Date:   Thu Oct 12 19:31:37 2023 +0300
+
+    added a change to the article display style
+
+[33mcommit 60ccaedc1bcc6a74b1f33ba0b11fbd5324044dce[m
+Author: bitmatzery <bitmatzery@gmail.com>
+Date:   Thu Oct 12 15:05:17 2023 +0300
+
+    #34 Add translation of registration page
+
+[33mcommit 84dd539b66442e9c1e57b40eb261f629ee57614c[m
+Merge: 166d2aa a74a1be
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Thu Oct 12 13:22:47 2023 +0600
+
+    Merge pull request #132 from RYAZHAPOVILNUR/tooltip-create_articles#80
+    
+    выполнено
+
+[33mcommit 166d2aa4c5c1240083864b8fc43434efe9ec11bb[m
+Merge: 251cf23 82ca7d6
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Thu Oct 12 13:19:25 2023 +0600
+
+    Merge pull request #131 from Seynaro/main
+    
+     #31 / #33
+
+[33mcommit 251cf235507c7817b4e02cf9489b7c423b89d96f[m
+Merge: b5b6104 ceacf89
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Thu Oct 12 13:03:47 2023 +0600
+
+    Merge pull request #130 from youngGeek19/task61
+    
+    feature(materials): пустой раздел Материалы
+
+[33mcommit 2107ca7a166dd8898ec910ae22d623cfb508b3c5[m
+Author: KroookJs <dimongotov92@gmail.com>
+Date:   Thu Oct 12 01:15:06 2023 +0300
+
+    edit text profile: theme
+
+[33mcommit a74a1be2aa985e3a8754d4d63f144487d4bf3e5b[m
+Author: Grayd-WebDev <grayd2@yandex.ru>
+Date:   Wed Oct 11 15:12:19 2023 +0300
+
+    выполнено
+
+[33mcommit 82ca7d663201c6730df05217a816e32f5b6a1090[m
+Author: Seynaro <xamzatseynaro@gmail.com>
+Date:   Wed Oct 11 12:54:50 2023 +0300
+
+    #33
+    Добавить перевод страницы логина
+
+[33mcommit 07a78b94e373e4a29a33896cd07510301fe0cad8[m
+Author: Seynaro <xamzatseynaro@gmail.com>
+Date:   Wed Oct 11 10:53:24 2023 +0300
+
+    #31
+    Убрать из профиля лишний блок
+
+[33mcommit 5f4ef552a69c40ca421f40823b6bcc007eba54f8[m
+Author: Sultanefendi <sedredinovich@gmail.com>
+Date:   Tue Oct 10 22:15:01 2023 +0300
+
+    fixed the ability to switch themes
+
+[33mcommit d1aab34086c9e97f427b1f607755209796d9ba15[m
+Author: Sultanefendi <sedredinovich@gmail.com>
+Date:   Tue Oct 10 22:13:43 2023 +0300
+
+    change t
+
+[33mcommit e63d39f084392774b2e807a177d15b08265e090a[m
+Author: Sultanefendi <sedredinovich@gmail.com>
+Date:   Tue Oct 10 21:56:36 2023 +0300
+
+    added the ability to switch theme
+
+[33mcommit f2b57a5c0b581eeaec72cf4bd6a968497261a142[m
+Author: Sultanefendi <sedredinovich@gmail.com>
+Date:   Tue Oct 10 18:02:33 2023 +0300
+
+    added the ability to switch languages
+
+[33mcommit eef603ca551f2cdb90c68a793903a07acd512a58[m
+Merge: 7f38f58 b5b6104
+Author: rashidovD <61225454+rashidovD@users.noreply.github.com>
+Date:   Tue Oct 10 15:37:10 2023 +0300
+
+    Merge branch 'main' into backlog
+    
+    # Conflicts:
+    #       libs/users/core/ui/layout/src/lib/navbar/navbar.component.html
+
+[33mcommit 7f38f58d2e2a954484c896f40564af174be6a309[m
+Author: rashidovD <61225454+rashidovD@users.noreply.github.com>
+Date:   Tue Oct 10 15:28:06 2023 +0300
+
+    настроил ngrx; реализовал оторбражение и удаление карточек
+
+[33mcommit b5b610425b85af4a131fa2dcb9b32f1bd256b7da[m
+Merge: 93c23fb 61b71cd
+Author: Akhmed-Khan Makhmudov <65925046+Grayd-WebDev@users.noreply.github.com>
+Date:   Mon Oct 9 23:04:18 2023 +0300
+
+    Merge pull request #129 from RYAZHAPOVILNUR:issue_#105_aticles_incorrect_route
+    
+    issue105 ссылка исправлена !
+
+[33mcommit 61b71cd056b9aced30135ce0d8628e9f7df43384[m
+Author: Grayd-WebDev <grayd2@yandex.ru>
+Date:   Mon Oct 9 23:02:52 2023 +0300
+
+    issue105 ссылка исправлена !
+    теперь просто /articles/50 а не /articles/:id?id=50
+
+[33mcommit ceacf893d9f3fb7a79be37fdd7678f9f8ca35526[m
+Author: youngeek19 <lenar.rashitov@internet.ru>
+Date:   Mon Oct 9 22:55:12 2023 +0300
+
+    feature(materials): пустой раздел Материалы
+
+[33mcommit 93c23fbdf75a3b43fc46f01e22cc522d8b10072f[m
+Merge: 91718b3 b73c1bf
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Sat Oct 7 07:48:27 2023 +0600
+
+    Merge pull request #128 from RYAZHAPOVILNUR/issues111
+    
+    task #111 added a modal window for editing a task
+
+[33mcommit 65800078db3a62230d33d824536c57f7750ef0f7[m
+Author: Pikhtyarev <pihtyarevv@mail.ru>
+Date:   Fri Oct 6 13:47:46 2023 +0300
+
+    до изменения файла app-theme
+
+[33mcommit b73c1bfad596363145020d5b0494e4e4cc435133[m
+Author: Sultanefendi <sedredinovich@gmail.com>
+Date:   Fri Oct 6 03:10:13 2023 +0300
+
+    added a modal window for editing a task
+
+[33mcommit 91718b3f4942499673129916bfe4ad860feccae6[m
+Merge: 34c2454 b9d9819
+Author: Akhmed-Khan Makhmudov <65925046+Grayd-WebDev@users.noreply.github.com>
+Date:   Fri Oct 6 00:07:24 2023 +0300
+
+    Merge pull request #127 from RYAZHAPOVILNUR/Issue119_profilePhotoZoom
+    
+    Задача 119 - выполнено, чуть поменял верстку
+
+[33mcommit b9d9819325bb9506ce2911d921608720528c5ea3[m
+Author: Grayd-WebDev <grayd2@yandex.ru>
+Date:   Fri Oct 6 00:05:00 2023 +0300
+
+    issue 119- сделано. Зум работает на фотках профиля.
+    добавил чуть стилей, иконок, верстки.
+    перенес переход на профиль в глвный navbar
+
+[33mcommit 3de23b64906130777113c3a7ed98cee708eaa289[m
+Author: Grayd-WebDev <grayd2@yandex.ru>
+Date:   Thu Oct 5 13:47:31 2023 +0300
+
+    Задача 119 - выполнено, чуть поменял верстку
+    в feature-user-info и слегка анимировал
+    добавил модалку с фото
+
+[33mcommit 34c24544aac0116482e2c059d3919089c3f205c6[m
+Author: ryazhapov-ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Wed Oct 4 19:44:50 2023 +0600
+
+    118 update task name bug
+
+[33mcommit 4e888a05645dceb79641abca78fba2547cfa9a37[m
+Author: ryazhapov-ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Wed Oct 4 18:50:05 2023 +0600
+
+    58 fix bugs
+
+[33mcommit 1fcf20638199017d107be94ec35809453b2da4b8[m
+Merge: d28dec4 59ddca3
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Wed Oct 4 18:15:24 2023 +0600
+
+    Merge pull request #126 from RYAZHAPOVILNUR/issue58_rebased
+    
+    rebasing SOS
+
+[33mcommit 59ddca3e0454f00ee94caf165cae241a689a7f60[m
+Author: Grayd-WebDev <grayd2@yandex.ru>
+Date:   Tue Oct 3 20:00:54 2023 +0300
+
+    rebasing SOS
+
+[33mcommit d28dec491591d7b7f5fceac403914aeb00891788[m
+Merge: 8998187 6be9715
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Tue Oct 3 07:55:30 2023 +0600
+
+    Merge pull request #123 from Ridook/task-#116-edit-buttons-guest/home
+    
+    edit buttons guest/home
+
+[33mcommit 6be971549b25eb0900fbe0d96e0239105e80d7fc[m
+Author: Ridook <ndgtpx@gmail.com>
+Date:   Mon Oct 2 11:26:04 2023 +0300
+
+    edit buttons guest/home
+
+[33mcommit 8998187bf5b0f70ad6d77928a8a5a81457849684[m
+Merge: d1b6fd4 0ea9c58
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Mon Oct 2 07:28:32 2023 +0600
+
+    Merge pull request #115 from Pikhtyarev/task-#113-add-fab-button-create-article
+    
+    Task #113 add button to create article
+
+[33mcommit 3a3baae3b82ab52b5e2dffede97001dd045986fc[m
+Author: Pikhtyarev <pihtyarevv@mail.ru>
+Date:   Sat Sep 30 14:17:40 2023 +0300
+
+    добавил кнопки и выбор цвета в настройках
+
+[33mcommit 0ea9c5890df39b82094f6842436f358e5f354d64[m
+Merge: ac2b719 d1b6fd4
+Author: Egor Pikhtyarev <100373854+Pikhtyarev@users.noreply.github.com>
+Date:   Sat Sep 30 13:12:28 2023 +0300
+
+    Merge branch 'main' into task-#113-add-fab-button-create-article
+
+[33mcommit d1b6fd463d11b339811b2f6d9bc6f22420253105[m
+Merge: d056ce7 cd051bb
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Sat Sep 30 14:32:37 2023 +0600
+
+    Merge pull request #120 from bitmatzery/feature
+    
+    Task #104 mini-avatar card and transition to profile
+
+[33mcommit cd051bb9ccf4f0e19574533761a94ca4a57426f8[m
+Author: bitmatzery <bitmatzery@gmail.com>
+Date:   Sat Sep 30 10:35:32 2023 +0300
+
+    #104 mini-avatar card and transition to profile
+
+[33mcommit d056ce760aa5713cbaffe98bb228f515223b1032[m
+Merge: ebea52c 64165b1
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Sat Sep 30 10:09:53 2023 +0600
+
+    Merge pull request #112 from Ridook/task-#110-add-change-column-name
+    
+    Task #110 add change column name
+
+[33mcommit ac2b719ffe649bff8e1bf5aff5a3028bca4cd5cf[m
+Author: Pikhtyarev <pihtyarevv@mail.ru>
+Date:   Fri Sep 29 10:34:06 2023 +0300
+
+    перенес создание статьи во вклдаку 'Статьи' в кнопку
+
+[33mcommit c1775bdb1f9dc94b598708f5af8764afd190308d[m
+Author: Pikhtyarev <pihtyarevv@mail.ru>
+Date:   Fri Sep 29 09:50:03 2023 +0300
+
+    перенес создание статьи в кнопку во вкладке 'статьи'
+
+[33mcommit 64165b1bbc785aecb2bd1d8485fdf9284a143021[m
+Author: Ridook <ndgtpx@gmail.com>
+Date:   Wed Sep 27 19:41:19 2023 +0300
+
+    добавил возможность редактирования имени колонки
+
+[33mcommit 05417b00a6c0d3bdc25c1a20ef1bdca68206e74f[m
+Author: Ridook <ndgtpx@gmail.com>
+Date:   Wed Sep 27 19:25:16 2023 +0300
+
+    создал новый компонент
+
+[33mcommit 2e92115719aa108030f2896e04a236dfa98ed3a7[m
+Author: Ridook <ndgtpx@gmail.com>
+Date:   Wed Sep 27 18:56:25 2023 +0300
+
+    установил зависимости
+
+[33mcommit ebea52cc12f1e08f0eb94e171a80bd78110921fd[m
+Merge: 0525800 dec2807
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Wed Sep 27 07:41:59 2023 +0600
+
+    Merge pull request #103 from RYAZHAPOVILNUR/higcharts_for_landing_page
+    
+    pie and spline charts with mock data for landing page
+
+[33mcommit 05258002b74efe76f46a3dd49814b6684aedfe28[m
+Merge: 3556554 60ea250
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Wed Sep 27 07:40:08 2023 +0600
+
+    Merge pull request #91 from Ridook/task-#83-add-like-comments-logic
+    
+    Task #83 add like comments logic
+
+[33mcommit 60ea25023f3141fbd8e47a6660c4bcf7bed5f32f[m
+Author: Ridook <ndgtpx@gmail.com>
+Date:   Tue Sep 26 12:10:58 2023 +0300
+
+    исправил конфликты
+
+[33mcommit 77b94c5e8947669ee48454b05e3db15483782985[m
+Author: Ridook <ndgtpx@gmail.com>
+Date:   Tue Sep 26 12:07:34 2023 +0300
+
+    task-#83 -add-like-comments
+
+[33mcommit ab54af1e518364c1e2f6015cfc0e27fc6e70450c[m
+Merge: c0973d4 edc9cc7
+Author: Ridook <ndgtpx@gmail.com>
+Date:   Tue Sep 26 12:06:48 2023 +0300
+
+    Merge branch 'main' into task-#83-add-like-comments-logic
+
+[33mcommit dec2807687b8d56fbd45c37fb70095b08d479936[m
+Merge: c35911b 3556554
+Author: Khkimov <khakim198765@gmail.com>
+Date:   Tue Sep 26 08:57:13 2023 +0500
+
+    Merge branch 'main' into higcharts_for_landing_page
+    
+    # Conflicts:
+    #       tsconfig.base.json
+
+[33mcommit 355655435712ce578b5376555e6f705e2d08e709[m
+Merge: edc9cc7 a91ddb8
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Tue Sep 26 09:16:18 2023 +0600
+
+    Merge pull request #102 from RYAZHAPOVILNUR/integration-with-github-59
+    
+    added data-access for github api
+
+[33mcommit c35911b5fee0286e118d9c4868b6228e8d37965d[m
+Author: Khkimov <khakim198765@gmail.com>
+Date:   Mon Sep 25 20:43:33 2023 +0500
+
+    created highcharts service
+
+[33mcommit a91ddb8ee39f62d490cac6537fdb2200c4f980a3[m
+Merge: ef1a8ae edc9cc7
+Author: pteechkin <errorbird9001@gmail.com>
+Date:   Mon Sep 25 23:14:24 2023 +0800
+
+    resolved conflicts
+
+[33mcommit 1da0458ac9fa5115062461c402f07febaeb4c981[m
+Author: Khkimov <khakim198765@gmail.com>
+Date:   Sun Sep 24 15:32:47 2023 +0500
+
+    pie and spline charts with mock data
+
+[33mcommit ef1a8aeefefcc18bee27fa355a7d12ed66cfd3c4[m
+Author: pteechkin <errorbird9001@gmail.com>
+Date:   Sat Sep 23 21:47:32 2023 +0800
+
+    added data-access for github api
+
+[33mcommit edc9cc72d91b470d66a88d1152c6e35522db8dd4[m
+Merge: 17fd304 46cdd32
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Sat Sep 23 18:30:18 2023 +0600
+
+    Merge pull request #99 from RYAZHAPOVILNUR/feature-chart-77
+    
+    task-77
+
+[33mcommit 17fd304015684b5ca9ef47577e3edabedbbb7866[m
+Merge: 041f518 ebf83d0
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Sat Sep 23 18:28:40 2023 +0600
+
+    Merge pull request #95 from RYAZHAPOVILNUR/see-user-profile-84
+    
+    See user profile 84
+
+[33mcommit 041f5181fbcc05c0dd1fee27b66ce3b5981b51ab[m
+Merge: 90c1c7f 1b95dd6
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Sat Sep 23 18:28:14 2023 +0600
+
+    Merge pull request #94 from RYAZHAPOVILNUR/search-by-task-79
+    
+    task - 79 create 'search by task'
+
+[33mcommit 90c1c7f334704feffc4e6239f889583c266622b2[m
+Merge: 85ad193 a156fcf
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Sat Sep 23 18:26:17 2023 +0600
+
+    Merge pull request #100 from Ridook/task-#86-add-avatar
+    
+    task-#86-add-avatar-in-article
+
+[33mcommit 85ad19395e3be5f094f0e0ecd4f88f3fb980e7b7[m
+Merge: e28d37e 81aba62
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Sat Sep 23 18:25:46 2023 +0600
+
+    Merge pull request #101 from 1amarxo/main
+    
+    Добавить на бэкенде роль «ПреподДобавить на бэкенде роль «Преподавате…
+
+[33mcommit 81aba6235a6912d3da69913f3cc140739bdd48db[m
+Author: Abdu-Salam Kurbanov <aburib1iya@gmail.com>
+Date:   Sat Sep 23 15:54:29 2023 +0400
+
+    Добавить на бэкенде роль «ПреподДобавить на бэкенде роль «Преподаватель» #60аватель» #60
+    
+    Проблема в том что роль на Бэкэнде определена как enum. Я решил сделать это так.
+
+[33mcommit a156fcfe055e4a2006758ed68891f59a0e6f5466[m
+Author: Ridook <ndgtpx@gmail.com>
+Date:   Sat Sep 23 14:47:48 2023 +0300
+
+    task-#86-add-avatar-in-article
+
+[33mcommit 46cdd32c9bc4835d32e6d196da8987974a73839c[m
+Author: Abdullah Gezikhanov <a.gezikhanov@mail.ru>
+Date:   Sat Sep 23 11:45:05 2023 +0300
+
+    chart library added and implemented
+
+[33mcommit ebf83d056206f6d438c68f1df89eb4a59d0c5cfe[m
+Author: rau4o <rauan.k@eventyr.pro>
+Date:   Fri Sep 22 18:21:36 2023 +0600
+
+    task - 84 create 'see user profile'
+
+[33mcommit 56f2a7fd9e58ed65f5ca9f1b13c61e43fa3ef886[m
+Author: rau4o <rauan.k@eventyr.pro>
+Date:   Fri Sep 22 18:19:10 2023 +0600
+
+    task - 84 create 'see user profile'
+
+[33mcommit 1b95dd6990be4a3966995a229943f8e5f92726f5[m
+Author: rau4o <rauan.k@eventyr.pro>
+Date:   Fri Sep 22 15:44:38 2023 +0600
+
+    task - 70 create 'search by task'
+
+[33mcommit 341f266ef6fb6c4c405511c32be29281427bb9fd[m
+Author: rau4o <rauan.k@eventyr.pro>
+Date:   Fri Sep 22 15:35:59 2023 +0600
+
+    task - 84 create 'search by task'
+
+[33mcommit 6098b2defe854630281bb384c293052d2fea122d[m
+Author: rau4o <rauan.k@eventyr.pro>
+Date:   Thu Sep 21 23:54:32 2023 +0600
+
+    task - 84 create 'search by task'
+
+[33mcommit 0a109842db1edefeaac5f0d4550b8d318a51dfcf[m
+Author: rau4o <rauan.k@eventyr.pro>
+Date:   Thu Sep 21 23:38:17 2023 +0600
+
+    task - 84 create 'search by task'
+
+[33mcommit 56ca621154cdf9ef89b0f2ec98a2a58101f668df[m
+Author: rau4o <rauan.k@eventyr.pro>
+Date:   Thu Sep 21 23:35:57 2023 +0600
+
+    task - 84 create 'search by task'
+
+[33mcommit e065cdc1db8c0562ec3f9640a4ab0ae5ceed4d4f[m
+Author: rau4o <rauan.k@eventyr.pro>
+Date:   Wed Sep 20 19:57:16 2023 +0600
+
+    task - 84 create 'see user profile page'
+
+[33mcommit b37f0cabe6f0747b6c79dabf081ca7da20d9eee4[m
+Author: rau4o <rauan.k@eventyr.pro>
+Date:   Wed Sep 20 19:54:37 2023 +0600
+
+    task - 84 create 'see user profile page'
+
+[33mcommit 86bc4ff6e84bc9c01076f2366c00e961e8583e77[m
+Author: rau4o <rauan.k@eventyr.pro>
+Date:   Wed Sep 20 19:11:29 2023 +0600
+
+    task - 84 create 'see user profile page'
+
+[33mcommit fe89271c84b16aaa4bbb6eb4f49be7fb72e59c51[m
+Author: rau4o <rauan.k@eventyr.pro>
+Date:   Wed Sep 20 01:29:32 2023 +0600
+
+    task - 79 create 'search by task'
+
+[33mcommit 977237a56073e2dce7ea9441f12bd6d2c795055a[m
+Author: rau4o <rauan.k@eventyr.pro>
+Date:   Wed Sep 20 01:27:02 2023 +0600
+
+    task - 79 create 'search by task'
+
+[33mcommit c0973d4109d4ef15f846bcd3e875832b9474c76d[m
+Author: Ridook <ndgtpx@gmail.com>
+Date:   Tue Sep 19 09:56:19 2023 +0300
+
+    refactor
+
+[33mcommit e28d37ee13d1b1388018418c4f06cf01a9f8d19d[m
+Merge: f6a88c6 9e32590
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Tue Sep 19 07:30:31 2023 +0600
+
+    Merge pull request #93 from RYAZHAPOVILNUR/articleRouting87
+    
+    Task #87 adding routing to an article
+
+[33mcommit 9e325903991aa451778fbb8bd8c3303e23d46860[m
+Author: Sultanefendi <sedredinovich@gmail.com>
+Date:   Mon Sep 18 22:49:19 2023 +0300
+
+    Сделал при нажатии на любую точку статьи, кроме ее автора, переход к самой статье
+
+[33mcommit 9ad9210acd384be4c4d4d02b965bc8e7f40c51f8[m
+Author: rau4o <rauan.k@eventyr.pro>
+Date:   Mon Sep 18 22:58:34 2023 +0600
+
+    task - 84 create 'see user profile'
+
+[33mcommit d50207b2fd3dced189675424617a275348645ed9[m
+Author: rau4o <rauan.k@eventyr.pro>
+Date:   Mon Sep 18 22:31:40 2023 +0600
+
+    task - 84 create 'see user profile'
+
+[33mcommit f6a88c616509fa353f1dcd2ff73862f1e6782c3a[m
+Merge: 6523837 5a8ea2d
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Sun Sep 17 13:26:43 2023 +0600
+
+    Merge pull request #89 from Seynaro/main
+    
+    deleted 'Контакты' section from the navbar
+
+[33mcommit 6523837474ed5547a9733a0148b48c61df453159[m
+Merge: 70fef99 fe4779d
+Author: Ilyas_Khakimov <85385120+Khkimov@users.noreply.github.com>
+Date:   Sun Sep 17 11:43:10 2023 +0500
+
+    Merge pull request #92 from RYAZHAPOVILNUR/remove-contacts-page
+    
+    deleted contacts page
+
+[33mcommit fe4779d24b61b35d175af45c51448abcac3eda8b[m
+Author: Khkimov <khakim198765@gmail.com>
+Date:   Sun Sep 17 11:41:24 2023 +0500
+
+    deleted contacts page
+
+[33mcommit 5a8ea2dbebb98899e4f9215110aafc6fa67619de[m
+Author: Khamzat <xamzatseynaro@gmail.com>
+Date:   Sat Sep 16 16:46:11 2023 +0300
+
+    deleted links from the footer
+
+[33mcommit 31604c4a3666090b21dcb2c4324025d561aaacf1[m
+Author: Ridook <ndgtpx@gmail.com>
+Date:   Sat Sep 16 16:21:32 2023 +0300
+
+    сделал цвет активного лайка идентичным хедеру
+
+[33mcommit b1848c870803fc920c5009df2d015390974047db[m
+Author: Ridook <ndgtpx@gmail.com>
+Date:   Sat Sep 16 16:18:23 2023 +0300
+
+    удалил неиспользуемый геттер
+
+[33mcommit 8b44482fbf803a319cae4234fd3932136d688f7e[m
+Author: Ridook <ndgtpx@gmail.com>
+Date:   Sat Sep 16 16:11:42 2023 +0300
+
+    task #83 feat(users): added the like logic
+    
+    Изменил архитектуру страницы статьи:
+    вынес комментарии в отдельный компонент.
+    И добавил смену локали даты в комментариях
+
+[33mcommit eb786d7d2ba45492b87cd1dc8791b649456be09f[m
+Author: Ridook <ndgtpx@gmail.com>
+Date:   Sat Sep 16 15:47:15 2023 +0300
+
+    task #83 feat(users): added the like logic
+    
+    Изменил архитектуру страницы статьи:
+    вынес комментарии в отдельный компонент.
+    И добавил смену локали даты в комментариях
+
+[33mcommit 39bbb30f0453967e360d1f87353f038958254a1d[m
+Author: Khamzat <xamzatseynaro@gmail.com>
+Date:   Sat Sep 16 15:44:24 2023 +0300
+
+    deleted 'Контакты' section from the navbar
+
+[33mcommit 70fef9911a1821c8c174f0637fd852d856bc702d[m
+Merge: ed42e7c 5facbc2
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Fri Sep 15 20:56:50 2023 +0600
+
+    Merge pull request #67 from RYAZHAPOVILNUR/Rustam.Dev
+    
+    Todo dark mode
+
+[33mcommit 5facbc240ca83e777e792a952a5f6595fa0e8db3[m
+Merge: fff5c53 ed42e7c
+Author: Rustam <131157037+ONYXIY@users.noreply.github.com>
+Date:   Fri Sep 15 17:40:05 2023 +0300
+
+    Merge branch 'main' into Rustam.Dev
+
+[33mcommit ed42e7cc8a14829eb4be98266fde47e43fbf3637[m
+Merge: 0e0d81b 0c4400f
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Fri Sep 15 20:20:56 2023 +0600
+
+    Merge pull request #71 from RYAZHAPOVILNUR/addColumn-55
+    
+    Add column 55
+
+[33mcommit 0c4400f8e50dfbb92f0fc33b26c6077d4d225ae7[m
+Merge: 2bfde16 0e0d81b
+Author: ryazhapov-ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Fri Sep 15 20:19:15 2023 +0600
+
+    Merge branch 'main' into addColumn-55
+    
+    # Conflicts:
+    #       libs/users/task/src/lib/tasks-view/tasks-view.component.html
+
+[33mcommit 0e0d81b3fd0c50912062bfdae831fa69e53a943e[m
+Merge: 1dab7bf 97b711f
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Fri Sep 15 20:03:28 2023 +0600
+
+    Merge pull request #75 from RYAZHAPOVILNUR/fixArticleCard-52
+    
+    fix: added an edit icon and made the text clickable
+
+[33mcommit 1dab7bf919bb4555d5261acd2d07c39d508865b3[m
+Merge: cb442ba c635e3d
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Fri Sep 15 20:02:44 2023 +0600
+
+    Merge pull request #76 from RYAZHAPOVILNUR/addedNgrxpush-66
+    
+    Replaced everything | async on | ngrxPush
+
+[33mcommit c635e3d9d46f8679829c12b49b5228587606e919[m
+Author: Sultanefendi <sedredinovich@gmail.com>
+Date:   Fri Sep 15 13:47:09 2023 +0300
+
+    Заменил все оставшиеся | async на | ngrxPush
+
+[33mcommit 97b711fd268490cafc8e58be5f88987b07f5152f[m
+Author: Dzhavid <mr.telepuzig@yandex.ru>
+Date:   Thu Sep 14 17:12:37 2023 +0300
+
+    fix: added an edit icon and made the text clickable
+
+[33mcommit cb442ba91b915c29c363bca3c9a8fdf634cff4ea[m
+Merge: 2952883 1fdc38a
+Author: zubairov1993 <58912688+zubairov1993@users.noreply.github.com>
+Date:   Thu Sep 14 12:48:04 2023 +0600
+
+    Merge pull request #73 from RYAZHAPOVILNUR/hotfix/create-article
+    
+    поправил создание статей
+
+[33mcommit 1fdc38a4a8d97fb4660722c1ef19228a395cbac6[m
+Author: zubairov1993 <58912688+zubairov1993@users.noreply.github.com>
+Date:   Thu Sep 14 12:45:18 2023 +0500
+
+    поправил создание статей
+
+[33mcommit 2952883c718e569ed00d95893f6e2faa7ceceaf8[m
+Merge: 1dbf299 e09e160
+Author: zubairov1993 <58912688+zubairov1993@users.noreply.github.com>
+Date:   Thu Sep 14 12:47:40 2023 +0600
+
+    Merge pull request #72 from RYAZHAPOVILNUR/hotfix/move-task
+    
+    поправил верстку при перетаскивании задач
+
+[33mcommit fff5c53a8f4dcdf40c77d56fddb2a9ee4a5687ec[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Thu Sep 14 02:03:05 2023 +0300
+
+    Todo dark mode
+
+[33mcommit 2bfde16b48c5b41e95c6fc69f95b1040e302beb1[m
+Author: rau4o <rauan.k@eventyr.pro>
+Date:   Thu Sep 14 00:12:21 2023 +0600
+
+    task - 55 finish creating "Create column in Dialog"
+
+[33mcommit 3875605d6f2282c1a760c670066e221211d18649[m
+Author: rau4o <rauan.k@eventyr.pro>
+Date:   Wed Sep 13 16:45:28 2023 +0600
+
+    task - 56 finish creating "Create task in Dialog"
+
+[33mcommit e09e160c7acd2e4c12dde1ab5108eef59e06a91d[m
+Author: zubairov1993 <58912688+zubairov1993@users.noreply.github.com>
+Date:   Wed Sep 13 10:36:33 2023 +0500
+
+    поправил верстку при перетаскивании задач
+
+[33mcommit a0c46b96811ca0bc2106dafc05307a9a9f529c69[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Wed Sep 13 08:10:23 2023 +0300
+
+    Todo dark mode
+
+[33mcommit 1dbf29942bd9aeb43ff919ed091ff36b7e9b2925[m
+Author: ryazhapov-ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Thu Aug 31 12:15:04 2023 +0600
+
+    update tasks
+
+[33mcommit 432dd9a07e94676c88f00a91b73e0af84a843092[m
+Author: ryazhapov-ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Tue Aug 29 14:29:18 2023 +0600
+
+    update tasks
+
+[33mcommit 54842c95a3c4b30886eccdeef05674015ca293e6[m
+Merge: b1d7162 2bb1b5b
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Tue Aug 29 14:14:17 2023 +0600
+
+    Merge pull request #49 from galacticmelt/feature/comments
+    
+    Feature/comments
+
+[33mcommit b1d7162b8c53f854173975b4411e4e77199767a4[m
+Merge: f591318 bc74454
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Tue Aug 29 14:11:37 2023 +0600
+
+    Merge pull request #47 from galacticmelt/global/add-i18n
+    
+    Global/add i18n
+
+[33mcommit f591318bf6b0959dd0b60e5fd3ce8a25a49db74e[m
+Merge: 5cef3a5 d44c418
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Tue Aug 29 14:05:08 2023 +0600
+
+    Merge pull request #45 from 1amarxo/main
+    
+    Edit button for Article
+
+[33mcommit 5cef3a56cf8ebf51cfbb845cc4a862a85c1cfc90[m
+Merge: 11bf4c4 6f48099
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Tue Aug 29 13:03:01 2023 +0600
+
+    Merge pull request #46 from ONYXIY/dev-24-08-23
+    
+    Dev 24 08 23 (todo)
+
+[33mcommit 2bb1b5bc84fe813ebb2a480410f99642b8e41a33[m
+Author: pteechkin <errorbird9001@gmail.com>
+Date:   Tue Aug 29 14:46:41 2023 +0800
+
+    added comments ui and some fixes
+
+[33mcommit bc74454929b89b17bd5c6673b67df84c14ff00c7[m
+Author: pteechkin <errorbird9001@gmail.com>
+Date:   Tue Aug 29 14:17:55 2023 +0800
+
+    little fix
+
+[33mcommit 6f480996948bba055a88b8ac4730a32e36f3855c[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Tue Aug 29 04:03:08 2023 +0300
+
+    added move tasks
+
+[33mcommit 1bcb89266c07d2fffc654b37c8ea6bb5ec68c661[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Mon Aug 28 23:45:28 2023 +0300
+
+    Update tasks.effect.ts
+
+[33mcommit 38a71c06016b6905a6e3f93d3cd921dbf9b3b587[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Mon Aug 28 23:43:38 2023 +0300
+
+    Added (add tasks/columns; remove tasks/columns)
+
+[33mcommit 281dbe0b3a2ab59e564fd012a508185bc0466b15[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Sun Aug 27 22:01:53 2023 +0300
+
+    update effects
+
+[33mcommit e5e37bd7813f8d0c8d954570fa4bc4be567fa5ad[m
+Merge: 8402d26 a42b608
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Sat Aug 26 21:24:37 2023 +0300
+
+    Merge branch 'dev-24-08-23' of https://github.com/ONYXIY/mentoring-users-app into dev-24-08-23
+
+[33mcommit 8402d267d86ac644c674caa0ba28663df8a94977[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Sat Aug 26 21:24:33 2023 +0300
+
+    trying new effects
+
+[33mcommit b430f9b2e729bf5c1964b84cce17271e36871184[m
+Author: pteechkin <errorbird9001@gmail.com>
+Date:   Sat Aug 26 12:15:35 2023 +0800
+
+    added i18n for header and sidenav
+
+[33mcommit a42b60805ee604877c1f916744fce1c32e1997a1[m
+Merge: d238806 11bf4c4
+Author: Rustam <131157037+ONYXIY@users.noreply.github.com>
+Date:   Fri Aug 25 21:42:03 2023 +0300
+
+    Merge branch 'RYAZHAPOVILNUR:main' into dev-24-08-23
+
+[33mcommit d238806ba03e8df0b2fa5c0be99196bdec256808[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Fri Aug 25 21:40:36 2023 +0300
+
+    Event emitters for task f + refac actions
+
+[33mcommit 11bf4c43690acc38bb6d53a379f7249e25aa3770[m
+Merge: cf4d48a bd5902d
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Fri Aug 25 17:13:56 2023 +0600
+
+    Merge pull request #44 from Seynaro/main
+    
+    add route and lib for article-read
+
+[33mcommit d44c418415267565b2a82be51c33dd3d77deea32[m
+Author: Abdu-Salam Kurbanov <aburib1iya@gmail.com>
+Date:   Thu Aug 24 20:24:17 2023 +0400
+
+    Edit button for Article
+    
+    * Подождать Рушана и делать запрос на сервер при нажатии на кнопку "редактировать" (Abuman)
+
+[33mcommit cf4d48a44e4820c8b059d7b21b0e29897d57ab7f[m
+Author: ryazhapov-ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Thu Aug 24 15:08:17 2023 +0600
+
+    update tasks
+
+[33mcommit bd5902d88bdb3f0dba044ccce4aa9e8a3f99aa61[m
+Merge: e11d105 9cff1c4
+Author: Seynaro <55236026+Seynaro@users.noreply.github.com>
+Date:   Thu Aug 24 11:51:18 2023 +0300
+
+    Merge branch 'RYAZHAPOVILNUR:main' into main
+
+[33mcommit 9cff1c4f536297767e213dbce3027680c1df0e99[m
+Merge: 19202f0 9e85d36
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Thu Aug 24 14:12:49 2023 +0600
+
+    Merge pull request #42 from ONYXIY/main
+    
+    todo
+
+[33mcommit 19202f09007c6c0fb9c88c89357f671dc87bdafc[m
+Merge: c8e20df 01c4066
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Thu Aug 24 13:43:48 2023 +0600
+
+    Merge pull request #43 from galacticmelt/style/sidenav-mobile
+    
+    changed sidenav behavior on mobile
+
+[33mcommit 01c4066fb28c2ca7363b1b0c653af49d3c21cd8b[m
+Author: pteechkin <errorbird9001@gmail.com>
+Date:   Thu Aug 24 15:11:50 2023 +0800
+
+    changed sidenav behavior on mobile
+
+[33mcommit 9e85d36d014d11faf065436f6141397c8d19110b[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Thu Aug 24 06:22:28 2023 +0300
+
+    deleted comments
+
+[33mcommit 89f0d9d517d7ea24205fd7bd9750e32024f74325[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Thu Aug 24 06:18:13 2023 +0300
+
+    Todo(Add component state + facade new columns/tasks; delete tasks)
+
+[33mcommit 8a85aba57398d3c11afd239c75f7f0a7dbe46ab6[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Wed Aug 23 17:01:17 2023 +0300
+
+    Added effect (addColumn, removeColumn, addTask,)
+
+[33mcommit f756f6133d2a74c034e310051f69222a8ea87067[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Wed Aug 23 03:00:07 2023 +0300
+
+    added f addTask/delTask, addCol, delCol
+
+[33mcommit 61e410d63c602d2ae0d64ff1a459ffede939f3b5[m
+Merge: 4937ca5 c8e20df
+Author: Rustam <131157037+ONYXIY@users.noreply.github.com>
+Date:   Mon Aug 21 16:59:43 2023 +0300
+
+    Merge branch 'RYAZHAPOVILNUR:main' into main
+
+[33mcommit e11d105d313aaaea1718cd26a196dff1ca3cf40b[m
+Author: Seynaro <xamzatseynaro@gmail.com>
+Date:   Mon Aug 21 15:10:37 2023 +0300
+
+    delete default <p>
+
+[33mcommit 6f34c63e08bc0df69119a67dd206f7a9182005c2[m
+Merge: 1ce6710 c62fbdd
+Author: Seynaro <xamzatseynaro@gmail.com>
+Date:   Mon Aug 21 14:42:20 2023 +0300
+
+    Merge remote-tracking branch 'origin/seynaro' into main
+    
+    # Conflicts:
+    #       apps/users/src/app/app.routes.ts
+    #       libs/users/articles/article-read/ng-package.json
+    #       libs/users/articles/article-read/src/index.ts
+    #       libs/users/articles/article-read/src/lib/article-read/article-read.component.ts
+
+[33mcommit 1ce6710d1cfa5cf05b8f9cea185affc14f0b720d[m
+Author: Seynaro <xamzatseynaro@gmail.com>
+Date:   Mon Aug 21 14:39:16 2023 +0300
+
+    add article-read lib
+
+[33mcommit 86621ca85fd494298861c7cca1cf18b7a32ead5d[m
+Author: Seynaro <xamzatseynaro@gmail.com>
+Date:   Mon Aug 21 14:38:38 2023 +0300
+
+    add "Читать" button in articles-view.component
+
+[33mcommit 74cf96d10ca719910782a8ad276ea7235979bc33[m
+Author: Seynaro <xamzatseynaro@gmail.com>
+Date:   Mon Aug 21 14:37:07 2023 +0300
+
+    add 'article-read' in tsconfig.base.json
+
+[33mcommit aa1fdf3aacf7245bf9c1ee47c166a935cfe3e32f[m
+Author: Seynaro <xamzatseynaro@gmail.com>
+Date:   Mon Aug 21 14:35:54 2023 +0300
+
+    add path 'articles/:id' in routes
+
+[33mcommit c8e20df967a9f70a8f98af13428fea9d7d008263[m
+Merge: 96b9b55 03f4c99
+Author: ryazhapov-ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Mon Aug 21 16:58:41 2023 +0600
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit 96b9b558b245c04133de9b5fe7212edf2d1e9a9e[m
+Author: ryazhapov-ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Mon Aug 21 16:58:29 2023 +0600
+
+    update tasks
+
+[33mcommit cef974eab2f4b39536dba002189e35ebec1ef40b[m
+Merge: a8bd8de 03f4c99
+Author: Seynaro <xamzatseynaro@gmail.com>
+Date:   Mon Aug 21 10:52:23 2023 +0300
+
+    Merge remote-tracking branch 'origin/main' into main
+
+[33mcommit 03f4c99b5f99a040a4d1856dfd51e098eb940e66[m
+Merge: 712a200 e7a74ba
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Sun Aug 20 14:33:16 2023 +0600
+
+    Merge pull request #41 from galacticmelt/feature/add-comments-logic
+    
+    added comments logic
+
+[33mcommit 712a200669a12b7671173779cc02e1b53b9ed003[m
+Merge: 7e4ebec 08b3b2f
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Sun Aug 20 13:42:56 2023 +0600
+
+    Merge pull request #40 from galacticmelt/fix/fix-sidebar-and-header
+    
+    fixed sidebar and header
+
+[33mcommit e7a74baa7a5304ed437b2f5481948ec5e9c486d5[m
+Author: pteechkin <errorbird9001@gmail.com>
+Date:   Sun Aug 20 14:07:34 2023 +0800
+
+    added comments logic
+
+[33mcommit 08b3b2fff8f94be992d6dd063770cb4a1b88595c[m
+Author: pteechkin <errorbird9001@gmail.com>
+Date:   Sun Aug 20 12:14:10 2023 +0800
+
+    fixed sidebar and header
+
+[33mcommit c62fbdd58fd852cabbf8915ad0fc46ef7fa2b4d8[m
+Author: Khamzat <xamzatseynaro@gmail.com>
+Date:   Sat Aug 19 17:16:47 2023 +0300
+
+    bug
+
+[33mcommit 4937ca558b248759a6e0c28e6b62db1817b1f475[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Fri Aug 18 01:21:28 2023 +0300
+
+    column from api via component state
+
+[33mcommit ace38cda5ee0bce4c4c859cf63ce084e2783403e[m
+Merge: ed030a6 7e4ebec
+Author: Rustam <131157037+ONYXIY@users.noreply.github.com>
+Date:   Wed Aug 16 11:56:29 2023 +0300
+
+    Merge branch 'RYAZHAPOVILNUR:main' into main
+
+[33mcommit a8bd8de333081ba0a5c950d276c4b00c8a11a522[m
+Merge: a655abe 7e4ebec
+Author: Seynaro <xamzatseynaro@gmail.com>
+Date:   Wed Aug 16 11:48:26 2023 +0300
+
+    Merge remote-tracking branch 'origin/main' into main
+    
+    # Conflicts:
+    #       apps/users/src/app/app.routes.ts
+    #       libs/users/articles/articles/src/lib/articles-view/articles-view.component.html
+
+[33mcommit 7e4ebec684651069817e6a945645a083d4ccc9c1[m
+Author: ryazhapov-ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Tue Aug 15 15:01:22 2023 +0600
+
+    update tasks
+
+[33mcommit e8e5860bbda651f981617643ed01f35182cbe52b[m
+Merge: ffcfb6e 725f979
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Tue Aug 15 13:55:55 2023 +0600
+
+    Merge pull request #38 from galacticmelt/global/add-styles-and-dark-mode
+    
+    changed ui and added dark mode
+
+[33mcommit 725f979a06cbd7dbdc7590050dbf34ea9feaea80[m
+Merge: 0e35d0a ffcfb6e
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Tue Aug 15 13:55:48 2023 +0600
+
+    Merge branch 'main' into global/add-styles-and-dark-mode
+
+[33mcommit 0e35d0a763b444092734f74d5eafd9fb9c51a0d7[m
+Author: pteechkin <errorbird9001@gmail.com>
+Date:   Tue Aug 15 15:43:08 2023 +0800
+
+    deleted commented code
+
+[33mcommit ffcfb6e8e37709c4469d5dc9311c9415b83a1c85[m
+Merge: 2b4a734 4d8073e
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Tue Aug 15 13:37:41 2023 +0600
+
+    Merge pull request #37 from Rushannn/move-menu-from-header
+    
+    task from 09-08-2023
+
+[33mcommit 2b4a734078a191a5423e66a6fc685da847b652c3[m
+Merge: 8dfad54 92c6e4e
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Tue Aug 15 13:36:10 2023 +0600
+
+    Merge pull request #39 from ONYXIY/dev
+    
+    Dev
+
+[33mcommit 8dfad54de1915f5d034485d5914d4658540f4c86[m
+Merge: 68c8b8a 8d81311
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Tue Aug 15 13:16:26 2023 +0600
+
+    Merge pull request #34 from Rushannn/add-photo-feat
+    
+    feat(users): add image cropper
+
+[33mcommit ed030a6744e95562fef55760d4eb3f85871b6add[m
+Merge: 61ba8e6 92c6e4e
+Author: Rustam <131157037+ONYXIY@users.noreply.github.com>
+Date:   Tue Aug 15 10:01:17 2023 +0300
+
+    Merge pull request #2 from ONYXIY/dev
+    
+    Dev
+
+[33mcommit 92c6e4e26cc83e0eed93836d540240177f052070[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Tue Aug 15 10:00:16 2023 +0300
+
+    trying to add delete column
+
+[33mcommit 1f3756f1e379528c98845e88a402a38d6bfe2ec9[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Mon Aug 14 17:44:34 2023 +0300
+
+    added component tasks store
+
+[33mcommit 0aabf15b78004e04c08d65ba11e9bb183d0a3ab7[m
+Author: pteechkin <errorbird9001@gmail.com>
+Date:   Mon Aug 14 21:11:03 2023 +0800
+
+    changed ui and added dark mode
+
+[33mcommit f1346a70a12db220954770361899c7d70030972f[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Mon Aug 14 01:42:28 2023 +0300
+
+    trying component store
+
+[33mcommit 61ba8e6b9ada42ee3a428e394796e51b92d2449b[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Sun Aug 13 22:26:28 2023 +0300
+
+    feat(tasks): implement getColums
+
+[33mcommit bbd1382f05027e3e4a9f5c095a480029c5069dcf[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Sun Aug 13 19:51:44 2023 +0300
+
+    refac(dump smart comp), create addNewColumn, DragDrop
+
+[33mcommit b9bf9a1a7ce3adc3774872abe399e49e3f62b746[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Sat Aug 12 12:22:01 2023 +0300
+
+    refac
+
+[33mcommit 807f7136c8cbbe888b0f986ae51a1f89126bfa19[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Fri Aug 11 17:40:19 2023 +0300
+
+    for TasksContainerComponent check
+
+[33mcommit 4d8073e367d500e042be019c26279ad16bb7a41f[m
+Author: Rushannn <rushankarimov@gmail.com>
+Date:   Fri Aug 11 11:00:58 2023 +0300
+
+    feat(users): move menu frome header
+
+[33mcommit 0e2037f4fde60bc27769f17d709248046a4a0975[m
+Merge: 8d81311 68c8b8a
+Author: Rushannn <rushankarimov@gmail.com>
+Date:   Fri Aug 11 10:30:15 2023 +0300
+
+    Merge remote-tracking branch 'upstream/main' into move-menu-from-header
+
+[33mcommit 8d813110353ddeeedfe61aa025e5c019ed1ac806[m
+Author: Rushannn <rushankarimov@gmail.com>
+Date:   Fri Aug 11 09:16:20 2023 +0300
+
+    feat(users): complete change/add image feature
+
+[33mcommit 38b6232a70c35df90aaf31897610081a0afb6d2c[m
+Merge: 4c772ed 68c8b8a
+Author: Rustam <131157037+ONYXIY@users.noreply.github.com>
+Date:   Thu Aug 10 11:56:22 2023 +0300
+
+    Merge branch 'RYAZHAPOVILNUR:main' into main
+
+[33mcommit 68c8b8a1fd9bc6f9160e74197c4d9cf0c318b334[m
+Merge: 66595ba 42944c7
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Wed Aug 9 14:26:38 2023 +0600
+
+    Merge pull request #36 from galacticmelt/global/setup-build-and-docker
+    
+    setup build and docker
+
+[33mcommit 42944c7abab804ba452993f5fbc607ec74c32263[m
+Author: pteechkin <errorbird9001@gmail.com>
+Date:   Wed Aug 9 15:53:24 2023 +0800
+
+    changed build executor
+
+[33mcommit 4c772eddf4c9ed7f330e5e4b92db4dd5759dd989[m
+Merge: fd81a2b 66595ba
+Author: Rustam <131157037+ONYXIY@users.noreply.github.com>
+Date:   Wed Aug 9 10:41:21 2023 +0300
+
+    Merge pull request #1 from RYAZHAPOVILNUR/main
+    
+    to do
+
+[33mcommit fd81a2b7a9230ddd527fb338043cad8865b67f46[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Wed Aug 9 10:40:32 2023 +0300
+
+    get request for columns
+
+[33mcommit 66595ba3d5be88462a5103a4de8dcff7b6b41b59[m
+Merge: 1704507 f48a4db
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Wed Aug 9 13:30:40 2023 +0600
+
+    Merge pull request #33 from galacticmelt/fix/article-editor-mode-bug
+    
+    fix article editor mode bug
+
+[33mcommit 04012d5227eb3272091d1f5c1e86b955d106a889[m
+Author: Rushannn <rushankarimov@gmail.com>
+Date:   Wed Aug 9 09:44:34 2023 +0300
+
+    feat(users): add image cropper
+
+[33mcommit 7706d861bc008e623c3e9e622cb8db0fee528c2d[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Wed Aug 9 01:18:38 2023 +0300
+
+    added reducer effect action selector
+
+[33mcommit 7eb2577f4de60aae883108e08fb83b2958f384e9[m
+Author: pteechkin <errorbird9001@gmail.com>
+Date:   Tue Aug 8 21:45:15 2023 +0800
+
+    changed build settings and added docker files
+
+[33mcommit a655abee74b5e1992f28d8f7d3ead0820f284383[m
+Merge: 66b77af 1704507
+Author: Seynaro <55236026+Seynaro@users.noreply.github.com>
+Date:   Tue Aug 8 14:56:05 2023 +0300
+
+    Merge branch 'RYAZHAPOVILNUR:main' into main
+
+[33mcommit fb352d5441b451f66cc5ce828b0ceab494fbd6da[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Tue Aug 8 11:04:09 2023 +0300
+
+    1
+
+[33mcommit bae772158f8269fc7a98bea989349749063d0b15[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Tue Aug 8 10:41:49 2023 +0300
+
+    add new board / show task btn
+
+[33mcommit 4790211ba4fbf0109e30124b5ef82a9081914752[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Mon Aug 7 18:24:22 2023 +0300
+
+    derty code dragdrop tasks board
+
+[33mcommit 14236983ce8ed58f50e546530332854d719547c9[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Sun Aug 6 23:39:02 2023 +0300
+
+    1
+
+[33mcommit 67e5a5822381f5b7dbda3f33c0a2baea90484717[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Sun Aug 6 08:25:08 2023 +0300
+
+    added 2 comp for tasks + roat
+
+[33mcommit aa879b08de3550f509808d91f4a75934745839fe[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Sun Aug 6 05:17:07 2023 +0300
+
+    added tasks lib
+
+[33mcommit f48a4dbed1857bfc8595deea5d90224cd927dfb3[m
+Author: pteechkin <errorbird9001@gmail.com>
+Date:   Fri Aug 4 20:28:59 2023 +0800
+
+    fix article editor mode bug
+
+[33mcommit 17045070ab17ddf13a007ef9fdc3c9e7cc5e25bc[m
+Author: ryazhapov-ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Fri Aug 4 14:48:32 2023 +0600
+
+    update tasks
+
+[33mcommit d038cbcd004f0a6e1a5a7815aa71fe1ce760d643[m
+Merge: f83b4b1 1aa5b35
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Fri Aug 4 14:09:24 2023 +0600
+
+    Merge pull request #32 from 1amarxo/main
+    
+    added Tooltip
+
+[33mcommit f83b4b1752057371d4fa427e22dd29ab523ab137[m
+Author: ryazhapov-ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Fri Aug 4 14:07:23 2023 +0600
+
+    fix patch form after guard bug
+
+[33mcommit e44f924936bcc540d74d19bb005528b42e40f481[m
+Merge: 0ab6054 554c11f
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Fri Aug 4 13:39:25 2023 +0600
+
+    Merge pull request #31 from galacticmelt/fix/preserve-article-on-reload
+    
+    fix preserve article on reload
+
+[33mcommit 1aa5b35a77735417e12eb10ddebba3b6f244d5f7[m
+Author: Abdu-Salam Kurbanov <aburib1iya@gmail.com>
+Date:   Fri Aug 4 11:08:57 2023 +0400
+
+    added Tooltip
+
+[33mcommit 554c11f3aaff20cee00194d70161bbd9766f1370[m
+Author: pteechkin <errorbird9001@gmail.com>
+Date:   Fri Aug 4 14:50:36 2023 +0800
+
+    fix preserve article on reload
+
+[33mcommit 66b77af1bb06de42b0f4dce2d79af91353caafa1[m
+Merge: 67f30a6 0ab6054
+Author: Seynaro <55236026+Seynaro@users.noreply.github.com>
+Date:   Thu Aug 3 10:55:02 2023 +0300
+
+    Merge branch 'RYAZHAPOVILNUR:main' into main
+
+[33mcommit 0ab605409aa92089522f40197da20672403a033f[m
+Merge: 3b84032 e65de7b
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Thu Aug 3 13:50:36 2023 +0600
+
+    Merge pull request #30 from ONYXIY/main
+    
+    added profile photo on header
+
+[33mcommit 67f30a673568f260ceaa3d5b8d1dc7c762d83e1a[m
+Author: Seynaro <xamzatseynaro@gmail.com>
+Date:   Wed Aug 2 14:23:52 2023 +0300
+
+    add routerLink into article title
+
+[33mcommit d553217d9ca30a3cf950a60c6c2bd87fa77fce03[m
+Author: Seynaro <xamzatseynaro@gmail.com>
+Date:   Wed Aug 2 14:21:40 2023 +0300
+
+    add articles/:id route
+
+[33mcommit 54887b7a34407c849bc9d1ffa94b73132a5f65af[m
+Author: Seynaro <xamzatseynaro@gmail.com>
+Date:   Wed Aug 2 14:20:40 2023 +0300
+
+    add article read lib
+
+[33mcommit e65de7bc4be176412e7349cf132920fda9172bcd[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Wed Aug 2 09:33:59 2023 +0300
+
+    added profile photo on header
+
+[33mcommit 3b84032491f0ff61794979eeebdac04295e1ac88[m
+Author: ryazhapov-ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Sun Jul 30 16:50:22 2023 +0600
+
+    update tasks
+
+[33mcommit ae8a188027f51a4e8337813b07867edf50c06424[m
+Merge: 943a2e4 0a23b0b
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Sun Jul 30 15:59:04 2023 +0600
+
+    Merge pull request #29 from ONYXIY/main
+    
+    Change btn location (Смена пароля)
+
+[33mcommit 943a2e479875134d24d2de039fdfe7140a43abc2[m
+Author: ryazhapov-ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Sun Jul 30 15:32:11 2023 +0600
+
+    fix patch article area bug
+
+[33mcommit 9229ea7ccf5d651a2feada4eba6f37eb5b597e44[m
+Merge: 2aa8575 b79e3a0
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Sun Jul 30 15:13:28 2023 +0600
+
+    Merge pull request #28 from galacticmelt/fix/article-edit-permission
+    
+    Fix article edit permission
+
+[33mcommit b79e3a0b1085f468eaf64a2e71b28931d3073d02[m
+Author: pteechkin <errorbird9001@gmail.com>
+Date:   Sat Jul 29 16:04:10 2023 +0800
+
+    fixed article edit permission
+
+[33mcommit a7d5f6ad52843b9d01aa506794a522ae29da1c0a[m
+Author: pteechkin <errorbird9001@gmail.com>
+Date:   Thu Jul 27 17:37:38 2023 +0800
+
+    fixed edit permission
+
+[33mcommit 0a23b0bf601b418128872d6fcea61253b2aa5c48[m
+Author: ONYXIY <onxvnezakona@gmail.com>
+Date:   Wed Jul 26 13:18:24 2023 +0300
+
+    Change btn location (Смена пароля)
+
+[33mcommit 2aa8575dc99f24b915e4c8aedfb4ca806ba5a588[m
+Author: ryazhapov-ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Wed Jul 26 15:12:03 2023 +0600
+
+    update tasks
+
+[33mcommit 0670d547be79cf2e4b11da23d2f919b821e75b20[m
+Merge: 573e4d0 ed0a557
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Wed Jul 26 13:18:13 2023 +0600
+
+    Merge pull request #27 from Rushannn/task-26.07.23
+    
+    Task 26.07.23
+
+[33mcommit ed0a557769d5e86d067d004b288131720ddc8280[m
+Author: Rushannn <rushankarimov@gmail.com>
+Date:   Wed Jul 26 09:41:23 2023 +0300
+
+    feat(users) implement edit article
+
+[33mcommit 6a5ff195e0bfc2ae5d91886c60eb7fd063a396b5[m
+Author: Rushannn <rushankarimov@gmail.com>
+Date:   Sun Jul 23 11:49:46 2023 +0300
+
+    feat(users) add "loading", "loaded", "error" cases in article wiev component
+
+[33mcommit 573e4d0675d3f33ec1c8ab49ac6282dc3d03439c[m
+Author: ryazhapov-ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Sat Jul 22 14:37:12 2023 +0600
+
+    update tasks
+
+[33mcommit 2ab654a922f71fb54581f855b1f99c454ea17b29[m
+Author: ryazhapov-ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Sat Jul 22 14:36:57 2023 +0600
+
+    show articles
+
+[33mcommit f0ed6c0678aad7f9c9b38f7092f89657c57dd3cd[m
+Merge: 1b07be8 50eb0b7
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Sat Jul 22 13:19:29 2023 +0600
+
+    Merge pull request #26 from Rushannn/task-21.07.23
+    
+    Task 21.07.23
+
+[33mcommit 50eb0b7f4f0e531b7846d10fa5da32e115122b29[m
+Author: Rushannn <rushankarimov@gmail.com>
+Date:   Sat Jul 22 09:55:10 2023 +0300
+
+    feat(users) try implement articles view
+
+[33mcommit 8781d0023639d734c343c84d0a575857390f8135[m
+Author: Rushannn <rushankarimov@gmail.com>
+Date:   Sat Jul 22 06:46:36 2023 +0300
+
+    feat(users) implement request for articles to the server
+
+[33mcommit 48da066b3864ae3c340181f1e278f8a78798adfb[m
+Author: Rushannn <rushankarimov@gmail.com>
+Date:   Wed Jul 19 14:52:58 2023 +0300
+
+    feat(users) implements canDeactivate on create article page
+
+[33mcommit 1b07be8daee0524e4a9555d6fdfda344e2baeff8[m
+Author: ryazhapov-ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Tue Jul 18 14:48:53 2023 +0600
+
+    update tasks
+
+[33mcommit 6d2445e35f1a838b629095f3be0b72e8a4075713[m
+Merge: 92b7aad a3d01d5
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Tue Jul 18 13:10:11 2023 +0600
+
+    Merge pull request #25 from Rushannn/task-17.07.23
+    
+    Task 17.07.23
+
+[33mcommit a3d01d56744ad5111298198d0b9e98d85016eaff[m
+Author: Rushannn <rushankarimov@gmail.com>
+Date:   Tue Jul 18 09:42:13 2023 +0300
+
+    chore(users) add redirect after article publish
+
+[33mcommit e52508568ebfca5807eb19b0e4ac6b4805ca0b8d[m
+Author: Rushannn <rushankarimov@gmail.com>
+Date:   Tue Jul 18 07:53:37 2023 +0300
+
+    feat(users) add implement articles create function
+
+[33mcommit 690f83fa0c6db46c970795373b51ed5bd39ea439[m
+Author: Rushannn <rushankarimov@gmail.com>
+Date:   Sat Jul 15 09:49:16 2023 +0300
+
+    feat(users) add ngx-quill library, add routing to articles-create page
+
+[33mcommit 92b7aad81654185cb7619ef6f013b0e9c8dddd11[m
+Author: ryazhapov-ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Fri Jul 14 18:40:53 2023 +0600
+
+    update tasks
+
+[33mcommit 15f04d639b00757d8505974c15fb07fac1d3bba8[m
+Author: ryazhapov-ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Fri Jul 14 15:27:28 2023 +0600
+
+    refactor(detail-users-card) refactor isFieldChanged
+
+[33mcommit 85963a8875490a24e437d79fd277ca8dd5998638[m
+Merge: f1e1513 1767086
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Fri Jul 14 14:25:50 2023 +0600
+
+    Merge pull request #24 from Rushannn/task-13.07.23
+    
+    Task 13.07.23
+
+[33mcommit 1767086299526d0090741cab5549491e113ea1e8[m
+Author: Rushannn <rushankarimov@gmail.com>
+Date:   Thu Jul 13 00:07:31 2023 +0300
+
+    chore (users) change paasword confirm
+
+[33mcommit 06b13844fc82c529bd977b6ce7d76c27102e56b7[m
+Author: Rushannn <rushankarimov@gmail.com>
+Date:   Tue Jul 11 21:39:28 2023 +0300
+
+    feat(users) add photo on /admin/users page
+
+[33mcommit d2939afc0b1950219abf10b40f78e2f390b3049c[m
+Author: Rushannn <rushankarimov@gmail.com>
+Date:   Tue Jul 11 18:25:05 2023 +0300
+
+    feat(users) add articles and articles-create libs
+
+[33mcommit e2d8592d64de642d64c980152c0dad81345f0e43[m
+Author: Rushannn <rushankarimov@gmail.com>
+Date:   Tue Jul 11 13:57:22 2023 +0300
+
+    feat(users) add tooltips in forms of default-users-card
+
+[33mcommit 0475a72afb8afa4b2cc9f6cf50205171626149ac[m
+Author: Rushannn <rushankarimov@gmail.com>
+Date:   Tue Jul 11 11:57:26 2023 +0300
+
+    feat(users) implement check fields change before save in detail-users-card
+
+[33mcommit f1e151395292894c074249988b149881274fa2a7[m
+Author: ryazhapov-ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Mon Jul 10 15:47:32 2023 +0600
+
+    chore(users) update tasks.md
+
+[33mcommit 235f095756d72199d53e4b81bbc28ebdb4128741[m
+Author: ryazhapov-ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Mon Jul 10 15:29:54 2023 +0600
+
+    fix(header) home page
+
+[33mcommit 704441f6349e731a1ebbf7865f6e04af5cc39f12[m
+Merge: e67ede2 1b0fa40
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Mon Jul 10 14:59:04 2023 +0600
+
+    Merge pull request #23 from baymran/cities
+    
+    dadata input suggestions
+
+[33mcommit e67ede249d4bb35834566b908eae13e9fe785426[m
+Author: ryazhapov-ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Mon Jul 10 14:49:27 2023 +0600
+
+    fix(change password dialog) update validation message on input
+
+[33mcommit 6a334937b44e11f8e3e792089f9d1bd4e2245cba[m
+Merge: 97ed8f0 1155f58
+Author: ilnur <ilnur_abu_yahya@mail.ru>
+Date:   Mon Jul 10 14:28:18 2023 +0600
+
+    Merge pull request #22 from Rushannn/task-10.07.23
+    
+    feat(users) add AuthorizedUserLayoutComponent, UnauthorizedUserLayout…
+
+[33mcommit 1b0fa40e43d9944f010c5745c6ff15b97b5dd06e[m
+Author: Umar Baymran <1000slow@gmail.com>
+Date:   Mon Jul 10 10:58:13 2023 +0300
+
+    refactor(edit users) path aliases
+
+[33mcommit 1155f583cae58d3bdbd4f5ccb3c2d5d79057fae3[m
+Author: Rushannn <rushankarimov@gmail.com>
+Date:   Mon Jul 10 10:51:42 2023 +0300
+
+    feat(users) add AuthorizedUserLayoutComponent, UnauthorizedUserLayoutComponent and implement change users password
+
+[33mcommit dec1d27f665dcd284588e0fa2cf2770652c16dc0[m
+Author: Umar Baymran <1000slow@gmail.com>
+Date:   Mon Jul 10 10:26:45 2023 +0300
+
+    feat(edit users) add mat-autocomplete for city suggestions

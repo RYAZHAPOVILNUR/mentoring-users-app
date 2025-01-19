@@ -1,0 +1,12 @@
+<ng-container *ngIf="material?.type === 'pdf'">
+  <div #pdfContainer class="pdf__container"></div>
+</ng-container>
+<ng-container *ngIf="material?.type === 'audio'">
+  <div #pdfContainer class="audio__container"></div>
+</ng-container>
+<ng-container *ngIf="material?.type === 'video'">
+  <div #pdfContainer class="video__container"></div>
+</ng-container>
+<ng-container *ngIf="material?.type === 'default'">
+  <div class='default__container'><span>File extension does not support</span></div>
+</ng-container>

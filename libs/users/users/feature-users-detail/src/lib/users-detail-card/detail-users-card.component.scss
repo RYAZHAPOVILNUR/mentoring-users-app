@@ -56,3 +56,16 @@ div.alert-success {
   justify-content: center;
   color: white;
 }
+.edit-user-button__st{
+  color: black;
+  background-color: transparent;
+
+  &:disabled {
+    color: gray;
+    background-color: transparent;
+    cursor: not-allowed;
+    opacity: 0.6;
+  };
+  &:hover { background-color: transparent }
+
+}
