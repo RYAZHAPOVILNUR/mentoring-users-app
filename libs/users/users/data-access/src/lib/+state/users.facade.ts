@@ -57,4 +57,15 @@ export class UsersFacade {
   loadUser() {
     this.store.dispatch(UsersActions.loadUser());
   }
+<<<<<<< Updated upstream
+=======
+
+  setUsersFilter(filter: { name: string }) {
+    this.store.dispatch(UsersActions.setUsersFilter({ filter }));
+  }
+
+  addStoryPoints(userData: CreateUserDTO, id: number, onSuccessAddSP: () => void) {
+    this.store.dispatch(UsersActions.addUserStoryPoints({ userData, id, onSuccessAddSP}));
+  }
+>>>>>>> Stashed changes
 }

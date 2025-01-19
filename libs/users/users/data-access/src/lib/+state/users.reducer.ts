@@ -75,6 +75,28 @@ const reducer = createReducer(
   on(UsersActions.updateUserStatus, (state, { status }) => ({
     ...state,
     status,
+<<<<<<< Updated upstream
+=======
+  })),
+  on(UsersActions.setUsersFilter, (state: UsersState, { filter }) => {
+    return {
+      ...state,
+      usersFilter: { filter }
+    }
+  }),
+  on(UsersActions.addUserStoryPointsSuccess, (state, {userData}) => 
+    usersAdapter.updateOne({
+      id: userData.id,
+      changes: userData
+    },
+    {...state, status: 'loaded' as const}
+    )
+  ),
+  on(UsersActions.addUserStoryPointsFailed, (state, {error}) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+>>>>>>> Stashed changes
   }))
 );
 

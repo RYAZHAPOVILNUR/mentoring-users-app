@@ -1,0 +1,17 @@
+<div class="container">
+    <form [formGroup]="form">
+    <mat-form-field class="form" >
+        <mat-label>Найти пользователя</mat-label>
+        <input matInput placeholder="Введите имя пользователя" formControlName="nameControl">
+        <button
+        mat-raised-button
+        matTextSuffixck
+        type="submit"
+        (click)="applyFilter()"
+        >
+            <mat-icon>search</mat-icon>
+            Применить
+        </button>
+    </mat-form-field>
+    </form>
+</div>
