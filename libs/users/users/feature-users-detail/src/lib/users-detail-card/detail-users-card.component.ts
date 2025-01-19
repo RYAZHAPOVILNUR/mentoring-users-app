@@ -59,17 +59,16 @@ export class DetailUsersCardComponent implements OnInit {
     user: null,
     status: 'init',
     errors: null,
-
   };
-  public isStoryPointsEdit = false
+  public isStoryPointsEdit = false;
 
   public get vm() {
     return this._vm;
   }
+
   @Input({ required: true })
   set vm(vm: DetailUsersCardVm) {
-    this._vm = vm
-
+    this._vm = vm;
 
     if (vm.user) {
       this.formGroup.patchValue({
@@ -77,9 +76,8 @@ export class DetailUsersCardComponent implements OnInit {
         email: vm.user.email,
         username: vm.user.username,
         city: vm.user.city,
-        // totalStoryPoints: vm.user.totalStoryPoints,
       });
-        this.totalStoryPoints.setValue(Number(vm.user.totalStoryPoints))
+      this.totalStoryPoints.setValue(Number(vm.user.totalStoryPoints));
     }
 
     if (vm.editMode) {
@@ -95,7 +93,10 @@ export class DetailUsersCardComponent implements OnInit {
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
-  public totalStoryPoints = new FormControl({ value: this.vm.user?.totalStoryPoints || 0, disabled: true }, [Validators.min(0), Validators.pattern('^[0-9]*$')])
+  public totalStoryPoints = new FormControl({ value: this.vm.user?.totalStoryPoints || 0, disabled: true }, [
+    Validators.min(0),
+    Validators.pattern('^[0-9]*$'),
+  ]);
 
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
@@ -105,11 +106,11 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
-
-  @Output() editStoryPoints = new EventEmitter<{ user: CreateUserDTO, onSuccessCb: onSuccessEditionCbType }>();
+  @Output() editStoryPoints = new EventEmitter<{ user: CreateUserDTO; onSuccessCb: onSuccessEditionCbType }>();
 
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
   @ViewChild('snackbarStoryPoints') snackbarStoryPoints!: TemplateRef<any>;
+
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -164,10 +165,8 @@ export class DetailUsersCardComponent implements OnInit {
   }
 
   editStoryPointToggle(): void {
-    this.isStoryPointsEdit = !this.isStoryPointsEdit
-    this.updateEditStoryPointsState()
-
-
+    this.isStoryPointsEdit = !this.isStoryPointsEdit;
+    this.updateEditStoryPointsState();
   }
 
   private updateEditStoryPointsState() {
@@ -178,28 +177,29 @@ export class DetailUsersCardComponent implements OnInit {
     }
   }
 
-   public onSpEditSuccess: onSuccessEditionCbType = () =>
+  public onSpEditSuccess: onSuccessEditionCbType = () =>
     this.snackBar.openFromTemplate(this.snackbarStoryPoints, {
       duration: 2500,
       horizontalPosition: 'center',
       verticalPosition: 'top',
     });
-    public onEditStoryPoints(){
-      this.editStoryPoints.emit({
-        user: {
-          id: this.vm.user?.id || null,
-          name: this.vm.user?.name || '',
-          email: this.vm.user?.email || '',
-          username: this.vm.user?.username || '',
-          purchaseDate: new Date().toString() || '',
-          educationStatus: 'trainee',
-          city: this.vm.user?.city || '',
-          totalStoryPoints: Number(this.totalStoryPoints.value) || this.vm.user?.totalStoryPoints
 
-        },
-        onSuccessCb: this.onSpEditSuccess,
-      })
-    }
+  public onEditStoryPoints() {
+    this.editStoryPoints.emit({
+      user: {
+        id: this.vm.user?.id || null,
+        name: this.vm.user?.name || '',
+        email: this.vm.user?.email || '',
+        username: this.vm.user?.username || '',
+        purchaseDate: new Date().toString() || '',
+        educationStatus: 'trainee',
+        city: this.vm.user?.city || '',
+        totalStoryPoints: Number(this.totalStoryPoints.value) || this.vm.user?.totalStoryPoints,
+      },
+      onSuccessCb: this.onSpEditSuccess,
+    });
+  }
+
   public onOptionClicked(selectedValue: string) {
     this.formGroup.get('city')?.setValue(selectedValue);
   }

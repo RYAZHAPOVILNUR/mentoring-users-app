@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {  MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -17,6 +17,7 @@ export class FoldersDeleteDialogComponent {
   onConfirm() {
     this.dialog.close(true);
   }
+
   onCancel() {
     this.dialog.close(false);
   }

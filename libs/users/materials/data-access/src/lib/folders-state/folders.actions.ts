@@ -14,5 +14,5 @@ export const addFolder = createAction('[Folders/API] Add Folder', props<{ title:
 export const addFolderSuccess = createAction('[Folders/API] Add Folder Success', props<{ folder: FoldersEntity }>());
 export const addFolderFailure = createAction('[Folders/API] Add Folder Failure', props<{ error: any }>());
 export const deleteFolder = createAction('[Folders/API] Delete Folder', props<{ id: number }>());
-export const deleteFolderSuccess = createAction( '[Folders/API] Delete Folder Success' ,props< {id: number}>());
+export const deleteFolderSuccess = createAction('[Folders/API] Delete Folder Success', props<{ id: number }>());
 export const deleteFolderFailure = createAction('[Folders/API] Delete Folder Failure', props<{ error: any }>());

@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { select, Store, Action } from '@ngrx/store';
 
 import * as FoldersActions from './folders.actions';
-;
+
 import * as FoldersSelectors from './folders.selectors';
 
 @Injectable()
@@ -25,13 +25,15 @@ export class FoldersFacade {
     this.store.dispatch(FoldersActions.initFolders());
   }
 
-  addFolder(title: string){
+  addFolder(title: string) {
     this.store.dispatch(FoldersActions.addFolder({ title }));
   }
-  deleteFolder(id: number){
+
+  deleteFolder(id: number) {
     this.store.dispatch(FoldersActions.deleteFolder({ id }));
   }
-  getFolderById(id: number){
+
+  getFolderById(id: number) {
     return this.store.select(FoldersSelectors.selectFolderById(id));
   }
 }

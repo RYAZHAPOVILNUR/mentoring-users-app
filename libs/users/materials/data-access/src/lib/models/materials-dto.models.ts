@@ -1,10 +1,10 @@
-import {DeepReadonly} from '@users/core/utils';
+import { DeepReadonly } from '@users/core/utils';
 
-export type CreateMaterialDTO = DeepReadonly< {
+export type CreateMaterialDTO = DeepReadonly<{
   title: string;
   material_link: string;
   folder_id: number;
-}>
+}>;
 
 export type MaterialDTO = DeepReadonly<{
   id: number;
@@ -12,6 +12,4 @@ export type MaterialDTO = DeepReadonly<{
   title: string;
   material_link: string;
   folder_id: number;
-}>
-
-
+}>;

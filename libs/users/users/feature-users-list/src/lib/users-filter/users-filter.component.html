@@ -1,16 +1,13 @@
-<div class = "search__container">
-
+<div class="search__container">
   <mat-form-field
-  class="edit-user-field">
-  <input
-    [formControl]="usersFilter"
-    matInput placeholder="search user"
-    class="edit-user-input"
-    type="text"
-
-  />
+    class="edit-user-field">
+    <input
+      [formControl]="usersFilter"
+      matInput placeholder="search user"
+      class="edit-user-input"
+      type="text" />
     <ng-container *ngIf="!hasText()" matSuffix>
-    <mat-icon >search</mat-icon>
+      <mat-icon>search</mat-icon>
     </ng-container>
     <ng-container *ngIf="hasText()" matSuffix>
       <button
@@ -20,9 +17,8 @@
         class="edit-user-button__st"
         matSuffix
         (click)="usersFilter.reset()">
-        <mat-icon >close</mat-icon>
+        <mat-icon>close</mat-icon>
       </button>
-
     </ng-container>
   </mat-form-field>
 </div>

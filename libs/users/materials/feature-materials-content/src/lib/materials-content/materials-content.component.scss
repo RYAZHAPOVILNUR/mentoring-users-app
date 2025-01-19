@@ -1,26 +1,30 @@
-.pdf__container{
+.pdf__container {
   width: 900px;
   margin: auto;
   height: 800px;
 }
-.audio__container{
+
+.audio__container {
   width: 350px;
   height: 40px;
   margin: auto;
   overflow: hidden;
 }
-.video__container{
+
+.video__container {
   width: 900px;
   height: 700px;
   margin: auto;
 }
-.default__container{
+
+.default__container {
   width: 320px;
   height: 40px;
   margin: auto;
   display: flex;
   overflow: hidden;
 }
+
 .default__container span {
   margin: auto;
   font-weight: bold;

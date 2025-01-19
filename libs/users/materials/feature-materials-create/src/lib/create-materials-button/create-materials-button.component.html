@@ -1,23 +1,22 @@
 <button mat-fab
         color="primary"
         class="add-user-fab-button"
-        [matMenuTriggerFor]="menu" >
-         <mat-icon>add</mat-icon>
+        [matMenuTriggerFor]="menu">
+  <mat-icon>add</mat-icon>
 </button>
 
-<mat-menu #menu='matMenu' class="custom-menu" >
+<mat-menu #menu='matMenu' class="custom-menu">
   <button mat-menu-item
-  (click) = "openDialog('audio')">
+          (click)="openDialog('audio')">
     <mat-icon>music_note</mat-icon>
     <span>music</span></button>
   <button mat-menu-item
-  (click)="openDialog('video')">
+          (click)="openDialog('video')">
     <mat-icon>movie</mat-icon>
     <span>video</span></button>
   <button mat-menu-item
-  (click)="openDialog('pdf')" >
+          (click)="openDialog('pdf')">
     <mat-icon>menu_book</mat-icon>
     <span>pdf</span></button>
-
 </mat-menu>
 

@@ -25,8 +25,12 @@ export const selectEntity = createSelector(selectMaterialsEntities, selectSelect
   selectedId ? entities[selectedId] : undefined
 );
 
-export const selectMaterialsByFolderId = createSelector(selectAllMaterials, (state: MaterialsEntity[], props:{folderID : number})=>
-  state.filter((material)=>
-   material.folder_id === props.folderID)
-
-)
+export const selectMaterialsByFolderId = createSelector(
+  selectAllMaterials,
+  (
+    state: MaterialsEntity[],
+    props: {
+      folderID: number;
+    }
+  ) => state.filter((material) => material.folder_id === props.folderID)
+);

@@ -1,7 +1,14 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormControl,  ReactiveFormsModule, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  ReactiveFormsModule,
+  Validators,
+  AbstractControl,
+  ValidationErrors,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -14,13 +21,14 @@ import { MatIconModule } from '@angular/material/icon';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateMaterialsDialogComponent {
-  public dialogRef = inject(MatDialogRef<CreateMaterialsDialogComponent>);
+  private readonly dialogRef = inject(MatDialogRef<CreateMaterialsDialogComponent>);
   public materialType: 'audio' | 'video' | 'pdf' = inject(MAT_DIALOG_DATA).type;
 
   public formGroup = new FormBuilder().group({
     title: new FormControl('', [Validators.required]),
     material_link: new FormControl('', [this.getLinkValidator(this.materialType), Validators.required]),
   });
+
   public onSubmit() {
     this.dialogRef.close(this.formGroup.value);
   }

@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateFolderButtonComponent } from '@materials/feature-folders-create';
-import {FoldersFacade} from '@users/materials/data-access';
-import {FoldersListComponent} from '../folders-list/folders-list.component';
+import { FoldersFacade } from '@users/materials/data-access';
+import { FoldersListComponent } from '../folders-list/folders-list.component';
 
-import {LetDirective} from '@ngrx/component';
+import { LetDirective } from '@ngrx/component';
 
 @Component({
   selector: 'users-folders-state-list-container',
@@ -15,8 +15,8 @@ import {LetDirective} from '@ngrx/component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersListContainerComponent implements OnInit {
-  foldersFacade: FoldersFacade = inject(FoldersFacade);
-  folders$ = this.foldersFacade.allFolders$;
+  private readonly foldersFacade: FoldersFacade = inject(FoldersFacade);
+  public readonly folders$ = this.foldersFacade.allFolders$;
 
   ngOnInit() {
     this.foldersFacade.init();

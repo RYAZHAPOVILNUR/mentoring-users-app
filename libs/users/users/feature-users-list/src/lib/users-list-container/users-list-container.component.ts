@@ -21,8 +21,7 @@ import { UsersFilterComponent } from '../users-filter/users-filter.component';
     MatDialogModule,
     LetDirective,
     CreateUsersButtonComponent,
-    UsersFilterComponent
-
+    UsersFilterComponent,
   ],
   templateUrl: './users-list-container.component.html',
   styleUrls: ['./users-list-container.component.scss'],
@@ -32,7 +31,7 @@ import { UsersFilterComponent } from '../users-filter/users-filter.component';
 })
 export class UsersListContainerComponent {
   private readonly componentStore = inject(UsersListContainerStore);
-  public usersFacade = inject(UsersFacade);
+  private readonly usersFacade = inject(UsersFacade);
   public readonly users$ = this.componentStore.users$;
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;
@@ -43,11 +42,9 @@ export class UsersListContainerComponent {
     this.componentStore.deleteUser(user);
   }
 
-
   onRedirectToEdit({ id, editMode }: { id: number; editMode: boolean }) {
     this.router.navigate(['/admin/users', id], {
       queryParams: { edit: editMode },
-
     });
   }
 }

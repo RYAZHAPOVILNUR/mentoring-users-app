@@ -1,4 +1,4 @@
-.container{
+.container {
   width: 200px;
   height: 120px;
   display: flex;
@@ -6,27 +6,32 @@
   align-items: center;
   justify-content: center;
 }
-.buttons{
+
+.buttons__container {
   margin-top: 20px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   width: 100%;
 }
-.button{
+
+.button {
   border-radius: 50%;
   background: none;
   border: none;
   margin-right: 10px;
-  &:hover{
+
+  &:hover {
     background-color: lightgray;
     transition: 0.3s;
   }
 }
-.button mat-icon{
+
+.button mat-icon {
   margin-top: 5px;
 }
-.text{
+
+.text {
   font-weight: bold;
   font-size: 16px;
   font-family: "Unica One", arial, helvetica, sans-serif;

@@ -17,6 +17,7 @@ export class MaterialsDeleteDialogComponent {
   onConfirm() {
     this.dialog.close(true);
   }
+
   onCancel() {
     this.dialog.close(false);
   }

@@ -1,13 +1,16 @@
-<button class="card" (click) = 'openFolder()'>
+<button class="card" (click)='openFolder()'>
   <div class="card__container">
-      <div class="card__logo">
-        <div class="card__icon"><mat-icon>folder</mat-icon></div>
-        <button (click)="deleteFolder(folder.id, $event)" class="delete__button"><mat-icon>delete</mat-icon></button>
+    <div class="card__logo">
+      <div class="card__icon">
+        <mat-icon>folder</mat-icon>
       </div>
-
+      <button (click)="deleteFolder(folder.id, $event)" class="delete__button">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
     <div class="card__title">
-      <span>{{folder.title}}</span>
-      <span>{{folder.created_at | date: 'mediumDate'}}</span>
+      <span>{{ folder.title }}</span>
+      <span>{{ folder.created_at | date: 'mediumDate' }}</span>
     </div>
   </div>
 </button>

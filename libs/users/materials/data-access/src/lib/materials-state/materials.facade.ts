@@ -27,14 +27,16 @@ export class MaterialsFacade {
   init() {
     this.store.dispatch(MaterialsActions.initMaterials());
   }
+
   getMaterialsByFolder(folderID: number): Observable<MaterialsEntity[]> {
-   return  this.store.pipe(select(MaterialsSelectors.selectMaterialsByFolderId, {folderID}))
-  }
-  addMaterial(material:CreateMaterialDTO){
-    this.store.dispatch(MaterialsActions.addMaterial({material: material}));
-  }
-  deleteMaterial(id:number){
-    this.store.dispatch(MaterialsActions.deleteMaterial({id}))
+    return this.store.pipe(select(MaterialsSelectors.selectMaterialsByFolderId, { folderID }));
   }
 
+  addMaterial(material: MaterialsEntity) {
+    this.store.dispatch(MaterialsActions.addMaterial({ material: material }));
+  }
+
+  deleteMaterial(id: number) {
+    this.store.dispatch(MaterialsActions.deleteMaterial({ id }));
+  }
 }

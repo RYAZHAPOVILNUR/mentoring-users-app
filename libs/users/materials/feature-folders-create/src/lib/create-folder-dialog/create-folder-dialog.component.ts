@@ -4,6 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+
 @Component({
   selector: 'users-create-folder-dialog',
   standalone: true,
@@ -12,19 +13,17 @@ import { MatCardModule } from '@angular/material/card';
   styleUrls: ['./create-folder-dialog.component.scss'],
 })
 export class CreateFolderDialogComponent {
-  public dialogRef = inject(MatDialogRef<CreateFolderDialogComponent>);
-  folderTitle = new FormControl('', [Validators.required, Validators.minLength(1)]);
+  public readonly dialogRef = inject(MatDialogRef<CreateFolderDialogComponent>);
+  public readonly folderTitle = new FormControl('', [Validators.required, Validators.minLength(1)]);
 
-  closeDialog(){
-    if (this.folderTitle.valid){
-      const folder = this.folderTitle.value;
-      this.dialogRef.close(folder);
+  closeDialog() {
+    if (this.folderTitle.valid) {
+      const folderTitle: string | null = this.folderTitle.value;
+      this.dialogRef.close(folderTitle);
     }
   }
-  cancelDialog(){
+
+  cancelDialog() {
     this.dialogRef.close();
   }
-
-
-
 }

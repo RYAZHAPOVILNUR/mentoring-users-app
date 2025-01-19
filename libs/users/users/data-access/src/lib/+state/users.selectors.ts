@@ -12,11 +12,9 @@ export const selectUsersStatus = createSelector(selectUsersState, (state: UsersS
 
 export const selectUsersError = createSelector(selectUsersState, (state: UsersState) => state.error);
 
-export const selectAllUsers = createSelector(selectUsersState, (state: UsersState) =>{
-    return selectAll(state);
-
-})
-
+export const selectAllUsers = createSelector(selectUsersState, (state: UsersState) => {
+  return selectAll(state);
+});
 
 export const selectUsersEntities = createSelector(selectUsersState, (state: UsersState) => selectEntities(state));
 
@@ -34,20 +32,10 @@ export const selectOpenedUser = createSelector(
   ({ id }, entities) => entities[id] || null
 );
 
-export const usersFilterSelector = createSelector(
-  selectUsersState,
-  (state: UsersState) => state.usersFilter
-)
-export const filteredUsers = createSelector(selectAllUsers,usersFilterSelector, (state, usersFilter ) =>{
-  let users = state
-
-    const filter = usersFilter.filter.toLowerCase();
-    users = users.filter(
-      user =>
-        user.name.toLowerCase().includes(filter) ||
-        user.email.toLowerCase().includes(filter)
-    );
-
-    return users.length !==0 ? users : state
-
-})
+export const usersFilterSelector = createSelector(selectUsersState, (state: UsersState) => state.usersFilter);
+export const filteredUsers = createSelector(selectAllUsers, usersFilterSelector, (state, usersFilter) => {
+  let users = state;
+  const filter = usersFilter.name.toLowerCase();
+  users = users.filter((user) => user.name.toLowerCase().includes(filter) || user.email.toLowerCase().includes(filter));
+  return users.length !== 0 ? users : state;
+});

@@ -1,11 +1,3 @@
-<!--<div class="pdf__container">-->
-<!--&lt;!&ndash;  <ng-container *ngrxLet="pdfSrc as pdfSrc">&ndash;&gt;-->
-<!--<pdf-viewer [src]="pdfUrl" [render-text]="true" style="width: 100%; height: 500px; background-color: #2e7d32"></pdf-viewer>-->
-<!--  {{pdfUrl}}-->
-<!--&lt;!&ndash;</ng-container>&ndash;&gt;-->
-<!--</div>-->
-
-
 <ng-container *ngIf="material?.type === 'pdf'">
   <div #pdfContainer class="pdf__container"></div>
 </ng-container>
@@ -16,5 +8,5 @@
   <div #pdfContainer class="video__container"></div>
 </ng-container>
 <ng-container *ngIf="material?.type === 'default'">
- <div class ='default__container'> <span>File extension does not support</span></div>
+  <div class='default__container'><span>File extension does not support</span></div>
 </ng-container>

@@ -114,29 +114,29 @@
               </button>
 
               <ng-container *ngIf="isStoryPointsEdit" matSuffix>
-              <button
-                mat-icon-button
-                type="button"
-                color="primary"
-                class="edit-user-button__st"
-                matSuffix
-                [disabled]="totalStoryPoints.invalid"
-                (click)="onEditStoryPoints(); editStoryPointToggle()"
-              >
-                <mat-icon>done</mat-icon>
-              </button>
+                <button
+                  mat-icon-button
+                  type="button"
+                  color="primary"
+                  class="edit-user-button__st"
+                  matSuffix
+                  [disabled]="totalStoryPoints.invalid"
+                  (click)="onEditStoryPoints(); editStoryPointToggle()"
+                >
+                  <mat-icon>done</mat-icon>
+                </button>
 
-              <button
-                mat-icon-button
-                type="button"
-                color="primary"
-                class="edit-user-button__st"
-                matSuffix
-                (click)="this.totalStoryPoints.setValue(this.vm.user?.totalStoryPoints || 0); editStoryPointToggle()"
-              >
-                <mat-icon>close</mat-icon>
-              </button>
-            </ng-container>
+                <button
+                  mat-icon-button
+                  type="button"
+                  color="primary"
+                  class="edit-user-button__st"
+                  matSuffix
+                  (click)="this.totalStoryPoints.setValue(this.vm.user?.totalStoryPoints || 0); editStoryPointToggle()"
+                >
+                  <mat-icon>close</mat-icon>
+                </button>
+              </ng-container>
             </mat-form-field>
 
           </div>

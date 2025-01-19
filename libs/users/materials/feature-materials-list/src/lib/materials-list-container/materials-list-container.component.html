@@ -1,16 +1,15 @@
-
 <div class="list">
   <ng-container *ngrxLet="materials$ as materials">
     <div *ngFor="let material of materials">
-      <users-materials-list [material$]="material" class="list__item"></users-materials-list>
+      <users-materials-card [material$]="material" class="list__item"></users-materials-card>
     </div>
   </ng-container>
 </div>
 
-<users-create-materials-button [folder_id]="folder_id" ></users-create-materials-button>
+<users-create-materials-button [folder_id]="folder_id"></users-create-materials-button>
 
 <div class="folder__title">
-<ng-container *ngrxLet="folder$ as folder">
-  {{folder?.title}}
-</ng-container>
+  <ng-container *ngrxLet="folder$ as folder">
+    {{ folder?.title }}
+  </ng-container>
 </div>

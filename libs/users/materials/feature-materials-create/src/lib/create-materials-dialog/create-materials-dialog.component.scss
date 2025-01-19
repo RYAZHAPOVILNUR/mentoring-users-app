@@ -1,4 +1,4 @@
-.custom-dialog{
+.custom-dialog {
   display: flex;
   height: 170px;
   width: 250px;
@@ -7,8 +7,8 @@
   flex-direction: column;
 
 }
-.folder__input
-{
+
+.material__input {
   margin-top: 25px;
   width: 80%;
   padding: 8px;
@@ -22,7 +22,8 @@
     outline: none;
   }
 }
-.folder__buttons-container{
+
+.materials__buttons-container {
   display: flex;
   flex-direction: row;
   gap: 16px;

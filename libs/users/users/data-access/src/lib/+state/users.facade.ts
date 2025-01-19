@@ -60,11 +60,11 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.loadUser());
   }
 
-  editStoryPoints(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType){
-    this.store.dispatch(UsersActions.editStoryPoints({userData, onSuccessCb}))
+  editStoryPoints(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
+    this.store.dispatch(UsersActions.editStoryPoints({ userData, onSuccessCb }));
   }
 
-  setUsersFilter(filter: string){
-    this.store.dispatch(UsersActions.setUsersFilter({usersFilter: {filter}}))
+  setUsersFilter(filter: string) {
+    this.store.dispatch(UsersActions.setUsersFilter({ usersFilter: { name: filter } }));
   }
 }

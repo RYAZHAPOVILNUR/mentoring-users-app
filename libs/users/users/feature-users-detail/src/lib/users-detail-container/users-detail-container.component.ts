@@ -52,16 +52,12 @@ export class UsersDetailComponent {
   }
 
   onCloseUser() {
-    this.router.navigate(['/admin/users'],
-      {queryParamsHandling: 'merge',}
-    );
-
+    this.router.navigate(['/admin/users'], { queryParamsHandling: 'merge' });
   }
 
   onCloseEditMode() {
     this.router.navigate(['/admin/users', this.user.id], {
       queryParams: { edit: false },
-
     });
   }
 
@@ -78,7 +74,6 @@ export class UsersDetailComponent {
       },
     });
 
-
     dialogRef
       .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -91,9 +86,6 @@ export class UsersDetailComponent {
   }
 
   onEditStoryPoints(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
-    this.usersFacade.editStoryPoints(userData, onSuccessCb)
-
+    this.usersFacade.editStoryPoints(userData, onSuccessCb);
   }
-
-
 }
