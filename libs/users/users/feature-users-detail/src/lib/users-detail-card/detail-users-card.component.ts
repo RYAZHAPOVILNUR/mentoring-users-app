@@ -153,7 +153,7 @@ export class DetailUsersCardComponent implements OnInit {
     this.openEditMode.emit();
   }
 
-  /////////////
+  ///////////
 
   areActionsActive = false;
 
@@ -184,7 +184,7 @@ export class DetailUsersCardComponent implements OnInit {
     this.formGroup.get('storypoint')?.disable();
   }
 
-  /////////////
+  ///////////
 
   onCloseUser() {
     this.closeUser.emit();
