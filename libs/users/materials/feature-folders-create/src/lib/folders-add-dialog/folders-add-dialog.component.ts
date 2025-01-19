@@ -5,10 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-
-export interface FolderFormData {
-  folderName: string;
-}
+import { IAddFolder } from 'libs/users/materials/data-access/src/lib/models/folder-add.model';
 
 @Component({
   selector: 'users-folders-add-dialog',
@@ -40,8 +37,8 @@ export class FoldersAddDialogComponent {
 
   save(): void {
     if (this.folderAddFormGroup.valid) {
-      const formData: FolderFormData = {
-        folderName: this.folderAddFormGroup.value.folderName,
+      const formData: IAddFolder = {
+        title: this.folderAddFormGroup.value.folderName,
       };
       this.dialogRef.close(formData);
     }

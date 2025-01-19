@@ -1,10 +1,7 @@
-import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
+import { IAddFolder } from '../models/folder-add.model';
+import { IFolder } from '../models/folder.model';
 
-export const MaterialsActions = createActionGroup({
-  source: 'Materials',
-  events: {
-    'Load Materialss': emptyProps(),
-    'Load Materialss Success': props<{ data: unknown }>(),
-    'Load Materialss Failure': props<{ error: unknown }>(),
-  },
-});
+export const addFolder = createAction('[Materials Folder] Add Folder', props<{ folder: IAddFolder }>());
+export const addFolderSuccess = createAction('[Materials Folder] Add Folder Success', props<{ folder: IFolder }>());
+export const addFolderFailed = createAction('[Materials Folder] Add Folder Failed', props<{ error: string }>());

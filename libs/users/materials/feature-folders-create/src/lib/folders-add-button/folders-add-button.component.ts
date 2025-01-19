@@ -1,9 +1,13 @@
-import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { FolderFormData, FoldersAddDialogComponent } from '../folders-add-dialog/folders-add-dialog.component';
+import { FoldersAddDialogComponent } from '../folders-add-dialog/folders-add-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
+import { IAddFolder } from 'libs/users/materials/data-access/src/lib/models/folder-add.model';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MaterialsFacade } from '@users/materials/data-access';
+import { IFolder } from 'libs/users/materials/data-access/src/lib/models/folder.model';
 
 @Component({
   selector: 'users-folders-add-button',
@@ -16,12 +20,21 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class FoldersAddButtonComponent {
   private readonly dialog = inject(MatDialog);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly materialsFacade = inject(MaterialsFacade);
 
-  openAddFolderDialog(): void {
+  public openAddFolderDialog(): void {
     const dialogRef: MatDialogRef<FoldersAddDialogComponent> = this.dialog.open(FoldersAddDialogComponent);
 
-    dialogRef.afterClosed().subscribe((result: FolderFormData) => {
-      console.log(result);
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((result: IAddFolder) => {
+        console.log(result);
+        const newFolder: IAddFolder = {
+          title: result.title,
+        };
+        this.materialsFacade.addFolder(newFolder);
+      });
   }
 }
