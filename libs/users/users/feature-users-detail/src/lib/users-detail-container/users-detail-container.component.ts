@@ -1,15 +1,17 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
 import { UsersErrors, UsersFacade, onSuccessEditionCbType } from '@users/users/data-access';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, map, tap, } from 'rxjs';
 import { selectQueryParam, CreateUserDTO, UsersEntity } from '@users/core/data-access';
 import { Store, select } from '@ngrx/store';
 import { LetDirective } from '@ngrx/component';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Actions } from '@ngrx/effects';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -20,13 +22,28 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrls: ['./users-detail-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersDetailComponent {
+export class UsersDetailComponent implements OnInit {
   private readonly usersFacade = inject(UsersFacade);
+  private readonly snackBar = inject(MatSnackBar)
   private readonly store = inject(Store);
   private readonly router = inject(Router);
-  public user!: UsersEntity;
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
+  public user!: UsersEntity;
+
+  ngOnInit() {
+    this.usersFacade.storyPointsUpdateSuccess$
+      .pipe(
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe(() => {
+        this.snackBar.open('Story points updated successfully', 'Close', {
+          duration: 2500,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+      });
+  }
 
   public readonly user$: Observable<UsersEntity | null> = this.usersFacade.openedUser$.pipe(
     tap((user) => {
@@ -49,6 +66,10 @@ export class UsersDetailComponent {
     this.router.navigate(['/admin/users', this.user.id], {
       queryParams: { edit: false },
     });
+  }
+
+  public onEditStoryPoints(userStoryPoints: CreateUserDTO) {
+    this.usersFacade.editUserStoryPoint(userStoryPoints, this.user.id)
   }
 
   onCloseUser() {

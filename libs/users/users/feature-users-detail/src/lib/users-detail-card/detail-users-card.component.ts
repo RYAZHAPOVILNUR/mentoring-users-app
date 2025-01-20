@@ -74,6 +74,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
+      this.totalStoryPoints.setValue(vm.user.totalStoryPoints ?? null)
     }
 
     if (vm.editMode) {
@@ -94,11 +95,15 @@ export class DetailUsersCardComponent implements OnInit {
     user: CreateUserDTO;
     onSuccessCb: onSuccessEditionCbType;
   }>();
+  @Output() editStoryPoints = new EventEmitter<{
+    user: CreateUserDTO;
+  }>();
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('snackbarStoryPoints') snackbarStoryPointsTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -110,6 +115,7 @@ export class DetailUsersCardComponent implements OnInit {
   private snackBar = inject(MatSnackBar);
   private readonly destroyRef = inject(DestroyRef);
   public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
+  public totalStoryPoints = new FormControl({ value: 0, disabled: true })
 
   ngOnInit(): void {
     this.checkChangeFields();
@@ -121,6 +127,15 @@ export class DetailUsersCardComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'top',
     });
+
+  onAddStoryPoints() {
+    this.totalStoryPoints.disable()
+    this.editStoryPoints.emit({
+      user: {
+        totalStoryPoints: this.totalStoryPoints.value || 0,
+      },
+    })
+  }
 
   onSubmit(): void {
     this.editUser.emit({
