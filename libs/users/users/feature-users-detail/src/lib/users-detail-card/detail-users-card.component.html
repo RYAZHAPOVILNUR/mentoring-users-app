@@ -106,6 +106,29 @@
             </button>
           </mat-card-actions>
         </form>
+
+        <mat-form-field>
+          <mat-label>Количество сторипоинтов</mat-label>
+          <input type="text" placeholder="Введите Story Points" matInput [formControl]="totalStoryPoints">
+
+          <button
+            type="button"
+            (click)="toggleStoryPoints()"
+            *ngIf="!totalStoryPoints.disabled"
+            matSuffix
+            mat-icon-button
+            aria-label="Confirm"
+            [disabled]="totalStoryPoints.invalid"
+            >
+
+            <mat-icon>done</mat-icon>
+          </button>
+
+          <button type="button" (click)="toggleStoryPoints()" matSuffix mat-icon-button aria-label="Toggle">
+            <mat-icon>{{ totalStoryPoints.disabled ? 'add' : 'close'}}</mat-icon>
+          </button>
+        </mat-form-field>
+
       </mat-card>
     </div>
   </ng-container>
