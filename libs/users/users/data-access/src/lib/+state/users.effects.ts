@@ -155,20 +155,20 @@ export const addUserStoryPoints = createEffect(
         },
         onSuccessAddSP,
       })),
-      switchMap(({ user, onSuccessAddSP }) =>
-        apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
-          map((userData) => ({ userData, onSuccessAddSP })),
-          tap(({ onSuccessAddSP }) => onSuccessAddSP()),
-          map(({ userData }) => UsersActions.addUserStoryPointsSuccess({ userData })),
-          catchError((error) => {
-            console.error('Error', error);
-            return of(UsersActions.addUserStoryPointsFailed({ error }));
-          })
-        )
-      ),
-      catchError((error) => {
-        console.error('Error', error);
-        return of(UsersActions.addUserStoryPointsFailed({ error }));
+      switchMap(({ user, onSuccessAddSP }) => {
+        return apiService
+          .post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user)
+          .pipe(
+            map((userData) => ({ userData, onSuccessAddSP })),
+            tap(({ onSuccessAddSP }) => onSuccessAddSP()),
+            map(({ userData }) => {
+              return UsersActions.addUserStoryPointsSuccess({ userData })
+            }),
+            catchError((error) => {
+              console.error('Error', error);
+              return of(UsersActions.addUserStoryPointsFailed({ error }));
+            })
+          )
       })
     );
   },

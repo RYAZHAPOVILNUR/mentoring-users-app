@@ -74,6 +74,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
+      this.totalStoryPoints.setValue(vm.user.totalStoryPoints ?? 0);
     }
 
     if (vm.editMode) {
