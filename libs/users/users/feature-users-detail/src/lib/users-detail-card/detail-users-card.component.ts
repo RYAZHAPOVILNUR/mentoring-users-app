@@ -132,8 +132,8 @@ export class DetailUsersCardComponent implements OnInit {
     this.totalStoryPoints.disable()
     this.editStoryPoints.emit({
       user: {
-        name: this.formGroup.value.name || '',
-        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        // name: this.formGroup.value.name || '',
+        // email: this.formGroup.value.email?.trim().toLowerCase() || '',
         totalStoryPoints: this.totalStoryPoints.value || 0,
       },
     })

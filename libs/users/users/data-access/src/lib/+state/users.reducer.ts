@@ -55,11 +55,11 @@ const reducer = createReducer(
       state
     )
   ),
-  on(UsersActions.editUserStoryPointsSuccess, (state, { userStoryPoints }) =>
+  on(UsersActions.editUserStoryPointsSuccess, (state, { userData, id }) =>
     usersAdapter.updateOne(
       {
-        id: userStoryPoints.id,
-        changes: { totalStoryPoints: userStoryPoints.totalStoryPoints }
+        id,
+        changes: { totalStoryPoints: userData.totalStoryPoints }
       },
       { ... state, status: 'loaded' as const}
     )

@@ -42,8 +42,8 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.editUser({ userData, id, onSuccessCb }));
   }
 
-  editUserStoryPoint(userStoryPoints: CreateUserDTO, id: number) {
-    this.store.dispatch(UsersActions.editUserStoryPoints({ userStoryPoints, id }))
+  editUserStoryPoint(userData: CreateUserDTO, id: number) {
+    this.store.dispatch(UsersActions.editUserStoryPoints({ userData, id }))
   }
 
   getUserFromStore(id: number) {
