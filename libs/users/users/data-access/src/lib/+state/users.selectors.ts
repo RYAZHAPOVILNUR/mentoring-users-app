@@ -1,8 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { USERS_FEATURE_KEY, UsersState, usersAdapter } from './users.reducer';
-import { selectQueryParam, selectQueryParams, selectRouteParams } from '@users/core/data-access';
+import {  selectRouteParams } from '@users/core/data-access';
 
-// Lookup the 'Users' feature state managed by NgRx
 export const selectUsersState = createFeatureSelector<UsersState>(USERS_FEATURE_KEY);
 
 const { selectAll, selectEntities } = usersAdapter.getSelectors();
@@ -28,3 +27,13 @@ export const selectOpenedUser = createSelector(
   selectUsersEntities,
   ({ id }, entities) => entities[id] || null
 );
+
+export const usersFilterSelector = createSelector(selectUsersState, (state) => state.usersFilter);
+
+export const filteredUsers = createSelector(
+  selectAllUsers,
+  usersFilterSelector,
+  (allUsers, usersFilter) => {
+    if (!usersFilter.name) return allUsers;
+    return allUsers.filter((user) => user.name.includes(usersFilter.name));    
+  });
