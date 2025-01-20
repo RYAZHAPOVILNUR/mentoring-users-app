@@ -7,11 +7,12 @@ import { UsersErrors } from './users.reducer';
 import { onSuccessEditionCbType } from './users.actions';
 import { selectLoggedUser } from '@auth/data-access';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { Actions, ofType } from '@ngrx/effects';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
   private readonly store = inject(Store);
-
+  private readonly actions$ = inject(Actions)
   /**
    * Combine pieces of state using createSelector,
    * and expose them as observables through the facade.
@@ -22,6 +23,8 @@ export class UsersFacade {
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
   public readonly loggedUser$ = this.store.select(selectLoggedUser);
   public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError));
+  public readonly storyPointsUpdateSuccess$ = this.actions$.pipe(
+    ofType(UsersActions.editUserStoryPointsSuccess));
   /**
    * Use the initialization action to perform one
    * or more tasks in your Effects.

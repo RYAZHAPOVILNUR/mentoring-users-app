@@ -11,8 +11,7 @@ import { LetDirective } from '@ngrx/component';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Actions, ofType } from '@ngrx/effects';
-import * as UsersActions from '@users/users/data-access';
+import { Actions } from '@ngrx/effects';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -30,13 +29,11 @@ export class UsersDetailComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
-  private readonly actions$ = inject(Actions);
   public user!: UsersEntity;
 
   ngOnInit() {
-    this.actions$
+    this.usersFacade.storyPointsUpdateSuccess$
       .pipe(
-        ofType(UsersActions.editUserStoryPointsSuccess),
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(() => {
