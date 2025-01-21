@@ -9,6 +9,8 @@ import { UsersFacade } from '@users/users/data-access';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { UsersFilterComponent} from 'libs/users/users/feature-users-list/users-filter/users-filter.component';
 
 @Component({
   selector: 'users-list-container',
@@ -20,6 +22,7 @@ import { CreateUsersButtonComponent } from '@users/feature-users-create';
     MatDialogModule,
     LetDirective,
     CreateUsersButtonComponent,
+    UsersFilterComponent
   ],
   templateUrl: './users-list-container.component.html',
   styleUrls: ['./users-list-container.component.scss'],
