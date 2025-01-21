@@ -12,7 +12,6 @@
     </ng-template>
     <span>{{ user.id === loggedUser.id ? 'Ментор' : 'Ученик' }}</span>
   </mat-card-content>
-
   <mat-menu #menu="matMenu">
     <button mat-menu-item color="accent" (click)="redirectToEditPage(true, $event)">Редактировать</button>
     <button

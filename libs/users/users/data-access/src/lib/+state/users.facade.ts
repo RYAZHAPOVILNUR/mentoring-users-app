@@ -8,6 +8,7 @@ import { onSuccessEditionCbType } from './users.actions';
 import { selectLoggedUser } from '@auth/data-access';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
 
+
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
   private readonly store = inject(Store);
@@ -22,10 +23,16 @@ export class UsersFacade {
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
   public readonly loggedUser$ = this.store.select(selectLoggedUser);
   public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError));
+  public readonly filteredUsers$ = this.store.select(UsersSelectors.selectFilteredUsers);
   /**
    * Use the initialization action to perform one
    * or more tasks in your Effects.
    */
+
+  usersFilter( filter: {name: string} ) {
+    this.store.dispatch(UsersActions.setUsersFilter({filter}));
+  }
+
   init() {
     this.store.dispatch(UsersActions.initUsers());
   }

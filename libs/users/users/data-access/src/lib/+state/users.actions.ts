@@ -20,6 +20,8 @@ export const addUserFailed = createAction('[Users/Api] Add User Failed', props<{
 
 // export const selectId = createAction('[Users Page] Select Id', props<{ id: number }>());
 
+export const setUsersFilter = createAction('[Users Filter] Set Users Filter', props<{ filter: { name: string } }>());
+
 // export const deleteSelectedId = createAction('[Users Page] Delete Selected Id');
 
 export const editUser = createAction(

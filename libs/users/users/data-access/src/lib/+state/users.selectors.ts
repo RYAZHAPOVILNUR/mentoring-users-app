@@ -7,6 +7,8 @@ export const selectUsersState = createFeatureSelector<UsersState>(USERS_FEATURE_
 
 const { selectAll, selectEntities } = usersAdapter.getSelectors();
 
+
+
 export const selectUsersStatus = createSelector(selectUsersState, (state: UsersState) => state.status);
 
 export const selectUsersError = createSelector(selectUsersState, (state: UsersState) => state.error);
@@ -16,6 +18,13 @@ export const selectAllUsers = createSelector(selectUsersState, (state: UsersStat
 export const selectUsersEntities = createSelector(selectUsersState, (state: UsersState) => selectEntities(state));
 
 export const selectSelectedId = createSelector(selectUsersState, (state: UsersState) => state.selectedId);
+
+export const selectUsersFilter = createSelector(selectUsersState, (state: UsersState) => state.usersFilter);
+
+export const selectFilteredUsers = createSelector(selectAllUsers, selectUsersFilter, (users, filter) => {
+    return users.filter(user => user.name.toLowerCase().includes(filter.name.toLowerCase()));
+  }
+);
 
 export const selectEntity = createSelector(selectUsersEntities, selectSelectedId, (entities, selectedId) =>
   selectedId ? entities[selectedId] : undefined
