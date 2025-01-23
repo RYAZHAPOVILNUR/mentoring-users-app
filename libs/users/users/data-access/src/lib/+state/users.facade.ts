@@ -4,11 +4,10 @@ import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
 import { Observable, of, switchMap } from 'rxjs';
 import { UsersErrors } from './users.reducer';
-import { addUserStoryPoints, onSuccessEditionCbType, onSuccessSPonCbType } from './users.actions';
+import { onSuccessEditionCbType, onSuccessSPonCbType } from './users.actions';
 import { selectLoggedUser } from '@auth/data-access';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
 import { IUsersFilter } from '../utils/users-filter.interface';
-import { selectFilteredUsers } from './users.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {

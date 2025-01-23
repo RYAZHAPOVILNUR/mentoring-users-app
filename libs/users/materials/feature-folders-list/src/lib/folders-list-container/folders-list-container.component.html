@@ -1,2 +1,10 @@
-<materials-folders-list>
-</materials-folders-list>
+
+<ng-container
+  *ngrxLet="{
+    status: status$,
+    folders: folders$,
+    errors: errors$
+  } as vm"
+>
+  <materials-folders-list [vm]="vm"></materials-folders-list>
+</ng-container>

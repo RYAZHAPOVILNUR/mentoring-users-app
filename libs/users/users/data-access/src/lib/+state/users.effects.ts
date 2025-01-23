@@ -6,7 +6,6 @@ import { ApiService } from '@users/core/http';
 import { Store, select } from '@ngrx/store';
 import { selectUsersEntities } from './users.selectors';
 import { CreateUserDTO, UsersDTO, UsersEntity, selectRouteParams, usersDTOAdapter } from '@users/core/data-access';
-import { addUserStoryPointsFailed, addUserStoryPointsSuccess } from './users.actions';
 
 export const userEffects = createEffect(
   () => {
