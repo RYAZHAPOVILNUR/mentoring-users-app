@@ -1,0 +1,12 @@
+
+<form (ngSubmit)="onSubmit()" [formGroup]="usersFilter">
+
+  <div class="usersFilterForm">
+    <mat-form-field class="example-full-width">
+      <mat-label> Фильтр </mat-label>
+      <input matInput placeholder="Name" formControlName="name">
+    </mat-form-field>
+    <button mat-raised-button type="submit" > Применить </button>
+  </div>
+
+</form>
