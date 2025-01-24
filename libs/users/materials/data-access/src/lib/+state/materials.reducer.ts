@@ -25,11 +25,17 @@ export interface MaterialsPartialState {
 
 export const reducer = createReducer(
   initialMaterialsState,
+  on(MaterialsActions.loadFolders, (state) => ({ ...state, loading: 'loading' as const })),
+  on(MaterialsActions.loadFoldersSuccess, (state, { folders }) =>
+    materialsAdapter.setAll(folders, { ...state, status: 'loaded' as const })
+  ),
+  on(MaterialsActions.loadFoldersFailed, (state, { error }) => ({ ...state, status: 'error' as const, error })),
   on(MaterialsActions.addFolder, (state) => ({ ...state, loading: 'loading' as const })),
   on(MaterialsActions.addFolderSuccess, (state, { folder }) =>
     materialsAdapter.addOne({ ...folder }, { ...state, loading: 'loaded' as const })
   ),
-  on(MaterialsActions.addFolderFailed, (state, { error }) => ({ ...state, status: 'error' as const, error }))
+  on(MaterialsActions.addFolderFailed, (state, { error }) => ({ ...state, status: 'error' as const, error })),
+  on(MaterialsActions.deleteFolderSuccess, (state, { id }) => materialsAdapter.removeOne(id, { ...state }))
 );
 
 export function materialsReducer(state: MaterialsState | undefined, action: Action) {

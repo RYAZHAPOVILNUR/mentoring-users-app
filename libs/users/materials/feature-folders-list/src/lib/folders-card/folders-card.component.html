@@ -1,1 +1,10 @@
-<p>folders-card works!</p>
+<mat-card class="folder-card-container">
+  <mat-card-content>
+    <div class="folder-card-top">
+      <mat-icon>folder</mat-icon>
+      <button class="delete-btn" (click)="onDeleteFolder($event)"><mat-icon>delete</mat-icon></button>
+    </div>
+      <div class="folder-card-title">{{folder.title}}</div>
+      <div class="folder-card-date">{{translateDate(folder.created_at)}}</div>
+  </mat-card-content>
+</mat-card>

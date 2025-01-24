@@ -30,7 +30,7 @@ export class FoldersAddButtonComponent {
       .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((result: IAddFolder) => {
-        console.log(result);
+        console.log('result', result);
         const newFolder: IAddFolder = {
           title: result.title,
         };
