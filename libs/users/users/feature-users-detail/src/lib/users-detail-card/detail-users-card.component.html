@@ -1,7 +1,6 @@
 <ng-container *ngIf="vm.status === 'loading'; else loadingResult">
   <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
 </ng-container>
-
 <ng-template #loadingResult>
   <ng-container *ngIf="vm.status === 'loaded'; else error">
     <div class="edit-user-container">
@@ -16,8 +15,7 @@
             color="accent"
             class="edit-user-button"
             *ngIf="!vm.editMode"
-            (click)="onOpenEditMode()"
-          >
+            (click)="onOpenEditMode()">
             <mat-icon>edit</mat-icon>
           </button>
           <button
@@ -26,8 +24,7 @@
             color="accent"
             class="edit-user-button"
             *ngIf="vm.editMode"
-            (click)="onDeleteUser()"
-          >
+            (click)="onDeleteUser()">
             <mat-icon>delete</mat-icon>
           </button>
         </div>
@@ -39,41 +36,33 @@
             <mat-form-field
               class="edit-user-field"
               [matTooltip]="vm.user!.name"
-              [matTooltipDisabled]="formGroup.enabled"
-            >
+              [matTooltipDisabled]="formGroup.enabled">
               <mat-label>Имя:</mat-label>
               <input matInput placeholder="Имя*" formControlName="name" class="edit-user-input" />
               <mat-error *ngIf="formGroup.hasError('required', 'name')">Это поле обязательно для заполнения</mat-error>
             </mat-form-field>
-
             <mat-form-field
               class="edit-user-field"
               [matTooltip]="vm.user!.email"
-              [matTooltipDisabled]="formGroup.enabled"
-            >
+              [matTooltipDisabled]="formGroup.enabled">
               <mat-label>Электронная почта:</mat-label>
               <input matInput placeholder="Электронная почта*" formControlName="email" class="edit-user-input" />
               <mat-error
-                *ngIf="formGroup.get('email')?.hasError('required') || formGroup.get('email')?.hasError('email')"
-              >
+                *ngIf="formGroup.get('email')?.hasError('required') || formGroup.get('email')?.hasError('email')">
                 Введите корректную электронную почту
               </mat-error>
             </mat-form-field>
-
             <mat-form-field
               class="edit-user-field"
               [matTooltip]="vm.user!.username"
-              [matTooltipDisabled]="formGroup.enabled"
-            >
+              [matTooltipDisabled]="formGroup.enabled">
               <mat-label>Имя пользователя:</mat-label>
               <input matInput placeholder="Имя пользователя" formControlName="username" class="edit-user-input" />
             </mat-form-field>
-
             <mat-form-field
               class="edit-user-field"
               [matTooltip]="vm.user!.city"
-              [matTooltipDisabled]="formGroup.enabled"
-            >
+              [matTooltipDisabled]="formGroup.enabled">
               <mat-label>Город:</mat-label>
               <input
                 type="text"
@@ -81,8 +70,47 @@
                 placeholder="Введите город"
                 matInput
                 formControlName="city"
-                [matAutocomplete]="auto"
-              />
+                [matAutocomplete]="auto"/>
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let suggestion of citySuggestions | ngrxPush" [value]="suggestion">
+                  {{ suggestion }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <mat-form-field class="edit-user-field">
+              <mat-label>Сторипоинты:</mat-label>
+              <input
+                type="text"
+                class="edit-user-input"
+                placeholder="Введите количество"
+                matInput
+                [formControl]="totalStorypoints"
+                [matAutocomplete]="auto"/>
+              <button
+                mat-icon-button
+                area-label="add storypoints"
+                matSuffix
+                *ngIf="totalStorypoints.disabled"
+                (click)="totalStorypoints.enable()">
+                <mat-icon>add</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                area-label="add storypoints"
+                matSuffix
+                *ngIf="!totalStorypoints.disabled"
+                (click)="onAddStorypoints()">
+                <mat-icon>done</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                area-label="close storypoints"
+                type="button"
+                matSuffix
+                *ngIf="!totalStorypoints.disabled"
+                (click)="totalStorypoints.reset()">
+                <mat-icon>close</mat-icon>
+              </button>
               <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                 <mat-option *ngFor="let suggestion of citySuggestions | ngrxPush" [value]="suggestion">
                   {{ suggestion }}
@@ -96,11 +124,9 @@
               color="primary"
               type="submit"
               [disabled]="formGroup.invalid || (areFieldsChanged$ | ngrxPush) === false"
-              aria-label="submit new user data"
-            >
+              aria-label="submit new user data">
               <mat-icon>done</mat-icon>
             </button>
-
             <button mat-icon-button color="warn" type="button" aria-label="Close edit mode" (click)="onCloseEditMode()">
               <mat-icon>close</mat-icon>
             </button>
@@ -110,7 +136,6 @@
     </div>
   </ng-container>
 </ng-template>
-
 <ng-template #error>
   <div class="alert alert-danger" role="alert">
     <h1>{{ vm.errors?.status }}</h1>
@@ -118,7 +143,6 @@
     Данный пользователь не найден
   </div>
 </ng-template>
-
 <ng-template #snackbar>
   <div class="edit-user-snackbar">
     <span>Пользователь успешно изменён!</span>
