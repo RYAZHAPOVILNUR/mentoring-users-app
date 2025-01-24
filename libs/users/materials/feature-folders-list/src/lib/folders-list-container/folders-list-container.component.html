@@ -1,0 +1,14 @@
+<p>folders-list-container works!</p>
+
+<ng-container
+  *ngrxLet="{
+    users: users$,
+    status: status$,
+    errors: errors$,
+    loggedUser: loggedUser$
+  } as vm"
+>
+  <!-- <users-list-users-filter (UserFilter)="onFilterUser($event)"></users-list-users-filter> -->
+  <!-- <users-list-ui [vm]="vm" (deleteUser)="onDeleteUser($event)" (redirectToEdit)="onRedirectToEdit($event)" /> -->
+</ng-container>
+<!-- <create-users-button></create-users-button> -->
