@@ -8,7 +8,6 @@ import { onSuccessEditionCbType } from './users.actions';
 import { selectLoggedUser } from '@auth/data-access';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
 
-
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
   private readonly store = inject(Store);
@@ -29,8 +28,12 @@ export class UsersFacade {
    * or more tasks in your Effects.
    */
 
-  usersFilter( filter: {name: string} ) {
-    this.store.dispatch(UsersActions.setUsersFilter({filter}));
+  // addStoryPoints(userData: CreateUserDTO, id: number, onSuccessAddSP: onSuccessSPonCbType) {
+  //   this.store.dispatch(UsersActions.addUserStoryPoints({ userData, id, onSuccessAddSP }));
+  // }
+
+  usersFilter(filter: { name: string }) {
+    this.store.dispatch(UsersActions.setUsersFilter({ filter }));
   }
 
   init() {

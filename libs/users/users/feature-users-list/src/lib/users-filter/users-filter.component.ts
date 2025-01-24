@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {  MatButtonModule } from '@angular/material/button';
-import {  MatFormFieldModule } from '@angular/material/form-field';
-import {  MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { UsersFacade } from '@users/users/data-access';
 import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 
@@ -23,12 +23,8 @@ export class UsersFilterComponent {
 
   ngOnInit() {
     this.inputName.valueChanges
-      .pipe(
-        takeUntil(this.destroy$),
-        debounceTime(1000),
-        distinctUntilChanged()
-      )
-      .subscribe(name => {
+      .pipe(debounceTime(1000), distinctUntilChanged(), takeUntil(this.destroy$))
+      .subscribe((name) => {
         this.usersFacade.usersFilter({ name: name || '' });
       });
   }

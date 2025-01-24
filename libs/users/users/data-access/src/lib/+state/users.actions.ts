@@ -3,6 +3,7 @@ import { UsersErrors } from './users.reducer';
 import { CreateUserDTO, LoadingStatus, UsersDTO, UsersEntity } from '@users/core/data-access';
 
 export type onSuccessEditionCbType = () => void;
+export type onSuccessSPonCbType = () => void;
 
 export const initUsers = createAction('[Users Page] Init');
 
@@ -18,11 +19,7 @@ export const addUser = createAction('[Users Page] Add User', props<{ userData: C
 export const addUserSuccess = createAction('[Users/Api] Add User Success', props<{ userData: UsersEntity }>());
 export const addUserFailed = createAction('[Users/Api] Add User Failed', props<{ error: any }>());
 
-// export const selectId = createAction('[Users Page] Select Id', props<{ id: number }>());
-
 export const setUsersFilter = createAction('[Users Filter] Set Users Filter', props<{ filter: { name: string } }>());
-
-// export const deleteSelectedId = createAction('[Users Page] Delete Selected Id');
 
 export const editUser = createAction(
   '[Users Detail] Edit User',

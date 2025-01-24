@@ -60,9 +60,11 @@ export class DetailUsersCardComponent implements OnInit {
     status: 'init',
     errors: null,
   };
+
   public get vm() {
     return this._vm;
   }
+
   @Input({ required: true })
   set vm(vm: DetailUsersCardVm) {
     this._vm = vm;
@@ -74,6 +76,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
+      this.totalStoryPoints.setValue(this.vm.user?.totalStoryPoints);
     }
 
     if (vm.editMode) {
@@ -90,7 +93,15 @@ export class DetailUsersCardComponent implements OnInit {
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
 
+  pointsEdit: boolean = false;
+
+  public totalStoryPoints: any = new FormControl({ value: 0, disabled: true });
+
   @Output() editUser = new EventEmitter<{
+    user: CreateUserDTO;
+    onSuccessCb: onSuccessEditionCbType;
+  }>();
+  @Output() addStoryPoints = new EventEmitter<{
     user: CreateUserDTO;
     onSuccessCb: onSuccessEditionCbType;
   }>();
@@ -134,6 +145,22 @@ export class DetailUsersCardComponent implements OnInit {
       },
       onSuccessCb: this.onEditSuccess,
     });
+  }
+
+  onAddPoints(): void {
+    this.addStoryPoints.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        username: this.formGroup.value.username || '',
+        city: this.formGroup.value.city || '',
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        purchaseDate: new Date().toString() || '',
+        educationStatus: 'trainee',
+        totalStoryPoints: this.totalStoryPoints.value || 0,
+      },
+      onSuccessCb: this.onEditSuccess,
+    });
+    this.totalStoryPoints.disable();
   }
 
   onCloseUser() {

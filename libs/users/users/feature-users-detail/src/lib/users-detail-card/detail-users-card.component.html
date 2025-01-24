@@ -106,6 +106,34 @@
             </button>
           </mat-card-actions>
         </form>
+        <!--  -->
+        <div class="edit-user-points">
+          <mat-form-field class="edit-user-field">
+            <mat-label>Количество сторипоинтов</mat-label>
+            <input type="text" class="edit-user-input" matInput [formControl]="totalStoryPoints" />
+          </mat-form-field>
+          <button
+            class="edit-user-points-button"
+            *ngIf="totalStoryPoints.disabled"
+            mat-icon-button
+            (click)="totalStoryPoints.enable()"
+            type="button"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+
+          <div *ngIf="!totalStoryPoints.disabled" class="edit-user-buttons">
+            <button (click)="onAddPoints()" mat-icon-button type="button">
+              <mat-icon>done</mat-icon>
+            </button>
+            <button (click)="totalStoryPoints.disable()" mat-icon-button type="button">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+        </div>
+        <p>{{ vm.user?.totalStoryPoints }}</p>
+        <p>{{ pointsEdit }}</p>
+        <!--  -->
       </mat-card>
     </div>
   </ng-container>

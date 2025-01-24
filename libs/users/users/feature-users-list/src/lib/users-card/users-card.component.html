@@ -13,8 +13,9 @@
     <span>{{ user.id === loggedUser.id ? 'Ментор' : 'Ученик' }}</span>
   </mat-card-content>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item color="accent" (click)="redirectToEditPage(true, $event)">Редактировать</button>
+    <button type="button" mat-menu-item color="accent" (click)="redirectToEditPage(true, $event)">Редактировать</button>
     <button
+      type="button"
       mat-menu-item
       color="warn"
       [disabled]="user.isAdmin || user.id === loggedUser.id"
@@ -25,7 +26,7 @@
   </mat-menu>
 
   <mat-card-actions class="user-card-buttons">
-    <button mat-icon-button (click)="onOpenMenu($event)" [matMenuTriggerFor]="menu">
+    <button type="button" mat-icon-button (click)="onOpenMenu($event)" [matMenuTriggerFor]="menu">
       <mat-icon>more_horiz</mat-icon>
     </button>
   </mat-card-actions>
