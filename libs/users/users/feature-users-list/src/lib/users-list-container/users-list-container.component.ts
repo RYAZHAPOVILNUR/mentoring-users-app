@@ -9,6 +9,7 @@ import { UsersFacade } from '@users/users/data-access';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
+import { UserFilter } from '../user-filter/user-filter.component';
 
 @Component({
   selector: 'users-list-container',
@@ -20,6 +21,7 @@ import { CreateUsersButtonComponent } from '@users/feature-users-create';
     MatDialogModule,
     LetDirective,
     CreateUsersButtonComponent,
+    UserFilter
   ],
   templateUrl: './users-list-container.component.html',
   styleUrls: ['./users-list-container.component.scss'],
@@ -45,4 +47,6 @@ export class UsersListContainerComponent {
       queryParams: { edit: editMode },
     });
   }
+
+  
 }
