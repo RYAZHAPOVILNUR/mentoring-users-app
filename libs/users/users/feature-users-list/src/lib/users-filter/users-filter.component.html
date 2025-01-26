@@ -1,0 +1,13 @@
+<form [formGroup]="form" class="cards__item">
+  <mat-form-field>
+    <mat-label>Фильтр</mat-label>
+    <input
+      #filterInput
+      matInput
+      type="text"
+      class="filter-input"
+      formControlName="filter"
+      placeholder="Введите значение"
+    />
+  </mat-form-field>
+</form>

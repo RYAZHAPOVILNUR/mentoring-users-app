@@ -9,6 +9,7 @@ import { UsersFacade } from '@users/users/data-access';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
+import { UsersFilterComponent } from '../users-filter/users-filter.component';
 
 @Component({
   selector: 'users-list-container',
@@ -20,6 +21,7 @@ import { CreateUsersButtonComponent } from '@users/feature-users-create';
     MatDialogModule,
     LetDirective,
     CreateUsersButtonComponent,
+    UsersFilterComponent,
   ],
   templateUrl: './users-list-container.component.html',
   styleUrls: ['./users-list-container.component.scss'],
@@ -38,6 +40,10 @@ export class UsersListContainerComponent {
 
   onDeleteUser(user: UsersVM) {
     this.componentStore.deleteUser(user);
+  }
+
+  onFilterUsers(name: string) {
+    this.componentStore.filterUsers(name);
   }
 
   onRedirectToEdit({ id, editMode }: { id: number; editMode: boolean }) {
