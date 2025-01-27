@@ -12,8 +12,8 @@ import { debounceTime, startWith, Subject } from 'rxjs';
   styleUrls: ['./users-filter.component.scss'],
 })
 export class UsersFilterComponent implements OnInit {
-  private usersFacade = inject(UsersFacade);
-  private inputSubject = new Subject<string>();
+  private readonly usersFacade = inject(UsersFacade);
+  private readonly inputSubject = new Subject<string>();
 
   ngOnInit(): void {
     this.inputSubject.pipe(startWith(''), debounceTime(300)).subscribe((inputText) => {

@@ -34,7 +34,5 @@ export const usersFilterSelector = createSelector(selectUsersState, (state: User
 
 export const selectFilteredUsers = createSelector(usersFilterSelector, selectAllUsers, (usersFilter, allUsers) => {
   if (!usersFilter.name) return allUsers;
-  {
-    return allUsers.filter((user) => user.name.includes(usersFilter.name));
-  }
+  return allUsers.filter((user) => user.name.includes(usersFilter.name));
 });
