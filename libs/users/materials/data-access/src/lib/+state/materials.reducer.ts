@@ -3,7 +3,6 @@ import * as MaterialsActions from './materials.actions';
 import { TFoldersEntity } from '../models/folders/folders.entity';
 import { LoadingStatus } from '@users/core/data-access';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { IFoldersActionSuccess } from '../models/folders/folder-action-success.interface';
 
 export const MATERIALS_FEATURE_KEY = 'materials';
 
@@ -38,13 +37,19 @@ export const materialsFeature = createFeature({
       ...state,
       status: 'loading' as const,
     })),
-    on(MaterialsActions.loadFolderSuccess, (state, { folders }: IFoldersActionSuccess) => {
-      return materialsAdapter.setAll(folders, {
+    on(MaterialsActions.loadFolderSuccess, (state, { folders }) =>
+      materialsAdapter.setAll(folders, {
         ...state,
         status: 'loaded' as const,
-      });
-    }),
+      })
+    ),
     on(MaterialsActions.loadFolderFailure, (state, { error }) => ({
+      ...state,
+      status: 'error' as const,
+      error,
+    })),
+    on(MaterialsActions.deleteFolderSuccess, (state, { id }) => materialsAdapter.removeOne(id, { ...state })),
+    on(MaterialsActions.deleteFolderFailed, (state, { error }) => ({
       ...state,
       status: 'error' as const,
       error,

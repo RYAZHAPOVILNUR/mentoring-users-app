@@ -6,5 +6,5 @@
     errors: errors$
   } as vm"
 >
-  <materials-folders-list [vm]="vm"></materials-folders-list>
+  <materials-folders-list [vm]="vm" (deleteFolder)="onDeleteFolder($event)"></materials-folders-list>
 </ng-container>

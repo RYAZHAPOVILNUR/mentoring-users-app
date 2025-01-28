@@ -31,3 +31,24 @@ export const loadFolders = createEffect(
   },
   { functional: true }
 );
+
+export const deleteFolder = createEffect(
+  () => {
+    const action$ = inject(Actions);
+    const apiService = inject(ApiService);
+
+    return action$.pipe(
+      ofType(MaterialActions.deleteFolder),
+      switchMap(({ id }) =>
+        apiService.delete<void>(`/folder/${id}`).pipe(
+          map(() => MaterialActions.deleteFolderSuccess({ id })),
+          catchError((error) => {
+            console.log('Error', error);
+            return of(MaterialActions.deleteFolderFailed({ error }));
+          })
+        )
+      )
+    );
+  },
+  { functional: true }
+);

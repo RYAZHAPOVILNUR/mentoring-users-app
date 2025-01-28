@@ -10,6 +10,7 @@
         <div class="col-md-3 mb-3" *ngFor="let folder of vm.folders">
           <materials-folder-card
             [folder]="folder"
+            (deleteFolder)="onDeleteFolder(folder)"
           />
         </div>
       </div>

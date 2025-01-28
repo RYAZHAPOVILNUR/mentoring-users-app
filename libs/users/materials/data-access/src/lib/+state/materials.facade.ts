@@ -18,4 +18,8 @@ export class MaterialsFacade {
   public init() {
     this.store.dispatch(MaterialsActions.loadFolders());
   }
+
+  public deleteFolder(id: number): void {
+    this.store.dispatch(MaterialsActions.deleteFolder({ id }));
+  }
 }

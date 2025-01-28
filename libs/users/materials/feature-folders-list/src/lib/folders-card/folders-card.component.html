@@ -7,11 +7,10 @@
     ></mat-icon>
     <div class="folder-card-content__title">{{folder.title}}</div>
     <div class="folder-card-content__date">{{folder.createdAt | date: 'd MMMM, yyyy'}}</div>
-  
   </mat-card-content>
   
   <mat-card-actions class="folder-card-buttons">
-    <button mat-icon-button class="folder-card-buttons__btn" *ngIf="isIconVisible$ | async">
+    <button mat-icon-button class="folder-card-buttons__btn" *ngIf="isIconVisible$ | async" (click)="onDeleteFolder()">
       <mat-icon>delete</mat-icon>
     </button>
   </mat-card-actions>

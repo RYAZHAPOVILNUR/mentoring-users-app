@@ -21,6 +21,7 @@ import { tasksEffects, tasksFeature } from '@users/users/task/data-access';
 import { CLIENT_ID, githubApiEffects, githubApiFeature } from '@users/core/github-api/data-access';
 import { backlogFeature, backlogEffects } from '@users/users/backlog/data-access';
 import { materialsEffects, materialsFeature } from '@users/materials/data-access';
+import { DatePipe } from '@angular/common';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -89,5 +90,6 @@ export const appConfig: ApplicationConfig = {
         defaultLanguage: 'en',
       })
     ),
+    DatePipe,
   ],
 };

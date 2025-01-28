@@ -12,3 +12,24 @@ export const loadFolderFailure = createAction(
   }>()
 );
 console.log('Убрать any из error');
+
+export const deleteFolder = createAction(
+  '[Materials Page] Delete Folder',
+  props<{
+    id: number;
+  }>()
+);
+
+export const deleteFolderSuccess = createAction(
+  '[Materials Page] Delete Folder Success',
+  props<{
+    id: number;
+  }>()
+);
+
+export const deleteFolderFailed = createAction(
+  '[Materials Page] Delete Folder Failed',
+  props<{
+    error: any;
+  }>()
+);
