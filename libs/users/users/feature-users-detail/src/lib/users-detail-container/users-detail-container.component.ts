@@ -51,6 +51,25 @@ export class UsersDetailComponent {
     });
   }
 
+  public onEditStorypointsUser(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
+    this.usersFacade.editStorypointsUser(
+      {
+        ...userData,
+        name: this.user.name || '',
+        username: this.user.username || '',
+        city: this.user.city || '',
+        email: this.user.email?.trim().toLowerCase() || '',
+        purchaseDate: new Date().toString() || '',
+        educationStatus: 'trainee',
+      },
+      this.user.id,
+      onSuccessCb
+    );
+    this.router.navigate(['/admin/users', this.user.id], {
+      queryParams: { edit: false },
+    });
+  }
+
   onCloseUser() {
     this.router.navigate(['/admin/users']);
   }

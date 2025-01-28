@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   DestroyRef,
   EventEmitter,
@@ -11,7 +12,7 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { onSuccessEditionCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -48,6 +49,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     MatSnackBarModule,
     MatAutocompleteModule,
     PushPipe,
+    AsyncPipe,
   ],
   templateUrl: './detail-users-card.component.html',
   styleUrls: ['./detail-users-card.component.scss'],
@@ -73,6 +75,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: vm.user.email,
         username: vm.user.username,
         city: vm.user.city,
+        storypoints: vm.user.totalStoryPoints,
       });
     }
 
@@ -83,11 +86,14 @@ export class DetailUsersCardComponent implements OnInit {
     }
   }
 
+  public isStorypointsEditable$ = new BehaviorSubject<boolean>(false);
+
   public formGroup = new FormBuilder().group({
     name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    storypoints: new FormControl({ value: 0, disabled: !this.isStorypointsEditable$.value }),
   });
 
   @Output() editUser = new EventEmitter<{
@@ -98,7 +104,9 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
+  @Output() editStorypointsUser = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('snackbarPoints') snackbarPointsTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -122,6 +130,13 @@ export class DetailUsersCardComponent implements OnInit {
       verticalPosition: 'top',
     });
 
+  private onEditStorypointsSuccess: onSuccessEditionCbType = () =>
+    this.snackBar.openFromTemplate(this.snackbarPointsTemplateRef, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+
   onSubmit(): void {
     this.editUser.emit({
       user: {
@@ -129,6 +144,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: this.formGroup.value.username || '',
         city: this.formGroup.value.city || '',
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        totalStoryPoints: this.formGroup.value.storypoints || 0,
         purchaseDate: new Date().toString() || '',
         educationStatus: 'trainee',
       },
@@ -171,5 +187,26 @@ export class DetailUsersCardComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  public onLocksEditStorypoints() {
+    this.isStorypointsEditable$.next(true);
+    this.formGroup.controls.storypoints.enable();
+  }
+
+  public onDoneEditStorypoints() {
+    this.isStorypointsEditable$.next(false);
+    this.formGroup.controls.storypoints.enable();
+    this.editStorypointsUser.emit({
+      user: {
+        totalStoryPoints: this.formGroup.value.storypoints || 0,
+      },
+      onSuccessCb: this.onEditStorypointsSuccess,
+    });
+  }
+
+  public onCloseEditStorypoints() {
+    this.isStorypointsEditable$.next(false);
+    this.formGroup.controls.storypoints.disable();
   }
 }

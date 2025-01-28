@@ -16,6 +16,13 @@ export const UsersActions = createActionGroup({
     addUser: props<{ userData: CreateUserDTO }>(),
     addUserSuccess: props<{ userData: UsersEntity }>(),
     addUserFailed: props<{ error: any }>(),
+    editStorypointsUser: props<{
+      userData: CreateUserDTO;
+      id: number;
+      onSuccessCb: onSuccessEditionCbType;
+    }>(),
+    editStorypointsUserSuccess: props<{ userData: UsersDTO }>(),
+    editStorypointsUserFailed: props<{ error: UsersErrors | null }>(),
     editUser: props<{
       userData: CreateUserDTO;
       id: number;
