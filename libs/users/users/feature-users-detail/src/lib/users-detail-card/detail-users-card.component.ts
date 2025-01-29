@@ -11,8 +11,8 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { onSuccessEditionCbType } from '@users/users/data-access';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { onSuccessEditionCbType, onSuccessSPonCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -23,7 +23,7 @@ import { DetailUsersCardVm } from './detail-users-card-vm';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { CreateUserDTO, UsersEntity, UsersSP } from '@users/core/data-access';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { DadataApiService } from '@dadata';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs';
@@ -48,12 +48,16 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     MatSnackBarModule,
     MatAutocompleteModule,
     PushPipe,
+    AsyncPipe,
   ],
   templateUrl: './detail-users-card.component.html',
   styleUrls: ['./detail-users-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailUsersCardComponent implements OnInit {
+
+  isSPEditable$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+
   private _vm: DetailUsersCardVm = {
     editMode: false,
     user: null,
@@ -73,6 +77,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: vm.user.email,
         username: vm.user.username,
         city: vm.user.city,
+        totalStoryPoints: vm.user.totalStoryPoints,
       });
     }
 
@@ -88,17 +93,25 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    totalStoryPoints: new FormControl({ value: 0, disabled: !this.isSPEditable$.value }),
   });
 
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
     onSuccessCb: onSuccessEditionCbType;
   }>();
+  @Output() editSP = new EventEmitter<{
+    usersSP: UsersSP;
+    onSuccessAddSP: onSuccessSPonCbType;
+  }>();
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
+  @Output() closeEditSPMode = new EventEmitter();
+  @Output() openEditSPMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('snackbarPoints') snackbarPointsTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -122,6 +135,13 @@ export class DetailUsersCardComponent implements OnInit {
       verticalPosition: 'top',
     });
 
+  private onSuccessAddSP: onSuccessSPonCbType = () =>
+    this.snackBar.openFromTemplate(this.snackbarPointsTemplateRef, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    })
+
   onSubmit(): void {
     this.editUser.emit({
       user: {
@@ -136,6 +156,20 @@ export class DetailUsersCardComponent implements OnInit {
     });
   }
 
+  onSubmitSP(): void {
+    this.editSP.emit({
+      usersSP: {
+        totalStoryPoints: this.formGroup.value.totalStoryPoints || 0,
+        name: this.formGroup.value.name || '',
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        purchaseDate: new Date().toString() || '',
+        educationStatus: 'trainee',
+      },
+      onSuccessAddSP: this.onSuccessAddSP
+    });
+    this.isSPEditable$.next(false)
+  }
+
   onCloseUser() {
     this.closeUser.emit();
   }
@@ -146,6 +180,18 @@ export class DetailUsersCardComponent implements OnInit {
 
   onOpenEditMode() {
     this.openEditMode.emit();
+  }
+
+  onCloseSPEditMode() {
+    this.closeEditSPMode.emit();
+    this.isSPEditable$.next(false)
+    this.formGroup.controls.totalStoryPoints.disable()
+  }
+
+  onOpenSPEditMode() {
+    this.openEditSPMode.emit();
+    this.isSPEditable$.next(true)
+    this.formGroup.controls.totalStoryPoints.enable()
   }
 
   onDeleteUser() {
