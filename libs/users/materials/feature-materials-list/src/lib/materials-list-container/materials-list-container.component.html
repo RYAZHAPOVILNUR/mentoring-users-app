@@ -1,1 +1,15 @@
-<p>materials-list-container works!</p>
+<ng-container
+  *ngrxLet="{
+    materials: [],
+  } as vm"
+>
+<div class="container materials-container-top">
+  <button mat-icon-button aria-label="close materials container" (click)="closeFolder()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h1 class="materials-container-title">Folder title</h1>
+</div>
+  <users-materials-list [vm]="vm"/>
+</ng-container>
+<users-materials-add-button />
+

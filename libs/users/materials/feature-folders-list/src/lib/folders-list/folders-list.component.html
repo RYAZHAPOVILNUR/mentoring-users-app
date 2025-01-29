@@ -16,7 +16,7 @@
   <ng-container>
     <div class="container">
       <div class="row">
-        <div class="col-md-auto mb-3" *ngFor="let folder of vm.folders">
+        <div class="col-md-auto mb-3" *ngFor="let folder of vm.folders" routerLink="/materials/{{folder.id}}">
           <users-folders-card [folder]="folder" (deleteFolder)="onDeleteFolder(folder)"/>
         </div>
       </div>

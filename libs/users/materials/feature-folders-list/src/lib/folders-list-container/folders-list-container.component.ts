@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, ViewEncapsulation } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
+import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { FoldersAddButtonComponent } from '@users/feature-folders-create';
 import { MaterialsFacade } from '@users/materials/data-access';
-import { FoldersListComponent } from '../folders-list/folders-list.component';
 import { IFolder } from 'libs/users/materials/data-access/src/lib/models/folder.model';
-import { CoreUiConfirmDialogComponent } from '@users/core/ui';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Router } from '@angular/router';
+import { FoldersListComponent } from '../folders-list/folders-list.component';
 
 @Component({
   selector: 'users-folders-list-container',

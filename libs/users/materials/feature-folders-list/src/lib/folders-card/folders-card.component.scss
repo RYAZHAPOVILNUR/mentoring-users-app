@@ -2,6 +2,7 @@
   &-container {
     width: 120px;
     height: 100px;
+    cursor: pointer;
 
     &:hover .delete-btn {
       opacity: 1;
@@ -34,5 +35,9 @@
 }
 
 .mat-mdc-card-content {
-  padding: 0 10px;
+  padding: 10px;
+}
+
+.mat-mdc-icon-button.mat-mdc-button-base {
+  --mdc-icon-button-state-layer-size: 30px;
 }

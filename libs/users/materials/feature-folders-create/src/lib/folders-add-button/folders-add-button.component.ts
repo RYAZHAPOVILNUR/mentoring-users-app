@@ -30,11 +30,12 @@ export class FoldersAddButtonComponent {
       .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((result: IAddFolder) => {
-        console.log('result', result);
-        const newFolder: IAddFolder = {
-          title: result.title,
-        };
-        this.materialsFacade.addFolder(newFolder);
+        if (result && result.title) {
+          const newFolder: IAddFolder = {
+            title: result.title,
+          };
+          this.materialsFacade.addFolder(newFolder);
+        }
       });
   }
 }

@@ -1,1 +1,33 @@
-<p>materials-list works!</p>
+<!-- <ng-container *ngIf="vm.status === 'loading'; else loadingResult">
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container> -->
+
+<!-- <ng-template #loadingResult>
+  <ng-container *ngIf="vm.status === 'loaded'; else error">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-3" *ngFor="let folder of vm.folders">
+          <users-folders-card/>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-template> -->
+<ng-container>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-auto mb-3">
+        <users-materials-card/>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<!-- <ng-template #error>
+<div class="alert alert-danger" role="alert">
+  <h1>{{ vm.errors?.status }}</h1>
+  <hr />
+  {{ vm.errors }}
+</div>
+</ng-template> -->
+

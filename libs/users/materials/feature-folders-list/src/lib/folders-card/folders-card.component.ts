@@ -8,6 +8,7 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -16,7 +17,7 @@ import { IFolder } from 'libs/users/materials/data-access/src/lib/models/folder.
 @Component({
   selector: 'users-folders-card',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatCardModule, TranslateModule],
+  imports: [CommonModule, MatIconModule, MatCardModule, TranslateModule, MatButtonModule],
   templateUrl: './folders-card.component.html',
   styleUrls: ['./folders-card.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
@@ -32,6 +33,7 @@ export class FoldersCardComponent {
   private translate = inject(TranslateService);
 
   onDeleteFolder(event: Event) {
+    event.stopPropagation();
     this.deleteFolder.emit();
   }
 

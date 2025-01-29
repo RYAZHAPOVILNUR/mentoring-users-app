@@ -1,13 +1,36 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MaterialsAddButtonComponent } from '@users/feature-materials-create';
+import { MaterialsListComponent } from '../materials-list/materials-list.component';
+import { LetDirective } from '@ngrx/component';
+import { MaterialsFacade } from '@users/materials/data-access';
+import { MatIconModule } from '@angular/material/icon';
+import { Router } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { IFolder } from 'libs/users/materials/data-access/src/lib/models/folder.model';
 
 @Component({
   selector: 'users-materials-list-container',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    MaterialsAddButtonComponent,
+    MaterialsListComponent,
+    LetDirective,
+    MatIconModule,
+    MatButtonModule,
+  ],
   templateUrl: './materials-list-container.component.html',
   styleUrls: ['./materials-list-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MaterialsListContainerComponent {}
+export class MaterialsListContainerComponent {
+  private readonly materialsFacade = inject(MaterialsFacade);
+  public folders$ = this.materialsFacade.folders$;
+  private router = inject(Router);
+
+  closeFolder() {
+    this.router.navigate(['/materials']);
+  }
+}
