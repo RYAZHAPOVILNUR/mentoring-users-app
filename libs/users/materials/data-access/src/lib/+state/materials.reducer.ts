@@ -6,10 +6,15 @@ import { IFolder } from '../models/folder.model';
 
 export const MATERIALS_FEATURE_KEY = 'materials';
 
+export type FoldersErrors = {
+  status: number;
+  [key: string]: unknown;
+};
+
 export interface MaterialsState extends EntityState<IFolder> {
   selectedId?: string | number;
   status: LoadingStatus;
-  error: string | null;
+  error: FoldersErrors | null;
 }
 
 export const materialsAdapter: EntityAdapter<IFolder> = createEntityAdapter<IFolder>();
@@ -25,14 +30,14 @@ export interface MaterialsPartialState {
 
 export const reducer = createReducer(
   initialMaterialsState,
-  on(MaterialsActions.loadFolders, (state) => ({ ...state, loading: 'loading' as const })),
+  on(MaterialsActions.initFolders, (state) => ({ ...state, status: 'loading' as const })),
   on(MaterialsActions.loadFoldersSuccess, (state, { folders }) =>
     materialsAdapter.setAll(folders, { ...state, status: 'loaded' as const })
   ),
   on(MaterialsActions.loadFoldersFailed, (state, { error }) => ({ ...state, status: 'error' as const, error })),
-  on(MaterialsActions.addFolder, (state) => ({ ...state, loading: 'loading' as const })),
+  on(MaterialsActions.addFolder, (state) => ({ ...state, status: 'loading' as const })),
   on(MaterialsActions.addFolderSuccess, (state, { folder }) =>
-    materialsAdapter.addOne({ ...folder }, { ...state, loading: 'loaded' as const })
+    materialsAdapter.addOne({ ...folder }, { ...state, status: 'loaded' as const })
   ),
   on(MaterialsActions.addFolderFailed, (state, { error }) => ({ ...state, status: 'error' as const, error })),
   on(MaterialsActions.deleteFolderSuccess, (state, { id }) => materialsAdapter.removeOne(id, { ...state }))

@@ -10,3 +10,7 @@ export const selectAllFolders = createSelector(selectMaterialsState, (state: Mat
 export const selectMaterialsEntities = createSelector(selectMaterialsState, (state: MaterialsState) =>
   selectEntities(state)
 );
+
+export const selectFoldersStatus = createSelector(selectMaterialsState, (state: MaterialsState) => state.status);
+
+export const selectFoldersErrors = createSelector(selectMaterialsState, (state: MaterialsState) => state.error);

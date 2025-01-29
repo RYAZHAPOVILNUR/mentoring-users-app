@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialsCardComponent } from '../materials-card/materials-card.component';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MaterialsCardComponent } from '../materials-card/materials-card.component';
 import { MaterialsListVM } from './materials-list-view-model';
 
 @Component({

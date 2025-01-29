@@ -12,7 +12,7 @@ export const loadFolders = createEffect(
     const apiService = inject(ApiService);
 
     return actions$.pipe(
-      ofType(MaterialsActions.loadFolders),
+      ofType(MaterialsActions.initFolders),
       switchMap(() =>
         apiService.get<IFolder[]>('/folder').pipe(
           map((folders) => MaterialsActions.loadFoldersSuccess({ folders })),

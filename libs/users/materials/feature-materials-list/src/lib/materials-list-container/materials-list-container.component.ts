@@ -1,13 +1,12 @@
-import { ChangeDetectionStrategy, Component, inject, Input, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialsAddButtonComponent } from '@users/feature-materials-create';
-import { MaterialsListComponent } from '../materials-list/materials-list.component';
-import { LetDirective } from '@ngrx/component';
-import { MaterialsFacade } from '@users/materials/data-access';
+import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
-import { IFolder } from 'libs/users/materials/data-access/src/lib/models/folder.model';
+import { LetDirective } from '@ngrx/component';
+import { MaterialsAddButtonComponent } from '@users/feature-materials-create';
+import { MaterialsFacade } from '@users/materials/data-access';
+import { MaterialsListComponent } from '../materials-list/materials-list.component';
 
 @Component({
   selector: 'users-materials-list-container',

@@ -22,6 +22,8 @@ import { FoldersListComponent } from '../folders-list/folders-list.component';
 export class FoldersListContainerComponent {
   private readonly materialsFacade = inject(MaterialsFacade);
   public folders$ = this.materialsFacade.folders$;
+  public status$ = this.materialsFacade.foldersStatus$;
+  public errors$ = this.materialsFacade.foldersErrors$;
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
