@@ -17,6 +17,7 @@ export const selectUsersEntities = createSelector(selectUsersState, (state: User
 
 export const selectSelectedId = createSelector(selectUsersState, (state: UsersState) => state.selectedId);
 
+export  const usersFilterSelector = createSelector(selectUsersState,(state: UsersState) => state.filter || '');
 export const selectEntity = createSelector(selectUsersEntities, selectSelectedId, (entities, selectedId) =>
   selectedId ? entities[selectedId] : undefined
 );
@@ -28,3 +29,19 @@ export const selectOpenedUser = createSelector(
   selectUsersEntities,
   ({ id }, entities) => entities[id] || null
 );
+
+export const selectFilteredUsers = createSelector(
+  selectAllUsers,
+  usersFilterSelector,
+  (users, filterWrapper) => {
+    const filter = typeof filterWrapper === 'string' ? { name: '' } : filterWrapper;  // Если filterWrapper строка, то обрабатываем как пустой фильтр
+
+    if (!filter || !filter.name) {
+      return users;
+    }
+    return users.filter((user) =>
+      user.name.toLowerCase().includes(filter.name.toLowerCase())
+    );
+  }
+);
+
