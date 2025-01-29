@@ -4,6 +4,7 @@ import { createReducer, on, Action } from '@ngrx/store';
 import * as UsersActions from './users.actions';
 import { UsersEntity } from '@users/core/data-access';
 import { LoadingStatus } from '@users/core/data-access';
+import { state } from '@angular/animations';
 
 export const USERS_FEATURE_KEY = 'users';
 
@@ -16,6 +17,8 @@ export interface UsersState extends EntityState<UsersEntity> {
   selectedId?: string | number; // which Users record has been selected
   status: LoadingStatus;
   error: UsersErrors | null;
+  filter:{name:string} | null,
+
 }
 
 export interface UsersPartialState {
@@ -28,6 +31,7 @@ export const initialUsersState: UsersState = usersAdapter.getInitialState({
   // set initial required properties
   status: 'init',
   error: null,
+  filter:{name:''},
 });
 
 const reducer = createReducer(
@@ -63,6 +67,10 @@ const reducer = createReducer(
   on(UsersActions.loadUser, (state) => ({
     ...state,
     status: 'loading' as const,
+  })),
+  on(UsersActions.setUsersFilter,(state,{filter}) =>({
+    ...state,
+    filter,
   })),
   on(UsersActions.loadUserSuccess, (state, { userData }) =>
     usersAdapter.addOne({ ...userData }, { ...state, status: 'loaded' as const })
