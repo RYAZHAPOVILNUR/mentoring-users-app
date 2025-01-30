@@ -5,6 +5,7 @@ import * as MaterialsActions from './materials.actions';
 
 import { Observable } from 'rxjs';
 import { MaterialsErrors } from './materials.reducer';
+import { TCreateFoldersDTO } from '../models/folders/folder-dto.model';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
@@ -21,5 +22,9 @@ export class MaterialsFacade {
 
   public deleteFolder(id: number): void {
     this.store.dispatch(MaterialsActions.deleteFolder({ id }));
+  }
+
+  public addFolder(folderData: TCreateFoldersDTO): void {
+    this.store.dispatch(MaterialsActions.addFolder({ folderData }));
   }
 }

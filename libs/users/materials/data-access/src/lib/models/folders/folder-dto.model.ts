@@ -7,3 +7,9 @@ export type TFoldersDTO = DeepReadonly<{
 }>;
 
 // material_id: number;
+
+export type TCreateFoldersDTO = DeepReadonly<{
+  id?: number;
+  created_at?: number;
+  title: string;
+}>;

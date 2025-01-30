@@ -4,12 +4,12 @@ import { FoldersListComponent } from '../folders-list/folders-list.component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
 import { LetDirective } from '@ngrx/component';
 import { UsersListComponent } from '@users/feature-users-list';
-import { MaterialsFacade, TFoldersVM } from '@users/materials/data-access';
+import { MaterialsFacade, TCreateFoldersDTO, TFoldersVM } from '@users/materials/data-access';
 // import { DateLocalizationService } from '../../../../../core/ui/language-switch/src/lib/date-localization.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
-import { Subject, takeUntil, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FoldersAddButtonComponent } from '@users/materials/feature-folders-create';
 
 console.log('сменить зависимости на алиасы');
 
@@ -23,6 +23,7 @@ console.log('сменить зависимости на алиасы');
     LetDirective,
     UsersListComponent,
     AsyncPipe,
+    FoldersAddButtonComponent,
   ],
   templateUrl: './folders-list-container.component.html',
   styleUrls: ['./folders-list-container.component.scss'],
@@ -59,5 +60,9 @@ export class FoldersListContainerComponent {
           this.MaterialsFacade.deleteFolder(folder.id);
         }
       });
+  }
+
+  public onAddFolder(folder: TCreateFoldersDTO): void {
+    this.MaterialsFacade.addFolder(folder);
   }
 }
