@@ -6,7 +6,7 @@ export const selectFoldersState = createFeatureSelector<FoldersState>(FOLDERS_FE
 
 const { selectAll, selectEntities } = foldersAdapter.getSelectors();
 
-export const selectFoldersLoaded = createSelector(selectFoldersState, (state: FoldersState) => state.loaded);
+export const selectFoldersLoaded = createSelector(selectFoldersState, (state: FoldersState) => state.status);
 
 export const selectFoldersError = createSelector(selectFoldersState, (state: FoldersState) => state.error);
 

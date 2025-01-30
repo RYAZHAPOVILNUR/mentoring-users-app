@@ -11,7 +11,6 @@ import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
   private readonly store = inject(Store);
-
   /**
    * Combine pieces of state using createSelector,
    * and expose them as observables through the facade.

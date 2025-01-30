@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { FoldersEntity } from './folders.models';
-
+import { FoldersEntity } from '../../models/folders.entity';
 export const initFolders = createAction('[Folders Page] Init');
 
 export const loadFoldersSuccess = createAction(
