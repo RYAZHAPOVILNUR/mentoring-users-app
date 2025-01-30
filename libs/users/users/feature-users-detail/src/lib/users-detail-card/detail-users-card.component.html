@@ -104,8 +104,39 @@
             <button mat-icon-button color="warn" type="button" aria-label="Close edit mode" (click)="onCloseEditMode()">
               <mat-icon>close</mat-icon>
             </button>
-          </mat-card-actions>
+          </mat-card-actions>          
         </form>
+
+        <div class="input-container">
+          <mat-form-field>
+            <mat-label>Количество сторипоинтов</mat-label>
+            <input
+              matInput
+              type="number"
+              [formControl]="totalStoryPoints"
+              [disabled]="isDisabled"
+            />
+            <div matSuffix>
+              <button
+                mat-icon-button
+                *ngIf="!isEditing"
+                (click)="enableEditing()"
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+              <ng-container *ngIf="isEditing">
+                <button mat-icon-button color="primary" (click)="confirmEdit()">
+                  <mat-icon>check</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="cancelEdit()">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </ng-container>
+            </div>
+          </mat-form-field>
+        </div>
+        
+
       </mat-card>
     </div>
   </ng-container>
