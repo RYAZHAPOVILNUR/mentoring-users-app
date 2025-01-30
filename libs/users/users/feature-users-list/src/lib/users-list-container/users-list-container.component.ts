@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject, DestroyRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject, DestroyRef, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersListComponent } from '../users-list/users-list.component';
 import { UsersListContainerStore } from './users-list-container.store';
@@ -29,7 +29,7 @@ import { UsersFilterComponent } from '../users-filter/users-filter.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [UsersListContainerStore],
 })
-export class UsersListContainerComponent {
+export class UsersListContainerComponent implements OnDestroy {
   private readonly componentStore = inject(UsersListContainerStore);
   public usersFacade = inject(UsersFacade);
   public readonly users$ = this.componentStore.users$;

@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
 import { LetDirective } from '@ngrx/component';
 import { UsersListComponent } from '@users/feature-users-list';
 import { MaterialsFacade, TFoldersVM } from '@users/materials/data-access';
-import { DateLocalizationService } from '../../../../../core/ui/language-switch/src/lib/date-localization.service';
+// import { DateLocalizationService } from '../../../../../core/ui/language-switch/src/lib/date-localization.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { Subject, takeUntil, tap } from 'rxjs';
@@ -28,14 +28,14 @@ console.log('сменить зависимости на алиасы');
   styleUrls: ['./folders-list-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FoldersListContainerComponent implements OnDestroy {
+export class FoldersListContainerComponent {
   private readonly MaterialsFacade = inject(MaterialsFacade);
   public readonly status$ = this.MaterialsFacade.status$;
   public readonly folders$ = this.MaterialsFacade.folders$;
   public readonly errors$ = this.MaterialsFacade.errors$;
-  private readonly dateLocalizationService = inject(DateLocalizationService);
+  // private readonly dateLocalizationService = inject(DateLocalizationService);
   private readonly dialog = inject(MatDialog);
-  private destroy$ = new Subject<void>();
+  private destroyRef$ = inject(DestroyRef);
 
   constructor() {
     this.MaterialsFacade.init();
@@ -53,16 +53,11 @@ export class FoldersListContainerComponent implements OnDestroy {
     });
     dialogRef
       .afterClosed()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef$))
       .subscribe((result) => {
         if (result) {
           this.MaterialsFacade.deleteFolder(folder.id);
         }
       });
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }
