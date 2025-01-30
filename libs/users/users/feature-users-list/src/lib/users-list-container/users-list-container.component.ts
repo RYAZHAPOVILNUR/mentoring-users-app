@@ -49,6 +49,6 @@ export class UsersListContainerComponent {
   }
 
   onFilterUser(name: string) { //+++
-    this.usersFacade.facadeUsersFilter(name);
+    this.usersFacade.setUsersFilter(name);
   }
 }
