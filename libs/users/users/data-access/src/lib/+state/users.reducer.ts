@@ -1,6 +1,5 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
-
 import * as UsersActions from './users.actions';
 import { UsersEntity } from '@users/core/data-access';
 import { LoadingStatus } from '@users/core/data-access';
@@ -16,8 +15,9 @@ export interface UsersState extends EntityState<UsersEntity> {
   selectedId?: string | number; // which Users record has been selected
   status: LoadingStatus;
   error: UsersErrors | null;
+  usersFilter: {name: string};
 }
-
+// 3.1. В редьюсере users.reducer создать новое поле usersFilter: {name: string} в UsersState и в initialUsersState,  
 export interface UsersPartialState {
   readonly [USERS_FEATURE_KEY]: UsersState;
 }
@@ -28,8 +28,9 @@ export const initialUsersState: UsersState = usersAdapter.getInitialState({
   // set initial required properties
   status: 'init',
   error: null,
+  usersFilter: { name: '' },
 });
-
+// 3.2. В редьюсере users.reducer создать новое поле usersFilter: {name: string} в UsersState и в initialUsersState,  
 const reducer = createReducer(
   initialUsersState,
   on(UsersActions.initUsers, (state) => ({
@@ -75,9 +76,29 @@ const reducer = createReducer(
   on(UsersActions.updateUserStatus, (state, { status }) => ({
     ...state,
     status,
-  }))
-);
+  })),
+  on(UsersActions.setUsersFilter, (state: UsersState, { name }) => {
+    return {...state, usersFilter: { name } };
+  }),
+  // 3.3. повесить обработчик экшена setUsersFilter в редьюсере с помощью on, 
+// на срабатывание экшена класть данные из этого экшена в state
+// 2в. в редьюсере, когда вызывается наш action, срабатывает этот код на 80 строке, в котором возвращаем предыдущий state
+// и usersFilter - значение нашего интерфейса (с 18 строки) и передавать его в state
 
+  on(UsersActions.editStoryPoints, (state) => ({
+    ...state,
+    status: 'loading' as const,
+  })),
+  on(UsersActions.editStoryPointsSuccess, (state, { userData }) =>
+    usersAdapter.updateOne(
+      {
+        id: userData.id,
+        changes: userData,
+      },
+      {...state, status: 'loading' as const }
+    )
+  ),
+);
 export function usersReducer(state: UsersState | undefined, action: Action) {
   return reducer(state, action);
 }

@@ -3,6 +3,7 @@ import { UsersErrors } from './users.reducer';
 import { CreateUserDTO, LoadingStatus, UsersDTO, UsersEntity } from '@users/core/data-access';
 
 export type onSuccessEditionCbType = () => void;
+export type onSuccessStoryPointsCbType = () => void;
 
 export const initUsers = createAction('[Users Page] Init');
 
@@ -33,8 +34,24 @@ export const editUser = createAction(
 export const editUserSuccess = createAction('[Users Detail] Edit User Success', props<{ userData: UsersDTO }>());
 export const editUserFailed = createAction('[Users Detail] Edit Failed', props<{ error: UsersErrors | null }>());
 
+export const editStoryPoints = createAction(
+  '[Users Detail] Edit UserStoryPoints',
+  props<{
+    userData: CreateUserDTO;
+    id: number;
+    onSuccessStoryPoints: onSuccessStoryPointsCbType;
+  }>()
+);
+export const editStoryPointsSuccess = createAction('[Users Detail] Edit StoryPoints Success', props<{ userData: UsersDTO }>());
+export const editStoryPointsFailed = createAction('[Users Detail] Edit StoryPoints Failed', props<{ error: UsersErrors | null }>());
+
 export const loadUser = createAction('[Users Page] Load User');
 export const loadUserSuccess = createAction('[Users/Api] Load User Success', props<{ userData: UsersEntity }>());
 export const loadUserFailed = createAction('[Users/Api] Load User Failed', props<{ error: any }>());
 
 export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{ status: LoadingStatus }>());
+
+export const setUsersFilter = createAction('[setUsersFilter] setUsersFilter', props<{ name: string }>())
+// props - это параметр функции, который обязаны передать, т.н. полезная нагрузка
+// 1.Создать action setUsersFilter который будет принимать данные {filter: {name: string}}
+// 1влад. для чего нужен action - мы создаем действие - фильтрацию пользователей, которое принимает в себя имя-строку, по которой будем фильтровать

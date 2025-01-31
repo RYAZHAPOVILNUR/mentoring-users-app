@@ -112,6 +112,40 @@ export const editUser = createEffect(
   { functional: true }
 );
 
+export const editStoryPoints = createEffect(
+  () => {
+    const actions$ = inject(Actions); // вводим поток экшенов
+    const apiService = inject(ApiService); // вводим сервис для АПИ запросов
+    const usersEntities$ = inject(Store).pipe(select(selectUsersEntities)); // вводим Стор и выбираем всех пользователей
+
+    return actions$.pipe(  
+      ofType(UsersActions.editStoryPoints), // ожидаем экшн editStoryPoints
+      withLatestFrom(usersEntities$), // получаем актуальное состояние пользователей из Стора
+      filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])), // пропускаем, если пользователя с таким id не существует
+      map(([{ userData, id, onSuccessStoryPoints }, usersEntities]) => ({
+        user: {
+          ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]), // преобразуем сущность пользователя в DTO
+          totalStoryPoints: userData.totalStoryPoints, // обновляем totalStoryPoints на основе userData
+        }, 
+        onSuccessStoryPoints,
+      })),
+      switchMap(({ user, onSuccessStoryPoints }) => // перебираем юзеров
+        apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+          tap((userData)=>console.log('effect', userData)),
+          map((userData) => ({ userData, onSuccessStoryPoints })),
+          tap(({ onSuccessStoryPoints }) => onSuccessStoryPoints()),
+          map(({ userData }) => UsersActions.editStoryPointsSuccess({ userData })),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(UsersActions.editUserFailed({ error }));
+          })
+        )
+      )
+    );
+  },
+  { functional: true }
+);
+
 export const loadUser = createEffect(
   () => {
     const actions$ = inject(Actions);
