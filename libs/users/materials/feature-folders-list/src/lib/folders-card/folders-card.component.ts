@@ -20,6 +20,8 @@ export class FoldersCardComponent {
 
   @Output() deleteFolder = new EventEmitter();
 
+  @Output() redirectToMaterials = new EventEmitter();
+
   private readonly isIconVisibleSubject$ = new BehaviorSubject<boolean>(false);
   public readonly isIconVisible$ = this.isIconVisibleSubject$.asObservable();
 
@@ -29,5 +31,9 @@ export class FoldersCardComponent {
 
   public onDeleteFolder(): void {
     this.deleteFolder.emit();
+  }
+
+  public onRedirectToFolderPage(): void {
+    this.redirectToMaterials.emit(this.folder.id);
   }
 }

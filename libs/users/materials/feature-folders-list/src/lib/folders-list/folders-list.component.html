@@ -11,6 +11,7 @@
           <materials-folder-card
             [folder]="folder"
             (deleteFolder)="onDeleteFolder(folder)"
+            (redirectToMaterials)="onRedirectToFolderPage($event)"
           />
         </div>
       </div>

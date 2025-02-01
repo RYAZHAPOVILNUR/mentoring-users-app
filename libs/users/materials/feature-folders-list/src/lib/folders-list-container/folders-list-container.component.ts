@@ -10,6 +10,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FoldersAddButtonComponent } from '@users/materials/feature-folders-create';
+import { Router } from '@angular/router';
 
 console.log('сменить зависимости на алиасы');
 
@@ -36,6 +37,7 @@ export class FoldersListContainerComponent {
   public readonly errors$ = this.MaterialsFacade.errors$;
   // private readonly dateLocalizationService = inject(DateLocalizationService);
   private readonly dialog = inject(MatDialog);
+  private readonly router = inject(Router);
   private destroyRef$ = inject(DestroyRef);
 
   constructor() {
@@ -64,5 +66,9 @@ export class FoldersListContainerComponent {
 
   public onAddFolder(folder: TCreateFoldersDTO): void {
     this.MaterialsFacade.addFolder(folder);
+  }
+
+  public onRedirectToFolderPage(id: number): void {
+    this.router.navigate(['/materials', id]);
   }
 }

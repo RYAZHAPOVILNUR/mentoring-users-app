@@ -18,7 +18,13 @@ export class FoldersListComponent {
 
   @Output() deleteFolder = new EventEmitter();
 
+  @Output() redirectToMaterials = new EventEmitter();
+
   public onDeleteFolder(folder: TFoldersVM): void {
     this.deleteFolder.emit(folder);
+  }
+
+  public onRedirectToFolderPage(id: number): void {
+    this.redirectToMaterials.emit(id);
   }
 }
