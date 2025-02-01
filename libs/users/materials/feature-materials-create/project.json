@@ -1,7 +1,7 @@
 {
-  "name": "users-materials-feature-folders-create",
+  "name": "users-materials-feature-materials-create",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/users/materials/feature-folders-create/src",
+  "sourceRoot": "libs/users/materials/feature-materials-create/src",
   "prefix": "materials",
   "tags": [],
   "projectType": "library",
@@ -10,7 +10,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/users/materials/feature-folders-create/jest.config.ts",
+        "jestConfig": "libs/users/materials/feature-materials-create/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -25,8 +25,8 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "libs/users/materials/feature-folders-create/**/*.ts",
-          "libs/users/materials/feature-folders-create/**/*.html"
+          "libs/users/materials/feature-materials-create/**/*.ts",
+          "libs/users/materials/feature-materials-create/**/*.html"
         ]
       }
     }

@@ -1,10 +1,11 @@
-import { TasksContainerComponent } from './../../../../libs/users/task/src/lib/tasks-view-container/tasks-view-container.component';
+import { TasksContainerComponent } from '@users/users/tasks/tasks-view-container';
 import { Route } from '@angular/router';
 import { authGuard, adminGuard } from '@auth/data-access';
 import { AuthorizedUserLayoutComponent } from './authorized-user-layout/authorized-user-layout.component';
 import { UnauthorizedUserLayoutComponent } from './unauthorized-user-layout-component/unauthorized-user-layout-component.component';
 import { canDeactivateFormComponent } from '@users/core/utils';
 import { FoldersListContainerComponent } from '@users/materials/feature-folders-list';
+import { MaterialsListContainerComponent } from '@users/materials/feature-materials-list';
 
 const layoutAgnosticComponents = [
   {
@@ -56,7 +57,7 @@ export const appRoutes: Route[] = [
       {
         path: 'materials/:id',
         loadComponent: () =>
-          import('@users/materials/feature-folders-list').then((c) => c.FoldersListContainerComponent),
+          import('@users/materials/feature-materials-list').then((c) => c.MaterialsListContainerComponent),
       },
       {
         path: 'articles',

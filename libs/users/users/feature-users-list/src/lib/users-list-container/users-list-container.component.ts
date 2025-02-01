@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject, DestroyRef, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersListComponent } from '../users-list/users-list.component';
 import { UsersListContainerStore } from './users-list-container.store';
