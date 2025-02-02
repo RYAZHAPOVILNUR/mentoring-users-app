@@ -112,7 +112,7 @@ export const editUser = createEffect(
   { functional: true }
 );
 
-export const addUserStoryPoints = createEffect(
+export const addUserStoryPoints = createEffect( // +++
   () => {
     const actions$ = inject(Actions);
     const apiService = inject(ApiService);
@@ -141,7 +141,7 @@ export const addUserStoryPoints = createEffect(
             ),
             catchError((error) => {
               console.error('Error', error);
-              return of(UsersActions.editUserFailed({ error }));
+              return of(UsersActions.addUserStoryPointsFailed({ error }));
             })
           );
       })
