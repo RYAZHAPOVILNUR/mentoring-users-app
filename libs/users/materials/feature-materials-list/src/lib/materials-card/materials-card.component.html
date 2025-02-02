@@ -1,1 +1,18 @@
-<p>materials-card works!</p>
+
+
+<mat-card class="material-card-wrapper" (mouseenter)="onShowIcon(true)"
+          (mouseleave)="onShowIcon(false)" (dblclick)="onRedirectToMaterialContent()">
+  
+  <mat-card-content class="material-card-content">
+    <mat-icon fontIcon="material" class="material-card-content__icon"
+    ></mat-icon>
+    <div class="material-card-content__title">THis is title</div>
+    <div class="material-card-content__date">this is date now</div>
+  </mat-card-content>
+  
+  <mat-card-actions class="material-card-buttons">
+    <button mat-icon-button class="material-card-buttons__btn" *ngIf="isIconVisible$ | async" (click)="onDeleteMaterial()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

@@ -1,1 +1,9 @@
-<p>materials-list-container works!</p>
+<ng-container *ngrxLet="{
+status: status$,
+materials: materials$,
+errors: errors$
+} as vm"
+>
+  <materials-list [vm]="vm" (deleteMaterial)="onDeleteMaterial($event)"
+                  (redirectToMaterialContent)="onRedirectToMaterialContent($event)"></materials-list>
+</ng-container>

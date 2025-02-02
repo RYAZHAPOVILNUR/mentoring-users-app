@@ -1,4 +1,4 @@
-import { reducer, initialState } from './materials.reducer';
+import { reducer, initialState } from './folders.reducer';
 
 describe('Materials Reducer', () => {
   describe('an unknown action', () => {

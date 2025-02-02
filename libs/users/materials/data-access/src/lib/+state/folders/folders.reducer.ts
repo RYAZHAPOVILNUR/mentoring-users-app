@@ -1,30 +1,24 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import * as MaterialsActions from './materials.actions';
-import { TFoldersEntity } from '../models/folders/folders.entity';
+import * as MaterialsActions from './folders.actions';
+import { TFolderEntity } from '../../models/folders/folder.entity';
 import { LoadingStatus } from '@users/core/data-access';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { TFolderError } from '../../models/folders/folder-error.model';
 
-export const MATERIALS_FEATURE_KEY = 'materials';
+export const MATERIALS_FOLDERS_FEATURE_KEY = 'materials';
 
-export type MaterialsErrors = {
-  status: number;
-  [key: string]: unknown;
-};
-
-export interface MaterialsState extends EntityState<TFoldersEntity> {
-  materials: [];
+export interface MaterialsFoldersState extends EntityState<TFolderEntity> {
   status: LoadingStatus;
-  error: MaterialsErrors | null;
+  error: TFolderError | null;
 }
 
 export interface MaterialsPartialState {
-  readonly [MATERIALS_FEATURE_KEY]: MaterialsState;
+  readonly [MATERIALS_FOLDERS_FEATURE_KEY]: MaterialsFoldersState;
 }
 
-export const materialsAdapter: EntityAdapter<TFoldersEntity> = createEntityAdapter<TFoldersEntity>();
+export const materialsFoldersAdapter: EntityAdapter<TFolderEntity> = createEntityAdapter<TFolderEntity>();
 
-export const initialMaterialsState: MaterialsState = materialsAdapter.getInitialState({
-  materials: [],
+export const initialMaterialsFoldersState: MaterialsFoldersState = materialsFoldersAdapter.getInitialState({
   status: 'init',
   error: null,
 });
@@ -32,13 +26,13 @@ export const initialMaterialsState: MaterialsState = materialsAdapter.getInitial
 export const materialsFeature = createFeature({
   name: 'materials',
   reducer: createReducer(
-    initialMaterialsState,
+    initialMaterialsFoldersState,
     on(MaterialsActions.loadFolders, (state) => ({
       ...state,
       status: 'loading' as const,
     })),
     on(MaterialsActions.loadFolderSuccess, (state, { folders }) =>
-      materialsAdapter.setAll(folders, {
+      materialsFoldersAdapter.setAll(folders, {
         ...state,
         status: 'loaded' as const,
       })
@@ -48,14 +42,14 @@ export const materialsFeature = createFeature({
       status: 'error' as const,
       error,
     })),
-    on(MaterialsActions.deleteFolderSuccess, (state, { id }) => materialsAdapter.removeOne(id, { ...state })),
+    on(MaterialsActions.deleteFolderSuccess, (state, { id }) => materialsFoldersAdapter.removeOne(id, { ...state })),
     on(MaterialsActions.deleteFolderFailed, (state, { error }) => ({
       ...state,
       status: 'error' as const,
       error,
     })),
     on(MaterialsActions.addFolderSuccess, (state, { folderData }) =>
-      materialsAdapter.addOne({ ...folderData }, { ...state })
+      materialsFoldersAdapter.addOne({ ...folderData }, { ...state })
     ),
     on(MaterialsActions.addFolderFailed, (state, { error }) => ({
       ...state,

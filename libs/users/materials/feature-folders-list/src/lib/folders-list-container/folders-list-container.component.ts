@@ -4,7 +4,7 @@ import { FoldersListComponent } from '../folders-list/folders-list.component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
 import { LetDirective } from '@ngrx/component';
 import { UsersListComponent } from '@users/feature-users-list';
-import { MaterialsFacade, TCreateFoldersDTO, TFoldersVM } from '@users/materials/data-access';
+import { FoldersFacade, TCreateFolderDTO, TFolderVM } from '@users/materials/data-access';
 // import { DateLocalizationService } from '../../../../../core/ui/language-switch/src/lib/date-localization.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
@@ -22,7 +22,6 @@ console.log('сменить зависимости на алиасы');
     FoldersListComponent,
     CreateUsersButtonComponent,
     LetDirective,
-    UsersListComponent,
     AsyncPipe,
     FoldersAddButtonComponent,
   ],
@@ -31,7 +30,7 @@ console.log('сменить зависимости на алиасы');
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersListContainerComponent {
-  private readonly MaterialsFacade = inject(MaterialsFacade);
+  private readonly MaterialsFacade = inject(FoldersFacade);
   public readonly status$ = this.MaterialsFacade.status$;
   public readonly folders$ = this.MaterialsFacade.folders$;
   public readonly errors$ = this.MaterialsFacade.errors$;
@@ -50,7 +49,7 @@ export class FoldersListContainerComponent {
     // });
   }
 
-  public onDeleteFolder(folder: TFoldersVM): void {
+  public onDeleteFolder(folder: TFolderVM): void {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
       data: { dialogText: `Вы уверены, что хотите удалить папку ${folder.title} ?` },
     });
@@ -64,7 +63,7 @@ export class FoldersListContainerComponent {
       });
   }
 
-  public onAddFolder(folder: TCreateFoldersDTO): void {
+  public onAddFolder(folder: TCreateFolderDTO): void {
     this.MaterialsFacade.addFolder(folder);
   }
 

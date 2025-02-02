@@ -1,14 +1,12 @@
 import { DeepReadonly } from '@users/core/utils';
 
-export type TFoldersDTO = DeepReadonly<{
+export type TFolderDTO = DeepReadonly<{
   id: number;
   created_at: number;
   title: string;
 }>;
 
-// material_id: number;
-
-export type TCreateFoldersDTO = DeepReadonly<{
+export type TCreateFolderDTO = DeepReadonly<{
   id?: number;
   created_at?: number;
   title: string;

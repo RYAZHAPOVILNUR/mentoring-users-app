@@ -1,12 +1,39 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { AsyncPipe, CommonModule, DatePipe } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { BehaviorSubject } from 'rxjs';
+import { TMaterialDTO } from '@users/materials/data-access';
 
 @Component({
   selector: 'materials-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatButtonModule, MatCardModule, MatIconModule, AsyncPipe, DatePipe],
   templateUrl: './materials-card.component.html',
   styleUrls: ['./materials-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MaterialsCardComponent {}
+export class MaterialsCardComponent {
+  @Input({ required: true })
+  material!: TMaterialDTO;
+
+  @Output() deleteMaterial = new EventEmitter();
+
+  @Output() redirectToMaterialContent = new EventEmitter();
+
+  private readonly isIconVisibleSubject$ = new BehaviorSubject<boolean>(false);
+  public readonly isIconVisible$ = this.isIconVisibleSubject$.asObservable();
+
+  public onShowIcon(isVisible: boolean): void {
+    this.isIconVisibleSubject$.next(isVisible);
+  }
+
+  public onDeleteMaterial(): void {
+    this.deleteMaterial.emit();
+  }
+
+  public onRedirectToMaterialContent(): void {
+    this.redirectToMaterialContent.emit(this.material.id);
+  }
+}

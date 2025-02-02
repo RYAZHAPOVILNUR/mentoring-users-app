@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from 
 import { CommonModule } from '@angular/common';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { TFoldersListVm, TFoldersVM } from '@users/materials/data-access';
+import { TFoldersListVM, TFolderVM } from '@users/materials/data-access';
 
 @Component({
   selector: 'materials-folders-list',
@@ -14,13 +14,13 @@ import { TFoldersListVm, TFoldersVM } from '@users/materials/data-access';
 })
 export class FoldersListComponent {
   @Input({ required: true })
-  vm!: TFoldersListVm;
+  vm!: TFoldersListVM;
 
   @Output() deleteFolder = new EventEmitter();
 
   @Output() redirectToMaterials = new EventEmitter();
 
-  public onDeleteFolder(folder: TFoldersVM): void {
+  public onDeleteFolder(folder: TFolderVM): void {
     this.deleteFolder.emit(folder);
   }
 

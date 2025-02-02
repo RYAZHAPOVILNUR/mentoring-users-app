@@ -1,11 +1,10 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ApiService } from '@users/core/http';
-import * as MaterialActions from './materials.actions';
+import * as MaterialActions from './folders.actions';
 import { catchError, map, of, switchMap } from 'rxjs';
-import { IFoldersActionSuccess } from '../models/folders/folder-action-success.interface';
-import { foldersDTOAdapter } from '../models/folders/folders-dto.adapter';
-import { TCreateFoldersDTO, TFoldersDTO } from '../models/folders/folder-dto.model';
+import { folderDtoAdapter } from '../../models/folders/folder-dto.adapter';
+import { TCreateFolderDTO, TFolderDTO } from '../../models/folders/folder-dto.model';
 
 export const loadFolders = createEffect(
   () => {
@@ -15,10 +14,10 @@ export const loadFolders = createEffect(
     return action$.pipe(
       ofType(MaterialActions.loadFolders),
       switchMap(() =>
-        apiService.get<TFoldersDTO[]>('/folder').pipe(
+        apiService.get<TFolderDTO[]>('/folder').pipe(
           map((folders) =>
             MaterialActions.loadFolderSuccess({
-              folders: folders.map((folder) => foldersDTOAdapter.DTOtoEntity(folder)),
+              folders: folders.map((folder) => folderDtoAdapter.DTOtoEntity(folder)),
             })
           ),
           catchError((error) => {
@@ -61,8 +60,8 @@ export const addFolders = createEffect(
     return action$.pipe(
       ofType(MaterialActions.addFolder),
       switchMap(({ folderData }) =>
-        apiService.post<TFoldersDTO, TCreateFoldersDTO>('/folder', folderData).pipe(
-          map((folder) => foldersDTOAdapter.DTOtoEntity(folder)),
+        apiService.post<TFolderDTO, TCreateFolderDTO>('/folder', folderData).pipe(
+          map((folder) => folderDtoAdapter.DTOtoEntity(folder)),
           map((folderEntity) =>
             MaterialActions.addFolderSuccess({
               folderData: folderEntity,

@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
-import { IFoldersActionSuccess } from '../models/folders/folder-action-success.interface';
-import { TCreateFoldersDTO } from '../models/folders/folder-dto.model';
-import { TFoldersEntity } from '../models/folders/folders.entity';
+import { IFoldersActionSuccess } from '../../models/folders/folder-action-success.model';
+import { TCreateFolderDTO } from '../../models/folders/folder-dto.model';
+import { TFolderEntity } from '../../models/folders/folder.entity';
 
 export const loadFolders = createAction('[Materials Page] Load Folders');
 
@@ -39,14 +39,14 @@ export const deleteFolderFailed = createAction(
 export const addFolder = createAction(
   '[Materials Page] Add Folder',
   props<{
-    folderData: TCreateFoldersDTO;
+    folderData: TCreateFolderDTO;
   }>()
 );
 
 export const addFolderSuccess = createAction(
   '[Materials Page] Add Folder Success',
   props<{
-    folderData: TFoldersEntity;
+    folderData: TFolderEntity;
   }>()
 );
 

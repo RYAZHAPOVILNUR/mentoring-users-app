@@ -1,8 +1,12 @@
-export * from './lib/+state/materials.actions';
-export * from './lib/+state/materials.selectors';
-export * from './lib/+state/materials.reducer';
-export * from './lib/+state/materials.facade';
-export * as materialsEffects from './lib/+state/materials.effects';
-export * from './lib/models/folders/folders-list-vm.type';
-export * from './lib/models/folders/folders-vm.type';
+// folders
+export * from './lib/+state/folders/folders.actions';
+export * from './lib/+state/folders/folders.selectors';
+export * from './lib/+state/folders/folders.reducer';
+export * from './lib/+state/folders/folders.facade';
+export * as materialsFoldersEffects from './lib/+state/folders/folders.effects';
+export * from './lib/models/folders/folder-list-vm.model';
+export * from './lib/models/folders/folder-vm.model';
 export * from './lib/models/folders/folder-dto.model';
+// materials
+export * from './lib/models/materials/material-list-vm.model';
+export * from './lib/models/materials/material-dto.model';

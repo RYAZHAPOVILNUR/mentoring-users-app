@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { BehaviorSubject } from 'rxjs';
-import { TFoldersVM } from '@users/materials/data-access';
+import { TFolderVM } from '@users/materials/data-access';
 
 @Component({
   selector: 'materials-folder-card',
@@ -16,7 +16,7 @@ import { TFoldersVM } from '@users/materials/data-access';
 })
 export class FoldersCardComponent {
   @Input({ required: true })
-  folder!: TFoldersVM;
+  folder!: TFolderVM;
 
   @Output() deleteFolder = new EventEmitter();
 

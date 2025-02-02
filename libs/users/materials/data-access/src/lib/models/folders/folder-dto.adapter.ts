@@ -1,12 +1,12 @@
-import { TFoldersDTO } from './folder-dto.model';
-import { TFoldersEntity } from './folders.entity';
+import { TFolderDTO } from './folder-dto.model';
+import { TFolderEntity } from './folder.entity';
 
-type TFoldersDTOAdapter = {
-  DTOtoEntity(dto: TFoldersDTO): TFoldersEntity;
-  entityToDTO(entity: TFoldersEntity): TFoldersDTO;
+type TFolderDTOAdapter = {
+  DTOtoEntity(dto: TFolderDTO): TFolderEntity;
+  entityToDTO(entity: TFolderEntity): TFolderDTO;
 };
 
-export const foldersDTOAdapter: TFoldersDTOAdapter = {
+export const folderDtoAdapter: TFolderDTOAdapter = {
   DTOtoEntity(dto) {
     const { created_at, ...otherAddressFields } = dto;
 

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { TCreateFoldersDTO } from '@users/materials/data-access';
+import { TCreateFolderDTO } from '@users/materials/data-access';
 import { FoldersAddDialogComponent } from '../folders-add-dialog/folders-add-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -30,7 +30,7 @@ export class FoldersAddButtonComponent {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((folder) => {
         if (folder) {
-          const newFolderData: TCreateFoldersDTO = {
+          const newFolderData: TCreateFolderDTO = {
             title: folder.title,
           };
           this.sendNewFolder.emit(newFolderData);

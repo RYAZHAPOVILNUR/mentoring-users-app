@@ -2,18 +2,18 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 
-import { MaterialsEffects } from './materials.effects';
+import { materialsFoldersEffects } from './folders.effects';
 
-describe('MaterialsEffects', () => {
+describe('materialsFoldersEffects', () => {
   let actions$: Observable<any>;
-  let effects: MaterialsEffects;
+  let effects: materialsFoldersEffects;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [MaterialsEffects, provideMockActions(() => actions$)],
+      providers: [materialsFoldersEffects, provideMockActions(() => actions$)],
     });
 
-    effects = TestBed.inject(MaterialsEffects);
+    effects = TestBed.inject(materialsFoldersEffects);
   });
 
   it('should be created', () => {
