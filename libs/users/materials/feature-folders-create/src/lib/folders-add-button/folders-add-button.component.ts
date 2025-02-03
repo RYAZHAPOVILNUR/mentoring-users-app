@@ -1,13 +1,12 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { FoldersAddDialogComponent } from '../folders-add-dialog/folders-add-dialog.component';
-import { MatButtonModule } from '@angular/material/button';
-import { IAddFolder } from 'libs/users/materials/data-access/src/lib/models/folder-add.model';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { MaterialsFacade } from '@users/materials/data-access';
-import { IFolder } from 'libs/users/materials/data-access/src/lib/models/folder.model';
+import { IAddFolder } from 'libs/users/materials/data-access/src/lib/models/folder-add.model';
+import { FoldersAddDialogComponent } from '../folders-add-dialog/folders-add-dialog.component';
 
 @Component({
   selector: 'users-folders-add-button',

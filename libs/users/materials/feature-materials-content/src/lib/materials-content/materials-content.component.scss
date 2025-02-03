@@ -1,0 +1,27 @@
+.material-content {
+  &-container {
+    min-width: 300px;
+    min-height: 100px;
+    padding: 15px;
+    text-align: center;
+  }
+
+  &-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+}
+
+.material-title {
+  font-weight: 700;
+  margin-bottom: 0;
+  flex: 1;
+  text-align: center;
+}
+
+.error-msg {
+  color: red;
+  font-weight: 700;
+}

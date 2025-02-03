@@ -29,7 +29,7 @@ export class FoldersListContainerComponent {
   private readonly router = inject(Router);
 
   ngOnInit(): void {
-    this.materialsFacade.init();
+    this.materialsFacade.initFolders();
   }
 
   onDeleteFolder(folder: IFolder) {

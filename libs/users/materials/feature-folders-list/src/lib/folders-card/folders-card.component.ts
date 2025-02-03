@@ -11,8 +11,10 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { IFolder } from 'libs/users/materials/data-access/src/lib/models/folder.model';
+import { MaterialsService } from 'libs/users/materials/data-access/src/lib/services/materials.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'users-folders-card',
@@ -30,20 +32,15 @@ export class FoldersCardComponent {
   @Output()
   deleteFolder = new EventEmitter();
 
-  private translate = inject(TranslateService);
+  public readonly materialsService = inject(MaterialsService);
+  public translatedDate$!: Observable<string>;
+
+  ngOnInit() {
+    this.translatedDate$ = this.materialsService.translateDate(this.folder.created_at);
+  }
 
   onDeleteFolder(event: Event) {
     event.stopPropagation();
     this.deleteFolder.emit();
-  }
-
-  public translateDate(date: string | number | Date): string {
-    const defaultLang = this.translate.getDefaultLang();
-    const formattedDate = new Date(date).toLocaleString(defaultLang, {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric',
-    });
-    return this.translate.instant(formattedDate);
   }
 }

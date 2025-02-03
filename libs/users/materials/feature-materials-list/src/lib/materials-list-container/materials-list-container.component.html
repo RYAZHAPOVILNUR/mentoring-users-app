@@ -1,15 +1,12 @@
 <ng-container
-  *ngrxLet="{
-    materials: [],
-  } as vm"
+*ngrxLet="{
+  openedFolder: openedFolder$,
+  materials: materials$,
+  status: status$,
+  errors: errors$,
+} as vm"
 >
-<div class="container materials-container-top">
-  <button mat-icon-button aria-label="close materials container" (click)="closeFolder()">
-    <mat-icon>arrow_back</mat-icon>
-  </button>
-  <h1 class="materials-container-title">Folder title</h1>
-</div>
-  <users-materials-list [vm]="vm"/>
+  <users-materials-list [vm]="vm" (deleteMaterial)="onDeleteMaterial($event)"/>
 </ng-container>
-<users-materials-add-button />
+<users-materials-add-button [folderId]="openedFolderId"/>
 

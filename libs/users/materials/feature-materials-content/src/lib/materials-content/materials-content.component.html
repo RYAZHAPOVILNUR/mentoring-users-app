@@ -1,1 +1,32 @@
-<p>materials-content works!</p>
+
+  <div class="material-content-container">
+    <div class="material-content-top">
+      <h1 class="material-title">{{materialType === 'audio' ? 'Подкаст' : materialType === 'pdf' ? 'PDF' : materialType === 'video' ? 'Видео' : 'Неизвестный материал'}}</h1>
+      <button mat-icon-button aria-label="close materials content dialog" (click)="closeDialog()"><mat-icon>close</mat-icon></button>
+    </div>
+    <div class="material-content-bottom">
+      <ng-container *ngIf="materialType === 'video'">
+        <p mat-dialog-title>Ссылка на видео: {{this.data.material_link}}</p>
+        <img class="video-thimbnail" [src]="'https://img.youtube.com/vi/' + getVideoId() + '/hqdefault.jpg'" alt="Video thumbnail">
+      </ng-container>
+      <ng-container *ngIf="materialType === 'audio'">
+        <audio controls>
+          <source [src]="src" type="audio/mp3">
+        </audio>
+      </ng-container>
+      <ng-container *ngIf="materialType === 'pdf'">
+        <pdf-viewer [src]="src"
+                  [render-text]="true"
+                  [original-size]="false"
+                  style="width: 600px; height: 700px">
+        </pdf-viewer>
+      </ng-container>
+      <ng-container *ngIf="materialType === 'unknown'">
+        <p class="error-msg">*Ссылка материала неправильная.</p>
+      </ng-container>
+    </div>
+    
+  </div>
+
+
+

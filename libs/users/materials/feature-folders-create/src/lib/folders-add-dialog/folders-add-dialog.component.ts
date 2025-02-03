@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Inject, inject, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Inject, inject, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -35,7 +35,7 @@ export class FoldersAddDialogComponent {
     });
   }
 
-  save(): void {
+  public save(): void {
     if (this.folderAddFormGroup.valid) {
       const formData: IAddFolder = {
         title: this.folderAddFormGroup.value.folderName,
@@ -44,7 +44,7 @@ export class FoldersAddDialogComponent {
     }
   }
 
-  cancel(): void {
+  public cancel(): void {
     this.dialogRef.close();
   }
 }

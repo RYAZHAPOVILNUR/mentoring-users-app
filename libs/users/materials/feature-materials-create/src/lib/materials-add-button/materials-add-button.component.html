@@ -1,4 +1,19 @@
-<button mat-fab color="primary" class="add-material-fab-button">
+<button mat-fab color="primary" [matMenuTriggerFor]="menu" matTooltip="Добавить материал" class="add-material-fab-button">
   <mat-icon>add</mat-icon>
 </button>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="openAddMaterialDialog('video')">
+    <mat-icon>videocam</mat-icon>
+    <span>Видео</span>
+  </button>
+  <button mat-menu-item (click)="openAddMaterialDialog('pdf')">
+    <mat-icon>picture_as_pdf</mat-icon>
+    <span>Файл PDF</span>
+  </button>
+  <button mat-menu-item (click)="openAddMaterialDialog('podcast')">
+    <mat-icon>mic</mat-icon>
+    <span>Подкаст</span>
+  </button>
+</mat-menu>
 

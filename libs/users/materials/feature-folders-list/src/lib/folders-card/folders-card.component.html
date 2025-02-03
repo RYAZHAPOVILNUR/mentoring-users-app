@@ -5,6 +5,6 @@
       <button mat-icon-button class="delete-btn" (click)="onDeleteFolder($event)"><mat-icon>delete</mat-icon></button>
     </div>
       <div class="folder-card-title">{{folder.title}}</div>
-      <div class="folder-card-date">{{translateDate(folder.created_at)}}</div>
+      <div class="folder-card-date">{{translatedDate$ | async}}</div>
   </mat-card-content>
 </mat-card>
