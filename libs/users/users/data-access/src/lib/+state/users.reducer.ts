@@ -78,9 +78,26 @@ const reducer = createReducer(
     ...state,
     status,
   })),
-  on(UsersActions.setUsersFilter, (state, {name}) => ({
+  on(UsersActions.setUsersFilter, (state, { name }) => ({
     ...state,
-    usersFilter: {name},
+    usersFilter: {
+      ...state.usersFilter,
+      name: name
+    }
+  })),
+  on(UsersActions.addStoryPointsSuccess, (state, {userData}) => 
+    usersAdapter.updateOne(
+      {
+        id: userData.id,
+        changes: userData,
+      },
+    state
+  )
+  ),
+  on(UsersActions.addStoryPointsFailed, (state, {error}) => ({
+    ...state,
+    status: 'error' as const,
+    error,
   }))
 );
 

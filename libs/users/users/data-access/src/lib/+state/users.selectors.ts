@@ -37,4 +37,5 @@ export const  selectFilteredUsers = createSelector(
     (usersFilter, allUsers) => {
       return !usersFilter.name ? allUsers :allUsers.filter((user) => user.name.includes(usersFilter.name));
     }
+    
 )

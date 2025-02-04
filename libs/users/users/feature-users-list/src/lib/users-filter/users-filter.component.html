@@ -1,4 +1,7 @@
 <form [formGroup]="filter" (ngSubmit)="onFilter()">
-    <input type="text" formControlName="name" placeholder="Введите имя">
-    <button type="submit">Фильтровать</button>
-  </form>
+  <mat-form-field appearance="fill">
+    <mat-label>Введите имя</mat-label>
+    <input matInput type="text" formControlName="name">
+    <button mat-icon-button color="primary" type="submit"><mat-icon>search</mat-icon></button>
+  </mat-form-field>
+</form>
