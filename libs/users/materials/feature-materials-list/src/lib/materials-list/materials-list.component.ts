@@ -19,7 +19,7 @@ export class MaterialsListComponent {
   vm!: TMaterialListVM;
 
   @Input({ required: true })
-  folderTitle: unknown;
+  folderTitle!: string;
 
   @Output() deleteMaterial = new EventEmitter();
 

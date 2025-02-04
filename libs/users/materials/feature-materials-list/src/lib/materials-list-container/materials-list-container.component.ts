@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { MaterialsListComponent } from '../materials-list/materials-list.component';
 import { LetDirective } from '@ngrx/component';
-import { TMaterialDTO, MaterialsFacade } from '@users/materials/data-access';
+import { TMaterialDTO, MaterialsFacade, ProvideDataService } from '@users/materials/data-access';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
@@ -24,10 +24,15 @@ export class MaterialsListContainerComponent {
   private readonly dialog = inject(MatDialog);
   private readonly router = inject(Router);
   private destroyRef$ = inject(DestroyRef);
-  public folderTitle?: string;
+  private readonly provideData = inject(ProvideDataService);
+  public folderTitle!: string;
 
   constructor() {
     this.MaterialsFacade.init();
+
+    this.provideData.date$.pipe(takeUntilDestroyed(this.destroyRef$)).subscribe((folderTitle: string) => {
+      this.folderTitle = folderTitle;
+    });
   }
 
   public onGoBack(): void {

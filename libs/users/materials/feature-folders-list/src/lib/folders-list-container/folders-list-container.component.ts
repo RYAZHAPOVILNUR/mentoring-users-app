@@ -10,6 +10,7 @@ import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FoldersAddButtonComponent } from '@users/materials/feature-folders-create';
 import { Router } from '@angular/router';
+import { ProvideDataService } from '@users/materials/data-access';
 
 @Component({
   selector: 'materials-folders-list-container',
@@ -35,7 +36,7 @@ export class FoldersListContainerComponent {
   private readonly dialog = inject(MatDialog);
   private readonly router = inject(Router);
   private destroyRef$ = inject(DestroyRef);
-  public folderTitle?: string = 'No title';
+  private readonly provideData = inject(ProvideDataService);
 
   constructor() {
     this.MaterialsFoldersFacade.init();
@@ -66,7 +67,8 @@ export class FoldersListContainerComponent {
   }
 
   public onRedirectToFolderPage(folderDate: { folderId: number; folderTitle: string }): void {
-    this.folderTitle = folderDate.folderTitle;
+    this.provideData.updateDate(folderDate.folderTitle);
+    console.log(folderDate.folderTitle);
     this.router.navigate(['/materials', folderDate.folderId]);
   }
 }

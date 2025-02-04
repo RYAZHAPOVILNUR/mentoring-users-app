@@ -6,10 +6,12 @@
   <ng-container *ngIf="vm.status === 'loaded'; else error">
     <div class="container">
       
-      <button mat-icon-button class="material-card-buttons__btn" (click)="onGoBack()">
-        <mat-icon>keyboard_backspace</mat-icon>
-      </button>
-      <h2>{{folderTitle}}</h2>
+      <div class="title">
+        <button mat-icon-button class="btn" (click)="onGoBack()">
+          <mat-icon>keyboard_backspace</mat-icon>
+        </button>
+        <h2 class="subtitle">{{folderTitle}}</h2>
+      </div>
       
       <div class="row">
         <div class="col-md-3 mb-3" *ngFor="let material of vm.materials">
