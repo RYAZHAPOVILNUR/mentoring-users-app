@@ -1,5 +1,5 @@
 <div class="materials-container">
-  <ng-container *ngIf="!selectedFolder">
+  <ng-container *ngIf="(selectedFolder$ | async) === null">
     <div class="materials-header">
       <button mat-raised-button color="primary" (click)="openNewFolderDialog()">
         <mat-icon>create_new_folder</mat-icon>
@@ -38,8 +38,6 @@
   </ng-container>
 
   <users-folder-content 
-    *ngIf="selectedFolder"
-    [folder]="selectedFolder"
-    (backClick)="selectedFolder = null"
+    *ngIf="selectedFolder$ | async"
   ></users-folder-content>
 </div>

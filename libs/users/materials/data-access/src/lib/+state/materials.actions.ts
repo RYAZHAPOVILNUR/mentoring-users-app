@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { IFolder, IAddFolder, MaterialsError } from './materials.reducer';
+import { IAddFolder, IFolder, IMaterial, MaterialsError } from './materials.reducer';
 
 export const MaterialsActions = createActionGroup({
   source: 'Materials',
@@ -19,5 +19,23 @@ export const MaterialsActions = createActionGroup({
     'Open Folder': emptyProps(),
     'Open Folder Success': props<{ folder: IFolder }>(),
     'Open Folder Failure': props<{ error: MaterialsError }>(),
+
+    'Reset State': emptyProps(),
+
+    'Load Materials': emptyProps(),
+    'Load Materials Success': props<{ materials: IMaterial[] }>(),
+    'Load Materials Failure': props<{ error: MaterialsError }>(),
+
+    'Add Material': props<{ material: IMaterial }>(),
+    'Add Material Success': props<{ material: IMaterial }>(),
+    'Add Material Failure': props<{ error: MaterialsError }>(),
+
+    'Delete Material': props<{ materialId: string }>(),
+    'Delete Material Success': props<{ materialId: string }>(),
+    'Delete Material Failure': props<{ error: MaterialsError }>(),
+
+    'Open Material': props<{ material: IMaterial }>(),
+    'Open Material Success': props<{ material: IMaterial }>(),
+    'Open Material Failure': props<{ error: MaterialsError }>(),
   },
 });

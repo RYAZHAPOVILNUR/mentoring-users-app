@@ -1,18 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatDialogModule, MatDialog } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
-import { MaterialsFacade } from '@users/materials/data-access';
-import { FolderDialogComponent } from './folder-dialog/folder-dialog.component';
-import { IFolder } from '@users/materials/data-access';
-import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { IFolder, MaterialsFacade } from '@users/materials/data-access';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { FolderContentComponent } from './folder-content/folder-content.component';
+import { FolderDialogComponent } from './folder-dialog/folder-dialog.component';
 
 @Component({
   selector: 'users-materials',
@@ -35,11 +33,12 @@ import { FolderContentComponent } from './folder-content/folder-content.componen
 export class UsersMaterialsComponent implements OnInit {
   private readonly dialog = inject(MatDialog);
   private readonly materialsFacade = inject(MaterialsFacade);
+  private readonly router = inject(Router);
 
   readonly folders$ = this.materialsFacade.folders$;
   readonly status$ = this.materialsFacade.status$;
   readonly error$ = this.materialsFacade.error$;
-  selectedFolder: IFolder | null = null;
+  readonly selectedFolder$ = this.materialsFacade.selectedFolder$;
 
   ngOnInit() {
     this.materialsFacade.loadFolders();
@@ -64,7 +63,7 @@ export class UsersMaterialsComponent implements OnInit {
 
   onFolderDoubleClick(folder: IFolder): void {
     console.log('Opening folder:', folder);
-    this.selectedFolder = folder;
+    this.router.navigate(['/materials', folder.id]);
   }
 
   deleteFolder(folder: IFolder): void {

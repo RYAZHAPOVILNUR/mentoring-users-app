@@ -1,12 +1,12 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
-import { of } from 'rxjs';
-import { MaterialsActions } from './materials.actions';
-import { ApiService } from '@users/core/http';
-import { IFolder, IAddFolder } from './materials.reducer';
 import { Store } from '@ngrx/store';
 import { selectRouteParams } from '@users/core/data-access';
+import { ApiService } from '@users/core/http';
+import { of } from 'rxjs';
+import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { MaterialsActions } from './materials.actions';
+import { IAddFolder, IFolder, IMaterial } from './materials.reducer';
 
 @Injectable()
 export class MaterialsEffects {
@@ -16,15 +16,10 @@ export class MaterialsEffects {
 
     return action$.pipe(
       ofType(MaterialsActions.loadFolders),
-      tap(() => console.log('Loading folders...')),
       switchMap(() => 
         apiService.get<IFolder[]>('/folder').pipe(
-          tap(response => console.log('API Response:', response)),
           map((folders) => MaterialsActions.loadFoldersSuccess({ folders })),
-          catchError((error) => {
-            console.error('Error loading folders:', error);
-            return of(MaterialsActions.loadFoldersFailure({ error }))
-          })
+          catchError((error) => of(MaterialsActions.loadFoldersFailure({ error })))
         )
       )
     )
@@ -36,15 +31,10 @@ export class MaterialsEffects {
 
     return actions$.pipe(
       ofType(MaterialsActions.addFolder),
-      tap(action => console.log('1. Add Folder Action:', action)),
       switchMap(({ folder }) =>
         apiService.post<IFolder, IAddFolder>('/folder', folder).pipe(
-          tap(response => console.log('2. API Response:', response)),
           map((newFolder) => MaterialsActions.addFolderSuccess({ folder: newFolder })),
-          catchError((error) => {
-            console.error('Error creating folder:', error);
-            return of(MaterialsActions.addFolderFailure({ error }));
-          })
+          catchError((error) => of(MaterialsActions.addFolderFailure({ error })))
         )
       )
     )
@@ -56,15 +46,10 @@ export class MaterialsEffects {
 
     return action$.pipe(
       ofType(MaterialsActions.deleteFolder),
-      tap(action => console.log('1. Delete Folder Action:', action)),
       switchMap(({ id }) =>
         apiService.delete<void>(`/folder/${id}`).pipe(
-          tap(() => console.log('2. Folder deleted successfully')),
           map(() => MaterialsActions.deleteFolderSuccess({ id })),
-          catchError((error) => {
-            console.error('Error deleting folder:', error);
-            return of(MaterialsActions.deleteFolderFailure({ error }))
-          })
+          catchError((error) => of(MaterialsActions.deleteFolderFailure({ error })))
         )
       )
     )
@@ -80,14 +65,75 @@ export class MaterialsEffects {
       withLatestFrom(store.select(selectRouteParams)),
       switchMap(([, params]) => {
         return apiService.get<IFolder>(`/folder/${params['id']}`).pipe(
-          tap(response => console.log('Opening folder response:', response)),
           map((folder) => MaterialsActions.openFolderSuccess({ folder })),
-          catchError((error) => {
-            console.error('Error opening folder:', error);
-            return of(MaterialsActions.openFolderFailure({ error }))
-          })
+          catchError((error) => of(MaterialsActions.openFolderFailure({ error })))
         )
       })
     )
+  }, { functional: true });
+
+  loadMaterials = createEffect(() => {
+    const action$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const store = inject(Store);
+
+    return action$.pipe(
+      ofType(MaterialsActions.loadMaterials),
+      withLatestFrom(store.select(selectRouteParams)),
+      switchMap(([, params]) =>
+        apiService.get<IMaterial[]>('/material').pipe(
+          map((materials) => {
+            const filteredMaterials = materials.filter(
+              (material) => material.folder_id === +params['id']
+            );
+            return MaterialsActions.loadMaterialsSuccess({ materials: filteredMaterials });
+          }),
+          catchError((error) => of(MaterialsActions.loadMaterialsFailure({ error })))
+        )
+      )
+    );
+  }, { functional: true });
+
+  addMaterial = createEffect(() => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const store = inject(Store);
+
+    return actions$.pipe(
+      ofType(MaterialsActions.addMaterial),
+      withLatestFrom(store.select(selectRouteParams)),
+      switchMap(([{ material }, params]) => {
+        const folderId = Number(params['id']);
+
+        const materialWithFolderId = {
+          title: material.title,
+          material_link: material.material_link,
+          folder_id: folderId
+        };
+
+        return apiService.post<IMaterial, typeof materialWithFolderId>('/material', materialWithFolderId).pipe(
+          map((newMaterial) => MaterialsActions.addMaterialSuccess({ material: newMaterial })),
+          catchError((error) => of(MaterialsActions.addMaterialFailure({ error })))
+        );
+      })
+    );
+  }, { functional: true });
+
+  deleteMaterial = createEffect(() => {
+    const action$ = inject(Actions);
+    const apiService = inject(ApiService);
+
+    return action$.pipe(
+      ofType(MaterialsActions.deleteMaterial),
+      switchMap(({ materialId: id }) =>
+        apiService.delete<void>(`/material/${id}`).pipe(
+          switchMap(() => [
+            MaterialsActions.deleteMaterialSuccess({ materialId: id }),
+            MaterialsActions.loadMaterials()
+          ]),
+          catchError((error) => of(MaterialsActions.deleteMaterialFailure({ error })))
+        )
+      )
+    );
   }, { functional: true });
 }

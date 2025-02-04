@@ -1,9 +1,11 @@
-import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { IFolder } from '@users/materials/data-access';
-import { MaterialsFacade } from '@users/materials/data-access';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { MaterialsActions, MaterialsFacade } from '@users/materials/data-access';
+import { MaterialViewerComponent } from '../material-content/material-viewer/material-viewer.component';
 
 @Component({
   selector: 'users-folder-content',
@@ -11,17 +13,31 @@ import { MaterialsFacade } from '@users/materials/data-access';
   imports: [
     CommonModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MaterialViewerComponent
   ],
   templateUrl: './folder-content.component.html',
   styleUrls: ['./folder-content.component.scss']
 })
-export class FolderContentComponent {
-  @Input() folder!: IFolder;
-  @Output() readonly backClick = new EventEmitter<void>();
+export class FolderContentComponent implements OnInit {
   private readonly materialsFacade = inject(MaterialsFacade);
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+  private readonly store = inject(Store);
+  
+  folder$ = this.materialsFacade.selectedFolder$;
 
-  onBack(): void {
-    this.backClick.emit();
+  ngOnInit(): void {
+    const folderId = this.route.snapshot.params['id'];
+    if (folderId) {
+      this.materialsFacade.openFolder();
+      this.materialsFacade.loadMaterials();
+    }
   }
-} 
+
+  backOnFolders(): void {
+    this.store.dispatch(MaterialsActions.resetState());
+    this.materialsFacade.loadFolders();
+    this.router.navigate(['/materials']);
+  }
+}

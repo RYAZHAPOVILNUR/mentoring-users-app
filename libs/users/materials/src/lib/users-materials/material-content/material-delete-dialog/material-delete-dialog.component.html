@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Удаление материала</h2>
+
+<mat-dialog-content>
+  <p>Вы точно хотите удалить материал?</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Отмена</button>
+  <button mat-raised-button color="warn" (click)="onConfirm()">Удалить</button>
+</mat-dialog-actions> 

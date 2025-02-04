@@ -1,13 +1,12 @@
 <div class="folder-content">
   <div class="folder-header">
-    <button mat-icon-button (click)="onBack()">
+    <button mat-icon-button (click)="backOnFolders()">
       <mat-icon>arrow_back</mat-icon>
     </button>
-    <h2>{{ folder.title || folder.name }}</h2>
+    <h2 *ngIf="folder$ | async as folder">{{ folder.title || folder.name }}</h2>
   </div>
 
   <div class="content-container">
-    <!-- Здесь будет содержимое папки -->
-    <p class="empty-message">Папка пуста</p>
+    <users-material-viewer></users-material-viewer>
   </div>
 </div> 

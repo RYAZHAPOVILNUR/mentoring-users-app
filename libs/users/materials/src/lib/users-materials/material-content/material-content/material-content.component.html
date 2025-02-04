@@ -1,0 +1,45 @@
+<div class="title">
+    <h1 mat-dialog-title>{{ data.material.title }}</h1>
+</div>
+
+<div class="button-close">
+    <button class="title-button" mat-icon-button (click)="onClose()">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<!-- PDF -->
+<ng-container *ngIf="isPdf()">
+    <div class="pdf-container">
+        <iframe *ngIf="isExternalPdf()"
+            [src]="getGoogleDocsViewerUrl()"
+            width="100%" 
+            height="600px"
+            frameborder="0">
+        </iframe>
+
+        <pdf-viewer *ngIf="!isExternalPdf()"
+            [src]="safeMaterialLink"
+            [render-text]="true"
+            [original-size]="false"
+            class="pdf-viewer">
+        </pdf-viewer>
+    </div>
+</ng-container>
+<!-- SOUND CLOUD -->
+<ng-container *ngIf="isSoundCloud()">
+    <div class="soundcloud-player">
+      <iframe scrolling="no" allow="autoplay" [src]="getSoundCloudEmbedUrl()"></iframe>
+    </div>
+</ng-container>
+<!-- VIDEO -->
+<ng-container *ngIf="!isPdf() && !isSoundCloud()">
+    <div class="link">
+        <p mat-dialog-title>Ссылка на видео: {{ materialLink }}</p>
+    </div>
+
+
+    <div *ngIf="getVideoId()" class="thumbnail">
+      <img [src]="'https://img.youtube.com/vi/' + getVideoId() + '/maxresdefault.jpg'">
+    </div>
+</ng-container>
