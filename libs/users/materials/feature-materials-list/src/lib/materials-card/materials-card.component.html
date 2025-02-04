@@ -1,13 +1,12 @@
 
-
 <mat-card class="material-card-wrapper" (mouseenter)="onShowIcon(true)"
           (mouseleave)="onShowIcon(false)" (dblclick)="onRedirectToMaterialContent()">
-  
+
   <mat-card-content class="material-card-content">
-    <mat-icon fontIcon="material" class="material-card-content__icon"
+    <mat-icon *ngIf="getFileIcon() as icon" [fontIcon]="icon" class="material-card-content__icon"
     ></mat-icon>
-    <div class="material-card-content__title">THis is title</div>
-    <div class="material-card-content__date">this is date now</div>
+    <div class="material-card-content__title">{{material.folder_id}}</div>
+    <div class="material-card-content__date">{{material.created_at | date: 'd MMMM, yyyy'}}</div>
   </mat-card-content>
   
   <mat-card-actions class="material-card-buttons">

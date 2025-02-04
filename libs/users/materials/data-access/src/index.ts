@@ -8,5 +8,9 @@ export * from './lib/models/folders/folder-list-vm.model';
 export * from './lib/models/folders/folder-vm.model';
 export * from './lib/models/folders/folder-dto.model';
 // materials
+export * from './lib/+state/materials/materials.facade';
+export * from './lib/+state/materials/materials.actions';
+export * from './lib/+state/materials/materials.reducer';
+export * as materialsEffects from './lib/+state/materials/materials.effects';
 export * from './lib/models/materials/material-list-vm.model';
 export * from './lib/models/materials/material-dto.model';

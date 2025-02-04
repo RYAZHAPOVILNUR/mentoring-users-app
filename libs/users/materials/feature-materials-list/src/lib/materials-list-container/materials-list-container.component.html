@@ -4,6 +4,6 @@ materials: materials$,
 errors: errors$
 } as vm"
 >
-  <materials-list [vm]="vm" (deleteMaterial)="onDeleteMaterial($event)"
-                  (redirectToMaterialContent)="onRedirectToMaterialContent($event)"></materials-list>
+  <materials-list [vm]="vm" [folderTitle]="folderTitle" (deleteMaterial)="onDeleteMaterial($event)"
+                  (redirectToMaterialContent)="onRedirectToMaterialContent($event)" (goBack)="onGoBack()"></materials-list>
 </ng-container>

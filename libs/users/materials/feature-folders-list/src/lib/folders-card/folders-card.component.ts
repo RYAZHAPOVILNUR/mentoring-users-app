@@ -34,6 +34,9 @@ export class FoldersCardComponent {
   }
 
   public onRedirectToFolderPage(): void {
-    this.redirectToMaterials.emit(this.folder.id);
+    this.redirectToMaterials.emit({
+      folderId: this.folder.id,
+      folderTitle: this.folder.title,
+    });
   }
 }

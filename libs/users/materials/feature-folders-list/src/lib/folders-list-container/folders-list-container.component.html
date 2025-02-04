@@ -1,4 +1,3 @@
-
 <ng-container
   *ngrxLet="{
     status: status$,
@@ -6,7 +5,9 @@
     errors: errors$
   } as vm"
 >
-  <materials-folders-list [vm]="vm" (deleteFolder)="onDeleteFolder($event)" (redirectToMaterials)="onRedirectToFolderPage($event)"></materials-folders-list>
+  <materials-folders-list [vm]="vm" (deleteFolder)="onDeleteFolder($event)"
+                          (redirectToMaterials)="onRedirectToFolderPage($event)"></materials-folders-list>
 </ng-container>
 
-<materials-folders-add-button (sendNewFolder)="onAddFolder($event)"></materials-folders-add-button>
+<materials-folders-add-button
+  (sendNewFolder)="onAddFolder($event)"></materials-folders-add-button>

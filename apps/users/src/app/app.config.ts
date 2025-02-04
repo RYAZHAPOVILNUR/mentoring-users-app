@@ -20,7 +20,12 @@ import { articlesEffects, articlesFeature, commentsEffects, commentsFeature } fr
 import { tasksEffects, tasksFeature } from '@users/users/task/data-access';
 import { CLIENT_ID, githubApiEffects, githubApiFeature } from '@users/core/github-api/data-access';
 import { backlogFeature, backlogEffects } from '@users/users/backlog/data-access';
-import { materialsFoldersEffects, materialsFeature } from '@users/materials/data-access';
+import {
+  materialsFoldersEffects,
+  materialsFoldersFeature,
+  materialsEffects,
+  materialsFeature,
+} from '@users/materials/data-access';
 import { DatePipe } from '@angular/common';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -38,7 +43,8 @@ export const appConfig: ApplicationConfig = {
       githubApiEffects,
       backlogEffects,
       SettingsEffects,
-      materialsFoldersEffects
+      materialsFoldersEffects,
+      materialsEffects
     ),
     provideStore({
       router: routerReducer,
@@ -50,6 +56,7 @@ export const appConfig: ApplicationConfig = {
       [tasksFeature.name]: tasksFeature.reducer,
       [githubApiFeature.name]: githubApiFeature.reducer,
       [backlogFeature.name]: backlogFeature.reducer,
+      [materialsFoldersFeature.name]: materialsFoldersFeature.reducer,
       [materialsFeature.name]: materialsFeature.reducer,
     }),
     provideRouterStore(),

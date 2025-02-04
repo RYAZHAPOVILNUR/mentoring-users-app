@@ -3,7 +3,6 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
 import { LetDirective } from '@ngrx/component';
-import { UsersListComponent } from '@users/feature-users-list';
 import { FoldersFacade, TCreateFolderDTO, TFolderVM } from '@users/materials/data-access';
 // import { DateLocalizationService } from '../../../../../core/ui/language-switch/src/lib/date-localization.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -11,8 +10,6 @@ import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FoldersAddButtonComponent } from '@users/materials/feature-folders-create';
 import { Router } from '@angular/router';
-
-console.log('сменить зависимости на алиасы');
 
 @Component({
   selector: 'materials-folders-list-container',
@@ -30,17 +27,18 @@ console.log('сменить зависимости на алиасы');
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersListContainerComponent {
-  private readonly MaterialsFacade = inject(FoldersFacade);
-  public readonly status$ = this.MaterialsFacade.status$;
-  public readonly folders$ = this.MaterialsFacade.folders$;
-  public readonly errors$ = this.MaterialsFacade.errors$;
+  private readonly MaterialsFoldersFacade = inject(FoldersFacade);
+  public readonly status$ = this.MaterialsFoldersFacade.status$;
+  public readonly folders$ = this.MaterialsFoldersFacade.folders$;
+  public readonly errors$ = this.MaterialsFoldersFacade.errors$;
   // private readonly dateLocalizationService = inject(DateLocalizationService);
   private readonly dialog = inject(MatDialog);
   private readonly router = inject(Router);
   private destroyRef$ = inject(DestroyRef);
+  public folderTitle?: string = 'No title';
 
   constructor() {
-    this.MaterialsFacade.init();
+    this.MaterialsFoldersFacade.init();
 
     // window.addEventListener('storage', (event) => {
     //   if (event.key === 'lang') {
@@ -56,18 +54,19 @@ export class FoldersListContainerComponent {
     dialogRef
       .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef$))
-      .subscribe((result) => {
+      .subscribe((result: boolean) => {
         if (result) {
-          this.MaterialsFacade.deleteFolder(folder.id);
+          this.MaterialsFoldersFacade.deleteFolder(folder.id);
         }
       });
   }
 
   public onAddFolder(folder: TCreateFolderDTO): void {
-    this.MaterialsFacade.addFolder(folder);
+    this.MaterialsFoldersFacade.addFolder(folder);
   }
 
-  public onRedirectToFolderPage(id: number): void {
-    this.router.navigate(['/materials', id]);
+  public onRedirectToFolderPage(folderDate: { folderId: number; folderTitle: string }): void {
+    this.folderTitle = folderDate.folderTitle;
+    this.router.navigate(['/materials', folderDate.folderId]);
   }
 }

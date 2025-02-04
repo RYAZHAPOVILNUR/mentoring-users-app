@@ -24,7 +24,7 @@ export class FoldersListComponent {
     this.deleteFolder.emit(folder);
   }
 
-  public onRedirectToFolderPage(id: number): void {
-    this.redirectToMaterials.emit(id);
+  public onRedirectToFolderPage(folderDate: { folderId: number; folderTitle: string }): void {
+    this.redirectToMaterials.emit(folderDate);
   }
 }

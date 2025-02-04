@@ -13,7 +13,6 @@ export const loadFolderFailure = createAction(
     error: any;
   }>()
 );
-console.log('Убрать any из error');
 
 export const deleteFolder = createAction(
   '[Materials Page] Delete Folder',

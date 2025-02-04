@@ -29,6 +29,13 @@ export class MaterialsCardComponent {
     this.isIconVisibleSubject$.next(isVisible);
   }
 
+  public getFileIcon(): string {
+    if (this.material.material_link.includes('.pdf')) return 'picture_as_pdf';
+    if (this.material.material_link.includes('.mp3')) return 'audiotrack';
+    if (this.material.material_link.includes('youtube.com')) return 'ondemand_video';
+    else return 'insert_drive_file';
+  }
+
   public onDeleteMaterial(): void {
     this.deleteMaterial.emit();
   }

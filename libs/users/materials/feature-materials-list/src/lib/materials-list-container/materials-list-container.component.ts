@@ -1,8 +1,12 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { MaterialsListComponent } from '../materials-list/materials-list.component';
 import { LetDirective } from '@ngrx/component';
-import { TMaterialDTO } from '@users/materials/data-access';
+import { TMaterialDTO, MaterialsFacade } from '@users/materials/data-access';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { CoreUiConfirmDialogComponent } from '@users/core/ui';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'materials-list-container',
@@ -13,12 +17,35 @@ import { TMaterialDTO } from '@users/materials/data-access';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialsListContainerComponent {
+  private readonly MaterialsFacade = inject(MaterialsFacade);
+  public readonly status$ = this.MaterialsFacade.status$;
+  public readonly materials$ = this.MaterialsFacade.materials$;
+  public readonly errors$ = this.MaterialsFacade.errors$;
+  private readonly dialog = inject(MatDialog);
+  private readonly router = inject(Router);
+  private destroyRef$ = inject(DestroyRef);
+  public folderTitle?: string;
+
   constructor() {
-    console.log('materials-list-container init');
+    this.MaterialsFacade.init();
+  }
+
+  public onGoBack(): void {
+    this.router.navigate(['/materials']);
   }
 
   public onDeleteMaterial(material: TMaterialDTO): void {
-    console.log('delete material: ' + material);
+    const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
+      data: { dialogText: `Вы уверены, что хотите удалить папку ${material.title} ?` },
+    });
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntilDestroyed(this.destroyRef$))
+      .subscribe((result: boolean) => {
+        if (result) {
+          this.MaterialsFacade.deleteMaterial(material.id);
+        }
+      });
   }
 
   public onRedirectToMaterialContent(id: number): void {
