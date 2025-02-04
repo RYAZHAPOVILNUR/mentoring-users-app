@@ -29,7 +29,7 @@ export const initialUsersState: UsersState = usersAdapter.getInitialState({
   // set initial required properties
   status: 'init',
   error: null,
-  usersFilter: {name: ''}
+  usersFilter: { name: '' },
 });
 
 const reducer = createReducer(
@@ -62,6 +62,20 @@ const reducer = createReducer(
     status: 'error' as const,
     error,
   })),
+  on(UsersActions.storyPointsSuccess, (state, { userData }) =>
+    usersAdapter.updateOne(
+      {
+        id: userData.id,
+        changes: userData,
+      },
+      state
+    )
+  ),
+  on(UsersActions.storyPointsFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
   on(UsersActions.loadUser, (state) => ({
     ...state,
     status: 'loading' as const,
@@ -78,10 +92,10 @@ const reducer = createReducer(
     ...state,
     status,
   })),
-  on(UsersActions.setUsersFilter, (state, {filter}) => ({
+  on(UsersActions.setUsersFilter, (state, { filter }) => ({
     ...state,
     usersFilter: filter,
-  })),
+  }))
 );
 
 export function usersReducer(state: UsersState | undefined, action: Action) {

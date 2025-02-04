@@ -106,8 +106,7 @@
             </button>
           </mat-card-actions>
         </form>
-        <!--  -->
-        <div class="edit-user-points">
+        <div class="edit-user-points" *ngIf="!vm.user?.isAdmin">
           <mat-form-field class="edit-user-field">
             <mat-label>Количество сторипоинтов</mat-label>
             <input type="text" class="edit-user-input" matInput [formControl]="totalStoryPoints" />
@@ -123,7 +122,7 @@
           </button>
 
           <div *ngIf="!totalStoryPoints.disabled" class="edit-user-buttons">
-            <button (click)="onAddPoints()" mat-icon-button type="button">
+            <button (click)="onAddStoryPoints()" mat-icon-button type="button">
               <mat-icon>done</mat-icon>
             </button>
             <button (click)="totalStoryPoints.disable()" mat-icon-button type="button">
@@ -131,9 +130,6 @@
             </button>
           </div>
         </div>
-        <p>{{ vm.user?.totalStoryPoints }}</p>
-        <p>{{ pointsEdit }}</p>
-        <!--  -->
       </mat-card>
     </div>
   </ng-container>
@@ -150,5 +146,11 @@
 <ng-template #snackbar>
   <div class="edit-user-snackbar">
     <span>Пользователь успешно изменён!</span>
+  </div>
+</ng-template>
+
+<ng-template #points>
+  <div class="edit-user-snackbar">
+    <span>Сторипоинты пользователь обновлены!</span>
   </div>
 </ng-template>

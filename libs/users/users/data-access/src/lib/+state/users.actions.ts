@@ -29,6 +29,19 @@ export const editUser = createAction(
     onSuccessCb: onSuccessEditionCbType;
   }>()
 );
+
+export const addStoryPoints = createAction(
+  '[User detail] Add Story Points',
+  props<{
+    userData: CreateUserDTO;
+    id: number;
+    onSuccessAddSP: onSuccessSPonCbType;
+  }>()
+);
+// Надо здесь разобраться
+export const storyPointsSuccess = createAction('[Users Detail] Edit User Success', props<{ userData: UsersDTO }>());
+export const storyPointsFailed = createAction('[Users Detail] Edit Failed', props<{ error: UsersErrors | null }>());
+
 export const editUserSuccess = createAction('[Users Detail] Edit User Success', props<{ userData: UsersDTO }>());
 export const editUserFailed = createAction('[Users Detail] Edit Failed', props<{ error: UsersErrors | null }>());
 

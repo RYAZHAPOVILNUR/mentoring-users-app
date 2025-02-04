@@ -4,7 +4,7 @@ import { switchMap, catchError, of, map, withLatestFrom, filter, tap } from 'rxj
 import * as UsersActions from './users.actions';
 import { ApiService } from '@users/core/http';
 import { Store, select } from '@ngrx/store';
-import { selectUsersEntities } from './users.selectors';
+import { selectUserSpEntities, selectUsersEntities } from './users.selectors';
 import { CreateUserDTO, UsersDTO, UsersEntity, selectRouteParams, usersDTOAdapter } from '@users/core/data-access';
 
 export const userEffects = createEffect(
@@ -104,6 +104,43 @@ export const editUser = createEffect(
           catchError((error) => {
             console.error('Error', error);
             return of(UsersActions.editUserFailed({ error }));
+          })
+        )
+      )
+    );
+  },
+  { functional: true }
+);
+
+export const addStoryPoints = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const usersEntities$ = inject(Store).pipe(select(selectUserSpEntities));
+
+    return actions$.pipe(
+      ofType(UsersActions.addStoryPoints),
+      withLatestFrom(usersEntities$),
+      filter(([{ id }, userEntities]) => Boolean(userEntities[id])),
+      map(([{ userData, id, onSuccessAddSP }, userEntities]) => ({
+        user: {
+          ...usersDTOAdapter.entityToDTO(<UsersEntity>userEntities[id]),
+          name: userData.name,
+          email: userData.email,
+          username: userData.username,
+          city: userData.city,
+          totalStoryPoints: userData.totalStoryPoints,
+        },
+        onSuccessAddSP,
+      })),
+      switchMap(({ user, onSuccessAddSP }) =>
+        apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+          map((userData) => ({ userData, onSuccessAddSP })),
+          tap(({ onSuccessAddSP }) => onSuccessAddSP()),
+          map(({ userData }) => UsersActions.storyPointsSuccess({ userData })),
+          catchError((error) => {
+            console.log('Error', error);
+            return of(UsersActions.storyPointsFailed({ error }));
           })
         )
       )

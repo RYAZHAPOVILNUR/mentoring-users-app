@@ -52,9 +52,7 @@ export class UsersDetailComponent {
   }
 
   onAddStoryPoints(userData: CreateUserDTO, onSuccessAddSP: onSuccessSPonCbType) {
-    // this.usersFacade.addStoryPoints(userData, this.user.id, onSuccessAddSP);
-    console.log('onAddStoryPoints:', userData);
-    console.log('on onSuccess:', onSuccessAddSP);
+    this.usersFacade.addStoryPoints(userData, this.user.id, onSuccessAddSP);
   }
 
   onCloseUser() {
