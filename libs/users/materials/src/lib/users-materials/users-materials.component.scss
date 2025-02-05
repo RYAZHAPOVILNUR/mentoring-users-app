@@ -1,0 +1,30 @@
+.materials {
+  display: flex;
+  flex-direction: column;
+  // height: 80vh;
+  &_content {
+    // flex-grow: 1;
+  }
+  &_create {
+    padding: 10px;
+    // flex-grow: 0;
+    display: flex;
+    justify-content: end;
+    border: 1px solid blue;
+  }
+}
+
+.add_button {
+  min-width: 50px;
+  background-color: #7e57c2;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  mat-icon {
+    margin: 0;
+  }
+}

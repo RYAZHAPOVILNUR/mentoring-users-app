@@ -1,0 +1,12 @@
+<form class="form">
+  <div class="folder_name">
+    <mat-form-field appearance="fill">
+      <mat-label>Название папки:</mat-label>
+      <input matInput placeholder="Название папки:" [formControl]="folderName" />
+    </mat-form-field>
+  </div>
+  <div class="buttons">
+    <button class="buttons_close" mat-flat-button mat-dialog-close type="button">Отмена</button>
+    <button class="buttons_create" mat-flat-button [mat-dialog-close]="folderName.value" type="button">Создать</button>
+  </div>
+</form>
