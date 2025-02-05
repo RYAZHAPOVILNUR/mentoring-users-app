@@ -28,8 +28,8 @@ describe('Folders Selectors', () => {
   });
 
   describe('Folders Selectors', () => {
-    it('selectAllFolders() should return the list of Folders', () => {
-      const results = FoldersSelectors.selectAllFolders(state);
+    it('selectfolders() should return the list of Folders', () => {
+      const results = FoldersSelectors.selectfolders(state);
       const selId = getFoldersId(results[1]);
 
       expect(results.length).toBe(3);

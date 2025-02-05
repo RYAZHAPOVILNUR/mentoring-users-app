@@ -15,7 +15,7 @@ export class FoldersFacade {
    * and expose them as observables through the facade.
    */
   public readonly status$ = this.store.pipe(select(FoldersSelectors.selectFoldersLoaded));
-  public readonly allFolders$ = this.store.pipe(select(FoldersSelectors.selectAllFolders));
+  public readonly folders$ = this.store.pipe(select(FoldersSelectors.selectfolders));
   public readonly selectedFolders$ = this.store.pipe(select(FoldersSelectors.selectEntity));
   public readonly errors$: Observable<FoldersErrors | null> = this.store.pipe(select(FoldersSelectors.selectFoldersError))
   /**

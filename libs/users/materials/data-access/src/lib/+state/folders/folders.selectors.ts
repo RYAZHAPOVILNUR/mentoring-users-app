@@ -10,7 +10,7 @@ export const selectFoldersLoaded = createSelector(selectFoldersState, (state: Fo
 
 export const selectFoldersError = createSelector(selectFoldersState, (state: FoldersState) => state.error);
 
-export const selectAllFolders = createSelector(selectFoldersState, (state: FoldersState) => selectAll(state));
+export const selectfolders = createSelector(selectFoldersState, (state: FoldersState) => selectAll(state));
 
 export const selectFoldersEntities = createSelector(selectFoldersState, (state: FoldersState) => selectEntities(state));
 

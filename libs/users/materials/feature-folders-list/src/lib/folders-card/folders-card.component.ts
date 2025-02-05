@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -16,4 +16,14 @@ import { FoldersVM } from '../../../../folders-vm';
 export class FoldersCardComponent {
   @Input({ required: true })
   folder!: FoldersVM;
+
+  @Output()
+  delete = new EventEmitter<number>()
+
+  public showDeleteIcon = false;
+
+  public deleteFolder(event: Event): void {
+    this.delete.emit()
+  }
+
 }

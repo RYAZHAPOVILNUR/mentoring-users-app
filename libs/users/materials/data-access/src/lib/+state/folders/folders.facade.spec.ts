@@ -48,7 +48,7 @@ describe('FoldersFacade', () => {
      * The initially generated facade::loadAll() returns empty array
      */
     it('loadAll() should return empty list with loaded == true', async () => {
-      let list = await readFirst(facade.allFolders$);
+      let list = await readFirst(facade.folders$);
       let isLoaded = await readFirst(facade.loaded$);
 
       expect(list.length).toBe(0);
@@ -56,7 +56,7 @@ describe('FoldersFacade', () => {
 
       facade.init();
 
-      list = await readFirst(facade.allFolders$);
+      list = await readFirst(facade.folders$);
       isLoaded = await readFirst(facade.loaded$);
 
       expect(list.length).toBe(0);
@@ -66,8 +66,8 @@ describe('FoldersFacade', () => {
     /**
      * Use `loadFoldersSuccess` to manually update list
      */
-    it('allFolders$ should return the loaded list; and loaded flag == true', async () => {
-      let list = await readFirst(facade.allFolders$);
+    it('folders$ should return the loaded list; and loaded flag == true', async () => {
+      let list = await readFirst(facade.folders$);
       let isLoaded = await readFirst(facade.loaded$);
 
       expect(list.length).toBe(0);
@@ -79,7 +79,7 @@ describe('FoldersFacade', () => {
         })
       );
 
-      list = await readFirst(facade.allFolders$);
+      list = await readFirst(facade.folders$);
       isLoaded = await readFirst(facade.loaded$);
 
       expect(list.length).toBe(2);
