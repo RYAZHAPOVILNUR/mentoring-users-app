@@ -38,7 +38,7 @@ export const addStoryPoints = createAction(
     onSuccessAddSP: onSuccessSPonCbType;
   }>()
 );
-// Надо здесь разобраться
+
 export const storyPointsSuccess = createAction('[Users Detail] Edit User Success', props<{ userData: UsersDTO }>());
 export const storyPointsFailed = createAction('[Users Detail] Edit Failed', props<{ error: UsersErrors | null }>());
 
