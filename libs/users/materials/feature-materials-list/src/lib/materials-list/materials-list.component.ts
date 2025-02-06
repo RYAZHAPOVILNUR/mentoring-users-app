@@ -18,9 +18,6 @@ export class MaterialsListComponent {
   @Input({ required: true })
   vm!: TMaterialListVM;
 
-  @Input({ required: true })
-  folderTitle!: string;
-
   @Output() deleteMaterial = new EventEmitter();
 
   @Output() redirectToMaterialContent = new EventEmitter();

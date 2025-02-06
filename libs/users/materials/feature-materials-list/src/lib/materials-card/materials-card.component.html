@@ -5,7 +5,7 @@
   <mat-card-content class="material-card-content">
     <mat-icon *ngIf="getFileIcon() as icon" [fontIcon]="icon" class="material-card-content__icon"
     ></mat-icon>
-    <div class="material-card-content__title">{{material.folder_id}}</div>
+    <div class="material-card-content__title">{{material.title}}</div>
     <div class="material-card-content__date">{{material.created_at | date: 'd MMMM, yyyy'}}</div>
   </mat-card-content>
   

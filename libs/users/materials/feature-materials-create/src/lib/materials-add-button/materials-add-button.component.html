@@ -1,0 +1,17 @@
+<button mat-fab color="primary" [matMenuTriggerFor]="menu" class="add-material-fab-button" aria-label="Example icon-button with a menu">
+  <mat-icon>add</mat-icon>
+</button>
+<mat-menu #menu="matMenu" yPosition="above" class="material-add-btn__mat-menu">
+  <button mat-menu-item (click)="openAddMaterialDialog('PDF')">
+    <mat-icon>picture_as_pdf</mat-icon>
+    <span>PDF</span>
+  </button>
+  <button mat-menu-item (click)="openAddMaterialDialog('Audio')">
+    <mat-icon>audiotrack</mat-icon>
+    <span>Audio</span>
+  </button>
+  <button mat-menu-item (click)="openAddMaterialDialog('Video')">
+    <mat-icon>ondemand_video</mat-icon>
+    <span>Video</span>
+  </button>
+</mat-menu>

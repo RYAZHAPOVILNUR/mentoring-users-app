@@ -4,6 +4,7 @@ import * as MaterialsSelectors from './materials.selectors';
 import * as MaterialsActions from './materials.actions';
 import { Observable } from 'rxjs';
 import { TMaterialError } from '../../models/materials/material-error.model';
+import { TCreateMaterialDTO } from '../../models/materials/material-dto.model';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
@@ -19,6 +20,10 @@ export class MaterialsFacade {
   }
 
   public deleteMaterial(id: number): void {
-    this.store.dispatch(MaterialsActions.deleteMaterials({ id }));
+    this.store.dispatch(MaterialsActions.deleteMaterial({ id }));
+  }
+
+  public addMaterial(material: TCreateMaterialDTO): void {
+    this.store.dispatch(MaterialsActions.addMaterial({ material }));
   }
 }

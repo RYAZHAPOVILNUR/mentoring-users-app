@@ -18,7 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 export class FoldersAddButtonComponent {
   @Output() sendNewFolder = new EventEmitter();
 
-  public dialog = inject(MatDialog);
+  private dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
 
   public openAddFolderDialog(): void {
@@ -28,12 +28,10 @@ export class FoldersAddButtonComponent {
     dialogRef
       .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((folder) => {
-        if (folder) {
-          const newFolderData: TCreateFolderDTO = {
-            title: folder.title,
-          };
-          this.sendNewFolder.emit(newFolderData);
+      .subscribe((folderTitle: TCreateFolderDTO) => {
+        if (folderTitle) {
+          console.log(folderTitle);
+          this.sendNewFolder.emit(folderTitle);
         }
       });
   }

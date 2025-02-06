@@ -42,17 +42,32 @@ export const materialsFeature = createFeature({
       status: 'error' as const,
       error,
     })),
-    on(MaterialsActions.deleteMaterials, (state) => ({
+    on(MaterialsActions.deleteMaterial, (state) => ({
       ...state,
       status: 'loading' as const,
     })),
-    on(MaterialsActions.deleteMaterialsSuccess, (state, { id }) => {
-      return materialsAdapter.removeOne(id, { ...state, status: 'loaded' as const });
+    on(MaterialsActions.deleteMaterialSuccess, (state, { id }) => {
+      return materialsAdapter.removeOne(id, {
+        ...state,
+        status: 'loaded' as const,
+      });
     }),
-    on(MaterialsActions.deleteMaterialsFailed, (state, { error }) => ({
+    on(MaterialsActions.deleteMaterialFailed, (state, { error }) => ({
       ...state,
       status: 'error' as const,
       error,
+    })),
+    on(MaterialsActions.addMaterialSuccess, (state, { material }) =>
+      materialsAdapter.addOne({ ...material }, { ...state })
+    ),
+    on(MaterialsActions.addMaterialFailed, (state, { error }) => ({
+      ...state,
+      status: 'error' as const,
+      error,
+    })),
+    on(MaterialsActions.updateMaterialsStatus, (state, { status }) => ({
+      ...state,
+      status,
     }))
   ),
 });

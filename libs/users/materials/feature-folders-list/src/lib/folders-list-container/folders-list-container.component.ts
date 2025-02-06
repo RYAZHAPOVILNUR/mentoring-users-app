@@ -29,14 +29,14 @@ import { ProvideDataService } from '@users/materials/data-access';
 })
 export class FoldersListContainerComponent {
   private readonly MaterialsFoldersFacade = inject(FoldersFacade);
+  private readonly dialog = inject(MatDialog);
+  private readonly router = inject(Router);
+  private readonly destroyRef$ = inject(DestroyRef);
+  private readonly provideData = inject(ProvideDataService);
   public readonly status$ = this.MaterialsFoldersFacade.status$;
   public readonly folders$ = this.MaterialsFoldersFacade.folders$;
   public readonly errors$ = this.MaterialsFoldersFacade.errors$;
   // private readonly dateLocalizationService = inject(DateLocalizationService);
-  private readonly dialog = inject(MatDialog);
-  private readonly router = inject(Router);
-  private destroyRef$ = inject(DestroyRef);
-  private readonly provideData = inject(ProvideDataService);
 
   constructor() {
     this.MaterialsFoldersFacade.init();
@@ -68,7 +68,8 @@ export class FoldersListContainerComponent {
 
   public onRedirectToFolderPage(folderDate: { folderId: number; folderTitle: string }): void {
     this.provideData.updateDate(folderDate.folderTitle);
-    console.log(folderDate.folderTitle);
-    this.router.navigate(['/materials', folderDate.folderId]);
+    this.router.navigate(['/materials', folderDate.folderId], {
+      queryParams: { folder: folderDate.folderTitle },
+    });
   }
 }
