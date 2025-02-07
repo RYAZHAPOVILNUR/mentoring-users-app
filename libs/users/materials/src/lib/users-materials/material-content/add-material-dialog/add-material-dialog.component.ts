@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MaterialType } from '@users/materials/data-access';
+import { MaterialType, MATERIAL_PLACEHOLDERS } from '@users/materials/data-access';
 
 interface DialogData {
   type: MaterialType;
@@ -37,16 +37,7 @@ export class AddMaterialDialogComponent {
   });
 
   getPlaceholder(): string {
-    switch (this.data.type) {
-      case MaterialType.VIDEO:
-        return 'Вставьте ссылку на YouTube видео';
-      case MaterialType.PDF:
-        return 'Вставьте ссылку на PDF файл';
-      case MaterialType.PODCAST:
-        return 'Вставьте ссылку на аудио файл';
-      default:
-        return 'Вставьте ссылку';
-    }
+    return MATERIAL_PLACEHOLDERS[this.data.type] || 'Вставьте ссылку';
   }
 
   onSubmit(): void {

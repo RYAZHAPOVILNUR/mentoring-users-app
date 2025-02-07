@@ -43,6 +43,12 @@ export interface State {
   status: 'init' | 'loading' | 'loaded' | 'error';
 }
 
+export const MATERIAL_PLACEHOLDERS: Record<MaterialType, string> = {
+  [MaterialType.VIDEO]: 'Вставьте ссылку на YouTube видео',
+  [MaterialType.PDF]: 'Вставьте ссылку на PDF файл',
+  [MaterialType.PODCAST]: 'Вставьте ссылку на аудио файл',
+};
+
 export const initialState: State = {
   folders: [],
   materials: [],
@@ -54,7 +60,6 @@ export const initialState: State = {
 export const materialsReducer = createReducer(
   initialState,
 
-  // Load Folders
   on(MaterialsActions.loadFolders, (state) => ({
     ...state,
     status: 'loading' as const,
@@ -73,7 +78,6 @@ export const materialsReducer = createReducer(
     status: 'error' as const,
   })),
 
-  // Load Materials
   on(MaterialsActions.loadMaterials, (state) => ({
     ...state,
     status: 'loading' as const,
@@ -89,7 +93,6 @@ export const materialsReducer = createReducer(
     status: 'error' as const,
   })),
 
-  // Add Folder
   on(MaterialsActions.addFolder, (state) => ({
     ...state,
     status: 'loading' as const,
@@ -108,7 +111,6 @@ export const materialsReducer = createReducer(
     status: 'error' as const,
   })),
 
-  // Delete Folder
   on(MaterialsActions.deleteFolder, (state) => ({
     ...state,
     status: 'loading' as const,
@@ -127,7 +129,6 @@ export const materialsReducer = createReducer(
     status: 'error' as const,
   })),
 
-  // Open Folder
   on(MaterialsActions.openFolder, (state) => ({
     ...state,
     status: 'loading' as const,
@@ -152,7 +153,6 @@ export const materialsReducer = createReducer(
     materials: [],
   })),
 
-  // Add Material
   on(MaterialsActions.addMaterial, (state) => ({
     ...state,
     status: 'loading' as const,
@@ -170,7 +170,6 @@ export const materialsReducer = createReducer(
     status: 'error' as const,
   })),
 
-  // Delete Material
   on(MaterialsActions.deleteMaterial, (state) => ({
     ...state,
     status: 'loading' as const,

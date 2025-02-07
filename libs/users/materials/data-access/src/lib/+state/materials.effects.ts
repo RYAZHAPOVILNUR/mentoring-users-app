@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { selectRouteParams } from '@users/core/data-access';
@@ -8,7 +8,6 @@ import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { MaterialsActions } from './materials.actions';
 import { IAddFolder, IFolder, IMaterial } from './materials.reducer';
 
-@Injectable()
 export class MaterialsEffects {
   loadFolders = createEffect(() => {
     const action$ = inject(Actions);

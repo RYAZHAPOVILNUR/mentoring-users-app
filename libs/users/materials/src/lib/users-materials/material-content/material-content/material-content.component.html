@@ -7,8 +7,6 @@
         <mat-icon>close</mat-icon>
     </button>
 </div>
-
-<!-- PDF -->
 <ng-container *ngIf="isPdf()">
     <div class="pdf-container">
         <iframe *ngIf="isExternalPdf()"
@@ -26,13 +24,11 @@
         </pdf-viewer>
     </div>
 </ng-container>
-<!-- SOUND CLOUD -->
 <ng-container *ngIf="isSoundCloud()">
     <div class="soundcloud-player">
       <iframe scrolling="no" allow="autoplay" [src]="getSoundCloudEmbedUrl()"></iframe>
     </div>
 </ng-container>
-<!-- VIDEO -->
 <ng-container *ngIf="!isPdf() && !isSoundCloud()">
     <div class="link">
         <p mat-dialog-title>Ссылка на видео: {{ materialLink }}</p>

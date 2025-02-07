@@ -11,6 +11,7 @@ import { IFolder, MaterialsFacade } from '@users/materials/data-access';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { FolderContentComponent } from './folder-content/folder-content.component';
 import { FolderDialogComponent } from './folder-dialog/folder-dialog.component';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'users-materials',
@@ -50,19 +51,19 @@ export class UsersMaterialsComponent implements OnInit {
       disableClose: true
     });
 
-    dialogRef.afterClosed().subscribe((result?: { title: string }) => {
-      if (result) {
-        console.log('Creating folder:', result);
-        this.materialsFacade.addFolder({ 
-          name: result.title,
-          title: result.title 
-        });
-      }
-    });
+    dialogRef.afterClosed()
+      .pipe(take(1))
+      .subscribe((result?: { title: string }) => {
+        if (result) {
+          this.materialsFacade.addFolder({ 
+            name: result.title,
+            title: result.title 
+          });
+        }
+      });
   }
 
   onFolderDoubleClick(folder: IFolder): void {
-    console.log('Opening folder:', folder);
     this.router.navigate(['/materials', folder.id]);
   }
 
@@ -71,11 +72,12 @@ export class UsersMaterialsComponent implements OnInit {
       width: '400px'
     });
 
-    dialogRef.afterClosed().subscribe((result: boolean) => {
-      if (result && folder.id) {
-        console.log('Deleting folder:', folder);
-        this.materialsFacade.deleteFolder(folder.id);
-      }
-    });
+    dialogRef.afterClosed()
+      .pipe(take(1))
+      .subscribe((result: boolean) => {
+        if (result && folder.id) {
+          this.materialsFacade.deleteFolder(folder.id);
+        }
+      });
   }
 }
