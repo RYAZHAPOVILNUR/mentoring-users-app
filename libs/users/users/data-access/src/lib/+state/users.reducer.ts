@@ -1,12 +1,23 @@
-import { EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 import { UsersActions } from './users.actions';
-import { UsersEntity } from '@users/core/data-access';
-import { UsersState } from './users.interface';
+import { LoadingStatus, UsersEntity } from '@users/core/data-access';
+import { UsersErrors } from './users.type';
 
 export const usersAdapter: EntityAdapter<UsersEntity> = createEntityAdapter<UsersEntity>();
 
 export const USERS_FEATURE_KEY = 'users';
+
+export interface UsersState extends EntityState<UsersEntity> {
+  selectedId?: string | number; // which Users record has been selected
+  status: LoadingStatus;
+  error: UsersErrors | null;
+  usersFilter: { name: string };
+}
+
+export interface UsersPartialState {
+  readonly [USERS_FEATURE_KEY]: UsersState;
+}
 
 export const initialUsersState: UsersState = usersAdapter.getInitialState({
   // set initial required properties

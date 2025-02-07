@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { usersAdapter } from './users.reducer';
 import { USERS_FEATURE_KEY } from './users.reducer';
-import { UsersState } from './users.interface';
+import { UsersState } from './users.reducer';
 import { selectRouteParams } from '@users/core/data-access';
 
 // Lookup the 'Users' feature state managed by NgRx

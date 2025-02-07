@@ -1,0 +1,12 @@
+<mat-card class="user-card-wrapper">
+  <mat-card-content class="mat-card-content">
+    <!-- <img [src]="user.photo ? user.photo.url : 'assets/img/1.png'" alt="" class="user-photo" /> -->
+    <label *ngIf="folder.title">{{ folder.title }}</label>
+  </mat-card-content>
+
+  <!-- <mat-card-actions class="user-card-buttons">
+    <button mat-icon-button (click)="onOpenMenu($event)" [matMenuTriggerFor]="menu">
+      <mat-icon>more_horiz</mat-icon>
+    </button>
+  </mat-card-actions> -->
+</mat-card>

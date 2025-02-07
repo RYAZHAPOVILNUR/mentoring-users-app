@@ -25,6 +25,7 @@ export class UsersDetailComponent {
   private readonly store = inject(Store);
   private readonly router = inject(Router);
   public user!: UsersEntity;
+  
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
 

@@ -1,0 +1,11 @@
+<ng-container
+  *ngrxLet="{
+    folders: folders$,
+    status: status$,
+    errors: errors$,
+  } as vm"
+>
+  <pre>{{ vm | json }}</pre>
+  <folders-list [vm]="vm" />
+</ng-container>
+<create-folders-button></create-folders-button>
