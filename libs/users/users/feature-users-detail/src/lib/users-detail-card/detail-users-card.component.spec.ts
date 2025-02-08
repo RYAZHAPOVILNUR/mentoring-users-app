@@ -15,7 +15,7 @@ describe('DetailUsersCardComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create correctly', () => {
     expect(component).toBeTruthy();
   });
 });

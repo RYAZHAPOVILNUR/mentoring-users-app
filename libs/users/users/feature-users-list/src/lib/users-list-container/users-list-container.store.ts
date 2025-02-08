@@ -1,13 +1,13 @@
 import { Injectable, inject } from '@angular/core';
-import { ComponentStore } from '@ngrx/component-store';
-import { UsersFacade } from '@users/users/data-access';
-import { DeepReadonly } from '@users/core/utils';
-import { UsersVM } from '../../../../users-vm';
-import { tap } from 'rxjs';
-import { usersVMAdapter } from '../../../../users-vm.adapter';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { CoreUiConfirmDialogComponent } from '@users/core/ui';
+import { ComponentStore } from '@ngrx/component-store';
 import { UsersEntity } from '@users/core/data-access';
+import { CoreUiConfirmDialogComponent } from '@users/core/ui';
+import { DeepReadonly } from '@users/core/utils';
+import { UsersFacade } from '@users/users/data-access';
+import { tap } from 'rxjs';
+import { UsersVM } from '../../../../users-vm';
+import { usersVMAdapter } from '../../../../users-vm.adapter';
 
 type UsersListState = DeepReadonly<{
   users: UsersVM[];
@@ -32,7 +32,7 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
   }
 
   private setUsersFromGlobalToLocalStore(): void {
-    this.effect(() => this.usersFacade.allUsers$.pipe(tap((users: UsersEntity[]) => this.patchUsers(users))));
+    this.effect(() => this.usersFacade.filteredUsers$.pipe(tap((users: UsersEntity[]) => this.patchUsers(users))));
   }
 
   private patchUsers(users: UsersEntity[]): void {

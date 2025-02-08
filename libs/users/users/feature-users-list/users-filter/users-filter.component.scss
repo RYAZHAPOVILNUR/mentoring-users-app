@@ -1,0 +1,18 @@
+.filter-form {
+  display: flex;
+  margin: 20px 0px 20px 100px;
+  padding: 20px;
+  background: #f4f7fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+}
+
+.form-field {
+  width: 100%;
+}
+
+.mat-label {
+  color: #4a90e2;
+  font-weight: bold;
+}

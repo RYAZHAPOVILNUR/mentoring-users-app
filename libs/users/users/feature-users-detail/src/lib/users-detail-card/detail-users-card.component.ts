@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,24 +12,23 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { onSuccessEditionCbType } from '@users/users/data-access';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { DetailUsersCardVm } from './detail-users-card-vm';
+import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { DadataApiService } from '@dadata';
-import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs';
 import { PushPipe } from '@ngrx/component';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { onSuccessEditionCbType } from '@users/users/data-access';
+import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs';
+import { DetailUsersCardVm } from './detail-users-card-vm';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -74,6 +74,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
+      this.totalStoryPoints.setValue(vm.user.totalStoryPoints);
     }
 
     if (vm.editMode) {
@@ -94,11 +95,13 @@ export class DetailUsersCardComponent implements OnInit {
     user: CreateUserDTO;
     onSuccessCb: onSuccessEditionCbType;
   }>();
+  @Output() addStoryPoints = new EventEmitter<{ user: CreateUserDTO; onSuccessAddSP: onSuccessEditionCbType }>();
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('snackbarStoryPoints') snackbarTemplateRefSP!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -106,6 +109,7 @@ export class DetailUsersCardComponent implements OnInit {
     filter(Boolean),
     switchMap((value) => this.dadata.getCities(value))
   );
+  public totalStoryPoints = new FormControl({ value: 0, disabled: true });
 
   private snackBar = inject(MatSnackBar);
   private readonly destroyRef = inject(DestroyRef);
@@ -121,6 +125,30 @@ export class DetailUsersCardComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'top',
     });
+
+  private onAddSPSuccess: onSuccessEditionCbType = () => {
+    if (this.snackbarTemplateRef) {
+      this.snackBar.openFromTemplate(this.snackbarTemplateRefSP, {
+        duration: 2500,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+      });
+    }
+  };
+
+  onAddStoryPoints() {
+    this.totalStoryPoints.disable();
+    this.addStoryPoints.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        totalStoryPoints: this.totalStoryPoints.value || 0,
+        purchaseDate: new Date().toISOString(),
+        educationStatus: 'trainee',
+      },
+      onSuccessAddSP: this.onAddSPSuccess,
+    });
+  }
 
   onSubmit(): void {
     this.editUser.emit({

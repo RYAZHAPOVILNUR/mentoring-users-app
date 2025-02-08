@@ -1,0 +1,129 @@
+/* Styles for Material Viewer Component */ 
+
+.materials-container {
+  padding: 20px;
+}
+
+.materials-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  h2 {
+    margin: 0;
+  }
+}
+
+.materials-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.material-card {
+  cursor: pointer;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  .card-content {
+    padding: 16px;
+
+    .header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+
+      mat-icon {
+        margin-right: 8px;
+        color: #666;
+      }
+
+      .title {
+        font-size: 16px;
+        font-weight: 500;
+      }
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .date {
+        color: #666;
+        font-size: 14px;
+      }
+
+      .delete-button {
+        color: #666;
+        
+        &:hover {
+          color: #f44336;
+        }
+      }
+    }
+  }
+}
+
+.no-materials {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px;
+  background: #f5f5f5;
+  border-radius: 4px;
+  color: #666;
+}
+
+.div-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  mat-icon {
+    color: #666;
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+
+  .button-delete {
+    opacity: 0.7;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 1;
+      .delete {
+        color: #f44336;
+      }
+    }
+  }
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  word-break: break-word;
+}
+
+.date {
+  font-size: 12px;
+  color: #666;
+}
+
+.add-button {
+  position: fixed;
+  bottom: 80px;
+  right: 30px;
+  z-index: 1000;
+} 

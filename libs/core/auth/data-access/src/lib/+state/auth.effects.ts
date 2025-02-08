@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ApiService } from '@users/core/http';
 import { authActions } from './auth.actions';
-import { catchError, concatMap, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
+import { catchError, concatMap, debounceTime, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
 import {
   ChangePasswordPayload,
   ChangePasswordResponse,
@@ -57,6 +57,7 @@ export const getUserEffect$ = createEffect(
   ) =>
     actions$.pipe(
       ofType(authActions.getUser),
+      debounceTime(1000),
       withLatestFrom(store.select(selectAuthStatus)),
       switchMap(([, authStatus]) =>
         localStorageJwtService.getItem() && authStatus !== 'loaded'

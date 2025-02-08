@@ -1,12 +1,12 @@
-import { Injectable, inject } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import * as UsersActions from './users.actions';
-import * as UsersSelectors from './users.selectors';
-import { Observable, of, switchMap } from 'rxjs';
-import { UsersErrors } from './users.reducer';
-import { onSuccessEditionCbType } from './users.actions';
+import { inject, Injectable } from '@angular/core';
 import { selectLoggedUser } from '@auth/data-access';
+import { select, Store } from '@ngrx/store';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { Observable, of, switchMap } from 'rxjs';
+import * as UsersActions from './users.actions';
+import { onSuccessEditionCbType } from './users.actions';
+import { UsersErrors, UsersFilter } from './users.reducer';
+import * as UsersSelectors from './users.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
@@ -16,6 +16,7 @@ export class UsersFacade {
    * Combine pieces of state using createSelector,
    * and expose them as observables through the facade.
    */
+  public readonly filteredUsers$ = this.store.pipe(select(UsersSelectors.filteredUsers));
   public readonly status$ = this.store.pipe(select(UsersSelectors.selectUsersStatus));
   public readonly allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
   public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
@@ -56,5 +57,13 @@ export class UsersFacade {
 
   loadUser() {
     this.store.dispatch(UsersActions.loadUser());
+  }
+
+  public filterUser(filter: UsersFilter): void {
+    this.store.dispatch(UsersActions.setUsersFilter({ filter }));
+  }
+
+  addStoryPoints(userData: CreateUserDTO, id: number, onSuccessAddSP: onSuccessEditionCbType) {
+    this.store.dispatch(UsersActions.addStoryPoints({ userData, id, onSuccessAddSP }));
   }
 }

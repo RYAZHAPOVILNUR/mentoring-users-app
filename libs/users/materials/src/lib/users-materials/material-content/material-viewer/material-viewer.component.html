@@ -1,0 +1,53 @@
+<div class="materials-container">
+  <div class="materials-header">
+    <h2>Материалы</h2>
+  </div>
+
+  <div class="materials-list">
+    <ng-container *ngIf="(materialsFacade.materials$ | async)?.length; else noMaterials">
+      <mat-card *ngFor="let material of materialsFacade.materials$ | async" 
+                class="material-card"
+                (click)="onOpenMaterial(material)">
+        <div class="card-content">
+          <div class="header">
+            <mat-icon>{{ getIconForLink(material.material_link) }}</mat-icon>
+            <span class="title">{{ material.title }}</span>
+          </div>
+          <div class="footer">
+            <span class="date">{{ dateFormat(material.created_at) }}</span>
+            <button mat-icon-button color="warn" 
+                    (click)="$event.stopPropagation(); onDeleteMaterial(material.id)" 
+                    class="delete-button">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-card>
+    </ng-container>
+    
+    <ng-template #noMaterials>
+      <div class="no-materials">
+        <p>В этой папке пока нет материалов</p>
+      </div>
+    </ng-template>
+  </div>
+
+  <button mat-fab color="primary" [matMenuTriggerFor]="addMenu" class="add-button">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <mat-menu #addMenu="matMenu" class="add-material-menu">
+    <button mat-menu-item (click)="onAddMaterial(MaterialType.PDF)">
+      <mat-icon>picture_as_pdf</mat-icon>
+      <span>Файл PDF</span>
+    </button>
+    <button mat-menu-item (click)="onAddMaterial(MaterialType.VIDEO)">
+      <mat-icon>video_library</mat-icon>
+      <span>Видео</span>
+    </button>
+    <button mat-menu-item (click)="onAddMaterial(MaterialType.PODCAST)">
+      <mat-icon>audiotrack</mat-icon>
+      <span>Подкаст</span>
+    </button>
+  </mat-menu>
+</div> 
