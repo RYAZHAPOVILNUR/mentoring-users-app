@@ -1,5 +1,5 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { MaterialsActions } from './materials.actions';
+import * as MaterialsActions from './materials.actions';
 
 export const MATERIALS_FEATURE_KEY = 'materials';
 

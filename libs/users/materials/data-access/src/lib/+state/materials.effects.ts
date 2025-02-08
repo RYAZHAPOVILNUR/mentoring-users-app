@@ -5,7 +5,7 @@ import { selectRouteParams } from '@users/core/data-access';
 import { ApiService } from '@users/core/http';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
-import { MaterialsActions } from './materials.actions';
+import * as MaterialsActions from './materials.actions';
 import { IAddFolder, IFolder, IMaterial } from './materials.reducer';
 
 export class MaterialsEffects {

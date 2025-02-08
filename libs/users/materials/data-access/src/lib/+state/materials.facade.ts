@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { MaterialsActions } from './materials.actions';
+import * as MaterialsActions from './materials.actions';
 import { IAddFolder, IMaterial } from './materials.reducer';
 import { selectFolders, selectFoldersError, selectFoldersStatus, selectMaterials, selectSelectedFolder } from './materials.selectors';
 
