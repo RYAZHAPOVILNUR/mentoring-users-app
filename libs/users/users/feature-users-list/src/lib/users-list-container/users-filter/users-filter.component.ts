@@ -26,5 +26,6 @@ export class UsersFilterComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.valueChanges.unsubscribe();
+    this.userFacade.filteredUser('');
   }
 }
