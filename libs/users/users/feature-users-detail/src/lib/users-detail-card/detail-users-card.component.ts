@@ -29,6 +29,8 @@ import { DadataApiService } from '@dadata';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs';
 import { PushPipe } from '@ngrx/component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Store } from '@ngrx/store';
+import * as UsersActions from '@users/users/data-access';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -54,6 +56,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailUsersCardComponent implements OnInit {
+  private store = inject(Store);
+  private createAction = inject(Store);
+
   private _vm: DetailUsersCardVm = {
     editMode: false,
     user: null,
@@ -88,6 +93,7 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    totalStoryPoints: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
 
   @Output() editUser = new EventEmitter<{
@@ -172,4 +178,38 @@ export class DetailUsersCardComponent implements OnInit {
       )
       .subscribe();
   }
+
+  public isEditingStoryPoints = false;
+  public storyPointsControl = new FormControl(0, [
+    Validators.required,
+    Validators.min(0)
+  ]);
+
+  public startEditingStoryPoints(): void {
+    this.isEditingStoryPoints = true;
+    this.storyPointsControl.setValue(this.vm.user?.totalStoryPoints || 0);
+  }
+
+  public saveStoryPoints(): void {
+    if (this.vm.user && this.storyPointsControl.valid) {
+      this.store.dispatch(
+        UsersActions.updateUserStoryPoints({
+          userId: this.vm.user.id,
+          totalStoryPoints: this.storyPointsControl.value || 0,
+          onSuccessCb: () => {
+            this.isEditingStoryPoints = false;
+            this.snackBar.open('Story Points обновлены', 'OK', {
+              duration: 3000
+            });
+          }
+        })
+      );
+    }
+  }
+
+  public cancelEditingStoryPoints(): void {
+    this.isEditingStoryPoints = false;
+    this.storyPointsControl.setValue(this.vm.user?.totalStoryPoints || 0);
+  }
+
 }

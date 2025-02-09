@@ -56,3 +56,26 @@ div.alert-success {
   justify-content: center;
   color: white;
 }
+
+.edit-user-field {
+  position: relative;
+}
+
+.edit-user-field button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.edit-user-field button:first-of-type {
+  right: 40px;
+}
+
+.edit-user-field button:last-of-type {
+  right: 8px; 
+}
+
+.edit-user-field mat-icon {
+  opacity: 0.7;
+}
+

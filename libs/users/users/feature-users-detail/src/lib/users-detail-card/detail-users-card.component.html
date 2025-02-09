@@ -89,6 +89,59 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+
+            <mat-form-field class="edit-user-field">
+              <mat-label>Story Points:</mat-label>
+              
+              <ng-container *ngIf="!isEditingStoryPoints; else editStoryPoints">
+                <input 
+                  matInput 
+                  [value]="vm.user?.totalStoryPoints || '0'"
+                  readonly
+                />
+                <button 
+                  matSuffix
+                  mat-icon-button 
+                  type="button" 
+                  (click)="startEditingStoryPoints()"
+                  *ngIf="!vm.editMode"
+                >
+                  <mat-icon>add_circle_outlined</mat-icon>
+                </button>
+              </ng-container>
+              
+              <ng-template #editStoryPoints>
+                <input 
+                  matInput 
+                  type="number" 
+                  [formControl]="storyPointsControl"
+                  min="0"
+                />
+                <button 
+                  matSuffix
+                  mat-icon-button 
+                  (click)="saveStoryPoints()"
+                  [disabled]="!storyPointsControl.valid"
+                >
+                  <mat-icon>check_circle_outlined</mat-icon>
+                </button>
+                <button 
+                  matSuffix
+                  mat-icon-button 
+                  (click)="cancelEditingStoryPoints()"
+                >
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </ng-template>              
+              
+              <mat-error *ngIf="storyPointsControl.hasError('min')">
+                Значение должно быть больше или равно 0
+              </mat-error>
+              <mat-error *ngIf="storyPointsControl.hasError('required')">
+                Это поле обязательно для заполнения
+              </mat-error>
+            </mat-form-field>
+
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button

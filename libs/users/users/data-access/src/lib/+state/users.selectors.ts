@@ -45,3 +45,16 @@ export const selectFilteredUsers = createSelector(
     );
   }
 );
+
+export const selectUserWithStoryPoints = createSelector(
+  selectOpenedUser,
+  (user) => {
+    if (!user) return null;
+    return {
+      ...user,
+      totalStoryPoints: user.totalStoryPoints || 0
+    };
+  }
+);
+
+
