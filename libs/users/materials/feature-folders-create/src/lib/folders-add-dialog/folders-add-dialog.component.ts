@@ -16,6 +16,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 })
 export class FoldersAddDialogComponent {
   private readonly dialogRef = inject(MatDialogRef<FoldersAddDialogComponent>);
+
   public readonly form = new FormGroup({
     title: new FormControl('', {
       nonNullable: true,

@@ -3,13 +3,13 @@ import localeRu from '@angular/common/locales/ru';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 
+registerLocaleData(localeRu, 'ru');
+
 @Injectable({
   providedIn: 'root',
 })
 export class DateLocalizationService {
-  constructor(private datePipe: DatePipe) {
-    registerLocaleData(localeRu, 'ru');
-  }
+  constructor(private datePipe: DatePipe) {}
 
   public getDateLocalization<T>(lang: T | string = 'en-US', date: T | number = Date.now()) {}
 

@@ -14,4 +14,3 @@ export * from './lib/+state/materials/materials.reducer';
 export * as materialsEffects from './lib/+state/materials/materials.effects';
 export * from './lib/models/materials/material-list-vm.model';
 export * from './lib/models/materials/material-dto.model';
-export * from './lib/+state/utils/provideData.service';

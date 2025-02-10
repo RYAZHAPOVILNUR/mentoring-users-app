@@ -26,7 +26,7 @@ import {
   materialsEffects,
   materialsFeature,
 } from '@users/materials/data-access';
-import { DatePipe } from '@angular/common';
+// import { DatePipe } from '@angular/common';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -97,6 +97,6 @@ export const appConfig: ApplicationConfig = {
         defaultLanguage: 'en',
       })
     ),
-    DatePipe,
+    // DatePipe,
   ],
 };

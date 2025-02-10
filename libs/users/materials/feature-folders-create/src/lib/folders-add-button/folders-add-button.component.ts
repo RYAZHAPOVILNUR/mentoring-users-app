@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, EventEmitter, inject, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TCreateFolderDTO } from '@users/materials/data-access';
 import { FoldersAddDialogComponent } from '../folders-add-dialog/folders-add-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'materials-folders-add-button',
@@ -19,7 +19,6 @@ export class FoldersAddButtonComponent {
   @Output() sendNewFolder = new EventEmitter();
 
   private dialog = inject(MatDialog);
-  private readonly destroyRef = inject(DestroyRef);
 
   public openAddFolderDialog(): void {
     const dialogRef: MatDialogRef<FoldersAddDialogComponent> = this.dialog.open(FoldersAddDialogComponent, {
@@ -27,12 +26,14 @@ export class FoldersAddButtonComponent {
     });
     dialogRef
       .afterClosed()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((folderTitle: TCreateFolderDTO) => {
-        if (folderTitle) {
-          console.log(folderTitle);
-          this.sendNewFolder.emit(folderTitle);
-        }
-      });
+      .pipe(
+        tap((folderTitle: TCreateFolderDTO) => {
+          if (folderTitle) {
+            console.log(folderTitle);
+            this.sendNewFolder.emit(folderTitle);
+          }
+        })
+      )
+      .subscribe();
   }
 }

@@ -7,5 +7,10 @@ export type TMaterialListVM = DeepReadonly<{
   materials: TMaterialDTO[];
   status: LoadingStatus;
   errors: TMaterialError | null;
-  folder: { folderTitle: string; folderId: number };
+  folder: IFolderDataInMaterials;
 }>;
+
+interface IFolderDataInMaterials {
+  id?: number;
+  title?: string;
+}
