@@ -1,18 +1,18 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'users-create-dialog',
+  selector: 'user-folder-add-dialog',
   standalone: true,
   imports: [MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, MatDialogModule, MatButtonModule],
-  templateUrl: './users-create-folder-dialog.component.html',
-  styleUrls: ['./users-create-folder-dialog.component.scss'],
+  templateUrl: './folder-add-dialog.component.html',
+  styleUrls: ['./folder-add-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersCreateFolderDialogComponent {
-  public folderName = new FormControl('');
+export class FolderAddDialogComponent {
+  public folderName = new FormControl('', [Validators.required, Validators.minLength(3)]);
 }

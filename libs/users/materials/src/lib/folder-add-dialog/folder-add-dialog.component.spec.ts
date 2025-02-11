@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UsersCreateDialogComponent } from './users-create-folder-dialog.component';
+import { FolderAddDialogComponent } from './folder-add-dialog.component';
 
 describe('UsersMaterialsComponent', () => {
-  let component: UsersCreateDialogComponent;
-  let fixture: ComponentFixture<UsersCreateDialogComponent>;
+  let component: FolderAddDialogComponent;
+  let fixture: ComponentFixture<FolderAddDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UsersCreateDialogComponent],
+      imports: [FolderAddDialogComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(UsersCreateDialogComponent);
+    fixture = TestBed.createComponent(FolderAddDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,14 @@
+.add_button {
+  min-width: 50px;
+  background-color: #7e57c2;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  mat-icon {
+    margin: 0;
+  }
+}
