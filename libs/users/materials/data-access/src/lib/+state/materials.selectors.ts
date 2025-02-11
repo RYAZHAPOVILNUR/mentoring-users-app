@@ -1,4 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import * as fromMaterials from './materials.reducer';
+import { State } from './materials.reducer';
 
-export const selectMaterialsState = createFeatureSelector<fromMaterials.State>(fromMaterials.materialsFeatureKey);
+
+export const selectFoldersState = createFeatureSelector<State>('folders');
+
+export const selectAllFolders = createSelector(selectFoldersState, (state: State) => state.folders);
+export const selectFoldersError = createSelector(selectFoldersState, (state: State) => state.error);
+
