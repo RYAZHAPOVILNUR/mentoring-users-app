@@ -8,7 +8,8 @@
 	    <div *ngFor="let folder of vm.folders">
 		    <users-folders-card
 		    [folder]="folder"
-        (delete)="onDeleteFolder(folder)">
+        (delete)="onDeleteFolder(folder)"
+        (openFolder)="onOpenFolder($event)">
 		    </users-folders-card>
 	    </div>
     </div>

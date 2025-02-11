@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { CreateFolderDTO } from '../../models/folders-dto.model';
 
 import * as FoldersActions from './folders.actions';
 import { FoldersErrors } from './folders.reducer';
@@ -14,8 +15,8 @@ export class FoldersFacade {
    * Combine pieces of state using createSelector,
    * and expose them as observables through the facade.
    */
-  public readonly status$ = this.store.pipe(select(FoldersSelectors.selectFoldersLoaded));
-  public readonly folders$ = this.store.pipe(select(FoldersSelectors.selectfolders));
+  public readonly status$ = this.store.pipe(select(FoldersSelectors.selectFoldersStatus));
+  public readonly allFolders$ = this.store.pipe(select(FoldersSelectors.selectAllFolders));
   public readonly selectedFolders$ = this.store.pipe(select(FoldersSelectors.selectEntity));
   public readonly errors$: Observable<FoldersErrors | null> = this.store.pipe(select(FoldersSelectors.selectFoldersError))
   /**
@@ -24,5 +25,13 @@ export class FoldersFacade {
    */
   initFolders() {
     this.store.dispatch(FoldersActions.initFolders());
+  }
+
+  deleteFolder(id: number) {
+    this.store.dispatch(FoldersActions.deleteFolder({ id }));
+  }
+
+  addFolder(folderData: CreateFolderDTO) {
+    this.store.dispatch(FoldersActions.createFolder({ folderData }))
   }
 }

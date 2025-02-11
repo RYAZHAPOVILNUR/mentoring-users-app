@@ -8,6 +8,6 @@ export type FoldersDTO = DeepReadonly<{
 
 export type CreateFolderDTO = DeepReadonly<{
   id?: number,
-  created_at: string,
+  created_at?: string,
   title: string,
 }>

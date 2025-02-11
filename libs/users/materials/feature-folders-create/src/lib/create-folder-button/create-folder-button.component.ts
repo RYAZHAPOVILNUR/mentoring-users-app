@@ -4,10 +4,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { FoldersFacade } from '@users/data-access';
 import { CreateFolderDTO } from '../../../../data-access/src/lib/models/folders-dto.model';
-import {
-  FoldersListContainerStore
-} from '../../../../feature-folders-list/src/lib/folders-list-container/folders-list-container.store';
 import { CreateFolderDialogComponent } from '../create-folder-dialog/create-folder-dialog.component';
 
 @Component({
@@ -21,10 +19,10 @@ import { CreateFolderDialogComponent } from '../create-folder-dialog/create-fold
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateFolderButtonComponent {
-  private title!: string;
   public dialog = inject(MatDialog);
-  private readonly componentStore = inject(FoldersListContainerStore);
+  public title!: string;
   private readonly destroyRef = inject(DestroyRef);
+  private readonly foldersFacade = inject(FoldersFacade);
 
   openAddFolderDialog() {
     const dialogRef = this.dialog.open(CreateFolderDialogComponent, {
@@ -37,8 +35,8 @@ export class CreateFolderButtonComponent {
       if (result) {
         const newFolderData: CreateFolderDTO = {
           title: result.title,
-        }
-        this.componentStore.addFolder(newFolderData);
+        };
+        this.foldersFacade.addFolder(newFolderData);
       }
     });
   }

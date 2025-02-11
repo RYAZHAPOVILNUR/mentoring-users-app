@@ -1,1 +1,1 @@
-export * from './lib/feature-materials-list.module';
+export * from './lib/materials-content/materials-content.component';

@@ -5,6 +5,10 @@
 		errors: errors$
 	} as vm"
 >
-	<users-folders-list [vm]="vm" (deleteFolder)="onDeleteFolder($event)"></users-folders-list>
+	<users-folders-list
+    [vm]="vm"
+    (deleteFolder)="onDeleteFolder($event)"
+    (openFolder)="onOpenFolder($event)">
+  </users-folders-list>
 </ng-container>
 <create-folder-button></create-folder-button>

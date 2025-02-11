@@ -1,1 +1,17 @@
-<p>materials-list-container works!</p>
+<ng-container
+  *ngrxLet="{
+  materials: materials$,
+  status: status$,
+  errors: errors$
+  } as vm"
+>
+<users-materials-list
+  [vm]="vm">
+</users-materials-list>
+</ng-container>
+
+<!--<ng-container>-->
+<!--  <pre>Materials$: {{ (materials$ | async) | json }}</pre>-->
+<!--  <pre>Status$: {{ (status$ | async) }}</pre>-->
+<!--  <pre>Errors$: {{ (errors$ | async) | json }}</pre>-->
+<!--</ng-container>-->

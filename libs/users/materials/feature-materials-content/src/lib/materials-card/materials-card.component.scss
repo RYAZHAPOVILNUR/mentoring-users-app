@@ -1,0 +1,46 @@
+.material-content {
+  width: 110px;
+  padding: 10px;
+  border-radius: 5px;
+  background: #404e5e;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  cursor: pointer;
+}
+
+.material-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.material-icon {
+  font-size: 30px;
+  color: #daddec;
+}
+
+.material-icon {
+  font-size: 30px;
+  color: #daddec;
+  cursor: pointer;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #ff0000;
+  }
+}
+
+.material-info {
+  margin-top: 10px;
+}
+
+.material-title {
+  font-weight: bold;
+}
+
+.material-created {
+  margin-top: 5px;
+  font-size: 12px;
+  color: gray;
+}

@@ -18,12 +18,18 @@ export class FoldersCardComponent {
   folder!: FoldersVM;
 
   @Output()
-  delete = new EventEmitter<number>()
+  delete = new EventEmitter<number>();
+  @Output()
+  openFolder = new EventEmitter<number>();
 
   public showDeleteIcon = false;
 
   public deleteFolder(event: Event): void {
+    event.stopPropagation();
     this.delete.emit()
   }
 
+  onOpenFolder(): void {
+    this.openFolder.emit(this.folder.id);
+  }
 }
