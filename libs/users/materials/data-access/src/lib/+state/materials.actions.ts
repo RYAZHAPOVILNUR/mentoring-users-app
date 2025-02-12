@@ -1,4 +1,4 @@
-import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import { createAction, createActionGroup, emptyProps, props } from '@ngrx/store';
 
 export const MaterialsActions = createActionGroup({
   source: 'Materials',
@@ -8,3 +8,5 @@ export const MaterialsActions = createActionGroup({
     'Load Materialss Failure': props<{ error: unknown }>(),
   },
 });
+
+export const initUsers = createAction('[Folders Page] Init');
