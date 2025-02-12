@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Добавление нового материала</h1>
+<div mat-dialog-content>
+  <form [formGroup]="formGroup">
+    <mat-form-field appearance="fill">
+      <mat-label>Название</mat-label>
+      <input type="text" matInput formControlName="newTitle" />
+      <mat-error *ngIf="formGroup.get('newTitle')?.invalid && formGroup.get('newTitle')?.touched">
+        Введите менее 10 символов
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Ссылка</mat-label>
+      <input type="text" matInput formControlName="newLink" />
+    </mat-form-field>
+
+    <input type="hidden" formControlName="folderId" />
+  </form>
+</div>
+
+<div mat-dialog-actions class="add-folders-actions">
+  <button (click)="addSave()" mat-raised-button [disabled]="formGroup.invalid">Сохранить</button>
+  <button (click)="addClose()" mat-raised-button>Отмена</button>
+</div>

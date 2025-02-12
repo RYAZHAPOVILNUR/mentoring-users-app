@@ -1,0 +1,11 @@
+<div class="card-container" tabindex="0">
+  <users-folders-card
+    *ngFor="let folder of materialFacade.foldersAll$ | async; let i = index"
+    [folder]="folder"
+    [isSelected]="selectIndex === i"
+    (selectFolder)="selectFolder(i)"
+    (dblclick)="openFolder(folder.id)"
+  >
+  </users-folders-card>
+  <users-folders-add-button></users-folders-add-button>
+</div>

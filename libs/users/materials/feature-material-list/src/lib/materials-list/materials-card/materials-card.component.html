@@ -1,0 +1,15 @@
+<mat-card class="small-material-card">
+  <mat-card-header class="material-card-header">
+    <mat-icon class="material-icon" *ngIf="material.material_link.endsWith('pdf')">picture_as_pdf</mat-icon>
+    <mat-icon class="material-icon" *ngIf="material.material_link.endsWith('mp3')">audiotrack</mat-icon>
+    <mat-icon class="material-icon" *ngIf="!material.material_link.endsWith('pdf')
+     && !material.material_link.endsWith('mp3')">video_library</mat-icon>
+    <button class="material-icon-delete" (click)="onMaterialDelete(material.id)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-card-title class="material-title">{{ material.title }}</mat-card-title>
+    <mat-card-title class="material-date">{{material.created_at | date: 'dd.MM.yyyy' }}</mat-card-title>
+  </mat-card-content>
+</mat-card>

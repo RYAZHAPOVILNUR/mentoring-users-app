@@ -1,0 +1,28 @@
+:host {
+  color: #fff;
+  display: block;
+}
+
+.material-icon-delete {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+}
+
+.audio{
+ padding-left: 190px;
+}
+
+.pdf-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.pdf-viewer {
+  width: 100%;
+  height: 100%;
+}
