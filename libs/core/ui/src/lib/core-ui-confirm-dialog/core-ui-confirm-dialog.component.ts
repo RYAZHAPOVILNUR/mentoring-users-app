@@ -1,6 +1,10 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogModule,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -14,17 +18,15 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class CoreUiConfirmDialogComponent {
   public data: { dialogText: string } = inject(MAT_DIALOG_DATA);
-  public dialogText: string = this.data.dialogText;
 
-  // private dialogRef = inject(MatDialogRef<CoreUiConfirmDialogComponent, boolean>)
-
-  constructor(private dialogRef: MatDialogRef<CoreUiConfirmDialogComponent, boolean>) {}
+  private dialogRef = inject(MatDialogRef<CoreUiConfirmDialogComponent, boolean>)
+  // constructor(private dialogRef: MatDialogRef<CoreUiConfirmDialogComponent, boolean>) {}
 
   confirm() {
     this.dialogRef.close(true);
   }
 
   cancel() {
-    return this.dialogRef.close(false);
+    this.dialogRef.close(false)
   }
 }
