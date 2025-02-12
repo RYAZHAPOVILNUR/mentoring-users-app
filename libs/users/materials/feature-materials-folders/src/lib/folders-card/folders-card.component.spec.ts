@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UsersMaterialsComponent } from './users-materials.component';
+import { UsersMaterialsComponent } from './folders-card.component';
 
 describe('UsersMaterialsComponent', () => {
   let component: UsersMaterialsComponent;

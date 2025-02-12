@@ -1,23 +1,42 @@
-import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap } from 'rxjs/operators';
-import { Observable, EMPTY, of } from 'rxjs';
-import { MaterialsActions } from './materials.actions';
+import { inject } from "@angular/core";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { ApiService } from "@users/core/http";
+import { FoldersActions } from "./materials.actions";
+import { catchError, map, of, switchMap } from "rxjs";
+import { Folder } from "../models/folder.model";
 
-@Injectable()
-export class MaterialsEffects {
-  loadMaterialss$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(MaterialsActions.loadMaterialss),
-      concatMap(() =>
-        /** An EMPTY observable only emits completion. Replace with your own observable API request */
-        EMPTY.pipe(
-          map((data) => MaterialsActions.loadMaterialssSuccess({ data })),
-          catchError((error) => of(MaterialsActions.loadMaterialssFailure({ error })))
+export const foldersEffects = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+
+    return actions$.pipe(
+      ofType(FoldersActions.loadFolders),
+      switchMap(() =>
+        apiService.get<Folder[]>("/folder").pipe(
+          map(folders => FoldersActions.loadFoldersSuccess({folders})),
+          catchError(error => of(FoldersActions.loadFoldersFailure(error))),
         )
       )
-    );
-  });
+    )
+  },
+  { functional: true }
+)
 
-  constructor(private actions$: Actions) {}
-}
+export const folderEffects = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+
+    return actions$.pipe(
+      ofType(FoldersActions.loadFolder),
+      switchMap(({folder}) =>
+        apiService.post<Folder, Folder>("/folder", folder).pipe(
+          map((folder) => FoldersActions.loadFolderSuccess({folder})),
+          catchError((error) => of(FoldersActions.loadFolderFailure(error)))
+        )
+      )
+    )
+  },
+  { functional: true }
+)

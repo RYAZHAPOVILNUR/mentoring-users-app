@@ -1,0 +1,13 @@
+<div *ngFor="let folder of folders$ | async">
+    <mat-card class="folder-card">
+      <mat-card-header>
+        <mat-card-title>{{ folder.title }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Материалы в папке:</p>
+        <ul>
+          <li *ngFor="let material of folder.materials">{{ material.irl }}</li>
+        </ul>
+      </mat-card-content>
+    </mat-card>
+  </div>

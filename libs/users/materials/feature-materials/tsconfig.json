@@ -1,5 +1,4 @@
 {
-  "extends": "../../../../tsconfig.base.json",
   "compilerOptions": {
     "target": "es2022",
     "useDefineForClassFields": false,
@@ -8,11 +7,7 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "rootDir": "../../../../",
-    "paths": {
-      "@users/core/http": ["libs/core/http/src/index.ts"]
-    }
+    "noFallthroughCasesInSwitch": true
   },
   "files": [],
   "include": [],
@@ -24,6 +19,7 @@
       "path": "./tsconfig.spec.json"
     }
   ],
+  "extends": "../../../../tsconfig.base.json",
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
