@@ -1,0 +1,13 @@
+<button
+    mat-fab
+    color="primary"
+    class="add-user-fab-button"
+    [matMenuTriggerFor]="menu"
+    >
+    <mat-icon>add</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="addMaterialCreate('video')">Видео</button>
+    <button mat-menu-item (click)="addMaterialCreate('audio')">Аудио</button>
+    <button mat-menu-item (click)="addMaterialCreate('document')">Документ</button>
+</mat-menu>

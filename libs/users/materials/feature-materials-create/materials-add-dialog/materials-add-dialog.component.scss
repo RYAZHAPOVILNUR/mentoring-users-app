@@ -1,0 +1,15 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;  /* Расстояние между элементами формы */
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.add-folders-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}

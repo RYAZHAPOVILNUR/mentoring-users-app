@@ -1,0 +1,7 @@
+<p>{{folderTitle$ | async}}</p>
+<users-materials-card
+  [material]="material"
+  *ngFor="let material of materialFacade.materialAll$ | async"
+  (dblclick)="onOpenMaterial(material)"
+></users-materials-card>
+<users-materials-add-button></users-materials-add-button>

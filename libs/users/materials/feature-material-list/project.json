@@ -1,0 +1,52 @@
+{
+  "name": "feature-material-list",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/users/materials/feature-material-list/src",
+  "prefix": "users",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/users/materials/feature-material-list/ng-package.json",
+        "tailwindConfig": "libs/users/materials/feature-material-list/tailwind.config.js"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/users/materials/feature-material-list/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/users/materials/feature-material-list/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/users/materials/feature-material-list/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/users/materials/feature-material-list/**/*.ts",
+          "libs/users/materials/feature-material-list/**/*.html",
+          "libs/users/materials/feature-material-list/package.json"
+        ]
+      }
+    }
+  }
+}
