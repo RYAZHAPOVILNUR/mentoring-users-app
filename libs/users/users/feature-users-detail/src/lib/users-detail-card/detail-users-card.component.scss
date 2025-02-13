@@ -35,7 +35,18 @@
 }
 
 .edit-user-field {
+  display: flex;
+  align-items: center;
   width: 100%;
+
+  .edit-user-input {
+    flex-grow: 1;
+  }
+
+  .add-icon {
+    cursor: pointer;
+    margin-left: 8px;
+  }
 }
 
 .edit-user-btns-container {
@@ -55,4 +66,14 @@ div.alert-success {
   display: flex;
   justify-content: center;
   color: white;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
