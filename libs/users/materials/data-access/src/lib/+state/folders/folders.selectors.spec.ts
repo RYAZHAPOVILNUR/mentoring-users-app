@@ -1,7 +1,7 @@
-import * as fromMaterials from './materials.reducer';
-import { selectMaterialsState } from './materials.selectors';
+import * as fromMaterials from './folders.reducer';
+import { selectMaterialsState } from './folders.selectors';
 
-describe('Materials Selectors', () => {
+describe('Folders Selectors', () => {
   it('should select the feature state', () => {
     const result = selectMaterialsState({
       [fromMaterials.materialsFeatureKey]: {},

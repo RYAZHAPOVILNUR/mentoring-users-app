@@ -6,11 +6,11 @@ export type onSuccessEditionCbType = () => void;
 export type onSuccessSPonCbType = () => void;
 
 export const initUsers = createAction('[Users Page] Init');
-
+// Users
 export const loadUsersSuccess = createAction('[Users/API] Load Users Success', props<{ users: UsersEntity[] }>());
 
 export const loadUsersFailure = createAction('[Users/API] Load Users Failure', props<{ error: any }>());
-
+// ===
 export const deleteUser = createAction('[Users Page] Delete User', props<{ id: number }>());
 export const deleteUserSuccess = createAction('[Users/Api] Delete User Success', props<{ id: number }>());
 export const deleteUserFailed = createAction('[Users/Api] Delete User Failed', props<{ error: any }>());
@@ -44,7 +44,7 @@ export const storyPointsFailed = createAction('[Users Detail] Edit Failed', prop
 
 export const editUserSuccess = createAction('[Users Detail] Edit User Success', props<{ userData: UsersDTO }>());
 export const editUserFailed = createAction('[Users Detail] Edit Failed', props<{ error: UsersErrors | null }>());
-
+// Load User
 export const loadUser = createAction('[Users Page] Load User');
 export const loadUserSuccess = createAction('[Users/Api] Load User Success', props<{ userData: UsersEntity }>());
 export const loadUserFailed = createAction('[Users/Api] Load User Failed', props<{ error: any }>());

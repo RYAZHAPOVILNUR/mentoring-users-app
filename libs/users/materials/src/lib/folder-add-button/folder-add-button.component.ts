@@ -4,7 +4,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { FolderAddDialogComponent } from '../folder-add-dialog/folder-add-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { IAddFolder, MaterialsFacade } from '@users/materials/data-access';
+// import { IAddFolder, MaterialsFacade } from '@users/materials/data-access';
 
 @Component({
   selector: 'user-folder-add-button',
@@ -16,7 +16,7 @@ import { IAddFolder, MaterialsFacade } from '@users/materials/data-access';
 })
 export class FolderAddButtonComponent {
   readonly dialog = inject(MatDialog);
-  private readonly materialsFacade = inject(MaterialsFacade);
+  // private readonly materialsFacade = inject(MaterialsFacade);
   folderTitle: string = '';
 
   openDialog() {
@@ -24,11 +24,11 @@ export class FolderAddButtonComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         console.log(`Dialog result: ${result}`);
-        const newFolder: IAddFolder = {
-          title: result.folderTitle,
-        };
+        // const newFolder: IAddFolder = {
+        //   title: result.folderTitle,
+        // };
         // Send new Folder title to Facsde
-        this.materialsFacade.addFolder(newFolder);
+        // this.materialsFacade.addFolder(newFolder);
       }
     });
   }
