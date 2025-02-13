@@ -1,0 +1,11 @@
+<div class="filter">
+  <form [formGroup]="form">
+    <mat-dialog-content>
+      <mat-form-field class="filter-field">
+        <mat-label>Имя</mat-label>
+        <mat-icon (click)="clearSearch()" *ngIf="search" class="filter-field__clear">clear</mat-icon>
+        <input matInput [value]="search" formControlName="user" type="text">
+      </mat-form-field>
+    </mat-dialog-content>
+  </form>
+</div>
