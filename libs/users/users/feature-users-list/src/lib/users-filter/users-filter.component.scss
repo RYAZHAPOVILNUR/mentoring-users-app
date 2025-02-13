@@ -1,0 +1,20 @@
+.filter {
+  display: flex;
+  justify-content: center;
+
+  input {
+    width: 85%;
+  }
+  
+  &-field {
+    position: relative;
+    width: 20rem;
+    
+    &__clear {
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      top: 1rem;
+    }
+  }
+}

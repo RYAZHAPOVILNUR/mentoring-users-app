@@ -18,6 +18,7 @@ export class UsersFacade {
    */
   public readonly status$ = this.store.pipe(select(UsersSelectors.selectUsersStatus));
   public readonly allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
+  public readonly filteredUsers$ = this.store.pipe(select(UsersSelectors.filteredUsers));
   public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
   public readonly loggedUser$ = this.store.select(selectLoggedUser);
@@ -28,6 +29,10 @@ export class UsersFacade {
    */
   init() {
     this.store.dispatch(UsersActions.initUsers());
+  }
+
+  setUsersFilter(name: string) {
+    this.store.dispatch(UsersActions.setUsersFilter({ filter: { name } }))
   }
 
   deleteUser(id: number) {

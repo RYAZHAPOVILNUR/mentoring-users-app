@@ -6,6 +6,8 @@ export type onSuccessEditionCbType = () => void;
 
 export const initUsers = createAction('[Users Page] Init');
 
+export const setUsersFilter = createAction('[Users Page] Edit', props<{ filter: { name: string } }>());
+
 export const loadUsersSuccess = createAction('[Users/API] Load Users Success', props<{ users: UsersEntity[] }>());
 
 export const loadUsersFailure = createAction('[Users/API] Load Users Failure', props<{ error: any }>());

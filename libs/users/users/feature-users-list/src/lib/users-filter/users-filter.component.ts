@@ -1,0 +1,44 @@
+import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BehaviorSubject, debounceTime, distinctUntilChanged, map } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { UsersFacade, usersFilterSelector } from '@users/users/data-access';
+import { MatIconModule } from '@angular/material/icon';
+
+@Component({
+  selector: 'users-filter',
+  standalone: true,
+  imports: [CommonModule, MatInputModule, MatDialogModule, FormsModule, ReactiveFormsModule, MatIconModule],
+  templateUrl: './users-filter.component.html',
+  styleUrls: ['./users-filter.component.scss']
+})
+export class UsersFilterComponent {
+  store: Store = inject(Store)
+  facade: UsersFacade = inject(UsersFacade)
+  form!: FormGroup
+  search: string = ''
+
+  constructor() {
+    this.store.select(usersFilterSelector).subscribe(({ name }) => {
+      this.search = name
+    })
+
+    this.form = new FormGroup({
+      user: new FormControl(this.search, [])
+    })
+
+    this.form.get('user')?.valueChanges
+      .pipe(
+        map((value: string) => value.toLowerCase()),
+        distinctUntilChanged()
+      )
+      .subscribe(value => this.facade.setUsersFilter(value))
+  }
+
+  clearSearch() {
+    this.facade.setUsersFilter('')
+  }
+}
