@@ -5,10 +5,15 @@
   input {
     width: 85%;
   }
-  
+
   &-field {
     position: relative;
     width: 20rem;
+
+    mat-label {
+      pointer-events: none;
+      user-select: none;
+    }
     
     &__clear {
       cursor: pointer;

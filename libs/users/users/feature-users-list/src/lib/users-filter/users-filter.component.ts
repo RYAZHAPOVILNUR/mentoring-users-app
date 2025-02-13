@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BehaviorSubject, debounceTime, distinctUntilChanged, map } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { UsersFacade, usersFilterSelector } from '@users/users/data-access';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,9 +22,7 @@ export class UsersFilterComponent {
   search: string = ''
 
   constructor() {
-    this.store.select(usersFilterSelector).subscribe(({ name }) => {
-      this.search = name
-    })
+    this.store.select(usersFilterSelector).subscribe(({ name }) => this.search = name)
 
     this.form = new FormGroup({
       user: new FormControl(this.search, [])
@@ -32,13 +30,18 @@ export class UsersFilterComponent {
 
     this.form.get('user')?.valueChanges
       .pipe(
-        map((value: string) => value.toLowerCase()),
+        debounceTime(300),
+        map((value: string) => value.trim().toLowerCase()),
         distinctUntilChanged()
       )
-      .subscribe(value => this.facade.setUsersFilter(value))
+      .subscribe(value => {
+        this.facade.setUsersFilter(value)
+      })
+
+    this.form.get('user')?.valueChanges.subscribe(v => this.search = v)
   }
 
   clearSearch() {
-    this.facade.setUsersFilter('')
+    this.form.get('user')?.setValue('')
   }
 }
