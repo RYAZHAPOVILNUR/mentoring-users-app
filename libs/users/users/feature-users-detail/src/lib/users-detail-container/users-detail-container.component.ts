@@ -42,12 +42,33 @@ export class UsersDetailComponent {
     select(selectQueryParam('edit')),
     map((params) => params === 'true')
   );
+  public readonly editPointsMode$: Observable<boolean> = this.store.pipe(
+    select(selectQueryParam('pointsEdit')),
+    map((params) => params === 'true')
+  );
   public readonly errors$: Observable<UsersErrors | null> = this.usersFacade.errors$;
+
+  public onEditPoints(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
+    this.onCloseEditMode()
+    this.usersFacade.editPoints(userData, this.user.id, onSuccessCb)
+  }
 
   public onEditUser(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
     this.usersFacade.editUser(userData, this.user.id, onSuccessCb);
     this.router.navigate(['/admin/users', this.user.id], {
       queryParams: { edit: false },
+    });
+  }
+
+  onOpenPointsEditMode() {
+    this.router.navigate(['/admin/users', this.user.id], {
+      queryParams: { pointsEdit: true },
+    });
+  }
+
+  onClosePointsEditMode() {
+    this.router.navigate(['/admin/users', this.user.id], {
+      queryParams: { pointsEdit: false },
     });
   }
 

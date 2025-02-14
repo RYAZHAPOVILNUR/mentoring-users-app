@@ -32,11 +32,24 @@ export const editUser = createAction(
     onSuccessCb: onSuccessEditionCbType;
   }>()
 );
+
+export const editPoints = createAction(
+  '[Users Detail] Edit Points',
+  props<{
+    userData: CreateUserDTO;
+    id: number;
+    onSuccessCb: onSuccessEditionCbType;
+  }>()
+);
+
 export const editUserSuccess = createAction('[Users Detail] Edit User Success', props<{ userData: UsersDTO }>());
-export const editUserFailed = createAction('[Users Detail] Edit Failed', props<{ error: UsersErrors | null }>());
+export const editUserFailed = createAction('[Users Detail] Edit User Failed', props<{ error: UsersErrors | null }>());
+
+export const editPointsSuccess = createAction('[Users Detail] Edit Points Success', props<{ userData: UsersDTO }>());
+export const editPointsFailed = createAction('[Users Detail] Edit Points Failed', props<{ error: UsersErrors | null }>());
 
 export const loadUser = createAction('[Users Page] Load User');
 export const loadUserSuccess = createAction('[Users/Api] Load User Success', props<{ userData: UsersEntity }>());
-export const loadUserFailed = createAction('[Users/Api] Load User Failed', props<{ error: any }>());
+export const loadUserFailed = createAction('[Users/Api] Load User Failed', props<{ error: UsersErrors | null }>());
 
 export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{ status: LoadingStatus }>());
