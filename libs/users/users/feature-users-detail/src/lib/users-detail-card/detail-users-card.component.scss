@@ -36,6 +36,19 @@
 
 .edit-user-field {
   width: 100%;
+  position: relative;
+
+  &__bttns {
+    cursor: pointer;
+    position: absolute;
+    right: .5rem;
+    top: .3rem;
+    z-index: 100;
+  }
+
+  &__done {
+    margin-right: 1rem;
+  }
 }
 
 .edit-user-btns-container {

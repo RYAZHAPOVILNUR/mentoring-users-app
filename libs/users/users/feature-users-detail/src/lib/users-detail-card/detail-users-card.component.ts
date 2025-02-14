@@ -55,6 +55,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class DetailUsersCardComponent implements OnInit {
   private _vm: DetailUsersCardVm = {
+    editPointsMode: false,
     editMode: false,
     user: null,
     status: 'init',
@@ -74,6 +75,15 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
+      this.pointsGroup.patchValue({
+        totalStoryPoints: this.pointsGroup.value.totalStoryPoints || vm.user.totalStoryPoints
+      })
+    }
+
+    if (vm.editPointsMode) {
+      this.pointsGroup.enable()
+    } else {
+      this.pointsGroup.disable()
     }
 
     if (vm.editMode) {
@@ -90,15 +100,24 @@ export class DetailUsersCardComponent implements OnInit {
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
 
+  public pointsGroup = new FormBuilder().group({
+    totalStoryPoints: new FormControl({ value: 0, disabled: !this.vm.editPointsMode })
+  });
+
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
     onSuccessCb: onSuccessEditionCbType;
   }>();
+  @Output() editPoints = new EventEmitter();
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
+  @Output() openPointsEditMode = new EventEmitter();
+  @Output() closePointsEditMode = new EventEmitter();
+
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('pointsbar') pointsbarTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -122,6 +141,24 @@ export class DetailUsersCardComponent implements OnInit {
       verticalPosition: 'top',
     });
 
+  private onPointsEditSuccess: onSuccessEditionCbType = () =>
+    this.snackBar.openFromTemplate(this.pointsbarTemplateRef, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+
+  onPointsSubmit(): void {
+    console.log(this.pointsGroup!.value!.totalStoryPoints!)
+    this.editPoints.emit({
+      user: {
+        ...this.vm.user,
+        totalStoryPoints: this.pointsGroup.value.totalStoryPoints
+      },
+      onSuccessCb: this.onPointsEditSuccess
+    })
+  }
+
   onSubmit(): void {
     this.editUser.emit({
       user: {
@@ -134,6 +171,15 @@ export class DetailUsersCardComponent implements OnInit {
       },
       onSuccessCb: this.onEditSuccess,
     });
+  }
+
+  onOpenPointsEditMode() {
+    this.openPointsEditMode.emit();
+  }
+
+  onClosePointsEditMode() {
+    this.pointsGroup.get('totalStoryPoints')?.patchValue(this.vm.user?.totalStoryPoints!)
+    this.closePointsEditMode.emit();
   }
 
   onCloseUser() {
