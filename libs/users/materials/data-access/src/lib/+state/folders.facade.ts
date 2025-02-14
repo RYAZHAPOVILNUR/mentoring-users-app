@@ -1,7 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { FolderInterface, loadFolders, selectAllFolders, selectFoldersError } from '@users/materials/data-access';
+import {
+  addFolder,
+  AddNewFolder,
+  FolderInterface,
+  loadFolders,
+  selectAllFolders,
+  selectFoldersError
+} from '@users/materials/data-access';
 
 
 @Injectable({ providedIn: 'root' })
@@ -13,5 +20,9 @@ export class FoldersFacade {
 
   loadFolders() {
     this.store.dispatch(loadFolders());
+  }
+
+  addNewFolder(newFolderData: AddNewFolder) {
+    this.store.dispatch(addFolder({newFolderData}))
   }
 }

@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FoldersListComponent } from '@feature-folders-list';
+import { FoldersListComponent, FoldersListContainerComponent } from '@feature-folders-list';
 
 @Component({
   selector: 'users-users-materials',
   standalone: true,
-  imports: [CommonModule, FoldersListComponent],
+  imports: [CommonModule, FoldersListComponent, FoldersListContainerComponent],
   templateUrl: './users-materials.component.html',
   styleUrls: ['./users-materials.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

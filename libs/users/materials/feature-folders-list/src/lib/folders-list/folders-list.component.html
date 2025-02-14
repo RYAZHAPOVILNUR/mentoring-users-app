@@ -1,1 +1,14 @@
-<p>folders-list works!</p>
+<div class="folders-list-cont">
+<div class="folders-list" *ngIf="folders$ | async as folders; else loading">
+  <div class="display-card" *ngFor="let folder of folders">
+    <users-folders-cards [folder] = folder></users-folders-cards>
+  </div>
+</div>
+<div class="add-button">
+ <users-folders-add-button></users-folders-add-button>
+</div>
+</div>
+<ng-template #loading>
+  <p>Да подожди ты ...</p>
+</ng-template>
+

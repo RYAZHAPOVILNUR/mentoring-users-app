@@ -137,21 +137,3 @@ export const loadUser = createEffect(
   },
   { functional: true }
 );
-
-// export const updateTotalStoryPointsEffect = createEffect(
-//   () => {
-//     const actions$ = inject(Actions);
-//     const apiService = inject(ApiService);
-
-//     return actions$.pipe(
-//       ofType(UsersActions.updateTotalStoryPoints),
-//       switchMap(({ userId, user }) =>
-//         apiService.post(`/users/${userId}`,  user ).pipe(
-//           map(() => UsersActions.updateTotalStoryPointsSuccess({ userId, user})),
-//           catchError((error) => of(UsersActions.updateTotalStoryPointsFailure({ error })))
-//         )
-//       )
-//     );
-//   },
-//   { functional: true }
-// );

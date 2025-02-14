@@ -7,7 +7,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { API_URL } from '@users/core/http';
 import { environment } from '../environments/environment.development';
 import { provideEffects } from '@ngrx/effects';
-import { provideStore } from '@ngrx/store';
+import { provideState, provideStore } from '@ngrx/store';
 import { USERS_FEATURE_KEY, usersReducer, userEffects } from '@users/users/data-access';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
@@ -20,6 +20,7 @@ import { articlesEffects, articlesFeature, commentsEffects, commentsFeature } fr
 import { tasksEffects, tasksFeature } from '@users/users/task/data-access';
 import { CLIENT_ID, githubApiEffects, githubApiFeature } from '@users/core/github-api/data-access';
 import { backlogFeature, backlogEffects } from '@users/users/backlog/data-access';
+import { FoldersEffects, foldersReducer } from '@users/materials/data-access';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -35,7 +36,8 @@ export const appConfig: ApplicationConfig = {
       commentsEffects,
       githubApiEffects,
       backlogEffects,
-      SettingsEffects
+      SettingsEffects,
+      FoldersEffects
     ),
     provideStore({
       router: routerReducer,
@@ -46,7 +48,7 @@ export const appConfig: ApplicationConfig = {
       [commentsFeature.name]: commentsFeature.reducer,
       [tasksFeature.name]: tasksFeature.reducer,
       [githubApiFeature.name]: githubApiFeature.reducer,
-      [backlogFeature.name]: backlogFeature.reducer,
+      [backlogFeature.name]: backlogFeature.reducer
     }),
     provideRouterStore(),
     provideStoreDevtools({
@@ -54,37 +56,38 @@ export const appConfig: ApplicationConfig = {
       logOnly: !isDevMode(),
       autoPause: true,
       trace: false,
-      traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
+      traceLimit: 75 // maximum stack trace frames to be stored (in case trace option was provided as true)
     }),
     provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
     provideHttpClient(withInterceptors([tokenInterceptor])),
     {
       provide: API_URL,
-      useValue: environment.api_url,
+      useValue: environment.api_url
     },
     {
       provide: DADATA_TOKEN,
-      useValue: environment.dadata_api_key,
+      useValue: environment.dadata_api_key
     },
     {
       provide: CLIENT_ID,
-      useValue: environment.github_client_id,
+      useValue: environment.github_client_id
     },
     provideAnimations(),
     provideQuillConfig({
       modules: {
-        syntax: true,
-      },
+        syntax: true
+      }
     }),
     importProvidersFrom(
       TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
           useFactory: HttpLoaderFactory,
-          deps: [HttpClient],
+          deps: [HttpClient]
         },
-        defaultLanguage: 'en',
+        defaultLanguage: 'en'
       })
     ),
-  ],
+    provideState('folders', foldersReducer),
+  ]
 };
