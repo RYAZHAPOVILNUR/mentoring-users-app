@@ -28,6 +28,4 @@ export class MaterialsContentComponent {
   convertToEmbedUrl(watchUrl: string): string {
     return watchUrl.replace(/https:\/\/www\.youtube\.com\/watch\?v=([^&]+)/, 'https://www.youtube.com/embed/$1');
   }
-
-
 }

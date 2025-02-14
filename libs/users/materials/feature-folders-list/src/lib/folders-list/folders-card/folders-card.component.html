@@ -1,4 +1,4 @@
-<button mat-button class="card-button" (click)="onSelect()">
+<div class="card-button" (click)="onSelect()">
   <mat-card
     class="small-card"
     [ngClass]="{'select-folder': isSelected}"
@@ -14,4 +14,4 @@
       <mat-card-title class="card-date">{{ folder.created_at | date }}</mat-card-title>
     </mat-card-content>
   </mat-card>
-</button>
+</div>

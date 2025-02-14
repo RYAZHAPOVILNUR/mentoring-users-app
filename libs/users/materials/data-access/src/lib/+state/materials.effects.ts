@@ -54,7 +54,6 @@ export const addFolderEffect = createEffect(
         apiService.post<Folder, FolderCreate>('/folder', folder).pipe(
           map((folder: Folder) => MaterialsActions.addFolderSuccess({folder})),
           catchError((error) => {
-            console.error('Error response:', error);
             return of(MaterialsActions.addFolderFailure({ error }));
         })
         )
@@ -99,8 +98,6 @@ export const deleteMaterialsEffect = createEffect(
   }, {functional: true}
 )
 
-
-
 export const addMaterialEffect = createEffect(
   () => {
     const actions$ = inject(Actions);
@@ -112,7 +109,6 @@ export const addMaterialEffect = createEffect(
         apiService.post<Material, MaterialCreate>('/material', material).pipe(
           map((material: Material) => MaterialsActions.addMaterialSuccess({material})),
           catchError((error) => {
-            console.error('Error response:', error);
             return of(MaterialsActions.addMaterialFailure({ error }));
           })
         )

@@ -20,7 +20,7 @@ export class FoldesAddButtonComponent {
   readonly dialog = inject(MatDialog);
   materialsFacade = inject(MaterialsFacade);
   destroyRef = inject(DestroyRef);
-
+  //создал некорреткно lib постараюсь проработать это
   addFolderCreate() {
     const dialogRef: MatDialogRef<FoldersAddDialogComponent> = this.dialog.open(FoldersAddDialogComponent);
     dialogRef.afterClosed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {

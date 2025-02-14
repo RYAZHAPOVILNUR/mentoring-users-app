@@ -4,7 +4,6 @@ import *as MaterialsSelector from './materials.selectors'
 import *as MaterialsActions from './materials.actions'
 import { FolderCreate } from './models/folders.interface'
 import { MaterialCreate } from './models/materials.interface';
-import { selectMaterialsFilter } from './materials.selectors';
 import { take } from 'rxjs';
 
 

@@ -2718,6 +2718,15 @@
         "hash": "sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw=="
       }
     },
+    "npm:@emotion/hash": {
+      "type": "npm",
+      "name": "npm:@emotion/hash",
+      "data": {
+        "version": "0.8.0",
+        "packageName": "@emotion/hash",
+        "hash": "sha512-kBJtf7PH6aWwZ6fka3zQ0p6SBYzx4fl1LoZXE2RrnYST9Xljm7WfKJrU4g/Xr3Beg72MLrp1AWNUmuYJTL7Cow=="
+      }
+    },
     "npm:@eslint-community/eslint-utils": {
       "type": "npm",
       "name": "npm:@eslint-community/eslint-utils",
@@ -3301,6 +3310,87 @@
         "version": "2.0.4",
         "packageName": "@leichtgewicht/ip-codec",
         "hash": "sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A=="
+      }
+    },
+    "npm:@material-ui/core": {
+      "type": "npm",
+      "name": "npm:@material-ui/core",
+      "data": {
+        "version": "4.12.4",
+        "packageName": "@material-ui/core",
+        "hash": "sha512-tr7xekNlM9LjA6pagJmL8QCgZXaubWUwkJnoYcMKd4gw/t4XiyvnTkjdGrUVicyB2BsdaAv1tvow45bPM4sSwQ=="
+      }
+    },
+    "npm:react-is@17.0.2": {
+      "type": "npm",
+      "name": "npm:react-is@17.0.2",
+      "data": {
+        "version": "17.0.2",
+        "packageName": "react-is",
+        "hash": "sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w=="
+      }
+    },
+    "npm:react-is@16.13.1": {
+      "type": "npm",
+      "name": "npm:react-is@16.13.1",
+      "data": {
+        "version": "16.13.1",
+        "packageName": "react-is",
+        "hash": "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
+      }
+    },
+    "npm:react-is": {
+      "type": "npm",
+      "name": "npm:react-is",
+      "data": {
+        "version": "18.2.0",
+        "packageName": "react-is",
+        "hash": "sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w=="
+      }
+    },
+    "npm:@material-ui/icons": {
+      "type": "npm",
+      "name": "npm:@material-ui/icons",
+      "data": {
+        "version": "4.11.3",
+        "packageName": "@material-ui/icons",
+        "hash": "sha512-IKHlyx6LDh8n19vzwH5RtHIOHl9Tu90aAAxcbWME6kp4dmvODM3UvOHJeMIDzUbd4muuJKHmlNoBN+mDY4XkBA=="
+      }
+    },
+    "npm:@material-ui/styles": {
+      "type": "npm",
+      "name": "npm:@material-ui/styles",
+      "data": {
+        "version": "4.11.5",
+        "packageName": "@material-ui/styles",
+        "hash": "sha512-o/41ot5JJiUsIETME9wVLAJrmIWL3j0R0Bj2kCOLbSfqEkKf0fmaPt+5vtblUh5eXr2S+J/8J3DaCb10+CzPGA=="
+      }
+    },
+    "npm:@material-ui/system": {
+      "type": "npm",
+      "name": "npm:@material-ui/system",
+      "data": {
+        "version": "4.12.2",
+        "packageName": "@material-ui/system",
+        "hash": "sha512-6CSKu2MtmiJgcCGf6nBQpM8fLkuB9F55EKfbdTC80NND5wpTmKzwdhLYLH3zL4cLlK0gVaaltW7/wMuyTnN0Lw=="
+      }
+    },
+    "npm:@material-ui/types": {
+      "type": "npm",
+      "name": "npm:@material-ui/types",
+      "data": {
+        "version": "5.1.0",
+        "packageName": "@material-ui/types",
+        "hash": "sha512-7cqRjrY50b8QzRSYyhSpx4WRw2YuO0KKIGQEVk5J8uoz2BanawykgZGoWEqKm7pVIbzFDN0SpPcVV4IhOFkl8A=="
+      }
+    },
+    "npm:@material-ui/utils": {
+      "type": "npm",
+      "name": "npm:@material-ui/utils",
+      "data": {
+        "version": "4.11.3",
+        "packageName": "@material-ui/utils",
+        "hash": "sha512-ZuQPV4rBK/V1j2dIkSSEcH5uT6AaHuKWFfotADHsC0wVL1NLd2WkFCm4ZZbX33iO4ydl6V0GPngKm8HZQ2oujg=="
       }
     },
     "npm:@material/animation": {
@@ -5760,6 +5850,15 @@
         "hash": "sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA=="
       }
     },
+    "npm:@types/prop-types": {
+      "type": "npm",
+      "name": "npm:@types/prop-types",
+      "data": {
+        "version": "15.7.14",
+        "packageName": "@types/prop-types",
+        "hash": "sha512-gNMvNH49DJ7OJYv+KAKn0Xp45p8PLl6zo2YnvDIbTd4J6MER2BmWN49TG7n9LvkyihINxeKW8+3bfS2yDC9dzQ=="
+      }
+    },
     "npm:@types/qs": {
       "type": "npm",
       "name": "npm:@types/qs",
@@ -5787,6 +5886,42 @@
         "hash": "sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw=="
       }
     },
+    "npm:@types/react": {
+      "type": "npm",
+      "name": "npm:@types/react",
+      "data": {
+        "version": "17.0.83",
+        "packageName": "@types/react",
+        "hash": "sha512-l0m4ArKJvmFtR4e8UmKrj1pB4tUgOhJITf+mADyF/p69Ts1YAR/E+G9XEM0mHXKVRa1dQNHseyyDNzeuAXfXQw=="
+      }
+    },
+    "npm:@types/react-transition-group": {
+      "type": "npm",
+      "name": "npm:@types/react-transition-group",
+      "data": {
+        "version": "4.4.12",
+        "packageName": "@types/react-transition-group",
+        "hash": "sha512-8TV6R3h2j7a91c+1DXdJi3Syo69zzIZbz7Lg5tORM5LEJG7X/E6a1V3drRyBRZq7/utz7A+c4OgYLiLcYGHG6w=="
+      }
+    },
+    "npm:csstype@3.1.3": {
+      "type": "npm",
+      "name": "npm:csstype@3.1.3",
+      "data": {
+        "version": "3.1.3",
+        "packageName": "csstype",
+        "hash": "sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw=="
+      }
+    },
+    "npm:csstype": {
+      "type": "npm",
+      "name": "npm:csstype",
+      "data": {
+        "version": "2.6.21",
+        "packageName": "csstype",
+        "hash": "sha512-Z1PhmomIfypOpoMjRQB70jfvy/wxT50qW08YXO5lMIJkrdq4yOTR+AW7FqutScmB9NkLwxo+jU+kZLbofZZq/w=="
+      }
+    },
     "npm:@types/resolve": {
       "type": "npm",
       "name": "npm:@types/resolve",
@@ -5803,6 +5938,15 @@
         "version": "0.12.0",
         "packageName": "@types/retry",
         "hash": "sha512-wWKOClTTiizcZhXnPY4wikVAwmdYHp8q6DmC+EJUzAMsycb7HB32Kh9RN4+0gExjmPmZSAQjgURXIGATPegAvA=="
+      }
+    },
+    "npm:@types/scheduler": {
+      "type": "npm",
+      "name": "npm:@types/scheduler",
+      "data": {
+        "version": "0.16.8",
+        "packageName": "@types/scheduler",
+        "hash": "sha512-WZLiwShhwLRmeV6zH+GkbOFT6Z6VklCItrDioxUnv+u4Ll+8vKeFySoFyK/0ctcRpOmwAicELfmys1sDc/Rw+A=="
       }
     },
     "npm:@types/semver": {
@@ -7569,6 +7713,15 @@
         "hash": "sha512-neHB9xuzh/wk0dIHweyAXv2aPGZIVk3pLMe+/RNzINf17fe0OG96QroktYAUm7SM1PBnzTabaLboqqxDyMU+SQ=="
       }
     },
+    "npm:clsx": {
+      "type": "npm",
+      "name": "npm:clsx",
+      "data": {
+        "version": "1.2.1",
+        "packageName": "clsx",
+        "hash": "sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg=="
+      }
+    },
     "npm:co": {
       "type": "npm",
       "name": "npm:co",
@@ -7963,6 +8116,15 @@
         "version": "2.2.1",
         "packageName": "css-tree",
         "hash": "sha512-OA0mILzGc1kCOCSJerOeqDxDQ4HOh+G8NbOJFOTgOCzpw7fCBubk0fEyxp8AgOL/jvLgYA/uV0cMbe43ElF1JA=="
+      }
+    },
+    "npm:css-vendor": {
+      "type": "npm",
+      "name": "npm:css-vendor",
+      "data": {
+        "version": "2.0.8",
+        "packageName": "css-vendor",
+        "hash": "sha512-x9Aq0XTInxrkuFeHKbYC7zWY8ai7qJ04Kxd9MnvbC1uO5DagxoHQjm4JvG+vCdXOoFtCjbL2XSZfxmoYa9uQVQ=="
       }
     },
     "npm:css-what": {
@@ -8521,6 +8683,15 @@
         "version": "3.0.0",
         "packageName": "doctrine",
         "hash": "sha512-yS+Q5i3hBf7GBkd4KG8a7eBNNWNGLTaEwwYWUijIYM7zrlYDM0BFXHjjPWlWZ1Rg7UaddZeIDmi9jF3HmqiQ2w=="
+      }
+    },
+    "npm:dom-helpers": {
+      "type": "npm",
+      "name": "npm:dom-helpers",
+      "data": {
+        "version": "5.2.1",
+        "packageName": "dom-helpers",
+        "hash": "sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA=="
       }
     },
     "npm:dom-serializer": {
@@ -9774,6 +9945,15 @@
         "hash": "sha512-f168ZhRVVlV7vJ2g0gDH3IaTNv84c91z6GYRWuER0Ep5kLalAUH0KDtFhrTOb6+sjue7BK8M7aPY74fiC4bGXA=="
       }
     },
+    "npm:hoist-non-react-statics": {
+      "type": "npm",
+      "name": "npm:hoist-non-react-statics",
+      "data": {
+        "version": "3.3.2",
+        "packageName": "hoist-non-react-statics",
+        "hash": "sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw=="
+      }
+    },
     "npm:hosted-git-info": {
       "type": "npm",
       "name": "npm:hosted-git-info",
@@ -9961,6 +10141,15 @@
         "version": "1.2.1",
         "packageName": "humanize-ms",
         "hash": "sha512-Fl70vYtsAFb/C06PTS9dZBo7ihau+Tu/DNCk/OyHhea07S+aeMWpFFkUaXRa8fI+ScZbEI8dfSxwY7gxZ9SAVQ=="
+      }
+    },
+    "npm:hyphenate-style-name": {
+      "type": "npm",
+      "name": "npm:hyphenate-style-name",
+      "data": {
+        "version": "1.1.0",
+        "packageName": "hyphenate-style-name",
+        "hash": "sha512-WDC/ui2VVRrz3jOVi+XtjqkDjiVjTtFaAGiW37k6b+ohyQ5wYDOGkvCZa8+H0nx3gyvv0+BST9xuOgIyGQ00gw=="
       }
     },
     "npm:icss-utils": {
@@ -10285,6 +10474,15 @@
         "version": "4.0.3",
         "packageName": "is-glob",
         "hash": "sha512-xelSayHH36ZgE7ZWhli7pW34hNbNl8Ojv5KVmkJD4hBdD3th8Tfk9vYasLM+mXWOZhFkgZfxhLSnrwRr4elSSg=="
+      }
+    },
+    "npm:is-in-browser": {
+      "type": "npm",
+      "name": "npm:is-in-browser",
+      "data": {
+        "version": "1.1.3",
+        "packageName": "is-in-browser",
+        "hash": "sha512-FeXIBgG/CPGd/WUxuEyvgGTEfwiG9Z4EKGxjNMRqviiIIfsmgrpnHLffEDdwUHqNva1VEW91o3xBT/m8Elgl9g=="
       }
     },
     "npm:is-installed-globally": {
@@ -11241,6 +11439,78 @@
         "hash": "sha512-gqXddjPqQ6G40VdnI6T6yObEC+pDNvyP95wdQhkWkg7crHH3km5qP1FsOXEkzEQwnz6gz5qGTn1c2Y52wP3OyQ=="
       }
     },
+    "npm:jss": {
+      "type": "npm",
+      "name": "npm:jss",
+      "data": {
+        "version": "10.10.0",
+        "packageName": "jss",
+        "hash": "sha512-cqsOTS7jqPsPMjtKYDUpdFC0AbhYFLTcuGRqymgmdJIeQ8cH7+AgX7YSgQy79wXloZq2VvATYxUOUQEvS1V/Zw=="
+      }
+    },
+    "npm:jss-plugin-camel-case": {
+      "type": "npm",
+      "name": "npm:jss-plugin-camel-case",
+      "data": {
+        "version": "10.10.0",
+        "packageName": "jss-plugin-camel-case",
+        "hash": "sha512-z+HETfj5IYgFxh1wJnUAU8jByI48ED+v0fuTuhKrPR+pRBYS2EDwbusU8aFOpCdYhtRc9zhN+PJ7iNE8pAWyPw=="
+      }
+    },
+    "npm:jss-plugin-default-unit": {
+      "type": "npm",
+      "name": "npm:jss-plugin-default-unit",
+      "data": {
+        "version": "10.10.0",
+        "packageName": "jss-plugin-default-unit",
+        "hash": "sha512-SvpajxIECi4JDUbGLefvNckmI+c2VWmP43qnEy/0eiwzRUsafg5DVSIWSzZe4d2vFX1u9nRDP46WCFV/PXVBGQ=="
+      }
+    },
+    "npm:jss-plugin-global": {
+      "type": "npm",
+      "name": "npm:jss-plugin-global",
+      "data": {
+        "version": "10.10.0",
+        "packageName": "jss-plugin-global",
+        "hash": "sha512-icXEYbMufiNuWfuazLeN+BNJO16Ge88OcXU5ZDC2vLqElmMybA31Wi7lZ3lf+vgufRocvPj8443irhYRgWxP+A=="
+      }
+    },
+    "npm:jss-plugin-nested": {
+      "type": "npm",
+      "name": "npm:jss-plugin-nested",
+      "data": {
+        "version": "10.10.0",
+        "packageName": "jss-plugin-nested",
+        "hash": "sha512-9R4JHxxGgiZhurDo3q7LdIiDEgtA1bTGzAbhSPyIOWb7ZubrjQe8acwhEQ6OEKydzpl8XHMtTnEwHXCARLYqYA=="
+      }
+    },
+    "npm:jss-plugin-props-sort": {
+      "type": "npm",
+      "name": "npm:jss-plugin-props-sort",
+      "data": {
+        "version": "10.10.0",
+        "packageName": "jss-plugin-props-sort",
+        "hash": "sha512-5VNJvQJbnq/vRfje6uZLe/FyaOpzP/IH1LP+0fr88QamVrGJa0hpRRyAa0ea4U/3LcorJfBFVyC4yN2QC73lJg=="
+      }
+    },
+    "npm:jss-plugin-rule-value-function": {
+      "type": "npm",
+      "name": "npm:jss-plugin-rule-value-function",
+      "data": {
+        "version": "10.10.0",
+        "packageName": "jss-plugin-rule-value-function",
+        "hash": "sha512-uEFJFgaCtkXeIPgki8ICw3Y7VMkL9GEan6SqmT9tqpwM+/t+hxfMUdU4wQ0MtOiMNWhwnckBV0IebrKcZM9C0g=="
+      }
+    },
+    "npm:jss-plugin-vendor-prefixer": {
+      "type": "npm",
+      "name": "npm:jss-plugin-vendor-prefixer",
+      "data": {
+        "version": "10.10.0",
+        "packageName": "jss-plugin-vendor-prefixer",
+        "hash": "sha512-UY/41WumgjW8r1qMCO8l1ARg7NHnfRVWRhZ2E2m0DMYsr2DD91qIXLyNhiX83hHswR7Wm4D+oDYNC1zWCJWtqg=="
+      }
+    },
     "npm:karma-source-map-support": {
       "type": "npm",
       "name": "npm:karma-source-map-support",
@@ -11563,6 +11833,15 @@
         "version": "2.3.0",
         "packageName": "log-update",
         "hash": "sha512-vlP11XfFGyeNQlmEn9tJ66rEW1coA/79m5z6BCkudjbAGE83uhAcGYrBFwfs3AdLiLzGRusRPAbSPK9xZteCmg=="
+      }
+    },
+    "npm:loose-envify": {
+      "type": "npm",
+      "name": "npm:loose-envify",
+      "data": {
+        "version": "1.4.0",
+        "packageName": "loose-envify",
+        "hash": "sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q=="
       }
     },
     "npm:make-error": {
@@ -12582,6 +12861,15 @@
         "hash": "sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg=="
       }
     },
+    "npm:popper.js": {
+      "type": "npm",
+      "name": "npm:popper.js",
+      "data": {
+        "version": "1.16.1-lts",
+        "packageName": "popper.js",
+        "hash": "sha512-Kjw8nKRl1m+VrSFCoVGPph93W/qrSO7ZkqPpTf7F4bk/sqcfWK019dWBUpE/fBOsOQY1dks/Bmcbfn1heM/IsA=="
+      }
+    },
     "npm:portfinder": {
       "type": "npm",
       "name": "npm:portfinder",
@@ -13302,6 +13590,15 @@
         "hash": "sha512-NxNv/kLguCA7p3jE8oL2aEBsrJWgAakBpgmgK6lpPWV+WuOmY6r2/zbAVnP+T8bQlA0nzHXSJSJW0Hq7ylaD2Q=="
       }
     },
+    "npm:prop-types": {
+      "type": "npm",
+      "name": "npm:prop-types",
+      "data": {
+        "version": "15.8.1",
+        "packageName": "prop-types",
+        "hash": "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
+      }
+    },
     "npm:proxy-addr": {
       "type": "npm",
       "name": "npm:proxy-addr",
@@ -13464,13 +13761,31 @@
         "hash": "sha512-qqJBtEyVgS0ZmPGdCFPWJ3FreoqvG4MVQln/kCgF7Olq95IbOp0/BWyMwbdtn4VTvkM8Y7khCQ2Xgk/tcrCXig=="
       }
     },
-    "npm:react-is": {
+    "npm:react": {
       "type": "npm",
-      "name": "npm:react-is",
+      "name": "npm:react",
       "data": {
-        "version": "18.2.0",
-        "packageName": "react-is",
-        "hash": "sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w=="
+        "version": "17.0.2",
+        "packageName": "react",
+        "hash": "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
+      }
+    },
+    "npm:react-dom": {
+      "type": "npm",
+      "name": "npm:react-dom",
+      "data": {
+        "version": "17.0.2",
+        "packageName": "react-dom",
+        "hash": "sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA=="
+      }
+    },
+    "npm:react-transition-group": {
+      "type": "npm",
+      "name": "npm:react-transition-group",
+      "data": {
+        "version": "4.4.5",
+        "packageName": "react-transition-group",
+        "hash": "sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g=="
       }
     },
     "npm:read-cache": {
@@ -13732,6 +14047,15 @@
         "version": "1.2.4",
         "packageName": "sax",
         "hash": "sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw=="
+      }
+    },
+    "npm:scheduler": {
+      "type": "npm",
+      "name": "npm:scheduler",
+      "data": {
+        "version": "0.20.2",
+        "packageName": "scheduler",
+        "hash": "sha512-2eWfGgAqqWFGqtdMmcL5zCMK1U8KlXv8SQFGglL3CEtd0aDVDWgeF/YoCmvln55m5zSk3J/20hTaSBeSObsQDQ=="
       }
     },
     "npm:secure-compare": {
@@ -14290,6 +14614,15 @@
         "version": "1.1.0",
         "packageName": "thunky",
         "hash": "sha512-eHY7nBftgThBqOyHGVN+l8gF0BucP09fMo0oO/Lb0w1OF80dJv+lDVpXG60WMQvkcxAkNybKsrEIE3ZtKGmPrA=="
+      }
+    },
+    "npm:tiny-warning": {
+      "type": "npm",
+      "name": "npm:tiny-warning",
+      "data": {
+        "version": "1.0.3",
+        "packageName": "tiny-warning",
+        "hash": "sha512-lBN9zLN/oAf68o3zNXYrdCt1kP8WsiGW8Oo2ka41b2IM5JL/S1CTyX1rW0mb/zSuJun0ZUrDxx4sqvYS2FWzPA=="
       }
     },
     "npm:tmpl": {
@@ -19796,6 +20129,266 @@
       "dependencyType": "static"
     },
     {
+      "source": "npm:@material-ui/core",
+      "target": "npm:@types/react",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/core",
+      "target": "npm:react",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/core",
+      "target": "npm:react-dom",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/core",
+      "target": "npm:@babel/runtime",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/core",
+      "target": "npm:@material-ui/styles",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/core",
+      "target": "npm:@material-ui/system",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/core",
+      "target": "npm:@material-ui/types",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/core",
+      "target": "npm:@material-ui/utils",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/core",
+      "target": "npm:@types/react-transition-group",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/core",
+      "target": "npm:clsx",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/core",
+      "target": "npm:hoist-non-react-statics",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/core",
+      "target": "npm:popper.js",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/core",
+      "target": "npm:prop-types",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/core",
+      "target": "npm:react-is@17.0.2",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/core",
+      "target": "npm:react-transition-group",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/icons",
+      "target": "npm:@material-ui/core",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/icons",
+      "target": "npm:@types/react",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/icons",
+      "target": "npm:react",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/icons",
+      "target": "npm:react-dom",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/icons",
+      "target": "npm:@babel/runtime",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/styles",
+      "target": "npm:@types/react",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/styles",
+      "target": "npm:react",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/styles",
+      "target": "npm:react-dom",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/styles",
+      "target": "npm:@babel/runtime",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/styles",
+      "target": "npm:@emotion/hash",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/styles",
+      "target": "npm:@material-ui/types",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/styles",
+      "target": "npm:@material-ui/utils",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/styles",
+      "target": "npm:clsx",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/styles",
+      "target": "npm:csstype",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/styles",
+      "target": "npm:hoist-non-react-statics",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/styles",
+      "target": "npm:jss",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/styles",
+      "target": "npm:jss-plugin-camel-case",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/styles",
+      "target": "npm:jss-plugin-default-unit",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/styles",
+      "target": "npm:jss-plugin-global",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/styles",
+      "target": "npm:jss-plugin-nested",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/styles",
+      "target": "npm:jss-plugin-props-sort",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/styles",
+      "target": "npm:jss-plugin-rule-value-function",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/styles",
+      "target": "npm:jss-plugin-vendor-prefixer",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/styles",
+      "target": "npm:prop-types",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/system",
+      "target": "npm:@types/react",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/system",
+      "target": "npm:react",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/system",
+      "target": "npm:react-dom",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/system",
+      "target": "npm:@babel/runtime",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/system",
+      "target": "npm:@material-ui/utils",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/system",
+      "target": "npm:csstype",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/system",
+      "target": "npm:prop-types",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/types",
+      "target": "npm:@types/react",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/utils",
+      "target": "npm:react",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/utils",
+      "target": "npm:react-dom",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/utils",
+      "target": "npm:@babel/runtime",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/utils",
+      "target": "npm:prop-types",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@material-ui/utils",
+      "target": "npm:react-is@17.0.2",
+      "dependencyType": "static"
+    },
+    {
       "source": "npm:@material/animation",
       "target": "npm:tslib",
       "dependencyType": "static"
@@ -24451,6 +25044,26 @@
       "dependencyType": "static"
     },
     {
+      "source": "npm:@types/react",
+      "target": "npm:@types/prop-types",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@types/react",
+      "target": "npm:@types/scheduler",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@types/react",
+      "target": "npm:csstype@3.1.3",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:@types/react-transition-group",
+      "target": "npm:@types/react",
+      "dependencyType": "static"
+    },
+    {
       "source": "npm:@types/send",
       "target": "npm:@types/mime",
       "dependencyType": "static"
@@ -26646,6 +27259,16 @@
       "dependencyType": "static"
     },
     {
+      "source": "npm:css-vendor",
+      "target": "npm:@babel/runtime",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:css-vendor",
+      "target": "npm:is-in-browser",
+      "dependencyType": "static"
+    },
+    {
       "source": "npm:cssnano",
       "target": "npm:postcss",
       "dependencyType": "static"
@@ -27268,6 +27891,16 @@
     {
       "source": "npm:doctrine",
       "target": "npm:esutils",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:dom-helpers",
+      "target": "npm:@babel/runtime",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:dom-helpers",
+      "target": "npm:csstype@3.1.3",
       "dependencyType": "static"
     },
     {
@@ -28778,6 +29411,11 @@
     {
       "source": "npm:highcharts-angular",
       "target": "npm:tslib",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:hoist-non-react-statics",
+      "target": "npm:react-is@16.13.1",
       "dependencyType": "static"
     },
     {
@@ -31586,6 +32224,116 @@
       "dependencyType": "static"
     },
     {
+      "source": "npm:jss",
+      "target": "npm:@babel/runtime",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:jss",
+      "target": "npm:csstype@3.1.3",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:jss",
+      "target": "npm:is-in-browser",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:jss",
+      "target": "npm:tiny-warning",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:jss-plugin-camel-case",
+      "target": "npm:@babel/runtime",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:jss-plugin-camel-case",
+      "target": "npm:hyphenate-style-name",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:jss-plugin-camel-case",
+      "target": "npm:jss",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:jss-plugin-default-unit",
+      "target": "npm:@babel/runtime",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:jss-plugin-default-unit",
+      "target": "npm:jss",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:jss-plugin-global",
+      "target": "npm:@babel/runtime",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:jss-plugin-global",
+      "target": "npm:jss",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:jss-plugin-nested",
+      "target": "npm:@babel/runtime",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:jss-plugin-nested",
+      "target": "npm:jss",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:jss-plugin-nested",
+      "target": "npm:tiny-warning",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:jss-plugin-props-sort",
+      "target": "npm:@babel/runtime",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:jss-plugin-props-sort",
+      "target": "npm:jss",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:jss-plugin-rule-value-function",
+      "target": "npm:@babel/runtime",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:jss-plugin-rule-value-function",
+      "target": "npm:jss",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:jss-plugin-rule-value-function",
+      "target": "npm:tiny-warning",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:jss-plugin-vendor-prefixer",
+      "target": "npm:@babel/runtime",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:jss-plugin-vendor-prefixer",
+      "target": "npm:css-vendor",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:jss-plugin-vendor-prefixer",
+      "target": "npm:jss",
+      "dependencyType": "static"
+    },
+    {
       "source": "npm:karma-source-map-support",
       "target": "npm:source-map-support",
       "dependencyType": "static"
@@ -31928,6 +32676,11 @@
     {
       "source": "npm:wrap-ansi@3.0.1",
       "target": "npm:strip-ansi@4.0.0",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:loose-envify",
+      "target": "npm:js-tokens",
       "dependencyType": "static"
     },
     {
@@ -34741,6 +35494,21 @@
       "dependencyType": "static"
     },
     {
+      "source": "npm:prop-types",
+      "target": "npm:loose-envify",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:prop-types",
+      "target": "npm:object-assign",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:prop-types",
+      "target": "npm:react-is@16.13.1",
+      "dependencyType": "static"
+    },
+    {
       "source": "npm:proxy-addr",
       "target": "npm:forwarded",
       "dependencyType": "static"
@@ -34888,6 +35656,66 @@
     {
       "source": "npm:raw-body",
       "target": "npm:unpipe",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:react",
+      "target": "npm:loose-envify",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:react",
+      "target": "npm:object-assign",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:react-dom",
+      "target": "npm:react",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:react-dom",
+      "target": "npm:loose-envify",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:react-dom",
+      "target": "npm:object-assign",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:react-dom",
+      "target": "npm:scheduler",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:react-transition-group",
+      "target": "npm:react",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:react-transition-group",
+      "target": "npm:react-dom",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:react-transition-group",
+      "target": "npm:@babel/runtime",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:react-transition-group",
+      "target": "npm:dom-helpers",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:react-transition-group",
+      "target": "npm:loose-envify",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:react-transition-group",
+      "target": "npm:prop-types",
       "dependencyType": "static"
     },
     {
@@ -35188,6 +36016,16 @@
     {
       "source": "npm:saxes",
       "target": "npm:xmlchars",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:scheduler",
+      "target": "npm:loose-envify",
+      "dependencyType": "static"
+    },
+    {
+      "source": "npm:scheduler",
+      "target": "npm:object-assign",
       "dependencyType": "static"
     },
     {

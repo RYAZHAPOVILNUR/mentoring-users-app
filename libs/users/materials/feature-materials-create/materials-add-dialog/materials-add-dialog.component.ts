@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, OnInit, ViewEncapsulation }
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
@@ -30,8 +30,6 @@ export class MaterialsAddDialogComponent implements OnInit  {
   formGroup!: FormGroup;
 
   ngOnInit() {
-    console.log('Id папки', this.data.folderId);
-
     this.formGroup = new FormGroup({
       newTitle: new FormControl('', [Validators.required, Validators.maxLength(10), Validators.minLength(1)]),
       newLink: new FormControl('', [Validators.required, Validators.minLength(1)]),
@@ -54,12 +52,11 @@ export class MaterialsAddDialogComponent implements OnInit  {
       const audioRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*\.mp3$/
       return audioRegex.test(link);
     }
-
     return true;
   }
 
   addSave() {
-    if(this.formGroup.valid) {
+    if (this.formGroup.valid) {
       const formData = {
         title: this.formGroup.value.newTitle,
         material_link: this.formGroup.value.newLink,

@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Material, MaterialCreate, MaterialsFacade } from '../../data-access/src';
+import { MaterialsFacade } from '@users/materials/facade';
 import { MaterialsAddDialogComponent } from '../materials-add-dialog/materials-add-dialog.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
@@ -28,7 +28,8 @@ export class MaterialsAddButtonComponent {
   addMaterialCreate(materialType: string) {
     this.folderId = +this.activateRouter.snapshot.paramMap.get('id')!
     const dialogRef: MatDialogRef<MaterialsAddDialogComponent> =
-      this.dialog.open(MaterialsAddDialogComponent, {data: {folderId: this.folderId, materialType: materialType}});
+      this.dialog.open(MaterialsAddDialogComponent,
+        {data: {folderId: this.folderId, materialType: materialType}});
     dialogRef
       .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -36,6 +37,6 @@ export class MaterialsAddButtonComponent {
         if (res) {
           this.materialsFacade.addMaterials(res);
         }
-      });
+    });
   }
 }

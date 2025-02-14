@@ -7,9 +7,7 @@ import { MaterialsAddButtonComponent } from '../../../../feature-materials-creat
 import { MaterialsCardComponent } from './materials-card/materials-card.component';
 import { Store } from '@ngrx/store';
 import { selectFolders, selectMaterial } from '../../../../data-access/src/lib/+state/materials.selectors';
-import {
-  MaterialsContentComponent
-} from '../../../../feature-materials-content/materials-content/materials-content.component';
+import { MaterialsContentComponent } from '../../../../feature-materials-content/materials-content/materials-content.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -45,11 +43,8 @@ export class FeatureMaterialListComponent implements OnInit {
   }
   onOpenMaterial(material: Material){
     const dialogRef = this.dialog.open(MaterialsContentComponent, {
-      // width: '300px',
-      // height: '400px',
       data: material,
     });
-
     dialogRef.afterClosed().subscribe()
   }
 }

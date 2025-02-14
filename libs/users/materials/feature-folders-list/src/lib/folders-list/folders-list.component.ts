@@ -20,10 +20,6 @@ export class FoldersListComponent implements OnInit {
   materialFacade = inject(MaterialsFacade);
   router = inject(Router);
   selectIndex: number | null = null;
-  @HostListener('document:keydown.enter', ['$event'])
-  @HostListener('document:keydown.arrowup', ['$event'])
-  @HostListener('document:keydown.arrowdown', ['$event'])
-  // folder
 
   ngOnInit(): void {
     this.materialFacade.initFolders()
@@ -36,7 +32,6 @@ export class FoldersListComponent implements OnInit {
   selectFolder(index: number) {
     this.selectIndex = index;
   }
-
 
   @HostListener('document:keydown.enter', ['$event'])
   handleEnter(event: KeyboardEvent): void {
