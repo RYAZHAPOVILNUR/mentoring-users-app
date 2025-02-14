@@ -1,0 +1,19 @@
+<div class="new-material">
+  <mat-list class="new-material__select" *ngIf="isSelectOpen">
+    <mat-list-item class="new-material__select-item">
+      <button mat-button class="new-material__select-btn" (click)="openAddMaterialDialog('video')">{{
+        'LAYOUT.MATERIAL_NAME.VIDEO' | translate }}</button>
+    </mat-list-item>
+    <mat-list-item class="new-material__select-item">
+      <button mat-button class="new-material__select-btn" (click)="openAddMaterialDialog('pdf')">{{
+        'LAYOUT.MATERIAL_NAME.PDF' | translate }}</button>
+    </mat-list-item>
+    <mat-list-item class="new-material__select-item">
+      <button mat-button class="new-material__select-btn" (click)="openAddMaterialDialog('audio')">{{
+        'LAYOUT.MATERIAL_NAME.AUDIO' | translate }}</button>
+    </mat-list-item>
+  </mat-list>
+  <button mat-fab color="primary" class="new-material__btn" (click)="toggleSelect()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

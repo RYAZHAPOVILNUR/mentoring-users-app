@@ -1,1 +1,12 @@
-export * from './lib/users-materials-data-access/users-materials-data-access.component';
+export * from './lib/models/folders.interface';
+export * from './lib/models/materials.interface';
+export * from './lib/folders/+state/folders.actions';
+export * from './lib/folders/+state/folders.facade';
+export * from './lib/folders/+state/folders.reducer';
+export * from './lib/folders/+state/folders.selectors';
+export * as foldersEffects from './lib/folders/+state/folders.effects';
+export * from './lib/materials/+state/materials.actions';
+export * from './lib/materials/+state/materials.facade';
+export * from './lib/materials/+state/materials.reducer';
+export * from './lib/materials/+state/materials.selectors';
+export * as materialsEffects from './lib/materials/+state/materials.effects';

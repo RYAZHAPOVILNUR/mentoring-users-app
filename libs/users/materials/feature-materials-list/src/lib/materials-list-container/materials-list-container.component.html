@@ -1,0 +1,14 @@
+<div class="materials-list-header">
+  <button mat-icon-button (click)="redirectToFolders()">
+    <mat-icon>keyboard_backspace</mat-icon>
+  </button>
+  <h4 class="materials-list-header__title">{{selectedFolderTitle$ | async}}</h4>
+</div>
+<ng-container *ngrxLet="{
+    materials: materials$,
+    status: status$,
+    errors: errors$,
+  } as vm">
+  <users-materials-list-ui [vm]="vm" (deleteMaterial)="onDeleteMaterial($event)" />
+</ng-container>
+<users-materials-add-button />

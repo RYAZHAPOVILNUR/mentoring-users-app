@@ -1,0 +1,24 @@
+.material-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 20px;
+  position: relative;
+  overflow: hidden;
+
+  &__video {
+    width: 50vw;
+    height: 50vh;
+  }
+
+  &__pdf {
+    width: 50vw;
+    height: 80vh;
+  }
+
+  &__btn {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+  }
+}

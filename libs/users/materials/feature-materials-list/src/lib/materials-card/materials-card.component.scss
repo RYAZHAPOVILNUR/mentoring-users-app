@@ -1,0 +1,12 @@
+.material-card {
+  cursor: pointer;
+}
+
+.material-card__delete-btn {
+  display: none;
+  margin-left: auto;
+}
+
+.material-card:hover .material-card__delete-btn {
+  display: block;
+}

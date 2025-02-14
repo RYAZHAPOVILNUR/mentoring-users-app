@@ -89,6 +89,33 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+
+            <mat-form-field
+              class="edit-user-field"
+              [matTooltip]="vm.user?.totalStoryPoints?.toString() || 'Нет сторипоинтов'"
+              [matTooltipDisabled]="formGroup.enabled"
+            >
+              <mat-label>Количество сторипоинтов:</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Количество сторипоинтов"
+                formControlName="storypoints"
+                class="edit-user-input"
+              />
+              <mat-error *ngIf="formGroup.get('storypoints')?.hasError('pattern')"> Введите число </mat-error>
+              <mat-card-actions matSuffix class="sp-btns-container">
+                <button mat-icon-button *ngIf="!vm.editSPMode" (click)="onOpenEditSPMode()">
+                  <mat-icon>add</mat-icon>
+                </button>
+                <button mat-icon-button *ngIf="vm.editSPMode" (click)="onSubmitUserSP()">
+                  <mat-icon>check</mat-icon>
+                </button>
+                <button mat-icon-button *ngIf="vm.editSPMode" (click)="onCloseEditSPMode()">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-card-actions>
+            </mat-form-field>
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
@@ -122,5 +149,17 @@
 <ng-template #snackbar>
   <div class="edit-user-snackbar">
     <span>Пользователь успешно изменён!</span>
+  </div>
+</ng-template>
+
+<ng-template #snackbarCancelEditSP>
+  <div class="edit-user-snackbar">
+    <span>Добавление сторипоинтов отменено</span>
+  </div>
+</ng-template>
+
+<ng-template #snackbarEditSP>
+  <div class="edit-user-snackbar">
+    <span>Сторипоинты успешно добавлены!</span>
   </div>
 </ng-template>

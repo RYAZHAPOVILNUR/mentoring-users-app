@@ -1,0 +1,20 @@
+<mat-card class="material-card" (click)="onOpenMaterialContent()">
+  <mat-card-header class="material-card__header">
+    <button mat-icon-button disabled class="material-card__material-btn" *ngIf="type === 'pdf'">
+      <mat-icon>insert_drive_file</mat-icon>
+    </button>
+    <button mat-icon-button disabled class="material-card__material-btn" *ngIf="type === 'audio'">
+      <mat-icon>audiotrack</mat-icon>
+    </button>
+    <button mat-icon-button disabled class="material-card__material-btn" *ngIf="type === 'video'">
+      <mat-icon>ondemand_video</mat-icon>
+    </button>
+    <button mat-icon-button class="material-card__delete-btn" (click)="onDeleteMaterial($event)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content class="material-card__content">
+    <h4 class="material-card__title">{{material.title}}</h4>
+    <p class="material-card__date">{{formatDate(material.created_at) | async}}</p>
+  </mat-card-content>
+</mat-card>

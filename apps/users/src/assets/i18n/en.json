@@ -1,9 +1,13 @@
-
 {
   "LAYOUT": {
     "HEADER": {
       "HOME": "Home",
       "USERS": "Users"
+    },
+    "MATERIAL_NAME": {
+      "VIDEO": "Video",
+      "PDF": "PDF File",
+      "AUDIO": "Podcast"
     },
     "SIDENAV": {
       "PROFILE": "Profile",
@@ -79,4 +83,3 @@
     }
   }
 }
-
