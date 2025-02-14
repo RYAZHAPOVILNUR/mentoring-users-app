@@ -1,0 +1,9 @@
+.materials-list-header {
+  display: flex;
+  column-gap: 20px;
+  align-items: center;
+
+  &__title {
+    margin: 0px;
+  }
+}

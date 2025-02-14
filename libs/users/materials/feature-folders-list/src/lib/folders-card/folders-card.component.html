@@ -1,0 +1,14 @@
+<mat-card class="folder-card" (dblclick)="redirectToMaterialsPage($event)">
+  <mat-card-header class="folder-card__header">
+    <button mat-icon-button disabled class="folder-card__folder-btn">
+      <mat-icon>folder</mat-icon>
+    </button>
+    <button mat-icon-button class="folder-card__delete-btn" (click)="onDeleteFolder($event)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content class="folder-card__content">
+    <h4 class="folder-card__title">{{folder.title}}</h4>
+    <p class="folder-card__date">{{formatDate(folder.created_at) | async}}</p>
+  </mat-card-content>
+</mat-card>

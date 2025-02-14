@@ -1,0 +1,12 @@
+.folder-card {
+  cursor: pointer;
+
+  &:hover .folder-card__delete-btn {
+    display: block;
+  }
+
+  &__delete-btn {
+    margin-left: auto;
+    display: none;
+  }
+}

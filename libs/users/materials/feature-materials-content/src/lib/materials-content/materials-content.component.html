@@ -1,0 +1,19 @@
+<mat-card appearance="outlined" class="material-content">
+  <mat-card-header>
+    <mat-card-title>{{materialData.title}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <audio controls [attr.src]="materialData.material_link" *ngIf="materialData.type === 'audio'"
+      class="material-content__audio">
+      Ваш браузер не поддерживает аудио.
+    </audio>
+    <iframe [src]="convertedVideoUrl" *ngIf="materialData.type === 'video'" class="material-content__video">
+      Ваш браузер не поддерживает видео.
+    </iframe>
+    <pdf-viewer class="material-content__pdf" [src]="materialData.material_link" [fit-to-page]="true">
+    </pdf-viewer>
+  </mat-card-content>
+  <button mat-icon-button class="material-content__btn" (click)="close()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-card>
