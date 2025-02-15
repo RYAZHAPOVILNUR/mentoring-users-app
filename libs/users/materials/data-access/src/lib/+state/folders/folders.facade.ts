@@ -1,12 +1,22 @@
 import { Injectable, inject } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import * as FoldersActions from './folders.actions';
+import * as FoldersSelectors from './folders.selectors';
+import { Observable, of } from 'rxjs';
+import { FoldersErrors } from './folders.reducer';
 
 @Injectable({ providedIn: 'root' })
 export class FoldersFacade {
   private readonly store = inject(Store);
+  public readonly filtredFolders$ = this.store.select(FoldersSelectors.selectFiltredFolders);
 
-  initFolders() {
+  public readonly status$ = this.store.pipe(select(FoldersSelectors.selectFoldersStatus || of(null)));
+  public readonly allFolders = this.store.pipe(select(FoldersSelectors.selectAllFolders));
+  public readonly errors$: Observable<FoldersErrors | null> = this.store.pipe(
+    select(FoldersSelectors.selectFoldersError)
+  );
+
+  init() {
     this.store.dispatch(FoldersActions.initFolders());
   }
 }

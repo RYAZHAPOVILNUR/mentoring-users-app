@@ -32,21 +32,21 @@ export const loadFolder = createEffect(
     const apiService = inject(ApiService);
     const store = inject(Store);
     return actions$.pipe(
-      ofType(FoldersActions.loadfolders),
+      ofType(FoldersActions.initFolders),
       withLatestFrom(store.select(selectRouteParams)),
-      switchMap(([, params]) => {
-        if (params['id']) {
-          return apiService.get<FoldersDTO>(`/folder/${params['id']}`).pipe(
-            map((folder) => folderDTOAdapter.DTOtoEntity(folder)),
-            map((folderEntity) => FoldersActions.loadFoldersSuccess({ folders: [folderEntity] })),
-            catchError((error) => {
-              console.log('Error', error);
-              return of(FoldersActions.loadFolderFailed({ error }));
+      switchMap(() =>
+        apiService.get<FoldersDTO[]>('/folder').pipe(
+          map((folders) =>
+            FoldersActions.loadFoldersSuccess({
+              folders: folders.map((folder) => folderDTOAdapter.DTOtoEntity(folder)),
             })
-          );
-        }
-        return of(FoldersActions.updateFolderStatus({ status: 'loading' }));
-      })
+          ),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(FoldersActions.loadFolderFailure({ error }));
+          })
+        )
+      )
     );
   },
   { functional: true }

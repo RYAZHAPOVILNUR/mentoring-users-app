@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoldersFacade } from '@users/materials/data-access';
 import { Store } from '@ngrx/store';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';
+import { FoldersListVM } from './folders-list-view.model';
 
 @Component({
   selector: 'users-folders-list',
@@ -13,10 +14,10 @@ import { FoldersCardComponent } from '../folders-card/folders-card.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersListComponent {
-  private facade = inject(FoldersFacade);
-  private store = inject(Store);
+  @Input({ required: true })
+  vm!: FoldersListVM;
 
   constructor() {
-    // console.log('test>>>', this.store.subscribe());
+    // console.log('folders-list', this.vm);
   }
 }
