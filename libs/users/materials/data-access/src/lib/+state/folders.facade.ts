@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import {
   addFolder,
-  AddNewFolder,
+  AddNewFolder, deleteFolder,
   FolderInterface,
   loadFolders,
   selectAllFolders,
@@ -23,6 +23,10 @@ export class FoldersFacade {
   }
 
   addNewFolder(newFolderData: AddNewFolder) {
-    this.store.dispatch(addFolder({newFolderData}))
+    this.store.dispatch(addFolder({ newFolderData }));
+  }
+
+  deleteFolder(folderId: number) {
+    this.store.dispatch(deleteFolder({ folderId }));
   }
 }

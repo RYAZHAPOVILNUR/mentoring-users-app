@@ -14,3 +14,7 @@ export const addFolderSuccess = createAction(
   props<{ newFolderData: FolderInterface }>()
 );
 export const addFolderFailed = createAction('[Materials/Api] Add Folder Failed', props<{ error: any }>());
+
+export const deleteFolder = createAction('[Folders] Delete Folder', props<{folderId: number}>())
+export const deleteFolderSuccess = createAction('[Folders] Delete Folder Success', props<{folderId: number}>())
+export const deleteFolderFailure = createAction('[Folders] Delete Folder Failure', props<{error: any}>())

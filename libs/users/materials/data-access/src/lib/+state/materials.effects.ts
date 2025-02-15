@@ -40,4 +40,16 @@ export class FoldersEffects {
         )
       )
     ));
+
+  deleteFolder$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(FoldersActions.deleteFolder),
+      switchMap(({ folderId }) =>
+        this.apiService.delete(`/folder/${folderId}`).pipe(
+          map(() => FoldersActions.deleteFolderSuccess({ folderId })),
+          catchError(error => of(FoldersActions.deleteFolderFailure({ error })))
+        )
+      )
+    )
+  );
 }

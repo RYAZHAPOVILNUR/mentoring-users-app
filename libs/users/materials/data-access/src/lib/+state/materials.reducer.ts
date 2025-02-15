@@ -1,4 +1,4 @@
-import {FolderInterface } from '../interfaces/folder.interface';
+import { FolderInterface } from '../interfaces/folder.interface';
 import { createReducer, on } from '@ngrx/store';
 import * as FoldersAction from './materials.actions';
 
@@ -22,10 +22,14 @@ export const foldersReducer = createReducer(
     ...state,
     error
   })),
- on(FoldersAction.addFolderSuccess, (state, { newFolderData }) => {
-  return {
+  on(FoldersAction.addFolderSuccess, (state, { newFolderData }) => {
+    return {
+      ...state,
+      folders: [...state.folders, newFolderData]
+    };
+  }),
+  on(FoldersAction.deleteFolderSuccess, (state, { folderId }) => ({
     ...state,
-    folders: [...state.folders, newFolderData]
-  };
-})
+    folders: state.folders.filter(folder => folder.id !== folderId)
+  }))
 );
