@@ -1,18 +1,23 @@
 .folders-card {
-  width: 150px;
-  height: 120px;
-  background-color: #444444;
-  padding: 15px;
-  border-radius: 5px;
+  width: 200px;
+  height: 150px;
   margin: 0 20px 20px 0;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  cursor: pointer;
+}
 
-  &:hover {
-    filter: brightness(95%);
-  }
+.card-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .icons-cont {
-  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.folder-title {
+  margin: 20px 0;
+  font-size: 20px;
 }

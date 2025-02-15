@@ -1,7 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as FoldersActions from './materials.actions';
-import { HttpClient } from '@angular/common/http';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { AddNewFolder, FolderInterface } from '../interfaces/folder.interface';
 import { ApiService } from '@users/core/http';
