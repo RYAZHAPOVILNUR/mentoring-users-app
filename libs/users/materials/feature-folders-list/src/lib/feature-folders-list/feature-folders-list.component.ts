@@ -2,12 +2,12 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'users-folders-list',
+  selector: 'users-feature-folders-list',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './folders-list.component.html',
-  styleUrls: ['./folders-list.component.scss'],
+  templateUrl: './feature-folders-list.component.html',
+  styleUrls: ['./feature-folders-list.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FoldersListComponent {}
+export class FeatureFoldersListComponent {}

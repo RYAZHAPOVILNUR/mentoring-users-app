@@ -1,0 +1,6 @@
+import { DeepReadonly } from '@users/core/utils';
+import { FoldersEntity } from './folders.entity';
+
+export type FoldersVM = DeepReadonly<Pick<FoldersEntity, 'id' | 'createdAt' | 'title'>>;
+
+export { FoldersEntity };
