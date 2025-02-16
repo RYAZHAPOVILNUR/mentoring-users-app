@@ -1,12 +1,17 @@
-<button type="button" mat-flat-button class="folders-card" (mouseenter)="showDelete = true"
-        (mouseleave)="showDelete = false">
+<button
+  type="button" mat-flat-button
+  class="folders-card"
+  (mouseenter)="showDelete = true"
+  (mouseleave)="showDelete = false"
+  (dblclick)="openMaterialsList(folder.id)"
+>
   <div class="card-cont">
     <div class="icons-cont">
       <div class="folder-icon">
         <mat-icon fontIcon="folder"></mat-icon>
       </div>
       <div class="delete-icon" [ngClass]="{ 'visible': showDelete }">
-        <button mat-mini-fab (click)="onDelete(folder.id)">
+        <button mat-mini-fab (click)="deleteFolderDialog($event)">
           <mat-icon fontIcon="delete"></mat-icon>
         </button>
       </div>

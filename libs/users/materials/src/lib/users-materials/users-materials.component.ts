@@ -5,7 +5,7 @@ import { FoldersListComponent, FoldersListContainerComponent } from '@feature-fo
 @Component({
   selector: 'users-users-materials',
   standalone: true,
-  imports: [CommonModule, FoldersListComponent, FoldersListContainerComponent],
+  imports: [CommonModule,FoldersListContainerComponent],
   templateUrl: './users-materials.component.html',
   styleUrls: ['./users-materials.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

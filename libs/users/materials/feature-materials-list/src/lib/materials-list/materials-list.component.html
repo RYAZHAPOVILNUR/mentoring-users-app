@@ -1,1 +1,9 @@
-<p>materials-list works!</p>
+<div class="back-cont">
+<button mat-mini-fab class="button-back" (click)="goBack()">
+  <mat-icon fontIcon="arrow_back"></mat-icon>
+</button>
+  <span *ngIf="folder$ | async as folder" class="folder-title-back">
+    {{folder?.title}}
+  </span>
+</div>
+<users-materials-card></users-materials-card>
