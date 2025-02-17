@@ -140,31 +140,31 @@ export const loadUser = createEffect(
 
 export const addUserStoryPoints = createEffect(
   () => {
-    const actions$ = inject(Actions);  // Вводим поток экшенов
-    const apiService = inject(ApiService);  // Вводим сервис для API запросов
-    const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));  // Вводим Store и выбираем всех пользователей
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
 
     return actions$.pipe(
-      ofType(UsersActions.addUserStorypoints),  // Ожидаем экшн addStoryPoints
-      withLatestFrom(usersEntities$),  // Получаем актуальное состояние пользователей из Store
-      filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),  // Пропускаем, если пользователь с таким id не существует
+      ofType(UsersActions.addUserStorypoints),
+      withLatestFrom(usersEntities$),
+      filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
       map(([{ userData, id }, usersEntities]) => ({
         user: {
-          ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),  // Преобразуем сущность пользователя в DTO
-          totalStoryPoints: userData.totalStoryPoints,  // Обновляем totalStoryPoints на основе userData
+          ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
+          totalStoryPoints: userData.totalStoryPoints,
         },
       })),
       switchMap(({ user }) => 
-        apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user)  // Отправляем POST запрос на сервер
+        apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user)
           .pipe(
-            map((userData) => UsersActions.addUserStorypointsSuccess({ userData })),  // Отправляем экшн с успешными данными
+            map((userData) => UsersActions.addUserStorypointsSuccess({ userData })),
             catchError((error) => {
               console.error('Error', error);
-              return of(UsersActions.editUserFailed({ error }));  // В случае ошибки отправляем экшн с ошибкой
+              return of(UsersActions.editUserFailed({ error })); 
             })
           )
       )
     );
   },
-  { functional: true }  // Указываем, что это функциональный эффект
+  { functional: true }
 );

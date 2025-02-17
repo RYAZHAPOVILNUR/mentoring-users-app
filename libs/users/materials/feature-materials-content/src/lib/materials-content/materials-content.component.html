@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>{{ data.material.title }}</h2>
+
+  <ng-container *ngIf="data.material.material_link?.endsWith('.pdf')">
+    <pdf-viewer class="viewer" [src]="data.material.material_link" [render-text]="true"></pdf-viewer>
+  </ng-container>
+
+  <ng-container *ngIf="!data.material.material_link?.endsWith('.pdf') && !data.material.material_link?.endsWith('.mp3')">
+    <iframe width="100%" height="400" [src]="getSanitizedUrl(data.material.material_link)" frameborder="0" allowfullscreen></iframe>
+  </ng-container>
+
+  <ng-container *ngIf="data.material.material_link?.endsWith('.mp3')">
+    <audio controls [src]="data.material.material_link" type="audio/mp3" >
+      Ваш браузер не поддерживает воспроизведение аудио.
+    </audio>
+  </ng-container>

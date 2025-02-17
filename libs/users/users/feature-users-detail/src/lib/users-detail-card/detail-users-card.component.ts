@@ -99,10 +99,7 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
-  @Output() addStorypoints = new EventEmitter<{
-    user:CreateUserDTO;
-    onSuccessAddStorypoints: onSuccessStorypointsCbType;
-  }>();
+  @Output() addStorypoints = new EventEmitter<{ user:CreateUserDTO; onSuccessAddStorypoints: onSuccessStorypointsCbType;}>();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(

@@ -69,7 +69,6 @@ export class UsersDetailComponent {
 
   onAddStorypoints(userData: CreateUserDTO, onSuccessAddStorypoints: onSuccessStorypointsCbType) {
     this.usersFacade.addUserStorypoints(userData, this.user.id, onSuccessAddStorypoints);
-    console.log(userData)
   }
 
   onDeleteUser() {

@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
-import { UsersFacade } from '@users/users/data-access';
+import { UsersFacade, UsersFilter } from '@users/users/data-access';
 import { UsersVM } from '../../../../users-vm';
 import { UsersFilterComponent } from '../users-filter/users-filter.component';
 import { UsersListComponent } from '../users-list/users-list.component';
@@ -48,7 +48,7 @@ export class UsersListContainerComponent {
     });
   }
 
-  onFilterUser({ filter }: { filter: { name: string } }) {
+  onFilterUser({ filter }: { filter: UsersFilter }) {
     this.usersFacade.filtredUsers(filter);
   }
 }
