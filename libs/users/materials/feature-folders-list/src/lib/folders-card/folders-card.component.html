@@ -1,0 +1,13 @@
+<mat-card class="folder-card-wrapper">
+  <div class="button-container"> 
+    <button mat-menu-item color="warn" class="button" (click)="onDeleteFolder()" (click)="onOpenFolder(folder.id)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+  <mat-card-content class="mat-card-content">
+    <mat-icon class="folder-icon">folder</mat-icon>
+    <label class="title">{{ folder.title }}</label>
+    <label>{{ folder.created_at | date: 'MM/dd/yyyy'  }}</label>
+  </mat-card-content>
+</mat-card>
+
