@@ -1,13 +1,18 @@
-.content {
+.folder-content {
   position: relative;
-  width: 130px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   padding: 10px;
   border-radius: 7px;
   display: flex;
   flex-direction: column;
-  align-items: start;
-  border: 1px solid red;
+  align-items: flex-start;
+  border: 1px solid rgb(93, 89, 89);
+  &:hover {
+    mat-icon {
+      opacity: 1;
+    }
+  }
 }
 
 .folder-icon {
@@ -21,11 +26,19 @@ button {
   border: none;
 }
 
+.folder-title {
+  font-size: 14px;
+}
+
 .delete-button {
   position: absolute;
   top: 10px;
   right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   mat-icon {
     color: grey;
+    opacity: 0;
   }
 }
