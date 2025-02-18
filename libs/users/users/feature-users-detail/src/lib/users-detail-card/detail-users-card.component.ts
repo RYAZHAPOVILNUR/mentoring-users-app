@@ -149,7 +149,6 @@ export class DetailUsersCardComponent implements OnInit {
     });
 
   onPointsSubmit(): void {
-    console.log(this.pointsGroup!.value!.totalStoryPoints!)
     this.editPoints.emit({
       user: {
         ...this.vm.user,

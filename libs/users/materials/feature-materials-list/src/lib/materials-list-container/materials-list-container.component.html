@@ -1,0 +1,22 @@
+<ng-container *ngrxLet="{
+  materials: materials$,
+  folders: folders$,
+  status: status$
+} as vm">
+  <div class="content">
+    <div class="content-top">
+      <div class="content-top__title">
+        <a routerLink="/materials">
+          <mat-icon> arrow_back </mat-icon>
+        </a>
+        <span>
+          {{ getFolderName(folders$ | async) }}
+        </span>
+      </div>
+      <users-materials-list [vm]="vm"></users-materials-list>
+    </div>
+    <div class="content-bottom">
+      <users-materials-add-button></users-materials-add-button>
+    </div>
+  </div>
+</ng-container>

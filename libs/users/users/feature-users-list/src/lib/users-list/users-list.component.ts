@@ -25,6 +25,7 @@ export class UsersListComponent {
 
   onDeleteUser(user: UsersVM) {
     this.deleteUser.emit(user);
+    console.log(user)
   }
 
   onRedirectToEdit(editData: { id: number; editMode: boolean }) {

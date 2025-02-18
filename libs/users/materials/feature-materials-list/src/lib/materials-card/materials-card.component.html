@@ -1,0 +1,8 @@
+<div class="material" (click)="openMaterial(material)">
+  <div class="material-icons">
+    <mat-icon>{{ emoji[material.material_link.slice(-1)] || 'ondemand_video' }}</mat-icon>
+    <mat-icon id="delete" (click)="del(material, $event)">delete</mat-icon>
+  </div>
+  <div id="title" class="material-content">{{material.title || 'No name'}}</div>
+  <div class="material-content">{{material.created_at | date}}</div>
+</div>

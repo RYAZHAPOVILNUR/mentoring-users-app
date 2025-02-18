@@ -30,6 +30,7 @@ export class UsersDetailComponent {
 
   public readonly user$: Observable<UsersEntity | null> = this.usersFacade.openedUser$.pipe(
     tap((user) => {
+      console.log(123)
       if (!user) {
         this.usersFacade.loadUser();
       } else {

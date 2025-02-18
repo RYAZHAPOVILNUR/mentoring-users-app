@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Удаление папки</h1>
+<mat-dialog-content>
+  Вы хотите удалить папку {{ data.title }}?
+</mat-dialog-content>
+<mat-dialog-actions class="actions">
+  <button mat-button mat-dialog-close cdkFocusInitial>Нет</button>
+  <button mat-button (click)="del()">Да</button>
+</mat-dialog-actions>

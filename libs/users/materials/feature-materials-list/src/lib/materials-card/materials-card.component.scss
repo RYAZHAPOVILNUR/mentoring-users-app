@@ -1,0 +1,39 @@
+.material {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 7rem;
+  height: 7rem;
+  background-color: rgb(224, 224, 224);
+  border-radius: 1rem;
+  margin: .4rem;
+  padding: .5rem;
+  cursor: pointer;
+
+  #title {
+    max-height: 50%;
+  }
+
+  &-icons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #delete {
+    display: none;
+  }
+
+  &-content {
+    overflow: hidden;
+  }
+}
+
+.aaa .mat-dialog-container {
+  overflow: hidden;
+}
+
+.material:hover {
+  #delete {
+    display: flex;
+  }
+}
