@@ -5,11 +5,12 @@ import { FoldersListContainerStore } from './folders-list-container.store';
 import { FoldersFacade } from '../../../../data-access/src/index';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
 import { Router } from '@angular/router';
+import { LetDirective } from '@ngrx/component';
 
 @Component({
   selector: 'users-folders-list-container',
   standalone: true,
-  imports: [CommonModule, FoldersListComponent],
+  imports: [CommonModule, FoldersListComponent, LetDirective],
   templateUrl: './folders-list-container.component.html',
   styleUrls: ['./folders-list-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,

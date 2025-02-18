@@ -11,7 +11,7 @@ export const loadFoldersSuccess = createAction(
   props<{ folders: FoldersEntity[] }>()
 );
 
-export const loadFolderFailure = createAction('[Folder/Api] Load Folder Failure', props<{ error: Error }>());
+export const loadFoldersFailure = createAction('[Folder/Api] Load Folder Failure', props<{ error: Error }>());
 
 export const loadFolderFailed = createAction('[Folders/Api] Load Folder Failed', props<{ error: Error }>());
 
@@ -19,3 +19,5 @@ export const updateFolderStatus = createAction(
   '[Folders Detail] Update Folder Status',
   props<{ status: LoadingStatus }>()
 );
+
+export const loadFolder = createAction('[Folder Page] Load Folder');

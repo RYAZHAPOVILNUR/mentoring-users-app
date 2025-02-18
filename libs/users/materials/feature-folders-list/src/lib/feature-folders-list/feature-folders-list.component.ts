@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FoldersVM } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-feature-folders-list',

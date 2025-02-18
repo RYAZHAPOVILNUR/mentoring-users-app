@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { DeepReadonly } from '@users/core/utils';
 import { FoldersErrors, FoldersVM } from '@users/materials/data-access';
 import { LoadingStatus } from '@users/core/data-access';

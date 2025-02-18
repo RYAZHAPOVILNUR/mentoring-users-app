@@ -11,18 +11,18 @@ export type FoldersErrors = {
   status: number;
   [key: string]: unknown;
 };
-
+// Интерфейс состояния папок
 export interface FoldersState extends EntityState<FoldersEntity> {
   selectedId?: string | number;
   status: LoadingStatus;
   errors: FoldersErrors | null;
   foldersFilter: { title: string };
 }
-
+// Начальное состояние
 export interface FoldersPortailState {
   readonly [FOLDERS_FEATURE_KEY]: FoldersState;
 }
-
+// Создаем адаптер для управления коллекцией папок
 export const foldersAdapter: EntityAdapter<FoldersEntity> = createEntityAdapter<FoldersEntity>();
 
 export const initialFoldersState: FoldersState = foldersAdapter.getInitialState({
@@ -30,18 +30,17 @@ export const initialFoldersState: FoldersState = foldersAdapter.getInitialState(
   errors: null,
   foldersFilter: { title: '' },
 });
-
-export const reducer = createReducer(
+// Reducer (управляет состоянием)
+export const foldersReducer = createReducer(
   initialFoldersState,
   on(FoldersActions.initFolders, (state) => ({
     ...state,
     status: 'loading' as const,
   })),
-
   on(FoldersActions.loadFoldersSuccess, (state, { folders }) =>
     foldersAdapter.setAll(folders, { ...state, status: 'loaded' as const })
   ),
-  on(FoldersActions.loadFolderFailure, (state, { error }) => ({
+  on(FoldersActions.loadFoldersFailure, (state, { error }) => ({
     ...state,
     status: 'error' as const,
     error,

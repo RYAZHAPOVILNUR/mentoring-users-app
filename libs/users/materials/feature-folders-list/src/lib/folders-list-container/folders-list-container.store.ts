@@ -32,6 +32,7 @@ export class FoldersListContainerStore extends ComponentStore<FoldersListState> 
   }
 
   private patchFolder(folders: FoldersEntity[]): void {
+    console.log('Store>>>', folders);
     this.patchState({
       folders: folders.map((folder) => foldersVMAdapter.entityToVM(folder)),
     });

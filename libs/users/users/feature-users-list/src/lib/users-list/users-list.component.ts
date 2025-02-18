@@ -18,10 +18,6 @@ export class UsersListComponent {
   @Input({ required: true })
   vm!: UsersListVM;
 
-  constructor() {
-    console.log('Test>>>', this.vm);
-  }
-
   @Output() deleteUser = new EventEmitter();
   @Output() redirectToEdit = new EventEmitter();
 
