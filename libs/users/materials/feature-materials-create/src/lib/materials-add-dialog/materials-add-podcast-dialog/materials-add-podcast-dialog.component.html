@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>Добавление Подкаста</h1>
+<div mat-dialog-content>
+  <form [formGroup]="formGroup">
+    <div class="material-dialog-cont">
+      <mat-form-field>
+        <input matInput placeholder="Название" formControlName="title" />
+        <mat-error *ngIf="formGroup.get('title')?.hasError('required')">
+          Название обязательно
+        </mat-error>
+        <mat-error *ngIf="formGroup.get('title')?.hasError('whitespace')">
+          Не валидное название
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Ссылка" formControlName="materialLink" />
+        <mat-error *ngIf="formGroup.get('materialLink')?.hasError('required')">
+          Ссылка обязательна
+        </mat-error>
+        <mat-error *ngIf="formGroup.get('materialLink')?.hasError('whitespace')">
+          Не валидная ссылка
+        </mat-error>
+        <mat-error *ngIf="formGroup.get('materialLink')?.hasError('invalidAudio')">
+          Не валидная ссылка
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+
+<div mat-dialog-actions class="add-new-folder-btns-cont">
+  <button mat-button (click)="cancel()">Отмена</button>
+  <button mat-raised-button color="primary" (click)="save()" [disabled]="formGroup.invalid">
+    Сохранить
+  </button>
+</div>

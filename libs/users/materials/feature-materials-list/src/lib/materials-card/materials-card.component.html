@@ -7,10 +7,10 @@
   <div class="card-cont">
     <div class="icons-cont">
       <div class="folder-icon">
-        <mat-icon fontIcon="folder"></mat-icon>
+        <mat-icon>{{iconType}}</mat-icon>
       </div>
       <div class="delete-icon" [ngClass]="{ 'visible': showDelete }">
-        <button mat-mini-fab (click)="deleteMaterialDialog($event)">
+        <button mat-mini-fab (click)="deleteMaterialFolderDialog($event)">
           <mat-icon fontIcon="delete"></mat-icon>
         </button>
       </div>

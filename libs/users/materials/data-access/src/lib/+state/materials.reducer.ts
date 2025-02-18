@@ -54,6 +54,16 @@ export const materialsReducer = createReducer(
   on(FoldersAction.loadMaterialsFoldersFailure, (state, {error}) => ({
     ...state,
     error
+  })),
+  on(FoldersAction.addMaterialFolderSuccess, (state, { newMaterialFolderData }) => {
+    return {
+      ...state,
+      materialsFolders: [...state.materialsFolders, newMaterialFolderData]
+    };
+  }),
+  on(FoldersAction.deleteMaterialFolderSuccess, (state, {materialFolderId})=> ({
+    ...state,
+    materialsFolders: state.materialsFolders.filter(materialFolder => materialFolder.id !== materialFolderId)
   }))
 )
 

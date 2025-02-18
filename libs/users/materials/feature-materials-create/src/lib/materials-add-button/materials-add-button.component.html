@@ -1,3 +1,8 @@
-<button mat-fab (click)="addMaterialFolderDialog()">
+<button mat-fab [matMenuTriggerFor]="menu">
   <mat-icon>add</mat-icon>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="addVideoDialog()">Видео</button>
+    <button mat-menu-item (click)="addPdfDialog()">Файл PDF</button>
+    <button mat-menu-item (click)="addPodcastDialog()">Подкаст</button>
+  </mat-menu>
 </button>

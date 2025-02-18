@@ -7,6 +7,9 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { FoldersCardsDeleteDialogComponent } from '@feature-folders-list';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {
+  MaterialsCardDeleteDialogComponent
+} from '../materials-card-delete-dialog/materials-card-delete-dialog.component';
 
 @Component({
   selector: 'users-materials-card',
@@ -25,10 +28,18 @@ export class MaterialsCardComponent {
 
   showDelete = false;
 
-  deleteMaterialDialog(event: Event) {
+  get iconType(): string {
+    const link = this.material.material_link?.toLowerCase() || '';
+    if (link.includes('.pdf')) return 'description';
+    if (link.includes('.mp3')) return 'audiotrack';
+    if (link.includes('https://youtu')) return 'ondemand_video';
+    return 'folder';
+  }
+
+  deleteMaterialFolderDialog(event: Event) {
     event.stopPropagation();
-    const dialogRef: MatDialogRef<FoldersCardsDeleteDialogComponent> = this.dialog.open(
-      FoldersCardsDeleteDialogComponent, {
+    const dialogRef: MatDialogRef<MaterialsCardDeleteDialogComponent> = this.dialog.open(
+      MaterialsCardDeleteDialogComponent, {
         data: { material: this.material }
       });
 
