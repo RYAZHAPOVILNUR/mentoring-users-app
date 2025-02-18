@@ -4,6 +4,7 @@ import * as FoldersActions from './materials.actions';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { AddNewFolder, FolderInterface } from '../interfaces/folder.interface';
 import { ApiService } from '@users/core/http';
+import { MaterialInterface } from '../interfaces/material.interface';
 
 
 @Injectable()
@@ -48,6 +49,18 @@ export class FoldersEffects {
         this.apiService.delete(`/folder/${folderId}`).pipe(
           map(() => FoldersActions.deleteFolderSuccess({ folderId })),
           catchError(error => of(FoldersActions.deleteFolderFailure({ error })))
+        )
+      )
+    )
+  );
+
+  loadMaterials$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(FoldersActions.loadMaterialsFolders),
+      switchMap(() =>
+        this.apiService.get<MaterialInterface[]>('/material').pipe(
+          map(materialFolders => FoldersActions.loadMaterialsFoldersSuccess({ materialFolders })),
+          catchError(error => of(FoldersActions.loadMaterialsFoldersFailure({ error })))
         )
       )
     )

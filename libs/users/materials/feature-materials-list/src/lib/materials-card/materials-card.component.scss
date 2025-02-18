@@ -1,0 +1,38 @@
+.folders-card {
+  width: 200px;
+  height: 150px;
+  margin: 0 20px 20px 0;
+}
+
+.card-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.icons-cont {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.folder-title {
+  margin: 20px 0;
+  font-size: 20px;
+}
+
+.folder-date {
+  font-weight: 200;
+}
+
+.delete-icon {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.visible {
+  opacity: 1;
+  visibility: visible;
+}

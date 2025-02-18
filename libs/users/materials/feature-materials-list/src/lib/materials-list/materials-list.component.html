@@ -1,9 +1,23 @@
 <div class="back-cont">
-<button mat-mini-fab class="button-back" (click)="goBack()">
-  <mat-icon fontIcon="arrow_back"></mat-icon>
-</button>
+  <button mat-mini-fab class="button-back" (click)="goBack()">
+    <mat-icon fontIcon="arrow_back"></mat-icon>
+  </button>
   <span *ngIf="folder$ | async as folder" class="folder-title-back">
-    {{folder?.title}}
+    {{ folder?.title }}
   </span>
 </div>
-<users-materials-card></users-materials-card>
+<div class="materials-list" *ngIf="(material$ | async) as materials">
+  <div *ngIf="materials.length > 0; else noMaterials">
+    <div *ngFor="let material of materials">
+      <users-materials-card [material]="material"></users-materials-card>
+    </div>
+  </div>
+</div>
+
+<ng-template #noMaterials>
+  <p>Извините, материалов в данной папке не имеется</p>
+</ng-template>
+<div class="add-button">
+  <users-materials-add-button></users-materials-add-button>
+</div>
+

@@ -5,8 +5,8 @@ import {
   addFolder,
   AddNewFolder, deleteFolder,
   FolderInterface,
-  loadFolders,
-  selectAllFolders,
+  loadFolders, loadMaterialsFolders, MaterialInterface,
+  selectAllFolders, selectAllMaterials,
   selectFoldersError
 } from '@users/materials/data-access';
 
@@ -16,7 +16,7 @@ export class FoldersFacade {
   private readonly store = inject(Store);
 
   public readonly folders$: Observable<FolderInterface[]> = this.store.select(selectAllFolders);
-  public readonly errors$: Observable<any> = this.store.select(selectFoldersError);
+  public readonly materials$: Observable<MaterialInterface[]> = this.store.select(selectAllMaterials)
 
   loadFolders() {
     this.store.dispatch(loadFolders());
@@ -28,5 +28,9 @@ export class FoldersFacade {
 
   deleteFolder(folderId: number) {
     this.store.dispatch(deleteFolder({ folderId }));
+  }
+
+  loadMaterials() {
+    this.store.dispatch(loadMaterialsFolders())
   }
 }

@@ -1,0 +1,12 @@
+<button mat-flat-button class="delete-card-dialog">
+  <h2>Подтверждение</h2>
+  <p>Вы уверены, что хотите удалить папку <strong>"{{data.folder.title}}"</strong> ?</p>
+  <div class="yes-no-cont">
+    <button mat-mini-fab (click)="onDelete(data.folder.id)">
+      <mat-icon fontIcon="check" style="color: green"></mat-icon>
+    </button>
+    <button mat-mini-fab (click)="cancel()">
+      <mat-icon fontIcon="close" style="color: red"></mat-icon>
+    </button>
+  </div>
+</button>
