@@ -24,8 +24,4 @@ export class FoldersListContainerComponent {
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;
   private readonly router = inject(Router);
-
-  constructor() {
-    console.log('Folder Container>>>');
-  }
 }
