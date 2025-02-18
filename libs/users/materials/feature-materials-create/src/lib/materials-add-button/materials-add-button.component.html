@@ -1,0 +1,10 @@
+<div>
+  <button mat-fab [matMenuTriggerFor]="menu" #menuTrigger>
+    <mat-icon>add</mat-icon>
+  </button> 
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="onOpen('PDF')">PDF</button>
+    <button mat-menu-item (click)="onOpen('Музыки')">Музыка</button>
+    <button mat-menu-item (click)="onOpen('Видео')">Видео</button>
+  </mat-menu>
+</div>

@@ -1,0 +1,14 @@
+<div class="folder" (click)="openFolder(folder.id)">
+  <div class="folder-icons">
+    <mat-icon>folder</mat-icon>
+    <mat-icon id="delete" (click)="del(folder.id, folder.title || 'Без имени', $event)">delete</mat-icon>
+  </div>
+  <div id="title" class="folder-content">{{folder.title || 'No name'}}</div>
+  <div class="folder-content">{{folder.created_at | date}}</div>
+</div>
+
+<ng-template #deletedFolder>
+  <div class="edit-user-snackbar">
+    <span>Папка {{ folder.title }} успешно удалена!</span>
+  </div>
+</ng-template>
