@@ -1,7 +1,7 @@
-<button type="button" (click)="onOpenFolder(folder)" class="folder-content">
+<mat-card (click)="onOpenFolder(folder)" class="folder-content">
   <span class="folder-icon"><mat-icon>folder</mat-icon></span>
   <button class="delete-button" type="button"><mat-icon>delete</mat-icon></button>
   <div class="folder-title">
     <h4 class="folder-title">{{ folder.title }}</h4>
   </div>
-</button>
+</mat-card>
