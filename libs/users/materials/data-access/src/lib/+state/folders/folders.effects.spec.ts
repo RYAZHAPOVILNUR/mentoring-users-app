@@ -5,7 +5,7 @@ import { provideMockStore } from '@ngrx/store/testing';
 import { hot } from 'jasmine-marbles';
 import { Observable } from 'rxjs';
 
-import * as FoldersActions from './folders.actions';
+import { FoldersActions } from './folders.actions';
 import { FoldersEffects } from './folders.effects';
 
 describe('FoldersEffects', () => {
@@ -27,7 +27,7 @@ describe('FoldersEffects', () => {
 
       const expected = hot('-a-|', { a: FoldersActions.loadFoldersSuccess({ folders: [] }) });
 
-      expect(effects.init$).toBeObservable(expected);
+      expect(effects.initFolders$).toBeObservable(expected);
     });
   });
 });

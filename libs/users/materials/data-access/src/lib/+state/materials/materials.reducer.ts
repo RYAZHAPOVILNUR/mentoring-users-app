@@ -1,15 +1,16 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
-
-import * as MaterialsActions from './materials.actions';
-import { MaterialsEntity } from './materials.models';
+import { MaterialsActions } from './materials.actions';
+import { MaterialsErrors } from './materials.models';
+import { LoadingStatus } from '@users/core/data-access';
+import { MaterialsEntity } from '@users/core/data-access';
 
 export const MATERIALS_FEATURE_KEY = 'materials';
 
 export interface MaterialsState extends EntityState<MaterialsEntity> {
   selectedId?: string | number; // which Materials record has been selected
-  loaded: boolean; // has the Materials list been loaded
-  error?: string | null; // last known error (if any)
+  status: LoadingStatus;
+  error: MaterialsErrors | null;
 }
 
 export interface MaterialsPartialState {
@@ -19,17 +20,70 @@ export interface MaterialsPartialState {
 export const materialsAdapter: EntityAdapter<MaterialsEntity> = createEntityAdapter<MaterialsEntity>();
 
 export const initialMaterialsState: MaterialsState = materialsAdapter.getInitialState({
-  // set initial required properties
-  loaded: false,
+  status: 'init',
+  error: null,
 });
 
 const reducer = createReducer(
   initialMaterialsState,
-  on(MaterialsActions.initMaterials, (state) => ({ ...state, loaded: false, error: null })),
-  on(MaterialsActions.loadMaterialsSuccess, (state, { materials }) =>
-    materialsAdapter.setAll(materials, { ...state, loaded: true })
+
+  on(MaterialsActions.initMaterials, (state) => {
+    return {
+      ...state,
+      status: 'loading' as const,
+    };
+  }),
+  on(MaterialsActions.loadMaterialsSuccess, (state, { materials }) => {
+    return materialsAdapter.setAll(materials, {
+      ...state,
+      status: 'loaded' as const,
+    });
+  }),
+  on(MaterialsActions.loadMaterialsFailure, (state, { error }) => {
+    return {
+      ...state,
+      status: 'error' as const,
+      error,
+    };
+  }),
+  on(MaterialsActions.addMaterialSuccess, (state, { materialData }) => {
+    console.log(materialData);
+    return materialsAdapter.addOne({ ...materialData }, { ...state });
+  }),
+  on(MaterialsActions.addMaterialFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
+  on(MaterialsActions.deleteMaterialSuccess, (state, { id }) => {
+    return materialsAdapter.removeOne(id, {
+      ...state,
+      status: 'loaded' as const,
+    });
+  }),
+  on(MaterialsActions.deleteMaterialFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
+  on(MaterialsActions.editMaterialSuccess, (state, { materialData }) =>
+    materialsAdapter.updateOne(
+      {
+        id: materialData.id,
+        changes: materialData,
+      },
+      state
+    )
   ),
-  on(MaterialsActions.loadMaterialsFailure, (state, { error }) => ({ ...state, error }))
+  on(MaterialsActions.editMaterialFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
+  on(MaterialsActions.getMaterialById, (state, { material }) => ({
+    ...state,
+    selectedId: material.id,
+  }))
 );
 
 export function materialsReducer(state: MaterialsState | undefined, action: Action) {

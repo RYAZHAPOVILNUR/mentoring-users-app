@@ -1,12 +1,35 @@
-<mat-card class="user-card-wrapper">
-  <mat-card-content class="mat-card-content">
-    <!-- <img [src]="user.photo ? user.photo.url : 'assets/img/1.png'" alt="" class="user-photo" /> -->
-    <label *ngIf="folder.title">{{ folder.title }}</label>
+<mat-card
+  class="folder-card-wrapper"
+  matTooltip="{{ folder.title }}"
+  (dblclick)="onInMaterial({ folderId: folder.id, folderTitle: folder.title })"
+>
+  <mat-card-content class="folder-icon">
+    <mat-icon>folder</mat-icon>
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="folder-delete-button">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button
+        type="button"
+        mat-menu-item
+        (click)="
+          onDeleteFolder({
+            folderId: folder.id,
+            folderTitle: folder.title
+          })
+        "
+      >
+        Delete
+      </button>
+      <button type="button" mat-menu-item (click)="onEditFolder(folder)">Rename</button>
+    </mat-menu>
   </mat-card-content>
 
-  <!-- <mat-card-actions class="user-card-buttons">
-    <button mat-icon-button (click)="onOpenMenu($event)" [matMenuTriggerFor]="menu">
-      <mat-icon>more_horiz</mat-icon>
-    </button>
-  </mat-card-actions> -->
+  <mat-card-content class="mat-card-content">
+    <label *ngIf="folder.title">{{ folder.title | truncate }}</label>
+  </mat-card-content>
+
+  <mat-card-content class="mat-card-content">
+    <label *ngIf="folder.createdAt">{{ folder.createdAt | date }}</label>
+  </mat-card-content>
 </mat-card>

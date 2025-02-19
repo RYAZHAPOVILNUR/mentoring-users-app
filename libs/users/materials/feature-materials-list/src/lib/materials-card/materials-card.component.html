@@ -1,1 +1,31 @@
-<p>materials-card works!</p>
+<mat-card class="material-card-wrapper" matTooltip="{{ material.title }}" (dblclick)="onOpenMaterial(material)">
+  <mat-card-content class="material-icon">
+    <mat-icon>{{ material.materialFormat | formatIcon }}</mat-icon>
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="material-delete-button">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button
+        type="button"
+        mat-menu-item
+        (click)="
+          onDeleteMaterial({
+            materialId: material.id,
+            materialTitle: material.title
+          })
+        "
+      >
+        Delete
+      </button>
+      <button type="button" mat-menu-item (click)="onEditMaterial(material)">Rename</button>
+    </mat-menu>
+  </mat-card-content>
+
+  <mat-card-content class="mat-card-content">
+    <label *ngIf="material.title">{{ material.title | truncate }}</label>
+  </mat-card-content>
+
+  <mat-card-content class="mat-card-content">
+    <label *ngIf="material.createdAt">{{ material.createdAt | date }}</label>
+  </mat-card-content>
+</mat-card>

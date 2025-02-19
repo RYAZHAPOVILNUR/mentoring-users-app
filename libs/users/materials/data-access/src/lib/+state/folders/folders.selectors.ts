@@ -14,8 +14,10 @@ export const selectAllFolders = createSelector(selectFoldersState, (state: Folde
 
 export const selectFoldersEntities = createSelector(selectFoldersState, (state: FoldersState) => selectEntities(state));
 
-export const selectFoldSelectedId = createSelector(selectFoldersState, (state: FoldersState) => state.selectedId);
+export const selectFolderSelectedId = createSelector(selectFoldersState, (state: FoldersState) => state.selectedId);
 
-export const selectFoldEntity = createSelector(selectFoldersEntities, selectFoldSelectedId, (entities, selectedId) =>
-  selectedId ? entities[selectedId] : undefined
+export const selectFolderEntity = createSelector(
+  selectFoldersEntities,
+  selectFolderSelectedId,
+  (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
 );

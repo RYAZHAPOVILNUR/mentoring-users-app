@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, inject, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -25,25 +25,24 @@ import { MatInputModule } from '@angular/material/input';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateFoldersDialogComponent {
-  public formGroup: FormGroup;
-  private formBuilder = inject(FormBuilder);
-  public dialogRef = inject(MatDialogRef<CreateFoldersDialogComponent>);
+  private readonly formBuilder = inject(FormBuilder);
+  private readonly dialogRef = inject(MatDialogRef<CreateFoldersDialogComponent>);
+  private readonly data: { dialogText: string } = inject(MAT_DIALOG_DATA);
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { name: string }) {
-    this.formGroup = this.formBuilder.group({
-      name: ['', Validators.required],
-    });
-  }
+  public readonly dialogText: string = this.data.dialogText;
 
-  cancel(): void {
+  public readonly formGroup: FormGroup = this.formBuilder.group({
+    title: ['', Validators.required],
+    id: [new Date().toString(), Validators.required],
+  });
+
+  public cancel(): void {
     this.dialogRef.close();
   }
 
-  save(): void {
+  public save(): void {
     if (this.formGroup.valid) {
-      const formData = {
-        name: this.formGroup.value.name,
-      };
+      const formData = this.formGroup.value;
       this.dialogRef.close(formData);
     }
   }

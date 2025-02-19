@@ -4,8 +4,8 @@ import { CreateFoldersButtonComponent } from '@libs/users/materials/feature-fold
 import { FoldersListComponent } from '../folders-list/folders-list.component';
 import { Router } from '@angular/router';
 import { FoldersListContainerStore } from './folders-list-container.store';
-import { FoldersFacade } from '@libs/users/materials/state';
 import { LetDirective } from '@ngrx/component';
+import { FoldersEntity } from '@users/core/data-access';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -14,28 +14,29 @@ import { LetDirective } from '@ngrx/component';
   imports: [CommonModule, CreateFoldersButtonComponent, FoldersListComponent, LetDirective],
   templateUrl: './folders-list-container.component.html',
   styleUrls: ['./folders-list-container.component.scss'],
+  providers: [FoldersListContainerStore],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersListContainerComponent {
   private readonly componentStore = inject(FoldersListContainerStore);
-  public foldersFacade = inject(FoldersFacade);
+  private readonly router = inject(Router);
+
   public readonly folders$ = this.componentStore.folders$;
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;
-  private readonly router = inject(Router);
 
-  // onDeleteUser(user: UsersVM) {
-  //   this.componentStore.deleteUser(user);
-  // }
+  public onDeleteFolder(dataForDeleteFolder: { folderId: number; folderTitle: string }) {
+    const { folderId, folderTitle } = dataForDeleteFolder;
+    this.componentStore.deleteFolder(folderId, folderTitle);
+  }
 
-  // onFilterUsers(name: string) {
-  //   this.componentStore.filterUsers(name);
-  // }
+  public onEditFolder(folder: FoldersEntity) {
+    this.componentStore.editFolder(folder);
+  }
 
-  // onRedirectToEdit({ id, editMode }: { id: number; editMode: boolean }) {
-  //   this.router.navigate(['/admin/users', id], {
-  //     queryParams: { edit: editMode },
-  //   });
-  // }
+  public onInMaterial(folderSomeData: { folderId: number; folderTitle: string }) {
+    const { folderId, folderTitle } = folderSomeData;
+    this.router.navigate(['materials', folderId], { queryParams: { folderTitle } });
+  }
 }

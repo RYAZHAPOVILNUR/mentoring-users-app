@@ -6,6 +6,9 @@ import { FoldersEntity } from '@users/core/data-access';
 import { FoldersFacade } from '@libs/users/materials/state';
 import { foldersVMAdapter } from '../../../../folders-vm.adapter';
 import { FoldersVM } from '../../../../folders-vm';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { CoreUiConfirmDialogComponent } from '@users/core/ui';
+import { EditFoldersDialogComponent } from '@users/materials/feature-folders-edit';
 
 type FoldersListState = DeepReadonly<{
   folders: FoldersVM[];
@@ -15,11 +18,11 @@ const initialState: FoldersListState = {
   folders: [],
 };
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class FoldersListContainerStore extends ComponentStore<FoldersListState> {
+  private readonly dialog = inject(MatDialog);
   private readonly foldersFacade = inject(FoldersFacade);
+
   public readonly folders$ = this.select(({ folders }) => folders);
   public readonly status$ = this.select(this.foldersFacade.status$, (status) => status);
   public errors$ = this.select(this.foldersFacade.errors$, (error) => error);
@@ -42,20 +45,32 @@ export class FoldersListContainerStore extends ComponentStore<FoldersListState> 
     });
   }
 
-  // public deleteUser(user: UsersVM): void {
-  //   const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
-  //     data: { dialogText: `Вы уверены, что хотите удалить ${user.name}` },
-  //   });
-  //   this.effect(() =>
-  //     dialogRef.afterClosed().pipe(
-  //       tap((result: boolean) => {
-  //         if (result) this.usersFacade.deleteUser(user.id);
-  //       })
-  //     )
-  //   );
-  // }
+  public deleteFolder(folderId: number, folderTitle: string): void {
+    const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
+      data: { dialogText: `Вы уверены, что хотите удалить "${folderTitle}"?` },
+    });
+    this.effect(() =>
+      dialogRef.afterClosed().pipe(
+        tap((result: boolean) => {
+          if (result) this.foldersFacade.deleteFolder(folderId);
+        })
+      )
+    );
+  }
 
-  // public filterUsers(name: string) {
-  //   this.usersFacade.filterUsers(name);
-  // }
+  public editFolder(folder: FoldersEntity): void {
+    const dialogRef: MatDialogRef<EditFoldersDialogComponent> = this.dialog.open(EditFoldersDialogComponent, {
+      data: {
+        dialogText: `Переименовать`,
+        folderData: folder,
+      },
+    });
+    this.effect(() =>
+      dialogRef.afterClosed().pipe(
+        tap((formData: FoldersEntity) => {
+          if (formData) this.foldersFacade.editFolder(formData);
+        })
+      )
+    );
+  }
 }

@@ -1,23 +1,22 @@
 import { Action } from '@ngrx/store';
-
-import * as FoldersActions from './folders.actions';
-import { FoldersEntity } from './folders.models';
+import { FoldersActions } from './folders.actions';
+import { FoldersEntity } from '@users/core/data-access';
 import { FoldersState, initialFoldersState, foldersReducer } from './folders.reducer';
 
 describe('Folders Reducer', () => {
-  const createFoldersEntity = (id: string, name = ''): FoldersEntity => ({
+  const createFoldersEntity = (id: number): FoldersEntity => ({
     id,
-    name: name || `name-${id}`,
+    title: '',
+    createdAt: 'df',
   });
 
   describe('valid Folders actions', () => {
     it('loadFoldersSuccess should return the list of known Folders', () => {
-      const folders = [createFoldersEntity('PRODUCT-AAA'), createFoldersEntity('PRODUCT-zzz')];
+      const folders = [createFoldersEntity(3), createFoldersEntity(3)];
       const action = FoldersActions.loadFoldersSuccess({ folders });
 
       const result: FoldersState = foldersReducer(initialFoldersState, action);
 
-      expect(result.loaded).toBe(true);
       expect(result.ids.length).toBe(2);
     });
   });

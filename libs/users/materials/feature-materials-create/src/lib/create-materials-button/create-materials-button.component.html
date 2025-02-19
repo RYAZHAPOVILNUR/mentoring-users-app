@@ -1,1 +1,8 @@
-<p>create-materials-button works!</p>
+<button mat-fab [matMenuTriggerFor]="menu" color="primary" class="add-folder-fab-button">
+  <mat-icon>add</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button type="button" mat-menu-item (click)="openAddMaterialDialog('Audio')">Audio</button>
+  <button type="button" mat-menu-item (click)="openAddMaterialDialog('Video')">Video</button>
+  <button type="button" mat-menu-item (click)="openAddMaterialDialog('PDF')">PDF</button>
+</mat-menu>

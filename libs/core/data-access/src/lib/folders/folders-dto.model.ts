@@ -6,7 +6,7 @@ export type FoldersDTO = DeepReadonly<{
   title: string;
 }>;
 
-export type CreateFoldersDTO = DeepReadonly<{
+export type CreateFolderDTO = DeepReadonly<{
   id: number;
   created_at: string;
   title: string;

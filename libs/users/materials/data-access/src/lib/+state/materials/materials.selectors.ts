@@ -6,7 +6,7 @@ export const selectMaterialsState = createFeatureSelector<MaterialsState>(MATERI
 
 const { selectAll, selectEntities } = materialsAdapter.getSelectors();
 
-export const selectMaterialsLoaded = createSelector(selectMaterialsState, (state: MaterialsState) => state.loaded);
+export const selectMaterialsStatus = createSelector(selectMaterialsState, (state: MaterialsState) => state.status);
 
 export const selectMaterialsError = createSelector(selectMaterialsState, (state: MaterialsState) => state.error);
 
@@ -16,8 +16,13 @@ export const selectMaterialsEntities = createSelector(selectMaterialsState, (sta
   selectEntities(state)
 );
 
-export const selectMatSelectedId = createSelector(selectMaterialsState, (state: MaterialsState) => state.selectedId);
+export const selectMaterialSelectedId = createSelector(
+  selectMaterialsState,
+  (state: MaterialsState) => state.selectedId
+);
 
-export const selectMatEntity = createSelector(selectMaterialsEntities, selectMatSelectedId, (entities, selectedId) =>
-  selectedId ? entities[selectedId] : undefined
+export const selectMaterialEntity = createSelector(
+  selectMaterialsEntities,
+  selectMaterialSelectedId,
+  (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
 );

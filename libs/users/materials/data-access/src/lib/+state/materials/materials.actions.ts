@@ -1,11 +1,27 @@
-import { createAction, props } from '@ngrx/store';
-import { MaterialsEntity } from './materials.models';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import { MaterialsEntity } from '@users/core/data-access';
+import { MaterialsErrors } from './materials.models';
 
-export const initMaterials = createAction('[Materials Page] Init');
+export const MaterialsActions = createActionGroup({
+  source: 'Materials',
+  events: {
+    initMaterials: emptyProps(),
 
-export const loadMaterialsSuccess = createAction(
-  '[Materials/API] Load Materials Success',
-  props<{ materials: MaterialsEntity[] }>()
-);
+    loadMaterialsSuccess: props<{ materials: MaterialsEntity[] }>(),
+    loadMaterialsFailure: props<{ error: MaterialsErrors }>(),
 
-export const loadMaterialsFailure = createAction('[Materials/API] Load Materials Failure', props<{ error: any }>());
+    addMaterial: props<{ materialData: MaterialsEntity }>(),
+    addMaterialSuccess: props<{ materialData: MaterialsEntity }>(),
+    addMaterialFailed: props<{ error: MaterialsErrors }>(),
+
+    deleteMaterial: props<{ id: number }>(),
+    deleteMaterialSuccess: props<{ id: number }>(),
+    deleteMaterialFailed: props<{ error: MaterialsErrors }>(),
+
+    editMaterial: props<{ materialData: MaterialsEntity }>(),
+    editMaterialSuccess: props<{ materialData: MaterialsEntity }>(),
+    editMaterialFailed: props<{ error: MaterialsErrors | null }>(),
+
+    getMaterialById: props<{ material: MaterialsEntity }>(),
+  },
+});

@@ -4,13 +4,29 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { FoldersVM } from 'libs/users/materials/folders-vm';
+import { FoldersVM } from '@users/materials/folders-vm';
+import { MatMenuModule } from '@angular/material/menu';
+import { TruncatePipe } from '@users/core/utils';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'folders-card',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule, RouterModule, MatIconModule],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatButtonModule,
+    RouterModule,
+    MatIconModule,
+    MatMenuModule,
+    TruncatePipe,
+    MatTooltipModule,
+    MatFormFieldModule,
+    MatSelectModule,
+  ],
   templateUrl: './folders-card.component.html',
   styleUrls: ['./folders-card.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
@@ -18,27 +34,21 @@ import { FoldersVM } from 'libs/users/materials/folders-vm';
 })
 export class FoldersCardComponent {
   @Input({ required: true })
-  folder!: FoldersVM;
+  public folder!: FoldersVM;
 
-  @Output() deleteUser = new EventEmitter();
-  @Output() redirectToEdit = new EventEmitter();
+  @Output() deleteFolder = new EventEmitter<{ folderId: number; folderTitle: string }>();
+  @Output() editFolder = new EventEmitter();
+  @Output() inMaterial = new EventEmitter<{ folderId: number; folderTitle: string }>();
 
-  // @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
+  public onDeleteFolder(dataForDeleteFolder: { folderId: number; folderTitle: string }) {
+    this.deleteFolder.emit(dataForDeleteFolder);
+  }
 
-  // onOpenMenu(event: Event) {
-  //   event.stopPropagation();
-  //   this.trigger.openMenu();
-  // }
+  public onEditFolder(folder: FoldersVM) {
+    this.editFolder.emit(folder);
+  }
 
-  // onDeleteUser(event: Event) {
-  //   this.deleteUser.emit();
-  // }
-
-  // redirectToEditPage(editMode: boolean, event: Event) {
-  //   const emitData = {
-  //     id: this.user.id,
-  //     editMode,
-  //   };
-  //   this.redirectToEdit.emit(emitData);
-  // }
+  public onInMaterial(dataForInMaterial: { folderId: number; folderTitle: string }) {
+    this.inMaterial.emit(dataForInMaterial);
+  }
 }

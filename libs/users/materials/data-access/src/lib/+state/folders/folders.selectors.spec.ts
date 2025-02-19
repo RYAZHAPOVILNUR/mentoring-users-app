@@ -1,29 +1,27 @@
-import { FoldersEntity } from './folders.models';
+import { FoldersEntity } from '@users/core/data-access';
 import { foldersAdapter, FoldersPartialState, initialFoldersState } from './folders.reducer';
 import * as FoldersSelectors from './folders.selectors';
 
 describe('Folders Selectors', () => {
   const ERROR_MSG = 'No Error Available';
   const getFoldersId = (it: FoldersEntity) => it.id;
-  const createFoldersEntity = (id: string, name = '') =>
+  const createFoldersEntity = (id: number) =>
     ({
       id,
-      name: name || `name-${id}`,
+      title: '',
+      createdAt: 'df',
     } as FoldersEntity);
 
   let state: FoldersPartialState;
 
   beforeEach(() => {
     state = {
-      folders: foldersAdapter.setAll(
-        [createFoldersEntity('PRODUCT-AAA'), createFoldersEntity('PRODUCT-BBB'), createFoldersEntity('PRODUCT-CCC')],
-        {
-          ...initialFoldersState,
-          selectedId: 'PRODUCT-BBB',
-          error: ERROR_MSG,
-          loaded: true,
-        }
-      ),
+      folders: foldersAdapter.setAll([createFoldersEntity(3), createFoldersEntity(4), createFoldersEntity(6)], {
+        ...initialFoldersState,
+        title: '',
+        createdAt: 'df',
+        loaded: true,
+      }),
     };
   });
 
@@ -37,14 +35,14 @@ describe('Folders Selectors', () => {
     });
 
     it('selectEntity() should return the selected Entity', () => {
-      const result = FoldersSelectors.selectEntity(state) as FoldersEntity;
+      const result = FoldersSelectors.selectFoldEntity(state) as FoldersEntity;
       const selId = getFoldersId(result);
 
       expect(selId).toBe('PRODUCT-BBB');
     });
 
     it('selectFoldersLoaded() should return the current "loaded" status', () => {
-      const result = FoldersSelectors.selectFoldersLoaded(state);
+      const result = FoldersSelectors.selectFoldersStatus(state);
 
       expect(result).toBe(true);
     });

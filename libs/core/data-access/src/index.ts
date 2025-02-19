@@ -6,3 +6,7 @@ export * from './lib/users/users.entity';
 export * from './lib/folders/folders-dto.model';
 export * from './lib/folders/folders-dto.adapter';
 export * from './lib/folders/folders.entity';
+export * from './lib/materials/materials-dto.model';
+export * from './lib/materials/materials-dto.adapter';
+export * from './lib/materials/materials.entity';
+export * from './lib/fileFormat.type';

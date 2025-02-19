@@ -1,1 +1,23 @@
-<p>materials-list-container works!</p>
+<button mat-icon-button aria-label="Folders" color="accent" routerLink="../../materials">
+  <mat-icon>arrow_back</mat-icon>
+</button>
+<h1 class="materials-title">{{ folderTitle$ | async }}</h1>
+
+<ng-container
+  *ngrxLet="{
+    materials: materials$,
+    folderId: folderId$,
+    status: status$,
+    errors: errors$,
+  } as vm"
+>
+  <materials-list
+    [vm]="vm"
+    (openMaterial)="onOpenMaterial($event)"
+    (editMaterial)="onEditMaterial($event)"
+    (deleteMaterial)="onDeleteMaterial($event)"
+  />
+</ng-container>
+<div class="materials-create-button__container">
+  <create-materials-button></create-materials-button>
+</div>

@@ -4,12 +4,15 @@
 
 <ng-template #loadingResult>
   <ng-container *ngIf="vm.status === 'loaded'; else error">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 mb-3" *ngFor="let folder of vm.folders">
-          <folders-card [folder]="folder" />
-        </div>
-      </div>
+    <div class="folders-container">
+      <ng-container *ngFor="let folder of vm.folders">
+        <folders-card
+          [folder]="folder"
+          (inMaterial)="onInMaterial($event)"
+          (editFolder)="onEditFolder($event)"
+          (deleteFolder)="onDeleteFolder($event)"
+        />
+      </ng-container>
     </div>
   </ng-container>
 </ng-template>

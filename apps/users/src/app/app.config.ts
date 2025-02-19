@@ -20,17 +20,29 @@ import { articlesEffects, articlesFeature, commentsEffects, commentsFeature } fr
 import { tasksEffects, tasksFeature } from '@users/users/task/data-access';
 import { CLIENT_ID, githubApiEffects, githubApiFeature } from '@users/core/github-api/data-access';
 import { backlogFeature, backlogEffects } from '@users/users/backlog/data-access';
-import { FOLDERS_FEATURE_KEY, foldersReducer } from '@libs/users/materials/state';
-
+import {
+  FOLDERS_FEATURE_KEY,
+  foldersReducer,
+  MATERIALS_FEATURE_KEY,
+  MaterialsEffects,
+  materialsReducer,
+} from '@libs/users/materials/state';
+import { FoldersEffects } from '@libs/users/materials/state';
+import { MatDialogModule } from '@angular/material/dialog';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    importProvidersFrom(MatDialogModule),
+    importProvidersFrom(PdfViewerModule),
     provideEffects(
       userEffects,
       authEffects,
+      FoldersEffects,
+      MaterialsEffects,
       articlesEffects,
       tasksEffects,
       commentsEffects,
@@ -42,6 +54,7 @@ export const appConfig: ApplicationConfig = {
       router: routerReducer,
       [USERS_FEATURE_KEY]: usersReducer,
       [FOLDERS_FEATURE_KEY]: foldersReducer,
+      [MATERIALS_FEATURE_KEY]: materialsReducer,
       [settingsFeature.name]: settingsFeature.reducer,
       [authFeature.name]: authFeature.reducer,
       [articlesFeature.name]: articlesFeature.reducer,

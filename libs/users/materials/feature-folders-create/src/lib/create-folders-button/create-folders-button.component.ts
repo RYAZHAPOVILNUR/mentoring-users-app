@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FoldersFacade } from '@libs/users/materials/state';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -17,28 +18,20 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateFoldersButtonComponent {
-  private name!: string;
-  public dialog = inject(MatDialog);
-  // private readonly foldersFacade = inject(FoldersFacade);
+  private readonly dialog = inject(MatDialog);
+  private readonly foldersFacade = inject(FoldersFacade);
   private readonly destroyRef = inject(DestroyRef);
 
-  openAddFolderDialog(): void {
+  public openAddFolderDialog(): void {
     const dialogRef: MatDialogRef<CreateFoldersDialogComponent> = this.dialog.open(CreateFoldersDialogComponent, {
-      data: { name: null },
+      data: { dialogText: `Добавление папки` },
     });
     dialogRef
       .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((result) => {
-        if (result) {
-          // const newFolderData = {
-          //   name: result.name,
-          //   email: result.email,
-          //   purchaseDate: new Date().toString(),
-          //   educationStatus: 'trainee',
-          //   totalStoryPoints: 0,
-          // };
-          // this.foldersFacade.addFolder(newFolderData);
+      .subscribe((formData) => {
+        if (formData) {
+          this.foldersFacade.addFolder(formData);
         }
       });
   }

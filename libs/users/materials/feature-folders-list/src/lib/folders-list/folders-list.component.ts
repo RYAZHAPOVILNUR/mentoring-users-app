@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, Output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoldersListVM } from './folders-list-view-model';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { FoldersVM } from '@users/materials/folders-vm';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -16,16 +17,21 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 })
 export class FoldersListComponent {
   @Input({ required: true })
-  vm!: FoldersListVM;
+  public vm!: FoldersListVM;
 
-  // @Output() deleteUser = new EventEmitter();
-  // @Output() redirectToEdit = new EventEmitter();
+  @Output() deleteFolder = new EventEmitter();
+  @Output() editFolder = new EventEmitter();
+  @Output() inMaterial = new EventEmitter();
 
-  // onDeleteUser(user: UsersVM) {
-  //   this.deleteUser.emit(user);
-  // }
+  public onDeleteFolder(dataForDeleteFolder: { folderId: number; folderTitle: string }) {
+    this.deleteFolder.emit(dataForDeleteFolder);
+  }
 
-  // onRedirectToEdit(editData: { id: number; editMode: boolean }) {
-  //   this.redirectToEdit.emit(editData);
-  // }
+  public onEditFolder(folder: FoldersVM) {
+    this.editFolder.emit(folder);
+  }
+
+  public onInMaterial(folderSomeData: { folderId: number; folderTitle: string }) {
+    this.inMaterial.emit(folderSomeData);
+  }
 }

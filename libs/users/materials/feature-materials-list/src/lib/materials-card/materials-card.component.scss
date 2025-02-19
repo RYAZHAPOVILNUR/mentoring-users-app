@@ -1,0 +1,24 @@
+.material-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 150px;
+  min-height: 100px;
+  position: relative;
+  cursor: pointer;
+  & * {
+    cursor: pointer;
+  }
+  &:hover {
+    scale: 1.05;
+  }
+  &:active {
+    filter: brightness(0.9);
+  }
+}
+
+.material-delete-button {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+}

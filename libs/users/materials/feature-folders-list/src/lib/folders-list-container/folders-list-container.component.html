@@ -5,7 +5,13 @@
     errors: errors$,
   } as vm"
 >
-  <pre>{{ vm | json }}</pre>
-  <folders-list [vm]="vm" />
+  <folders-list
+    [vm]="vm"
+    (inMaterial)="onInMaterial($event)"
+    (editFolder)="onEditFolder($event)"
+    (deleteFolder)="onDeleteFolder($event)"
+  />
 </ng-container>
-<create-folders-button></create-folders-button>
+<div class="folders-button__container">
+  <create-folders-button></create-folders-button>
+</div>
