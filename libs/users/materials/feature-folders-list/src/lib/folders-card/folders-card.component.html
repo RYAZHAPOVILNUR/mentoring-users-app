@@ -1,7 +1,7 @@
 <mat-card
   class="folder-card-wrapper"
   matTooltip="{{ folder.title }}"
-  (dblclick)="onInMaterial({ folderId: folder.id, folderTitle: folder.title })"
+  (dblclick)="onOpenFolder({ folderId: folder.id, folderTitle: folder.title })"
 >
   <mat-card-content class="folder-icon">
     <mat-icon>folder</mat-icon>

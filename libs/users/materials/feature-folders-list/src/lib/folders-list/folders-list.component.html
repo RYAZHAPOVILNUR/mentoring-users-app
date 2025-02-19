@@ -8,7 +8,7 @@
       <ng-container *ngFor="let folder of vm.folders">
         <folders-card
           [folder]="folder"
-          (inMaterial)="onInMaterial($event)"
+          (openFolder)="onOpenFolder($event)"
           (editFolder)="onEditFolder($event)"
           (deleteFolder)="onDeleteFolder($event)"
         />

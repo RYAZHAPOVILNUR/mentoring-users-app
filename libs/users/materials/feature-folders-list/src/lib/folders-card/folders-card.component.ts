@@ -38,7 +38,7 @@ export class FoldersCardComponent {
 
   @Output() deleteFolder = new EventEmitter<{ folderId: number; folderTitle: string }>();
   @Output() editFolder = new EventEmitter();
-  @Output() inMaterial = new EventEmitter<{ folderId: number; folderTitle: string }>();
+  @Output() openFolder = new EventEmitter<{ folderId: number; folderTitle: string }>();
 
   public onDeleteFolder(dataForDeleteFolder: { folderId: number; folderTitle: string }) {
     this.deleteFolder.emit(dataForDeleteFolder);
@@ -48,7 +48,7 @@ export class FoldersCardComponent {
     this.editFolder.emit(folder);
   }
 
-  public onInMaterial(dataForInMaterial: { folderId: number; folderTitle: string }) {
-    this.inMaterial.emit(dataForInMaterial);
+  public onOpenFolder(dataForInMaterial: { folderId: number; folderTitle: string }) {
+    this.openFolder.emit(dataForInMaterial);
   }
 }

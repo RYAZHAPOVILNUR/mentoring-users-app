@@ -35,7 +35,7 @@ export class FoldersListContainerComponent {
     this.componentStore.editFolder(folder);
   }
 
-  public onInMaterial(folderSomeData: { folderId: number; folderTitle: string }) {
+  public onOpenFolder(folderSomeData: { folderId: number; folderTitle: string }) {
     const { folderId, folderTitle } = folderSomeData;
     this.router.navigate(['materials', folderId], { queryParams: { folderTitle } });
   }
