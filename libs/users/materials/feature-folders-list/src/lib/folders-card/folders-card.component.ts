@@ -41,6 +41,5 @@ export class FoldersCardComponent {
     // console.log('Open Folder: >>>', newUrl);
     //===============
     this.redirectToFolder.emit(folder);
-    console.log('folders-card redirected:');
   }
 }

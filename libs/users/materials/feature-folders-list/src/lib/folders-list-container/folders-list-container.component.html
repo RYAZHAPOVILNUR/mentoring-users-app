@@ -5,5 +5,5 @@
   errors: errors$,
 } as vm2"
 >
-  <users-folders-list [vm]="vm2"></users-folders-list>
+  <users-folders-list [vm]="vm2" (redirectToFolder)="onRedirectToFolder($event)"></users-folders-list>
 </ng-container>

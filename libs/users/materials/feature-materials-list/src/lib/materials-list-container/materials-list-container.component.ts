@@ -22,9 +22,4 @@ export class MaterialsListContainerComponent {
   private readonly store = inject(Store);
   private readonly router = inject(Router);
   public folder!: FoldersEntity;
-
-  public readonly folder$: Observable<FoldersEntity | null> = this.foldersFacade.
-
-  @Input()
-  redirectToFolder!: DetailFolderCardVm;
 }

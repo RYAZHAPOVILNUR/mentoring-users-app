@@ -7,7 +7,11 @@
     <div class="container">
       <div class="row">
         <ng-container *ngFor="let folder of vm.folders">
-          <users-folders-card style="max-width: 150px" [folder]="folder"></users-folders-card>
+          <users-folders-card
+            (redirectToFolder)="onRedirectToFolder($event)"
+            style="max-width: 150px"
+            [folder]="folder"
+          ></users-folders-card>
         </ng-container>
       </div>
     </div>

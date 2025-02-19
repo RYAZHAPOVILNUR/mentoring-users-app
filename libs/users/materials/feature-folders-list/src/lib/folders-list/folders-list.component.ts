@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewEncapsulation,
+  inject,
+} from '@angular/core';
 import { CommonModule, NgFor, NgIfContext } from '@angular/common';
 import { FoldersListVM } from './folders-list-view.module';
 import { FoldersFacade, FoldersVM } from '@users/materials/data-access';
@@ -21,8 +29,17 @@ export class FoldersListComponent {
 
   @Input({ required: true })
   vm!: FoldersListVM;
+
+  @Output()
+  redirectToFolder = new EventEmitter();
+
   ngOnInit() {
     console.log('List', this.fasade.init());
+  }
+
+  onRedirectToFolder(folder: FoldersVM) {
+    this.redirectToFolder.emit(folder);
+    console.log('Redirected to Folder List>>>', folder);
   }
 
   constructor() {
