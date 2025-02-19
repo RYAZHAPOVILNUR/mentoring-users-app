@@ -7,11 +7,12 @@ import { FoldersEntity, FoldersFacade } from '@users/materials/data-access';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { MaterialsCardComponent } from '../materials-card/materials-card.component';
 
 @Component({
   selector: 'users-materials-list-container',
   standalone: true,
-  imports: [CommonModule, MaterialsListComponent, LetDirective],
+  imports: [CommonModule, MaterialsListComponent, LetDirective, MaterialsCardComponent],
   templateUrl: './materials-list-container.component.html',
   styleUrls: ['./materials-list-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,

@@ -3,7 +3,7 @@
 </ng-container>
 
 <ng-template #loadingResult>
-  <ng-container *ngIf="vm.status === 'loaded'; alse: error">
+  <div *ngIf="vm.status === 'loaded'; else error">
     <div class="container">
       <div class="row">
         <ng-container *ngFor="let folder of vm.folders">
@@ -15,7 +15,7 @@
         </ng-container>
       </div>
     </div>
-  </ng-container>
+  </div>
 </ng-template>
 
 <ng-template #error>

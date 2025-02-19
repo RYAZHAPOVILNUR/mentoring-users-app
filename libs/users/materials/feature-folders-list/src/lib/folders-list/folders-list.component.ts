@@ -7,18 +7,16 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import { CommonModule, NgFor, NgIfContext } from '@angular/common';
+import { CommonModule, NgFor, NgIf, NgIfContext } from '@angular/common';
 import { FoldersListVM } from './folders-list-view.module';
 import { FoldersFacade, FoldersVM } from '@users/materials/data-access';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { isNgContainer } from '@angular/compiler';
-import { NgControl } from '@angular/forms';
 
 @Component({
   selector: 'users-folders-list',
   standalone: true,
-  imports: [CommonModule, NgFor, FoldersCardComponent, MatProgressBarModule],
+  imports: [CommonModule, NgFor, NgIf, FoldersCardComponent, MatProgressBarModule],
   templateUrl: './folders-list.component.html',
   styleUrls: ['./folders-list.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
