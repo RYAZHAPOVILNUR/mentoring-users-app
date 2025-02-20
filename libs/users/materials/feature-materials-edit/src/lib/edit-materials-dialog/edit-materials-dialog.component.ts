@@ -26,6 +26,7 @@ import { MaterialsDTO } from '@users/core/data-access';
 })
 export class EditMaterialsDialogComponent {
   private formBuilder = inject(FormBuilder);
+
   public dialogRef = inject(MatDialogRef<EditMaterialsDialogComponent>);
   public data: { dialogText: string; materialData: MaterialsDTO } = inject(MAT_DIALOG_DATA);
 
@@ -36,11 +37,11 @@ export class EditMaterialsDialogComponent {
     id: [this.data.materialData.id, Validators.required],
   });
 
-  cancel(): void {
+  public cancel(): void {
     this.dialogRef.close();
   }
 
-  save(): void {
+  public save(): void {
     if (this.formGroup.valid) {
       const formData = this.formGroup.value;
       this.dialogRef.close(formData);

@@ -31,22 +31,22 @@ import { MaterialsEntity } from '@users/core/data-access';
 })
 export class MaterialsListContainerComponent {
   private readonly componentStore = inject(MaterialsListContainerStore);
-  public readonly materialsFacade = inject(MaterialsFacade);
+
   public readonly materials$ = this.componentStore.materials$;
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;
   public readonly folderId$ = this.componentStore.folderId$;
   public readonly folderTitle$ = this.componentStore.folderTitle$;
 
-  onDeleteMaterial(dataForDeleteMaterial: { materialId: number; materialTitle: string }) {
+  public onDeleteMaterial(dataForDeleteMaterial: { materialId: number; materialTitle: string }) {
     this.componentStore.deleteMaterial(dataForDeleteMaterial);
   }
 
-  onEditMaterial(material: MaterialsEntity) {
+  public onEditMaterial(material: MaterialsEntity) {
     this.componentStore.editMaterial(material);
   }
 
-  onOpenMaterial(materialId: number) {
+  public onOpenMaterial(materialId: number) {
     this.componentStore.openMaterial(materialId);
   }
 }
