@@ -7,38 +7,36 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: space-between;
+  background-color: transparent;
+  color: #f7f2f2;
   border: 1px solid rgb(93, 89, 89);
   &:hover {
-    mat-icon {
-      opacity: 1;
+    .folder-menu {
+      button {
+        opacity: 1;
+        transition: opacity 0.3s ease 0s;
+      }
     }
   }
 }
 
-.folder-icon {
-  color: #cec9c9;
+.folder-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
-button {
-  cursor: pointer;
-  color: inherit;
-  background-color: inherit;
-  border: none;
+.folder-menu {
+  button {
+    background-color: transparent;
+    border: none;
+    color: #747070;
+    opacity: 0;
+    transition: opacity 0.3s ease 0s;
+  }
 }
 
 .folder-title {
   font-size: 14px;
-}
-
-.delete-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  mat-icon {
-    color: grey;
-    opacity: 0;
-  }
 }

@@ -1,6 +1,27 @@
 <button (click)="onOpenFolder(folder)" class="folder-content">
-  <span class="folder-icon"><mat-icon>folder</mat-icon></span>
-  <button class="delete-button" type="button"><mat-icon>delete</mat-icon></button>
+  <div class="folder-header">
+    <span class="folder-icon"><mat-icon style="color: #747070">folder</mat-icon></span>
+    <div class="folder-menu">
+      <button
+        mat-icon-button
+        (click)="$event.stopPropagation()"
+        [matMenuTriggerFor]="menu"
+        aria-label="Example icon-button with a menu"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>delete</mat-icon>
+          <span>Delete</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>edit</mat-icon>
+          <span>Edit</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
   <div class="folder-title">
     <h4 class="folder-title">{{ folder.title | shortTitle }}</h4>
   </div>

@@ -14,11 +14,12 @@ import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
 import { ShortTitle } from 'libs/users/materials/pipes/short-title.pipe';
 import { CorrectDatePipe } from 'libs/users/materials/pipes/correct-date.pipe';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'users-folders-card',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatCardModule, ShortTitle, CorrectDatePipe],
+  imports: [CommonModule, MatIconModule, MatCardModule, ShortTitle, CorrectDatePipe, MatMenuModule],
   templateUrl: './folders-card.component.html',
   styleUrls: ['./folders-card.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
