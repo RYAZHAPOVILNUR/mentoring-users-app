@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, scan, Subscription, timer } from "rxjs";
+import { BehaviorSubject, Subscription, timer } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -36,47 +36,40 @@ export class TaskTimerService {
     });
     this.isActive = true;
     this.isActive$.next(this.isActive);
+    this.updateLocalStorage(this.seconds, this.isActive);
   }
   
   public pauseTimer(): void {
-    this.timerSubscription.unsubscribe();
-    this.isActive$.next(false);
+    if (this.timerSubscription) {
+      this.timerSubscription.unsubscribe();
+    }
+    this.isActive = false;
+    this.isActive$.next(this.isActive);
     this.updateLocalStorage(this.seconds, false);
   }
   
   public stopTimer(): void {
-    this.timerSubscription.unsubscribe();
-    this.isActive$.next(false);
-    this.seconds$.next(0);
-    this.updateLocalStorage(0, false);
+    if (this.timerSubscription) {
+      this.timerSubscription.unsubscribe();
+    }
+    this.isActive = false;
+    this.isActive$.next(this.isActive);
+    this.seconds = 0;
+    this.seconds$.next(this.seconds);
+    this.updateLocalStorage(this.seconds, this.isActive);
   }
-  
-  // public startTimer(): void {
-  //   this.timerSubscription = timer(0, 1000).pipe(
-  //     scan(acc => ++acc, this.seconds)).subscribe(
-  //       (value) => {
-  //         this.seconds$.next(value);
-  //         this.updateLocalStorage(value, true);
-  //       }
-  //   );
-  //   this.isActive$.next(true);
-  // }
   
   private getSecondsFromLocalStorage(): number {
     const data = localStorage.getItem("timer");
-    if (data) {
-      return JSON.parse(data).seconds;
-    } else return 0;
+    return data ? JSON.parse(data).seconds : 0;
   }
   
   private getIsActiveFromLocalStorage(): boolean {
     const data = localStorage.getItem("timer");
-    if (data) {
-      return JSON.parse(data).isActive;
-    } else return false;
+    return data ? JSON.parse(data).isActive : false;
   }
   
   private updateLocalStorage(seconds: number, isActive: boolean): void {
-    localStorage.setItem("timer", JSON.stringify({ seconds: this.seconds, isActive: this.isActive }));
+    localStorage.setItem("timer", JSON.stringify({ seconds, isActive }));
   }
 }

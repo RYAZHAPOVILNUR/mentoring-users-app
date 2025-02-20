@@ -1,0 +1,10 @@
+<div class="timer">
+    <div class="timer__container">
+        <p class="timer__time">{{ (timerValue$ | async)! | formatTimePipe}}</p>
+    </div>
+    <div class="timer__buttons">
+        <button mat-raised-button color="primary" [disabled]="isRunning$ | async" (click)="startTimer()">Start</button>
+        <button mat-raised-button color="primary" [disabled]="!(isRunning$ | async)" (click)="pauseTimer()">Pause</button>
+        <button mat-raised-button color="primary" [disabled]="isStopped$ | async" (click)="stopTimer()">Stop</button>
+    </div>
+</div>
