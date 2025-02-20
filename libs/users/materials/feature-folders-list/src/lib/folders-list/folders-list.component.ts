@@ -31,16 +31,8 @@ export class FoldersListComponent {
   @Output()
   redirectToFolder = new EventEmitter();
 
-  ngOnInit() {
-    console.log('List', this.fasade.init());
-  }
-
   onRedirectToFolder(folder: FoldersVM) {
     this.redirectToFolder.emit(folder);
     console.log('Redirected to Folder List>>>', folder);
-  }
-
-  constructor() {
-    console.log('Folders List>>>', this.vm);
   }
 }

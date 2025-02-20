@@ -13,12 +13,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
 import { ShortTitle } from 'libs/users/materials/pipes/short-title.pipe';
-import { CorrecrDate } from 'libs/users/materials/pipes/correct-date.pipe';
+import { CorrectDatePipe } from 'libs/users/materials/pipes/correct-date.pipe';
 
 @Component({
   selector: 'users-folders-card',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatCardModule, ShortTitle, CorrecrDate],
+  imports: [CommonModule, MatIconModule, MatCardModule, ShortTitle, CorrectDatePipe],
   templateUrl: './folders-card.component.html',
   styleUrls: ['./folders-card.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
@@ -34,14 +34,6 @@ export class FoldersCardComponent {
   redirectToFolder = new EventEmitter();
 
   onOpenFolder(folder: FoldersVM) {
-    // Получаем текущий URL без параметров
-    // const baseUrl = this.router.url.split('?')[0];
-    // Формируем новый URL с id=123
-    // const newUrl = `${baseUrl}/${folder.id}`;
-    // Переход на новый URL (сохранится в истории браузера)
-    // this.router.navigateByUrl(newUrl);
-    // console.log('Open Folder: >>>', newUrl);
-    //===============
     this.redirectToFolder.emit(folder);
   }
 }

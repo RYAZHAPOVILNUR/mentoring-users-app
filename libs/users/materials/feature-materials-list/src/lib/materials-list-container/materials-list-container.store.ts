@@ -1,19 +1,25 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { DeepReadonly } from '@users/core/utils';
-import { FoldersVM } from '@users/materials/data-access';
+import { MaterialsFacade, MaterialsVM } from '@users/materials/data-access';
 
 type MaterialsListContainerState = DeepReadonly<{
-  folder: FoldersVM;
+  materials: MaterialsVM;
 }>;
 
-// const initialState: MaterialsListContainerState = {
-//   folders: [];
-// };
+const initialState: MaterialsListContainerState = {
+  materials: [],
+};
 
-// @Injectable()
-// export class MaterialsListContainerStore extends ComponentStore<MaterialsListContainerState> {
-//   constructor() {
-//     super(initialState);
-//   }
-// }
+@Injectable()
+export class MaterialsListContainerStore extends ComponentStore<MaterialsListContainerState> {
+  private readonly materialsFacade = inject(MaterialsFacade);
+  public readonly materials$ = this.select(({ materials }) => materials);
+  public readonly status$ = this.select(this.materialsFacade.status$, (status) => status);
+  public errors$ = this.select(this.materialsFacade.errors$, (error) => error);
+
+  constructor() {
+    super(initialState);
+    this.materialsFacade.init();
+  }
+}
