@@ -10,7 +10,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   MaterialsCardDeleteDialogComponent
 } from '../materials-card-delete-dialog/materials-card-delete-dialog.component';
-// import { MaterialsContentComponent } from '@feature-materials-content';
+import { MaterialsContentComponent } from '@feature-materials-content';
 
 @Component({
   selector: 'users-materials-card',
@@ -33,7 +33,7 @@ export class MaterialsCardComponent {
     const link = this.material.material_link?.toLowerCase() || '';
     if (link.includes('.pdf')) return 'description';
     if (link.includes('.mp3')) return 'audiotrack';
-    if (link.includes('https://youtu')) return 'ondemand_video';
+    if (link.includes('https://www.youtu')) return 'ondemand_video';
     return 'folder';
   }
 
@@ -48,12 +48,12 @@ export class MaterialsCardComponent {
   }
 
   openMaterialsContent(event: Event) {
-    // event.stopPropagation();
-    // const dialogRef: MatDialogRef<MaterialsContentComponent> = this.dialog.open(
-    //   MaterialsContentComponent, {
-    //     data: { material: this.material }
-    //   });
-    //
-    // dialogRef.afterClosed().pipe(takeUntilDestroyed(this.destroyRef))
+    event.stopPropagation();
+    const dialogRef: MatDialogRef<MaterialsContentComponent> = this.dialog.open(
+      MaterialsContentComponent, {
+        data: { material: this.material }
+      });
+
+    dialogRef.afterClosed().pipe(takeUntilDestroyed(this.destroyRef))
   }
 }

@@ -6,9 +6,9 @@
     {{ folder?.title }}
   </span>
 </div>
-<div class="materials-list" *ngIf="(material$ | async) as materials">
-  <div *ngIf="materials.length > 0; else noMaterials">
-    <div *ngFor="let material of materials">
+<div  *ngIf="(material$ | async) as materials">
+  <div *ngIf="materials.length > 0; else noMaterials" class="materials-list">
+    <div *ngFor="let material of materials" >
       <users-materials-card [material]="material"></users-materials-card>
     </div>
   </div>

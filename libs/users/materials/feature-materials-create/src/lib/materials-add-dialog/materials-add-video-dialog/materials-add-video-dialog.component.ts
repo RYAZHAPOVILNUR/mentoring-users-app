@@ -56,7 +56,7 @@ export class MaterialsAddVideoDialogComponent {
 
   private videoValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      return control.value.toLowerCase().includes('https://youtu') ? null : { invalidVideo: true };
+      return control.value.toLowerCase().includes('https://www.youtu') ? null : { invalidVideo: true };
     };
   }
 }
