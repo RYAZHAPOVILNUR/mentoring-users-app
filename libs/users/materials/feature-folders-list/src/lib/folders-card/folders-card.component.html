@@ -2,6 +2,9 @@
   <span class="folder-icon"><mat-icon>folder</mat-icon></span>
   <button class="delete-button" type="button"><mat-icon>delete</mat-icon></button>
   <div class="folder-title">
-    <h4 class="folder-title">{{ folder.title }}</h4>
+    <h4 class="folder-title">{{ folder.title | shortTitle }}</h4>
+  </div>
+  <div>
+    <span>{{ folder.createdAt | CorrectDate }}</span>
   </div>
 </mat-card>

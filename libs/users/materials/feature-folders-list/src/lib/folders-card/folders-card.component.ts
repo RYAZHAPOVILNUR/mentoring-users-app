@@ -12,11 +12,13 @@ import { FoldersVM } from '@users/materials/data-access';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
+import { ShortTitle } from 'libs/users/materials/pipes/short-title.pipe';
+import { CorrecrDate } from 'libs/users/materials/pipes/correct-date.pipe';
 
 @Component({
   selector: 'users-folders-card',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatCardModule],
+  imports: [CommonModule, MatIconModule, MatCardModule, ShortTitle, CorrecrDate],
   templateUrl: './folders-card.component.html',
   styleUrls: ['./folders-card.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,

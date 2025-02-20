@@ -7,13 +7,13 @@ type MaterialsListContainerState = DeepReadonly<{
   folder: FoldersVM;
 }>;
 
-const initialState: MaterialsListContainerState = {
-  folders: [];
-};
+// const initialState: MaterialsListContainerState = {
+//   folders: [];
+// };
 
-@Injectable()
-export class MaterialsListContainerStore extends ComponentStore<MaterialsListContainerState> {
-  constructor() {
-    super(initialState);
-  }
-}
+// @Injectable()
+// export class MaterialsListContainerStore extends ComponentStore<MaterialsListContainerState> {
+//   constructor() {
+//     super(initialState);
+//   }
+// }
