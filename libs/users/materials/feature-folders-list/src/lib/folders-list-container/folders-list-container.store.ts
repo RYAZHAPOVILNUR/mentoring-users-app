@@ -3,10 +3,8 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ComponentStore } from '@ngrx/component-store';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { DeepReadonly } from '@users/core/utils';
-import { FoldersFacade } from '@users/data-access';
 import { tap } from 'rxjs';
-import { foldersDTOAdapter } from '../../../../data-access/src/lib/models/folders-dto.adapter';
-import { FoldersDTO } from '../../../../data-access/src/lib/models/folders-dto.model';
+import { SharedFacade } from '../../../../data-access/src/lib/+state/sharedFacade';
 import { FoldersEntity } from '../../../../data-access/src/lib/models/folders.entity';
 import { FoldersVM } from '../../../../folders-vm';
 
@@ -20,22 +18,19 @@ const initialState: FoldersListState = {
 
 @Injectable()
 export class FoldersListContainerStore extends ComponentStore<FoldersListState> {
-  private readonly foldersFacade = inject(FoldersFacade);
+  private readonly facadeF = inject(SharedFacade);
   private readonly dialog = inject(MatDialog);
-
-  public readonly folders$ = this.select(
-    ({ folders }) => folders);
-  public readonly status$ = this.select(this.foldersFacade.status$, (status) => status);
-  public readonly errors$ = this.select(this.foldersFacade.errors$, (error) => error);
+  public readonly status$ = this.select(this.facadeF.statusFolders$, (status) => status);
+  public readonly errors$ = this.select(this.facadeF.errorsFolders$, (error) => error);
 
   constructor() {
     super(initialState);
-    this.foldersFacade.initFolders();
+    this.facadeF.initFolders();
     this.setFoldersFromGlobalToLocalStore();
   }
 
   private setFoldersFromGlobalToLocalStore(): void {
-    this.effect(() => this.foldersFacade.allFolders$.pipe(
+    this.effect(() => this.facadeF.allFolders$.pipe(
       tap((folders: FoldersEntity[]) => this.patchFolders(folders))
     ));
   }
@@ -51,7 +46,7 @@ export class FoldersListContainerStore extends ComponentStore<FoldersListState> 
       this.effect(() =>
     dialogRef.afterClosed().pipe(
       tap((result: boolean) => {
-        if (result) this.foldersFacade.deleteFolder(folder.id);
+        if (result) this.facadeF.deleteFolder(folder.id);
       })
     ));
   }

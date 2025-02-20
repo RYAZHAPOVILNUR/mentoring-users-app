@@ -41,6 +41,7 @@
         "libs/users/materials/feature-folders-create/src/index.ts"
       ],
       "@users/materials/data-access/models": ["libs/users/materials/data-access/src/lib/models"],
+      "@users/pipes": ["libs/users/core/ui/pipes/src/index.ts"],
       "@users/settings": ["libs/users/settings/src/index.ts"],
       "@users/settings-ui": ["libs/settings-ui/src/index.ts"],
       "@users/settings/data-access": ["libs/users/settings/data-access/src/index.ts"],

@@ -17,7 +17,6 @@ import { FoldersListVM } from './folders-list-view-model';
 export class FoldersListComponent {
   @Input({ required: true })
   vm!: FoldersListVM;
-
   @Output()
   deleteFolder = new EventEmitter();
   @Output()

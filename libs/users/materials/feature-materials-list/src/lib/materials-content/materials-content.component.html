@@ -1,1 +1,57 @@
+  <div class="material-dialog__header">
+    <h3 class="material-dialog__title">{{ getTitle() }}</h3>
+    <button class="material-dialog__close-button"
+            mat-icon-button
+            type="button"
+            mat-dialog-close>
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
 
+  <ng-container *ngIf="isYouTubeVideo() && !isPlayerActive">
+
+    <div class="material-dialog__footer">
+      <span class="material-dialog__link-label">Ссылка на видео:</span>
+      <a class="material-dialog__link" [href]="selectedMaterial.materialLink" target="_blank">{{ selectedMaterial.materialLink }}</a>
+    </div>
+
+    <img
+      class="video-poster"
+      [src]="getPosterLink()"
+      alt="Видео-постер"
+      (click)="activatePlayer()"
+    />
+
+  </ng-container>
+
+  <ng-container *ngIf="isYouTubeVideo() && isPlayerActive">
+    <iframe
+      class="video-player"
+      [src]="convertedYouTubeLink(selectedMaterial.materialLink)"
+      frameborder="0"
+      allowfullscreen>
+    </iframe>
+  </ng-container>
+
+  <ng-container *ngIf="isAudio()">
+    <audio
+      *ngIf="isAudio()"
+      [src]="selectedMaterial.materialLink"
+      controls
+      class="material-dialog__audio">
+      Ваш браузер не поддерживает аудио.
+    </audio>
+  </ng-container>
+
+  <ng-container *ngIf="isPdf()">
+    <div class="pdf-container">
+      <pdf-viewer
+        *ngIf="isPdf()"
+        [src]="selectedMaterial.materialLink"
+        [render-text]="true"
+        [show-all]="false"
+        [autoresize]="true"
+        class="material-dialog__pdf">
+      </pdf-viewer>
+    </div>
+  </ng-container>

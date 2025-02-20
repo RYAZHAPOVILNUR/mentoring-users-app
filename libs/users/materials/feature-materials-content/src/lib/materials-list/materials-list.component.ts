@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MaterialsEntity } from '../../../../data-access/src/lib/models/materials.entity';
 import { MaterialsCardComponent } from '../materials-card/materials-card.component';
 import { MaterialsListVM } from './materials-list-view-model';
 
@@ -16,4 +17,16 @@ import { MaterialsListVM } from './materials-list-view-model';
 export class MaterialsListComponent {
   @Input({ required: true })
   vm!: MaterialsListVM;
+  @Output()
+  deleteMaterial = new EventEmitter();
+  @Output()
+  viewMaterial = new EventEmitter();
+
+  public onDeleteMaterial(material: MaterialsEntity) {
+    this.deleteMaterial.emit(material)
+  }
+
+  public onViewMaterial(material: MaterialsEntity) {
+    this.viewMaterial.emit(material)
+  }
 }

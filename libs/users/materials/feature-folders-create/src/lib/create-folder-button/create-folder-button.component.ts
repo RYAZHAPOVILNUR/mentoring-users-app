@@ -4,7 +4,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { FoldersFacade } from '@users/data-access';
+import { SharedFacade } from '../../../../data-access/src/lib/+state/sharedFacade';
 import { CreateFolderDTO } from '../../../../data-access/src/lib/models/folders-dto.model';
 import { CreateFolderDialogComponent } from '../create-folder-dialog/create-folder-dialog.component';
 
@@ -22,7 +22,7 @@ export class CreateFolderButtonComponent {
   public dialog = inject(MatDialog);
   public title!: string;
   private readonly destroyRef = inject(DestroyRef);
-  private readonly foldersFacade = inject(FoldersFacade);
+  private readonly facadeF = inject(SharedFacade);
 
   openAddFolderDialog() {
     const dialogRef = this.dialog.open(CreateFolderDialogComponent, {
@@ -36,7 +36,7 @@ export class CreateFolderButtonComponent {
         const newFolderData: CreateFolderDTO = {
           title: result.title,
         };
-        this.foldersFacade.addFolder(newFolderData);
+        this.facadeF.addFolder(newFolderData);
       }
     });
   }

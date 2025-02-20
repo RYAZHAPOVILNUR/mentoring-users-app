@@ -1,5 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { selectRouteParams } from '@users/core/data-access';
+import { DeepReadonlyArray } from '@users/core/utils';
+import { MaterialsEntity } from '../../models/materials.entity';
 import { MATERIALS_FEATURE_KEY, MaterialsState, materialsAdapter } from './materials.reducer';
 
 // Lookup the 'Materials' feature state managed by NgRx
@@ -17,31 +19,23 @@ export const selectMaterialsEntities = createSelector(selectMaterialsState, (sta
   selectEntities(state)
 );
 
-// export const selectMaterialsForOpenedFolder = createSelector(
-//   selectRouteParams,
-//   selectAllMaterials,
-//   (routeParams, allMaterials) => {
-//     const folderId = routeParams['folderId'] ? +routeParams['folderId'] : null;
-//     return folderId != null
-//       ? allMaterials.filter(material => material.folderId === folderId)
-//       : [];
-//   }
-// );
-
 export const selectMaterialsForOpenedFolder = createSelector(
   selectRouteParams,
   selectAllMaterials,
   ({ folderId }, allMaterials) => {
     const paramsFolderId = Number(folderId);
     if (Number.isNaN(paramsFolderId)) {
-      return [];
+      return [] as DeepReadonlyArray<MaterialsEntity>;
     }
-    return allMaterials.filter(({ folderId }) => folderId === paramsFolderId);
+    return allMaterials.filter(({ folderId }) =>
+      folderId === paramsFolderId) as DeepReadonlyArray<MaterialsEntity>;
   }
 );
 
-export const selectSelectedId = createSelector(selectMaterialsState, (state: MaterialsState) => state.selectedId);
+export const selectSelectedId = createSelector(selectMaterialsState,
+  (state: MaterialsState) => state.selectedId);
 
-export const selectEntity = createSelector(selectMaterialsEntities, selectSelectedId, (entities, selectedId) =>
+export const selectEntity = createSelector(selectMaterialsEntities, selectSelectedId,
+  (entities, selectedId) =>
   selectedId ? entities[selectedId] : undefined
 );

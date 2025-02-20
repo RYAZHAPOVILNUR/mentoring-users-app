@@ -12,16 +12,17 @@
 .material-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
 }
 
 .material-icon {
-  font-size: 30px;
+  font-size: 26px;
   color: #daddec;
 }
 
-.material-icon {
-  font-size: 30px;
+.delete-icon {
+  font-size: 26px;
   color: #daddec;
   cursor: pointer;
   transition: color 0.2s;

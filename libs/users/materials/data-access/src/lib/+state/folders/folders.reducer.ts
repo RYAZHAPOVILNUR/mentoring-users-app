@@ -35,9 +35,7 @@ const reducer = createReducer(
     foldersAdapter.setAll(folders, { ...state, status: 'loaded' as const })
   ),
   on(FoldersActions.loadFoldersFailure, (state, { error }) => ({
-	...state,
-	status: 'error' as const,
-	error })),
+	...state, status: 'error' as const, error })),
 
   on(FoldersActions.deleteFolderSuccess, (state, { id }) =>
     foldersAdapter.removeOne(id, {...state })),

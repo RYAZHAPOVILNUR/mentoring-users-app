@@ -2,8 +2,7 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 import { LoadingStatus } from '@users/core/data-access';
 import { MaterialsEntity } from '../../models/materials.entity';
-import * as MaterialsActions from './materials.actions';
-
+import { materialsActions } from './materials.actions';
 
 export const MATERIALS_FEATURE_KEY = 'materials';
 
@@ -31,14 +30,22 @@ export const initialMaterialsState: MaterialsState = materialsAdapter.getInitial
 
 const reducer = createReducer(
   initialMaterialsState,
-  on(MaterialsActions.initMaterials, (state) => ({ ...state, status: 'loading' as const })),
-  on(MaterialsActions.loadMaterialsSuccess, (state, { materials }) =>
+  on(materialsActions.initMaterials, (state) => ({ ...state, status: 'loading' as const })),
+  on(materialsActions.loadMaterialsSuccess, (state, { materials }) =>
     materialsAdapter.setAll(materials, { ...state, status: 'loaded' as const })),
-  on(MaterialsActions.loadMaterialsFailure, (state, { error }) =>
-    ({ ...state,
-      status: 'error' as const,
-      error })));
+  on(materialsActions.loadMaterialsFailure, (state, { error }) =>
+    ({ ...state, status: 'error' as const, error })),
 
+  on(materialsActions.addMaterialsSuccess, (state, { material }) =>
+  materialsAdapter.addOne(material, {...state, error: null })),
+  on(materialsActions.addMaterialsFailure, (state, { error }) =>
+    ({...state, error })),
+
+  on(materialsActions.deleteMaterialsSuccess, (state, { id }) =>
+  materialsAdapter.removeOne(id, {...state })),
+  on(materialsActions.deleteMaterialsFailure, (state, { error }) => ({
+    ...state, error, })),
+);
 export function materialsReducer(state: MaterialsState | undefined, action: Action) {
   return reducer(state, action);
 }

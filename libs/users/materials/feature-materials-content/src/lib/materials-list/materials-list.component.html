@@ -6,7 +6,11 @@
   <ng-container *ngIf="vm.status === 'loaded'; else error">
     <div class="container-materials">
       <div *ngFor="let material of vm.materials">
-        <users-materials-card [material]="material" />
+        <users-materials-card
+          [material]="material"
+          (delete)="onDeleteMaterial(material)"
+          (view)="onViewMaterial(material)"
+        />
       </div>
     </div>
   </ng-container>

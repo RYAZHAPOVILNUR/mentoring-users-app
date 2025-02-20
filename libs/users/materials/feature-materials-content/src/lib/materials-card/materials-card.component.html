@@ -1,8 +1,9 @@
 <div class="material-content"
      (mouseenter)="showDeleteIcon = true"
-     (mouseleave)="showDeleteIcon = false">
+     (mouseleave)="showDeleteIcon = false"
+     (click)="openMaterial()">
   <div class="material-header">
-    <mat-icon class="material-icon">folder</mat-icon>
+    <mat-icon class="material-icon">{{ getFileTypeIcon() }}</mat-icon>
     <mat-icon
       class="delete-icon"
       *ngIf="showDeleteIcon"
@@ -11,7 +12,7 @@
     </mat-icon>
   </div>
   <div class="material-info">
-    <div class="material-title">{{ material.title }}</div>
-    <div class="material-created">{{ material.createdAt | date }}</div>
+  <div class="material-title">{{ material.title | lineTrim }}</div>
+  <div class="material-created">{{ material.createdAt | date }}</div>
   </div>
 </div>
