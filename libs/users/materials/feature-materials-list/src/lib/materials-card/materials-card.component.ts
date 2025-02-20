@@ -10,6 +10,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   MaterialsCardDeleteDialogComponent
 } from '../materials-card-delete-dialog/materials-card-delete-dialog.component';
+// import { MaterialsContentComponent } from '@feature-materials-content';
 
 @Component({
   selector: 'users-materials-card',
@@ -46,7 +47,13 @@ export class MaterialsCardComponent {
     dialogRef.afterClosed().pipe(takeUntilDestroyed(this.destroyRef))
   }
 
-  // openMaterialsList(folderId: number) {
-  //   this.router.navigate(['/materials', folderId])
-  // }
+  openMaterialsContent(event: Event) {
+    // event.stopPropagation();
+    // const dialogRef: MatDialogRef<MaterialsContentComponent> = this.dialog.open(
+    //   MaterialsContentComponent, {
+    //     data: { material: this.material }
+    //   });
+    //
+    // dialogRef.afterClosed().pipe(takeUntilDestroyed(this.destroyRef))
+  }
 }
