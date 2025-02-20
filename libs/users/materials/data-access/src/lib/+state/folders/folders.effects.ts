@@ -32,30 +32,4 @@ export class FoldersEffects {
     },
     { functional: true }
   );
-
-  // loadFolder = createEffect(
-  //   () => {
-  //     const actions$ = inject(Actions);
-  //     const apiService = inject(ApiService);
-  //     const store = inject(Store);
-  //     return actions$.pipe(
-  //       ofType(FoldersActions.initFolders),
-  //       withLatestFrom(store.select(selectRouteParams)),
-  //       switchMap(() =>
-  //         apiService.get<FoldersDTO[]>('/folder').pipe(
-  //           map((folders) =>
-  //             FoldersActions.loadFoldersSuccess({
-  //               folders: folders.map((folder) => folderDTOAdapter.DTOtoEntity(folder)),
-  //             })
-  //           ),
-  //           catchError((error) => {
-  //             console.error('Error', error);
-  //             return of(FoldersActions.loadFoldersFailure({ error }));
-  //           })
-  //         )
-  //       )
-  //     );
-  //   },
-  //   { functional: true }
-  // );
 }

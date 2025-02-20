@@ -1,4 +1,4 @@
-<mat-card (click)="onOpenFolder(folder)" class="folder-content">
+<button (click)="onOpenFolder(folder)" class="folder-content">
   <span class="folder-icon"><mat-icon>folder</mat-icon></span>
   <button class="delete-button" type="button"><mat-icon>delete</mat-icon></button>
   <div class="folder-title">
@@ -7,4 +7,4 @@
   <div>
     <span>{{ folder.createdAt | correctdate }}</span>
   </div>
-</mat-card>
+</button>

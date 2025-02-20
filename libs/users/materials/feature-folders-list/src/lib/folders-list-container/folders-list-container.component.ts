@@ -1,4 +1,3 @@
-// import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoldersListContainerStore } from './folders-list-container.store';

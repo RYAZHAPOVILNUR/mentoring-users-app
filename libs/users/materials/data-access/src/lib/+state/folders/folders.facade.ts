@@ -19,20 +19,4 @@ export class FoldersFacade {
   init() {
     this.store.dispatch(FoldersActions.initFolders());
   }
-
-  getFolderFromStore(id: number) {
-    return this.store.select(FoldersSelectors.selectFolderById(id)).pipe(
-      switchMap((folder: FoldersEntity | undefined): Observable<FoldersEntity | null> => {
-        if (folder) {
-          return of(folder);
-        } else {
-          return of(null);
-        }
-      })
-    );
-  }
-
-  loadFolder() {
-    this.store.dispatch(FoldersActions.loadFolder());
-  }
 }
