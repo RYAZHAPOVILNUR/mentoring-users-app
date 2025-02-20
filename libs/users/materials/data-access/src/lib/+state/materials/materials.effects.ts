@@ -60,7 +60,6 @@ export class MaterialsEffects {
       return this.actions$.pipe(
         ofType(MaterialsActions.addMaterial),
         switchMap(({ materialData }) => {
-          console.log(materialData);
           return this.apiService
             .post<MaterialsDTO, MaterialsDTO>('/material', materialsDTOAdapter.entityToDTO(materialData))
             .pipe(
@@ -107,31 +106,16 @@ export class MaterialsEffects {
       return this.actions$.pipe(
         ofType(MaterialsActions.getMaterialById),
         withLatestFrom(this.materialsEntities$),
-        filter(([{ material }, materialsEntities]) => Boolean(materialsEntities[material.id])),
-        map(([{ material }, materialsEntities]) => materialsEntities[material.id]),
+        filter(([{ materialId }, materialsEntities]) => Boolean(materialsEntities[materialId])),
+        map(([{ materialId }, materialsEntities]) => materialsEntities[materialId]),
         tap((material) => {
-          const link = material?.materialLink || '';
-
-          let materialFormat: FileFormat = 'Unknown';
-
-          switch (true) {
-            case /youtube\.com|youtu\.be/.test(link):
-              materialFormat = 'Video';
-              break;
-            case /\.(mp3|wav|ogg)(\?.*)?$/i.test(link):
-              materialFormat = 'Audio';
-              break;
-            case /\.(pdf)(\?.*)?$/i.test(link):
-              materialFormat = 'PDF';
-              break;
-          }
-
+          console.log(material);
           this.dialog.open(MaterialsContentComponent, {
             data: {
               dialogText: 'Material',
               materialById$: material,
-              materialFormat: materialFormat,
             },
+            autoFocus: false,
           });
         })
       );

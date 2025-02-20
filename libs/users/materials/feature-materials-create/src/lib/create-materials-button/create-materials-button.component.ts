@@ -32,11 +32,10 @@ export class CreateMaterialsButtonComponent implements OnInit {
     this.materialsFacade.folderId$.subscribe((folderId) => {
       if (typeof folderId === 'string') {
         this.folder_id$.next(+folderId);
-        takeUntilDestroyed(this.destroyRef);
       } else {
         this.folder_id$.next(undefined);
-        takeUntilDestroyed(this.destroyRef);
       }
+      takeUntilDestroyed(this.destroyRef);
     });
   }
 

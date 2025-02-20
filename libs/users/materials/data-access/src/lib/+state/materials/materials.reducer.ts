@@ -79,10 +79,6 @@ const reducer = createReducer(
     ...state,
     status: 'error' as const,
     error,
-  })),
-  on(MaterialsActions.getMaterialById, (state, { material }) => ({
-    ...state,
-    selectedId: material.id,
   }))
 );
 

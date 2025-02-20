@@ -11,6 +11,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { FormatIconPipe } from '@users/core/utils';
+import { MaterialsEntity } from '@users/core/data-access';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -46,11 +47,11 @@ export class MaterialsCardComponent {
     this.deleteMaterial.emit(dataForDeleteMaterial);
   }
 
-  public onEditMaterial(material: MaterialsVM) {
+  public onEditMaterial(material: MaterialsEntity) {
     this.editMaterial.emit(material);
   }
 
-  public onOpenMaterial(material: MaterialsVM) {
-    this.openMaterial.emit(material);
+  public onOpenMaterial(materialId: number) {
+    this.openMaterial.emit(materialId);
   }
 }

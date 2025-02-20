@@ -31,7 +31,6 @@ export class MaterialsListContainerStore extends ComponentStore<MaterialsListSta
     return undefined;
   });
   public readonly folderTitle$ = this.select(this.materialsFacade.folderTitle$, (title) => title);
-  public readonly materialById$ = this.select(this.materialsFacade.materialById$, (materialById) => materialById);
 
   constructor() {
     super(initialState);
@@ -80,7 +79,7 @@ export class MaterialsListContainerStore extends ComponentStore<MaterialsListSta
     );
   }
 
-  public openMaterial(material: MaterialsEntity) {
-    this.materialsFacade.openMaterial(material);
+  public openMaterial(materialId: number) {
+    this.materialsFacade.openMaterial(materialId);
   }
 }

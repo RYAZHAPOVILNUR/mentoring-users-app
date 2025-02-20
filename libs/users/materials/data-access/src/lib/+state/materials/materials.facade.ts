@@ -15,7 +15,6 @@ export class MaterialsFacade {
 
   public readonly status$ = this.store.pipe(select(MaterialsSelectors.selectMaterialsStatus));
   public readonly allMaterials$ = this.store.pipe(select(MaterialsSelectors.selectAllMaterials));
-  public readonly materialById$ = this.store.pipe(select(MaterialsSelectors.selectMaterialEntity));
   public readonly errors$: Observable<MaterialsErrors | null> = this.store.pipe(
     select(MaterialsSelectors.selectMaterialsError)
   );
@@ -40,7 +39,7 @@ export class MaterialsFacade {
     this.store.dispatch(MaterialsActions.editMaterialSuccess({ materialData: material }));
   }
 
-  openMaterial(material: MaterialsEntity) {
-    this.store.dispatch(MaterialsActions.getMaterialById({ material }));
+  openMaterial(materialId: number) {
+    this.store.dispatch(MaterialsActions.getMaterialById({ materialId }));
   }
 }

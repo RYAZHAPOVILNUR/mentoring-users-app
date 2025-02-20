@@ -46,7 +46,7 @@ export class MaterialsListContainerComponent {
     this.componentStore.editMaterial(material);
   }
 
-  onOpenMaterial(material: MaterialsEntity) {
-    this.componentStore.openMaterial(material);
+  onOpenMaterial(materialId: number) {
+    this.componentStore.openMaterial(materialId);
   }
 }

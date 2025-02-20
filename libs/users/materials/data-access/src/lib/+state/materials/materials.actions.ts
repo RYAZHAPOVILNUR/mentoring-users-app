@@ -22,6 +22,6 @@ export const MaterialsActions = createActionGroup({
     editMaterialSuccess: props<{ materialData: MaterialsEntity }>(),
     editMaterialFailed: props<{ error: MaterialsErrors | null }>(),
 
-    getMaterialById: props<{ material: MaterialsEntity }>(),
+    getMaterialById: props<{ materialId: number }>(),
   },
 });

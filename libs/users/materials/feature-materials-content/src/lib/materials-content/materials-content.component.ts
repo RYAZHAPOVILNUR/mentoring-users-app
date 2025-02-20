@@ -31,9 +31,7 @@ export class MaterialsContentComponent {
   private readonly data: {
     dialogText: string;
     materialById$: MaterialsVM;
-    materialFormat: FileFormat;
   } = inject(MAT_DIALOG_DATA);
 
   public readonly materialById$: MaterialsVM = this.data.materialById$;
-  public readonly materialFormat: string = this.data.materialFormat;
 }

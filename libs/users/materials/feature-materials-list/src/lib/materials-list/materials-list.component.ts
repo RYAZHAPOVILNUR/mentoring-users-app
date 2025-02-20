@@ -4,6 +4,7 @@ import { MaterialsListVM } from './materials-list-view-model';
 import { MaterialsCardComponent } from '../materials-card/materials-card.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MaterialsVM } from '../../../../materials-vm';
+import { MaterialsEntity } from '@users/core/data-access';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -27,11 +28,11 @@ export class MaterialsListComponent {
     this.deleteMaterial.emit(dataForDeleteMaterial);
   }
 
-  public onEditMaterial(material: MaterialsVM) {
+  public onEditMaterial(material: MaterialsEntity) {
     this.editMaterial.emit(material);
   }
 
-  public onOpenMaterial(material: MaterialsVM) {
-    this.openMaterial.emit(material);
+  public onOpenMaterial(materialId: number) {
+    this.openMaterial.emit(materialId);
   }
 }
