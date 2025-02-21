@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, OnDestroy } from "@angular/core";
 import { BehaviorSubject, Subscription, timer } from "rxjs";
 
 const TIMER_KEY = "timer";
@@ -12,7 +12,7 @@ export interface TimerState {
 @Injectable({
   providedIn: "root",
 })
-export class TaskTimerService {
+export class TaskTimerService implements OnDestroy{
   private state: TimerState = this.loadState();
   private state$ = new BehaviorSubject<TimerState>(this.state);
   private timerSubscription: Subscription | null = null;
