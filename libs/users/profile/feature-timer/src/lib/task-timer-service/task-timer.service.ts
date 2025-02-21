@@ -5,7 +5,6 @@ import { BehaviorSubject, Subscription, timer } from "rxjs";
   providedIn: "root",
 })
 export class TaskTimerService {
-  
   private seconds: number = this.getSecondsFromLocalStorage();
   private isActive: boolean = this.getIsActiveFromLocalStorage();
   
@@ -36,7 +35,6 @@ export class TaskTimerService {
     });
     this.isActive = true;
     this.isActive$.next(this.isActive);
-    this.updateLocalStorage(this.seconds, this.isActive);
   }
   
   public pauseTimer(): void {
