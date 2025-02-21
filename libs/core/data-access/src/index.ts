@@ -9,4 +9,4 @@ export * from './lib/folders/folders.entity';
 export * from './lib/materials/materials-dto.model';
 export * from './lib/materials/materials-dto.adapter';
 export * from './lib/materials/materials.entity';
-export * from './lib/fileFormat.type';
+export * from './lib/file-format.type';

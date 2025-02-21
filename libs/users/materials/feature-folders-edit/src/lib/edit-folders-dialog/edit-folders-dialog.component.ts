@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FoldersDTO } from '@users/core/data-access';
+import { EditFolderDialogFormType } from '../edit-folder-dialog-form.type';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -32,7 +33,7 @@ export class EditFoldersDialogComponent {
 
   public readonly dialogText: string = this.data.dialogText;
 
-  public readonly formGroup: FormGroup = this.formBuilder.group({
+  public readonly formGroup: FormGroup<EditFolderDialogFormType> = this.formBuilder.group({
     title: [this.data.folderData.title, Validators.required],
     id: [this.data.folderData.id, Validators.required],
   });

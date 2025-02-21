@@ -5,6 +5,8 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { linkFormatValidator } from '@users/core/utils';
+import { CreateMaterialDialogFormType } from '../create-material-dialog-form.type';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -35,12 +37,17 @@ export class CreateMaterialsDialogComponent {
 
   public readonly dialogText: string = this.data.dialogText;
 
-  public readonly formGroup: FormGroup = this.formBuilder.group({
-    title: ['', Validators.required],
-    materialLink: ['', Validators.required],
-    folderId: [this.data.folder_id$, Validators.required],
-    materialFormat: [this.data.materialFormat, Validators.required],
-  });
+  public readonly formGroup: FormGroup<CreateMaterialDialogFormType> = this.formBuilder.group(
+    {
+      title: ['', Validators.required],
+      materialLink: ['', Validators.required],
+      folderId: [this.data.folder_id$, Validators.required],
+      materialFormat: [this.data.materialFormat, Validators.required],
+    },
+    {
+      validators: [linkFormatValidator],
+    }
+  );
 
   cancel(): void {
     this.dialogRef.close();

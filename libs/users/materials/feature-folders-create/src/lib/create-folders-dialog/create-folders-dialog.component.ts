@@ -33,7 +33,6 @@ export class CreateFoldersDialogComponent {
 
   public readonly formGroup: FormGroup = this.formBuilder.group({
     title: ['', Validators.required],
-    id: [new Date().toString(), Validators.required],
   });
 
   public cancel(): void {

@@ -1,5 +1,5 @@
 import { DeepReadonly } from '@users/core/utils';
-import { FileFormat } from '../fileFormat.type';
+import { FileFormat } from '../file-format.type';
 
 export type MaterialsDTO = DeepReadonly<{
   material_link: string;

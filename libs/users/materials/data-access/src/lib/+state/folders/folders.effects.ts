@@ -32,16 +32,17 @@ export class FoldersEffects {
     () => {
       return this.actions$.pipe(
         ofType(FoldersActions.addFolder),
-        switchMap(({ folderData }) =>
-          this.apiService.post<FoldersDTO, FoldersEntity>('/folder', folderData).pipe(
+        switchMap(({ folderData }) => {
+          console.log(folderData);
+          return this.apiService.post<FoldersDTO, FoldersEntity>('/folder', folderData).pipe(
             map((folder) => foldersDTOAdapter.DTOtoEntity(folder)),
             map((folderEntity) => FoldersActions.addFolderSuccess({ folderData: folderEntity })),
             catchError((error) => {
               console.error('Error', error);
               return of(FoldersActions.addFolderFailed({ error }));
             })
-          )
-        )
+          );
+        })
       );
     },
     { functional: true }

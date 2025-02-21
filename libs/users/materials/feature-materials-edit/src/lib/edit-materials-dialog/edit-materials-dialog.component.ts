@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MaterialsDTO } from '@users/core/data-access';
+import { EditMaterialDialogFormType } from '../edit-material-dialog-form.type';
 
 @Component({
   selector: 'users-edit-materials-dialog',
@@ -32,7 +33,7 @@ export class EditMaterialsDialogComponent {
 
   public dialogText: string = this.data.dialogText;
 
-  public formGroup: FormGroup = this.formBuilder.group({
+  public formGroup: FormGroup<EditMaterialDialogFormType> = this.formBuilder.group({
     title: [this.data.materialData.title, Validators.required],
     id: [this.data.materialData.id, Validators.required],
   });
