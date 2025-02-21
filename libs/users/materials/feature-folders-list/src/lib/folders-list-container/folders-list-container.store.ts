@@ -25,7 +25,7 @@ export class FoldersListContainerStore extends ComponentStore<FoldersListState> 
 
   public readonly folders$ = this.select(({ folders }) => folders);
   public readonly status$ = this.select(this.foldersFacade.status$, (status) => status);
-  public errors$ = this.select(this.foldersFacade.errors$, (error) => error);
+  public readonly errors$ = this.select(this.foldersFacade.errors$, (error) => error);
 
   constructor() {
     super(initialState);
