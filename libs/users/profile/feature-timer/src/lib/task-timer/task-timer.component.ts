@@ -27,9 +27,9 @@ export class TaskTimerComponent {
     
     public pauseTimer(): void {
         this.timerService.pauseTimer();
-      }
+    }
     
     public stopTimer(): void {
-    this.timerService.stopTimer();
+        this.timerService.stopTimer();
     }
 }
