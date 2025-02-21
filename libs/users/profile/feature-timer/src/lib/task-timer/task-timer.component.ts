@@ -1,8 +1,8 @@
 import { Component, inject } from "@angular/core";
-import { TaskTimerService } from "../task-timer-service/task-timer.service";
+import { TaskTimerService, TimerState } from "../task-timer-service/task-timer.service";
 import { CommonModule } from "@angular/common";
 import { FormatTimePipe } from "./format-time.pipes";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, combineLatest, map } from "rxjs";
 import { MatButtonModule } from "@angular/material/button";
 
 @Component({
@@ -13,27 +13,23 @@ import { MatButtonModule } from "@angular/material/button";
   styleUrls: ['./task-timer.component.scss'],
 })
 export class TaskTimerComponent {
-      private readonly timerService: TaskTimerService = inject(TaskTimerService);
-      public readonly isRunning$: BehaviorSubject<boolean> = this.timerService.getIsTimerActive();
-      public readonly timerValue$: BehaviorSubject<number> = this.timerService.getTimerValue();
-      public readonly isStopped$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-      
-      private setStoppedState(IsStopped:boolean): void {
-          this.isStopped$.next(IsStopped);
+    private readonly timerService: TaskTimerService = inject(TaskTimerService);
+    public readonly state$: BehaviorSubject<TimerState> = this.timerService.getState();
+    public readonly displayedTime$ = this.state$.pipe(map(state => state.seconds));
+    public readonly isRunning$ = this.state$.pipe(map(state => state.isActive));
+    public readonly isStopButtonDisabled$ = combineLatest([this.isRunning$, this.displayedTime$]).pipe(
+        map(([isRunning, time]) => !isRunning && time === 0)
+    );
+    
+    public startTimer(): void {
+        this.timerService.startTimer();
+    }
+    
+    public pauseTimer(): void {
+        this.timerService.pauseTimer();
       }
-      
-      public startTimer(): void {
-          this.timerService.startTimer();
-          this.setStoppedState(false);
-      }
-      
-      public pauseTimer(): void {
-          this.timerService.pauseTimer();
-          this.setStoppedState(false);
-      }
-      
-      public stopTimer(): void {
-          this.timerService.stopTimer();
-          this.setStoppedState(true);
-      }
+    
+    public stopTimer(): void {
+    this.timerService.stopTimer();
+    }
 }
