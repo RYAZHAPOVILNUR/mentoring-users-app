@@ -1,23 +1,109 @@
-import { Injectable } from '@angular/core';
+import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap } from 'rxjs/operators';
-import { Observable, EMPTY, of } from 'rxjs';
+import { catchError, filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { of } from 'rxjs';
 import { MaterialsActions } from './materials.actions';
-
-@Injectable()
+import { CreateFolderDTO, FolderDTO, foldersDTOAdapter } from '@users/core/data-access';
+import { ApiService } from '@users/core/http';
+import { Store, select } from '@ngrx/store';
+import { selectAllFolders } from './materials.selectors';
+  
 export class MaterialsEffects {
-  loadMaterialss$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(MaterialsActions.loadMaterialss),
-      concatMap(() =>
-        /** An EMPTY observable only emits completion. Replace with your own observable API request */
-        EMPTY.pipe(
-          map((data) => MaterialsActions.loadMaterialssSuccess({ data })),
-          catchError((error) => of(MaterialsActions.loadMaterialssFailure({ error })))
+  init$ = createEffect(() => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    return actions$.pipe(
+      ofType(MaterialsActions.initFolders),
+      switchMap(() =>
+        apiService.get<FolderDTO[]>('/folders').pipe(
+          map((folders) =>
+            MaterialsActions.loadFoldersSuccess({
+              folders: folders.map((folder) => foldersDTOAdapter.DTOtoEntity(folder)),
+            })
+          ),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(MaterialsActions.loadFoldersFailure({ error }));
+          })
         )
       )
     );
-  });
-
-  constructor(private actions$: Actions) {}
+  }, {functional: true});
+  
+  addFolder = createEffect(
+    () => {
+      const actions$ = inject(Actions);
+      const apiService = inject(ApiService);
+      return actions$.pipe(
+        ofType(MaterialsActions.addFolder),
+        // delay(1500),
+        switchMap(({ folderData }) =>
+          apiService.post<FolderDTO, CreateFolderDTO>('/folders', folderData).pipe(
+            map((folder) => foldersDTOAdapter.DTOtoEntity(folder)),
+            map((folderEntity) => MaterialsActions.addFolderSuccess({ folderData: folderEntity })),
+            catchError((error) => {
+              console.error('Error', error);
+              return of(MaterialsActions.addFolderFailure({ error }));
+            })
+          )
+        )
+      );
+    },
+    { functional: true }
+  );
+  
+  editFolder = createEffect(
+    () => {
+      const actions$ = inject(Actions);
+      const apiService = inject(ApiService);
+      const foldersEntities$ = inject(Store).pipe(select(selectAllFolders));
+  
+      return actions$.pipe(
+        ofType(MaterialsActions.editFolder),
+        withLatestFrom(foldersEntities$),
+        filter(([{ id }, folders]) => Boolean(folders[id])),
+        map(([{ folderData, id, onSuccess }]) => ({
+          folder: {
+            id,
+            name: folderData.name,
+            createAt: folderData.createAt,
+          },
+          onSuccess,
+        })),
+        switchMap(({ folder, onSuccess }) =>
+          apiService.post<FolderDTO, CreateFolderDTO>(`/folder/${folder.id}`, folder).pipe(
+            map((folderData) => ({ folderData, onSuccess })),
+            tap(({ onSuccess }) => onSuccess()),
+            map(({ folderData }) => MaterialsActions.editFolderSuccess({ folderData })),
+            catchError((error) => {
+              console.error('Error', error);
+              return of(MaterialsActions.editFolderFailure({ error }));
+            })
+          )
+        )
+      );
+    },
+    { functional: true }
+  );
+  
+  deleteFolder = createEffect(
+    () => {
+      const actions$ = inject(Actions);
+      const apiService = inject(ApiService);
+      return actions$.pipe(
+        ofType(MaterialsActions.deleteFolder),
+        // delay(1500),
+        switchMap(({ id }) =>
+          apiService.delete<void>(`/folders/${id}`).pipe(
+            map(() => MaterialsActions.deleteFolderSuccess({ id })),
+            catchError((error) => {
+              console.error('Error', error);
+              return of(MaterialsActions.deleteFolderFailure({ error }));
+            })
+          )
+        )
+      );
+    },
+    { functional: true }
+  );
 }
