@@ -1,0 +1,22 @@
+button {
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	background-color: var(--page-color-scheme);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+
+button::after {
+	content: '';
+	position: absolute;
+	width: 12px;
+	height: 12px;
+	border-right: 2px solid var(--page-color-scheme);
+	border-bottom: 2px solid var(--page-color-scheme);
+	transform: rotate(45deg);
+	bottom: 8px;
+	right: 8px;
+}

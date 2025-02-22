@@ -1,1 +1,1 @@
-export * from './lib/feature-folders-list.module';
+export * from './lib/folders-list-container/folders-list-container.component';

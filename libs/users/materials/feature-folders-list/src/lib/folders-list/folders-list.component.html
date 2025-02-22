@@ -1,0 +1,8 @@
+<ng-container>
+	<div class="folders_list" *ngIf="folders$ | async as folders">
+		<div *ngFor="let folder of folders">
+			<users-folders-card [folder]="folder"></users-folders-card>
+		</div>
+		<div *ngIf="loading$ | async"> Loading ...</div>
+	</div>
+</ng-container>
