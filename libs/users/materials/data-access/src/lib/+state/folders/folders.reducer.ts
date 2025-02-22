@@ -2,10 +2,9 @@ import { createReducer, on } from '@ngrx/store';
 import * as FoldersActions from './folders.actions';
 import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 import { FoldersEntity } from '../../folders-dto/folders.entity';
+import { LoadingStatus } from '@users/core/data-access';
 
 export const FOLDERS_FEATURE_KEY = 'folders';
-
-export type LoadingStatus = 'init' | 'loading' | 'loaded' | 'error';
 
 export type FoldersErrors = {
   status: number;
