@@ -1,27 +1,11 @@
 {
-  "name": "users-materials-data-access",
+  "name": "libs/users/materials/data-access",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/users/materials/data-access/src",
   "prefix": "users",
   "tags": [],
   "projectType": "library",
   "targets": {
-    "build": {
-      "executor": "@nx/angular:ng-packagr-lite",
-      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
-      "options": {
-        "project": "libs/users/materials/data-access/ng-package.json"
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "libs/users/materials/data-access/tsconfig.lib.prod.json"
-        },
-        "development": {
-          "tsConfig": "libs/users/materials/data-access/tsconfig.lib.json"
-        }
-      },
-      "defaultConfiguration": "production"
-    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
@@ -40,10 +24,7 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "libs/users/materials/data-access/**/*.ts",
-          "libs/users/materials/data-access/**/*.html"
-        ]
+        "lintFilePatterns": ["libs/users/materials/data-access/**/*.ts", "libs/users/materials/data-access/**/*.html"]
       }
     }
   }

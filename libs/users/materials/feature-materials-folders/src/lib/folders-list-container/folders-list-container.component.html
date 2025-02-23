@@ -1,0 +1,11 @@
+<ng-container
+*ngrxLet="{
+    folders: folders$
+} as vm"
+>
+    <users-folders-list
+        [folders]="vm.folders"
+        (openFolder)="openFolder($event)"
+        (folderDeleted)="folderDeleted($event)"
+    ></users-folders-list>
+</ng-container>

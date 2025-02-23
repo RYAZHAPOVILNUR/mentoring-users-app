@@ -1,12 +1,21 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { Folder } from '../models/folder.model';
+import { Material } from '../models/material.model';
 
 export const MaterialsActions = createActionGroup({
   source: 'Materials',
   events: {
-    'Load Materialss': emptyProps(),
-    'Load Materialss Success': props<{ data: unknown }>(),
-    'Load Materialss Failure': props<{ error: unknown }>(),
+    'Load Material': props<{ material: Material }>(),
+    'Load Material Success': props<{ material: Material }>(),
+    'Load Material Failure': props<{ error: unknown }>(),
+
+    'Load Materails': emptyProps(),
+    'Load Materials Success': props<{ materials: Material[] }>(),
+    'Load Materials Failure': props<{ error: unknown }>(),
+    
+    'Delete Materail': props<{ id: number }>(),
+    'Delete Material Success': props<{ id: number }>(),
+    'Delete Material Failure': props<{ error: unknown }>(),
   },
 });
 
@@ -20,5 +29,11 @@ export const FoldersActions = createActionGroup({
     'Load Folders': emptyProps(),
     'Load Folders Success': props<{folders: Folder[]}>(),
     'Load Folders Failure': props<{error: unknown}>(),
+
+    'Delete Folder': props<{id: number}>(),
+    'Delete Folder Success': props<{id: number}>(),
+    'Delete Folder Failure': props<{error: unknown}>(),
+
+    'Load Folder Id': emptyProps(),
   }
 })

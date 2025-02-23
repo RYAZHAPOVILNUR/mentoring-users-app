@@ -20,5 +20,4 @@ import { MatInputModule } from "@angular/material/input";
 
 export class FolderDialogComponent {
     public folderName = '';
-    
 }

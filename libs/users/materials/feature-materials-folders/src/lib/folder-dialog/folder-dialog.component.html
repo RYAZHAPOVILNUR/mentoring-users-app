@@ -5,6 +5,6 @@
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Отмена</button>
+  <button mat-button [mat-dialog-close]="false">Отмена</button>
   <button mat-button [mat-dialog-close]="folderName">Создать</button>
 </div>

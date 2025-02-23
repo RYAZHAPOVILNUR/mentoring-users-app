@@ -1,0 +1,43 @@
+<div class="title">
+    <h1 mat-dialog-title>{{ data.material.title }}</h1>
+</div>
+<button 
+    class="button-close" 
+    mat-icon-button 
+    mat-dialog-close
+>
+    <mat-icon>close</mat-icon>
+</button>
+<ng-container *ngIf="data.material.material_link.endsWith('.pdf')">
+    <pdf-viewer
+      [src]="data.material.material_link"
+      [render-text]="true"
+      style="width: 800px;
+      height: 600px;
+      margin: 20px;"
+    ></pdf-viewer>
+</ng-container>
+<ng-container *ngIf="!data.material.material_link.endsWith('.pdf') && !data.material.material_link.endsWith('.mp3')">
+    <div class="link">
+        <p mat-dialog-title>Ссылка на видео: {{ data.material.material_link }}</p>
+    </div>
+
+    <div class="video-container">
+        <iframe
+            [src]="getSafeUrl()"
+            frameborder="0"
+            style="width: 100%;
+    height: 315px;"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+    </div>
+</ng-container>
+<ng-container *ngIf="data.material.material_link.endsWith('.mp3')">
+    <div class="audio-container">
+        <audio controls>
+            <source [src]="data.material.material_link" type="audio/mp3">
+            Ваш браузер не поддерживает аудио элемент.
+          </audio>
+    </div>
+</ng-container>

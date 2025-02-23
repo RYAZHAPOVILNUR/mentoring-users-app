@@ -1,0 +1,16 @@
+<div class="container-header">
+    <users-materials-add-button
+    (backFolders)="backFolders()"
+    (addMaterial)="onAddMaterial($event)"
+    ></users-materials-add-button>
+    <h3>{{openedFolder?.title}}</h3>
+</div>
+<div class="materials__cards">
+    <ng-container *ngFor="let material of allMaterials">
+        <users-materials-card
+            [material]="material"
+            (deleteMaterial)="onDeleteMaterial($event)"
+            (click)="onOpenMaterialCard(material)"
+        ></users-materials-card>
+    </ng-container>
+</div>

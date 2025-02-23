@@ -1,0 +1,14 @@
+.materials__cards {
+    display: flex;
+    gap: 10px;
+}
+.container-header {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    h3 {
+        text-align: center;
+        position: relative;
+        bottom: -6px;
+    }
+}

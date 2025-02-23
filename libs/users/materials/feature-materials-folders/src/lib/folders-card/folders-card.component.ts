@@ -1,23 +1,22 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
-import { CommonModule, NgFor } from '@angular/common';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MaterialsFacade } from '@users/materials/data-access';
+import { Folder } from '@users/materials/data-access';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'users-folders-card',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, MatCardModule, MatButtonModule, NgFor],
+  imports: [CommonModule, MatDialogModule, MatCardModule,MatIconModule, MatButtonModule],
   templateUrl: './folders-card.component.html',
   styleUrls: ['./folders-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FoldersCardComponent implements OnInit{
-  private materialsFacade = inject(MaterialsFacade);
-  public folders$ = this.materialsFacade.folders$;
+export class FoldersCardComponent {
+  @Input()
+  folder!: Folder;
 
-  ngOnInit(): void {
-    this.materialsFacade.loadFolders()
-  }
+  @Output() deleteFolder = new EventEmitter<Folder>()
 }

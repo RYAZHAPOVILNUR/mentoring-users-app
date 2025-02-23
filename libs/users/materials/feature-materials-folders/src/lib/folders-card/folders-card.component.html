@@ -1,13 +1,10 @@
-<div *ngFor="let folder of folders$ | async">
-    <mat-card class="folder-card">
-      <mat-card-header>
-        <mat-card-title>{{ folder.title }}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <p>Материалы в папке:</p>
-        <ul>
-          <li *ngFor="let material of folder.materials">{{ material.irl }}</li>
-        </ul>
-      </mat-card-content>
-    </mat-card>
-  </div>
+<div>
+  <mat-card class="folder-card">
+      <div class="folder-card-header">
+        <mat-icon>folder</mat-icon>
+        <button mat-icon-button (click)="deleteFolder.emit(folder)"><mat-icon class="delete">delete</mat-icon></button>
+      </div>
+      <div class="title">{{ folder.title }}</div>
+      <div class="sub-title">{{ folder.createdAt }}</div>
+  </mat-card>
+</div>
