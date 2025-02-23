@@ -1,21 +1,21 @@
 {
-  "name": "data-access",
+  "name": "feature-folders-list",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "sourceRoot": "/libs/users/materials/data-access/src",
+  "sourceRoot": "/libs/users/materials/feature-folders-list/src",
   "prefix": "lib",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:ng-packagr",
       "options": {
-        "project": "/libs/users/materials/data-access/ng-package.json"
+        "project": "/libs/users/materials/feature-folders-list/ng-package.json"
       },
       "configurations": {
         "production": {
-          "tsConfig": "/libs/users/materials/data-access/tsconfig.lib.prod.json"
+          "tsConfig": "/libs/users/materials/feature-folders-list/tsconfig.lib.prod.json"
         },
         "development": {
-          "tsConfig": "/libs/users/materials/data-access/tsconfig.lib.json"
+          "tsConfig": "/libs/users/materials/feature-folders-list/tsconfig.lib.json"
         }
       },
       "defaultConfiguration": "production"
@@ -23,7 +23,7 @@
     "test": {
       "executor": "@angular-devkit/build-angular:karma",
       "options": {
-        "tsConfig": "/libs/users/materials/data-access/tsconfig.spec.json",
+        "tsConfig": "/libs/users/materials/feature-folders-list/tsconfig.spec.json",
         "polyfills": [
           "zone.js",
           "zone.js/testing"
