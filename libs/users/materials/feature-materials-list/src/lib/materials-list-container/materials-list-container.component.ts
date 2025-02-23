@@ -1,13 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialsListComponent } from '../materials-list/materials-list.component';
-import { DetailFolderCardVm } from '../materials-card/detail-folder-card-vm';
 import { LetDirective } from '@ngrx/component';
-import { FoldersEntity, FoldersFacade } from '@users/materials/data-access';
-import { Store } from '@ngrx/store';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { MaterialsFacade } from '@users/materials/data-access';
 import { MaterialsCardComponent } from '../materials-card/materials-card.component';
+import { MaterialsListContainerStore } from './materials-list-container.store';
 
 @Component({
   selector: 'users-materials-list-container',
@@ -19,8 +16,13 @@ import { MaterialsCardComponent } from '../materials-card/materials-card.compone
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialsListContainerComponent {
-  private readonly foldersFacade = inject(FoldersFacade);
-  private readonly store = inject(Store);
-  private readonly router = inject(Router);
-  public folder!: FoldersEntity;
+  private readonly componentStore = inject(MaterialsListContainerStore);
+  public readonly materialsFacade = inject(MaterialsFacade);
+  public readonly materials$ = this.componentStore.materials$;
+  public readonly status$ = this.componentStore.status$;
+  public readonly errors$ = this.componentStore.errors$;
+
+  constructor() {
+    // console.log('MAterials List:>>>', this.materials$);
+  }
 }

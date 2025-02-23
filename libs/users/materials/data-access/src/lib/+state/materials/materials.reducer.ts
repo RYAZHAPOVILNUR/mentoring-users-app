@@ -1,10 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
-import { MaterialsActions } from './materials.actions';
+import * as MaterialsActions from './materials.actions';
 import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 import { MaterialsEntity } from '../../materials-dto/materials.entity';
 import { LoadingStatus } from '@users/core/data-access';
 
 export const MATERIALS_FEATURE_KEY = 'materials';
+
+// export type LoadingStatus = 'init' | 'loading' | 'loaded' | 'error';
 
 export type MaterialsErrors = {
   status: number;
@@ -35,5 +37,13 @@ export const materialsReducer = createReducer(
   on(MaterialsActions.initMaterials, (state) => ({
     ...state,
     status: 'loading' as const,
+  })),
+  on(MaterialsActions.loadMaterialsSuccess, (state, { materials }) =>
+    materialsAdapter.setAll(materials, { ...state, status: 'loaded' as const })
+  ),
+  on(MaterialsActions.loadMaterialsFailure, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
   }))
 );

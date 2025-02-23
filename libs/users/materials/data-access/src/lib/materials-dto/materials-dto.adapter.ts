@@ -9,7 +9,6 @@ type MaterialsDTOAdapter = {
 export const materialsDTOAdapter: MaterialsDTOAdapter = {
   DTOtoEntity(dto) {
     const { created_at, material_link, folder_id, ...otherFields } = dto;
-
     return {
       ...otherFields,
       createdAt: created_at,

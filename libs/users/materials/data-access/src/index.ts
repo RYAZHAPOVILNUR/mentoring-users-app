@@ -3,19 +3,21 @@ export * from './lib/folders-dto/folders-dto.models';
 export * from './lib/folders-dto/folders-vm';
 export * from './lib/folders-dto/folders-vm.adapter';
 export * from './lib/folders-dto/folders-dto.adapter';
+
 export * from './lib/+state/folders/folders.actions';
 export * from './lib/+state/folders/folders.effects';
 export * from './lib/+state/folders/folders.reducer';
 export * from './lib/+state/folders/folders.selectors';
 export * from './lib/+state/folders/folders.facade';
-// =========
+
 export * from './lib/materials-dto/materials.entity';
 export * from './lib/materials-dto/materials-dto.models';
 export * from './lib/materials-dto/materials-vm';
 export * from './lib/materials-dto/materials-vm.adapter';
 export * from './lib/materials-dto/materials-dto.adapter';
+
 export * from './lib/+state/materials/materials.actions';
 export * from './lib/+state/materials/materials.effects';
 export * from './lib/+state/materials/materials.reducer';
 export * from './lib/+state/materials/materials.selectors';
-// export * from './lib/+state/materials/materials.facade';
+export * from './lib/+state/materials/materials.facade';
