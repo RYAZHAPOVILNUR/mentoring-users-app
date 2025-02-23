@@ -1,0 +1,21 @@
+.material-content__frame {
+  padding: 30px;
+}
+
+.material-content__title {
+  color: white;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.material-content__pdf {
+  width: 500px;
+}
+
+.material-content__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

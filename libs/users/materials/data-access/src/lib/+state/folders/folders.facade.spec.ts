@@ -1,0 +1,89 @@
+import { NgModule } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule, Store } from '@ngrx/store';
+import { readFirst } from '@nx/angular/testing';
+
+import * as FoldersActions from './folders.actions';
+import { FoldersEffects } from './folders.effects';
+import { FoldersFacade } from './folders.facade';
+import { FoldersEntity } from './folders.models';
+import { FOLDERS_FEATURE_KEY, FoldersState, initialFoldersState, foldersReducer } from './folders.reducer';
+import * as FoldersSelectors from './folders.selectors';
+
+interface TestSchema {
+  folders: FoldersState;
+}
+
+describe('FoldersFacade', () => {
+  let facade: FoldersFacade;
+  let store: Store<TestSchema>;
+  const createFoldersEntity = (id: string, name = ''): FoldersEntity => ({
+    id,
+    name: name || `name-${id}`,
+  });
+
+  describe('used in NgModule', () => {
+    beforeEach(() => {
+      @NgModule({
+        imports: [
+          StoreModule.forFeature(FOLDERS_FEATURE_KEY, foldersReducer),
+          EffectsModule.forFeature([FoldersEffects]),
+        ],
+        providers: [FoldersFacade],
+      })
+      class CustomFeatureModule {}
+
+      @NgModule({
+        imports: [StoreModule.forRoot({}), EffectsModule.forRoot([]), CustomFeatureModule],
+      })
+      class RootModule {}
+      TestBed.configureTestingModule({ imports: [RootModule] });
+
+      store = TestBed.inject(Store);
+      facade = TestBed.inject(FoldersFacade);
+    });
+
+    /**
+     * The initially generated facade::loadAll() returns empty array
+     */
+    it('loadAll() should return empty list with loaded == true', async () => {
+      let list = await readFirst(facade.allFolders$);
+      let isLoaded = await readFirst(facade.loaded$);
+
+      expect(list.length).toBe(0);
+      expect(isLoaded).toBe(false);
+
+      facade.init();
+
+      list = await readFirst(facade.allFolders$);
+      isLoaded = await readFirst(facade.loaded$);
+
+      expect(list.length).toBe(0);
+      expect(isLoaded).toBe(true);
+    });
+
+    /**
+     * Use `loadFoldersSuccess` to manually update list
+     */
+    it('allFolders$ should return the loaded list; and loaded flag == true', async () => {
+      let list = await readFirst(facade.allFolders$);
+      let isLoaded = await readFirst(facade.loaded$);
+
+      expect(list.length).toBe(0);
+      expect(isLoaded).toBe(false);
+
+      store.dispatch(
+        FoldersActions.loadFoldersSuccess({
+          folders: [createFoldersEntity('AAA'), createFoldersEntity('BBB')],
+        })
+      );
+
+      list = await readFirst(facade.allFolders$);
+      isLoaded = await readFirst(facade.loaded$);
+
+      expect(list.length).toBe(2);
+      expect(isLoaded).toBe(true);
+    });
+  });
+});

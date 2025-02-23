@@ -1,37 +1,34 @@
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
+import { UsersActions } from './users.actions';
+import { LoadingStatus, UsersEntity } from '@users/core/data-access';
+import { UsersErrors } from './users.type';
 
-import * as UsersActions from './users.actions';
-import { UsersEntity } from '@users/core/data-access';
-import { LoadingStatus } from '@users/core/data-access';
+export const usersAdapter: EntityAdapter<UsersEntity> = createEntityAdapter<UsersEntity>();
 
 export const USERS_FEATURE_KEY = 'users';
-
-export type UsersErrors = {
-  status: number;
-  [key: string]: unknown;
-};
 
 export interface UsersState extends EntityState<UsersEntity> {
   selectedId?: string | number; // which Users record has been selected
   status: LoadingStatus;
   error: UsersErrors | null;
+  usersFilter: { name: string };
 }
 
 export interface UsersPartialState {
   readonly [USERS_FEATURE_KEY]: UsersState;
 }
 
-export const usersAdapter: EntityAdapter<UsersEntity> = createEntityAdapter<UsersEntity>();
-
 export const initialUsersState: UsersState = usersAdapter.getInitialState({
   // set initial required properties
   status: 'init',
   error: null,
+  usersFilter: { name: '' },
 });
 
 const reducer = createReducer(
   initialUsersState,
+
   on(UsersActions.initUsers, (state) => ({
     ...state,
     status: 'loading' as const,
@@ -46,6 +43,25 @@ const reducer = createReducer(
   })),
   on(UsersActions.deleteUserSuccess, (state, { id }) => usersAdapter.removeOne(id, { ...state })),
   on(UsersActions.addUserSuccess, (state, { userData }) => usersAdapter.addOne({ ...userData }, { ...state })),
+  on(UsersActions.addUserFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
+  on(UsersActions.editStorypointsUserSuccess, (state, { userData }) =>
+    usersAdapter.updateOne(
+      {
+        id: userData.id,
+        changes: userData,
+      },
+      state
+    )
+  ),
+  on(UsersActions.editStorypointsUserFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
   on(UsersActions.editUserSuccess, (state, { userData }) =>
     usersAdapter.updateOne(
       {
@@ -75,6 +91,10 @@ const reducer = createReducer(
   on(UsersActions.updateUserStatus, (state, { status }) => ({
     ...state,
     status,
+  })),
+  on(UsersActions.setUsersFilter, (state, { name }) => ({
+    ...state,
+    usersFilter: { name },
   }))
 );
 

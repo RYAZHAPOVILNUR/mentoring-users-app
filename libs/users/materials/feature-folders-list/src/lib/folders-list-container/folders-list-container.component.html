@@ -1,0 +1,17 @@
+<ng-container
+  *ngrxLet="{
+    folders: folders$,
+    status: status$,
+    errors: errors$,
+  } as vm"
+>
+  <folders-list
+    [vm]="vm"
+    (openFolder)="onOpenFolder($event)"
+    (editFolder)="onEditFolder($event)"
+    (deleteFolder)="onDeleteFolder($event)"
+  />
+</ng-container>
+<div class="folders-button__container">
+  <create-folders-button></create-folders-button>
+</div>

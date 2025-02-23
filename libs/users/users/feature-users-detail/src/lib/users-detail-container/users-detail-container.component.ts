@@ -25,6 +25,7 @@ export class UsersDetailComponent {
   private readonly store = inject(Store);
   private readonly router = inject(Router);
   public user!: UsersEntity;
+  
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
 
@@ -46,6 +47,25 @@ export class UsersDetailComponent {
 
   public onEditUser(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
     this.usersFacade.editUser(userData, this.user.id, onSuccessCb);
+    this.router.navigate(['/admin/users', this.user.id], {
+      queryParams: { edit: false },
+    });
+  }
+
+  public onEditStorypointsUser(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
+    this.usersFacade.editStorypointsUser(
+      {
+        ...userData,
+        name: this.user.name || '',
+        username: this.user.username || '',
+        city: this.user.city || '',
+        email: this.user.email?.trim().toLowerCase() || '',
+        purchaseDate: new Date().toString() || '',
+        educationStatus: 'trainee',
+      },
+      this.user.id,
+      onSuccessCb
+    );
     this.router.navigate(['/admin/users', this.user.id], {
       queryParams: { edit: false },
     });
