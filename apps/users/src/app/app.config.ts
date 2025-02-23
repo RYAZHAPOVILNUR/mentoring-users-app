@@ -35,7 +35,7 @@ export const appConfig: ApplicationConfig = {
       commentsEffects,
       githubApiEffects,
       backlogEffects,
-      SettingsEffects
+      SettingsEffects,
     ),
     provideStore({
       router: routerReducer,
