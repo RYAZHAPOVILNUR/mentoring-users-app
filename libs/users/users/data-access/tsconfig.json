@@ -16,7 +16,8 @@
       "path": "./tsconfig.lib.json"
     },
     {
-      "path": "./tsconfig.spec.json"
+      "path": "./tsconfig.spec.json",
+      "composite": true,
     }
   ],
   "extends": "../../../../tsconfig.base.json",

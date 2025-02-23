@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UsersMaterialsComponent } from './users-materials.component';
+import { UsersFilterComponent } from './users-filter.component';
 
-describe('UsersMaterialsComponent', () => {
-  let component: UsersMaterialsComponent;
-  let fixture: ComponentFixture<UsersMaterialsComponent>;
+describe('UsersFilterComponent', () => {
+  let component: UsersFilterComponent;
+  let fixture: ComponentFixture<UsersFilterComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UsersMaterialsComponent],
+      imports: [UsersFilterComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(UsersMaterialsComponent);
+    fixture = TestBed.createComponent(UsersFilterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

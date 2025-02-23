@@ -20,6 +20,7 @@ import { articlesEffects, articlesFeature, commentsEffects, commentsFeature } fr
 import { tasksEffects, tasksFeature } from '@users/users/task/data-access';
 import { CLIENT_ID, githubApiEffects, githubApiFeature } from '@users/core/github-api/data-access';
 import { backlogFeature, backlogEffects } from '@users/users/backlog/data-access';
+import { materialsEffects, materialsReducer } from '@users/materials/data-access';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -28,6 +29,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideEffects(
+      materialsEffects,
       userEffects,
       authEffects,
       articlesEffects,
@@ -39,6 +41,7 @@ export const appConfig: ApplicationConfig = {
     ),
     provideStore({
       router: routerReducer,
+      materials: materialsReducer,
       [USERS_FEATURE_KEY]: usersReducer,
       [settingsFeature.name]: settingsFeature.reducer,
       [authFeature.name]: authFeature.reducer,

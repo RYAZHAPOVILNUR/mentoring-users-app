@@ -1,0 +1,15 @@
+<ng-container
+    *ngrxLet="{
+        openedFolder: openedFolder$,
+        allMaterials: allMaterials$,
+    } as vm"
+>
+    <users-materials-list
+    [allMaterials]="vm.allMaterials"
+    [openedFolder]="vm.openedFolder"
+    (foldersBack)="foldersBack()"
+    (addMaterial)="addMaterial($event)"
+    (deleteMaterial)="deleteMaterial($event)"
+    (openMaterialCard)="openMaterialCard($event)"
+    ></users-materials-list>
+</ng-container>

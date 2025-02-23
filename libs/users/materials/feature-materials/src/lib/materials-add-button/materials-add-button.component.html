@@ -1,0 +1,23 @@
+<button 
+class="button-back" 
+mat-icon-button 
+(click)="onBack()"
+>
+<mat-icon>arrow_back</mat-icon></button>
+<div class="button-add">
+  <button mat-fab color="primary" [matMenuTriggerFor]="menu"><mat-icon>add</mat-icon></button>
+  <mat-menu #menu="matMenu">
+    <button
+    mat-menu-item
+    (click)="onAddMaterial('Видео')"
+    >Видео</button>
+    <button
+    mat-menu-item
+    (click)="onAddMaterial('PDF')"
+    >Файл PDF</button>
+    <button
+    mat-menu-item
+    (click)="onAddMaterial('Подкаст')"
+    >Подкаст</button>
+  </mat-menu>
+</div>

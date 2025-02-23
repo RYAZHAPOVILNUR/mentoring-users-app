@@ -1,0 +1,17 @@
+
+        <mat-card class="material__card">
+            <div class="material__card-header">
+                <ng-container *ngIf="isVideo(material.material_link)">
+                    <mat-icon>smart_display</mat-icon>
+                  </ng-container>
+                  <ng-container *ngIf="isPdf(material.material_link) && material.material_link.endsWith('.pdf')">
+                    <mat-icon>picture_as_pdf</mat-icon>
+                  </ng-container>
+                  <ng-container *ngIf="isAudio(material.material_link)">
+                    <mat-icon>audiotrack</mat-icon>
+                  </ng-container>
+                <button mat-icon-button (click)="onDeleteMaterial(material)"><mat-icon class="delete">delete</mat-icon></button>
+            </div>
+            <div class="title">{{ material.title }}</div>
+            <div class="sub-title">{{ material.created_at | date:'dd.MMM.yyyy'}}</div>
+        </mat-card>
