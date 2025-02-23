@@ -1,22 +1,20 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { AsyncPipe, CommonModule, DatePipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { MaterialsListComponent } from '../materials-list/materials-list.component';
 import { LetDirective } from '@ngrx/component';
 import {
   TMaterialDTO,
   MaterialsFacade,
-  TCreateMaterialDTO,
   TMaterialListVM,
   FoldersFacade,
+  IMaterialFromAddMaterialDialog,
 } from '@users/materials/data-access';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, combineLatest, map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, tap } from 'rxjs';
 import { MaterialsAddButtonComponent } from '@users/materials/feature-materials-create';
-
-// import { MaterialsAddButtonComponent } from '@users/materials/feature-materials-create';
 
 @Component({
   selector: 'materials-list-container',
@@ -39,22 +37,27 @@ export class MaterialsListContainerComponent implements OnInit {
   public readonly errors$ = this.MaterialsFacade.errors$;
 
   private readonly folders$ = this.MaterialsFoldersFacade.folders$;
-  private readonly folderSubject$ = new BehaviorSubject<TMaterialListVM['folder']>({ title: 'folder title' });
+  private readonly folderSubject$ = new BehaviorSubject<TMaterialListVM['folder']>({});
   public readonly folder$: Observable<TMaterialListVM['folder']> = this.folderSubject$.asObservable();
 
   ngOnInit(): void {
+    combineLatest([this.route.paramMap, this.folders$])
+      .pipe(
+        tap(([params, folders]) => {
+          this.folderSubject$.next({
+            id: Number(params.get('id')),
+            title: folders.find((folder) => Number(params.get('id')) === folder.id)?.title,
+          });
+        }),
+        takeUntilDestroyed(this.destroyRef$)
+      )
+      .subscribe();
+    this.MaterialsFacade.initFoldersFromMaterials();
     this.MaterialsFacade.init();
-
-    combineLatest([this.route.paramMap, this.folders$]).pipe(
-      map(([params, folders]) => {
-        this.folderSubject$.next({
-          title: folders.find((folder) => Number(params.get('id')) === folder.id)?.title,
-        });
-      })
-    );
   }
 
   public onGoBack(): void {
+    this.MaterialsFacade.init();
     this.router.navigate(['/materials']);
   }
 
@@ -74,13 +77,13 @@ export class MaterialsListContainerComponent implements OnInit {
       .subscribe();
   }
 
-  public onAddMaterial(material: TCreateMaterialDTO): void {
+  public onAddMaterial(material: IMaterialFromAddMaterialDialog): void {
     this.folder$
       .pipe(
         tap((folder: TMaterialListVM['folder']) => {
           this.MaterialsFacade.addMaterial({
             ...material,
-            material_link: material.material_link,
+            material_link: material.materialLink,
             folder_id: folder.id ?? Date.now(),
           });
         }),

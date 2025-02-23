@@ -3,8 +3,10 @@ import { inject } from '@angular/core';
 import { ApiService } from '@users/core/http';
 import * as MatererialsActions from './materials.actions';
 import { TCreateMaterialDTO, TMaterialDTO } from '../../models/materials/material-dto.model';
-import { catchError, map, of, switchMap, withLatestFrom } from 'rxjs';
+import { catchError, filter, map, of, switchMap, withLatestFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { selectFoldersEnteties } from '../folders/folders.selectors';
+import * as MaterialsFoldersActions from '../../+state/folders/folders.actions';
 import { selectRouteParams } from '@users/core/data-access';
 
 export const loadMaterials = createEffect(
@@ -16,23 +18,35 @@ export const loadMaterials = createEffect(
     return actions$.pipe(
       ofType(MatererialsActions.loadMaterials),
       withLatestFrom(store.select(selectRouteParams)),
-      switchMap(([, params]) => {
-        if (params['id']) {
-          return apiService.get<TMaterialDTO[]>('/material').pipe(
-            map((materials) =>
-              MatererialsActions.loadMaterialsSuccess({
-                // materials: materials.filter((material) => params['id'] === material.folder_id), отфильтрованные по id
-                materials,
-              })
-            ),
-            catchError((error) => {
-              console.log('Error', error);
-              return of(MatererialsActions.loadMaterialsFailed({ error }));
+      switchMap(([, params]) =>
+        apiService.get<TMaterialDTO[]>('/material').pipe(
+          map((materials) =>
+            MatererialsActions.loadMaterialsSuccess({
+              materials: materials.filter((material) => Number(params['id']) === material.folder_id), // отфильтрованные по id
+              // materials,
             })
-          );
-        }
-        return of(MatererialsActions.updateMaterialsStatus({ status: 'loading' }));
-      })
+          ),
+          catchError((error) => {
+            console.log('Error', error);
+            return of(MatererialsActions.loadMaterialsFailed({ error }));
+          })
+        )
+      )
+    );
+  },
+  { functional: true }
+);
+
+export const loadFoldersFromMaterials = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const store = inject(Store);
+
+    return actions$.pipe(
+      ofType(MatererialsActions.loadFoldersFromMaterials),
+      withLatestFrom(store.select(selectFoldersEnteties)),
+      filter(([, foldersEntities]) => !Object.keys(foldersEntities).length),
+      map(() => MaterialsFoldersActions.loadFolder())
     );
   },
   { functional: true }

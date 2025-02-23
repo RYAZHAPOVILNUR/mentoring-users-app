@@ -30,10 +30,16 @@ export class MaterialsCardComponent {
   }
 
   public getFileIcon(): string {
-    if (this.material.material_link.includes('.pdf')) return 'picture_as_pdf';
-    if (this.material.material_link.includes('.mp3')) return 'audiotrack';
-    if (this.material.material_link.includes('youtube.com')) return 'ondemand_video';
-    else return 'insert_drive_file';
+    switch (true) {
+      case this.material.material_link.endsWith('.pdf'):
+        return 'picture_as_pdf';
+      case this.material.material_link.endsWith('.mp3'):
+        return 'audiotrack';
+      case this.material.material_link.includes('youtube.com'):
+        return 'ondemand_video';
+      default:
+        return 'insert_drive_file';
+    }
   }
 
   public onDeleteMaterial(): void {

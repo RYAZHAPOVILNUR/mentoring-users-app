@@ -31,13 +31,13 @@ export const materialsFoldersFeature = createFeature({
       ...state,
       status: 'loading' as const,
     })),
-    on(MaterialsFoldersActions.loadFolderSuccess, (state, { folders }) =>
+    on(MaterialsFoldersActions.loadFoldersSuccess, (state, { folders }) =>
       materialsFoldersAdapter.setAll(folders, {
         ...state,
         status: 'loaded' as const,
       })
     ),
-    on(MaterialsFoldersActions.loadFolderFailure, (state, { error }) => ({
+    on(MaterialsFoldersActions.loadFoldersFailure, (state, { error }) => ({
       ...state,
       status: 'error' as const,
       error,
@@ -54,6 +54,20 @@ export const materialsFoldersFeature = createFeature({
       materialsFoldersAdapter.addOne({ ...folderData }, { ...state })
     ),
     on(MaterialsFoldersActions.addFolderFailed, (state, { error }) => ({
+      ...state,
+      status: 'error' as const,
+      error,
+    })),
+    on(MaterialsFoldersActions.loadFolderSuccess, (state, { folder }) =>
+      materialsFoldersAdapter.addOne(
+        { ...folder },
+        {
+          ...state,
+          status: 'loaded' as const,
+        }
+      )
+    ),
+    on(MaterialsFoldersActions.loadFolderFailed, (state, { error }) => ({
       ...state,
       status: 'error' as const,
       error,

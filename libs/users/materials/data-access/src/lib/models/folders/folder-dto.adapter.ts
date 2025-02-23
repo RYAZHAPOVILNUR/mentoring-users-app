@@ -6,7 +6,7 @@ type TFolderDTOAdapter = {
   entityToDTO(entity: TFolderEntity): TFolderDTO;
 };
 
-export const folderDtoAdapter: TFolderDTOAdapter = {
+export const folderDTOAdapter: TFolderDTOAdapter = {
   DTOtoEntity(dto) {
     const { created_at, ...otherAddressFields } = dto;
 

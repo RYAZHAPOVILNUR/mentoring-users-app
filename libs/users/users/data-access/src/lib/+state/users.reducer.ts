@@ -4,12 +4,6 @@ import { createReducer, on, Action } from '@ngrx/store';
 import * as UsersActions from './users.actions';
 import { UsersEntity } from '@users/core/data-access';
 import { LoadingStatus } from '@users/core/data-access';
-import {
-  addUserStoryPoints,
-  addUserStoryPointsFailed,
-  addUserStoryPointsSuccess,
-  setUsersFilter,
-} from './users.actions';
 import { IUsersFilter } from '../utils/users-filter.interface';
 
 export const USERS_FEATURE_KEY = 'users';

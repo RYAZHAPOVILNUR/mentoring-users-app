@@ -23,7 +23,7 @@ export class MaterialsAddDialogComponent {
       nonNullable: true,
       validators: [Validators.required, Validators.minLength(2)],
     }),
-    material_link: new FormControl('', {
+    materialLink: new FormControl('', {
       nonNullable: true,
       validators: [Validators.required, Validators.minLength(2)],
     }),

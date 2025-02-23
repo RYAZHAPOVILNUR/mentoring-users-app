@@ -5,10 +5,10 @@ import { TFolderEntity } from '../../models/folders/folder.entity';
 
 export const loadFolders = createAction('[Materials Page] Load Folders');
 
-export const loadFolderSuccess = createAction('[Materials Page] Load Folder Success', props<IFoldersActionSuccess>());
+export const loadFoldersSuccess = createAction('[Materials Page] Load Folders Success', props<IFoldersActionSuccess>());
 
-export const loadFolderFailure = createAction(
-  '[Materials Page] Load Folder Failure',
+export const loadFoldersFailure = createAction(
+  '[Materials Page] Load Folders Failure',
   props<{
     error: any;
   }>()
@@ -51,6 +51,22 @@ export const addFolderSuccess = createAction(
 
 export const addFolderFailed = createAction(
   '[Materials Page] Add Folder Failed',
+  props<{
+    error: any;
+  }>()
+);
+
+export const loadFolder = createAction('[Materials Page] Load Folder');
+
+export const loadFolderSuccess = createAction(
+  '[Materials Page] Load Folder Success',
+  props<{
+    folder: TFolderEntity;
+  }>()
+);
+
+export const loadFolderFailed = createAction(
+  '[Materials Page] Load Folder Failed',
   props<{
     error: any;
   }>()

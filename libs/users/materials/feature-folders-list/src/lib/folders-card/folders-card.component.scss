@@ -14,11 +14,12 @@
   &:first-child {
     padding-top: 0;
   }
-  &__icon {
-  }
   &__title {
     font-size: 18px;
     margin-top: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   &__date {
     margin-top: 10px;

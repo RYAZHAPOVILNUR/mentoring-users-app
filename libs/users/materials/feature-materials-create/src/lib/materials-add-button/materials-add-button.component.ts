@@ -6,11 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MaterialsAddDialogComponent } from '../materials-add-dialog/materials-add-dialog.component';
 import { tap } from 'rxjs';
-
-interface IMaterialFromAddMaterialDialog {
-  title: string;
-  material_link: string;
-}
+import { IMaterialFromAddMaterialDialog } from '@users/materials/data-access';
 
 @Component({
   selector: 'materials-add-button',
@@ -37,7 +33,9 @@ export class MaterialsAddButtonComponent {
       .afterClosed()
       .pipe(
         tap((material: IMaterialFromAddMaterialDialog) => {
-          this.sendNewMaterial.emit(material);
+          if (material) {
+            this.sendNewMaterial.emit(material);
+          }
         })
       )
       .subscribe();

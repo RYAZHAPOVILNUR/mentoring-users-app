@@ -60,9 +60,9 @@ export const addUserFailed = createAction(
   }>()
 );
 
-// export const selectId = createAction('[Users Page] Select Id', props<{ id: number }>());
+export const selectId = createAction('[Users Page] Select Id', props<{ id: number }>());
 
-// export const deleteSelectedId = createAction('[Users Page] Delete Selected Id');
+export const deleteSelectedId = createAction('[Users Page] Delete Selected Id');
 
 export const editUser = createAction(
   '[Users Detail] Edit User',
