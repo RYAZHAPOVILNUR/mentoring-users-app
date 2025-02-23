@@ -17,7 +17,7 @@ export * from './lib/materials-dto/materials-vm.adapter';
 export * from './lib/materials-dto/materials-dto.adapter';
 
 export * from './lib/+state/materials/materials.actions';
-export * from './lib/+state/materials/materials.effects';
+export * as loadMaterial from './lib/+state/materials/materials.effects';
 export * from './lib/+state/materials/materials.reducer';
 export * from './lib/+state/materials/materials.selectors';
 export * from './lib/+state/materials/materials.facade';

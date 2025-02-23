@@ -19,4 +19,20 @@ export class MaterialsFacade {
   init() {
     this.store.dispatch(MaterialActions.initMaterials());
   }
+
+  getmaterialFromStore(id: number) {
+    return this.store.select(MaterialSelectors.selectMaterialById(id)).pipe(
+      switchMap((user: MaterialsEntity | undefined): Observable<MaterialsEntity | null> => {
+        if (user) {
+          return of(user);
+        } else {
+          return of(null);
+        }
+      })
+    );
+  }
+
+  loadMaterial() {
+    this.store.dispatch(MaterialActions.loadMaterial());
+  }
 }

@@ -12,7 +12,7 @@ const initialState: MaterialsListState = {
   materials: [],
 };
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class MaterialsListContainerStore extends ComponentStore<MaterialsListState> {
   private readonly materialsFacade = inject(MaterialsFacade);
   public readonly materials$ = this.select(({ materials }) => materials);
@@ -22,7 +22,7 @@ export class MaterialsListContainerStore extends ComponentStore<MaterialsListSta
     super(initialState);
     this.materialsFacade.init();
     this.setMaterialsFromGlobalToLocaleStore();
-    console.log('Materils', this.materials$);
+    console.log('Materils Store>>', this.materials$);
   }
 
   private setMaterialsFromGlobalToLocaleStore(): void {
