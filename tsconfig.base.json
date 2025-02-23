@@ -59,7 +59,8 @@
       "@users/users/tasks/data-acces": ["libs/users/tasks/data-acces/src/index.ts"],
       "@users/users/tasks/tasks-view": ["libs/users/tasks/tasks-view/src/index.ts"],
       "@users/users/tasks/tasks-view-container": ["libs/users/tasks/tasks-view-container/src/index.ts"],
-      "@users/materials/feature-folders-list": ["libs/users/materials/feature-folders-list/src/index.ts"]
+      "@users/materials/feature-folders-list": ["libs/users/materials/feature-folders-list/src/index.ts"],
+      "@users/materials/feature-folders-create": ["libs/users/materials/feature-folders-create/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,0 +1,34 @@
+{
+  "name": "feature-folders-create",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "/libs/users/materials/feature-folders-create/src",
+  "prefix": "lib",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:ng-packagr",
+      "options": {
+        "project": "/libs/users/materials/feature-folders-create/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "/libs/users/materials/feature-folders-create/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "/libs/users/materials/feature-folders-create/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "tsConfig": "/libs/users/materials/feature-folders-create/tsconfig.spec.json",
+        "polyfills": [
+          "zone.js",
+          "zone.js/testing"
+        ]
+      }
+    }
+  }
+}

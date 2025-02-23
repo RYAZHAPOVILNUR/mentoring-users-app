@@ -1,0 +1,15 @@
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'folders-add-dialog',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './folders-add-dialog.component.html',
+  styleUrls: ['./folders-add-dialog.component.scss'],
+  encapsulation: ViewEncapsulation.Emulated,
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class FoldersAddDialogComponent {
+
+}
