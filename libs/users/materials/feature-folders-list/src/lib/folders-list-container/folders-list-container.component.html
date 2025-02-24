@@ -1,1 +1,11 @@
+<ng-container
+  *ngrxLet="{
+  folders: folders$,
+  status: status$,
+  errors: errors$,
+  } as vmf"
+>
+
+  <folders-list [vmf]="vmf"></folders-list>
+</ng-container>
 <folders-add-button></folders-add-button>

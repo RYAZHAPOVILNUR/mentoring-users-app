@@ -1,1 +1,26 @@
-<p>folders-list works!</p>
+<ng-container *ngIf="vmf.status === 'loading'; else loadingResult">
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+
+<ng-template #loadingResult>
+  <ng-container *ngIf="vmf.status === 'loaded'; else error">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-3" *ngFor="let folder of vmf.folders">
+          <folders-card
+            [folder]="folder"
+          />
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #error>
+  <div class="alert alert-danger" role="alert">
+    <h1>{{ vmf.errors }}</h1>
+    <hr />
+    {{ vmf.errors }}
+  </div>
+</ng-template>
+
