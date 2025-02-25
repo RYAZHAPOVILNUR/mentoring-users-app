@@ -1,0 +1,28 @@
+<button
+  type="button" mat-flat-button
+  class="folders-card"
+  (mouseenter)="showDelete = true"
+  (mouseleave)="showDelete = false"
+  (dblclick)="openMaterialsContent($event)"
+>
+  <div class="card-cont">
+    <div class="icons-cont">
+      <div class="folder-icon">
+        <mat-icon>{{iconType}}</mat-icon>
+      </div>
+      <div class="delete-icon" [ngClass]="{ 'visible': showDelete }">
+        <button mat-mini-fab (click)="deleteMaterialFolderDialog($event)">
+          <mat-icon fontIcon="delete"></mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="titles-cont">
+      <div class="folder-title">
+        {{ material.title }}
+      </div>
+      <div class="folder-date">
+        {{ material.created_at | date:'MMMM d, yyyy' }}
+      </div>
+    </div>
+  </div>
+</button>

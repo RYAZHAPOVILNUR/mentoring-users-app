@@ -6,26 +6,20 @@ import { Observable, of, switchMap } from 'rxjs';
 import { UsersErrors } from './users.reducer';
 import { onSuccessEditionCbType } from './users.actions';
 import { selectLoggedUser } from '@auth/data-access';
-import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { CreateUserDTO, UsersDTO, UsersEntity } from '@users/core/data-access';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
   private readonly store = inject(Store);
 
-  /**
-   * Combine pieces of state using createSelector,
-   * and expose them as observables through the facade.
-   */
   public readonly status$ = this.store.pipe(select(UsersSelectors.selectUsersStatus));
   public readonly allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
   public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
   public readonly loggedUser$ = this.store.select(selectLoggedUser);
   public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError));
-  /**
-   * Use the initialization action to perform one
-   * or more tasks in your Effects.
-   */
+  public readonly filteredUsers$ = this.store.select(UsersSelectors.filteredUsers);
+
   init() {
     this.store.dispatch(UsersActions.initUsers());
   }
@@ -56,5 +50,9 @@ export class UsersFacade {
 
   loadUser() {
     this.store.dispatch(UsersActions.loadUser());
+  }
+
+  updateTotalStoryPoints(userId: number, user: UsersDTO) {
+    this.store.dispatch(UsersActions.updateTotalStoryPoints({ userId, user }));
   }
 }

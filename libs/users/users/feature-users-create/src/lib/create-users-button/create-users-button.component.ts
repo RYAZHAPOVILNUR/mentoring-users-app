@@ -15,7 +15,7 @@ import { CreateUserDTO } from '@users/core/data-access';
   imports: [CommonModule, MatIconModule, MatButtonModule, MatDialogModule],
   templateUrl: './create-users-button.component.html',
   styleUrls: ['./create-users-button.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateUsersButtonComponent {
   private name!: string;
@@ -26,7 +26,7 @@ export class CreateUsersButtonComponent {
 
   openAddUserDialog(): void {
     const dialogRef: MatDialogRef<CreateUsersDialogComponent> = this.dialog.open(CreateUsersDialogComponent, {
-      data: { name: this.name, email: this.email },
+      data: { name: this.name, email: this.email }
     });
     dialogRef
       .afterClosed()
@@ -37,9 +37,8 @@ export class CreateUsersButtonComponent {
             name: result.name,
             email: result.email,
             purchaseDate: new Date().toString(),
-            educationStatus: 'trainee',
+            educationStatus: 'trainee'
           };
-
           this.usersFacade.addUser(newUserData);
         }
       });

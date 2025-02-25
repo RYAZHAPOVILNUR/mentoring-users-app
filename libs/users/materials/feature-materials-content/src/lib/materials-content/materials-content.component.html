@@ -1,0 +1,35 @@
+<div class="modal-container">
+  <div class="button">
+    <button mat-mini-fab (click)="cancel()" class="close-button">
+      <mat-icon fontIcon="close"></mat-icon>
+    </button>
+  </div>
+  <h1>{{ data.material.title }}</h1>
+
+  <div class="content">
+
+    <audio *ngIf="isMp3" controls>
+      <source [src]="data.material.material_link" type="audio/mpeg">
+      Ваш браузер не поддерживает аудиоплеер.
+    </audio>
+
+    <iframe
+      *ngIf="isYoutube"
+      [src]="youtubeEmbedUrl"
+      width="708"
+      height="400"
+      frameborder="0"
+      allowfullscreen>
+    </iframe>
+
+    <iframe
+      *ngIf="isPdf"
+      [src]="pdfEmbedUrl"
+      width="800px"
+      height="600px"
+      frameborder="0">
+    </iframe>
+
+    <p *ngIf="!isPdf && !isMp3 && !isYoutube">Формат файла не поддерживается для предварительного просмотра.</p>
+  </div>
+</div>

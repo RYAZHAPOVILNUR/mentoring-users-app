@@ -28,7 +28,7 @@ export type CreateUserDTO = DeepReadonly<{
   purchaseDate: string;
   educationStatus: string;
   educationTime?: number;
-  totalStoryPoints?: number;
+  totalStoryPoints?: number ;
 }>;
 
 export type UsersPhoto = {
