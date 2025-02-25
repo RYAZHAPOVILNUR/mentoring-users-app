@@ -11,11 +11,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialog } from '@angular/material/dialog';
 import { FoldersAddButtonComponent } from '@feature-folders-create';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'users-folders-list',
   standalone: true,
-  imports: [CommonModule, FoldersCardsComponent, MatButtonModule, MatDividerModule, MatIconModule, MatFormFieldModule, MatInputModule, FormsModule, FoldersAddButtonComponent],
+  imports: [CommonModule, FoldersCardsComponent, MatButtonModule, MatDividerModule, MatIconModule, MatFormFieldModule, MatInputModule, FormsModule, FoldersAddButtonComponent, MatProgressBarModule],
   templateUrl: './folders-list.component.html',
   styleUrls: ['./folders-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -25,10 +26,13 @@ export class FoldersListComponent implements OnInit {
   store = inject(Store)
   readonly dialog = inject(MatDialog);
 
-
   folders$ = this.foldersFacade$.folders$;
+  isLoading = true;
 
   ngOnInit() {
     this.foldersFacade$.loadFolders()
+    this.folders$.subscribe(() => {
+      this.isLoading = false;
+    });
   }
 }

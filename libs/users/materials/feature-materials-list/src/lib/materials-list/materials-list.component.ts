@@ -6,47 +6,60 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FolderInterface, FoldersFacade, MaterialInterface } from '@users/materials/data-access';
-import { map, Observable } from 'rxjs';
+import { map, Observable, switchMap, tap } from 'rxjs';
 import { MaterialsAddButtonComponent } from '@feature-materials-create';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'users-materials-list',
   standalone: true,
-  imports: [CommonModule, MaterialsCardComponent, MatIconModule, MatButtonModule, MaterialsAddButtonComponent],
+  imports: [CommonModule, MaterialsCardComponent, MatIconModule, MatButtonModule, MaterialsAddButtonComponent, MatProgressBarModule],
   templateUrl: './materials-list.component.html',
   styleUrls: ['./materials-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MaterialsListComponent implements OnInit{
-  folderId!: number
+export class MaterialsListComponent implements OnInit {
+  folderId!: number;
   folder$!: Observable<FolderInterface | undefined>;
-  material$!: Observable<MaterialInterface[] | undefined>
+  material$!: Observable<MaterialInterface[]>;
+  isLoading = true;
 
-  route = inject(ActivatedRoute)
-  destroyRef = inject(DestroyRef);
-  folderFacade = inject(FoldersFacade)
-  location = inject(Location)
+  private route = inject(ActivatedRoute);
+  private destroyRef = inject(DestroyRef);
+  private folderFacade = inject(FoldersFacade);
+  private location = inject(Location);
 
   constructor() {
-    this.folderFacade.loadFolders()
-    this.folderFacade.loadMaterials()
+    this.folderFacade.loadFolders();
+    this.folderFacade.loadMaterials();
   }
 
   ngOnInit() {
-    this.route.paramMap.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(params => {
-      this.folderId = Number(params.get('id'));
+    this.folder$ = this.route.paramMap.pipe(
+      tap(() => this.isLoading = true),
+      map(params => Number(params.get('id'))),
+      tap(id => this.folderId = id),
+      switchMap(id =>
+        this.folderFacade.folders$.pipe(
+          map(folders => folders.find(folder => folder.id === id)),
+          tap(() => this.isLoading = false)
+        )
+      ),
+      takeUntilDestroyed(this.destroyRef)
+    );
 
-      this.folder$ = this.folderFacade.folders$.pipe(
-        map(folders => folders.find(folder => folder.id === this.folderId))
-      )
-
-      this.material$ = this.folderFacade.materials$.pipe(
-        map(materials => materials.filter(material => material.folder_id === this.folderId))
-      )
-    });
+    this.material$ = this.route.paramMap.pipe(
+      map(params => Number(params.get('id'))),
+      switchMap(id =>
+        this.folderFacade.materials$.pipe(
+          map(materials => materials.filter(material => material.folder_id === id))
+        )
+      ),
+      takeUntilDestroyed(this.destroyRef)
+    );
   }
 
   goBack() {
-    this.location.back()
+    this.location.back();
   }
 }

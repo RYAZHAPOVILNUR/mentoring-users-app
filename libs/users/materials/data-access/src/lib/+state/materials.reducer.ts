@@ -49,7 +49,7 @@ export const materialsReducer = createReducer(
   initialMaterialState,
   on(FoldersAction.loadMaterialsFoldersSuccess, (state, {materialFolders}) => ({
     ...state,
-    materialFolders
+    materialsFolders: materialFolders
   })),
   on(FoldersAction.loadMaterialsFoldersFailure, (state, {error}) => ({
     ...state,

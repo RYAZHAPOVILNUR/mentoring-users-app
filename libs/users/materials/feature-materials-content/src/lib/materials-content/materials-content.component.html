@@ -7,13 +7,12 @@
   <h1>{{ data.material.title }}</h1>
 
   <div class="content">
-    <!-- MP3 -->
+
     <audio *ngIf="isMp3" controls>
       <source [src]="data.material.material_link" type="audio/mpeg">
       Ваш браузер не поддерживает аудиоплеер.
     </audio>
 
-    <!-- YouTube -->
     <iframe
       *ngIf="isYoutube"
       [src]="youtubeEmbedUrl"
@@ -23,7 +22,14 @@
       allowfullscreen>
     </iframe>
 
-    <!-- Файл не поддерживается -->
+    <iframe
+      *ngIf="isPdf"
+      [src]="pdfEmbedUrl"
+      width="800px"
+      height="600px"
+      frameborder="0">
+    </iframe>
+
     <p *ngIf="!isPdf && !isMp3 && !isYoutube">Формат файла не поддерживается для предварительного просмотра.</p>
   </div>
 </div>

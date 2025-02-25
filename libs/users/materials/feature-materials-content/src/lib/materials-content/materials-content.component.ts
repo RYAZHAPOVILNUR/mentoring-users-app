@@ -12,13 +12,14 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   imports: [CommonModule, MatButtonModule, MatIconModule],
   templateUrl: './materials-content.component.html',
   styleUrls: ['./materials-content.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MaterialsContentComponent {
   isPdf: boolean;
   isMp3: boolean;
   isYoutube: boolean;
   youtubeEmbedUrl?: SafeResourceUrl;
+  pdfEmbedUrl?: SafeResourceUrl;
 
   constructor(
     public dialogRef: MatDialogRef<MaterialsContentComponent>,
@@ -33,6 +34,10 @@ export class MaterialsContentComponent {
     if (this.isYoutube) {
       this.youtubeEmbedUrl = this.sanitizeYoutubeUrl(data.material.material_link);
     }
+
+    if (this.isPdf) {
+      this.pdfEmbedUrl = this.sanitizePdfUrl(data.material.material_link);
+    }
   }
 
   sanitizeYoutubeUrl(url: string): SafeResourceUrl {
@@ -41,6 +46,10 @@ export class MaterialsContentComponent {
       const embedUrl = `https://www.youtube.com/embed/${videoIdMatch[1]}`;
       return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
     }
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  sanitizePdfUrl(url: string): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 

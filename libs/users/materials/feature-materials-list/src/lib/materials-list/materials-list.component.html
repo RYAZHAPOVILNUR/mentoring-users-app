@@ -1,3 +1,4 @@
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate" style="width: 90vw; "></mat-progress-bar>
 <div class="back-cont">
   <button mat-mini-fab class="button-back" (click)="goBack()">
     <mat-icon fontIcon="arrow_back"></mat-icon>
@@ -6,10 +7,13 @@
     {{ folder?.title }}
   </span>
 </div>
-<div  *ngIf="(material$ | async) as materials">
-  <div *ngIf="materials.length > 0; else noMaterials" class="materials-list">
-    <div *ngFor="let material of materials" >
-      <users-materials-card [material]="material"></users-materials-card>
+
+<div *ngIf="!isLoading">
+  <div *ngIf="(material$ | async) as materials">
+    <div *ngIf="materials.length > 0; else noMaterials" class="materials-list">
+      <div *ngFor="let material of materials">
+        <users-materials-card [material]="material"></users-materials-card>
+      </div>
     </div>
   </div>
 </div>
@@ -17,7 +21,7 @@
 <ng-template #noMaterials>
   <p>Извините, материалов в данной папке не имеется</p>
 </ng-template>
+
 <div class="add-button">
   <users-materials-add-button [folderId]="folderId"></users-materials-add-button>
 </div>
-
