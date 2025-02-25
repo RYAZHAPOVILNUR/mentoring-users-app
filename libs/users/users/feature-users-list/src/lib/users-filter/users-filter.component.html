@@ -1,0 +1,9 @@
+<form class="form-filter" [formGroup]="form">
+  <mat-form-field class="filter-name" formGroupName="usersFilter">
+    <mat-label>Поиск</mat-label>
+    <input matInput placeholder="Введите имя пользователя" formControlName="name">
+  </mat-form-field>
+  <button class="button" mat-icon-button type="submit" matTextSuffixck (click)="applyFilter()">
+    <mat-icon>search</mat-icon>
+  </button>
+</form>
