@@ -1,0 +1,64 @@
+.edit-user-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.folder-avatar {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+}
+
+.edit-folder-card {
+  width: 400px;
+  padding: 20px;
+}
+
+.close-button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-folder-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.edit-folder-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-folder-content {
+  margin-bottom: 20px;
+}
+
+.edit-folder-field {
+  width: 100%;
+}
+
+.edit-folder-btns-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+div.alert-success {
+  position: absolute;
+  text-align: center;
+  width: 400px;
+  top: 3em;
+  z-index: 1;
+}
+
+.edit-folder-snackbar {
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

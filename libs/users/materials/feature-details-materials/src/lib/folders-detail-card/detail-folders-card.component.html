@@ -1,0 +1,82 @@
+<ng-container *ngIf="vm.status === 'loading'; else loadingResult">
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+
+<ng-template #loadingResult>
+  <ng-container *ngIf="vm.status === 'loaded'; else error">
+    <div class="edit-folder-container">
+      <mat-card class="edit-folder-card">
+        <div class="close-button-container">
+          <button mat-icon-button aria-label="close dialog" color="accent" (click)="onCloseFolder()">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            type="button"
+            color="accent"
+            class="edit-folder-button"
+            *ngIf="!vm.editMode"
+            (click)="onOpenEditMode()"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            type="button"
+            color="accent"
+            class="edit-folder-button"
+            *ngIf="vm.editMode"
+            (click)="onDeleteFolder()"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        <h1 class="edit-folder-title">
+          {{ vm.editMode ? 'Редактирование  папки' : 'Информация папки' }}
+        </h1>
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="edit-folder-form">
+          <div class="edit-folder-content">
+            <mat-form-field
+              class="edit-folder-field"
+              [matTooltip]="vm.folder!.name"
+              [matTooltipDisabled]="formGroup.enabled"
+            >
+              <mat-label>Имя:</mat-label>
+              <input matInput placeholder="Имя*" formControlName="name" class="edit-folder-input" />
+              <mat-error *ngIf="formGroup.hasError('required', 'name')">Это поле обязательно для заполнения</mat-error>
+            </mat-form-field>
+          </div>
+          <mat-card-actions class="edit-folder-btns-container" *ngIf="vm.editMode">
+            <button
+              mat-icon-button
+              color="primary"
+              type="submit"
+              [disabled]="formGroup.invalid || (areFieldsChanged$ | ngrxPush) === false"
+              aria-label="submit new folder data"
+            >
+              <mat-icon>done</mat-icon>
+            </button>
+
+            <button mat-icon-button color="warn" type="button" aria-label="Close edit mode" (click)="onCloseEditMode()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-card-actions>
+        </form>
+      </mat-card>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #error>
+  <div class="alert alert-danger" role="alert">
+    <h1>{{ vm.errors }}</h1>
+    <hr />
+    Данная папка не найдена
+  </div>
+</ng-template>
+
+<ng-template #snackbar>
+  <div class="edit-user-snackbar">
+    <span>Папка успешно изменена!</span>
+  </div>
+</ng-template>

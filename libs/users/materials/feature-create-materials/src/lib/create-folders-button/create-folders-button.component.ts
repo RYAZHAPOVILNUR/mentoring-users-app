@@ -8,14 +8,14 @@ import { CreateFoldersDialogComponent } from "../create-folders-dialog/create-fo
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { CreateFolderDTO } from "@users/core/data-access";
 @Component({
-  selector: 'app-create-materials-button',
-  templateUrl: './create-materials-button.component.html',
-  styleUrls: ['./create-materials-button.component.scss'],
+  selector: 'create-folders-button',
+  templateUrl: './create-folders-button.component.html',
+  styleUrls: ['./create-folders-button.component.scss'],
   standalone: true,
   imports: [MatIconModule,CommonModule, MatButtonModule, MatDialogModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MaterialsCreateButtonComponent {
+export class FoldersCreateButtonComponent {
   private name!: string;
   public dialog = inject(MatDialog);
   private readonly materialsFacade = inject(MaterialsFacade);

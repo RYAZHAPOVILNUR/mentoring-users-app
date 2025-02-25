@@ -30,6 +30,8 @@
       "@users/core/utils": ["libs/core/utils/src/index.ts"],
       "@users/data-access": ["libs/data-access/src/index.ts"],
       "@users/feature-create-materials": ["libs/users/materials/feature-create-materials/src/index.ts"],
+      "@users/feature-detail-materials": ["libs/users/materials/feature-details-materials/src/index.ts"],
+      "@users/feature-materials-list": ["libs/users/materials/feature-materials-list/src/index.ts"],
       "@users/feature-users-create": ["libs/users/users/feature-users-create/src/index.ts"],
       "@users/feature-users-detail": ["libs/users/users/feature-users-detail/src/index.ts"],
       "@users/feature-users-list": ["libs/users/users/feature-users-list/src/index.ts"],

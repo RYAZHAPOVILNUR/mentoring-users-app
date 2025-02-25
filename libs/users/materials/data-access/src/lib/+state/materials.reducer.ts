@@ -30,7 +30,7 @@ export const initialFoldersState: FoldersState = foldersAdapter.getInitialState(
 
 export const reducer = createReducer(
   initialFoldersState,
-  on(MaterialsActions.loadFolders, (state) => ({
+  on(MaterialsActions.initFolders, (state) => ({
     ...state,
     status: 'loading' as const,
   })),
