@@ -20,7 +20,7 @@ export class MaterialsContentComponent  {
   public isPlayerActive: boolean = false;
   constructor(
     private dialogRef: MatDialogRef<MaterialsContentComponent>,
-    @Inject(MAT_DIALOG_DATA) public selectedMaterial: { materialLink: string; title: string },
+    @Inject(MAT_DIALOG_DATA) public readonly selectedMaterial: { materialLink: string; title: string },
     private sanitizer: DomSanitizer,
   ) {}
 
