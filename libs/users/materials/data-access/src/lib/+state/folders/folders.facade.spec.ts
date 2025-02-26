@@ -6,7 +6,7 @@ import { readFirst } from '@nx/angular/testing';
 
 import * as FoldersActions from './folders.actions';
 import { FoldersEffects } from './folders.effects';
-import { FoldersFacade } from './folders.facade';
+import { facadeF } from './folders.facade';
 import { FoldersEntity } from './folders.models';
 import { FOLDERS_FEATURE_KEY, FoldersState, initialFoldersState, foldersReducer } from './folders.reducer';
 import * as FoldersSelectors from './folders.selectors';
@@ -15,8 +15,8 @@ interface TestSchema {
   folders: FoldersState;
 }
 
-describe('FoldersFacade', () => {
-  let facade: FoldersFacade;
+describe('facadeF', () => {
+  let facade: facadeF;
   let store: Store<TestSchema>;
   const createFoldersEntity = (id: string, name = ''): FoldersEntity => ({
     id,
@@ -30,7 +30,7 @@ describe('FoldersFacade', () => {
           StoreModule.forFeature(FOLDERS_FEATURE_KEY, foldersReducer),
           EffectsModule.forFeature([FoldersEffects]),
         ],
-        providers: [FoldersFacade],
+        providers: [facadeF],
       })
       class CustomFeatureModule {}
 
@@ -41,7 +41,7 @@ describe('FoldersFacade', () => {
       TestBed.configureTestingModule({ imports: [RootModule] });
 
       store = TestBed.inject(Store);
-      facade = TestBed.inject(FoldersFacade);
+      facade = TestBed.inject(facadeF);
     });
 
     /**

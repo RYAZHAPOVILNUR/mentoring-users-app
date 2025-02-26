@@ -83,6 +83,8 @@ export class DetailUsersCardComponent implements OnInit {
     }
   }
 
+  @Input({ required: true }) timer!: { days: number; hours: number; minutes: number; seconds: number } | null;
+
   public formGroup = new FormBuilder().group({
     name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
@@ -98,6 +100,9 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
+  @Output() startTimer = new EventEmitter();
+  @Output() stopTimer = new EventEmitter();
+  @Output() resetTimer = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
@@ -156,6 +161,18 @@ export class DetailUsersCardComponent implements OnInit {
     this.formGroup.get('city')?.setValue(selectedValue);
   }
 
+  onStartTimer() {
+    this.startTimer.emit();
+  }
+
+  onStopTimer() {
+    this.stopTimer.emit()
+  }
+
+  onResetTimer() {
+    this.resetTimer.emit();
+  }
+
   private checkChangeFields() {
     this.formGroup.valueChanges
       .pipe(
@@ -165,7 +182,8 @@ export class DetailUsersCardComponent implements OnInit {
           const isFormControlChanged = (key: string, control: FormControl) =>
             this.vm.user && this.vm.user[key as keyof UsersEntity] !== control.value;
 
-          const isFieldChanged = formEntries.some(([key, control]) => isFormControlChanged(key, control));
+          const isFieldChanged = formEntries.some(([key, control]) =>
+            isFormControlChanged(key, control));
 
           this.areFieldsChanged$.next(isFieldChanged);
         })
