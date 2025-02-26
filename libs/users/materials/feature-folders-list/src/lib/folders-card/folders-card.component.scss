@@ -1,0 +1,46 @@
+.folder-content {
+  width: 110px;
+  padding: 10px;
+  border-radius: 5px;
+  background: #404e5e;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  cursor: pointer;
+}
+
+.folder-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.folder-icon {
+  font-size: 30px;
+  color: #daddec;
+}
+
+.delete-icon {
+  font-size: 30px;
+  color: #daddec;
+  cursor: pointer;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #ff0000;
+  }
+}
+
+.folder-info {
+  margin-top: 10px;
+}
+
+.folder-title {
+  font-weight: bold;
+}
+
+.folder-created {
+  margin-top: 5px;
+  font-size: 12px;
+  color: gray;
+}

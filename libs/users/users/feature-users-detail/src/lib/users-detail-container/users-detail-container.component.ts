@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Router } from '@angular/router';
+import { TimerService } from '../../../../data-access/src/lib/timer.service';
 import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
 import { UsersErrors, UsersFacade, onSuccessEditionCbType } from '@users/users/data-access';
 import { Observable, map, tap } from 'rxjs';
@@ -15,18 +17,19 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'users-detail',
   standalone: true,
-  imports: [CommonModule, DetailUsersCardComponent, MatDialogModule, LetDirective],
+  imports: [CommonModule, DetailUsersCardComponent, MatDialogModule, LetDirective, MatProgressBarModule],
   templateUrl: './users-detail-container.component.html',
   styleUrls: ['./users-detail-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersDetailComponent {
+export class UsersDetailComponent implements OnInit {
   private readonly usersFacade = inject(UsersFacade);
   private readonly store = inject(Store);
   private readonly router = inject(Router);
   public user!: UsersEntity;
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly timerService = inject(TimerService);
 
   public readonly user$: Observable<UsersEntity | null> = this.usersFacade.openedUser$.pipe(
     tap((user) => {
@@ -49,6 +52,32 @@ export class UsersDetailComponent {
     this.router.navigate(['/admin/users', this.user.id], {
       queryParams: { edit: false },
     });
+  }
+
+  public timer$! : Observable<{ days: number; hours: number; minutes: number; seconds: number }>;
+
+  ngOnInit() {
+    this.user$.pipe(
+      tap((user) => {
+        if (user && user.id) {
+          this.timerService.createTimer(user.id);
+          this.timer$ = this.timerService.getTimer(user.id);
+        }
+      }),
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe()
+  }
+
+  onStartTimer() {
+    this.timerService.startTimer(this.user.id);
+  }
+
+  onStopTimer() {
+    this.timerService.stopTimer(this.user.id);
+  }
+
+  onResetTimer() {
+    this.timerService.resetTimer(this.user.id);
   }
 
   onCloseUser() {

@@ -1,0 +1,18 @@
+<div class="folder-content"
+     (mouseenter)="showDeleteIcon = true"
+     (mouseleave)="showDeleteIcon = false"
+     (click)="onOpenFolder()">
+  <div class="folder-header">
+    <mat-icon class="folder-icon">folder</mat-icon>
+    <mat-icon
+      class="delete-icon"
+      *ngIf="showDeleteIcon"
+      (click)="deleteFolder($event)">
+      delete
+    </mat-icon>
+  </div>
+  <div class="folder-info">
+    <div class="folder-title">{{ folder.title }}</div>
+    <div class="folder-created">{{ folder.createdAt | date }}</div>
+  </div>
+</div>

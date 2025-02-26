@@ -14,7 +14,6 @@ export const userEffects = createEffect(
 
     return actions$.pipe(
       ofType(UsersActions.initUsers),
-      // delay(1500),
       switchMap(() =>
         apiService.get<UsersDTO[]>('/users').pipe(
           map((users) =>
