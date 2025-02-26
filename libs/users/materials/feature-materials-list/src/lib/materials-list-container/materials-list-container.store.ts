@@ -18,20 +18,20 @@ export class MaterialsListContainerStore extends ComponentStore<MaterialsListSta
   public readonly materials$ = this.select(({ materials }) => materials);
   public readonly status$ = this.select(this.materialsFacade.status$, (status) => status);
   public errors$ = this.select(this.materialsFacade.errors$, (error) => error);
+
   constructor() {
     super(initialState);
     this.materialsFacade.init();
     this.setMaterialsFromGlobalToLocaleStore();
-    console.log('Materils Store>>', this.materials$);
   }
 
   private setMaterialsFromGlobalToLocaleStore(): void {
     this.effect(() =>
-      this.materialsFacade.filtredMaterials$.pipe(tap((materials: MaterialsEntity[]) => this.patchMaterial(materials)))
+      this.materialsFacade.filtredMaterials$.pipe(tap((materials: MaterialsEntity[]) => this.patchMaterials(materials)))
     );
   }
 
-  private patchMaterial(materials: MaterialsEntity[]): void {
+  private patchMaterials(materials: MaterialsEntity[]): void {
     this.patchState({
       materials: materials.map((material) => materialsVMAdapter.entityToVM(material)),
     });

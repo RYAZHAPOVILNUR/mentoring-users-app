@@ -23,7 +23,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersListComponent {
-  private readonly fasade = inject(FoldersFacade);
+  private readonly facade = inject(FoldersFacade);
 
   @Input({ required: true })
   vm!: FoldersListVM;

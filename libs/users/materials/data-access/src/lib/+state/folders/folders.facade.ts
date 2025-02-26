@@ -10,6 +10,7 @@ import { FoldersEntity } from '../../folders-dto/folders.entity';
 export class FoldersFacade {
   private readonly store = inject(Store);
   public readonly filtredFolders$ = this.store.select(FoldersSelectors.selectFiltredFolders);
+  public readonly openedFolder$ = this.store.select(FoldersSelectors.selectOpenedFolder);
   public readonly status$ = this.store.pipe(select(FoldersSelectors.selectFoldersStatus || of(null)));
   public readonly allFolders = this.store.pipe(select(FoldersSelectors.selectAllFolders));
   public readonly errors$: Observable<FoldersErrors | null> = this.store.pipe(
@@ -18,5 +19,9 @@ export class FoldersFacade {
 
   init() {
     this.store.dispatch(FoldersActions.initFolders());
+  }
+
+  loadFolder() {
+    this.store.dispatch(FoldersActions.loadFolder());
   }
 }

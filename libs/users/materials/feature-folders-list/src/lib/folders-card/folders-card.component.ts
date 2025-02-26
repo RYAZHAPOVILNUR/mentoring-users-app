@@ -34,7 +34,7 @@ export class FoldersCardComponent {
   @Output()
   redirectToFolder = new EventEmitter();
 
-  onOpenFolder(folder: FoldersVM) {
-    this.redirectToFolder.emit(folder);
+  onOpenFolder(data: Event) {
+    this.redirectToFolder.emit(this.folder);
   }
 }

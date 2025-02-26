@@ -75,7 +75,7 @@ const reducer = createReducer(
     ...state,
     status: 'error' as const,
     error,
-  })),
+  })), // ========
   on(UsersActions.loadUser, (state) => ({
     ...state,
     status: 'loading' as const,

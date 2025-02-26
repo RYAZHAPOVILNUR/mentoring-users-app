@@ -4,6 +4,7 @@ import { selectRouteParams } from '@users/core/data-access';
 
 // Создаёт селектор, который получает всё состояние MaterialsState из глобального хранилища NgRx.
 export const selectMaterialsState = createFeatureSelector<MaterialsState>(MATERIALS_FEATURE_KEY);
+
 // selectAll — функция, возвращающая массив всех сущностей (материалов).
 // selectEntities — функция, возвращающая объект { [id]: entity }, где ключи — id материалов, а значения — сами материалы.
 const { selectAll, selectEntities } = materialsAdapter.getSelectors();
@@ -15,8 +16,17 @@ export const selectMaterialsStatus = createSelector(selectMaterialsState, (state
 export const selectmaterialsError = createSelector(selectMaterialsState, (state: MaterialsState) => state.errors);
 
 // Извлекает все материалы из состояния с помощью selectAll. Если state отсутствует, возвращает пустой массив [].
-export const selectAllMaterials = createSelector(selectMaterialsState, (state) =>
-  state ? materialsAdapter.getSelectors().selectAll(state) : []
+export const selectAllMaterials = createSelector(selectMaterialsState, (state: MaterialsState) => selectAll(state));
+
+// selectEntities(state) возвращает объект с материалами в формате { [id]: material }. Упрощает доступ к конкретному материалу по id.
+export const selectMaterialsEntities = createSelector(selectMaterialsState, (state: MaterialsState) =>
+  selectEntities(state)
+);
+
+export const selectSelectedId = createSelector(selectMaterialsState, (state: MaterialsState) => state.selectedId);
+
+export const selectEntity = createSelector(selectMaterialsEntities, selectSelectedId, (entities, selectedId) =>
+  selectedId ? entities[selectedId] : undefined
 );
 
 // Получает текущий фильтр из MaterialsState. Используется для фильтрации списка материалов.
@@ -35,10 +45,6 @@ export function selectMaterialsById(id: number): any {
   throw new Error('Function not implemented.');
 }
 //
-// selectEntities(state) возвращает объект с материалами в формате { [id]: material }. Упрощает доступ к конкретному материалу по id.
-export const selectMaterialsEntities = createSelector(selectMaterialsState, (state: MaterialsState) =>
-  selectEntities(state)
-);
 
 // Фабричный селектор, принимающий id. Возвращает селектор, который ищет материал в entities.
 export const selectMaterialById = (id: number) => createSelector(selectMaterialsEntities, (entities) => entities[id]);

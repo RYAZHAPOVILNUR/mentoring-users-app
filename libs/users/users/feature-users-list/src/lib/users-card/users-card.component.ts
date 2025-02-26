@@ -46,5 +46,4 @@ export class UsersCardComponent {
     };
     this.redirectToEdit.emit(emitData);
   }
-
 }

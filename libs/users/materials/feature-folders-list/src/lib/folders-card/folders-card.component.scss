@@ -1,5 +1,6 @@
 .folder-content {
   position: relative;
+  cursor: pointer;
   width: 150px;
   height: 150px;
   padding: 10px;
@@ -9,7 +10,7 @@
   align-items: flex-start;
   justify-content: space-between;
   background-color: transparent;
-  color: #f7f2f2;
+  color: #747070;
   border: 1px solid rgb(93, 89, 89);
   &:hover {
     .folder-menu {

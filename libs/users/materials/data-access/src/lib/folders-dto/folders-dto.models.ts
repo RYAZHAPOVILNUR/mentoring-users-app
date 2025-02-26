@@ -2,6 +2,6 @@ import { DeepReadonly } from '@users/core/utils';
 
 export type FoldersDTO = DeepReadonly<{
   id: number;
-  created_at: number;
   title: string;
+  created_at: number;
 }>;

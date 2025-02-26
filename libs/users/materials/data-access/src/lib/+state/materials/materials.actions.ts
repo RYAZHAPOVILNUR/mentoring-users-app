@@ -16,10 +16,11 @@ export const updateMaterialState = createAction(
   props<{ status: LoadingStatus }>()
 );
 
-// export const loadMaterial = createAction('[Materials Page] Load Material');
-export const loadMaterial = createAction('[Materials Page] Load Material');
+export const loadMaterials = createAction('[Materials Page] Load Materials');
+
 export const loadMaterialSuccess = createAction(
   '[Material/Api] Load Material Success',
   props<{ materialData: MaterialsEntity }>()
 );
+
 export const loadMaterialFailed = createAction('[Material/Api] Load Material Failed', props<{ error: any }>());

@@ -15,16 +15,17 @@ export class MaterialsFacade {
   public readonly errors$: Observable<MaterialsErrors | null> = this.store.pipe(
     select(MaterialSelectors.selectmaterialsError)
   );
+  public readonly openedMaterial$ = this.store.select(MaterialSelectors.selectOpenedMaterial);
 
   init() {
     this.store.dispatch(MaterialActions.initMaterials());
   }
 
-  getmaterialFromStore(id: number) {
+  getMaterialFromStore(id: number) {
     return this.store.select(MaterialSelectors.selectMaterialById(id)).pipe(
-      switchMap((user: MaterialsEntity | undefined): Observable<MaterialsEntity | null> => {
-        if (user) {
-          return of(user);
+      switchMap((material: MaterialsEntity | undefined): Observable<MaterialsEntity | null> => {
+        if (material) {
+          return of(material);
         } else {
           return of(null);
         }
@@ -32,7 +33,7 @@ export class MaterialsFacade {
     );
   }
 
-  loadMaterial() {
-    this.store.dispatch(MaterialActions.loadMaterial());
+  loadMaterials() {
+    this.store.dispatch(MaterialActions.loadMaterials());
   }
 }

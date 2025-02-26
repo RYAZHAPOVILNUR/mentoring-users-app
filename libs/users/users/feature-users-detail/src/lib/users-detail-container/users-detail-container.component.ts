@@ -27,6 +27,8 @@ export class UsersDetailComponent {
   public user!: UsersEntity;
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
+  public readonly errors$: Observable<UsersErrors | null> = this.usersFacade.errors$;
+  public readonly status$ = this.usersFacade.status$;
 
   public readonly user$: Observable<UsersEntity | null> = this.usersFacade.openedUser$.pipe(
     tap((user) => {
@@ -37,12 +39,11 @@ export class UsersDetailComponent {
       }
     })
   );
-  public readonly status$ = this.usersFacade.status$;
+
   public readonly editMode$: Observable<boolean> = this.store.pipe(
     select(selectQueryParam('edit')),
     map((params) => params === 'true')
   );
-  public readonly errors$: Observable<UsersErrors | null> = this.usersFacade.errors$;
 
   public onEditUser(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
     this.usersFacade.editUser(userData, this.user.id, onSuccessCb);

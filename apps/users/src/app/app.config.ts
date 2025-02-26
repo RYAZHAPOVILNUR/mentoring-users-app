@@ -12,10 +12,10 @@ import { USERS_FEATURE_KEY, usersReducer, userEffects } from '@users/users/data-
 import {
   FOLDERS_FEATURE_KEY,
   foldersReducer,
-  FoldersEffects,
+  loadFolders,
   MATERIALS_FEATURE_KEY,
   materialsReducer,
-  loadMaterial,
+  loadMaterials,
 } from '@users/materials/data-access';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
@@ -37,8 +37,8 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideEffects(
       userEffects,
-      FoldersEffects,
-      loadMaterial,
+      loadFolders,
+      loadMaterials,
       authEffects,
       articlesEffects,
       tasksEffects,
