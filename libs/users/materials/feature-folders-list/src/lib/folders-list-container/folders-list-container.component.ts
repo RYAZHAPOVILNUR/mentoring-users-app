@@ -18,7 +18,7 @@ import { LetDirective } from '@ngrx/component';
 })
 export class FoldersListContainerComponent {
   private readonly componentStore = inject(FoldersListContainerStore);
-  public foldersFacede = inject(FoldersFacade);
+  // public foldersFacede = inject(FoldersFacade);
   public readonly folders$ = this.componentStore.folders$;
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;

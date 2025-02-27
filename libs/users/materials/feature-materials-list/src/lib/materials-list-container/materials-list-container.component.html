@@ -1,15 +1,14 @@
 <div class="material-content">
   <ng-container
     *ngrxLet="{
-    folder: folder$,
     materials: materials$,
+    folder: folder,
   } as vm"
   >
     <div class="material-header">
       <button class="button-back" routerLink="/materials" mat-button><mat-icon>arrow_back</mat-icon></button>
-      <h4>{{ vm.folder?.title }}</h4>
-      <p>{{ vm.folder?.id }}</p>
-      <p>{{ vm.materials?.folderId }}</p>
+      <p>Title: {{ vm.folder }}</p>
+      <p>Material: {{ vm.materials }}</p>
     </div>
     <users-materials-list></users-materials-list>
   </ng-container>

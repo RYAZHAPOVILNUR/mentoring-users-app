@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { DeepReadonly } from '@users/core/utils';
 import { MaterialsEntity, MaterialsFacade, MaterialsVM, materialsVMAdapter } from '@users/materials/data-access';
-import { tap } from 'rxjs';
+import { combineLatest, tap } from 'rxjs';
 
 type MaterialsListState = DeepReadonly<{
   materials: MaterialsVM[];
@@ -21,9 +21,28 @@ export class MaterialsListContainerStore extends ComponentStore<MaterialsListSta
 
   constructor() {
     super(initialState);
+  }
+
+  init() {
     this.materialsFacade.init();
     this.setMaterialsFromGlobalToLocaleStore();
+    console.log('Store Init...');
   }
+
+  // private setMaterialsFromGlobalToLocaleStore(): void {
+  //   this.effect(() =>
+  //     this.materialsFacade.filtredMaterials$.pipe(tap((materials: MaterialsEntity[]) => this.patchMaterials(materials)))
+  //   )();
+  // }
+
+  // private setMaterialsFromGlobalToLocaleStore(): void {
+  //   this.effect(() =>
+  //     combineLatest([
+  //       this.materialsFacade.filtredMaterials$,
+  //       this.status$, // или другие зависимости
+  //     ]).pipe(tap(([materials]) => this.patchMaterials(materials)))
+  //   )();
+  // }
 
   private setMaterialsFromGlobalToLocaleStore(): void {
     this.effect(() =>

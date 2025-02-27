@@ -18,7 +18,7 @@ export const materialsEffects = createEffect(
       withLatestFrom(store.select(selectRouteParams)),
       switchMap(([, params]) => {
         if (params['id']) {
-          console.log('Params>>>', params['id']);
+          console.log('Params Materials>>>', params['id']);
         }
         apiService.get<MaterialsDTO[]>(`/material/${params['id']}`).pipe(
           map((materials) =>

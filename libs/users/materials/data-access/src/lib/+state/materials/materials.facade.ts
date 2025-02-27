@@ -21,19 +21,19 @@ export class MaterialsFacade {
     this.store.dispatch(MaterialActions.initMaterials());
   }
 
-  getMaterialFromStore(id: number) {
-    return this.store.select(MaterialSelectors.selectMaterialById(id)).pipe(
-      switchMap((material: MaterialsEntity | undefined): Observable<MaterialsEntity | null> => {
-        if (material) {
-          return of(material);
-        } else {
-          return of(null);
-        }
-      })
-    );
-  }
+  // getMaterialFromStore(id: number) {
+  //   return this.store.select(MaterialSelectors.selectMaterialById(id)).pipe(
+  //     switchMap((material: MaterialsEntity | undefined): Observable<MaterialsEntity | null> => {
+  //       if (material) {
+  //         return of(material);
+  //       } else {
+  //         return of(null);
+  //       }
+  //     })
+  //   );
+  // }
 
-  loadMaterials() {
-    this.store.dispatch(MaterialActions.loadMaterials());
-  }
+  // loadMaterials() {
+  //   this.store.dispatch(MaterialActions.loadMaterials());
+  // }
 }

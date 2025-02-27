@@ -19,10 +19,15 @@ import { MaterialsListVM } from './materials-list-view.module';
 })
 export class MaterialsListComponent {
   private readonly materialsFacede = inject(MaterialsFacade);
+  public readonly status$ = this.materialsFacede.status$;
+  public readonly errors$: Observable<MaterialsErrors | null> = this.materialsFacede.errors$;
   private readonly store = inject(Store);
   private readonly router = inject(Router);
   public materials$!: MaterialsEntity;
 
+  constructor() {
+    console.log('Materials List>>>', this.materials$);
+  }
   // @Input({ required: true })
   // vm!: MaterialsListVM;
 
@@ -37,7 +42,4 @@ export class MaterialsListComponent {
   //     }
   //   })
   // );
-
-  public readonly status$ = this.materialsFacede.status$;
-  public readonly errors$: Observable<MaterialsErrors | null> = this.materialsFacede.errors$;
 }

@@ -33,28 +33,29 @@ export const loadFolders = createEffect(
   { functional: true }
 );
 
-export const loadFolder = createEffect(
-  () => {
-    const actions$ = inject(Actions);
-    const apiService = inject(ApiService);
-    const store = inject(Store);
-    return actions$.pipe(
-      ofType(FoldersActions.loadFolder),
-      withLatestFrom(store.select(selectRouteParams)),
-      switchMap(([, params]) => {
-        if (params['id']) {
-          return apiService.get<FoldersDTO>(`/folder/${params['id']}`).pipe(
-            map((folder) => folderDTOAdapter.DTOtoEntity(folder)),
-            map((folderEntity) => FoldersActions.loadFolderSuccess({ folderData: folderEntity })),
-            catchError((error) => {
-              console.error('Error', error);
-              return of(FoldersActions.loadFolderFailed({ error }));
-            })
-          );
-        }
-        return of(FoldersActions.updateFolderStatus({ status: 'loading' }));
-      })
-    );
-  },
-  { functional: true }
-);
+// export const loadFolder = createEffect(
+//   () => {
+//     const actions$ = inject(Actions);
+//     const apiService = inject(ApiService);
+//     const store = inject(Store);
+//     return actions$.pipe(
+//       ofType(FoldersActions.loadFolder),
+//       withLatestFrom(store.select(selectRouteParams)),
+//       switchMap(([, params]) => {
+//         console.log('Params Folder>>>', params['id']);
+//         if (params['id']) {
+//           return apiService.get<FoldersDTO>(`/folder/${params['id']}`).pipe(
+//             map((folder) => folderDTOAdapter.DTOtoEntity(folder)),
+//             map((folderEntity) => FoldersActions.loadFolderSuccess({ folderData: folderEntity })),
+//             catchError((error) => {
+//               console.error('Error', error);
+//               return of(FoldersActions.loadFolderFailed({ error }));
+//             })
+//           );
+//         }
+//         return of(FoldersActions.updateFolderStatus({ status: 'loading' }));
+//       })
+//     );
+//   },
+//   { functional: true }
+// );
