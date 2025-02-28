@@ -59,9 +59,15 @@ export class UsersFacade {
   loadUser() {
     this.store.dispatch(UsersActions.loadUser());
   }
-
+// filter for users (добавлен фильтр для пользователей).
   userFilter(name: string) {
     this.store.dispatch(UsersActions.setUsersFilter({ name }));
   }
-  // filter for users (добавлен фильтр для пользователей).
+
+  addStoryPoints(userData: CreateUserDTO, id: number, onSuccessAddSP: onSuccessEditionCbType) {
+    this.store.dispatch(UsersActions.addUserStoryPoints({ userData, id, onSuccessAddSP }));
+  }
+  // add story points
 }
+
+

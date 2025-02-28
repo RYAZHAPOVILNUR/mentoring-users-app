@@ -12,7 +12,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { onSuccessEditionCbType } from '@users/users/data-access';
+import { onSuccessEditionCbType, onSuccessSPonCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -98,7 +98,9 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
+  @Output() addStoryPoints = new EventEmitter<{ user: CreateUserDTO; onSuccessAddSP: onSuccessSPonCbType }>();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('snackbarStoryPoints') snackbarStoryPointsTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -110,6 +112,7 @@ export class DetailUsersCardComponent implements OnInit {
   private snackBar = inject(MatSnackBar);
   private readonly destroyRef = inject(DestroyRef);
   public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
+  public totalStoryPoints = new FormControl({ value: 0, disabled: true }); // add story points
 
   ngOnInit(): void {
     this.checkChangeFields();
@@ -135,6 +138,35 @@ export class DetailUsersCardComponent implements OnInit {
       onSuccessCb: this.onEditSuccess,
     });
   }
+  // add story points
+  private onAddSPSuccess: onSuccessSPonCbType = () =>
+    this.snackBar.open('Сторипоинт добавлен', 'Ok', {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+
+  onAddStoryPoints() {
+    this.totalStoryPoints.disable();
+    this.addStoryPoints.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        totalStoryPoints: this.totalStoryPoints.value || 0,
+        purchaseDate: '',
+        educationStatus: '',
+      },
+      onSuccessAddSP: this.onAddSPSuccess,
+    });
+  }
+
+  toggleStoryPoints(): void {
+    if (this.totalStoryPoints.disabled) {
+      this.totalStoryPoints.enable();
+    } else {
+      this.totalStoryPoints.disable();
+    }
+  } // add story points
 
   onCloseUser() {
     this.closeUser.emit();

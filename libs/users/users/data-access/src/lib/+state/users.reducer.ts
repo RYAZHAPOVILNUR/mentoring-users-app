@@ -84,8 +84,22 @@ const reducer = createReducer(
       ...state,
       usersFilter: { name },
     };
-  })
-   // filter for users (добавлен фильтр для пользователей).
+  }), // filter for users (добавлен фильтр для пользователей).
+  on(UsersActions.addUserStoryPointsSuccess, (state, { userData }) =>
+    usersAdapter.updateOne(
+      {
+        id: userData.id,
+        changes: userData,
+      },
+      state
+    )
+  ),
+  on(UsersActions.addUserStoryPointsFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  }))
+   // add story points
 );
 
 export function usersReducer(state: UsersState | undefined, action: Action) {
