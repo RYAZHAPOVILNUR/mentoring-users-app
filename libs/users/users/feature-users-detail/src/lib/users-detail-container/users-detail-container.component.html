@@ -2,6 +2,7 @@
   *ngrxLet="{
     user: user$,
     editMode: editMode$,
+    editPointsMode: editPointsMode$,
     status: status$,
     errors: errors$
   } as vm"
@@ -9,9 +10,12 @@
   <detail-users-card
     [vm]="vm"
     (editUser)="onEditUser($event.user, $event.onSuccessCb)"
+    (editPoints)="onEditPoints($event.user , $event.onSuccessCb)"
     (closeUser)="onCloseUser()"
     (closeEditMode)="onCloseEditMode()"
+    (closePointsEditMode)="onClosePointsEditMode()"
     (openEditMode)="onOpenEditMode()"
+    (openPointsEditMode)="onOpenPointsEditMode()"
     (deleteUser)="onDeleteUser()"
   />
 </ng-container>

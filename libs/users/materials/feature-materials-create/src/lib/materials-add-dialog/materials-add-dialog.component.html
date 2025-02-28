@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Добавление {{ data.title }}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Название" formControlName="title" />
+        <mat-error>Название обязательно</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Ссылка" formControlName="material_link" />
+        <mat-error>Ссылка обязательна</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions class="actions">
+  <button mat-button (click)="close()">Отмена</button>
+  <button mat-raised-button color="primary" (click)="save()">Сохранить</button>
+</div>

@@ -6,7 +6,7 @@ type UsersVMAdapter = {
 };
 
 export const usersVMAdapter: UsersVMAdapter = {
-  entityToVM({ id, name, username, email, isAdmin, photo }) {
-    return { id, name, username, email, isAdmin, photo };
+  entityToVM({ id, name, username, email, isAdmin, photo, totalStoryPoints }) {
+    return { id, name, username, email, isAdmin, photo, totalStoryPoints };
   },
 };

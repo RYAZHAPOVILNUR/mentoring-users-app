@@ -5,6 +5,20 @@
   align-items: center;
 }
 
+#timer {
+  font-size: 30px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  color: #7e57c2;
+}
+
+.timer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .user-photo {
   position: relative; /* Add this to make the overlay position relative to the photo container */
   width: 8rem;

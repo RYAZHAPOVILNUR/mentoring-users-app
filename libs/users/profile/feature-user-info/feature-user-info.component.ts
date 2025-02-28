@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -52,6 +52,8 @@ export class FeatureUserInfoComponent implements OnInit {
 
   public photo: any;
   public isPhotoHovered?: boolean;
+  public seconds: BehaviorSubject<string> = new BehaviorSubject<string>(localStorage.getItem('seconds')! !== '0' ? (Math.floor(Date.now()/1000) - +localStorage.getItem('seconds')!).toString() : '0');
+  public toggle: BehaviorSubject<string> = new BehaviorSubject<string>(localStorage.getItem('seconds')!);
 
   ngOnInit(): void {
     this.photo = this.vm.user.photo ? this.vm.user.photo.url : '';
@@ -59,7 +61,11 @@ export class FeatureUserInfoComponent implements OnInit {
       'github',
       this.domSanitizer.bypassSecurityTrustResourceUrl(`assets/icons/github.svg`)
     );
-    of(this.vm.githubUserName).subscribe(console.log);
+    //of(this.vm.githubUserName).subscribe(console.log);
+
+    if (localStorage.getItem('seconds') !== '0') {
+      this.goTimer()
+    }
   }
   onOpenChangePassword() {
     const dialogRef = this.dialog.open(PasswordChangeDialogComponent);
@@ -122,5 +128,37 @@ export class FeatureUserInfoComponent implements OnInit {
     this.dialog.open(UiPhotoModalComponent, {
       data: this.vm.user.photo ? this.vm.user.photo.url : '',
     });
+  }
+
+  getTime(time: string | null): string {
+    const s = +time! % 60
+    const m = Math.floor(+time! / 60)
+    const c = Math.floor(m / 60)
+    const d = Math.floor(c / 24)
+
+    const res = `${d}д ${c}ч ${m.toString().length === 1 ? `0${m}` : m}:${s.toString().length === 1 ? `0${s}` : s}`
+    return res
+  }
+
+  goTimer() {
+    const timer = setInterval(() => {
+      const sec = +localStorage.getItem('seconds')!
+      this.seconds.next((Math.floor(Date.now() / 1000) - sec).toString())
+    }, 1000)
+    localStorage.setItem('timer', timer.toString())
+  }
+
+  toggleTimer() {
+    if (localStorage.getItem('seconds') !== '0') {
+      clearInterval(+localStorage.getItem('timer')!)
+      localStorage.setItem('seconds', '0')
+      this.toggle.next('0')
+    } else {
+      this.seconds.next('0')
+      this.toggle.next('1')
+      clearInterval(+localStorage.getItem('timer')!)
+      localStorage.setItem('seconds', Math.floor(Date.now() / 1000).toString())
+      this.goTimer()
+    }
   }
 }
