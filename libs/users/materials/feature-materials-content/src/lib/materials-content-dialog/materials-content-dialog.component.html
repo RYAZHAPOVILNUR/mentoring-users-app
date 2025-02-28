@@ -1,1 +1,40 @@
-<p>materials-content-dialog works!</p>
+<mat-dialog-content class="dialog-content">
+  <div class="dialog-content__header">
+    <h2 mat-dialog-title class="dialog-content__title">{{ data.title }}</h2>
+    
+    <button mat-icon-button type="button" class="dialog-content__close-btn"
+            [mat-dialog-close]="false">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="dialog-content__main" [ngSwitch]="onCheckFileType()">
+    <ng-container *ngSwitchCase="'video'">
+      <div class="video">
+        <iframe [src]="onGetSecurityUrl('video')" allowfullscreen
+                class="video__item"></iframe>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="'audio'">
+      <div class="audio">
+        <audio preload="metadata" controls
+               [src]="onGetSecurityUrl('audio')"></audio>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="'pdf'">
+      <pdf-viewer [src]="onGetSecurityUrl('pdf')"
+                  [render-text]="true"
+                  [original-size]="false"
+                  class="pdf"
+      ></pdf-viewer>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <div class="alert alert-danger" role="alert">
+        <h1>Некорректная ссылка на источник: {{ data.materialLink }}</h1>
+        <hr />
+      </div>
+    </ng-container>
+  </div>
+</mat-dialog-content>
+
+
+

@@ -1,6 +1,6 @@
 
 <mat-card class="material-card-wrapper" (mouseenter)="onShowIcon(true)"
-          (mouseleave)="onShowIcon(false)" (dblclick)="onRedirectToMaterialContent()">
+          (mouseleave)="onShowIcon(false)" (dblclick)="onOpenMaterialContentDialog()">
 
   <mat-card-content class="material-card-content">
     <mat-icon *ngIf="getFileIcon() as icon" [fontIcon]="icon" class="material-card-content__icon"

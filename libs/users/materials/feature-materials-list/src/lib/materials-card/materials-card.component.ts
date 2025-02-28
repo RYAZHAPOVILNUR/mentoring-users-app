@@ -1,10 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { AsyncPipe, CommonModule, DatePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { BehaviorSubject } from 'rxjs';
 import { TMaterialDTO } from '@users/materials/data-access';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MaterialsContentDialogComponent } from '@users/materials/feature-materials-content';
 
 @Component({
   selector: 'materials-card',
@@ -15,6 +17,8 @@ import { TMaterialDTO } from '@users/materials/data-access';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialsCardComponent {
+  private readonly dialog = inject(MatDialog);
+
   @Input({ required: true })
   material!: TMaterialDTO;
 
@@ -48,5 +52,17 @@ export class MaterialsCardComponent {
 
   public onRedirectToMaterialContent(): void {
     this.redirectToMaterialContent.emit(this.material.id);
+  }
+
+  public onOpenMaterialContentDialog(): void {
+    const dialogRef: MatDialogRef<MaterialsContentDialogComponent> = this.dialog.open(MaterialsContentDialogComponent, {
+      minWidth: '200px',
+      maxWidth: '1980px',
+      data: {
+        materialLink: this.material.material_link,
+        title: this.material.title,
+      },
+      autoFocus: false,
+    });
   }
 }

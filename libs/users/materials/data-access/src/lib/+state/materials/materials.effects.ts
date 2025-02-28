@@ -22,8 +22,8 @@ export const loadMaterials = createEffect(
         apiService.get<TMaterialDTO[]>('/material').pipe(
           map((materials) =>
             MatererialsActions.loadMaterialsSuccess({
-              materials: materials.filter((material) => Number(params['id']) === material.folder_id), // отфильтрованные по id
-              // materials,
+              // materials: materials.filter((material) => Number(params['id']) === material.folder_id), // отфильтрованные по id
+              materials,
             })
           ),
           catchError((error) => {

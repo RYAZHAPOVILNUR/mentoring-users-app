@@ -1,0 +1,30 @@
+.dialog-content {
+  &__header {
+    position: relative;
+  }
+
+  &__close-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  &__title {
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  &__main {
+    margin-top: 30px;
+    .video {
+      &__item {
+        width: 900px;
+        min-height: 600px;
+      }
+    }
+    .pdf {
+      width: 1920px;
+      height: 1080px;
+    }
+  }
+}
