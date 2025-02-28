@@ -47,6 +47,6 @@ export class FoldersCardComponent {
       }
     })
       .afterClosed()
-      .subscribe(v => v && this.facade.DeleteFolder({ id, title, created_at: '' }, this.openAlert.bind(this)))
+      .subscribe(v => v && this.facade.deleteFolder({ id, title, created_at: '' }, this.openAlert.bind(this)))
   }
 }

@@ -75,6 +75,14 @@
             </button>
           </ng-template>
         </ng-container>
+        <div class="timer">
+          <div>
+            <mat-icon (click)="toggleTimer()" id="timer">{{ (toggle | async) === '0' ? 'timer_off' : 'timer'}}</mat-icon>
+          </div>
+          <div>
+            {{ getTime(seconds | async) }}
+          </div>
+        </div>
       </mat-card-actions>
     </mat-card>
   </div>

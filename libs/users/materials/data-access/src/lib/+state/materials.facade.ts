@@ -30,7 +30,7 @@ export class MaterialsFacade {
     this.store.dispatch(MaterialsActions.loadFolder({ folder }))
   }
 
-  DeleteFolder(folder: FolderDTO, openFn: () => void) {
+  deleteFolder(folder: FolderDTO, openFn: () => void) {
     this.store.dispatch(MaterialsActions.deleteFolder({ folder, openFn }))
   }
 }
