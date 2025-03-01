@@ -13,7 +13,7 @@ const { selectAll, selectEntities } = materialsAdapter.getSelectors();
 export const selectMaterialsStatus = createSelector(selectMaterialsState, (state: MaterialsState) => state.status);
 
 // Получает errors из MaterialsState. Используется для обработки ошибок загрузки данных.
-export const selectmaterialsError = createSelector(selectMaterialsState, (state: MaterialsState) => state.errors);
+export const selectMaterialsError = createSelector(selectMaterialsState, (state: MaterialsState) => state.errors);
 
 // Извлекает все материалы из состояния с помощью selectAll. Если state отсутствует, возвращает пустой массив [].
 export const selectAllMaterials = createSelector(selectMaterialsState, (state: MaterialsState) => selectAll(state));

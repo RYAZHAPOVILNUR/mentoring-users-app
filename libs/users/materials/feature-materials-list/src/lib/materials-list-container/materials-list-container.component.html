@@ -8,7 +8,8 @@
   >
     <button class="button-back" routerLink="/materials" mat-button><mat-icon>arrow_back</mat-icon></button>
     <div class="material-header">
-      <div class="mat-con">
+      <div *ngIf="vm.error" class="mat-con">Error: {{ vm.error.status }}</div>
+      <div *ngIf="vm.materials" class="mat-con">
         <div style="border: 1px solid blue; padding: 5px" *ngFor="let material of vm.materials">
           <p>Title: {{ material.title }}</p>
           <p>Link: {{ material.materialLink }}</p>

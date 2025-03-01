@@ -15,27 +15,19 @@ export const materialsEffects = createEffect(
     const store = inject(Store);
     return actions$.pipe(
       ofType(MaterialsActions.loadMaterials),
-      withLatestFrom(store.select(selectRouteParams)),
-      switchMap(([, params]) => {
-        if (params['id']) {
-          console.log('Params Materials>>>', params['id']);
-        }
-        store.dispatch(MaterialsActions.updateMaterialState({ status: 'loading' }));
-
-        return apiService.get<MaterialsDTO[]>(`/material`).pipe(
+      switchMap(() =>
+        apiService.get<MaterialsDTO[]>(`/material`).pipe(
           map((materials) => {
-            console.log('Effects Succes', materials);
             return MaterialsActions.loadMaterialsSuccess({
               materials: materials.map((material) => materialsDTOAdapter.DTOtoEntity(material)),
             });
           }),
           catchError((error) => {
-            console.log('Effects Error');
             console.error('Error', error);
             return of(MaterialsActions.loadMaterialsFailure({ error }));
           })
-        );
-      })
+        )
+      )
     );
   },
   { functional: true }

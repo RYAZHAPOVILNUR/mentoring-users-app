@@ -14,7 +14,7 @@ export class MaterialsFacade {
   // public readonly openedMaterial$ = this.store.select(MaterialSelectors.selectOpenedMaterial);
   public readonly status$ = this.store.pipe(select(MaterialSelectors.selectMaterialsStatus || of(null)));
   public readonly errors$: Observable<MaterialsErrors | null> = this.store.pipe(
-    select(MaterialSelectors.selectmaterialsError)
+    select(MaterialSelectors.selectMaterialsError)
   );
 
   init() {

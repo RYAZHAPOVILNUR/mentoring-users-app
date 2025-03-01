@@ -8,6 +8,7 @@ import {
   MaterialsEntity,
   MaterialsFacade,
   initMaterials,
+  selectFiltredMaterials,
   selectMaterialsEntities,
 } from '@users/materials/data-access';
 import { MaterialsCardComponent } from '../materials-card/materials-card.component';
@@ -15,7 +16,7 @@ import { MaterialsListContainerStore } from './materials-list-container.store';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, map, switchMap, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectArticlesEntities } from 'libs/users/articles/data-access/src/lib/+state/articles.selectors';
 
@@ -38,22 +39,31 @@ import { selectArticlesEntities } from 'libs/users/articles/data-access/src/lib/
 })
 export class MaterialsListContainerComponent {
   private readonly componentStore = inject(MaterialsListContainerStore);
-  private readonly foldersfacade = inject(FoldersFacade);
+  // private readonly foldersfacade = inject(FoldersFacade);
   public readonly materialsFacade = inject(MaterialsFacade);
   private readonly store = inject(Store);
   private readonly route = inject(ActivatedRoute);
-  public readonly materials$ = this.componentStore.materials$;
+  public readonly allMaterials$ = this.componentStore.materials$;
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;
   // public readonly materials$ = this.materialsFacade.
   public folder!: FoldersEntity;
   public material!: MaterialsEntity;
-  private storege!: MaterialsStore;
+  // private storege!: MaterialsStore;
 
-  constructor() {
-    this.store.setMaterialId(this.route.paramMap.pipe(map((params) => Number(params.get('id')))));
-    // console.log('Materials List>>', this.materials$);
-  }
+  // public readonly allMaterials$ = this.store.select(selectFiltredMaterials);
+
+  materials$ = this.route.paramMap.pipe(
+    map((params) => Number(params.get('id'))), // Получаем id из URL
+    switchMap((id) => {
+      console.log('List ID', id);
+      return this.allMaterials$.pipe(
+        map((materials) => materials.filter((material) => material.folderId === id)) // Фильтруем по id
+      );
+    })
+  );
+
+  constructor() {}
 
   ngOnInit() {
     this.materialsFacade.loadMaterials();

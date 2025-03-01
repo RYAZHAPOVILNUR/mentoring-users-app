@@ -31,28 +31,7 @@ export class MaterialsListContainerStore extends ComponentStore<MaterialsListSta
     super(initialState);
     this.materialsFacade.init();
     this.setMaterialsFromGlobalToLocaleStore();
-    super({ materials: [], selectedMaterialId: null });
   }
-
-  // Фильтруем материалы по ID
-  readonly filteredMaterials$ = this.select(this.state$, (state) =>
-    state.materials.filter((material) => material.folderId === state.selectedMaterialId)
-  );
-
-  // private setMaterialsFromGlobalToLocaleStore(): void {
-  //   this.effect(() =>
-  //     this.materialsFacade.filtredMaterials$.pipe(tap((materials: MaterialsEntity[]) => this.patchMaterials(materials)))
-  //   )();
-  // }
-
-  // private setMaterialsFromGlobalToLocaleStore(): void {
-  //   this.effect(() =>
-  //     combineLatest([
-  //       this.materialsFacade.filtredMaterials$,
-  //       this.status$, // или другие зависимости
-  //     ]).pipe(tap(([materials]) => this.patchMaterials(materials)))
-  //   )();
-  // }
 
   readonly filteredMaterials$ = this.select(this.state$, (state) =>
     state.materials.filter((material) => material.folderId === 2178)
