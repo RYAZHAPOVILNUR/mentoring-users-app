@@ -1,42 +1,23 @@
-@use '@angular/material' as mat;
-
-$primary: mat.define-palette(mat.$deep-purple-palette, 400);
-$accent: mat.define-palette(mat.$blue-grey-palette, 300);
-$theme: mat.define-light-theme(
-  (
-    color: (
-      primary: $primary,
-      accent: $accent,
-    ),
-  )
-);
-
-@include mat.core();
-
-@include mat.all-component-themes($theme);
-@include app-theme.theme($theme);
-
-html,
-body {
-  height: 100%;
-}
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  padding: 0;
 }
 
-.add-user-fab-button {
-  position: fixed !important;
-  bottom: 5em !important;
-  right: 10em !important;
-  z-index: 100;
+
+:root {
+  --white-color: #fff;
+  --black-color: #000;
+  --primary-color: #6200ee;
+  --secondary-color: #03DAC6;
 }
 
-mat-progress-bar {
-  margin-top: 2px;
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: rgba(22, 3, 54, 1.0);
+  background: linear-gradient(270deg, rgba(22, 3, 54, 1.0), rgba(1, 1, 1, 1.0)) !important;
+  color: var(--white-color) !important;
 }
 
-.ql-editor:focus {
-  border: 1px solid #80bdff !important;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important;
-}
+

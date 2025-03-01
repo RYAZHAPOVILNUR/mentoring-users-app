@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~16.0.0",
     "@angular/platform-browser-dynamic": "~16.0.0",
     "@angular/router": "~16.0.0",
+    "@fortawesome/fontawesome-free": "^6.7.2",
     "@ngrx/component": "^16.0.1",
     "@ngrx/component-store": "~16.0.0",
     "@ngrx/effects": "~16.0.0",

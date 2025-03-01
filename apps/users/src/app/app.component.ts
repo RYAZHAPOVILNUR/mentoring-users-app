@@ -43,6 +43,7 @@
 
 import {Component} from '@angular/core';
 import {RouterModule} from "@angular/router";
+import {SidebarComponent} from "@users/sidebar";
 // import { RouterModule } from '@angular/router';
 // import { authActions } from '@auth/data-access';
 // import { Store } from '@ngrx/store';
@@ -59,6 +60,7 @@ import {RouterModule} from "@angular/router";
   standalone: true,
   imports: [
     RouterModule,
+    SidebarComponent,
     // HeaderComponent,
     // FooterComponent,
     // NgIf,
