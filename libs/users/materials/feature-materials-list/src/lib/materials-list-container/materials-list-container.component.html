@@ -1,4 +1,7 @@
 <div class="material-content">
+  <div class="material-header">
+    <button class="button-back" routerLink="/materials" mat-button><mat-icon>arrow_back</mat-icon></button>
+  </div>
   <ng-container
     *ngrxLet="{
     materials: materials$,
@@ -6,9 +9,6 @@
     error: errors$,
   } as vm"
   >
-    <div class="material-header">
-      <button class="button-back" routerLink="/materials" mat-button><mat-icon>arrow_back</mat-icon></button>
-    </div>
     <div *ngFor="let mat of vm.materials">
       <div>{{ mat.materialLink }}</div>
     </div>
