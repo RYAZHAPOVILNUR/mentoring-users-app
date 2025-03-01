@@ -18,7 +18,8 @@ export const foldersEffect = createEffect(
         apiService.get<FoldersDTO[]>('/folder').pipe(
 					map((folders) =>
 						 FoldersActions.loadFoldersSuccess({
-							 folders: folders.map((folder) => foldersDTOAdapter.DTOtoEntity(folder)),
+							 folders: folders.map((folder) =>
+                 foldersDTOAdapter.DTOtoEntity(folder)),
 						})
 					),
 					catchError((error) => {

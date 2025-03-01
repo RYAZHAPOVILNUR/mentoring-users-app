@@ -12,7 +12,7 @@
     </mat-icon>
   </div>
   <div class="material-info">
-  <div class="material-title">{{ material.title | lineTrim }}</div>
+  <div class="material-title">{{ material.title | lineTrim:5 }}</div>
   <div class="material-created">{{ material.createdAt | date }}</div>
   </div>
 </div>
