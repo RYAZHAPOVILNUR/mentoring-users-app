@@ -1,3 +1,4 @@
+import { MaterialsContentComponent } from '@users/feature-materials-list';
 import { TasksContainerComponent } from './../../../../libs/users/task/src/lib/tasks-view-container/tasks-view-container.component';
 import { Route } from '@angular/router';
 import { authGuard, adminGuard } from '@auth/data-access';
@@ -49,7 +50,21 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'materials',
-        loadComponent: () => import('@users/materials').then((c) => c.UsersMaterialsComponent),
+        loadComponent: () => import('@users/feature-folders-list').then((c) => c.FoldersListContainerComponent),
+      },
+      {
+        path: 'materials/:folderId',
+        loadComponent: () =>
+          import("@users/feature-materials-content").then(
+            (c) => c.MaterialsListContainerComponent
+          ),
+      },
+      {
+        path: 'materials',
+        loadComponent: () =>
+          import('@users/feature-materials-list').then(
+            (c) => c.MaterialsContentComponent
+          ),
       },
       {
         path: 'articles',

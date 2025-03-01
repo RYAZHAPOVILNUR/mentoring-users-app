@@ -26,7 +26,7 @@ export class CreateUsersButtonComponent {
 
   openAddUserDialog(): void {
     const dialogRef: MatDialogRef<CreateUsersDialogComponent> = this.dialog.open(CreateUsersDialogComponent, {
-      data: { name: this.name, email: this.email },
+      data: { name: this.name, email: this.email }
     });
     dialogRef
       .afterClosed()
