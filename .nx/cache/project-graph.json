@@ -330,6 +330,61 @@
         "implicitDependencies": []
       }
     },
+    "users-users-feature-users-detail": {
+      "name": "users-users-feature-users-detail",
+      "type": "lib",
+      "data": {
+        "name": "users-users-feature-users-detail",
+        "root": "libs/users/users/feature-users-detail",
+        "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+        "sourceRoot": "libs/users/users/feature-users-detail/src",
+        "prefix": "users",
+        "tags": [],
+        "projectType": "library",
+        "targets": {
+          "test": {
+            "inputs": [
+              "default",
+              "^production",
+              "{workspaceRoot}/jest.preset.js"
+            ],
+            "executor": "@nx/jest:jest",
+            "outputs": [
+              "{workspaceRoot}/coverage/{projectRoot}"
+            ],
+            "options": {
+              "jestConfig": "libs/users/users/feature-users-detail/jest.config.ts",
+              "passWithNoTests": true
+            },
+            "configurations": {
+              "ci": {
+                "ci": true,
+                "codeCoverage": true
+              }
+            }
+          },
+          "lint": {
+            "inputs": [
+              "default",
+              "{workspaceRoot}/.eslintrc.json",
+              "{workspaceRoot}/.eslintignore"
+            ],
+            "executor": "@nx/linter:eslint",
+            "outputs": [
+              "{options.outputFile}"
+            ],
+            "options": {
+              "lintFilePatterns": [
+                "libs/users/users/feature-users-detail/**/*.ts",
+                "libs/users/users/feature-users-detail/**/*.html"
+              ]
+            },
+            "configurations": {}
+          }
+        },
+        "implicitDependencies": []
+      }
+    },
     "users-users-feature-users-create": {
       "name": "users-users-feature-users-create",
       "type": "lib",
@@ -385,14 +440,14 @@
         "implicitDependencies": []
       }
     },
-    "users-users-feature-users-detail": {
-      "name": "users-users-feature-users-detail",
+    "users-articles-articles-create": {
+      "name": "users-articles-articles-create",
       "type": "lib",
       "data": {
-        "name": "users-users-feature-users-detail",
-        "root": "libs/users/users/feature-users-detail",
+        "name": "users-articles-articles-create",
+        "root": "libs/users/articles/articles-create",
         "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-        "sourceRoot": "libs/users/users/feature-users-detail/src",
+        "sourceRoot": "libs/users/articles/articles-create/src",
         "prefix": "users",
         "tags": [],
         "projectType": "library",
@@ -408,7 +463,7 @@
               "{workspaceRoot}/coverage/{projectRoot}"
             ],
             "options": {
-              "jestConfig": "libs/users/users/feature-users-detail/jest.config.ts",
+              "jestConfig": "libs/users/articles/articles-create/jest.config.ts",
               "passWithNoTests": true
             },
             "configurations": {
@@ -430,8 +485,8 @@
             ],
             "options": {
               "lintFilePatterns": [
-                "libs/users/users/feature-users-detail/**/*.ts",
-                "libs/users/users/feature-users-detail/**/*.html"
+                "libs/users/articles/articles-create/**/*.ts",
+                "libs/users/articles/articles-create/**/*.html"
               ]
             },
             "configurations": {}
@@ -495,14 +550,14 @@
         "implicitDependencies": []
       }
     },
-    "users-articles-articles-create": {
-      "name": "users-articles-articles-create",
+    "users-core-ui-language-switch": {
+      "name": "users-core-ui-language-switch",
       "type": "lib",
       "data": {
-        "name": "users-articles-articles-create",
-        "root": "libs/users/articles/articles-create",
-        "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-        "sourceRoot": "libs/users/articles/articles-create/src",
+        "name": "users-core-ui-language-switch",
+        "root": "libs/users/core/ui/language-switch",
+        "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+        "sourceRoot": "libs/users/core/ui/language-switch/src",
         "prefix": "users",
         "tags": [],
         "projectType": "library",
@@ -518,7 +573,7 @@
               "{workspaceRoot}/coverage/{projectRoot}"
             ],
             "options": {
-              "jestConfig": "libs/users/articles/articles-create/jest.config.ts",
+              "jestConfig": "libs/users/core/ui/language-switch/jest.config.ts",
               "passWithNoTests": true
             },
             "configurations": {
@@ -540,8 +595,8 @@
             ],
             "options": {
               "lintFilePatterns": [
-                "libs/users/articles/articles-create/**/*.ts",
-                "libs/users/articles/articles-create/**/*.html"
+                "libs/users/core/ui/language-switch/**/*.ts",
+                "libs/users/core/ui/language-switch/**/*.html"
               ]
             },
             "configurations": {}
@@ -613,171 +668,6 @@
         "implicitDependencies": []
       }
     },
-    "users-core-ui-language-switch": {
-      "name": "users-core-ui-language-switch",
-      "type": "lib",
-      "data": {
-        "name": "users-core-ui-language-switch",
-        "root": "libs/users/core/ui/language-switch",
-        "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
-        "sourceRoot": "libs/users/core/ui/language-switch/src",
-        "prefix": "users",
-        "tags": [],
-        "projectType": "library",
-        "targets": {
-          "test": {
-            "inputs": [
-              "default",
-              "^production",
-              "{workspaceRoot}/jest.preset.js"
-            ],
-            "executor": "@nx/jest:jest",
-            "outputs": [
-              "{workspaceRoot}/coverage/{projectRoot}"
-            ],
-            "options": {
-              "jestConfig": "libs/users/core/ui/language-switch/jest.config.ts",
-              "passWithNoTests": true
-            },
-            "configurations": {
-              "ci": {
-                "ci": true,
-                "codeCoverage": true
-              }
-            }
-          },
-          "lint": {
-            "inputs": [
-              "default",
-              "{workspaceRoot}/.eslintrc.json",
-              "{workspaceRoot}/.eslintignore"
-            ],
-            "executor": "@nx/linter:eslint",
-            "outputs": [
-              "{options.outputFile}"
-            ],
-            "options": {
-              "lintFilePatterns": [
-                "libs/users/core/ui/language-switch/**/*.ts",
-                "libs/users/core/ui/language-switch/**/*.html"
-              ]
-            },
-            "configurations": {}
-          }
-        },
-        "implicitDependencies": []
-      }
-    },
-    "data-access": {
-      "name": "data-access",
-      "type": "lib",
-      "data": {
-        "name": "data-access",
-        "root": "libs/users/materials/data-access",
-        "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-        "sourceRoot": "libs/users/materials/data-access/src",
-        "prefix": "users",
-        "tags": [],
-        "projectType": "library",
-        "targets": {
-          "test": {
-            "inputs": [
-              "default",
-              "^production",
-              "{workspaceRoot}/jest.preset.js"
-            ],
-            "executor": "@nx/jest:jest",
-            "outputs": [
-              "{workspaceRoot}/coverage/{projectRoot}"
-            ],
-            "options": {
-              "jestConfig": "libs/users/materials/data-access/jest.config.ts",
-              "passWithNoTests": true
-            },
-            "configurations": {
-              "ci": {
-                "ci": true,
-                "codeCoverage": true
-              }
-            }
-          },
-          "lint": {
-            "inputs": [
-              "default",
-              "{workspaceRoot}/.eslintrc.json",
-              "{workspaceRoot}/.eslintignore"
-            ],
-            "executor": "@nx/linter:eslint",
-            "outputs": [
-              "{options.outputFile}"
-            ],
-            "options": {
-              "lintFilePatterns": [
-                "libs/users/materials/data-access/**/*.ts",
-                "libs/users/materials/data-access/**/*.html"
-              ]
-            },
-            "configurations": {}
-          }
-        },
-        "implicitDependencies": []
-      }
-    },
-    "core-github-api-data-access": {
-      "name": "core-github-api-data-access",
-      "type": "lib",
-      "data": {
-        "name": "core-github-api-data-access",
-        "root": "libs/core/github-api/data-access",
-        "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-        "sourceRoot": "libs/core/github-api/data-access/src",
-        "prefix": "users",
-        "tags": [],
-        "projectType": "library",
-        "targets": {
-          "test": {
-            "inputs": [
-              "default",
-              "^production",
-              "{workspaceRoot}/jest.preset.js"
-            ],
-            "executor": "@nx/jest:jest",
-            "outputs": [
-              "{workspaceRoot}/coverage/{projectRoot}"
-            ],
-            "options": {
-              "jestConfig": "libs/core/github-api/data-access/jest.config.ts",
-              "passWithNoTests": true
-            },
-            "configurations": {
-              "ci": {
-                "ci": true,
-                "codeCoverage": true
-              }
-            }
-          },
-          "lint": {
-            "inputs": [
-              "default",
-              "{workspaceRoot}/.eslintrc.json",
-              "{workspaceRoot}/.eslintignore"
-            ],
-            "executor": "@nx/linter:eslint",
-            "outputs": [
-              "{options.outputFile}"
-            ],
-            "options": {
-              "lintFilePatterns": [
-                "libs/core/github-api/data-access/**/*.ts",
-                "libs/core/github-api/data-access/**/*.html"
-              ]
-            },
-            "configurations": {}
-          }
-        },
-        "implicitDependencies": []
-      }
-    },
     "article-read": {
       "name": "article-read",
       "type": "lib",
@@ -840,14 +730,14 @@
         "tags": []
       }
     },
-    "users-articles-data-access": {
-      "name": "users-articles-data-access",
+    "core-github-api-data-access": {
+      "name": "core-github-api-data-access",
       "type": "lib",
       "data": {
-        "name": "users-articles-data-access",
-        "root": "libs/users/articles/data-access",
+        "name": "core-github-api-data-access",
+        "root": "libs/core/github-api/data-access",
         "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-        "sourceRoot": "libs/users/articles/data-access/src",
+        "sourceRoot": "libs/core/github-api/data-access/src",
         "prefix": "users",
         "tags": [],
         "projectType": "library",
@@ -863,7 +753,7 @@
               "{workspaceRoot}/coverage/{projectRoot}"
             ],
             "options": {
-              "jestConfig": "libs/users/articles/data-access/jest.config.ts",
+              "jestConfig": "libs/core/github-api/data-access/jest.config.ts",
               "passWithNoTests": true
             },
             "configurations": {
@@ -885,8 +775,63 @@
             ],
             "options": {
               "lintFilePatterns": [
-                "libs/users/articles/data-access/**/*.ts",
-                "libs/users/articles/data-access/**/*.html"
+                "libs/core/github-api/data-access/**/*.ts",
+                "libs/core/github-api/data-access/**/*.html"
+              ]
+            },
+            "configurations": {}
+          }
+        },
+        "implicitDependencies": []
+      }
+    },
+    "data-access": {
+      "name": "data-access",
+      "type": "lib",
+      "data": {
+        "name": "data-access",
+        "root": "libs/users/materials/data-access",
+        "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+        "sourceRoot": "libs/users/materials/data-access/src",
+        "prefix": "users",
+        "tags": [],
+        "projectType": "library",
+        "targets": {
+          "test": {
+            "inputs": [
+              "default",
+              "^production",
+              "{workspaceRoot}/jest.preset.js"
+            ],
+            "executor": "@nx/jest:jest",
+            "outputs": [
+              "{workspaceRoot}/coverage/{projectRoot}"
+            ],
+            "options": {
+              "jestConfig": "libs/users/materials/data-access/jest.config.ts",
+              "passWithNoTests": true
+            },
+            "configurations": {
+              "ci": {
+                "ci": true,
+                "codeCoverage": true
+              }
+            }
+          },
+          "lint": {
+            "inputs": [
+              "default",
+              "{workspaceRoot}/.eslintrc.json",
+              "{workspaceRoot}/.eslintignore"
+            ],
+            "executor": "@nx/linter:eslint",
+            "outputs": [
+              "{options.outputFile}"
+            ],
+            "options": {
+              "lintFilePatterns": [
+                "libs/users/materials/data-access/**/*.ts",
+                "libs/users/materials/data-access/**/*.html"
               ]
             },
             "configurations": {}
@@ -1005,6 +950,61 @@
         "implicitDependencies": []
       }
     },
+    "users-articles-data-access": {
+      "name": "users-articles-data-access",
+      "type": "lib",
+      "data": {
+        "name": "users-articles-data-access",
+        "root": "libs/users/articles/data-access",
+        "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+        "sourceRoot": "libs/users/articles/data-access/src",
+        "prefix": "users",
+        "tags": [],
+        "projectType": "library",
+        "targets": {
+          "test": {
+            "inputs": [
+              "default",
+              "^production",
+              "{workspaceRoot}/jest.preset.js"
+            ],
+            "executor": "@nx/jest:jest",
+            "outputs": [
+              "{workspaceRoot}/coverage/{projectRoot}"
+            ],
+            "options": {
+              "jestConfig": "libs/users/articles/data-access/jest.config.ts",
+              "passWithNoTests": true
+            },
+            "configurations": {
+              "ci": {
+                "ci": true,
+                "codeCoverage": true
+              }
+            }
+          },
+          "lint": {
+            "inputs": [
+              "default",
+              "{workspaceRoot}/.eslintrc.json",
+              "{workspaceRoot}/.eslintignore"
+            ],
+            "executor": "@nx/linter:eslint",
+            "outputs": [
+              "{options.outputFile}"
+            ],
+            "options": {
+              "lintFilePatterns": [
+                "libs/users/articles/data-access/**/*.ts",
+                "libs/users/articles/data-access/**/*.html"
+              ]
+            },
+            "configurations": {}
+          }
+        },
+        "implicitDependencies": []
+      }
+    },
     "users-backlog-data-access": {
       "name": "users-backlog-data-access",
       "type": "lib",
@@ -1115,61 +1115,6 @@
         "implicitDependencies": []
       }
     },
-    "users-articles-articles": {
-      "name": "users-articles-articles",
-      "type": "lib",
-      "data": {
-        "name": "users-articles-articles",
-        "root": "libs/users/articles/articles",
-        "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-        "sourceRoot": "libs/users/articles/articles/src",
-        "prefix": "users",
-        "tags": [],
-        "projectType": "library",
-        "targets": {
-          "test": {
-            "inputs": [
-              "default",
-              "^production",
-              "{workspaceRoot}/jest.preset.js"
-            ],
-            "executor": "@nx/jest:jest",
-            "outputs": [
-              "{workspaceRoot}/coverage/{projectRoot}"
-            ],
-            "options": {
-              "jestConfig": "libs/users/articles/articles/jest.config.ts",
-              "passWithNoTests": true
-            },
-            "configurations": {
-              "ci": {
-                "ci": true,
-                "codeCoverage": true
-              }
-            }
-          },
-          "lint": {
-            "inputs": [
-              "default",
-              "{workspaceRoot}/.eslintrc.json",
-              "{workspaceRoot}/.eslintignore"
-            ],
-            "executor": "@nx/linter:eslint",
-            "outputs": [
-              "{options.outputFile}"
-            ],
-            "options": {
-              "lintFilePatterns": [
-                "libs/users/articles/articles/**/*.ts",
-                "libs/users/articles/articles/**/*.html"
-              ]
-            },
-            "configurations": {}
-          }
-        },
-        "implicitDependencies": []
-      }
-    },
     "users-users-data-access": {
       "name": "users-users-data-access",
       "type": "lib",
@@ -1217,6 +1162,61 @@
               "lintFilePatterns": [
                 "libs/users/users/data-access/**/*.ts",
                 "libs/users/users/data-access/**/*.html"
+              ]
+            },
+            "configurations": {}
+          }
+        },
+        "implicitDependencies": []
+      }
+    },
+    "users-articles-articles": {
+      "name": "users-articles-articles",
+      "type": "lib",
+      "data": {
+        "name": "users-articles-articles",
+        "root": "libs/users/articles/articles",
+        "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+        "sourceRoot": "libs/users/articles/articles/src",
+        "prefix": "users",
+        "tags": [],
+        "projectType": "library",
+        "targets": {
+          "test": {
+            "inputs": [
+              "default",
+              "^production",
+              "{workspaceRoot}/jest.preset.js"
+            ],
+            "executor": "@nx/jest:jest",
+            "outputs": [
+              "{workspaceRoot}/coverage/{projectRoot}"
+            ],
+            "options": {
+              "jestConfig": "libs/users/articles/articles/jest.config.ts",
+              "passWithNoTests": true
+            },
+            "configurations": {
+              "ci": {
+                "ci": true,
+                "codeCoverage": true
+              }
+            }
+          },
+          "lint": {
+            "inputs": [
+              "default",
+              "{workspaceRoot}/.eslintrc.json",
+              "{workspaceRoot}/.eslintignore"
+            ],
+            "executor": "@nx/linter:eslint",
+            "outputs": [
+              "{options.outputFile}"
+            ],
+            "options": {
+              "lintFilePatterns": [
+                "libs/users/articles/articles/**/*.ts",
+                "libs/users/articles/articles/**/*.html"
               ]
             },
             "configurations": {}
@@ -1610,61 +1610,6 @@
         "implicitDependencies": []
       }
     },
-    "core-dadata": {
-      "name": "core-dadata",
-      "type": "lib",
-      "data": {
-        "name": "core-dadata",
-        "root": "libs/core/dadata",
-        "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-        "sourceRoot": "libs/core/dadata/src",
-        "prefix": "users",
-        "tags": [],
-        "projectType": "library",
-        "targets": {
-          "test": {
-            "inputs": [
-              "default",
-              "^production",
-              "{workspaceRoot}/jest.preset.js"
-            ],
-            "executor": "@nx/jest:jest",
-            "outputs": [
-              "{workspaceRoot}/coverage/{projectRoot}"
-            ],
-            "options": {
-              "jestConfig": "libs/core/dadata/jest.config.ts",
-              "passWithNoTests": true
-            },
-            "configurations": {
-              "ci": {
-                "ci": true,
-                "codeCoverage": true
-              }
-            }
-          },
-          "lint": {
-            "inputs": [
-              "default",
-              "{workspaceRoot}/.eslintrc.json",
-              "{workspaceRoot}/.eslintignore"
-            ],
-            "executor": "@nx/linter:eslint",
-            "outputs": [
-              "{options.outputFile}"
-            ],
-            "options": {
-              "lintFilePatterns": [
-                "libs/core/dadata/**/*.ts",
-                "libs/core/dadata/**/*.html"
-              ]
-            },
-            "configurations": {}
-          }
-        },
-        "implicitDependencies": []
-      }
-    },
     "chart": {
       "name": "chart",
       "type": "lib",
@@ -1720,14 +1665,14 @@
         "implicitDependencies": []
       }
     },
-    "users-home": {
-      "name": "users-home",
+    "core-dadata": {
+      "name": "core-dadata",
       "type": "lib",
       "data": {
-        "name": "users-home",
-        "root": "libs/users/home",
+        "name": "core-dadata",
+        "root": "libs/core/dadata",
         "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-        "sourceRoot": "libs/users/home/src",
+        "sourceRoot": "libs/core/dadata/src",
         "prefix": "users",
         "tags": [],
         "projectType": "library",
@@ -1743,7 +1688,7 @@
               "{workspaceRoot}/coverage/{projectRoot}"
             ],
             "options": {
-              "jestConfig": "libs/users/home/jest.config.ts",
+              "jestConfig": "libs/core/dadata/jest.config.ts",
               "passWithNoTests": true
             },
             "configurations": {
@@ -1765,8 +1710,8 @@
             ],
             "options": {
               "lintFilePatterns": [
-                "libs/users/home/**/*.ts",
-                "libs/users/home/**/*.html"
+                "libs/core/dadata/**/*.ts",
+                "libs/core/dadata/**/*.html"
               ]
             },
             "configurations": {}
@@ -1822,6 +1767,61 @@
               "lintFilePatterns": [
                 "libs/users/task/**/*.ts",
                 "libs/users/task/**/*.html"
+              ]
+            },
+            "configurations": {}
+          }
+        },
+        "implicitDependencies": []
+      }
+    },
+    "users-home": {
+      "name": "users-home",
+      "type": "lib",
+      "data": {
+        "name": "users-home",
+        "root": "libs/users/home",
+        "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+        "sourceRoot": "libs/users/home/src",
+        "prefix": "users",
+        "tags": [],
+        "projectType": "library",
+        "targets": {
+          "test": {
+            "inputs": [
+              "default",
+              "^production",
+              "{workspaceRoot}/jest.preset.js"
+            ],
+            "executor": "@nx/jest:jest",
+            "outputs": [
+              "{workspaceRoot}/coverage/{projectRoot}"
+            ],
+            "options": {
+              "jestConfig": "libs/users/home/jest.config.ts",
+              "passWithNoTests": true
+            },
+            "configurations": {
+              "ci": {
+                "ci": true,
+                "codeCoverage": true
+              }
+            }
+          },
+          "lint": {
+            "inputs": [
+              "default",
+              "{workspaceRoot}/.eslintrc.json",
+              "{workspaceRoot}/.eslintignore"
+            ],
+            "executor": "@nx/linter:eslint",
+            "outputs": [
+              "{options.outputFile}"
+            ],
+            "options": {
+              "lintFilePatterns": [
+                "libs/users/home/**/*.ts",
+                "libs/users/home/**/*.html"
               ]
             },
             "configurations": {}
@@ -18283,43 +18283,6 @@
         "type": "static"
       }
     ],
-    "users-users-feature-users-create": [
-      {
-        "source": "users-users-feature-users-create",
-        "target": "npm:@angular/core",
-        "type": "static"
-      },
-      {
-        "source": "users-users-feature-users-create",
-        "target": "npm:@angular/common",
-        "type": "static"
-      },
-      {
-        "source": "users-users-feature-users-create",
-        "target": "npm:@angular/material",
-        "type": "static"
-      },
-      {
-        "source": "users-users-feature-users-create",
-        "target": "users-users-data-access",
-        "type": "static"
-      },
-      {
-        "source": "users-users-feature-users-create",
-        "target": "core-data-access",
-        "type": "static"
-      },
-      {
-        "source": "users-users-feature-users-create",
-        "target": "npm:@angular/forms",
-        "type": "static"
-      },
-      {
-        "source": "users-users-feature-users-create",
-        "target": "npm:jest-preset-angular",
-        "type": "static"
-      }
-    ],
     "users-users-feature-users-detail": [
       {
         "source": "users-users-feature-users-detail",
@@ -18387,69 +18350,39 @@
         "type": "static"
       }
     ],
-    "users-users-feature-users-list": [
+    "users-users-feature-users-create": [
       {
-        "source": "users-users-feature-users-list",
+        "source": "users-users-feature-users-create",
         "target": "npm:@angular/core",
         "type": "static"
       },
       {
-        "source": "users-users-feature-users-list",
+        "source": "users-users-feature-users-create",
         "target": "npm:@angular/common",
         "type": "static"
       },
       {
-        "source": "users-users-feature-users-list",
+        "source": "users-users-feature-users-create",
         "target": "npm:@angular/material",
         "type": "static"
       },
       {
-        "source": "users-users-feature-users-list",
-        "target": "npm:@angular/router",
-        "type": "static"
-      },
-      {
-        "source": "users-users-feature-users-list",
-        "target": "core-data-access",
-        "type": "static"
-      },
-      {
-        "source": "users-users-feature-users-list",
-        "target": "core-utils",
-        "type": "static"
-      },
-      {
-        "source": "users-users-feature-users-list",
+        "source": "users-users-feature-users-create",
         "target": "users-users-data-access",
         "type": "static"
       },
       {
-        "source": "users-users-feature-users-list",
-        "target": "npm:@ngrx/component",
+        "source": "users-users-feature-users-create",
+        "target": "core-data-access",
         "type": "static"
       },
       {
-        "source": "users-users-feature-users-list",
-        "target": "users-users-feature-users-create",
+        "source": "users-users-feature-users-create",
+        "target": "npm:@angular/forms",
         "type": "static"
       },
       {
-        "source": "users-users-feature-users-list",
-        "target": "npm:@ngrx/component-store",
-        "type": "static"
-      },
-      {
-        "source": "users-users-feature-users-list",
-        "target": "npm:rxjs",
-        "type": "static"
-      },
-      {
-        "source": "users-users-feature-users-list",
-        "target": "core-ui",
-        "type": "static"
-      },
-      {
-        "source": "users-users-feature-users-list",
+        "source": "users-users-feature-users-create",
         "target": "npm:jest-preset-angular",
         "type": "static"
       }
@@ -18541,6 +18474,95 @@
         "type": "static"
       }
     ],
+    "users-users-feature-users-list": [
+      {
+        "source": "users-users-feature-users-list",
+        "target": "npm:@angular/core",
+        "type": "static"
+      },
+      {
+        "source": "users-users-feature-users-list",
+        "target": "npm:@angular/common",
+        "type": "static"
+      },
+      {
+        "source": "users-users-feature-users-list",
+        "target": "npm:@angular/material",
+        "type": "static"
+      },
+      {
+        "source": "users-users-feature-users-list",
+        "target": "npm:@angular/router",
+        "type": "static"
+      },
+      {
+        "source": "users-users-feature-users-list",
+        "target": "core-data-access",
+        "type": "static"
+      },
+      {
+        "source": "users-users-feature-users-list",
+        "target": "core-utils",
+        "type": "static"
+      },
+      {
+        "source": "users-users-feature-users-list",
+        "target": "users-users-data-access",
+        "type": "static"
+      },
+      {
+        "source": "users-users-feature-users-list",
+        "target": "npm:@ngrx/component",
+        "type": "static"
+      },
+      {
+        "source": "users-users-feature-users-list",
+        "target": "users-users-feature-users-create",
+        "type": "static"
+      },
+      {
+        "source": "users-users-feature-users-list",
+        "target": "npm:@ngrx/component-store",
+        "type": "static"
+      },
+      {
+        "source": "users-users-feature-users-list",
+        "target": "npm:rxjs",
+        "type": "static"
+      },
+      {
+        "source": "users-users-feature-users-list",
+        "target": "core-ui",
+        "type": "static"
+      },
+      {
+        "source": "users-users-feature-users-list",
+        "target": "npm:jest-preset-angular",
+        "type": "static"
+      }
+    ],
+    "users-core-ui-language-switch": [
+      {
+        "source": "users-core-ui-language-switch",
+        "target": "npm:@angular/core",
+        "type": "static"
+      },
+      {
+        "source": "users-core-ui-language-switch",
+        "target": "npm:@ngx-translate/core",
+        "type": "static"
+      },
+      {
+        "source": "users-core-ui-language-switch",
+        "target": "npm:rxjs",
+        "type": "static"
+      },
+      {
+        "source": "users-core-ui-language-switch",
+        "target": "npm:jest-preset-angular",
+        "type": "static"
+      }
+    ],
     "users-profile-feature-profile": [
       {
         "source": "users-profile-feature-profile",
@@ -18604,117 +18626,6 @@
       },
       {
         "source": "users-profile-feature-profile",
-        "target": "npm:jest-preset-angular",
-        "type": "static"
-      }
-    ],
-    "users-core-ui-language-switch": [
-      {
-        "source": "users-core-ui-language-switch",
-        "target": "npm:@angular/core",
-        "type": "static"
-      },
-      {
-        "source": "users-core-ui-language-switch",
-        "target": "npm:@ngx-translate/core",
-        "type": "static"
-      },
-      {
-        "source": "users-core-ui-language-switch",
-        "target": "npm:rxjs",
-        "type": "static"
-      },
-      {
-        "source": "users-core-ui-language-switch",
-        "target": "npm:jest-preset-angular",
-        "type": "static"
-      }
-    ],
-    "data-access": [
-      {
-        "source": "data-access",
-        "target": "npm:@ngrx/store",
-        "type": "static"
-      },
-      {
-        "source": "data-access",
-        "target": "npm:@angular/core",
-        "type": "static"
-      },
-      {
-        "source": "data-access",
-        "target": "npm:@ngrx/effects",
-        "type": "static"
-      },
-      {
-        "source": "data-access",
-        "target": "npm:jasmine-marbles",
-        "type": "static"
-      },
-      {
-        "source": "data-access",
-        "target": "npm:rxjs",
-        "type": "static"
-      },
-      {
-        "source": "data-access",
-        "target": "core-http",
-        "type": "static"
-      },
-      {
-        "source": "data-access",
-        "target": "npm:@ngrx/entity",
-        "type": "static"
-      },
-      {
-        "source": "data-access",
-        "target": "core-data-access",
-        "type": "static"
-      },
-      {
-        "source": "data-access",
-        "target": "npm:jest-preset-angular",
-        "type": "static"
-      }
-    ],
-    "core-github-api-data-access": [
-      {
-        "source": "core-github-api-data-access",
-        "target": "npm:@ngrx/store",
-        "type": "static"
-      },
-      {
-        "source": "core-github-api-data-access",
-        "target": "npm:@angular/core",
-        "type": "static"
-      },
-      {
-        "source": "core-github-api-data-access",
-        "target": "npm:@ngrx/effects",
-        "type": "static"
-      },
-      {
-        "source": "core-github-api-data-access",
-        "target": "npm:rxjs",
-        "type": "static"
-      },
-      {
-        "source": "core-github-api-data-access",
-        "target": "core-data-access",
-        "type": "static"
-      },
-      {
-        "source": "core-github-api-data-access",
-        "target": "npm:@angular/common",
-        "type": "static"
-      },
-      {
-        "source": "core-github-api-data-access",
-        "target": "core-http",
-        "type": "static"
-      },
-      {
-        "source": "core-github-api-data-access",
         "target": "npm:jest-preset-angular",
         "type": "static"
       }
@@ -18806,54 +18717,91 @@
         "type": "static"
       }
     ],
-    "users-articles-data-access": [
+    "core-github-api-data-access": [
       {
-        "source": "users-articles-data-access",
+        "source": "core-github-api-data-access",
         "target": "npm:@ngrx/store",
         "type": "static"
       },
       {
-        "source": "users-articles-data-access",
+        "source": "core-github-api-data-access",
         "target": "npm:@angular/core",
         "type": "static"
       },
       {
-        "source": "users-articles-data-access",
+        "source": "core-github-api-data-access",
         "target": "npm:@ngrx/effects",
         "type": "static"
       },
       {
-        "source": "users-articles-data-access",
+        "source": "core-github-api-data-access",
         "target": "npm:rxjs",
         "type": "static"
       },
       {
-        "source": "users-articles-data-access",
-        "target": "core-http",
-        "type": "static"
-      },
-      {
-        "source": "users-articles-data-access",
-        "target": "npm:@angular/router",
-        "type": "static"
-      },
-      {
-        "source": "users-articles-data-access",
+        "source": "core-github-api-data-access",
         "target": "core-data-access",
         "type": "static"
       },
       {
-        "source": "users-articles-data-access",
+        "source": "core-github-api-data-access",
+        "target": "npm:@angular/common",
+        "type": "static"
+      },
+      {
+        "source": "core-github-api-data-access",
+        "target": "core-http",
+        "type": "static"
+      },
+      {
+        "source": "core-github-api-data-access",
+        "target": "npm:jest-preset-angular",
+        "type": "static"
+      }
+    ],
+    "data-access": [
+      {
+        "source": "data-access",
+        "target": "npm:@ngrx/store",
+        "type": "static"
+      },
+      {
+        "source": "data-access",
+        "target": "npm:@angular/core",
+        "type": "static"
+      },
+      {
+        "source": "data-access",
+        "target": "npm:@ngrx/effects",
+        "type": "static"
+      },
+      {
+        "source": "data-access",
+        "target": "npm:jasmine-marbles",
+        "type": "static"
+      },
+      {
+        "source": "data-access",
+        "target": "npm:rxjs",
+        "type": "static"
+      },
+      {
+        "source": "data-access",
+        "target": "core-http",
+        "type": "static"
+      },
+      {
+        "source": "data-access",
         "target": "npm:@ngrx/entity",
         "type": "static"
       },
       {
-        "source": "users-articles-data-access",
-        "target": "core-auth-data-access",
+        "source": "data-access",
+        "target": "core-data-access",
         "type": "static"
       },
       {
-        "source": "users-articles-data-access",
+        "source": "data-access",
         "target": "npm:jest-preset-angular",
         "type": "static"
       }
@@ -18948,6 +18896,58 @@
       },
       {
         "source": "settings-data-access",
+        "target": "npm:jest-preset-angular",
+        "type": "static"
+      }
+    ],
+    "users-articles-data-access": [
+      {
+        "source": "users-articles-data-access",
+        "target": "npm:@ngrx/store",
+        "type": "static"
+      },
+      {
+        "source": "users-articles-data-access",
+        "target": "npm:@angular/core",
+        "type": "static"
+      },
+      {
+        "source": "users-articles-data-access",
+        "target": "npm:@ngrx/effects",
+        "type": "static"
+      },
+      {
+        "source": "users-articles-data-access",
+        "target": "npm:rxjs",
+        "type": "static"
+      },
+      {
+        "source": "users-articles-data-access",
+        "target": "core-http",
+        "type": "static"
+      },
+      {
+        "source": "users-articles-data-access",
+        "target": "npm:@angular/router",
+        "type": "static"
+      },
+      {
+        "source": "users-articles-data-access",
+        "target": "core-data-access",
+        "type": "static"
+      },
+      {
+        "source": "users-articles-data-access",
+        "target": "npm:@ngrx/entity",
+        "type": "static"
+      },
+      {
+        "source": "users-articles-data-access",
+        "target": "core-auth-data-access",
+        "type": "static"
+      },
+      {
+        "source": "users-articles-data-access",
         "target": "npm:jest-preset-angular",
         "type": "static"
       }
@@ -19066,6 +19066,63 @@
         "type": "static"
       }
     ],
+    "users-users-data-access": [
+      {
+        "source": "users-users-data-access",
+        "target": "npm:@ngrx/store",
+        "type": "static"
+      },
+      {
+        "source": "users-users-data-access",
+        "target": "core-data-access",
+        "type": "static"
+      },
+      {
+        "source": "users-users-data-access",
+        "target": "npm:@angular/core",
+        "type": "static"
+      },
+      {
+        "source": "users-users-data-access",
+        "target": "npm:@ngrx/effects",
+        "type": "static"
+      },
+      {
+        "source": "users-users-data-access",
+        "target": "npm:jasmine-marbles",
+        "type": "static"
+      },
+      {
+        "source": "users-users-data-access",
+        "target": "npm:rxjs",
+        "type": "static"
+      },
+      {
+        "source": "users-users-data-access",
+        "target": "core-http",
+        "type": "static"
+      },
+      {
+        "source": "users-users-data-access",
+        "target": "npm:@nx/angular",
+        "type": "static"
+      },
+      {
+        "source": "users-users-data-access",
+        "target": "core-auth-data-access",
+        "type": "static"
+      },
+      {
+        "source": "users-users-data-access",
+        "target": "npm:@ngrx/entity",
+        "type": "static"
+      },
+      {
+        "source": "users-users-data-access",
+        "target": "npm:jest-preset-angular",
+        "type": "static"
+      }
+    ],
     "users-articles-articles": [
       {
         "source": "users-articles-articles",
@@ -19164,63 +19221,6 @@
       },
       {
         "source": "users-articles-articles",
-        "target": "npm:jest-preset-angular",
-        "type": "static"
-      }
-    ],
-    "users-users-data-access": [
-      {
-        "source": "users-users-data-access",
-        "target": "npm:@ngrx/store",
-        "type": "static"
-      },
-      {
-        "source": "users-users-data-access",
-        "target": "core-data-access",
-        "type": "static"
-      },
-      {
-        "source": "users-users-data-access",
-        "target": "npm:@angular/core",
-        "type": "static"
-      },
-      {
-        "source": "users-users-data-access",
-        "target": "npm:@ngrx/effects",
-        "type": "static"
-      },
-      {
-        "source": "users-users-data-access",
-        "target": "npm:jasmine-marbles",
-        "type": "static"
-      },
-      {
-        "source": "users-users-data-access",
-        "target": "npm:rxjs",
-        "type": "static"
-      },
-      {
-        "source": "users-users-data-access",
-        "target": "core-http",
-        "type": "static"
-      },
-      {
-        "source": "users-users-data-access",
-        "target": "npm:@nx/angular",
-        "type": "static"
-      },
-      {
-        "source": "users-users-data-access",
-        "target": "core-auth-data-access",
-        "type": "static"
-      },
-      {
-        "source": "users-users-data-access",
-        "target": "npm:@ngrx/entity",
-        "type": "static"
-      },
-      {
-        "source": "users-users-data-access",
         "target": "npm:jest-preset-angular",
         "type": "static"
       }
@@ -19494,28 +19494,6 @@
         "type": "static"
       }
     ],
-    "core-dadata": [
-      {
-        "source": "core-dadata",
-        "target": "npm:@angular/core",
-        "type": "static"
-      },
-      {
-        "source": "core-dadata",
-        "target": "npm:@angular/common",
-        "type": "static"
-      },
-      {
-        "source": "core-dadata",
-        "target": "npm:rxjs",
-        "type": "static"
-      },
-      {
-        "source": "core-dadata",
-        "target": "npm:jest-preset-angular",
-        "type": "static"
-      }
-    ],
     "chart": [
       {
         "source": "chart",
@@ -19538,39 +19516,24 @@
         "type": "static"
       }
     ],
-    "users-home": [
+    "core-dadata": [
       {
-        "source": "users-home",
+        "source": "core-dadata",
         "target": "npm:@angular/core",
         "type": "static"
       },
       {
-        "source": "users-home",
+        "source": "core-dadata",
         "target": "npm:@angular/common",
         "type": "static"
       },
       {
-        "source": "users-home",
-        "target": "npm:@angular/material",
+        "source": "core-dadata",
+        "target": "npm:rxjs",
         "type": "static"
       },
       {
-        "source": "users-home",
-        "target": "npm:highcharts",
-        "type": "static"
-      },
-      {
-        "source": "users-home",
-        "target": "npm:highcharts-angular",
-        "type": "static"
-      },
-      {
-        "source": "users-home",
-        "target": "core-highcharts",
-        "type": "static"
-      },
-      {
-        "source": "users-home",
+        "source": "core-dadata",
         "target": "npm:jest-preset-angular",
         "type": "static"
       }
@@ -19643,6 +19606,43 @@
       },
       {
         "source": "users-task",
+        "target": "npm:jest-preset-angular",
+        "type": "static"
+      }
+    ],
+    "users-home": [
+      {
+        "source": "users-home",
+        "target": "npm:@angular/core",
+        "type": "static"
+      },
+      {
+        "source": "users-home",
+        "target": "npm:@angular/common",
+        "type": "static"
+      },
+      {
+        "source": "users-home",
+        "target": "npm:@angular/material",
+        "type": "static"
+      },
+      {
+        "source": "users-home",
+        "target": "npm:highcharts",
+        "type": "static"
+      },
+      {
+        "source": "users-home",
+        "target": "npm:highcharts-angular",
+        "type": "static"
+      },
+      {
+        "source": "users-home",
+        "target": "core-highcharts",
+        "type": "static"
+      },
+      {
+        "source": "users-home",
         "target": "npm:jest-preset-angular",
         "type": "static"
       }
