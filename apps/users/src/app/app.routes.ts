@@ -1,4 +1,3 @@
-import { TasksContainerComponent } from './../../../../libs/users/task/src/lib/tasks-view-container/tasks-view-container.component';
 import { Route } from '@angular/router';
 import { authGuard, adminGuard } from '@auth/data-access';
 import { AuthorizedUserLayoutComponent } from './authorized-user-layout/authorized-user-layout.component';
@@ -41,15 +40,17 @@ export const appRoutes: Route[] = [
         loadComponent: () =>
           import('@users/users/profile/feature-profile').then((c) => c.UserProfileContainerComponent),
       },
+      // {
+      //   path: 'folders-editor',
+      //   loadComponent: () =>
+      //     import('@users/materials/feature-folders-create').then((c) => c.FoldersAddButtonComponent),
+      //   canDeactivate: [canDeactivateFormComponent],
+      // },
       {
         path: 'article-editor',
         loadComponent: () =>
           import('@users/users/articles/articles-create').then((c) => c.ArticlesCreateContainerComponent),
         canDeactivate: [canDeactivateFormComponent],
-      },
-      {
-        path: 'materials',
-        loadComponent: () => import('@users/materials').then((c) => c.UsersMaterialsComponent),
       },
       {
         path: 'articles',
@@ -70,6 +71,14 @@ export const appRoutes: Route[] = [
       {
         path: 'chart',
         loadComponent: () => import('@users/users/chart').then((c) => c.ChartViewComponent),
+      },
+      {
+        path: 'materials',
+        loadComponent: () => import('@users/materials/feature-folders-list').then((c) => c.FoldersListContainerComponent),
+      },
+      {
+        path: 'materials/:id',
+        loadComponent: () => import('@users/materials/feature-materials-list').then((c) => c.MaterialsListContainerComponent),
       },
       {
         path: 'backlog',

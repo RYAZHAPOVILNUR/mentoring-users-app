@@ -1,0 +1,21 @@
+{
+  "run": {
+    "command": "nx serve users -o",
+    "startTime": "2025-02-27T11:44:55.199Z",
+    "endTime": "2025-02-28T21:17:07.074Z",
+    "inner": false
+  },
+  "tasks": [
+    {
+      "taskId": "users:serve:development",
+      "target": "serve",
+      "projectName": "users",
+      "hash": "10000094566195617750",
+      "startTime": "2025-02-27T11:44:55.202Z",
+      "endTime": "2025-02-28T21:17:07.066Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    }
+  ]
+}

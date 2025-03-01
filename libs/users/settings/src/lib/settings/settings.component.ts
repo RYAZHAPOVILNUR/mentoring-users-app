@@ -8,7 +8,7 @@ import { PushPipe } from '@ngrx/component';
 import { MatIconModule } from '@angular/material/icon';
 import { SettingsFacade } from '@users/settings/data-access';
 import { MatCardModule } from '@angular/material/card';
-import { ChangeThemeComponent } from 'libs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component';
+import { ChangeThemeComponent } from '@users/users/settings/feature-change-theme'
 
 @Component({
   selector: 'users-settings',

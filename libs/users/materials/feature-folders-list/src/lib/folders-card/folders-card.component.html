@@ -1,0 +1,16 @@
+<!-- <p>folders-card works!</p> -->
+
+<mat-card
+  class="folder-card-wrapper"
+  (dblclick)="redirectToMaterialPage()"
+  matTooltipClass="example-tooltip-uppercase"
+>
+  <mat-card-content class="mat-card-content">
+    <div class="mat-icons">
+      <mat-icon>folder</mat-icon>
+      <mat-icon class="mat-icon-delete" (click)="onDeleteFolder($event)">delete</mat-icon>
+    </div>
+    <label class="title" *ngIf="folder.title">{{ folder.title }}<br>{{ folder.created_at | date }}</label>
+  </mat-card-content>  
+
+</mat-card>

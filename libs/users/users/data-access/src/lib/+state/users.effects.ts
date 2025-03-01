@@ -81,7 +81,6 @@ export const editUser = createEffect(
     const actions$ = inject(Actions);
     const apiService = inject(ApiService);
     const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
-
     return actions$.pipe(
       ofType(UsersActions.editUser),
       withLatestFrom(usersEntities$),

@@ -1,0 +1,21 @@
+<!-- <p>materials-content works!</p> -->
+<h1 mat-dialog-title>Mатериал</h1>
+<h2 mat-dialog-title>{{ data.material.title }}</h2>
+
+<ng-container *ngIf="data.material.material_link?.endsWith('.pdf')">
+    <pdf-viewer class="viewer" [src]="data.material.material_link" [render-text]="true"></pdf-viewer>
+</ng-container>
+
+<ng-container *ngIf="data.material.material_link && !data.material.material_link?.endsWith('.pdf') && !data.material.material_link?.endsWith('.mp3')">
+    <iframe width="500px" height="400px" [src]="getSanitizedUrl(data.material.material_link)" [frameBorder]="0" allowfullscreen></iframe>
+</ng-container>
+
+<ng-container *ngIf="data.material.material_link?.endsWith('.mp3')">
+    <audio controls [src]="data.material.material_link" type="audio/mp3">
+        Аудио не воспроизводится
+    </audio>
+</ng-container>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Отмена</button>
+</div>

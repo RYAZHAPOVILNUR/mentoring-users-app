@@ -1,0 +1,27 @@
+.mat-card-content {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 3px;
+  width: 150px;
+  // overflow: hidden;
+}
+
+.title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mat-icons{
+  display: flex;
+  justify-content: space-between;
+}
+
+.mat-icon-delete{
+  visibility: hidden;
+}
+
+.mat-card-content:hover .mat-icon-delete{
+  visibility: visible;
+}

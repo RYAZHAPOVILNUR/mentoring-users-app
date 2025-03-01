@@ -1,0 +1,42 @@
+<!-- <p>materials-list-container works!</p> -->
+<!-- <p>{{ folder.title }}</p> -->
+
+<button mat-fab color="primary" class="back-material-fab-button" (click)="onBackToFolder()">
+  <mat-icon aria-hidden="false" aria-label="arrow_back" fontIcon="arrow_back"></mat-icon>
+</button>
+
+<ng-container
+  *ngrxLet="{
+    materials: materials$,
+    status: status$,
+    errors: errors$
+  } as vm"
+>
+
+  <users-materials-list [vm]="vm" (deleteMaterial)="onDeleteMaterial(material)" (openMaterial)="onOpenMaterial(material)"/>
+
+  <users-materials-add-button></users-materials-add-button>
+  
+</ng-container>
+
+
+
+
+  <!-- <detail-materials-card
+    (editMaterial)="onEditMaterial($event.material, $event.onSuccessCb)"
+  /> -->
+
+    <!-- <detail-materials-card
+    [vm]="vm"
+    (backToFolders)="backToFolders()"
+  /> -->
+
+
+  <!-- <detail-materials-card
+    [vm]="vm"
+    (editMaterial)="onEditMaterial($event.user, $event.onSuccessCb)"
+    (closeMaterial)="onCloseMaterial()"
+    (closeEditMode)="onCloseEditMode()"
+    (openEditMode)="onOpenEditMode()"
+    (deleteMaterial)="onDeleteMaterial()"
+  /> -->

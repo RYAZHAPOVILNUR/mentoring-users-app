@@ -1,0 +1,1085 @@
+[32m?[39m [1mPort 4200 is already in use.[22m
+[1mWould you like to use a different port?[22m[0m [0m[2m(Y/n) [22m[46D[46C[2K[1A[2K[G[32m?[39m [1mPort 4200 is already in use.[22m
+[1mWould you like to use a different port?[22m[0m [0m[2m(Y/n) [22my[47D[47C[2K[1A[2K[G[32m?[39m [1mPort 4200 is already in use.[22m
+[1mWould you like to use a different port?[22m[0m [0m[36mYes[39m[43D[43C
+[36m⠋[39m Generating browser application bundles (phase: setup)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...
+WARNING: There was an error creating glob patterns, returning an empty array
+createGlobPatternsForDependencies: Error when generating globs.
+ENOENT: no such file or directory, scandir '/Users/id/Desktop/ilnur_the_one/mentoring-users-app/libs/settings/feature-change-theme'
+
+[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                                                                    [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mvendor.js[39m[37m                                                                                              [2m | [22mvendor                                [2m | [22m  [96m4.79 MB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mstyles.css, styles.js[39m[37m                                                                                  [2m | [22mstyles                                [2m | [22m[96m647.68 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mmain.js[39m[37m                                                                                                [2m | [22mmain                                  [2m | [22m[96m382.23 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mpolyfills.js[39m[37m                                                                                           [2m | [22mpolyfills                             [2m | [22m[96m331.92 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mscripts.js[39m[37m                                                                                             [2m | [22mscripts                               [2m | [22m[96m211.30 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                                                             [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1m [22m                                                                                                      [2m | [22m[1mInitial Total[22m                         [2m | [22m  [1m6.34 MB[22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                                                                       [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mdefault-node_modules_quill_dist_quill_js.js[39m[37m    [39m[37m                                                        [2m | [22musers-users-articles-articles-create  [2m | [22m[96m506.50 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_users_chart_src_index_ts.js[39m[37m                                                                       [2m | [22musers-users-chart                     [2m | [22m[96m487.61 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_users_home_src_index_ts.js[39m[37m                                                                        [2m | [22musers-home                            [2m | [22m[96m445.05 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdark-violent.css, dark-violent.js[39m[37m                                                                      [2m | [22mdark-violent                          [2m | [22m[96m301.43 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdark-green.css, dark-green.js[39m[37m                                                                          [2m | [22mdark-green                            [2m | [22m[96m301.39 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdark-red.css, dark-red.js[39m[37m                                                                              [2m | [22mdark-red                              [2m | [22m[96m301.37 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mcustom-theme.css, custom-theme.js[39m[37m                                                                      [2m | [22mcustom-theme                          [2m | [22m[96m300.78 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlight-green.css, light-green.js[39m[37m                                                                        [2m | [22mlight-green                           [2m | [22m[96m300.75 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlight-red.css, light-red.js[39m[37m                                                                            [2m | [22mlight-red                             [2m | [22m[96m300.71 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlight-violent.css, light-violent.js[39m[37m                                                                    [2m | [[39m[37m22mlight-violent                         [2m | [22m[96m300.56 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_users_task_src_index_ts.js[39m[37m                                                                        [2m | [22musers-users-task                      [2m | [22m[96m266.51 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdefault-node_modules_angular_material_fesm2022_input_mjs.js[39m[37m                                            [2m | [22musers-feature-users-list              [2m | [22m[96m233.48 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdefault-libs_core_ui_src_index_ts.js[39m[37m                                                                   [2m | [22musers-feature-users-list              [2m | [22m[96m228.28 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m                                            [2m | [22musers-materials-feature-materials-list[2m | [22m[96m132.83 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_users_users_feature-users-detail_src_index_ts.js[39m[37m                                                  [2m | [22musers-feature-users-detail            [2m | [22m [96m98.99 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdefault-libs_users_articles_articles-create_src_index_ts.js[39m[37m                                            [2m | [22musers-users-articles-articles-create  [2m | [22m [96m90.72 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdefault-node_modules_angular_material_fesm2022_checkbox_mjs.js[39m[37m                                         [2m | [22mauth-feature-login                    [2m | [22m [96m77.67 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_users_articles_articles_src_index_ts.js[39m[37m                                                           [2m | [22musers-users-articles-articles         [2m | [22m [96m74.89 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_users_profile_feature-profile_src_index_ts.js[39m[37m                                                     [2m | [22musers-users-profile-feature-profile   [2m | [22m [96m67.37 [39m[37mkB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdefault-node_modules_angular_material_fesm2022_tooltip_mjs.js[39m[37m                                          [2m | [22musers-feature-users-list              [2m | [22m [96m60.24 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdefault-libs_users_task_src_lib_task-change-dialog_task-change-dialog_component_ts-node_modul-c82731.js[39m[37m[2m | [22musers-users-task                      [2m | [22m [96m59.93 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdefault-node_modules_ngx-quill_fesm2022_ngx-quill_mjs.js[39m[37m                                               [2m | [22musers-users-articles-articles-create  [2m | [22m [96m56.88 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_users_articles_article-read_src_index_ts.js[39m[37m                                                       [2m | [22musers-users-articles-article-read     [2m | [22m [96m50.17 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_users_users_feature-users-list_src_index_ts.js[39m[37m                                                    [2m | [22musers-feature-users-list              [2m | [22m [96m48.81 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-folders-list_src_index_ts.js[39m[37m                                              [2m | [22musers-materials-feature-folders-list  [2m | [22m [96m40.66 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdefault-node_modules_angular_material_fesm2022_progress-bar_mjs.js[39m[37m                                     [2m | [22musers-feature-users-list              [2m | [22m [96m34.50 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdefault-node_modules_angular_material_fesm2022_progress-spinner_mjs.js[39m[37m                                 [2m | [22musers-users-profile-feature-profile   [2m | [22m [96m32.00 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_core_auth_feature-register_src_index_ts.js[39m[37m                                                        [2m | [22mauth-feature-register                 [2m | [22m [96m27.03 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_core_auth_feature-login_src[39m[37m_index_ts.js[39m[37m                                                           [2m | [22mauth-feature-login                    [2m | [22m [96m24.03 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_users_backlog_src_index_ts.js[39m[37m                                                                     [2m | [22musers-users-backlog                   [2m | [22m [96m18.61 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_users_settings_src_index_ts.js[39m[37m                                                                    [2m | [22musers-settings                        [2m | [22m [96m11.65 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mcommon.js[39m[37m                                                                                              [2m | [22mcommon                                [2m | [22m  [96m4.16 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-21T12:44:21.413Z[39m[37m[22m - Hash: [1m[37md175c8b27713aade[39m[37m[22m - Time: [1m[37m18314[39m[37m[22mms[0m[39m
+[1m[33m[39m[22m
+[1m[33m[0m[36m./libs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.scss?ngResource[39m[33m[0m - [0m[33mWarning: [39m[33m[0mModule Warning (from ./node_modules/sass-loader/dist/cjs.js):[39m[22m
+[1m[33mYou probably don't mean to use the color value aqua in interpolation here.[39m[22m
+[1m[33mIt may end up represented as cyan, which will likely produce invalid CSS.[39m[22m
+[1m[33mAlways quote color names when using them as strings or map keys (for example, "aqua").[39m[22m
+[1m[33mIf you really want to use the color value here, use '"" + $color-name'.[39m[22m
+[1m[33m[39m[22m
+[1m[33mlibs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.scss 164:8  root stylesheet[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[36m./libs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.scss?ngResource[39m[33m[0m - [0m[33mWarning: [39m[33m[0mModule Warning (from ./node_modules/sass-loader/dist/cjs.js):[39m[22m
+[1m[33mYou probably don't mean to use the color value blue in interpolation here.[39m[22m
+[1m[33mIt may end up represented as blue, which will likely produce invalid CSS.[39m[22m
+[1m[33mAlways quote color names when using them as strings or map keys (for example, "blue").[39m[22m
+[1m[33mIf you really want to use the color value here, use '"" + $color-name'.[39m[22m
+[1m[33m[39m[22m
+[1m[33mlibs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.scss 164:8  root stylesheet[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[36m./libs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.scss?ngResource[39m[33m[0m - [0m[33mWarning: [39m[33m[0mModule Warning (from ./node_modules/sass-loader/dist/cjs.js):[39m[22m
+[1m[33mYou probably don't mean to use the color value brown in interpolation here.[39m[22m
+[1m[33mIt may end up represented as brown, which will likely produce invalid CSS.[39m[22m
+[1m[33mAlways quote color names when using them as strings or map keys (for example, "brown").[39m[22m
+[1m[33mIf you really want to use the color value here, use '"" + $color-name'.[39m[22m
+[1m[33m[39m[22m
+[1m[33mlibs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.scss 164:8  root stylesheet[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[36m./libs/users/settings/fea[39m[22m[1m[33mture-change-theme/src/lib/change-theme-settings/change-theme.component.scss?ngResource[39m[33m[0m - [0m[33mWarning: [39m[33m[0mModule Warning (from ./node_modules/sass-loader/dist/cjs.js):[39m[22m
+[1m[33mYou probably don't mean to use the color value green in interpolation here.[39m[22m
+[1m[33mIt may end up represented as green, which will likely produce invalid CSS.[39m[22m
+[1m[33mAlways quote color names when using them as strings or map keys (for example, "green").[39m[22m
+[1m[33mIf you really want to use the color value here, use '"" + $color-name'.[39m[22m
+[1m[33m[39m[22m
+[1m[33mlibs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.scss 164:8  root stylesheet[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[36m./libs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.scss?ngResource[39m[33m[0m - [0m[33mWarning: [39m[33m[0mModule Warning (from ./node_modules/sass-loader/dist/cjs.js):[39m[22m
+[1m[33mYou probably don't mean to use the color value indigo in interpolation here.[39m[22m
+[1m[33mIt may end up represented as indigo, which will likely produce invalid CSS.[39m[22m
+[1m[33mAlways quote color names when using them as strings or map keys (for example, "indigo").[39m[22m
+[1m[33mIf you really want to use the color value here, use '"" + $color-name'.[39m[22m
+[1m[33m[39m[22m
+[1m[33mlibs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.scss 164:8  root stylesheet[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[36m./libs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.scss?ngResource[39m[33m[0m - [0m[33mWarning: [39m[33m[0mModule Warning (from ./node_modules/sass-loader/dist/cjs.js):[39m[22m
+[1m[33mYou probably don't mean to use the color value lightgreen in interpolation here.[39m[22m
+[1m[33mIt may end up represented as lightGreen, which will likely produce invalid CSS.[39m[22m
+[1m[33mAlways quote color names when using them as strings or map keys (for example, "lightgreen").[39m[22m
+[1m[33mIf you really want to use the color value here, use '"" + $color-name'.[39m[22m
+[1m[33m[39m[22m
+[1m[33mlibs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.scss 164:8  root stylesheet[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[36m./libs/users/settings/feature-change[39m[22m[1m[33m-theme/src/lib/change-theme-settings/change-theme.component.scss?ngResource[39m[33m[0m - [0m[33mWarning: [39m[33m[0mModule Warning (from ./node_modules/sass-loader/dist/cjs.js):[39m[22m
+[1m[33mYou probably don't mean to use the color value lime in interpolation here.[39m[22m
+[1m[33mIt may end up represented as lime, which will likely produce invalid CSS.[39m[22m
+[1m[33mAlways quote color names when using them as strings or map keys (for example, "lime").[39m[22m
+[1m[33mIf you really want to use the color value here, use '"" + $color-name'.[39m[22m
+[1m[33m[39m[22m
+[1m[33mlibs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.scss 164:8  root stylesheet[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[36m./libs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.scss?ngResource[39m[33m[0m - [0m[33mWarning: [39m[33m[0mModule Warning (from ./node_modules/sass-loader/dist/cjs.js):[39m[22m
+[1m[33mYou probably don't mean to use the color value orange in interpolation here.[39m[22m
+[1m[33mIt may end up represented as orange, which will likely produce invalid CSS.[39m[22m
+[1m[33mAlways quote color names when using them as strings or map keys (for example, "orange").[39m[22m
+[1m[33mIf you really want to use the color value here, use '"" + $color-name'.[39m[22m
+[1m[33m[39m[22m
+[1m[33mlibs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.scss 164:8  root stylesheet[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[36m./libs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.scss?ngResource[39m[33m[0m - [0m[33mWarning: [39m[33m[0mModule Warning (from ./node_modules/sass-loader/dist/cjs.js):[39m[22m
+[1m[33mYou probably don't mean to use the color value pink in interpolation here.[39m[22m
+[1m[33mIt may end up represented as pink, which will likely produce invalid CSS.[39m[22m
+[1m[33mAlways quote color names when using them as strings or map keys (for example, "pink").[39m[22m
+[1m[33mIf you really want to use the color value here, use '"" + $color-name'.[39m[22m
+[1m[33m[39m[22m
+[1m[33mlibs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.scss 164:8  root stylesheet[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[36m./libs/users/settings/feature-change-theme/src/lib/change-theme-sett[39m[22m[1m[33mings/change-theme.component.scss?ngResource[39m[33m[0m - [0m[33mWarning: [39m[33m[0mModule Warning (from ./node_modules/sass-loader/dist/cjs.js):[39m[22m
+[1m[33mYou probably don't mean to use the color value purple in interpolation here.[39m[22m
+[1m[33mIt may end up represented as purple, which will likely produce invalid CSS.[39m[22m
+[1m[33mAlways quote color names when using them as strings or map keys (for example, "purple").[39m[22m
+[1m[33mIf you really want to use the color value here, use '"" + $color-name'.[39m[22m
+[1m[33m[39m[22m
+[1m[33mlibs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.scss 164:8  root stylesheet[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[36m./libs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.scss?ngResource[39m[33m[0m - [0m[33mWarning: [39m[33m[0mModule Warning (from ./node_modules/sass-loader/dist/cjs.js):[39m[22m
+[1m[33mYou probably don't mean to use the color value red in interpolation here.[39m[22m
+[1m[33mIt may end up represented as red, which will likely produce invalid CSS.[39m[22m
+[1m[33mAlways quote color names when using them as strings or map keys (for example, "red").[39m[22m
+[1m[33mIf you really want to use the color value here, use '"" + $color-name'.[39m[22m
+[1m[33m[39m[22m
+[1m[33mlibs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.scss 164:8  root stylesheet[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[36m./libs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.scss?ngResource[39m[33m[0m - [0m[33mWarning: [39m[33m[0mModule Warning (from ./node_modules/sass-loader/dist/cjs.js):[39m[22m
+[1m[33mYou probably don't mean to use the color value teal in interpolation here.[39m[22m
+[1m[33mIt may end up represented as teal, which will likely produce invalid CSS.[39m[22m
+[1m[33mAlways quote color names when using them as strings or map keys (for example, "teal").[39m[22m
+[1m[33mIf you really want to use the color value here, use '"" + $color-name'.[39m[22m
+[1m[33m[39m[22m
+[1m[33mlibs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.scss 164:8  root stylesheet[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[36m./libs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.scss?ng[39m[22m[1m[33mResource[39m[33m[0m - [0m[33mWarning: [39m[33m[0mModule Warning (from ./node_modules/sass-loader/dist/cjs.js):[39m[22m
+[1m[33mYou probably don't mean to use the color value yellow in interpolation here.[39m[22m
+[1m[33mIt may end up represented as yellow, which will likely produce invalid CSS.[39m[22m
+[1m[33mAlways quote color names when using them as strings or map keys (for example, "yellow").[39m[22m
+[1m[33mIf you really want to use the color value here, use '"" + $color-name'.[39m[22m
+[1m[33m[39m[22m
+[1m[33mlibs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.scss 164:8  root stylesheet[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[36m./libs/users/task/src/lib/task-change-dialog/task-change-dialog.component.scss?ngResource[39m[33m[0m - [0m[33mWarning: [39m[33m[0mModule Warning (from ./node_modules/postcss-loader/dist/cjs.js):[39m[22m
+[1m[33m(60:3) from "autoprefixer" plugin: start value has mixed support, consider using flex-start instead[39m[22m
+[1m[33m[39m[22m
+[1m[33mCode:[39m[22m
+[1m[33m  align-items: start[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[36m./libs/users/task/src/lib/task-change-dialog/task-change-dialog.component.scss?ngResource[39m[33m[0m - [0m[33mWarning: [39m[33m[0mModule Warning (from ./node_modules/postcss-loader/dist/cjs.js):[39m[22m
+[1m[33m(80:3) from "autoprefixer" plugin: start value has mixed support, consider using flex-start instead[39m[22m
+[1m[33m[39m[22m
+[1m[33mCode:[39m[22m
+[1m[33m  align-items: start[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m/Users/id/Desktop/ilnur_the_one/mentoring-users-app/libs/users/articles/articles-create/src/lib/articles-create-ui/articles-create-ui.component.ts depends on 'quill-blot-formatter'. CommonJS or AMD dependencies can cause optimization bailouts.[39m[22m
+[1m[33mFor more info see: https://angular.io/guide/build#configuring-commonjs-dependencies[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m/Users/id/Desktop/ilnur_the_one/mentoring-users-app/libs/users/home/src/lib/home/home.component.ts depends on 'highcharts'. CommonJS or AMD dependencies can cause optimization bailouts.[39m[22m
+[1m[33mFor more info see: https://angular.io/guide/build#configuring-commonjs-dependencies[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m/Users/id/Desktop/ilnur_the_one/mentoring-users-app/node_modules/ngx-quill/fesm2022/ngx-quill.mjs depends o[39m[22m[1m[33mn 'quill'. CommonJS or AMD dependencies can cause optimization bailouts.[39m[22m
+[1m[33mFor more info see: https://angular.io/guide/build#configuring-commonjs-dependencies[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[37m[39m
+[37m** Angular Live Development Server is listening on localhost:62630, open your browser on http://localhost:62630/ **[39m
+[37m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: sealing)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m125.14 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-21T12:47:59.328Z[39m[37m[22m - Hash: [1m[37m91c57b608b5e9275[39m[37m[22m - Time: [1m[37m11030[39m[37m[22mms[0m[39m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.html[0m:[93m11[0m:[93m12[0m - [91merror[0m[90m NG5002: [0mParser Error: Unexpected token ===, expected identifier, keyword, or string[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.html[0m:[93m16[0m:[93m33[0m - [91merror[0m[90m NG5002: [0mParser Error: Unexpected token ===, expected identifier, keyword, or string[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.html[0m:[93m20[0m:[93m22[0m - [91merror[0m[90m NG5002: [0mParser Error: Unexpected token ===, expected identifier, keyword, or string[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.html[0m:[93m23[0m:[93m22[0m - [91merror[0m[90m NG5002: [0mParser Error: Unexpected token ===, expected identifier, keyword, or string[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.html[0m:[93m42[0m:[93m50[0m - [91merror[0m[90m NG5002: [0mParser Error: Unexpected token ===, expected identifier, keyword, or string[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.html[0m:[93m44[0m:[93m26[0m - [91merror[0m[90m NG5002: [0mParser Error: Unexpected token ===, expected identifier, keyword, or string[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.html[0m:[93m44[0m:[93m49[0m - [91merror[0m[90m NG5002: [0mParser Error: Unexpected token ===, expected identifier, keyword, or string[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.html[0m:[93m4[39m[22m[1m[31m4[0m:[93m73[0m - [91merror[0m[90m NG5002: [0mParser Error: Unexpected token ===, expected identifier, keyword, or string[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[37m[39m
+[37m[91m✖[39m[37m Failed to compile.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: sealing)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m125.14 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-21T12:49:27.126Z[39m[37m[22m - Hash: [1m[37m0570b241d473f67f[39m[37m[22m - Time: [1m[37m8094[39m[37m[22mms[0m[39m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.html[0m:[93m11[0m:[93m12[0m - [91merror[0m[90m NG5002: [0mParser Error: Unexpected token ===, expected identifier, keyword, or string[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.html[0m:[93m16[0m:[93m33[0m - [91merror[0m[90m NG5002: [0mParser Error: Unexpected token ===, expected identifier, keyword, or string[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.html[0m:[93m20[0m:[93m22[0m - [91merror[0m[90m NG5002: [0mParser Error: Unexpected token ===, expected identifier, keyword, or string[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.html[0m:[93m23[0m:[93m22[0m - [91merror[0m[90m NG5002: [0mParser Error: Unexpected token ===, expected identifier, keyword, or string[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.html[0m:[93m42[0m:[93m50[0m - [91merror[0m[90m NG5002: [0mParser Error: Unexpected token ===, expected identifier, keyword, or string[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.html[0m:[93m44[0m:[93m26[0m - [91merror[0m[90m NG5002: [0mParser Error: Unexpected token ===, expected identifier, keyword, or string[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.html[0m:[93m44[0m:[93m49[0m - [91merror[0m[90m NG5002: [0mParser Error: Unexpected token ===, expected identifier, keyword, or string[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.html[0m:[93m4[39m[22m[1m[31m4[0m:[93m73[0m - [91merror[0m[90m NG5002: [0mParser Error: Unexpected token ===, expected identifier, keyword, or string[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[37m[39m
+[37m[91m✖[39m[37m Failed to compile.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: sealing)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m[2m | [22m[1mNames[22m  [2m | [22m[1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m         [2m | [22mruntime[2m | [22m[96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m37 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-21T12:56:20.097Z[39m[37m[22m - Hash: [1m[37m4e30fe0c13787445[39m[37m[22m - Time: [1m[37m622[39m[37m[22mms[0m[39m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.html[0m:[93m11[0m:[93m12[0m - [91merror[0m[90m NG5002: [0mParser Error: Unexpected token ===, expected identifier, keyword, or string[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.html[0m:[93m16[0m:[93m33[0m - [91merror[0m[90m NG5002: [0mParser Error: Unexpected token ===, expected identifier, keyword, or string[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.html[0m:[93m20[0m:[93m22[0m - [91merror[0m[90m NG5002: [0mParser Error: Unexpected token ===, expected identifier, keyword, or string[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.html[0m:[93m23[0m:[93m22[0m - [91merror[0m[90m NG5002: [0mParser Error: Unexpected token ===, expected identifier, keyword, or string[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.html[0m:[93m44[0m:[93m50[0m - [91merror[0m[90m NG5002: [0mParser Error: Unexpected token ===, expected identifier, keyword, or string[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.html[0m:[93m46[0m:[93m26[0m - [91merror[0m[90m NG5002: [0mParser Error: Unexpected token ===, expected identifier, keyword, or string[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.html[0m:[93m46[0m:[93m49[0m - [91merror[0m[90m NG5002: [0mParser Error: Unexpected token ===, expected identifier, keyword, or string[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.html[0m:[93m4[39m[22m[1m[31m6[0m:[93m73[0m - [91merror[0m[90m NG5002: [0mParser Error: Unexpected token ===, expected identifier, keyword, or string[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[37m[39m
+[37m[91m✖[39m[37m Failed to compile.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m132.83 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-21T12:57:44.037Z[39m[37m[22m - Hash: [1m[37m519e7c0eb7f73804[39m[37m[22m - Time: [1m[37m1075[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m132.02 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-21T13:00:25.924Z[39m[37m[22m - Hash: [1m[37md7d71ee98c2d3eb3[39m[37m[22m - Time: [1m[37m1082[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m132.01 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-21T13:00:44.958Z[39m[37m[22m - Hash: [1m[37m79fb23c4dabf49d0[39m[37m[22m - Time: [1m[37m1303[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m132.02 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-21T13:01:06.571Z[39m[37m[22m - Hash: [1m[37m321ee22201650d0e[39m[37m[22m - Time: [1m[37m817[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m132.00 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-21T13:03:39.222Z[39m[37m[22m - Hash: [1m[37md6b1079af153abb3[39m[37m[22m - Time: [1m[37m779[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m132.00 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-21T13:13:51.593Z[39m[37m[22m - Hash: [1m[37m5723d18a40d30e70[39m[37m[22m - Time: [1m[37m4042[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m132.02 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-21T13:29:56.839Z[39m[37m[22m - Hash: [1m[37m1f034ca42f63f660[39m[37m[22m - Time: [1m[37m1174[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m132.01 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-21T13:30:38.105Z[39m[37m[22m - Hash: [1m[37md6c75b7cbabdb83a[39m[37m[22m - Time: [1m[37m734[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m132.01 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-21T17:24:05.232Z[39m[37m[22m - Hash: [1m[37m29eb66a32274a0bd[39m[37m[22m - Time: [1m[37m5401[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m132.06 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-21T17:39:04.500Z[39m[37m[22m - Hash: [1m[37m757972e2f3cfdda2[39m[37m[22m - Time: [1m[37m1962[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m132.06 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T07:37:58.879Z[39m[37m[22m - Hash: [1m[37mbe32b1a0091cddbf[39m[37m[22m - Time: [1m[37m2093[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m132.04 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T07:38:43.162Z[39m[37m[22m - Hash: [1m[37m1fe60dd6592c1d84[39m[37m[22m - Time: [1m[37m1305[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m132.04 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T07:47:21.864Z[39m[37m[22m - Hash: [1m[37m20b76ec706316b62[39m[37m[22m - Time: [1m[37m2054[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m132.07 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T07:52:12.041Z[39m[37m[22m - Hash: [1m[37m8f048b2b822aaeec[39m[37m[22m - Time: [1m[37m2592[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m132.48 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T07:52:49.316Z[39m[37m[22m - Hash: [1m[37mf68756fe8d4ffbf7[39m[37m[22m - Time: [1m[37m833[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m132.04 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T07:54:58.453Z[39m[37m[22m - Hash: [1m[37me35a8e2328bc6a61[39m[37m[22m - Time: [1m[37m1660[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m132.55 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T07:58:27.419Z[39m[37m[22m - Hash: [1m[37m19b6f4a580dcde76[39m[37m[22m - Time: [1m[37m2542[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m132.35 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T07:59:22.968Z[39m[37m[22m - Hash: [1m[37m1b6f4c06593d674a[39m[37m[22m - Time: [1m[37m2515[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m132.35 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T08:00:21.617Z[39m[37m[22m - Hash: [1m[37m78c9bb6f40470101[39m[37m[22m - Time: [1m[37m693[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m135.49 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T08:07:56.469Z[39m[37m[22m - Hash: [1m[37mae28ca30e05cb8ae[39m[37m[22m - Time: [1m[37m4460[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m135.75 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T08:11:11.489Z[39m[37m[22m - Hash: [1m[37m01e0f763f7f7f879[39m[37m[22m - Time: [1m[37m1723[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m135.63 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T08:13:34.966Z[39m[37m[22m - Hash: [1m[37m04e2d92e4bffebeb[39m[37m[22m - Time: [1m[37m1496[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m135.90 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T08:20:39.753Z[39m[37m[22m - Hash: [1m[37me9d6425d9304815b[39m[37m[22m - Time: [1m[37m2914[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m136.33 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T08:25:21.930Z[39m[37m[22m - Hash: [1m[37m96b84eb8a19bc019[39m[37m[22m - Time: [1m[37m1999[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m38 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T08:26:19.030Z[39m[37m[22m - Hash: [1m[37m96b84eb8a19bc019[39m[37m[22m - Time: [1m[37m1381[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: sealing)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m136.28 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T08:49:26.763Z[39m[37m[22m - Hash: [1m[37m87dfc2fe2078a534[39m[37m[22m - Time: [1m[37m2090[39m[37m[22mms[0m[39m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-create/src/lib/materials-add-dialog/materials-add-dialog.component.ts[0m:[93m26[0m:[93m14[0m - [91merror[0m[90m TS2420: [0mClass 'MaterialsAddDialogComponent' incorrectly implements interface 'OnInit'.[39m[22m
+[1m[31m  Property 'ngOnInit' is missing in type 'MaterialsAddDialogComponent' but required in type 'OnInit'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m26[0m export class MaterialsAddDialogComponent implements OnInit{[39m[22m
+[1m[31m[7m  [0m [91m             ~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m  [96mnode_modules/@angular/core/index.d.ts[0m:[93m6174[0m:[93m5[0m[39m[22m
+[1m[31m    [7m6174[0m     ngOnInit(): void;[39m[22m
+[1m[31m    [7m    [0m [96m    ~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[31m    'ngOnInit' is declared here.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[37m[39m
+[37m[91m✖[39m[37m Failed to compile.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m136.25 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T08:49:46.644Z[39m[37m[22m - Hash: [1m[37m8ae085990dde4b33[39m[37m[22m - Time: [1m[37m2496[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: sealing)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m136.28 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:00:52.781Z[39m[37m[22m - Hash: [1m[37made96928bbc3c273[39m[37m[22m - Time: [1m[37m2878[39m[37m[22mms[0m[39m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-create/src/lib/materials-add-dialog/materials-add-dialog.component.ts[0m:[93m26[0m:[93m14[0m - [91merror[0m[90m TS2420: [0mClass 'MaterialsAddDialogComponent' incorrectly implements interface 'OnInit'.[39m[22m
+[1m[31m  Property 'ngOnInit' is missing in type 'MaterialsAddDialogComponent' but required in type 'OnInit'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m26[0m export class MaterialsAddDialogComponent implements OnInit{[39m[22m
+[1m[31m[7m  [0m [91m             ~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m  [96mnode_modules/@angular/core/index.d.ts[0m:[93m6174[0m:[93m5[0m[39m[22m
+[1m[31m    [7m6174[0m     ngOnInit(): void;[39m[22m
+[1m[31m    [7m    [0m [96m    ~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[31m    'ngOnInit' is declared here.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[37m[39m
+[37m[91m✖[39m[37m Failed to compile.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m136.28 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:01:05.332Z[39m[37m[22m - Hash: [1m[37mc53285e999c2e00d[39m[37m[22m - Time: [1m[37m1364[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m131.61 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:01:30.628Z[39m[37m[22m - Hash: [1m[37m20bf44685b479ead[39m[37m[22m - Time: [1m[37m685[39m[37m[22mms[0m[39m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-create/src/lib/materials-add-dialog/materials-add-dialog.component.html[0m:[93m19[0m:[93m8[0m - [91merror[0m[90m NG5002: [0mUnexpected character "/"[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m19[0m   </for/m>[39m[22m
+[1m[31m[7m  [0m [91m       ~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m  [96mlibs/users/materials/feature-materials-create/src/lib/materials-add-dialog/materials-add-dialog.component.ts[0m:[93m21[0m:[93m16[0m[39m[22m
+[1m[31m    [7m21[0m   templateUrl: './materials-add-dialog.component.html',[39m[22m
+[1m[31m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[31m    Error occurs in the template of component MaterialsAddDialogComponent.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[37m[39m
+[37m[91m✖[39m[37m Failed to compile.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m135.89 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:01:33.604Z[39m[37m[22m - Hash: [1m[37m74cc20b4542737de[39m[37m[22m - Time: [1m[37m698[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m135.89 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:02:32.909Z[39m[37m[22m - Hash: [1m[37mdd5f3ad0da2c0c33[39m[37m[22m - Time: [1m[37m1287[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m136.26 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:04:16.424Z[39m[37m[22m - Hash: [1m[37m2ab78b8a03628bae[39m[37m[22m - Time: [1m[37m1958[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: sealing)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m136.33 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:05:24.544Z[39m[37m[22m - Hash: [1m[37m7439d6e26c865ab6[39m[37m[22m - Time: [1m[37m1541[39m[37m[22mms[0m[39m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-create/src/lib/materials-add-dialog/materials-add-dialog.component.ts[0m:[93m44[0m:[93m73[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ name: string; }' is not assignable to parameter of type 'MaterialType'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m44[0m         material_link: ['', [Validators.required, materialLinkValidator(this.data)]],[39m[22m
+[1m[31m[7m  [0m [91m                                                                        ~~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-create/src/lib/materials-add-dialog/materials-add-dialog.component.ts[0m:[93m50[0m:[93m71[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ name: string; }' is not assignable to parameter of type 'MaterialType'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m50[0m       material_link: ['', [Validators.required, materialLinkValidator(this.data)]],[39m[22m
+[1m[31m[7m  [0m [91m                                                                      ~~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[37m[39m
+[37m[91m✖[39m[37m Failed to compile.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m136.33 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:05:25.131Z[39m[37m[22m - Hash: [1m[37m007c93a27b9ae081[39m[37m[22m - Time: [1m[37m483[39m[37m[22mms[0m[39m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-create/src/lib/materials-add-dialog/materials-add-dialog.component.ts[0m:[93m44[0m:[93m73[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ name: string; }' is not assignable to parameter of type 'MaterialType'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m44[0m         material_link: ['', [Validators.required, materialLinkValidator(this.data)]],[39m[22m
+[1m[31m[7m  [0m [91m                                                                        ~~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-create/src/lib/materials-add-dialog/materials-add-dialog.component.ts[0m:[93m50[0m:[93m71[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ name: string; }' is not assignable to parameter of type 'MaterialType'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m50[0m       material_link: ['', [Validators.required, materialLinkValidator(this.data)]],[39m[22m
+[1m[31m[7m  [0m [91m                                                                      ~~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[37m[39m
+[37m[91m✖[39m[37m Failed to compile.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m136.33 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:05:42.604Z[39m[37m[22m - Hash: [1m[37me034bd43014dbfe4[39m[37m[22m - Time: [1m[37m955[39m[37m[22mms[0m[39m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-create/src/lib/materials-add-dialog/materials-add-dialog.component.ts[0m:[93m41[0m:[93m17[0m - [91merror[0m[90m TS7006: [0mParameter 'data' implicitly has an 'any' type.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m41[0m     constructor(@Inject(MAT_DIALOG_DATA) public data) {[39m[22m
+[1m[31m[7m  [0m [91m                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[37m[39m
+[37m[91m✖[39m[37m Failed to compile.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: sealing)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m136.13 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:05:56.818Z[39m[37m[22m - Hash: [1m[37m8fe5ab7dba29b32b[39m[37m[22m - Time: [1m[37m1770[39m[37m[22mms[0m[39m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-create/src/lib/materials-add-dialog/materials-add-dialog.component.ts[0m:[93m44[0m:[93m73[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ name: string; }' is not assignable to parameter of type 'MaterialType'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m44[0m         material_link: ['', [Validators.required, materialLinkValidator(this.data)]],[39m[22m
+[1m[31m[7m  [0m [91m                                                                        ~~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[37m[39m
+[37m[91m✖[39m[37m Failed to compile.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: sealing)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m136.13 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:06:44.385Z[39m[37m[22m - Hash: [1m[37maa656bdd71b16da6[39m[37m[22m - Time: [1m[37m748[39m[37m[22mms[0m[39m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-create/src/lib/materials-add-dialog/materials-add-dialog.component.ts[0m:[93m44[0m:[93m73[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ name: string; }' is not assignable to parameter of type 'MaterialType'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m44[0m         material_link: ['', [Validators.required, materialLinkValidator(this.data)]],[39m[22m
+[1m[31m[7m  [0m [91m                                                                        ~~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[37m[39m
+[37m[91m✖[39m[37m Failed to compile.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m136.06 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:07:40.887Z[39m[37m[22m - Hash: [1m[37m0918de5d3ce9b45b[39m[37m[22m - Time: [1m[37m1297[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m135.99 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:08:21.795Z[39m[37m[22m - Hash: [1m[37m733900ce97813581[39m[37m[22m - Time: [1m[37m1575[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m135.95 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:09:34.339Z[39m[37m[22m - Hash: [1m[37mff28cf7857e3393d[39m[37m[22m - Time: [1m[37m1384[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m135.95 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:10:40.941Z[39m[37m[22m - Hash: [1m[37m8b5b9e9ccae87e72[39m[37m[22m - Time: [1m[37m1143[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m136.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:14:15.399Z[39m[37m[22m - Hash: [1m[37m8d88e52cd9803aaa[39m[37m[22m - Time: [1m[37m3463[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m136.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:14:53.086Z[39m[37m[22m - Hash: [1m[37md4d94df40e1c4242[39m[37m[22m - Time: [1m[37m1456[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m136.07 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:15:03.314Z[39m[37m[22m - Hash: [1m[37m46c256eeed6c8522[39m[37m[22m - Time: [1m[37m858[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m136.46 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:15:44.630Z[39m[37m[22m - Hash: [1m[37mf1393f9fdd8e7b82[39m[37m[22m - Time: [1m[37m1248[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m136.46 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:16:12.948Z[39m[37m[22m - Hash: [1m[37m51db950087a430eb[39m[37m[22m - Time: [1m[37m837[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m136.33 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:16:25.702Z[39m[37m[22m - Hash: [1m[37mfa8b95db657adb4f[39m[37m[22m - Time: [1m[37m3566[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m136.55 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:18:52.037Z[39m[37m[22m - Hash: [1m[37mc9898c3772f8a338[39m[37m[22m - Time: [1m[37m2661[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: sealing)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m136.52 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:19:44.058Z[39m[37m[22m - Hash: [1m[37m6bf5aecfe9d81be4[39m[37m[22m - Time: [1m[37m1041[39m[37m[22mms[0m[39m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-create/src/lib/materials-add-button/materials-add-button.component.ts[0m:[93m55[0m:[93m30[0m - [91merror[0m[90m TS2304: [0mCannot find name 'AddMaterialsType'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m55[0m           const newMaterial: AddMaterialsType = {[39m[22m
+[1m[31m[7m  [0m [91m                             ~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[37m[39m
+[37m[91m✖[39m[37m Failed to compile.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m136.52 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:20:50.725Z[39m[37m[22m - Hash: [1m[37mb894b48aca4423cb[39m[37m[22m - Time: [1m[37m946[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m136.28 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:22:23.985Z[39m[37m[22m - Hash: [1m[37m9c50d24d04004cc3[39m[37m[22m - Time: [1m[37m776[39m[37m[22mms[0m[39m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/users/materials/feature-materials-create/src/lib/materials-add-button/materials-add-button.component.ts[0m:[93m62[0m:[93m9[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m62[0m         )[39m[22m
+[1m[31m[7m  [0m [91m        ~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[37m[39m
+[37m[91m✖[39m[37m Failed to compile.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                        [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                 [2m | [22mruntime                               [2m | [22m [96m14.12 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                           [2m | [22m[1mNames[22m                                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_users_materials_feature-materials-list_src_index_ts.js[39m[37m[2m | [22musers-materials-feature-materials-list[2m | [22m[96m136.55 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m36 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2025-02-22T10:22:43.073Z[39m[37m[22m - Hash: [1m[37m224b779bc1c213f4[39m[37m[22m - Time: [1m[37m1007[39m[37m[22mms[0m[39m
+[37m[39m
+[37m[92m✔[39m[37m Compiled successfully.[39m

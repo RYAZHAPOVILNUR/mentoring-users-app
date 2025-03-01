@@ -1,0 +1,24 @@
+[NX Daemon Server] - 2025-02-12T18:24:29.816Z - Started listening on: /tmp/5c18dce4ef0471636e87/d.sock
+[NX Daemon Server] - 2025-02-12T18:24:29.818Z - [WATCHER]: Subscribed to changes within: /Users/id/Desktop/ilnur the one/mentoring-users-app (native)
+[NX Daemon Server] - 2025-02-12T18:24:29.820Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2025-02-12T18:24:29.820Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2025-02-12T18:24:29.821Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2025-02-12T18:24:29.823Z - [REQUEST]: Responding to the client. Shutdown initiated
+[NX Daemon Server] - 2025-02-12T18:24:29.823Z - Done responding to the client Shutdown initiated
+[NX Daemon Server] - 2025-02-12T18:24:29.823Z - Handled FORCE_SHUTDOWN. Handling time: 0. Response time: 0.
+[NX Daemon Server] - 2025-02-12T18:24:29.824Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2025-02-12T18:24:29.824Z - [WATCHER]: Stopping the watcher for /Users/id/Desktop/ilnur the one/mentoring-users-app (sources)
+[NX Daemon Server] - 2025-02-12T18:24:29.824Z - [WATCHER]: Stopping the watcher for /Users/id/Desktop/ilnur the one/mentoring-users-app (outputs)
+[NX Daemon Server] - 2025-02-12T18:24:29.824Z - Server stopped because: "Request to shutdown"
+[NX Daemon Server] - 2025-02-12T18:33:09.203Z - Started listening on: /tmp/5c18dce4ef0471636e87/d.sock
+[NX Daemon Server] - 2025-02-12T18:33:09.206Z - [WATCHER]: Subscribed to changes within: /Users/id/Desktop/ilnur the one/mentoring-users-app (native)
+[NX Daemon Server] - 2025-02-12T18:33:09.209Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2025-02-12T18:33:09.209Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2025-02-12T18:33:09.210Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2025-02-12T18:33:09.210Z - [REQUEST]: Responding to the client. Shutdown initiated
+[NX Daemon Server] - 2025-02-12T18:33:09.211Z - Done responding to the client Shutdown initiated
+[NX Daemon Server] - 2025-02-12T18:33:09.211Z - Handled FORCE_SHUTDOWN. Handling time: 0. Response time: 1.
+[NX Daemon Server] - 2025-02-12T18:33:09.212Z - [WATCHER]: Stopping the watcher for /Users/id/Desktop/ilnur the one/mentoring-users-app (sources)
+[NX Daemon Server] - 2025-02-12T18:33:09.212Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2025-02-12T18:33:09.212Z - [WATCHER]: Stopping the watcher for /Users/id/Desktop/ilnur the one/mentoring-users-app (outputs)
+[NX Daemon Server] - 2025-02-12T18:33:09.213Z - Server stopped because: "Request to shutdown"
