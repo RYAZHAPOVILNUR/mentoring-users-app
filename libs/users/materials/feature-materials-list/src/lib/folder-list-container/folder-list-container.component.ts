@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { MaterialsFacade } from '@users/materials/data-access';
 import { FoldersVM } from 'libs/users/materials/folder-vm';
 import { FolderListContainerStore } from './folder-list-container.store';
-import {FoldersCreateButtonComponent} from 'libs/users/materials/feature-create-materials/src/lib/create-folders-button/create-folders-button.component';
 import {FolderListComponent} from '../folder-list/folder-list.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -13,7 +12,6 @@ import { LetDirective } from '@ngrx/component';
   selector: 'folder-list-container',
   standalone: true,
   imports: [CommonModule,
-            FoldersCreateButtonComponent,
             FolderListComponent,
             MatButtonModule,
             MatDialogModule,
@@ -39,8 +37,12 @@ export class FolderListContainerComponent {
   }
 
   onRedirectToEdit({ id, editMode }: { id: number; editMode: boolean }) {
-    this.router.navigate(['/admin/folders', id], {
+    this.router.navigate(['materials', id], {
       queryParams: { edit: editMode },
     });
+  }
+
+  public openFolder(id: number) {
+    this.router.navigate([`/materials/`, id])
   }
 }

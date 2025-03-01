@@ -31,10 +31,10 @@ export class FoldersDetailComponent {
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
 
-  public readonly folder$: Observable<FolderEntity | null> = this.materialsFacade.allFolders$.pipe(
+  public readonly folder$: Observable<FolderEntity | null> = this.materialsFacade.openedFolder$.pipe(
     tap((folder) => {
       if (!folder) {
-        this.materialsFacade.init();
+        this.materialsFacade.loadFolder();
       } else {
         this.folder = folder;
       }
@@ -49,23 +49,23 @@ export class FoldersDetailComponent {
 
   public onEditFolder(folderData: FolderEntity, onSuccessCb: onSuccessEditionCbType) {
     this.materialsFacade.editFolder(folderData, this.folder.id, onSuccessCb);
-    this.router.navigate(['/admin/folders', this.folder.id], {
+    this.router.navigate(['/materials', this.folder.id], {
       queryParams: { edit: false },
     });
   }
 
   onCloseFolder() {
-    this.router.navigate(['/admin/folders']);
+    this.router.navigate(['/materials']);
   }
 
   onCloseEditMode() {
-    this.router.navigate(['/admin/folders', this.folder.id], {
+    this.router.navigate(['/materials', this.folder.id], {
       queryParams: { edit: false },
     });
   }
 
   onOpenEditMode() {
-    this.router.navigate(['admin/folders', this.folder.id], {
+    this.router.navigate(['materials', this.folder.id], {
       queryParams: { edit: true },
     });
   }
@@ -73,7 +73,7 @@ export class FoldersDetailComponent {
   onDeleteFolder() {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
       data: {
-        dialogText: `Вы уверены, что хотите удалить ${this.folder.name}`,
+        dialogText: `Вы уверены, что хотите удалить ${this.folder.title}`,
       },
     });
 

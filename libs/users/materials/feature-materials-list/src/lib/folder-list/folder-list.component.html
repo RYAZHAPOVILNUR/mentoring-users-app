@@ -9,9 +9,9 @@
         <div class="col-md-4 mb-3" *ngFor="let folder of vm.folders">
           <folder-card
             [folder]="folder"
-            [openedFolder]="vm.openedFolder"
             (deleteFolder)="onDeleteFolder(folder)"
             (redirectToEdit)="onRedirectToEdit($event)"
+            (dblclick)="onOpenFolder(folder.id)"
           />
         </div>
       </div>
@@ -26,4 +26,5 @@
     {{ vm.errors }}
   </div>
 </ng-template>
+<create-folders-button></create-folders-button>
 

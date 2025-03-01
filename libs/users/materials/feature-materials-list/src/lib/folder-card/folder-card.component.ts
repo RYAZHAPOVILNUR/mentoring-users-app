@@ -20,22 +20,26 @@ import { RouterModule } from '@angular/router';
 export class FolderCardComponent {
   @Input({ required: true })
   folder!: FoldersVM;
-
-  @Input({ required: true })
-  openedFolder!: FolderEntity;
   
   @Output() deleteFolder = new EventEmitter();
   @Output() redirectToEdit = new EventEmitter();
   
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
 
+  public dateFormat(time: string): string {
+    const date = new Date(parseInt(time));
+    return `${date.getDate()}
+    ${date.toLocaleString('default', { month: 'short' }).slice(0, -1)}
+    ${date.getFullYear()}`
+  }
+
   onOpenMenu(event: Event) {
     event.stopPropagation();
     this.trigger.openMenu();
   }
 
-  onDeleteFolder(event: Event) {
-    this.deleteFolder.emit();
+  onDeleteFolder(folder: FolderEntity) {
+    this.deleteFolder.emit(folder);
   }
   
   redirectToEditPage(editMode: boolean, event: Event) {

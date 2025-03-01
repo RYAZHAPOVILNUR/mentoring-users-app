@@ -31,4 +31,8 @@ export class MaterialsFacade {
   deleteFolder(id: number) {
     this.store.dispatch(MaterialsActions.deleteFolder({id}));
   }
+
+  loadFolder() {
+    this.store.dispatch(MaterialsActions.loadFolder())
+  }
 }

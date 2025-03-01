@@ -5,14 +5,14 @@ export enum TypeFolder {
 }
 export type FolderDTO = DeepReadonly<{
   id: number;
-  name: string;
-  createAt: string;
+  title: string;
+  created_at: string;
   typeFolder?: TypeFolder,
 }>;
 
 export type CreateFolderDTO = DeepReadonly<{
   id?: number | null;
-  name: string;
-  createAt: string;
+  title: string;
+  created_at: string;
   typeFolder?: TypeFolder,
 }>;

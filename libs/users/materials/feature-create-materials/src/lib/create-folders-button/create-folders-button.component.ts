@@ -16,14 +16,14 @@ import { CreateFolderDTO } from "@users/core/data-access";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersCreateButtonComponent {
-  private name!: string;
+  private title!: string;
   public dialog = inject(MatDialog);
   private readonly materialsFacade = inject(MaterialsFacade);
   private readonly destroyRef = inject(DestroyRef);
 
   openAddFolderDialog(): void {
     const dialogRef: MatDialogRef<CreateFoldersDialogComponent> = this.dialog.open(CreateFoldersDialogComponent, {
-      data: {name: this.name},
+      data: {title: this.title},
     });
     dialogRef
     .afterClosed()
@@ -31,8 +31,8 @@ export class FoldersCreateButtonComponent {
     .subscribe((result) => {
       if(result) {
         const newFolderData:CreateFolderDTO = {
-          name: result.name,
-          createAt: new Date().getDate().toString(),
+          title: result.title,
+          created_at: new Date().getDate().toString(),
         };
 
         this.materialsFacade.addFolder(newFolderData);

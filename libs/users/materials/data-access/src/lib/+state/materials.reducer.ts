@@ -1,6 +1,6 @@
-import { createFeature, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { MaterialsActions } from './materials.actions';
-import { FolderDTO, FolderEntity, LoadingStatus } from '@users/core/data-access';
+import { FolderEntity, LoadingStatus } from '@users/core/data-access';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Action } from '@ngrx/store';
 
@@ -34,11 +34,9 @@ export const reducer = createReducer(
     ...state,
     status: 'loading' as const,
   })),
-  on(MaterialsActions.loadFoldersSuccess, (state, {folders}) => ({
-    ...state,
-    status: 'loaded' as const,
-    folders,
-  })),
+  on(MaterialsActions.loadFoldersSuccess, (state, {folders}) =>
+    foldersAdapter.setAll(folders, { ...state, status: 'loaded' as const })
+  ),
   on(MaterialsActions.loadFoldersFailure, (state, {error}) => ({
     ...state,
     status: 'error' as const,

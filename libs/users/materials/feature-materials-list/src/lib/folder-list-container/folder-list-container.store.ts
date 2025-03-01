@@ -43,7 +43,7 @@ export class FolderListContainerStore extends ComponentStore<FolderListState> {
 
   public deleteFolder(folder: FoldersVM): void {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
-      data: { dialogText: `Вы уверены, что хотите удалить ${folder.name}` },
+      data: { dialogText: `Вы уверены, что хотите удалить ${folder.title}` },
     });
     this.effect(() =>
       dialogRef.afterClosed().pipe(

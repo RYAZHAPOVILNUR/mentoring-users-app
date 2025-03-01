@@ -69,7 +69,7 @@ export class DetailFoldersCardComponent implements OnInit {
 
     if (vm.folder) {
       this.formGroup.patchValue({
-        name: vm.folder.name,
+        title: vm.folder.title,
       });
     }
 
@@ -81,7 +81,7 @@ export class DetailFoldersCardComponent implements OnInit {
   }
 
   public formGroup = new FormBuilder().group({
-    name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
+    title: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
   });
 
   @Output() editFolder = new EventEmitter<{
@@ -92,7 +92,7 @@ export class DetailFoldersCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteFolder = new EventEmitter();
-  @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('snackbarFolder') snackbarTemplateRef!: TemplateRef<any>;
 
   private snackBar = inject(MatSnackBar);
   private readonly destroyRef = inject(DestroyRef);
@@ -113,8 +113,9 @@ export class DetailFoldersCardComponent implements OnInit {
     this.editFolder.emit({
       folder: {
         id: this._vm.folder?.id || 0,
-        name: this.formGroup.value.name || '',
-        createAt: new Date().getDate().toString(),
+        title: this.formGroup.value.title || '',
+        created_at: new Date().getDate().toString(),
+        typeFolder: this._vm.folder?.typeFolder,
         isOwn: this._vm.folder?.isOwn || false,
       },
       onSuccessCb: this.onEditSuccess,

@@ -38,12 +38,12 @@
           <div class="edit-folder-content">
             <mat-form-field
               class="edit-folder-field"
-              [matTooltip]="vm.folder!.name"
+              [matTooltip]="vm.folder!.title"
               [matTooltipDisabled]="formGroup.enabled"
             >
               <mat-label>Имя:</mat-label>
-              <input matInput placeholder="Имя*" formControlName="name" class="edit-folder-input" />
-              <mat-error *ngIf="formGroup.hasError('required', 'name')">Это поле обязательно для заполнения</mat-error>
+              <input matInput placeholder="Имя*" formControlName="title" class="edit-folder-input" />
+              <mat-error *ngIf="formGroup.hasError('required', 'title')">Это поле обязательно для заполнения</mat-error>
             </mat-form-field>
           </div>
           <mat-card-actions class="edit-folder-btns-container" *ngIf="vm.editMode">
@@ -75,8 +75,8 @@
   </div>
 </ng-template>
 
-<ng-template #snackbar>
-  <div class="edit-user-snackbar">
+<ng-template #snackbarFolder>
+  <div class="edit-folder-snackbar">
     <span>Папка успешно изменена!</span>
   </div>
 </ng-template>

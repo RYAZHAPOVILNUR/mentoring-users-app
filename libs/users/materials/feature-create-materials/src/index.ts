@@ -1,4 +1,3 @@
-export * from './lib/feature-create-materials.module';
-export * from './lib/lib.routes';
-
-export * from './lib/lib.routes';
+export * from './lib/create-folders-button/create-folders-button.component';
+export * from './lib/create-folders-dialog/create-folders-dialog.component';
+export * from 'libs/users/materials/folder-vm';

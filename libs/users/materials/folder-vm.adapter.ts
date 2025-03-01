@@ -6,7 +6,7 @@ type FoldersVMAdapter = {
 }
 
 export const foldersVMAdapter: FoldersVMAdapter = {
-  entityToVM({id, name, createAt, typeFolder, isOwn}) {
-    return {id, name, createAt, typeFolder ,isOwn};
+  entityToVM({id, title, created_at, typeFolder, isOwn}) {
+    return {id, title, created_at, typeFolder ,isOwn};
   }
 }

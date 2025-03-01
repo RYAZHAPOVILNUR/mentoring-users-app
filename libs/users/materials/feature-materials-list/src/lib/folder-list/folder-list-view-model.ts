@@ -7,5 +7,4 @@ export type FolderListVM = DeepReadonly<{
   folders: FoldersVM[];
   status: LoadingStatus;
   errors: FoldersError | null;
-  openedFolder: FolderEntity;
 }>

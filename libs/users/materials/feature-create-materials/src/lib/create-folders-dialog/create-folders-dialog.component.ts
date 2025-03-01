@@ -27,9 +27,9 @@ export class CreateFoldersDialogComponent {
   private formBuilder = inject(FormBuilder);
   public dialogRef = inject(MatDialogRef<CreateFoldersDialogComponent>);
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {name: string;}) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {title: string;}) {
     this.formGroup = this.formBuilder.group({
-      name: ['', Validators.required],
+      title: ['', Validators.required],
     });
   }
 
@@ -40,7 +40,7 @@ export class CreateFoldersDialogComponent {
   save(): void {
     if (this.formGroup.valid) {
       const formData = {
-        name: this.formGroup.value.name,
+        title: this.formGroup.value.title,
       };
       this.dialogRef.close(formData);
     }
