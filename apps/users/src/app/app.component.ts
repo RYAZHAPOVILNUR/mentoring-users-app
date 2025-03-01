@@ -42,6 +42,7 @@
 
 
 import {Component} from '@angular/core';
+import {RouterModule} from "@angular/router";
 // import { RouterModule } from '@angular/router';
 // import { authActions } from '@auth/data-access';
 // import { Store } from '@ngrx/store';
