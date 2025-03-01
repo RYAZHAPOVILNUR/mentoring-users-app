@@ -1,0 +1,36 @@
+<button
+    mat-fab
+    color="primary"
+    class="create-material-fab-button"
+    matTooltip="Добавить материал"
+    (click)="onOpenMenu($event)"
+    [matMenuTriggerFor]="menu"
+    >
+    <mat-icon>add</mat-icon>
+</button>
+
+<mat-menu #menu="matMenu">
+    <button
+        mat-menu-item
+        color="accent"
+        (click)="onAddMaterial('Video')"
+    >
+        Видео
+    </button>
+
+    <button
+        mat-menu-item
+        color="accent"
+        (click)="onAddMaterial('PDF')"
+    >
+        Файл PDF
+    </button>
+
+    <button
+        mat-menu-item
+        color="accent"
+        (click)="onAddMaterial('Audio')"
+    >
+        Подкаст
+    </button>
+</mat-menu>

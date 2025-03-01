@@ -24,12 +24,8 @@ export class FolderListComponent {
   @Output() redirectToEdit = new EventEmitter();
   @Output() openFolder = new EventEmitter<number>();
 
-  onDeleteFolder(folder: FoldersVM) {
+  public onDeleteFolder(folder: FoldersVM) {
     this.deleteFolder.emit(folder);
-  }
-
-  onRedirectToEdit(editData: { id: number; editMode: boolean }) {
-    this.redirectToEdit.emit(editData);
   }
 
   public onOpenFolder(id: number) {

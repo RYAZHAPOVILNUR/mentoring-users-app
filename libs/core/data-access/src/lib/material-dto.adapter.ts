@@ -13,14 +13,19 @@ export const materialsDTOAdapter: MaterialDTOAdapter = {
     return {
       ...otherAddressFields,
       isPDF: typeMaterial === TypeMaterial.PDF,
+      isVideo: typeMaterial === TypeMaterial.Video,
+      isAudio: typeMaterial === TypeMaterial.Audio,
     };
   },
   entityToDTO(entity) {
-    const { isPDF, ...otherFields } = entity;
+    const { isPDF, isVideo, isAudio, ...otherFields } = entity;
 
     return {
       ...otherFields,
-      typeMaterial: isPDF ? TypeMaterial.PDF : TypeMaterial.Video,
+      typeMaterial: isPDF ? TypeMaterial.PDF
+      : isVideo ? TypeMaterial.Video
+      : isAudio ? TypeMaterial.Audio
+      : undefined
     };
   },
 };

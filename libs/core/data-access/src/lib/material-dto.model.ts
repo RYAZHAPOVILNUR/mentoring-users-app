@@ -7,13 +7,15 @@ export enum TypeMaterial {
 export type MaterialDTO = DeepReadonly<{
   id: number;
   name: string;
-  createAt: string;
+  created_at: string;
+  link: string;
   typeMaterial?: TypeMaterial;
 }>;
 
 export type CreateMaterialDTO = DeepReadonly<{
   id?: number | null;
   name: string;
-  createAt: string;
+  created_at: string;
+  link: string;
   typeMaterial?: TypeMaterial;
 }>;

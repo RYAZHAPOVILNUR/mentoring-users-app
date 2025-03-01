@@ -32,17 +32,11 @@ export class FolderListContainerComponent {
   public readonly openedFolder$ = this.materialsFacade.openedFolder$;
   private readonly router = inject(Router);
 
-  onDeleteFolder(folder: FoldersVM) {
+  public onDeleteFolder(folder: FoldersVM) {
     this.componentStore.deleteFolder(folder);
   }
 
-  onRedirectToEdit({ id, editMode }: { id: number; editMode: boolean }) {
-    this.router.navigate(['materials', id], {
-      queryParams: { edit: editMode },
-    });
-  }
-
-  public openFolder(id: number) {
+  public onOpenFolder(id: number) {
     this.router.navigate([`/materials/`, id])
   }
 }

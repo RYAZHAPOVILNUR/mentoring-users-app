@@ -1,17 +1,13 @@
 <ng-container
   *ngrxLet="{
     folder: folder$,
-    editMode: editMode$,
     status: status$,
     errors: errors$
   } as vm"
 >
   <detail-folders-card
     [vm]="vm"
-    (editFolder)="onEditFolder($event.folder, $event.onSuccessCb)"
     (closeFolder)="onCloseFolder()"
-    (closeEditMode)="onCloseEditMode()"
-    (openEditMode)="onOpenEditMode()"
     (deleteFolder)="onDeleteFolder()"
   />
 </ng-container>

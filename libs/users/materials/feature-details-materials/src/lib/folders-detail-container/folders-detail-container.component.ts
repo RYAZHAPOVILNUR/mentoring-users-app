@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { UsersErrors, UsersFacade, onSuccessAddStoryPointsCbType, onSuccessEditionCbType } from '@users/users/data-access';
 import { Observable, map, tap } from 'rxjs';
 import { selectQueryParam, CreateUserDTO, UsersEntity, usersDTOAdapter, FolderEntity, CreateFolderDTO } from '@users/core/data-access';
 import { Store, select } from '@ngrx/store';
@@ -25,7 +24,6 @@ import { DetailFoldersCardComponent } from "../folders-detail-card/detail-folder
 })
 export class FoldersDetailComponent {
   private readonly materialsFacade = inject(MaterialsFacade);
-  private readonly store = inject(Store);
   private readonly router = inject(Router);
   public folder!: FolderEntity;
   private readonly dialog = inject(MatDialog);
@@ -41,33 +39,10 @@ export class FoldersDetailComponent {
     })
   );
   public readonly status$ = this.materialsFacade.status$;
-  public readonly editMode$: Observable<boolean> = this.store.pipe(
-    select(selectQueryParam('edit')),
-    map((params) => params === 'true')
-  );
   public readonly errors$: Observable<FoldersError | null> = this.materialsFacade.errors$;
-
-  public onEditFolder(folderData: FolderEntity, onSuccessCb: onSuccessEditionCbType) {
-    this.materialsFacade.editFolder(folderData, this.folder.id, onSuccessCb);
-    this.router.navigate(['/materials', this.folder.id], {
-      queryParams: { edit: false },
-    });
-  }
 
   onCloseFolder() {
     this.router.navigate(['/materials']);
-  }
-
-  onCloseEditMode() {
-    this.router.navigate(['/materials', this.folder.id], {
-      queryParams: { edit: false },
-    });
-  }
-
-  onOpenEditMode() {
-    this.router.navigate(['materials', this.folder.id], {
-      queryParams: { edit: true },
-    });
   }
 
   onDeleteFolder() {
