@@ -3,13 +3,15 @@
   <form (ngSubmit)="save()" [formGroup]="formGroup">
     <div class="dialog-content">
       <mat-form-field>
-        <input matInput placeholder="Название" formControlName="name" />
+        <input matInput placeholder="Название" formControlName="name" [errorStateMatcher]="matcher"
+        />
         <mat-error>
           Название обязательно
         </mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="ссылка" formControlName="link" />
+        <input matInput placeholder="ссылка" formControlName="link" [errorStateMatcher]="matcher"
+        />
         <mat-error>
           Ссылка обязательна
         </mat-error>

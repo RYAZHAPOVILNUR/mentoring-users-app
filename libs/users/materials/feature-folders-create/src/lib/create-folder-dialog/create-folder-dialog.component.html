@@ -3,7 +3,7 @@
   <form [formGroup]="formGroup">
     <div class="dialog-content">
       <mat-form-field>
-        <input matInput placeholder="Название папки*" formControlName="title" />
+        <input matInput placeholder="Название папки*" formControlName="title" [errorStateMatcher]="matcher" />
         <mat-error>Название обязательно</mat-error>
       </mat-form-field>
     </div>

@@ -1,5 +1,4 @@
 import { ApplicationConfig, importProvidersFrom, isDevMode } from '@angular/core';
-import { ErrorStateMatcher } from '@angular/material/core';
 import { provideRouter, withEnabledBlockingInitialNavigation } from '@angular/router';
 import {
   FOLDERS_FEATURE_KEY,
@@ -9,9 +8,6 @@ import {
   materialEffects,
   MATERIALS_FEATURE_KEY
 } from '@users/data-access';
-import {
-  MyErrorStateMatcher
-} from '../../../../libs/users/users/feature-users-create/src/lib/create-users-dialog/create-users-dialog.component';
 import { appRoutes } from './app.routes';
 import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -85,10 +81,6 @@ export const appConfig: ApplicationConfig = {
     {
       provide: CLIENT_ID,
       useValue: environment.github_client_id,
-    },
-    {
-      provide: ErrorStateMatcher,
-      useClass: MyErrorStateMatcher
     },
     provideAnimations(),
     provideQuillConfig({

@@ -32,10 +32,7 @@ import { MaterialsListComponent } from '../materials-list/materials-list.compone
 })
 export class MaterialsListContainerComponent {
   public facade =  inject(SharedFacade);
-  public readonly  materials$ = this.facade.materialsForOpenedFolder$
-    .pipe(
-      tap(materials => console.log('materials:', materials))
-    );
+  public readonly  materials$ = this.facade.materialsForOpenedFolder$;
   public readonly status$ = this.facade.statusMaterials$;
   public readonly errors$ = this.facade.errorsMaterials$;
   public readonly folder$ = this.facade.openedFolders$;

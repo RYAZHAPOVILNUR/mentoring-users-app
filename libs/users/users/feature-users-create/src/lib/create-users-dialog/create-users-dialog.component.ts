@@ -6,25 +6,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {
   FormBuilder,
-  FormControl,
-  FormGroup,
-  FormGroupDirective,
-  FormsModule, NgForm,
+  FormsModule,
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = this.getSubmitted(form)
-    return !!(control && control.invalid && (control.dirty || isSubmitted));
-  }
-  private getSubmitted(form: FormGroupDirective | NgForm | null): boolean {
-    return !!(form && form.submitted)
-  }
-}
-
+import { MyErrorStateMatcher } from '../../../../../core/ui/classes/my-error-state-matcher';
 
 @Component({
   selector: 'users-create-users-dialog',
@@ -63,4 +50,7 @@ export class CreateUsersDialogComponent {
       this.dialogRef.close(formData);
     }
   }
+
+  matcher = new MyErrorStateMatcher();
+
 }

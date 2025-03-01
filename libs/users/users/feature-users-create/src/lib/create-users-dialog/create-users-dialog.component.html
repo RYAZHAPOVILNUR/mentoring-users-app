@@ -3,11 +3,15 @@
   <form (ngSubmit)="save()" [formGroup]="formGroup">
     <div class="dialog-content">
       <mat-form-field>
-        <input matInput placeholder="Имя*" formControlName="name" />
+        <input [errorStateMatcher]="matcher"
+               matInput placeholder="Имя*"
+               formControlName="name" />
         <mat-error>Имя обязательно</mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Электронная почта*" formControlName="email" />
+        <input [errorStateMatcher]="matcher"
+               matInput placeholder="Электронная почта*"
+               formControlName="email" />
         <mat-error>Введите корректную электронную почту</mat-error>
       </mat-form-field>
     </div>

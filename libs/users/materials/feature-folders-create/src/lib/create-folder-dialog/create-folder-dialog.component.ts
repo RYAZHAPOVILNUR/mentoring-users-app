@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MyErrorStateMatcher } from '../../../../../core/ui/classes/my-error-state-matcher';
 
 @Component({
   selector: 'users-create-folder-dialog',
@@ -44,4 +45,5 @@ export class CreateFolderDialogComponent {
       this.dialogRef.close(formData);
     }
   }
+  matcher = new MyErrorStateMatcher();
 }
