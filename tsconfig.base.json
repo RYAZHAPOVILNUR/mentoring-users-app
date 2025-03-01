@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@users/auth": ["libs/core/auth/src/index.ts"],
-      "@users/sidebar": ["libs/core/ui/sidebar/src/index.ts"]
+      "@users/sidebar": ["libs/core/ui/sidebar/src/index.ts"],
+      "@users/todos": ["libs/feature/todos/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

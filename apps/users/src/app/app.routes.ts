@@ -104,4 +104,10 @@ export const appRoutes: Route[] = [
   //   path: 'home',
   //   loadComponent: () => import('@users/home').then((c) => c.HomeComponent),
   // }
+  // {
+  //   path: 'todos',
+  //   loadChildren: () =>
+  //     import('@feature/todos').then((c) => c.TODOS_ROUTES),
+  // },
+  // { path: '', redirectTo: 'todos', pathMatch: 'full' },
 ];

@@ -1,4 +1,3 @@
-@import "~@fortawesome/fontawesome-free/css/all.min.css";
 
 * {
   box-sizing: border-box;
@@ -14,15 +13,11 @@
 }
 
 html, body {
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, "JetBrains Mono", sans-serif;
   height: 100vh;
   width: 100vw;
   background: linear-gradient(270deg, rgba(22, 3, 54, 1.0), rgba(1, 1, 1, 1.0)) !important;
   color: var(--white-color) !important;
 }
 
-app-root {
-  display: flex;
-  height: 100%;
-  width: 100%;
-}
+
