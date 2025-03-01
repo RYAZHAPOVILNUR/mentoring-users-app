@@ -5,11 +5,12 @@ import { FoldersFacade, FoldersVM } from '../../../../data-access/src/index';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
+import { CreateFolderButtonComponent } from '@users/feature-folder-create';
 
 @Component({
   selector: 'users-folders-list-container',
   standalone: true,
-  imports: [CommonModule, FoldersListComponent, LetDirective],
+  imports: [CommonModule, FoldersListComponent, LetDirective, CreateFolderButtonComponent],
   templateUrl: './folders-list-container.component.html',
   styleUrls: ['./folders-list-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,

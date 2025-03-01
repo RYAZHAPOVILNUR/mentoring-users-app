@@ -26,7 +26,11 @@ export class MaterialsListComponent {
   public materials$!: MaterialsEntity;
 
   // @Input({ required: true })
-  // vm!: MaterialsListVM[];
+  // vm!: MaterialsListVM;
+
+  // constructor() {
+  //   console.log('List...', this.vm);
+  // }
 
   // public readonly folder$: Observable<MaterialsEntity | null> = this.materialsFacede.openedMaterial$.pipe(
   //   tap((material) => {

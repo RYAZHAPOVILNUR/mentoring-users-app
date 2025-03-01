@@ -6,18 +6,11 @@
     error: errors$,
   } as vm"
   >
-    <button class="button-back" routerLink="/materials" mat-button><mat-icon>arrow_back</mat-icon></button>
     <div class="material-header">
-      <div *ngIf="vm.error" class="mat-con">Error: {{ vm.error.status }}</div>
-      <div *ngIf="vm.materials" class="mat-con">
-        <div style="border: 1px solid blue; padding: 5px" *ngFor="let material of vm.materials">
-          <p>Title: {{ material.title }}</p>
-          <p>Link: {{ material.materialLink }}</p>
-          <p>Created At: {{ material.createdAt }}</p>
-          <p>Folder Id: {{ material.folderId }}</p>
-          <p>ID: {{ material.id }}</p>
-        </div>
-      </div>
+      <button class="button-back" routerLink="/materials" mat-button><mat-icon>arrow_back</mat-icon></button>
+    </div>
+    <div *ngFor="let mat of vm.materials">
+      <div>{{ mat.materialLink }}</div>
     </div>
     <users-materials-list></users-materials-list>
   </ng-container>

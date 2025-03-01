@@ -6,8 +6,6 @@ import { LoadingStatus } from '@users/core/data-access';
 
 export const MATERIALS_FEATURE_KEY = 'materials';
 
-// export type LoadingStatus = 'init' | 'loading' | 'loaded' | 'error';
-
 export type MaterialsErrors = {
   status: number;
   [key: string]: unknown;

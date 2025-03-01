@@ -5,5 +5,8 @@
   errors: errors$,
 } as vm"
 >
+  <div class="create-button-block">
+    <users-create-folder-button></users-create-folder-button>
+  </div>
   <users-folders-list [vm]="vm" (redirectToFolder)="onRedirectToFolder($event)"></users-folders-list>
 </ng-container>

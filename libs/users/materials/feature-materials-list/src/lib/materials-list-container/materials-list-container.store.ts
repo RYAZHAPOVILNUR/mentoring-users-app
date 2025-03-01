@@ -31,11 +31,12 @@ export class MaterialsListContainerStore extends ComponentStore<MaterialsListSta
     super(initialState);
     this.materialsFacade.init();
     this.setMaterialsFromGlobalToLocaleStore();
+    // super({ materials: [], selectedMaterialId: null });
   }
 
-  readonly filteredMaterials$ = this.select(this.state$, (state) =>
-    state.materials.filter((material) => material.folderId === 2178)
-  );
+  // readonly filteredMaterials$ = this.select(this.state$, (state) =>
+  //   state.materials.filter((material) => material.folderId === 2178)
+  // );
 
   private setMaterialsFromGlobalToLocaleStore(): void {
     this.effect(() =>

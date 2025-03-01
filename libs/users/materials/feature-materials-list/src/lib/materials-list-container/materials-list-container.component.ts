@@ -5,6 +5,7 @@ import { LetDirective } from '@ngrx/component';
 import {
   FoldersEntity,
   FoldersFacade,
+  MaterialsDTO,
   MaterialsEntity,
   MaterialsFacade,
   initMaterials,
@@ -16,22 +17,14 @@ import { MaterialsListContainerStore } from './materials-list-container.store';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { Observable, map, switchMap, tap } from 'rxjs';
+import { Observable, map, switchMap } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { selectArticlesEntities } from 'libs/users/articles/data-access/src/lib/+state/articles.selectors';
+import { CreateFolderButtonComponent } from '@users/feature-folder-create';
 
 @Component({
   selector: 'users-materials-list-container',
   standalone: true,
-  imports: [
-    CommonModule,
-    MaterialsListComponent,
-    LetDirective,
-    MaterialsCardComponent,
-    RouterLink,
-    MatIconModule,
-    MatButtonModule,
-  ],
+  imports: [CommonModule, MaterialsListComponent, LetDirective, RouterLink, MatIconModule, MatButtonModule],
   templateUrl: './materials-list-container.component.html',
   styleUrls: ['./materials-list-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
@@ -47,23 +40,33 @@ export class MaterialsListContainerComponent {
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;
   // public readonly materials$ = this.materialsFacade.
-  public folder!: FoldersEntity;
-  public material!: MaterialsEntity;
+  // public folder!: FoldersEntity;
+  // public material!: MaterialsEntity[];
   // private storege!: MaterialsStore;
 
   // public readonly allMaterials$ = this.store.select(selectFiltredMaterials);
 
-  materials$ = this.route.paramMap.pipe(
+  public readonly materials$ = this.route.paramMap.pipe(
     map((params) => Number(params.get('id'))), // Получаем id из URL
     switchMap((id) => {
-      console.log('List ID', id);
+      this.materials$.subscribe((value) => console.log('List>>>>', value));
       return this.allMaterials$.pipe(
         map((materials) => materials.filter((material) => material.folderId === id)) // Фильтруем по id
       );
     })
   );
 
-  constructor() {}
+  // public materials$: Observable<MaterialsEntity[] | null> = this.materialsFacade.filtredMaterials$.pipe(
+  //   tap((material) => {
+  //     if (!material) {
+  //       console.log('Test', this.materials$);
+  //       this.materialsFacade.loadMaterials();
+  //     } else {
+  //       console.log('Test....', this.materials$);
+  //       this.material = material;
+  //     }
+  //   })
+  // );
 
   ngOnInit() {
     this.materialsFacade.loadMaterials();
