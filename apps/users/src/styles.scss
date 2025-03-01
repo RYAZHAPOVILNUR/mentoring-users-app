@@ -1,23 +1,28 @@
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-
 :root {
   --white-color: #fff;
   --black-color: #000;
   --primary-color: #6200ee;
-  --secondary-color: #03DAC6;
+  --secondary-color: #140331;
 }
 
-
-body {
+html, body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background: rgba(22, 3, 54, 1.0);
+  height: 100vh;
+  width: 100vw;
   background: linear-gradient(270deg, rgba(22, 3, 54, 1.0), rgba(1, 1, 1, 1.0)) !important;
   color: var(--white-color) !important;
 }
 
-
+app-root {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}

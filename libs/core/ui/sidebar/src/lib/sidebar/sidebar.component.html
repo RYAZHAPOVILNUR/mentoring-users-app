@@ -1,10 +1,11 @@
 <nav class="sidebar">
-  <ul>
+  <div class="logo">MENTOR</div>
+  <ul class="menu">
     <li *ngFor="let item of menuItems">
       <a [routerLink]="item.path">
-        <i [class]="item.icon"></i> {{ item.label }}
+        <i [class]="item.icon"></i>
+        {{ item.label }}
       </a>
     </li>
   </ul>
 </nav>
-
