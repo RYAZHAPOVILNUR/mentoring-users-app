@@ -276,7 +276,7 @@
       },
       {
         "file": ".nx/cache/file-map.json",
-        "hash": "16393452436219900547"
+        "hash": "6973034839881004169"
       },
       {
         "file": ".nx/cache/lockfile.hash",
@@ -288,7 +288,7 @@
       },
       {
         "file": ".nx/cache/project-graph.json",
-        "hash": "12913655257027349426"
+        "hash": "2755925944596100091"
       },
       {
         "file": ".nx/cache/run.json",
@@ -830,7 +830,7 @@
         },
         {
           "file": "libs/users/materials/feature-materials-create/src/index.ts",
-          "hash": "14632919658175126270"
+          "hash": "13907906851509022728"
         },
         {
           "file": "libs/users/materials/feature-materials-create/src/lib/materials-add-button/materials-add-button.component.html",
