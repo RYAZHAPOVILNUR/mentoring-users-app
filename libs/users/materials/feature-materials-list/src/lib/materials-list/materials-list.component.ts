@@ -25,11 +25,8 @@ export class MaterialsListComponent {
   private readonly router = inject(Router);
   public materials$!: MaterialsEntity;
 
-  constructor() {
-    console.log('Materials List>>>', this.materials$);
-  }
   // @Input({ required: true })
-  // vm!: MaterialsListVM;
+  // vm!: MaterialsListVM[];
 
   // public readonly folder$: Observable<MaterialsEntity | null> = this.materialsFacede.openedMaterial$.pipe(
   //   tap((material) => {

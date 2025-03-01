@@ -2,13 +2,21 @@
   <ng-container
     *ngrxLet="{
     materials: materials$,
-    folder: folder,
+    status: status$,
+    error: errors$,
   } as vm"
   >
+    <button class="button-back" routerLink="/materials" mat-button><mat-icon>arrow_back</mat-icon></button>
     <div class="material-header">
-      <button class="button-back" routerLink="/materials" mat-button><mat-icon>arrow_back</mat-icon></button>
-      <p>Title: {{ vm.folder }}</p>
-      <p>Material: {{ vm.materials }}</p>
+      <div class="mat-con">
+        <div style="border: 1px solid blue; padding: 5px" *ngFor="let material of vm.materials">
+          <p>Title: {{ material.title }}</p>
+          <p>Link: {{ material.materialLink }}</p>
+          <p>Created At: {{ material.createdAt }}</p>
+          <p>Folder Id: {{ material.folderId }}</p>
+          <p>ID: {{ material.id }}</p>
+        </div>
+      </div>
     </div>
     <users-materials-list></users-materials-list>
   </ng-container>

@@ -4,6 +4,8 @@ import { LoadingStatus } from '@users/core/data-access';
 
 export const initMaterials = createAction('[Materials Page] Init');
 
+export const loadMaterials = createAction('[Materials Page] Load Materials');
+
 export const loadMaterialsSuccess = createAction(
   '[Materials/Api] Load Materials Success',
   props<{ materials: MaterialsEntity[] }>()
@@ -15,8 +17,6 @@ export const updateMaterialState = createAction(
   '[Materials Detail] Update Material Status',
   props<{ status: LoadingStatus }>()
 );
-
-export const loadMaterials = createAction('[Materials Page] Load Materials');
 
 export const loadMaterialSuccess = createAction(
   '[Material/Api] Load Material Success',

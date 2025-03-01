@@ -9,16 +9,20 @@ import { MaterialsEntity } from '../../materials-dto/materials.entity';
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
   private readonly store = inject(Store);
+  // public readonly allMaterials = this.store.pipe(select(MaterialSelectors.selectAllMaterials));
   public readonly filtredMaterials$ = this.store.select(MaterialSelectors.selectFiltredMaterials);
+  // public readonly openedMaterial$ = this.store.select(MaterialSelectors.selectOpenedMaterial);
   public readonly status$ = this.store.pipe(select(MaterialSelectors.selectMaterialsStatus || of(null)));
-  public readonly allMaterials = this.store.pipe(select(MaterialSelectors.selectAllMaterials));
   public readonly errors$: Observable<MaterialsErrors | null> = this.store.pipe(
     select(MaterialSelectors.selectmaterialsError)
   );
-  public readonly openedMaterial$ = this.store.select(MaterialSelectors.selectOpenedMaterial);
 
   init() {
     this.store.dispatch(MaterialActions.initMaterials());
+  }
+
+  loadMaterials(): void {
+    this.store.dispatch(MaterialActions.loadMaterials());
   }
 
   // getMaterialFromStore(id: number) {
@@ -33,7 +37,8 @@ export class MaterialsFacade {
   //   );
   // }
 
-  // loadMaterials() {
+  // loadMaterial() {
   //   this.store.dispatch(MaterialActions.loadMaterials());
+  //   console.log('Materials Facede loadmaterials...');
   // }
 }

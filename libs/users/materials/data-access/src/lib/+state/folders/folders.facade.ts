@@ -21,7 +21,7 @@ export class FoldersFacade {
     this.store.dispatch(FoldersActions.initFolders());
   }
 
-  loadFolder() {
-    this.store.dispatch(FoldersActions.loadFolder());
-  }
+  // loadFolder() {
+  //   this.store.dispatch(FoldersActions.loadFolder());
+  // }
 }

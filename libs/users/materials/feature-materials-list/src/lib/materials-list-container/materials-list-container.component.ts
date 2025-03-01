@@ -8,14 +8,16 @@ import {
   MaterialsEntity,
   MaterialsFacade,
   initMaterials,
+  selectMaterialsEntities,
 } from '@users/materials/data-access';
 import { MaterialsCardComponent } from '../materials-card/materials-card.component';
 import { MaterialsListContainerStore } from './materials-list-container.store';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { Observable, tap } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { selectArticlesEntities } from 'libs/users/articles/data-access/src/lib/+state/articles.selectors';
 
 @Component({
   selector: 'users-materials-list-container',
@@ -39,20 +41,24 @@ export class MaterialsListContainerComponent {
   private readonly foldersfacade = inject(FoldersFacade);
   public readonly materialsFacade = inject(MaterialsFacade);
   private readonly store = inject(Store);
-  // public readonly materials$ = this.componentStore.materials$;
+  private readonly route = inject(ActivatedRoute);
+  public readonly materials$ = this.componentStore.materials$;
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;
-  public readonly materials$ = this.materialsFacade.allMaterials;
+  // public readonly materials$ = this.materialsFacade.
   public folder!: FoldersEntity;
   public material!: MaterialsEntity;
+  private storege!: MaterialsStore;
 
   constructor() {
+    this.store.setMaterialId(this.route.paramMap.pipe(map((params) => Number(params.get('id')))));
     // console.log('Materials List>>', this.materials$);
   }
 
   ngOnInit() {
+    this.materialsFacade.loadMaterials();
     // this.store.dispatch(initMaterials());
-    this.componentStore.init();
+    //this.componentStore.init();
   }
 
   // public readonly folder$: Observable<FoldersEntity | null> = this.foldersfacade.openedFolder$.pipe(

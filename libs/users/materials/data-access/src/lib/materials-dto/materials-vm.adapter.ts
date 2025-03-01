@@ -7,6 +7,6 @@ type MaterialsVMAdapter = {
 
 export const materialsVMAdapter: MaterialsVMAdapter = {
   entityToVM({ id, title, createdAt, materialLink, folderId }) {
-    return { id, title, createdAt: createdAt, materialLink, folderId };
+    return { id, title, createdAt, materialLink, folderId };
   },
 };
