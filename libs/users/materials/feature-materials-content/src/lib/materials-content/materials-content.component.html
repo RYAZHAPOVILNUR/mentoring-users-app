@@ -1,21 +1,27 @@
 <!-- <p>materials-content works!</p> -->
-<h1 mat-dialog-title>Mатериал</h1>
+<!-- <h1 mat-dialog-title>Mатериал pdf | audio | video</h1> -->
 <h2 mat-dialog-title>{{ data.material.title }}</h2>
 
-<ng-container *ngIf="data.material.material_link?.endsWith('.pdf')">
-    <pdf-viewer class="viewer" [src]="data.material.material_link" [render-text]="true"></pdf-viewer>
+<!-- PDF -->
+<ng-container *ngIf="materialLink.endsWith('.pdf')">
+    <pdf-viewer class="viewer" [src]="materialLink" [render-text]="true" [original-size]="false"></pdf-viewer>
 </ng-container>
 
-<ng-container *ngIf="data.material.material_link && !data.material.material_link?.endsWith('.pdf') && !data.material.material_link?.endsWith('.mp3')">
-    <iframe width="500px" height="400px" [src]="getSanitizedUrl(data.material.material_link)" [frameBorder]="0" allowfullscreen></iframe>
+<!-- AUDIO -->
+<ng-container *ngIf="materialLink.endsWith('.mp3')">
+    <div class="audio">
+        <audio controls>
+          <source [src]="materialLink" type="audio/mp3">
+        </audio>
+    </div>
 </ng-container>
 
-<ng-container *ngIf="data.material.material_link?.endsWith('.mp3')">
-    <audio controls [src]="data.material.material_link" type="audio/mp3">
-        Аудио не воспроизводится
-    </audio>
+<ng-container *ngIf="regexMaterials.video.test(materialLink)">
+    <iframe class="video-iframe" width="700px" height="500px" [src]="getSanitizedUrl(materialLink)" 
+    allowfullscreen></iframe>
+    <p mat-dialog-title>Ссылка на видео: {{ materialLink }}</p>
 </ng-container>
 
 <div mat-dialog-actions>
-  <button mat-button (click)="cancel()">Отмена</button>
+  <button mat-button (click)="cancel()">Закрыть</button>
 </div>

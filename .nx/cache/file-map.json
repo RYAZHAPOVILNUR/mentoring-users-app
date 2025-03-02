@@ -276,7 +276,7 @@
       },
       {
         "file": ".nx/cache/file-map.json",
-        "hash": "6973034839881004169"
+        "hash": "16620012385706322974"
       },
       {
         "file": ".nx/cache/lockfile.hash",
@@ -288,11 +288,11 @@
       },
       {
         "file": ".nx/cache/project-graph.json",
-        "hash": "2755925944596100091"
+        "hash": "15754330022185230676"
       },
       {
         "file": ".nx/cache/run.json",
-        "hash": "4756435239510167421"
+        "hash": "10895088479986515954"
       },
       {
         "file": ".nx/cache/terminalOutputs/14854098207355747825",
@@ -448,6 +448,14 @@
       },
       {
         "file": ".nx/cache/terminalOutputs/5679521616516039863",
+        "hash": "9894687812357759966"
+      },
+      {
+        "file": ".nx/cache/terminalOutputs/13824925240579529191",
+        "hash": "1874215553838450874"
+      },
+      {
+        "file": ".nx/cache/terminalOutputs/16578870374755001843",
         "hash": "3244421341483603138"
       }
     ],
@@ -2688,13 +2696,14 @@
         },
         {
           "file": "libs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.ts",
-          "hash": "9381838059514871945",
+          "hash": "5984127092019609824",
           "deps": [
             "npm:@angular/core",
             "npm:@angular/common",
             "data-access",
             "npm:@angular/material",
-            "npm:@angular/router"
+            "npm:@angular/router",
+            "feature-materials-content"
           ]
         },
         {
@@ -3661,11 +3670,11 @@
         },
         {
           "file": "libs/users/materials/feature-materials-content/src/lib/materials-content/materials-content.component.html",
-          "hash": "16898915970188089716"
+          "hash": "6442992660110241659"
         },
         {
           "file": "libs/users/materials/feature-materials-content/src/lib/materials-content/materials-content.component.scss",
-          "hash": "3244421341483603138"
+          "hash": "17559571539300331104"
         },
         {
           "file": "libs/users/materials/feature-materials-content/src/lib/materials-content/materials-content.component.spec.ts",
@@ -3676,13 +3685,14 @@
         },
         {
           "file": "libs/users/materials/feature-materials-content/src/lib/materials-content/materials-content.component.ts",
-          "hash": "2527182262798070334",
+          "hash": "5752717410142009807",
           "deps": [
             "npm:@angular/core",
             "npm:@angular/common",
             "npm:@angular/material",
             "npm:ng2-pdf-viewer",
-            "npm:@angular/platform-browser"
+            "npm:@angular/platform-browser",
+            "feature-materials-create"
           ]
         },
         {
