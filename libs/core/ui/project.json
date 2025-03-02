@@ -8,7 +8,9 @@
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "libs/core/ui/jest.config.ts",
         "passWithNoTests": true
@@ -22,9 +24,14 @@
     },
     "lint": {
       "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["libs/core/ui/**/*.ts", "libs/core/ui/**/*.html"]
+        "lintFilePatterns": [
+          "libs/core/ui/**/*.ts",
+          "libs/core/ui/**/*.html"
+        ]
       }
     }
   }

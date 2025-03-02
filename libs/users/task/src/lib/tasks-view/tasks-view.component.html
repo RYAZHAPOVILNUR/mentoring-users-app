@@ -1,19 +1,19 @@
-<div class="board" cdkDropListGroup [ngClass]="{ 'dark-mode': colorMode }">
+<div [ngClass]="{ 'dark-mode': colorMode }" cdkDropListGroup class="board">
   <div class="board-wrapper">
     <users-tasks-column
-      *ngFor="let column of columns; let columnIndex = index"
-      class="board-columns"
-      [column]="column"
-      (removeTask)="removeTask($event, columnIndex)"
       (addTask)="openAddNewTaskModal(columnIndex)"
-      (dragDrop)="dragDrop($event)"
-      (deleteColumn)="removeColumn(columnIndex)"
       (changeColumnName)="onChangeColumnName($event, columnIndex)"
       (changeTaskModal)="openChangeTaskModal($event)"
-      >
+      (deleteColumn)="removeColumn(columnIndex)"
+      (dragDrop)="dragDrop($event)"
+      (removeTask)="removeTask($event, columnIndex)"
+      *ngFor="let column of columns; let columnIndex = index"
+      [column]="column"
+      class="board-columns"
+    >
     </users-tasks-column>
   </div>
-  <button class="addColumn" mat-raised-button (click)="openAddNewColumnModal()">
+  <button (click)="openAddNewColumnModal()" class="addColumn" mat-raised-button>
     Add Column
   </button>
 </div>

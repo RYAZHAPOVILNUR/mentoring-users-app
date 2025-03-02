@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Output} from "@angular/core";
-import {MatIconModule} from "@angular/material/icon";
-import {FormsModule} from "@angular/forms";
-import {CommonModule} from "@angular/common";
+import { Component, EventEmitter, Output } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'users-tasks-search-input',
@@ -9,10 +9,10 @@ import {CommonModule} from "@angular/common";
   imports: [
     CommonModule,
     MatIconModule,
-    FormsModule,
+    FormsModule
   ],
   templateUrl: './tasks-search-input.component.html',
-  styleUrls: ['./tasks-search-input.component.scss'],
+  styleUrls: ['./tasks-search-input.component.scss']
 })
 
 export class TasksSearchInputComponent {

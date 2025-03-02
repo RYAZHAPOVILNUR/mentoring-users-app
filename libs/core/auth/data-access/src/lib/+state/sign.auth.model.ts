@@ -1,9 +1,9 @@
-import { UsersDTO, UsersEntity } from "@users/core/data-access"
-import { DeepReadonly } from "@users/core/utils"
+import { UsersDTO, UsersEntity } from '@users/core/data-access';
+import { DeepReadonly } from '@users/core/utils';
 
 export interface SignAuthPayload {
-  email: string
-  password: string
+  email: string;
+  password: string;
 }
 
 export interface SignAuthResponse {
@@ -17,11 +17,11 @@ export interface SignAuthUser {
 }
 
 export interface RegisterResponse {
-  authToken: string
+  authToken: string;
 }
 
 export interface ChangeProfileDataResponse {
-  message: string
+  message: string;
 }
 
 export type LoggedInUserDTO = DeepReadonly<{
@@ -49,19 +49,20 @@ export interface NewUser {
 }
 
 export interface ChangePasswordPayload {
-  oldPassword: string
-  newPassword: string
+  oldPassword: string;
+  newPassword: string;
 }
 
 export interface ChangePasswordResponse {
-  message: string
+  message: string;
 }
+
 export interface ChangeProfileDataPayload {
   name?: string;
-  city?: string
+  city?: string;
   email?: string;
 }
 
 export interface ChangeProfileDataResponse {
-  message: string
+  message: string;
 }

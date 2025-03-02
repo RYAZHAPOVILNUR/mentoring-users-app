@@ -18,12 +18,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { TasksStore } from '../tasks-view-container/tasks-list-container.store';
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { TasksCreateDialogComponent } from "../tasks-create-dialog/tasks-create-dialog.component";
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
-import { filter } from "rxjs";
-import { TasksCreateColumnDialogComponent } from "../tasks-create-column-dialog/tasks-create-column-dialog.component";
-import { TasksColumnComponent } from "./tasks-column/tasks-column.component";
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { TasksCreateDialogComponent } from '../tasks-create-dialog/tasks-create-dialog.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { filter } from 'rxjs';
+import { TasksCreateColumnDialogComponent } from '../tasks-create-column-dialog/tasks-create-column-dialog.component';
+import { TasksColumnComponent } from './tasks-column/tasks-column.component';
 import { TaskChangeDialogComponent } from '../task-change-dialog/task-change-dialog.component';
 
 
@@ -53,7 +53,7 @@ import { TaskChangeDialogComponent } from '../task-change-dialog/task-change-dia
 export class TasksViewComponent {
 
   private matDialog = inject(MatDialog);
-  private readonly destroyRef = inject(DestroyRef)
+  private readonly destroyRef = inject(DestroyRef);
 
   constructor(private tasksStore: TasksStore) {
   }
@@ -73,7 +73,7 @@ export class TasksViewComponent {
     this.deleteColumn.emit(columnIndex);
   }
 
-  public removeTask(taskName: string, columnIndex: number,) {
+  public removeTask(taskName: string, columnIndex: number) {
     this.deleteTask.emit({ columnIndex, taskName });
   }
 
@@ -128,7 +128,7 @@ export class TasksViewComponent {
         takeUntilDestroyed(this.destroyRef),
         filter(taskName => !!taskName)
       )
-      .subscribe((taskName: string) => this.addTask.emit({ columnIndex, taskName }))
+      .subscribe((taskName: string) => this.addTask.emit({ columnIndex, taskName }));
   }
 
   public openChangeTaskModal(task: ITask): void {
@@ -139,9 +139,9 @@ export class TasksViewComponent {
     });
     dialogRef.afterClosed()
       .pipe(
-        takeUntilDestroyed(this.destroyRef),
+        takeUntilDestroyed(this.destroyRef)
       )
-      .subscribe()
+      .subscribe();
   }
 
   public openAddNewColumnModal(): void {
@@ -151,7 +151,7 @@ export class TasksViewComponent {
         takeUntilDestroyed(this.destroyRef),
         filter(column => !!column)
       )
-      .subscribe((columnName => this.addNewColumn(columnName)))
+      .subscribe((columnName => this.addNewColumn(columnName)));
   }
 
   private addNewColumn(columnName: string): void {
@@ -159,7 +159,7 @@ export class TasksViewComponent {
       const newColumns = [...this.columns];
       newColumns.push({
         columnName: columnName,
-        tasks: [],
+        tasks: []
       });
       this.updateColumns.emit({ columns: newColumns });
     }

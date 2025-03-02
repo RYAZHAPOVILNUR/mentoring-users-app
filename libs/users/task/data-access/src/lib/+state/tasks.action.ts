@@ -1,10 +1,9 @@
-
-import { createActionGroup, props, emptyProps } from "@ngrx/store";
-import { IColumn, ITaskBoard } from "../model/tasks.interface";
+import { createActionGroup, props, emptyProps } from '@ngrx/store';
+import { IColumn, ITaskBoard } from '../model/tasks.interface';
 
 export const tasksAction = createActionGroup({
   source: 'tasks',
-  events:{
+  events: {
     loadBoards: emptyProps(),
     loadBoardsSuccess: props<{ boards: ITaskBoard[] }>(),
 
@@ -14,12 +13,12 @@ export const tasksAction = createActionGroup({
     addBoard: props<ITaskBoard>(),
     addBoardSuccess: props<ITaskBoard>(),
 
-    updateColumns: props<{columns: IColumn[]}>(),
-    updateColumnsSuccess: props<{columns: IColumn[]}>(),
+    updateColumns: props<{ columns: IColumn[] }>(),
+    updateColumnsSuccess: props<{ columns: IColumn[] }>(),
 
     deleteColumn: props<{ columnIndex: number }>(),
     deleteColumnSuccess: props<{ columnIndex: number }>(),
 
-    searchTask: props<{term: string}>(),
+    searchTask: props<{ term: string }>()
   }
 });

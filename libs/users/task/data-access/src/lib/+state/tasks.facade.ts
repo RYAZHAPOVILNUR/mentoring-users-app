@@ -5,7 +5,7 @@ import { IColumn } from '../model/tasks.interface';
 import { select, Store } from '@ngrx/store';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class TasksFacade {
   private readonly store = inject(Store);
@@ -28,6 +28,6 @@ export class TasksFacade {
   }
 
   public searchTask(term: string): void {
-    this.store.dispatch(tasksAction.searchTask({term}));
+    this.store.dispatch(tasksAction.searchTask({ term }));
   }
 }

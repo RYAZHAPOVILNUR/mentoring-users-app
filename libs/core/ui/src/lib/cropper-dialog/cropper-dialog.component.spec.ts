@@ -7,7 +7,7 @@ describe('CropperDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CropperDialogComponent],
+      imports: [CropperDialogComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(CropperDialogComponent);

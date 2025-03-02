@@ -5,17 +5,17 @@
   </div>
 
   <image-cropper
+    (imageCropped)="cropImg($event)"
+    [aspectRatio]="4 / 4"
+    [cropperMinWidth]="150"
     [imageBase64]="imageBase64"
     [maintainAspectRatio]="true"
-    [aspectRatio]="4 / 4"
-    output="base64"
     [resizeToWidth]="256"
-    [cropperMinWidth]="150"
     [roundCropper]="true"
-    format="png"
     alignImage="center"
-    (imageCropped)="cropImg($event)"
+    format="png"
+    output="base64"
   ></image-cropper>
-  <button mat-raised-button color="primary" (click)="onCrop()">Обрезать</button>
+  <button (click)="onCrop()" color="primary" mat-raised-button>Обрезать</button>
 </div>
 

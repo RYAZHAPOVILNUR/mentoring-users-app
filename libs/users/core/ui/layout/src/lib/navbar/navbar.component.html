@@ -1,6 +1,6 @@
 <mat-nav-list>
 
-  <div class="user-photo-contayner" (click)="onZoomPhotoClick()">
+  <div (click)="onZoomPhotoClick()" class="user-photo-contayner">
     <div class="user-photo-wrapper">
       <img [src]="userPhoto | ngrxPush" alt="User Photo">
       <div class="photo_overlay">
@@ -49,11 +49,11 @@
       <span matListItemTitle>{{ 'LAYOUT.SIDENAV.CHART' | translate }}</span>
     </mat-list-item>
 
-    <mat-list-item class="list-item" (click)="onLogout()">
+    <mat-list-item (click)="onLogout()" class="list-item">
       <mat-icon matListItemIcon>logout</mat-icon>
       <span class="button-label">{{ 'LAYOUT.SIDENAV.LOGOUT' | translate }}</span>
     </mat-list-item>
 
   </div>
 
-  </mat-nav-list>
+</mat-nav-list>

@@ -1,6 +1,7 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { authActions } from './auth.actions';
 import { LoadingStatus, UsersEntity } from '@users/core/data-access';
+
 export const authFeatureKey = 'auth';
 
 export interface AuthState {
@@ -35,7 +36,7 @@ export const authFeature = createFeature({
     authInitialState,
     on(authActions.login, (state) => ({
       ...state,
-      authStatus: 'loading' as const,
+      authStatus: 'loading' as const
     })),
     on(authActions.loginSuccess, (state, { res }) => ({
       ...state,
@@ -44,7 +45,7 @@ export const authFeature = createFeature({
       loggedUser: res.user
     })),
     on(authActions.getUser, (state) => ({
-      ...state,
+      ...state
 
     })),
     on(authActions.getUserSuccess, (state, { user }) => ({
@@ -56,10 +57,10 @@ export const authFeature = createFeature({
       ...state,
       ...authInitialState
     })),
-    on(authActions.uploadImageSuccess, (state, { user}) => ({
+    on(authActions.uploadImageSuccess, (state, { user }) => ({
       ...state,
       loggedUser: user
     }))
-  ),
+  )
 });
 

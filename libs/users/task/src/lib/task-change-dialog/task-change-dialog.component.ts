@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   MatDialogModule,
   MatDialogRef,
-  MAT_DIALOG_DATA,
+  MAT_DIALOG_DATA
 } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
@@ -18,7 +18,7 @@ import { UsersFacade } from '@users/users/data-access';
 import { PushPipe } from '@ngrx/component';
 import { UsersEntity } from '@users/core/data-access';
 import { skip } from 'rxjs/operators';
-import { BacklogFacade } from "@users/users/backlog/data-access";
+import { BacklogFacade } from '@users/users/backlog/data-access';
 
 interface Task {
   name: string;
@@ -27,12 +27,14 @@ interface Task {
   status: string;
   assignees: UsersEntity[];
 }
+
 interface StoryPoint {
   UX: string;
   DESING: string;
   FRONT: string;
   BACK: string;
 }
+
 @Component({
   templateUrl: './task-change-dialog.component.html',
   styleUrls: ['./task-change-dialog.component.scss'],
@@ -49,33 +51,34 @@ interface StoryPoint {
     MatCardModule,
     FormsModule,
     PushPipe,
-    MatListModule,
+    MatListModule
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskChangeDialogComponent {
   public readonly data: any = inject(MAT_DIALOG_DATA);
-  private readonly backlogFacade = inject(BacklogFacade)
+  private readonly backlogFacade = inject(BacklogFacade);
   private readonly usersFacade = inject(UsersFacade);
   private dialogRef = inject(MatDialogRef<TaskChangeDialogComponent>);
   public status = false;
+
   constructor() {
     this.usersFacade.init();
   }
 
-  public storyPoint:StoryPoint= {
+  public storyPoint: StoryPoint = {
 
-     "UX":"?",
-      "DESING":"?",
-      "FRONT":"?",
-      "BACK":"?",
+    'UX': '?',
+    'DESING': '?',
+    'FRONT': '?',
+    'BACK': '?'
   };
 
 
   get totalPoint(): string {
     const values = Object.values(this.storyPoint);
 
-if(Object.values(this.storyPoint).every(value => value === "?")) return '?'
+    if (Object.values(this.storyPoint).every(value => value === '?')) return '?';
 
     return values.reduce((total, currentValue) => {
       const parsedValue = parseFloat(currentValue);
@@ -96,8 +99,6 @@ if(Object.values(this.storyPoint).every(value => value === "?")) return '?'
       ...this.storyPoint, [category]: value
     };
   }
-
-
 
 
   public task: Task = {
@@ -124,13 +125,13 @@ if(Object.values(this.storyPoint).every(value => value === "?")) return '?'
           mime: 'image/jpeg',
           meta: {
             width: 256,
-            height: 256,
+            height: 256
           },
-          url: 'https://x8ki-letl-twmt.n7.xano.io/vault/XBYkUImp/a3wAS70PV6uO4QH5_mRMIkW22KU/bQW7WA../file-f0764d.png',
+          url: 'https://x8ki-letl-twmt.n7.xano.io/vault/XBYkUImp/a3wAS70PV6uO4QH5_mRMIkW22KU/bQW7WA../file-f0764d.png'
         },
-        isAdmin: false,
-      },
-    ],
+        isAdmin: false
+      }
+    ]
   };
   public editMode = this.data !== null;
   public textareaValue = this.editMode ? this.task.name : '';
@@ -149,18 +150,22 @@ if(Object.values(this.storyPoint).every(value => value === "?")) return '?'
   addAssigned(assigned: UsersEntity): void {
     this.task = { ...this.task, assignees: [...this.task.assignees, assigned] };
   }
+
   removeAssigned(id: number): void {
     this.task = {
       ...this.task,
-      assignees: this.task.assignees.filter((el) => el.id !== id),
+      assignees: this.task.assignees.filter((el) => el.id !== id)
     };
   }
+
   onChangeStatus(status: string): void {
     this.task = { ...this.task, status };
   }
+
   onChangePriority(priority: string): void {
     this.task = { ...this.task, priority };
   }
+
   toggleQuill() {
     this.editMode = true;
     this.editStatus = !this.editStatus;
@@ -172,8 +177,8 @@ if(Object.values(this.storyPoint).every(value => value === "?")) return '?'
       ['bold', 'italic', 'underline'],
       [{ list: 'ordered' }, { list: 'bullet' }],
       [{ color: [] }, { background: [] }],
-      ['link', 'image'],
-    ],
+      ['link', 'image']
+    ]
   };
 
   public cancel(): void {
@@ -184,7 +189,7 @@ if(Object.values(this.storyPoint).every(value => value === "?")) return '?'
     this.backlogFacade.addBacklog({
       title: this.textareaValue,
       description: this.editorContent
-    })
+    });
     this.dialogRef.close();
   }
 }

@@ -1,7 +1,7 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { tasksAction } from './tasks.action';
 import { ITaskBoard } from '../model/tasks.interface';
-import {filterColumnsByTerm} from "../../../../src/lib/tasks-view-container/tasks-list-container.store";
+import { filterColumnsByTerm } from '../../../../src/lib/tasks-view-container/tasks-list-container.store';
 
 export const TASKS_FEATURE_KEY = 'tasks';
 
@@ -38,13 +38,13 @@ export const tasksFeature = createFeature({
       ...state,
       ...board
     })),
-    on(tasksAction.searchTask, (state, {term}) => {
+    on(tasksAction.searchTask, (state, { term }) => {
       const filteredColumns = filterColumnsByTerm(state.columns, term);
       return {
         ...state,
         term,
         filteredColumns: term ? filteredColumns : []
-      }
-    }),
-  ),
+      };
+    })
+  )
 });

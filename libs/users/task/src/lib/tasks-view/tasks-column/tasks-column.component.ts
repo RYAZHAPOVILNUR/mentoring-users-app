@@ -4,7 +4,7 @@ import {
   Output,
   EventEmitter,
   ViewChild,
-  ElementRef,
+  ElementRef
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -13,7 +13,7 @@ import {
   CdkDragPreview,
   CdkDropList,
   CdkDropListGroup,
-  DragDropModule,
+  DragDropModule
 } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -22,8 +22,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { IColumn } from '@users/users/task/data-access';
-import {BehaviorSubject, skip} from "rxjs";
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import { BehaviorSubject, skip } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'users-tasks-column',
@@ -40,10 +40,10 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
     MatFormFieldModule,
     MatInputModule,
     CdkDragPreview,
-    DragDropModule,
+    DragDropModule
   ],
   templateUrl: './tasks-column.component.html',
-  styleUrls: ['./tasks-column.component.scss'],
+  styleUrls: ['./tasks-column.component.scss']
 })
 export class TasksColumnComponent {
   @Input({ required: true })
@@ -54,9 +54,11 @@ export class TasksColumnComponent {
     }
     this.columnData = column;
   }
+
   get column() {
     return this.columnData;
   }
+
   @Output() deleteColumn = new EventEmitter<number>();
   @Output() deleteTask = new EventEmitter<{
     columnIndex: number;
@@ -66,17 +68,21 @@ export class TasksColumnComponent {
   @Output() addTask = new EventEmitter();
   @Output() removeTask = new EventEmitter();
   @Output() changeTaskModal = new EventEmitter();
-  @Output() changeColumnName = new EventEmitter<string>()
+  @Output() changeColumnName = new EventEmitter<string>();
+
   @ViewChild('input', { read: ElementRef })
   set input(elRef: ElementRef<HTMLInputElement>) {
     if (elRef) {
       elRef.nativeElement.focus();
     }
   }
+
   private readonly editing$ = new BehaviorSubject(false);
+
   set editing(value: boolean) {
     this.editing$.next(value);
   }
+
   get editing(): boolean {
     return this.editing$.value;
   }
@@ -94,8 +100,9 @@ export class TasksColumnComponent {
       .subscribe(editing => {
         if (!editing && this.title !== this.titleInitialValue) {
           this.changeColumnName.emit(this.title);
-        };
-      })
+        }
+        ;
+      });
   }
 
   onDragDrop($event: CdkDragDrop<IColumn>) {
@@ -109,6 +116,7 @@ export class TasksColumnComponent {
   public onRemoveTask(taskData: any) {
     this.removeTask.emit(taskData);
   }
+
   public onChangeTaskModal(task: any) {
     this.changeTaskModal.emit(task);
   }
@@ -131,6 +139,7 @@ export class TasksColumnComponent {
   public removeColumn() {
     this.deleteColumn.emit();
   }
+
   public onEditing() {
     this.editing = !this.editing;
   }

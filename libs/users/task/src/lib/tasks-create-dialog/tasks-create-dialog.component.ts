@@ -1,11 +1,11 @@
-import {ChangeDetectionStrategy, Component, inject} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {MatDialogModule, MatDialogRef} from "@angular/material/dialog";
-import {MatIconModule} from "@angular/material/icon";
-import {MatButtonModule} from "@angular/material/button";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
-import {FormsModule} from "@angular/forms";
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'users-tasks-create-dialog',
@@ -17,7 +17,7 @@ import {FormsModule} from "@angular/forms";
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule,
+    FormsModule
   ],
   templateUrl: './tasks-create-dialog.component.html',
   styleUrls: ['./tasks-create-dialog.component.scss'],

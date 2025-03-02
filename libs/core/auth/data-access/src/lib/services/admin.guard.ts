@@ -18,4 +18,4 @@ export const adminGuard: CanActivateFn = () => {
     filter(isAdmin => isAdmin !== null),
     map(isAdmin => !!isAdmin)
   );
-}
+};

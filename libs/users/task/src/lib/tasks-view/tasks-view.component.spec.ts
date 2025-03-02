@@ -7,7 +7,7 @@ describe('TasksViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TasksViewComponent],
+      imports: [TasksViewComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TasksViewComponent);

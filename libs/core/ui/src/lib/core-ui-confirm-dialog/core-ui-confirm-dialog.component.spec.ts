@@ -7,7 +7,7 @@ describe('CoreUiConfirmDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CoreUiConfirmDialogComponent],
+      imports: [CoreUiConfirmDialogComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(CoreUiConfirmDialogComponent);

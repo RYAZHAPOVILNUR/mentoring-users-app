@@ -11,7 +11,7 @@ export const loadFolders = createEffect(() => {
   const apiService = inject(ApiService);
 
   return actions$.pipe(
-    ofType(foldersActions.loadFolders),
+    ofType(foldersActions.initFolders),
     switchMap(() =>
       apiService.get<FoldersDTO[]>('/folder').pipe(
         map((folders) => foldersActions.loadFoldersSuccess({

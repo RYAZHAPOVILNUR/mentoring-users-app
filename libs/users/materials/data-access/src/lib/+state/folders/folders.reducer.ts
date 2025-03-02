@@ -25,7 +25,7 @@ export const initialFoldersState: FoldersState = foldersAdapter.getInitialState(
 
 export const reducer = createReducer(
   initialFoldersState,
-  on(foldersActions.loadFolders, (state) => ({
+  on(foldersActions.initFolders, (state) => ({
     ...state,
     status: 'loading' as const
   })),

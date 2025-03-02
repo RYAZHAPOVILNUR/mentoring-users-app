@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -31,19 +31,18 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
   templateUrl: './login-form-ui.component.html',
   styleUrls: ['./login-form-ui.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginFormUiComponent {
-  private readonly api = inject(ApiService);
   @Output() login = new EventEmitter();
   @Output() redirectToSignup = new EventEmitter();
-  private readonly languageSwitchService = inject(LanguageSwitchService);
-  public readonly selectedLanguage$ = this.languageSwitchService.selectedLanguage$;
-
   public formGroup = new FormBuilder().group({
     email: new FormControl('admin@gmail.com', [Validators.required, Validators.email]),
     password: new FormControl('12345', [Validators.required])
   });
+  private readonly api = inject(ApiService);
+  private readonly languageSwitchService = inject(LanguageSwitchService);
+  public readonly selectedLanguage$ = this.languageSwitchService.selectedLanguage$;
 
   onRedirectToSignUp() {
     this.redirectToSignup.emit();
@@ -54,7 +53,7 @@ export class LoginFormUiComponent {
       const userData = {
         email: this.formGroup.value.email?.trim().toLowerCase(),
         password: this.formGroup.value.password
-      }
+      };
       this.login.emit(userData);
     }
   }

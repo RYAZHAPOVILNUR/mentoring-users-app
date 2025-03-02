@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -31,7 +31,7 @@ import { LanguageKeys, LanguageSwitchService } from '@users/users/core/ui/langua
   ],
   templateUrl: './register-form-ui.component.html',
   styleUrls: ['./register-form-ui.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegisterFormUiComponent {
 
@@ -42,14 +42,11 @@ export class RegisterFormUiComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(3)]),
     agreement: new FormControl(false, Validators.requiredTrue)
   });
-
+  @Output() redirectToLogin = new EventEmitter();
+  @Output() register = new EventEmitter<NewUser>();
   private readonly api = inject(ApiService);
   private readonly languageSwitchService = inject(LanguageSwitchService);
   public readonly selectedLanguage$ = this.languageSwitchService.selectedLanguage$;
-
-  @Output() redirectToLogin = new EventEmitter();
-  @Output() register = new EventEmitter<NewUser>();
-
 
   onRegister() {
     if (this.formGroup.valid) {
@@ -57,7 +54,7 @@ export class RegisterFormUiComponent {
         name: this.formGroup.value.name?.trim() as string,
         email: this.formGroup.value.email?.trim().toLowerCase() as string,
         password: this.formGroup.value.password as string
-      }
+      };
       this.register.emit(userData);
     }
   }

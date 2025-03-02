@@ -7,7 +7,7 @@ describe('ProfileChangeDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProfileChangeDialogComponent],
+      imports: [ProfileChangeDialogComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProfileChangeDialogComponent);

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegisterFormUiComponent } from '../register-form-ui/register-form-ui.component';
 import { Router } from '@angular/router';
-import { NewUser, authActions } from '@auth/data-access';
+import { authActions, NewUser } from '@auth/data-access';
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -11,17 +11,17 @@ import { Store } from '@ngrx/store';
   imports: [CommonModule, RegisterFormUiComponent],
   templateUrl: './register-container.component.html',
   styleUrls: ['./register-container.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegisterContainerComponent {
-  private readonly router = inject(Router)
-  private readonly store = inject(Store)
+  private readonly router = inject(Router);
+  private readonly store = inject(Store);
 
   onRedirectToLogin() {
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login']);
   }
 
   onRegister(userData: NewUser) {
-    this.store.dispatch(authActions.register({ userData }))
+    this.store.dispatch(authActions.register({ userData }));
   }
 }

@@ -10,12 +10,12 @@ export class LanguageSwitchService {
   private readonly translateService = inject(TranslateService);
 
   public selectedLanguage$: BehaviorSubject<LanguageKeys>;
-  
+
   private getStoredLanguage() {
     const savedLanguage = localStorage.getItem('lang');
-    return savedLanguage 
+    return savedLanguage
       ? savedLanguage as LanguageKeys
-      : Languages.Russian
+      : Languages.Russian;
   }
 
   public setLanguage(language: LanguageKeys) {
@@ -26,7 +26,7 @@ export class LanguageSwitchService {
 
   constructor() {
     this.selectedLanguage$ = new BehaviorSubject<LanguageKeys>(this.getStoredLanguage());
-    this.translateService.setDefaultLang(this.getStoredLanguage())
+    this.translateService.setDefaultLang(this.getStoredLanguage());
   }
 
 }

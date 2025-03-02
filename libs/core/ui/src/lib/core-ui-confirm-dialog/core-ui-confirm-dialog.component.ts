@@ -10,21 +10,22 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [CommonModule, MatDialogModule, MatIconModule, MatButtonModule],
   templateUrl: './core-ui-confirm-dialog.component.html',
   styleUrls: ['./core-ui-confirm-dialog.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CoreUiConfirmDialogComponent {
-  public data: { dialogText: string } = inject(MAT_DIALOG_DATA)
-  public dialogText: string = this.data.dialogText
+  public data: { dialogText: string } = inject(MAT_DIALOG_DATA);
+  public dialogText: string = this.data.dialogText;
 
   // private dialogRef = inject(MatDialogRef<CoreUiConfirmDialogComponent, boolean>)
 
-  constructor(private dialogRef: MatDialogRef<CoreUiConfirmDialogComponent, boolean>) { }
+  constructor(private dialogRef: MatDialogRef<CoreUiConfirmDialogComponent, boolean>) {
+  }
 
   confirm() {
-    this.dialogRef.close(true)
+    this.dialogRef.close(true);
   }
 
   cancel() {
-    return this.dialogRef.close(false)
+    return this.dialogRef.close(false);
   }
 }

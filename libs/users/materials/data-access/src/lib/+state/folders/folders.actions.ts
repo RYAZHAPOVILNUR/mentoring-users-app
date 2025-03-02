@@ -5,7 +5,7 @@ import { FoldersErrors } from '../../models/folders-error';
 export const foldersActions = createActionGroup({
   source: 'Folders',
   events: {
-    loadFolders: emptyProps(),
+    initFolders: emptyProps(),
 
     loadFoldersSuccess: props<{ folders: FoldersEntity[] }>(),
     loadFoldersFailure: props<{ error: FoldersErrors }>(),

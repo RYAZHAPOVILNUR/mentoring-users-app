@@ -7,7 +7,7 @@ describe('RegisterFormUiComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RegisterFormUiComponent],
+      imports: [RegisterFormUiComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(RegisterFormUiComponent);

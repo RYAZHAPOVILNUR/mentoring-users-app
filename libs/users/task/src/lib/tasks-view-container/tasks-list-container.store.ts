@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import {IColumn, ITask, TasksFacade} from '@users/users/task/data-access';
-import { tap} from 'rxjs';
+import { IColumn, ITask, TasksFacade } from '@users/users/task/data-access';
+import { tap } from 'rxjs';
 
 type TaskColumnsState = {
   columns: IColumn[];
@@ -28,7 +28,7 @@ function filterTasksByTerm(tasks: ITask[], term: string): ITask[] {
 export class TasksStore extends ComponentStore<TaskColumnsState> {
   private readonly taskFacade = inject(TasksFacade);
   public columns$ = this.select(({ columns }) => columns);
-  public filteredColumn$ = this.select(({filteredColumns}) => filteredColumns);
+  public filteredColumn$ = this.select(({ filteredColumns }) => filteredColumns);
 
   constructor() {
     super(initialState);
@@ -40,12 +40,15 @@ export class TasksStore extends ComponentStore<TaskColumnsState> {
     this.taskFacade.getAllBoards();
     this.effect(() =>
       this.taskFacade.allTaskColumns$.pipe(
-          tap((columns: IColumn[]) => this.patchColumns(columns))
-        )
+        tap((columns: IColumn[]) => this.patchColumns(columns))
+      )
     );
   }
 
-  public changeColumnName = this.updater((state, { columnIndex, columnName }: { columnIndex: number, columnName: string }) => {
+  public changeColumnName = this.updater((state, { columnIndex, columnName }: {
+    columnIndex: number,
+    columnName: string
+  }) => {
     const updatedColumns = [...state.columns];
     const column = { ...updatedColumns[columnIndex], columnName };
     updatedColumns[columnIndex] = column;
@@ -64,7 +67,7 @@ export class TasksStore extends ComponentStore<TaskColumnsState> {
   public updateLocalColumns = this.updater((state, columns: IColumn[]) => {
     this.taskFacade.updateColumns(columns);
     return { ...state, columns };
-});
+  });
 
   public deleteLocalColumn = this.updater((state, columnIndex: number) => {
     const updatedColumns = [...state.columns];
@@ -73,7 +76,10 @@ export class TasksStore extends ComponentStore<TaskColumnsState> {
     return { ...state, columns: updatedColumns };
   });
 
-  public addTaskToLocalColumn = this.updater((state, { columnIndex, taskName }: { columnIndex: number, taskName: string }) => {
+  public addTaskToLocalColumn = this.updater((state, { columnIndex, taskName }: {
+    columnIndex: number,
+    taskName: string
+  }) => {
     const updatedColumns = [...state.columns];
     const column = { ...updatedColumns[columnIndex] };
     column.tasks = [...column.tasks, { taskName }];
@@ -94,11 +100,11 @@ export class TasksStore extends ComponentStore<TaskColumnsState> {
   public searchTask = this.updater((state, term: string) => {
     this.taskFacade.searchTask(term);
     if (!term) {
-      return {...state, columns: [...state.columns], filteredColumns: []};
+      return { ...state, columns: [...state.columns], filteredColumns: [] };
     }
     state.filteredColumns = [...state.columns];
     const list = [...state.filteredColumns];
     const filteredColumns = filterColumnsByTerm(list, term);
-    return {...state, columns: [...state.columns], filteredColumns: [...filteredColumns] };
-  })
+    return { ...state, columns: [...state.columns], filteredColumns: [...filteredColumns] };
+  });
 }

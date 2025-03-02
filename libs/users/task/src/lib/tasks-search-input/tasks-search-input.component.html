@@ -1,7 +1,7 @@
 <div class="d-flex align-items-center input">
   <mat-icon class="d-flex align-items-center icon">search icon</mat-icon>
-  <input class="w-100"
-         type="text"
+  <input (ngModelChange)="searchTasks($event)"
          [(ngModel)]="text"
-         (ngModelChange)="searchTasks($event)">
+         class="w-100"
+         type="text">
 </div>

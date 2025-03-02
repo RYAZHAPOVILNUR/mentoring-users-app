@@ -7,7 +7,7 @@ describe('PasswordChangeDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PasswordChangeDialogComponent],
+      imports: [PasswordChangeDialogComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(PasswordChangeDialogComponent);

@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {map, timer} from "rxjs";
-import {Student} from "./students-data.model";
-import {studentData} from "./students-data.data";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map, timer } from 'rxjs';
+import { Student } from './students-data.model';
+import { studentData } from './students-data.data';
 
 @Injectable({ providedIn: 'root' })
 export class HighchartsService {
@@ -14,12 +14,12 @@ export class HighchartsService {
   getData() {
     return timer(2000).pipe(
       map(() => {
-        const stData: Student[] = []
+        const stData: Student[] = [];
         studentData.forEach((item) => {
-          stData.push(item)
-        })
-        return stData
+          stData.push(item);
+        });
+        return stData;
       })
-    )
+    );
   }
 }

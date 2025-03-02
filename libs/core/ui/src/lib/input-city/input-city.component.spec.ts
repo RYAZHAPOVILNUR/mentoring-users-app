@@ -7,7 +7,7 @@ describe('InputCityComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InputCityComponent],
+      imports: [InputCityComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(InputCityComponent);

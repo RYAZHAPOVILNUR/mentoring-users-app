@@ -7,7 +7,7 @@ describe('TasksColumnComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TasksColumnComponent],
+      imports: [TasksColumnComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TasksColumnComponent);

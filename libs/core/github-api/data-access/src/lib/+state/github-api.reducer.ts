@@ -2,6 +2,7 @@ import { createFeature, createReducer, on } from '@ngrx/store';
 import { githubApiActions } from './github-api.actions';
 import { LoadingStatus } from '@users/core/data-access';
 import { GithubUserDTO } from '../models/github-user-DTO.model';
+
 export const authFeatureKey = 'auth';
 
 export interface GithubApiState {
@@ -24,7 +25,7 @@ export const githubApiFeature = createFeature({
     githubApiInitialState,
     on(githubApiActions.getAccessToken, (state) => ({
       ...state,
-      status: 'loading' as const,
+      status: 'loading' as const
     })),
     on(githubApiActions.getAccessTokenSuccess, (state, { token }) => ({
       ...state,
@@ -38,7 +39,7 @@ export const githubApiFeature = createFeature({
     })),
     on(githubApiActions.getGithubUser, (state) => ({
       ...state,
-      status: 'loading' as const,
+      status: 'loading' as const
     })),
     on(githubApiActions.getGithubUserSuccess, (state, { user }) => ({
       ...state,
@@ -52,8 +53,8 @@ export const githubApiFeature = createFeature({
     })),
     on(githubApiActions.logoutFromGithub, (state) => ({
       ...state,
-      githubUser: null,
-    })),
-  ),
+      githubUser: null
+    }))
+  )
 });
 

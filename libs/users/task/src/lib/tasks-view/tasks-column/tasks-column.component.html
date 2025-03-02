@@ -1,42 +1,42 @@
 <mat-card
-  class="board-column"
-  cdkDropList
-  [cdkDropListData]="column"
   (cdkDropListDropped)="onDragDrop($event)"
+  [cdkDropListData]="column"
+  cdkDropList
+  class="board-column"
 >
-  <div class="column-title" (dblclick)="onEditing()">
-    <span *ngIf="!editing" class="column-title">{{ title}}</span>
+  <div (dblclick)="onEditing()" class="column-title">
+    <span *ngIf="!editing" class="column-title">{{ title }}</span>
     <input
-      *ngIf="editing"
       #input
+      (blur)="onEditing()"
+      (keyup.enter)="onEditing()"
+      *ngIf="editing"
+      [(ngModel)]="title"
       mat-input
       type="text"
-     [(ngModel)]="title"
-     (keyup.enter)="onEditing()"
-     (blur)="onEditing()"
     />
   </div>
   <div class="tasks-container">
     <mat-card
-      class="task"
       (click)="onChangeTaskModal(task)"
       *ngFor="let task of column.tasks; let taskIndex = index"
       cdkDrag
+      class="task"
     >
       <div [innerHTML]="splitText(task.taskName)"></div>
       <button
-        mat-icon-button
-        class="delTask"
         (click)="onRemoveTask(task.taskName)"
+        class="delTask"
+        mat-icon-button
       >
         х
       </button>
     </mat-card>
   </div>
-  <button mat-raised-button class="delBtnContainer" (click)="removeColumn()">
+  <button (click)="removeColumn()" class="delBtnContainer" mat-raised-button>
     Delete Column
   </button>
-  <button mat-raised-button class="tasksBtn" (click)="onAddNewTaskModal()">
+  <button (click)="onAddNewTaskModal()" class="tasksBtn" mat-raised-button>
     Add Task
   </button>
 </mat-card>

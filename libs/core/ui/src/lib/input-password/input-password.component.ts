@@ -16,11 +16,11 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   templateUrl: './input-password.component.html',
   styleUrls: ['./input-password.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputPasswordComponent implements ControlValueAccessor {
   public value: string | undefined;
@@ -29,12 +29,12 @@ export class InputPasswordComponent implements ControlValueAccessor {
   private onChange!: (value: string) => void;
   private onTouched!: () => void;
 
-    constructor(
-        @Self() private readonly ngControl: NgControl,
-        private readonly changeDetector: ChangeDetectorRef
-    ) {
-        this.ngControl.valueAccessor = this;
-    }
+  constructor(
+    @Self() private readonly ngControl: NgControl,
+    private readonly changeDetector: ChangeDetectorRef
+  ) {
+    this.ngControl.valueAccessor = this;
+  }
 
   public onInputValueChange(event: Event): void {
     const targetInputElement = event.target as HTMLInputElement;

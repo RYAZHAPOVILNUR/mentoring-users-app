@@ -1,8 +1,8 @@
 <ng-container [ngSwitch]="selectedLanguage$ | ngrxPush">
-  <button mat-icon-button *ngSwitchCase="'ru'" (click)="onSwitchLanguage('en')" class="lang-switch-btn">
+  <button (click)="onSwitchLanguage('en')" *ngSwitchCase="'ru'" class="lang-switch-btn" mat-icon-button>
     En
   </button>
-  <button mat-icon-button *ngSwitchCase="'en'" (click)="onSwitchLanguage('ru')" class="lang-switch-btn">
+  <button (click)="onSwitchLanguage('ru')" *ngSwitchCase="'en'" class="lang-switch-btn" mat-icon-button>
     Ru
   </button>
 </ng-container>
@@ -12,18 +12,18 @@
   <div class="wrapper">
     <h1>{{ 'LAYOUT.LOGIN.SIGN_IN' | translate }}</h1>
     <p>{{ 'LAYOUT.LOGIN.YOU_DONT_HAVE_AN_ACCOUNT' | translate }}
-      <span class="interactive-link" (click)="onRedirectToSignUp()">{{ 'LAYOUT.LOGIN.SIGN_UP' | translate }}</span>
+      <span (click)="onRedirectToSignUp()" class="interactive-link">{{ 'LAYOUT.LOGIN.SIGN_UP' | translate }}</span>
     </p>
 
-    <form class="form-fields-wrapper" [formGroup]="formGroup" (ngSubmit)="onLogin()">
+    <form (ngSubmit)="onLogin()" [formGroup]="formGroup" class="form-fields-wrapper">
       <mat-label>{{ 'LAYOUT.LOGIN.EMAIL' | translate }}*</mat-label>
       <mat-form-field appearance="outline">
-        <input matInput formControlName="email">
+        <input formControlName="email" matInput>
       </mat-form-field>
 
       <mat-label>{{ 'LAYOUT.LOGIN.PASSWORD' | translate }}*</mat-label>
       <input-password
-      [formControlName]="'password'"
+        [formControlName]="'password'"
       ></input-password>
 
       <div class="checkbox-container">
@@ -31,10 +31,10 @@
         <span class="interactive-link">{{ 'LAYOUT.LOGIN.FORGOT_YOUR_PASSWORD' | translate }}</span>
       </div>
 
-      <button mat-fab
-      extended
-      color="primary"
-      type="submit"
+      <button color="primary"
+              extended
+              mat-fab
+              type="submit"
       >
         {{ 'LAYOUT.LOGIN.SIGN_IN' | translate }}
       </button>

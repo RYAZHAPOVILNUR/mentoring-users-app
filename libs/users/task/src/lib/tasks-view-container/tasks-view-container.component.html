@@ -3,12 +3,12 @@
   </users-tasks-search-input>
 
   <users-tasks-view
-    [columns]="(text ? filteredColumn$ : columns$) | ngrxPush"
-    (updateColumns)="onUpdateColumns($event)"
-    (deleteColumn)="deleteColumn($event)"
     (addTask)="addTask($event)"
-    (deleteTask)="deleteTask($event)"
     (changeColumnName)=onChangeColumnName($event)
+    (deleteColumn)="deleteColumn($event)"
+    (deleteTask)="deleteTask($event)"
+    (updateColumns)="onUpdateColumns($event)"
+    [columns]="(text ? filteredColumn$ : columns$) | ngrxPush"
   >
   </users-tasks-view>
 </div>

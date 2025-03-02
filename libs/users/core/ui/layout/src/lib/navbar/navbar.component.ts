@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,26 +20,26 @@ import { UiPhotoModalComponent } from 'libs/users/profile/ui-profile/ui-photo-mo
     MatIconModule,
     MatDialogModule,
     MatListModule,
-    RouterModule, 
+    RouterModule,
     TranslateModule,
     PushPipe
-    
+
   ],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavbarComponent {
   private readonly facade = inject(AuthFacade);
   public readonly userPhoto: Observable<string | undefined> = this.facade.user$.pipe(map(user => user.photo?.url));
-  public readonly photo = this.userPhoto ? this.userPhoto : ''
+  public readonly photo = this.userPhoto ? this.userPhoto : '';
   private readonly dialog = inject(MatDialog);
 
   public onLogout() {
-    this.facade.logout()
+    this.facade.logout();
   }
 
-  onZoomPhotoClick(){
+  onZoomPhotoClick() {
     this.userPhoto.subscribe(photoUrl => {
       this.dialog.open(UiPhotoModalComponent, { data: photoUrl || '' });
     });

@@ -12,18 +12,18 @@ import { Router } from '@angular/router';
   imports: [CommonModule, LoginFormUiComponent],
   templateUrl: './login-container.component.html',
   styleUrls: ['./login-container.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginContainerComponent {
   private readonly store = inject(Store);
   private readonly router = inject(Router);
 
   onLogin(userData: SignAuthPayload) {
-    this.store.dispatch(authActions.login({userData}))
+    this.store.dispatch(authActions.login({ userData }));
   }
 
   onRedirectToSignup() {
-    this.router.navigate(['/signup'])
+    this.router.navigate(['/signup']);
   }
 
 }

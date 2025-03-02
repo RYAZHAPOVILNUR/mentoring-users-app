@@ -1,7 +1,7 @@
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { LetDirective, PushPipe } from "@ngrx/component";
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { InputCityComponent } from '../input-city/input-city.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -9,7 +9,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { UsersEntity } from '@users/core/data-access';
-import { AuthFacade } from '@auth/data-access';
 import { TranslateModule } from '@ngx-translate/core';
 
 
@@ -32,9 +31,9 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
   templateUrl: './profile-change-dialog.component.html',
   styleUrls: ['./profile-change-dialog.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfileChangeDialogComponent{
+export class ProfileChangeDialogComponent {
   public userEntityData: UsersEntity = inject(MAT_DIALOG_DATA);
 
   public formGroup = new FormBuilder().group({
