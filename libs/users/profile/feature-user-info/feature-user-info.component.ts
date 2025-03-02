@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -52,6 +52,8 @@ export class FeatureUserInfoComponent implements OnInit {
 
   public photo: any;
   public isPhotoHovered?: boolean;
+  public seconds: BehaviorSubject<string> = new BehaviorSubject<string>(localStorage.getItem('seconds')! !== '0' ? (Math.floor((+localStorage.getItem('pauseStamp')! - +localStorage.getItem('seconds')!) / 1000)).toString() : '0');
+  public toggle: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(localStorage.getItem('pause')! === '1');
 
   ngOnInit(): void {
     this.photo = this.vm.user.photo ? this.vm.user.photo.url : '';
@@ -59,7 +61,10 @@ export class FeatureUserInfoComponent implements OnInit {
       'github',
       this.domSanitizer.bypassSecurityTrustResourceUrl(`assets/icons/github.svg`)
     );
-    of(this.vm.githubUserName).subscribe(console.log);
+
+    if (localStorage.getItem('pause') === '0') {
+      this.goTimer()
+    }
   }
   onOpenChangePassword() {
     const dialogRef = this.dialog.open(PasswordChangeDialogComponent);
@@ -122,5 +127,52 @@ export class FeatureUserInfoComponent implements OnInit {
     this.dialog.open(UiPhotoModalComponent, {
       data: this.vm.user.photo ? this.vm.user.photo.url : '',
     });
+  }
+
+  getTime(time: string | null): string {
+    const s = +time! % 60
+    const m = Math.floor(+time! / 60 % 60)
+    const c = Math.floor(+time! / 60 / 60 % 24)
+    const d = Math.floor(+time! / 60 / 60 / 24)
+
+    const res = `${d}д ${c}ч ${m.toString().length === 1 ? `0${m}` : m}:${s.toString().length === 1 ? `0${s}` : s}`
+    return res
+  }
+
+  goTimer() {
+    const t = () => {
+      const sec = +localStorage.getItem('seconds')!
+      this.seconds.next((Math.floor((Date.now() - sec) / 1000)).toString())
+    }
+    const timer = setInterval(t, 1)
+    localStorage.setItem('timer', timer.toString())
+  }
+
+  toggleTimer() {
+    if (localStorage.getItem('pause') === '0') {
+      localStorage.setItem('pauseStamp', Math.floor(Date.now()).toString())
+      localStorage.setItem('pause', '1')
+      clearInterval(+localStorage.getItem('timer')!)
+      this.toggle.next(true)
+
+
+    } else {
+      localStorage.setItem('seconds', (Math.floor(Date.now()) - +localStorage.getItem('pauseStamp')! + +localStorage.getItem('seconds')!).toString())
+      localStorage.setItem('pause', '0')
+      clearInterval(+localStorage.getItem('timer')!)
+      this.toggle.next(false)
+
+      this.goTimer()
+
+    }
+  }
+
+  resetTimer() {
+    localStorage.setItem('seconds', '0')
+    localStorage.setItem('pauseStamp', '0')
+    localStorage.setItem('pause', '1')
+    clearInterval(+localStorage.getItem('timer')!)
+    this.seconds.next('0')
+    this.toggle.next(true)
   }
 }

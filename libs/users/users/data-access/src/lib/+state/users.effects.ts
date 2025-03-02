@@ -93,6 +93,7 @@ export const editUser = createEffect(
           email: userData.email,
           username: userData.username,
           city: userData.city,
+          educationStatus: userData.educationStatus
         },
         onSuccessCb,
       })),
@@ -106,6 +107,44 @@ export const editUser = createEffect(
             return of(UsersActions.editUserFailed({ error }));
           })
         )
+      )
+    );
+  },
+  { functional: true }
+);
+
+export const editPoints = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
+
+    return actions$.pipe(
+      ofType(UsersActions.editPoints),
+      withLatestFrom(usersEntities$),
+      filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
+      map(([{ userData, id, onSuccessCb }, usersEntities]) => ({
+        user: {
+          ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
+          name: userData.name,
+          email: userData.email,
+          username: userData.username,
+          city: userData.city,
+          totalStoryPoints: userData.totalStoryPoints
+        },
+        onSuccessCb
+      })),
+      switchMap(({ user, onSuccessCb }) => {
+        return apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+          map((userData) => ({ userData, onSuccessCb })),
+          tap(({ onSuccessCb }) => onSuccessCb()),
+          map(({ userData }) => UsersActions.editPointsSuccess({ userData })),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(UsersActions.editPointsFailed({ error }));
+          })
+        )
+      }
       )
     );
   },
