@@ -7,7 +7,6 @@ import { CreateFolderDTO, FolderDTO, FolderEntity, foldersDTOAdapter } from '@us
 import { ApiService } from '@users/core/http';
 import { Store, select } from '@ngrx/store';
 import { selectFoldersEntities } from './materials.selectors';
-import { foldersAdapter } from './materials.reducer';
   
 export class MaterialsEffects {
   init$ = createEffect(() => {

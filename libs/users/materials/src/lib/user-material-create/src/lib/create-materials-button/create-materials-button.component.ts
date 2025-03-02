@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { MaterialsFacade } from '@users/materials/data-access';
+import { UserMaterialsFacade } from '@users/user-material-data-access';
 import { CreateMaterialDialogComponent} from '../create-materials-dialog/create-material-dialog.component';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatMenuModule } from '@angular/material/menu';
@@ -33,7 +33,7 @@ import { CreateMaterialDTO, TypeMaterial } from '@users/core/data-access';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialsAddButtonComponent {
-  private readonly materialsFacade = inject(MaterialsFacade);
+  private readonly materialsFacade = inject(UserMaterialsFacade);
   private readonly destroyRef = inject(DestroyRef);
   public dialog = inject(MatDialog);
 

@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { CreateFolderDTO, FolderDTO, CreateMaterialDTO, MaterialDTO, FolderEntity, MaterialEntity } from 'libs/core/data-access/src/index';
+import { CreateFolderDTO, FolderDTO, FolderEntity} from 'libs/core/data-access/src/index';
 export type onSuccessEditionCbType = () => void;
 
 export const MaterialsActions = createActionGroup({
@@ -20,17 +20,5 @@ export const MaterialsActions = createActionGroup({
     'Delete Folder': props<{id: number}>(),
     'Delete Folder Success': props<{id: number}>(),
     'Delete Folder Failure': props<{error: any}>(),
-    'Load Materials': emptyProps(),
-    'Load Materials Success': props<{ folders: MaterialDTO[] }>(),
-    'Load Materials Failure': props<{ error: any }>(),
-    'Add Material': props<{materialData: CreateMaterialDTO}>(),
-    'Add Material Success': props<{materialData: MaterialEntity}>(),
-    'Add Material Failure': props<{error: any}>(),
-    'Edit Material': props<{materialData: MaterialEntity, id: number, onSuccess: onSuccessEditionCbType}>(),
-    'Edit Material Success': props<{materialData: MaterialEntity}>(),
-    'Edit Material Failure': props<{error: any}>(),
-    'Delete Material': props<{id: number}>(),
-    'Delete Material Success': props<{id: number}>(),
-    'Delete Material Failure': props<{error: any}>(),
   },
 });

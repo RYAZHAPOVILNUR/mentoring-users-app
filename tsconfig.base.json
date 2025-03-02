@@ -44,6 +44,7 @@
       "@users/tasks-view": ["libs/tasks-view/src/index.ts"],
       "@users/tasks/tasks-view": ["libs/tasks/tasks-view/src/index.ts"],
       "@users/user-material-create": ["libs/users/materials/src/lib/user-material-create/src/index.ts"],
+      "@users/user-material-data-access": ["libs/users/materials/src/lib/user-material-data-access/src/index.ts"],
       "@users/users/articles/article-comments": ["libs/users/articles/article-comments/src/index.ts"],
       "@users/users/articles/article-read": ["libs/users/articles/article-read/src/index.ts"],
       "@users/users/articles/articles": ["libs/users/articles/articles/src/index.ts"],
