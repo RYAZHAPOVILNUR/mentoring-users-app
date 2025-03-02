@@ -58,6 +58,14 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+            <mat-form-field class="edit-user-field" [matTooltip]="formGroup.value.status!">
+              <mat-label>Статус:</mat-label>
+              <mat-select [disabled]="!formGroup.get('status')?.enable" formControlName="status">
+                <mat-option value="trainee">Стажер</mat-option>
+                <mat-option value="junior">Джун</mat-option>
+                <mat-option value="middle">Миддл</mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button mat-icon-button color="primary" type="submit"

@@ -29,6 +29,7 @@ import { DadataApiService } from '@dadata';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs';
 import { PushPipe } from '@ngrx/component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {MatSelectModule} from '@angular/material/select';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -47,6 +48,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     MatTooltipModule,
     MatSnackBarModule,
     MatAutocompleteModule,
+    MatSelectModule,
     PushPipe,
   ],
   templateUrl: './detail-users-card.component.html',
@@ -74,6 +76,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: vm.user.email,
         username: vm.user.username,
         city: vm.user.city,
+        status: vm.user.educationStatus
       });
       this.pointsGroup.patchValue({
         totalStoryPoints: this.pointsGroup.value.totalStoryPoints || vm.user.totalStoryPoints
@@ -98,6 +101,7 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    status: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
 
   public pointsGroup = new FormBuilder().group({
@@ -166,7 +170,7 @@ export class DetailUsersCardComponent implements OnInit {
         city: this.formGroup.value.city || '',
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
         purchaseDate: new Date().toString() || '',
-        educationStatus: 'trainee',
+        educationStatus: this.formGroup.value.status || '',
       },
       onSuccessCb: this.onEditSuccess,
     });

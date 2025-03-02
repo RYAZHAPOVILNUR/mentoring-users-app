@@ -77,7 +77,8 @@
         </ng-container>
         <div class="timer">
           <div>
-            <mat-icon (click)="toggleTimer()" id="timer">{{ (toggle | async) === '0' ? 'timer_off' : 'timer'}}</mat-icon>
+            <mat-icon (click)="toggleTimer()" id="timer">{{ (toggle | async) ? 'timer_off' : 'timer'}}</mat-icon>
+            <mat-icon (click)="resetTimer()" id="timer">clear</mat-icon>
           </div>
           <div>
             {{ getTime(seconds | async) }}
