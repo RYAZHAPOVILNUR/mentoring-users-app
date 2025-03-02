@@ -3,6 +3,7 @@ import { select, Store } from '@ngrx/store';
 import * as FoldersActions from './folders.actions'
 import * as FoldersSelectors from './folders.selectors';
 import { CreateFolderDTO } from '../../../../../../../core/data-access/src';
+import * as UsersActions from '../../../../../../users/data-access/src/lib/+state/users.actions';
 
 
 @Injectable({ providedIn: 'root' })
@@ -21,5 +22,13 @@ export class FoldersFacade {
   addFolder(folderData: CreateFolderDTO) {
     console.log(folderData)
     this.store.dispatch(FoldersActions.addFolder({folder: folderData}));
+  }
+
+  deleteFolder(folderId: number) {
+    this.store.dispatch(FoldersActions.deleteFolder({folderId: folderId}));
+  }
+
+  loadFolder() {
+    this.store.dispatch(FoldersActions.loadFolder());
   }
 }

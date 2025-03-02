@@ -1,0 +1,11 @@
+<ng-container
+  *ngrxLet="{
+  materials: materials$,
+  status: status$,
+  errors: errors$,
+  lang: lang$
+  } as vmf"
+>
+
+  <materials-list [vmf]="vmf"></materials-list>
+</ng-container>

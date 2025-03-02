@@ -7,9 +7,10 @@ import { AuthFacade } from '@auth/data-access';
 import { Observable } from 'rxjs';
 import { NgIf } from '@angular/common';
 import { PushPipe } from '@ngrx/component';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   standalone: true,
@@ -22,6 +23,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatSidenavModule,
     MatIconModule,
     MatButtonModule,
+    MatDialogModule
   ],
   providers: [],
   selector: 'users-root',

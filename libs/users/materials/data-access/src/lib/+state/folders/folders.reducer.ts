@@ -2,7 +2,8 @@ import { Action, createReducer, on } from '@ngrx/store';
 import * as FolderAction from './folders.actions'
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { FoldersDTO, LoadingStatus, UsersEntity } from '../../../../../../../core/data-access/src';
-import { state } from '@angular/animations';
+import * as UsersActions from '../../../../../../users/data-access/src/lib/+state/users.actions';
+import { usersAdapter } from '../../../../../../users/data-access/src';
 
 
 export const FoldersFeatureKey = 'folders';
@@ -43,6 +44,30 @@ const reducerFolder = createReducer(
     ...state,
     status: 'error' as const,
     error,
+  })),
+  on(FolderAction.deleteFolderSuccess, (state, { folderId }) => (
+    foldersAdapter.removeOne(folderId, state)
+  )),
+  on(FolderAction.deleteFolderFailure, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
+  on(FolderAction.loadFolder, (state) => ({
+    ...state,
+    status: 'loading' as const,
+  })),
+  on(FolderAction.loadFolderSuccess, (state, { folder }) =>
+    foldersAdapter.addOne({ ...folder }, { ...state, status: 'loaded' as const })
+  ),
+  on(FolderAction.loadFolderFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
+  on(FolderAction.updateFolderStatus, (state, { status }) => ({
+    ...state,
+    status: status,
   }))
 );
 

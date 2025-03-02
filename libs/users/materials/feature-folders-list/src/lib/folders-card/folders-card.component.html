@@ -1,4 +1,12 @@
-<div>
-  <mat-icon>folder</mat-icon>
-  <p>{{folder.title}}</p>
-</div>
+<mat-card class="folder-card-wrapper"  (mouseenter)="isHovered = true" (mouseleave)="isHovered = false" (click)="redirectToEditPage(false, $event)">
+  <div class="folder-buttons">
+      <mat-icon>folder</mat-icon>
+    <button mat-icon-button color="grey" class="folder-delete" *ngIf="isHovered" (click)="ondeleteFolder($event)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+  <div class="folder-info">
+    <p>{{ folder.title }}</p>
+    <p>{{ folder.created_at ? (folder.created_at | date: 'dd MMMM YYYY' : undefined : lang ) : '' }}</p>
+  </div>
+</mat-card>

@@ -3,11 +3,16 @@ import { inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ApiService } from '@users/core/http';
 import { addFolder, initFolders } from './folders.actions';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, map, of, switchMap, withLatestFrom } from 'rxjs';
 import { FoldersDTO } from '@users/core/data-access';
 import * as FolderActions from './folders.actions';
-import { CreateFolderDTO } from '../../../../../../../core/data-access/src';
-import { foldersAdapter } from './folders.reducer';
+import {
+  CreateFolderDTO,
+  selectRouteParams,
+  UsersDTO,
+  usersDTOAdapter
+} from '../../../../../../../core/data-access/src';
+
 
 export const folderEffect = createEffect(
   () => {
@@ -38,9 +43,6 @@ export const addFolderEffect = createEffect(
       ofType(addFolder),
       switchMap(({ folder }) =>
         apiService.post<FoldersDTO,CreateFolderDTO>('/folder', folder).pipe(
-          map((folder) => {
-            return folder
-          }),
           map((folder) => FolderActions.addFolderSuccess({ folder })),
           catchError((err) => {
             console.log(err)
@@ -50,4 +52,48 @@ export const addFolderEffect = createEffect(
       )
     )
   }, {functional: true}
+);
+
+
+export const deleteFolder = createEffect(
+  () => {
+    const action$ = inject(Actions);
+    const apiService = inject(ApiService);
+
+
+    return action$.pipe(
+      ofType(FolderActions.deleteFolder),
+      switchMap(({ folderId }) =>
+        apiService.delete<FoldersDTO>(`/folder/${folderId}`).pipe(
+          map(( folder) => FolderActions.deleteFolderSuccess({ folderId })),
+          catchError((err) => of(FolderActions.deleteFolderFailure( err )))
+        )
+      )
+    )
+  }, { functional: true }
 )
+export const loadFolder = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const store = inject(Store);
+    return actions$.pipe(
+      ofType(FolderActions.loadFolder),
+      withLatestFrom(store.select(selectRouteParams)),
+      switchMap(([, params]) => {
+        if (params['id']) {
+          console.log(params['id'])
+          return apiService.get<FoldersDTO>(`/folder/1}`).pipe(
+            map((folder) => FolderActions.loadFolderSuccess({ folder: folder })),
+            catchError((error) => {
+              console.error('Error', error);
+              return of(FolderActions.loadFolderFailed({ error }));
+            })
+          );
+        }
+        return of(FolderActions.updateFolderStatus({ status: 'loading' }));
+      })
+    );
+  },
+  { functional: true }
+);

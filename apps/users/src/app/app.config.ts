@@ -23,8 +23,12 @@ import { backlogFeature, backlogEffects } from '@users/users/backlog/data-access
 import {
   folderReducer,
   FoldersFeatureKey,
-  FolderEffect
+  FolderEffect,
+  materialReducer,
+  MaterialsFeatureKey,
+  MaterialEffect
 } from '@users/materials/data-access';
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -41,7 +45,8 @@ export const appConfig: ApplicationConfig = {
       githubApiEffects,
       backlogEffects,
       SettingsEffects,
-      FolderEffect
+      FolderEffect,
+      MaterialEffect
     ),
     provideStore({
       router: routerReducer,
@@ -53,7 +58,8 @@ export const appConfig: ApplicationConfig = {
       [tasksFeature.name]: tasksFeature.reducer,
       [githubApiFeature.name]: githubApiFeature.reducer,
       [backlogFeature.name]: backlogFeature.reducer,
-      [FoldersFeatureKey]: folderReducer
+      [FoldersFeatureKey]: folderReducer,
+      [MaterialsFeatureKey]: materialReducer
     }),
     provideRouterStore(),
     provideStoreDevtools({

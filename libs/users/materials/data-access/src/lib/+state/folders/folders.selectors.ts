@@ -5,7 +5,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 export const selectFoldersState = createFeatureSelector<FoldersState>(FoldersFeatureKey);
 
-const { selectAll, selectEntities } = foldersAdapter.getSelectors();
+const { selectAll } = foldersAdapter.getSelectors();
 
 export const selectFoldersStatus = createSelector(selectFoldersState, (state: FoldersState) => state.status);
 

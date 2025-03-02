@@ -3,9 +3,10 @@
   folders: folders$,
   status: status$,
   errors: errors$,
+  lang: lang$
   } as vmf"
 >
 
-  <folders-list [vmf]="vmf"></folders-list>
+  <folders-list [vmf]="vmf" (deleteFolder)="onDeleteFolder($event)" (redirectToMaterials)="onRedirectToMaterials($event)"></folders-list>
 </ng-container>
 <folders-add-button></folders-add-button>
