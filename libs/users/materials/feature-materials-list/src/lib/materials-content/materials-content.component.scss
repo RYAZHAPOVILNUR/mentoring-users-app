@@ -1,0 +1,57 @@
+.material-dialog__header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2% 2% 0 0;
+}
+
+.material-dialog__title {
+  margin: 0 20px 0 60px;
+  text-align: center;
+  flex-grow: 1;
+  color: white;
+  font-size: 30px;
+}
+
+.material-dialog__footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 30px;
+  font-size: 20px;
+  color: white;
+}
+
+.material-dialog__link {
+  color: white;
+}
+
+.video-poster {
+  padding: 10px;
+  width: 854px;
+  height: auto;
+}
+
+.video-player {
+  width: 854px;
+  height: 480px;
+}
+
+.material-dialog__audio {
+  max-width: 400px;
+  height: 100px;
+  padding: 10px;
+}
+.pdf-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  //align-items: center;
+}
+
+.material-dialog__pdf {
+  width: 70vw;
+  height: 80vh;
+  overflow: hidden;
+}
+
