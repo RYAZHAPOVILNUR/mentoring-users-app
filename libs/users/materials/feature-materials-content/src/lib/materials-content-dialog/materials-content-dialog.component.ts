@@ -104,6 +104,7 @@ export class MaterialsContentDialogComponent {
   private sanitizerUrl(url: string, type: MaterialType): SafeResourceUrl {
     const regExp = type !== MaterialType.VIDEO ? REGEX_FORMATS[type] : null;
     if (regExp && regExp.test(url)) {
+      // здесь я уберу потом, пока недоделано
       // this.urlChecker
       //   .checkUrlExists(url)
       //   .pipe(
