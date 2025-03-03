@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { TaskTimerService, TimerState } from "../task-timer-service/task-timer.service";
 import { CommonModule } from "@angular/common";
 import { FormatTimePipe } from "./format-time.pipes";
@@ -11,6 +11,7 @@ import { MatButtonModule } from "@angular/material/button";
   imports: [CommonModule, FormatTimePipe, MatButtonModule],
   templateUrl: './task-timer.component.html',
   styleUrls: ['./task-timer.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskTimerComponent {
     private readonly timerService: TaskTimerService = inject(TaskTimerService);

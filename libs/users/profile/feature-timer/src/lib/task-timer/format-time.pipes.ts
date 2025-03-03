@@ -8,9 +8,11 @@ export class FormatTimePipe implements PipeTransform {
   
   transform (value: number): string {
     const days = Math.floor(value / 86400);
-    const hours = Math.floor(value / 3600);
-    const minutes = Math.floor((value % 3600) / 60);
-    const seconds = value % 60;
+    const remainingAfterDays = value - (days * 86400);
+    const hours = Math.floor(remainingAfterDays / 3600);
+    const remainingAfterHours = remainingAfterDays - (hours * 3600);
+    const minutes = Math.floor(remainingAfterHours / 60);
+    const seconds = remainingAfterHours % 60;
     return [
       days.toString().padStart(2, "0"),
       hours.toString().padStart(2, "0"),

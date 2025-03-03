@@ -74,8 +74,12 @@ export class TaskTimerService implements OnDestroy{
     if (this.state.isActive) {
       const now = Date.now();
       const passedSeconds = Math.floor((now - this.state.lastUpdateTime) / 1000);
-      this.state.seconds += passedSeconds;
-      this.state.lastUpdateTime = now;
+      this.state = { 
+        ...this.state,
+        seconds: this.state.seconds + passedSeconds,
+        lastUpdateTime: now
+      };
+      this.state$.next(this.state);
     }
   }
   
