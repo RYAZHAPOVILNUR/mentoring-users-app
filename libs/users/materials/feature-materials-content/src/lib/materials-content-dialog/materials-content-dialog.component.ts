@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -6,13 +6,35 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { MatIconModule } from '@angular/material/icon';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { UrlCheckerService } from '@users/core/http';
+import { filter, tap } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 interface IMaterialData {
   materialLink: string;
   title: string;
 }
 
-type TRegEXFormats = 'video' | 'audio' | 'pdf';
+enum MaterialType {
+  PDF = 'pdf',
+  VIDEO = 'video',
+  AUDIO = 'audio',
+  UKNOWN = 'uknown',
+}
+
+const REGEX_FORMATS: Record<Exclude<MaterialType, MaterialType.VIDEO>, RegExp | null> = {
+  [MaterialType.PDF]: /^https:\/\/.*\.pdf$/,
+  [MaterialType.AUDIO]: /^https:\/\/.*\.mp3$/,
+  [MaterialType.UKNOWN]: null,
+};
+
+type TYouTubeRegexType = 'SHARE' | 'WATCH' | 'EMBED';
+
+const REGEX_YOUTUBE: Record<TYouTubeRegexType, RegExp> = {
+  SHARE: /^https:\/\/youtu\.be\/([a-zA-Z0-9_-]+)/,
+  WATCH: /^https:\/\/www\.youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/,
+  EMBED: /^https:\/\/www\.youtube\.com\/embed\/([a-zA-Z0-9_-]+)/,
+};
 
 @Component({
   selector: 'materials-materials-content-dialog',
@@ -28,53 +50,75 @@ export class MaterialsContentDialogComponent {
   );
   private readonly domSanitizer = inject(DomSanitizer);
   public readonly data: IMaterialData = inject(MAT_DIALOG_DATA);
+  private readonly urlChecker = inject(UrlCheckerService);
+  private readonly destroyRef = inject(DestroyRef);
+  public errorMessage: string | null = null;
+  protected readonly MaterialType = MaterialType;
 
-  public onCheckFileType(): string {
+  public get fileType(): MaterialType {
     const { materialLink } = this.data;
-    switch (true) {
-      case materialLink.endsWith('.pdf'):
-        return 'pdf';
-      case materialLink.endsWith('.mp3'):
-        return 'audio';
-      case materialLink.includes('youtube.com'):
-        return 'video';
-      default:
-        return 'insert_drive_file';
+    if (materialLink.endsWith('.pdf')) return MaterialType.PDF;
+    if (materialLink.endsWith('.mp3')) return MaterialType.AUDIO;
+    if (materialLink.includes('youtube.com')) return MaterialType.VIDEO;
+    return MaterialType.UKNOWN;
+  }
+
+  public get secureUrl(): SafeResourceUrl {
+    const { materialLink } = this.data;
+
+    if (this.fileType === MaterialType.VIDEO) {
+      const videoId = this.extractVideoId(materialLink);
+      if (videoId) {
+        return this.domSanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoId}`);
+      }
+    }
+
+    try {
+      return this.sanitizerUrl(this.data.materialLink, this.fileType);
+    } catch (error: any) {
+      this.errorMessage = error.message;
+      return '';
     }
   }
 
-  public onGetSecurityUrl(materialType: TRegEXFormats): SafeResourceUrl {
-    const materialLink = this.data.materialLink;
-    const regEXFormats = {
-      pdf: /^https:\/\/.*\.pdf$/,
-      video: /^https:\/\/www\.youtube\.com\/embed\/([a-zA-Z0-9_-]+)/,
-      audio: /^https:\/\/.*\.mp3$/,
-    };
-    const regExResult = materialLink.match(regEXFormats[materialType]);
+  private extractVideoId(url: string): string | null {
+    let videoId = null;
 
-    const getDomSanitizerURL = (URL: string): SafeResourceUrl => {
-      return this.domSanitizer.bypassSecurityTrustResourceUrl(URL);
-    };
-
-    switch (materialType) {
-      case 'audio':
-        if (regExResult && regExResult[0]) {
-          return getDomSanitizerURL(`${materialLink}`);
+    const shareMatch = url.match(REGEX_YOUTUBE.SHARE);
+    if (shareMatch) {
+      videoId = shareMatch[1];
+    } else {
+      const watchMatch = url.match(REGEX_YOUTUBE.WATCH);
+      if (watchMatch) {
+        videoId = watchMatch[1];
+      } else {
+        const embedMatch = url.match(REGEX_YOUTUBE.EMBED);
+        if (embedMatch) {
+          videoId = embedMatch[1];
         }
-        console.log('else audio');
-        return getDomSanitizerURL('https://www.sousound.com/music/healing/healing_01.mp3');
-      case 'pdf':
-        if (regExResult && regExResult[0]) {
-          return `${materialLink}`;
-        }
-        return 'https://www.orimi.com/pdf-test.pdf';
-      case 'video':
-        if (regExResult && regExResult[1]) {
-          return getDomSanitizerURL('https://www.youtube.com/embed/' + regExResult[1]);
-        }
-        return getDomSanitizerURL('https://www.youtube.com/embed/dQw4w9WgXcQ?si=IzHtdH_qqisyNmGm');
-      default:
-        return getDomSanitizerURL('https://www.youtube.com/embed/dQw4w9WgXcQ?si=IzHtdH_qqisyNmGm');
+      }
     }
+    return videoId;
+  }
+
+  private sanitizerUrl(url: string, type: MaterialType): SafeResourceUrl {
+    const regExp = type !== MaterialType.VIDEO ? REGEX_FORMATS[type] : null;
+    if (regExp && regExp.test(url)) {
+      // this.urlChecker
+      //   .checkUrlExists(url)
+      //   .pipe(
+      //     // filter((result: boolean) => !result),
+      //     tap((result: any) => {
+      //       console.log(result);
+      //       throw new Error(`Файл по указанной ссылке: ${url} - НЕ существует, укажите другой url`);
+      //     }),
+      //     takeUntilDestroyed(this.destroyRef)
+      //   )
+      //   .subscribe();
+      if (type === MaterialType.PDF) {
+        return url;
+      } else return this.domSanitizer.bypassSecurityTrustResourceUrl(url);
+    }
+    throw new Error(`Некорректная ссылка для типа материала: ${type}. Полученная ссылка: ${url}`);
   }
 }

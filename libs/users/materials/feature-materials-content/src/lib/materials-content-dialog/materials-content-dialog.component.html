@@ -7,26 +7,35 @@
       <mat-icon>close</mat-icon>
     </button>
   </div>
-  <div class="dialog-content__main" [ngSwitch]="onCheckFileType()">
-    <ng-container *ngSwitchCase="'video'">
+  
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    <h1>{{ errorMessage }}</h1>
+    <hr />
+  </div>
+  
+  <div class="dialog-content__main" [ngSwitch]="fileType">
+    <ng-container *ngSwitchCase="MaterialType.VIDEO">
       <div class="video">
-        <iframe [src]="onGetSecurityUrl('video')" allowfullscreen
+        <iframe [src]="secureUrl" allowfullscreen
                 class="video__item"></iframe>
       </div>
     </ng-container>
-    <ng-container *ngSwitchCase="'audio'">
+    
+    <ng-container *ngSwitchCase="MaterialType.AUDIO">
       <div class="audio">
         <audio preload="metadata" controls
-               [src]="onGetSecurityUrl('audio')"></audio>
+               [src]="secureUrl"></audio>
       </div>
     </ng-container>
-    <ng-container *ngSwitchCase="'pdf'">
-      <pdf-viewer [src]="onGetSecurityUrl('pdf')"
+    
+    <ng-container *ngSwitchCase="MaterialType.PDF">
+      <pdf-viewer [src]="secureUrl"
                   [render-text]="true"
                   [original-size]="false"
                   class="pdf"
       ></pdf-viewer>
     </ng-container>
+    
     <ng-container *ngSwitchDefault>
       <div class="alert alert-danger" role="alert">
         <h1>Некорректная ссылка на источник: {{ data.materialLink }}</h1>
