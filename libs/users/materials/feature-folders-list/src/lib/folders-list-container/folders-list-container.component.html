@@ -1,1 +1,17 @@
-<p>folders-list-container works!</p>
+<ng-container
+    *ngrxLet="{
+        allFolders: allFolders$,
+        foldersStatus: foldersStatus$,
+    } as vm"
+>
+<ng-container>
+    <!-- <users-folders-list
+        [folders]="vm.allFolders"
+        (deleteFolder)="deleteFolder($event)"
+        (openFolder)="openFolder($event)"
+    >
+        
+    </users-folders-list> -->
+</ng-container>
+
+</ng-container>
