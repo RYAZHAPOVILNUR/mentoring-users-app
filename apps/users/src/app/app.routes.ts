@@ -40,12 +40,6 @@ export const appRoutes: Route[] = [
         loadComponent: () =>
           import('@users/users/profile/feature-profile').then((c) => c.UserProfileContainerComponent),
       },
-      // {
-      //   path: 'folders-editor',
-      //   loadComponent: () =>
-      //     import('@users/materials/feature-folders-create').then((c) => c.FoldersAddButtonComponent),
-      //   canDeactivate: [canDeactivateFormComponent],
-      // },
       {
         path: 'article-editor',
         loadComponent: () =>
