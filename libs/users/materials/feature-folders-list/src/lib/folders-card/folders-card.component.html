@@ -1,7 +1,7 @@
-<mat-card class="folder-card-wrapper"  (mouseenter)="isHovered = true" (mouseleave)="isHovered = false" (click)="redirectToEditPage(false, $event)">
+<mat-card class="folder-card-wrapper"  (click)="redirectToEditPage(false, $event)">
   <div class="folder-buttons">
       <mat-icon>folder</mat-icon>
-    <button mat-icon-button color="grey" class="folder-delete" *ngIf="isHovered" (click)="ondeleteFolder($event)">
+    <button mat-icon-button color="grey" class="folder-delete"  (click)="ondeleteFolder($event)">
       <mat-icon>delete</mat-icon>
     </button>
   </div>

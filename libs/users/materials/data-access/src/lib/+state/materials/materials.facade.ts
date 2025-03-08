@@ -2,6 +2,8 @@ import { inject, Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import * as MaterialsSelector from './materials.selectors';
 import * as MaterialsActions from './materials.actions';
+import { CreateMaterialDTO, MaterialsDTO } from '../../../../../../../core/data-access/src/lib/materials-dto.model';
+import * as FoldersActions from '../folders/folders.actions';
 
 
 @Injectable({ providedIn: 'root' })
@@ -13,5 +15,13 @@ export class MaterialsFacade {
 
   init(){
     this.store.dispatch(MaterialsActions.initMaterials())
+  }
+
+  addMaterial(materialData: CreateMaterialDTO) {
+    this.store.dispatch(MaterialsActions.addMaterial({material: materialData}));
+  }
+
+  deleteMaterial(material: MaterialsDTO) {
+    this.store.dispatch(MaterialsActions.deleteMaterial({material}));
   }
 }

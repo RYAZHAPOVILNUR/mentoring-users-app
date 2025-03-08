@@ -1,12 +1,16 @@
-<mat-card class="folder-card-wrapper">
-  <div class="folder-buttons">
-    <mat-icon>folder</mat-icon>
-    <button mat-icon-button color="grey" class="folder-delete">
+<mat-card class="material-card-wrapper" (click)="openMediaDialog(material)">
+  <div class="material-buttons">
+    <ng-container [ngSwitch]="material.material_link | materialType">
+      <mat-icon *ngSwitchCase="materialTypes.PDF">picture_as_pdf</mat-icon>
+      <mat-icon *ngSwitchCase="materialTypes.AUDIO">music_note</mat-icon>
+      <mat-icon *ngSwitchCase="materialTypes.VIDEO">video_library</mat-icon>
+    </ng-container>
+    <button mat-icon-button color="grey" class="material-delete" (click)="ondeleteFolder($event)">
       <mat-icon>delete</mat-icon>
     </button>
   </div>
-  <div class="folder-info">
-    <p>{{material | json}}</p>
-    <p>{{ material.folder_id }}</p>
+  <div class="material-info">
+    <p>{{ material.title }}</p>
+    <p>{{ material.created_at ? (material.created_at | date: 'dd MMMM YYYY' : undefined : lang ) : '' }}</p>
   </div>
 </mat-card>

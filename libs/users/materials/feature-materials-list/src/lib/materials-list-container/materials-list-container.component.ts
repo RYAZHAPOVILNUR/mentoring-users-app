@@ -6,11 +6,13 @@ import { LanguageSwitchService } from '../../../../../core/ui/language-switch/sr
 import { Router } from '@angular/router';
 import { MaterialsFacade } from '@users/materials/data-access';
 import { MaterialsListContainerStore } from './materials-list-container.store';
+import { MaterialsAddButtonComponent } from '../../../../featute-materials-create/src/lib/materials-add-button/materials-add-button.component';
+import { MaterialsDTO } from '../../../../../../core/data-access/src/lib/materials-dto.model';
 
 @Component({
   selector: 'lib-materials-list-container',
   standalone: true,
-  imports: [CommonModule, LetDirective, MaterialsListComponent],
+  imports: [CommonModule, LetDirective, MaterialsListComponent, MaterialsAddButtonComponent],
   providers: [MaterialsListContainerStore],
   templateUrl: './materials-list-container.component.html',
   styleUrls: ['./materials-list-container.component.scss'],
@@ -22,12 +24,18 @@ export class MaterialsListContainerComponent {
 
   private readonly componentStore = inject(MaterialsListContainerStore);
   private readonly langService = inject(LanguageSwitchService);
-  public readonly materials$ = this.componentStore.materials$;
+  public readonly materials$ = this.componentStore.filteredMaterials$;
   public readonly lang$ = this.langService.selectedLanguage$;
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;
   private readonly router = inject(Router);
-  ngOnInit(): void {
-    this.materialsFacade.init();
+
+
+  onCloseMaterials() {
+    this.router.navigate(['/materials'])
+  }
+
+  onDeleteMaterial(material: MaterialsDTO) {
+    this.componentStore.deleteMaterial(material);
   }
 }

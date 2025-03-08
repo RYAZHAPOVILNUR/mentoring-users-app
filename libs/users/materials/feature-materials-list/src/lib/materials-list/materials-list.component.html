@@ -1,3 +1,7 @@
+<button mat-icon-button aria-label="close dialog" color="accent" (click)="onCloseMaterials()">
+  <mat-icon>arrow_back</mat-icon>
+</button>
+
 <ng-container *ngIf="vmf.status === 'loading'; else loadingResult">
   <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
 </ng-container>
@@ -9,6 +13,8 @@
         <div class="col-md-2 mb-5" *ngFor="let material of vmf.materials">
           <materials-card
             [material]="material"
+            [lang]="vmf.lang"
+            (deleteMaterial)="onDeleteMaterial(material)"
           />
         </div>
       </div>

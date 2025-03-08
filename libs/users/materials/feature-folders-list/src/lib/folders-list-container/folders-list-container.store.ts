@@ -1,10 +1,10 @@
 import { DeepReadonly } from '../../../../../../core/utils/src';
 import { inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { FoldersFacade } from '@users/materials/data-access';
-import { tap } from 'rxjs';
+import { FoldersFacade, MaterialsFacade } from '@users/materials/data-access';
+import { shareReplay, tap } from 'rxjs';
 import { FoldersDTO } from '../../../../../../core/data-access/src';
-import { LanguageSwitchService } from '../../../../../core/ui/language-switch/src';
+
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from "@users/core/ui";
 
@@ -20,6 +20,7 @@ const initialState: FoldersListState = {
 @Injectable()
 export class FoldersListContainerStore extends ComponentStore<FoldersListState> {
   private readonly foldersFacade = inject(FoldersFacade);
+  private readonly materialFacade = inject(MaterialsFacade);
   private readonly dialog = inject(MatDialog);
   public readonly folders$ = this.select(({ folders }) => folders);
   public readonly status$ = this.select(this.foldersFacade.status$, (status) => status);
@@ -28,11 +29,12 @@ export class FoldersListContainerStore extends ComponentStore<FoldersListState> 
   constructor() {
     super(initialState);
     this.foldersFacade.init();
+    this.materialFacade.init();
     this.setFoldersFromGlobalToLocalStore();
   }
 
   private setFoldersFromGlobalToLocalStore(): void {
-    this.effect(() => this.foldersFacade.allFolders$.pipe(tap((folders: FoldersDTO[]) => this.patchState({folders: folders}))));
+    this.effect(() => this.foldersFacade.allFolders$.pipe(tap((folders: FoldersDTO[]) => this.patchState({folders: folders})),shareReplay(1)));
   }
 
   public deleteFolder(folder: FoldersDTO): void {

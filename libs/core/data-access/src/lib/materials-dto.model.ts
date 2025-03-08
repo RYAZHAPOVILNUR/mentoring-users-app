@@ -9,7 +9,7 @@ export type MaterialsDTO = DeepReadonly<{
   folder_id: number;
 }>;
 
-export type CreateFolderDTO = DeepReadonly<{
+export type CreateMaterialDTO = DeepReadonly<{
   id?: number;
   created_at: string;
   title: string;

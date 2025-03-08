@@ -7,5 +7,7 @@
   } as vmf"
 >
 
-  <materials-list [vmf]="vmf"></materials-list>
+  <materials-list [vmf]="vmf" (closeMaterials)="onCloseMaterials()" (deleteMaterial)="onDeleteMaterial($event)"></materials-list>
 </ng-container>
+
+<materials-add-button></materials-add-button>

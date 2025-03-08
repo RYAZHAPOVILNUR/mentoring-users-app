@@ -20,7 +20,6 @@ export class FoldersFacade {
   }
 
   addFolder(folderData: CreateFolderDTO) {
-    console.log(folderData)
     this.store.dispatch(FoldersActions.addFolder({folder: folderData}));
   }
 

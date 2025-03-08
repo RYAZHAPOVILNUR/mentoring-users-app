@@ -35,6 +35,22 @@ const reducerMaterial = createReducer(
     status: 'error' as const,
     error,
   })),
+  on(MaterialsAction.addMaterialSuccess, (state, { material }) => (
+    materialsAdapter.addOne({...material}, { ...state })
+  )),
+  on(MaterialsAction.addMaterialFailure, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
+  on(MaterialsAction.deleteMaterialSuccess, (state,{ materialId }) => (
+    materialsAdapter.removeOne(materialId, state)
+  )),
+  on(MaterialsAction.deleteMaterialFailure, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  }))
 );
 
 export function materialReducer(state: MaterialsState | undefined, action: Action){

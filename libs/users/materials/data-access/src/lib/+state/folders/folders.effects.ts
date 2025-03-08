@@ -2,15 +2,13 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ApiService } from '@users/core/http';
-import { addFolder, initFolders } from './folders.actions';
+import { initFolders } from './folders.actions';
 import { catchError, map, of, switchMap, withLatestFrom } from 'rxjs';
 import { FoldersDTO } from '@users/core/data-access';
 import * as FolderActions from './folders.actions';
 import {
   CreateFolderDTO,
   selectRouteParams,
-  UsersDTO,
-  usersDTOAdapter
 } from '../../../../../../../core/data-access/src';
 
 
@@ -40,7 +38,7 @@ export const addFolderEffect = createEffect(
     const apiService = inject(ApiService);
 
     return actions$.pipe(
-      ofType(addFolder),
+      ofType(FolderActions.addFolder),
       switchMap(({ folder }) =>
         apiService.post<FoldersDTO,CreateFolderDTO>('/folder', folder).pipe(
           map((folder) => FolderActions.addFolderSuccess({ folder })),
@@ -83,7 +81,7 @@ export const loadFolder = createEffect(
       switchMap(([, params]) => {
         if (params['id']) {
           console.log(params['id'])
-          return apiService.get<FoldersDTO>(`/folder/1}`).pipe(
+          return apiService.get<FoldersDTO>(`/material/1}`).pipe(
             map((folder) => FolderActions.loadFolderSuccess({ folder: folder })),
             catchError((error) => {
               console.error('Error', error);

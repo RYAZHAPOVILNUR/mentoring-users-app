@@ -23,12 +23,8 @@ export class FoldersListComponent {
   @Output() deleteFolder = new EventEmitter();
   @Output() redirectToMaterials = new EventEmitter();
 
-  ngOnInit() {
-    console.log(this.vmf)
-  }
 
   ondeleteFolder(folder: FoldersDTO) {
-    console.log(folder);
     this.deleteFolder.emit(folder);
   };
 

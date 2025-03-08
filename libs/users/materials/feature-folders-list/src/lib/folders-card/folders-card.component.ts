@@ -1,10 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  inject,
   Input,
   Output,
-  SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
 import { CommonModule, DatePipe, registerLocaleData } from '@angular/common';
@@ -30,6 +28,7 @@ import { MatDialogModule } from '@angular/material/dialog';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersCardComponent {
+  private clickCount = 0;
   ngOnInit() {
     registerLocaleData(localeRu, 'ru');
     registerLocaleData(localeEn, 'en'); // Регистрация локали
@@ -44,6 +43,7 @@ export class FoldersCardComponent {
   @Output() redirectToMaterials = new EventEmitter();
 
   ondeleteFolder(event: Event) {
+    event.stopPropagation();
     this.deleteFolder.emit();
   }
 
@@ -52,6 +52,9 @@ export class FoldersCardComponent {
       id: +this.folder.id,
       editMode,
     };
-    this.redirectToMaterials.emit(emitData);
+    this.clickCount++;
+    if(this.clickCount === 2) {
+      this.redirectToMaterials.emit(emitData);
+    }
   }
 }

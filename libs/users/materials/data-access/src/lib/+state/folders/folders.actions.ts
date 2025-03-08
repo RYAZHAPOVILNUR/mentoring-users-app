@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { CreateFolderDTO, FoldersDTO, LoadingStatus, UsersEntity } from '../../../../../../../core/data-access/src';
+import { CreateFolderDTO, FoldersDTO, LoadingStatus } from '../../../../../../../core/data-access/src';
 
 
 export const initFolders = createAction('[Folders Page] Init');

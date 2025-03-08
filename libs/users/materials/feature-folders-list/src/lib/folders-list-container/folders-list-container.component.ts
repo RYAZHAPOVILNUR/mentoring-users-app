@@ -22,7 +22,7 @@ import { LanguageSwitchService } from '../../../../../core/ui/language-switch/sr
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FoldersListContainerComponent implements OnInit {
+export class FoldersListContainerComponent {
   private readonly foldersFacade = inject(FoldersFacade);
 
   private readonly componentStore = inject(FoldersListContainerStore);
@@ -32,9 +32,6 @@ export class FoldersListContainerComponent implements OnInit {
   public readonly errors$ = this.componentStore.errors$;
   public readonly lang$ = this.langService.selectedLanguage$;
   private readonly router = inject(Router);
-  ngOnInit(): void {
-    this.foldersFacade.init();
-  }
 
   onDeleteFolder(folder: FoldersDTO) {
     this.componentStore.deleteFolder(folder);
