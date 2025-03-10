@@ -63,8 +63,8 @@
       "@users/materials/feature-folders-create": ["libs/users/materials/feature-folders-create/src/index.ts"],
       "@users/materials/feature-materials-list": ["libs/users/materials/feature-materials-list/src/index.ts"],
       "@users/materials/data-access": ["libs/users/materials/data-access/src/index.ts"],
-      "@users/materials/feature-materials-create": ["libs/users/materials/feature-materials-create/src/index.ts"],
-      "@users/materials/feature-materials-content": ["libs/users/materials/feature-materials-content/src/index.ts"]
+      "@users/materials/feature-materials-content": ["libs/users/materials/feature-materials-content/src/index.ts"],
+      "@users/materials/feature-materials-create": ["libs/users/materials/featute-materials-create/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

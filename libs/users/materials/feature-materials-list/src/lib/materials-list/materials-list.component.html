@@ -13,7 +13,7 @@
         <div class="col-md-2 mb-5" *ngFor="let material of vmf.materials">
           <materials-card
             [material]="material"
-            [lang]="vmf.lang"
+            [lang]="vmf.lang ? vmf.lang : null"
             (deleteMaterial)="onDeleteMaterial(material)"
           />
         </div>

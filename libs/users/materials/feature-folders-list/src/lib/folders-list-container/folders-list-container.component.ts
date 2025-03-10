@@ -1,20 +1,19 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
-import { CommonModule, NgFor } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
+import { NgFor } from '@angular/common';
 import { FoldersAddButtonComponent } from '@users/materials/feature-folders-create';
-import { FoldersFacade } from '@users/materials/data-access';
 import { Router } from '@angular/router';
 import { FoldersListContainerStore } from './folders-list-container.store';
 import { LetDirective } from '@ngrx/component';
-import { UsersListComponent } from '../../../../../users/feature-users-list/src';
+import { UsersListComponent } from '@users/feature-users-list';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
-import { FoldersDTO } from '../../../../../../core/data-access/src';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { LanguageSwitchService } from '../../../../../core/ui/language-switch/src';
+import { FoldersDTO } from '@users/core/data-access';
+import { MatDialogModule } from '@angular/material/dialog';
+import { LanguageSwitchService } from '@users/users/core/ui/language-switch';
 
 @Component({
   selector: 'folders-container',
   standalone: true,
-  imports: [CommonModule, FoldersAddButtonComponent, LetDirective, UsersListComponent, FoldersListComponent,NgFor, MatDialogModule,
+  imports: [FoldersAddButtonComponent, LetDirective, UsersListComponent, FoldersListComponent,NgFor, MatDialogModule,
   ],
   providers: [FoldersListContainerStore],
   templateUrl: './folders-list-container.component.html',
@@ -23,7 +22,6 @@ import { LanguageSwitchService } from '../../../../../core/ui/language-switch/sr
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersListContainerComponent {
-  private readonly foldersFacade = inject(FoldersFacade);
 
   private readonly componentStore = inject(FoldersListContainerStore);
   private readonly langService = inject(LanguageSwitchService);

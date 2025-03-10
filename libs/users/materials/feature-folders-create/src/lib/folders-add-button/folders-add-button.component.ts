@@ -1,18 +1,17 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, ViewEncapsulation } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FoldersAddDialogComponent } from '@users/materials/feature-folders-create';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { CreateFolderDTO } from '../../../../../../core/data-access/src';
+import { CreateFolderDTO } from '@users/core/data-access';
 import { FoldersFacade } from '@users/materials/data-access';
 
 
 @Component({
   selector: 'folders-add-button',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule],
+  imports: [MatButtonModule, MatIconModule],
   templateUrl: './folders-add-button.component.html',
   styleUrls: ['./folders-add-button.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,

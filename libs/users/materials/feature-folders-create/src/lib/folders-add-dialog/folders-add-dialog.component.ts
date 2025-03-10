@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, Inject, inject, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
@@ -28,7 +28,7 @@ export class FoldersAddDialogComponent {
   private formBuilder = inject(FormBuilder);
   public dialogRef = inject(MatDialogRef<FoldersAddDialogComponent>);
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { name: string }) {
+  constructor() {
     this.formGroup = this.formBuilder.group({
       name: ['', Validators.required]
     });

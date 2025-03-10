@@ -1,10 +1,9 @@
-import { DeepReadonly } from '../../../../../../core/utils/src';
+import { DeepReadonly } from '@users/core/utils';
 import { inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { FoldersFacade, MaterialsFacade } from '@users/materials/data-access';
 import { shareReplay, tap } from 'rxjs';
-import { FoldersDTO } from '../../../../../../core/data-access/src';
-
+import { FoldersDTO } from '@users/core/data-access';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from "@users/core/ui";
 

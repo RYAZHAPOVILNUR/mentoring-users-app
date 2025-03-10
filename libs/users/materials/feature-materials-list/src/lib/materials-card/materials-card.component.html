@@ -11,6 +11,6 @@
   </div>
   <div class="material-info">
     <p>{{ material.title }}</p>
-    <p>{{ material.created_at ? (material.created_at | date: 'dd MMMM YYYY' : undefined : lang ) : '' }}</p>
+    <p>{{ material.created_at ? (material.created_at | date: 'dd MMMM YYYY' : undefined : lang ? lang : '') : '' }}</p>
   </div>
 </mat-card>

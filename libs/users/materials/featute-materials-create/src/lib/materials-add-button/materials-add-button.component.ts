@@ -4,20 +4,18 @@ import {
   DestroyRef,
   inject,
   OnDestroy,
-  OnInit,
-  ViewEncapsulation
+  OnInit
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatMenuModule } from '@angular/material/menu';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MaterialsAddDialogComponent } from '../materials-add-dialog/materials-add-dialog.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { CreateMaterialDTO } from '../../../../../../core/data-access/src/lib/materials-dto.model';
+import { CreateMaterialDTO } from '@users/core/data-access';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MaterialsFacade } from '@users/materials/data-access';
@@ -26,7 +24,6 @@ import { MaterialsFacade } from '@users/materials/data-access';
   selector: 'materials-add-button',
   standalone: true,
   imports: [
-    CommonModule,
     MatButtonModule,
     MatIconModule,
     MatOptionModule,
@@ -36,7 +33,6 @@ import { MaterialsFacade } from '@users/materials/data-access';
   ],
   templateUrl: './materials-add-button.component.html',
   styleUrls: ['./materials-add-button.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialsAddButtonComponent implements OnInit, OnDestroy {
@@ -76,5 +72,4 @@ export class MaterialsAddButtonComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.folderIdSub.unsubscribe();
   }
-
 }

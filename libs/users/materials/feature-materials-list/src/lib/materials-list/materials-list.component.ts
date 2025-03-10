@@ -5,7 +5,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MaterialsCardComponent } from '../materials-card/materials-card.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MaterialsDTO } from '../../../../../../core/data-access/src/lib/materials-dto.model';
+import { MaterialsDTO } from '@users/core/data-access';
 
 @Component({
   selector: 'materials-list',

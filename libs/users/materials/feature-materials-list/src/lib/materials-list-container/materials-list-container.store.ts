@@ -1,12 +1,12 @@
-import { DeepReadonly } from '../../../../../../core/utils/src';
-import { MaterialsDTO } from '../../../../../../core/data-access/src/lib/materials-dto.model';
+import { DeepReadonly } from '@users/core/utils';
+import { MaterialsDTO } from '@users/core/data-access';
 import { inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { MaterialsFacade } from '@users/materials/data-access';
 import { shareReplay, switchMap, tap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { CoreUiConfirmDialogComponent } from '../../../../../../core/ui/src';
+import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 
 
 type MaterialsListState = DeepReadonly<{
@@ -29,8 +29,10 @@ export class MaterialsListContainerStore extends ComponentStore<MaterialsListSta
   private route = inject(ActivatedRoute);
   private dialog = inject(MatDialog);
 
+
   constructor() {
     super(initialState);
+    this.materialsFacade.init();
     this.setMaterialsFromGlobalToLocalStore();
     this.filterMaterialsByFolderId();
   }

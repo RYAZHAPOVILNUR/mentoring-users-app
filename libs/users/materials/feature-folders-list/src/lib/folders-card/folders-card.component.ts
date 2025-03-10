@@ -5,9 +5,9 @@ import {
   Output,
   ViewEncapsulation
 } from '@angular/core';
-import { CommonModule, DatePipe, registerLocaleData } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { FoldersDTO } from '../../../../../../core/data-access/src';
+import { FoldersDTO } from '@users/core/data-access';
 import localeRu from '@angular/common/locales/ru'; // Импортируйте данные русской локализации
 import localeEn from '@angular/common/locales/en';
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
@@ -15,12 +15,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { EventEmitter} from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DeepReadonly } from '@users/core/utils';
 
 
 @Component({
   selector: 'folders-card',
   standalone: true,
-  imports: [CommonModule, MatIconModule, TranslateModule, MatButtonModule, MatCardModule,MatDialogModule],
+  imports: [DatePipe,MatIconModule, TranslateModule, MatButtonModule, MatCardModule,MatDialogModule],
   providers: [DatePipe, TranslatePipe],
   templateUrl: './folders-card.component.html',
   styleUrls: ['./folders-card.component.scss'],
@@ -29,15 +30,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 })
 export class FoldersCardComponent {
   private clickCount = 0;
-  ngOnInit() {
+  constructor() {
     registerLocaleData(localeRu, 'ru');
-    registerLocaleData(localeEn, 'en'); // Регистрация локали
-  };
+    registerLocaleData(localeEn, 'en');
+  }
 
-  isHovered: boolean = false;
-
-  @Input() folder!: FoldersDTO;
-  @Input() lang!: string | undefined;
+  @Input() folder!: DeepReadonly<FoldersDTO>;
+  @Input() lang!: string | null;
 
   @Output() deleteFolder = new EventEmitter();
   @Output() redirectToMaterials = new EventEmitter();
@@ -47,7 +46,7 @@ export class FoldersCardComponent {
     this.deleteFolder.emit();
   }
 
-  redirectToEditPage(editMode: boolean, event: Event) {
+  redirectToEditPage(editMode: boolean) {
     const emitData = {
       id: +this.folder.id,
       editMode,

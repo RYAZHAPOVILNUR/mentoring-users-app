@@ -1,18 +1,17 @@
 import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { LetDirective } from '@ngrx/component';
 import { MaterialsListComponent } from '../materials-list/materials-list.component';
-import { LanguageSwitchService } from '../../../../../core/ui/language-switch/src';
+import { LanguageSwitchService } from '@users/users/core/ui/language-switch';
 import { Router } from '@angular/router';
-import { MaterialsFacade } from '@users/materials/data-access';
 import { MaterialsListContainerStore } from './materials-list-container.store';
-import { MaterialsAddButtonComponent } from '../../../../featute-materials-create/src/lib/materials-add-button/materials-add-button.component';
-import { MaterialsDTO } from '../../../../../../core/data-access/src/lib/materials-dto.model';
+import { MaterialsDTO } from '@users/core/data-access';
+import { MaterialsAddButtonComponent } from '@users/materials/feature-materials-create';
+
 
 @Component({
   selector: 'lib-materials-list-container',
   standalone: true,
-  imports: [CommonModule, LetDirective, MaterialsListComponent, MaterialsAddButtonComponent],
+  imports: [LetDirective, MaterialsListComponent, MaterialsAddButtonComponent],
   providers: [MaterialsListContainerStore],
   templateUrl: './materials-list-container.component.html',
   styleUrls: ['./materials-list-container.component.scss'],
@@ -20,7 +19,6 @@ import { MaterialsDTO } from '../../../../../../core/data-access/src/lib/materia
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialsListContainerComponent {
-  private readonly materialsFacade = inject(MaterialsFacade);
 
   private readonly componentStore = inject(MaterialsListContainerStore);
   private readonly langService = inject(LanguageSwitchService);
@@ -39,3 +37,4 @@ export class MaterialsListContainerComponent {
     this.componentStore.deleteMaterial(material);
   }
 }
+

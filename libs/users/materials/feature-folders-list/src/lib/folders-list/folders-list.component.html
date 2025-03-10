@@ -9,8 +9,8 @@
         <div class="col-md-2 mb-5" *ngFor="let folder of vmf.folders">
           <folders-card
             [folder]="folder"
-            [lang]="vmf.lang"
-            (deleteFolder)="ondeleteFolder(folder)"
+            [lang]="vmf.lang ? vmf.lang : null"
+            (deleteFolder)="onDeleteFolder(folder)"
             (redirectToMaterials)="onRedirectToMaterials($event)"
           />
         </div>
