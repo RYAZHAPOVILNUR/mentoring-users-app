@@ -28,22 +28,20 @@ import { map } from 'rxjs';
   styleUrls: ['./users-list-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [UsersListContainerStore],
+  providers: [UsersListContainerStore, UsersFilterComponent],
 })
 export class UsersListContainerComponent {
   private readonly componentStore = inject(UsersListContainerStore);
   public usersFacade = inject(UsersFacade);
+  private readonly router = inject(Router);
   public readonly users$ = this.componentStore.users$;
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;
   public readonly loggedUser$ = this.usersFacade.loggedUser$;
-  private readonly router = inject(Router);
-  public filteredUsers$ = this.componentStore.users$;
+  public filteredUsers$ = this.usersFacade.filteredUsers$
 
   onFilterUsers(searchTerm: string) {
-    this.filteredUsers$ = this.users$.pipe(
-      map(users => users.filter((user) => user.name.toLowerCase().includes(searchTerm.toLowerCase())))
-    );
+    this.usersFacade.filterUser(searchTerm)
   }
 
   onDeleteUser(user: UsersVM) {

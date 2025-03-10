@@ -8,10 +8,15 @@ import { onSuccessEditionCbType } from './users.actions';
 import { selectLoggedUser } from '@auth/data-access';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
 import { selectFilteredUsers } from './users.selectors';
+import {
+  UsersListContainerStore
+} from '../../../../feature-users-list/src/lib/users-list-container/users-list-container.store';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
   private readonly store = inject(Store);
+  private readonly componentStore = inject(UsersListContainerStore);
+
 
   /**
    * Combine pieces of state using createSelector,
@@ -23,7 +28,7 @@ export class UsersFacade {
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
   public readonly loggedUser$ = this.store.select(selectLoggedUser);
   public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError));
-  public filteredUsers$ = this.store.select(selectFilteredUsers);
+  public readonly filteredUsers$ = this.store.select(selectFilteredUsers);
 
   /**
    * Use the initialization action to perform one
@@ -59,5 +64,11 @@ export class UsersFacade {
 
   loadUser() {
     this.store.dispatch(UsersActions.loadUser());
+  }
+
+  filterUser(name: string) {
+    this.store.dispatch(UsersActions.setUsersFilter({
+      filter: { name }
+    }));
   }
 }

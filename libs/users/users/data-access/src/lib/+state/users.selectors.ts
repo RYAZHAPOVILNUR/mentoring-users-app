@@ -35,10 +35,9 @@ export const selectFilteredUsers = createSelector(
   usersFilterSelector,
   selectAllUsers,
   (userFilter , allUsers) => {
-    if (userFilter && userFilter.name && allUsers) {
-      return allUsers.filter((user) => user.name.toLowerCase().includes(userFilter.name.toLowerCase()))
-    } else {
-      return allUsers
-    }
+    return !userFilter.name
+      ? allUsers
+      : allUsers.filter((user) =>
+        user.name.toLowerCase().includes(userFilter.name.toLowerCase()));
   }
 )
