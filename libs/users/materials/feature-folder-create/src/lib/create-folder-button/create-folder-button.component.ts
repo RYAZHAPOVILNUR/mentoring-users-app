@@ -20,7 +20,7 @@ import { CreateFolderDTO, FoldersFacade } from '@users/materials/data-access';
 export class CreateFolderButtonComponent {
   private readonly dialog = inject(MatDialog);
   private readonly dialogref = inject(DestroyRef);
-  private readonly folderfacade = inject(FoldersFacade);
+  private readonly folderFacade = inject(FoldersFacade);
   public readonly name = new FormControl(null);
 
   onFolderCreate(): void {
@@ -36,7 +36,7 @@ export class CreateFolderButtonComponent {
             createdAt: new Date().getTime(),
             id: new Date().getTime() + 12,
           };
-          this.folderfacade.createFolder(newFolder);
+          this.folderFacade.createFolder(newFolder);
         }
       });
   }
