@@ -17,7 +17,7 @@ import { MaterialsListContainerStore } from './materials-list-container.store';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { Observable, map, switchMap } from 'rxjs';
+import { Observable, map, switchMap, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { CreateFolderButtonComponent } from '@users/feature-folder-create';
 

@@ -2,10 +2,10 @@
   <h4>Введите название папки:</h4>
   <mat-form-field>
     <mat-label>Название папки:</mat-label>
-    <input matInput formControlName="name" />
+    <input matInput [formControl]="folderName" />
   </mat-form-field>
   <div class="dialog-buttons">
-    <button mat-stroked-button type="button">Отмена</button>
-    <button mat-stroked-button type="submit">Добавить</button>
+    <button [mat-dialog-close]="" mat-stroked-button type="button">Отмена</button>
+    <button [mat-dialog-close]="onCreateFolder(folderName)" mat-stroked-button type="submit">Добавить</button>
   </div>
 </div>

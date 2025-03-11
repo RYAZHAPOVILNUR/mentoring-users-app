@@ -5,3 +5,9 @@ export type FoldersDTO = DeepReadonly<{
   title: string;
   created_at: number;
 }>;
+
+export type CreateFolderDTO = DeepReadonly<{
+  id: number;
+  title: string;
+  createdAt: number;
+}>;

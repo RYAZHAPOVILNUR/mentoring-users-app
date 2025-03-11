@@ -44,6 +44,7 @@ export const foldersReducer = createReducer(
     status: 'error' as const,
     error,
   })),
+  on(FoldersActions.createFolder, (state, { folderData }) => foldersAdapter.addOne({ ...folderData }, { ...state })),
   on(FoldersActions.loadFolder, (state) => ({
     ...state,
     status: 'loading' as const,
