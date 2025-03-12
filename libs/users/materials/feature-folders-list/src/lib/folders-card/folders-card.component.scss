@@ -10,7 +10,6 @@
   align-items: flex-start;
   justify-content: space-between;
   background-color: transparent;
-  color: #747070;
   border: 1px solid rgb(93, 89, 89);
   &:hover {
     .folder-menu {
@@ -32,7 +31,6 @@
   button {
     background-color: transparent;
     border: none;
-    color: #747070;
     opacity: 0;
     transition: opacity 0.3s ease 0s;
   }

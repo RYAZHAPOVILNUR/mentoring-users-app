@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, DestroyRef, ViewEncapsulation, inje
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { FolderAddDialogComponent } from '../folder-add-dialog/folder-add-dialog.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
