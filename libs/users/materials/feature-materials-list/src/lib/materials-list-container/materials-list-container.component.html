@@ -2,6 +2,12 @@
   <div class="material-header">
     <button class="button-back" routerLink="/materials" mat-button><mat-icon>arrow_back</mat-icon></button>
   </div>
+  <div style="border: 1px solid red; padding: 10px">
+    <div style="border-bottom: 1px solid blue" *ngFor="let mater of materials$ | async">
+      <h4>Title: {{ mater.title }}</h4>
+      <p>Id: {{ mater.id }}</p>
+    </div>
+  </div>
   <ng-container
     *ngrxLet="{
     materials: materials$,
@@ -9,8 +15,11 @@
     error: errors$,
   } as vm"
   >
-    <div *ngFor="let mat of vm.materials">
-      <div>{{ mat.materialLink }}</div>
+    <p>Test</p>
+    <div style="border: 1px solid green">
+      <div *ngFor="let mat of vm.materials">
+        <div>{{ mat.materialLink }}</div>
+      </div>
     </div>
     <users-materials-list></users-materials-list>
   </ng-container>

@@ -37,7 +37,7 @@ export const selectMaterialsFilter = createSelector(selectMaterialsState, (state
 // selectAllMaterials → получает все материалы. selectMaterialsFilter → получает текущий фильтр.
 // Возвращает отфильтрованный список материалов, содержащих текст filter.title.
 export const selectFiltredMaterials = createSelector(selectAllMaterials, selectMaterialsFilter, (materials, filter) => {
-  return materials.filter((material) => material.title.toLowerCase().includes(filter.title.toLowerCase()));
+  return materials.filter((material) => material.folderId === material.id);
 });
 
 // Эта функция просто выбрасывает ошибку, потому что не реализована. Вероятно, она планировалась для выбора материала по id

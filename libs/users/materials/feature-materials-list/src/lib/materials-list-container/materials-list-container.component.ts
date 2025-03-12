@@ -39,22 +39,25 @@ export class MaterialsListContainerComponent {
   public readonly allMaterials$ = this.componentStore.materials$;
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;
-  // public readonly materials$ = this.materialsFacade.
+  public readonly materials$ = this.materialsFacade.filtredMaterials$;
   // public folder!: FoldersEntity;
   // public material!: MaterialsEntity[];
   // private storege!: MaterialsStore;
 
   // public readonly allMaterials$ = this.store.select(selectFiltredMaterials);
 
-  public readonly materials$ = this.route.paramMap.pipe(
-    map((params) => Number(params.get('id'))), // Получаем id из URL
-    switchMap((id) => {
-      this.materials$.subscribe((value) => console.log('List>>>>', value));
-      return this.allMaterials$.pipe(
-        map((materials) => materials.filter((material) => material.folderId === id)) // Фильтруем по id
-      );
-    })
-  );
+  // public readonly materials$ = this.route.paramMap.pipe(
+  //   map((params) => Number(params.get('id'))), // Получаем id из URL
+  //   tap(() => {
+  //     console.log('test', this.test());
+  //   }),
+  //   switchMap((id) => {
+  //     this.materials$.subscribe((value) => console.log('List>>>>', value));
+  //     return this.allMaterials$.pipe(
+  //       map((materials) => materials.filter((material) => material.folderId === id)) // Фильтруем по id
+  //     );
+  //   })
+  // );
 
   // public materials$: Observable<MaterialsEntity[] | null> = this.materialsFacade.filtredMaterials$.pipe(
   //   tap((material) => {
@@ -73,7 +76,11 @@ export class MaterialsListContainerComponent {
     // this.store.dispatch(initMaterials());
     //this.componentStore.init();
   }
+  test() {
+    console.log('test Func', this.materials$);
+  }
 
+  constructor() {}
   // public readonly folder$: Observable<FoldersEntity | null> = this.foldersfacade.openedFolder$.pipe(
   //   tap((folder) => {
   //     if (!folder) {
