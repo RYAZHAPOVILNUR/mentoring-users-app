@@ -1,0 +1,22 @@
+.create {
+    margin: 20px;
+}
+
+.dialog-create-folder {
+    width: 400px;
+    display: flex;
+    margin: 0 auto;
+    height: 250px;
+    flex-direction: column;
+}
+
+.dialog-create-folder__input {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.dialog-create-folder__buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}

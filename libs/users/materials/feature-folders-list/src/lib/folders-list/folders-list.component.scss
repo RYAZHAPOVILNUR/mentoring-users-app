@@ -1,0 +1,20 @@
+.folders-list {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-top: 50px;
+}
+
+.add-folder-button {
+    display: flex;
+    width: 171px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+.folders-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 1720px;
+    margin: 0 auto;
+}

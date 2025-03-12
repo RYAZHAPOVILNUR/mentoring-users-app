@@ -1,1 +1,3 @@
-export * from './lib/users-materials-data-access/users-materials-data-access.component';
+export * from './lib/interfaces/folder.interface';
+
+export * from './lib/interfaces/material.interface';
