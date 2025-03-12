@@ -61,7 +61,7 @@ export class UserMaterialsEffects {
         map(([{ materialData, id, onSuccess }, materialsEntities]) => ({
           material: {
             ...materialsDTOAdapter.entityToDTO(<MaterialEntity>materialsEntities[id]),
-            name: materialData.name,
+            title: materialData.title,
             created_at: materialData.created_at,
           },
           onSuccess,

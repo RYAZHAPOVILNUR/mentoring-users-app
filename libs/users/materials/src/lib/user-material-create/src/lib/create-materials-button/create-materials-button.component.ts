@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, DestroyRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, DestroyRef, ViewChild, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -40,6 +40,9 @@ export class MaterialsAddButtonComponent {
   private materialTitle!: string;
   private materialLink!: string;
 
+  @Input()
+  folder_id?: number;
+
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
 
   public onOpenMenu(event: Event) {
@@ -60,14 +63,15 @@ export class MaterialsAddButtonComponent {
       .subscribe(result => {
         if(result) {
           const newMaterial: CreateMaterialDTO = {
-            name: result.materialTitle,
-            link: result.materialLink,
+            title: result.materialTitle,
+            material_link: result.materialLink,
             typeMaterial:
               result.materialType === "Video" ? TypeMaterial.Video
               : result.materialType === "Audio" ? TypeMaterial.Audio
               : result.materialType === "PDF" ? TypeMaterial.PDF
               : undefined,
             created_at: new Date().toISOString(),
+            folder_id: this.folder_id,
           }
 
           this.materialsFacade.addMaterial(newMaterial)

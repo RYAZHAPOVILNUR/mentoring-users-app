@@ -6,16 +6,18 @@ export enum TypeMaterial {
 }
 export type MaterialDTO = DeepReadonly<{
   id: number;
-  name: string;
+  title: string;
   created_at: string;
-  link: string;
+  material_link: string;
+  folder_id?: number;
   typeMaterial?: TypeMaterial;
 }>;
 
 export type CreateMaterialDTO = DeepReadonly<{
   id?: number | null;
-  name: string;
+  title: string;
   created_at: string;
-  link: string;
+  material_link: string;
+  folder_id?: number;
   typeMaterial?: TypeMaterial;
 }>;

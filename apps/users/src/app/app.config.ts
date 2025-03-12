@@ -23,6 +23,7 @@ import { backlogFeature, backlogEffects } from '@users/users/backlog/data-access
 import { UsersEffects } from 'libs/users/users/data-access/src/lib/+state/users.effects';
 import { MATERIALS_FEATURE_KEY, materialsReducer } from '@users/materials/data-access';
 import { MaterialsEffects } from 'libs/users/materials/data-access/src/lib/+state/materials.effects';
+import { USER_MATERIALS_FEATURE_KEY, UserMaterialsEffects, userMaterialsReducer } from '@users/user-material-data-access';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -32,6 +33,7 @@ export const appConfig: ApplicationConfig = {
 
   providers: [
     provideEffects(
+      UserMaterialsEffects,
       MaterialsEffects,
       UsersEffects,
       authEffects,
@@ -44,6 +46,7 @@ export const appConfig: ApplicationConfig = {
     ),
     provideStore({
       router: routerReducer,
+      [USER_MATERIALS_FEATURE_KEY]: userMaterialsReducer,
       [USERS_FEATURE_KEY]: usersReducer,
       [MATERIALS_FEATURE_KEY]: materialsReducer,
       [settingsFeature.name]: settingsFeature.reducer,
