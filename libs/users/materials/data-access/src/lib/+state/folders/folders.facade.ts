@@ -5,7 +5,7 @@ import * as FoldersSelectors from './folders.selectors';
 import { Observable, of, switchMap } from 'rxjs';
 import { FoldersErrors } from './folders.reducer';
 import { FoldersEntity } from '../../folders-dto/folders.entity';
-import { CreateFolderDTO } from '../../folders-dto/folders-dto.models';
+import { AddFolderDTO } from '../../folders-dto/folders-dto.models';
 
 @Injectable({ providedIn: 'root' })
 export class FoldersFacade {
@@ -22,8 +22,8 @@ export class FoldersFacade {
     this.store.dispatch(FoldersActions.initFolders());
   }
 
-  createFolder(folderData: CreateFolderDTO) {
-    this.store.dispatch(FoldersActions.createFolder({ folderData }));
+  addFolder(folderData: AddFolderDTO) {
+    this.store.dispatch(FoldersActions.addFolder({ folderData }));
   }
   // loadFolder() {
   //   this.store.dispatch(FoldersActions.loadFolder());

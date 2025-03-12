@@ -6,7 +6,7 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { FolderAddDialogComponent } from '../folder-add-dialog/folder-add-dialog.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { CreateFolderDTO, FoldersFacade } from '@users/materials/data-access';
+import { AddFolderDTO, FoldersFacade } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-create-folder-button',
@@ -21,9 +21,8 @@ export class CreateFolderButtonComponent {
   private readonly dialog = inject(MatDialog);
   private readonly dialogref = inject(DestroyRef);
   private readonly folderFacade = inject(FoldersFacade);
-  public readonly name = new FormControl(null);
 
-  onFolderCreate(): void {
+  onFolderAdd(): void {
     const dialogRef = this.dialog.open(FolderAddDialogComponent);
 
     dialogRef
@@ -31,12 +30,13 @@ export class CreateFolderButtonComponent {
       .pipe(takeUntilDestroyed(this.dialogref))
       .subscribe((result) => {
         if (result) {
-          const newFolder: CreateFolderDTO = {
+          console.log('name:', result);
+          const folder: AddFolderDTO = {
+            id: new Date().getTime(),
             title: result,
             createdAt: new Date().getTime(),
-            id: new Date().getTime() + 12,
           };
-          this.folderFacade.createFolder(newFolder);
+          this.folderFacade.addFolder(folder);
         }
       });
   }

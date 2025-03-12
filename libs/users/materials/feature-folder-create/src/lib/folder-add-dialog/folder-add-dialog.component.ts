@@ -18,18 +18,5 @@ import { FoldersFacade } from '@users/materials/data-access';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FolderAddDialogComponent {
-  // private readonly dialogRef = inject(MatDialogRef);
-  readonly dialogRef = inject(MatDialogRef<FolderAddDialogComponent>);
-  private readonly folderFacade = inject(FoldersFacade);
-  public readonly folderName = new FormControl('');
-
-  constructor() {
-    this.folderName.valueChanges.subscribe((value) => {
-      console.log('Value', value);
-    });
-  }
-
-  onCreateFolder(folderName: any) {
-    this.folderFacade.createFolder(folderName);
-  }
+  public folderName = new FormControl('');
 }

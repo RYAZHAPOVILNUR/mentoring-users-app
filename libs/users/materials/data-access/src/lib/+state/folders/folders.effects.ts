@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of, catchError, map, switchMap } from 'rxjs';
 import * as FoldersActions from './folders.actions';
 import { ApiService } from '@users/core/http';
-import { CreateFolderDTO, FoldersDTO } from '../../folders-dto/folders-dto.models';
+import { AddFolderDTO, FoldersDTO } from '../../folders-dto/folders-dto.models';
 import { folderDTOAdapter } from '../../folders-dto/folders-dto.adapter';
 
 export const loadFolders = createEffect(
@@ -36,14 +36,14 @@ export const createFolder = createEffect(
     const actions$ = inject(Actions);
     const apiServices = inject(ApiService);
     return actions$.pipe(
-      ofType(FoldersActions.createFolder),
+      ofType(FoldersActions.addFolder),
       switchMap(({ folderData }) =>
-        apiServices.post<FoldersDTO, CreateFolderDTO>('/folder', folderData).pipe(
+        apiServices.post<FoldersDTO, AddFolderDTO>('/folder', folderData).pipe(
           map((folder) => folderDTOAdapter.DTOtoEntity(folder)),
-          map((folderEntity) => FoldersActions.cresteFolderSuccess({ folderData: folderEntity })),
+          map((folderEntity) => FoldersActions.addFolderSuccess({ folderData: folderEntity })),
           catchError((error) => {
             console.error('Error', error);
-            return of(FoldersActions.createFolderFailed({ error }));
+            return of(FoldersActions.addFolderFailed({ error }));
           })
         )
       )

@@ -9,7 +9,7 @@ export class ApiService {
   private readonly apiUrl = inject(API_URL);
 
   public get<T>(url: string, params: HttpParams = new HttpParams()): Observable<T> {
-    console.log('Servises>>>', url);
+    console.log('Services Get:', url, '+Params:', params);
     return this.http.get<T>(`${this.apiUrl}${url}`, {
       headers: this.headers,
       params,
@@ -17,6 +17,7 @@ export class ApiService {
   }
 
   public post<T, D>(url: string, data?: D): Observable<T> {
+    console.log('Services Post:', url, '+Data:', data);
     return this.http.post<T>(`${this.apiUrl}${url}`, JSON.stringify(data), {
       headers: this.headers,
     });
