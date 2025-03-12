@@ -1,1 +1,25 @@
-<p>folders-card works!</p>
+<mat-card
+  (dblclick)="onOpenFolder()"
+  class="card"
+>
+  <mat-card-content class="card-icons">
+    <mat-icon>folder</mat-icon>
+    <button [matMenuTriggerFor]="menu" class="btn-menu" mat-icon-button>
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button (click)="onDeleteFolder()" mat-menu-item type="button">
+        Delete
+      </button>
+      <button (click)="onEditFolder()" mat-menu-item type="button">Rename</button>
+    </mat-menu>
+  </mat-card-content>
+
+  <mat-card-content class="mat-card-content">
+    <label *ngIf="folder.title">{{ folder.title }}</label>
+  </mat-card-content>
+
+  <mat-card-content class="mat-card-content">
+    <label *ngIf="folder.createdAt">{{ folder.createdAt | date: "d MMM yyyy" }}</label>
+  </mat-card-content>
+</mat-card>

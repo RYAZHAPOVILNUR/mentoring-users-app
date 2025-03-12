@@ -45,6 +45,9 @@
       "@users/materials/data-access": [
         "libs/users/materials/data-access/src/index.ts"
       ],
+      "@users/materials/feature-folders-create": [
+        "libs/users/materials/feature-folders-create/src/index.ts"
+      ],
       "@users/materials/feature-folders-list": [
         "libs/users/materials/feature-folders-list/src/index.ts"
       ],

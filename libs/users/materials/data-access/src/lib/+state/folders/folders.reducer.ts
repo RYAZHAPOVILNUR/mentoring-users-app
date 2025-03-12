@@ -23,7 +23,7 @@ export const initialFoldersState: FoldersState = foldersAdapter.getInitialState(
   error: null
 });
 
-export const reducer = createReducer(
+const reducer = createReducer(
   initialFoldersState,
   on(foldersActions.initFolders, (state) => ({
     ...state,

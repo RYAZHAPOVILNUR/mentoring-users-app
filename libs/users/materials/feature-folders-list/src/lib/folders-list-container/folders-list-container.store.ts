@@ -9,9 +9,10 @@ import { FoldersEntity } from '@users/core/data-access';
 import { foldersVmAdapter } from '../../../../folders-vm.adapter';
 import { FoldersVm } from '../../../../folders-vm';
 import { FoldersFacade } from '@users/materials/data-access';
+import { FoldersAddDialogComponent } from '@users/materials/feature-folders-create';
 
 export type FoldersListState = DeepReadonly<{
-  folders: FoldersVm[]
+  folders: FoldersVm[];
 }>
 
 const initialState: FoldersListState = {
@@ -35,17 +36,33 @@ export class FoldersListContainerStore extends ComponentStore<FoldersListState> 
     this.setFoldersFromGlobalToLocalStore();
   }
 
-  public deleteFolder(folder: FoldersVm): void {
+  public deleteFolder(folderId: number, folderTitle: string): void {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
-      data: { dialogText: `Вы уверены, что хотите удалить ${folder.title}` }
+      data: { dialogText: `Вы уверены, что хотите удалить "${folderTitle}"` }
     });
     this.effect(
       () => dialogRef.afterClosed().pipe(
         tap(
           (result: boolean) => {
-            if (result) this.foldersFacade.deleteFolder(folder.id);
+            if (result) this.foldersFacade.deleteFolder(folderId);
           }
         )
+      )
+    );
+  }
+
+  public editFolder(folder: FoldersEntity): void {
+    const dialogRef: MatDialogRef<FoldersAddDialogComponent> = this.dialog.open(FoldersAddDialogComponent, {
+      data: {
+        dialogText: `Переименовать`,
+        folderData: folder
+      }
+    });
+    this.effect(() =>
+      dialogRef.afterClosed().pipe(
+        tap((formData: FoldersEntity) => {
+          if (formData) this.foldersFacade.editFolder(formData);
+        })
       )
     );
   }
@@ -53,12 +70,12 @@ export class FoldersListContainerStore extends ComponentStore<FoldersListState> 
   private setFoldersFromGlobalToLocalStore(): void {
     this.effect(
       () => this.foldersFacade.allFolders$.pipe(
-        tap((folders: FoldersEntity[]) => this.patchUsers(folders))
+        tap((folders: FoldersEntity[]) => this.patchFolders(folders))
       )
     );
   }
 
-  private patchUsers(folders: FoldersEntity[]): void {
+  private patchFolders(folders: FoldersEntity[]): void {
     this.patchState({
       folders: folders.map(
         folder => foldersVmAdapter.entityToVm(folder)

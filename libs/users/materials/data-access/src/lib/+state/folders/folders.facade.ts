@@ -8,7 +8,7 @@ import { foldersActions } from './folders.actions';
 
 @Injectable({ providedIn: 'root' })
 export class FoldersFacade {
-  public readonly store = inject(Store);
+  private readonly store = inject(Store);
 
   public readonly status$ = this.store.select(
     FoldersSelectors.selectFoldersStatus);

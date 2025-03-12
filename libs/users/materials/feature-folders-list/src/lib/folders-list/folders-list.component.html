@@ -1,1 +1,27 @@
-<p>folders-list works!</p>
+<ng-container *ngIf="vm.status === 'loading'; else loadingResult">
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+
+<ng-template #loadingResult>
+  <ng-container *ngIf="vm.status === 'loaded'; else error">
+    <div class="container">
+      <ng-container *ngFor="let folder of vm.folders" class="col-md-4 mb-3">
+        <folders-card
+          (deleteFolder)="onDeleteFolder($event)"
+          (editFolder)="onEditFolder($event)"
+          (openFolder)="onOpenFolder($event)"
+          [folder]="folder"
+        />
+      </ng-container>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #error>
+  <div class="alert alert-danger" role="alert">
+    <h1>{{ vm.errors?.status }}</h1>
+    <hr>
+    {{ vm.errors }}
+  </div>
+</ng-template>
+

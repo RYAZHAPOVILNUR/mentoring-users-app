@@ -1,1 +1,18 @@
-<p>folders-list-container works!</p>
+<ng-container
+  *ngrxLet="{
+    folders: folders$,
+    status: status$,
+    errors: errors$,
+  } as vm"
+>
+  <folders-list
+    (deleteFolder)="onDeleteFolder($event)"
+
+    (editFolder)="onEditFolder($event)"
+    (openFolder)="onOpenFolder($event)"
+    [vm]="vm"
+  >
+  </folders-list>
+</ng-container>
+
+<folders-add-button></folders-add-button>

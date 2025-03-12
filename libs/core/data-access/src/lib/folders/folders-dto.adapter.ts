@@ -2,9 +2,9 @@ import { FoldersDTO } from './folders-dto.model';
 import { FoldersEntity } from './folders.entity';
 
 type FoldersDTOAdapter = {
-  DTOtoEntity(dto: FoldersDTO): FoldersEntity,
-  entityToDTO(entity: FoldersEntity): FoldersDTO
-}
+  DTOtoEntity(dto: FoldersDTO): FoldersEntity;
+  entityToDTO(entity: FoldersEntity): FoldersDTO;
+};
 
 export const foldersDTOAdapter: FoldersDTOAdapter = {
   DTOtoEntity(dto) {
@@ -22,5 +22,5 @@ export const foldersDTOAdapter: FoldersDTOAdapter = {
       ...otherFields,
       created_at: createdAt
     };
-  }
+  },
 };

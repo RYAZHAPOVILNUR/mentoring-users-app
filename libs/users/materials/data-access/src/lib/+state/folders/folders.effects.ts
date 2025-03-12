@@ -6,7 +6,7 @@ import { ApiService } from '@users/core/http';
 import { FoldersDTO, foldersDTOAdapter, FoldersEntity } from '@users/core/data-access';
 import { foldersActions } from './folders.actions';
 
-export const loadFolders = createEffect(() => {
+export const foldersEffects = createEffect(() => {
   const actions$ = inject(Actions);
   const apiService = inject(ApiService);
 
@@ -34,10 +34,12 @@ export const addFolder = createEffect(() => {
     ofType(foldersActions.addFolder),
     switchMap(({ folderData }) =>
       apiService.post<FoldersDTO, FoldersEntity>('/folder', folderData).pipe(
-        map((folder) => foldersDTOAdapter.DTOtoEntity(folder)),
-        map((folderEntity) => foldersActions.addFolderSuccess({ folderData: folderEntity })),
+        map((folder) => foldersDTOAdapter.DTOtoEntity(folder)
+        ),
+        map((folderEntity) =>
+          foldersActions.addFolderSuccess({ folderData: folderEntity })
+        ),
         catchError((error) => {
-          console.error('Add folder error:', error);
           return of(foldersActions.addFolderFailure({ error }));
         })
       )
@@ -52,7 +54,7 @@ export const deleteFolder = createEffect(() => {
   return actions$.pipe(
     ofType(foldersActions.deleteFolder),
     switchMap(({ id }) =>
-      apiService.delete<void>(`/folder/${id}`).pipe(
+      apiService.delete<FoldersDTO>(`/folder/${id}`).pipe(
         map(() => foldersActions.deleteFolderSuccess({ id })),
         catchError((error) => {
           console.error('Delete folder error:', error);
