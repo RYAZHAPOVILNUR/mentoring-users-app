@@ -1,6 +1,6 @@
 export interface IFolder {
     id: number;
-    create_at: Date;
+    created_at: number;
     title: string;
 }
 

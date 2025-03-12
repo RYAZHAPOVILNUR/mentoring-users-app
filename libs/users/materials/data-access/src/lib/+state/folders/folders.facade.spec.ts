@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FoldersFacade } from './folders.facade';
+import { foldersFacade } from './folders.facade';
 
 describe('FoldersFacade', () => {
   let service: FoldersFacade;

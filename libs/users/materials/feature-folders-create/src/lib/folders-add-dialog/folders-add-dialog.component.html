@@ -1,1 +1,18 @@
-<p>folders-add-dialog works!</p>
+<div class="dialog">
+    <h1 mat-dialog-title>Добавление новой папки</h1>
+    <mat-dialog-content>
+        <form>
+            <div class="dialog-content">
+                <mat-form-field appearance="fill">
+                    <mat-label matInput>Название папки</mat-label>
+                    <input [formControl]="addFolderControl" />
+                    <mat-error>Укажите название папки</mat-error>
+                </mat-form-field>
+            </div>
+        </form>
+    </mat-dialog-content>
+    <mat-dialog-actions class="dialog-actions">
+        <button mat-button [disabled]="addFolderControl.invalid" (click)="saveFolder()">Создать</button>
+        <button mat-button mat-dialog-close>Отмена</button>
+    </mat-dialog-actions>
+</div>
