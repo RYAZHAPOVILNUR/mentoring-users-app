@@ -1,4 +1,4 @@
-import { createAction, emptyProps, props } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 import { CreateMaterialDTO, MaterialDTO } from '../../models/materials.models';
 import { LoadingStatus } from '@users/core/data-access';
 
@@ -21,15 +21,3 @@ export const loadMaterialSuccess = createAction('[Materials/Api] Load Material S
 export const loadMaterialFailed = createAction('[Materials/Api] Load Material Failed', props<{ error: any }>());
 
 export const updateMaterialStatus = createAction('[Materials Detail] Update Material Status', props<{ status: LoadingStatus }>());
-
-
-// export const editMaterial = createAction(
-//   '[Materials Detail] Edit Material',
-//   props<{
-//     materialData: CreateMaterialDTO;
-//     id: number;
-//     onSuccessCb: onSuccessEditionCbType;
-//   }>()
-// );
-// export const editMaterialSuccess = createAction('[Materials Detail] Edit Material Success', props<{ materialData: MaterialDTO }>());
-// export const editMaterialFailed = createAction('[Materials Detail] Edit Failed', props<{ error: MaterialsErrors | null }>());

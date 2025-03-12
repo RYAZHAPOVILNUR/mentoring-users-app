@@ -1,3 +1,46 @@
+.header-materails{
+  display: flex;
+  text-align: center;
+  align-items: center;
+  gap: 30px;
+  margin: 0 0 0px;
+}
+
+.header-materails__title{
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 0px;
+}
+
 .back-material-fab-button {
     margin: 5px;
 }
+
+.drag-item {
+    width: 150px;
+    height: 150px;
+    background-color: #3498db;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .drop-area {
+    width: 300px;
+    height: 300px;
+    background-color: #ecf0f1;
+    border: 2px dashed #3498db;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+  }
+  
+  .drop-area.hovered {
+    background-color: #bdc3c7;
+  }
+  

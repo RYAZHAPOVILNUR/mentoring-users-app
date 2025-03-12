@@ -23,8 +23,6 @@ export class FoldersListContainerComponent implements OnInit{
   status$ = this.foldersFacade.status$;
   errors$ = this.foldersFacade.errors$;
 
-  // counter = 1;
-
   ngOnInit(): void {
     this.foldersFacade.init()
   }

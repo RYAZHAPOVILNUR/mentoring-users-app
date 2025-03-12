@@ -19,7 +19,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class DefineMaterialTypePipe implements PipeTransform {
    transform(value: string): MaterialType {
-    // console.log(value);
      const isAudio = value.endsWith('.mp3');
      if (isAudio) return MaterialType.AUDIO;
 
@@ -56,12 +55,10 @@ export class MaterialsCardComponent {
     @Input({ required: true })
     material!: MaterialDTO;
     
-    // public dialogRef = inject(MatDialogRef<MaterialsContentComponent>);
     private readonly destroyRef = inject(DestroyRef);
     public dialog = inject(MatDialog);
     
     @Output() deleteMaterial = new EventEmitter();
-    // @Output() openMaterial = new EventEmitter();
     
     onDeleteMaterial(event: Event) {
       this.deleteMaterial.emit();
@@ -78,40 +75,5 @@ export class MaterialsCardComponent {
       .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe()
-    }
-
-    // onOpenMaterial(material: MaterialDTO) {
-    //   this.openMaterial.emit(material);
-    // }
-
-    // onOpenMaterial() {
-    //   const dialogRef: MatDialogRef<MaterialsContentComponent> = this.dialog.open(MaterialsContentComponent, {
-    //     minWidth: '200px',
-    //     maxWidth: '1000px',
-    //     data: {
-    //       materialLink: this.material.material_link,
-    //       title: this.material.title
-    //     },
-    //     autoFocus: false
-    //   }
-    //   )
-    // }
-
-
-    // onOpenMaterialDialog(): void {
-    //       const dialogRef: MatDialogRef<MaterialsAddDialogComponent> = this.dialog.open(MaterialsAddDialogComponent);
-    //       dialogRef
-    //         .afterClosed()
-    //         .pipe(
-    //           filter(Boolean), 
-    //           tap((result: CreateMaterialDTO) => this.materialsFacade.addMaterial(result))
-    //         )
-    //         .subscribe();
-    //     }
-
-    // @Output() editMaterial = new EventEmitter<{
-    //   user: CreateMaterialDTO;
-    //   onSuccessCb: onSuccessEditionCbType;
-    // }>();
-  
+    }  
 }

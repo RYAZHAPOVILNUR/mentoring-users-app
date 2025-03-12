@@ -28,10 +28,8 @@ import { MatListModule } from '@angular/material/list';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersCardComponent {
-    // [x: string]: any;
     @Input({ required: true })
     folder!: FolderDTO;
-    // img: any;
 
     @Output() deleteFolder = new EventEmitter();
     @Output() redirectToMaterials = new EventEmitter();

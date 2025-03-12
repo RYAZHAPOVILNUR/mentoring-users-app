@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
-import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { AsyncPipe, CommonModule, NgIf } from '@angular/common';
 import { LetDirective } from '@ngrx/component';
-import { CreateMaterialDTO, MaterialDTO, MaterialsFacade } from '@users/materials/data-access';
-import { Router } from '@angular/router';
+import { FolderDTO, FoldersFacade, MaterialDTO, MaterialsFacade } from '@users/materials/data-access';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { MaterialsListComponent } from '../materials-list/materials-list.component';
 import { MaterialsAddButtonComponent } from '@users/materials/feature-materials-create';
@@ -15,8 +15,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MaterialsContentComponent } from '@users/materials/feature-materials-content';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { filter, Observable, tap } from 'rxjs';
+import { filter } from 'rxjs';
+import { MaterialsListVM } from '../materials-list/materials-list-view-model';
 
 @Component({
   selector: 'users-materials-list-container',
@@ -50,18 +50,39 @@ export class MaterialsListContainerComponent implements OnInit{
   errors$ = this.materialsFacade.errors$;
   public dialog = inject(MatDialog);
 
+  @Input({ required: true })
+  public folder!: FolderDTO;
+  vm!: MaterialsListVM;
+
+  public foldersFacade = inject(FoldersFacade)  
+  folders$ = this.foldersFacade.allFolders$;
+  public readonly openedFolder$ = this.foldersFacade.openedFolder$;
+  private readonly route = inject(ActivatedRoute);
+  folderId: number | null = null;
+  folderTitle: string | null = null;
+    
   ngOnInit(): void {
+
+    this.route.params.subscribe(params => {
+      const folderId = +params['id']; 
+      if (!isNaN(folderId)) { 
+        this.folderId = folderId;  
+        this.foldersFacade.openedFolder(folderId); 
+      }
+    });
+
     this.materialsFacade.init()
+
+        this.openedFolder$.subscribe(openedFolder => {
+          this.vm = {
+            openedFolder,
+            materials: [],
+            status: 'loading',
+            errors: null,
+          };
+        });
   }
   
-  // ngOnInit(): void {
-  //   this.materialsFacade.loadMaterial()
-  // }
-  
-  // onRedirectToMaterials(id: number) {
-  //   this.router.navigate(['/materials', id]);
-  // }
-
   onDeleteMaterial(material: MaterialDTO) {
     this.materialsFacade.deleteMaterial(material.id);
   }
@@ -76,51 +97,7 @@ export class MaterialsListContainerComponent implements OnInit{
         .afterClosed()
         .pipe(
           filter(Boolean), 
-          // tap((result: CreateMaterialDTO) => this.materialsFacade.loadMaterial(result))
         )
         .subscribe();
         };
     }
-
-  // onOpenMaterial(material: MaterialDTO){
-  //   this.materialsFacade.openMaterial(material.id);
-  // }
-
-  // public readonly material$: Observable<MaterialDTO | null> = this.materialsFacade.openedMaterial$.pipe(
-  //   tap((material) => {
-  //     if (!material) {
-  //       this.materialsFacade.loadMaterial();
-  //     } else {
-  //       this.material = material;        }
-  //     })
-  //   );
-
-  // public readonly editMode$: Observable<boolean> = this.store.pipe(
-  //   select(selectQueryParam('edit')),
-  //   map((params) => params === 'true')
-  // );
-
-  // public onEditMaterial(materialData: CreateMaterialDTO, onSuccessCb: onSuccessEditionCbType) {
-  //   this.materialsFacade.editMaterial(materialData, this.folder.id, onSuccessCb);
-  //   this.router.navigate(['/material', this.folder.id], {
-  //     queryParams: { edit: false },
-  //   });
-  // }
-  
-
-  // public material!: MaterialsEntity;
-  // private readonly dialog = inject(MatDialog);
-  // private readonly destroyRef = inject(DestroyRef);
-
-  // public readonly material$: Observable<MaterialsEntity | null> = this.materialsFacade.openedMaterial$.pipe(
-  //   tap((material) => {
-  //     if (!material) {
-  //       this.materialsFacade.loadMaterial();
-  //     } else {
-  //       this.material = material;
-  //     }
-  //   })
-  // );
-  // public readonly status$ = this.materialsFacade.status$;
-
-// }

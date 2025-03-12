@@ -11,8 +11,7 @@ export class FoldersFacade {
   public readonly status$ = this.store.pipe(select(FoldersSelectors.selectFoldersStatus));
   public readonly allFolders$ = this.store.pipe(select(FoldersSelectors.selectAllFolders));
   public readonly selectedFolders$ = this.store.pipe(select(FoldersSelectors.selectEntity));
-  // public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
-  // public readonly loggedUser$ = this.store.select(selectLoggedUser);
+  public readonly openedFolder$ = this.store.select(FoldersSelectors.selectOpenedFolder);
   public readonly errors$ = this.store.pipe(select(FoldersSelectors.selectFoldersError));
 
     init() {
@@ -26,23 +25,8 @@ export class FoldersFacade {
     deleteFolder(id: number) {
       this.store.dispatch(FoldersActions.deleteFolder({ id }));
     }
-      
 
-      // getFolderFromStore(id: number) {
-      //   return this.store.select(FoldersSelectors.selectFolderById(id)).pipe(
-      //     switchMap((folder: FoldersEntity | undefined): Observable<FoldersEntity | null> => {
-      //       if (folder) {
-      //         return of(folder);
-      //       } else {
-      //         return of(null);
-      //       }
-      //     })
-      //   );
-      // }
-    
-      // loadFolder() {
-      //   this.store.dispatch(FoldersActions.loadFolder());
-      // }
-    
-  
+    openedFolder(id: number) {
+      this.store.dispatch(FoldersActions.openFolder({ id }));
+    }
 }

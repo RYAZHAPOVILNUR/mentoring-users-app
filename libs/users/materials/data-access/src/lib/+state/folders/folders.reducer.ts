@@ -8,9 +8,9 @@ import { LoadingStatus } from '@users/core/data-access';
 export const FOLDERS_FEATURE_KEY = 'folders';
 
 export interface FoldersState extends EntityState<FolderDTO> {
-  // selectedId?: string | number; // which Folders record has been selected
-  // loaded: boolean; // has the Folders list been loaded
-  error: FoldersErrors | null; // last known error (if any)
+  folders: FolderDTO[];
+  selectedId?: string | number;
+  error: FoldersErrors | null;
   status: LoadingStatus;
 }
 
@@ -27,8 +27,8 @@ export const foldersAdapter: EntityAdapter<FolderDTO> = createEntityAdapter<Fold
 
 export const initialFoldersState: FoldersState = foldersAdapter.getInitialState({
   folders: [],
+  selectedId: undefined,
   status: 'init',
-  // loaded: false,
   error: null,
 });
 
@@ -49,6 +49,22 @@ const reducer = createReducer(
   on(FoldersActions.deleteFolderSuccess, (state, { id }) => foldersAdapter.removeOne(id, { ...state })),
   on(FoldersActions.addFolderSuccess, (state, { folderData }) => foldersAdapter.addOne({ ...folderData }, { ...state })),
   
+
+  on(FoldersActions.openFolder, (state) => ({
+    ...state,
+    status: 'loading' as const,
+  })),
+  on(FoldersActions.openFolderSuccess, (state, { folder }) => ({
+    ...state,
+    selectedId: folder.id,
+    error: null,
+    status: 'loaded' as const,
+  })),
+  on(FoldersActions.openFolderFailed, (state, { error }) => ({
+    ...state,
+    error,
+    status: 'error' as const,
+  })),
 );
 
 export function foldersReducer(state: FoldersState | undefined, action: Action) {

@@ -1,5 +1,3 @@
-<!-- <p>materials-list works!</p> -->
-
 <ng-container *ngIf="vm.status === 'loading'; else loadingResult">
     <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
 </ng-container>
@@ -7,12 +5,12 @@
   <ng-template #loadingResult>
     <ng-container *ngIf="vm.status === 'loaded'; else error">
       <div class="material-list">
-            <users-materials-card 
-              *ngFor="let material of vm.materials"
-              [material]="material"
-              (deleteMaterial)="onDeleteMaterial(material)"
-              (openMaterial)="onOpenMaterial(material)"
-            />
+          <users-materials-card 
+            *ngFor="let material of vm.materials"
+            [material]="material"
+            (deleteMaterial)="onDeleteMaterial(material)"
+            (openMaterial)="onOpenMaterial(material)"
+          />
       </div>
     </ng-container>
   </ng-template>

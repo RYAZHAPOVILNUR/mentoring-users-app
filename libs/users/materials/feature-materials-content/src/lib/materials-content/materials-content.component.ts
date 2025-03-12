@@ -7,7 +7,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { regexMaterials } from '@users/materials/feature-materials-create';
+import { regexMaterials } from 'libs/users/materials/feature-materials-list/src/lib/materials-list/materials-list-view-model';
 
 @Component({
   selector: 'users-materials-content',
@@ -41,7 +41,6 @@ export class MaterialsContentComponent {
     return match ? match[1] || match[2] : null;
   }
 
-  // Функция для безопасной передачи URL
   getSanitizedUrl(url: string){
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }

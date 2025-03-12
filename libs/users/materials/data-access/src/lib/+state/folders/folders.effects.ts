@@ -1,9 +1,11 @@
 import { inject } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, catchError, of, map } from 'rxjs';
+import { switchMap, catchError, of, map, withLatestFrom, filter, tap } from 'rxjs';
 import * as FoldersActions from './folders.actions';
 import { ApiService } from '@users/core/http';
 import { CreateFolderDTO, FolderDTO } from '../../models/folders.models';
+import { Store } from '@ngrx/store';
+import { selectRouteParams } from '@users/core/data-access';
 
 export const folderEffects = createEffect(
   () => {
@@ -12,7 +14,6 @@ export const folderEffects = createEffect(
 
     return actions$.pipe(
       ofType(FoldersActions.initFolders),
-      // delay(1500),
       switchMap(() =>
         apiService.get<FolderDTO[]>('/folder').pipe(
             map((folders) =>
@@ -35,7 +36,6 @@ export const deleteFolder = createEffect(
     const apiService = inject(ApiService);
     return actions$.pipe(
       ofType(FoldersActions.deleteFolder),
-      // delay(1500),
       switchMap(({ id }) =>
         apiService.delete<void>(`/folder/${id}`).pipe(
           map(() => FoldersActions.deleteFolderSuccess({ id })),
@@ -56,10 +56,8 @@ export const addFolder = createEffect(
     const apiService = inject(ApiService);
     return actions$.pipe(
       ofType(FoldersActions.addFolder),
-      // delay(1500),
       switchMap(({ folderData }) =>
         apiService.post<FolderDTO, CreateFolderDTO>('/folder', folderData).pipe(
-          // map((folder) => FolderDTO(folder)),
           map((FolderDTO) => FoldersActions.addFolderSuccess({ folderData: FolderDTO })),
           catchError((error) => {
             console.error('Error', error);
@@ -72,3 +70,27 @@ export const addFolder = createEffect(
   { functional: true }
 );
 
+
+
+export const openFolder = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const store = inject(Store);
+    return actions$.pipe(
+      ofType(FoldersActions.openFolder),
+      withLatestFrom(store.select(selectRouteParams)),
+      filter(([, params]) => !!Number(params['id'])),
+      switchMap(([, params]) => {
+        const folderId = params['id'];
+
+        return apiService.get<FolderDTO>(`/folder/${folderId}`).pipe(
+          map((folder) => FoldersActions.openFolderSuccess({ folder })),
+          catchError((error) => of(FoldersActions.openFolderFailed({ error })))
+        )
+      })
+      
+    )
+  }, 
+  { functional: true }
+);

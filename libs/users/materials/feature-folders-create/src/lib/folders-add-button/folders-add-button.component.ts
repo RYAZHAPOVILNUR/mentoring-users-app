@@ -8,7 +8,6 @@ import { CreateFolderDTO, FoldersFacade } from '@users/materials/data-access';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FoldersAddDialogComponent } from '../folders-add-dialog/folders-add-dialog.component';
 
-
 @Component({
   selector: 'users-folders-add-button',
   standalone: true,
@@ -21,7 +20,6 @@ import { FoldersAddDialogComponent } from '../folders-add-dialog/folders-add-dia
 export class FoldersAddButtonComponent {
   
   private title!: string;
-    // private id!: string;
   public dialog = inject(MatDialog);
   private readonly foldersFacade = inject(FoldersFacade);
   private readonly destroyRef = inject(DestroyRef);
@@ -38,7 +36,6 @@ export class FoldersAddButtonComponent {
           const newFolderData: CreateFolderDTO = {
             title: result.title,
           };
-  
           this.foldersFacade.addFolder(newFolderData);
         }
       });

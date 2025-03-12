@@ -8,9 +8,7 @@ import { LoadingStatus } from '@users/core/data-access';
 export const MATERIALS_FEATURE_KEY = 'materials';
 
 export interface MaterialsState extends EntityState<MaterialDTO> {
-  // selectedId?: string | number; // which Materials record has been selected
-  // loaded: boolean; // has the Materials list been loaded
-  error: MaterialsErrors | null; // last known error (if any)
+  error: MaterialsErrors | null;
   status: LoadingStatus;
 }
 
@@ -28,7 +26,6 @@ export const materialsAdapter: EntityAdapter<MaterialDTO> = createEntityAdapter<
 export const initialMaterialsState: MaterialsState = materialsAdapter.getInitialState({
   materials: [],
   status: 'init',
-  // loaded: false,
   error: null,
 });
 
@@ -48,23 +45,6 @@ const reducer = createReducer(
   })),
   on(MaterialsActions.deleteMaterialSuccess, (state, { id }) => materialsAdapter.removeOne(id, { ...state })),
   on(MaterialsActions.addMaterialSuccess, (state, { material }) => materialsAdapter.addOne({ ...material }, { ...state })),
-    
-  // on(MaterialsActions.loadMaterial, (state) => ({
-  //   ...state,
-  //   status: 'loading' as const,
-  // })),
-  // on(MaterialsActions.loadMaterialSuccess, (state, { materialData }) =>
-  //   materialsAdapter.addOne({ ...materialData }, { ...state, status: 'loaded' as const })
-  // ),
-  // on(MaterialsActions.loadMaterialFailed, (state, { error }) => ({
-  //   ...state,
-  //   status: 'error' as const,
-  //   error,
-  // })),
-  // on(MaterialsActions.updateMaterialStatus, (state, { status }) => ({
-  //   ...state,
-  //   status,
-  // }))
 
 );
 

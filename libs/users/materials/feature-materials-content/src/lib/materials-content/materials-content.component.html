@@ -1,13 +1,9 @@
-<!-- <p>materials-content works!</p> -->
-<!-- <h1 mat-dialog-title>Mатериал pdf | audio | video</h1> -->
 <h2 mat-dialog-title>{{ data.material.title }}</h2>
 
-<!-- PDF -->
 <ng-container *ngIf="materialLink.endsWith('.pdf')">
     <pdf-viewer class="viewer" [src]="materialLink" [render-text]="true" [original-size]="false"></pdf-viewer>
 </ng-container>
 
-<!-- AUDIO -->
 <ng-container *ngIf="materialLink.endsWith('.mp3')">
     <div class="audio">
         <audio controls>
@@ -17,8 +13,13 @@
 </ng-container>
 
 <ng-container *ngIf="regexMaterials.video.test(materialLink)">
-    <iframe class="video-iframe" width="700px" height="500px" [src]="getSanitizedUrl(materialLink)" 
-    allowfullscreen></iframe>
+    <iframe 
+      class="video-iframe"
+      width="700px"
+      height="500px"
+      [src]="getSanitizedUrl(materialLink)"
+      allowfullscreen>
+    </iframe>
     <p mat-dialog-title>Ссылка на видео: {{ materialLink }}</p>
 </ng-container>
 
