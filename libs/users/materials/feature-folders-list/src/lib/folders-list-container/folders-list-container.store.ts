@@ -5,8 +5,7 @@ import { FoldersFacade, MaterialsFacade } from '@users/materials/data-access';
 import { shareReplay, tap } from 'rxjs';
 import { FoldersDTO } from '@users/core/data-access';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { CoreUiConfirmDialogComponent } from "@users/core/ui";
-
+import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 
 type FoldersListState = DeepReadonly<{
   folders: FoldersDTO[];
@@ -33,16 +32,16 @@ export class FoldersListContainerStore extends ComponentStore<FoldersListState> 
   }
 
   private setFoldersFromGlobalToLocalStore(): void {
-    this.effect(() => this.foldersFacade.allFolders$.pipe(tap((folders: FoldersDTO[]) => this.patchState({folders: folders})),shareReplay(1)));
+    this.effect(() => this.foldersFacade.allFolders$.pipe(tap(( folders: FoldersDTO[] ) => this.patchState({folders: folders})),shareReplay(1)));
   }
 
-  public deleteFolder(folder: FoldersDTO): void {
+  public deleteFolder( folder: FoldersDTO ): void {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
-      data: { dialogText: `Вы уверены, что хотите удалить ${folder.title}` },
+      data: { dialogText: `Вы уверены, что хотите удалить ${ folder.title }` },
     });
     this.effect(() =>
       dialogRef.afterClosed().pipe(
-        tap((result: boolean) => {
+        tap(( result: boolean ) => {
           if (result) this.foldersFacade.deleteFolder(+folder.id);
         })
       )

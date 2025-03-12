@@ -2,35 +2,32 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ApiService } from '@users/core/http';
+import * as FolderActions from './folders.actions';
 import { initFolders } from './folders.actions';
 import { catchError, map, of, switchMap, withLatestFrom } from 'rxjs';
-import { FoldersDTO } from '@users/core/data-access';
-import * as FolderActions from './folders.actions';
-import {
-  CreateFolderDTO,
-  selectRouteParams,
-} from '../../../../../../../core/data-access/src';
-
+import { CreateFolderDTO, FoldersDTO, selectRouteParams } from '@users/core/data-access';
 
 export const folderEffect = createEffect(
   () => {
-  const actions$ = inject(Actions);
-  const store = inject(Store);
-  const apiService = inject(ApiService);
+    const actions$ = inject(Actions);
+    const store = inject(Store);
+    const apiService = inject(ApiService);
 
-  return actions$.pipe(
-    ofType(initFolders),
-    switchMap(() =>
-      apiService.get<FoldersDTO[]>('/folder').pipe(
-        map((folders) => FolderActions.loadFoldersSuccess({ folders })),
-        catchError((err) => {
-          console.log(err.message)
-          return of(FolderActions.loadFoldersFailure(err))
-        })
+    return actions$.pipe(
+      ofType(initFolders),
+      switchMap(() =>
+        apiService.get<FoldersDTO[]>('/folder').pipe(
+          map((folders) => FolderActions.loadFoldersSuccess({ folders })),
+          catchError((err) => {
+            console.log(err.message);
+            return of(FolderActions.loadFoldersFailure(err));
+          })
+        )
       )
-    )
-  )
-}, {functional: true})
+    );
+  },
+  { functional: true }
+);
 
 export const addFolderEffect = createEffect(
   () => {

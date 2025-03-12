@@ -7,7 +7,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CreateFolderDTO } from '@users/core/data-access';
 import { FoldersFacade } from '@users/materials/data-access';
 
-
 @Component({
   selector: 'folders-add-button',
   standalone: true,
@@ -21,24 +20,24 @@ export class FoldersAddButtonComponent {
   private name!: string;
   public dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
-  private readonly folderFacade = inject(FoldersFacade)
+  private readonly folderFacade = inject(FoldersFacade);
 
   openAddFolderDialog() {
     const dialogRef: MatDialogRef<FoldersAddDialogComponent> = this.dialog.open(FoldersAddDialogComponent, {
       data: { name: this.name },
     });
-    dialogRef.afterClosed()
+    dialogRef
+      .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((result) => {
-        if(result) {
-          console.log(result)
+        if (result) {
+          console.log(result);
           const newFolder: CreateFolderDTO = {
             title: result,
             created_at: Date.now().toString(),
-          }
+          };
           this.folderFacade.addFolder(newFolder);
         }
-      })
+      });
   }
-
 }

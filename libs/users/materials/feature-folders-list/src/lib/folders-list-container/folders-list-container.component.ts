@@ -13,8 +13,7 @@ import { LanguageSwitchService } from '@users/users/core/ui/language-switch';
 @Component({
   selector: 'folders-container',
   standalone: true,
-  imports: [FoldersAddButtonComponent, LetDirective, UsersListComponent, FoldersListComponent,NgFor, MatDialogModule,
-  ],
+  imports: [FoldersAddButtonComponent, LetDirective, UsersListComponent, FoldersListComponent, NgFor, MatDialogModule],
   providers: [FoldersListContainerStore],
   templateUrl: './folders-list-container.component.html',
   styleUrls: ['./folders-list-container.component.scss'],
@@ -22,7 +21,6 @@ import { LanguageSwitchService } from '@users/users/core/ui/language-switch';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersListContainerComponent {
-
   private readonly componentStore = inject(FoldersListContainerStore);
   private readonly langService = inject(LanguageSwitchService);
   public readonly folders$ = this.componentStore.folders$;

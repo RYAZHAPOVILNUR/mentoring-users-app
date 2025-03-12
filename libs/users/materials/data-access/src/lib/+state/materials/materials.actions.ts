@@ -1,7 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { CreateMaterialDTO, MaterialsDTO } from '../../../../../../../core/data-access/src/lib/materials-dto.model';
-import { LoadingStatus } from '../../../../../../../core/data-access/src';
-
+import { CreateMaterialDTO, MaterialsDTO } from '@users/core/data-access';
 
 export const initMaterials = createAction('[Material Page] Init');
 export const loadMaterialsSuccess = createAction('[Materials/API] Load Materials Success', props<{ material: MaterialsDTO[] }>());
@@ -15,4 +13,3 @@ export const deleteMaterial = createAction('[Material/API] Delete Material', pro
 export const deleteMaterialSuccess = createAction('[Material/API] Delete MaterialSuccess', props<{ materialId: number }>());
 export const deleteMaterialFailure = createAction('[Materials/API] Delete MaterialFailure', props<{ error: any }>());
 
-export const updateMaterialStatus = createAction('[Material/API] Update Material Status', props<{ status: LoadingStatus }>());

@@ -8,7 +8,6 @@ import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 
-
 type MaterialsListState = DeepReadonly<{
   materials: MaterialsDTO[];
   filteredMaterials: MaterialsDTO[];

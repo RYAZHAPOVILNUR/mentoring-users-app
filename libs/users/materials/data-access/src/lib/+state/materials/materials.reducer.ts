@@ -1,9 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { LoadingStatus } from '../../../../../../../core/data-access/src';
-import { MaterialsDTO } from '../../../../../../../core/data-access/src/lib/materials-dto.model';
+import { LoadingStatus, MaterialsDTO } from '@users/core/data-access';
 import { Action, createReducer, on } from '@ngrx/store';
 import * as MaterialsAction from '../materials/materials.actions';
-
 
 export const MaterialsFeatureKey = 'materials';
 

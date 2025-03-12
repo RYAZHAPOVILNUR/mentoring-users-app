@@ -2,8 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import * as MaterialsSelector from './materials.selectors';
 import * as MaterialsActions from './materials.actions';
-import { CreateMaterialDTO, MaterialsDTO } from '../../../../../../../core/data-access/src/lib/materials-dto.model';
-import * as FoldersActions from '../folders/folders.actions';
+import { CreateMaterialDTO, MaterialsDTO } from '@users/core/data-access';
 
 
 @Injectable({ providedIn: 'root' })

@@ -30,7 +30,7 @@ export class FoldersAddDialogComponent {
 
   constructor() {
     this.formGroup = this.formBuilder.group({
-      name: ['', Validators.required]
+      name: ['', Validators.required],
     });
   }
 
@@ -38,7 +38,7 @@ export class FoldersAddDialogComponent {
     this.dialogRef.close();
   }
 
-  save(){
+  save() {
     this.dialogRef.close(this.formGroup.value.name);
   }
 }

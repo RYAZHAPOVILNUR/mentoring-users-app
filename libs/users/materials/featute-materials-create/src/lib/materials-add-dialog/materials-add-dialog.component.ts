@@ -8,13 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 @Component({
   selector: 'materials-add-dialog',
   standalone: true,
-  imports: [
-    MatButtonModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-  ],
+  imports: [MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
   templateUrl: './materials-add-dialog.component.html',
   styleUrls: ['./materials-add-dialog.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
@@ -23,14 +17,14 @@ import { MatInputModule } from '@angular/material/input';
 export class MaterialsAddDialogComponent {
   public formGroup!: FormGroup;
   private formBuilder = inject(FormBuilder);
-  public data: {type: string} = inject(MAT_DIALOG_DATA);
+  public data: { type: string } = inject(MAT_DIALOG_DATA);
   public dialogRef = inject(MatDialogRef<MaterialsAddDialogComponent>);
 
   constructor() {
     this.formGroup = this.formBuilder.group({
       title: ['', Validators.required],
       link: ['', Validators.required],
-    })
+    });
   }
 
   cancel() {
@@ -39,6 +33,5 @@ export class MaterialsAddDialogComponent {
 
   save() {
     this.dialogRef.close(this.formGroup.value);
-    console.log(this.formGroup.value);
   }
 }

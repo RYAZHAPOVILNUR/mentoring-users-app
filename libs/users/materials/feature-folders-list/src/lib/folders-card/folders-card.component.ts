@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  Output,
-  ViewEncapsulation
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { FoldersDTO } from '@users/core/data-access';
@@ -13,15 +7,13 @@ import localeEn from '@angular/common/locales/en';
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { EventEmitter} from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeepReadonly } from '@users/core/utils';
-
 
 @Component({
   selector: 'folders-card',
   standalone: true,
-  imports: [DatePipe,MatIconModule, TranslateModule, MatButtonModule, MatCardModule,MatDialogModule],
+  imports: [DatePipe, MatIconModule, TranslateModule, MatButtonModule, MatCardModule, MatDialogModule],
   providers: [DatePipe, TranslatePipe],
   templateUrl: './folders-card.component.html',
   styleUrls: ['./folders-card.component.scss'],
@@ -52,7 +44,7 @@ export class FoldersCardComponent {
       editMode,
     };
     this.clickCount++;
-    if(this.clickCount === 2) {
+    if (this.clickCount === 2) {
       this.redirectToMaterials.emit(emitData);
     }
   }

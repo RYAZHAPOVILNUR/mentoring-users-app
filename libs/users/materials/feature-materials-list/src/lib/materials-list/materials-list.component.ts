@@ -22,13 +22,12 @@ export class MaterialsListComponent {
   @Output() closeMaterials = new EventEmitter();
   @Output() deleteMaterial = new EventEmitter<MaterialsDTO>();
 
-
   onCloseMaterials() {
-    this.closeMaterials.emit()
+    this.closeMaterials.emit();
   }
 
   onDeleteMaterial(material: MaterialsDTO) {
-    console.log(material)
+    console.log(material);
     this.deleteMaterial.emit(material);
   }
 }

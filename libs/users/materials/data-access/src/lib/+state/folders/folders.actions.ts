@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { CreateFolderDTO, FoldersDTO, LoadingStatus } from '../../../../../../../core/data-access/src';
-
+import { CreateFolderDTO, FoldersDTO, LoadingStatus } from '@users/core/data-access';
 
 export const initFolders = createAction('[Folders Page] Init');
 export const loadFoldersSuccess = createAction('[Folders/API] Load Folders Success', props<{ folders: FoldersDTO[] }>());

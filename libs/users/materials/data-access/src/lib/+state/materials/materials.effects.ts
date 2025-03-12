@@ -1,15 +1,10 @@
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { catchError, filter, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
-import { initMaterials } from './materials.actions';
-import { CreateMaterialDTO, MaterialsDTO } from '../../../../../../../core/data-access/src/lib/materials-dto.model';
+import { catchError, map, of, switchMap } from 'rxjs';
 import * as MaterialsActions from './materials.actions';
-import * as FoldersActions from '../folders/folders.actions';
-import { ApiService } from '../../../../../../../core/http/src';
-import { selectRouteParams } from '../../../../../../../core/data-access/src';
-
-
+import { CreateMaterialDTO, MaterialsDTO } from '@users/core/data-access';
+import { ApiService } from '@users/core/http';
 
 export const materialEffect = createEffect(
   () => {
@@ -21,12 +16,14 @@ export const materialEffect = createEffect(
       ofType(MaterialsActions.initMaterials),
       switchMap(() =>
         apiService.get<MaterialsDTO[]>('/material').pipe(
-          map(materials => MaterialsActions.loadMaterialsSuccess({material: materials})),
+          map((materials) => MaterialsActions.loadMaterialsSuccess({ material: materials })),
           catchError((err) => of(MaterialsActions.loadMaterialsFailure(err)))
         )
       )
-    )
-  }, {functional: true});
+    );
+  },
+  { functional: true }
+);
 
 export const addMaterial = createEffect(
   () => {
