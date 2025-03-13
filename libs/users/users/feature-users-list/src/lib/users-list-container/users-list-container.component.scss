@@ -1,0 +1,14 @@
+.users-container {
+	display: flex;
+	flex-direction: column;
+
+	&__filter {
+		display: flex;
+		justify-content: space-evenly;
+		margin-top: 50px;
+		margin-bottom: 20px;
+		width: 100%;
+		max-width: 500px;
+		align-self: center;
+	}
+}
