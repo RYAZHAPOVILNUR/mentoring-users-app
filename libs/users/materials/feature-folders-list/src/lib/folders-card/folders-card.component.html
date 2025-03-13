@@ -1,4 +1,4 @@
-<mat-card (click)="onOpenFolder($event)" class="folder-content">
+<mat-card (click)="onOpenFolder()" class="folder-content">
   <div class="folder-header">
     <span class="folder-icon"><mat-icon style="color: #747070">folder</mat-icon></span>
     <div class="folder-menu">
@@ -12,12 +12,12 @@
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item>
-          <mat-icon>delete</mat-icon>
-          <span>Delete</span>
-        </button>
-        <button mat-menu-item>
           <mat-icon>edit</mat-icon>
           <span>Edit</span>
+        </button>
+        <button (click)="onDeleteFolder()" mat-menu-item>
+          <mat-icon>delete</mat-icon>
+          <span>Delete</span>
         </button>
       </mat-menu>
     </div>

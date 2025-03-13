@@ -1,7 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { FOLDERS_FEATURE_KEY, FoldersState, foldersAdapter } from './folders.reducer';
 import { selectRouteParams } from '@users/core/data-access';
-import { selectUsersEntities } from '@users/users/data-access';
 
 // Главный селектор состояния папок
 export const selectFoldersState = createFeatureSelector<FoldersState>(FOLDERS_FEATURE_KEY);
@@ -23,7 +22,7 @@ export const selectFiltredFolders = createSelector(selectAllFolders, selectFolde
   return folders.filter((folder) => folder.id === folder.id);
 });
 
-export const selectFolderById = (id: number) => createSelector(selectFoldersEntities, (entities) => entities[id]);
+// export const selectFolderById = (id: number) => createSelector(selectFoldersEntities, (entities) => entities[id]);
 
 export const selectOpenedFolder = createSelector(
   selectRouteParams,
