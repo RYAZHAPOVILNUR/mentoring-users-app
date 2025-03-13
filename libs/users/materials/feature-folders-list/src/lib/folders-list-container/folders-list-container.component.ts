@@ -40,7 +40,6 @@ export class FoldersListContainerComponent implements OnInit {
       }
     })
   }
-  
   onOpenFolder(id: number) {
     this.router.navigate(['/materials', id]);
   }

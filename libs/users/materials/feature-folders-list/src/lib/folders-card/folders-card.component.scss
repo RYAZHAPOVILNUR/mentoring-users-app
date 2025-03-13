@@ -2,8 +2,8 @@
 .folder-card {
     &__container {
         position: relative;
-        width: 130px;
-        height: 110px;
+        width: 160px;
+        height: 130px;
         border: 1px solid rgba(34, 30, 30, 0.589);
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
         border-radius: 5px;
@@ -18,7 +18,7 @@
         }
 
         &:hover {
-            background-color: rgba(107, 103, 103, 0.1);
+            background-color: rgba(124, 122, 122, 0.1);
 
             .folder-card__button-delete {
                 display: block;
@@ -55,8 +55,5 @@
         position: absolute;
         top: 7px;
         right: 5px;
-    }
-    &__button-open {
-
     }
 }

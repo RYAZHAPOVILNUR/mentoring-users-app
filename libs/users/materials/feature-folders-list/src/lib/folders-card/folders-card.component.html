@@ -1,13 +1,7 @@
-<div class="folder__card">
+<div class="folder__card" (dblclick)="onOpenFolder(folder)">
     <div class="folder-card__container">
         <div class="folder-card__icon-container">
-            <button 
-                mai-icon-button
-                (click)="onOpenFolder(folder)"
-                class="folder-card__button-open"
-            >
             <mat-icon class="folder-card__icon">folder</mat-icon>
-            </button>
             <button 
             mat-icon-button
             (click)="onDeleteFolder($event, folder)"
