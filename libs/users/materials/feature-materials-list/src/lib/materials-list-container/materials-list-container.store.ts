@@ -14,11 +14,6 @@ const initialState: MaterialsListState = {
   materials: [],
 };
 
-interface MaterialsState {
-  materials: MaterialsEntity[];
-  selectedMaterialId: number | null;
-}
-
 @Injectable({ providedIn: 'root' })
 export class MaterialsListContainerStore extends ComponentStore<MaterialsListState> {
   private readonly materialsFacade = inject(MaterialsFacade);

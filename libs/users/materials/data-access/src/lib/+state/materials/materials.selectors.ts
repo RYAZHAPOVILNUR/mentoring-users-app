@@ -1,9 +1,14 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { MATERIALS_FEATURE_KEY, MaterialsState, materialsAdapter } from './materials.reducer';
-import { selectRouteParams } from '@users/core/data-access';
+import { selectRouteParams, selectRouteParam } from '@users/core/data-access';
 
 // Создаёт селектор, который получает всё состояние MaterialsState из глобального хранилища NgRx.
 export const selectMaterialsState = createFeatureSelector<MaterialsState>(MATERIALS_FEATURE_KEY);
+
+export const selectMaterialIdFromRoute = createSelector(
+  selectRouteParam('id'),
+  (id) => (id ? Number(id) : null) // Приводим к числу
+);
 
 // selectAll — функция, возвращающая массив всех сущностей (материалов).
 // selectEntities — функция, возвращающая объект { [id]: entity }, где ключи — id материалов, а значения — сами материалы.
@@ -34,11 +39,15 @@ export const selectMaterialsFilter = createSelector(selectMaterialsState, (state
   state ? state.materialsFilter : { title: '' }
 );
 
-// selectAllMaterials → получает все материалы. selectMaterialsFilter → получает текущий фильтр.
-// Возвращает отфильтрованный список материалов, содержащих текст filter.title.
-export const selectFiltredMaterials = createSelector(selectAllMaterials, selectMaterialsFilter, (materials, filter) => {
-  return materials.filter((material) => material.folderId === material.id);
-});
+export const selectFilteredMaterials = createSelector(
+  selectAllMaterials,
+  selectMaterialIdFromRoute,
+  (materials, materialId) => {
+    if (!materialId) return [];
+    console.log('URL>>>', materialId);
+    return materials.filter((material) => material.folderId === materialId);
+  }
+);
 
 // Эта функция просто выбрасывает ошибку, потому что не реализована. Вероятно, она планировалась для выбора материала по id
 export function selectMaterialsById(id: number): any {

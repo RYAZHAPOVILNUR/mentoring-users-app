@@ -1,5 +1,5 @@
-import { FoldersEntity } from './folders-vm';
 import { FoldersVM } from './folders-vm';
+import { FoldersEntity } from './folders.entity';
 
 type FoldersVMAdapter = {
   entityToVM(entity: FoldersEntity): FoldersVM;

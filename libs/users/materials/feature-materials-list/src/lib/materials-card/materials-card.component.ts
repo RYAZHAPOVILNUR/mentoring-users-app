@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { MaterialsVM } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-materials-card',
@@ -12,6 +13,8 @@ import { RouterLink } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialsCardComponent {
+  @Input({})
+  material!: MaterialsVM;
   // private _vm: DetailFolderCardVm = {
   //   folder: null,
   //   status: 'init',

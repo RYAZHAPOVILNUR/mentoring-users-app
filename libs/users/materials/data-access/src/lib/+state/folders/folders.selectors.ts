@@ -20,7 +20,7 @@ export const selectFoldersEntities = createSelector(selectFoldersState, (state: 
 export const selectFoldersFilter = createSelector(selectFoldersState, (state: FoldersState) => state.foldersFilter);
 
 export const selectFiltredFolders = createSelector(selectAllFolders, selectFoldersFilter, (folders, filter) => {
-  return folders.filter((folder) => folder.title.toLowerCase().includes(filter.title.toLowerCase()));
+  return folders.filter((folder) => folder.id === folder.id);
 });
 
 export const selectFolderById = (id: number) => createSelector(selectFoldersEntities, (entities) => entities[id]);
