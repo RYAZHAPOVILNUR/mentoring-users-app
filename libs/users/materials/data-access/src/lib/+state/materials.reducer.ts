@@ -39,10 +39,32 @@ export const FolderReducer = createReducer(
     })),
     on(FoldersActions.addFolderSuccess, (state, { NewFolderData }) => ({
         ...state,
-        
+        NewFolder: [...state.folder, NewFolderData]
     })),
     on(FoldersActions.deleteFolderSuccess, (state, { FolderId }) => ({
         ...state,
-
+        folders: state.folder.filter(folder => folder.id !== FolderId)
     }))
 )
+export const MaterialReducer = createReducer(
+    initialMaterialState,
+    on(FoldersActions.loadMaterialsSuccess, (state, { materials }) => ({
+        ...state,
+        material: materials,
+        status: 'loaded' as const
+    })),
+    on(FoldersActions.loadFoldersFailure, (state, { error }) => ({
+        ...state,
+        MaterialError: error,
+        status: 'error' as const
+    })),
+    on(FoldersActions.addMaterialSuccess, (state, { NewMaterialData }) => ({
+        ...state,
+        NewMaterial: [...state.materials, NewMaterialData]
+    })),
+    on(FoldersActions.deleteMaterialSuccess, (state, { MaterialId }) => ({
+        ...state,
+        material: state.materials.filter(material => material.id !== MaterialId)
+    }))
+)
+
