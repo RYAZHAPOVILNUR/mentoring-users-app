@@ -1,0 +1,1 @@
+export * from "./lib/user-material-list-container/user-material-list-container.component"

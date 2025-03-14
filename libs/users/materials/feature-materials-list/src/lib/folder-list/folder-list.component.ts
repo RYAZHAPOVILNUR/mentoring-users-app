@@ -21,7 +21,6 @@ export class FolderListComponent {
   vm!: FolderListVM;
 
   @Output() deleteFolder= new EventEmitter();
-  @Output() redirectToEdit = new EventEmitter();
   @Output() openFolder = new EventEmitter<number>();
 
   public onDeleteFolder(folder: FoldersVM) {

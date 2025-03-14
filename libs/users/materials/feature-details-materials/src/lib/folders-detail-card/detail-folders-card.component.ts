@@ -10,6 +10,7 @@ import {
   Output,
   TemplateRef,
   ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { onSuccessEditionCbType, onSuccessAddStoryPointsCbType } from '@users/users/data-access';
@@ -30,6 +31,8 @@ import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap,
 import { PushPipe } from '@ngrx/component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MaterialsAddButtonComponent } from "../../../../src/lib/user-material-create/src/lib/create-materials-button/create-materials-button.component";
+import { UserMaterialListContainerComponent } from '@users/users/materials/user-material-list';
+import { MaterialListContainerStore } from 'libs/users/materials/user-material-list/src/lib/user-material-list-container/user-material.store';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -48,11 +51,13 @@ import { MaterialsAddButtonComponent } from "../../../../src/lib/user-material-c
     MatTooltipModule,
     MatSnackBarModule,
     MatAutocompleteModule,
-    MaterialsAddButtonComponent
+    MaterialsAddButtonComponent,
+    UserMaterialListContainerComponent
 ],
   templateUrl: './detail-folders-card.component.html',
   styleUrls: ['./detail-folders-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [MaterialListContainerStore]
 })
 export class DetailFoldersCardComponent {
   private _vm: DetailFoldersCardVm = {

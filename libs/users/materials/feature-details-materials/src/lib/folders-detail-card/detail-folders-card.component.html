@@ -12,6 +12,7 @@
         <h2>{{vm.folder?.title}}</h2>
       </div>
     </div>
+    <user-materials-list-container [folder_id]="vm.folder?.id"></user-materials-list-container>
     <users-materials-add-button [folder_id]="vm.folder?.id"></users-materials-add-button>
   </ng-container>
 </ng-template>

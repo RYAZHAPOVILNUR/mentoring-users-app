@@ -1,0 +1,12 @@
+<mat-card class="user-material-card">
+  <mat-card-content class="user-material-card-content">
+      <div class="div-card">
+          <div class="icons">
+              <mat-icon>file</mat-icon>
+              <button class="button-delete" mat-icon-button (click)="onDeleteMaterial(material)"><mat-icon class="delete">delete</mat-icon></button>
+          </div>
+          <div class="title">{{ material.title }}</div>
+          <div class="date">{{ dateFormat(material.created_at) }}</div>
+      </div>
+  </mat-card-content>
+</mat-card>
