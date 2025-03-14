@@ -3,11 +3,10 @@ import { Folder } from "../interfaces/folder.interface";
 import { Material } from "../interfaces/material.interface";
 
 import * as FoldersActions from './materials.actions';
-import { state } from "@angular/animations";
 
 export interface FolderState {
     folder: Folder[];
-    FolderError: any;
+    folderError: any;
 }
 
 export interface MaterialState {
@@ -17,7 +16,7 @@ export interface MaterialState {
 
 export const initialFolderState: FolderState = {
     folder: [],
-    FolderError: null
+    folderError: null
 }
 
 export const initialMaterialState: MaterialState = {
