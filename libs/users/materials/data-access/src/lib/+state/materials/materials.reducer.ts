@@ -1,20 +1,69 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { MaterialsActions } from './materials.actions';
+import * as MaterialsActions from './materials.actions';
+import { IMaterial } from '../../models/material.model';
+import { LoadingStatus } from '@users/core/data-access';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
-export const materialsFeatureKey = 'materials';
+export const MATERIALS_FEATURE_KEY = 'materials';
 
-export interface State {}
+export interface MaterialsState extends EntityState<IMaterial> {
+  status: LoadingStatus;
+  error: MaterialsErrors | null;
+}
 
-export const initialState: State = {};
+export type MaterialsErrors = {
+  status: number;
+  message: string;
+  [key: string]: unknown;
+}
 
-export const reducer = createReducer(
-  initialState,
-  on(MaterialsActions.loadMaterialss, (state) => state),
-  on(MaterialsActions.loadMaterialssSuccess, (state, action) => state),
-  on(MaterialsActions.loadMaterialssFailure, (state, action) => state)
-);
+export const MaterialsAdapter: EntityAdapter<IMaterial> = createEntityAdapter<IMaterial>();
+
+export const initialMaterialsState: MaterialsState = MaterialsAdapter.getInitialState({
+  materials: [],
+  status: 'init',
+  error: null,
+});
 
 export const materialsFeature = createFeature({
-  name: materialsFeatureKey,
-  reducer,
-});
+  name: MATERIALS_FEATURE_KEY,
+  reducer: createReducer(
+    
+    initialMaterialsState,
+    on(MaterialsActions.loadMaterials, (state) => ({
+      ...state,
+      status: 'loading' as const,
+    })),
+    on(MaterialsActions.loadMaterialsSuccess, (state, { materials }) =>
+      MaterialsAdapter.setAll(materials, { ...state, status: 'loaded' as const })
+    ),
+    on(MaterialsActions.loadMaterialsFailure, (state) => ({
+      ...state,
+      status: 'error' as const,
+    })),
+
+    on(MaterialsActions.deleteMaterial, (state) => ({
+      ...state,
+      status: 'loading' as const,
+    })),
+    on(MaterialsActions.deleteMaterialSuccess, (state, { id }) =>
+      MaterialsAdapter.removeOne(id, { ...state, status: 'loaded' as const })
+    ),
+    on(MaterialsActions.deleteMaterialFailed, (state) => ({
+      ...state,
+      status: 'error' as const,
+    })),
+
+    on(MaterialsActions.addMaterial, (state) => ({
+      ...state,
+      status: 'loading' as const,
+    })),
+    on(MaterialsActions.addMaterialSuccess, (state, { materials }) =>
+      MaterialsAdapter.addOne({ ...materials }, { ...state, status: 'loaded' as const })
+    ),
+    on(MaterialsActions.addMaterialFailed, (state) => ({
+      ...state,
+      status: 'error' as const,
+    })),
+    )
+})

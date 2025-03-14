@@ -1,9 +1,9 @@
-import { inject, Injectable } from '@angular/core';
+import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { IAddFolder, IFolder } from '../../models/folder.model';
 
 import { ApiService } from '@users/core/http';
-import { map, switchMap, catchError, of, withLatestFrom } from 'rxjs';
+import { map, switchMap, catchError, of } from 'rxjs';
 import * as FoldersActions from './folders.actions';
 
 export const foldersEffects = createEffect(

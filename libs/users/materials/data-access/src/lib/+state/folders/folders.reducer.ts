@@ -1,4 +1,4 @@
-import { Action, createFeature, createReducer, on } from '@ngrx/store';
+import { createFeature, createReducer, on } from '@ngrx/store';
 import * as FoldersActions from './folders.actions';
 import { IFolder } from '../../models/folder.model';
 import { LoadingStatus } from '@users/core/data-access';
@@ -68,6 +68,3 @@ export const foldersFeature = createFeature({
     )
 })
 
-export function foldersReducer(state: FoldersState | undefined, action: Action) {
-  return foldersFeature.reducer(state, action);
-}
