@@ -2,7 +2,9 @@
   <mat-card-content class="user-material-card-content">
       <div class="div-card">
           <div class="icons">
-              <mat-icon>file</mat-icon>
+                <mat-icon *ngIf="material.material_link.endsWith('.pdf')">insert_drive_file</mat-icon>
+                <mat-icon *ngIf="material.material_link.endsWith('.mp3')">music_note</mat-icon>
+                <mat-icon *ngIf="!material.material_link.endsWith('.pdf') && !material.material_link.endsWith('.mp3')">ondemand_video</mat-icon>
               <button class="button-delete" mat-icon-button (click)="onDeleteMaterial(material)"><mat-icon class="delete">delete</mat-icon></button>
           </div>
           <div class="title">{{ material.title }}</div>

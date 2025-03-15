@@ -1,13 +1,15 @@
-import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserMaterialListComponent } from "../user-material-list/user-material-lsit.component";
 import { UserMaterialsFacade } from '@users/user-material-data-access';
 import { MaterialsVM } from '../user-material-card/materials.vm';
 import { MaterialListContainerStore } from './user-material.store';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { LetDirective } from '@ngrx/component';
 import { filter, map, tap } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { UserMaterialsContentComponent } from '@users/users/materials/user-materials-content';
 
 @Component({
   selector: 'user-materials-list-container',
@@ -26,6 +28,9 @@ export class UserMaterialListContainerComponent {
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;
 
+  private readonly destroyRef = inject(DestroyRef);
+  public dialog = inject(MatDialog);
+
   @Input({required: true})
   folder_id?: number;
 
@@ -37,6 +42,18 @@ export class UserMaterialListContainerComponent {
     this.componentStore.deleteMaterial(material);
   }
 
-  public onOpenMaterial(id: number) {
+  public onOpenMaterial(material: MaterialsVM) {
+    const dialogRef: MatDialogRef<UserMaterialsContentComponent> = this.dialog
+    .open(
+      UserMaterialsContentComponent, {
+        data: { material },
+        panelClass: 'materials-content'
+      }
+    )
+
+    dialogRef
+    .afterClosed()
+    .pipe(takeUntilDestroyed(this.destroyRef))
+    .subscribe()
   }
 }
