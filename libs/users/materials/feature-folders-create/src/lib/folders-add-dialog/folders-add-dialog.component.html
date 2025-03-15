@@ -1,20 +1,21 @@
 <div class="dialog-create-folder">
-    <h1 class="create">Создать Новую Папку</h1>
-    <form class="dialog-create-folder__form">
-        <div class="dialog-create-folder__input-container">
-            <mat-form-field class="dialog-create-folder__input">
-                <input  matInput placeholder="Название папки">
-            </mat-form-field>
-        </div>
-        <div class="dialog-create-folder__buttons">
-            <button mat-raised-button>
-            Создать
-            <mat-icon>add</mat-icon>
-        </button>
-        <button mat-raised-button type="button" (click)="dialogClose()">
-            Отмена
-            <mat-icon>cancel</mat-icon>
-        </button>
-        </div>
-    </form>    
+  <h1 class="create">Создать Новую Папку</h1>
+  <form class="dialog-create-folder__form" [formGroup]="formGroup">
+    <div class="dialog-create-folder__input-container">
+      <mat-form-field class="dialog-create-folder__input">
+        <input matInput placeholder="Название папки" formControlName="name" />
+        <mat-error>Название обязательно</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="dialog-create-folder__buttons" mat-dialolg-actions>
+      <button mat-raised-button type="button" (click)="save()" [disabled]="formGroup.invalid">
+        Создать
+        <mat-icon>add</mat-icon>
+      </button>
+      <button mat-raised-button type="button" (click)="canel()">
+        Отмена
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </div>
+  </form>
 </div>

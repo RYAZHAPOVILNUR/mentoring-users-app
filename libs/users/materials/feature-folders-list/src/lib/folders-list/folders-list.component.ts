@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoldersAddButtonComponent } from '@users/feature-folders-create';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'users-folders-list',
@@ -11,4 +12,6 @@ import { FoldersCardComponent } from '../folders-card/folders-card.component';
   styleUrls: ['./folders-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FoldersListComponent {}
+export class FoldersListComponent {
+  readonly store = inject(Store);
+}

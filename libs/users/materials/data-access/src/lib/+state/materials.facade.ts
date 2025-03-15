@@ -1,5 +1,5 @@
 import { inject, Injectable } from "@angular/core";
-import { select, Store } from "@ngrx/store";
+import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { AddNewFolder, Folder } from "../interfaces/folder.interface";
 import { selectAllFolders, selectAllMaterials } from "./materials.selectors";
