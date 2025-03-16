@@ -24,7 +24,7 @@ export class UserMaterialListComponent {
     this.deleteMaterial.emit(material)
   }
 
-  onOpenMaterial(id: number) {
-    this.openMaterial.emit(id)
+  onOpenMaterial(material: MaterialsVM) {
+    this.openMaterial.emit(material)
   }
 }

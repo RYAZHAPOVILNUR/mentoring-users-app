@@ -1,5 +1,28 @@
-.materials-content {
-  display: block;
-  width: 70%;
-  height: 50vh;
+.materials-content .mat-dialog-container {
+  padding: 20px;
+  border-radius: 12px;
+  background: white;
+  width: 90vw !important;
+  height: 90vh !important;
+  max-width: none !important;
+}
+
+.audio-dialog .mat-dialog-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  min-height: 100px;
+}
+
+.audio-dialog audio {
+  width: 100%;
+  max-width: 300px;
+}
+
+.pdf-dialog .mat-dialog-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  height: 100%;
 }

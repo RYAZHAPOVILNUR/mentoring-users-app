@@ -147,5 +147,14 @@
       "dependsOn": ["build"],
       "command": "docker build -f apps/users/Dockerfile . -t users"
     }
-  }
+  },
+  "assets": [
+    "src/favicon.ico",
+    "apps/users/src/assets",
+    {
+      "glob": "**/*",
+      "input": "node_modules/ngx-extended-pdf-viewer/assets",
+      "output": "assets"
+    }
+  ]
 }

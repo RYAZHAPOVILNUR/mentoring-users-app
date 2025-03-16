@@ -10,6 +10,7 @@ import { LetDirective } from '@ngrx/component';
 import { filter, map, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { UserMaterialsContentComponent } from '@users/users/materials/user-materials-content';
+import { MaterialEntity } from '@users/core/data-access';
 
 @Component({
   selector: 'user-materials-list-container',
@@ -43,17 +44,23 @@ export class UserMaterialListContainerComponent {
   }
 
   public onOpenMaterial(material: MaterialsVM) {
-    const dialogRef: MatDialogRef<UserMaterialsContentComponent> = this.dialog
-    .open(
+    const isAudio = material.material_link?.endsWith('.mp3');
+    const isPdf = material.material_link?.endsWith('.pdf');
+  
+    const dialogWidth = isAudio ? '400px' : '80vw';
+    const dialogHeight = isAudio ? '150px' : isPdf ? '90vh' : '80vh';
+  
+    const dialogRef: MatDialogRef<UserMaterialsContentComponent> = this.dialog.open(
       UserMaterialsContentComponent, {
         data: { material },
-        panelClass: 'materials-content'
+        width: dialogWidth,
+        height: dialogHeight,
+        maxWidth: 'none',
+        panelClass: isAudio ? 'audio-dialog' : isPdf ? 'pdf-dialog' : 'materials-content'
       }
-    )
-
-    dialogRef
-    .afterClosed()
-    .pipe(takeUntilDestroyed(this.destroyRef))
-    .subscribe()
-  }
+    );
+  
+    dialogRef.afterClosed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
+  }  
+  
 }

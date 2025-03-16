@@ -8,32 +8,23 @@
   </button>
 </div>
 
-<!-- PDF -->
-<!-- <ng-container *ngIf="data.material.material_link.endsWith('.pdf')">
-  <pdf-viewer
-      [src]="materialLink"
-      [render-text]="true"
-      [original-size]="false"
-      class="pdf-viewer"
-  ></pdf-viewer>
-</ng-container> -->
-
-<!-- AUDIO -->
-<ng-container *ngIf="data?.material?.material_link?.endsWith('.mp3')">
+<ng-container *ngIf="isAudio">
   <div class="audio">
-      <audio controls>
-        <source [src]="data.material.material_link" type="audio/mp3">
-      </audio>
+    <audio controls>
+      <source [src]="materialLink" type="audio/mp3">
+    </audio>
   </div>
 </ng-container>
 
-<!-- VIDEO -->
-<ng-container *ngIf="!data.material.material_link?.endsWith('.pdf') && !data.material.material_link?.endsWith('.mp3')">
-  <div class="link">
-      <p mat-dialog-title>Ссылка на видео: {{ data.material.material_link }}</p>
+<ng-container *ngIf="isVideo">
+  <div class="video-container">
+    <iframe *ngIf="videoUrl" width="560" height="315" [src]="videoUrl" frameborder="0" allowfullscreen></iframe>
   </div>
+</ng-container>
 
-  <div *ngIf="getVideoId()" class="thumbnail">
-    <img [src]="'https://img.youtube.com/vi/' + getVideoId() + '/maxresdefault.jpg'">
+<ng-container *ngIf="isPdf">
+  <div class="pdf-container">
+    <ngx-extended-pdf-viewer baseHref="/assets/ngx-extended-pdf-viewer/" [src]="materialLink" useBrowserLocale="true" class="pdf-viewer"
+      [showSidebarButton]="false"></ngx-extended-pdf-viewer>
   </div>
 </ng-container>
