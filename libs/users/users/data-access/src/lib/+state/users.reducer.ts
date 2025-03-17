@@ -18,7 +18,7 @@ export interface UsersState extends EntityState<UsersEntity> {
   error: UsersErrors | null;
   usersFilter: {
     name: string
-  };
+  }
 }
 
 export interface UsersPartialState {

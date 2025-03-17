@@ -15,8 +15,6 @@ import {
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
   private readonly store = inject(Store);
-  private readonly componentStore = inject(UsersListContainerStore);
-
 
   /**
    * Combine pieces of state using createSelector,
@@ -28,12 +26,18 @@ export class UsersFacade {
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
   public readonly loggedUser$ = this.store.select(selectLoggedUser);
   public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError));
-  public readonly filteredUsers$ = this.store.select(selectFilteredUsers);
+  public readonly filteredUsers$ = this.store.pipe(select(UsersSelectors.selectFilteredUsers))
 
   /**
    * Use the initialization action to perform one
    * or more tasks in your Effects.
    */
+  filterUser(name: string) {
+    this.store.dispatch(UsersActions.setUsersFilter({
+      filter: { name }
+    }));
+  }
+
   init() {
     this.store.dispatch(UsersActions.initUsers());
   }
@@ -66,9 +70,5 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.loadUser());
   }
 
-  filterUser(name: string) {
-    this.store.dispatch(UsersActions.setUsersFilter({
-      filter: { name }
-    }));
-  }
+
 }

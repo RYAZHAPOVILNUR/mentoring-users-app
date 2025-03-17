@@ -3,8 +3,8 @@
     status: status$,
     errors: errors$,
     loggedUser: loggedUser$,
-    users: filteredUsers$
-  } as vm"
+    users: users$,
+      } as vm"
 >
   <users-filter (filterUsers)="onFilterUsers($event)"></users-filter>
   <users-list-ui [vm]="vm" (deleteUser)="onDeleteUser($event)" (redirectToEdit)="onRedirectToEdit($event)" />

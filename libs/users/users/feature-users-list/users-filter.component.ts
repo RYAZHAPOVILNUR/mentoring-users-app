@@ -1,26 +1,40 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  EventEmitter,
+  inject,
+  OnDestroy,
+  OnInit,
+  Output
+} from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { debounceTime, Subject, Subscription } from 'rxjs';
+import { debounceTime, Subject, Subscription, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'users-filter',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule],
   templateUrl: 'users-filter.component.html',
   styleUrls: ['users-filter.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersFilterComponent implements OnInit, OnDestroy{
-  private subscription = new Subscription();
+export class UsersFilterComponent {
+  private readonly destroyRef = inject(DestroyRef)
   @Output() filterUsers = new EventEmitter();
-  name = new FormControl('');
-  ngOnInit(){
-    this.subscription = this.name.valueChanges.pipe( debounceTime(200) ).subscribe(value => { this.filterUsers.emit(value); })
-    }
+  name = new FormControl('', {nonNullable: true});
 
-  ngOnDestroy(){
-  this.subscription.unsubscribe();
+  constructor() {
+    this.name.valueChanges
+      .pipe(
+        tap((value: string) => this.filterUsers.emit(value)),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe()
   }
 };
 

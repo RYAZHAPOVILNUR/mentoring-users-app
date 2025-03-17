@@ -28,7 +28,7 @@ import { map } from 'rxjs';
   styleUrls: ['./users-list-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [UsersListContainerStore, UsersFilterComponent],
+  providers: [UsersListContainerStore],
 })
 export class UsersListContainerComponent {
   private readonly componentStore = inject(UsersListContainerStore);
