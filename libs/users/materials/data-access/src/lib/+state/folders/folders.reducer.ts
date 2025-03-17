@@ -44,7 +44,7 @@ export const foldersReducer = createReducer(
     status: 'error' as const,
     error,
   })),
-  on(FoldersActions.addFolder, (state, { folderData }) => foldersAdapter.addOne(folderData, { ...state })),
+  // on(FoldersActions.addFolder, (state, { folderData }) => foldersAdapter.addOne(folderData, { ...state })),
   on(FoldersActions.loadFolder, (state) => ({
     ...state,
     status: 'loading' as const,
@@ -56,5 +56,9 @@ export const foldersReducer = createReducer(
     ...state,
     status,
   })),
-  on(FoldersActions.deleteFolderSuccess, (state, { id }) => foldersAdapter.removeOne(id, { ...state }))
+  on(FoldersActions.deleteFolderSuccess, (state, { id }) => foldersAdapter.removeOne(id, { ...state })),
+  // on(FoldersActions.editFolder, (state, { folder }) =>
+  //   foldersAdapter.updateOne({ id: folder.id, changes: folder }, state)
+  // ),
+  on(FoldersActions.editFolderFailed, (state, { error }) => ({ ...state, status: 'error' as const, error }))
 );

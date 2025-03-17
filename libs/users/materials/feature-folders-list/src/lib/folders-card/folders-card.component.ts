@@ -55,21 +55,12 @@ export class FoldersCardComponent {
       data: folder,
       width: '700px',
     });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        console.log('Deleted', result);
-      }
-    });
   }
+
   onEditFolder(folder: FoldersEntity): void {
     const dialogRef = this.dialog.open(EditFolderDialogComponent, {
       data: folder,
-      width: '700px',
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        // console.log('Deleted', result);
-      }
+      width: '250px',
     });
   }
 }

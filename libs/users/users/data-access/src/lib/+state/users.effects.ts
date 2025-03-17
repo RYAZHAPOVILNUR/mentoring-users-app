@@ -79,7 +79,7 @@ export const addUser = createEffect(
 export const editUser = createEffect(
   () => {
     const actions$ = inject(Actions);
-    const apiService = inject(ApiService);
+    const apiService$ = inject(ApiService);
     const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
 
     return actions$.pipe(
@@ -97,7 +97,7 @@ export const editUser = createEffect(
         onSuccessCb,
       })),
       switchMap(({ user, onSuccessCb }) =>
-        apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+        apiService$.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
           map((userData) => ({ userData, onSuccessCb })),
           tap(({ onSuccessCb }) => onSuccessCb()),
           map(({ userData }) => UsersActions.editUserSuccess({ userData })),

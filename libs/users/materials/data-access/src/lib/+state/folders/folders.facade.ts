@@ -29,6 +29,11 @@ export class FoldersFacade {
   deleteFolder(id: number) {
     this.store.dispatch(FoldersActions.deleteFolder({ id }));
   }
+
+  editFolder(folder: AddFolderDTO) {
+    console.log('Folder:', folder);
+    // this.store.dispatch(FoldersActions.editFolder({ folder, id }));
+  }
   // loadFolder() {
   //   this.store.dispatch(FoldersActions.loadFolder());
   // }

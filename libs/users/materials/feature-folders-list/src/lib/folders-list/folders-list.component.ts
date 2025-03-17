@@ -33,6 +33,5 @@ export class FoldersListComponent {
 
   onRedirectToFolder(folder: FoldersVM) {
     this.redirectToFolder.emit(folder);
-    console.log('Redirected to Folder List>>>', folder);
   }
 }

@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { FoldersEntity } from '../../folders-dto/folders.entity';
 import { LoadingStatus } from '@users/core/data-access';
-import { AddFolderDTO } from '../../folders-dto/folders-dto.models';
+import { AddFolderDTO, FoldersDTO } from '../../folders-dto/folders-dto.models';
 
 export const initFolders = createAction('[Folders Page] Init');
 
@@ -36,3 +36,7 @@ export const addFolderFailed = createAction('[Folders Page] Create Folders faile
 export const deleteFolder = createAction('[Folders Page] Delete Folder', props<{ id: number }>());
 export const deleteFolderSuccess = createAction('[Folder Page] Delete Folder Success', props<{ id: number }>());
 export const deleteFolderFailed = createAction('[Folder Page] Delete Folder Failed', props<{ error: any }>());
+
+export const editFolder = createAction('[Folder Page] Edit Folder', props<{ folder: AddFolderDTO; id: number }>());
+export const editFolderSuccess = createAction('[Folder Page] Edit Folder Success', props<{ folder: FoldersDTO }>());
+export const editFolderFailed = createAction('[Folder Page] Edit Folder Failed', props<{ error: any }>());
