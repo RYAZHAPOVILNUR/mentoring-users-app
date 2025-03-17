@@ -24,7 +24,10 @@
 
 <ng-container *ngIf="isPdf">
   <div class="pdf-container">
-    <ngx-extended-pdf-viewer baseHref="/assets/ngx-extended-pdf-viewer/" [src]="materialLink" useBrowserLocale="true" class="pdf-viewer"
-      [showSidebarButton]="false"></ngx-extended-pdf-viewer>
+    <pdf-viewer [src]="materialLink"
+              [render-text]="true"
+              [original-size]="false"
+              class="pdf-viewer"
+  ></pdf-viewer>
   </div>
 </ng-container>

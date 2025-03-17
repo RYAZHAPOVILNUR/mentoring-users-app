@@ -15,7 +15,10 @@
         "main": "apps/users/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/users/tsconfig.app.json",
-        "assets": ["apps/users/src/favicon.ico", "apps/users/src/assets"],
+        "assets": [
+          "apps/users/src/favicon.ico",
+          "apps/users/src/assets"
+        ],
         "styles": [
           "node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
           "./node_modules/quill/dist/quill.core.css",
@@ -63,7 +66,9 @@
         "stylePreprocessorOptions": {
           "includePaths": ["libs/users/settings"]
         },
-        "scripts": ["./node_modules/quill/dist/quill.min.js"]
+        "scripts": [
+          "./node_modules/quill/dist/quill.min.js"
+        ]
       },
       "configurations": {
         "production": {
@@ -147,14 +152,5 @@
       "dependsOn": ["build"],
       "command": "docker build -f apps/users/Dockerfile . -t users"
     }
-  },
-  "assets": [
-    "src/favicon.ico",
-    "apps/users/src/assets",
-    {
-      "glob": "**/*",
-      "input": "node_modules/ngx-extended-pdf-viewer/assets",
-      "output": "assets"
-    }
-  ]
+  }
 }
