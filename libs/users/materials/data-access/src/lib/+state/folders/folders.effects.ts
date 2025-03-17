@@ -52,29 +52,22 @@ export const createFolder = createEffect(
   { functional: true }
 );
 
-// export const loadFolder = createEffect(
-//   () => {
-//     const actions$ = inject(Actions);
-//     const apiService = inject(ApiService);
-//     const store = inject(Store);
-//     return actions$.pipe(
-//       ofType(FoldersActions.loadFolder),
-//       withLatestFrom(store.select(selectRouteParams)),
-//       switchMap(([, params]) => {
-//         console.log('Params Folder>>>', params['id']);
-//         if (params['id']) {
-//           return apiService.get<FoldersDTO>(`/folder/${params['id']}`).pipe(
-//             map((folder) => folderDTOAdapter.DTOtoEntity(folder)),
-//             map((folderEntity) => FoldersActions.loadFolderSuccess({ folderData: folderEntity })),
-//             catchError((error) => {
-//               console.error('Error', error);
-//               return of(FoldersActions.loadFolderFailed({ error }));
-//             })
-//           );
-//         }
-//         return of(FoldersActions.updateFolderStatus({ status: 'loading' }));
-//       })
-//     );
-//   },
-//   { functional: true }
-// );
+export const deleteFolder = createEffect(
+  () => {
+    const action$ = inject(Actions);
+    const apiService = inject(ApiService);
+    return action$.pipe(
+      ofType(FoldersActions.deleteFolder),
+      switchMap(({ id }) =>
+        apiService.delete<void>(`/folder/${id}`).pipe(
+          map(() => FoldersActions.deleteFolderSuccess({ id })),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(FoldersActions.deleteFolderFailed({ error }));
+          })
+        )
+      )
+    );
+  },
+  { functional: true }
+);

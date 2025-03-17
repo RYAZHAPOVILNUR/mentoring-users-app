@@ -1,26 +1,19 @@
 <mat-card (click)="onOpenFolder()" class="folder-content">
   <div class="folder-header">
     <span class="folder-icon"><mat-icon style="color: #747070">folder</mat-icon></span>
-    <div class="folder-menu">
-      <button
-        mat-icon-button
-        (click)="$event.stopPropagation()"
-        [matMenuTriggerFor]="menu"
-        aria-label="Example icon-button with a menu"
-      >
-        <mat-icon>more_vert</mat-icon>
+    <button mat-icon-button (click)="$event.stopPropagation()" [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
       </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <mat-icon>edit</mat-icon>
-          <span>Edit</span>
-        </button>
-        <button (click)="onDeleteFolder()" mat-menu-item>
-          <mat-icon>delete</mat-icon>
-          <span>Delete</span>
-        </button>
-      </mat-menu>
-    </div>
+      <button (click)="onDeleteFolder(folder)" mat-menu-item>
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+    </mat-menu>
   </div>
   <div class="folder-title">
     <h4 class="folder-title">{{ folder.title | shortTitle }}</h4>

@@ -32,3 +32,7 @@ export const addFolderSuccess = createAction(
   props<{ folderData: AddFolderDTO }>()
 );
 export const addFolderFailed = createAction('[Folders Page] Create Folders failed', props<{ error: any }>());
+
+export const deleteFolder = createAction('[Folders Page] Delete Folder', props<{ id: number }>());
+export const deleteFolderSuccess = createAction('[Folder Page] Delete Folder Success', props<{ id: number }>());
+export const deleteFolderFailed = createAction('[Folder Page] Delete Folder Failed', props<{ error: any }>());

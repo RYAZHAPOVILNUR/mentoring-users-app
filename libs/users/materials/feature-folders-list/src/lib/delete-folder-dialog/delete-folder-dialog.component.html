@@ -1,8 +1,8 @@
-<div class="delete-folder">
-  <h1 mat-dialog-title>Delete file</h1>
-  <div mat-dialog-content>Would you like to delete cat.jpeg?</div>
-  <div mat-dialog-actions>
-    <button mat-button mat-dialog-close cdkFocusInitial>No</button>
-    <button mat-button mat-dialog-close="true">Ok</button>
-  </div>
-</div>
+<mat-dialog-content>
+  <h1 mat-dialog-title>Удаление папки: {{ data.title }}</h1>
+  <div mat-dialog-content>Вы точно хотите удалить эту папку?</div>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close cdkFocusInitial>Нет</button>
+    <button mat-button (click)="onDelete(data)">Да</button>
+  </mat-dialog-actions>
+</mat-dialog-content>

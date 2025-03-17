@@ -1,5 +1,4 @@
 .folder-content {
-  position: relative;
   cursor: pointer;
   width: 150px;
   height: 150px;
@@ -12,11 +11,9 @@
   background-color: transparent;
   border: 1px solid rgb(93, 89, 89);
   &:hover {
-    .folder-menu {
-      button {
-        opacity: 1;
-        transition: opacity 0.3s ease 0s;
-      }
+    button {
+      opacity: 1;
+      transition: opacity 0.3s ease 0s;
     }
   }
 }
@@ -24,12 +21,13 @@
 .folder-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+
   width: 100%;
 }
 
-.folder-menu {
+.folder-content {
   button {
-    background-color: transparent;
     border: none;
     opacity: 0;
     transition: opacity 0.3s ease 0s;

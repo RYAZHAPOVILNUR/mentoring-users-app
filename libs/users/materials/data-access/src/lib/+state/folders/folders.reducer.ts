@@ -55,5 +55,6 @@ export const foldersReducer = createReducer(
   on(FoldersActions.updateFolderStatus, (state, { status }) => ({
     ...state,
     status,
-  }))
+  })),
+  on(FoldersActions.deleteFolderSuccess, (state, { id }) => foldersAdapter.removeOne(id, { ...state }))
 );
