@@ -1,0 +1,10 @@
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Favorite Animal</mat-label>
+    <input matInput formControlName="" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Отмена</button>
+  <button mat-button (click)="onEdit(data)" cdkFocusInitial>Изменить</button>
+</div>

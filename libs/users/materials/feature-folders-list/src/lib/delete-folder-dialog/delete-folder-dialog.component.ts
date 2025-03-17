@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { DIALOG_DATA } from '@angular/cdk/dialog';
 import { FoldersEntity, FoldersFacade } from '@users/materials/data-access';
 
 @Component({
@@ -22,6 +21,5 @@ export class DeleteFolderDialogComponent {
   onDelete(folder: FoldersEntity) {
     this.dialogRef.close();
     this.folderFacade.deleteFolder(folder.id);
-    console.log('Deleted dialog:', folder);
   }
 }
