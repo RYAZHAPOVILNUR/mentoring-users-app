@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>{{ data.title }}</h1>
+<div mat-dialog-content>
+  <form (ngSubmit)="save()" [formGroup]="formGroup">
+    <div class="dialog-content">
+      <mat-form-field>
+        <input [errorStateMatcher]="matcher" matInput placeholder="Название" formControlName="name" />
+        <mat-error>
+          Название обязательно
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input [errorStateMatcher]="matcher" matInput placeholder="ссылка" formControlName="link" />
+        <mat-error>
+          Ссылка обязательна
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <button mat-button mat-dialog-close>Отмена</button>
+    <button mat-raised-button color="primary" type="submit">Сохранить</button>
+  </form>
+</div>
+<div mat-dialog-actions>
+</div>
