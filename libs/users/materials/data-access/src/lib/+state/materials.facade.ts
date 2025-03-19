@@ -21,8 +21,8 @@ export class MaterialsFacade{
         this.store.dispatch(addFolder({ NewFolderData }))
     }
 
-    deleteFolder(FolderId: number) {
-        this.store.dispatch(deleteFolder({ FolderId }))
+    deleteFolder(id: number) {
+        this.store.dispatch(deleteFolder({ id }))
     }
 
     loadMaterials() {
@@ -33,7 +33,7 @@ export class MaterialsFacade{
         this.store.dispatch(addMaterial({NewMaterialData}))
     }
 
-    deleteMaterial(MaterialId: number) {
-        this.store.dispatch(deleteMaterial({MaterialId}))
+    deleteMaterial(id: number) {
+        this.store.dispatch(deleteMaterial({ id }))
     }
 }

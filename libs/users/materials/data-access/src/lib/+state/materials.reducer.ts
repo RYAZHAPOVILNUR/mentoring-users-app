@@ -7,21 +7,25 @@ import * as FoldersActions from './materials.actions';
 export interface FolderState {
     folder: Folder[];
     folderError: any;
+    status: string;
 }
 
 export interface MaterialState {
     materials: Material[];
     MaterialError: any;
+    status: string;
 }
 
 export const initialFolderState: FolderState = {
     folder: [],
-    folderError: null
+    folderError: null,
+    status: 'loading'
 }
 
 export const initialMaterialState: MaterialState = {
     materials: [],
-    MaterialError: null
+    MaterialError: null,
+    status: 'loading'
 }
 
 export const FolderReducer = createReducer(
@@ -40,9 +44,9 @@ export const FolderReducer = createReducer(
         ...state,
         NewFolder: [...state.folder, NewFolderData]
     })),
-    on(FoldersActions.deleteFolderSuccess, (state, { FolderId }) => ({
+    on(FoldersActions.deleteFolderSuccess, (state, { id }) => ({
         ...state,
-        folders: state.folder.filter(folder => folder.id !== FolderId)
+        folders: state.folder.filter(folder => folder.id !== id)
     }))
 )
 export const MaterialReducer = createReducer(
@@ -61,9 +65,9 @@ export const MaterialReducer = createReducer(
         ...state,
         NewMaterial: [...state.materials, NewMaterialData]
     })),
-    on(FoldersActions.deleteMaterialSuccess, (state, { MaterialId }) => ({
+    on(FoldersActions.deleteMaterialSuccess, (state, { id }) => ({
         ...state,
-        material: state.materials.filter(material => material.id !== MaterialId)
+        material: state.materials.filter(material => material.id !== id)
     }))
 )
 

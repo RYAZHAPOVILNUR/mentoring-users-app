@@ -10,8 +10,8 @@ export const addFolder = createAction('[Folders] Add Folder', props<{ NewFolderD
 export const addFolderSuccess = createAction('[Folders] Add Folder Success', props<{ NewFolderData: Folder }>());
 export const addFolderFailure = createAction('[Folders] Add Folder Failure', props<{ error: any }>());
 
-export const deleteFolder = createAction('[Folders] Delete Folder', props<{ FolderId: number }>());
-export const deleteFolderSuccess = createAction('[Folders] Delete Folder Success', props<{ FolderId: number }>());
+export const deleteFolder = createAction('[Folders] Delete Folder', props<{ id: number }>());
+export const deleteFolderSuccess = createAction('[Folders] Delete Folder Success', props<{ id: number }>());
 export const deleteFolderFailure = createAction('[Folders] Delete Folder Failure', props<{ error: any }>());
 
 export const loadMaterials = createAction('[Materials] Load Materials');
@@ -22,6 +22,6 @@ export const addMaterial = createAction('[Materials] Add Material', props<{ NewM
 export const addMaterialSuccess = createAction('[Materials] Add Material Success', props<{ NewMaterialData: Material }>());
 export const addMaterialFailure = createAction('[Materials] Add Material Failure', props<{ error: any }>());
 
-export const deleteMaterial = createAction('[Materials] Delete Material', props<{ MaterialId: number }>());
-export const deleteMaterialSuccess = createAction('[Materials] Delete Material Success', props<{ MaterialId: number }>());
+export const deleteMaterial = createAction('[Materials] Delete Material', props<{ id: number }>());
+export const deleteMaterialSuccess = createAction('[Materials] Delete Material Success', props<{ id: number }>());
 export const deleteMaterialFailure = createAction('[Materials] Delete Material Failure', props<{ error: any }>());

@@ -3,6 +3,7 @@ import { FolderState, MaterialState } from "./materials.reducer";
 
 export const selectFolderState = createFeatureSelector<FolderState>('folders');
 export const selectAllFolders = createSelector(selectFolderState, (state: FolderState) => state.folder);
+export const selectFolderStatus = createSelector(selectFolderState, (state: FolderState) => state.status);
 export const selectFoldersError = createSelector(selectFolderState, (state: FolderState) => state.folderError);
 
 export const selectMaterialState = createFeatureSelector<MaterialState>('materials');

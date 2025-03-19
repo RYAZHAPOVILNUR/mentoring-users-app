@@ -22,6 +22,7 @@ export class FoldersEffects {
       )
     )
   );
+
   addFolder$ = createEffect(() =>
     this.actions$.pipe(
       ofType(FoldersActions.addFolder),
@@ -39,17 +40,19 @@ export class FoldersEffects {
       )
     )
   );
+
   deleteFolder$ = createEffect(() =>
     this.actions$.pipe(
       ofType(FoldersActions.deleteFolder),
-      switchMap(({ FolderId }) =>
-        this.apiService.delete(`/folder/${FolderId}`).pipe(
-          map(() => FoldersActions.deleteFolderSuccess({ FolderId })),
+      switchMap(({ id }) =>
+        this.apiService.delete(`/folder/${ id }`).pipe(
+          map(() => FoldersActions.deleteFolderSuccess({ id })),
           catchError((error) => of(FoldersActions.deleteFolderFailure({ error })))
         )
       )
     )
   );
+
   loadMaterials$ = createEffect(() =>
     this.actions$.pipe(
       ofType(FoldersActions.loadMaterials),
@@ -61,6 +64,7 @@ export class FoldersEffects {
       )
     )
   );
+
   addMaterial$ = createEffect(() =>
     this.actions$.pipe(
       ofType(FoldersActions.addMaterial),
@@ -77,12 +81,13 @@ export class FoldersEffects {
       )
     )
   );
-  deletematerial$ = createEffect(() =>
+
+  deleteMaterial$ = createEffect(() =>
     this.actions$.pipe(
       ofType(FoldersActions.deleteMaterial),
-      switchMap(({ MaterialId }) =>
-        this.apiService.delete(`/material/${MaterialId}`).pipe(
-          map(() => FoldersActions.deleteMaterialSuccess({ MaterialId })),
+      switchMap(({ id }) =>
+        this.apiService.delete(`/material/${ id }`).pipe(
+          map(() => FoldersActions.deleteMaterialSuccess({ id })),
           catchError((error) => of(FoldersActions.deleteMaterialFailure({ error })))
         )
       )
