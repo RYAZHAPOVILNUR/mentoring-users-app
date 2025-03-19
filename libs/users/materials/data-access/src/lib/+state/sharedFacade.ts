@@ -8,6 +8,7 @@ import * as FoldersActions from './folders/folders.actions';
 import * as FoldersSelectors from './folders/folders.selectors';
 import { materialsActions } from './materials/materials.actions';
 import * as MaterialsSelectors from './materials/materials.selectors';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({ providedIn: 'root' })
 export class SharedFacade {
@@ -50,8 +51,9 @@ export class SharedFacade {
     this.allFolders$
       .pipe(
         take(1),
-        filter(folders => folders.length === 0), // Проверяем, есть ли папки
-        tap(() => this.store.dispatch(FoldersActions.initFolders())) // Загружаем только если пусто
+        filter(folders => folders.length === 0),
+        tap(() => this.store.dispatch(FoldersActions.initFolders())),
+        takeUntilDestroyed()
       )
       .subscribe();
   }
@@ -73,7 +75,8 @@ export class SharedFacade {
         }),
         tap(() => {
           this.store.dispatch(materialsActions.initMaterials()); // Загружаем материалы
-        })
+        }),
+        takeUntilDestroyed()
       )
       .subscribe();
   }
