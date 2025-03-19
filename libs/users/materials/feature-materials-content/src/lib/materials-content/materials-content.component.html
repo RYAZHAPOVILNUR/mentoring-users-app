@@ -1,1 +1,24 @@
-<p>materials-content works!</p>
+<div class="materials-content">
+  <div class="materials-content__container">
+    <span mat-dialog-title class="materials-content__title"> {{ data.title }}</span>
+    <button mat-icon-button mat-dialog-close class="materials-content__button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-dialog-content>
+    <ng-container *ngIf="materialsValidation.audio.test(data.material_link)">
+      <audio class="materials-content__audio" type="audio/mp3" controls [src]="data.material_link"></audio>
+    </ng-container>
+    <ng-container *ngIf="materialsValidation.video.test(data.material_link)">
+      <iframe [src]="getVideoUrl()" class="materials-content__video" allowfullscreen></iframe>
+    </ng-container>
+    <ng-container *ngIf="materialsValidation.pdf.test(data.material_link)">
+      <pdf-viewer
+        class="materials-content__pdf"
+        [src]="data.material_link"
+        [render-text]="true"
+        [original-size]="false"
+      />
+    </ng-container>
+  </mat-dialog-content>
+</div>

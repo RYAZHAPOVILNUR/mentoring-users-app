@@ -15,7 +15,7 @@ export type MaterialsErrors = {
   status: number;
   message: string;
   [key: string]: unknown;
-}
+};
 
 export const MaterialsAdapter: EntityAdapter<IMaterial> = createEntityAdapter<IMaterial>();
 
@@ -28,7 +28,6 @@ export const initialMaterialsState: MaterialsState = MaterialsAdapter.getInitial
 export const materialsFeature = createFeature({
   name: MATERIALS_FEATURE_KEY,
   reducer: createReducer(
-    
     initialMaterialsState,
     on(MaterialsActions.loadMaterials, (state) => ({
       ...state,
@@ -64,6 +63,6 @@ export const materialsFeature = createFeature({
     on(MaterialsActions.addMaterialFailed, (state) => ({
       ...state,
       status: 'error' as const,
-    })),
-    )
-})
+    }))
+  ),
+});

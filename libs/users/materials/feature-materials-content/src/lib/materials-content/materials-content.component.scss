@@ -1,0 +1,34 @@
+.materials-content {
+    &__container {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__title {
+        font-size: 30px;
+        line-height: 22px;
+        margin-bottom: 0px;
+        margin-top: 10px;
+    }
+
+    &__button {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+    }
+
+    &__audio {
+        max-width: 550px;
+        height: 50px;
+    }
+
+    &__video {
+        width: 854px;
+        height: 480px;
+    }
+
+    &__pdf {
+        width: 70vw;
+        height: 90vh;
+    }
+}

@@ -1,9 +1,9 @@
 export interface IFolder {
-    id: number;
-    created_at: number;
-    title: string;
+  id: number;
+  created_at: string;
+  title: string;
 }
 
 export interface IAddFolder {
-    title: string;
+  title: string;
 }

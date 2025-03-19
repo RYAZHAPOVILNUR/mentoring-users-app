@@ -1,1 +1,1 @@
-export * from './lib/feature-materials-create.module';
+export * from './lib/materials-add-button/materials-add-button.component';

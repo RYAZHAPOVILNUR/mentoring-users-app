@@ -1,15 +1,12 @@
-<div class="folder__card" (dblclick)="onOpenFolder(folder)">
-    <div class="folder-card__container">
-        <div class="folder-card__icon-container">
-            <mat-icon class="folder-card__icon">folder</mat-icon>
-            <button 
-            mat-icon-button
-            (click)="onDeleteFolder($event, folder)"
-            class="folder-card__button-delete">
-                <mat-icon>delete</mat-icon>
-            </button>
-        </div>
-        <p class="folder-card__title">{{ folder.title }}</p>
-        <p class="folder-card__date">{{ formatDate(folder.created_at) }}</p>
+<div class="folder-card" (dblclick)="onOpenFolder(folder)">
+  <div class="folder-card__container">
+    <div class="folder-card__icon-container">
+      <mat-icon class="folder-card__icon">folder</mat-icon>
+      <button mat-icon-button (click)="onDeleteFolder($event, folder)" class="folder-card__button-delete">
+        <mat-icon>delete</mat-icon>
+      </button>
     </div>
+    <p class="folder-card__title">{{ folder.title }}</p>
+    <p class="folder-card__date">{{ formatDate(folder.created_at) }}</p>
+  </div>
 </div>

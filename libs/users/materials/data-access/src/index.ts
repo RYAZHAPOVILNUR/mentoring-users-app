@@ -13,3 +13,7 @@ export * as MaterialsEffects from './lib/+state/materials/materials.effects';
 export * from './lib/models/folder.model';
 export * from './lib/models/material.model';
 export * from './lib/view-models/folder-vm';
+export * from './lib/view-models/material-vm';
+export * from './lib/constants-enums/materials-validation';
+export * from './lib/constants-enums/materials-enums';
+export * from './lib/validators/materials-links-validator';

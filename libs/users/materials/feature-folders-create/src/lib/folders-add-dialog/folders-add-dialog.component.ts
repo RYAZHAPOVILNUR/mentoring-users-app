@@ -16,8 +16,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 })
 export class FoldersAddDialogComponent {
   private readonly dialogRef = inject(MatDialogRef);
-  public readonly addFolderControl = new FormControl('', Validators.required)
-  
+  public readonly addFolderControl = new FormControl('', Validators.required);
+
   public saveFolder(): void {
     if (this.addFolderControl.valid) {
       this.dialogRef.close(this.addFolderControl.value);

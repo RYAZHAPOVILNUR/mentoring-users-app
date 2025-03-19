@@ -21,6 +21,7 @@ import { tasksEffects, tasksFeature } from '@users/users/task/data-access';
 import { CLIENT_ID, githubApiEffects, githubApiFeature } from '@users/core/github-api/data-access';
 import { backlogFeature, backlogEffects } from '@users/users/backlog/data-access';
 import { FOLDERS_FEATURE_KEY, FoldersEffects, foldersFeature } from '@users/materials/data-access';
+import { MATERIALS_FEATURE_KEY, MaterialsEffects, materialsFeature } from '@users/materials/data-access';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -38,11 +39,13 @@ export const appConfig: ApplicationConfig = {
       backlogEffects,
       SettingsEffects,
       FoldersEffects,
+      MaterialsEffects
     ),
     provideStore({
       router: routerReducer,
       [USERS_FEATURE_KEY]: usersReducer,
       [FOLDERS_FEATURE_KEY]: foldersFeature.reducer,
+      [MATERIALS_FEATURE_KEY]: materialsFeature.reducer,
       [settingsFeature.name]: settingsFeature.reducer,
       [authFeature.name]: authFeature.reducer,
       [articlesFeature.name]: articlesFeature.reducer,

@@ -1,1 +1,21 @@
-<p>materials-add-dialog works!</p>
+<span mat-dialog-title *ngIf="data === MaterialFileType.video">Добавление видео</span>
+<span mat-dialog-title *ngIf="data === MaterialFileType.pdf">Добавление PDF-файла</span>
+<span mat-dialog-title *ngIf="data === MaterialFileType.audio">Добавление аудио</span>
+<mat-dialog-content>
+  <form [formGroup]="addMaterial" class="materials-add__wrapper">
+    <mat-form-field appearance="fill">
+      <mat-label>Название файла</mat-label>
+      <input matInput formControlName="title" />
+      <mat-error>Укажите название файла</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Укажите ссылку</mat-label>
+      <input matInput formControlName="link" />
+      <mat-error>Укажите корректную ссылку</mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button color="primary" [disabled]="addMaterial.invalid" (click)="saveMaterial()">Создать</button>
+  <button mat-flat-button mat-dialog-close>Отмена</button>
+</mat-dialog-actions>

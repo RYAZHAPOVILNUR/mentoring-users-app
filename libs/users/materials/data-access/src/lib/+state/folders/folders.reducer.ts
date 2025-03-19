@@ -15,7 +15,7 @@ export type FoldersErrors = {
   status: number;
   message: string;
   [key: string]: unknown;
-}
+};
 
 export const FoldersAdapter: EntityAdapter<IFolder> = createEntityAdapter<IFolder>();
 
@@ -28,7 +28,6 @@ export const initialFoldersState: FoldersState = FoldersAdapter.getInitialState(
 export const foldersFeature = createFeature({
   name: FOLDERS_FEATURE_KEY,
   reducer: createReducer(
-    
     initialFoldersState,
     on(FoldersActions.loadFolders, (state) => ({
       ...state,
@@ -64,7 +63,6 @@ export const foldersFeature = createFeature({
     on(FoldersActions.addFolderFailed, (state) => ({
       ...state,
       status: 'error' as const,
-    })),
-    )
-})
-
+    }))
+  ),
+});

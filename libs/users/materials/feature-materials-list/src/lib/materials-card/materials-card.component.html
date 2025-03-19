@@ -1,1 +1,20 @@
-<p>materials-card works!</p>
+<div class="materials-card">
+  <div class="materials-card__container">
+    <div class="materials-card__icon-container">
+      <mat-icon *ngIf="materialsValidation.pdf.test(material.material_link)" class="materials-card__icon"
+        >picture_as_pdf</mat-icon
+      >
+      <mat-icon *ngIf="materialsValidation.video.test(material.material_link)" class="materials-card__icon"
+        >video_library</mat-icon
+      >
+      <mat-icon *ngIf="materialsValidation.audio.test(material.material_link)" class="materials-card__icon"
+        >music_note</mat-icon
+      >
+      <button mat-icon-button class="materials-card__button" (click)="onDeleteMaterial(material)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <p class="materials-card__title">{{ material.title }}</p>
+    <p class="material-card__date">{{ formatDate(material.created_at) }}</p>
+  </div>
+</div>
