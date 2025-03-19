@@ -22,15 +22,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   width: 100%;
-}
-
-.folder-content {
   button {
-    border: none;
     opacity: 0;
     transition: opacity 0.3s ease 0s;
+    border: 1px solid red;
   }
 }
 

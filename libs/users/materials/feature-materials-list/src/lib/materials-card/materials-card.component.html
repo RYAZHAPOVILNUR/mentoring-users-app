@@ -1,6 +1,10 @@
-<div style="border: 1px dashed red">
-  <p>{{ material.materialLink }}</p>
-  <h4>Title: {{ material.title }}</h4>
-  <p>ID: {{ material.id }}</p>
-  <p>Folder Id: {{ material.folderId }}</p>
-</div>
+<mat-card class="material-card">
+  <div class="material-header">
+    <mat-icon>{{ material.materialLink | defineMaterialType }}</mat-icon>
+    <button type="button" mat-button>
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+  <h4>{{ material.title | shortTitle }}</h4>
+  <p>{{ material.createdAt | correctdate }}</p>
+</mat-card>

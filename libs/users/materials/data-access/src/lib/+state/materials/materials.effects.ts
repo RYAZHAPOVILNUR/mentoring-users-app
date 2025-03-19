@@ -32,3 +32,25 @@ export const materialsEffects = createEffect(
   },
   { functional: true }
 );
+
+//===============
+// получается запрос на апи не делаю, если в стэйте нет фолдеров, беру их
+// (через foldersEnteties) и отправляю экшен
+// (условно: initFoldersFromMaterials({ foldersEnteties })) ?
+//===============
+// ofType(MatererialsActions.loadMaterials),
+// withLatestFrom(store.select(selectFoldersEnteties)),
+// filter(([, foldersEnteties]) => !Object.keys(foldersEnteties).length),
+// switchMap(([, foldersEnteties]) => {
+//   return apiService.get<TFolderDTO[]>('/folder').pipe(
+//     map((folders) =>
+//       MaterialsFoldersActions.loadFolderSuccess({
+//         folders: folders.map((folder) => folderDtoAdapter.DTOtoEntity(folder)),
+//       })
+//     ),
+//     catchError((error) => {
+//       console.log('Error', error);
+//       return of(MaterialsFoldersActions.loadFolderFailure({ error }));
+//     })
+//   );
+// })

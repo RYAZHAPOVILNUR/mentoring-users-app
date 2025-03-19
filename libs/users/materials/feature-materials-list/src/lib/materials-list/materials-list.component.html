@@ -1,5 +1,7 @@
 <ng-container>
-  <ng-container *ngFor="let material of vm.materials">
-    <users-materials-card [material]="material"></users-materials-card>
-  </ng-container>
+  <div class="materials-container">
+    <ng-container *ngFor="let material of vm.materials">
+      <users-materials-card [material]="material"></users-materials-card>
+    </ng-container>
+  </div>
 </ng-container>
