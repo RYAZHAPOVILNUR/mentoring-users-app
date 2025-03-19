@@ -22,8 +22,8 @@ export const loadMaterials = createEffect(
         apiService.get<TMaterialDTO[]>('/material').pipe(
           map((materials) =>
             MatererialsActions.loadMaterialsSuccess({
-              // materials: materials.filter((material) => Number(params['id']) === material.folder_id), // отфильтрованные по id
-              materials,
+              materials: materials.filter((material) => Number(params['id']) === material.folder_id), // отфильтрованные по id
+              // materials,
             })
           ),
           catchError((error) => {
@@ -43,7 +43,7 @@ export const loadFoldersFromMaterials = createEffect(
     const store = inject(Store);
 
     return actions$.pipe(
-      ofType(MatererialsActions.loadFoldersFromMaterials),
+      ofType(MatererialsActions.loadMaterials),
       withLatestFrom(store.select(selectFoldersEnteties)),
       filter(([, foldersEntities]) => !Object.keys(foldersEntities).length),
       map(() => MaterialsFoldersActions.loadFolder())
@@ -84,7 +84,6 @@ export const addMaterial = createEffect(
         apiService.post<TMaterialDTO, TCreateMaterialDTO>('/material', material).pipe(
           map((material) => {
             return MatererialsActions.addMaterialSuccess({
-              // materials: materials.filter((material) => params['id'] === material.folder_id), отфильтрованные по id
               material,
             });
           }),

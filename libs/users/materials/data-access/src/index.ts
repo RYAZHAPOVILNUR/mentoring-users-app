@@ -7,6 +7,7 @@ export * as materialsFoldersEffects from './lib/+state/folders/folders.effects';
 export * from './lib/models/folders/folder-list-vm.model';
 export * from './lib/models/folders/folder-vm.model';
 export * from './lib/models/folders/folder-dto.model';
+export * as folderEntity from './lib/models/folders/folder.entity';
 // materials
 export * from './lib/+state/materials/materials.facade';
 export * from './lib/+state/materials/materials.actions';

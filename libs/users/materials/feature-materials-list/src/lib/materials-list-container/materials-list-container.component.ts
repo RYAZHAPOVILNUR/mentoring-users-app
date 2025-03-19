@@ -5,16 +5,17 @@ import { LetDirective } from '@ngrx/component';
 import {
   TMaterialDTO,
   MaterialsFacade,
-  TMaterialListVM,
-  FoldersFacade,
   IMaterialFromAddMaterialDialog,
+  selectOpenedFolder,
+  folderEntity,
 } from '@users/materials/data-access';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, combineLatest, Observable, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { MaterialsAddButtonComponent } from '@users/materials/feature-materials-create';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'materials-list-container',
@@ -27,32 +28,18 @@ import { MaterialsAddButtonComponent } from '@users/materials/feature-materials-
 export class MaterialsListContainerComponent implements OnInit {
   private readonly dialog = inject(MatDialog);
   private readonly router = inject(Router);
-  private readonly route = inject(ActivatedRoute);
   private readonly destroyRef$ = inject(DestroyRef);
   private readonly MaterialsFacade = inject(MaterialsFacade);
-  private readonly MaterialsFoldersFacade = inject(FoldersFacade);
+  private readonly store = inject(Store);
 
   public readonly status$ = this.MaterialsFacade.status$;
   public readonly materials$ = this.MaterialsFacade.materials$;
   public readonly errors$ = this.MaterialsFacade.errors$;
 
-  private readonly folders$ = this.MaterialsFoldersFacade.folders$;
-  private readonly folderSubject$ = new BehaviorSubject<TMaterialListVM['folder']>({});
-  public readonly folder$: Observable<TMaterialListVM['folder']> = this.folderSubject$.asObservable();
+  public readonly selectedFolder$: Observable<folderEntity.TFolderEntity | null> =
+    this.store.select(selectOpenedFolder);
 
   ngOnInit(): void {
-    combineLatest([this.route.paramMap, this.folders$])
-      .pipe(
-        tap(([params, folders]) => {
-          this.folderSubject$.next({
-            id: Number(params.get('id')),
-            title: folders.find((folder) => Number(params.get('id')) === folder.id)?.title,
-          });
-        }),
-        takeUntilDestroyed(this.destroyRef$)
-      )
-      .subscribe();
-    this.MaterialsFacade.initFoldersFromMaterials();
     this.MaterialsFacade.init();
   }
 
@@ -78,21 +65,17 @@ export class MaterialsListContainerComponent implements OnInit {
   }
 
   public onAddMaterial(material: IMaterialFromAddMaterialDialog): void {
-    this.folder$
+    this.selectedFolder$
       .pipe(
-        tap((folder: TMaterialListVM['folder']) => {
+        tap((folder) => {
           this.MaterialsFacade.addMaterial({
             ...material,
             material_link: material.materialLink,
-            folder_id: folder.id ?? Date.now(),
+            folder_id: folder?.id ? folder.id : Date.now(),
           });
         }),
         takeUntilDestroyed(this.destroyRef$)
       )
       .subscribe();
-  }
-
-  public onRedirectToMaterialContent(id: number): void {
-    console.log('rediret to material: ' + id);
   }
 }

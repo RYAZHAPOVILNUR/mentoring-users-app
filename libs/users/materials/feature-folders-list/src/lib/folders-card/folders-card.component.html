@@ -6,7 +6,7 @@
     <mat-icon fontIcon="folder" class="folder-card-content__icon"
     ></mat-icon>
     <div class="folder-card-content__title">{{ folder.title }}</div>
-    <div class="folder-card-content__date">{{ dateCreateAt }}</div>
+    <div class="folder-card-content__date">{{ dateCreatedAt$ | async }}</div>
   </mat-card-content>
   
   <mat-card-actions class="folder-card-buttons">

@@ -16,8 +16,6 @@ export const loadMaterialsFailed = createAction(
   }>()
 );
 
-export const loadFoldersFromMaterials = createAction('[Materials Page] Load Folders From Materials');
-
 export const deleteMaterial = createAction(
   '[Materials Page] Delete Materials',
   props<{

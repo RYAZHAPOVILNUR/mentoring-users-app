@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -6,9 +6,6 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { MatIconModule } from '@angular/material/icon';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { UrlCheckerService } from '@users/core/http';
-import { filter, tap } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 interface IMaterialData {
   materialLink: string;
@@ -50,8 +47,6 @@ export class MaterialsContentDialogComponent {
   );
   private readonly domSanitizer = inject(DomSanitizer);
   public readonly data: IMaterialData = inject(MAT_DIALOG_DATA);
-  private readonly urlChecker = inject(UrlCheckerService);
-  private readonly destroyRef = inject(DestroyRef);
   public errorMessage: string | null = null;
   protected readonly MaterialType = MaterialType;
 
@@ -104,18 +99,6 @@ export class MaterialsContentDialogComponent {
   private sanitizerUrl(url: string, type: MaterialType): SafeResourceUrl {
     const regExp = type !== MaterialType.VIDEO ? REGEX_FORMATS[type] : null;
     if (regExp && regExp.test(url)) {
-      // здесь я уберу потом, пока недоделано
-      // this.urlChecker
-      //   .checkUrlExists(url)
-      //   .pipe(
-      //     // filter((result: boolean) => !result),
-      //     tap((result: any) => {
-      //       console.log(result);
-      //       throw new Error(`Файл по указанной ссылке: ${url} - НЕ существует, укажите другой url`);
-      //     }),
-      //     takeUntilDestroyed(this.destroyRef)
-      //   )
-      //   .subscribe();
       if (type === MaterialType.PDF) {
         return url;
       } else return this.domSanitizer.bypassSecurityTrustResourceUrl(url);

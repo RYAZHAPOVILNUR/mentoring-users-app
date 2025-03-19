@@ -9,7 +9,6 @@ import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { FoldersAddButtonComponent } from '@users/materials/feature-folders-create';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
-// import { DateLocalizationService } from '../../../../../core/ui/language-switch/src/lib/date-localization.service';
 
 @Component({
   selector: 'materials-folders-list-container',
@@ -35,16 +34,8 @@ export class FoldersListContainerComponent {
   public readonly folders$ = this.MaterialsFoldersFacade.folders$;
   public readonly errors$ = this.MaterialsFoldersFacade.errors$;
 
-  // private readonly dateLocalizationService = inject(DateLocalizationService);
-
   constructor() {
     this.MaterialsFoldersFacade.init();
-
-    // window.addEventListener('storage', (event) => {
-    //   if (event.key === 'lang') {
-    //     this.dateLocalizationService.getDateLocalization(localStorage.getItem('lang'), this.folders$);
-    //   }
-    // });
   }
 
   public onDeleteFolder(folder: TFolderVM): void {

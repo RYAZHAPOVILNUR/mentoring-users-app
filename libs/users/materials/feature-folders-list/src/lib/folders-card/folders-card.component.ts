@@ -1,25 +1,34 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
-import { AsyncPipe, CommonModule, DatePipe, registerLocaleData } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
 import { TFolderVM } from '@users/materials/data-access';
-import localeRu from '@angular/common/locales/ru';
-
-registerLocaleData(localeRu, 'ru');
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { LanguageSwitchService } from '@users/users/core/ui/language-switch';
+import { LanguageKeys } from '@users/users/core/ui/language-switch';
 
 @Component({
   selector: 'materials-folder-card',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatCardModule, MatIconModule, AsyncPipe, DatePipe],
+  imports: [CommonModule, MatButtonModule, MatCardModule, MatIconModule, AsyncPipe],
   templateUrl: './folders-card.component.html',
   styleUrls: ['./folders-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DatePipe],
 })
 export class FoldersCardComponent implements OnInit {
-  private readonly datePipe = inject(DatePipe);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly languageSwitchService = inject(LanguageSwitchService);
 
   @Input({ required: true })
   folder!: TFolderVM;
@@ -28,10 +37,28 @@ export class FoldersCardComponent implements OnInit {
 
   @Output() redirectToMaterials = new EventEmitter();
 
-  public dateCreateAt!: string;
+  public date!: Date;
 
-  ngOnInit(): void {
-    this.dateCreateAt = this.datePipe.transform(this.folder.createdAt, 'd MMMM, yyyy', undefined, 'ru') ?? 'created at';
+  private dateCreatedAtSubject$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public dateCreatedAt$ = this.dateCreatedAtSubject$.asObservable();
+
+  ngOnInit() {
+    const date = new Date(this.folder.createdAt);
+
+    this.languageSwitchService.selectedLanguage$
+      .pipe(
+        tap((result: LanguageKeys) => {
+          this.dateCreatedAtSubject$.next(
+            date.toLocaleDateString(result, {
+              day: 'numeric',
+              month: 'short',
+              year: 'numeric',
+            })
+          );
+        }),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe();
   }
 
   private readonly isIconVisibleSubject$ = new BehaviorSubject<boolean>(false);

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TMaterialDTO, TMaterialListVM } from '@users/materials/data-access';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -14,7 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./materials-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MaterialsListComponent {
+export class MaterialsListComponent implements OnInit {
   @Input({ required: true })
   vm!: TMaterialListVM;
 
@@ -24,12 +24,13 @@ export class MaterialsListComponent {
 
   @Output() goBack = new EventEmitter();
 
-  public onDeleteMaterial(material: TMaterialDTO): void {
-    this.deleteMaterial.emit(material);
+  ngOnInit() {
+    console.log(this.vm.folder);
+    console.log(this.vm.folder?.title);
   }
 
-  public onRedirectToMaterialContent(id: number): void {
-    this.redirectToMaterialContent.emit(id);
+  public onDeleteMaterial(material: TMaterialDTO): void {
+    this.deleteMaterial.emit(material);
   }
 
   public onGoBack(): void {

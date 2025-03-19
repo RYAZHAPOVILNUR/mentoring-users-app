@@ -2,12 +2,11 @@
 status: status$,
 materials: materials$,
 errors: errors$,
-folder: folder$
+folder: selectedFolder$
 } as vm"
 >
   <materials-list [vm]="vm"
                   (deleteMaterial)="onDeleteMaterial($event)"
-                  (redirectToMaterialContent)="onRedirectToMaterialContent($event)"
                   (goBack)="onGoBack()"></materials-list>
 
 
