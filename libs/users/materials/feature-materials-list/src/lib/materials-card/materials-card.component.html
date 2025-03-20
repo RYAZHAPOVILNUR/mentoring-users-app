@@ -1,1 +1,22 @@
-<p>materials-card works!</p>
+<mat-card class="material-card-wrapper" usersBasket usersOnclick (dblclick)="onOpenMaterial(material)">
+  <div class="button-container">
+    <button
+      class="button-materials-card"
+      mat-menu-item
+      (click)="onDeleteMaterial(material)"
+      matTooltipClass="example-tooltip-uppercase"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+    <mat-icon *ngIf="material.material_link.endsWith('.pdf')">picture_as_pdf</mat-icon>
+    <mat-icon *ngIf="material.material_link.endsWith('.mp3')">music_note</mat-icon>
+    <mat-icon *ngIf="!material.material_link.endsWith('.pdf') && !material.material_link.endsWith('.mp3')"
+      >ondemand_video</mat-icon
+    >
+  </div>
+  <mat-card-content class="mat-card-content">
+    <mat-icon class="folder-icon">material</mat-icon>
+    <label class="title">{{ material.title }}</label>
+    <label>{{ material.created_at | date : 'dd/MM/yyyy' }}</label>
+  </mat-card-content>
+</mat-card>

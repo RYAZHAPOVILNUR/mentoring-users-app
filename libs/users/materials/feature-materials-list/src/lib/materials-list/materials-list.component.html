@@ -1,1 +1,30 @@
-<p>materials-list works!</p>
+<div class="material-list-container">
+  <button mat-icon-button (click)="redirectMaterials()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h4>{{ vm.folder?.title }}</h4>
+</div>
+
+<ng-container *ngIf="vm.status === 'loading'; else loadingResult">
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+
+<ng-template #loadingResult>
+  <ng-container>
+    <div class="container">
+      <div class="row">
+        <div class="material-card" *ngFor="let material of vm.materials">
+          <users-materials-card [material]="material" (deleteMaterial)="onDeleteMaterial(material)" />
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #error>
+  <div class="alert alert-danger" role="alert">
+    <h1>{{ vm.errors?.status || 'Error' }}</h1>
+    <hr />
+    {{ vm.errors }}
+  </div>
+</ng-template>

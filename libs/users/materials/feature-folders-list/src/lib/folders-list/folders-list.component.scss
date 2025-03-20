@@ -1,0 +1,29 @@
+.container {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.folder-card {
+  width: 200px;
+  height: 156px;
+  margin: 0;
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.folder-card:hover {
+  transform: translateY(-5px);
+}

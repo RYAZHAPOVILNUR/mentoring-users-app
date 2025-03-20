@@ -1,1 +1,10 @@
-<p>Тут будут материалы</p>
+<ng-container
+  *ngrxLet="{
+    folders: folders$,
+    status: status$,
+    errors: errors$,
+} as vm"
+>
+  <users-folders-list [vm]="vm" (deleteFolder)="onDeleteFolder($event)" (openFolder)="onOpenFolder($event)" />
+</ng-container>
+<users-folders-add-button />

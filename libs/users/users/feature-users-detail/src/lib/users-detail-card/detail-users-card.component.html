@@ -80,12 +80,14 @@
             <mat-form-field class="edit-user-field">
               <mat-label>Сторипоинты:</mat-label>
               <input
-                type="text"
-                class="edit-user-input"
-                placeholder="Введите количество"
-                matInput
-                [formControl]="totalStorypoints"
-                [matAutocomplete]="auto"/>
+              type="text"
+              id="storypoints-input"
+              name="storypoints"
+              class="edit-user-input"
+              placeholder="Введите количество"
+              matInput
+              [formControl]="totalStorypoints"
+              autocomplete="off"/>
               <button
                 mat-icon-button
                 area-label="add storypoints"
@@ -111,11 +113,6 @@
                 (click)="totalStorypoints.reset()">
                 <mat-icon>close</mat-icon>
               </button>
-              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                <mat-option *ngFor="let suggestion of citySuggestions | ngrxPush" [value]="suggestion">
-                  {{ suggestion }}
-                </mat-option>
-              </mat-autocomplete>
             </mat-form-field>
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">

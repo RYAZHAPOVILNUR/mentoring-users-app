@@ -22,7 +22,7 @@ import { UsersListContainerStore } from './users-list-container.store';
     MatDialogModule,
     LetDirective,
     CreateUsersButtonComponent,
-    UsersFilterComponent
+    UsersFilterComponent,
   ],
   templateUrl: './users-list-container.component.html',
   styleUrls: ['./users-list-container.component.scss'],
@@ -49,6 +49,6 @@ export class UsersListContainerComponent {
     });
   }
   onUserFilter(name: UsersFilter) {
-    this.usersFacade.onUsersFilter(name)
+    this.usersFacade.onUsersFilter(name);
   }
 }

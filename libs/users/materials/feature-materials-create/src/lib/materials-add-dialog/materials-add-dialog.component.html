@@ -1,1 +1,23 @@
-<p>materials-add-dialog works!</p>
+<div class="menu-position">
+  <h2 mat-dialog-title>Добавить файл {{data.materialType}}</h2>
+  <mat-dialog-content class="materials-menu-name">
+    <form [formGroup]="formGroup">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Название</mat-label>
+        <input matInput formControlName="materialsTitle" placeholder="Введите название" />
+        <mat-error *ngIf="formGroup.get('materialsTitle')?.invalid">Название обязательно</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Ссылка на материал</mat-label>
+        <input matInput formControlName="materialLink" placeholder="https://example.com" />
+        <mat-error *ngIf="formGroup.get('materialLink')?.invalid">Введите корректный URL</mat-error>
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="button-position">
+    <button mat-button (click)="cancel()">Отмена</button>
+    <button mat-button color="primary" (click)="save()" [disabled]="formGroup.invalid">Сохранить</button>
+  </mat-dialog-actions>
+</div>

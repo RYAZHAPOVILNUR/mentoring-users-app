@@ -1,0 +1,51 @@
+.container {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.material-card {
+  width: 200px;
+  height: 156px;
+  margin: 0;
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.material-card:hover {
+  transform: translateY(-5px);
+}
+
+.material-list-container {
+  display: flex;
+  align-items: center;
+  margin-left: 90px;
+  gap: 10px;
+}
+
+::ng-deep .material-list-container button mat-icon {
+  transition: transform 1s ease;
+}
+
+button,
+mat-icon-button {
+  border: none;
+  background: none;
+  color: yellowgreen;
+}
+
+::ng-deep .material-list-container button:hover mat-icon {
+  transform: rotate(360deg);
+}

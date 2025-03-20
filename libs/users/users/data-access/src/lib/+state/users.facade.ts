@@ -11,6 +11,9 @@ import { selectFilteredUsers } from './users.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
+  loaded$(loaded$: any): unknown {
+    throw new Error('Method not implemented.');
+  }
   private readonly store = inject(Store);
 
   /**

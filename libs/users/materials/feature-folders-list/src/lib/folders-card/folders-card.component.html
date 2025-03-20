@@ -1,1 +1,17 @@
-<p>folders-card works!</p>
+<mat-card class="folder-card-wrapper" usersBasket usersOnclick (dblclick)="onOpenFolder($event)">
+  <div class="button-container">
+    <button
+      class="button-folders-card"
+      mat-menu-item
+      (click)="onDeleteFolder($event)"
+      matTooltipClass="example-tooltip-uppercase"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+  <mat-card-content class="mat-card-content">
+    <mat-icon class="folder-icon">folder</mat-icon>
+    <label class="title">{{ folder.title }}</label>
+    <label>{{ folder.created_at | date : 'dd/MM/yyyy' }}</label>
+  </mat-card-content>
+</mat-card>
