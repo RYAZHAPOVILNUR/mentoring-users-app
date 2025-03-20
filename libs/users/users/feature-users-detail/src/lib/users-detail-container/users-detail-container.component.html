@@ -6,12 +6,18 @@
     errors: errors$
   } as vm"
 >
-  <detail-users-card
-    [vm]="vm"
-    (editUser)="onEditUser($event.user, $event.onSuccessCb)"
-    (closeUser)="onCloseUser()"
-    (closeEditMode)="onCloseEditMode()"
-    (openEditMode)="onOpenEditMode()"
-    (deleteUser)="onDeleteUser()"
-  />
+  <ng-container *ngIf="timer$ | async as timer">
+    <detail-users-card
+      [vm]="vm"
+      [timer]="timer"
+      (editUser)="onEditUser($event.user, $event.onSuccessCb)"
+      (closeUser)="onCloseUser()"
+      (closeEditMode)="onCloseEditMode()"
+      (openEditMode)="onOpenEditMode()"
+      (deleteUser)="onDeleteUser()"
+      (startTimer)="onStartTimer()"
+      (stopTimer)="onStopTimer()"
+      (resetTimer)="onResetTimer()"
+    />
+  </ng-container>
 </ng-container>

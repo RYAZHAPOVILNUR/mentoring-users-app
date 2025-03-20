@@ -106,6 +106,45 @@
             </button>
           </mat-card-actions>
         </form>
+        <div class="count-down-timer">
+          <div class="wrapper">
+            <div class="description">
+              <p>Days</p>
+              <p>Hours</p>
+              <p>Minutes</p>
+              <p>Seconds</p>
+            </div>
+            <div class="times">
+              <p>{{ timer?.days }}</p>
+              <p>{{ timer?.hours }}</p>
+              <p>{{ timer?.minutes }}</p>
+              <p>{{ timer?.seconds }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="timer-btn">
+          <button
+            (click)="onStartTimer()"
+            mat-stroked-button
+            type="button"
+            color="warn">
+            старт
+          </button>
+          <button
+            (click)="onStopTimer()"
+            mat-stroked-button
+            type="button"
+            color="warn">
+            пауза
+          </button>
+          <button
+            (click)="onResetTimer()"
+            mat-stroked-button
+            type="button"
+            color="warn">
+            сбросить
+          </button>
+        </div>
       </mat-card>
     </div>
   </ng-container>
