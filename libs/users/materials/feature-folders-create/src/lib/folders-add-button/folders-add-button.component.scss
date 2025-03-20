@@ -1,0 +1,7 @@
+::ng-deep .material-list-container button mat-icon {
+    transition: transform 1s ease;
+  }
+  
+  ::ng-deep .material-list-container button:hover mat-icon {
+    transform: rotate(360deg);
+  }

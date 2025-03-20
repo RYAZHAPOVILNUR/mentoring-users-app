@@ -12,7 +12,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { onSuccessEditionCbType } from '@users/users/data-access';
+import { onSuccessEditionCbType, onSuccessStorypointsCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -29,6 +29,7 @@ import { DadataApiService } from '@dadata';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs';
 import { PushPipe } from '@ngrx/component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -48,6 +49,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     MatSnackBarModule,
     MatAutocompleteModule,
     PushPipe,
+    MatSelectModule,
   ],
   templateUrl: './detail-users-card.component.html',
   styleUrls: ['./detail-users-card.component.scss'],
@@ -74,6 +76,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
+      this.totalStorypoints.setValue(vm.user.totalStoryPoints)
     }
 
     if (vm.editMode) {
@@ -88,6 +91,7 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    totalStoryPoints: new FormControl<number | null>({ value: null, disabled: !this.vm.editMode }),
   });
 
   @Output() editUser = new EventEmitter<{
@@ -98,6 +102,10 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
+  @Output() addStorypoints = new EventEmitter<{
+    user: CreateUserDTO;
+    onSuccessAddStorypoints: onSuccessStorypointsCbType;
+  }>();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
@@ -110,6 +118,7 @@ export class DetailUsersCardComponent implements OnInit {
   private snackBar = inject(MatSnackBar);
   private readonly destroyRef = inject(DestroyRef);
   public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
+  public totalStorypoints: FormControl = new FormControl({ value: 0, disabled: true });
 
   ngOnInit(): void {
     this.checkChangeFields();
@@ -117,11 +126,34 @@ export class DetailUsersCardComponent implements OnInit {
 
   private onEditSuccess: onSuccessEditionCbType = () =>
     this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
-      duration: 2500,
+      duration: 1000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
     });
 
+  private onEditStoryPoint: onSuccessStorypointsCbType = () =>
+    this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
+      duration: 1000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+
+  public onAddStorypoints() {
+    this.totalStorypoints.disable();
+    this.addStorypoints.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        email: this.formGroup.value.email || '',
+        totalStoryPoints: this.totalStorypoints.value || 0,
+      },
+      onSuccessAddStorypoints: this.onEditStoryPoint,
+    });
+    this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
+      duration: 1000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+  }
   onSubmit(): void {
     this.editUser.emit({
       user: {
@@ -131,6 +163,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
         purchaseDate: new Date().toString() || '',
         educationStatus: 'trainee',
+        totalStoryPoints: this.formGroup.value.totalStoryPoints || 0,
       },
       onSuccessCb: this.onEditSuccess,
     });
