@@ -1,0 +1,17 @@
+
+<mat-card class="material-card-wrapper" (mouseenter)="onShowIcon(true)"
+          (mouseleave)="onShowIcon(false)" (dblclick)="onOpenMaterialContentDialog()">
+
+  <mat-card-content class="material-card-content">
+    <mat-icon *ngIf="getFileIcon() as icon" [fontIcon]="icon" class="material-card-content__icon"
+    ></mat-icon>
+    <div class="material-card-content__title">{{material.title}}</div>
+    <div class="material-card-content__date">{{dateCreatedAt$ | async}}</div>
+  </mat-card-content>
+  
+  <mat-card-actions class="material-card-buttons">
+    <button mat-icon-button class="material-card-buttons__btn" *ngIf="isIconVisible$ | async" (click)="onDeleteMaterial()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

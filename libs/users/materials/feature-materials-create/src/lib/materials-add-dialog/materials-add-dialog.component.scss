@@ -1,0 +1,14 @@
+.mat-add-form-field {
+  width: 100%;
+}
+
+.mat-add-dialog-actions {
+  display: flex;
+  justify-content: space-around;
+}
+
+.mat-add-dialog-actions {
+  &__btn {
+    width: 150px;
+  }
+}

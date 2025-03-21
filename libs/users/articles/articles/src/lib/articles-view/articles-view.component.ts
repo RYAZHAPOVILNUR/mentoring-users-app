@@ -11,8 +11,6 @@ import { ArticlesCreateButtonComponent } from '@users/users/articles/articles-cr
 import { MatListModule } from '@angular/material/list';
 import { PushPipe } from '@ngrx/component';
 import { map, Observable } from 'rxjs';
-import { ApiService } from '@users/core/http';
-import { LanguageSwitchService } from '@users/users/core/ui/language-switch';
 import { TranslateModule } from '@ngx-translate/core';
 import { UsersListContainerStore } from '../../../../../users/feature-users-list/src/lib/users-list-container/users-list-container.store';
 import { UsersFacade } from '@users/users/data-access';

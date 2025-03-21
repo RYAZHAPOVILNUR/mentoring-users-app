@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>Добавление {{dialogData.fileType}}</h2>
+<mat-dialog-content class="mat-add-dialog-content">
+  <form [formGroup]="form">
+    <mat-form-field class="mat-add-form-field">
+      <mat-label>Название</mat-label>
+      <input matInput type="text" formControlName="title">
+    </mat-form-field>
+    <mat-form-field class="mat-add-form-field">
+      <mat-label>Ссылка</mat-label>
+      <input matInput type="text" formControlName="materialLink">
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions class="mat-add-dialog-actions">
+  <button mat-flat-button class="mat-add-dialog-actions__btn"
+          (click)="onCancelAddMaterial()">Отмена
+  </button>
+  <button mat-flat-button class="mat-add-dialog-actions__btn"
+          (click)="onAddMaterial()" [disabled]="form.invalid">Добавить
+  </button>
+</mat-dialog-actions>

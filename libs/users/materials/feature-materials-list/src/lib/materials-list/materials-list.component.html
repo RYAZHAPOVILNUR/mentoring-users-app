@@ -1,0 +1,34 @@
+<ng-container *ngIf="vm.status === 'loading'; else loadingResult">
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+
+<ng-template #loadingResult>
+  <ng-container *ngIf="vm.status === 'loaded'; else error">
+    <div class="container">
+      
+      <div class="title">
+        <button mat-icon-button class="btn" (click)="onGoBack()">
+          <mat-icon>keyboard_backspace</mat-icon>
+        </button>
+        <h2 class="subtitle">{{ vm.folder?.title }}</h2>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-3 mb-3" *ngFor="let material of vm.materials">
+          <materials-card
+            [material]="material"
+            (deleteMaterial)="onDeleteMaterial(material)"
+          />
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #error>
+  <div class="alert alert-danger" role="alert">
+    <h1>{{ vm.errors?.status }}</h1>
+    <hr />
+    {{ vm.errors }}
+  </div>
+</ng-template>
