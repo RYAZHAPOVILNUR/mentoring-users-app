@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MaterialsFacade } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-folders-add-dialog',
@@ -28,6 +29,7 @@ export class FoldersAddDialogComponent {
   public formGroup: FormGroup;
   readonly dialogRef = inject(MatDialogRef<FoldersAddDialogComponent>);
   private formBuilder = inject(FormBuilder);
+  private readonly facade = inject(MaterialsFacade)
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { name: string }) {
     this.formGroup = this.formBuilder.group({

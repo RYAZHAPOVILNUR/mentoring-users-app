@@ -2,7 +2,7 @@ import { inject, Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { AddNewFolder, Folder } from "../interfaces/folder.interface";
-import { selectAllFolders, selectAllMaterials } from "./materials.selectors";
+import { selectAllFolders, selectAllMaterials, selectFoldersError, selectFolderStatus, selectMaterialError, selectMaterialStatus } from "./materials.selectors";
 import { AddNewMaterial, Material } from "../interfaces/material.interface";
 import { addFolder, addMaterial, deleteFolder, deleteMaterial, loadFolders, loadMaterials } from "./materials.actions";
 
@@ -11,7 +11,12 @@ export class MaterialsFacade{
     private readonly store = inject(Store)
 
     public readonly folders$: Observable<Folder[]> = this.store.select(selectAllFolders);
+    public readonly foldersStatus$ = this.store.select(selectFolderStatus);
+    public readonly folderErrors$ = this.store.select(selectFoldersError);
     public readonly materials$: Observable<Material[]> = this.store.select(selectAllMaterials);
+    public readonly materialsStatus$ = this.store.select(selectMaterialStatus);
+    public readonly materialErrors$ = this.store.select(selectMaterialError);
+
 
     loadFolders() {
         this.store.dispatch(loadFolders())

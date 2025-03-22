@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoldersAddButtonComponent } from '@users/feature-folders-create';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';
-import { Store } from '@ngrx/store';
+import { Folder } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-folders-list',
@@ -13,5 +13,17 @@ import { Store } from '@ngrx/store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersListComponent {
-  readonly store = inject(Store);
+  @Input({required: true})
+  folders!: Folder[];
+
+  @Output() deleteFolder = new EventEmitter();
+  @Output() openFolder = new EventEmitter<number>();
+
+  public onDeleteFolder(folder: Folder) {
+    this.deleteFolder.emit(folder)
+  }
+
+  public onOpenFolder(id: number) {
+    this.openFolder.emit(id)
+  }
 }

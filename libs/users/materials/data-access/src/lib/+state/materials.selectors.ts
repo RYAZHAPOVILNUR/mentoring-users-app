@@ -8,4 +8,5 @@ export const selectFoldersError = createSelector(selectFolderState, (state: Fold
 
 export const selectMaterialState = createFeatureSelector<MaterialState>('materials');
 export const selectAllMaterials = createSelector(selectMaterialState, (state: MaterialState) => state.materials);
+export const selectMaterialStatus = createSelector(selectMaterialState, (state: MaterialState) => state.status);
 export const selectMaterialError = createSelector(selectMaterialState, (state: MaterialState) => state.MaterialError)

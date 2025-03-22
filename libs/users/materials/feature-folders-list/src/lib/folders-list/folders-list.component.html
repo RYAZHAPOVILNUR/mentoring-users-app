@@ -1,9 +1,14 @@
-<div class="folders-list">
-    <div class="add-folder-button">
-        <users-folders-add-button></users-folders-add-button>
-    </div>
-    <div class="folders-list-container">
-        <users-folders-card></users-folders-card>
-    </div>
+<div class="add-folder-button">
+  <users-folders-add-button></users-folders-add-button>
 </div>
-
+<div class="folders-list">
+  <div class="folders-list-container">
+    <ng-container *ngFor="let folder of folders">
+      <users-folders-card
+        [folder]="folder"
+        (deleteFolder)="onDeleteFolder(folder)"
+        (dblclick)="onOpenFolder(folder.id)"
+      ></users-folders-card>
+    </ng-container>
+  </div>
+</div>
