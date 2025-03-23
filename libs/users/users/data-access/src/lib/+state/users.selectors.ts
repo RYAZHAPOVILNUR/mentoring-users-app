@@ -41,3 +41,4 @@ export const selectFilteredUsers = createSelector(
         user.name.toLowerCase().includes(userFilter.name.toLowerCase()));
   }
 )
+
