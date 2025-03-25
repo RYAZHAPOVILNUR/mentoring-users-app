@@ -14,7 +14,7 @@ export const initialFoldersState: FoldersState = foldersAdapter.getInitialState(
 });
 
 export interface FoldersState extends EntityState<FoldersDTO> {
-  selectedId?: string | number; // which Users record has been selected
+  selectedId?: string | number;
   status: LoadingStatus;
   error: string | null;
 }

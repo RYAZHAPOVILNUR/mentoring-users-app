@@ -3,7 +3,7 @@ import { MaterialsDTO } from '@users/core/data-access';
 import { inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { MaterialsFacade } from '@users/materials/data-access';
-import { shareReplay, switchMap, tap } from 'rxjs';
+import { distinctUntilChanged, map, shareReplay, switchMap, tap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
@@ -43,11 +43,11 @@ export class MaterialsListContainerStore extends ComponentStore<MaterialsListSta
 
   private filterMaterialsByFolderId(): void {
     this.effect(() => this.route.params.pipe(
+      distinctUntilChanged((prev, curr) => prev['id'] === curr['id']),
       switchMap(params => {
         const folderId = params['id'];
-        console.log(folderId)// Получаем id папки из параметров маршрута
         return this.materials$.pipe(
-          tap(materials => {
+          map(materials => {
             const filteredMaterials = materials.filter(material => material.folder_id === +folderId);
             this.patchState({ filteredMaterials });
           })

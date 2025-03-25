@@ -19,8 +19,7 @@ export const folderEffect = createEffect(
         apiService.get<FoldersDTO[]>('/folder').pipe(
           map((folders) => FolderActions.loadFoldersSuccess({ folders })),
           catchError((err) => {
-            console.log(err.message);
-            return of(FolderActions.loadFoldersFailure(err));
+            return of(FolderActions.loadFoldersFailure({error: err}));
           })
         )
       )
@@ -41,7 +40,7 @@ export const addFolderEffect = createEffect(
           map((folder) => FolderActions.addFolderSuccess({ folder })),
           catchError((err) => {
             console.log(err)
-            return of(FolderActions.loadFoldersFailure(err))
+            return of(FolderActions.loadFoldersFailure({error: err}))
           })
         )
       )
