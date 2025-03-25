@@ -1,0 +1,26 @@
+.folder-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.folder-title {
+  display: flex;
+  align-items: center;
+  h2 {
+    margin: 0;
+  }
+}
+
+div.alert-success {
+  position: absolute;
+  text-align: center;
+  width: 400px;
+  top: 3em;
+  z-index: 1;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

@@ -1,0 +1,13 @@
+<ng-container
+  *ngrxLet="{
+    folder: folder$,
+    status: status$,
+    errors: errors$
+  } as vm"
+>
+  <detail-folders-card
+    [vm]="vm"
+    (closeFolder)="onCloseFolder()"
+    (deleteFolder)="onDeleteFolder()"
+  />
+</ng-container>

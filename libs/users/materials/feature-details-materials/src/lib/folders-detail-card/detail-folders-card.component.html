@@ -1,0 +1,26 @@
+<ng-container *ngIf="vm.status === 'loading'; else loadingResult">
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+
+<ng-template #loadingResult>
+  <ng-container *ngIf="vm.status === 'loaded'; else error">
+    <div class="folder-container">
+      <div class="folder-title">
+        <button mat-icon-button aria-label="close dialog" color="accent" (click)="onCloseFolder()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <h2>{{vm.folder?.title}}</h2>
+      </div>
+    </div>
+    <user-materials-list-container [folder_id]="vm.folder?.id"></user-materials-list-container>
+    <users-materials-add-button [folder_id]="vm.folder?.id"></users-materials-add-button>
+  </ng-container>
+</ng-template>
+
+<ng-template #error>
+  <div class="alert alert-danger" role="alert">
+    <h1>{{ vm.errors }}</h1>
+    <hr />
+    Данная папка не найдена
+  </div>
+</ng-template>

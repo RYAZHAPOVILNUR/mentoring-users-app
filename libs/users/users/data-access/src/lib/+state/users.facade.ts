@@ -11,21 +11,14 @@ import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
   private readonly store = inject(Store);
-
-  /**
-   * Combine pieces of state using createSelector,
-   * and expose them as observables through the facade.
-   */
   public readonly status$ = this.store.pipe(select(UsersSelectors.selectUsersStatus));
   public readonly allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
   public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
   public readonly loggedUser$ = this.store.select(selectLoggedUser);
+  public readonly filteredUser$ = this.store.select(UsersSelectors.selectFilteredUsers);
   public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError));
-  /**
-   * Use the initialization action to perform one
-   * or more tasks in your Effects.
-   */
+  
   init() {
     this.store.dispatch(UsersActions.initUsers());
   }
@@ -56,5 +49,13 @@ export class UsersFacade {
 
   loadUser() {
     this.store.dispatch(UsersActions.loadUser());
+  }
+
+  setUsersFilter(filter: {name: string}) {
+    this.store.dispatch(UsersActions.setUsersFilter({filter}));
+  }
+
+  addStoryPoints(userData: CreateUserDTO, id: number, onSuccessCb: UsersActions.onSuccessAddStoryPointsCbType) {
+    this.store.dispatch(UsersActions.addStoryPoints({userData, id, onSuccessCb}));
   }
 }

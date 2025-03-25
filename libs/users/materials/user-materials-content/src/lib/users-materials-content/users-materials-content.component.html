@@ -1,0 +1,33 @@
+<div class="title">
+  <h1 mat-dialog-title>{{ data.material.title }}</h1>
+</div>
+
+<div class="button-close">
+  <button class="title-button" mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<ng-container *ngIf="isAudio">
+  <div class="audio">
+    <audio controls>
+      <source [src]="materialLink" type="audio/mp3">
+    </audio>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="isVideo">
+  <div class="video-container">
+    <iframe *ngIf="videoUrl" width="560" height="315" [src]="videoUrl" frameborder="0" allowfullscreen></iframe>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="isPdf">
+  <div class="pdf-container">
+    <pdf-viewer [src]="materialLink"
+              [render-text]="true"
+              [original-size]="false"
+              class="pdf-viewer"
+  ></pdf-viewer>
+  </div>
+</ng-container>

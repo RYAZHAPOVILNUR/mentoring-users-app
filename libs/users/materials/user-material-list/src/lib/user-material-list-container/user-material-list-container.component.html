@@ -1,0 +1,14 @@
+<ng-container
+  *ngrxLet="{
+    materials: filteredMaterials$,
+    status: status$,
+    errors: errors$,
+  } as vm"
+>
+  <materials-ui
+    [vm]="vm"
+    (deleteMaterial)="onDeleteMaterial($event)"
+    (openMaterial)="onOpenMaterial($event)"
+  />
+</ng-container>
+

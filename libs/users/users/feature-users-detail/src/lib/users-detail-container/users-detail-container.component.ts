@@ -2,14 +2,16 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
-import { UsersErrors, UsersFacade, onSuccessEditionCbType } from '@users/users/data-access';
+import { UsersErrors, UsersFacade, onSuccessAddStoryPointsCbType, onSuccessEditionCbType } from '@users/users/data-access';
 import { Observable, map, tap } from 'rxjs';
-import { selectQueryParam, CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { selectQueryParam, CreateUserDTO, UsersEntity, usersDTOAdapter } from '@users/core/data-access';
 import { Store, select } from '@ngrx/store';
 import { LetDirective } from '@ngrx/component';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormControl } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -65,6 +67,10 @@ export class UsersDetailComponent {
     this.router.navigate(['admin/users', this.user.id], {
       queryParams: { edit: true },
     });
+  }
+
+  onAddStoryPoints(userData: CreateUserDTO, onSuccessCb: onSuccessAddStoryPointsCbType) {
+    this.usersFacade.addStoryPoints(userData, this.user.id, onSuccessCb);
   }
 
   onDeleteUser() {
