@@ -9,5 +9,5 @@
     "types": []
   },
   "exclude": ["src/**/*.spec.ts", "src/test-setup.ts", "jest.config.ts", "src/**/*.test.ts"],
-  "include": ["src/**/*.ts", "../../../core/data-access/lib/folders.entity.ts", "@user/core/data-access"]
+  "include": ["*.ts"]
 }

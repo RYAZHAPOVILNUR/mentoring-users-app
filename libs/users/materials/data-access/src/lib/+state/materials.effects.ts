@@ -36,7 +36,6 @@ export class MaterialsEffects {
       const apiService = inject(ApiService);
       return actions$.pipe(
         ofType(MaterialsActions.addFolder),
-        // delay(1500),
         switchMap(({ folderData }) =>
           apiService.post<FolderDTO, CreateFolderDTO>('/folder', folderData).pipe(
             map((folder) => foldersDTOAdapter.DTOtoEntity(folder)),
@@ -52,39 +51,31 @@ export class MaterialsEffects {
     { functional: true }
   );
   
-  editFolder = createEffect(
-    () => {
-      const actions$ = inject(Actions);
-      const apiService = inject(ApiService);
-      const foldersEntities$ = inject(Store).pipe(select(selectFoldersEntities));
+  editFolder = createEffect(() => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const foldersEntities$ = inject(Store).pipe(select(selectFoldersEntities));
   
-      return actions$.pipe(
-        ofType(MaterialsActions.editFolder),
-        withLatestFrom(foldersEntities$),
-        filter(([{ id }, folderEntities]) => Boolean(folderEntities[id])),
-        map(([{ folderData, id, onSuccess }, folderEntities]) => ({
-          folder: {
-            ...foldersDTOAdapter.entityToDTO(<FolderEntity>folderEntities[id]),
-            title: folderData.title,
-            created_at: folderData.created_at,
-          },
-          onSuccess,
-        })),
-        switchMap(({ folder, onSuccess }) =>
-          apiService.post<FolderDTO, CreateFolderDTO>(`/folder/${folder.id}`, folder).pipe(
-            map((folderData) => ({ folderData, onSuccess })),
-            tap(({ onSuccess }) => onSuccess()),
-            map(({ folderData }) => MaterialsActions.editFolderSuccess({ folderData })),
-            catchError((error) => {
-              console.error('Error', error);
-              return of(MaterialsActions.editFolderFailure({ error }));
-            })
-          )
+    return actions$.pipe(
+      ofType(MaterialsActions.editFolder),
+      withLatestFrom(foldersEntities$),
+      filter(([{ id }, folderEntities]) => Boolean(!!folderEntities[id])),
+      switchMap(([{ folderData, id, onSuccess }, folderEntities]) =>
+        apiService.post<FolderDTO, CreateFolderDTO>(`/folder/${id}`, {
+          ...foldersDTOAdapter.entityToDTO(<FolderEntity>folderEntities[id]) as FolderEntity,
+          title: folderData.title,
+          created_at: folderData.created_at,
+        }).pipe(
+          tap(() => onSuccess?.()),
+          map(folderData => MaterialsActions.editFolderSuccess({ folderData })),
+          catchError(error => {
+            console.error('Error editing folder:', error);
+            return of(MaterialsActions.editFolderFailure({ error }));
+          })
         )
-      );
-    },
-    { functional: true }
-  );
+      )
+    );
+  }, { functional: true });
   
   deleteFolder = createEffect(
     () => {
@@ -92,7 +83,6 @@ export class MaterialsEffects {
       const apiService = inject(ApiService);
       return actions$.pipe(
         ofType(MaterialsActions.deleteFolder),
-        // delay(1500),
         switchMap(({ id }) =>
           apiService.delete<void>(`/folder/${id}`).pipe(
             map(() => MaterialsActions.deleteFolderSuccess({ id })),

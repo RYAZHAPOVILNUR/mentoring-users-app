@@ -1,7 +1,7 @@
 import { DeepReadonly } from "@users/core/utils";
 export enum TypeFolder {
-  MentorsFolders = "mentors folders",
-  MyFolders = "my folders",
+  MentorsFolders = "MENTORS_FOLDERS",
+  MyFolders = "MY_FOLDERS",
 }
 export type FolderDTO = DeepReadonly<{
   id: number;

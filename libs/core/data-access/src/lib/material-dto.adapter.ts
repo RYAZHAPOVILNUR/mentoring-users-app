@@ -24,8 +24,7 @@ export const materialsDTOAdapter: MaterialDTOAdapter = {
       ...otherFields,
       typeMaterial: isPDF ? TypeMaterial.PDF
       : isVideo ? TypeMaterial.Video
-      : isAudio ? TypeMaterial.Audio
-      : undefined
+      : TypeMaterial.Audio
     };
   },
 };
