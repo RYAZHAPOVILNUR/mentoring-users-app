@@ -1,0 +1,34 @@
+{
+  "name": "feature-materials-content",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "/libs/users/materials/feature-materials-content/src",
+  "prefix": "lib",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:ng-packagr",
+      "options": {
+        "project": "/libs/users/materials/feature-materials-content/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "/libs/users/materials/feature-materials-content/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "/libs/users/materials/feature-materials-content/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "tsConfig": "/libs/users/materials/feature-materials-content/tsconfig.spec.json",
+        "polyfills": [
+          "zone.js",
+          "zone.js/testing"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+<mat-card class="material-card-wrapper" (click)="openMediaDialog(material)">
+  <div class="material-buttons">
+    <ng-container [ngSwitch]="material.material_link | materialType">
+      <mat-icon *ngSwitchCase="materialTypes.PDF">picture_as_pdf</mat-icon>
+      <mat-icon *ngSwitchCase="materialTypes.AUDIO">music_note</mat-icon>
+      <mat-icon *ngSwitchCase="materialTypes.VIDEO">video_library</mat-icon>
+    </ng-container>
+    <button mat-icon-button color="grey" class="material-delete" (click)="ondeleteFolder($event)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+  <div class="material-info">
+    <p>{{ material.title }}</p>
+    <p>{{ material.created_at ? (material.created_at | date: 'dd MMMM YYYY' : undefined : lang ? lang : '') : '' }}</p>
+  </div>
+</mat-card>

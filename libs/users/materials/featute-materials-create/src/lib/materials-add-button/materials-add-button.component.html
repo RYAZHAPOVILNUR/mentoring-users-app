@@ -1,0 +1,21 @@
+<div class="selector-container">
+  <button mat-fab color="primary" class="add-material-fab-button" [matMenuTriggerFor]="menu">
+    <mat-icon>add</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="openDialog('PDF')">
+      <mat-icon>picture_as_pdf</mat-icon>
+      <span>PDF</span>
+    </button>
+    <button mat-menu-item (click)="openDialog('AUDIO')">
+      <mat-icon>music_note</mat-icon>
+      <span>AUDIO</span>
+    </button>
+    <button mat-menu-item (click)="openDialog('VIDEO')">
+      <mat-icon>video_library</mat-icon>
+      <span>VIDEO</span>
+    </button>
+  </mat-menu>
+</div>
+
+

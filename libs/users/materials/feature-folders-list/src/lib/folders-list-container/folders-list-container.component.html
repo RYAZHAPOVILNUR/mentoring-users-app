@@ -1,0 +1,12 @@
+<ng-container
+  *ngrxLet="{
+  folders: folders$,
+  status: status$,
+  errors: errors$,
+  lang: lang$
+  } as vmf"
+>
+
+  <folders-list [vmf]="vmf" (deleteFolder)="onDeleteFolder($event)" (redirectToMaterials)="onRedirectToMaterials($event)"></folders-list>
+</ng-container>
+<folders-add-button></folders-add-button>

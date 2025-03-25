@@ -1,30 +1,33 @@
 {
-  "name": "users-materials-data-access",
+  "name": "data-access",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/users/materials/data-access/src",
-  "prefix": "users",
-  "tags": [],
   "projectType": "library",
+  "sourceRoot": "/libs/users/materials/data-access/src",
+  "prefix": "lib",
   "targets": {
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+    "build": {
+      "executor": "@angular-devkit/build-angular:ng-packagr",
       "options": {
-        "jestConfig": "libs/users/materials/data-access/jest.config.ts",
-        "passWithNoTests": true
+        "project": "/libs/users/materials/data-access/ng-package.json"
       },
       "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
+        "production": {
+          "tsConfig": "/libs/users/materials/data-access/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "/libs/users/materials/data-access/tsconfig.lib.json"
         }
-      }
+      },
+      "defaultConfiguration": "production"
     },
-    "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
       "options": {
-        "lintFilePatterns": ["libs/users/materials/data-access/**/*.ts", "libs/users/materials/data-access/**/*.html"]
+        "tsConfig": "/libs/users/materials/data-access/tsconfig.spec.json",
+        "polyfills": [
+          "zone.js",
+          "zone.js/testing"
+        ]
       }
     }
   }

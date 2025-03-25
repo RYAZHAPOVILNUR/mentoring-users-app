@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Содержимое файла</h2>
+<mat-dialog-content>
+  <ng-container [ngSwitch]="data.type">
+    <pdf-viewer
+                *ngSwitchCase="'pdf'"
+                [src]="data.link"
+                [render-text]="true"
+                [original-size]="false"
+                style="width: 800px; height: 500px"
+    ></pdf-viewer>
+    <audio *ngSwitchCase="'audio'" controls width="100%">
+      <p>{{data.link}}</p>
+      <source [src]="data.link" type="audio/mpeg" muted>
+      Ваш браузер не поддерживает аудио.
+    </audio>
+    <video *ngSwitchCase="'video'" controls width="100%">
+      <p>{{data.link}}</p>
+      <source [src]="data.link" type="video/mp4" muted>
+      Ваш браузер не поддерживает видео.
+    </video>
+    <p *ngSwitchDefault>Неподдерживаемый формат</p>
+  </ng-container>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button color="primary" (click)="close()">Закрыть</button>
+</mat-dialog-actions>
