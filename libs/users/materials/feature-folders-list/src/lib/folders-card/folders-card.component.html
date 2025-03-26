@@ -1,0 +1,17 @@
+<mat-card class="folder-card">
+	<mat-card-actions class="folder-card-actions">
+		<button mat-icon-button><mat-icon> folder</mat-icon></button>
+		<button mat-icon-button class="folder-card_del_button"><mat-icon> delete</mat-icon></button>
+	</mat-card-actions>
+	<mat-card-header>
+		<mat-card-title>
+			<a href="">
+				<p class="card-title">{{folder?.title}}</p>
+			</a>
+		</mat-card-title>
+		<mat-card-subtitle>
+			<p *ngIf="createAt">{{ createAt | date:'dd MMM yyyy' }}</p>
+
+		</mat-card-subtitle>
+	</mat-card-header>
+</mat-card>

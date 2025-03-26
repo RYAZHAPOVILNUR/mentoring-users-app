@@ -1,0 +1,39 @@
+.folder-card {
+  width: 175px;
+  height: 150px;
+  background-color: rgb(101, 101, 101);
+}
+
+.folder-card-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 5px;
+  max-width: 155px;
+}
+.folder-card-actions button {
+  background-color: transparent;
+  color: rgb(216, 212, 212);
+  border: none;
+  cursor: pointer;
+}
+
+.folder-card_del_button {
+  display: none;
+}
+
+.folder-card:hover .folder-card_del_button {
+  display: block;
+  transition: display 0.5s ease-in-out;
+}
+
+a,
+p {
+  text-decoration: none;
+  color: white;
+}
