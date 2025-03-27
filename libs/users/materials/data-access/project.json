@@ -1,16 +1,16 @@
 {
-  "name": "users-materials-data-access",
+  "name": "data-access",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/users/materials/data-access/src",
+  "sourceRoot": "data-access/src",
   "prefix": "users",
-  "tags": [],
   "projectType": "library",
+  "tags": [],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/users/materials/data-access/jest.config.ts",
+        "jestConfig": "data-access/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -24,7 +24,7 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/users/materials/data-access/**/*.ts", "libs/users/materials/data-access/**/*.html"]
+        "lintFilePatterns": ["data-access/**/*.ts", "data-access/**/*.html"]
       }
     }
   }

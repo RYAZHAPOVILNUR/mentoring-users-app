@@ -102,8 +102,8 @@ const reducer = createReducer(
   )
 );
 
-export function usersReducer(state: UsersState | undefined, action: Action) {
-  return reducer(state, action);
-}
+  export function usersReducer(state: UsersState | undefined, action: Action) {
+    return reducer(state, action);
+  }
 
 

@@ -1,0 +1,22 @@
+<mat-card
+  class="user-card-wrapper"
+>
+  <mat-card-content class="mat-card-content">
+    <img [src]="'assets/img/1.png'" alt="" class="user-photo" />
+    <label *ngIf="folder.title; else email">{{ folder.title }}</label>
+    <ng-template #email>
+      {{ folder.id }}
+    </ng-template>
+  </mat-card-content>
+
+  <mat-menu #menu="matMenu">
+    <button
+      mat-menu-item
+      color="warn"
+      (click)="onDeleteFolder($event)"
+    >
+      Удалить
+    </button>
+  </mat-menu>
+
+</mat-card>

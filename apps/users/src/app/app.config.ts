@@ -9,6 +9,7 @@ import { environment } from '../environments/environment.development';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
 import { USERS_FEATURE_KEY, usersReducer, userEffects } from '@users/users/data-access';
+import { FOLDERS_FEATURE_KEY, foldersReducer, folderEffects} from '@users/materials/data-access'
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -28,6 +29,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideEffects(
+      folderEffects,
       userEffects,
       authEffects,
       articlesEffects,
@@ -39,6 +41,7 @@ export const appConfig: ApplicationConfig = {
     ),
     provideStore({
       router: routerReducer,
+      [FOLDERS_FEATURE_KEY]: foldersReducer,
       [USERS_FEATURE_KEY]: usersReducer,
       [settingsFeature.name]: settingsFeature.reducer,
       [authFeature.name]: authFeature.reducer,
