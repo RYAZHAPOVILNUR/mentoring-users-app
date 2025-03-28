@@ -1,33 +1,52 @@
-import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CreateUsersButtonComponent, UsersVM } from '@users/feature-users-create';
 import { LetDirective } from '@ngrx/component';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
-import { FoldersListContainerStore } from './folders-list-container.store';
-import { FoldersVM } from '../../../../folders-vm';
 import {
   FoldersAddButtonComponent
 } from '../../../../feature-folders-create/folders-add-button/folders-add-button.component';
-import {
-  UsersListContainerStore
-} from '../../../../../users/feature-users-list/src/lib/users-list-container/users-list-container.store';
+import { FoldersFacade } from '@users/materials/data-access';
+import { FoldersSecondModel } from '../../../../folders-model';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { CoreUiConfirmDialogComponent } from '@users/core/ui';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'users-folders-list-container',
   standalone: true,
-  imports: [CommonModule, LetDirective, FoldersListComponent, FoldersAddButtonComponent],
+  imports: [CommonModule, LetDirective, FoldersListComponent, FoldersAddButtonComponent, MatSnackBarModule],
   templateUrl: './folders-list-container.component.html',
   styleUrls: ['./folders-list-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.Emulated,
-  providers: [FoldersListContainerStore],
-
 })
-export class FoldersListContainerComponent {
-  private readonly componentStore = inject(FoldersListContainerStore);
-  public readonly folders$ = this.componentStore.folders$;
 
-  onDeleteFolder(folder: FoldersVM) {
-    this.componentStore.deleteFolder(folder);
+export class FoldersListContainerComponent implements OnInit{
+  public readonly foldersFacade = inject(FoldersFacade);
+  private readonly dialog = inject(MatDialog);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly snackBar = inject(MatSnackBar);
+  public readonly folders$ = this.foldersFacade.allFolders$;
+  public readonly status$ = this.foldersFacade.status$;
+  public readonly errors$ = this.foldersFacade.errors$;
+
+  ngOnInit(): void {
+    this.foldersFacade.loadFolders();
+  }
+
+  onDeleteFolder(folder: FoldersSecondModel): void {
+    const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
+      data: { dialogText: `Вы уверены, что хотите удалить папку ${folder.title}?` },
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((result: boolean) => {
+        if (result) {
+          this.foldersFacade.deleteFolder(folder.id);
+          this.snackBar.open('Папка успешно удалена!', 'Закрыть', { duration: 4000 });
+        }
+      });
   }
 }

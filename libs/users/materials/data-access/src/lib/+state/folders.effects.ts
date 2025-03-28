@@ -14,7 +14,7 @@ export const folderEffects = createEffect(
       ofType(FoldersActions.initFolder),
       // delay(1500),
       switchMap(() =>
-        apiService.get<FoldersModel[]>('/folder').pipe(
+        apiService.get<FoldersSecondModel[]>('/folder').pipe(
           map((folders) =>
             FoldersActions.loadFoldersSuccess({ folders })),
 
@@ -56,12 +56,10 @@ export const addFolder = createEffect(
     const apiService = inject(ApiService);
     return actions$.pipe(
       ofType(FoldersActions.addFolder),
-      // delay(1500),
-      switchMap(({ title }) =>
-        apiService.post<FoldersModel, FoldersSecondModel>('/folder', { title }).pipe(
+      switchMap(({ folder }) =>
+        apiService.post<FoldersSecondModel, FoldersModel>('/folder', folder).pipe(
           map((folder) => FoldersActions.addFolderSuccess({ folder })),
           catchError((error) => {
-            console.error('Error', error);
             return of(FoldersActions.addFolderFailed({ error }));
           })
         )
