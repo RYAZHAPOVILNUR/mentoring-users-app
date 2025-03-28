@@ -30,7 +30,7 @@ export class UsersFilterComponent implements OnDestroy {
         takeUntil(this.destroy$)
       )
       .subscribe((value) => {
-        this.usersFacade.setFilter(value || '');
+        this.usersFacade.setUsersFilter(value || '');
       });
   }
 
