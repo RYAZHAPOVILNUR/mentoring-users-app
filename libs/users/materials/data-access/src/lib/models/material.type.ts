@@ -1,4 +1,4 @@
-export interface IMaterial {
+export type TMaterial = {
   id: number;
   created_at: string;
   title: string;
@@ -6,7 +6,7 @@ export interface IMaterial {
   folder_id: number;
 }
 
-export interface IAddMaterial {
+export type TAddMaterial = {
   title: string;
   material_link: string;
   folder_id?: number;

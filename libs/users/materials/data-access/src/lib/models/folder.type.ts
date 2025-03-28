@@ -1,9 +1,9 @@
-export interface IFolder {
+export type TFolder = {
   id: number;
   created_at: string;
   title: string;
 }
 
-export interface IAddFolder {
+export type TAddFolder = {
   title: string;
 }

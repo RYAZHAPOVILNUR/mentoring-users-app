@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { IFolder } from '@users/materials/data-access';
+import { TFolder } from '@users/materials/data-access';
 import { formatDate } from '@users/core/utils';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -16,16 +16,16 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class FoldersCardComponent {
   @Input({ required: true })
-  public folder!: IFolder;
+  public folder!: TFolder;
 
   @Output() deleteFolder = new EventEmitter();
   @Output() openFolder = new EventEmitter();
 
-  public onDeleteFolder(event: Event, folder: IFolder) {
+  public onDeleteFolder(event: Event, folder: TFolder) {
     this.deleteFolder.emit(folder);
   }
 
-  public onOpenFolder(folder: IFolder): void {
+  public onOpenFolder(folder: TFolder): void {
     this.openFolder.emit(folder.id);
   }
 

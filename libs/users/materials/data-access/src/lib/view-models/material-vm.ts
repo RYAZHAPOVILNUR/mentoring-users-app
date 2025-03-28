@@ -1,4 +1,4 @@
 import { DeepReadonly } from '@users/core/utils';
-import { IMaterial } from '../models/material.model';
+import { TMaterial } from '../models/material.type';
 
-export type MaterialVM = DeepReadonly<Pick<IMaterial, 'id' | 'created_at' | 'title' | 'material_link' | 'folder_id'>>;
+export type MaterialVM = DeepReadonly<Pick<TMaterial, 'id' | 'created_at' | 'title' | 'material_link' | 'folder_id'>>;

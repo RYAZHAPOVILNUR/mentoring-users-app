@@ -4,12 +4,12 @@ import { Observable } from 'rxjs';
 import { MaterialsErrors } from './materials.reducer';
 import * as MaterialsSelectors from './materials.selectors';
 import * as MaterialsActions from './materials.actions';
-import { IAddMaterial } from '../../models/material.model';
+import { TAddMaterial } from '../../models/material.type';
 
 @Injectable({
   providedIn: 'root',
 })
-export class materialsFacade {
+export class MaterialsFacade {
   private readonly store = inject(Store);
 
   public readonly materialsStatus$ = this.store.pipe(select(MaterialsSelectors.selectMaterialsStatus));
@@ -28,7 +28,7 @@ export class materialsFacade {
     this.store.dispatch(MaterialsActions.deleteMaterial({ id }));
   }
 
-  public addMaterials(materialData: IAddMaterial) {
+  public addMaterials(materialData: TAddMaterial) {
     this.store.dispatch(MaterialsActions.addMaterial({ materialData }));
   }
 }

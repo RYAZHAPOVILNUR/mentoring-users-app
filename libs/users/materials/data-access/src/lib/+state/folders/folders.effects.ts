@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { IAddFolder, IFolder } from '../../models/folder.model';
+import { TAddFolder, TFolder } from '../../models/folder.type';
 
 import { ApiService } from '@users/core/http';
 import { map, switchMap, catchError, of } from 'rxjs';
@@ -14,7 +14,7 @@ export const foldersEffects = createEffect(
     return actions$.pipe(
       ofType(FoldersActions.loadFolders),
       switchMap(() =>
-        apiService.get<IFolder[]>('/folder').pipe(
+        apiService.get<TFolder[]>('/folder').pipe(
           map((folders) => FoldersActions.loadFoldersSuccess({ folders })),
           catchError((error) => of(FoldersActions.loadFoldersFailure({ error })))
         )
@@ -50,7 +50,7 @@ export const addFolder = createEffect(
     return actions$.pipe(
       ofType(FoldersActions.addFolder),
       switchMap((title) =>
-        apiService.post<IFolder, IAddFolder>('/folder', title).pipe(
+        apiService.post<TFolder, TAddFolder>('/folder', title).pipe(
           map((folder) => FoldersActions.addFolderSuccess({ folder })),
           catchError((error) => of(FoldersActions.addFolderFailed({ error })))
         )

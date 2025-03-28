@@ -10,8 +10,8 @@ export * from './lib/+state/materials/materials.selectors';
 export * from './lib/+state/materials/materials.facade';
 export * as MaterialsEffects from './lib/+state/materials/materials.effects';
 
-export * from './lib/models/folder.model';
-export * from './lib/models/material.model';
+export * from './lib/models/folder.type';
+export * from './lib/models/material.type';
 export * from './lib/view-models/folder-vm';
 export * from './lib/view-models/folders-vm.adapter';
 export * from './lib/view-models/material-vm';

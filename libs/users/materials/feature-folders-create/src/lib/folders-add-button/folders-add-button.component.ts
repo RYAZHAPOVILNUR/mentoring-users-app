@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { foldersFacade } from '@users/materials/data-access';
+import { FoldersFacade } from '@users/materials/data-access';
 import { FoldersAddDialogComponent } from '../folders-add-dialog/folders-add-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { Subject, takeUntil } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'users-folders-add-button',
@@ -15,11 +15,9 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrls: ['./folders-add-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FoldersAddButtonComponent implements OnDestroy {
+export class FoldersAddButtonComponent {
   private readonly dialog = inject(MatDialog);
-  private readonly foldersFacade = inject(foldersFacade);
-
-  private readonly unsubscribe$ = new Subject<void>();
+  private readonly FoldersFacade = inject(FoldersFacade);
 
   public openAddFolderDialog() {
     const dialogRef = this.dialog.open(FoldersAddDialogComponent, {
@@ -29,18 +27,11 @@ export class FoldersAddButtonComponent implements OnDestroy {
 
     dialogRef
       .afterClosed()
-      .pipe(takeUntil(this.unsubscribe$))
+      .pipe(takeUntilDestroyed())
       .subscribe((result) => {
         if (result) {
-          this.foldersFacade.addFolder(result);
-          this.unsubscribe$.next();
-          this.unsubscribe$.complete();
+          this.FoldersFacade.addFolder(result);
         }
       });
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 }

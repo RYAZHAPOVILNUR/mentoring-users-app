@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { IMaterial, IAddMaterial } from '../../models/material.model';
+import { TMaterial, TAddMaterial } from '../../models/material.type';
 
 import { ApiService } from '@users/core/http';
 import { map, switchMap, catchError, of, withLatestFrom } from 'rxjs';
@@ -16,7 +16,7 @@ export const materialsEffects = createEffect(
     return actions$.pipe(
       ofType(MaterialsActions.loadMaterials),
       switchMap(() =>
-        apiService.get<IMaterial[]>('/material').pipe(
+        apiService.get<TMaterial[]>('/material').pipe(
           map((materials) => MaterialsActions.loadMaterialsSuccess({ materials })),
           catchError((error) => of(MaterialsActions.loadMaterialsFailure({ error })))
         )
@@ -58,7 +58,7 @@ export const addMaterial = createEffect(
         folder_id: Number(params['id']),
       })),
       switchMap((materialsData) =>
-        apiService.post<IMaterial, IAddMaterial>('/material', materialsData).pipe(
+        apiService.post<TMaterial, TAddMaterial>('/material', materialsData).pipe(
           map((materials) => MaterialsActions.addMaterialSuccess({ materials })),
           catchError((error) => of(MaterialsActions.addMaterialFailed({ error })))
         )

@@ -1,4 +1,4 @@
 import { DeepReadonly } from '@users/core/utils';
-import { IFolder } from '../models/folder.model';
+import { TFolder } from '../models/folder.type';
 
-export type FolderVM = DeepReadonly<Pick<IFolder, 'id' | 'created_at' | 'title'>>;
+export type FolderVM = DeepReadonly<Pick<TFolder, 'id' | 'created_at' | 'title'>>;

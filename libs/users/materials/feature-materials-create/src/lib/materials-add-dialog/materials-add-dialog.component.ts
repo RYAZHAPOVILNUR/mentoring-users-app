@@ -5,7 +5,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
-import { MaterialFileType, materialsValidation, material_linkValidator } from '@users/materials/data-access';
+import { MaterialFileType, materialsValidation, materialLinkValidator } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-materials-add-dialog',
@@ -23,7 +23,7 @@ export class MaterialsAddDialogComponent {
 
   public addMaterial: FormGroup = new FormGroup({
     title: new FormControl('', [Validators.required]),
-    link: new FormControl('', [Validators.required, material_linkValidator(this.data)]),
+    link: new FormControl('', [Validators.required, materialLinkValidator(this.data)]),
   });
 
   public saveMaterial() {

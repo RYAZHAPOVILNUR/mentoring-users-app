@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as foldersSelectors from './../folders/folders.selectors';
 import { MATERIALS_FEATURE_KEY, MaterialsState, MaterialsAdapter } from './materials.reducer';
-import { IMaterial } from '../../models/material.model';
+import { TMaterial } from '../../models/material.type';
 
 export const selectMaterialsState = createFeatureSelector<MaterialsState>(MATERIALS_FEATURE_KEY);
 
@@ -20,5 +20,5 @@ export const selectMaterialsEntities = createSelector(selectMaterialsState, (sta
 export const selectOpenedMaterials = createSelector(
   selectAllMaterials,
   foldersSelectors.selectOpenedFolder,
-  (materials, folder): IMaterial[] => (folder ? materials.filter((material) => material.folder_id === folder.id) : [])
+  (materials, folder): TMaterial[] => (folder ? materials.filter((material) => material.folder_id === folder.id) : [])
 );

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { foldersFacade, IMaterial, materialsFacade } from '@users/materials/data-access';
+import { FoldersFacade, TMaterial, MaterialsFacade } from '@users/materials/data-access';
 import { Router } from '@angular/router';
 import { MaterialsListComponent } from '../materials-list/materials-list.component';
 import { MaterialsAddButtonComponent } from '@users/feature-materials-create';
@@ -29,24 +29,24 @@ export class MaterialsListContainerComponent {
   public readonly materialsStatus$ = this.componentStore.materialsStatus$;
   public readonly materialsErrors$ = this.componentStore.materialsErrors$;
 
-  private readonly foldersFacade = inject(foldersFacade);
-  public readonly openedFolder$ = this.foldersFacade.openedFolder$;
+  private readonly FoldersFacade = inject(FoldersFacade);
+  public readonly openedFolder$ = this.FoldersFacade.openedFolder$;
 
-  private readonly materialsFacade = inject(materialsFacade);
-  public readonly openedMaterials$ = this.materialsFacade.openedMaterials$;
+  private readonly MaterialsFacade = inject(MaterialsFacade);
+  public readonly openedMaterials$ = this.MaterialsFacade.openedMaterials$;
 
   public onBackToFolders() {
     this.router.navigate(['/materials']);
   }
 
-  public onOpenMaterial(material: IMaterial) {
+  public onOpenMaterial(material: TMaterial) {
     const dialogRef = this.dialog.open(MaterialsContentComponent, {
       data: material,
     });
     dialogRef.afterClosed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
   }
 
-  public onDeleteMaterial(material: IMaterial) {
+  public onDeleteMaterial(material: TMaterial) {
     this.componentStore.onDeleteMaterial(material);
   }
 }

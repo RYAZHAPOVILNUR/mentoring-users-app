@@ -1,12 +1,12 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import * as FoldersActions from './folders.actions';
-import { IFolder } from '../../models/folder.model';
+import { TFolder } from '../../models/folder.type';
 import { LoadingStatus } from '@users/core/data-access';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
 export const FOLDERS_FEATURE_KEY = 'folders';
 
-export interface FoldersState extends EntityState<IFolder> {
+export interface FoldersState extends EntityState<TFolder> {
   status: LoadingStatus;
   error: FoldersErrors | null;
 }
@@ -17,7 +17,7 @@ export type FoldersErrors = {
   [key: string]: unknown;
 };
 
-export const FoldersAdapter: EntityAdapter<IFolder> = createEntityAdapter<IFolder>();
+export const FoldersAdapter: EntityAdapter<TFolder> = createEntityAdapter<TFolder>();
 
 export const initialFoldersState: FoldersState = FoldersAdapter.getInitialState({
   folders: [],

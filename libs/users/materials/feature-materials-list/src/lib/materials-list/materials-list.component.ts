@@ -4,7 +4,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MaterialsListVM } from './materials-list-view-model';
 import { MaterialsCardComponent } from '../materials-card/materials-card.component';
-import { IMaterial } from '@users/materials/data-access';
+import { TMaterial } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-materials-list',
@@ -26,11 +26,11 @@ export class MaterialsListComponent {
     this.backToFolders.emit();
   }
 
-  public onDeleteMaterial(material: IMaterial) {
+  public onDeleteMaterial(material: TMaterial) {
     this.deleteMaterial.emit(material);
   }
 
-  public onOpenMaterial(material: IMaterial) {
+  public onOpenMaterial(material: TMaterial) {
     this.openMaterial.emit(material);
   }
 }

@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { IMaterial, materialsValidation } from '@users/materials/data-access';
+import { TMaterial, materialsValidation } from '@users/materials/data-access';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -17,7 +17,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class MaterialsContentComponent {
   private readonly DomSanitizer = inject(DomSanitizer);
-  public data: IMaterial = inject(MAT_DIALOG_DATA);
+  public data: TMaterial = inject(MAT_DIALOG_DATA);
   public materialsValidation = materialsValidation;
 
   public getVideoUrl() {

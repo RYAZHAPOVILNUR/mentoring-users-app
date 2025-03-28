@@ -1,4 +1,4 @@
-import { foldersFacade, IFolder, FolderVM } from '@users/materials/data-access';
+import { FoldersFacade, TFolder, FolderVM } from '@users/materials/data-access';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FoldersVmAdapter } from '@users/materials/data-access';
@@ -6,9 +6,10 @@ import { ComponentStore } from '@ngrx/component-store';
 import { DeepReadonly } from '@users/core/utils';
 import { tap } from 'rxjs';
 import { inject, Injectable } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 type FoldersListState = DeepReadonly<{
-  folder: IFolder[];
+  folder: TFolder[];
 }>;
 
 const initialState: FoldersListState = {
@@ -17,21 +18,21 @@ const initialState: FoldersListState = {
 
 @Injectable()
 export class FoldersListContainerStore extends ComponentStore<FoldersListState> {
-  public readonly foldersFacade = inject(foldersFacade);
+  public readonly FoldersFacade = inject(FoldersFacade);
   private readonly dialog = inject(MatDialog);
 
-  public readonly folders$ = this.foldersFacade.allFolders$;
-  public readonly foldersStatus$ = this.select(this.foldersFacade.foldersStatus$, (status) => status);
-  public readonly foldersErrors$ = this.select(this.foldersFacade.foldersErrors$, (error) => error);
+  public readonly folders$ = this.FoldersFacade.allFolders$;
+  public readonly foldersStatus$ = this.select(this.FoldersFacade.foldersStatus$, (status) => status);
+  public readonly foldersErrors$ = this.select(this.FoldersFacade.foldersErrors$, (error) => error);
 
   constructor() {
     super(initialState);
-    this.foldersFacade.loadFolders();
+    this.FoldersFacade.loadFolders();
     this.setFoldersFromGlobalToLocalStore();
   }
 
   private setFoldersFromGlobalToLocalStore(): void {
-    this.effect(() => this.foldersFacade.allFolders$.pipe(tap((folder: FolderVM[]) => this.patchFolders(folder))));
+    this.effect(() => this.FoldersFacade.allFolders$.pipe(tap((folder: FolderVM[]) => this.patchFolders(folder))));
   }
 
   private patchFolders(folder: FolderVM[]): void {
@@ -40,14 +41,16 @@ export class FoldersListContainerStore extends ComponentStore<FoldersListState> 
     });
   }
 
-  public onDeleteFolder(folder: IFolder) {
+  public onDeleteFolder(folder: TFolder) {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
       data: { dialogText: `Вы уверены, что хотите удалить папку "${folder.title}"?` },
     });
 
-    dialogRef.afterClosed().subscribe((result: boolean) => {
+    dialogRef.afterClosed()
+    .pipe(takeUntilDestroyed())
+    .subscribe((result: boolean) => {
       if (result) {
-        this.foldersFacade.deleteFolder(folder.id);
+        this.FoldersFacade.deleteFolder(folder.id);
       }
     });
   }

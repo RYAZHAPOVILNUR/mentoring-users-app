@@ -8,7 +8,7 @@ import * as FoldersActions from './folders.actions';
 @Injectable({
   providedIn: 'root',
 })
-export class foldersFacade {
+export class FoldersFacade {
   private readonly store = inject(Store);
 
   public readonly foldersStatus$ = this.store.pipe(select(FoldersSelectors.selectFoldersStatus));

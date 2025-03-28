@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
-import { IFolder } from '@users/materials/data-access';
+import { TFolder } from '@users/materials/data-access';
 import { Router } from '@angular/router';
 import { FoldersAddButtonComponent } from '@users/materials/feature-folders-create';
 import { LetDirective } from '@ngrx/component';
@@ -25,7 +25,7 @@ export class FoldersListContainerComponent {
   public readonly foldersStatus$ = this.componentStore.foldersStatus$;
   public readonly errors$ = this.componentStore.foldersErrors$;
 
-  onDeleteFolder(folder: IFolder) {
+  onDeleteFolder(folder: TFolder) {
     this.componentStore.onDeleteFolder(folder);
   }
   onOpenFolder(id: number) {

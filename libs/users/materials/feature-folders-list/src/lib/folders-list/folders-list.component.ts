@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IFolder } from '@users/materials/data-access';
+import { TFolder } from '@users/materials/data-access';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';
 import { FoldersListVM } from './folders-list-view-model';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -19,11 +19,11 @@ export class FoldersListComponent {
   @Output() deleteFolder = new EventEmitter();
   @Output() openFolder = new EventEmitter();
 
-  onDeleteFolder(folder: IFolder) {
+  onDeleteFolder(folder: TFolder) {
     this.deleteFolder.emit(folder);
   }
 
-  onOpenFolder(folder: IFolder) {
+  onOpenFolder(folder: TFolder) {
     this.openFolder.emit(folder.id);
   }
 }

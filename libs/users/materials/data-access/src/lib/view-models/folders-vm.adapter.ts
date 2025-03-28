@@ -1,8 +1,8 @@
-import { IFolder } from '../models/folder.model';
+import { TFolder } from '../models/folder.type';
 import { FolderVM } from './folder-vm';
 
 type FoldersVmAdapter = {
-  entityToVM(entity: IFolder): FolderVM;
+  entityToVM(entity: TFolder): FolderVM;
 };
 
 export const FoldersVmAdapter: FoldersVmAdapter = {

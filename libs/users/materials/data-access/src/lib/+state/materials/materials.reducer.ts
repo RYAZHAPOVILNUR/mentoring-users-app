@@ -1,12 +1,12 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import * as MaterialsActions from './materials.actions';
-import { IMaterial } from '../../models/material.model';
+import { TMaterial } from '../../models/material.type';
 import { LoadingStatus } from '@users/core/data-access';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
 export const MATERIALS_FEATURE_KEY = 'materials';
 
-export interface MaterialsState extends EntityState<IMaterial> {
+export interface MaterialsState extends EntityState<TMaterial> {
   status: LoadingStatus;
   error: MaterialsErrors | null;
 }
@@ -17,7 +17,7 @@ export type MaterialsErrors = {
   [key: string]: unknown;
 };
 
-export const MaterialsAdapter: EntityAdapter<IMaterial> = createEntityAdapter<IMaterial>();
+export const MaterialsAdapter: EntityAdapter<TMaterial> = createEntityAdapter<TMaterial>();
 
 export const initialMaterialsState: MaterialsState = MaterialsAdapter.getInitialState({
   materials: [],

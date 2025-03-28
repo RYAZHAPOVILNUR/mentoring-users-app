@@ -1,4 +1,4 @@
-import { foldersFacade, IMaterial, materialsFacade, MaterialVM } from '@users/materials/data-access';
+import { FoldersFacade, TMaterial, MaterialsFacade, MaterialVM } from '@users/materials/data-access';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MaterialsVmAdapter } from '@users/materials/data-access';
@@ -6,9 +6,10 @@ import { ComponentStore } from '@ngrx/component-store';
 import { DeepReadonly } from '@users/core/utils';
 import { tap } from 'rxjs';
 import { inject, Injectable } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 type MaterialsListState = DeepReadonly<{
-  materials: IMaterial[];
+  materials: TMaterial[];
 }>;
 
 const initialState: MaterialsListState = {
@@ -17,24 +18,24 @@ const initialState: MaterialsListState = {
 
 @Injectable()
 export class MaterialsListContainerStore extends ComponentStore<MaterialsListState> {
-  public readonly materialsFacade = inject(materialsFacade);
-  public readonly foldersFacade = inject(foldersFacade);
+  public readonly MaterialsFacade = inject(MaterialsFacade);
+  public readonly FoldersFacade = inject(FoldersFacade);
   private readonly dialog = inject(MatDialog);
 
-  public readonly materials$ = this.materialsFacade.allMaterials$;
-  public readonly materialsStatus$ = this.select(this.materialsFacade.materialsStatus$, (status) => status);
-  public readonly materialsErrors$ = this.select(this.materialsFacade.materialsErrors$, (error) => error);
+  public readonly materials$ = this.MaterialsFacade.allMaterials$;
+  public readonly materialsStatus$ = this.select(this.MaterialsFacade.materialsStatus$, (status) => status);
+  public readonly materialsErrors$ = this.select(this.MaterialsFacade.materialsErrors$, (error) => error);
 
   constructor() {
     super(initialState);
-    this.foldersFacade.loadFolders();
-    this.materialsFacade.loadMaterials();
+    this.FoldersFacade.loadFolders();
+    this.MaterialsFacade.loadMaterials();
     this.setMaterialsFromGlobalToLocalStore();
   }
 
   private setMaterialsFromGlobalToLocalStore(): void {
     this.effect(() =>
-      this.materialsFacade.allMaterials$.pipe(tap((materials: MaterialVM[]) => this.patchMaterials(materials)))
+      this.MaterialsFacade.allMaterials$.pipe(tap((materials: MaterialVM[]) => this.patchMaterials(materials)))
     );
   }
 
@@ -44,14 +45,16 @@ export class MaterialsListContainerStore extends ComponentStore<MaterialsListSta
     });
   }
 
-  public onDeleteMaterial(material: IMaterial) {
+  public onDeleteMaterial(material: TMaterial) {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
       data: { dialogText: `Вы хотите удалить "${material.title}"?` },
     });
 
-    dialogRef.afterClosed().subscribe((result: boolean) => {
+    dialogRef.afterClosed()
+    .pipe(takeUntilDestroyed())
+    .subscribe((result: boolean) => {
       if (result) {
-        this.materialsFacade.deleteMaterials(material.id);
+        this.MaterialsFacade.deleteMaterials(material.id);
       }
     });
   }

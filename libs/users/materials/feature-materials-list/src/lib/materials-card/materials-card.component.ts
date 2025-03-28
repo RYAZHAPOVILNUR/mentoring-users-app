@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { formatDate } from '@users/core/utils';
-import { IMaterial } from '@users/materials/data-access';
+import { TMaterial } from '@users/materials/data-access';
 import { materialsValidation } from '@users/materials/data-access';
 
 @Component({
@@ -17,7 +17,7 @@ import { materialsValidation } from '@users/materials/data-access';
 })
 export class MaterialsCardComponent {
   @Input({ required: true })
-  public material!: IMaterial;
+  public material!: TMaterial;
   @Output() deleteMaterial = new EventEmitter();
 
   public readonly materialsValidation = materialsValidation;
@@ -26,7 +26,7 @@ export class MaterialsCardComponent {
     return formatDate(time);
   }
 
-  public onDeleteMaterial(material: IMaterial) {
+  public onDeleteMaterial(material: TMaterial) {
     this.deleteMaterial.emit(material);
   }
 }

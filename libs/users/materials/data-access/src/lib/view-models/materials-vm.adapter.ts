@@ -1,8 +1,8 @@
-import { IMaterial } from '../models/material.model';
+import { TMaterial } from '../models/material.type';
 import { MaterialVM } from './material-vm';
 
 type MaterialsVmAdapter = {
-  entityToVM(entity: IMaterial): MaterialVM;
+  entityToVM(entity: TMaterial): MaterialVM;
 };
 
 export const MaterialsVmAdapter: MaterialsVmAdapter = {
