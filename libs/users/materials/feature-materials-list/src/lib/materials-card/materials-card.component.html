@@ -1,4 +1,4 @@
-<mat-card class="material-card">
+<mat-card (click)="onOpenMaterial(material.materialLink)" class="material-card">
   <div class="material-header">
     <mat-icon>{{ material.materialLink | defineMaterialType }}</mat-icon>
     <button type="button" mat-button>

@@ -1,11 +1,15 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { MaterialsVM } from '@users/materials/data-access';
+import { MaterialsEntity, MaterialsVM } from '@users/materials/data-access';
 import { MatIconModule } from '@angular/material/icon';
-import { CorrectDatePipe, DefineMaterialTypePipe, ShortTitle } from '@users/feature-folders-list';
+import { CorrectDatePipe, DefineMaterialTypePipe, MaterialType, ShortTitle } from '@users/feature-folders-list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCard, MatCardModule } from '@angular/material/card';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { PdfViewerDialogComponent } from '../pdf-viewer-dialog/pdf-viewer-dialog.component';
+import { AudioPlayerDialogComponent } from '../audio-player-dialog/audio-player-dialog.component';
+import { VideoPlayerDialogComponent } from '../video-player-dialog/video-player-dialog.component';
 
 @Component({
   selector: 'users-materials-card',
@@ -19,27 +23,35 @@ import { MatCard, MatCardModule } from '@angular/material/card';
     MatButtonModule,
     MatCardModule,
     ShortTitle,
+    MatDialogModule,
   ],
   templateUrl: './materials-card.component.html',
   styleUrls: ['./materials-card.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DefineMaterialTypePipe],
 })
 export class MaterialsCardComponent {
+  private dialog = inject(MatDialog);
+  private materialTypePipe = inject(DefineMaterialTypePipe);
+
   @Input({})
   material!: MaterialsVM;
-  // private _vm: DetailFolderCardVm = {
-  //   folder: null,
-  //   status: 'init',
-  //   errors: null,
-  // };
-  // public get vm() {
-  //   return this._vm;
-  // }
-  // @Input({ required: true })
-  // set vm(vm: DetailFolderCardVm) {
-  //   this._vm = vm;
-  //   if (vm.folder) {
-  //   }
-  // }
+
+  onOpenMaterial(materialLink: string): void {
+    const fileType = this.materialTypePipe.transform(materialLink);
+
+    switch (fileType) {
+      case MaterialType.AUDIO:
+        this.dialog.open(AudioPlayerDialogComponent, { data: materialLink });
+        break;
+      case MaterialType.PDF:
+        this.dialog.open(PdfViewerDialogComponent, { data: materialLink });
+        break;
+      case MaterialType.VIDEO:
+      default:
+        this.dialog.open(VideoPlayerDialogComponent, { data: materialLink });
+        break;
+    }
+  }
 }
