@@ -1,1 +1,13 @@
-<p>audio-player-dialog works!</p>
+<div class="audio-player">
+  <button mat-button (click)="togglePlay()">
+    {{ isPlaying() ? '⏸' : '▶' }}
+  </button>
+  <button mat-button (click)="stop()">⏹</button>
+  <input type="range" [value]="progress()" (input)="seek($event)" min="0" max="100" />
+  <span>{{ formatTime(currentTime()) }} / {{ formatTime(duration()) }}</span>
+  <audio #audio (timeupdate)="updateProgress()" (loadedmetadata)="updateMetadata()">
+    <source [src]="data" type="audio/mpeg" />
+    Ваш браузер не поддерживает аудио.
+  </audio>
+  <button (click)="onPlayrClose()" type="button" mat-button><mat-icon>close</mat-icon></button>
+</div>
