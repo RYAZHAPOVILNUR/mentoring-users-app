@@ -50,5 +50,10 @@
     "@nx/angular:component": {
       "style": "scss"
     }
+  },
+  "defaultBase": "main",
+  "nxCloudId": "67e136aeccc83d6b0e764520",
+  "workspaceLayout": {
+    "projectNameAndRootFormat": "as-provided"
   }
 }
