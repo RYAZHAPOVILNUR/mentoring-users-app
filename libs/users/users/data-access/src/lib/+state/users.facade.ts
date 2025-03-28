@@ -61,7 +61,7 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.loadUser());
   }
 
-  setFilter(name: string) {
+  setUsersFilter(name: string) {
     this.store.dispatch(UsersActions.setUsersFilter({ filter: { name } }));
   }
 }
