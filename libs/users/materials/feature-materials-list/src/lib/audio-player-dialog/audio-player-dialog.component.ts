@@ -27,7 +27,6 @@ export class AudioPlayerDialogComponent {
   public readonly data = inject(MAT_DIALOG_DATA);
   private readonly dialogRef = inject(DialogRef);
 
-  @Input() src!: string;
   @ViewChild('audio') audioRef!: ElementRef<HTMLAudioElement>;
 
   isPlaying = signal(false);
