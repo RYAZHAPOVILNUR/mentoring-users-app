@@ -2,9 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import * as FoldersActions from './folders.actions';
 import * as FoldersSelectors from './folders.selectors';
-import { Observable, of, switchMap } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { FoldersErrors } from './folders.reducer';
-import { FoldersEntity } from '../../folders-dto/folders.entity';
 import { AddFolderDTO } from '../../folders-dto/folders-dto.models';
 
 @Injectable({ providedIn: 'root' })
@@ -29,12 +28,4 @@ export class FoldersFacade {
   deleteFolder(id: number) {
     this.store.dispatch(FoldersActions.deleteFolder({ id }));
   }
-
-  editFolder(folder: AddFolderDTO) {
-    console.log('Folder:', folder);
-    // this.store.dispatch(FoldersActions.editFolder({ folder, id }));
-  }
-  // loadFolder() {
-  //   this.store.dispatch(FoldersActions.loadFolder());
-  // }
 }

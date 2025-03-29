@@ -1,6 +1,14 @@
 <div class="material-content">
   <div class="material-header">
     <button class="button-back" routerLink="/materials" mat-button><mat-icon>arrow_back</mat-icon></button>
+    <button mat-fab color="primary" class="add-user-fab-button" [matMenuTriggerFor]="menu">
+      <mat-icon>add</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="onAddPdf()">Добавить: PDF</button>
+      <button mat-menu-item (click)="onAddAudio()">Добавить: AUDIO</button>
+      <button mat-menu-item (click)="onAddVideo()">Добавить: VIDEO</button>
+    </mat-menu>
   </div>
   <ng-container
     *ngrxLet="{

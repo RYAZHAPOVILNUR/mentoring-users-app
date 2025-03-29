@@ -1,9 +1,6 @@
-<iframe
-  [src]="videoLink"
-  width="560"
-  height="315"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowfullscreen
->
-</iframe>
+<mat-card class="card">
+  <div class="button">
+    <button (click)="onPlayrClose()" type="button" mat-button><mat-icon>close</mat-icon></button>
+  </div>
+  <iframe [src]="videoLink" class="video" frameborder="0"> </iframe>
+</mat-card>

@@ -1,3 +1,17 @@
-p {
-  color: #fff;
+.card {
+  width: 60vw;
+  height: 60vh;
+}
+
+.button {
+  display: flex;
+  justify-content: end;
+  button {
+    width: 30px;
+  }
+}
+
+.video {
+  width: 100%;
+  height: 100%;
 }

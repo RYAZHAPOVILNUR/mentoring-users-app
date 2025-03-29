@@ -2,7 +2,6 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  margin-bottom: 20px;
   mat-icon {
     margin-left: 5px;
   }
@@ -17,7 +16,8 @@
 }
 .material-header {
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
+  align-items: center;
   align-items: center;
   width: 100%;
   margin-bottom: 20px;
