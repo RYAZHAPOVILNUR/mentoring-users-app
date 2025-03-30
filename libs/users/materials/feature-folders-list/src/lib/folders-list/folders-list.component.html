@@ -1,1 +1,18 @@
-
+<ng-container *ngIf="vm.status === 'loading'; else loadingResult">
+</ng-container>
+<ng-template #loadingResult>
+  <ng-container *ngIf="vm.status === 'loaded'; else error">
+    <div class="folders-container">
+      <ng-container *ngFor="let folder of vm.folders">
+        <users-folders-card [folder]="folder" (deleteFolder)="onDeleteFolder($event)" />
+      </ng-container>
+    </div>
+  </ng-container>
+</ng-template>
+<ng-template #error>
+  <div class="alert alert-danger" role="alert">
+    <h1>{{ vm.errors?.status }}</h1>
+    <hr />
+    {{ vm.errors }}
+  </div>
+</ng-template>

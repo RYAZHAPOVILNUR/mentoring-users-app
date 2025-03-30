@@ -4,12 +4,12 @@ import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as MaterialsActions from './materials.actions';
 import { ApiService } from '@users/core/http';
-import { IFolder } from '../models/folder.model';
-import { IAddFolder } from '../models/folder-add.model';
 import { Store } from '@ngrx/store';
 import { selectRouteParams } from '@users/core/data-access';
 import { IMaterial } from '../models/material.model';
 import { IAddMaterial } from '../models/material-add.model';
+import { CreateFoldersDTO, FoldersDTO } from '../models/folders-dto.model';
+import { foldersDTOAdapter } from '../models/folder.adapter';
 
 @Injectable()
 export class MaterialsEffects {
@@ -19,10 +19,12 @@ export class MaterialsEffects {
       const action$ = inject(Actions);
       const apiService = inject(ApiService);
       return action$.pipe(
-        ofType(MaterialsActions.loadFolders),
+        ofType(MaterialsActions.initFolders),
         switchMap(() =>
-          apiService.get<IFolder[]>('/folder').pipe(
-            map((folders) => MaterialsActions.loadFoldersSuccess({ folders })),
+          apiService.get<FoldersDTO[]>('/folder').pipe(
+            map((folders) => MaterialsActions.loadFoldersSuccess({ 
+              folders: folders.map((folder) =>foldersDTOAdapter.DTOtoEntity(folder)),
+             })),
             catchError((error) => {
               console.error('Error', error);
               return of(MaterialsActions.loadFoldersFailure({ error }));
@@ -64,11 +66,10 @@ export class MaterialsEffects {
 
       return actions$.pipe(
         ofType(MaterialsActions.addFolder),
-        switchMap(({ folder }) =>
-          apiService.post<IFolder, IAddFolder>('/folder', folder).pipe(
-            map((newFolder) =>
-              MaterialsActions.addFolderSuccess({ folder: newFolder })
-            ),
+        switchMap(({ folderData }) =>
+          apiService.post<FoldersDTO, CreateFoldersDTO>('/folder', folderData).pipe(
+            map((folder) =>  foldersDTOAdapter.DTOtoEntity(folder)),
+            map((folderEntity) => MaterialsActions.addFolderSuccess({ folderData: folderEntity })),
             catchError((error) => {
               console.log('Error', error);
               return of(MaterialsActions.addFolderFailure({ error }))
@@ -88,9 +89,11 @@ export class MaterialsEffects {
         ofType(MaterialsActions.openFolder),
         withLatestFrom(store.select(selectRouteParams)),
         switchMap(([, params]) => {
-          return apiService.get<IFolder>(`/folder/${params['id']}`)
+          return apiService.get<FoldersDTO>(`/folder/${params['id']}`)
           .pipe(
-            map((folder) => MaterialsActions.openFolderSuccess({ folder })),
+            map((folder) => MaterialsActions.openFolderSuccess({ 
+              folder:foldersDTOAdapter.DTOtoEntity(folder),
+             })),
             catchError((error) => {
               console.log('Error', error);
               return of(MaterialsActions.openFolderFailure({ error }))
