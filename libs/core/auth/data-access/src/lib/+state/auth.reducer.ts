@@ -19,7 +19,6 @@ export const authInitialState: AuthState = {
     name: '',
     username: '',
     city: '',
-    storypoints: 0,
     purchaseDate: new Date().toString(),
     educationStatus: 'trainee',
     educationTime: 0,
