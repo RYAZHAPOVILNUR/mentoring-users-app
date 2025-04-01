@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+
 @Component({
   selector: 'users-users-materials',
   standalone: true,
@@ -9,4 +10,6 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./users-materials.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersMaterialsComponent {}
+export class UsersMaterialsComponent {
+
+}

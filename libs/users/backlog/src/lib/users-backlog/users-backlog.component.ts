@@ -7,6 +7,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { IBacklog, BacklogFacade } from '@users/users/backlog/data-access';
 import { Observable } from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { TaskChangeDialogComponent } from '../../../../task/src/lib/task-change-dialog/task-change-dialog.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
