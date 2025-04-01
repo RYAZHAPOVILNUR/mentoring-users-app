@@ -73,6 +73,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: vm.user.email,
         username: vm.user.username,
         city: vm.user.city,
+        storypoints: vm.user.storypoints,
       });
     }
 
@@ -88,6 +89,7 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    storypoints: new FormControl({value: 0, disabled: !this.vm.editMode}, [Validators.pattern('^[0-9]*$')]),
   });
 
   @Output() editUser = new EventEmitter<{
@@ -135,7 +137,7 @@ export class DetailUsersCardComponent implements OnInit {
       onSuccessCb: this.onEditSuccess,
     });
   }
-
+// mat suffix mat prefix
   onCloseUser() {
     this.closeUser.emit();
   }

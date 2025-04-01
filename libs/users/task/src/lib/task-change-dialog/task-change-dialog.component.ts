@@ -100,6 +100,7 @@ export class TaskChangeDialogComponent {
         email: 'strategy05@mail.ru',
         username: 'Dzhavid',
         city: '',
+        storypoints: 0,
         purchaseDate: new Date().toString(),
         educationStatus: 'trainee',
         educationTime: 0,
