@@ -84,4 +84,8 @@ export class UsersDetailComponent {
         }
       });
   }
+
+  onAddTotalStoryPoint(totalStoryPoints: number) {
+    this.usersFacade.addTotalStoryPoint(this.user.id, totalStoryPoints);
+  }
 }

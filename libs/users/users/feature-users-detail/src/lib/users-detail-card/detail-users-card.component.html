@@ -89,6 +89,54 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+
+            <mat-form-field
+            class="edit-user-field"
+            [matTooltip]="''"
+            [matTooltipDisabled]="formGroup.enabled"
+            >
+            <mat-label>Количество сторипоинтов</mat-label>
+            <input 
+              type="number"
+              class="edit-user-input"
+              matInput
+              formControlName="totalStoryPoints"
+            />
+            <button 
+              *ngIf="formGroup.get('totalStoryPoints')?.disabled" 
+              mat-icon-button 
+              color="black" 
+              matSuffix 
+              (click)="onStoryPointsEditor()"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+            <button 
+              *ngIf="!formGroup.get('totalStoryPoints')?.disabled && !vm.editMode" 
+              mat-icon-button 
+              color="black" 
+              matSuffix 
+              (click)="onEditStoryPoints()"
+            >
+              <mat-icon>check</mat-icon>
+            </button>
+            <button 
+              *ngIf="!formGroup.get('totalStoryPoints')?.disabled && !vm.editMode" 
+              mat-icon-button 
+              color="black" 
+              matSuffix 
+              (click)="onStoryPointsEditor()"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+            <mat-error *ngIf="formGroup.get('totalStoryPoints')?.hasError('pattern')">
+              Введите только целое число
+            </mat-error>
+            <mat-error *ngIf="formGroup.get('totalStoryPoints')?.hasError('min')">
+              Значение не может быть отрицательным
+            </mat-error>
+          </mat-form-field>
+            
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
