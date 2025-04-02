@@ -28,4 +28,8 @@ export class FoldersFacade {
   deleteFolder(id: number) {
     this.store.dispatch(FoldersActions.deleteFolder({ id }));
   }
+
+  selectedFolder(id: number) {
+    this.store.dispatch(FoldersActions.selectFolder({ id }));
+  }
 }

@@ -26,12 +26,26 @@ export const updateFolderStatus = createAction(
   props<{ status: LoadingStatus }>()
 );
 
+// export const selectedfolder = createAction('[materials Page] Selected Folder', props<{ id: number }>());
+
+// Запрос одной Папки по ID
+export const selectFolder = createAction('[Materials Page] Select Folder', props<{ id: number }>());
+
+// Успешная загрузка Папки
+export const selectFolderSuccess = createAction(
+  '[Materials Page] Select Folder Success',
+  props<{ folder: FoldersEntity }>()
+);
+
+// Ошибка загрузки
+export const selectFolderFailure = createAction('[Materials Page] Select Folder Failed', props<{ error: string }>());
+
 export const addFolder = createAction('[Folders Page] add Folder', props<{ folderData: AddFolderDTO }>());
 export const addFolderSuccess = createAction(
   '[Folders Page] Create Folder Success',
   props<{ folderData: AddFolderDTO }>()
 );
-export const addFolderFailed = createAction('[Folders Page] Create Folders failed', props<{ error: any }>());
+export const addFolderFailed = createAction('[Folders Page] Create Folders Failed', props<{ error: any }>());
 
 export const deleteFolder = createAction('[Folders Page] Delete Folder', props<{ id: number }>());
 export const deleteFolderSuccess = createAction('[Folder Page] Delete Folder Success', props<{ id: number }>());

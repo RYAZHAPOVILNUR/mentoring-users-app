@@ -17,7 +17,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DeleteFolderDialogComponent } from '../delete-folder-dialog/delete-folder-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
-import { EditFolderDialogComponent } from '../edit-folder-dialog/edit-folder-dialog.component';
 
 @Component({
   selector: 'users-folders-card',
@@ -50,17 +49,11 @@ export class FoldersCardComponent {
     this.redirectToFolder.emit(this.folder);
   }
 
-  onDeleteFolder(folder: FoldersEntity): void {
+  onDeleteFolder(event: Event, folder: FoldersEntity): void {
+    event.stopPropagation();
     const dialogRef = this.dialog.open(DeleteFolderDialogComponent, {
       data: folder,
       width: '700px',
-    });
-  }
-
-  onEditFolder(folder: FoldersEntity): void {
-    const dialogRef = this.dialog.open(EditFolderDialogComponent, {
-      data: folder,
-      width: '250px',
     });
   }
 }

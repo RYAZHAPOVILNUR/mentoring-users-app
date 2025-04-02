@@ -1,0 +1,19 @@
+<mat-card [formGroup]="materialData" class="card">
+  <mat-card-title>Добавление {{ dialogData.title }} файла</mat-card-title>
+  <mat-form-field appearance="fill" class="input">
+    <mat-label>Ссылка</mat-label>
+    <input type="email" matInput formControlName="title" />
+    <mat-error>Not correct</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="input">
+    <mat-label>Название</mat-label>
+    <input type="email" matInput formControlName="materialLink" />
+    <mat-error>Not correct</mat-error>
+  </mat-form-field>
+  <div class="buttons">
+    <button mat-button mat-dialog-close type="button">Отмена</button>
+    <button mat-button type="button" [disabled]="materialData.invalid" [mat-dialog-close]="materialWithUpdatedFields">
+      Добавить
+    </button>
+  </div>
+</mat-card>

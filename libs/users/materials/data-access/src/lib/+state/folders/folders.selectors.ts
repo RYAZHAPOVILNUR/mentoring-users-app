@@ -29,3 +29,12 @@ export const selectOpenedFolder = createSelector(
   selectFoldersEntities,
   ({ id }, entities) => entities[id] || null
 );
+
+// Получаем состояние пользователей
+export const selectFolderState = (status: FoldersState) => status;
+
+// Выбираем загруженного пользователя
+export const selectSelectedFolder = createSelector(selectFolderState, (status: FoldersState) => status);
+
+// Получаем флаг загрузки
+export const selectFolderLoading = createSelector(selectFolderState, (status: FoldersState) => status);

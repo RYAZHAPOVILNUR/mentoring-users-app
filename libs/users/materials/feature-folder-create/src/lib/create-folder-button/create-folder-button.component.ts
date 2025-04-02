@@ -29,7 +29,6 @@ export class CreateFolderButtonComponent {
       .pipe(takeUntilDestroyed(this.dialogref))
       .subscribe((result) => {
         if (result) {
-          console.log('name:', result);
           const folder: AddFolderDTO = {
             id: new Date().getTime(),
             title: result,

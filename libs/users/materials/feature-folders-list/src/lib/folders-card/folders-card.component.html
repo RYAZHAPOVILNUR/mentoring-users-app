@@ -1,7 +1,7 @@
 <mat-card (click)="onOpenFolder()" class="folder-content">
   <div class="folder-header">
     <span><mat-icon>folder</mat-icon></span>
-    <button type="button" mat-button (click)="onDeleteFolder(folder)">
+    <button type="button" mat-button (click)="onDeleteFolder($event, folder)">
       <mat-icon>delete</mat-icon>
     </button>
   </div>

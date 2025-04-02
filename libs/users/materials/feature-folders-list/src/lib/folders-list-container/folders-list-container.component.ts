@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoldersListContainerStore } from './folders-list-container.store';
-import { FoldersVM } from '../../../../data-access/src/index';
+import { FoldersVM, selectAllFolders } from '../../../../data-access/src/index';
 import { FoldersListComponent } from '../folders-list/folders-list.component';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { CreateFolderButtonComponent } from '@users/feature-folder-create';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'users-folders-list-container',
@@ -19,11 +20,15 @@ import { CreateFolderButtonComponent } from '@users/feature-folder-create';
 })
 export class FoldersListContainerComponent {
   private readonly componentStore = inject(FoldersListContainerStore);
-  // public foldersFacede = inject(FoldersFacade);
   public readonly folders$ = this.componentStore.folders$;
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;
   private readonly router = inject(Router);
+  private readonly store = inject(Store);
+
+  ngOnInit() {
+    console.log('Folder', this.store.select(selectAllFolders));
+  }
 
   onRedirectToFolder(folder: FoldersVM) {
     this.router.navigate([`/materials/${folder.id}`]);
