@@ -32,10 +32,6 @@ export const initialMaterialsState: MaterialsState = materialsAdapter.getInitial
 
 export const materialsReducer = createReducer(
   initialMaterialsState,
-  on(MaterialsActions.initMaterials, (state) => ({
-    ...state,
-    status: 'loading' as const,
-  })),
   on(MaterialsActions.loadMaterialsSuccess, (state, { materials }) =>
     materialsAdapter.setAll(materials, { ...state, status: 'loaded' as const })
   ),

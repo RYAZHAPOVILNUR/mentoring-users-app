@@ -2,16 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@
 import { CommonModule } from '@angular/common';
 import { MaterialsListComponent } from '../materials-list/materials-list.component';
 import { LetDirective } from '@ngrx/component';
-import {
-  FoldersEntity,
-  FoldersFacade,
-  FoldersVM,
-  MaterialsFacade,
-  selectAllFolders,
-  selectFiltredFolders,
-  selectFolder,
-  selectOpenedFolder,
-} from '@users/materials/data-access';
+import { FoldersFacade, MaterialsFacade, selectOpenedFolder } from '@users/materials/data-access';
 import { MaterialsListContainerStore } from './materials-list-container.store';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -19,8 +10,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { AddMaterialButtonComponent, AddMaterialDialogComponent } from '@users/feature-materials-create';
 import { Store } from '@ngrx/store';
-import { loadFolders } from 'libs/users/materials/data-access/src/lib/+state/folders/folders.effects';
-import { take } from 'rxjs';
 
 @Component({
   selector: 'users-materials-list-container',
@@ -49,13 +38,12 @@ export class MaterialsListContainerComponent {
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;
   public readonly materials$ = this.materialsFacade.filtredMaterials$;
-  public openedFolder$: any = '';
+  public openedFolder$: any = ''; // =========
   private readonly route = inject(ActivatedRoute);
 
   ngOnInit() {
     this.materialsFacade.loadMaterials();
     this.foldersFacade.init();
-    this.foldersFacade.selectedFolder(Number(this.route.snapshot.paramMap.get('id')));
     this.store.select(selectOpenedFolder).subscribe((folder) => {
       folder?.title ? (this.openedFolder$ = folder) : '';
     });

@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { MaterialsEntity, MaterialsVM } from '@users/materials/data-access';
+import { MaterialsVM } from '@users/materials/data-access';
 import { MatIconModule } from '@angular/material/icon';
 import { CorrectDatePipe, DefineMaterialTypePipe, MaterialType, ShortTitle } from '@users/feature-folders-list';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCard, MatCardModule } from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { PdfViewerDialogComponent } from '../pdf-viewer-dialog/pdf-viewer-dialog.component';
 import { AudioPlayerDialogComponent } from '../audio-player-dialog/audio-player-dialog.component';

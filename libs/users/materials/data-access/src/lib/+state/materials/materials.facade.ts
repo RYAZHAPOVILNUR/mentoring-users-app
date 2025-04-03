@@ -14,10 +14,6 @@ export class MaterialsFacade {
     select(MaterialSelectors.selectMaterialsError)
   );
 
-  init() {
-    this.store.dispatch(MaterialActions.initMaterials());
-  }
-
   loadMaterials(): void {
     this.store.dispatch(MaterialActions.loadMaterials());
   }

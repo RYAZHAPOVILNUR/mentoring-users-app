@@ -7,7 +7,7 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import { CommonModule, NgFor, NgIf, NgIfContext } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { FoldersListVM } from './folders-list-view.module';
 import { FoldersFacade, FoldersVM } from '@users/materials/data-access';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';

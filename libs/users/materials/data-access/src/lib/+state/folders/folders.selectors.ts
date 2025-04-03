@@ -2,7 +2,6 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { FOLDERS_FEATURE_KEY, FoldersState, foldersAdapter } from './folders.reducer';
 import { selectRouteParams } from '@users/core/data-access';
 
-// Главный селектор состояния папок
 export const selectFoldersState = createFeatureSelector<FoldersState>(FOLDERS_FEATURE_KEY);
 
 const { selectAll, selectEntities } = foldersAdapter.getSelectors();
@@ -11,7 +10,6 @@ export const selectFoldersStatus = createSelector(selectFoldersState, (state: Fo
 
 export const selectFoldersError = createSelector(selectFoldersState, (state: FoldersState) => state.errors);
 
-// Создаем селектор для списка папок
 export const selectAllFolders = createSelector(selectFoldersState, (state: FoldersState) => selectAll(state));
 
 export const selectFoldersEntities = createSelector(selectFoldersState, (state: FoldersState) => selectEntities(state));
@@ -22,19 +20,8 @@ export const selectFiltredFolders = createSelector(selectAllFolders, selectFolde
   return folders.filter((folder) => folder.id === folder.id);
 });
 
-// export const selectFolderById = (id: number) => createSelector(selectFoldersEntities, (entities) => entities[id]);
-
 export const selectOpenedFolder = createSelector(
   selectRouteParams,
   selectFoldersEntities,
   ({ id }, entities) => entities[id] || null
 );
-
-// Получаем состояние пользователей
-export const selectFolderState = (status: FoldersState) => status;
-
-// Выбираем загруженного пользователя
-export const selectSelectedFolder = createSelector(selectFolderState, (status: FoldersState) => status);
-
-// Получаем флаг загрузки
-export const selectFolderLoading = createSelector(selectFolderState, (status: FoldersState) => status);

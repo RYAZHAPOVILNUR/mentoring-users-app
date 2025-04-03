@@ -1,10 +1,8 @@
 import { Injectable, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ComponentStore } from '@ngrx/component-store';
-import { State } from '@ngrx/store';
 import { DeepReadonly } from '@users/core/utils';
 import { MaterialsEntity, MaterialsFacade, MaterialsVM, materialsVMAdapter } from '@users/materials/data-access';
-import { combineLatest, map, tap } from 'rxjs';
+import { tap } from 'rxjs';
 
 type MaterialsListState = DeepReadonly<{
   materials: MaterialsVM[];
@@ -24,7 +22,6 @@ export class MaterialsListContainerStore extends ComponentStore<MaterialsListSta
 
   constructor() {
     super(initialState);
-    this.materialsFacade.init();
     this.setMaterialsFromGlobalToLocaleStore();
   }
 

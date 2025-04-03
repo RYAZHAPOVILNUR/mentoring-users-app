@@ -1,6 +1,6 @@
 <mat-card class="card">
   <div class="button">
-    <button mat-button (click)="onDialogClose()" type="button"><mat-icon>close</mat-icon></button>
+    <button mat-button mat-dialog-close type="button"><mat-icon>close</mat-icon></button>
   </div>
   <pdf-viewer [src]="data" [render-text]="true" [original-size]="false" class="viewer"></pdf-viewer>
 </mat-card>

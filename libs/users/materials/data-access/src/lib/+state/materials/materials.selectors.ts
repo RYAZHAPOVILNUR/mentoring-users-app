@@ -1,67 +1,23 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { MATERIALS_FEATURE_KEY, MaterialsState, materialsAdapter } from './materials.reducer';
-import { selectRouteParams, selectRouteParam } from '@users/core/data-access';
+import { selectRouteParam } from '@users/core/data-access';
 
-// Создаёт селектор, который получает всё состояние MaterialsState из глобального хранилища NgRx.
 export const selectMaterialsState = createFeatureSelector<MaterialsState>(MATERIALS_FEATURE_KEY);
 
-export const selectMaterialIdFromRoute = createSelector(
-  selectRouteParam('id'),
-  (id) => (id ? Number(id) : null) // Приводим к числу
-);
+export const selectMaterialIdFromRoute = createSelector(selectRouteParam('id'), (id) => (id ? Number(id) : null));
 
-// selectAll — функция, возвращающая массив всех сущностей (материалов).
-// selectEntities — функция, возвращающая объект { [id]: entity }, где ключи — id материалов, а значения — сами материалы.
-const { selectAll, selectEntities } = materialsAdapter.getSelectors();
+const { selectAll } = materialsAdapter.getSelectors();
 
-// createSelector создаёт селектор, который получает status из MaterialsState.
 export const selectMaterialsStatus = createSelector(selectMaterialsState, (state: MaterialsState) => state.status);
 
-// Получает errors из MaterialsState. Используется для обработки ошибок загрузки данных.
 export const selectMaterialsError = createSelector(selectMaterialsState, (state: MaterialsState) => state.errors);
 
-// Извлекает все материалы из состояния с помощью selectAll. Если state отсутствует, возвращает пустой массив [].
 export const selectAllMaterials = createSelector(selectMaterialsState, (state: MaterialsState) => selectAll(state));
-
-// selectEntities(state) возвращает объект с материалами в формате { [id]: material }. Упрощает доступ к конкретному материалу по id.
-export const selectMaterialsEntities = createSelector(selectMaterialsState, (state: MaterialsState) =>
-  selectEntities(state)
-);
-
-export const selectSelectedId = createSelector(selectMaterialsState, (state: MaterialsState) => state.selectedId);
-
-export const selectEntity = createSelector(selectMaterialsEntities, selectSelectedId, (entities, selectedId) =>
-  selectedId ? entities[selectedId] : undefined
-);
-
-// Получает текущий фильтр из MaterialsState. Используется для фильтрации списка материалов.
-export const selectMaterialsFilter = createSelector(selectMaterialsState, (state: MaterialsState | undefined) =>
-  state ? state.materialsFilter : { title: '' }
-);
 
 export const selectFilteredMaterials = createSelector(
   selectAllMaterials,
   selectMaterialIdFromRoute,
   (materials, materialId) => {
-    if (!materialId) return [];
-    console.log('URL>>>', materialId);
     return materials.filter((material) => material.folderId === materialId);
   }
-);
-
-// Эта функция просто выбрасывает ошибку, потому что не реализована. Вероятно, она планировалась для выбора материала по id
-export function selectMaterialsById(id: number): any {
-  throw new Error('Function not implemented.');
-}
-//
-
-// Фабричный селектор, принимающий id. Возвращает селектор, который ищет материал в entities.
-export const selectMaterialById = (id: number) => createSelector(selectMaterialsEntities, (entities) => entities[id]);
-
-//selectRouteParams получает параметры из URL (например, id материала). selectMaterialsEntities получает объект { [id]: material }.
-// Возвращает открытый материал, если id найден, иначе null. Используется, например, на странице /materials/:id.
-export const selectOpenedMaterial = createSelector(
-  selectRouteParams,
-  selectMaterialsEntities,
-  ({ id }, entities) => entities[id] || null
 );

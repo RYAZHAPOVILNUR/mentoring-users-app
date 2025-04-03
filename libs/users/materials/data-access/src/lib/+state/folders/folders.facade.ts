@@ -10,9 +10,7 @@ import { AddFolderDTO } from '../../folders-dto/folders-dto.models';
 export class FoldersFacade {
   private readonly store = inject(Store);
   public readonly filtredFolders$ = this.store.select(FoldersSelectors.selectFiltredFolders);
-  public readonly openedFolder$ = this.store.select(FoldersSelectors.selectOpenedFolder);
   public readonly status$ = this.store.pipe(select(FoldersSelectors.selectFoldersStatus || of(null)));
-  public readonly allFolders = this.store.pipe(select(FoldersSelectors.selectAllFolders));
   public readonly errors$: Observable<FoldersErrors | null> = this.store.pipe(
     select(FoldersSelectors.selectFoldersError)
   );
@@ -27,9 +25,5 @@ export class FoldersFacade {
 
   deleteFolder(id: number) {
     this.store.dispatch(FoldersActions.deleteFolder({ id }));
-  }
-
-  selectedFolder(id: number) {
-    this.store.dispatch(FoldersActions.selectFolder({ id }));
   }
 }
