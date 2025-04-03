@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddMaterialDialogComponent } from '../add-material-dialog/add-material-dialog.component';
-import { MaterialsFacade } from '@users/materials/data-access';
+import { FoldersEntity, MaterialsFacade } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-add-material-button',
@@ -20,8 +20,8 @@ export class AddMaterialButtonComponent {
   private readonly dialog = inject(MatDialog);
   private readonly materialsFacade = inject(MaterialsFacade);
 
-  @Input()
-  openedFolder!: any;
+  @Input({ required: true })
+  openedFolder$!: FoldersEntity | null;
 
   onAddFile(type: string): void {
     switch (type) {
@@ -40,7 +40,7 @@ export class AddMaterialButtonComponent {
 
   onOpenDialog(title: string): void {
     const dialogRef = this.dialog.open(AddMaterialDialogComponent, {
-      data: { title: title, folder: this.openedFolder },
+      data: { title: title, folder: this.openedFolder$ },
     });
 
     dialogRef.afterClosed().subscribe((result) => {

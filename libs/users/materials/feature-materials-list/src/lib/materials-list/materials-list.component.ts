@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialsCardComponent } from '../materials-card/materials-card.component';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { MaterialsListVM } from './materials-list-view.module';
 
 @Component({
   selector: 'users-materials-list',
@@ -18,5 +19,5 @@ export class MaterialsListComponent {
   private readonly store = inject(Store);
 
   @Input({ required: true })
-  vm!: any;
+  vm!: MaterialsListVM;
 }

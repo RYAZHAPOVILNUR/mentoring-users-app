@@ -2,14 +2,14 @@
   <div class="material-header">
     <button class="button-back" routerLink="/materials" mat-button><mat-icon>arrow_back</mat-icon></button>
 
-    <p>{{ openedFolder$.title }}</p>
-    <users-add-material-button [openedFolder]="openedFolder$"></users-add-material-button>
+    <p *ngIf="openedFolder$">{{ openedFolder$.title }}</p>
+    <users-add-material-button [openedFolder$]="openedFolder$"></users-add-material-button>
   </div>
   <ng-container
     *ngrxLet="{
     materials: materials$,
     status: status$,
-    error: errors$,
+    errors: errors$,
   } as vm"
   >
     <users-materials-list [vm]="vm"></users-materials-list>

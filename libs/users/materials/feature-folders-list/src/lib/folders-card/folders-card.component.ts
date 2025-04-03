@@ -8,7 +8,7 @@ import {
   inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FoldersEntity, FoldersVM } from '@users/materials/data-access';
+import { FoldersVM } from '@users/materials/data-access';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { ShortTitle } from 'libs/users/materials/pipes/short-title.pipe';

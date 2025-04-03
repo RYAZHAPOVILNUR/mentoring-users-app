@@ -6,7 +6,6 @@ import { AddMaterialsDTO, MaterialsDTO } from '../../materials-dto/materials-dto
 import { materialsDTOAdapter } from '../../materials-dto/materials-dto.adapter';
 import * as MaterialsActions from './materials.actions';
 import { Store } from '@ngrx/store';
-import { MaterialsEntity } from '../../materials-dto/materials.entity';
 
 export const materialsEffects = createEffect(
   () => {
@@ -63,9 +62,9 @@ export const deleteMaterial = createEffect(
     const apiService = inject(ApiService);
     return action$.pipe(
       ofType(MaterialsActions.deleteMaterial),
-      switchMap((id) =>
+      switchMap(({ id }) =>
         apiService.delete<void>(`/material/${id}`).pipe(
-          map(() => MaterialsActions.deleteMaterialSuccess(id)),
+          map(() => MaterialsActions.deleteMaterialSuccess({ id })),
           catchError((error) => {
             console.error('Error', error);
             return of(MaterialsActions.deleteMaterialFailed({ error }));

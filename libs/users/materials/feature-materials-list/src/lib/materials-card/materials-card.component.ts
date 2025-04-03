@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { MaterialsEntity, MaterialsVM } from '@users/materials/data-access';
+import { MaterialsVM } from '@users/materials/data-access';
 import { MatIconModule } from '@angular/material/icon';
 import { CorrectDatePipe, DefineMaterialTypePipe, MaterialType, ShortTitle } from '@users/feature-folders-list';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,7 +9,6 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { PdfViewerDialogComponent } from '../pdf-viewer-dialog/pdf-viewer-dialog.component';
 import { AudioPlayerDialogComponent } from '../audio-player-dialog/audio-player-dialog.component';
 import { VideoPlayerDialogComponent } from '../video-player-dialog/video-player-dialog.component';
-import { DeleteFolderDialogComponent } from 'libs/users/materials/feature-folders-list/src/lib/delete-folder-dialog/delete-folder-dialog.component';
 import { DeleteMaterialDialogComponent } from '../delete-material-dialog/delete-material-dialog.component';
 
 @Component({
@@ -18,7 +16,6 @@ import { DeleteMaterialDialogComponent } from '../delete-material-dialog/delete-
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink,
     MatIconModule,
     DefineMaterialTypePipe,
     CorrectDatePipe,

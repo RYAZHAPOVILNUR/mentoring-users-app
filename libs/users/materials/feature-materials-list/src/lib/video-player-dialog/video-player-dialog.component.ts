@@ -19,13 +19,17 @@ export class VideoPlayerDialogComponent {
   public readonly data = inject(MAT_DIALOG_DATA);
 
   public videoLink: SafeResourceUrl = '';
-  videoValidation = /[?&]v=([a-zA-Z0-9_-]{11})|\/embed\/([a-zA-Z0-9_-]{11})/;
+  videoValidation = /(youtu\.be\/|[?&]v=|\/embed\/)([a-zA-Z0-9_-]{11})/;
 
   constructor(private sanitizer: DomSanitizer) {}
 
   ngOnInit() {
     const id = this.data.match(this.videoValidation);
-    const trustedUrl = `https://www.youtube.com/embed/`;
-    this.videoLink = this.sanitizer.bypassSecurityTrustResourceUrl(`${trustedUrl}${id[1]}`);
+    if (id && id[2]) {
+      const trustedUrl = `https://www.youtube.com/embed/`;
+      this.videoLink = this.sanitizer.bypassSecurityTrustResourceUrl(`${trustedUrl}${id[2]}`);
+    } else {
+      console.error('Invalid YouTube link:', this.data);
+    }
   }
 }
