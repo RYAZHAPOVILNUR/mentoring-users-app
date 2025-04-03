@@ -4,6 +4,7 @@ import * as MaterialActions from './materials.actions';
 import * as MaterialSelectors from './materials.selectors';
 import { Observable, of } from 'rxjs';
 import { MaterialsErrors } from './materials.reducer';
+import { MaterialsEntity } from '../../materials-dto/materials.entity';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialsFacade {
@@ -16,5 +17,13 @@ export class MaterialsFacade {
 
   loadMaterials(): void {
     this.store.dispatch(MaterialActions.loadMaterials());
+  }
+
+  addMaterial(materialData: MaterialsEntity): void {
+    this.store.dispatch(MaterialActions.addMaterial({ materialData }));
+  }
+
+  deleteMaterial(id: number) {
+    this.store.dispatch(MaterialActions.deleteMaterial({ id }));
   }
 }

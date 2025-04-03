@@ -49,10 +49,10 @@ export class FoldersCardComponent {
     this.redirectToFolder.emit(this.folder);
   }
 
-  onDeleteFolder(event: Event, folder: FoldersEntity): void {
+  onDeleteFolder(event: Event): void {
     event.stopPropagation();
     const dialogRef = this.dialog.open(DeleteFolderDialogComponent, {
-      data: folder,
+      data: this.folder,
       width: '700px',
     });
   }

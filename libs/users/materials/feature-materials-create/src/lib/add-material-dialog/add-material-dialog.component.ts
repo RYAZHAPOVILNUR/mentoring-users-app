@@ -28,13 +28,12 @@ export class AddMaterialDialogComponent {
   public readonly dialogData = inject(MAT_DIALOG_DATA);
 
   public materialData = new FormGroup({
-    title: new FormControl('', [Validators.required, Validators.minLength(10)]),
-    materialLink: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    title: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    materialLink: new FormControl('', [Validators.required, Validators.minLength(10)]),
   });
 
   get materialWithUpdatedFields() {
     return {
-      id: new Date().getTime(),
       ...this.materialData.value,
       createdAt: new Date().getTime(),
       folderId: this.dialogData.folder.id,

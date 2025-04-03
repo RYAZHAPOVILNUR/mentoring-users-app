@@ -4,7 +4,7 @@ import { MaterialsListComponent } from '../materials-list/materials-list.compone
 import { LetDirective } from '@ngrx/component';
 import { FoldersFacade, MaterialsFacade, selectOpenedFolder } from '@users/materials/data-access';
 import { MaterialsListContainerStore } from './materials-list-container.store';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
@@ -39,7 +39,6 @@ export class MaterialsListContainerComponent {
   public readonly errors$ = this.componentStore.errors$;
   public readonly materials$ = this.materialsFacade.filtredMaterials$;
   public openedFolder$: any = ''; // =========
-  private readonly route = inject(ActivatedRoute);
 
   ngOnInit() {
     this.materialsFacade.loadMaterials();

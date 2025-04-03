@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddMaterialDialogComponent } from '../add-material-dialog/add-material-dialog.component';
+import { MaterialsFacade } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-add-material-button',
@@ -17,6 +18,7 @@ import { AddMaterialDialogComponent } from '../add-material-dialog/add-material-
 })
 export class AddMaterialButtonComponent {
   private readonly dialog = inject(MatDialog);
+  private readonly materialsFacade = inject(MaterialsFacade);
 
   @Input()
   openedFolder!: any;
@@ -42,7 +44,7 @@ export class AddMaterialButtonComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed', result);
+      this.materialsFacade.addMaterial(result);
     });
   }
 }

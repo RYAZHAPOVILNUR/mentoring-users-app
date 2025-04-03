@@ -22,7 +22,7 @@ export const updateFolderStatus = createAction(
 export const addFolder = createAction('[Folders Page] add Folder', props<{ folderData: AddFolderDTO }>());
 export const addFolderSuccess = createAction(
   '[Folders Page] Create Folder Success',
-  props<{ folderData: AddFolderDTO }>()
+  props<{ folderData: FoldersEntity }>()
 );
 export const addFolderFailed = createAction('[Folders Page] Create Folders Failed', props<{ error: any }>());
 

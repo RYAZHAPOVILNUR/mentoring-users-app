@@ -7,3 +7,11 @@ export type MaterialsDTO = DeepReadonly<{
   material_link: string;
   folder_id: number;
 }>;
+
+export type AddMaterialsDTO = DeepReadonly<{
+  id: number;
+  created_at: number;
+  title: string;
+  material_link: string;
+  folder_id: number;
+}>;
