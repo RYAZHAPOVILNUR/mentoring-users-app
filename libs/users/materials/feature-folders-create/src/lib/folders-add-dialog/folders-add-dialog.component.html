@@ -5,10 +5,10 @@
     <mat-form-field>
       <mat-label>Название папки</mat-label>
       <input formControlName="title" matInput />
-      <mat-error *ngIf="formGroup.get('folderName')?.hasError('required')">
+      <mat-error *ngIf="formGroup.get('title')?.hasError('required')">
         Название папки обязательно.
       </mat-error>
-      <mat-error *ngIf="formGroup.get('folderName')?.hasError('minlength')">
+      <mat-error *ngIf="formGroup.get('title')?.hasError('minlength')">
         Название папки должно быть не менее 3 символов.
       </mat-error>
     </mat-form-field>

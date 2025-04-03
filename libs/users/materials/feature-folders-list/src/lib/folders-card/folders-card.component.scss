@@ -18,10 +18,27 @@
   &:active {
     filter: brightness(0.9);
   }
+
+  &:hover .delete {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+  }
+}
+
+.card-icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
 }
 
 .btn-menu {
   position: absolute;
   top: 3px;
   right: 3px;
+}
+
+.delete {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
 }

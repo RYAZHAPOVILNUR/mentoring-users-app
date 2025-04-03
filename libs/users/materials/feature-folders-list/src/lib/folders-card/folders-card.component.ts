@@ -32,11 +32,11 @@ export class FoldersCardComponent {
     this.deleteFolder.emit({ folderId: this.folder.id, folderTitle: this.folder.title });
   }
 
-  onEditFolder() {
-    this.editFolder.emit(this.folder);
+  onEditFolder(folder: FoldersVm) {
+    this.editFolder.emit(folder);
   }
 
-  onOpenFolder() {
-    this.openFolder.emit({ folderId: this.folder.id, folderTitle: this.folder.title });
+  onOpenFolder(data: { folderId: number, folderTitle: string }) {
+    this.openFolder.emit(data);
   }
 }

@@ -1,17 +1,17 @@
 <mat-card
-  (dblclick)="onOpenFolder()"
+  (dblclick)="onOpenFolder({ folderId: folder.id, folderTitle: folder.title })"
   class="card"
 >
   <mat-card-content class="card-icons">
     <mat-icon>folder</mat-icon>
-    <button [matMenuTriggerFor]="menu" class="btn-menu" mat-icon-button>
-      <mat-icon>more_vert</mat-icon>
+    <button (click)="onDeleteFolder()" mat-icon-button>
+      <mat-icon class="delete">delete</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
       <button (click)="onDeleteFolder()" mat-menu-item type="button">
         Delete
       </button>
-      <button (click)="onEditFolder()" mat-menu-item type="button">Rename</button>
+      <button (click)="onEditFolder(folder)" mat-menu-item type="button">Rename</button>
     </mat-menu>
   </mat-card-content>
 
