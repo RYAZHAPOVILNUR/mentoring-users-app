@@ -3,5 +3,3 @@ export interface Folder {
     created_at: string;
     title: string;
 }
-
-export type Folders = Folder[];
