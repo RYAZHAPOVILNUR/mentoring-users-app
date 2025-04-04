@@ -1,4 +1,8 @@
-<p>folder {{ folder?.title }}</p>
-<p>{{ folder?.created_at }}</p>
-
-
+<div class="folders-card-wrap">
+    <mat-icon class="folder-icon">folder</mat-icon>
+    <div class="folder-content">
+      <p>{{ folder?.title }}</p>
+      <p>{{ folder?.created_at | date:'d MMMM y' }} г.</p>
+    </div>
+  </div>
+  

@@ -1,0 +1,24 @@
+.folders-card-wrap {
+    width: 150px;
+    height: 100px;
+    flex-direction: column;
+    background-color:steelblue;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.folder-icon {
+    color:wheat;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-size: 24px;
+}
+
+.folder-font-bold {
+    font-weight: bold;
+}
+
+p {
+    color: aliceblue;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
