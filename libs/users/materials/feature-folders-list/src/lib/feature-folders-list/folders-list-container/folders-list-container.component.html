@@ -1,7 +1,4 @@
-<div class="folders-container" *ngIf="folders$ | async as folders">
-    <div *ngFor="let folder of folders">
-        <users-folders-card 
-            [folder]="folder">
-        </users-folders-card>
-    </div>
-</div>
+<ng-container *ngIf="folders$ | async as folders">
+    <users-folders-list [folders]="folders" />
+</ng-container>
+  

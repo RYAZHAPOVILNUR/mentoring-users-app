@@ -1,1 +1,7 @@
-<p>folders-list works!</p>
+<div class="folders-container" *ngIf="folders as folders">
+    <div *ngFor="let folder of folders">
+        <users-folders-card 
+            [folder]="folder">
+        </users-folders-card>
+    </div>
+</div>
