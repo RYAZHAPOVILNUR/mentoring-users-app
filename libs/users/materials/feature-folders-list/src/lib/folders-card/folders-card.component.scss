@@ -11,7 +11,7 @@
   background-color: transparent;
   border: 1px solid rgb(93, 89, 89);
   &:hover {
-    button {
+    .folder-delete {
       opacity: 1;
       transition: opacity 0.3s ease 0s;
     }
@@ -19,15 +19,26 @@
 }
 
 .folder-header {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  button {
+
+  .folder-delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     opacity: 0;
     transition: opacity 0.3s ease 0s;
-    margin-right: -30px;
-    display: block;
+    width: 35px;
+    height: 35px;
+    &:hover {
+      background-color: #ede9e9;
+      border-radius: 50%;
+      padding: 2px;
+      transition: background-color 0.3s ease 0s;
+    }
   }
 }
 

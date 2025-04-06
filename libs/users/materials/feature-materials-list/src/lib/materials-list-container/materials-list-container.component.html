@@ -1,7 +1,6 @@
 <div class="material-content">
   <div class="material-header">
     <button class="button-back" routerLink="/materials" mat-button><mat-icon>arrow_back</mat-icon></button>
-
     <p *ngIf="openedFolder$">{{ openedFolder$.title }}</p>
     <users-add-material-button [openedFolder$]="openedFolder$"></users-add-material-button>
   </div>

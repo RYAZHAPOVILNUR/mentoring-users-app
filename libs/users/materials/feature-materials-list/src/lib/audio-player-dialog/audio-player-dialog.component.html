@@ -9,5 +9,24 @@
     <source [src]="data" type="audio/mpeg" />
     Ваш браузер не поддерживает аудио.
   </audio>
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>download</mat-icon>
+      <span>скачать</span>
+    </button>
+    <button mat-menu-item>
+      <span class="speed-menu">
+        <mat-icon>speed</mat-icon>
+        <button mat-button [matMenuTriggerFor]="speed">Скорость</button>
+      </span>
+      <mat-menu #speed="matMenu">
+        <button mat-menu-item>1x</button>
+        <button mat-menu-item>2x</button>
+      </mat-menu>
+    </button>
+  </mat-menu>
   <button (click)="onPlayrClose()" type="button" mat-button><mat-icon>close</mat-icon></button>
 </div>

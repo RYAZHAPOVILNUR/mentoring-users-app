@@ -15,7 +15,6 @@ const initialState: MaterialsListState = {
 @Injectable({ providedIn: 'root' })
 export class MaterialsListContainerStore extends ComponentStore<MaterialsListState> {
   private readonly materialsFacade = inject(MaterialsFacade);
-
   public readonly materials$ = this.select(({ materials }) => materials);
   public readonly status$ = this.select(this.materialsFacade.status$, (status) => status);
   public errors$ = this.select(this.materialsFacade.errors$, (error) => error);

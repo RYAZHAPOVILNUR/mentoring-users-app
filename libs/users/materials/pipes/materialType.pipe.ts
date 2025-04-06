@@ -4,6 +4,7 @@ export enum MaterialType {
   AUDIO = 'audiotrack',
   PDF = 'picture_as_pdf',
   VIDEO = 'ondemand_video',
+  NoType = 'no_type',
 }
 
 @Pipe({ name: 'defineMaterialType', standalone: true })
@@ -15,6 +16,8 @@ export class DefineMaterialTypePipe implements PipeTransform {
     const isPdf = value.endsWith('.pdf');
     if (isPdf) return MaterialType.PDF;
 
-    return MaterialType.VIDEO;
+    const isVideo = value.includes('youtu');
+    if (isVideo) return MaterialType.VIDEO;
+    return MaterialType.NoType;
   }
 }

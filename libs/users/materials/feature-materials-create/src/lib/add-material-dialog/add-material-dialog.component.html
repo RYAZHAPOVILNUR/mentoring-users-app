@@ -12,7 +12,13 @@
   </mat-form-field>
   <div class="buttons">
     <button mat-button mat-dialog-close type="button">Отмена</button>
-    <button mat-button type="button" [disabled]="materialData.invalid" [mat-dialog-close]="materialWithUpdatedFields">
+    <button
+      mat-button
+      type="button"
+      [disabled]="isSupported"
+      [disabled]="materialData.invalid"
+      [mat-dialog-close]="materialWithUpdatedFields"
+    >
       Добавить
     </button>
   </div>

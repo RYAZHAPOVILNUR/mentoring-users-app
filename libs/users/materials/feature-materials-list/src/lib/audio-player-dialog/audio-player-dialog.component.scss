@@ -7,3 +7,11 @@
 input[type='range'] {
   flex: 1;
 }
+
+.speed-menu {
+  display: flex;
+  align-items: center;
+  .mat-mdc-menu-trigger {
+    padding: 0px;
+  }
+}

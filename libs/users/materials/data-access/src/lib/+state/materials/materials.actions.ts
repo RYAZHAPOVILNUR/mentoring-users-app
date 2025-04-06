@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { MaterialsEntity } from '../../materials-dto/materials.entity';
+import { LoadingStatus } from '@users/core/data-access';
 
 export const loadMaterials = createAction('[Materials Page] Load Materials');
 
@@ -9,6 +10,11 @@ export const loadMaterialsSuccess = createAction(
 );
 
 export const loadMaterialsFailure = createAction('[Materials/Api] Load Materials Failure', props<{ error: Error }>());
+
+export const updateMaterialsStatus = createAction(
+  '[Materials Page] Load materials Status',
+  props<{ status: LoadingStatus }>()
+);
 
 export const addMaterial = createAction('[Materials Page] Add Material', props<{ materialData: MaterialsEntity }>());
 export const addMaterialSuccess = createAction(

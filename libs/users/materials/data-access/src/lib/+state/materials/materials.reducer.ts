@@ -35,6 +35,10 @@ export const materialsReducer = createReducer(
   on(MaterialsActions.loadMaterialsSuccess, (state, { materials }) =>
     materialsAdapter.setAll(materials, { ...state, status: 'loaded' as const })
   ),
+  on(MaterialsActions.updateMaterialsStatus, (state, { status }) => ({
+    ...state,
+    status,
+  })),
   on(MaterialsActions.loadMaterialsFailure, (state, { error }) => ({
     ...state,
     status: 'error' as const,

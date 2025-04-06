@@ -1,7 +1,18 @@
-<ng-container>
-  <div class="materials-container">
+<ng-container *ngIf="vm.status === 'loading'; else loadingResult">
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+<ng-template #loadingResult>
+  <div class="materials-container" *ngIf="vm.status === 'loaded'; else error">
     <ng-container *ngFor="let material of vm.materials">
       <users-materials-card [material]="material"></users-materials-card>
     </ng-container>
   </div>
-</ng-container>
+</ng-template>
+
+<ng-template #error>
+  <div class="alert alert-danger" role="alert">
+    <h1>{{ vm.errors?.status }}</h1>
+    <hr />
+    {{ vm.errors }}
+  </div>
+</ng-template>

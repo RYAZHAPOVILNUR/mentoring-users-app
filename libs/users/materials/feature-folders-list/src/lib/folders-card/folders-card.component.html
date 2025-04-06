@@ -1,9 +1,9 @@
 <mat-card (click)="onOpenFolder()" class="folder-content">
   <div class="folder-header">
     <span><mat-icon>folder</mat-icon></span>
-    <button type="button" mat-button (click)="onDeleteFolder($event)">
+    <span class="folder-delete" (click)="onDeleteFolder($event)">
       <mat-icon>delete</mat-icon>
-    </button>
+    </span>
   </div>
   <div class="folder-title">
     <h4 class="folder-title">{{ folder.title | shortTitle }}</h4>
