@@ -1,19 +1,22 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap, withLatestFrom } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { MaterialsActions } from './materials.actions';
 import { ApiService } from '@users/core/http';
 import { Folder, newFolder } from '../models/folders.interface';
+import { Store } from '@ngrx/store';
+import { Material } from '../models/materials.interface';
 
 @Injectable()
 export class MaterialsEffects {
 
   private actions$ = inject(Actions);
+  private store = inject(Store);
   private apiService = inject(ApiService);
 
-  loadFolders$ = createEffect(() => {
-    return this.actions$.pipe(
+  loadFolders$ = createEffect(() =>
+    this.actions$.pipe(
       ofType(MaterialsActions.loadFolders),
       mergeMap(() => this.apiService.get<Folder[]>('/folder').pipe(
         map((folders) => MaterialsActions.loadFoldersSuccess({ folders })),
@@ -23,11 +26,11 @@ export class MaterialsEffects {
         })
       )
       )
-    );
-  });
+    )
+  );
 
-  createFolder$ = createEffect(() => {
-    return this.actions$.pipe(
+  createFolder$ = createEffect(() =>
+    this.actions$.pipe(
       ofType(MaterialsActions.createFolder),
       switchMap((action) => 
         this.apiService.post<Folder, newFolder>('/folder', action.folder).pipe(
@@ -39,11 +42,11 @@ export class MaterialsEffects {
           )
         )
       )
-    );
-  });
+    )
+  );
 
-  deleteFolder = createEffect(() => {
-    return this.actions$.pipe(
+  deleteFolder = createEffect(() =>
+    this.actions$.pipe(
       ofType(MaterialsActions.deleteFolder),
       switchMap(({ folderId }) => 
         this.apiService.delete<void>(`/folder/${folderId}`).pipe(
@@ -53,7 +56,27 @@ export class MaterialsEffects {
           )
         )
       )
-    );
-  });
+    )
+  );
+
+  openFolder = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MaterialsActions.openFolder),
+      map(({ folderId }) => MaterialsActions.loadMaterials({ folderId }))
+    )
+  );
   
+  loadMaterials = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MaterialsActions.loadMaterials),
+      switchMap(({ folderId }) =>
+        this.apiService.get<Material[]>(`/material?folderId=${folderId}`).pipe(
+          map((materials) => MaterialsActions.loadMaterialsSuccess({ materials })),
+          catchError((error) =>
+            of(MaterialsActions.loadMaterialsFailure({ error }))
+          )
+        )
+      )
+    )
+  );
 }

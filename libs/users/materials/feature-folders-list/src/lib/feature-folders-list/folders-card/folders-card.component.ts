@@ -17,6 +17,11 @@ import { MatIconModule } from '@angular/material/icon';
 export class FoldersCardComponent {
   @Input() folder: Folder | undefined;
   @Output() deleteFolder = new EventEmitter();
+  @Output() openFolder = new EventEmitter();
+
+  onOpenFolder(folderId?: number): void {
+    this.openFolder.emit(folderId);
+  }
 
   onDeleteFolder(folderId?: number, event?: Event): void {
     event?.stopPropagation();

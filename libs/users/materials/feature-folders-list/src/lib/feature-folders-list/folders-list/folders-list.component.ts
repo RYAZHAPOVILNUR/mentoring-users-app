@@ -19,8 +19,14 @@ import { FoldersAddButtonComponent } from '@users/materials/feature-folders-crea
 export class FoldersListComponent {
   @Input() folders: Folder[] = [];
   @Output() deleteFolder = new EventEmitter<number>();
+  @Output() openFolder = new EventEmitter<number>();
 
+  onOpenFolder(folderId: number):void {
+    this.openFolder.emit(folderId);
+  }
+  
   onDeleteFolder(folderId: number):void {
     this.deleteFolder.emit(folderId);
   }
+
 }

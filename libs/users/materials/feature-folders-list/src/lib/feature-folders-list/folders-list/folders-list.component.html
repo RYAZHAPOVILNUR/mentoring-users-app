@@ -2,6 +2,7 @@
     <div *ngFor="let folder of folders">
         <users-folders-card 
             [folder]="folder"
+            (openFolder)="onOpenFolder(folder.id)"
             (deleteFolder)="onDeleteFolder(folder.id)">
         </users-folders-card>
     </div>

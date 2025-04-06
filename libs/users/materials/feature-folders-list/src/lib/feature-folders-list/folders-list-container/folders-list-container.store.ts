@@ -5,6 +5,7 @@ import { Folder } from '@users/materials/data-access';
 import { MaterialsFacade } from '@users/materials/data-access';
 import { switchMap, tap } from 'rxjs';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
+import { Router } from '@angular/router';
 
 export interface FoldersListContainerState {
   folders: Folder[]
@@ -16,10 +17,11 @@ const initialState: FoldersListContainerState = {
 
 @Injectable({ providedIn: 'root' })
 export class FoldersListContainerStore extends ComponentStore<FoldersListContainerState> {
-  private readonly materialsFacade = inject(MaterialsFacade)
+  private readonly materialsFacade = inject(MaterialsFacade);
   private readonly dialog = inject(MatDialog);
-  public readonly folders$ = this.select(({ folders }) => folders)
-
+  public readonly router = inject(Router);
+  public readonly folders$ = this.select(({ folders }) => folders);
+  
   constructor() {
     super(initialState);
   }
@@ -32,6 +34,11 @@ export class FoldersListContainerStore extends ComponentStore<FoldersListContain
       })
     )
   );
+
+  public openFolder(folderId: number): void {
+    this.materialsFacade.openFolder(folderId)
+    this.router.navigate(['/materials', folderId]);
+  }
 
   public deleteFolder(folderId: number): void {
     this.folders$.pipe(

@@ -31,8 +31,11 @@ export class FoldersListContainerComponent {
     this.componentStore.loadFolders();
   }
 
+  onOpenFolder(folderId: number) {
+    this.componentStore.openFolder(folderId);
+  }
+  
   onDeleteFolder(folderId: number) {
     this.componentStore.deleteFolder(folderId);
   }
-
 }

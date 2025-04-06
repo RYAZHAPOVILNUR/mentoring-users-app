@@ -1,4 +1,4 @@
-<div class="folders-card-wrap">
+<div class="folders-card-wrap" (click)="onOpenFolder(folder?.id)">
     <div class="icons-container">
       <mat-icon class="folder-icon">folder</mat-icon>
       <mat-icon class="delete-icon" (click)="onDeleteFolder(folder?.id, $event)">delete</mat-icon>

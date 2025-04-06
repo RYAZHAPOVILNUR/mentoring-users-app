@@ -52,6 +52,10 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('@users/materials/feature-folders-list').then((c) => c.FoldersListContainerComponent),
       },
       {
+      path: 'materials/:id',
+      loadComponent: () => import('@users/materials/feature-materials-list').then((c) => c.MaterialsListContainerComponent),
+      },
+      {
         path: 'articles',
         loadComponent: () => import('@users/users/articles/articles').then((c) => c.ArticlesViewContainerComponent),
       },

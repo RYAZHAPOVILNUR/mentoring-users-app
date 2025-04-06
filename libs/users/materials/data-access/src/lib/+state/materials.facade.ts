@@ -26,4 +26,8 @@ export class MaterialsFacade {
     deleteFolder(folderId: number) {
         this.store.dispatch(MaterialsActions.deleteFolder({folderId}))
     }
+
+    openFolder(folderId: number) {
+        this.store.dispatch(MaterialsActions.openFolder({folderId}))
+    }
 }

@@ -16,5 +16,11 @@ export const MaterialsActions = createActionGroup({
     'Delete Folder': props<{ folderId: number }>(),
     'Delete Folder Success': props<{ folderId: number }>(),
     'Delete Folder Failure': props<{ error: Error }>(),
+
+    'Open Folder': props<{ folderId: number }>(),
+
+    'Load Materials': props<{ folderId: number }>(),
+    'Load Materials Success': props<{ materials: Material[] }>(),
+    'Load Materials Failure': props<{ error: Error }>(),
   },
 });
