@@ -1,8 +1,10 @@
 import { inject, Injectable } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ComponentStore } from '@ngrx/component-store';
 import { Folder } from '@users/materials/data-access';
 import { MaterialsFacade } from '@users/materials/data-access';
 import { switchMap, tap } from 'rxjs';
+import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 
 export interface FoldersListContainerState {
   folders: Folder[]
@@ -15,6 +17,7 @@ const initialState: FoldersListContainerState = {
 @Injectable({ providedIn: 'root' })
 export class FoldersListContainerStore extends ComponentStore<FoldersListContainerState> {
   private readonly materialsFacade = inject(MaterialsFacade)
+  private readonly dialog = inject(MatDialog);
   public readonly folders$ = this.select(({ folders }) => folders)
 
   constructor() {
@@ -29,4 +32,22 @@ export class FoldersListContainerStore extends ComponentStore<FoldersListContain
       })
     )
   );
+
+  public deleteFolder(folderId: number): void {
+    this.folders$.pipe(
+      switchMap(folders => {
+        const folder = folders.find(f => f.id === folderId);
+        if (folder) {
+          const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
+            data: { dialogText: `Вы уверены, что хотите удалить папку ${folder.title}` },
+          });
+          return dialogRef.afterClosed();
+        }
+        return [];
+      }),
+      tap((result: boolean) => {
+        if (result) this.materialsFacade.deleteFolder(folderId);
+      })
+    ).subscribe();
+  }
 }

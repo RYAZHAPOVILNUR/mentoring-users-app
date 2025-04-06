@@ -1,7 +1,8 @@
 <div class="folders-container" *ngIf="folders as folders">
     <div *ngFor="let folder of folders">
         <users-folders-card 
-            [folder]="folder">
+            [folder]="folder"
+            (deleteFolder)="onDeleteFolder(folder.id)">
         </users-folders-card>
     </div>
 </div>

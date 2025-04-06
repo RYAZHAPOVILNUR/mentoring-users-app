@@ -46,5 +46,15 @@ export const materialsFeature = createFeature({
       loading: false,
       error: String(error)
     })),
+    on(MaterialsActions.deleteFolder, (state, { folderId }) => ({
+      ...state,
+      folders: state.folders.filter(folder => folder.id !== folderId),
+      loading:false
+    })),
+    on(MaterialsActions.deleteFolderFailure, (state, { error }) => ({
+      ...state,
+      loading: false,
+      error: String(error)
+    })),
   ),
 });

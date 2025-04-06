@@ -41,4 +41,19 @@ export class MaterialsEffects {
       )
     );
   });
+
+  deleteFolder = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(MaterialsActions.deleteFolder),
+      switchMap(({ folderId }) => 
+        this.apiService.delete<void>(`/folder/${folderId}`).pipe(
+          map(() => MaterialsActions.deleteFolderSuccess({ folderId })),
+          catchError((error) => 
+            of(MaterialsActions.deleteFolderFailure({ error }))
+          )
+        )
+      )
+    );
+  });
+  
 }

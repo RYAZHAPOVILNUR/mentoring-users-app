@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoldersCardComponent } from "../folders-card/folders-card.component";
 import { Folder } from '@users/materials/data-access';
@@ -18,4 +18,9 @@ import { FoldersAddButtonComponent } from '@users/materials/feature-folders-crea
 })
 export class FoldersListComponent {
   @Input() folders: Folder[] = [];
+  @Output() deleteFolder = new EventEmitter<number>();
+
+  onDeleteFolder(folderId: number):void {
+    this.deleteFolder.emit(folderId);
+  }
 }

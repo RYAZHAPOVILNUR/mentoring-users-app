@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Folder } from '@users/materials/data-access';
-import { FeatureFoldersListComponent } from "../feature-folders-list.component";
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -9,13 +8,18 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   imports: [
     CommonModule,
-    FeatureFoldersListComponent,
     MatIconModule
-  ],
+],
   templateUrl: './folders-card.component.html',
   styleUrls: ['./folders-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersCardComponent {
   @Input() folder: Folder | undefined;
+  @Output() deleteFolder = new EventEmitter();
+
+  onDeleteFolder(folderId?: number, event?: Event): void {
+    event?.stopPropagation();
+    this.deleteFolder.emit(folderId);
+  }
 }

@@ -1,5 +1,8 @@
 <div class="folders-card-wrap">
-    <mat-icon class="folder-icon">folder</mat-icon>
+    <div class="icons-container">
+      <mat-icon class="folder-icon">folder</mat-icon>
+      <mat-icon class="delete-icon" (click)="onDeleteFolder(folder?.id, $event)">delete</mat-icon>
+    </div>
     <div class="folder-content">
       <p class="folder-font-bold">{{ folder?.title }}</p>
       <p>{{ folder?.created_at | date:'d MMMM y' }} y.</p>
