@@ -1,1 +1,10 @@
-<p>folders-add-dialog works!</p>
+<h2 mat-dialog-title>Folder title</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <input matInput [(ngModel)]="folder.title" placeholder="Enter folder title" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Отмена</button>
+  <button mat-button (click)="onSaveFolder()">Сохранить</button>
+</mat-dialog-actions>

@@ -34,6 +34,17 @@ export const materialsFeature = createFeature({
       ...state,
       loading: false,
       error: String(error)
-  }))
+    })),
+    on(MaterialsActions.createFolderSuccess, (state, {folder}) => ({
+      ...state,
+      folders: [...state.folders, folder],
+      loading: false,
+      error: null
+    })),
+    on(MaterialsActions.createFolderFailure, (state, { error }) => ({
+      ...state,
+      loading: false,
+      error: String(error)
+    })),
   ),
 });

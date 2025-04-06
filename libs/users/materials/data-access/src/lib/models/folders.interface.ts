@@ -3,3 +3,7 @@ export interface Folder {
     created_at: string;
     title: string;
 }
+
+export interface newFolder {
+    title: string;
+}

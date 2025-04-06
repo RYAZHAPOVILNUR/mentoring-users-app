@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { Folder } from '../models/folders.interface';
+import { Folder, newFolder } from '../models/folders.interface';
 import { Material } from '../models/materials.interface';
 
 export const MaterialsActions = createActionGroup({
@@ -8,5 +8,9 @@ export const MaterialsActions = createActionGroup({
     'Load Folders': emptyProps(),
     'Load Folders Success': props<{ folders: Folder[] }>(),
     'Load Folders Failure': props<{ error: Error }>(),
+
+    'Create Folder': props<{ folder: newFolder }>(),
+    'Create Folder Success': props<{ folder: Folder }>(),
+    'Create Folder Failure': props<{ error: Error }>(),
   },
 });
