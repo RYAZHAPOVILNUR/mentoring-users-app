@@ -1,1 +1,6 @@
-<p>materials-list-container works!</p>
+<p>{{folderTitle$ | async}}</p>
+<ng-container *ngIf="materials$ | async as materials">
+    <users-materials-list
+    [materials]="materials"
+    />
+</ng-container>

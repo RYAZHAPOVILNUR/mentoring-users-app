@@ -8,6 +8,7 @@ export const MATERIALS_FEATURE_KEY = 'materials';
 export interface MaterialsState {
   folders: Folder[];
   materials: Material[];
+  selectedFolderId: number | null;
   loading: boolean;
   error: string | null;
 }
@@ -15,6 +16,7 @@ export interface MaterialsState {
 export const initialMaterialsState: MaterialsState = {
   folders: [],
   materials: [],
+  selectedFolderId: null,
   loading: false,
   error: null
 };
@@ -59,8 +61,9 @@ export const materialsFeature = createFeature({
       loading: false,
       error: String(error)
     })),
-    on(MaterialsActions.openFolder, (state) =>({
+    on(MaterialsActions.openFolder, (state, {folderId}) =>({
       ...state,
+      selectedFolderId: folderId,
       loading: true
     })),
     on(MaterialsActions.loadMaterials, (state) => ({

@@ -1,13 +1,20 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Material } from '@users/materials/data-access';
+import { MaterialsCardComponent } from '../materials-card/materials-card.component'
 
 @Component({
   selector: 'users-materials-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    MaterialsCardComponent
+  ],
   templateUrl: './materials-list.component.html',
   styleUrls: ['./materials-list.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MaterialsListComponent {}
+export class MaterialsListComponent {
+  @Input() materials: Material[] = [];
+}

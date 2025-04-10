@@ -14,3 +14,8 @@ export const selectMaterials = createSelector(
   selectMaterialsState,
   (state): Material[] => state.materials
 );
+
+export const selectSelectedFolderId = createSelector(
+  selectMaterialsState,
+  (state) => state.selectedFolderId
+)

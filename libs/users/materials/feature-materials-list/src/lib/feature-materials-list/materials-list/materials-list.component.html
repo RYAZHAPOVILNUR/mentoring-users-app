@@ -1,1 +1,7 @@
-<p>materials-list works!</p>
+<div class="materials-container" *ngIf="materials as materials">
+    <div *ngFor="let material of materials">
+        <users-materials-card [material]="material">
+        </users-materials-card>
+    </div>
+</div>
+
