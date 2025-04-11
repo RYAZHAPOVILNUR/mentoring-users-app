@@ -23,7 +23,6 @@ export class FoldersListContainerComponent {
   public readonly errors$ = this.componentStore.errors$;
   private readonly router = inject(Router);
 
-
   public onDeleteFolder(dataForDeleteFolder: { folderId: number; folderTitle: string }) {
     const { folderId, folderTitle } = dataForDeleteFolder;
     this.componentStore.deleteFolder(folderId, folderTitle);

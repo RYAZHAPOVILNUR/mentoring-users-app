@@ -1,1 +1,23 @@
-<p>materials-list works!</p>
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate" style="width: 90vw;"></mat-progress-bar>
+<div class="folder-header">
+  <button (click)="goBack()" class="btn" mat-mini-fab>
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span *ngIf="folder$ | async as folder" class="folder-title">
+    {{ folder?.title }}
+  </span>
+</div>
+
+<div *ngIf="!isLoading">
+  <div *ngIf="materials$ | async as materials">
+    <div *ngIf="materials.length > 0; else noMaterials">
+      <div *ngFor="let material of materials">
+        <users-materials-card></users-materials-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noMaterials>
+  <p>Извените, материалов в данной папке не имеется</p>
+</ng-template>
