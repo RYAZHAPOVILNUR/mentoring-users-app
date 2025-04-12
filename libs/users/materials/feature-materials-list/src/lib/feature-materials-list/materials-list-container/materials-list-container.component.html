@@ -1,6 +1,12 @@
-<p>{{folderTitle$ | async}}</p>
+<div class="material-list-header-container">
+    <button mat-button (click)="returnToFolders()">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span class="folder-title">{{folderTitle$ | async}}</span>
+</div>
 <ng-container *ngIf="materials$ | async as materials">
-    <users-materials-list
-    [materials]="materials"
+    <users-materials-list 
+        [materials]="materials" 
+        [folderId]="folder$ | async"
     />
 </ng-container>

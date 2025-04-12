@@ -1,0 +1,26 @@
+.add-material-button-container {
+    position: absolute;
+    bottom: 16px;
+    right: 180px;
+}
+
+.mat-select-arrow {
+    display: none !important;
+}
+
+.hidden-select {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.hidden-select .mat-select-panel {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+.add-material-button-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

@@ -1,1 +1,12 @@
-<p>materials-add-button works!</p>
+<div class="add-material-button-container">
+    <mat-form-field appearance="outline" class="hidden-select">
+        <mat-select #materialSelect [(value)]="selectedMaterialType" (selectionChange)="onMaterialTypeSelected($event.value)" disableRipple>
+            <!-- <mat-option [value]="null">Не выбрано</mat-option> -->
+            <mat-option *ngFor="let option of materialType" [value]="option.value">{{ option.viewValue }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <button mat-fab (click)="openSelect()" class="custom-trigger-button">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>

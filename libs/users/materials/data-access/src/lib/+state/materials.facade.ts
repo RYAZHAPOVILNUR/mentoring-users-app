@@ -4,7 +4,7 @@ import { MaterialsActions } from './materials.actions';
 import * as MaterialsSelectors from './materials.selectors';
 import { Observable } from 'rxjs';
 import { Folder, newFolder } from '../models/folders.interface';
-import { Material } from '../models/materials.interface';
+import { Material, newMaterial } from '../models/materials.interface';
 
 @Injectable({ providedIn: 'root' })
 
@@ -37,5 +37,9 @@ export class MaterialsFacade {
     loadMaterials(folderId: number) {
         this.store.dispatch(MaterialsActions.loadMaterials({folderId}));
         return this.allMaterials;
+    }
+
+    createMaterial(material: newMaterial) {
+        this.store.dispatch(MaterialsActions.createMaterial({material}));
     }
 }

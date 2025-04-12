@@ -6,7 +6,7 @@ import { MaterialsActions } from './materials.actions';
 import { ApiService } from '@users/core/http';
 import { Folder, newFolder } from '../models/folders.interface';
 import { Store } from '@ngrx/store';
-import { Material } from '../models/materials.interface';
+import { Material, newMaterial } from '../models/materials.interface';
 
 @Injectable()
 export class MaterialsEffects {
@@ -79,4 +79,21 @@ export class MaterialsEffects {
       )
     )
   );
+
+  createMaterial = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MaterialsActions.createMaterial),
+      switchMap((action) => 
+        this.apiService.post<Material, newMaterial>('/material', action.material).pipe(
+          map((createdMaterial) => 
+            MaterialsActions.createMaterialSuccess({ material: createdMaterial })
+          ),
+          catchError((error) => 
+            of(MaterialsActions.createMaterialFailure({ error }))
+          )
+        )
+      )
+    )
+  );
+  
 }
