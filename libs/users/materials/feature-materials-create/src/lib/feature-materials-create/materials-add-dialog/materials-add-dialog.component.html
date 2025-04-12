@@ -1,15 +1,26 @@
 <h2 mat-dialog-title>Material title</h2>
-<mat-dialog-content>
+<form [formGroup]="materialsForm" novalidate (ngSubmit)="onSaveMaterial()">
+  <mat-dialog-content>
     <div class="material-add-form-fields">
-        <mat-form-field>
-            <input matInput [(ngModel)]="material.title" placeholder="Enter material`s title" />
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput [(ngModel)]="material.material_link" placeholder="Enter material`s link" />
-        </mat-form-field>
+      <mat-form-field>
+        <mat-label>Enter material's title</mat-label>
+        <input matInput formControlName="title" />
+        <mat-error *ngIf="materialsForm.get('title')?.hasError('required')">
+          Title is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Enter material's link</mat-label>
+        <input matInput formControlName="material_link" />
+        <mat-error *ngIf="materialsForm.get('material_link')?.hasError('required')">
+          Link is required
+        </mat-error>
+      </mat-form-field>
+      <input type="hidden" formControlName="folder_id" />
     </div>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Отмена</button>
-  <button mat-button (click)="onSaveMaterial()">Сохранить</button>
-</mat-dialog-actions>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button type="button" (click)="onNoClick()">Отмена</button>
+    <button mat-button type="submit">Сохранить</button>
+  </mat-dialog-actions>
+</form>

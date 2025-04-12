@@ -57,7 +57,10 @@ export class MaterialsAddButtonComponent {
 
   openMaterialAddDialog(value: string): void {
     const dialogRef = this.dialog.open(MaterialsAddDialogComponent, {
-      data: { folderId: this.folderId ?? 0 }
+      data: { 
+        folderId: this.folderId ?? 0,
+        materialType: value
+      }
     });
 
     dialogRef.afterClosed().subscribe(material => {
