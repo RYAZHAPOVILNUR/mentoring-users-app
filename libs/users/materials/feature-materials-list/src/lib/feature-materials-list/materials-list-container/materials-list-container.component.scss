@@ -1,0 +1,16 @@
+.material-list-header-container {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Уменьшил gap для компактности, можно вернуть 16px */
+    margin-bottom: 16px;
+}
+
+.folder-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.mat-icon {
+    cursor: pointer;
+    font-weight: bold;
+}

@@ -1,0 +1,7 @@
+<ng-container *ngIf="folders$ | async as folders">
+    <users-folders-list
+    [folders]="folders"
+    (openFolder)="onOpenFolder($event)"
+    (deleteFolder)="onDeleteFolder($event)"/>
+</ng-container>
+  
