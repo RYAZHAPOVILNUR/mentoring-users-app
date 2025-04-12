@@ -1,13 +1,13 @@
 <div class="materials-card-wrap" (click)="onOpenMaterial(material?.id)">
     <div class="icons-container">
-        <mat-icon class="material-icon">picture_as_pdf</mat-icon>
-        <mat-icon class="material-icon">audiotrack</mat-icon>
-        <mat-icon class="material-icon">video_library</mat-icon>
-        <mat-icon class="delete-icon" (click)="onDeleteMaterial(material?.id, $event)">delete</mat-icon>
+      <mat-icon *ngIf="materialType === 'pdf'" class="material-icon">picture_as_pdf</mat-icon>
+      <mat-icon *ngIf="materialType === 'audio'" class="material-icon">audiotrack</mat-icon>
+      <mat-icon *ngIf="materialType === 'video'" class="material-icon">video_library</mat-icon>
+      <mat-icon *ngIf="materialType === 'unknown'" class="material-icon">help_outline</mat-icon>
+      <mat-icon class="delete-icon" (click)="onDeleteMaterial(material?.id, $event)">delete</mat-icon>
     </div>
     <div class="material-content">
       <p class="material-font-bold">{{ material?.title }}</p>
-      <p>{{ material?.created_at | date:'d MMMM y' }} y.</p>
+      <p>{{ material?.created_at | date:'d MMMM y' }}</p>
     </div>
   </div>
-  

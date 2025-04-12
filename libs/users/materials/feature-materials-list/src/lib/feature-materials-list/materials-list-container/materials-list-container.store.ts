@@ -41,7 +41,7 @@ export class MaterialsListContainerStore extends ComponentStore<MaterialsListCon
   readonly setFolderId = this.updater<number>((state, folderId) => ({...state, folderId}));
   readonly setFolderTitle = this.updater<string>((state, folderTitle) => ({...state, folderTitle}));
 
-  readonly loadMaterialsEffect = this.effect<number>((folderId$) =>
+  readonly loadMaterialsByFolderId = this.effect<number>((folderId$) =>
     folderId$.pipe(
       switchMap((folderId) =>
         this.materialsFacade.loadMaterials(folderId).pipe(
@@ -55,6 +55,6 @@ export class MaterialsListContainerStore extends ComponentStore<MaterialsListCon
   constructor() {
     super(initialState);
     this.materialsFacade.loadFolders();
-    this.loadMaterialsEffect(this.validFolderId$);
+    this.loadMaterialsByFolderId(this.validFolderId$);
   }
 }
