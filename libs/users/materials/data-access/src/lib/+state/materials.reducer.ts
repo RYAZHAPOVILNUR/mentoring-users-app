@@ -90,5 +90,15 @@ export const materialsFeature = createFeature({
       loading: false,
       error: String(error)
     })),
+    on(MaterialsActions.deleteMaterial, (state, { materialId }) => ({
+      ...state,
+      materials: state.materials.filter(material => material.id !== materialId),
+      loading:false
+    })),
+    on(MaterialsActions.deleteMaterialFailure, (state, { error }) => ({
+      ...state,
+      loading: false,
+      error: String(error)
+    })),
   ),
 });

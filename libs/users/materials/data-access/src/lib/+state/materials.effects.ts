@@ -96,4 +96,17 @@ export class MaterialsEffects {
     )
   );
   
+  deleteMaterial = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MaterialsActions.deleteMaterial),
+      switchMap(({ materialId }) => 
+        this.apiService.delete<void>(`/material/${materialId}`).pipe(
+          map(() => MaterialsActions.deleteMaterialSuccess({ materialId })),
+          catchError((error) => 
+            of(MaterialsActions.deleteFolderFailure({ error }))
+          )
+        )
+      )
+    )
+  );
 }

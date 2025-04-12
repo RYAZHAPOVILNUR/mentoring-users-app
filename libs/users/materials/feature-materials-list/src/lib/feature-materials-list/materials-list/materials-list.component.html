@@ -1,6 +1,8 @@
 <div class="materials-container" *ngIf="materials as materials">
     <div *ngFor="let material of materials">
-        <users-materials-card [material]="material">
+        <users-materials-card
+            [material]="material"
+            (deleteMaterial)="onDeleteMaterial(material.id)">
         </users-materials-card>
     </div>
     <div class="add-material-button-container">

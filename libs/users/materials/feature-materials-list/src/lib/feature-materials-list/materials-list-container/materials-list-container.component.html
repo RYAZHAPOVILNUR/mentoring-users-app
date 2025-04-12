@@ -8,5 +8,6 @@
     <users-materials-list 
         [materials]="materials" 
         [folderId]="folder$ | async"
+        (deleteMaterial)="onDeleteMaterial($event)"
     />
 </ng-container>

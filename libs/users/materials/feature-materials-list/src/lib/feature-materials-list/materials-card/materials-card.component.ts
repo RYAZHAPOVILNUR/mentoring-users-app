@@ -49,9 +49,7 @@ export class MaterialsCardComponent {
    }
 
    onDeleteMaterial(materialId?: number, event?: Event): void {
-    if (event) {
-      event.stopPropagation();
-    }
-    console.log('onDeleteMaterial', materialId, event);
+    event?.stopPropagation();
+    this.deleteMaterial.emit(materialId);
   }
 }

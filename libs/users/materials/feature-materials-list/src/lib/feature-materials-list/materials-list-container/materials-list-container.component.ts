@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation, OnInit, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation, OnInit, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialsListComponent } from '../materials-list/materials-list.component'
 import { MaterialsListContainerStore } from './materials-list-container.store';
@@ -22,6 +22,7 @@ import { MatDividerModule } from '@angular/material/divider';
   styleUrls: ['./materials-list-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [MaterialsListContainerStore]
 })
 export class MaterialsListContainerComponent implements OnInit, OnDestroy{
   private readonly componentStore = inject(MaterialsListContainerStore);
@@ -34,6 +35,8 @@ export class MaterialsListContainerComponent implements OnInit, OnDestroy{
   public readonly folder$ = this.componentStore.folderId$
   public readonly folderTitle$ = this.componentStore.folderTitle$
   
+  @Output() deleteMaterial = new EventEmitter<number>();
+
   ngOnInit(): void {
     const snapshotId = Number(this.route.snapshot.params['id']);
     if (!isNaN(snapshotId) && snapshotId > 0) {
@@ -55,5 +58,9 @@ export class MaterialsListContainerComponent implements OnInit, OnDestroy{
 
   returnToFolders(): void {
     this.router.navigate(['/materials']);
+  }
+
+  onDeleteMaterial(materialId: number) {
+    this.componentStore.deleteMaterial(materialId);
   }
 }
