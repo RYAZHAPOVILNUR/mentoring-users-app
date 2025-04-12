@@ -15,6 +15,15 @@
         <mat-error *ngIf="materialsForm.get('material_link')?.hasError('required')">
           Link is required
         </mat-error>
+        <mat-error *ngIf="materialsForm.get('material_link')?.hasError('invalidPdf')">
+          Link must be a PDF file (ending with .pdf)
+        </mat-error>
+        <mat-error *ngIf="materialsForm.get('material_link')?.hasError('invalidVideo')">
+          Link must be a YouTube URL
+        </mat-error>
+        <mat-error *ngIf="materialsForm.get('material_link')?.hasError('invalidAudio')">
+          Link must be an audio file (.mp3, .wav, or .ogg)
+        </mat-error>
       </mat-form-field>
       <input type="hidden" formControlName="folder_id" />
     </div>
