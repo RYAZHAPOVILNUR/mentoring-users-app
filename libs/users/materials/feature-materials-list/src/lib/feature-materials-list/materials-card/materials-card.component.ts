@@ -1,8 +1,13 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Material } from '@users/materials/data-access';
+import { MaterialsContentComponent } from '@users/materials/feature-materials-content'
+import { MatDialog } from '@angular/material/dialog';
 
+export interface DialogData {
+  name: string;
+}
 @Component({
   selector: 'users-materials-card',
   standalone: true,
@@ -17,6 +22,7 @@ import { Material } from '@users/materials/data-access';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialsCardComponent {
+  public dialog = inject(MatDialog)
   @Input() material: Material | undefined;
   @Output() deleteMaterial = new EventEmitter<number>();
   @Output() openMaterial = new EventEmitter<number>();
@@ -27,7 +33,7 @@ export class MaterialsCardComponent {
     this.materialType = this.getMaterialType(this.material?.material_link); 
   }
 
-
+  
   private getMaterialType(link: string | undefined): string | null {
     if (!link) return null;
 
@@ -44,9 +50,15 @@ export class MaterialsCardComponent {
     return 'unknown';
   }
 
-   onOpenMaterial(materialId?: number): void {
-    console.log("onOpenMaterial", materialId)
-   }
+   openDialog(): void {
+    const dialogRef = this.dialog.open(MaterialsContentComponent, {
+      width: '800px',
+      maxWidth: '90vw',
+      data: {material: this.material}
+    });
+
+    dialogRef.afterClosed()
+  }
 
    onDeleteMaterial(materialId?: number, event?: Event): void {
     event?.stopPropagation();

@@ -1,4 +1,4 @@
-<div class="materials-card-wrap" (click)="onOpenMaterial(material?.id)">
+<div class="materials-card-wrap" (click)="openDialog()">
     <div class="icons-container">
       <mat-icon *ngIf="materialType === 'pdf'" class="material-icon">picture_as_pdf</mat-icon>
       <mat-icon *ngIf="materialType === 'audio'" class="material-icon">audiotrack</mat-icon>

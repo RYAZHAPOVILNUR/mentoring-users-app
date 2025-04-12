@@ -1,0 +1,25 @@
+mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 600px;
+  overflow: auto;
+}
+
+iframe,
+video,
+audio,
+pdf-viewer {
+  max-width: 100%;
+}
+
+mat-dialog-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+button[mat-fab] {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

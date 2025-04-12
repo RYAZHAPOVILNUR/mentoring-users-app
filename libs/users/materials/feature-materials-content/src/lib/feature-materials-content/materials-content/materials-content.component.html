@@ -1,1 +1,46 @@
-<p>materials-content works!</p>
+<h2 mat-dialog-title>{{data.material.title}}</h2>
+<mat-dialog-actions>
+  <button mat-fab mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-dialog-actions>
+
+<mat-dialog-content>
+  <ng-container [ngSwitch]="getFileType(data.material.material_link)">
+    <iframe
+      *ngSwitchCase="'youtube'"
+      [src]="getYouTubeEmbedUrl(data.material.material_link)"
+      width="100%"
+      height="500px"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+    <video
+      *ngSwitchCase="'video'"
+      controls
+      [src]="data.material.material_link"
+      style="width: 100%; max-height: 500px;"
+    >
+      Your browser does not support the video tag.
+    </video>
+    <audio
+      *ngSwitchCase="'audio'"
+      controls
+      [src]="data.material.material_link"
+      style="width: 100%;"
+    >
+      Your browser does not support the audio tag.
+    </audio>
+    <pdf-viewer
+      *ngSwitchCase="'pdf'"
+      [src]="data.material.material_link"
+      [render-text]="true"
+      [original-size]="true"
+      style="width: 100%; height: 500px;"
+    ></pdf-viewer>
+    <div *ngSwitchDefault>
+      <p>Unsupported file type or no file provided.</p>
+    </div>
+  </ng-container>
+</mat-dialog-content>
