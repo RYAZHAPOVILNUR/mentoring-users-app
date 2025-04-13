@@ -30,7 +30,7 @@ export const selectMaterialSelectedId = createSelector(
   (state: MaterialsState) => state.selectedId
 );
 
-export const selectEntity = createSelector(
+export const selectMaterialEntity = createSelector(
   selectMaterialsEntities,
   selectMaterialSelectedId,
   (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
