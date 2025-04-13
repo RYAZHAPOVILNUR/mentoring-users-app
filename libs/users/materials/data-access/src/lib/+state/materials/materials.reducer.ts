@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { LoadingStatus, MaterialsEntity } from '@users/core/data-access';
 import { MaterialsErrors } from './models/material';
-import { createReducer, on } from '@ngrx/store';
+import { Action, createReducer, on } from '@ngrx/store';
 import { materialsActions } from './materials.actions';
 
 export const MATERIALS_FEATURE_KEY = 'materials';
@@ -68,3 +68,7 @@ const reducer = createReducer(
     error
   }))
 );
+
+export function materialsReducer(state: MaterialsState | undefined, action: Action) {
+  return reducer(state, action);
+}
