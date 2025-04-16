@@ -1,0 +1,27 @@
+<ng-container *ngIf="vm.status === 'loading'; else loadingResult">
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+
+<ng-template #loadingResult>
+  <div *ngIf="vm.status === 'loaded'; else error">
+    <div class="container">
+      <div class="row">
+        <ng-container *ngFor="let folder of vm.folders">
+          <users-folders-card
+            (redirectToFolder)="onRedirectToFolder($event)"
+            style="max-width: 150px"
+            [folder]="folder"
+          ></users-folders-card>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #error>
+  <div class="alert alert-danger" role="alert">
+    <h1>{{ vm.errors?.status }}</h1>
+    <hr />
+    {{ vm.errors }}
+  </div>
+</ng-template>

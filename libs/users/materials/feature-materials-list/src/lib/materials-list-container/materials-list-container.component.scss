@@ -1,0 +1,24 @@
+.button-back {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  mat-icon {
+    margin-left: 5px;
+  }
+}
+
+.material-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 90%;
+}
+.material-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}

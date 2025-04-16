@@ -38,6 +38,22 @@
   width: 100%;
 }
 
+.edit-user-points {
+  position: relative;
+
+  &-button {
+    position: absolute;
+    top: 0;
+    right: -10px;
+  }
+}
+
+.edit-user-buttons {
+  position: absolute;
+  top: 0;
+  right: -10px;
+}
+
 .edit-user-btns-container {
   display: flex;
   justify-content: space-between;

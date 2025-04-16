@@ -12,7 +12,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { onSuccessEditionCbType } from '@users/users/data-access';
+import { onSuccessEditionCbType, onSuccessSPonCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -60,9 +60,11 @@ export class DetailUsersCardComponent implements OnInit {
     status: 'init',
     errors: null,
   };
+
   public get vm() {
     return this._vm;
   }
+
   @Input({ required: true })
   set vm(vm: DetailUsersCardVm) {
     this._vm = vm;
@@ -74,6 +76,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
+      this.totalStoryPoints.setValue(this.vm.user?.totalStoryPoints!);
     }
 
     if (vm.editMode) {
@@ -90,15 +93,24 @@ export class DetailUsersCardComponent implements OnInit {
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
 
+  public totalStoryPoints = new FormControl({ value: 0, disabled: true });
+
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
     onSuccessCb: onSuccessEditionCbType;
   }>();
+
+  @Output() addStoryPoints = new EventEmitter<{
+    user: CreateUserDTO;
+    onSuccessAddSP: onSuccessSPonCbType;
+  }>();
+
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('points') pointsSnackbarTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -108,6 +120,7 @@ export class DetailUsersCardComponent implements OnInit {
   );
 
   private snackBar = inject(MatSnackBar);
+  private pointsSnackeBar = inject(MatSnackBar);
   private readonly destroyRef = inject(DestroyRef);
   public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
 
@@ -117,6 +130,13 @@ export class DetailUsersCardComponent implements OnInit {
 
   private onEditSuccess: onSuccessEditionCbType = () =>
     this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+
+  private onStorySuccess: onSuccessSPonCbType = () =>
+    this.pointsSnackeBar.openFromTemplate(this.pointsSnackbarTemplateRef, {
       duration: 2500,
       horizontalPosition: 'center',
       verticalPosition: 'top',
@@ -133,6 +153,18 @@ export class DetailUsersCardComponent implements OnInit {
         educationStatus: 'trainee',
       },
       onSuccessCb: this.onEditSuccess,
+    });
+  }
+
+  onAddStoryPoints(): void {
+    this.totalStoryPoints.disable();
+    this.addStoryPoints.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        totalStoryPoints: this.totalStoryPoints.value || 0,
+      },
+      onSuccessAddSP: this.onStorySuccess,
     });
   }
 

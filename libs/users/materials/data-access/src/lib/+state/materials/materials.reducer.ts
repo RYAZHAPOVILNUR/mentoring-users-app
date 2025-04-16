@@ -1,0 +1,51 @@
+import { createReducer, on } from '@ngrx/store';
+import * as MaterialsActions from './materials.actions';
+import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
+import { MaterialsEntity } from '../../materials-dto/materials.entity';
+import { LoadingStatus } from '@users/core/data-access';
+
+export const MATERIALS_FEATURE_KEY = 'materials';
+
+export type MaterialsErrors = {
+  status: number;
+  [key: string]: unknown;
+};
+
+export interface MaterialsState extends EntityState<MaterialsEntity> {
+  selectedId?: string | number;
+  status: LoadingStatus;
+  errors: MaterialsErrors | null;
+  materialsFilter: { title: string };
+}
+
+export interface MaterialsPortailState {
+  readonly [MATERIALS_FEATURE_KEY]: MaterialsState;
+}
+
+export const materialsAdapter: EntityAdapter<MaterialsEntity> = createEntityAdapter<MaterialsEntity>();
+
+export const initialMaterialsState: MaterialsState = materialsAdapter.getInitialState({
+  status: 'init',
+  errors: null,
+  materialsFilter: { title: '' },
+});
+
+export const materialsReducer = createReducer(
+  initialMaterialsState,
+  on(MaterialsActions.loadMaterialsSuccess, (state, { materials }) =>
+    materialsAdapter.setAll(materials, { ...state, status: 'loaded' as const })
+  ),
+  on(MaterialsActions.updateMaterialsStatus, (state, { status }) => ({
+    ...state,
+    status,
+  })),
+  on(MaterialsActions.loadMaterialsFailure, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
+  on(MaterialsActions.addMaterialSuccess, (state, { materialData }) =>
+    materialsAdapter.addOne(materialData, { ...state })
+  ),
+  on(MaterialsActions.deleteMaterialSuccess, (state, { id }) => materialsAdapter.removeOne(id, { ...state }))
+);

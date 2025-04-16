@@ -1,0 +1,17 @@
+.card {
+  padding: 10px;
+  width: 80vw;
+  height: 80vh;
+}
+.viewer {
+  width: 100%;
+  height: 100%;
+}
+.button {
+  display: flex;
+  justify-content: end;
+  padding-bottom: 10px;
+  button {
+    width: 30px;
+  }
+}

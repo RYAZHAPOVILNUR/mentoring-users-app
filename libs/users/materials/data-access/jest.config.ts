@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'users-materials-data-access',
+  displayName: 'folders',
   preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory: '../../../../coverage/libs/users/materials/data-access',
