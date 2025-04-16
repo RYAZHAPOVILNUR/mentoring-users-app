@@ -17,11 +17,12 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class VideoPlayerDialogComponent {
   public readonly data = inject(MAT_DIALOG_DATA);
+  private readonly sanitizer = inject(DomSanitizer);
 
   public videoLink: SafeResourceUrl = '';
   videoValidation = /(youtu\.be\/|[?&]v=|\/embed\/)([a-zA-Z0-9_-]{11})/;
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor() {}
 
   ngOnInit() {
     const id = this.data.match(this.videoValidation);

@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of, catchError, map, switchMap } from 'rxjs';
+import { of, catchError, map, concatMap } from 'rxjs';
 import * as FoldersActions from './folders.actions';
 import { ApiService } from '@users/core/http';
 import { AddFolderDTO, FoldersDTO } from '../../folders-dto/folders-dto.models';
@@ -12,7 +12,7 @@ export const loadFolders = createEffect(
     const apiService = inject(ApiService);
     return actions$.pipe(
       ofType(FoldersActions.initFolders),
-      switchMap(() =>
+      concatMap(() =>
         apiService.get<FoldersDTO[]>('/folder').pipe(
           map((folders) =>
             FoldersActions.loadFoldersSuccess({
@@ -20,7 +20,7 @@ export const loadFolders = createEffect(
             })
           ),
           catchError((error) => {
-            console.error('Error', error);
+            console.error('[loadFolders effect] Failed to load folders:', error);
             return of(FoldersActions.loadFoldersFailure({ error }));
           })
         )
@@ -36,12 +36,12 @@ export const createFolder = createEffect(
     const apiServices = inject(ApiService);
     return actions$.pipe(
       ofType(FoldersActions.addFolder),
-      switchMap(({ folderData }) =>
+      concatMap(({ folderData }) =>
         apiServices.post<FoldersDTO, AddFolderDTO>('/folder', folderData).pipe(
           map((folder) => folderDTOAdapter.DTOtoEntity(folder)),
           map((folderEntity) => FoldersActions.addFolderSuccess({ folderData: folderEntity })),
           catchError((error) => {
-            console.error('Error', error);
+            console.error('[loadFolders effect] Failed to load folders:', error);
             return of(FoldersActions.addFolderFailed({ error }));
           })
         )
@@ -57,11 +57,11 @@ export const deleteFolder = createEffect(
     const apiService = inject(ApiService);
     return action$.pipe(
       ofType(FoldersActions.deleteFolder),
-      switchMap(({ id }) =>
+      concatMap(({ id }) =>
         apiService.delete<void>(`/folder/${id}`).pipe(
           map(() => FoldersActions.deleteFolderSuccess({ id })),
           catchError((error) => {
-            console.error('Error', error);
+            console.error('[loadFolders effect] Failed to load folders:', error);
             return of(FoldersActions.deleteFolderFailed({ error }));
           })
         )

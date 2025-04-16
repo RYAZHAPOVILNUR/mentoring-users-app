@@ -10,7 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { AddMaterialButtonComponent } from '@users/feature-materials-create';
 import { Store } from '@ngrx/store';
-import { filter } from 'rxjs';
+import { Subject, filter, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'users-materials-list-container',
@@ -39,6 +39,7 @@ export class MaterialsListContainerComponent {
   public readonly errors$ = this.componentStore.errors$;
   public readonly materials$ = this.materialsFacade.filtredMaterials$;
   public openedFolder$!: FoldersEntity | null;
+  private destroy$ = new Subject<void>();
 
   ngOnInit() {
     this.materialsFacade.loadMaterials();
@@ -46,9 +47,17 @@ export class MaterialsListContainerComponent {
 
     this.store
       .select(selectOpenedFolder)
-      .pipe(filter((folder) => !!folder))
+      .pipe(
+        filter((folder) => !!folder),
+        takeUntil(this.destroy$)
+      )
       .subscribe((folder) => {
         this.openedFolder$ = folder;
       });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
