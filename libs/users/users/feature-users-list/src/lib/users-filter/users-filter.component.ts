@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -20,14 +20,13 @@ import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 
 export class UsersFilterComponent implements OnInit, OnDestroy {
 
-  nameControl = new FormControl<string>('', { nonNullable: true });
+  public nameControl = new FormControl<string>('', { nonNullable: true });
 
-  filteredUsers$ = this.usersFacade.filteredUsers$;
+  private usersFacade = inject(UsersFacade);
+
+  public readonly filteredUsers$ = this.usersFacade.filteredUsers$;
 
   private destroy$ = new Subject<void>();
-
-  constructor(private usersFacade: UsersFacade) {
-  }
 
   ngOnInit() {
     this.nameControl.valueChanges.pipe(
