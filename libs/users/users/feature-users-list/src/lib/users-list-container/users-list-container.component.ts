@@ -9,6 +9,7 @@ import { UsersFacade } from '@users/users/data-access';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { CreateUsersButtonComponent } from '@users/feature-users-create';
+import { UsersFilterComponent } from './users-filter.component';
 
 @Component({
   selector: 'users-list-container',
@@ -20,6 +21,7 @@ import { CreateUsersButtonComponent } from '@users/feature-users-create';
     MatDialogModule,
     LetDirective,
     CreateUsersButtonComponent,
+    UsersFilterComponent
   ],
   templateUrl: './users-list-container.component.html',
   styleUrls: ['./users-list-container.component.scss'],
@@ -35,6 +37,8 @@ export class UsersListContainerComponent {
   public readonly errors$ = this.componentStore.errors$;
   public readonly loggedUser$ = this.usersFacade.loggedUser$;
   private readonly router = inject(Router);
+  public readonly filteredUsers$ = this.usersFacade.filteredUsers$;
+
 
   onDeleteUser(user: UsersVM) {
     this.componentStore.deleteUser(user);

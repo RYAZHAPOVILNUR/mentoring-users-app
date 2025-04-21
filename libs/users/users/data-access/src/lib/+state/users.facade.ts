@@ -7,10 +7,21 @@ import { UsersErrors } from './users.reducer';
 import { onSuccessEditionCbType } from './users.actions';
 import { selectLoggedUser } from '@auth/data-access';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { selectFilteredUsers } from './users.selectors';
+import { setUsersFilter } from './users.actions';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
   private readonly store = inject(Store);
+
+  filteredUsers$ = this.store.select(selectFilteredUsers);
+  
+  setUsersFilter(filter: string | null) {
+    this.store.dispatch(setUsersFilter({ 
+      filter: filter ? { name: filter } : null 
+    }));
+  }
+  
 
   /**
    * Combine pieces of state using createSelector,
