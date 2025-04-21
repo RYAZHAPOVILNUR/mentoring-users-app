@@ -30,6 +30,12 @@ export const editUser = createAction(
     onSuccessCb: onSuccessEditionCbType;
   }>()
 );
+
+export const setUsersFilter = createAction(
+  '[Users] Set Users Filter',
+  props<{ filter: {name: string} | null }>()
+);
+
 export const editUserSuccess = createAction('[Users Detail] Edit User Success', props<{ userData: UsersDTO }>());
 export const editUserFailed = createAction('[Users Detail] Edit Failed', props<{ error: UsersErrors | null }>());
 
