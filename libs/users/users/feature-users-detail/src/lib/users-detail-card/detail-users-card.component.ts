@@ -12,7 +12,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { onSuccessEditionCbType } from '@users/users/data-access';
+import { onSuccessEditionCbType, updateTotalStoryPoints } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -60,6 +60,8 @@ export class DetailUsersCardComponent implements OnInit {
     status: 'init',
     errors: null,
   };
+  store: any;
+  usersFacade: any;
   public get vm() {
     return this._vm;
   }
@@ -74,6 +76,10 @@ export class DetailUsersCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
+      this.formControlStoryPoints.patchValue(
+        vm.user.totalStoryPoints
+      )
+
     }
 
     if (vm.editMode) {
@@ -88,7 +94,8 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
-  });
+  })
+  formControlStoryPoints = new FormControl<number>({value: 0, disabled: true})
 
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
@@ -98,6 +105,7 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
+  @Output() editStoryPoints = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
@@ -122,6 +130,9 @@ export class DetailUsersCardComponent implements OnInit {
       verticalPosition: 'top',
     });
 
+
+
+
   onSubmit(): void {
     this.editUser.emit({
       user: {
@@ -132,9 +143,28 @@ export class DetailUsersCardComponent implements OnInit {
         purchaseDate: new Date().toString() || '',
         educationStatus: 'trainee',
       },
+
       onSuccessCb: this.onEditSuccess,
     });
   }
+  onUpdateStoryPoints(): void {
+    this.formControlStoryPoints.disable()
+    this.editStoryPoints.emit({
+      user: {
+          name: this.formGroup.value.name || '',
+          username: this.formGroup.value.username || '',
+          city: this.formGroup.value.city || '',
+          email: this.formGroup.value.email?.trim().toLowerCase() || '',
+          purchaseDate: new Date().toString() || '',
+          educationStatus: 'trainee',
+          totalStoryPoints: Number (this.formControlStoryPoints.value)
+      },
+
+      onSuccessCb: this.onEditSuccess,
+    });
+  }
+
+
 
   onCloseUser() {
     this.closeUser.emit();
@@ -172,4 +202,6 @@ export class DetailUsersCardComponent implements OnInit {
       )
       .subscribe();
   }
+
+  protected readonly updateTotalStoryPoints = updateTotalStoryPoints;
 }

@@ -89,6 +89,77 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+
+
+
+
+
+
+
+            <mat-form-field
+              class="edit-storypoints-user-field"
+            >
+              <mat-label>Количество сторипоинтов:</mat-label>
+              <input
+                class="edit-user-input"
+                placeholder=""
+                matInput
+                [formControl]="formControlStoryPoints"
+              />
+              <button
+                mat-icon-button
+                type="button"
+                color="accent"
+                class="edit-user-button"
+                matSuffix
+                *ngIf="formControlStoryPoints.disabled"
+                (click)="formControlStoryPoints.enable()"
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+
+              <button
+                *ngIf="!formControlStoryPoints.disabled"
+                mat-icon-button
+                color="primary"
+                type="submit"
+                matSuffix
+                aria-label="submit story points"
+                (click)="onUpdateStoryPoints()"
+
+              >
+                <mat-icon>done</mat-icon>
+              </button>
+
+              <button
+                *ngIf="!formControlStoryPoints.disabled"
+                mat-icon-button
+                color="warn"
+                type="button"
+                aria-label="Close story points mode"
+                matSuffix
+                (click)="formControlStoryPoints.disable()"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+
+            </mat-form-field>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button

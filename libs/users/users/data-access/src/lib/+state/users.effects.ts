@@ -136,4 +136,90 @@ export const loadUser = createEffect(
     );
   },
   { functional: true }
+
+);
+
+// export const updateTotalStoryPoints$ = createEffect(() => {
+//   const actions$ = inject(Actions);
+//   const apiService = inject(ApiService);
+
+//   // return actions$.pipe(
+//   //   ofType(UsersActions.updateTotalStoryPoints), // Слушаем экшен обновления
+//   //   switchMap((action) =>
+//   //     apiService
+//   //       .post(`/users/${action.userId}/update-story-points`, { totalStoryPoints: action.totalStoryPoints }) // Отправляем запрос на сервер
+//   //       .pipe(
+//   //         map(() =>
+//   //           UsersActions.updateTotalStoryPointsSuccess({
+//   //             userId: action.userId,
+//   //             totalStoryPoints: action.totalStoryPoints,
+//   //           })
+//   //         ), // Если запрос успешен
+//   //         catchError((error) => {
+//   //           console.error('Error updating story points', error);
+//   //           return of(UsersActions.updateTotalStoryPointsFailure({ error })); // Если ошибка
+//   //         })
+//   //       )
+//   //   )
+//   // );
+
+//     return actions$.pipe(
+//       ofType(UsersActions.updateTotalStoryPoints), // Обработка экшена
+//       switchMap((action) =>
+//         apiService
+//           .post(`/users/${action.userId}/update-story-points`, { totalStoryPoints: action.totalStoryPoints })
+//           .pipe(
+//             map(() =>
+//               UsersActions.updateTotalStoryPointsSuccess({
+//                 userId: action.userId,
+//                 totalStoryPoints: action.totalStoryPoints,
+//               })
+//             ),
+//             catchError((error) => {
+//               console.error('Error updating story points', error);
+//               return of(UsersActions.updateTotalStoryPointsFailure({ error }));
+//             })
+//           )
+//       )
+//     );
+//   });
+
+
+
+
+export const editUserStoryPoints = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
+
+    return actions$.pipe(
+      ofType(UsersActions.updateTotalStoryPoints),
+      withLatestFrom(usersEntities$),
+      filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
+      map(([{ userData, id, onSuccessCb }, usersEntities]) => ({
+        user: {
+          ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
+          name: userData.name,
+          email: userData.email,
+          username: userData.username,
+          city: userData.city,
+          totalStoryPoints: userData.totalStoryPoints,
+        },
+        onSuccessCb,
+      })),
+      switchMap(({ user, onSuccessCb }) =>
+        apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+          map((userData) => ({ userData, onSuccessCb })),
+          tap(({ onSuccessCb }) => onSuccessCb()),
+          map(({ userData }) => UsersActions.updateTotalStoryPointsSuccess({ userData })),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(UsersActions.updateTotalStoryPointsFailure({ error }));
+          })
+        )
+      )
+    );
+  },
+  { functional: true }
 );

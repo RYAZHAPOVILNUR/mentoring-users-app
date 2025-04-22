@@ -37,6 +37,7 @@ export class UsersDetailComponent {
       }
     })
   );
+
   public readonly status$ = this.usersFacade.status$;
   public readonly editMode$: Observable<boolean> = this.store.pipe(
     select(selectQueryParam('edit')),
@@ -49,6 +50,11 @@ export class UsersDetailComponent {
     this.router.navigate(['/admin/users', this.user.id], {
       queryParams: { edit: false },
     });
+  }
+
+  public onEditStoryPoints(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
+    console.log('USERDATACONTAINER', userData)
+    this.usersFacade.updateTotalStoryPoints(userData, this.user.id, onSuccessCb);
   }
 
   onCloseUser() {
