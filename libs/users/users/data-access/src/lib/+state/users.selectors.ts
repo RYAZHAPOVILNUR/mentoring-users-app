@@ -21,10 +21,25 @@ export const selectEntity = createSelector(selectUsersEntities, selectSelectedId
   selectedId ? entities[selectedId] : undefined
 );
 
+export const usersFilterSelector = createSelector(selectUsersState, (state: UsersState) => state.usersFilter);
+
 export const selectUserById = (id: number) => createSelector(selectUsersEntities, (entities) => entities[id]);
 
 export const selectOpenedUser = createSelector(
   selectRouteParams,
   selectUsersEntities,
-  ({ id }, entities) => entities[id] || null
+  ({ id }, entities) => entities[id] || null,
+  
 );
+
+export const filteredUsers  = createSelector(
+  usersFilterSelector, 
+  selectAllUsers,
+  (filter, users) => {
+    if(!filter.name){
+      return users
+    }
+    return users.filter(user => user.name.toLowerCase().includes(filter.name.toLowerCase()))
+  }
+  )
+
