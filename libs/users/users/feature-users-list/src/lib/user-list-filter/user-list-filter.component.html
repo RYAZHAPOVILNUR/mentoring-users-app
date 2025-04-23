@@ -1,0 +1,8 @@
+
+
+<form class="example-form" [formGroup]="FormGroup">
+    <mat-form-field class="example-full-width">
+      <mat-label></mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+    <button (click)="emitFormNameHandler()"> Применить фильтрацию!</button>

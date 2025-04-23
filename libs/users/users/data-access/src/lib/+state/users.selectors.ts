@@ -21,7 +21,7 @@ export const selectEntity = createSelector(selectUsersEntities, selectSelectedId
   selectedId ? entities[selectedId] : undefined
 );
 
-export const usersFilterSelector = createSelector(selectUsersState, (state: UsersState) => state.usersFilter);
+export const usersFilterSelector = createSelector(selectUsersState, (state: UsersState) => state.usersFilter || { name: ''});
 
 export const selectUserById = (id: number) => createSelector(selectUsersEntities, (entities) => entities[id]);
 
