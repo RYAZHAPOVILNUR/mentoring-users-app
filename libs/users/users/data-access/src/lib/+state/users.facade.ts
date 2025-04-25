@@ -64,4 +64,10 @@ export class UsersFacade {
   setUsersFilter(name: string) {
     this.store.dispatch(UsersActions.setUsersFilter({ filter: { name } }));
   }
+  
+  addStoryPoints(userData: CreateUserDTO, id: number, onSuccessAddSP: onSuccessEditionCbType) {
+    this.store.dispatch(UsersActions.addUserStoryPoints({ userData, id, onSuccessAddSP }));
+  }
 }
+
+

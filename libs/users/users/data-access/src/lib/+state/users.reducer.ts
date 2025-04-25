@@ -1,6 +1,5 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
-
 import * as UsersActions from './users.actions';
 import { UsersEntity } from '@users/core/data-access';
 import { LoadingStatus } from '@users/core/data-access';
@@ -44,7 +43,7 @@ const reducer = createReducer(
   on(UsersActions.loadUsersFailure, (state, { error }) => ({
     ...state,
     status: 'error' as const,
-    error,
+    error: error as UsersErrors | null,
   })),
   on(UsersActions.deleteUserSuccess, (state, { id }) => usersAdapter.removeOne(id, { ...state })),
   on(UsersActions.addUserSuccess, (state, { userData }) => usersAdapter.addOne({ ...userData }, { ...state })),
@@ -72,7 +71,7 @@ const reducer = createReducer(
   on(UsersActions.loadUserFailed, (state, { error }) => ({
     ...state,
     status: 'error' as const,
-    error,
+    error: error as UsersErrors | null,
   })),
   on(UsersActions.updateUserStatus, (state, { status }) => ({
     ...state,
@@ -81,6 +80,20 @@ const reducer = createReducer(
   on(UsersActions.setUsersFilter, (state, { filter }) => ({
     ...state,
     usersFilter: filter,
+  })),
+  on(UsersActions.addUserStoryPointsSuccess, (state, { userData }) =>
+    usersAdapter.updateOne(
+      {
+        id: userData.id,
+        changes: userData,
+      },
+      state
+    )
+  ),
+  on(UsersActions.addUserStoryPointsFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error: error as UsersErrors | null,
   }))
 );
 
