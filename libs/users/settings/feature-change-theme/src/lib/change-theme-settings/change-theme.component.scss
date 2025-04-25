@@ -1,5 +1,4 @@
 @use '@angular/material' as mat;
-@import '@angular/material/theming';
 
 .settings-title {
   padding: 20px 20px 0 20px;
@@ -162,7 +161,7 @@ $color-palettes: (
   @for $i from 100 through 900 {
     $shade: $i;
     .#{$color-name}-#{$shade} {
-      background-color: mat-color($color-palette, $shade);
+      background-color: mat.get-color-from-palette($color-palette, $shade);
     }
   }
 }
