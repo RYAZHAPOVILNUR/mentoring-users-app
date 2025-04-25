@@ -14,7 +14,7 @@ import { setUsersFilter } from './users.actions';
 export class UsersFacade {
   private readonly store = inject(Store);
 
-  filteredUsers$ = this.store.select(selectFilteredUsers);
+  readonly filteredUsers$ = this.store.select(selectFilteredUsers);
   
   setUsersFilter(filter: string | null) {
     this.store.dispatch(setUsersFilter({ 
@@ -67,5 +67,13 @@ export class UsersFacade {
 
   loadUser() {
     this.store.dispatch(UsersActions.loadUser());
+  }
+
+  updateStoryPoints(id: number, newPoints: number, onSuccessCb?: () => void) {
+    this.store.dispatch(UsersActions.updateUserStoryPoints({ 
+      id, 
+      newPoints,
+      onSuccessCb
+    }));
   }
 }

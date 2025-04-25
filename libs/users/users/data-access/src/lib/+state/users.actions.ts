@@ -36,6 +36,25 @@ export const setUsersFilter = createAction(
   props<{ filter: {name: string} | null }>()
 );
 
+export const updateUserStoryPoints = createAction(
+  '[Users Detail] Update Story Points',
+  props<{ 
+    id: number;
+    newPoints: number;
+    onSuccessCb?: () => void 
+  }>()
+);
+
+export const updateUserStoryPointsSuccess = createAction(
+  '[Users/API] Update Story Points Success',
+  props<{ user: UsersDTO }>()
+);
+
+export const updateUserStoryPointsFailed = createAction(
+  '[Users/API] Update Story Points Failed',
+  props<{ error: UsersErrors }>()
+);
+
 export const editUserSuccess = createAction('[Users Detail] Edit User Success', props<{ userData: UsersDTO }>());
 export const editUserFailed = createAction('[Users Detail] Edit Failed', props<{ error: UsersErrors | null }>());
 

@@ -56,3 +56,47 @@ div.alert-success {
   justify-content: center;
   color: white;
 }
+
+.edit-user-field {
+  width: 100%;
+  
+  .story-points-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .story-points-view {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 10px;
+
+      .story-points-value {
+        min-width: 24px;
+        text-align: center;
+        font-weight: 500;
+      }
+    }
+
+    .story-points-edit {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 4px;
+
+      .story-points-input {
+        width: 60px;
+        text-align: center;
+        margin: 0 4px;
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 4px;
+        margin-left: 8px;
+      }
+    }
+  }
+}

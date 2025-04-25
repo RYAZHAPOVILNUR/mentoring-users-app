@@ -89,6 +89,57 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+            
+            <mat-form-field class="edit-user-field">
+              <mat-label>Количество сторипойнтов</mat-label>
+              <div class="story-points-controls">
+               
+                <div *ngIf="!isEditingStoryPoints" class="story-points-view">
+                  {{ formGroup.get('storyPoints')?.value || 0 }}
+                  
+                  <button 
+                    mat-icon-button 
+                    (click)="startEditingStoryPoints()" 
+                    color="primary"
+                    class="plus-button"
+                    matTooltip="Добавить сторипойнты"
+                  >
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+            
+                <div *ngIf="isEditingStoryPoints" class="story-points-edit">
+
+                  <input 
+                    matInput 
+                    type="number" 
+                    formControlName="storyPoints" 
+                    class="story-points-input"
+                    min="0"
+                    #storyPointsInput
+                  >
+                  <div>
+                    <button 
+                    mat-icon-button 
+                    (click)="saveStoryPoints()" 
+                    color="primary"
+                    [disabled]="formGroup.invalid"
+                  >
+                    <mat-icon>check</mat-icon>
+                  </button>
+                  
+                  <button 
+                    mat-icon-button 
+                    (click)="cancelEditingStoryPoints()" 
+                    color="warn"
+                  >
+                    <mat-icon>close</mat-icon>
+                  </button>
+                  </div>
+                  
+                </div>
+              </div>
+            </mat-form-field>
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button

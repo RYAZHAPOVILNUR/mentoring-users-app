@@ -53,6 +53,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrls: ['./detail-users-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+
+
 export class DetailUsersCardComponent implements OnInit {
   private _vm: DetailUsersCardVm = {
     editMode: false,
@@ -83,11 +85,18 @@ export class DetailUsersCardComponent implements OnInit {
     }
   }
 
+  @Output() updateStoryPoints = new EventEmitter<{
+    id: number;
+    newPoints: number;
+    onSuccessCb: onSuccessEditionCbType;
+  }>();
+
   public formGroup = new FormBuilder().group({
     name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    storyPoints: new FormControl({ value: 0, disabled: !this.vm.editMode }, [Validators.min(0)])
   });
 
   @Output() editUser = new EventEmitter<{
@@ -111,9 +120,52 @@ export class DetailUsersCardComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
   public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
 
+  private onStoryPointsUpdateSuccess: onSuccessEditionCbType = () =>
+    this.snackBar.open('Story points updated successfully!', 'Close', {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+
   ngOnInit(): void {
     this.checkChangeFields();
   }
+
+  public isEditingStoryPoints = false;
+  private originalStoryPoints = 0;
+
+
+
+  startEditingStoryPoints(): void {
+    this.isEditingStoryPoints = true;
+    this.originalStoryPoints = this.formGroup.get('storyPoints')?.value || 0;
+    setTimeout(() => {
+        const input = this.formGroup.get('storyPoints');
+        if (input) {
+            const inputEl = document.querySelector('.story-points-input') as HTMLInputElement;
+            inputEl?.focus();
+            inputEl?.select();
+        }
+    });
+}
+
+  saveStoryPoints(): void {
+    if (this.vm.user && this.formGroup.valid) {
+      this.isEditingStoryPoints = false;
+      this.updateStoryPoints.emit({
+        id: this.vm.user.id,
+        newPoints: this.formGroup.value.storyPoints || 0,
+        onSuccessCb: this.onStoryPointsUpdateSuccess
+      });
+    }
+  }
+
+  cancelEditingStoryPoints(): void {
+    this.isEditingStoryPoints = false;
+    this.formGroup.get('storyPoints')?.setValue(this.originalStoryPoints);
+}
+
+
 
   private onEditSuccess: onSuccessEditionCbType = () =>
     this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
@@ -165,7 +217,9 @@ export class DetailUsersCardComponent implements OnInit {
           const isFormControlChanged = (key: string, control: FormControl) =>
             this.vm.user && this.vm.user[key as keyof UsersEntity] !== control.value;
 
-          const isFieldChanged = formEntries.some(([key, control]) => isFormControlChanged(key, control));
+          const isFieldChanged = formEntries.some(([key, control]) => 
+            key !== 'storyPoints' && isFormControlChanged(key, control)
+          );
 
           this.areFieldsChanged$.next(isFieldChanged);
         })

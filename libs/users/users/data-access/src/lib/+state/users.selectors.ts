@@ -42,3 +42,9 @@ export const selectFilteredUsers = createSelector(
       );
     }
 );
+
+export const selectUserStoryPoints = (id: number) => 
+  createSelector(
+    selectUserById(id),
+    (user) => user?.totalStoryPoints || 0
+  );

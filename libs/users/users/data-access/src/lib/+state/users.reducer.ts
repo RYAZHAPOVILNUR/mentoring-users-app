@@ -85,6 +85,30 @@ const reducer = createReducer(
   on(UsersActions.updateUserStatus, (state, { status }) => ({
     ...state,
     status,
+  })),
+  on(UsersActions.updateUserStatus, (state, { status }) => ({
+    ...state,
+    status
+  })),
+  on(UsersActions.updateUserStoryPoints, (state) => ({
+    ...state,
+    status: 'loading' as const
+  })),
+  on(UsersActions.updateUserStoryPointsSuccess, (state, { user }) =>
+    usersAdapter.updateOne(
+      {
+        id: user.id,
+        changes: {
+          totalStoryPoints: user.totalStoryPoints
+        }
+      },
+      { ...state, status: 'loaded' as const, error: null }
+    )
+  ),
+  on(UsersActions.updateUserStoryPointsFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
   }))
 );
 
