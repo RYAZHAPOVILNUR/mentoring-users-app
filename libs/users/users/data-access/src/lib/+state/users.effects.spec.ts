@@ -4,7 +4,6 @@ import { Action } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
 import { hot } from 'jasmine-marbles';
 import { Observable } from 'rxjs';
-
 import * as UsersActions from './users.actions';
 import { UsersEffects } from './users.effects';
 
