@@ -49,7 +49,7 @@ export class ArticlesCreateContainerComponent implements DeactivatableComponent 
   public editingArticle$: Observable<Article | null> = this.store.select(ArticleSelectors.selectArticleForEdit).pipe(
     withLatestFrom(this.articleId$),
     map(([article, id]) => {
-      if (!article && id) {
+      if (!article && id && typeof id === 'string') {
         this.store.dispatch(ArticlesActions.getArticleForEdit({ id }));
       }
       return article;
@@ -59,7 +59,7 @@ export class ArticlesCreateContainerComponent implements DeactivatableComponent 
   onPublishArticle(article: CreateArticle) {
     this.article = article;
     console.log(this.article);
-    
+
   }
 
   onFormChange(isFormChage: boolean) {
