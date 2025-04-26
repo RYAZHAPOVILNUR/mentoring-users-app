@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ImageCroppedEvent, ImageCropperModule } from 'ngx-image-cropper';
+import { ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'users-cropper-dialog',
   standalone: true,
-  imports: [CommonModule, ImageCropperModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, ImageCropperComponent, MatButtonModule, MatIconModule],
   templateUrl: './cropper-dialog.component.html',
   styleUrls: ['./cropper-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

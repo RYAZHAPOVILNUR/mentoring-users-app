@@ -1,5 +1,4 @@
 @use '@angular/material' as mat;
-@import '@angular/material/theming';
 
 .settings-title {
   padding: 20px 20px 0 20px;
@@ -141,28 +140,28 @@
 
 $color-palettes: (
   red: mat.$red-palette,
-  pink: mat.$pink-palette,
-  purple: mat.$purple-palette,
-  deepPurple: mat.$deep-purple-palette,
-  indigo: mat.$indigo-palette,
-  blue: mat.$blue-palette,
-  cyan: mat.$cyan-palette,
-  teal: mat.$teal-palette,
-  green: mat.$green-palette,
-  lightGreen: mat.$light-green-palette,
-  lime: mat.$lime-palette,
-  yellow: mat.$yellow-palette,
-  amber: mat.$amber-palette,
-  orange: mat.$orange-palette,
-  brown: mat.$brown-palette,
-  blueGray: mat.$blue-gray-palette,
+  pink: mat.$m2-pink-palette,
+  purple: mat.$m2-purple-palette,
+  deepPurple: mat.$m2-deep-purple-palette,
+  indigo: mat.$m2-indigo-palette,
+  blue: mat.$m2-blue-palette,
+  cyan: mat.$m2-cyan-palette,
+  teal: mat.$m2-teal-palette,
+  green: mat.$m2-green-palette,
+  lightGreen: mat.$m2-light-green-palette,
+  lime: mat.$m2-lime-palette,
+  yellow: mat.$m2-yellow-palette,
+  amber: mat.$m2-amber-palette,
+  orange: mat.$m2-orange-palette,
+  brown: mat.$m2-brown-palette,
+  blueGray: mat.$m2-blue-gray-palette,
 );
 
 @each $color-name, $color-palette in $color-palettes {
   @for $i from 100 through 900 {
     $shade: $i;
     .#{$color-name}-#{$shade} {
-      background-color: mat-color($color-palette, $shade);
+      background-color: mat.m2-get-color-from-palette($color-palette, $shade);
     }
   }
 }

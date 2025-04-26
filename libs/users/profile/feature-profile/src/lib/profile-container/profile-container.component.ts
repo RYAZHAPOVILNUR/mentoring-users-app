@@ -43,7 +43,7 @@ export class ProfileContainerComponent implements OnInit {
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         tap((code) => {
-          if (code) {
+          if (code && typeof code === 'string') {
             this.store.dispatch(githubApiActions.getAccessToken({ code }));
           }
         })
