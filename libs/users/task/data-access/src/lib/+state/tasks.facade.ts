@@ -14,7 +14,7 @@ export class TasksFacade {
   getMyBoard() {
     this.store.dispatch(tasksAction.loadMyBoard());
   }
-
+  
   getAllBoards() {
     this.store.dispatch(tasksAction.loadBoards());
   }

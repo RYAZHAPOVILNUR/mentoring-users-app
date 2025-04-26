@@ -1,0 +1,10 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.materials-list {
+  max-width: 130px;
+  padding: 0;
+}

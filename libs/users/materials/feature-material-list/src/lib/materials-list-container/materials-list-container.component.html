@@ -1,0 +1,15 @@
+<div class="folder">
+  <button mat-icon-button routerLink="/materials">
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+  <span>{{ folderTitle }}</span>
+</div>
+<ng-container
+  *ngrxLet="{
+    materials: materials$,
+    status: status$,
+} as materials"
+>
+  <users-materials-list [materials]="materials" (deleteMaterial)="onDeleteMaterial($event)"></users-materials-list>
+</ng-container>
+<users-materials-add-button class="material-create-button" [folderId]="folderId"></users-materials-add-button>

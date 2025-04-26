@@ -1,0 +1,9 @@
+<ng-container
+  *ngrxLet="{
+    folders: folders$,
+    status: status$,
+  } as folders"  
+>
+  <users-folders-list [folders] = "folders" (deleteFolder) = "onDeleteFolder($event)" (openFolder) = "onOpenFolder($event)"></users-folders-list>
+</ng-container>
+<users-folders-add-button class="folder-create-button"></users-folders-add-button>

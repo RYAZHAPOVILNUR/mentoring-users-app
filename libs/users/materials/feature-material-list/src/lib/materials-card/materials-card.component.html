@@ -1,0 +1,10 @@
+<div (click)="openDialog(material, getMaterialType(material.material_link))">
+  <mat-card class="material-card p-2 hover-container">
+    <div class="material-title">
+      <mat-icon> {{ getMaterialTypeIcon(material.material_link) }} </mat-icon>
+      <button mat-icon-button class="hover-button" (click)="onDeleteMaterial($event)"><mat-icon>delete</mat-icon></button>
+    </div>
+    <mat-card-subtitle>{{ material.title }}</mat-card-subtitle>
+    <mat-card-subtitle class="date">{{ material.created_at | date : 'dd MMM y' : '' : 'ru' }} </mat-card-subtitle>
+  </mat-card>
+</div>

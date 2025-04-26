@@ -1,0 +1,22 @@
+.dialog-content {
+  padding: 1rem;
+}
+
+.video-link {
+  display: flex;
+  flex-direction: row;
+  margin: 3rem;
+  font-size: 24px;
+}
+
+.dialog-title {
+  display: flex;
+  flex-direction: column;
+  font-size: 24px;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

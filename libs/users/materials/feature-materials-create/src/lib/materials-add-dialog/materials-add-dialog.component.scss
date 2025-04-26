@@ -1,0 +1,23 @@
+.dialog-container {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+}
+
+.dialog-title {
+  display: flex;
+  gap: 1rem;
+  font-size: 24px;
+}
+
+.dialog-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.dialog-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+}

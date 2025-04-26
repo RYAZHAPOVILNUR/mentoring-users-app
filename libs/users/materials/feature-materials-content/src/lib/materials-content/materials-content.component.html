@@ -1,0 +1,35 @@
+<div class="dialog-content">
+  <div class="dialog-header">
+    <div class="dialog-title">
+      <p>Материал {{data.material.title}} </p>
+      <p>Создан: {{data.material.created_at | date : 'dd MMM y' : '' : 'ru' }} </p>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div *ngIf="data.materialType === 'video'">
+    <div class="video-link">Ссылка:
+      <a [href]="data.material.material_link">youtube видео</a>
+    </div>
+    <youtube-player
+    [width]="650"
+    [height]="400"
+    [videoId]="videoId ?? ''"
+  ></youtube-player>
+  </div>
+  <div *ngIf="data.materialType === 'pdf'">
+    <pdf-viewer
+      [src]="data.material.material_link"
+      [render-text]="true"
+      [original-size]="false"
+      style="width: 600px; height: 700px"
+    ></pdf-viewer>
+  </div>
+  <div *ngIf="data.materialType === 'audio'">
+    <audio controls>
+      <source [src]="data.material.material_link" type="audio/mpeg" />
+      Ваш браузер не поддерживает элемент audio.
+    </audio>
+  </div>
+</div>

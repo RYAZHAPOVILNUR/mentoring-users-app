@@ -1,0 +1,1 @@
+export type materialFilter = { folder_id: number };

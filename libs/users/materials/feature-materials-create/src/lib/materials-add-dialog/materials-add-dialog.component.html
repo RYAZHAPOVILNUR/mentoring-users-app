@@ -1,0 +1,24 @@
+<div class="dialog-container">
+  <div class="dialog-title">
+    <p>Добавить</p>
+    <p *ngIf="data.materialType === 'video'">видео</p>
+    <p *ngIf="data.materialType === 'audio'">аудио</p>
+    <p *ngIf="data.materialType === 'pdf'">PDF</p>
+  </div>
+  <div>
+    <form [formGroup]="formGroup" class="dialog-form">
+      <mat-form-field>
+        <input matInput placeholder="Название*" formControlName="title" />
+        <mat-error>Имя обязательно</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Ссылка*" formControlName="material_link" />
+        <mat-error>Ссылка обязательна</mat-error>
+      </mat-form-field>
+    </form>
+  </div>
+  <div mat-dialog-actions class="dialog-actions">
+    <button mat-button (click)="onClose()">Отмена</button>
+    <button mat-raised-button color="primary" (click)="onSave()" [disabled]="formGroup.invalid">Сохранить</button>
+  </div>
+</div>

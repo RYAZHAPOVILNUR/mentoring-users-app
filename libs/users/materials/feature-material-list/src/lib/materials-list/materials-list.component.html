@@ -1,0 +1,17 @@
+<ng-container *ngIf="materials.status === 'loading'; else loadingResult">
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+<ng-template #loadingResult>
+  <ng-container *ngIf="materials.status === 'loaded'; else error">
+    <div class="container">
+      <div class="row">
+        <div class="materials-list" *ngFor="let material of materials.materials">
+          <users-materials-card [material]="material" (deleteMaterial)="onDeleteMaterial(material)"></users-materials-card>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>
+<ng-template #error>
+  <p>Error</p>
+</ng-template>

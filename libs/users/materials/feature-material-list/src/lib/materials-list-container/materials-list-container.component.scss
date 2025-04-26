@@ -1,0 +1,14 @@
+.folder {
+  display: flex;
+  flex-direction: row;
+  font-size: 28px;
+  align-items: center;
+  margin: 0 0 1rem 15rem;
+}
+
+.material-create-button {
+  position: fixed;
+  bottom: 120px;
+  right: 60px;
+  z-index: 1000;
+}

@@ -1,0 +1,19 @@
+<ng-container *ngIf="folders.status === 'loading'; else loadingResult">
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+
+<ng-template #loadingResult>
+  <ng-container *ngIf="folders.status === 'loaded'; else error">
+    <div class="container">
+      <div class="row">
+        <div class="folders-list" *ngFor="let folder of folders.folders">
+          <users-folders-card [folder]="folder" (deleteFolder)="onDeleteFolder(folder)" (openFolder)="onOpenFolder(folder.id)"></users-folders-card>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #error>
+  <p>Error</p>
+</ng-template>

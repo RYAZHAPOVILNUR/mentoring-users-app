@@ -1,0 +1,8 @@
+<mat-card class="folder-card p-2 hover-container" (click)="onOpenFolder($event)">
+  <div class="folder-title">
+    <mat-icon>folder</mat-icon>
+    <button mat-icon-button class="hover-button" (click)="onDeleteFolder($event)"><mat-icon>delete</mat-icon></button>
+  </div>
+  <mat-card-subtitle>{{ folder.title }}</mat-card-subtitle>
+  <mat-card-subtitle class="date">{{ folder.created_at | date : 'dd MMM y':'':'ru' }} </mat-card-subtitle>
+</mat-card>

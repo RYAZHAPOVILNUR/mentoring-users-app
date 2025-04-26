@@ -1,0 +1,23 @@
+.material-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.material-card {
+  cursor: pointer;
+}
+
+.hover-button {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s;
+  width: auto !important;
+  height: auto !important;
+  padding: 0.25rem !important;
+}
+
+.hover-container:hover .hover-button {
+  visibility: visible;
+  opacity: 1;
+}
