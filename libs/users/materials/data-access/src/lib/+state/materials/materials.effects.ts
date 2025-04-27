@@ -6,105 +6,11 @@ import * as MaterialsActions from './materials.actions';
 import { ApiService } from '@users/core/http';
 import { Store } from '@ngrx/store';
 import { selectRouteParams } from '@users/core/data-access';
-import { IMaterial } from '../models/material.model';
-import { IAddMaterial } from '../models/material-add.model';
-import { CreateFoldersDTO, FoldersDTO } from '../models/folders-dto.model';
-import { foldersDTOAdapter } from '../models/folder.adapter';
+import { IMaterial } from '../../models/material.model';
+import { IAddMaterial } from '../../models/material-add.model';
 
 @Injectable()
 export class MaterialsEffects {
-  // folders
-  loadFolders = createEffect(
-    () => {
-      const action$ = inject(Actions);
-      const apiService = inject(ApiService);
-      return action$.pipe(
-        ofType(MaterialsActions.initFolders),
-        switchMap(() =>
-          apiService.get<FoldersDTO[]>('/folder').pipe(
-            map((folders) => MaterialsActions.loadFoldersSuccess({ 
-              folders: folders.map((folder) =>foldersDTOAdapter.DTOtoEntity(folder)),
-             })),
-            catchError((error) => {
-              console.error('Error', error);
-              return of(MaterialsActions.loadFoldersFailure({ error }));
-            })
-          )
-        )
-      );
-    },
-    { functional: true }
-  );
-
-  
-  deleteFolder = createEffect(
-    () => {
-      const action$ = inject(Actions);
-      const apiService = inject(ApiService);
-
-      return action$.pipe(
-        ofType(MaterialsActions.deleteFolder),
-        switchMap(({ id }) =>
-          apiService.delete<void>(`/folder/${id}`).pipe(
-            map(() =>
-              MaterialsActions.deleteFolderSuccess({ id })
-            ),
-            catchError((error) => {
-              console.error('Error', error);
-              return of(MaterialsActions.deleteFolderFailure({ error }))
-            })
-          )
-        )
-      )
-    }, {functional: true}
-  )
-
-  addFolder = createEffect(
-    () => {
-      const actions$ = inject(Actions);
-      const apiService = inject(ApiService);
-
-      return actions$.pipe(
-        ofType(MaterialsActions.addFolder),
-        switchMap(({ folderData }) =>
-          apiService.post<FoldersDTO, CreateFoldersDTO>('/folder', folderData).pipe(
-            map((folder) =>  foldersDTOAdapter.DTOtoEntity(folder)),
-            map((folderEntity) => MaterialsActions.addFolderSuccess({ folderData: folderEntity })),
-            catchError((error) => {
-              console.log('Error', error);
-              return of(MaterialsActions.addFolderFailure({ error }))
-            })
-          )
-      ))
-    }, {functional: true}
-  )
-
-  openFolder = createEffect(
-    () => {
-      const actions$ = inject(Actions);
-      const apiService = inject(ApiService);
-      const store = inject(Store);
-
-      return actions$.pipe(
-        ofType(MaterialsActions.openFolder),
-        withLatestFrom(store.select(selectRouteParams)),
-        switchMap(([, params]) => {
-          return apiService.get<FoldersDTO>(`/folder/${params['id']}`)
-          .pipe(
-            map((folder) => MaterialsActions.openFolderSuccess({ 
-              folder:foldersDTOAdapter.DTOtoEntity(folder),
-             })),
-            catchError((error) => {
-              console.log('Error', error);
-              return of(MaterialsActions.openFolderFailure({ error }))
-            })
-          )
-        })
-      )
-    }, {functional: true}
-  )
-
-    // materials
     loadMaterials = createEffect(
       () => {
         const action$ = inject(Actions);

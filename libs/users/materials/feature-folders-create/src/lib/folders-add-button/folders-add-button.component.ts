@@ -6,7 +6,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FoldersAddDialogComponent } from '../folders-add-dialog/folders-add-dialog.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { CreateFoldersDTO, MaterialsFacade } from '@users/materials/data-access';
+import { CreateFoldersDTO, FoldersFacade, } from '@users/materials/data-access';
 
 @Component({
   selector: 'users-folders-add-button',
@@ -18,7 +18,7 @@ import { CreateFoldersDTO, MaterialsFacade } from '@users/materials/data-access'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersAddButtonComponent {
-  private readonly materialsFacade = inject(MaterialsFacade);
+  private readonly foldersFacade = inject(FoldersFacade);
 
   private readonly destroyRef = inject(DestroyRef);
 
@@ -40,7 +40,7 @@ export class FoldersAddButtonComponent {
             title: result.folderTitle
           }
 
-          this.materialsFacade.addFolder(newFolder)
+          this.foldersFacade.addFolder(newFolder)
         }
       })
   }
