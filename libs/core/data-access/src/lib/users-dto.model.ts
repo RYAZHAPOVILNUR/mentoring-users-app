@@ -31,6 +31,14 @@ export type CreateUserDTO = DeepReadonly<{
   totalStoryPoints?: number;
 }>;
 
+export type UsersSP = DeepReadonly<{
+  totalStoryPoints: number;
+  name: string;
+  email: string;
+  purchaseDate: string;
+  educationStatus: string;
+}>;
+
 export type UsersPhoto = {
   path: string;
   name: string;
