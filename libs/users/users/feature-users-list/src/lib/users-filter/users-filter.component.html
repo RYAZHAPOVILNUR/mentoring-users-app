@@ -1,0 +1,14 @@
+<div class="users-filter__wrap">
+  <form [formGroup]="filterForm">
+    <mat-form-field class="users-filter__field">
+      <mat-label>
+        User's name
+        <mat-icon fontSet="material-icons">search</mat-icon>
+      </mat-label>
+      <input id="name" type="text" formControlName="name" (input)="onFilter()" matInput>
+      <button *ngIf="name" matSuffix mat-icon-button (click)="clearFilter()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+</div>
