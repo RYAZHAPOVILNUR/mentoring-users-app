@@ -137,3 +137,49 @@ export const loadUser = createEffect(
   },
   { functional: true }
 );
+
+export const updateStoryPoints = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const store = inject(Store);
+    
+    return actions$.pipe(
+      ofType(UsersActions.updateUserStoryPoints),
+      withLatestFrom(store.pipe(select(selectUsersEntities))),
+      filter(([{ userId }, usersEntities]) => Boolean(usersEntities[userId])),
+      switchMap(([{ userId, totalStoryPoints, onSuccessCb }, usersEntities]) => {
+        const user = usersEntities[userId];
+        if (!user) {
+          return of(UsersActions.updateUserStoryPointsFailed({
+            error: { status: 404, message: 'User not found' }
+          }));
+        }
+
+        const updateData = {
+          ...user,
+          totalStoryPoints
+        };
+
+        return apiService.post<UsersDTO, Partial<UsersDTO>>(
+          `/users/${userId}`, 
+          updateData
+        ).pipe(
+          tap(() => {
+            if (onSuccessCb) {
+              onSuccessCb();
+            }
+          }),
+          map((response) => UsersActions.updateUserStoryPointsSuccess({ 
+            userData: usersDTOAdapter.DTOtoEntity(response)
+          })),
+          catchError((error) => {
+            console.error('Error updating story points:', error);
+            return of(UsersActions.updateUserStoryPointsFailed({ error }));
+          })
+        );
+      })
+    );
+  },
+  { functional: true }
+);

@@ -8,7 +8,6 @@ import { ITaskBoard } from '../model/tasks.interface';
 import { EMPTY } from 'rxjs';
 
 export class tasksEffects {
-  // Загрузка всех бордв, спросить нужны ли они
   loadAllBoards$ = createEffect(() => {
     const actions$ = inject(Actions);
     const api = inject(ApiService);
