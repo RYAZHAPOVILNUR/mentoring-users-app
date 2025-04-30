@@ -4,7 +4,10 @@
   <ng-container *ngIf="vm.status === 'loaded'; else error">
     <div class="folders-container">
       <ng-container *ngFor="let folder of vm.folders">
-        <users-folders-card [folder]="folder" (deleteFolder)="onDeleteFolder($event)" />
+        <users-folders-card [folder]="folder" 
+        (deleteFolder)="onDeleteFolder($event)" 
+        (dblclick)="onOpenFolder(folder.id)"
+        />
       </ng-container>
     </div>
   </ng-container>

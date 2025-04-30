@@ -1,1 +1,29 @@
-<p>materials-list works!</p>
+<div class="back">
+    <button mat-icon-button aria-label="Folders" color="accent" routerLink="../../materials">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+            <div class="title">{{ vm.openedFolder?.title }}</div>
+  </div>
+
+<ng-container *ngIf="vm.status === 'loading'; else loadingResult">
+</ng-container>
+
+<ng-template #loadingResult>
+    <ng-container *ngIf="vm.status === 'loaded'; else error">
+        <div class="materials-container">
+            <ng-container *ngFor="let material of vm.allMaterials">
+                <users-materials-card 
+                [material]="material" 
+                />
+            </ng-container>
+        </div>
+    </ng-container>
+</ng-template>
+
+<ng-template #error>
+    <div class="alert alert-danger" role="alert">
+        <h1>{{ vm.errors?.status }}</h1>
+        <hr />
+        {{ vm.errors }}
+    </div>
+</ng-template>

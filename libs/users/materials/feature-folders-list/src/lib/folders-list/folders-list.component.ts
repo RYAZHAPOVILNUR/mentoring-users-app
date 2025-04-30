@@ -20,8 +20,13 @@ export class FoldersListComponent {
   public vm!: FoldersListVM;
 
   @Output() deleteFolder = new EventEmitter();
+  @Output() openFolder = new EventEmitter<number>();
 
   public onDeleteFolder(folder: FoldersVM) {
     this.deleteFolder.emit(folder);
+  }
+
+  public onOpenFolder(id: number) {
+    this.openFolder.emit(id);
   }
 }

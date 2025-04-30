@@ -17,5 +17,7 @@ export * from './lib/models/folders-dto.model';
 export * from './lib/models/folders-vm';
 export * from './lib/models/folder.adapter';
 
-export * from './lib/models/material.model';
-export * from './lib/models/material-add.model';
+export * from './lib/models-material/materials.entity';
+export * from './lib/models-material/material-dto.model';
+export * from './lib/models-material/materials-vm';
+export * from './lib/models-material/materials-vm.adapter';

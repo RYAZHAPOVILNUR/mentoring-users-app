@@ -28,7 +28,7 @@ export const initialFoldersState: FoldersState = foldersAdapter.getInitialState(
   error: null,
 });
 
-export function materialsReducer(state: FoldersState | undefined, action: Action) {
+export function foldersReducer(state: FoldersState | undefined, action: Action) {
   return reducer(state, action);
 }
 

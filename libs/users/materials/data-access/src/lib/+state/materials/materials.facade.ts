@@ -1,34 +1,29 @@
 import { inject, Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
-import * as MaterialsSelectors from './materials.selectors';
 import * as MaterialsActions from './materials.actions';
-import { IAddMaterial } from "../../models/material-add.model";
+import { CreateMaterialDTO } from "../../models-material/material-dto.model";
+import * as Selectors from './materials.selectors';
 import { Observable } from "rxjs";
-
+import { MaterialsErrors } from "./materials.reducer";
+import { selectRouteParam } from "@users/core/data-access";
 
 @Injectable({
   providedIn: 'root'})
 export class MaterialsFacade {
     private readonly store = inject(Store)
 
-    //selectors
-    // public readonly foldersStatus$ = this.store.select(MaterialsSelectors.selectFoldersStatus)
-    // public readonly allFolders$ = this.store.select(MaterialsSelectors.selectAllFolders)
-    // public readonly openedFolder$ = this.store.select(MaterialsSelectors.selectOpenedFolder)
-    // public readonly errors$: Observable<FoldersErrors | null> = this.store.select(MaterialsSelectors.selectFoldersError)
-  
-    // public readonly materialsStatus$ = this.store.select(MaterialsSelectors.selectMaterialsStatus)
-    // public readonly allMaterials$ = this.store.select(MaterialsSelectors.selectAllMaterials)
+    public readonly materialsStatus$ = this.store.select(Selectors.selectMaterialsStatus)
+    public readonly allMaterials$ = this.store.select(Selectors.selectAllMaterials)
+    public readonly error$: Observable<MaterialsErrors | null> = this.store.select(Selectors.selectMaterialsError)
+    public readonly folderId$: Observable<string | undefined> = this.store.select(selectRouteParam('id'));
 
-
-  
-    loadMaterials() {
-      this.store.dispatch(MaterialsActions.loadMaterials())
+    initMaterials() {
+      this.store.dispatch(MaterialsActions.initMaterials())
     }
     deleteMaterial(id: number) {
       this.store.dispatch(MaterialsActions.deleteMaterial({ id }))
     }
-    addMaterial(material: IAddMaterial) {
-      this.store.dispatch(MaterialsActions.addMaterial({ material }))
+    addMaterial(materialData: CreateMaterialDTO) {
+      this.store.dispatch(MaterialsActions.addMaterial({ materialData }))
     }
 }

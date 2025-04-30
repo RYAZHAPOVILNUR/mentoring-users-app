@@ -6,8 +6,8 @@ import * as MaterialsActions from './materials.actions';
 import { ApiService } from '@users/core/http';
 import { Store } from '@ngrx/store';
 import { selectRouteParams } from '@users/core/data-access';
-import { IMaterial } from '../../models/material.model';
-import { IAddMaterial } from '../../models/material-add.model';
+import { MaterialsEntity } from '../../models-material/materials.entity';
+import { CreateMaterialDTO, MaterialsDTO } from '../../models-material/material-dto.model';
 
 @Injectable()
 export class MaterialsEffects {
@@ -16,25 +16,25 @@ export class MaterialsEffects {
         const action$ = inject(Actions);
         const apiService = inject(ApiService);
         const store = inject(Store);
+        action$.subscribe(console.log)
     
         return action$.pipe(
-          ofType(MaterialsActions.loadMaterials),
+          ofType(MaterialsActions.initMaterials),
           withLatestFrom(store.select(selectRouteParams)),
           switchMap(([, params]) =>
-            apiService.get<IMaterial[]>('/material').pipe(
-              map((materials) => 
-                 MaterialsActions.loadMaterialsSuccess({ 
-                    materials: materials.filter(
-                      (material) => material.folder_id === +params['id']
-                    )
-                  })
+            apiService.get<MaterialsEntity[]>('/material').pipe(
+              map((materials) =>
+                MaterialsActions.loadMaterialsSuccess({
+                  materials: materials.filter((material) => material.folder_id === +params['id']),
+                })
               ),
-              catchError((error) => {console.error('Error', error);
-              return of(MaterialsActions.loadMaterialsFailure({ error }))
+              catchError((error) => {
+                console.error('Error', error);
+                return of(MaterialsActions.loadMaterialsFailure({ error }));
               })
-              )
+            )
           )
-        )
+        );
       }, {functional: true}
     )
   
@@ -49,7 +49,7 @@ export class MaterialsEffects {
             apiService.delete<void>(`/material/${id}`).pipe(
               switchMap(() => [
                 MaterialsActions.deleteMaterialSuccess({ id }),
-                MaterialsActions.loadMaterials()
+                MaterialsActions.initMaterials()
               ]),
               catchError((error) => {
                 console.error('Error', error);
@@ -65,30 +65,21 @@ export class MaterialsEffects {
       () => {
         const actions$ = inject(Actions);
         const apiService = inject(ApiService);
-        const store = inject(Store);
   
         return actions$.pipe(
           ofType(MaterialsActions.addMaterial),
-          withLatestFrom(store.select(selectRouteParams)),
-          switchMap(([{ material }, params]) => {
-            const folderId = Number(params['id']);
-  
-            const materialWithFolderId: IAddMaterial = {
-              title: material.title,
-              material_link: material.material_link,
-              folder_id: folderId
-            }
-  
-            return apiService.post<IMaterial, IAddMaterial>('/material', materialWithFolderId).pipe(
-              map((newMaterial) =>
-                MaterialsActions.addMaterialSuccess({ material: newMaterial })
-              ),
+          switchMap(({ materialData }) => {
+            return apiService.post<MaterialsDTO, CreateMaterialDTO>('/material', materialData).pipe(
+              map((materialEntity) => MaterialsActions.addMaterialSuccess({ materialData: materialEntity })),
               catchError((error) => {
                 console.log('Error', error);
-                return of(MaterialsActions.addMaterialFailure({ error }))
+                return of(MaterialsActions.addMaterialFailure({ error }));
               })
-            )}
-        ))
-      }, {functional: true}
-    )
-}
+            );
+          })
+        );
+      },
+      { functional: true }
+    );
+  }
+  

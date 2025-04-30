@@ -1,15 +1,15 @@
 import { createAction, props } from '@ngrx/store';
-import { IMaterial } from '../../models/material.model';
-import { IAddMaterial } from '../../models/material-add.model';
+import { MaterialsEntity } from '../../models-material/materials.entity';
+import { CreateMaterialDTO } from '../../models-material/material-dto.model';
 
-export const loadMaterials = createAction('[Materials Page] Load Materials');
-export const loadMaterialsSuccess = createAction('[Materials Page] Load Materials Success', props<{materials: IMaterial[] }>()); 
-export const loadMaterialsFailure = createAction('[Materials Page] Load Materials Failure', props<{ error: any }>()); 
+export const initMaterials = createAction('[Materials Page] Init');
+export const loadMaterialsSuccess = createAction('[Materials /API] Load Materials Success', props<{materials: MaterialsEntity[] }>()); 
+export const loadMaterialsFailure = createAction('[Materials /API] Load Materials Failure', props<{ error: any }>()); 
 
 export const deleteMaterial = createAction('[Materials Page] Delete Material', props<{ id: number }>());
-export const deleteMaterialSuccess = createAction('[Materials Page] Delete Material Success', props<{ id: number }>());
-export const deleteMaterialFailure = createAction('[Materials Page] Delete Material Failure', props<{ error: any }>());
+export const deleteMaterialSuccess = createAction('[Materials /API] Delete Material Success', props<{ id: number }>());
+export const deleteMaterialFailure = createAction('[Materials /API] Delete Material Failure', props<{ error: any }>());
 
-export const addMaterial = createAction('[Materials Page] Add Material', props<{ material: IAddMaterial }>());
-export const addMaterialSuccess = createAction('[Materials Page] Add Material Success', props<{ material: IMaterial }>());
-export const addMaterialFailure = createAction('[Materials Page] Add Material Failure', props<{ error: any }>());
+export const addMaterial = createAction('[Materials Page] Add Material', props<{ materialData: CreateMaterialDTO }>());
+export const addMaterialSuccess = createAction('[Materials /API] Add Material Success', props<{ materialData: MaterialsEntity}>());
+export const addMaterialFailure = createAction('[Materials /API] Add Material Failure', props<{ error: any }>());

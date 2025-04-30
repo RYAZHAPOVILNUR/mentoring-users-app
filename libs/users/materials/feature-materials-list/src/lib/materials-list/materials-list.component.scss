@@ -1,0 +1,19 @@
+.back {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: x-large;
+}
+
+.materials-container {
+    display: flex;
+    gap: 25px;
+    max-width: 1600px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+  
