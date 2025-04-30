@@ -1,0 +1,9 @@
+<div class="filter-form-container">
+    <form class="filter-form">
+        <mat-form-field class="filter-form__full-width">
+            <mat-label>Search by Name</mat-label>
+            <input matInput placeholder="Enter name to search" value="name" (input)="onFilter()" [formControl]="userName">
+        </mat-form-field>
+    </form>
+</div>
+
