@@ -6,6 +6,8 @@ import { ApiService } from '@users/core/http';
 import { Store, select } from '@ngrx/store';
 import { selectUsersEntities } from './users.selectors';
 import { CreateUserDTO, UsersDTO, UsersEntity, selectRouteParams, usersDTOAdapter } from '@users/core/data-access';
+import { usersAdapter } from './users.reducer';
+import { Dictionary } from '@ngrx/entity';
 
 export const userEffects = createEffect(
   () => {
@@ -137,3 +139,43 @@ export const loadUser = createEffect(
   },
   { functional: true }
 );
+
+export const addUserStoryPoints = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
+
+    return actions$.pipe(
+      ofType(UsersActions.addUserStoryPoints),
+      withLatestFrom(usersEntities$),
+      filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
+      map(([{ userStoryPoints, id, onSuccessAddSP }, usersEntities]) => ({
+        user: userProperties(usersEntities, id, userStoryPoints),
+        onSuccessAddSP,
+      })),
+      switchMap(({ user, onSuccessAddSP }) => {
+        return apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+          map((userData) => ({ userData, onSuccessAddSP })),
+          tap(({ onSuccessAddSP }) => onSuccessAddSP()),
+          map(({ userData }) => {
+            return UsersActions.addUserStoryPointsSuccess({ userData });
+          })
+        );
+      }),
+      catchError((error) => {
+        return of(UsersActions.addUserStoryPointsFailed({ error }));
+      })
+    );
+  },
+  { functional: true }
+);
+
+const userProperties = (usersEntities: Dictionary<UsersEntity>, id: number, userStoryPoints: number) => {
+  return {
+    ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
+    purchaseDate: usersEntities[id]?.purchaseDate || '12.10.2023',
+    educationStatus: usersEntities[id]?.educationStatus || 'trainee',
+    totalStoryPoints: userStoryPoints,
+  };
+};
