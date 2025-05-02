@@ -5,7 +5,9 @@ import { MaterialsAddButtonComponent } from '@users/feature-materials-create';
 import { MaterialsListContainerStore } from './materials-list-container.store';
 import { LetDirective } from '@ngrx/component';
 import { RouterModule } from '@angular/router';
-import { MaterialsFacade } from '@users/materials/data-access';
+import { MaterialsFacade, MaterialsVM } from '@users/materials/data-access';
+
+
 
 @Component({
   selector: 'users-materials-list-container',
@@ -18,12 +20,18 @@ import { MaterialsFacade } from '@users/materials/data-access';
   providers: [MaterialsListContainerStore],
 })
 export class MaterialsListContainerComponent {
+  
   private readonly componentStore = inject(MaterialsListContainerStore);
   private readonly materialsFacade = inject(MaterialsFacade);
-
+  
   public readonly allMaterials$ = this.materialsFacade.allMaterials$;
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;
   public readonly folderId$ = this.componentStore.folderId$;
   public readonly openedFolder$ = this.componentStore.openedFolder$;
+
+  public onDeleteMaterial(material: MaterialsVM) {
+    this.componentStore.deleteMaterial(material);
+  }
+
 }

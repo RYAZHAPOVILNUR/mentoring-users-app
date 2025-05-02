@@ -10,7 +10,6 @@ type FoldersDTOAdapter = {
 export const foldersDTOAdapter: FoldersDTOAdapter = {
   DTOtoEntity(dto) {
     const { created_at, ...otherFields } = dto;
-
     return {
       ...otherFields,
       createdAt: created_at,
@@ -18,7 +17,6 @@ export const foldersDTOAdapter: FoldersDTOAdapter = {
   },
   entityToDTO(entity) {
     const { createdAt, ...otherFields } = entity;
-
     return {
       ...otherFields,
       created_at: createdAt,

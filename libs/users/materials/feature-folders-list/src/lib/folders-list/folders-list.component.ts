@@ -16,6 +16,7 @@ import { FoldersVM } from '@users/materials/data-access';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersListComponent {
+
   @Input({ required: true }) 
   public vm!: FoldersListVM;
 
@@ -29,4 +30,5 @@ export class FoldersListComponent {
   public onOpenFolder(id: number) {
     this.openFolder.emit(id);
   }
+  
 }

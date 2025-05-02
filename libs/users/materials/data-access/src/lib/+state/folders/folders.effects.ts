@@ -12,7 +12,7 @@ export class FoldersEffects {
     () => {
       const action$ = inject(Actions);
       const apiService = inject(ApiService);
-      // action$.subscribe(console.log)
+
       return action$.pipe(
         ofType(FoldersActions.initFolders),
         switchMap(() =>

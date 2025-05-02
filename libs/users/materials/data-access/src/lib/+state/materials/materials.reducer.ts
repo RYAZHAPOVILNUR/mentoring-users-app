@@ -32,38 +32,43 @@ export function materialsReducer(state: MaterialsState | undefined, action: Acti
   return reducerM(state, action);
 }
 
-  const reducerM = createReducer(
-    initialMaterialsState, 
+const reducerM = createReducer(
+  
+  initialMaterialsState,
 
-    on(MaterialsActions.initMaterials, (state) => ({
-      ...state, status: 'loading' as const
-    })
-    ),
-   
-    on(MaterialsActions.loadMaterialsSuccess, (state, { materials }) =>
-      materialsAdapter.setAll(materials, { ...state, status: 'loaded' as const })
-    ),
+  on(MaterialsActions.initMaterials, (state) => ({
+    ...state,
+    status: 'loading' as const,
+  })),
 
+  on(MaterialsActions.loadMaterialsSuccess, (state, { materials }) =>
+    materialsAdapter.setAll(materials, { ...state, status: 'loaded' as const })
+  ),
 
-    on(MaterialsActions.loadMaterialsFailure, (state, { error }) => ({
-      ...state, status: 'error' as const, error
-    })
-    ),
+  on(MaterialsActions.loadMaterialsFailure, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
 
-    on(MaterialsActions.deleteMaterialSuccess, (state, { id }) =>
+  on(MaterialsActions.deleteMaterialSuccess, (state, { id }) => 
     materialsAdapter.removeOne(id, { ...state })
-    ),
-    on(MaterialsActions.deleteMaterialFailure, (state, { error }) => ({
-      ...state, status: 'error' as const, error
-    })
-    ),
+  ),
 
-    on(MaterialsActions.addMaterialSuccess, (state, { materialData }) => {
-      return materialsAdapter.addOne({ ...materialData }, { ...state });
-    }),
+  on(MaterialsActions.deleteMaterialFailure, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
 
-    on(MaterialsActions.addMaterialFailure, (state, { error }) => ({
-      ...state, status: 'error' as const, error
-    })
-    ),
-  );
+  on(MaterialsActions.addMaterialSuccess, (state, { materialData }) => {
+    return materialsAdapter.addOne({ ...materialData }, { ...state });
+  }),
+
+  on(MaterialsActions.addMaterialFailure, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  }))
+  
+);

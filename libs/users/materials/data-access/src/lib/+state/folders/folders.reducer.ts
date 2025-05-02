@@ -7,9 +7,9 @@ import * as FoldersActions from './folders.actions';
 export const FOLDERS_FEATURE_KEY = 'folders';
 
 export type FoldersErrors = {
-    status: number;
-    [key: string]: unknown;
-  }; 
+  status: number;
+  [key: string]: unknown;
+}; 
 
 export interface FoldersState extends EntityState<FoldersEntity> {
   selectedId?: string | number;
@@ -33,35 +33,37 @@ export function foldersReducer(state: FoldersState | undefined, action: Action) 
 }
 
 const reducer = createReducer(
-    initialFoldersState,
 
-    // folders
-    on(FoldersActions.initFolders, (state) => ({
-      ...state, status: 'loading' as const
-    }
-    )),
-    on(FoldersActions.loadFoldersSuccess, (state, { folders }) => 
-      foldersAdapter.setAll(folders, { ...state, status: 'loaded' as const })
-    ),
-    on(FoldersActions.loadFoldersFailure, (state, { error }) => ({
-      ...state, status: 'error' as const, error
-    })
-    ),
+  initialFoldersState,
 
-    on(FoldersActions.deleteFolderSuccess, (state, { id }) =>
-      foldersAdapter.removeOne(id, { ...state })
-    ),
-    on(FoldersActions.deleteFolderFailure, (state, { error }) => ({
-      ...state, status: 'error' as const, error
-    })
-    ),
+  on(FoldersActions.initFolders, (state) => ({
+    ...state,
+    status: 'loading' as const,
+  })),
+  on(FoldersActions.loadFoldersSuccess, (state, { folders }) =>
+    foldersAdapter.setAll(folders, { ...state, status: 'loaded' as const })
+  ),
+  on(FoldersActions.loadFoldersFailure, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
+  on(FoldersActions.deleteFolderSuccess, (state, { id }) => 
+    foldersAdapter.removeOne(id, { ...state })
+  ),
+  on(FoldersActions.deleteFolderFailure, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
 
-    on(FoldersActions.addFolderSuccess, (state, { folderData }) => {
-      return foldersAdapter.addOne(folderData, {...state})
-    }),
-    on(FoldersActions.addFolderFailure, (state, { error }) => ({
-      ...state, status: 'error' as const, error
-    })
-    ),
-
-  );
+  on(FoldersActions.addFolderSuccess, (state, { folderData }) => {
+    return foldersAdapter.addOne(folderData, { ...state });
+  }),
+  on(FoldersActions.addFolderFailure, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  }))
+  
+);

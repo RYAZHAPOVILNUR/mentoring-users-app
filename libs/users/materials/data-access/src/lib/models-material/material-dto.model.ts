@@ -9,8 +9,6 @@ export type MaterialsDTO = DeepReadonly<{
     material_format: MaterialFormat;
   }>;
   
-  export type MaterialFormat = 'Audio' | 'Video' | 'PDF' | 'Unknown';
-  
   export type CreateMaterialDTO = DeepReadonly<{
     id?: number;
     created_at?: string;
@@ -19,3 +17,5 @@ export type MaterialsDTO = DeepReadonly<{
     folder_id: number;
     material_format: MaterialFormat;
   }>;
+
+  export type MaterialFormat = 'Audio' | 'Video' | 'PDF' | 'Unknown';

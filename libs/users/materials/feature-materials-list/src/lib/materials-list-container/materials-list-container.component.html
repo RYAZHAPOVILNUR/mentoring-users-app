@@ -9,7 +9,7 @@
 >
   <users-materials-list
     [vm]="vm"
-
+    (deleteMaterial)="onDeleteMaterial($event)"
   />
 </ng-container>
 <users-materials-add-button></users-materials-add-button>

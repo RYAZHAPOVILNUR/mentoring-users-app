@@ -1,9 +1,9 @@
 <div class="back">
     <button mat-icon-button aria-label="Folders" color="accent" routerLink="../../materials">
-      <mat-icon>arrow_back</mat-icon>
+        <mat-icon>arrow_back</mat-icon>
     </button>
-            <div class="title">{{ vm.openedFolder?.title }}</div>
-  </div>
+    <div class="title">{{ vm.openedFolder?.title }}</div>
+</div>
 
 <ng-container *ngIf="vm.status === 'loading'; else loadingResult">
 </ng-container>
@@ -14,6 +14,7 @@
             <ng-container *ngFor="let material of vm.allMaterials">
                 <users-materials-card 
                 [material]="material" 
+                (deleteMaterial)="onDeleteMaterial(material)"          
                 />
             </ng-container>
         </div>

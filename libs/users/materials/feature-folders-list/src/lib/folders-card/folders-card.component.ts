@@ -18,6 +18,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoldersCardComponent {
+
   @Input()
   public folder!: FoldersVM;
 
@@ -26,5 +27,6 @@ export class FoldersCardComponent {
   public onDeleteFolder (folder: FoldersVM) {
     this.deleteFolder.emit(folder);
   }
+  
 }
 

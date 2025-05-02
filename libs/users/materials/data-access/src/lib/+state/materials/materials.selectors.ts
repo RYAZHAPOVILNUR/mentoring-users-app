@@ -6,22 +6,22 @@ export const selectMaterialsState = createFeatureSelector<MaterialsState>(MATERI
 const { selectAll } = materialsAdapter.getSelectors();
 
 export const selectMaterialsStatus = createSelector(
-    selectMaterialsState, (state: MaterialsState) => state.status
-  )
-  
-  export const selectAllMaterials = createSelector(
-    selectMaterialsState, (state: MaterialsState) => {
-      console.log('selectAllMaterials');
-      return selectAll(state);
-    }
-  );
-  
-  export const selectMaterialsError = createSelector(
-    selectMaterialsState, (state: MaterialsState) => state.error
-  )
-  
-  export const selectMaterialSelectedId = createSelector(
-    selectMaterialsState,
-    (state: MaterialsState) => state.selectedId
-  );
+  selectMaterialsState, 
+  (state: MaterialsState) => state.status
+);
+
+export const selectAllMaterials = createSelector(
+  selectMaterialsState,
+  (state: MaterialsState) => selectAll(state)
+);
+
+export const selectMaterialsError = createSelector(
+  selectMaterialsState, 
+  (state: MaterialsState) => state.error
+);
+
+export const selectMaterialSelectedId = createSelector(
+  selectMaterialsState,
+  (state: MaterialsState) => state.selectedId
+);
   

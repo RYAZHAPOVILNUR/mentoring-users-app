@@ -7,12 +7,12 @@ import { FoldersEntity, FoldersFacade, FoldersVM, foldersVMAdapter } from "@user
 import { tap } from "rxjs";
 
 type FoldersListState = DeepReadonly<{
-    folders: FoldersVM[];
-  }>;
+  folders: FoldersVM[];
+}>;
 
-  const initialState: FoldersListState = {
-    folders: [],
-  }; 
+const initialState: FoldersListState = {
+  folders: [],
+}; 
 
 @Injectable()
 export class FoldersListContainerStore extends ComponentStore<FoldersListState> {
@@ -53,4 +53,5 @@ export class FoldersListContainerStore extends ComponentStore<FoldersListState> 
       )
     );
   }
+
 }

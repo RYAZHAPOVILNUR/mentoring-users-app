@@ -16,7 +16,6 @@ export class MaterialsEffects {
         const action$ = inject(Actions);
         const apiService = inject(ApiService);
         const store = inject(Store);
-        action$.subscribe(console.log)
     
         return action$.pipe(
           ofType(MaterialsActions.initMaterials),
@@ -81,5 +80,7 @@ export class MaterialsEffects {
       },
       { functional: true }
     );
+
+    
   }
   

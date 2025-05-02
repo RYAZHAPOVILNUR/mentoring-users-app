@@ -4,8 +4,8 @@ import { FoldersEntity, MaterialsErrors, MaterialsVM } from "@users/materials/da
 
 export type MaterialsListVM = DeepReadonly<{
   allMaterials: MaterialsVM[];
-    folderId: number | undefined;
-    status: LoadingStatus;
-    errors: MaterialsErrors | null;
-    openedFolder?: FoldersEntity | null,
-  }>;
+  folderId: number | undefined;
+  status: LoadingStatus;
+  errors: MaterialsErrors | null;
+  openedFolder?: FoldersEntity | null;
+}>;

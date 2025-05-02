@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { CreateMaterialDTO, MaterialsFacade } from '@users/materials/data-access';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { firstValueFrom } from 'rxjs';
@@ -12,7 +13,7 @@ import { MaterialsAddDialogComponent } from '../materials-add-dialog/materials-a
 @Component({
   selector: 'users-materials-add-button',
   standalone: true,
-  imports: [CommonModule, MatButtonModule,  MatIconModule, MatMenuModule, ],
+  imports: [CommonModule, MatButtonModule,  MatIconModule, MatMenuModule, MatTooltipModule],
   templateUrl: './materials-add-button.component.html',
   styleUrls: ['./materials-add-button.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
@@ -41,13 +42,13 @@ export class MaterialsAddButtonComponent {
     dialogRef
       .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(result => {
+      .subscribe((result) => {
         if (result) {
           const newMaterial: CreateMaterialDTO = {
             title: result.materialTitle,
             material_link: result.materialLink,
             material_format: result.materialFormat,
-            folder_id: result.folderId
+            folder_id: result.folderId,
           };
           this.materialsFacade.addMaterial(newMaterial);
         }

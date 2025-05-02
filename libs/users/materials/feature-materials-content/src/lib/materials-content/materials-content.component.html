@@ -1,1 +1,39 @@
-<p>materials-content works!</p>
+<div class="title">
+    <h1 mat-dialog-title>{{ data.material.title }}</h1>
+</div>
+
+<div class="button-close">
+    <button class="title-button" mat-icon-button (click)="onClose()">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<ng-container *ngIf="materialLink.endsWith('.mp3')">
+    <div class="audio">
+        <audio controls>
+          <source [src]="materialLink" type="audio/mp3">
+        </audio>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="materialLink.endsWith('.pdf')">
+    <pdf-viewer
+        [src]="materialLink"
+        [render-text]="true"
+        [original-size]="false"
+        class="pdf-viewer"
+    ></pdf-viewer>
+</ng-container>
+
+<ng-container *ngIf="materialLink.includes('youtube.com') || materialLink.includes('youtu.be')">
+    <div class="youtube-video">
+      <iframe
+        [src]="materialLink | youtube | url"
+        width="100%"
+        height="315"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </ng-container>
+

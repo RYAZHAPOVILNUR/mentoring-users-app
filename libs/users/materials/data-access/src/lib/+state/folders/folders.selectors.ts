@@ -6,21 +6,24 @@ export const selectFoldersState = createFeatureSelector<FoldersState>(FOLDERS_FE
 
 const { selectAll, selectEntities } = foldersAdapter.getSelectors();
 
-// folders
 export const selectFoldersStatus = createSelector(
-  selectFoldersState, (state: FoldersState) => state.status
+  selectFoldersState, 
+  (state: FoldersState) => state.status
 )
 
 export const selectAllFolders = createSelector(
-  selectFoldersState, (state: FoldersState) => selectAll(state)
+  selectFoldersState, 
+  (state: FoldersState) => selectAll(state)
 )
 
 export const selectFoldersEntities = createSelector(
-  selectFoldersState, (state: FoldersState) => selectEntities(state)
+  selectFoldersState, 
+  (state: FoldersState) => selectEntities(state)
 )
 
 export const selectFoldersError = createSelector(
-  selectFoldersState, (state: FoldersState) => state.error
+  selectFoldersState, 
+  (state: FoldersState) => state.error
 )
 
 export const selectOpenedFolder = createSelector(

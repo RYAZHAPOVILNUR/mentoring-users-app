@@ -28,7 +28,6 @@ export class FoldersListContainerComponent {
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$; 
   
-
   onDeleteFolder(folder: FoldersVM){
     this.componentStore.deleteFolder(folder);
   }
@@ -36,4 +35,5 @@ export class FoldersListContainerComponent {
   public onOpenFolder(id: number) {
     this.router.navigate([`/materials/`, id])
   }
+  
 }
