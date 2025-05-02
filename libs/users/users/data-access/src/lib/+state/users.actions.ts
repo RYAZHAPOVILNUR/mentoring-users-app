@@ -38,3 +38,22 @@ export const loadUserSuccess = createAction('[Users/Api] Load User Success', pro
 export const loadUserFailed = createAction('[Users/Api] Load User Failed', props<{ error: any }>());
 
 export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{ status: LoadingStatus }>());
+
+export const editUserStoryPoints = createAction(
+  '[Users Detail] Edit User StoryPoints',
+  props<{
+    userData: Partial<CreateUserDTO>;
+    id: number;
+    onSuccessCb: onSuccessEditionCbType;
+  }>()
+);
+
+export const editUserStoryPointsSuccess = createAction(
+  '[Users Detail] Edit User StoryPoints Success',
+  props<{ userData: UsersDTO }>()
+);
+
+export const editUserStoryPointsFailed = createAction(
+  '[Users Detail] Edit User StoryPoints Failed',
+  props<{ error: UsersErrors | null }>()
+);
