@@ -90,6 +90,8 @@ export class DetailUsersCardComponent implements OnInit {
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
 
+  @Input({ required: true }) timer!: { days: number; hours: number; minutes: number; seconds: number } | null;
+
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
     onSuccessCb: onSuccessEditionCbType;
@@ -98,6 +100,9 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
+  @Output() startTimer = new EventEmitter();
+  @Output() stopTimer = new EventEmitter();
+  @Output() resetTimer = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
@@ -154,6 +159,18 @@ export class DetailUsersCardComponent implements OnInit {
 
   public onOptionClicked(selectedValue: string) {
     this.formGroup.get('city')?.setValue(selectedValue);
+  }
+
+  onStartTimer() {
+    this.startTimer.emit();
+  }
+
+  onStopTimer() {
+    this.stopTimer.emit()
+  }
+
+  onResetTimer() {
+    this.resetTimer.emit();
   }
 
   private checkChangeFields() {
