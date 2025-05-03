@@ -57,4 +57,8 @@ export class UsersFacade {
   loadUser() {
     this.store.dispatch(UsersActions.loadUser());
   }
+
+  addTotalStoryPoint(userId: number, totalStoryPoints: number) {
+    this.store.dispatch(UsersActions.updateStoryPoints({ userId, totalStoryPoints }))
+  }
 }

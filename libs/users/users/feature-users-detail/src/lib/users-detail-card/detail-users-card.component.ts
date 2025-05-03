@@ -54,6 +54,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailUsersCardComponent implements OnInit {
+  public isEditingStoryPoints = false;
   private _vm: DetailUsersCardVm = {
     editMode: false,
     user: null,
@@ -73,6 +74,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: vm.user.email,
         username: vm.user.username,
         city: vm.user.city,
+        totalStoryPoints: vm.user.totalStoryPoints?.toString(),
       });
     }
 
@@ -88,6 +90,7 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    totalStoryPoints: new FormControl({ value: '', disabled: true }, [Validators.pattern(/^[0-9]+$/), Validators.min(0)])
   });
 
   @Output() editUser = new EventEmitter<{
@@ -98,6 +101,7 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
+  @Output() addTotalStoryPoint = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
@@ -129,6 +133,7 @@ export class DetailUsersCardComponent implements OnInit {
         username: this.formGroup.value.username || '',
         city: this.formGroup.value.city || '',
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        // totalStoryPoints: Number(this.formGroup.value.totalStoryPoints) || 0,
         purchaseDate: new Date().toString() || '',
         educationStatus: 'trainee',
       },
@@ -171,5 +176,19 @@ export class DetailUsersCardComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  onStoryPointsEditor(): void {
+    this.isEditingStoryPoints = !this.isEditingStoryPoints;
+    if (this.isEditingStoryPoints) {
+      this.formGroup.get('totalStoryPoints')?.enable();
+    } else {
+      this.formGroup.get('totalStoryPoints')?.disable();
+    }
+  }
+
+  onEditStoryPoints(): void {
+    this.isEditingStoryPoints = !this.isEditingStoryPoints;
+    this.addTotalStoryPoint.emit(this.formGroup.value.totalStoryPoints);
   }
 }
