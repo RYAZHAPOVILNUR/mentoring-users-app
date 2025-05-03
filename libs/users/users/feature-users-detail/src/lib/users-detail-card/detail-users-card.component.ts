@@ -73,6 +73,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: vm.user.email,
         username: vm.user.username,
         city: vm.user.city,
+        points: vm.user.totalStoryPoints ?? null,
       });
     }
 
@@ -88,6 +89,7 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    points: new FormControl<number | null>({ value: null, disabled: !this.vm.editMode})
   });
 
   @Output() editUser = new EventEmitter<{
@@ -100,6 +102,7 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() deleteUser = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
+  
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
     distinctUntilChanged(),
@@ -123,6 +126,7 @@ export class DetailUsersCardComponent implements OnInit {
     });
 
   onSubmit(): void {
+    console.log(this.formGroup.value)
     this.editUser.emit({
       user: {
         name: this.formGroup.value.name || '',
@@ -131,6 +135,9 @@ export class DetailUsersCardComponent implements OnInit {
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
         purchaseDate: new Date().toString() || '',
         educationStatus: 'trainee',
+        totalStoryPoints: this.formGroup.value.points !== null ? Number(this.formGroup.value.points) : undefined, // Изменено название поля
+        
+
       },
       onSuccessCb: this.onEditSuccess,
     });
@@ -154,6 +161,9 @@ export class DetailUsersCardComponent implements OnInit {
 
   public onOptionClicked(selectedValue: string) {
     this.formGroup.get('city')?.setValue(selectedValue);
+  }
+  public onOptionClicked2(selectedValue: number) {
+    this.formGroup.get('points')?.setValue(selectedValue);
   }
 
   private checkChangeFields() {

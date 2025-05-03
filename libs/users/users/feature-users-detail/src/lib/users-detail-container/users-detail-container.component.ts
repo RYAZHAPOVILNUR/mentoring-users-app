@@ -45,6 +45,7 @@ export class UsersDetailComponent {
   public readonly errors$: Observable<UsersErrors | null> = this.usersFacade.errors$;
 
   public onEditUser(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
+    console.log('Данные, отправляемые на бэкенд:', userData);
     this.usersFacade.editUser(userData, this.user.id, onSuccessCb);
     this.router.navigate(['/admin/users', this.user.id], {
       queryParams: { edit: false },
