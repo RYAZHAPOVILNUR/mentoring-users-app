@@ -2,10 +2,9 @@
 
 
 export interface FoldersSecondModel {
-  title: string;
   id: number;
-  created_at: number;
-  material_id: number;
+  created_at: string;
+  title: string;
 }
 
 export interface FoldersModel {

@@ -1,0 +1,36 @@
+<ng-container *ngIf="vm">
+  <div class="materials-list__wrapper">
+    <button mat-raised-button class="materials-list__button"
+            (click)="onBackToFolders()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span class="materials-list__title">
+      {{ vm.folder?.title }}
+    </span>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="vm.status === 'loading'; else loadingResult">
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+
+<ng-template #loadingResult>
+  <ng-container *ngIf="vm.status === 'loaded' else error">
+    <div class="materials-list__container">
+      <div *ngFor="let material of vm.materials">
+        <users-materials-card
+          [material]="material"
+          (dblclick)="onOpenMaterial(material)"
+        ></users-materials-card>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #error>
+  <div class="alert alert-danger" role="alert">
+    <h1>{{ vm.errors?.status }}</h1>
+    <hr />
+    {{ vm.errors }}
+  </div>
+</ng-template>

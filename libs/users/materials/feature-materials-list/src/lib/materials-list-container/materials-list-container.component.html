@@ -1,0 +1,15 @@
+<ng-container   *ngrxLet= "{
+  materials: openedMaterials$,
+  folder: openedFolder$,
+  status: materialStatus$,
+  errors: materialsErrors$,
+  } as vm">
+
+  <users-materials-list
+    [vm]="vm"
+    (backToFolders)="OnBackToFolders()"
+  >
+
+  </users-materials-list>
+
+</ng-container>

@@ -1,26 +1,11 @@
-<ng-container *ngIf="vm.status === 'loading'; else loadingResult">
-  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
-</ng-container>
-
-<ng-template #loadingResult>
-  <ng-container *ngIf="vm.status === 'loaded' && vm.folders?.length; else error">
-    <div class="container">
-      <div class="row">
-        <div class="folder-card" *ngFor="let folder of vm.folders">
+ <div class="container">
+      <div class="folders-card-flex">
+        <ng-container *ngFor="let folder of folders">
           <users-folders-card
             [folder]="folder"
             (deleteFolder)="onDeleteFolder(folder)"
-          />
-        </div>
+            (click)="onOpenFolder(folder.id)"
+          ></users-folders-card>
+        </ng-container>
       </div>
     </div>
-  </ng-container>
-</ng-template>
-
-<ng-template #error>
-  <div class="alert alert-danger" role="alert">
-    <h1>{{ vm.errors?.status || 'Error' }}</h1>
-    <hr />
-    {{ vm.errors }}
-  </div>
-</ng-template>

@@ -33,7 +33,7 @@
       "@users/feature-folders-list": ["libs/users/materials/feature-folders-list/src/index.ts"],
       "@users/feature-materials-content": ["feature-materials-content/src/index.ts"],
       "@users/feature-materials-create": ["feature-materials-create/src/index.ts"],
-      "@users/feature-materials-list": ["feature-materials-list/src/index.ts"],
+      "@users/feature-materials-list": ["libs/users/materials/feature-materials-list/src/index.ts"],
       "@users/feature-users-create": ["libs/users/users/feature-users-create/src/index.ts"],
       "@users/feature-users-detail": ["libs/users/users/feature-users-detail/src/index.ts"],
       "@users/feature-users-list": ["libs/users/users/feature-users-list/src/index.ts"],

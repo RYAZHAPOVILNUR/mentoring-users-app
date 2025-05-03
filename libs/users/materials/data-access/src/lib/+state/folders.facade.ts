@@ -11,7 +11,7 @@ export class FoldersFacade {
   public readonly allFolders$ = this.store.pipe(select(FoldersSelectors.selectAllFolders));
   public readonly status$ = this.store.pipe(select(FoldersSelectors.selectFoldersStatus));
   public readonly errors$ = this.store.pipe(select(FoldersSelectors.selectFoldersError));
-
+  public readonly openedFolders$ = this.store.pipe(select(FoldersSelectors.selectOpenedFolder))
 
   addFolder(folder: FoldersModel) {
     this.store.dispatch(FoldersActions.addFolder({ folder }));
@@ -25,7 +25,4 @@ export class FoldersFacade {
     this.store.dispatch(FoldersActions.deleteFolder({ id }));
   }
 
-  init() {
-    this.store.dispatch(FoldersActions.initFolder());
-  }
 }

@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { CommonModule } from '@angular/common';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FoldersCardComponent } from '../folders-card/folders-card.component';
-import { FoldersListVM } from './folders-list-view-model';
 import { FoldersSecondModel } from '../../../../folders-model';
 
 @Component({
@@ -15,11 +14,17 @@ import { FoldersSecondModel } from '../../../../folders-model';
 })
 export class FoldersListComponent {
 @Input({ required: true })
-vm!: FoldersListVM;
+folders!: FoldersSecondModel[];
 
   @Output() deleteFolder = new EventEmitter();
+  @Output() openFolder = new EventEmitter();
+
 
   onDeleteFolder(folder: FoldersSecondModel) {
     this.deleteFolder.emit(folder);
+  }
+
+  onOpenFolder(id: number) {
+    this.openFolder.emit(id);
   }
 }

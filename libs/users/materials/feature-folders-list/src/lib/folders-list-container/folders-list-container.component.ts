@@ -11,11 +11,13 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'users-folders-list-container',
   standalone: true,
-  imports: [CommonModule, LetDirective, FoldersListComponent, FoldersAddButtonComponent, MatSnackBarModule],
+  imports: [CommonModule, LetDirective, FoldersListComponent, FoldersAddButtonComponent, MatSnackBarModule, MatProgressBarModule],
   templateUrl: './folders-list-container.component.html',
   styleUrls: ['./folders-list-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,6 +28,7 @@ export class FoldersListContainerComponent implements OnInit{
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
   private readonly snackBar = inject(MatSnackBar);
+  private readonly router = inject(Router);
   public readonly folders$ = this.foldersFacade.allFolders$;
   public readonly status$ = this.foldersFacade.status$;
   public readonly errors$ = this.foldersFacade.errors$;
@@ -48,5 +51,9 @@ export class FoldersListContainerComponent implements OnInit{
           this.snackBar.open('Папка успешно удалена!', 'Закрыть', { duration: 4000 });
         }
       });
+  }
+
+  onOpenFolder(id: number): void {
+    this.router.navigate(['/materials', id])
   }
 }
