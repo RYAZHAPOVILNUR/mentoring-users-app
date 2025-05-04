@@ -21,7 +21,8 @@ import { tasksEffects, tasksFeature } from '@users/users/task/data-access';
 import { CLIENT_ID, githubApiEffects, githubApiFeature } from '@users/core/github-api/data-access';
 import { backlogFeature, backlogEffects } from '@users/users/backlog/data-access';
 import { updateTotalStoryPoints } from '@users/users/data-access';
-
+import {FoldersEffects} from '../../../../libs/users/materials/data-access/src/lib/+state/folders/folders.effect'
+import {foldersReducer} from '../../../../libs/users/materials/data-access/src/lib/+state/folders/folders.reducer'
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -38,6 +39,7 @@ export const appConfig: ApplicationConfig = {
       githubApiEffects,
       backlogEffects,
       SettingsEffects,
+      FoldersEffects,
       
       
     ),
@@ -51,6 +53,9 @@ export const appConfig: ApplicationConfig = {
       [tasksFeature.name]: tasksFeature.reducer,
       [githubApiFeature.name]: githubApiFeature.reducer,
       [backlogFeature.name]: backlogFeature.reducer,
+      folders: foldersReducer,
+      
+
     }),
     provideRouterStore(),
     provideStoreDevtools({
