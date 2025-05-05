@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Добавление нового папки</h1>
+<div mat-dialog-content>
+  <form [formGroup]="folderAddFormGroup">
+    <div class="dialog-content">
+      <mat-form-field>
+        <input matInput placeholder="Имя*" formControlName="folderName" />
+        <mat-error>Имя обязательно</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Отмена</button>
+  <button mat-raised-button color="primary" (click)="save()" [disabled]="this.folderAddFormGroup.invalid">Сохранить</button>
+</div>

@@ -1,0 +1,44 @@
+.folder-card {
+    &-container {
+      width: 120px;
+      height: 100px;
+      cursor: pointer;
+  
+      &:hover .delete-btn {
+        opacity: 1;
+      }
+    }
+  
+    &-top {
+      display: flex;
+      justify-content: space-between;
+    }
+  
+    &-title,
+    &-date {
+      margin-bottom: 0px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  
+    &-title {
+      font-weight: 700;
+    }
+  }
+  
+  .delete-btn {
+    opacity: 0;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+  }
+  
+  .mat-mdc-card-content {
+    padding: 10px;
+  }
+  
+  .mat-mdc-icon-button.mat-mdc-button-base {
+    --mdc-icon-button-state-layer-size: 30px;
+  }
+  
