@@ -1,0 +1,9 @@
+<h1 *ngIf="timer$ | async as timer">
+  {{ timer.days }}д {{ timer.hours }}ч {{ timer.minutes | formatedTime }}:{{ timer.seconds | formatedTime }}
+</h1>
+<div>
+  <button (click)="startOrPause()" mat-icon-button>
+    <mat-icon>{{ (isActive$ | async) ? 'pause' : 'play_arrow' }} </mat-icon>
+  </button>
+  <button (click)="reset()" mat-icon-button><mat-icon>stop</mat-icon></button>
+</div>
