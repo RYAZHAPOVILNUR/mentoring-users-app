@@ -8,6 +8,7 @@ import { usersVMAdapter } from '../../../../users-vm.adapter';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
 import { UsersEntity } from '@users/core/data-access';
+import { UsersFilter } from '../../../../../../core/data-access/src/lib/users-filter';
 
 type UsersListState = DeepReadonly<{
   users: UsersVM[];
@@ -32,7 +33,7 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
   }
 
   private setUsersFromGlobalToLocalStore(): void {
-    this.effect(() => this.usersFacade.allUsers$.pipe(tap((users: UsersEntity[]) => this.patchUsers(users))));
+    this.effect(() => this.usersFacade.filteredUsers$.pipe(tap((users: UsersEntity[]) => this.patchUsers(users))));
   }
 
   private patchUsers(users: UsersEntity[]): void {
@@ -52,5 +53,9 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
         })
       )
     );
+  }
+
+  public filterUsers(filter: UsersFilter) {
+    this.usersFacade.filterUsers(filter)
   }
 }
