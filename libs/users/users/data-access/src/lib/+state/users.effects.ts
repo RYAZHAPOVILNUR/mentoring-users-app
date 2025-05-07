@@ -6,6 +6,7 @@ import { ApiService } from '@users/core/http';
 import { Store, select } from '@ngrx/store';
 import { selectUsersEntities } from './users.selectors';
 import { CreateUserDTO, UsersDTO, UsersEntity, selectRouteParams, usersDTOAdapter } from '@users/core/data-access';
+import { error } from 'highcharts';
 
 export const userEffects = createEffect(
   () => {
@@ -93,6 +94,9 @@ export const editUser = createEffect(
           email: userData.email,
           username: userData.username,
           city: userData.city,
+          purchaseDate: usersEntities[id]?.purchaseDate ?? '12.10.2023',
+          educationStatus: usersEntities[id]?.educationStatus || 'trainee',
+          totalStoryPoints: userData.totalStoryPoints,
         },
         onSuccessCb,
       })),
@@ -137,3 +141,41 @@ export const loadUser = createEffect(
   },
   { functional: true }
 );
+
+export const addStoryPoint = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const store = inject(Store);
+    const usersEntities$ = store.pipe(select(selectUsersEntities));
+    return actions$.pipe(
+      ofType(UsersActions.addStoryPoint),
+      withLatestFrom(usersEntities$),
+      filter(([{id}, usersEntities]) => Boolean(usersEntities[id])),
+      map(([{userData, id, onSuccessSPAdd}, usersEntities]) =>({
+        user: {
+          ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
+          purchaseDate: usersEntities[id]?.purchaseDate ?? '12.10.2023',
+          educationStatus: usersEntities[id]?.educationStatus || 'trainee',
+          totalStoryPoints: userData.totalStoryPoints,
+        }, onSuccessSPAdd
+      })),
+      switchMap(({user, onSuccessSPAdd}) => {
+        return apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+          map((userData) => ({userData, onSuccessSPAdd})),
+          tap(({onSuccessSPAdd}) => onSuccessSPAdd()),
+          map(({userData}) => {
+            return UsersActions.addStoryPointSuccess({userData})
+          }
+        ),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(UsersActions.addStoryPointFailed({error}));
+          })
+          
+        )
+      })
+    )
+  },
+  { functional: true }
+)
