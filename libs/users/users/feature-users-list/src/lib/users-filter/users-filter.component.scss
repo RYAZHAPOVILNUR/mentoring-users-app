@@ -1,0 +1,24 @@
+
+.filter-form-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  
+}
+
+.filter-form {
+  display: flex;
+  margin-bottom: 20px;
+  flex-direction: column; 
+
+  align-items: center; 
+}
+
+.form-field {
+  margin-bottom: 0;
+  width: 300px; 
+}
+
+button {
+  width: 150px; 
+}
