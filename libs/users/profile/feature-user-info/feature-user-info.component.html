@@ -48,6 +48,23 @@
             <mat-icon>explore</mat-icon>
             <span>{{ vm.user.city }}</span>
           </div>
+          <div class="timer">
+            <button (click)="onStartTimer()"  class="user-info-timer">
+              <mat-icon>timer</mat-icon>
+            </button>
+            <button (click)="onPauseTimer()"  class="user-info-timer">
+              <mat-icon>pause</mat-icon>
+            </button>
+            <button (click)="onClearTimer()"  class="user-info-timer">
+              <mat-icon>clear</mat-icon>
+            </button>
+            <span>
+              <span> {{ timerValues.days }} {{'PROFILE.USER_INFO.TIMER_DAYS' | translate}}</span>
+              <span> {{ timerValues.hours }} {{'PROFILE.USER_INFO.TIMER_HOURS' | translate}}</span>
+              <span> {{ timerValues.minutes }} :</span>
+              <span> {{ timerValues.seconds }} </span>
+            </span>
+          </div>
         </div>
       </mat-card-content>
       <mat-card-actions class="user-info-items">
