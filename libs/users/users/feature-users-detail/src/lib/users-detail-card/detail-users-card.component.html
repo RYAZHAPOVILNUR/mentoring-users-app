@@ -42,7 +42,7 @@
               [matTooltipDisabled]="formGroup.enabled"
             >
               <mat-label>Имя:</mat-label>
-              <input matInput placeholder="Имя*" formControlName="name" class="edit-user-input" />
+              <input matInput placeholder="Имя*" formControlName="name" class="edit-user-input"/>
               <mat-error *ngIf="formGroup.hasError('required', 'name')">Это поле обязательно для заполнения</mat-error>
             </mat-form-field>
 
@@ -52,7 +52,7 @@
               [matTooltipDisabled]="formGroup.enabled"
             >
               <mat-label>Электронная почта:</mat-label>
-              <input matInput placeholder="Электронная почта*" formControlName="email" class="edit-user-input" />
+              <input matInput placeholder="Электронная почта*" formControlName="email" class="edit-user-input"/>
               <mat-error
                 *ngIf="formGroup.get('email')?.hasError('required') || formGroup.get('email')?.hasError('email')"
               >
@@ -66,7 +66,7 @@
               [matTooltipDisabled]="formGroup.enabled"
             >
               <mat-label>Имя пользователя:</mat-label>
-              <input matInput placeholder="Имя пользователя" formControlName="username" class="edit-user-input" />
+              <input matInput placeholder="Имя пользователя" formControlName="username" class="edit-user-input"/>
             </mat-form-field>
 
             <mat-form-field
@@ -89,6 +89,37 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+
+            <mat-form-field
+              class="edit-user-field"
+              [matTooltip]="vm.user!.totalStoryPoints.toString()"
+              [matTooltipDisabled]="formGroup.enabled"
+            >
+              <mat-label>Количество сторипоинтов</mat-label>
+              <input
+                type="number"
+                class="edit-user-input"
+                placeholder="Введите количество сторипоинтов"
+                matInput
+                formControlName="totalStoryPoints"
+              />
+              <button (click)="onAddStoryPoints()" *ngIf="!formGroup.get('totalStoryPoints')?.disabled" matSuffix
+                      mat-icon-button
+                      aria-label="Clear">
+                <mat-icon>done</mat-icon>
+              </button>
+              <button (click)="formGroup.get('totalStoryPoints')?.disable()"
+                      *ngIf="!formGroup.get('totalStoryPoints')?.disabled" matSuffix mat-icon-button
+                      aria-label="Clear">
+                <mat-icon>close</mat-icon>
+              </button>
+              <button (click)="formGroup.get('totalStoryPoints')?.enable()"
+                      *ngIf="formGroup.get('totalStoryPoints')?.disabled" matSuffix mat-icon-button
+                      aria-label="Clear">
+                <mat-icon>add</mat-icon>
+              </button>
+            </mat-form-field>
+
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
@@ -114,7 +145,7 @@
 <ng-template #error>
   <div class="alert alert-danger" role="alert">
     <h1>{{ vm.errors?.status }}</h1>
-    <hr />
+    <hr/>
     Данный пользователь не найден
   </div>
 </ng-template>
@@ -124,3 +155,10 @@
     <span>Пользователь успешно изменён!</span>
   </div>
 </ng-template>
+
+<ng-template #snackbarStoryPoints>
+  <div class="edit-user-snackbar">
+    <span>Очки успешно добавлены!</span>
+  </div>
+</ng-template>
+

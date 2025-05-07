@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
@@ -12,7 +13,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { onSuccessEditionCbType } from '@users/users/data-access';
+import { onSuccessEditionCbType, onSuccessSPonCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -53,7 +54,13 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrls: ['./detail-users-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DetailUsersCardComponent implements OnInit {
+export class DetailUsersCardComponent implements OnInit, AfterViewInit {
+  ngAfterViewInit(): void {
+    if (!this.snackbarTemplateRefSP) {
+      console.error('snackbarTemplateRefSP не инициализирован!');
+    }
+  }
+
   private _vm: DetailUsersCardVm = {
     editMode: false,
     user: null,
@@ -63,6 +70,7 @@ export class DetailUsersCardComponent implements OnInit {
   public get vm() {
     return this._vm;
   }
+
   @Input({ required: true })
   set vm(vm: DetailUsersCardVm) {
     this._vm = vm;
@@ -73,6 +81,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: vm.user.email,
         username: vm.user.username,
         city: vm.user.city,
+        totalStoryPoints: vm.user.totalStoryPoints,
       });
     }
 
@@ -88,17 +97,21 @@ export class DetailUsersCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    totalStoryPoints: new FormControl({ value: 0, disabled: !this.vm.editMode }),
   });
 
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
     onSuccessCb: onSuccessEditionCbType;
   }>();
+  @Output() addStoryPoints = new EventEmitter<{ user: CreateUserDTO; onSuccessAddSP: onSuccessSPonCbType }>();
   @Output() closeUser = new EventEmitter();
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('snackbarStoryPoints', { static: false }) snackbarTemplateRefSP!: TemplateRef<any>;
+
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
@@ -121,6 +134,35 @@ export class DetailUsersCardComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'top',
     });
+  private onAddSPSuccess: onSuccessSPonCbType = () => {
+    if (!this.snackbarTemplateRefSP) {
+      console.error('snackbarTemplateRefSP не найден!');
+      return;
+    }
+
+    this.snackBar.openFromTemplate(this.snackbarTemplateRefSP, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+  };
+
+  onAddStoryPoints() {
+    const totalStoryPointsControl = this.formGroup.get('totalStoryPoints');
+    totalStoryPointsControl?.disable();
+    this.addStoryPoints.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        totalStoryPoints: totalStoryPointsControl?.value || 0,
+        username: this.formGroup.value.username || '',
+        city: this.formGroup.value.city || '',
+        purchaseDate: new Date().toISOString(),
+        educationStatus: 'trainee',
+      },
+      onSuccessAddSP: this.onAddSPSuccess,
+    });
+  }
 
   onSubmit(): void {
     this.editUser.emit({
@@ -131,6 +173,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
         purchaseDate: new Date().toString() || '',
         educationStatus: 'trainee',
+        totalStoryPoints: this.formGroup.value.totalStoryPoints || undefined,
       },
       onSuccessCb: this.onEditSuccess,
     });
