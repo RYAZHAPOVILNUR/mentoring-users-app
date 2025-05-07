@@ -89,6 +89,47 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+            <mat-form-field
+              class="edit-user-field"
+              [matTooltip]=" 'Количество сторипоинтов: ' + (vm.user!.totalStoryPoints)"
+              [matTooltipDisabled]="formGroup.enabled"
+            >
+              <mat-label>Количество сторипоинтов: </mat-label>
+              <input
+                name="storyPoints"
+                type="number"
+                class="edit-user-input"
+                matInput
+                formControlName="totalStoryPoints"
+                [disabled]="formGroup.get('totalStoryPoints')?.disabled ?? true"
+              />
+              <button 
+                *ngIf="formGroup.get('totalStoryPoints')?.disabled && vm.editMode === false" 
+                type="button" 
+                mat-icon-button 
+                matSuffix 
+                (click)="enableTotalStoryPoints()"
+                >
+                <mat-icon>add</mat-icon>
+              </button>
+              <div *ngIf="formGroup.get('totalStoryPoints')?.enabled && vm.editMode === false" class="edit-user-storypoint-btns">
+                <button
+                  mat-icon-button
+                  type="button"
+                  aria-label="submit new user storypoint data"
+                  (click)="onAddUserStorypoint()"
+                >
+                  <mat-icon>done</mat-icon>
+                </button><button 
+                  type="button" 
+                  mat-icon-button 
+                  matSuffix 
+                  (click)="disableTotalStoryPoints()"
+                >
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+            </mat-form-field>
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
