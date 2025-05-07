@@ -89,6 +89,20 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+
+            <mat-form-field class="edit-user-field">
+              <mat-label>Storypoints:</mat-label>
+              <input type="text" matInput [formControl]="totalStoryPoints" class="edit-user-input" />
+              <button mat-icon-button (click)="onAddStoryPoints()" *ngIf="!totalStoryPoints.disabled" matSuffix>
+                <mat-icon>done</mat-icon>
+              </button>
+              <button mat-icon-button (click)="totalStoryPoints.disable()" *ngIf="!totalStoryPoints.disabled" matSuffix>
+                <mat-icon>close</mat-icon>
+              </button>
+              <button mat-icon-button (click)="totalStoryPoints.enable()" *ngIf="totalStoryPoints.disabled" matSuffix>
+                <mat-icon>add</mat-icon>
+              </button>
+            </mat-form-field>
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
