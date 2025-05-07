@@ -1,37 +1,23 @@
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
-
-import * as UsersActions from './users.actions';
+import { UsersActions } from './users.actions';
 import { UsersEntity } from '@users/core/data-access';
-import { LoadingStatus } from '@users/core/data-access';
-
-export const USERS_FEATURE_KEY = 'users';
-
-export type UsersErrors = {
-  status: number;
-  [key: string]: unknown;
-};
-
-export interface UsersState extends EntityState<UsersEntity> {
-  selectedId?: string | number; // which Users record has been selected
-  status: LoadingStatus;
-  error: UsersErrors | null;
-}
-
-export interface UsersPartialState {
-  readonly [USERS_FEATURE_KEY]: UsersState;
-}
+import { UsersState } from './users.interface';
 
 export const usersAdapter: EntityAdapter<UsersEntity> = createEntityAdapter<UsersEntity>();
+
+export const USERS_FEATURE_KEY = 'users';
 
 export const initialUsersState: UsersState = usersAdapter.getInitialState({
   // set initial required properties
   status: 'init',
   error: null,
+  usersFilter: { name: '' },
 });
 
 const reducer = createReducer(
   initialUsersState,
+
   on(UsersActions.initUsers, (state) => ({
     ...state,
     status: 'loading' as const,
@@ -75,6 +61,10 @@ const reducer = createReducer(
   on(UsersActions.updateUserStatus, (state, { status }) => ({
     ...state,
     status,
+  })),
+  on(UsersActions.setUsersFilter, (state, { name }) => ({
+    ...state,
+    usersFilter: { name },
   }))
 );
 
