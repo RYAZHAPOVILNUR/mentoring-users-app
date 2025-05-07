@@ -12,7 +12,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { onSuccessEditionCbType } from '@users/users/data-access';
+import { onSuccessEditionCbType, onSuccessSPType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -54,6 +54,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailUsersCardComponent implements OnInit {
+  public isShow = false;
   private _vm: DetailUsersCardVm = {
     editMode: false,
     user: null,
@@ -73,7 +74,9 @@ export class DetailUsersCardComponent implements OnInit {
         email: vm.user.email,
         username: vm.user.username,
         city: vm.user.city,
+        userId: vm.user.id,
       });
+      this.totalStoryPoints.setValue(vm.user.totalStoryPoints);
     }
 
     if (vm.editMode) {
@@ -84,11 +87,13 @@ export class DetailUsersCardComponent implements OnInit {
   }
 
   public formGroup = new FormBuilder().group({
+    userId: new FormControl<number | null>({ value: null, disabled: true }),
     name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
+  public totalStoryPoints = new FormControl({ value: 0, disabled: true });
 
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
@@ -98,6 +103,12 @@ export class DetailUsersCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
+  @Output() editStoryPoints = new EventEmitter<{
+    user: CreateUserDTO;
+    onSuccessSP: onSuccessSPType;
+    id: number;
+  }>();
+
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
   private dadata = inject(DadataApiService);
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
@@ -171,5 +182,33 @@ export class DetailUsersCardComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  onSubmitTSPoints() {
+    this.editStoryPoints.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        username: this.formGroup.value.username || '',
+        city: this.formGroup.value.city || '',
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        purchaseDate: new Date().toString() || '',
+        educationStatus: 'trainee',
+        totalStoryPoints: this.totalStoryPoints.value || 0,
+      },
+      onSuccessSP: this.onSuccessEditStoryPoints,
+      id: this.formGroup.value.userId!,
+    });
+    this.totalStoryPoints.disable();
+  }
+
+  private onSuccessEditStoryPoints: onSuccessSPType = () =>
+    this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+  clearInput() {
+    this.totalStoryPoints.setValue(this._vm.user?.totalStoryPoints ?? 0);
+    this.totalStoryPoints.disable();
   }
 }
