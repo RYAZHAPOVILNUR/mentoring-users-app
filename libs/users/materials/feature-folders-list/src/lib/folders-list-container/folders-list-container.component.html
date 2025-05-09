@@ -1,1 +1,29 @@
-<p>folders-list-container works!</p>
+<ng-container *ngrxLet="{
+    folders: folders$,
+    status: status$,
+    errors: errors$,
+  } as vm">
+  <ng-container [ngSwitch]="vm.status">
+      <ng-container *ngSwitchCase="'loading'">
+          <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'error'">
+          <div class="alert alert-danger" rode="alert">
+            <h1>{{ vm.errors?.status }}</h1>
+            <hr />
+            {{ vm.errors }}
+          </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'loaded'">
+          <ng-container>
+              <users-folders-list
+                  [folders]="vm.folders"
+              >
+              </users-folders-list>
+              </ng-container>
+          </ng-container>
+          
+      </ng-container>
+</ng-container>
