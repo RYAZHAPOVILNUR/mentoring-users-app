@@ -1,0 +1,28 @@
+.folder-title-wrapper {
+    margin-bottom: 10px;
+  
+    .backspace-button {
+      margin-right: 10px;
+      transition: 0.6s ease;
+      padding: 10px;
+  
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  
+    .folder-title {
+      font-size: 30px;
+    }
+  }
+  
+  .material-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 0% 3%;
+    justify-content: start;
+    min-height: 110px;
+    margin-bottom: 20px;
+  }
+  

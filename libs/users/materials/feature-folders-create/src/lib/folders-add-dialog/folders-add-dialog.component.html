@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Создать новую папку</h2>
+<mat-dialog-content>
+    <form>
+        <mat-form-field appearance="fill">
+            <mat-label>Название папки</mat-label>
+            <input [formControl]="addFolderControl" matInput />
+            <mat-error>Укажите название папки</mat-error>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-flat-button color="primary" [disabled]="addFolderControl.invalid" (click)="saveFolder()">Создать</button>
+    <button mat-flat-button mat-dialog-close>Отмена</button>
+</mat-dialog-actions>
