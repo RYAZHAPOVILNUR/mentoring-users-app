@@ -1,0 +1,21 @@
+<ng-container
+  *ngrxLet="{
+    folders: folders$,
+    status: status$,
+  } as vm"
+>
+  <ng-container [ngSwitch]="vm.status">
+    <ng-container *ngSwitchCase="'loading'">
+      <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+    </ng-container>
+    <ng-container *ngSwitchCase="'loaded'">
+      <ng-container>
+        <lib-materials-folders-feature
+        (addFolder)="onAddFolder($event)"
+          (deleteFolder)="onDeleteFolder($event)"
+          (setOpenedFolder)="setOpenedFolder($event)"
+          [folders]="vm.folders"></lib-materials-folders-feature>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</ng-container>
