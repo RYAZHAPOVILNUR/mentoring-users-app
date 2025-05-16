@@ -3,17 +3,20 @@ import { UsersErrors } from './users.reducer';
 import { CreateUserDTO, LoadingStatus, UsersDTO, UsersEntity } from '@users/core/data-access';
 
 export type onSuccessEditionCbType = () => void;
+export type onSuccessSPonCbType = () => void
 
 export const initUsers = createAction('[Users Page] Init');
 
 export const loadUsersSuccess = createAction('[Users/API] Load Users Success', props<{ users: UsersEntity[] }>());
 
 export const loadUsersFailure = createAction('[Users/API] Load Users Failure', props<{ error: any }>());
-
+export const addUserStoryPoints = createAction('[Users Detail] Add User StoryPoints', props<{userData: CreateUserDTO, id: number, onSuccessAddSP: onSuccessSPonCbType}>())
+export const addUserStoryPointsSuccess = createAction('[Users Detail] Add User StoryPoints Success', props<{ userData:UsersDTO }>());
+export const addUserStoryPointsFailed = createAction('[Users Detail] Add User StoryPoints Failed', props<{ error: any }>());
 export const deleteUser = createAction('[Users Page] Delete User', props<{ id: number }>());
 export const deleteUserSuccess = createAction('[Users/Api] Delete User Success', props<{ id: number }>());
 export const deleteUserFailed = createAction('[Users/Api] Delete User Failed', props<{ error: any }>());
-
+export const setUsersFilter = createAction('[Users Filter] Set Users Filter', props<{ filter: { name: string } }>());
 export const addUser = createAction('[Users Page] Add User', props<{ userData: CreateUserDTO }>());
 export const addUserSuccess = createAction('[Users/Api] Add User Success', props<{ userData: UsersEntity }>());
 export const addUserFailed = createAction('[Users/Api] Add User Failed', props<{ error: any }>());

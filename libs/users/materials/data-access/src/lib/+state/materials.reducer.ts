@@ -1,5 +1,8 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { MaterialsActions } from './materials.actions';
+import { Folder, Material } from '../models/materials.model';
+import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
+import { LoadingStatus } from '@users/core/data-access';
 
 export const materialsFeatureKey = 'materials';
 
@@ -7,14 +10,64 @@ export interface State {}
 
 export const initialState: State = {};
 
-export const reducer = createReducer(
-  initialState,
-  on(MaterialsActions.loadMaterialss, (state) => state),
-  on(MaterialsActions.loadMaterialssSuccess, (state, action) => state),
-  on(MaterialsActions.loadMaterialssFailure, (state, action) => state)
-);
+export interface MaterialsState extends EntityState<Folder> {
+  materials: Material[];
+  status: LoadingStatus;
+}
+
+export const materialsAdapter: EntityAdapter<Folder> =
+  createEntityAdapter<Folder>();
+
+export const initialMaterialsState: MaterialsState =
+  materialsAdapter.getInitialState({
+    materials: [],
+    status: 'init',
+  });
+
 
 export const materialsFeature = createFeature({
-  name: materialsFeatureKey,
-  reducer,
+  name: 'materials',
+  reducer: createReducer(
+    initialMaterialsState,
+
+    on(MaterialsActions.loadFolders, (state) => ({
+      ...state,
+      status: 'loading' as const,
+    })),
+    on(MaterialsActions.loadFoldersSuccess, (state, { folders }) =>
+      materialsAdapter.setAll(folders, { ...state, status: 'loaded' as const })
+    ),
+    on(MaterialsActions.addFolderSuccess, (state, { newFolder }) =>
+      materialsAdapter.addOne(
+        { ...newFolder },
+        { ...state, status: 'loaded' as const }
+      )
+    ),
+    on(MaterialsActions.getFolderForRead, (state) => ({
+      ...state,
+      status: 'loading' as const,
+    })),
+    on(MaterialsActions.getFolderForReadSucces, (state, { folder }) =>
+      materialsAdapter.addOne(
+        { ...folder },
+        { ...state, status: 'loaded' as const }
+      )
+    ),
+    on(MaterialsActions.loadFoldersFailure, (state, { error }) => ({
+      ...state,
+      loading: false,
+      error,
+    })),
+    on(MaterialsActions.deleteFolderSuccess, (state, { id }) =>
+      materialsAdapter.removeOne(id, { ...state })
+    ),
+
+    // materials=============================================
+  ),
+    
 });
+
+// export const materialsFeature = createFeature({
+//   name: materialsFeatureKey,
+//   reducer,
+// });
