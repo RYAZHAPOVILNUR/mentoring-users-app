@@ -1,8 +1,10 @@
 <ng-container *ngrxLet="{
-    folders: folders$,
+    materials: materials$,
     status: status$,
-    errors: errors$,
-  } as vm">
+    errors: error$,
+    title: title$
+  } as vm"
+>
   <ng-container [ngSwitch]="vm.status">
       <ng-container *ngSwitchCase="'loading'">
           <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
@@ -18,14 +20,12 @@
 
       <ng-container *ngSwitchCase="'loaded'">
           <ng-container>
-              <users-folders-list
-                [folders]="vm.folders"
-                (deleteFolder)="deleteFolder($event)"
-                (openFolder)="openFolder($event)"
+              <users-materials-list
+                [vm]="vm"
+                (deleteMaterial)="deleteMaterial($event)"
               >
-              </users-folders-list>
+              </users-materials-list>
               </ng-container>
-          </ng-container>
-          
+          </ng-container>  
       </ng-container>
 </ng-container>

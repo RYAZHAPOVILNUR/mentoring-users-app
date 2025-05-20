@@ -43,6 +43,26 @@ const reducer = createReducer(
     status: 'error' as const,
     error,
   })),
+
+  on(
+    FoldersActions.addFolderSuccess, (state, { folder }) =>
+    foldersAdapter.addOne(folder, { ...state })
+  ),
+   on(FoldersActions.addFolderFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
+  
+   on(FoldersActions.deleteFolderSuccess, (state, { id }) => 
+    foldersAdapter.removeOne(id, { ...state })
+  ),
+  on(FoldersActions.deleteFolderFailed, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
+  })),
+
 )
 
 export function foldersReducer(state: FoldersState | undefined, action: Action) {

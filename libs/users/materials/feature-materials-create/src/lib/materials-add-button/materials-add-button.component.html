@@ -1,0 +1,13 @@
+<button mat-fab color="primary" class="create-folder-fab-button"
+matTooltip="Добавить материал" [matMenuTriggerFor]="menu">
+    <mat-icon>add</mat-icon>
+</button>
+
+<mat-menu #menu="matMenu">
+    <button type="button" mat-menu-item 
+    (click)="onAddMaterial('Video')" matTooltip="Добавить Video">Video</button>
+    <button type="button" mat-menu-item 
+    (click)="onAddMaterial('PDF')" matTooltip="Добавить PDF">PDF</button>
+    <button type="button" mat-menu-item 
+    (click)="onAddMaterial('Audio')" matTooltip="Добавить Audio">Audio</button>
+</mat-menu>

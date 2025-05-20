@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -26,5 +26,11 @@ import { FoldersType } from '@users/materials/data-access';
 export class FoldersCardComponent {
   @Input({required: true}) 
   folder!: FoldersType;
+
+  @Output() deleteFolder = new EventEmitter();
+
+   public onDeleteFolder (folder: FoldersType) {
+    this.deleteFolder.emit(folder);
+  }
 
 }

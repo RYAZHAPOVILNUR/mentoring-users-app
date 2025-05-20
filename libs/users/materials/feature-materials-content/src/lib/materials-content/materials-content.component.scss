@@ -1,0 +1,31 @@
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    
+    h1 {
+        font-size: x-large;
+        font-weight: 500;
+        margin: 0px !important;
+    }
+
+}
+
+.button-close {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 10px;
+    margin-top: -50px;
+}
+
+.audio {
+    margin: 10px;
+}
+
+.pdf-viewer {
+    width: 800px;
+    height: 600px;
+    margin: 20px;
+}

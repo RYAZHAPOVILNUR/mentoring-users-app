@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="back">
+       <button mat-icon-button routerLink="../../materials"> <mat-icon>arrow_back</mat-icon></button>
+        <div class="title">{{vm.title?.title}}</div>  
+    </div>
+    <div class="materials-cards-flex">
+        <ng-container *ngFor="let material of vm.materials">
+            <users-materials-card
+                [material]="material"
+                (deleteMaterial)="onDeleteMaterial(material)"
+            >
+            </users-materials-card> 
+        </ng-container>
+    </div>
+</div>
+
+<users-materials-add-button></users-materials-add-button>
