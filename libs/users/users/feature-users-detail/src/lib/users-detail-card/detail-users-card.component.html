@@ -89,6 +89,49 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
+
+            <mat-form-field class="edit-user-field">
+              <mat-label>Story Points</mat-label>
+              <input
+                matInput
+                type="number"
+                formControlName="totalStoryPoints"
+                class="edit-user-input"
+                placeholder="Введите story points"
+              />
+              <button
+                *ngIf="(isStoryPointsDisabled$ | async) && !vm.editMode"
+                mat-icon-button
+                matSuffix
+                color="primary"
+                type="button"
+                aria-label="change user data"
+                (click)="enableStoryPointsField()"
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+              <button
+                *ngIf="!(isStoryPointsDisabled$ | async) && !vm.editMode"
+                mat-icon-button
+                matSuffix
+                color="primary"
+                type="submit"
+                aria-label="confirm change user data"
+              >
+                <mat-icon>check</mat-icon>
+              </button>
+              <button
+                *ngIf="!(isStoryPointsDisabled$ | async) && !vm.editMode"
+                mat-icon-button
+                matSuffix
+                color="primary"
+                type="button"
+                aria-label="close change user data"
+                (click)="disableStoryPointsField()"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
