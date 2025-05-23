@@ -1,6 +1,6 @@
 @use '@angular/material' as mat;
 @use './app-theme.scss';
-@import "tailwindcss";
+@import 'tailwindcss';
 
 $primary: mat.m2-define-palette(mat.$m2-deep-purple-palette, 400);
 $accent: mat.m2-define-palette(mat.$m2-blue-grey-palette, 300);

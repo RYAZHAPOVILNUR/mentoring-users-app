@@ -22,7 +22,6 @@ import { RouterLink } from '@angular/router';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    PushPipe,
     RouterLink,
   ],
   selector: 'article-comment',

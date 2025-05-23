@@ -11,7 +11,7 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { onSuccessEditionCbType } from '@users/users/data-access';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -48,21 +48,22 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     MatSnackBarModule,
     MatAutocompleteModule,
     PushPipe,
+    AsyncPipe,
   ],
   templateUrl: './detail-users-card.component.html',
   styleUrls: ['./detail-users-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailUsersCardComponent implements OnInit {
-  private _vm: DetailUsersCardVm = {
-    editMode: false,
-    user: null,
-    status: 'init',
-    errors: null,
-  };
-  public get vm() {
-    return this._vm;
-  }
+  @Output() readonly editUser = new EventEmitter<{
+    user: CreateUserDTO;
+    onSuccessCb: onSuccessEditionCbType;
+  }>();
+  @Output() readonly closeUser = new EventEmitter();
+  @Output() readonly closeEditMode = new EventEmitter();
+  @Output() readonly openEditMode = new EventEmitter();
+  @Output() readonly deleteUser = new EventEmitter();
+
   @Input({ required: true })
   set vm(vm: DetailUsersCardVm) {
     this._vm = vm;
@@ -73,6 +74,7 @@ export class DetailUsersCardComponent implements OnInit {
         email: vm.user.email,
         username: vm.user.username,
         city: vm.user.city,
+        totalStoryPoints: vm.user.totalStoryPoints,
       });
     }
 
@@ -83,77 +85,43 @@ export class DetailUsersCardComponent implements OnInit {
     }
   }
 
-  public formGroup = new FormBuilder().group({
+  @ViewChild('snackbar') readonly snackbarTemplateRef!: TemplateRef<any>;
+
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly dadata = inject(DadataApiService);
+  private readonly snackBar = inject(MatSnackBar);
+
+  private _vm: DetailUsersCardVm = {
+    editMode: false,
+    user: null,
+    status: 'init',
+    errors: null,
+  };
+
+  public readonly areFieldsChanged$ = new BehaviorSubject<boolean>(false);
+  public readonly isStoryPointsDisabled$ = new BehaviorSubject<boolean>(true);
+
+  public readonly formGroup = new FormBuilder().group({
     name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    totalStoryPoints: new FormControl({ value: 0, disabled: !this.vm.editMode }),
   });
 
-  @Output() editUser = new EventEmitter<{
-    user: CreateUserDTO;
-    onSuccessCb: onSuccessEditionCbType;
-  }>();
-  @Output() closeUser = new EventEmitter();
-  @Output() closeEditMode = new EventEmitter();
-  @Output() openEditMode = new EventEmitter();
-  @Output() deleteUser = new EventEmitter();
-  @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
-  private dadata = inject(DadataApiService);
-  public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
+  public readonly citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
     distinctUntilChanged(),
     filter(Boolean),
-    switchMap((value) => this.dadata.getCities(value))
+    switchMap((value) => this.dadata.getCities(value)),
   );
 
-  private snackBar = inject(MatSnackBar);
-  private readonly destroyRef = inject(DestroyRef);
-  public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
+  public get vm() {
+    return this._vm;
+  }
 
   ngOnInit(): void {
     this.checkChangeFields();
-  }
-
-  private onEditSuccess: onSuccessEditionCbType = () =>
-    this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
-      duration: 2500,
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-    });
-
-  onSubmit(): void {
-    this.editUser.emit({
-      user: {
-        name: this.formGroup.value.name || '',
-        username: this.formGroup.value.username || '',
-        city: this.formGroup.value.city || '',
-        email: this.formGroup.value.email?.trim().toLowerCase() || '',
-        purchaseDate: new Date().toString() || '',
-        educationStatus: 'trainee',
-      },
-      onSuccessCb: this.onEditSuccess,
-    });
-  }
-
-  onCloseUser() {
-    this.closeUser.emit();
-  }
-
-  onCloseEditMode() {
-    this.closeEditMode.emit();
-  }
-
-  onOpenEditMode() {
-    this.openEditMode.emit();
-  }
-
-  onDeleteUser() {
-    this.deleteUser.emit();
-  }
-
-  public onOptionClicked(selectedValue: string) {
-    this.formGroup.get('city')?.setValue(selectedValue);
   }
 
   private checkChangeFields() {
@@ -168,8 +136,62 @@ export class DetailUsersCardComponent implements OnInit {
           const isFieldChanged = formEntries.some(([key, control]) => isFormControlChanged(key, control));
 
           this.areFieldsChanged$.next(isFieldChanged);
-        })
+        }),
       )
       .subscribe();
+  }
+
+  private onEditSuccess: onSuccessEditionCbType = () =>
+    this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+
+  public onSubmit(): void {
+    this.disableStoryPointsField();
+
+    this.editUser.emit({
+      user: {
+        name: this.formGroup.getRawValue().name || '',
+        username: this.formGroup.getRawValue().username || '',
+        city: this.formGroup.getRawValue().city || '',
+        email: this.formGroup.getRawValue().email?.trim().toLowerCase() || '',
+        purchaseDate: new Date().toString() || '',
+        educationStatus: 'trainee',
+        totalStoryPoints: this.formGroup.getRawValue().totalStoryPoints || 0,
+      },
+      onSuccessCb: this.onEditSuccess,
+    });
+  }
+
+  public onCloseUser() {
+    this.closeUser.emit();
+  }
+
+  public onCloseEditMode() {
+    this.closeEditMode.emit();
+  }
+
+  public onOpenEditMode() {
+    this.openEditMode.emit();
+  }
+
+  public onDeleteUser() {
+    this.deleteUser.emit();
+  }
+
+  public onOptionClicked(selectedValue: string) {
+    this.formGroup.get('city')?.setValue(selectedValue);
+  }
+
+  public enableStoryPointsField() {
+    this.formGroup.get('totalStoryPoints')?.enable();
+    this.isStoryPointsDisabled$.next(false);
+  }
+
+  public disableStoryPointsField() {
+    this.formGroup.get('totalStoryPoints')?.disable();
+    this.isStoryPointsDisabled$.next(true);
   }
 }

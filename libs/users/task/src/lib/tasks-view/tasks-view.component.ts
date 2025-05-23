@@ -1,9 +1,6 @@
 import { MatButtonModule } from '@angular/material/button';
 import {
-  CdkDrag,
   CdkDragDrop,
-  CdkDragPreview,
-  CdkDropList,
   CdkDropListGroup,
   moveItemInArray,
   transferArrayItem,
@@ -32,8 +29,6 @@ import { TaskChangeDialogComponent } from '../task-change-dialog/task-change-dia
   templateUrl: './tasks-view.component.html',
   styleUrls: ['./tasks-view.component.scss'],
   imports: [
-    CdkDrag,
-    CdkDropList,
     NgFor,
     FormsModule,
     CdkDropListGroup,
@@ -43,7 +38,6 @@ import { TaskChangeDialogComponent } from '../task-change-dialog/task-change-dia
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    CdkDragPreview,
     DragDropModule,
     TasksColumnComponent,
   ],
@@ -121,7 +115,7 @@ export class TasksViewComponent {
       .afterClosed()
       .pipe(
         takeUntilDestroyed(this.destroyRef),
-        filter((taskName) => !!taskName)
+        filter((taskName) => !!taskName),
       )
       .subscribe((taskName: string) => this.addTask.emit({ columnIndex, taskName }));
   }
@@ -137,13 +131,13 @@ export class TasksViewComponent {
   public openAddNewColumnModal(): void {
     const dialogRef: MatDialogRef<TasksCreateColumnDialogComponent> = this.matDialog.open(
       TasksCreateColumnDialogComponent,
-      {}
+      {},
     );
     dialogRef
       .afterClosed()
       .pipe(
         takeUntilDestroyed(this.destroyRef),
-        filter((column) => !!column)
+        filter((column) => !!column),
       )
       .subscribe((columnName) => this.addNewColumn(columnName));
   }

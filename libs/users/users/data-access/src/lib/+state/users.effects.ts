@@ -20,17 +20,17 @@ export const userEffects = createEffect(
           map((users) =>
             UsersActions.loadUsersSuccess({
               users: users.map((user) => usersDTOAdapter.DTOtoEntity(user)),
-            })
+            }),
           ),
           catchError((error) => {
             console.error('Error', error);
             return of(UsersActions.loadUsersFailure({ error }));
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   },
-  { functional: true }
+  { functional: true },
 );
 
 export const deleteUser = createEffect(
@@ -46,12 +46,12 @@ export const deleteUser = createEffect(
           catchError((error) => {
             console.error('Error', error);
             return of(UsersActions.deleteUserFailed({ error }));
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   },
-  { functional: true }
+  { functional: true },
 );
 
 export const addUser = createEffect(
@@ -68,12 +68,12 @@ export const addUser = createEffect(
           catchError((error) => {
             console.error('Error', error);
             return of(UsersActions.addUserFailed({ error }));
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   },
-  { functional: true }
+  { functional: true },
 );
 
 export const editUser = createEffect(
@@ -93,6 +93,7 @@ export const editUser = createEffect(
           email: userData.email,
           username: userData.username,
           city: userData.city,
+          totalStoryPoints: userData.totalStoryPoints,
         },
         onSuccessCb,
       })),
@@ -104,12 +105,12 @@ export const editUser = createEffect(
           catchError((error) => {
             console.error('Error', error);
             return of(UsersActions.editUserFailed({ error }));
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   },
-  { functional: true }
+  { functional: true },
 );
 
 export const loadUser = createEffect(
@@ -128,12 +129,12 @@ export const loadUser = createEffect(
             catchError((error) => {
               console.error('Error', error);
               return of(UsersActions.loadUserFailed({ error }));
-            })
+            }),
           );
         }
         return of(UsersActions.updateUserStatus({ status: 'loading' }));
-      })
+      }),
     );
   },
-  { functional: true }
+  { functional: true },
 );

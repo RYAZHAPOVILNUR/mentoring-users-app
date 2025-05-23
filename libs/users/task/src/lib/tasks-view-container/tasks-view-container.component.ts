@@ -1,6 +1,6 @@
 import { IColumn } from '@users/users/task/data-access';
 import { Component, inject } from '@angular/core';
-import { CommonModule, NgFor } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { TasksViewComponent } from '../tasks-view/tasks-view.component';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -11,7 +11,7 @@ import { TasksSearchInputComponent } from '../tasks-search-input/tasks-search-in
 @Component({
   selector: 'users-tasks-container',
   standalone: true,
-  imports: [CommonModule, TasksViewComponent, NgFor, MatButtonModule, PushPipe, TasksSearchInputComponent],
+  imports: [CommonModule, TasksViewComponent, MatButtonModule, PushPipe, TasksSearchInputComponent],
   templateUrl: './tasks-view-container.component.html',
   styleUrls: ['./tasks-view-container.component.scss'],
   providers: [TasksStore],

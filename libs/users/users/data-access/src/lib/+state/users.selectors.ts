@@ -18,7 +18,7 @@ export const selectUsersEntities = createSelector(selectUsersState, (state: User
 export const selectSelectedId = createSelector(selectUsersState, (state: UsersState) => state.selectedId);
 
 export const selectEntity = createSelector(selectUsersEntities, selectSelectedId, (entities, selectedId) =>
-  selectedId ? entities[selectedId] : undefined
+  selectedId ? entities[selectedId] : undefined,
 );
 
 export const selectUserById = (id: number) => createSelector(selectUsersEntities, (entities) => entities[id]);
@@ -26,5 +26,11 @@ export const selectUserById = (id: number) => createSelector(selectUsersEntities
 export const selectOpenedUser = createSelector(
   selectRouteParams,
   selectUsersEntities,
-  ({ id }, entities) => entities[id] || null
+  ({ id }, entities) => entities[id] || null,
+);
+
+export const usersFilterSelector = createSelector(selectUsersState, (state: UsersState) => state.usersFilter);
+
+export const filteredUsers = createSelector(usersFilterSelector, selectAllUsers, (filter, users) =>
+  filter.name ? users.filter((user) => user.name.indexOf(filter.name) !== -1) : users,
 );

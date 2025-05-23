@@ -24,9 +24,12 @@ export class UsersDetailComponent {
   private readonly usersFacade = inject(UsersFacade);
   private readonly store = inject(Store);
   private readonly router = inject(Router);
-  public user!: UsersEntity;
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
+
+  public user!: UsersEntity;
+  public readonly status$ = this.usersFacade.status$;
+  public readonly errors$: Observable<UsersErrors | null> = this.usersFacade.errors$;
 
   public readonly user$: Observable<UsersEntity | null> = this.usersFacade.openedUser$.pipe(
     tap((user) => {
@@ -35,14 +38,13 @@ export class UsersDetailComponent {
       } else {
         this.user = user;
       }
-    })
+    }),
   );
-  public readonly status$ = this.usersFacade.status$;
+
   public readonly editMode$: Observable<boolean> = this.store.pipe(
     select(selectQueryParam('edit')),
-    map((params) => params === 'true')
+    map((params) => params === 'true'),
   );
-  public readonly errors$: Observable<UsersErrors | null> = this.usersFacade.errors$;
 
   public onEditUser(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
     this.usersFacade.editUser(userData, this.user.id, onSuccessCb);
@@ -51,23 +53,23 @@ export class UsersDetailComponent {
     });
   }
 
-  onCloseUser() {
+  public onCloseUser() {
     this.router.navigate(['/admin/users']);
   }
 
-  onCloseEditMode() {
+  public onCloseEditMode() {
     this.router.navigate(['/admin/users', this.user.id], {
       queryParams: { edit: false },
     });
   }
 
-  onOpenEditMode() {
+  public onOpenEditMode() {
     this.router.navigate(['admin/users', this.user.id], {
       queryParams: { edit: true },
     });
   }
 
-  onDeleteUser() {
+  public onDeleteUser() {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
       data: {
         dialogText: `Вы уверены, что хотите удалить ${this.user.name}`,
