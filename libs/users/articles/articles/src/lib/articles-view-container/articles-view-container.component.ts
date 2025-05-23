@@ -6,14 +6,13 @@ import { ArticleSelectors, ArticlesActions, Article } from '@users/users/article
 import { LetDirective } from '@ngrx/component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { selectLoggedUserId } from '@auth/data-access';
-import { ArticleReadComponent } from '@users/users/articles/article-read';
 import { map, Observable, withLatestFrom } from 'rxjs';
 import { selectQueryParam } from '@users/core/data-access';
 
 @Component({
   selector: 'users-articles-view-container',
   standalone: true,
-  imports: [CommonModule, ArticlesViewComponent, LetDirective, MatProgressBarModule, ArticleReadComponent],
+  imports: [CommonModule, ArticlesViewComponent, LetDirective, MatProgressBarModule],
   templateUrl: './articles-view-container.component.html',
   styleUrls: ['./articles-view-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,7 +32,7 @@ export class ArticlesViewContainerComponent {
         this.store.dispatch(ArticlesActions.getArticleForEdit({ id }));
       }
       return article;
-    })
+    }),
   );
 
   constructor() {

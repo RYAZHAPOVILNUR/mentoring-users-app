@@ -1,6 +1,6 @@
 import { UiPhotoModalComponent } from 'libs/users/profile/ui-profile/ui-photo-modal/ui-photo-modal.component';
 import { AuthFacade, ChangePasswordPayload, ChangeProfileDataPayload } from '../../../core/auth/data-access/src';
-import { ChangeDetectionStrategy, Component, Input, OnInit, DestroyRef, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, DestroyRef } from '@angular/core';
 import { PasswordChangeDialogComponent, ProfileChangeDialogComponent } from '../../../core/ui/src';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { EventEmitter, Output, inject } from '@angular/core';
@@ -22,8 +22,6 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'feature-user-info',
   standalone: true,
   imports: [
-    PasswordChangeDialogComponent,
-    ProfileChangeDialogComponent,
     MatProgressSpinnerModule,
     MatSidenavModule,
     MatButtonModule,
@@ -57,7 +55,7 @@ export class FeatureUserInfoComponent implements OnInit {
     this.photo = this.vm.user.photo ? this.vm.user.photo.url : '';
     this.matIconRegistry.addSvgIcon(
       'github',
-      this.domSanitizer.bypassSecurityTrustResourceUrl(`assets/icons/github.svg`)
+      this.domSanitizer.bypassSecurityTrustResourceUrl(`assets/icons/github.svg`),
     );
     of(this.vm.githubUserName).subscribe(console.log);
   }

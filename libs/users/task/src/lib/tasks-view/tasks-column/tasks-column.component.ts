@@ -1,13 +1,6 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  CdkDrag,
-  CdkDragDrop,
-  CdkDragPreview,
-  CdkDropList,
-  CdkDropListGroup,
-  DragDropModule,
-} from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragDrop, CdkDropList, DragDropModule } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -26,13 +19,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     CdkDrag,
     CdkDropList,
     FormsModule,
-    CdkDropListGroup,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    CdkDragPreview,
     DragDropModule,
   ],
   templateUrl: './tasks-column.component.html',
