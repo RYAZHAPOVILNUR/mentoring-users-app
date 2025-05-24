@@ -6,7 +6,7 @@ import {
 } from './materials.selectors';
 import { MaterialsActions } from './materials.actions';
 import { Store } from '@ngrx/store';
-import { CreateFolder } from '../models/materials.model';
+import { CreateFolder, CreateMaterial } from '../models/materials.model';
 
 @Injectable({
   providedIn: 'root',
@@ -27,5 +27,16 @@ export class MaterialsFacade {
 
   deleteFolder(id: number) {
     this.store.dispatch(MaterialsActions.deleteFolder({ id }));
+  }
+  // materials facde 
+  getMaterials() {
+    this.store.dispatch(MaterialsActions.loadMaterials());
+  }
+
+  addMaterial(material: CreateMaterial) {
+    this.store.dispatch(MaterialsActions.addMaterial({ material }));
+  }
+  deleteMaterial(id: number) {
+    this.store.dispatch(MaterialsActions.deleteMaterial({ id }));
   }
 }

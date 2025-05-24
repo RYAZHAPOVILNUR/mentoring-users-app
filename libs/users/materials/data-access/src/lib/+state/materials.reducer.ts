@@ -29,7 +29,7 @@ export const materialsFeature = createFeature({
   name: 'materials',
   reducer: createReducer(
     initialMaterialsState,
-
+    //folders reducer 
     on(MaterialsActions.loadFolders, (state) => ({
       ...state,
       status: 'loading' as const,
@@ -62,12 +62,28 @@ export const materialsFeature = createFeature({
       materialsAdapter.removeOne(id, { ...state })
     ),
 
-    // materials=============================================
+    // materials reducer 
+
+    on(MaterialsActions.loadMaterials, (state) => ({
+      ...state,
+      status: 'loading' as const,
+    })),
+    on(MaterialsActions.loadMaterialsSuccess, (state, { materials }) => ({
+      ...state,
+      materials,
+      status: 'loaded' as const,
+    })),
+
+    on(MaterialsActions.addMaterialSuccess, (state, { newMaterial }) => ({
+      ...state,
+      materials: [...state.materials, newMaterial],
+    })),
+
+    on(MaterialsActions.deleteMaterialSuccess, (state, { id }) => ({
+      ...state,
+      materials: state.materials.filter((mat) => mat.id !== id),
+    }))
   ),
     
 });
 
-// export const materialsFeature = createFeature({
-//   name: materialsFeatureKey,
-//   reducer,
-// });

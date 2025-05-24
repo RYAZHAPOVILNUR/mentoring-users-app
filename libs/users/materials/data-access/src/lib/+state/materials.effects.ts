@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { MaterialsActions } from './materials.actions';
 import { catchError, map, mergeMap, of, switchMap, tap, withLatestFrom } from 'rxjs';
-import { CreateFolder, Folder } from '../models/materials.model';
+import { CreateFolder, CreateMaterial, Folder, Material } from '../models/materials.model';
 import { ApiService } from '@users/core/http';
 import { Store } from '@ngrx/store';
 import { selectRouteParams } from '@users/core/data-access';
@@ -88,6 +88,51 @@ export class MaterialsEffects {
       })
     );
   });
+
+  loadMaterials$ = createEffect(() => {
+    const api = inject(ApiService);
+    return this.actions$.pipe(
+      ofType(MaterialsActions.loadMaterials),
+      mergeMap(() =>
+        api
+          .get<Material[]>('/material')
+          .pipe(
+            map((materials) =>
+              MaterialsActions.loadMaterialsSuccess({ materials })
+            )
+          )
+      )
+    );
+  });
+
+  addMaterialEffect$ = createEffect(() => {
+    const apiService = inject(ApiService);
+    return this.actions$.pipe(
+      ofType(MaterialsActions.addMaterial),
+      switchMap(({ material }) => {
+        return apiService
+          .post<Material, CreateMaterial>('/material', material)
+          .pipe(
+            map((newMaterial) => {
+              return MaterialsActions.addMaterialSuccess({ newMaterial });
+            })
+          );
+      })
+    );
+  });
+
+  deleteMaterial$ = createEffect(() => {
+    const apiService = inject(ApiService);
+    return this.actions$.pipe(
+      ofType(MaterialsActions.deleteMaterial),
+      mergeMap(({ id }) => {
+        return apiService
+          .delete(`/material/${id}`)
+          .pipe(map(() => MaterialsActions.deleteMaterialSuccess({ id })));
+      })
+    );
+  });
+
 
   constructor(private actions$: Actions) {}
 }
