@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, EventEmitter, inject, Input, Output, ViewEncapsulation } from '@angular/core';
 import { CommonModule, DatePipe, NgFor } from '@angular/common';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-//import { AddFolderDialogComponentComponent } from '../add-folder-dialog-component/add-folder-dialog-component.component';
+import { AddFoldersFeatureComponent } from '../add-folders-feature/add-folders-feature.component';
 import { Folder } from '@users/materials/data-access';
 import { filter } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -12,7 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
   selector: 'lib-materials-folders-feature',
   imports: [ CommonModule, DatePipe, NgFor, MatListModule, MatIconModule ],
   templateUrl: './materials-folders-feature.component.html',
-  styleUrl: './materials-folders-feature.component.css',
+  styleUrl: './materials-folders-feature.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true
 })
@@ -33,15 +33,15 @@ export class MaterialsFoldersFeatureComponent {
   openedFolder(folderId: number) {
     this.setOpenedFolder.emit(folderId);
   }
-  // public openChangeTaskModal(): void {
-  //   const dialogRef: MatDialogRef<AddFolderDialogComponentComponent> =
-  //     this.matDialog.open(AddFolderDialogComponentComponent, {});
-  //   dialogRef
-  //     .afterClosed()
-  //     .pipe(
-  //       takeUntilDestroyed(this.destroyRef),
-  //       filter((folderName) => !!folderName)
-  //     )
-  //     .subscribe((folderName) => this.addFolder.emit(folderName));
-  // }
+  public openChangeTaskModal(): void {
+    const dialogRef: MatDialogRef<AddFoldersFeatureComponent> =
+      this.matDialog.open(AddFoldersFeatureComponent, {});
+    dialogRef
+      .afterClosed()
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        filter((folderName) => !!folderName)
+      )
+      .subscribe((folderName) => this.addFolder.emit(folderName));
+  }
 }
