@@ -4,10 +4,10 @@ import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
 import { Observable, of, switchMap } from 'rxjs';
 import { UsersErrors } from './users.reducer';
-import { onSuccessEditionCbType } from './users.actions';
+import { onSuccessEditionCbType, setUsersFilter } from './users.actions';
 import { selectLoggedUser } from '@auth/data-access';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
-
+import { filteredUsers } from './users.selectors';
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
   private readonly store = inject(Store);
@@ -50,11 +50,17 @@ export class UsersFacade {
         } else {
           return of(null);
         }
-      })
+      }),
     );
   }
 
   loadUser() {
     this.store.dispatch(UsersActions.loadUser());
   }
+
+  setFilter(filter: { name: string }) {
+    this.store.dispatch(setUsersFilter({ filter }));
+  }
+
+  public readonly filteredUsers$ = this.store.select(filteredUsers);
 }
