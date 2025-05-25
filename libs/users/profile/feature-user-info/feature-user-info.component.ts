@@ -1,6 +1,6 @@
 import { UiPhotoModalComponent } from 'libs/users/profile/ui-profile/ui-photo-modal/ui-photo-modal.component';
 import { AuthFacade, ChangePasswordPayload, ChangeProfileDataPayload } from '../../../core/auth/data-access/src';
-import { ChangeDetectionStrategy, Component, Input, OnInit, DestroyRef, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, DestroyRef, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { PasswordChangeDialogComponent, ProfileChangeDialogComponent } from '../../../core/ui/src';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { EventEmitter, Output, inject } from '@angular/core';
@@ -37,7 +37,7 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrls: ['./feature-user-info.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FeatureUserInfoComponent implements OnInit {
+export class FeatureUserInfoComponent implements OnInit, OnDestroy {
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
   private readonly authFacade = inject(AuthFacade);
@@ -60,6 +60,17 @@ export class FeatureUserInfoComponent implements OnInit {
       this.domSanitizer.bypassSecurityTrustResourceUrl(`assets/icons/github.svg`)
     );
     of(this.vm.githubUserName).subscribe(console.log);
+
+    // Initialize timer from localStorage
+    const savedSeconds = localStorage.getItem(this.STORAGE_SECONDS);
+    const savedRunning = localStorage.getItem(this.STORAGE_RUNNING);
+
+    this.totalSeconds = savedSeconds ? parseInt(savedSeconds, 10) : 0;
+    this.isRunning = savedRunning === 'true';
+
+    if (this.isRunning) {
+      this.startInterval();
+    }
   }
   onOpenChangePassword() {
     const dialogRef = this.dialog.open(PasswordChangeDialogComponent);
@@ -122,5 +133,65 @@ export class FeatureUserInfoComponent implements OnInit {
     this.dialog.open(UiPhotoModalComponent, {
       data: this.vm.user.photo ? this.vm.user.photo.url : '',
     });
+  }
+
+  // Timer functionality
+  totalSeconds = 0;
+  isRunning = false;
+  private intervalId: any = null;
+  private templateUpdate = inject(ChangeDetectorRef);
+
+  readonly STORAGE_SECONDS = 'timerSeconds';
+  readonly STORAGE_RUNNING = 'timerIsRunning';
+
+  get displayTime(): string {
+    const days = Math.floor(this.totalSeconds / 86400);
+    const hours = Math.floor((this.totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((this.totalSeconds % 3600) / 60);
+    const seconds = this.totalSeconds % 60;
+    return `${days}д ${hours}ч ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  }
+
+  get toggleIcon(): string {
+    return this.isRunning ? 'pause' : 'timer';
+  }
+
+  private clearInterval(): void {
+    if (this.intervalId !== null) {
+      clearInterval(this.intervalId);
+      this.intervalId = null;
+    }
+  }
+
+  private startInterval(): void {
+    this.clearInterval();
+    this.intervalId = setInterval(() => {
+      this.totalSeconds++;
+      localStorage.setItem(this.STORAGE_SECONDS, this.totalSeconds.toString());
+      this.templateUpdate.markForCheck();
+    }, 1000);
+  }
+
+  toggleTimer(): void {
+    this.isRunning = !this.isRunning;
+    localStorage.setItem(this.STORAGE_RUNNING, this.isRunning.toString());
+
+    if (this.isRunning) {
+      this.startInterval();
+    } else {
+      this.clearInterval();
+    }
+  }
+
+  resetTimer(): void {
+    this.clearInterval();
+    this.totalSeconds = 0;
+    this.isRunning = false;
+    localStorage.removeItem(this.STORAGE_SECONDS);
+    localStorage.removeItem(this.STORAGE_RUNNING);
+  }
+
+  ngOnDestroy(): void {
+    this.clearInterval();
   }
 }

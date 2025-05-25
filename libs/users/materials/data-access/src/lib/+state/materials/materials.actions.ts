@@ -4,7 +4,7 @@ import { CreateMaterialDTO } from '../../models-material/material-dto.model';
 import { MaterialsErrors } from './materials.reducer';
 
 export const initMaterials = createAction('[Materials Page] Init');
-export const loadMaterialsSuccess = createAction('[Materials /API] Load Materials Success', props<{materials: MaterialsEntity[] }>()); 
+export const loadMaterialsSuccess = createAction('[Materials /API] Load Materials Success', props<{ materials: MaterialsEntity[] }>()); 
 export const loadMaterialsFailure = createAction('[Materials /API] Load Materials Failure', props<{ error: MaterialsErrors }>()); 
 
 export const deleteMaterial = createAction('[Materials Page] Delete Material', props<{ id: number }>());

@@ -76,6 +76,18 @@
           </ng-template>
         </ng-container>
       </mat-card-actions>
+      <!-- Timer Section -->
+      <div class="timer-inline">
+        <div class="timer-display">
+          {{ displayTime }}
+        </div>
+        <button mat-icon-button color="primary" (click)="toggleTimer()" aria-label="toggle">
+          <mat-icon>{{ toggleIcon }}</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="resetTimer()" aria-label="reset">
+          <mat-icon>history</mat-icon>
+        </button>
+      </div>
     </mat-card>
   </div>
 </ng-container>
