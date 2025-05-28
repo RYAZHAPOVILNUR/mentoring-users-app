@@ -7,6 +7,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
+interface DialogData {
+  title: string;
+  material_link: string;
+  folder_id: string;
+}
+
 @Component({
   selector: 'users-materials-add-dialog',
   standalone: true,
@@ -21,11 +27,18 @@ export class MaterialsAddDialogComponent {
   private formBuilder = inject(FormBuilder);
   public dialogRef = inject(MatDialogRef<MaterialsAddDialogComponent>);
   private sanitizer = inject(DomSanitizer);
+  public readonly data: DialogData = inject<DialogData>(MAT_DIALOG_DATA);
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { title: string; material_link: string; folder_id: string }) {
+  constructor() {
     this.formGroup = this.formBuilder.group({
       title: [this.data.title || '', Validators.required],
-      material_link: [this.data.material_link || '', [Validators.required, Validators.pattern(/^https?:\/\/\S+/)]],
+      material_link: [
+        this.data.material_link || '', 
+        [
+          Validators.required, 
+          Validators.pattern(/^https?:\/\/\S+/)
+        ]
+      ],
     });
   }
 

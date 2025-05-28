@@ -1,11 +1,11 @@
-// materials-list-container.component.ts
-import { ChangeDetectionStrategy, Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MaterialsListComponent } from "../materials-list/materials-list.component";
 import { FoldersFacade, MaterialDTO, MaterialsFacade } from '@users/materials/data-access';
 import { LetDirective } from '@ngrx/component';
 import { MaterialsAddButtonComponent } from '@users/feature-materials-create';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'users-materials-list-container',
@@ -16,35 +16,44 @@ import { MaterialsAddButtonComponent } from '@users/feature-materials-create';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MaterialsListContainerComponent implements OnInit {
+export class MaterialsListContainerComponent implements OnInit, OnDestroy {
   private readonly foldersFacade = inject(FoldersFacade);
-  public materialsFacade = inject(MaterialsFacade);
+  public readonly materialsFacade = inject(MaterialsFacade);
   private readonly router = inject(Router);
-  private readonly route = inject(ActivatedRoute); // Получаем активный маршрут
+  private readonly route = inject(ActivatedRoute);
+  private destroy$ = new Subject<void>();
 
-  materials$ = this.materialsFacade.allMaterials$;
-  status$ = this.materialsFacade.status$;
-  errors$ = this.materialsFacade.errors$;
+  public readonly materials$ = this.materialsFacade.allMaterials$;
+  public readonly status$ = this.materialsFacade.status$;
+  public readonly errors$ = this.materialsFacade.errors$;
   public readonly openedFolder$ = this.foldersFacade.openedFolder$;
 
   ngOnInit(): void {
-    // Получаем параметр "id" из маршрута
-    this.route.params.subscribe(params => {
-      const folderId = +params['id']; // Преобразуем в число, если id приходит как строка
-      if (folderId) {
-        // Диспатчим экшен с полученным id
+    this.route.params.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(params => {
+      const folderId = Number(params['id']);
+      
+      if (!isNaN(folderId) && folderId > 0) {
         this.foldersFacade.openedFolder(folderId);
+      } else {
+        console.error('Invalid folder ID:', params['id']);
       }
     });
 
     this.materialsFacade.loadMaterials();
   }
 
-  public backOnFolders() {
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  public backOnFolders(): void {
     this.router.navigate(['/materials']);
   }
 
-  onDeleteMaterial(material: MaterialDTO) {
+  public onDeleteMaterial(material: MaterialDTO): void {
     this.materialsFacade.deleteMaterial(material.id);
   }
 }

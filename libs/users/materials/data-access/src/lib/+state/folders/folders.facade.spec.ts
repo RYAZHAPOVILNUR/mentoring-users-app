@@ -1,15 +1,17 @@
-import { NgModule } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule, Store } from '@ngrx/store';
 import { readFirst } from '@nx/angular/testing';
 
 import * as FoldersActions from './folders.actions';
-import { FoldersEffects } from './folders.effects';
+import { loadFolders, addFolder, deleteFolder, openFolder } from './folders.effects';
 import { FoldersFacade } from './folders.facade';
-import { FoldersEntity } from './folders.models';
-import { FOLDERS_FEATURE_KEY, FoldersState, initialFoldersState, foldersReducer } from './folders.reducer';
-import * as FoldersSelectors from './folders.selectors';
+import { FoldersEntity } from './folder-models';
+import { FOLDERS_FEATURE_KEY, FoldersState, foldersReducer } from './folders.reducer';
+import { ApiService } from '@users/core/http';
+import { provideMockActions } from '@ngrx/effects/testing';
+import { Observable, of } from 'rxjs';
+import { CreateFolderDTO } from '../models/folder-models';
 
 interface TestSchema {
   folders: FoldersState;
@@ -18,72 +20,100 @@ interface TestSchema {
 describe('FoldersFacade', () => {
   let facade: FoldersFacade;
   let store: Store<TestSchema>;
+  let actions$: Observable<any>;
+  let apiService: jest.Mocked<ApiService>;
+
   const createFoldersEntity = (id: string, name = ''): FoldersEntity => ({
     id,
     name: name || `name-${id}`,
   });
 
-  describe('used in NgModule', () => {
-    beforeEach(() => {
-      @NgModule({
-        imports: [
-          StoreModule.forFeature(FOLDERS_FEATURE_KEY, foldersReducer),
-          EffectsModule.forFeature([FoldersEffects]),
-        ],
-        providers: [FoldersFacade],
-      })
-      class CustomFeatureModule {}
+  const createTestFolderDTO = (): CreateFolderDTO => ({
+    title: 'Test folder',
+    id: 0
+  });
 
-      @NgModule({
-        imports: [StoreModule.forRoot({}), EffectsModule.forRoot([]), CustomFeatureModule],
-      })
-      class RootModule {}
-      TestBed.configureTestingModule({ imports: [RootModule] });
+  beforeEach(() => {
+    apiService = {
+      get: jest.fn(),
+      post: jest.fn(),
+      delete: jest.fn()
+    } as any;
 
-      store = TestBed.inject(Store);
-      facade = TestBed.inject(FoldersFacade);
+    TestBed.configureTestingModule({
+      imports: [
+        StoreModule.forRoot({}),
+        StoreModule.forFeature(FOLDERS_FEATURE_KEY, foldersReducer),
+        EffectsModule.forRoot([]),
+        EffectsModule.forFeature({
+          loadFolders,
+          addFolder,
+          deleteFolder,
+          openFolder
+        } as any), 
+      ],
+      providers: [
+        FoldersFacade,
+        provideMockActions(() => actions$),
+        { provide: ApiService, useValue: apiService }
+      ],
     });
 
-    /**
-     * The initially generated facade::loadAll() returns empty array
-     */
-    it('loadAll() should return empty list with loaded == true', async () => {
-      let list = await readFirst(facade.allFolders$);
-      let isLoaded = await readFirst(facade.loaded$);
+    store = TestBed.inject(Store);
+    facade = TestBed.inject(FoldersFacade);
+  });
 
-      expect(list.length).toBe(0);
-      expect(isLoaded).toBe(false);
+  it('should be created', () => {
+    expect(facade).toBeTruthy();
+  });
 
-      facade.init();
+  it('allFolders$ should return empty array initially', async () => {
+    const folders = await readFirst(facade.allFolders$);
+    expect(folders).toEqual([]);
+  });
 
-      list = await readFirst(facade.allFolders$);
-      isLoaded = await readFirst(facade.loaded$);
+  it('should dispatch loadFolders action on loadFolders()', () => {
+    const dispatchSpy = jest.spyOn(store, 'dispatch');
+    facade.loadFolders();
+    expect(dispatchSpy).toHaveBeenCalledWith(FoldersActions.loadFolders());
+  });
 
-      expect(list.length).toBe(0);
-      expect(isLoaded).toBe(true);
+  describe('loadFoldersSuccess', () => {
+    it('should update allFolders$ when loadFoldersSuccess is dispatched', async () => {
+      const folders = [
+        createFoldersEntity('1', 'Folder 1'),
+        createFoldersEntity('2', 'Folder 2')
+      ];
+
+      actions$ = of(FoldersActions.loadFoldersSuccess({ folders }));
+
+      const result = await readFirst(facade.allFolders$);
+      expect(result).toEqual(folders);
     });
+  });
 
-    /**
-     * Use `loadFoldersSuccess` to manually update list
-     */
-    it('allFolders$ should return the loaded list; and loaded flag == true', async () => {
-      let list = await readFirst(facade.allFolders$);
-      let isLoaded = await readFirst(facade.loaded$);
+  it('should dispatch addFolder action with correct DTO', () => {
+    const dispatchSpy = jest.spyOn(store, 'dispatch');
+    const testFolder: CreateFolderDTO = createTestFolderDTO();
+    
+    facade.addFolder(testFolder);
+    
+    expect(dispatchSpy).toHaveBeenCalledWith(
+      FoldersActions.addFolder({ folder: testFolder })
+    );
+  });
 
-      expect(list.length).toBe(0);
-      expect(isLoaded).toBe(false);
+  it('should dispatch deleteFolder action on deleteFolder()', () => {
+    const dispatchSpy = jest.spyOn(store, 'dispatch');
+    const id = 123;
+    facade.deleteFolder(id);
+    expect(dispatchSpy).toHaveBeenCalledWith(FoldersActions.deleteFolder({ id }));
+  });
 
-      store.dispatch(
-        FoldersActions.loadFoldersSuccess({
-          folders: [createFoldersEntity('AAA'), createFoldersEntity('BBB')],
-        })
-      );
-
-      list = await readFirst(facade.allFolders$);
-      isLoaded = await readFirst(facade.loaded$);
-
-      expect(list.length).toBe(2);
-      expect(isLoaded).toBe(true);
-    });
+  it('should dispatch openFolder action on openedFolder()', () => {
+    const dispatchSpy = jest.spyOn(store, 'dispatch');
+    const id = 456;
+    facade.openedFolder(id);
+    expect(dispatchSpy).toHaveBeenCalledWith(FoldersActions.openFolder({ id }));
   });
 });

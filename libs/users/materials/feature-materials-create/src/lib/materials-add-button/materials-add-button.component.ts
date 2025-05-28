@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation, Input, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateMaterialDTO, MaterialsFacade } from '@users/materials/data-access';
 import { MatDialog } from '@angular/material/dialog';
 import { MaterialsAddDialogComponent } from '../materials-add-dialog/materials-add-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'users-materials-add-button',
@@ -15,12 +16,14 @@ import { MatButtonModule } from '@angular/material/button';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MaterialsAddButtonComponent {
+
+export class MaterialsAddButtonComponent implements OnDestroy {
   @Input() folder_id!: string;
 
   private title!: string;
   private readonly materialFacade = inject(MaterialsFacade);
   readonly dialog = inject(MatDialog);
+  private readonly destroy$ = new Subject<void>();
 
   OpenDialog(folder_id: string): void {
     const dialogRef = this.dialog.open(MaterialsAddDialogComponent, {
@@ -28,6 +31,7 @@ export class MaterialsAddButtonComponent {
     });
 
     dialogRef.afterClosed()
+    .pipe(takeUntil(this.destroy$))
       .subscribe((result) => {
         if (result) {
           const newMaterialData: CreateMaterialDTO = {
@@ -39,4 +43,8 @@ export class MaterialsAddButtonComponent {
         }
       });
   };
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }
