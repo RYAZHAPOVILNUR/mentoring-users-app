@@ -3,6 +3,34 @@
     <button (click)="onOpenChangeProfileData()" class="name-edit-btn" mat-mini-fab>
       <mat-icon>edit</mat-icon>
     </button>
+
+
+    <button
+      mat-mini-fab
+      class="timer-btn"
+      (click)="onTimerMouseClick()"
+    >
+      <mat-icon>timer</mat-icon>
+    </button>
+
+    <div
+      class="timer-popup"
+      *ngIf="timerVisible"
+      style="position: absolute; top: 102%; right: 0; background: #fff; border: 1px solid #7e57c2; padding: 10px; z-index: 100;"
+    >
+      <div style="margin-bottom: 8px; color: black">{{ formattedTimer  }}</div>
+      <button mat-mini-fab color="primary" (click)="startTimer()">
+        <mat-icon>play_arrow</mat-icon>
+      </button>
+      <button mat-mini-fab color="accent" (click)="pauseTimer()">
+        <mat-icon>pause</mat-icon>
+      </button>
+      <button mat-mini-fab color="warn" (click)="resetTimer()">
+        <mat-icon>restart_alt</mat-icon>
+      </button>
+    </div>
+
+
     <mat-card class="user-info-card user-info-column">
       <ng-container *ngIf="vm.isLoggedUser; else notLoggedUser">
         <div class="user-photo user-info-items" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
@@ -53,8 +81,10 @@
       <mat-card-actions class="user-info-items">
         <ng-container *ngIf="vm.isLoggedUser">
           <button mat-button class="navbar-btn" (click)="onOpenChangePassword()">
-            <mat-icon>lock-reset</mat-icon
-            ><span class="button-label">{{ 'PROFILE.USER_INFO.CHANGE_PASSWORD' | translate }}</span>
+            <mat-icon>lock-reset
+            </mat-icon
+            >
+            <span class="button-label">{{ 'PROFILE.USER_INFO.CHANGE_PASSWORD' | translate }}</span>
           </button>
         </ng-container>
         <mat-spinner *ngIf="vm.githubStatus === 'loading'" diameter="24"></mat-spinner>
@@ -70,8 +100,10 @@
           </div>
           <ng-template #connectGithub>
             <button mat-button class="navbar-btn" (click)="onConnectGithub()">
-              <mat-icon svgIcon="github">edit</mat-icon
-              ><span class="button-label">{{ 'PROFILE.USER_INFO.CONNECT_GITHUB' | translate }}</span>
+              <mat-icon svgIcon="github">edit
+              </mat-icon
+              >
+              <span class="button-label">{{ 'PROFILE.USER_INFO.CONNECT_GITHUB' | translate }}</span>
             </button>
           </ng-template>
         </ng-container>

@@ -45,7 +45,7 @@
 
 .name-edit-btn {
   position: absolute;
-  top: 20px;
+  top: 60px;
   right: 20px;
   z-index: 10;
   width: 30px;
@@ -54,6 +54,24 @@
   border: solid 1px #7e57c2;
   box-shadow: none;
 }
+
+.timer-btn {
+  position: absolute;
+  top: 57px;
+  z-index: 1;
+  left: 6%;
+}
+
+.timer-popup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px #7e57c233;
+  width: 100%;
+}
+
 .name-edit-btn > .mat-icon {
   height: 25px;
   width: 25px;
