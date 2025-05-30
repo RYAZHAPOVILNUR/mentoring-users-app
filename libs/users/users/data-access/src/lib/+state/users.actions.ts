@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { UsersErrors } from './users.reducer';
+import { UsersErrors, UsersFilter } from './users.reducer';
 import { CreateUserDTO, LoadingStatus, UsersDTO, UsersEntity } from '@users/core/data-access';
 
 export type onSuccessEditionCbType = () => void;
