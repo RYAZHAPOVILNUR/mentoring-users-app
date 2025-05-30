@@ -15,9 +15,11 @@
 .settings-content {
   padding: 0 20px 5px 20px;
   & article {
-    display: -webkit-box;
+    display: box;
     -webkit-box-orient: vertical;
+    box-orient: vertical;
     -webkit-line-clamp: 4;
+    line-clamp: 4;
     overflow: hidden;
     text-overflow: ellipsis;
   }
