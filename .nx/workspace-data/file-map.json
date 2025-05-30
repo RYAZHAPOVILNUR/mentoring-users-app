@@ -1,0 +1,3656 @@
+{
+  "version": "6.0",
+  "nxVersion": "20.8.0",
+  "pathMappings": {
+    "@auth/data-access": [
+      "libs/core/auth/data-access/src/index.ts"
+    ],
+    "@auth/feature-login": [
+      "libs/core/auth/feature-login/src/index.ts"
+    ],
+    "@auth/feature-register": [
+      "libs/core/auth/feature-register/src/index.ts"
+    ],
+    "@dadata": [
+      "libs/core/dadata/src/index.ts"
+    ],
+    "@users/core/dadata": [
+      "libs/core/dadata/src/index.ts"
+    ],
+    "@users/core/data-access": [
+      "libs/core/data-access/src/index.ts"
+    ],
+    "@users/core/github-api": [
+      "libs/core/github-api/src/index.ts"
+    ],
+    "@users/core/github-api/data-access": [
+      "libs/core/github-api/data-access/src/index.ts"
+    ],
+    "@users/core/highcharts": [
+      "libs/core/highcharts/src/index.ts"
+    ],
+    "@users/core/http": [
+      "libs/core/http/src/index.ts"
+    ],
+    "@users/core/ui": [
+      "libs/core/ui/src/index.ts"
+    ],
+    "@users/core/ui/layout": [
+      "libs/users/core/ui/layout/src/public-api.ts"
+    ],
+    "@users/core/utils": [
+      "libs/core/utils/src/index.ts"
+    ],
+    "@users/data-access": [
+      "libs/data-access/src/index.ts"
+    ],
+    "@users/feature-folders-create": [
+      "libs/users/materials/feature-folders-create/src/index.ts"
+    ],
+    "@users/feature-folders-list": [
+      "libs/users/materials/feature-folders-list/src/index.ts"
+    ],
+    "@users/feature-materials-content": [
+      "libs/users/materials/feature-materials-content/src/index.ts"
+    ],
+    "@users/feature-materials-create": [
+      "libs/users/materials/feature-materials-create/src/index.ts"
+    ],
+    "@users/feature-materials-list": [
+      "libs/users/materials/feature-materials-list/src/index.ts"
+    ],
+    "@users/feature-users-create": [
+      "libs/users/users/feature-users-create/src/index.ts"
+    ],
+    "@users/feature-users-detail": [
+      "libs/users/users/feature-users-detail/src/index.ts"
+    ],
+    "@users/feature-users-list": [
+      "libs/users/users/feature-users-list/src/index.ts"
+    ],
+    "@users/home": [
+      "libs/users/home/src/index.ts"
+    ],
+    "@users/materials": [
+      "libs/users/materials/src/index.ts"
+    ],
+    "@users/materials/data-access": [
+      "libs/users/materials/data-access/src/index.ts"
+    ],
+    "@users/settings": [
+      "libs/users/settings/src/index.ts"
+    ],
+    "@users/settings-ui": [
+      "libs/settings-ui/src/index.ts"
+    ],
+    "@users/settings/data-access": [
+      "libs/users/settings/data-access/src/index.ts"
+    ],
+    "@users/tasks-view": [
+      "libs/tasks-view/src/index.ts"
+    ],
+    "@users/tasks/tasks-view": [
+      "libs/tasks/tasks-view/src/index.ts"
+    ],
+    "@users/users/articles/article-comments": [
+      "libs/users/articles/article-comments/src/index.ts"
+    ],
+    "@users/users/articles/article-read": [
+      "libs/users/articles/article-read/src/index.ts"
+    ],
+    "@users/users/articles/articles": [
+      "libs/users/articles/articles/src/index.ts"
+    ],
+    "@users/users/articles/articles-create": [
+      "libs/users/articles/articles-create/src/index.ts"
+    ],
+    "@users/users/articles/data-access": [
+      "libs/users/articles/data-access/src/index.ts"
+    ],
+    "@users/users/backlog": [
+      "libs/users/backlog/src/index.ts"
+    ],
+    "@users/users/backlog/data-access": [
+      "libs/users/backlog/data-access/src/index.ts"
+    ],
+    "@users/users/chart": [
+      "libs/users/chart/src/index.ts"
+    ],
+    "@users/users/core/ui/language-switch": [
+      "libs/users/core/ui/language-switch/src/index.ts"
+    ],
+    "@users/users/core/ui/theme-switch": [
+      "libs/users/core/ui/theme-switch/src/index.ts"
+    ],
+    "@users/users/data-access": [
+      "libs/users/users/data-access/src/index.ts"
+    ],
+    "@users/users/materials/data-access": [
+      "libs/users/materials/data-access/src/index.ts"
+    ],
+    "@users/users/profile/data-access": [
+      "libs/users/profile/data-access/src/index.ts"
+    ],
+    "@users/users/profile/feature-profile": [
+      "libs/users/profile/feature-profile/src/index.ts"
+    ],
+    "@users/users/settings/feature-change-theme": [
+      "libs/users/settings/feature-change-theme/src/index.ts"
+    ],
+    "@users/users/settings/settings-ui": [
+      "libs/users/settings/settings-ui/src/index.ts"
+    ],
+    "@users/users/task": [
+      "libs/users/task/src/index.ts"
+    ],
+    "@users/users/task/data-access": [
+      "libs/users/task/data-access/src/index.ts"
+    ],
+    "@users/users/tasks": [
+      "libs/users/tasks/src/index.ts"
+    ],
+    "@users/users/tasks/data-acces": [
+      "libs/users/tasks/data-acces/src/index.ts"
+    ],
+    "@users/users/tasks/tasks-view": [
+      "libs/users/tasks/tasks-view/src/index.ts"
+    ],
+    "@users/users/tasks/tasks-view-container": [
+      "libs/users/tasks/tasks-view-container/src/index.ts"
+    ]
+  },
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "nonProjectFiles": [
+      {
+        "file": ".prettierignore",
+        "hash": "7848693104264504795"
+      },
+      {
+        "file": "libs/users/profile/feature-user-info/feature-user-info-vm.ts",
+        "hash": "1765124946137608179"
+      },
+      {
+        "file": ".prettierrc",
+        "hash": "18364264586821277305"
+      },
+      {
+        "file": "package.json",
+        "hash": "16336325778539727648"
+      },
+      {
+        "file": "jest.preset.js",
+        "hash": "9430166341120122740"
+      },
+      {
+        "file": "tsconfig.base.json",
+        "hash": "8373573917099470952"
+      },
+      {
+        "file": "tools/tsconfig.tools.json",
+        "hash": "16088922570277978783"
+      },
+      {
+        "file": "libs/users/users/users-vm.ts",
+        "hash": "3305041459365950505"
+      },
+      {
+        "file": "libs/.gitkeep",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "13330349324263242413"
+      },
+      {
+        "file": ".eslintignore",
+        "hash": "7663861978715868291"
+      },
+      {
+        "file": "libs/users/profile/feature-user-info/feature-user-info.component.scss",
+        "hash": "4990529376920319231"
+      },
+      {
+        "file": "apps/.gitkeep",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": ".eslintrc.json",
+        "hash": "17156311649799645633"
+      },
+      {
+        "file": "libs/users/users/users-vm.adapter.ts",
+        "hash": "14290422156425914275"
+      },
+      {
+        "file": "nx.json",
+        "hash": "8432446827232407954"
+      },
+      {
+        "file": "jest.config.ts",
+        "hash": "12333515226966617182"
+      },
+      {
+        "file": "libs/users/profile/ui-profile/ui-photo-modal/ui-photo-modal.component.spec.ts",
+        "hash": "9959157976151161114"
+      },
+      {
+        "file": ".editorconfig",
+        "hash": "5443105041930014821"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "15121813142522526918"
+      },
+      {
+        "file": "libs/users/profile/feature-user-info/feature-user-info.component.html",
+        "hash": "14673478281714538513"
+      },
+      {
+        "file": "libs/users/profile/ui-profile/ui-photo-modal/ui-photo-modal.component.html",
+        "hash": "14652538491970744336"
+      },
+      {
+        "file": "libs/users/profile/feature-user-info/feature-user-info.component.spec.ts",
+        "hash": "8924309249607075626"
+      },
+      {
+        "file": "tasks.md",
+        "hash": "12172551229828468437"
+      },
+      {
+        "file": "libs/users/profile/ui-profile/ui-photo-modal/ui-photo-modal.component.ts",
+        "hash": "3994261441358983183"
+      },
+      {
+        "file": "libs/users/profile/ui-profile/ui-photo-modal/ui-photo-modal.component.scss",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "libs/users/profile/feature-user-info/feature-user-info.component.ts",
+        "hash": "12095711473085850918"
+      },
+      {
+        "file": "README.md",
+        "hash": "5080428003831556973"
+      }
+    ],
+    "projectFileMap": {
+      "users-task-data-access": [
+        {
+          "file": "libs/users/task/data-access/.eslintrc.json",
+          "hash": "10287172738953212181"
+        },
+        {
+          "file": "libs/users/task/data-access/README.md",
+          "hash": "399669748312651003"
+        },
+        {
+          "file": "libs/users/task/data-access/jest.config.ts",
+          "hash": "10227821411604208325"
+        },
+        {
+          "file": "libs/users/task/data-access/project.json",
+          "hash": "12393769519115026965"
+        },
+        {
+          "file": "libs/users/task/data-access/src/index.ts",
+          "hash": "9302078192706328187"
+        },
+        {
+          "file": "libs/users/task/data-access/src/lib/+state/tasks.action.ts",
+          "hash": "15756181018668635259"
+        },
+        {
+          "file": "libs/users/task/data-access/src/lib/+state/tasks.effect.ts",
+          "hash": "3877222818275287471",
+          "deps": [
+            "core-http"
+          ]
+        },
+        {
+          "file": "libs/users/task/data-access/src/lib/+state/tasks.facade.ts",
+          "hash": "155629786461940915"
+        },
+        {
+          "file": "libs/users/task/data-access/src/lib/+state/tasks.reducer.ts",
+          "hash": "17283969715175595050",
+          "deps": [
+            "users-task"
+          ]
+        },
+        {
+          "file": "libs/users/task/data-access/src/lib/+state/tasks.selector.ts",
+          "hash": "2975650142426208708"
+        },
+        {
+          "file": "libs/users/task/data-access/src/lib/model/tasks.interface.ts",
+          "hash": "3901309683505452867"
+        },
+        {
+          "file": "libs/users/task/data-access/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/users/task/data-access/tsconfig.json",
+          "hash": "16248533471678702062"
+        },
+        {
+          "file": "libs/users/task/data-access/tsconfig.lib.json",
+          "hash": "16963930419743084573"
+        },
+        {
+          "file": "libs/users/task/data-access/tsconfig.spec.json",
+          "hash": "13144727132898993533"
+        }
+      ],
+      "chart": [
+        {
+          "file": "libs/users/chart/.eslintrc.json",
+          "hash": "4280308468970313161"
+        },
+        {
+          "file": "libs/users/chart/README.md",
+          "hash": "17329768577834770677"
+        },
+        {
+          "file": "libs/users/chart/jest.config.ts",
+          "hash": "2224092386091867402"
+        },
+        {
+          "file": "libs/users/chart/project.json",
+          "hash": "13395514939875132057"
+        },
+        {
+          "file": "libs/users/chart/src/index.ts",
+          "hash": "13799327043863977808"
+        },
+        {
+          "file": "libs/users/chart/src/lib/chart-view/chart-view.component.html",
+          "hash": "1862993924637334870"
+        },
+        {
+          "file": "libs/users/chart/src/lib/chart-view/chart-view.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/users/chart/src/lib/chart-view/chart-view.component.spec.ts",
+          "hash": "1092599455467043099"
+        },
+        {
+          "file": "libs/users/chart/src/lib/chart-view/chart-view.component.ts",
+          "hash": "5710475373541253982"
+        },
+        {
+          "file": "libs/users/chart/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/users/chart/tsconfig.json",
+          "hash": "8526453262384300416"
+        },
+        {
+          "file": "libs/users/chart/tsconfig.lib.json",
+          "hash": "15320869708364835784"
+        },
+        {
+          "file": "libs/users/chart/tsconfig.spec.json",
+          "hash": "17159144152117924454"
+        }
+      ],
+      "users-users-feature-users-create": [
+        {
+          "file": "libs/users/users/feature-users-create/.eslintrc.json",
+          "hash": "10287172738953212181"
+        },
+        {
+          "file": "libs/users/users/feature-users-create/README.md",
+          "hash": "7404924468460491996"
+        },
+        {
+          "file": "libs/users/users/feature-users-create/jest.config.ts",
+          "hash": "1592549554778706748"
+        },
+        {
+          "file": "libs/users/users/feature-users-create/project.json",
+          "hash": "17781799560986462146"
+        },
+        {
+          "file": "libs/users/users/feature-users-create/src/index.ts",
+          "hash": "14432943760936236052"
+        },
+        {
+          "file": "libs/users/users/feature-users-create/src/lib/create-users-button/create-users-button.component.html",
+          "hash": "11443598947221029906"
+        },
+        {
+          "file": "libs/users/users/feature-users-create/src/lib/create-users-button/create-users-button.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/users/users/feature-users-create/src/lib/create-users-button/create-users-button.component.spec.ts",
+          "hash": "5703350557730781914"
+        },
+        {
+          "file": "libs/users/users/feature-users-create/src/lib/create-users-button/create-users-button.component.ts",
+          "hash": "8597969929466696550",
+          "deps": [
+            "users-users-data-access",
+            "core-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/users/feature-users-create/src/lib/create-users-dialog/create-users-dialog.component.html",
+          "hash": "16270580622376278942"
+        },
+        {
+          "file": "libs/users/users/feature-users-create/src/lib/create-users-dialog/create-users-dialog.component.scss",
+          "hash": "1624635865799449679"
+        },
+        {
+          "file": "libs/users/users/feature-users-create/src/lib/create-users-dialog/create-users-dialog.component.spec.ts",
+          "hash": "4242682332498188358"
+        },
+        {
+          "file": "libs/users/users/feature-users-create/src/lib/create-users-dialog/create-users-dialog.component.ts",
+          "hash": "7095870943573186027"
+        },
+        {
+          "file": "libs/users/users/feature-users-create/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/users/users/feature-users-create/tsconfig.json",
+          "hash": "16248533471678702062"
+        },
+        {
+          "file": "libs/users/users/feature-users-create/tsconfig.lib.json",
+          "hash": "9957646254653392655"
+        },
+        {
+          "file": "libs/users/users/feature-users-create/tsconfig.spec.json",
+          "hash": "13144727132898993533"
+        }
+      ],
+      "data-access": [
+        {
+          "file": "libs/users/materials/data-access/.eslintrc.json",
+          "hash": "13354458262963388726"
+        },
+        {
+          "file": "libs/users/materials/data-access/README.md",
+          "hash": "8669956866157544960"
+        },
+        {
+          "file": "libs/users/materials/data-access/jest.config.ts",
+          "hash": "16781699444619282781"
+        },
+        {
+          "file": "libs/users/materials/data-access/project.json",
+          "hash": "12579034284117504048"
+        },
+        {
+          "file": "libs/users/materials/data-access/src/index.ts",
+          "hash": "8981746639379426383"
+        },
+        {
+          "file": "libs/users/materials/data-access/src/lib/+state/folders/folders.actions.ts",
+          "hash": "13009195772054739544"
+        },
+        {
+          "file": "libs/users/materials/data-access/src/lib/+state/folders/folders.effects.spec.ts",
+          "hash": "18352171671650810470"
+        },
+        {
+          "file": "libs/users/materials/data-access/src/lib/+state/folders/folders.effects.ts",
+          "hash": "8526203447628679965",
+          "deps": [
+            "core-http",
+            "core-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/materials/data-access/src/lib/+state/folders/folders.facade.spec.ts",
+          "hash": "6160227983764632577",
+          "deps": [
+            "core-http"
+          ]
+        },
+        {
+          "file": "libs/users/materials/data-access/src/lib/+state/folders/folders.facade.ts",
+          "hash": "10659285605078723041"
+        },
+        {
+          "file": "libs/users/materials/data-access/src/lib/+state/folders/folders.reducer.spec.ts",
+          "hash": "2672505602400535404"
+        },
+        {
+          "file": "libs/users/materials/data-access/src/lib/+state/folders/folders.reducer.ts",
+          "hash": "4499607038769280208",
+          "deps": [
+            "core-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/materials/data-access/src/lib/+state/folders/folders.selectors.spec.ts",
+          "hash": "8588875487113752002"
+        },
+        {
+          "file": "libs/users/materials/data-access/src/lib/+state/folders/folders.selectors.ts",
+          "hash": "781064776090293133"
+        },
+        {
+          "file": "libs/users/materials/data-access/src/lib/+state/materials/materials.actions.ts",
+          "hash": "3801854882522699012"
+        },
+        {
+          "file": "libs/users/materials/data-access/src/lib/+state/materials/materials.effects.spec.ts",
+          "hash": "4598034146437606017"
+        },
+        {
+          "file": "libs/users/materials/data-access/src/lib/+state/materials/materials.effects.ts",
+          "hash": "11107487510949146686",
+          "deps": [
+            "core-http",
+            "core-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/materials/data-access/src/lib/+state/materials/materials.facade.spec.ts",
+          "hash": "9494192085296505438"
+        },
+        {
+          "file": "libs/users/materials/data-access/src/lib/+state/materials/materials.facade.ts",
+          "hash": "14897248417316016998"
+        },
+        {
+          "file": "libs/users/materials/data-access/src/lib/+state/materials/materials.models.ts",
+          "hash": "16315001586436030513"
+        },
+        {
+          "file": "libs/users/materials/data-access/src/lib/+state/materials/materials.reducer.spec.ts",
+          "hash": "6441785011624202851"
+        },
+        {
+          "file": "libs/users/materials/data-access/src/lib/+state/materials/materials.reducer.ts",
+          "hash": "5416255655808681139",
+          "deps": [
+            "core-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/materials/data-access/src/lib/+state/materials/materials.selectors.spec.ts",
+          "hash": "15648588047105228803"
+        },
+        {
+          "file": "libs/users/materials/data-access/src/lib/+state/materials/materials.selectors.ts",
+          "hash": "4655131929137258547"
+        },
+        {
+          "file": "libs/users/materials/data-access/src/lib/+state/models/folder-models.ts",
+          "hash": "4131134148408020653"
+        },
+        {
+          "file": "libs/users/materials/data-access/src/lib/+state/models/material-model.ts",
+          "hash": "179988359985905519"
+        },
+        {
+          "file": "libs/users/materials/data-access/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/users/materials/data-access/tsconfig.json",
+          "hash": "1564390839698439061"
+        },
+        {
+          "file": "libs/users/materials/data-access/tsconfig.lib.json",
+          "hash": "9957646254653392655"
+        },
+        {
+          "file": "libs/users/materials/data-access/tsconfig.spec.json",
+          "hash": "13144727132898993533"
+        }
+      ],
+      "users-articles-articles": [
+        {
+          "file": "libs/users/articles/articles/.eslintrc.json",
+          "hash": "10287172738953212181"
+        },
+        {
+          "file": "libs/users/articles/articles/README.md",
+          "hash": "14705775307286216050"
+        },
+        {
+          "file": "libs/users/articles/articles/jest.config.ts",
+          "hash": "3283468073863875431"
+        },
+        {
+          "file": "libs/users/articles/articles/project.json",
+          "hash": "2928109797002425917"
+        },
+        {
+          "file": "libs/users/articles/articles/src/index.ts",
+          "hash": "16460991719469023897"
+        },
+        {
+          "file": "libs/users/articles/articles/src/lib/articles-view-container/articles-view-container.component.html",
+          "hash": "4238167852157626732"
+        },
+        {
+          "file": "libs/users/articles/articles/src/lib/articles-view-container/articles-view-container.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/users/articles/articles/src/lib/articles-view-container/articles-view-container.component.spec.ts",
+          "hash": "5403006110787307148"
+        },
+        {
+          "file": "libs/users/articles/articles/src/lib/articles-view-container/articles-view-container.component.ts",
+          "hash": "8771066616386770519",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@ngrx/store",
+            "users-articles-data-access",
+            "npm:@ngrx/component",
+            "npm:@angular/material",
+            "core-auth-data-access",
+            "article-read",
+            "npm:rxjs",
+            "core-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/articles/articles/src/lib/articles-view/articles-view.component.html",
+          "hash": "2879375188461550471"
+        },
+        {
+          "file": "libs/users/articles/articles/src/lib/articles-view/articles-view.component.scss",
+          "hash": "14941543921620235225"
+        },
+        {
+          "file": "libs/users/articles/articles/src/lib/articles-view/articles-view.component.spec.ts",
+          "hash": "15449047183216909726"
+        },
+        {
+          "file": "libs/users/articles/articles/src/lib/articles-view/articles-view.component.ts",
+          "hash": "8557359785224091471",
+          "deps": [
+            "users-articles-data-access",
+            "users-articles-articles-create",
+            "core-http",
+            "users-core-ui-language-switch",
+            "users-users-feature-users-list",
+            "users-users-data-access",
+            "settings-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/articles/articles/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/users/articles/articles/tsconfig.json",
+          "hash": "16248533471678702062"
+        },
+        {
+          "file": "libs/users/articles/articles/tsconfig.lib.json",
+          "hash": "9957646254653392655"
+        },
+        {
+          "file": "libs/users/articles/articles/tsconfig.spec.json",
+          "hash": "13144727132898993533"
+        }
+      ],
+      "users-articles-data-access": [
+        {
+          "file": "libs/users/articles/data-access/.eslintrc.json",
+          "hash": "10287172738953212181"
+        },
+        {
+          "file": "libs/users/articles/data-access/README.md",
+          "hash": "15174299634352519893"
+        },
+        {
+          "file": "libs/users/articles/data-access/jest.config.ts",
+          "hash": "3905480492206168612"
+        },
+        {
+          "file": "libs/users/articles/data-access/project.json",
+          "hash": "7620884537915340757"
+        },
+        {
+          "file": "libs/users/articles/data-access/src/index.ts",
+          "hash": "6640322370906712933"
+        },
+        {
+          "file": "libs/users/articles/data-access/src/lib/+state/articles.actions.ts",
+          "hash": "11030380600258205859"
+        },
+        {
+          "file": "libs/users/articles/data-access/src/lib/+state/articles.effects.ts",
+          "hash": "13945238481613834593",
+          "deps": [
+            "core-http",
+            "core-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/articles/data-access/src/lib/+state/articles.facade.ts",
+          "hash": "950358820530885237"
+        },
+        {
+          "file": "libs/users/articles/data-access/src/lib/+state/articles.reducer.spec.ts",
+          "hash": "13685577228550857478"
+        },
+        {
+          "file": "libs/users/articles/data-access/src/lib/+state/articles.reducer.ts",
+          "hash": "17665054104289340710",
+          "deps": [
+            "core-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/articles/data-access/src/lib/+state/articles.selectors.ts",
+          "hash": "17772970110983594500",
+          "deps": [
+            "core-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/articles/data-access/src/lib/+state/comments/comments.actions.ts",
+          "hash": "5714611511453941725"
+        },
+        {
+          "file": "libs/users/articles/data-access/src/lib/+state/comments/comments.effects.ts",
+          "hash": "17172027555924555296",
+          "deps": [
+            "core-http",
+            "core-auth-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/articles/data-access/src/lib/+state/comments/comments.facade.ts",
+          "hash": "8957385560044528039"
+        },
+        {
+          "file": "libs/users/articles/data-access/src/lib/+state/comments/comments.reducer.spec.ts",
+          "hash": "7299350639335415001"
+        },
+        {
+          "file": "libs/users/articles/data-access/src/lib/+state/comments/comments.reducer.ts",
+          "hash": "14578831757916050984",
+          "deps": [
+            "core-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/articles/data-access/src/lib/+state/comments/comments.selectors.ts",
+          "hash": "13937159069248644353"
+        },
+        {
+          "file": "libs/users/articles/data-access/src/lib/models/article.model.ts",
+          "hash": "5025588308524220343"
+        },
+        {
+          "file": "libs/users/articles/data-access/src/lib/models/create-article.model.ts",
+          "hash": "10783482953521300332"
+        },
+        {
+          "file": "libs/users/articles/data-access/src/lib/models/create-comment.model.ts",
+          "hash": "1833044425358526535"
+        },
+        {
+          "file": "libs/users/articles/data-access/src/lib/models/user-comment.model.ts",
+          "hash": "4988126799255553613"
+        },
+        {
+          "file": "libs/users/articles/data-access/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/users/articles/data-access/tsconfig.json",
+          "hash": "16248533471678702062"
+        },
+        {
+          "file": "libs/users/articles/data-access/tsconfig.lib.json",
+          "hash": "9957646254653392655"
+        },
+        {
+          "file": "libs/users/articles/data-access/tsconfig.spec.json",
+          "hash": "13144727132898993533"
+        }
+      ],
+      "feature-folders-list": [
+        {
+          "file": "libs/users/materials/feature-folders-list/.eslintrc.json",
+          "hash": "13354458262963388726"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-list/README.md",
+          "hash": "4735652897409327169"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-list/jest.config.ts",
+          "hash": "2702032311472793686"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-list/project.json",
+          "hash": "17352129586599992600"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-list/src/index.ts",
+          "hash": "6370449131333717574"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-list/src/lib/folders-card/folders-card.component.html",
+          "hash": "4607793013774470098"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-list/src/lib/folders-card/folders-card.component.scss",
+          "hash": "1874034645585978695"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-list/src/lib/folders-card/folders-card.component.spec.ts",
+          "hash": "1944041157576681025"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-list/src/lib/folders-card/folders-card.component.ts",
+          "hash": "9459079890864353371",
+          "deps": [
+            "data-access"
+          ]
+        },
+        {
+          "file": "libs/users/materials/feature-folders-list/src/lib/folders-list-container/folders-list-container.component.html",
+          "hash": "2080347860157975768"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-list/src/lib/folders-list-container/folders-list-container.component.scss",
+          "hash": "4055606894390288348"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-list/src/lib/folders-list-container/folders-list-container.component.spec.ts",
+          "hash": "2008522369387102700"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-list/src/lib/folders-list-container/folders-list-container.component.ts",
+          "hash": "8020048025255295690",
+          "deps": [
+            "data-access",
+            "feature-folders-create",
+            "core-ui"
+          ]
+        },
+        {
+          "file": "libs/users/materials/feature-folders-list/src/lib/folders-list-container/folders-list-container.store.ts",
+          "hash": "1764631272984788227"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-list/src/lib/folders-list/folder-list.model.ts",
+          "hash": "7815766216852933146",
+          "deps": [
+            "core-data-access",
+            "core-utils",
+            "data-access"
+          ]
+        },
+        {
+          "file": "libs/users/materials/feature-folders-list/src/lib/folders-list/folders-list.component.html",
+          "hash": "16823734363481716051"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-list/src/lib/folders-list/folders-list.component.scss",
+          "hash": "15799309727377993653"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-list/src/lib/folders-list/folders-list.component.spec.ts",
+          "hash": "9179464649092160093"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-list/src/lib/folders-list/folders-list.component.ts",
+          "hash": "10884592338387904196",
+          "deps": [
+            "data-access"
+          ]
+        },
+        {
+          "file": "libs/users/materials/feature-folders-list/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-list/tsconfig.json",
+          "hash": "16248533471678702062"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-list/tsconfig.lib.json",
+          "hash": "9957646254653392655"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-list/tsconfig.spec.json",
+          "hash": "13144727132898993533"
+        }
+      ],
+      "users-users-data-access": [
+        {
+          "file": "libs/users/users/data-access/.eslintrc.json",
+          "hash": "10287172738953212181"
+        },
+        {
+          "file": "libs/users/users/data-access/README.md",
+          "hash": "15909389826658657133"
+        },
+        {
+          "file": "libs/users/users/data-access/jest.config.ts",
+          "hash": "15453917591070072211"
+        },
+        {
+          "file": "libs/users/users/data-access/project.json",
+          "hash": "17833473592774158881"
+        },
+        {
+          "file": "libs/users/users/data-access/src/index.ts",
+          "hash": "11697252117958043312"
+        },
+        {
+          "file": "libs/users/users/data-access/src/lib/+state/users.actions.ts",
+          "hash": "17151499760669277402",
+          "deps": [
+            "core-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/users/data-access/src/lib/+state/users.effects.spec.ts",
+          "hash": "4149276571759380637"
+        },
+        {
+          "file": "libs/users/users/data-access/src/lib/+state/users.effects.ts",
+          "hash": "11698357167956840592",
+          "deps": [
+            "core-http",
+            "core-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/users/data-access/src/lib/+state/users.facade.spec.ts",
+          "hash": "13665104183465613573"
+        },
+        {
+          "file": "libs/users/users/data-access/src/lib/+state/users.facade.ts",
+          "hash": "2438700106144824502",
+          "deps": [
+            "core-auth-data-access",
+            "core-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/users/data-access/src/lib/+state/users.reducer.spec.ts",
+          "hash": "1850481533616090187"
+        },
+        {
+          "file": "libs/users/users/data-access/src/lib/+state/users.reducer.ts",
+          "hash": "17773651001121124469",
+          "deps": [
+            "core-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/users/data-access/src/lib/+state/users.selectors.spec.ts",
+          "hash": "15878685293703898736"
+        },
+        {
+          "file": "libs/users/users/data-access/src/lib/+state/users.selectors.ts",
+          "hash": "877932539762308024",
+          "deps": [
+            "core-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/users/data-access/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/users/users/data-access/tsconfig.json",
+          "hash": "16248533471678702062"
+        },
+        {
+          "file": "libs/users/users/data-access/tsconfig.lib.json",
+          "hash": "5355608648437398109"
+        },
+        {
+          "file": "libs/users/users/data-access/tsconfig.spec.json",
+          "hash": "13144727132898993533"
+        }
+      ],
+      "feature-materials-content": [
+        {
+          "file": "libs/users/materials/feature-materials-content/.eslintrc.json",
+          "hash": "13354458262963388726"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-content/README.md",
+          "hash": "10566426473689194923"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-content/jest.config.ts",
+          "hash": "15984706361057273359"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-content/project.json",
+          "hash": "12497013282952882742"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-content/src/index.ts",
+          "hash": "3147380373399191422"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-content/src/lib/materials-content/materials-content.component.html",
+          "hash": "2397320381455737967"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-content/src/lib/materials-content/materials-content.component.scss",
+          "hash": "4557267966590826623"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-content/src/lib/materials-content/materials-content.component.spec.ts",
+          "hash": "5823403236554891956"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-content/src/lib/materials-content/materials-content.component.ts",
+          "hash": "1099543824605027171"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-content/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-content/tsconfig.json",
+          "hash": "16248533471678702062"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-content/tsconfig.lib.json",
+          "hash": "9957646254653392655"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-content/tsconfig.spec.json",
+          "hash": "13144727132898993533"
+        }
+      ],
+      "users-core-ui-layout": [
+        {
+          "file": "libs/users/core/ui/layout/.eslintrc.json",
+          "hash": "1467312077891044648"
+        },
+        {
+          "file": "libs/users/core/ui/layout/README.md",
+          "hash": "12088769717357837419"
+        },
+        {
+          "file": "libs/users/core/ui/layout/jest.config.ts",
+          "hash": "11108761657403512714"
+        },
+        {
+          "file": "libs/users/core/ui/layout/project.json",
+          "hash": "670187755050931595"
+        },
+        {
+          "file": "libs/users/core/ui/layout/src/index.ts",
+          "hash": "12284508670494686082"
+        },
+        {
+          "file": "libs/users/core/ui/layout/src/lib/footer/footer.component.html",
+          "hash": "3227494710110728186"
+        },
+        {
+          "file": "libs/users/core/ui/layout/src/lib/footer/footer.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/users/core/ui/layout/src/lib/footer/footer.component.spec.ts",
+          "hash": "5850760657800237085"
+        },
+        {
+          "file": "libs/users/core/ui/layout/src/lib/footer/footer.component.ts",
+          "hash": "6751212566692712355"
+        },
+        {
+          "file": "libs/users/core/ui/layout/src/lib/footer/index.ts",
+          "hash": "3431716135328408191"
+        },
+        {
+          "file": "libs/users/core/ui/layout/src/lib/header/header.component.html",
+          "hash": "2833648746635773267"
+        },
+        {
+          "file": "libs/users/core/ui/layout/src/lib/header/header.component.scss",
+          "hash": "14183950429266524513"
+        },
+        {
+          "file": "libs/users/core/ui/layout/src/lib/header/header.component.spec.ts",
+          "hash": "4499384199601543057"
+        },
+        {
+          "file": "libs/users/core/ui/layout/src/lib/header/header.component.ts",
+          "hash": "16781604933936749957",
+          "deps": [
+            "core-auth-data-access",
+            "users-core-ui-language-switch",
+            "users-feature-change-theme"
+          ]
+        },
+        {
+          "file": "libs/users/core/ui/layout/src/lib/header/index.ts",
+          "hash": "12541423769449981273"
+        },
+        {
+          "file": "libs/users/core/ui/layout/src/lib/navbar/index.ts",
+          "hash": "8095917643561628816"
+        },
+        {
+          "file": "libs/users/core/ui/layout/src/lib/navbar/navbar.component.html",
+          "hash": "12079013302959915611"
+        },
+        {
+          "file": "libs/users/core/ui/layout/src/lib/navbar/navbar.component.scss",
+          "hash": "3263688061704760806"
+        },
+        {
+          "file": "libs/users/core/ui/layout/src/lib/navbar/navbar.component.spec.ts",
+          "hash": "11611426068913683136"
+        },
+        {
+          "file": "libs/users/core/ui/layout/src/lib/navbar/navbar.component.ts",
+          "hash": "7049749985982568185",
+          "deps": [
+            "core-auth-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/core/ui/layout/src/public-api.ts",
+          "hash": "9541194996760502075"
+        },
+        {
+          "file": "libs/users/core/ui/layout/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/users/core/ui/layout/tsconfig.json",
+          "hash": "15064525358714244092"
+        },
+        {
+          "file": "libs/users/core/ui/layout/tsconfig.lib.json",
+          "hash": "12606167873482877370"
+        },
+        {
+          "file": "libs/users/core/ui/layout/tsconfig.spec.json",
+          "hash": "13073987341149875477"
+        }
+      ],
+      "article-read": [
+        {
+          "file": "libs/users/articles/article-read/README.md",
+          "hash": "17546067346875602751"
+        },
+        {
+          "file": "libs/users/articles/article-read/ng-package.json",
+          "hash": "7813848078038916678"
+        },
+        {
+          "file": "libs/users/articles/article-read/package.json",
+          "hash": "15128834810432551439"
+        },
+        {
+          "file": "libs/users/articles/article-read/project.json",
+          "hash": "12081703660212746259"
+        },
+        {
+          "file": "libs/users/articles/article-read/src/index.ts",
+          "hash": "12977633540424767837"
+        },
+        {
+          "file": "libs/users/articles/article-read/src/lib/article-comments/article-comment/article-comment.component.html",
+          "hash": "15515776424314261894"
+        },
+        {
+          "file": "libs/users/articles/article-read/src/lib/article-comments/article-comment/article-comment.component.scss",
+          "hash": "15739916503667185524"
+        },
+        {
+          "file": "libs/users/articles/article-read/src/lib/article-comments/article-comment/article-comment.component.spec.ts",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/users/articles/article-read/src/lib/article-comments/article-comment/article-comment.component.ts",
+          "hash": "12254938633603573739",
+          "deps": [
+            "users-core-ui-language-switch",
+            "users-articles-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/articles/article-read/src/lib/article-comments/article-comments.component.html",
+          "hash": "17725610826797381422"
+        },
+        {
+          "file": "libs/users/articles/article-read/src/lib/article-comments/article-comments.component.scss",
+          "hash": "14282514703433711777"
+        },
+        {
+          "file": "libs/users/articles/article-read/src/lib/article-comments/article-comments.component.spec.ts",
+          "hash": "331999978032517751"
+        },
+        {
+          "file": "libs/users/articles/article-read/src/lib/article-comments/article-comments.component.ts",
+          "hash": "4873263716077199825",
+          "deps": [
+            "users-articles-data-access",
+            "core-data-access",
+            "core-auth-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/articles/article-read/src/lib/article-read-container/article-read-container.component.html",
+          "hash": "2396448659158513130"
+        },
+        {
+          "file": "libs/users/articles/article-read/src/lib/article-read-container/article-read-container.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/users/articles/article-read/src/lib/article-read-container/article-read-container.component.ts",
+          "hash": "13550465115390758923",
+          "deps": [
+            "core-data-access",
+            "users-articles-data-access",
+            "core-auth-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/articles/article-read/src/lib/article-read/article-read.component.html",
+          "hash": "13294061157589423337"
+        },
+        {
+          "file": "libs/users/articles/article-read/src/lib/article-read/article-read.component.scss",
+          "hash": "17809031046233908352"
+        },
+        {
+          "file": "libs/users/articles/article-read/src/lib/article-read/article-read.component.spec.ts",
+          "hash": "12218672964510754803"
+        },
+        {
+          "file": "libs/users/articles/article-read/src/lib/article-read/article-read.component.ts",
+          "hash": "388740921310431869",
+          "deps": [
+            "users-articles-data-access",
+            "users-users-data-access",
+            "users-users-feature-users-list"
+          ]
+        },
+        {
+          "file": "libs/users/articles/article-read/src/lib/article-read/article-read.service.spec.ts",
+          "hash": "12291619387096261143"
+        },
+        {
+          "file": "libs/users/articles/article-read/src/lib/article-read/article-read.service.ts",
+          "hash": "341779112539936473"
+        },
+        {
+          "file": "libs/users/articles/article-read/tsconfig.lib.json",
+          "hash": "17729442930619210579"
+        },
+        {
+          "file": "libs/users/articles/article-read/tsconfig.lib.prod.json",
+          "hash": "1939170332703490951"
+        },
+        {
+          "file": "libs/users/articles/article-read/tsconfig.spec.json",
+          "hash": "6232842471409693982"
+        }
+      ],
+      "core-data-access": [
+        {
+          "file": "libs/core/data-access/.eslintrc.json",
+          "hash": "17327085785578759323"
+        },
+        {
+          "file": "libs/core/data-access/README.md",
+          "hash": "849942858149441189"
+        },
+        {
+          "file": "libs/core/data-access/jest.config.ts",
+          "hash": "1543234301625443206"
+        },
+        {
+          "file": "libs/core/data-access/project.json",
+          "hash": "3542110743251138165"
+        },
+        {
+          "file": "libs/core/data-access/src/index.ts",
+          "hash": "1624032846566398675"
+        },
+        {
+          "file": "libs/core/data-access/src/lib/loading-status.type.ts",
+          "hash": "8728681635171576482"
+        },
+        {
+          "file": "libs/core/data-access/src/lib/router.selectors.ts",
+          "hash": "12662115523912281692"
+        },
+        {
+          "file": "libs/core/data-access/src/lib/users-dto.adapter.ts",
+          "hash": "16774869937522463448"
+        },
+        {
+          "file": "libs/core/data-access/src/lib/users-dto.model.ts",
+          "hash": "12504266722637584433",
+          "deps": [
+            "core-utils"
+          ]
+        },
+        {
+          "file": "libs/core/data-access/src/lib/users.entity.ts",
+          "hash": "16749897940875269977"
+        },
+        {
+          "file": "libs/core/data-access/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/core/data-access/tsconfig.json",
+          "hash": "8526453262384300416"
+        },
+        {
+          "file": "libs/core/data-access/tsconfig.lib.json",
+          "hash": "15320869708364835784"
+        },
+        {
+          "file": "libs/core/data-access/tsconfig.spec.json",
+          "hash": "17159144152117924454"
+        }
+      ],
+      "core-auth-data-access": [
+        {
+          "file": "libs/core/auth/data-access/.eslintrc.json",
+          "hash": "10287172738953212181"
+        },
+        {
+          "file": "libs/core/auth/data-access/README.md",
+          "hash": "16665984561084116438"
+        },
+        {
+          "file": "libs/core/auth/data-access/jest.config.ts",
+          "hash": "2845560695107122164"
+        },
+        {
+          "file": "libs/core/auth/data-access/project.json",
+          "hash": "9374639651511059306"
+        },
+        {
+          "file": "libs/core/auth/data-access/src/index.ts",
+          "hash": "1367567346634851185"
+        },
+        {
+          "file": "libs/core/auth/data-access/src/lib/+state/auth.actions.ts",
+          "hash": "674169640534819034",
+          "deps": [
+            "core-data-access"
+          ]
+        },
+        {
+          "file": "libs/core/auth/data-access/src/lib/+state/auth.effects.ts",
+          "hash": "8916618903671190750",
+          "deps": [
+            "core-http",
+            "core-data-access"
+          ]
+        },
+        {
+          "file": "libs/core/auth/data-access/src/lib/+state/auth.reducer.ts",
+          "hash": "10146496916660851533",
+          "deps": [
+            "core-data-access"
+          ]
+        },
+        {
+          "file": "libs/core/auth/data-access/src/lib/+state/auth.selectors.ts",
+          "hash": "5002697527252109373",
+          "deps": [
+            "core-data-access"
+          ]
+        },
+        {
+          "file": "libs/core/auth/data-access/src/lib/+state/auth.service.ts",
+          "hash": "1617151162163680102"
+        },
+        {
+          "file": "libs/core/auth/data-access/src/lib/+state/sign.auth.model.ts",
+          "hash": "2424294050356779669",
+          "deps": [
+            "core-data-access",
+            "core-utils"
+          ]
+        },
+        {
+          "file": "libs/core/auth/data-access/src/lib/auth.facade.ts",
+          "hash": "13604294072640638345"
+        },
+        {
+          "file": "libs/core/auth/data-access/src/lib/services/admin.guard.spec.ts",
+          "hash": "14870568410944734426"
+        },
+        {
+          "file": "libs/core/auth/data-access/src/lib/services/admin.guard.ts",
+          "hash": "10902580336680842463"
+        },
+        {
+          "file": "libs/core/auth/data-access/src/lib/services/auth.guard.spec.ts",
+          "hash": "12132810063693827441"
+        },
+        {
+          "file": "libs/core/auth/data-access/src/lib/services/auth.guard.ts",
+          "hash": "8535221548683956832"
+        },
+        {
+          "file": "libs/core/auth/data-access/src/lib/services/local-storage-jwt.service.spec.ts",
+          "hash": "2940523381407347690"
+        },
+        {
+          "file": "libs/core/auth/data-access/src/lib/services/local-storage-jwt.service.ts",
+          "hash": "12595722752537296724"
+        },
+        {
+          "file": "libs/core/auth/data-access/src/lib/services/token.interceptor.ts",
+          "hash": "6341870382526816360"
+        },
+        {
+          "file": "libs/core/auth/data-access/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/core/auth/data-access/tsconfig.json",
+          "hash": "16248533471678702062"
+        },
+        {
+          "file": "libs/core/auth/data-access/tsconfig.lib.json",
+          "hash": "9957646254653392655"
+        },
+        {
+          "file": "libs/core/auth/data-access/tsconfig.spec.json",
+          "hash": "13144727132898993533"
+        }
+      ],
+      "feature-materials-create": [
+        {
+          "file": "libs/users/materials/feature-materials-create/.eslintrc.json",
+          "hash": "13354458262963388726"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-create/README.md",
+          "hash": "15447615411419218583"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-create/jest.config.ts",
+          "hash": "9148175258804797368"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-create/project.json",
+          "hash": "7958948062401201806"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-create/src/index.ts",
+          "hash": "5804969969778451701"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-create/src/lib/materials-add-button/materials-add-button.component.html",
+          "hash": "8065670838404338291"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-create/src/lib/materials-add-button/materials-add-button.component.scss",
+          "hash": "12494535089735871779"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-create/src/lib/materials-add-button/materials-add-button.component.spec.ts",
+          "hash": "5479039950596127602"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-create/src/lib/materials-add-button/materials-add-button.component.ts",
+          "hash": "11437351079009713681",
+          "deps": [
+            "data-access"
+          ]
+        },
+        {
+          "file": "libs/users/materials/feature-materials-create/src/lib/materials-add-dialog/materials-add-dialog.component.html",
+          "hash": "15135733140080438366"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-create/src/lib/materials-add-dialog/materials-add-dialog.component.scss",
+          "hash": "18046533499318292225"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-create/src/lib/materials-add-dialog/materials-add-dialog.component.spec.ts",
+          "hash": "4432302840609557149"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-create/src/lib/materials-add-dialog/materials-add-dialog.component.ts",
+          "hash": "308928905912044756"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-create/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-create/tsconfig.json",
+          "hash": "16248533471678702062"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-create/tsconfig.lib.json",
+          "hash": "9957646254653392655"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-create/tsconfig.spec.json",
+          "hash": "13144727132898993533"
+        }
+      ],
+      "users-home": [
+        {
+          "file": "libs/users/home/.eslintrc.json",
+          "hash": "17327085785578759323"
+        },
+        {
+          "file": "libs/users/home/README.md",
+          "hash": "7361823693845484881"
+        },
+        {
+          "file": "libs/users/home/jest.config.ts",
+          "hash": "5652935444469956357"
+        },
+        {
+          "file": "libs/users/home/project.json",
+          "hash": "327513105691379510"
+        },
+        {
+          "file": "libs/users/home/src/index.ts",
+          "hash": "16342128905101411898"
+        },
+        {
+          "file": "libs/users/home/src/lib/home/home.component.html",
+          "hash": "2968541395679406723"
+        },
+        {
+          "file": "libs/users/home/src/lib/home/home.component.scss",
+          "hash": "4648088309093343663"
+        },
+        {
+          "file": "libs/users/home/src/lib/home/home.component.spec.ts",
+          "hash": "2620641819347346630"
+        },
+        {
+          "file": "libs/users/home/src/lib/home/home.component.ts",
+          "hash": "14397448333388653046",
+          "deps": [
+            "core-highcharts"
+          ]
+        },
+        {
+          "file": "libs/users/home/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/users/home/tsconfig.json",
+          "hash": "8526453262384300416"
+        },
+        {
+          "file": "libs/users/home/tsconfig.lib.json",
+          "hash": "15320869708364835784"
+        },
+        {
+          "file": "libs/users/home/tsconfig.spec.json",
+          "hash": "17159144152117924454"
+        }
+      ],
+      "settings": [
+        {
+          "file": "libs/users/settings/.eslintrc.json",
+          "hash": "16268695479154141749"
+        },
+        {
+          "file": "libs/users/settings/README.md",
+          "hash": "9527427837524247309"
+        },
+        {
+          "file": "libs/users/settings/jest.config.ts",
+          "hash": "14865636472003297006"
+        },
+        {
+          "file": "libs/users/settings/project.json",
+          "hash": "16348846031144504589"
+        },
+        {
+          "file": "libs/users/settings/src/index.ts",
+          "hash": "16631012797161242868"
+        },
+        {
+          "file": "libs/users/settings/src/lib/settings/settings.component.html",
+          "hash": "12721162166087214058"
+        },
+        {
+          "file": "libs/users/settings/src/lib/settings/settings.component.scss",
+          "hash": "15369578335877343634"
+        },
+        {
+          "file": "libs/users/settings/src/lib/settings/settings.component.spec.ts",
+          "hash": "11220787347026323686"
+        },
+        {
+          "file": "libs/users/settings/src/lib/settings/settings.component.ts",
+          "hash": "2955460011161113335",
+          "deps": [
+            "users-core-ui-language-switch",
+            "settings-data-access",
+            "users-feature-change-theme"
+          ]
+        },
+        {
+          "file": "libs/users/settings/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/users/settings/tsconfig.json",
+          "hash": "8526453262384300416"
+        },
+        {
+          "file": "libs/users/settings/tsconfig.lib.json",
+          "hash": "15320869708364835784"
+        },
+        {
+          "file": "libs/users/settings/tsconfig.spec.json",
+          "hash": "17159144152117924454"
+        }
+      ],
+      "users-users-feature-users-detail": [
+        {
+          "file": "libs/users/users/feature-users-detail/.eslintrc.json",
+          "hash": "10287172738953212181"
+        },
+        {
+          "file": "libs/users/users/feature-users-detail/README.md",
+          "hash": "8895265703810629847"
+        },
+        {
+          "file": "libs/users/users/feature-users-detail/jest.config.ts",
+          "hash": "8017395821387256342"
+        },
+        {
+          "file": "libs/users/users/feature-users-detail/project.json",
+          "hash": "2658077053178949691"
+        },
+        {
+          "file": "libs/users/users/feature-users-detail/src/index.ts",
+          "hash": "16286448228102173010"
+        },
+        {
+          "file": "libs/users/users/feature-users-detail/src/lib/users-detail-card/detail-users-card-vm.ts",
+          "hash": "5237406102288383372",
+          "deps": [
+            "core-data-access",
+            "users-users-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/users/feature-users-detail/src/lib/users-detail-card/detail-users-card.component.html",
+          "hash": "12377108916131134024"
+        },
+        {
+          "file": "libs/users/users/feature-users-detail/src/lib/users-detail-card/detail-users-card.component.scss",
+          "hash": "942255025037975126"
+        },
+        {
+          "file": "libs/users/users/feature-users-detail/src/lib/users-detail-card/detail-users-card.component.spec.ts",
+          "hash": "11345799120829399468"
+        },
+        {
+          "file": "libs/users/users/feature-users-detail/src/lib/users-detail-card/detail-users-card.component.ts",
+          "hash": "14745694644606864469",
+          "deps": [
+            "core-dadata",
+            "core-data-access",
+            "users-users-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/users/feature-users-detail/src/lib/users-detail-container/users-detail-container.component.html",
+          "hash": "14015063366544269004"
+        },
+        {
+          "file": "libs/users/users/feature-users-detail/src/lib/users-detail-container/users-detail-container.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/users/users/feature-users-detail/src/lib/users-detail-container/users-detail-container.component.ts",
+          "hash": "7834959966357476062",
+          "deps": [
+            "core-data-access",
+            "core-ui",
+            "users-users-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/users/feature-users-detail/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/users/users/feature-users-detail/tsconfig.json",
+          "hash": "16248533471678702062"
+        },
+        {
+          "file": "libs/users/users/feature-users-detail/tsconfig.lib.json",
+          "hash": "9957646254653392655"
+        },
+        {
+          "file": "libs/users/users/feature-users-detail/tsconfig.spec.json",
+          "hash": "13144727132898993533"
+        }
+      ],
+      "users-core-ui-language-switch": [
+        {
+          "file": "libs/users/core/ui/language-switch/.eslintrc.json",
+          "hash": "12123959870778998922"
+        },
+        {
+          "file": "libs/users/core/ui/language-switch/README.md",
+          "hash": "13305040025918282996"
+        },
+        {
+          "file": "libs/users/core/ui/language-switch/jest.config.ts",
+          "hash": "16750182410733475438"
+        },
+        {
+          "file": "libs/users/core/ui/language-switch/project.json",
+          "hash": "5639948671008465114"
+        },
+        {
+          "file": "libs/users/core/ui/language-switch/src/index.ts",
+          "hash": "5756049232360880524"
+        },
+        {
+          "file": "libs/users/core/ui/language-switch/src/lib/language-switch.service.spec.ts",
+          "hash": "12881314535086406735"
+        },
+        {
+          "file": "libs/users/core/ui/language-switch/src/lib/language-switch.service.ts",
+          "hash": "3060252602473717151"
+        },
+        {
+          "file": "libs/users/core/ui/language-switch/src/lib/languages.ts",
+          "hash": "1893864710630239446"
+        },
+        {
+          "file": "libs/users/core/ui/language-switch/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/users/core/ui/language-switch/tsconfig.json",
+          "hash": "15064525358714244092"
+        },
+        {
+          "file": "libs/users/core/ui/language-switch/tsconfig.lib.json",
+          "hash": "12606167873482877370"
+        },
+        {
+          "file": "libs/users/core/ui/language-switch/tsconfig.spec.json",
+          "hash": "13073987341149875477"
+        }
+      ],
+      "users-users-feature-users-list": [
+        {
+          "file": "libs/users/users/feature-users-list/.eslintrc.json",
+          "hash": "10287172738953212181"
+        },
+        {
+          "file": "libs/users/users/feature-users-list/README.md",
+          "hash": "3590061589119931402"
+        },
+        {
+          "file": "libs/users/users/feature-users-list/jest.config.ts",
+          "hash": "14918776663274296927"
+        },
+        {
+          "file": "libs/users/users/feature-users-list/project.json",
+          "hash": "6456377335091770609"
+        },
+        {
+          "file": "libs/users/users/feature-users-list/src/index.ts",
+          "hash": "11971381644679390800"
+        },
+        {
+          "file": "libs/users/users/feature-users-list/src/lib/users-card/users-card.component.html",
+          "hash": "15162429698991764812"
+        },
+        {
+          "file": "libs/users/users/feature-users-list/src/lib/users-card/users-card.component.scss",
+          "hash": "15770574688029629911"
+        },
+        {
+          "file": "libs/users/users/feature-users-list/src/lib/users-card/users-card.component.spec.ts",
+          "hash": "17649886175982346410"
+        },
+        {
+          "file": "libs/users/users/feature-users-list/src/lib/users-card/users-card.component.ts",
+          "hash": "3727102402117487128",
+          "deps": [
+            "core-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/users/feature-users-list/src/lib/users-filter/users-filter.component.html",
+          "hash": "14251037372715219037"
+        },
+        {
+          "file": "libs/users/users/feature-users-list/src/lib/users-filter/users-filter.component.scss",
+          "hash": "10085026079489721812"
+        },
+        {
+          "file": "libs/users/users/feature-users-list/src/lib/users-filter/users-filter.component.ts",
+          "hash": "2429200897738374621"
+        },
+        {
+          "file": "libs/users/users/feature-users-list/src/lib/users-list-container/users-list-container.component.html",
+          "hash": "2118760510447424440"
+        },
+        {
+          "file": "libs/users/users/feature-users-list/src/lib/users-list-container/users-list-container.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/users/users/feature-users-list/src/lib/users-list-container/users-list-container.component.spec.ts",
+          "hash": "522820976599354583"
+        },
+        {
+          "file": "libs/users/users/feature-users-list/src/lib/users-list-container/users-list-container.component.ts",
+          "hash": "2177225263388823480",
+          "deps": [
+            "users-users-feature-users-create",
+            "users-users-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/users/feature-users-list/src/lib/users-list-container/users-list-container.store.ts",
+          "hash": "15673343195781695696",
+          "deps": [
+            "users-users-data-access",
+            "core-utils",
+            "core-ui",
+            "core-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/users/feature-users-list/src/lib/users-list/users-list-view-model.ts",
+          "hash": "2735636543230854335",
+          "deps": [
+            "core-utils",
+            "users-users-data-access",
+            "core-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/users/feature-users-list/src/lib/users-list/users-list.component.html",
+          "hash": "5493302694113803751"
+        },
+        {
+          "file": "libs/users/users/feature-users-list/src/lib/users-list/users-list.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/users/users/feature-users-list/src/lib/users-list/users-list.component.spec.ts",
+          "hash": "2172874414768568348"
+        },
+        {
+          "file": "libs/users/users/feature-users-list/src/lib/users-list/users-list.component.ts",
+          "hash": "9147981328005587129"
+        },
+        {
+          "file": "libs/users/users/feature-users-list/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/users/users/feature-users-list/tsconfig.json",
+          "hash": "16248533471678702062"
+        },
+        {
+          "file": "libs/users/users/feature-users-list/tsconfig.lib.json",
+          "hash": "14917692719125067625"
+        },
+        {
+          "file": "libs/users/users/feature-users-list/tsconfig.spec.json",
+          "hash": "13144727132898993533"
+        }
+      ],
+      "users-articles-articles-create": [
+        {
+          "file": "libs/users/articles/articles-create/.eslintrc.json",
+          "hash": "10287172738953212181"
+        },
+        {
+          "file": "libs/users/articles/articles-create/README.md",
+          "hash": "5897673920015680314"
+        },
+        {
+          "file": "libs/users/articles/articles-create/jest.config.ts",
+          "hash": "14288949818453695276"
+        },
+        {
+          "file": "libs/users/articles/articles-create/project.json",
+          "hash": "13393522444083159167"
+        },
+        {
+          "file": "libs/users/articles/articles-create/src/index.ts",
+          "hash": "6134797314525139824"
+        },
+        {
+          "file": "libs/users/articles/articles-create/src/lib/articles-create-button/articles-create-button.component.html",
+          "hash": "1842227091107316527"
+        },
+        {
+          "file": "libs/users/articles/articles-create/src/lib/articles-create-button/articles-create-button.component.scss",
+          "hash": "2187124629521145546"
+        },
+        {
+          "file": "libs/users/articles/articles-create/src/lib/articles-create-button/articles-create-button.component.spec.ts",
+          "hash": "5079717658757328735"
+        },
+        {
+          "file": "libs/users/articles/articles-create/src/lib/articles-create-button/articles-create-button.component.ts",
+          "hash": "6351191027423869565"
+        },
+        {
+          "file": "libs/users/articles/articles-create/src/lib/articles-create-container/articles-create-container.component.html",
+          "hash": "13466033348252859351"
+        },
+        {
+          "file": "libs/users/articles/articles-create/src/lib/articles-create-container/articles-create-container.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/users/articles/articles-create/src/lib/articles-create-container/articles-create-container.component.spec.ts",
+          "hash": "9668569396919941272"
+        },
+        {
+          "file": "libs/users/articles/articles-create/src/lib/articles-create-container/articles-create-container.component.ts",
+          "hash": "8962939616445904425",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "users-articles-data-access",
+            "npm:@ngrx/store",
+            "core-utils",
+            "npm:@angular/material",
+            "core-ui",
+            "npm:rxjs",
+            "core-data-access",
+            "npm:@ngrx/component"
+          ]
+        },
+        {
+          "file": "libs/users/articles/articles-create/src/lib/articles-create-ui/articles-create-ui.component.html",
+          "hash": "12143246169248753079"
+        },
+        {
+          "file": "libs/users/articles/articles-create/src/lib/articles-create-ui/articles-create-ui.component.scss",
+          "hash": "13659499171570272512"
+        },
+        {
+          "file": "libs/users/articles/articles-create/src/lib/articles-create-ui/articles-create-ui.component.spec.ts",
+          "hash": "10739652260065238557"
+        },
+        {
+          "file": "libs/users/articles/articles-create/src/lib/articles-create-ui/articles-create-ui.component.ts",
+          "hash": "4396907407095019652",
+          "deps": [
+            "users-articles-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/articles/articles-create/src/lib/articles-create-ui/articles-create-vm.ts",
+          "hash": "2777495091850245760",
+          "deps": [
+            "users-articles-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/articles/articles-create/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/users/articles/articles-create/tsconfig.json",
+          "hash": "16248533471678702062"
+        },
+        {
+          "file": "libs/users/articles/articles-create/tsconfig.lib.json",
+          "hash": "9957646254653392655"
+        },
+        {
+          "file": "libs/users/articles/articles-create/tsconfig.spec.json",
+          "hash": "13144727132898993533"
+        }
+      ],
+      "users-backlog": [
+        {
+          "file": "libs/users/backlog/.eslintrc.json",
+          "hash": "16268695479154141749"
+        },
+        {
+          "file": "libs/users/backlog/README.md",
+          "hash": "10348318166523573360"
+        },
+        {
+          "file": "libs/users/backlog/jest.config.ts",
+          "hash": "5536499544774582162"
+        },
+        {
+          "file": "libs/users/backlog/project.json",
+          "hash": "15700434956583428821"
+        },
+        {
+          "file": "libs/users/backlog/src/index.ts",
+          "hash": "371625973595204436"
+        },
+        {
+          "file": "libs/users/backlog/src/lib/users-backlog/users-backlog.component.html",
+          "hash": "11938295620751402655"
+        },
+        {
+          "file": "libs/users/backlog/src/lib/users-backlog/users-backlog.component.scss",
+          "hash": "6571589902285425393"
+        },
+        {
+          "file": "libs/users/backlog/src/lib/users-backlog/users-backlog.component.spec.ts",
+          "hash": "3970779576662026517"
+        },
+        {
+          "file": "libs/users/backlog/src/lib/users-backlog/users-backlog.component.ts",
+          "hash": "14921845227397429746",
+          "deps": [
+            "users-backlog-data-access",
+            "users-task"
+          ]
+        },
+        {
+          "file": "libs/users/backlog/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/users/backlog/tsconfig.json",
+          "hash": "8526453262384300416"
+        },
+        {
+          "file": "libs/users/backlog/tsconfig.lib.json",
+          "hash": "15320869708364835784"
+        },
+        {
+          "file": "libs/users/backlog/tsconfig.spec.json",
+          "hash": "17159144152117924454"
+        }
+      ],
+      "users-feature-change-theme": [
+        {
+          "file": "libs/users/settings/feature-change-theme/.eslintrc.json",
+          "hash": "18431441734433082710"
+        },
+        {
+          "file": "libs/users/settings/feature-change-theme/README.md",
+          "hash": "9527427837524247309"
+        },
+        {
+          "file": "libs/users/settings/feature-change-theme/jest.config.ts",
+          "hash": "18064274916227024154"
+        },
+        {
+          "file": "libs/users/settings/feature-change-theme/project.json",
+          "hash": "6557585876910979972"
+        },
+        {
+          "file": "libs/users/settings/feature-change-theme/src/index.ts",
+          "hash": "5080968521709540652"
+        },
+        {
+          "file": "libs/users/settings/feature-change-theme/src/lib/change-theme-header/change-theme-header.component.html",
+          "hash": "13194792581593961962"
+        },
+        {
+          "file": "libs/users/settings/feature-change-theme/src/lib/change-theme-header/change-theme-header.component.scss",
+          "hash": "1054723409685443384"
+        },
+        {
+          "file": "libs/users/settings/feature-change-theme/src/lib/change-theme-header/change-theme-header.component.spec.ts",
+          "hash": "6888878913820650693"
+        },
+        {
+          "file": "libs/users/settings/feature-change-theme/src/lib/change-theme-header/change-theme-header.component.ts",
+          "hash": "3907562313899391040"
+        },
+        {
+          "file": "libs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.html",
+          "hash": "4269429850698076059"
+        },
+        {
+          "file": "libs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.scss",
+          "hash": "15509966307176042099"
+        },
+        {
+          "file": "libs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.spec.ts",
+          "hash": "6506524111071723231"
+        },
+        {
+          "file": "libs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component.ts",
+          "hash": "5389295944799012427"
+        },
+        {
+          "file": "libs/users/settings/feature-change-theme/src/lib/change-theme-storage/change-theme-storage.ts",
+          "hash": "5491147883006958651"
+        },
+        {
+          "file": "libs/users/settings/feature-change-theme/src/lib/style-manager/index.ts",
+          "hash": "7549327167476406581"
+        },
+        {
+          "file": "libs/users/settings/feature-change-theme/src/lib/style-manager/style-manager.spec.ts",
+          "hash": "2326893309656061611"
+        },
+        {
+          "file": "libs/users/settings/feature-change-theme/src/lib/style-manager/style-manager.ts",
+          "hash": "11521731825070888827"
+        },
+        {
+          "file": "libs/users/settings/feature-change-theme/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/users/settings/feature-change-theme/tsconfig.json",
+          "hash": "16248533471678702062"
+        },
+        {
+          "file": "libs/users/settings/feature-change-theme/tsconfig.lib.json",
+          "hash": "15320869708364835784"
+        },
+        {
+          "file": "libs/users/settings/feature-change-theme/tsconfig.spec.json",
+          "hash": "2628739785099261941"
+        }
+      ],
+      "users-e2e": [
+        {
+          "file": "apps/users-e2e/.eslintrc.json",
+          "hash": "14060216369337943343"
+        },
+        {
+          "file": "apps/users-e2e/cypress.config.ts",
+          "hash": "15414076024138857470"
+        },
+        {
+          "file": "apps/users-e2e/project.json",
+          "hash": "13833512427666506680"
+        },
+        {
+          "file": "apps/users-e2e/src/e2e/app.cy.ts",
+          "hash": "1627315876065656"
+        },
+        {
+          "file": "apps/users-e2e/src/fixtures/example.json",
+          "hash": "11614668686582597233"
+        },
+        {
+          "file": "apps/users-e2e/src/support/app.po.ts",
+          "hash": "11157016311132186162"
+        },
+        {
+          "file": "apps/users-e2e/src/support/commands.ts",
+          "hash": "7314691991044890572"
+        },
+        {
+          "file": "apps/users-e2e/src/support/e2e.ts",
+          "hash": "3666078656922506009"
+        },
+        {
+          "file": "apps/users-e2e/tsconfig.json",
+          "hash": "15439127571515986436"
+        }
+      ],
+      "users-backlog-data-access": [
+        {
+          "file": "libs/users/backlog/data-access/.eslintrc.json",
+          "hash": "13354458262963388726"
+        },
+        {
+          "file": "libs/users/backlog/data-access/README.md",
+          "hash": "247148144744039610"
+        },
+        {
+          "file": "libs/users/backlog/data-access/jest.config.ts",
+          "hash": "2035737419064955338"
+        },
+        {
+          "file": "libs/users/backlog/data-access/project.json",
+          "hash": "10438161163775104461"
+        },
+        {
+          "file": "libs/users/backlog/data-access/src/index.ts",
+          "hash": "9383066582315161193"
+        },
+        {
+          "file": "libs/users/backlog/data-access/src/lib/+state/backlog.action.ts",
+          "hash": "4654099316966967140"
+        },
+        {
+          "file": "libs/users/backlog/data-access/src/lib/+state/backlog.effect.ts",
+          "hash": "14059434987835982618",
+          "deps": [
+            "core-http"
+          ]
+        },
+        {
+          "file": "libs/users/backlog/data-access/src/lib/+state/backlog.facade.ts",
+          "hash": "18053368678199779119",
+          "deps": [
+            "core-data-access",
+            "users-users-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/backlog/data-access/src/lib/+state/backlog.reducer.ts",
+          "hash": "17453036745145172742",
+          "deps": [
+            "core-data-access",
+            "users-users-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/backlog/data-access/src/lib/+state/backlog.selector.ts",
+          "hash": "13791136483789051279"
+        },
+        {
+          "file": "libs/users/backlog/data-access/src/lib/model/backlog.model.ts",
+          "hash": "13056772912197302611"
+        },
+        {
+          "file": "libs/users/backlog/data-access/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/users/backlog/data-access/tsconfig.json",
+          "hash": "16248533471678702062"
+        },
+        {
+          "file": "libs/users/backlog/data-access/tsconfig.lib.json",
+          "hash": "9957646254653392655"
+        },
+        {
+          "file": "libs/users/backlog/data-access/tsconfig.spec.json",
+          "hash": "13144727132898993533"
+        }
+      ],
+      "core-highcharts": [
+        {
+          "file": "libs/core/highcharts/.eslintrc.json",
+          "hash": "16268695479154141749"
+        },
+        {
+          "file": "libs/core/highcharts/README.md",
+          "hash": "12742706072351719255"
+        },
+        {
+          "file": "libs/core/highcharts/jest.config.ts",
+          "hash": "17718084584620285791"
+        },
+        {
+          "file": "libs/core/highcharts/project.json",
+          "hash": "6841404807707054802"
+        },
+        {
+          "file": "libs/core/highcharts/src/index.ts",
+          "hash": "7736955237476579006"
+        },
+        {
+          "file": "libs/core/highcharts/src/lib/core-highcharts.module.ts",
+          "hash": "5368402717481818166"
+        },
+        {
+          "file": "libs/core/highcharts/src/lib/highcharts.service.ts",
+          "hash": "9291891899288927480"
+        },
+        {
+          "file": "libs/core/highcharts/src/lib/students-data.data.ts",
+          "hash": "13827658544402262749"
+        },
+        {
+          "file": "libs/core/highcharts/src/lib/students-data.model.ts",
+          "hash": "4154411282280889210"
+        },
+        {
+          "file": "libs/core/highcharts/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/core/highcharts/tsconfig.json",
+          "hash": "8526453262384300416"
+        },
+        {
+          "file": "libs/core/highcharts/tsconfig.lib.json",
+          "hash": "15320869708364835784"
+        },
+        {
+          "file": "libs/core/highcharts/tsconfig.spec.json",
+          "hash": "17159144152117924454"
+        }
+      ],
+      "feature-materials-list": [
+        {
+          "file": "libs/users/materials/feature-materials-list/.eslintrc.json",
+          "hash": "13354458262963388726"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-list/README.md",
+          "hash": "1724756158245106829"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-list/jest.config.ts",
+          "hash": "6504679292506124881"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-list/project.json",
+          "hash": "13388890127334015530"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-list/src/index.ts",
+          "hash": "2466269673250026343"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.html",
+          "hash": "12537212109798284889"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.scss",
+          "hash": "8814201970010063574"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.spec.ts",
+          "hash": "17073338529478313951"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-list/src/lib/materials-card/materials-card.component.ts",
+          "hash": "8259282777918067701",
+          "deps": [
+            "data-access",
+            "feature-materials-content"
+          ]
+        },
+        {
+          "file": "libs/users/materials/feature-materials-list/src/lib/materials-list-container/materials-list-container.component.html",
+          "hash": "9902687012636226243"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-list/src/lib/materials-list-container/materials-list-container.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-list/src/lib/materials-list-container/materials-list-container.component.spec.ts",
+          "hash": "17958940881082236230"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-list/src/lib/materials-list-container/materials-list-container.component.ts",
+          "hash": "5328216240591802726",
+          "deps": [
+            "data-access",
+            "feature-materials-create"
+          ]
+        },
+        {
+          "file": "libs/users/materials/feature-materials-list/src/lib/materials-list/material-list.model.ts",
+          "hash": "13900229827302751956",
+          "deps": [
+            "core-data-access",
+            "core-utils",
+            "data-access"
+          ]
+        },
+        {
+          "file": "libs/users/materials/feature-materials-list/src/lib/materials-list/materials-list.component.html",
+          "hash": "13647018010986778789"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-list/src/lib/materials-list/materials-list.component.scss",
+          "hash": "15868847077968058251"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-list/src/lib/materials-list/materials-list.component.spec.ts",
+          "hash": "14069980875620554248"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-list/src/lib/materials-list/materials-list.component.ts",
+          "hash": "1691918963585069095",
+          "deps": [
+            "data-access"
+          ]
+        },
+        {
+          "file": "libs/users/materials/feature-materials-list/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-list/tsconfig.json",
+          "hash": "16248533471678702062"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-list/tsconfig.lib.json",
+          "hash": "9957646254653392655"
+        },
+        {
+          "file": "libs/users/materials/feature-materials-list/tsconfig.spec.json",
+          "hash": "13144727132898993533"
+        }
+      ],
+      "core-auth-feature-login": [
+        {
+          "file": "libs/core/auth/feature-login/.eslintrc.json",
+          "hash": "10287172738953212181"
+        },
+        {
+          "file": "libs/core/auth/feature-login/README.md",
+          "hash": "275029362003006172"
+        },
+        {
+          "file": "libs/core/auth/feature-login/jest.config.ts",
+          "hash": "11983954327911584819"
+        },
+        {
+          "file": "libs/core/auth/feature-login/project.json",
+          "hash": "14389868582914925859"
+        },
+        {
+          "file": "libs/core/auth/feature-login/src/index.ts",
+          "hash": "3520251502397527910"
+        },
+        {
+          "file": "libs/core/auth/feature-login/src/lib/login-container/login-container.component.html",
+          "hash": "2824154568557584251"
+        },
+        {
+          "file": "libs/core/auth/feature-login/src/lib/login-container/login-container.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/core/auth/feature-login/src/lib/login-container/login-container.component.spec.ts",
+          "hash": "4987723790829828140"
+        },
+        {
+          "file": "libs/core/auth/feature-login/src/lib/login-container/login-container.component.ts",
+          "hash": "11625230559342103368",
+          "deps": [
+            "core-auth-data-access"
+          ]
+        },
+        {
+          "file": "libs/core/auth/feature-login/src/lib/login-form-ui/login-form-ui.component.html",
+          "hash": "9263568176925970980"
+        },
+        {
+          "file": "libs/core/auth/feature-login/src/lib/login-form-ui/login-form-ui.component.scss",
+          "hash": "8046017159607763793"
+        },
+        {
+          "file": "libs/core/auth/feature-login/src/lib/login-form-ui/login-form-ui.component.spec.ts",
+          "hash": "1071975809378068528"
+        },
+        {
+          "file": "libs/core/auth/feature-login/src/lib/login-form-ui/login-form-ui.component.ts",
+          "hash": "7028346379042852813",
+          "deps": [
+            "core-http",
+            "core-ui",
+            "users-core-ui-language-switch"
+          ]
+        },
+        {
+          "file": "libs/core/auth/feature-login/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/core/auth/feature-login/tsconfig.json",
+          "hash": "16248533471678702062"
+        },
+        {
+          "file": "libs/core/auth/feature-login/tsconfig.lib.json",
+          "hash": "6703263342655340472"
+        },
+        {
+          "file": "libs/core/auth/feature-login/tsconfig.spec.json",
+          "hash": "13144727132898993533"
+        }
+      ],
+      "settings-data-access": [
+        {
+          "file": "libs/users/settings/data-access/.eslintrc.json",
+          "hash": "13354458262963388726"
+        },
+        {
+          "file": "libs/users/settings/data-access/README.md",
+          "hash": "1752534141088960420"
+        },
+        {
+          "file": "libs/users/settings/data-access/jest.config.ts",
+          "hash": "15045069352609301376"
+        },
+        {
+          "file": "libs/users/settings/data-access/project.json",
+          "hash": "13254655114566065672"
+        },
+        {
+          "file": "libs/users/settings/data-access/src/index.ts",
+          "hash": "5514052041661721818"
+        },
+        {
+          "file": "libs/users/settings/data-access/src/lib/+state/settings.actions.ts",
+          "hash": "12615806381822122663"
+        },
+        {
+          "file": "libs/users/settings/data-access/src/lib/+state/settings.effects.spec.ts",
+          "hash": "15597065564726660761"
+        },
+        {
+          "file": "libs/users/settings/data-access/src/lib/+state/settings.effects.ts",
+          "hash": "12349192235186603897"
+        },
+        {
+          "file": "libs/users/settings/data-access/src/lib/+state/settings.facade.ts",
+          "hash": "8030025070782863456"
+        },
+        {
+          "file": "libs/users/settings/data-access/src/lib/+state/settings.reducer.spec.ts",
+          "hash": "262610982082036407"
+        },
+        {
+          "file": "libs/users/settings/data-access/src/lib/+state/settings.reducer.ts",
+          "hash": "2105232414911227925"
+        },
+        {
+          "file": "libs/users/settings/data-access/src/lib/+state/settings.selectors.spec.ts",
+          "hash": "1893547787631433200"
+        },
+        {
+          "file": "libs/users/settings/data-access/src/lib/+state/settings.selectors.ts",
+          "hash": "10828402567350097486"
+        },
+        {
+          "file": "libs/users/settings/data-access/src/lib/model/settings.interface.ts",
+          "hash": "18143580759050417481"
+        },
+        {
+          "file": "libs/users/settings/data-access/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/users/settings/data-access/tsconfig.json",
+          "hash": "16248533471678702062"
+        },
+        {
+          "file": "libs/users/settings/data-access/tsconfig.lib.json",
+          "hash": "9957646254653392655"
+        },
+        {
+          "file": "libs/users/settings/data-access/tsconfig.spec.json",
+          "hash": "13144727132898993533"
+        }
+      ],
+      "core-dadata": [
+        {
+          "file": "libs/core/dadata/.eslintrc.json",
+          "hash": "17327085785578759323"
+        },
+        {
+          "file": "libs/core/dadata/README.md",
+          "hash": "6272349263208253852"
+        },
+        {
+          "file": "libs/core/dadata/jest.config.ts",
+          "hash": "8378275433777121472"
+        },
+        {
+          "file": "libs/core/dadata/project.json",
+          "hash": "18000652009308035564"
+        },
+        {
+          "file": "libs/core/dadata/src/index.ts",
+          "hash": "12891731922236962823"
+        },
+        {
+          "file": "libs/core/dadata/src/lib/dadata-api/dadata-api.service.ts",
+          "hash": "7120981799942164537"
+        },
+        {
+          "file": "libs/core/dadata/src/lib/dadata.token.ts",
+          "hash": "14236345039396077563"
+        },
+        {
+          "file": "libs/core/dadata/src/lib/suggestions.model.ts",
+          "hash": "14232401125431533956"
+        },
+        {
+          "file": "libs/core/dadata/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/core/dadata/tsconfig.json",
+          "hash": "8526453262384300416"
+        },
+        {
+          "file": "libs/core/dadata/tsconfig.lib.json",
+          "hash": "15320869708364835784"
+        },
+        {
+          "file": "libs/core/dadata/tsconfig.spec.json",
+          "hash": "17159144152117924454"
+        }
+      ],
+      "core-http": [
+        {
+          "file": "libs/core/http/.eslintrc.json",
+          "hash": "17327085785578759323"
+        },
+        {
+          "file": "libs/core/http/README.md",
+          "hash": "17695402863644048078"
+        },
+        {
+          "file": "libs/core/http/jest.config.ts",
+          "hash": "4142524217574749965"
+        },
+        {
+          "file": "libs/core/http/project.json",
+          "hash": "1658476044280719696"
+        },
+        {
+          "file": "libs/core/http/src/index.ts",
+          "hash": "4893884853102476288"
+        },
+        {
+          "file": "libs/core/http/src/lib/api-url.token.ts",
+          "hash": "16008779154520631148"
+        },
+        {
+          "file": "libs/core/http/src/lib/api.service.ts",
+          "hash": "16827099914955184426"
+        },
+        {
+          "file": "libs/core/http/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/core/http/tsconfig.json",
+          "hash": "8526453262384300416"
+        },
+        {
+          "file": "libs/core/http/tsconfig.lib.json",
+          "hash": "15320869708364835784"
+        },
+        {
+          "file": "libs/core/http/tsconfig.spec.json",
+          "hash": "17159144152117924454"
+        }
+      ],
+      "core-ui": [
+        {
+          "file": "libs/core/ui/.eslintrc.json",
+          "hash": "17327085785578759323"
+        },
+        {
+          "file": "libs/core/ui/README.md",
+          "hash": "14955696478693086955"
+        },
+        {
+          "file": "libs/core/ui/jest.config.ts",
+          "hash": "17784206925555413018"
+        },
+        {
+          "file": "libs/core/ui/project.json",
+          "hash": "12609609455252801814"
+        },
+        {
+          "file": "libs/core/ui/src/index.ts",
+          "hash": "7662231146812062219"
+        },
+        {
+          "file": "libs/core/ui/src/lib/core-ui-confirm-dialog/core-ui-confirm-dialog.component.html",
+          "hash": "6916978448584565261"
+        },
+        {
+          "file": "libs/core/ui/src/lib/core-ui-confirm-dialog/core-ui-confirm-dialog.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/core/ui/src/lib/core-ui-confirm-dialog/core-ui-confirm-dialog.component.spec.ts",
+          "hash": "5487940549624297333"
+        },
+        {
+          "file": "libs/core/ui/src/lib/core-ui-confirm-dialog/core-ui-confirm-dialog.component.ts",
+          "hash": "2461535299226303624"
+        },
+        {
+          "file": "libs/core/ui/src/lib/cropper-dialog/cropper-dialog.component.html",
+          "hash": "11585826738399423744"
+        },
+        {
+          "file": "libs/core/ui/src/lib/cropper-dialog/cropper-dialog.component.scss",
+          "hash": "15682272497409692273"
+        },
+        {
+          "file": "libs/core/ui/src/lib/cropper-dialog/cropper-dialog.component.spec.ts",
+          "hash": "4459294386449595704"
+        },
+        {
+          "file": "libs/core/ui/src/lib/cropper-dialog/cropper-dialog.component.ts",
+          "hash": "5551950624590163003",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:ngx-image-cropper",
+            "npm:@angular/material"
+          ]
+        },
+        {
+          "file": "libs/core/ui/src/lib/input-city/input-city.component.html",
+          "hash": "15649881704654009215"
+        },
+        {
+          "file": "libs/core/ui/src/lib/input-city/input-city.component.scss",
+          "hash": "16306494780072263971"
+        },
+        {
+          "file": "libs/core/ui/src/lib/input-city/input-city.component.spec.ts",
+          "hash": "12414167196405116831"
+        },
+        {
+          "file": "libs/core/ui/src/lib/input-city/input-city.component.ts",
+          "hash": "17871177869533531384",
+          "deps": [
+            "core-dadata",
+            "core-data-access"
+          ]
+        },
+        {
+          "file": "libs/core/ui/src/lib/input-password/input-password.component.html",
+          "hash": "5635291872124553292"
+        },
+        {
+          "file": "libs/core/ui/src/lib/input-password/input-password.component.scss",
+          "hash": "16306494780072263971"
+        },
+        {
+          "file": "libs/core/ui/src/lib/input-password/input-password.component.ts",
+          "hash": "10766211882775837471"
+        },
+        {
+          "file": "libs/core/ui/src/lib/password-change-dialog/password-change-dialog.component.html",
+          "hash": "16847085210824615314"
+        },
+        {
+          "file": "libs/core/ui/src/lib/password-change-dialog/password-change-dialog.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/core/ui/src/lib/password-change-dialog/password-change-dialog.component.spec.ts",
+          "hash": "14663370152043534358"
+        },
+        {
+          "file": "libs/core/ui/src/lib/password-change-dialog/password-change-dialog.component.ts",
+          "hash": "11896174040830042597"
+        },
+        {
+          "file": "libs/core/ui/src/lib/profile-change-dialog/profile-change-dialog.component.html",
+          "hash": "11981645550549734984"
+        },
+        {
+          "file": "libs/core/ui/src/lib/profile-change-dialog/profile-change-dialog.component.scss",
+          "hash": "16306494780072263971"
+        },
+        {
+          "file": "libs/core/ui/src/lib/profile-change-dialog/profile-change-dialog.component.spec.ts",
+          "hash": "8007921282464170202"
+        },
+        {
+          "file": "libs/core/ui/src/lib/profile-change-dialog/profile-change-dialog.component.ts",
+          "hash": "12339252058813120684",
+          "deps": [
+            "core-data-access",
+            "core-auth-data-access"
+          ]
+        },
+        {
+          "file": "libs/core/ui/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/core/ui/tsconfig.json",
+          "hash": "8526453262384300416"
+        },
+        {
+          "file": "libs/core/ui/tsconfig.lib.json",
+          "hash": "15320869708364835784"
+        },
+        {
+          "file": "libs/core/ui/tsconfig.spec.json",
+          "hash": "17159144152117924454"
+        }
+      ],
+      "core-auth-feature-register": [
+        {
+          "file": "libs/core/auth/feature-register/.eslintrc.json",
+          "hash": "10287172738953212181"
+        },
+        {
+          "file": "libs/core/auth/feature-register/README.md",
+          "hash": "13448282769782007664"
+        },
+        {
+          "file": "libs/core/auth/feature-register/jest.config.ts",
+          "hash": "7800422498656722402"
+        },
+        {
+          "file": "libs/core/auth/feature-register/project.json",
+          "hash": "9410077772934632809"
+        },
+        {
+          "file": "libs/core/auth/feature-register/src/index.ts",
+          "hash": "13215009117017322105"
+        },
+        {
+          "file": "libs/core/auth/feature-register/src/lib/register-container/register-container.component.html",
+          "hash": "3968490293719190079"
+        },
+        {
+          "file": "libs/core/auth/feature-register/src/lib/register-container/register-container.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/core/auth/feature-register/src/lib/register-container/register-container.component.spec.ts",
+          "hash": "3493312690680252297"
+        },
+        {
+          "file": "libs/core/auth/feature-register/src/lib/register-container/register-container.component.ts",
+          "hash": "10366416031277650691",
+          "deps": [
+            "core-auth-data-access"
+          ]
+        },
+        {
+          "file": "libs/core/auth/feature-register/src/lib/register-form-ui/register-form-ui.component.html",
+          "hash": "3491781633119030761"
+        },
+        {
+          "file": "libs/core/auth/feature-register/src/lib/register-form-ui/register-form-ui.component.scss",
+          "hash": "16626856641452606889"
+        },
+        {
+          "file": "libs/core/auth/feature-register/src/lib/register-form-ui/register-form-ui.component.spec.ts",
+          "hash": "5274943824842516247"
+        },
+        {
+          "file": "libs/core/auth/feature-register/src/lib/register-form-ui/register-form-ui.component.ts",
+          "hash": "10955341939276047936",
+          "deps": [
+            "core-auth-data-access",
+            "core-ui",
+            "core-http",
+            "users-core-ui-language-switch"
+          ]
+        },
+        {
+          "file": "libs/core/auth/feature-register/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/core/auth/feature-register/tsconfig.json",
+          "hash": "16248533471678702062"
+        },
+        {
+          "file": "libs/core/auth/feature-register/tsconfig.lib.json",
+          "hash": "9957646254653392655"
+        },
+        {
+          "file": "libs/core/auth/feature-register/tsconfig.spec.json",
+          "hash": "13144727132898993533"
+        }
+      ],
+      "core-github-api-data-access": [
+        {
+          "file": "libs/core/github-api/data-access/.eslintrc.json",
+          "hash": "10287172738953212181"
+        },
+        {
+          "file": "libs/core/github-api/data-access/README.md",
+          "hash": "11221181011136101251"
+        },
+        {
+          "file": "libs/core/github-api/data-access/jest.config.ts",
+          "hash": "10371734800401696735"
+        },
+        {
+          "file": "libs/core/github-api/data-access/project.json",
+          "hash": "1339806133599479608"
+        },
+        {
+          "file": "libs/core/github-api/data-access/src/index.ts",
+          "hash": "16508004449958519024"
+        },
+        {
+          "file": "libs/core/github-api/data-access/src/lib/+state/github-api.actions.ts",
+          "hash": "2988325553045590750"
+        },
+        {
+          "file": "libs/core/github-api/data-access/src/lib/+state/github-api.effects.ts",
+          "hash": "14828716261912319025"
+        },
+        {
+          "file": "libs/core/github-api/data-access/src/lib/+state/github-api.reducer.ts",
+          "hash": "11508381299690308068",
+          "deps": [
+            "core-data-access"
+          ]
+        },
+        {
+          "file": "libs/core/github-api/data-access/src/lib/+state/github-api.selectors.ts",
+          "hash": "9419380052167663750"
+        },
+        {
+          "file": "libs/core/github-api/data-access/src/lib/client-id.token.ts",
+          "hash": "7923826023157073062"
+        },
+        {
+          "file": "libs/core/github-api/data-access/src/lib/models/github-token-DTO.model.ts",
+          "hash": "9377783573416948542"
+        },
+        {
+          "file": "libs/core/github-api/data-access/src/lib/models/github-user-DTO.model.ts",
+          "hash": "9735471369490083556"
+        },
+        {
+          "file": "libs/core/github-api/data-access/src/lib/services/github-api.service.spec.ts",
+          "hash": "5453661378192428560"
+        },
+        {
+          "file": "libs/core/github-api/data-access/src/lib/services/github-api.service.ts",
+          "hash": "12100870895788839182",
+          "deps": [
+            "core-http"
+          ]
+        },
+        {
+          "file": "libs/core/github-api/data-access/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/core/github-api/data-access/tsconfig.json",
+          "hash": "16248533471678702062"
+        },
+        {
+          "file": "libs/core/github-api/data-access/tsconfig.lib.json",
+          "hash": "9957646254653392655"
+        },
+        {
+          "file": "libs/core/github-api/data-access/tsconfig.spec.json",
+          "hash": "13144727132898993533"
+        }
+      ],
+      "users-task": [
+        {
+          "file": "libs/users/task/.eslintrc.json",
+          "hash": "17327085785578759323"
+        },
+        {
+          "file": "libs/users/task/README.md",
+          "hash": "7383232813159798479"
+        },
+        {
+          "file": "libs/users/task/jest.config.ts",
+          "hash": "13169803458587066704"
+        },
+        {
+          "file": "libs/users/task/project.json",
+          "hash": "9740201118730493009"
+        },
+        {
+          "file": "libs/users/task/src/index.ts",
+          "hash": "13635068177129685270"
+        },
+        {
+          "file": "libs/users/task/src/lib/task-change-dialog/task-change-dialog.component.html",
+          "hash": "14526681487962953857"
+        },
+        {
+          "file": "libs/users/task/src/lib/task-change-dialog/task-change-dialog.component.scss",
+          "hash": "11874251710782705811"
+        },
+        {
+          "file": "libs/users/task/src/lib/task-change-dialog/task-change-dialog.component.ts",
+          "hash": "2292794542021231683",
+          "deps": [
+            "users-users-data-access",
+            "core-data-access",
+            "users-backlog-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/task/src/lib/tasks-create-column-dialog/tasks-create-column-dialog.component.html",
+          "hash": "5126794056348984735"
+        },
+        {
+          "file": "libs/users/task/src/lib/tasks-create-column-dialog/tasks-create-column-dialog.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/users/task/src/lib/tasks-create-column-dialog/tasks-create-column-dialog.component.spec.ts",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/users/task/src/lib/tasks-create-column-dialog/tasks-create-column-dialog.component.ts",
+          "hash": "11432728826348174035"
+        },
+        {
+          "file": "libs/users/task/src/lib/tasks-create-dialog/tasks-create-dialog.component.html",
+          "hash": "8962697245376916655"
+        },
+        {
+          "file": "libs/users/task/src/lib/tasks-create-dialog/tasks-create-dialog.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/users/task/src/lib/tasks-create-dialog/tasks-create-dialog.component.spec.ts",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/users/task/src/lib/tasks-create-dialog/tasks-create-dialog.component.ts",
+          "hash": "14415423523942299570"
+        },
+        {
+          "file": "libs/users/task/src/lib/tasks-search-input/tasks-search-input.component.html",
+          "hash": "6735530881795563980"
+        },
+        {
+          "file": "libs/users/task/src/lib/tasks-search-input/tasks-search-input.component.scss",
+          "hash": "3610621089985915823"
+        },
+        {
+          "file": "libs/users/task/src/lib/tasks-search-input/tasks-search-input.component.spec.ts",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/users/task/src/lib/tasks-search-input/tasks-search-input.component.ts",
+          "hash": "11052303217005520183"
+        },
+        {
+          "file": "libs/users/task/src/lib/tasks-view-container/tasks-list-container.store.ts",
+          "hash": "16919712302310250074",
+          "deps": [
+            "users-task-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/task/src/lib/tasks-view-container/tasks-view-container.component.html",
+          "hash": "5646590737470842919"
+        },
+        {
+          "file": "libs/users/task/src/lib/tasks-view-container/tasks-view-container.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/users/task/src/lib/tasks-view-container/tasks-view-container.component.spec.ts",
+          "hash": "12890681267936150454"
+        },
+        {
+          "file": "libs/users/task/src/lib/tasks-view-container/tasks-view-container.component.ts",
+          "hash": "10295491634255205426",
+          "deps": [
+            "users-task-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/task/src/lib/tasks-view/tasks-column/tasks-column.component.html",
+          "hash": "4657794030100490120"
+        },
+        {
+          "file": "libs/users/task/src/lib/tasks-view/tasks-column/tasks-column.component.scss",
+          "hash": "21663406182813149"
+        },
+        {
+          "file": "libs/users/task/src/lib/tasks-view/tasks-column/tasks-column.component.spec.ts",
+          "hash": "18109314300055155243"
+        },
+        {
+          "file": "libs/users/task/src/lib/tasks-view/tasks-column/tasks-column.component.ts",
+          "hash": "5838228742533321444",
+          "deps": [
+            "users-task-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/task/src/lib/tasks-view/tasks-view.component.html",
+          "hash": "11130696798704691155"
+        },
+        {
+          "file": "libs/users/task/src/lib/tasks-view/tasks-view.component.scss",
+          "hash": "2976827414726400471"
+        },
+        {
+          "file": "libs/users/task/src/lib/tasks-view/tasks-view.component.spec.ts",
+          "hash": "8789556928746057733"
+        },
+        {
+          "file": "libs/users/task/src/lib/tasks-view/tasks-view.component.ts",
+          "hash": "1722621041538175017",
+          "deps": [
+            "users-task-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/task/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/users/task/tsconfig.json",
+          "hash": "8526453262384300416"
+        },
+        {
+          "file": "libs/users/task/tsconfig.lib.json",
+          "hash": "15320869708364835784"
+        },
+        {
+          "file": "libs/users/task/tsconfig.spec.json",
+          "hash": "17159144152117924454"
+        }
+      ],
+      "users": [
+        {
+          "file": "apps/users/.eslintrc.json",
+          "hash": "13741239984819894748"
+        },
+        {
+          "file": "apps/users/.postcssrc.json",
+          "hash": "4809645065749137349"
+        },
+        {
+          "file": "apps/users/Dockerfile",
+          "hash": "17343745477901645570"
+        },
+        {
+          "file": "apps/users/jest.config.ts",
+          "hash": "8391144030084124300"
+        },
+        {
+          "file": "apps/users/nginx.conf",
+          "hash": "9870145404483685104"
+        },
+        {
+          "file": "apps/users/project.json",
+          "hash": "16111170180684766000"
+        },
+        {
+          "file": "apps/users/src/app-theme.scss",
+          "hash": "4075346666529749241"
+        },
+        {
+          "file": "apps/users/src/app/app.component.html",
+          "hash": "17816966185630879015"
+        },
+        {
+          "file": "apps/users/src/app/app.component.scss",
+          "hash": "12080594437076729483"
+        },
+        {
+          "file": "apps/users/src/app/app.component.spec.ts",
+          "hash": "9129315388550437122"
+        },
+        {
+          "file": "apps/users/src/app/app.component.ts",
+          "hash": "15482173081057498456",
+          "deps": [
+            "core-auth-data-access",
+            "users-core-ui-layout"
+          ]
+        },
+        {
+          "file": "apps/users/src/app/app.config.ts",
+          "hash": "8132013695698470821",
+          "deps": [
+            "core-http",
+            "users-users-data-access",
+            "core-auth-data-access",
+            "settings-data-access",
+            "core-dadata",
+            "users-articles-data-access",
+            "users-task-data-access",
+            "core-github-api-data-access",
+            "users-backlog-data-access",
+            "data-access"
+          ]
+        },
+        {
+          "file": "apps/users/src/app/app.routes.ts",
+          "hash": "16540317548153164923",
+          "deps": [
+            "core-auth-data-access",
+            "core-utils",
+            [
+              "users-home",
+              "dynamic"
+            ],
+            [
+              "users-users-feature-users-list",
+              "dynamic"
+            ],
+            [
+              "users-users-feature-users-detail",
+              "dynamic"
+            ],
+            [
+              "users-profile-feature-profile",
+              "dynamic"
+            ],
+            [
+              "users-articles-articles-create",
+              "dynamic"
+            ],
+            [
+              "feature-folders-list",
+              "dynamic"
+            ],
+            [
+              "feature-materials-list",
+              "dynamic"
+            ],
+            [
+              "users-articles-articles",
+              "dynamic"
+            ],
+            [
+              "article-read",
+              "dynamic"
+            ],
+            [
+              "users-task",
+              "dynamic"
+            ],
+            [
+              "settings",
+              "dynamic"
+            ],
+            [
+              "chart",
+              "dynamic"
+            ],
+            [
+              "users-backlog",
+              "dynamic"
+            ],
+            [
+              "core-auth-feature-login",
+              "dynamic"
+            ],
+            [
+              "core-auth-feature-register",
+              "dynamic"
+            ]
+          ]
+        },
+        {
+          "file": "apps/users/src/app/authorized-user-layout/authorized-user-layout.component.html",
+          "hash": "18273841022716295292"
+        },
+        {
+          "file": "apps/users/src/app/authorized-user-layout/authorized-user-layout.component.scss",
+          "hash": "4704622401579445933"
+        },
+        {
+          "file": "apps/users/src/app/authorized-user-layout/authorized-user-layout.component.spec.ts",
+          "hash": "5002434553657837917"
+        },
+        {
+          "file": "apps/users/src/app/authorized-user-layout/authorized-user-layout.component.ts",
+          "hash": "853268433658487459",
+          "deps": [
+            "users-core-ui-layout",
+            "core-auth-data-access"
+          ]
+        },
+        {
+          "file": "apps/users/src/app/unauthorized-user-layout-component/unauthorized-user-layout-component.component.html",
+          "hash": "13346765743709189221"
+        },
+        {
+          "file": "apps/users/src/app/unauthorized-user-layout-component/unauthorized-user-layout-component.component.scss",
+          "hash": "10999163419771827330"
+        },
+        {
+          "file": "apps/users/src/app/unauthorized-user-layout-component/unauthorized-user-layout-component.component.spec.ts",
+          "hash": "7593803111463520802"
+        },
+        {
+          "file": "apps/users/src/app/unauthorized-user-layout-component/unauthorized-user-layout-component.component.ts",
+          "hash": "6415072509606093575"
+        },
+        {
+          "file": "apps/users/src/app/user.interface.ts",
+          "hash": "8524761304664094395"
+        },
+        {
+          "file": "apps/users/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/users/src/assets/i18n/en.json",
+          "hash": "14949739551081541105"
+        },
+        {
+          "file": "apps/users/src/assets/i18n/ru.json",
+          "hash": "17840652229445706703"
+        },
+        {
+          "file": "apps/users/src/assets/icons/github.svg",
+          "hash": "13388223504651981113"
+        },
+        {
+          "file": "apps/users/src/assets/img/1.png",
+          "hash": "11512425798544690722"
+        },
+        {
+          "file": "apps/users/src/environments/environment.development.ts",
+          "hash": "16760761966332050917"
+        },
+        {
+          "file": "apps/users/src/environments/environment.ts",
+          "hash": "1655714181481801424"
+        },
+        {
+          "file": "apps/users/src/favicon.ico",
+          "hash": "9303420814833116677"
+        },
+        {
+          "file": "apps/users/src/index.html",
+          "hash": "6879277917394920052"
+        },
+        {
+          "file": "apps/users/src/main.ts",
+          "hash": "2633615247295277217"
+        },
+        {
+          "file": "apps/users/src/styles.scss",
+          "hash": "17333204171144135225"
+        },
+        {
+          "file": "apps/users/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "apps/users/src/themes/custom-theme.scss",
+          "hash": "3219629872112376519"
+        },
+        {
+          "file": "apps/users/src/themes/dark-green.scss",
+          "hash": "11784024991624969236"
+        },
+        {
+          "file": "apps/users/src/themes/dark-red.scss",
+          "hash": "6135169729390450873"
+        },
+        {
+          "file": "apps/users/src/themes/dark-violent.scss",
+          "hash": "4086769625424746399"
+        },
+        {
+          "file": "apps/users/src/themes/light-green.scss",
+          "hash": "17054882697138520591"
+        },
+        {
+          "file": "apps/users/src/themes/light-red.scss",
+          "hash": "2486896507473711899"
+        },
+        {
+          "file": "apps/users/src/themes/light-violent.scss",
+          "hash": "11297002705472787244"
+        },
+        {
+          "file": "apps/users/tsconfig.app.json",
+          "hash": "8365644956319658761"
+        },
+        {
+          "file": "apps/users/tsconfig.editor.json",
+          "hash": "17511610827034788226"
+        },
+        {
+          "file": "apps/users/tsconfig.json",
+          "hash": "12094030803572703611"
+        },
+        {
+          "file": "apps/users/tsconfig.spec.json",
+          "hash": "2628739785099261941"
+        }
+      ],
+      "users-profile-feature-profile": [
+        {
+          "file": "libs/users/profile/feature-profile/.eslintrc.json",
+          "hash": "10287172738953212181"
+        },
+        {
+          "file": "libs/users/profile/feature-profile/README.md",
+          "hash": "15673082588716328624"
+        },
+        {
+          "file": "libs/users/profile/feature-profile/jest.config.ts",
+          "hash": "4772480685865176512"
+        },
+        {
+          "file": "libs/users/profile/feature-profile/ng-package.json",
+          "hash": "1541820452722001819"
+        },
+        {
+          "file": "libs/users/profile/feature-profile/package.json",
+          "hash": "8826879502317504736"
+        },
+        {
+          "file": "libs/users/profile/feature-profile/project.json",
+          "hash": "9100095029195903504"
+        },
+        {
+          "file": "libs/users/profile/feature-profile/src/index.ts",
+          "hash": "9358427312488533089"
+        },
+        {
+          "file": "libs/users/profile/feature-profile/src/lib/profile-container/profile-container.component.html",
+          "hash": "6564983016647812380"
+        },
+        {
+          "file": "libs/users/profile/feature-profile/src/lib/profile-container/profile-container.component.scss",
+          "hash": "1360027452333631150"
+        },
+        {
+          "file": "libs/users/profile/feature-profile/src/lib/profile-container/profile-container.component.spec.ts",
+          "hash": "4404891077094876622"
+        },
+        {
+          "file": "libs/users/profile/feature-profile/src/lib/profile-container/profile-container.component.ts",
+          "hash": "13478333866335343731",
+          "deps": [
+            "core-github-api-data-access",
+            "npm:@angular/core",
+            "core-auth-data-access",
+            "core-data-access",
+            "core-ui",
+            "npm:rxjs",
+            "npm:@ngrx/component",
+            "npm:@angular/common",
+            "npm:@angular/material",
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/users/profile/feature-profile/src/lib/user-profile-container/user-profile-container.component.html",
+          "hash": "7272426565651666215"
+        },
+        {
+          "file": "libs/users/profile/feature-profile/src/lib/user-profile-container/user-profile-container.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/users/profile/feature-profile/src/lib/user-profile-container/user-profile-container.component.spec.ts",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/users/profile/feature-profile/src/lib/user-profile-container/user-profile-container.component.ts",
+          "hash": "5553293964471596435",
+          "deps": [
+            "users-users-data-access",
+            "core-data-access",
+            "core-auth-data-access"
+          ]
+        },
+        {
+          "file": "libs/users/profile/feature-profile/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/users/profile/feature-profile/tsconfig.json",
+          "hash": "16248533471678702062"
+        },
+        {
+          "file": "libs/users/profile/feature-profile/tsconfig.lib.json",
+          "hash": "9957646254653392655"
+        },
+        {
+          "file": "libs/users/profile/feature-profile/tsconfig.lib.prod.json",
+          "hash": "10809217796916261822"
+        },
+        {
+          "file": "libs/users/profile/feature-profile/tsconfig.spec.json",
+          "hash": "13144727132898993533"
+        }
+      ],
+      "core-utils": [
+        {
+          "file": "libs/core/utils/.eslintrc.json",
+          "hash": "17327085785578759323"
+        },
+        {
+          "file": "libs/core/utils/README.md",
+          "hash": "17440163674869835495"
+        },
+        {
+          "file": "libs/core/utils/jest.config.ts",
+          "hash": "12594014486063541888"
+        },
+        {
+          "file": "libs/core/utils/project.json",
+          "hash": "15509344548128201610"
+        },
+        {
+          "file": "libs/core/utils/src/index.ts",
+          "hash": "13455203251681886997"
+        },
+        {
+          "file": "libs/core/utils/src/lib/deep-readonly.ts",
+          "hash": "13257314264280476271"
+        },
+        {
+          "file": "libs/core/utils/src/lib/unsaved-changes.guard.ts",
+          "hash": "12222317480441621882"
+        },
+        {
+          "file": "libs/core/utils/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/core/utils/tsconfig.json",
+          "hash": "8526453262384300416"
+        },
+        {
+          "file": "libs/core/utils/tsconfig.lib.json",
+          "hash": "15320869708364835784"
+        },
+        {
+          "file": "libs/core/utils/tsconfig.spec.json",
+          "hash": "17159144152117924454"
+        }
+      ],
+      "feature-folders-create": [
+        {
+          "file": "libs/users/materials/feature-folders-create/.eslintrc.json",
+          "hash": "13354458262963388726"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-create/README.md",
+          "hash": "14923577260200836495"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-create/jest.config.ts",
+          "hash": "15564154803336978223"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-create/project.json",
+          "hash": "16172689741376151035"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-create/src/index.ts",
+          "hash": "10607463793999640178"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-create/src/lib/folders-add-button/folders-add-button.component.html",
+          "hash": "10877543806967626009"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-create/src/lib/folders-add-button/folders-add-button.component.scss",
+          "hash": "12494535089735871779"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-create/src/lib/folders-add-button/folders-add-button.component.spec.ts",
+          "hash": "12617254959367309601"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-create/src/lib/folders-add-button/folders-add-button.component.ts",
+          "hash": "18007295236748503198",
+          "deps": [
+            "data-access"
+          ]
+        },
+        {
+          "file": "libs/users/materials/feature-folders-create/src/lib/folders-add-dialog/folders-add-dialog.component.html",
+          "hash": "1878879980147289333"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-create/src/lib/folders-add-dialog/folders-add-dialog.component.scss",
+          "hash": "4586774602991277418"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-create/src/lib/folders-add-dialog/folders-add-dialog.component.spec.ts",
+          "hash": "1505809238192535849"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-create/src/lib/folders-add-dialog/folders-add-dialog.component.ts",
+          "hash": "8734905088097856944"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-create/src/test-setup.ts",
+          "hash": "12935735732682149507"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-create/tsconfig.json",
+          "hash": "16248533471678702062"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-create/tsconfig.lib.json",
+          "hash": "9957646254653392655"
+        },
+        {
+          "file": "libs/users/materials/feature-folders-create/tsconfig.spec.json",
+          "hash": "13144727132898993533"
+        }
+      ]
+    }
+  }
+}
