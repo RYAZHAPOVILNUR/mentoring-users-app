@@ -20,17 +20,17 @@ export const userEffects = createEffect(
           map((users) =>
             UsersActions.loadUsersSuccess({
               users: users.map((user) => usersDTOAdapter.DTOtoEntity(user)),
-            })
+            }),
           ),
           catchError((error) => {
             console.error('Error', error);
             return of(UsersActions.loadUsersFailure({ error }));
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   },
-  { functional: true }
+  { functional: true },
 );
 
 export const deleteUser = createEffect(
@@ -46,12 +46,12 @@ export const deleteUser = createEffect(
           catchError((error) => {
             console.error('Error', error);
             return of(UsersActions.deleteUserFailed({ error }));
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   },
-  { functional: true }
+  { functional: true },
 );
 
 export const addUser = createEffect(
@@ -68,12 +68,12 @@ export const addUser = createEffect(
           catchError((error) => {
             console.error('Error', error);
             return of(UsersActions.addUserFailed({ error }));
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   },
-  { functional: true }
+  { functional: true },
 );
 
 export const editUser = createEffect(
@@ -104,12 +104,12 @@ export const editUser = createEffect(
           catchError((error) => {
             console.error('Error', error);
             return of(UsersActions.editUserFailed({ error }));
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   },
-  { functional: true }
+  { functional: true },
 );
 
 export const loadUser = createEffect(
@@ -128,12 +128,48 @@ export const loadUser = createEffect(
             catchError((error) => {
               console.error('Error', error);
               return of(UsersActions.loadUserFailed({ error }));
-            })
+            }),
           );
         }
         return of(UsersActions.updateUserStatus({ status: 'loading' }));
-      })
+      }),
     );
   },
-  { functional: true }
+  { functional: true },
+);
+
+export const addUserStoryPoints = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
+    return actions$.pipe(
+      ofType(UsersActions.addUserStoryPoints),
+      withLatestFrom(usersEntities$),
+      filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
+      map(([{ userData, id, onSuccessAddSP }, usersEntities]) => ({
+        user: {
+          ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
+          purchaseDate: usersEntities[id]?.purchaseDate || '01.06.2025',
+          educationStatus: usersEntities[id]?.educationStatus || 'trainee',
+          totalStoryPoints: userData.totalStoryPoints,
+        },
+        onSuccessAddSP,
+      })),
+      switchMap(({ user, onSuccessAddSP }) => {
+        return apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+          map((userData) => ({ userData, onSuccessAddSP })),
+          tap(({ onSuccessAddSP }) => onSuccessAddSP()),
+          map(({ userData }) => {
+            return UsersActions.addUserStoryPointsSuccess({ userData });
+          }),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(UsersActions.addUserStoryPointsFailed({ error }));
+          }),
+        );
+      }),
+    );
+  },
+  { functional: true },
 );
