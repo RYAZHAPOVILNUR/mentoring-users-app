@@ -4,10 +4,10 @@ import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
 import { Observable, of, switchMap } from 'rxjs';
 import { UsersErrors } from './users.reducer';
-import { onSuccessEditionCbType } from './users.actions';
+import { onSuccessEditionCbType, onSuccessSPonCbType, setUsersFilter } from './users.actions';
 import { selectLoggedUser } from '@auth/data-access';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
-
+import { filteredUsers } from './users.selectors';
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
   private readonly store = inject(Store);
@@ -42,6 +42,10 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.editUser({ userData, id, onSuccessCb }));
   }
 
+  addStoryPoints(userData: CreateUserDTO, id: number, onSuccessAddSP: onSuccessSPonCbType) {
+    this.store.dispatch(UsersActions.addUserStoryPoints({ userData, id, onSuccessAddSP }));
+  }
+
   getUserFromStore(id: number) {
     return this.store.select(UsersSelectors.selectUserById(id)).pipe(
       switchMap((user: UsersEntity | undefined): Observable<UsersEntity | null> => {
@@ -50,11 +54,17 @@ export class UsersFacade {
         } else {
           return of(null);
         }
-      })
+      }),
     );
   }
 
   loadUser() {
     this.store.dispatch(UsersActions.loadUser());
   }
+
+  setFilter(filter: { name: string }) {
+    this.store.dispatch(setUsersFilter({ filter }));
+  }
+
+  public readonly filteredUsers$ = this.store.select(filteredUsers);
 }
