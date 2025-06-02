@@ -1,29 +1,29 @@
 import { inject, Injectable } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import * as AuthSelectors from './+state/auth.selectors';
-import { authActions } from './+state/auth.actions';
 import { ChangePasswordPayload, ChangeProfileDataPayload } from './+state/sign.auth.model';
+import { AuthStore } from './+state/auth.store';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Injectable({ providedIn: 'root' })
 export class AuthFacade {
-  store = inject(Store);
-  isAuthenticated$ = this.store.pipe(select(AuthSelectors.selectIsAuthenticated));
-  user$ = this.store.pipe(select(AuthSelectors.selectLoggedUser));
-  isAdmin$ = this.store.pipe(select(AuthSelectors.selectIsAdmin));
-  loggedUserId$ = this.store.pipe(select(AuthSelectors.selectLoggedUserId));
-  status$ = this.store.pipe(select(AuthSelectors.selectAuthStatus));
+  authStore = inject(AuthStore);
+
+  isAuthenticated$ = toObservable(this.authStore.signalIsAuthenticated);
+  user$ = toObservable(this.authStore.loggedUser);
+  isAdmin$ = toObservable(this.authStore.signalIsAdmin);
+  loggedUserId$ = toObservable(this.authStore.signalLoggedUserId);
+  status$ = toObservable(this.authStore.authStatus);
 
   public logout() {
-    this.store.dispatch(authActions.logout());
+    this.authStore.logout();
   }
 
   public changePassword(data: ChangePasswordPayload) {
-    this.store.dispatch(authActions.changePassword({ data }));
+    this.authStore.changePassword(data);
   }
 
-  public changeProfileData(data: ChangeProfileDataPayload) {
-    this.store.dispatch(authActions.changeProfileData({ data }));
-  }
+  // public changeProfileData(data: ChangeProfileDataPayload) {
+  //   this.store.dispatch(authActions.changeProfileData({ data }));
+  // }
 
   public getLoggedUser() {
     return this.user$;

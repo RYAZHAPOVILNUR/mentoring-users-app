@@ -5,18 +5,20 @@ import * as UsersSelectors from './users.selectors';
 import { Observable, of, switchMap } from 'rxjs';
 import { UsersErrors } from './users.reducer';
 import { onSuccessEditionCbType } from './users.actions';
-import { selectLoggedUser } from '@auth/data-access';
+import { AuthStore } from '@auth/data-access';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
   private readonly store = inject(Store);
+  private readonly authSignalStore = inject(AuthStore);
 
   public readonly status$ = this.store.pipe(select(UsersSelectors.selectUsersStatus));
   public readonly allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
   public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
-  public readonly loggedUser$ = this.store.select(selectLoggedUser);
+  public readonly loggedUser$ = toObservable(this.authSignalStore.loggedUser);
   public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError));
   public readonly filteredUsers$ = this.store.select(UsersSelectors.filteredUsers);
 

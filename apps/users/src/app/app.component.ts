@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { authActions } from '@auth/data-access';
+import { AuthStore } from '@auth/data-access';
 import { Store } from '@ngrx/store';
 import { AuthFacade } from '@auth/data-access';
 import { Observable } from 'rxjs';
@@ -17,13 +17,13 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  private readonly store = inject(Store);
+  private readonly authSignalStore = inject(AuthStore);
   private readonly facade = inject(AuthFacade);
   public readonly isAuthenticated$: Observable<boolean> = this.facade.isAuthenticated$;
   opened!: boolean;
   events: string[] = [];
 
   constructor() {
-    this.store.dispatch(authActions.getUser());
+    this.authSignalStore.getUser();
   }
 }

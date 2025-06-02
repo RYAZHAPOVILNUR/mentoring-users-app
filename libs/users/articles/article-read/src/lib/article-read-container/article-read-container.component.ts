@@ -9,15 +9,14 @@ import {
   CommentsActions,
   commentsSelectors,
 } from '../../../../data-access/src';
-import { selectQueryParam, selectRouteParam } from '../../../../../../core/data-access/src';
 import { map, Observable, withLatestFrom, take } from 'rxjs';
 import { LetDirective } from '@ngrx/component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ArticleReadComponent } from '../article-read/article-read.component';
 import { ArticleCommentsComponent } from '../article-comments/article-comments.component';
-import { selectLoggedUserId } from '../../../../../../core/auth/data-access/src';
+import { AuthStore } from '../../../../../../core/auth/data-access/src';
 import { selectComments } from '../../../../data-access/src/lib/+state/comments/comments.selectors';
-import { selectOpenedArticle } from 'libs/users/articles/data-access/src/lib/+state/articles.selectors';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'article-read-container',
@@ -29,9 +28,10 @@ import { selectOpenedArticle } from 'libs/users/articles/data-access/src/lib/+st
 })
 export class ArticleReadContainerComponent {
   private readonly store = inject(Store);
+  private readonly authSignalStore = inject(AuthStore);
   public readonly status$ = this.store.select(ArticleSelectors.selectStatus);
   public readonly commentsStatus$ = this.store.select(commentsSelectors.selectStatus);
-  public readonly loggedUserId$ = this.store.select(selectLoggedUserId);
+  public readonly loggedUserId$ = toObservable(this.authSignalStore.signalLoggedUserId);
   public articleComments$ = this.store.select(selectComments);
 
   public articleId$ = this.store.pipe(select(selectRouteParams));
@@ -42,7 +42,7 @@ export class ArticleReadContainerComponent {
         this.store.dispatch(ArticlesActions.getArticleForRead());
       }
       return article;
-    })
+    }),
   );
 
   onSubmitComment(commentText: string) {

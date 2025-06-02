@@ -88,7 +88,7 @@ export class FeatureUserInfoComponent implements OnInit {
           const changeProfileDataPayload: ChangeProfileDataPayload = {
             ...result.value,
           };
-          this.authFacade.changeProfileData(changeProfileDataPayload);
+          // this.authFacade.changeProfileData(changeProfileDataPayload);
         }
       });
   }

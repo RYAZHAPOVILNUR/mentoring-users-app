@@ -5,11 +5,11 @@ import {
   selectGithubUserName,
 } from '@users/core/github-api/data-access';
 import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
-import { authActions, selectAuthStatus, selectLoggedUser } from '@auth/data-access';
-import { UsersEntity, selectQueryParam } from '@users/core/data-access';
+import { AuthStore } from '@auth/data-access';
+import { selectQueryParam } from '@users/core/data-access';
 import { FeatureUserInfoComponent } from '../../../../feature-user-info/feature-user-info.component';
 import { CropperDialogComponent } from '@users/core/ui';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { noop, of, tap } from 'rxjs';
 import { LetDirective } from '@ngrx/component';
 import { CommonModule } from '@angular/common';
@@ -27,15 +27,15 @@ import { Store } from '@ngrx/store';
 })
 export class ProfileContainerComponent implements OnInit {
   private readonly store = inject(Store);
+  private readonly authSignalStore = inject(AuthStore);
   private destroyRef = inject(DestroyRef);
-  public readonly user!: UsersEntity;
   private readonly dialog = inject(MatDialog);
   private readonly githubApiService = inject(GithubApiService);
-  public readonly user$ = this.store.select(selectLoggedUser);
-  public readonly status$ = this.store.select(selectAuthStatus);
   public readonly githubUserName$ = this.store.select(selectGithubUserName);
   public readonly githubStatus$ = this.store.select(selectGithubStatus);
   public readonly isLoggedUser = of(true);
+  public readonly user$ = toObservable(this.authSignalStore.loggedUser);
+  public readonly status$ = toObservable(this.authSignalStore.authStatus);
 
   ngOnInit() {
     this.store
@@ -46,7 +46,7 @@ export class ProfileContainerComponent implements OnInit {
           if (code && typeof code === 'string') {
             this.store.dispatch(githubApiActions.getAccessToken({ code }));
           }
-        })
+        }),
       )
       .subscribe(noop);
 
@@ -66,9 +66,9 @@ export class ProfileContainerComponent implements OnInit {
         data: { image },
       });
 
-      dialogRef.afterClosed().subscribe((result) => {
-        if (result) {
-          this.store.dispatch(authActions.uploadImage({ image: result }));
+      dialogRef.afterClosed().subscribe((image) => {
+        if (image) {
+          this.authSignalStore.uploadImage(image);
         }
       });
     };
