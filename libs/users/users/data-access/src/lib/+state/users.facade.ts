@@ -5,44 +5,44 @@ import * as UsersSelectors from './users.selectors';
 import { Observable, of, switchMap } from 'rxjs';
 import { UsersErrors } from './users.reducer';
 import { onSuccessEditionCbType } from './users.actions';
-import { selectLoggedUser } from '@auth/data-access';
+import { AuthStore } from '@auth/data-access';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
   private readonly store = inject(Store);
+  private readonly authSignalStore = inject(AuthStore);
 
-  /**
-   * Combine pieces of state using createSelector,
-   * and expose them as observables through the facade.
-   */
   public readonly status$ = this.store.pipe(select(UsersSelectors.selectUsersStatus));
   public readonly allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
   public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
-  public readonly loggedUser$ = this.store.select(selectLoggedUser);
+  public readonly loggedUser$ = toObservable(this.authSignalStore.loggedUser);
   public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError));
+  public readonly filteredUsers$ = this.store.select(UsersSelectors.filteredUsers);
+
   /**
    * Use the initialization action to perform one
    * or more tasks in your Effects.
    */
-  init() {
+  public init() {
     this.store.dispatch(UsersActions.initUsers());
   }
 
-  deleteUser(id: number) {
+  public deleteUser(id: number) {
     this.store.dispatch(UsersActions.deleteUser({ id }));
   }
 
-  addUser(userData: CreateUserDTO) {
+  public addUser(userData: CreateUserDTO) {
     this.store.dispatch(UsersActions.addUser({ userData }));
   }
 
-  editUser(userData: CreateUserDTO, id: number, onSuccessCb: onSuccessEditionCbType) {
+  public editUser(userData: CreateUserDTO, id: number, onSuccessCb: onSuccessEditionCbType) {
     this.store.dispatch(UsersActions.editUser({ userData, id, onSuccessCb }));
   }
 
-  getUserFromStore(id: number) {
+  public getUserFromStore(id: number) {
     return this.store.select(UsersSelectors.selectUserById(id)).pipe(
       switchMap((user: UsersEntity | undefined): Observable<UsersEntity | null> => {
         if (user) {
@@ -50,11 +50,15 @@ export class UsersFacade {
         } else {
           return of(null);
         }
-      })
+      }),
     );
   }
 
-  loadUser() {
+  public loadUser() {
     this.store.dispatch(UsersActions.loadUser());
+  }
+
+  public filterUsers(name: string | '') {
+    this.store.dispatch(UsersActions.setUsersFilter({ filter: { name } }));
   }
 }

@@ -23,7 +23,7 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
   private readonly dialog = inject(MatDialog);
   public readonly users$ = this.select(({ users }) => users);
   public readonly status$ = this.select(this.usersFacade.status$, (status) => status);
-  public errors$ = this.select(this.usersFacade.errors$, (error) => error);
+  public readonly errors$ = this.select(this.usersFacade.errors$, (error) => error);
 
   constructor() {
     super(initialState);
@@ -32,7 +32,7 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
   }
 
   private setUsersFromGlobalToLocalStore(): void {
-    this.effect(() => this.usersFacade.allUsers$.pipe(tap((users: UsersEntity[]) => this.patchUsers(users))));
+    this.effect(() => this.usersFacade.filteredUsers$.pipe(tap((users: UsersEntity[]) => this.patchUsers(users))));
   }
 
   private patchUsers(users: UsersEntity[]): void {
@@ -49,8 +49,8 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
       dialogRef.afterClosed().pipe(
         tap((result: boolean) => {
           if (result) this.usersFacade.deleteUser(user.id);
-        })
-      )
+        }),
+      ),
     );
   }
 }

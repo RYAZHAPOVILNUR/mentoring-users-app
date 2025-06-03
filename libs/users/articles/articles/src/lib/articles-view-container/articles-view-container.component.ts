@@ -5,25 +5,26 @@ import { select, Store } from '@ngrx/store';
 import { ArticleSelectors, ArticlesActions, Article } from '@users/users/articles/data-access';
 import { LetDirective } from '@ngrx/component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { selectLoggedUserId } from '@auth/data-access';
-import { ArticleReadComponent } from '@users/users/articles/article-read';
+import { AuthStore } from '@auth/data-access';
 import { map, Observable, withLatestFrom } from 'rxjs';
 import { selectQueryParam } from '@users/core/data-access';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'users-articles-view-container',
   standalone: true,
-  imports: [CommonModule, ArticlesViewComponent, LetDirective, MatProgressBarModule, ArticleReadComponent],
+  imports: [CommonModule, ArticlesViewComponent, LetDirective, MatProgressBarModule],
   templateUrl: './articles-view-container.component.html',
   styleUrls: ['./articles-view-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticlesViewContainerComponent {
   private readonly store = inject(Store);
+  private readonly authSignalStore = inject(AuthStore);
 
   public readonly articles$ = this.store.select(ArticleSelectors.selectArticles);
   public readonly status$ = this.store.select(ArticleSelectors.selectStatus);
-  public readonly loggedUserId$ = this.store.select(selectLoggedUserId);
+  public readonly loggedUserId$ = toObservable(this.authSignalStore.loggedUserId);
   public articleId$ = this.store.pipe(select(selectQueryParam('id')));
 
   public viewedArticle$: Observable<Article | null> = this.store.select(ArticleSelectors.selectArticleForEdit).pipe(
@@ -33,7 +34,7 @@ export class ArticlesViewContainerComponent {
         this.store.dispatch(ArticlesActions.getArticleForEdit({ id }));
       }
       return article;
-    })
+    }),
   );
 
   constructor() {
