@@ -24,7 +24,7 @@ export class ArticlesViewContainerComponent {
 
   public readonly articles$ = this.store.select(ArticleSelectors.selectArticles);
   public readonly status$ = this.store.select(ArticleSelectors.selectStatus);
-  public readonly loggedUserId$ = toObservable(this.authSignalStore.signalLoggedUserId);
+  public readonly loggedUserId$ = toObservable(this.authSignalStore.loggedUserId);
   public articleId$ = this.store.pipe(select(selectQueryParam('id')));
 
   public viewedArticle$: Observable<Article | null> = this.store.select(ArticleSelectors.selectArticleForEdit).pipe(

@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from 'libs/core/auth/data-access/src/lib/+state/auth.service';
 
 @Component({
   standalone: true,
@@ -17,13 +18,13 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  private readonly authSignalStore = inject(AuthStore);
+  private readonly authService = inject(AuthService);
   private readonly facade = inject(AuthFacade);
   public readonly isAuthenticated$: Observable<boolean> = this.facade.isAuthenticated$;
   opened!: boolean;
   events: string[] = [];
 
   constructor() {
-    this.authSignalStore.getUser();
+    this.authService.getUser();
   }
 }

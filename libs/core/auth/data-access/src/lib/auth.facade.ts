@@ -2,23 +2,25 @@ import { inject, Injectable } from '@angular/core';
 import { ChangePasswordPayload, ChangeProfileDataPayload } from './+state/sign.auth.model';
 import { AuthStore } from './+state/auth.store';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { AuthService } from './+state/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthFacade {
-  authStore = inject(AuthStore);
+  authSignalStore = inject(AuthStore);
+  authService = inject(AuthService);
 
-  isAuthenticated$ = toObservable(this.authStore.signalIsAuthenticated);
-  user$ = toObservable(this.authStore.loggedUser);
-  isAdmin$ = toObservable(this.authStore.signalIsAdmin);
-  loggedUserId$ = toObservable(this.authStore.signalLoggedUserId);
-  status$ = toObservable(this.authStore.authStatus);
+  isAuthenticated$ = toObservable(this.authSignalStore.isAuthenticated);
+  user$ = toObservable(this.authSignalStore.loggedUser);
+  isAdmin$ = toObservable(this.authSignalStore.isAdmin);
+  loggedUserId$ = toObservable(this.authSignalStore.loggedUserId);
+  status$ = toObservable(this.authSignalStore.status);
 
   public logout() {
-    this.authStore.logout();
+    this.authService.logout();
   }
 
   public changePassword(data: ChangePasswordPayload) {
-    this.authStore.changePassword(data);
+    this.authService.changePassword(data);
   }
 
   // public changeProfileData(data: ChangeProfileDataPayload) {

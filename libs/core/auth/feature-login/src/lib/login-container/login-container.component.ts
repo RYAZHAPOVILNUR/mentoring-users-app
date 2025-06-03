@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoginFormUiComponent } from '../login-form-ui/login-form-ui.component';
 import { AuthStore, SignAuthPayload } from '@auth/data-access';
 import { Router } from '@angular/router';
+import { AuthService } from 'libs/core/auth/data-access/src/lib/+state/auth.service';
 
 @Component({
   selector: 'users-login-container',
@@ -13,11 +14,11 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginContainerComponent {
-  private readonly authStore = inject(AuthStore);
+  private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
 
   onLogin(userData: SignAuthPayload) {
-    this.authStore.login(userData);
+    this.authService.login(userData);
   }
 
   onRedirectToSignup() {

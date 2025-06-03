@@ -4,14 +4,16 @@ import { filter, map, tap } from 'rxjs';
 import { CanActivateFn } from '@angular/router';
 import { AuthStore } from '../+state/auth.store';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { AuthService } from '../+state/auth.service';
 
 export const adminGuard: CanActivateFn = () => {
   const authSignalStore = inject(AuthStore);
+  const authService = inject(AuthService);
 
-  return toObservable(authSignalStore.signalIsAdmin).pipe(
+  return toObservable(authSignalStore.isAdmin).pipe(
     tap((isAdmin) => {
       if (isAdmin === null) {
-        authSignalStore.getUser();
+        authService.getUser();
       }
     }),
     filter((isAdmin) => isAdmin !== null),

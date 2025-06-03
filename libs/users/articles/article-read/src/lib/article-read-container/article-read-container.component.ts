@@ -31,7 +31,7 @@ export class ArticleReadContainerComponent {
   private readonly authSignalStore = inject(AuthStore);
   public readonly status$ = this.store.select(ArticleSelectors.selectStatus);
   public readonly commentsStatus$ = this.store.select(commentsSelectors.selectStatus);
-  public readonly loggedUserId$ = toObservable(this.authSignalStore.signalLoggedUserId);
+  public readonly loggedUserId$ = toObservable(this.authSignalStore.loggedUserId);
   public articleComments$ = this.store.select(selectComments);
 
   public articleId$ = this.store.pipe(select(selectRouteParams));

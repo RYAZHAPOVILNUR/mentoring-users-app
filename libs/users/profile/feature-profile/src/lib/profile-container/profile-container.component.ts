@@ -35,7 +35,7 @@ export class ProfileContainerComponent implements OnInit {
   public readonly githubStatus$ = this.store.select(selectGithubStatus);
   public readonly isLoggedUser = of(true);
   public readonly user$ = toObservable(this.authSignalStore.loggedUser);
-  public readonly status$ = toObservable(this.authSignalStore.authStatus);
+  public readonly status$ = toObservable(this.authSignalStore.status);
 
   ngOnInit() {
     this.store

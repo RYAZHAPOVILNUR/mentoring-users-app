@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RegisterFormUiComponent } from '../register-form-ui/register-form-ui.component';
 import { Router } from '@angular/router';
 import { AuthStore, NewUser } from '@auth/data-access';
+import { AuthService } from 'libs/core/auth/data-access/src/lib/+state/auth.service';
 
 @Component({
   selector: 'users-register-container',
@@ -14,13 +15,13 @@ import { AuthStore, NewUser } from '@auth/data-access';
 })
 export class RegisterContainerComponent {
   private readonly router = inject(Router);
-  private readonly authSignalStore = inject(AuthStore);
+  private readonly authService = inject(AuthService);
 
   onRedirectToLogin() {
     this.router.navigate(['/login']);
   }
 
   onRegister(userData: NewUser) {
-    this.authSignalStore.register(userData);
+    this.authService.register(userData);
   }
 }
