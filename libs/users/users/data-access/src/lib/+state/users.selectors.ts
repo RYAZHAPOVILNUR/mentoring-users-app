@@ -34,7 +34,7 @@ export const filteredUsers = createSelector(usersFilterSelector, selectAllUsers,
   if (!usersFilter) {
     return allUsers; 
   }
-  else {
-    return allUsers.filter(user => user.name); 
-  } 
+  else {   
+    return allUsers.filter(user => user.name.toLowerCase().includes(usersFilter.name.toLowerCase()));  
+  }   
 }); 

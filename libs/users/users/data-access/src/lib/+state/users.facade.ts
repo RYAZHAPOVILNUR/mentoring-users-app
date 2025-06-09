@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { props, select, Store } from '@ngrx/store';
 import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
 import { Observable, of, switchMap } from 'rxjs';
@@ -60,7 +60,7 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.loadUser());
   }
 
-  setUsersFilter() {
-    this.store.dispatch(UsersActions.setUsersFilter()); 
+  setUsersFilter(name: string) {
+    this.store.dispatch(UsersActions.setUsersFilter({ filter: { name }})); 
   }
 }

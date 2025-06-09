@@ -16,7 +16,7 @@ export interface UsersState extends EntityState<UsersEntity> {
   selectedId?: string | number; // which Users record has been selected
   status: LoadingStatus;
   error: UsersErrors | null;
-  usersFilter: { name:string }; 
+  usersFilter: { name: string }; 
 }
 
 export interface UsersPartialState {
@@ -78,9 +78,9 @@ const reducer = createReducer(
     ...state,
     status,
   })), 
-  on(UsersActions.setUsersFilter, (state) => ({
+  on(UsersActions.setUsersFilter, (state, { filter }) => ({
     ...state, 
-    usersFilter: { name: ''},  
+    usersFilter: { name: filter.name },  
   }))
 );
 
