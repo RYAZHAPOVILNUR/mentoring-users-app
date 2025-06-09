@@ -11,6 +11,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { PushPipe } from '@ngrx/component';
 import { LanguageKeys, LanguageSwitchService } from '@users/users/core/ui/language-switch';
 import { ChangeThemeComponentHeader } from '@users/users/settings/feature-change-theme';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'lib-header',
@@ -32,8 +33,8 @@ import { ChangeThemeComponentHeader } from '@users/users/settings/feature-change
 export class HeaderComponent {
   private readonly facade = inject(AuthFacade);
   private readonly languageSwitchService = inject(LanguageSwitchService);
-  public readonly isAuthenticated$: Observable<boolean> = this.facade.isAuthenticated$;
-  public readonly isAdmin$: Observable<boolean | null> = this.facade.isAdmin$;
+  public readonly isAuthenticated$ = toObservable(this.facade.isAuthenticated$);
+  public readonly isAdmin = toObservable(this.facade.isAdmin$);
   public readonly selectedLanguage$ = this.languageSwitchService.selectedLanguage$;
 
   @Output() sidenavToggle = new EventEmitter();

@@ -1,11 +1,11 @@
 <ng-container
   *ngrxLet="{
     user: user$,
-    status: status$,
-    isLoggedUser
+    status: status,
+    isLoggedUser: isLoggedUser
   } as vm"
 >
-  <ng-container *ngIf="vm.status === 'loaded'">
+  <ng-container *ngIf="vm.status() === 'loaded' && vm.user()">
     <feature-user-info [vm]="vm"></feature-user-info>
   </ng-container>
 </ng-container>

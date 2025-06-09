@@ -1,4 +1,4 @@
-<section *ngIf="userId$ | ngrxPush as userId">
+<section *ngIf="userId | ngrxPush as userId">
   <form [formGroup]="formGroup" (submit)="onSubmitComment()">
     <h2>{{ 'LAYOUT.ARTICALE.COMMENTS' | translate }}</h2>
     <mat-form-field>
