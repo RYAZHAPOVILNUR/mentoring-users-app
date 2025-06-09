@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegisterFormUiComponent } from '../register-form-ui/register-form-ui.component';
 import { Router } from '@angular/router';
-import { NewUser, authActions } from '@auth/data-access';
-import { Store } from '@ngrx/store';
+import { NewUser } from '@auth/data-access';
+import { AuthStore } from 'libs/core/auth/data-access/src/lib/+state/auth.store';
 
 @Component({
   selector: 'users-register-container',
@@ -15,13 +15,13 @@ import { Store } from '@ngrx/store';
 })
 export class RegisterContainerComponent {
   private readonly router = inject(Router);
-  private readonly store = inject(Store);
+  private readonly authStore = inject(AuthStore);
 
   onRedirectToLogin() {
     this.router.navigate(['/login']);
   }
 
   onRegister(userData: NewUser) {
-    this.store.dispatch(authActions.register({ userData }));
+    this.authStore.register( userData );
   }
 }

@@ -10,6 +10,7 @@ import { AuthFacade } from '@auth/data-access';
 import { Observable, map } from 'rxjs';
 import { PushPipe } from '@ngrx/component';
 import { UiPhotoModalComponent } from 'libs/users/profile/ui-profile/ui-photo-modal/ui-photo-modal.component';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'navbar',
@@ -30,7 +31,9 @@ import { UiPhotoModalComponent } from 'libs/users/profile/ui-profile/ui-photo-mo
 })
 export class NavbarComponent {
   private readonly facade = inject(AuthFacade);
-  public readonly userPhoto: Observable<string | undefined> = this.facade.user$.pipe(map((user) => user.photo?.url));
+  public readonly userPhoto = toObservable(this.facade.user$).pipe(
+    map((user) => user.photo?.url)
+  );  
   public readonly photo = this.userPhoto ? this.userPhoto : '';
   private readonly dialog = inject(MatDialog);
 

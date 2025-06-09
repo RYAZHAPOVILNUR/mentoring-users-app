@@ -12,7 +12,7 @@ import { USERS_FEATURE_KEY, usersReducer, userEffects } from '@users/users/data-
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { authEffects, authFeature, tokenInterceptor } from '@auth/data-access';
+import { tokenInterceptor } from '@auth/data-access';
 import { SettingsEffects, settingsFeature } from '@users/settings/data-access';
 import { DADATA_TOKEN } from '@users/core/dadata';
 import { provideQuillConfig } from 'ngx-quill/config';
@@ -29,7 +29,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideEffects(
       userEffects,
-      authEffects,
       articlesEffects,
       tasksEffects,
       commentsEffects,
@@ -41,7 +40,6 @@ export const appConfig: ApplicationConfig = {
       router: routerReducer,
       [USERS_FEATURE_KEY]: usersReducer,
       [settingsFeature.name]: settingsFeature.reducer,
-      [authFeature.name]: authFeature.reducer,
       [articlesFeature.name]: articlesFeature.reducer,
       [commentsFeature.name]: commentsFeature.reducer,
       [tasksFeature.name]: tasksFeature.reducer,
