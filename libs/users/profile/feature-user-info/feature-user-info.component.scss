@@ -218,17 +218,17 @@ div.github {
   }
 }
 
- .timer-inline {
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   width: 100%;
-   font-weight: 400;
-   font-size: 1.2rem;
+.timer-inline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-weight: 400;
+  font-size: 1.2rem;
 
-   .timer-display {
-     min-width: 150px;
-     text-align: center;
-     font-size: clamp(1rem, 2.5vw, 1.3rem);
-   }
- }
+  .timer-display {
+    min-width: 150px;
+    text-align: center;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+  }
+}
