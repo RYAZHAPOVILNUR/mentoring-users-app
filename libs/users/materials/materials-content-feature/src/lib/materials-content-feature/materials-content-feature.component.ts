@@ -9,15 +9,16 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Material, selectOpenedFolder } from '@users/materials/data-access';
+import { Material, MaterialsFacade, selectOpenedFolder } from '@users/materials/data-access';
 import { MaterialsContentViewComponent } from '../materials-content-view/materials-content-view.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MaterialsContentAddComponent } from '../materials-content-add/materials-content-add.component';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'lib-materials-content-feature',
   imports: [
     CommonModule,
-    LetDirective,
     RouterModule,
     MatListModule,
     MatIconModule,
@@ -34,6 +35,7 @@ export class MaterialsContentFeatureComponent {
   @Input({ required: true }) vm!: MaterialsVM;
   private matDialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
+  private materialsFacade = inject(MaterialsFacade);
 
 
 
@@ -46,5 +48,23 @@ export class MaterialsContentFeatureComponent {
       .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
+  }
+
+  public openAddMaterial(materialType: string): void {
+    const dialogRef: MatDialogRef<MaterialsContentAddComponent> =
+      this.matDialog.open(MaterialsContentAddComponent, {data: {materialType: materialType}});
+    dialogRef
+      .afterClosed()
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        filter((newMaterial) => !!newMaterial)
+      )
+      .subscribe((newMaterial) =>
+        this.materialsFacade.addMaterial(newMaterial)
+      );
+  }
+
+  deletedMaterial(id: number) {
+    this.materialsFacade.deleteMaterial(id);
   }
 }
