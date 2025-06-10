@@ -1,1 +1,1 @@
-export * from './lib/materials-content-feature/materials-content-feature.component';
+export * from './lib/materials-content-container/materials-content-container.component';

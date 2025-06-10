@@ -1,1 +1,29 @@
 <p>MaterialsContentFeature works!</p>
+<div style="user-select: none">
+  <div class="mat-header">
+    <p routerLink="/materials">Материалы</p>
+    <span>/</span>
+    <p>{{ vm.openedFolder?.title }}</p>
+    <span>|</span>
+    <p>
+      <button mat-fab color="primary" [matMenuTriggerFor]="menu" class="upload-button"><mat-icon style="color: white;">add</mat-icon></button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item><mat-icon>music_note</mat-icon>Видео</button>
+        <button mat-menu-item><mat-icon>ondemand_video</mat-icon>Аудио</button>
+      </mat-menu>
+    </p>
+  </div>
+  <mat-divider></mat-divider>
+
+  <div>
+    <mat-list class="mat-list">
+      <div (dblclick)="openMaterialContent(material)" class="material" *ngFor="let material of vm.materials">
+          <mat-icon class="mat-icon" *ngIf="material.material_link.endsWith('.pdf')">insert_drive_file</mat-icon>
+          <mat-icon class="mat-icon" *ngIf="material.material_link.endsWith('.mp3')">music_note</mat-icon>
+          <mat-icon class="mat-icon" *ngIf="!material.material_link.endsWith('.pdf') && !material.material_link.endsWith('.mp3')">ondemand_video</mat-icon>
+          <div class="mat-title" matListItemTitle>{{ material.title }}</div>
+          <div class="mat-title" matListItemLine>{{ material.created_at | date }}</div>
+      </div>
+    </mat-list>
+  </div>
+</div>

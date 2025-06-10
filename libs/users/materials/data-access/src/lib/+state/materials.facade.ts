@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import {
   selectAllFolders,
+  selectMaterials,
   selectOpenedFolder,
   selectStatus,
 } from './materials.selectors';
@@ -16,6 +17,7 @@ export class MaterialsFacade {
   public readonly openedFolder$ = this.store.select(selectOpenedFolder);
   public readonly allFolders$ = this.store.select(selectAllFolders);
   public readonly getStatus$ = this.store.select(selectStatus);
+  public readonly getMaterials$ = this.store.select(selectMaterials);
 
   addFolder(folder: CreateFolder) {
     this.store.dispatch(MaterialsActions.addFolder({ folder }));

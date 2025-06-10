@@ -7,10 +7,11 @@ import { filter } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'lib-materials-folders-feature',
-  imports: [ CommonModule, DatePipe, NgFor, MatListModule, MatIconModule ],
+  imports: [ CommonModule, DatePipe, NgFor, MatListModule, MatIconModule, MatButtonModule],
   templateUrl: './materials-folders-feature.component.html',
   styleUrl: './materials-folders-feature.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

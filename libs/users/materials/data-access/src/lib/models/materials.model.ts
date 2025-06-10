@@ -17,6 +17,7 @@ export interface Material {
   id: number;
   created_at: number;
   title: string;
+  folder_id: number
   material_link: string;
 }
 
