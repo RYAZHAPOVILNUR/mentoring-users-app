@@ -1,4 +1,3 @@
-<p>materials-content-view works!</p>
 <mat-progress-bar *ngIf="loadedProgress" mode="indeterminate"></mat-progress-bar>
 <div class="viewMaterial">
   <h3 style="text-align: center">Просмотр материала: {{ data.material.title }}</h3>
@@ -23,12 +22,13 @@
   </ng-container>
 
   <ng-container *ngIf="!data.material.material_link.endsWith('.pdf') && !data.material.material_link.endsWith('.mp3')">
-    <div class="link">
+    <!-- <div class="link">
       <p mat-dialog-title>Ссылка на видео: {{ data.material.material_link }}</p>
-    </div>
+    </div> -->
 
-    <div *ngIf="getVideoId()" class="thumbnail">
+    <!-- <div *ngIf="getVideoId()" class="thumbnail">
       <img [src]="'https://img.youtube.com/vi/' + getVideoId() + '/maxresdefault.jpg'" (load)="onImageLoaded()"/>
-    </div>
+    </div> -->
+    <lib-youtube-player *ngIf="getVideoId()"  [videoId]="getVideoId()" (readyStateChange)="onVideoLoaded($event)"></lib-youtube-player>
   </ng-container>
 </div>
