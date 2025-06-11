@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   ChangeDetectionStrategy,
   Component,
@@ -19,16 +18,27 @@ import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { DetailUsersCardVm } from './detail-users-card-vm';
+import {
+  DetailUsersCardVm,
+  EditParams,
+  INITIAL_USER_CONFIG,
+  QueryParamsConfig
+} from './detail-users-card-vm';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { UsersEntity } from '@users/core/data-access';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { DadataApiService } from '@dadata';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs';
 import { PushPipe } from '@ngrx/component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
+const SNACK_BAR_CONFIG: MatSnackBarConfig = {
+  duration: 2500,
+  horizontalPosition: 'center',
+  verticalPosition: 'top',
+}
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -54,106 +64,102 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailUsersCardComponent implements OnInit {
-  private _vm: DetailUsersCardVm = {
-    editMode: false,
-    user: null,
-    status: 'init',
-    errors: null,
-  };
+  private snackBar = inject(MatSnackBar);
+  private readonly destroyRef = inject(DestroyRef);
+  private dadata = inject(DadataApiService);
+  @ViewChild('snackbarUserAdded') userAddedTemplateRef!: TemplateRef<any>;
+  @ViewChild('snackbarPointsAdded') pointsAddedTemplateRef!: TemplateRef<any>;
+  @Output() closeUser = new EventEmitter();
+  @Output() closeEditMode = new EventEmitter();
+  @Output() openEditMode = new EventEmitter<QueryParamsConfig>();
+  @Output() deleteUser = new EventEmitter();
+  @Output() editUser = new EventEmitter<EditParams>();
+  @Output() editPoints = new EventEmitter<EditParams>();
+
+  private _vm: DetailUsersCardVm = INITIAL_USER_CONFIG;
+
   public get vm() {
     return this._vm;
   }
+
   @Input({ required: true })
   set vm(vm: DetailUsersCardVm) {
     this._vm = vm;
 
     if (vm.user) {
-      this.formGroup.patchValue({
-        name: vm.user.name,
-        email: vm.user.email,
-        username: vm.user.username,
-        city: vm.user.city,
-      });
+      this.formGroup.patchValue(vm.user);
     }
 
-    if (vm.editMode) {
+    if (vm.isEditUser) {
       this.formGroup.enable();
+    } else if(vm.isEditPoints) {
+      this.formGroup.controls.totalStoryPoints.enable();
     } else {
       this.formGroup.disable();
     }
   }
 
-  public formGroup = new FormBuilder().group({
-    name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
-    email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
-    username: new FormControl({ value: '', disabled: !this.vm.editMode }),
-    city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+  protected formGroup = new FormBuilder().group({
+    name: new FormControl({ value: '', disabled: !this.vm.isEditUser }, [Validators.required]),
+    email: new FormControl({ value: '', disabled: !this.vm.isEditUser }, [Validators.required, Validators.email]),
+    username: new FormControl({ value: '', disabled: !this.vm.isEditUser }),
+    city: new FormControl({ value: '', disabled: !this.vm.isEditUser }),
+    totalStoryPoints: new FormControl({ value: 0, disabled: !this.vm.isEditUser || !this.vm.isEditPoints }),
   });
 
-  @Output() editUser = new EventEmitter<{
-    user: CreateUserDTO;
-    onSuccessCb: onSuccessEditionCbType;
-  }>();
-  @Output() closeUser = new EventEmitter();
-  @Output() closeEditMode = new EventEmitter();
-  @Output() openEditMode = new EventEmitter();
-  @Output() deleteUser = new EventEmitter();
-  @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
-  private dadata = inject(DadataApiService);
-  public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
+  protected citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
     distinctUntilChanged(),
     filter(Boolean),
     switchMap((value) => this.dadata.getCities(value))
   );
 
-  private snackBar = inject(MatSnackBar);
-  private readonly destroyRef = inject(DestroyRef);
-  public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
+  protected areFieldsChanged$ = new BehaviorSubject<boolean>(false);
 
   ngOnInit(): void {
     this.checkChangeFields();
   }
 
-  private onEditSuccess: onSuccessEditionCbType = () =>
-    this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
-      duration: 2500,
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-    });
+  private onEditUserSuccess: onSuccessEditionCbType = () =>
+    this.snackBar.openFromTemplate(this.userAddedTemplateRef, SNACK_BAR_CONFIG);
 
-  onSubmit(): void {
+  private onEditPointsSuccess: onSuccessEditionCbType = () =>
+    this.snackBar.openFromTemplate(this.pointsAddedTemplateRef, SNACK_BAR_CONFIG);
+
+  protected onSubmit(): void {
     this.editUser.emit({
       user: {
         name: this.formGroup.value.name || '',
         username: this.formGroup.value.username || '',
         city: this.formGroup.value.city || '',
         email: this.formGroup.value.email?.trim().toLowerCase() || '',
-        purchaseDate: new Date().toString() || '',
-        educationStatus: 'trainee',
+        totalStoryPoints: this.formGroup.value.totalStoryPoints || 0
       },
-      onSuccessCb: this.onEditSuccess,
+      onSuccessCb: this.onEditUserSuccess,
     });
   }
 
-  onCloseUser() {
+  protected onSubmitStoryPoints(): void {
+    this.editUser.emit({
+      user: { totalStoryPoints: this.formGroup.value.totalStoryPoints || 0 },
+      onSuccessCb: this.onEditPointsSuccess,
+    });
+  }
+
+  protected onCloseUser() {
     this.closeUser.emit();
   }
 
-  onCloseEditMode() {
+  protected onCloseEditMode() {
     this.closeEditMode.emit();
   }
 
-  onOpenEditMode() {
-    this.openEditMode.emit();
+  protected onOpenEditMode(params: QueryParamsConfig) {
+    this.openEditMode.emit(params);
   }
 
-  onDeleteUser() {
+  protected onDeleteUser() {
     this.deleteUser.emit();
-  }
-
-  public onOptionClicked(selectedValue: string) {
-    this.formGroup.get('city')?.setValue(selectedValue);
   }
 
   private checkChangeFields() {

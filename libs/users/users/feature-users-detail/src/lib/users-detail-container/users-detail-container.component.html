@@ -1,7 +1,8 @@
 <ng-container
   *ngrxLet="{
     user: user$,
-    editMode: editMode$,
+    isEditUser: isEditUser$,
+    isEditPoints: isEditPoint$,
     status: status$,
     errors: errors$
   } as vm"
@@ -11,7 +12,7 @@
     (editUser)="onEditUser($event.user, $event.onSuccessCb)"
     (closeUser)="onCloseUser()"
     (closeEditMode)="onCloseEditMode()"
-    (openEditMode)="onOpenEditMode()"
+    (openEditMode)="onOpenEditMode($event)"
     (deleteUser)="onDeleteUser()"
   />
 </ng-container>

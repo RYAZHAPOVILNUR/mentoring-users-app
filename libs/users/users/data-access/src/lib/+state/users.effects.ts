@@ -93,9 +93,13 @@ export const editUser = createEffect(
           email: userData.email,
           username: userData.username,
           city: userData.city,
+          educationStatus: userData.educationStatus,
+          purchaseDate: userData.purchaseDate,
+          totalStoryPoints: userData.totalStoryPoints,
         },
         onSuccessCb,
       })),
+      tap(console.log),
       switchMap(({ user, onSuccessCb }) =>
         apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
           map((userData) => ({ userData, onSuccessCb })),
