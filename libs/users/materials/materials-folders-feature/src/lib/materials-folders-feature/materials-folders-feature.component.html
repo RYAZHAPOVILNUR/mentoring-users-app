@@ -1,0 +1,16 @@
+<div style="user-select: none">
+  <div class="mat-header">
+    <p>Материалы</p>
+    <span>|</span>
+    <p><button mat-fab color="primary" class="add-folders-button" (click)="openChangeTaskModal()"><mat-icon style="color: white;">add</mat-icon></button></p>
+  </div>
+  <mat-divider></mat-divider>
+  <mat-list>
+    <mat-list-item (dblclick)="openedFolder(folder.id)" class="mat-item" *ngFor="let folder of folders">
+      <mat-icon matListItemIcon>folder</mat-icon>
+      <div matListItemTitle>{{ folder.title }}</div>
+      <div matListItemLine>{{ folder.created_at | date }}</div>
+      <div class="deleteDiv" (click)="deletedFolder(folder.id)"><mat-icon class="matIcon">delete</mat-icon></div>
+    </mat-list-item>
+  </mat-list>
+</div>
