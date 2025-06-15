@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersListComponent } from '../users-list/users-list.component';
 import { UsersListContainerStore } from './users-list-container.store';
@@ -8,19 +8,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { UsersFacade } from '@users/users/data-access';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
-import { CreateUsersButtonComponent } from '@users/feature-users-create';
 
 @Component({
-  selector: 'users-list-container',
   standalone: true,
-  imports: [
-    CommonModule,
-    UsersListComponent,
-    MatButtonModule,
-    MatDialogModule,
-    LetDirective,
-    CreateUsersButtonComponent,
-  ],
+  imports: [CommonModule, UsersListComponent, MatButtonModule, MatDialogModule, LetDirective],
   templateUrl: './users-list-container.component.html',
   styleUrls: ['./users-list-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,

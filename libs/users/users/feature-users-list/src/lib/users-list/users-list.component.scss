@@ -1,0 +1,10 @@
+.users-list {
+  &__button {
+    position: fixed;
+
+    &_create {
+      bottom: 12px;
+      right: 12px;
+    }
+  }
+}
