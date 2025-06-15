@@ -23,47 +23,47 @@
           "./node_modules/quill/dist/quill.snow.css",
           "node_modules/bootstrap/dist/css/bootstrap.min.css",
           {
-            "input": "apps/users/src/themes/light-violent.scss",
+            "input": "apps/users/src/styles/themes/light-violent.scss",
             "inject": false,
             "bundleName": "light-violent"
           },
           {
-            "input": "apps/users/src/themes/light-green.scss",
+            "input": "apps/users/src/styles/themes/light-green.scss",
             "inject": false,
             "bundleName": "light-green"
           },
           {
-            "input": "apps/users/src/themes/light-red.scss",
+            "input": "apps/users/src/styles/themes/light-red.scss",
             "inject": false,
             "bundleName": "light-red"
           },
           {
-            "input": "apps/users/src/themes/dark-violent.scss",
+            "input": "apps/users/src/styles/themes/dark-violent.scss",
             "inject": false,
             "bundleName": "dark-violent"
           },
           {
-            "input": "apps/users/src/themes/dark-green.scss",
+            "input": "apps/users/src/styles/themes/dark-green.scss",
             "inject": false,
             "bundleName": "dark-green"
           },
           {
-            "input": "apps/users/src/themes/dark-red.scss",
+            "input": "apps/users/src/styles/themes/dark-red.scss",
             "inject": false,
             "bundleName": "dark-red"
           },
           {
-            "input": "apps/users/src/themes/custom-theme.scss",
+            "input": "apps/users/src/styles/themes/custom-theme.scss",
             "inject": false,
             "bundleName": "custom-theme"
           },
           {
-            "input": "apps/users/src/app-theme.scss"
+            "input": "apps/users/src/styles/app-theme.scss"
           },
           "@angular/material/prebuilt-themes/deeppurple-amber.css"
         ],
         "stylePreprocessorOptions": {
-          "includePaths": ["libs/users/settings"]
+          "includePaths": ["libs/users/settings", "apps/users/styles/variables"]
         },
         "scripts": ["./node_modules/quill/dist/quill.js"]
       },

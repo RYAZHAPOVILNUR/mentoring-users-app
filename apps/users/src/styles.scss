@@ -1,5 +1,5 @@
 @use '@angular/material' as mat;
-@use './app-theme.scss';
+@use 'styles/app-theme';
 @import "tailwindcss";
 
 $primary: mat.m2-define-palette(mat.$m2-deep-purple-palette, 400);
@@ -22,6 +22,7 @@ html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
