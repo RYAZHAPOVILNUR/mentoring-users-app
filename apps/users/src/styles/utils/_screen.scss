@@ -1,0 +1,25 @@
+@use '../variables/breakpoints';
+
+@mixin mobile {
+  @media screen and (breakpoints.$bp-mobile) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (breakpoints.$bp-tablet) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (breakpoints.$bp-desktop) {
+    @content;
+  }
+}
+
+@mixin not-desktop {
+  @media screen and (breakpoints.$bp-not-desktop) {
+    @content;
+  }
+}

@@ -1,4 +1,7 @@
+@use 'apps/users/src/styles/utils/screen';
+
 .home-wrapper {
+  padding: 0 20px;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -8,7 +11,13 @@
 
   &__about {
     display: flex;
+
+    @include screen.not-desktop {
+      flex-direction: column;
+      align-items: center;
+    }
   }
+
   &__text {
     margin-right: 20px;
 
@@ -20,6 +29,11 @@
   &__charts {
     display: flex;
     column-gap: 20px;
+
+    @include screen.not-desktop {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 }
 

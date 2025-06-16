@@ -4,7 +4,7 @@
 
 <ng-template #loadingResult>
   <ng-container *ngIf="vm.status === 'loaded'; else error">
-    <div class="container">
+    <div class="users-list container">
       <div class="row">
         <div class="col-md-4 mb-3" *ngFor="let user of vm.users">
           <users-card
@@ -15,6 +15,8 @@
           />
         </div>
       </div>
+
+      <users-create-users-button class="users-list__button users-list__button_create" />
     </div>
   </ng-container>
 </ng-template>
@@ -26,3 +28,4 @@
     {{ vm.errors }}
   </div>
 </ng-template>
+

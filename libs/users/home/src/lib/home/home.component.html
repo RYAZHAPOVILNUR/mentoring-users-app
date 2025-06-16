@@ -20,8 +20,8 @@
   </div>
 
   <div class="home-wrapper__charts">
-    <highcharts-chart [Highcharts]="Highcharts" [options]="pieChartOptions"></highcharts-chart>
+    <highcharts-chart [Highcharts]="Highcharts" [runOutsideAngular]="true" [options]="pieChartOptions"></highcharts-chart>
 
-    <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"> </highcharts-chart>
+    <highcharts-chart [Highcharts]="Highcharts" [runOutsideAngular]="true" [options]="chartOptions"></highcharts-chart>
   </div>
 </div>
