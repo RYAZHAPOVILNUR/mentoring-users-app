@@ -1,6 +1,6 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
-@use '../app-theme';
+@use '../utils/theme';
 
 $primary: mat.m2-define-palette(mat.$m2-deep-purple-palette, 800);
 $accent: mat.m2-define-palette(mat.$m2-blue-grey-palette, A200, 700);
@@ -14,4 +14,4 @@ $theme: mat.m2-define-dark-theme(
 );
 
 @include mat.all-component-themes($theme);
-@include app-theme.theme($theme);
+@include theme.theme($theme);
