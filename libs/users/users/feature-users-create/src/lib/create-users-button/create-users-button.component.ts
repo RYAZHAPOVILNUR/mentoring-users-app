@@ -9,8 +9,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CreateUserDTO } from '@users/core/data-access';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'create-users-button',
+  selector: 'users-create-users-button',
   standalone: true,
   imports: [CommonModule, MatIconModule, MatButtonModule, MatDialogModule],
   templateUrl: './create-users-button.component.html',

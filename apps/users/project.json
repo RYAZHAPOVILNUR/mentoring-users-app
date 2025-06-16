@@ -22,6 +22,7 @@
           "./node_modules/quill/dist/quill.bubble.css",
           "./node_modules/quill/dist/quill.snow.css",
           "node_modules/bootstrap/dist/css/bootstrap.min.css",
+          "apps/users/src/styles/styles.scss",
           {
             "input": "apps/users/src/styles/themes/light-violent.scss",
             "inject": false,
@@ -58,12 +59,12 @@
             "bundleName": "custom-theme"
           },
           {
-            "input": "apps/users/src/styles/app-theme.scss"
+            "input": "apps/users/src/styles/utils/theme.scss"
           },
           "@angular/material/prebuilt-themes/deeppurple-amber.css"
         ],
         "stylePreprocessorOptions": {
-          "includePaths": ["libs/users/settings", "apps/users/styles/variables"]
+          "includePaths": ["libs/users/settings"]
         },
         "scripts": ["./node_modules/quill/dist/quill.js"]
       },
