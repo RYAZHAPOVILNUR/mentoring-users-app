@@ -6,14 +6,13 @@ import { MaterialsFoldersFeatureComponent } from '../materials-folders-feature/m
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { LetDirective } from '@ngrx/component';
 
-
 @Component({
   selector: 'lib-folders-feature-container',
-  imports: [CommonModule, MaterialsFoldersFeatureComponent, MatProgressBarModule, LetDirective ],
+  imports: [CommonModule, MaterialsFoldersFeatureComponent, MatProgressBarModule, LetDirective],
   templateUrl: './folders-feature-container.component.html',
   styleUrl: './folders-feature-container.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true
+  standalone: true,
 })
 export class FoldersFeatureContainerComponent {
   public router = inject(Router);
@@ -25,7 +24,6 @@ export class FoldersFeatureContainerComponent {
   ngOnInit() {
     this.materialsFacade.getFolders();
   }
- 
 
   setOpenedFolder(id: number) {
     this.router.navigate(['/materials/', id]);
@@ -33,7 +31,6 @@ export class FoldersFeatureContainerComponent {
   onDeleteFolder(id: number) {
     this.materialsFacade.deleteFolder(id);
   }
-
   onAddFolder(folderName: string) {
     const newFolder = {
       title: folderName,

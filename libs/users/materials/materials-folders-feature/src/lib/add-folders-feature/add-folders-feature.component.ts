@@ -16,11 +16,9 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class AddFoldersFeatureComponent {
   private dialogRef = inject(MatDialogRef<AddFoldersFeatureComponent>);
-
   public folderName = '';
 
-  create(){
-    this.dialogRef.close(this.folderName)
+  create() {
+    this.dialogRef.close(this.folderName);
   }
-
 }

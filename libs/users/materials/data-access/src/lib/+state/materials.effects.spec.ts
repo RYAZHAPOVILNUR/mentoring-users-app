@@ -12,10 +12,9 @@ describe('MaterialsEffects', () => {
     TestBed.configureTestingModule({
       providers: [MaterialsEffects, provideMockActions(() => actions$)],
     });
-
     effects = TestBed.inject(MaterialsEffects);
   });
-
+  
   it('should be created', () => {
     expect(effects).toBeTruthy();
   });

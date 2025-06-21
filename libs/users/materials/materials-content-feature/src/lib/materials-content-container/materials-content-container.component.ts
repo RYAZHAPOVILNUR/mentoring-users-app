@@ -7,16 +7,14 @@ import { map } from 'rxjs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MaterialsContentFeatureComponent } from '../materials-content-feature/materials-content-feature.component';
 
-
 @Component({
   selector: 'lib-materials-content-container',
-  imports: [CommonModule, MatProgressBarModule, MaterialsContentFeatureComponent, LetDirective ],
+  imports: [CommonModule, MatProgressBarModule, MaterialsContentFeatureComponent, LetDirective],
   templateUrl: './materials-content-container.component.html',
   styleUrl: './materials-content-container.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialsContentContainerComponent {
-
   ngOnInit() {
     this.materialsFacade.getMaterials();
   }
@@ -25,18 +23,12 @@ export class MaterialsContentContainerComponent {
   public materialsFacade = inject(MaterialsFacade);
   public status$ = this.materialsFacade.getStatus$;
   public materials$ = this.materialsFacade.getMaterials$;
-
   public openedFolder$ = this.materialsFacade.openedFolder$.pipe(
     map((folder) => {
       if (!folder) {
         this.store.dispatch(MaterialsActions.getFolderForRead());
       }
       return folder;
-    })
+    }),
   );
-
-  constructor () {
-    console.log()
-  }
-
 }

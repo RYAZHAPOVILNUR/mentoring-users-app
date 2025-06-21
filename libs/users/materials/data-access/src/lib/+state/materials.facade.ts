@@ -1,10 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import {
-  selectAllFolders,
-  selectMaterials,
-  selectOpenedFolder,
-  selectStatus,
-} from './materials.selectors';
+import { selectAllFolders, selectMaterials, selectOpenedFolder, selectStatus } from './materials.selectors';
 import { MaterialsActions } from './materials.actions';
 import { Store } from '@ngrx/store';
 import { CreateFolder, CreateMaterial } from '../models/materials.model';
@@ -22,19 +17,17 @@ export class MaterialsFacade {
   addFolder(folder: CreateFolder) {
     this.store.dispatch(MaterialsActions.addFolder({ folder }));
   }
-
   getFolders() {
     this.store.dispatch(MaterialsActions.loadFolders());
   }
-
   deleteFolder(id: number) {
     this.store.dispatch(MaterialsActions.deleteFolder({ id }));
   }
-  // materials facde 
+  
+  // materials facde
   getMaterials() {
     this.store.dispatch(MaterialsActions.loadMaterials());
   }
-
   addMaterial(material: CreateMaterial) {
     this.store.dispatch(MaterialsActions.addMaterial({ material }));
   }

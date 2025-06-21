@@ -35,27 +35,6 @@ export class MaterialsEffects {
           )
       )
     );
-    // return this.actions$.pipe(
-    //   ofType(MaterialsActions.loadFolders),
-    //   mergeMap(() =>
-    //     api.get<Folder[]>('/folder').pipe(
-    //       map((folders) =>
-    //         MaterialsActions.loadFoldersSuccess({ folders })
-    //       ),
-    //       catchError((error: any) => {
-    //         // Логирование ошибки для отладки
-    //         console.error('Ошибка при загрузке папок:', error);
-
-    //         // Диспатч действия с ошибкой
-    //         return of(
-    //           MaterialsActions.loadFoldersFailure({
-    //             error: error.message || 'Не удалось загрузить папки',
-    //           })
-    //         );
-    //       })
-    //     )
-    //   )
-    // );
   });
 
   getFolderForRead$ = createEffect(() => {
@@ -82,9 +61,6 @@ export class MaterialsEffects {
         return of(1).pipe(
           map(() => MaterialsActions.deleteFolderSuccess({ id }))
         );
-        // return apiService
-        //   .delete(`/folder/${id}`)
-        //   .pipe(map(() => MaterialsActions.deleteFolderSuccess({ id })));
       })
     );
   });

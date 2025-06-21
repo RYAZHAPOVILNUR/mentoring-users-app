@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { CommonModule } from '@angular/common';
 import { YouTubePlayer } from '@angular/youtube-player';
 
-
 @Component({
   selector: 'lib-youtube-player',
   imports: [CommonModule, YouTubePlayer],
@@ -18,24 +17,12 @@ export class YoutubePlayerComponent {
   private player: any;
   isReady: boolean = false;
 
-  ngOnInit() {
-    // Async loading YouTube IFrame API
-    const tag = document.createElement('script');
-    tag.src = 'https://www.youtube.com/iframe_api';
-    document.body.appendChild(tag);
-  }
-
   onPlayerReady(event: any) {
     this.player = event.target;
     this.isReady = true;
-    this.readyStateChange.emit(this.isReady); 
+    this.readyStateChange.emit(this.isReady);
   }
-
   onPlayerStateChange(event: any) {
     console.log('Player state:', event.data);
-  }
-
-  constructor() {
-    console.log(this.videoId)
   }
 }

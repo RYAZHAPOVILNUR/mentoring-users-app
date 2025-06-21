@@ -17,15 +17,7 @@ import { filter } from 'rxjs';
 
 @Component({
   selector: 'lib-materials-content-feature',
-  imports: [
-    CommonModule,
-    RouterModule,
-    MatListModule,
-    MatIconModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatDividerModule,
-  ],
+  imports: [CommonModule, RouterModule, MatListModule, MatIconModule, MatButtonModule, MatMenuModule, MatDividerModule],
   templateUrl: './materials-content-feature.component.html',
   styleUrl: './materials-content-feature.component.scss',
   encapsulation: ViewEncapsulation.Emulated,
@@ -37,33 +29,24 @@ export class MaterialsContentFeatureComponent {
   private readonly destroyRef = inject(DestroyRef);
   private materialsFacade = inject(MaterialsFacade);
 
-
-
   public openMaterialContent(material: Material): void {
-    const dialogRef: MatDialogRef<MaterialsContentViewComponent> =
-      this.matDialog.open(MaterialsContentViewComponent, {
-        data: { material },
-      });
-    dialogRef
-      .afterClosed()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe();
+    const dialogRef: MatDialogRef<MaterialsContentViewComponent> = this.matDialog.open(MaterialsContentViewComponent, {
+      data: { material },
+    });
+    dialogRef.afterClosed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
   }
-
   public openAddMaterial(materialType: string): void {
-    const dialogRef: MatDialogRef<MaterialsContentAddComponent> =
-      this.matDialog.open(MaterialsContentAddComponent, {data: {materialType: materialType}});
+    const dialogRef: MatDialogRef<MaterialsContentAddComponent> = this.matDialog.open(MaterialsContentAddComponent, {
+      data: { materialType: materialType },
+    });
     dialogRef
       .afterClosed()
       .pipe(
         takeUntilDestroyed(this.destroyRef),
-        filter((newMaterial) => !!newMaterial)
+        filter((newMaterial) => !!newMaterial),
       )
-      .subscribe((newMaterial) =>
-        this.materialsFacade.addMaterial(newMaterial)
-      );
+      .subscribe((newMaterial) => this.materialsFacade.addMaterial(newMaterial));
   }
-
   deletedMaterial(id: number) {
     this.materialsFacade.deleteMaterial(id);
   }

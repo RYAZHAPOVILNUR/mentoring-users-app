@@ -1,10 +1,6 @@
-<p>materials-content-add works!</p>
-
 <div class="addMaterial">
   <h2 style="text-align: center">Добавление материала</h2>
-
   <span style="color: red; margin: 0 auto" *ngIf="error">{{ error }}</span>
-
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="example-form">
     <div class="mat-inp">
       <mat-form-field class="example-form-field">
@@ -36,21 +32,18 @@
       Сохранить
     </button>
   </form>
-
-  
   <ng-container *ngIf="data.materialType == 'PDF'">
     <mat-divider></mat-divider>
-    <span>Тестовая ссылка: https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf</span>
     <pdf-viewer
-    (after-load-complete)="callBackFn($event)"
-    (error)="onError($event)"
-    [src]="link"
-    [render-text]="true"
-    [original-size]="false"
-    style="width: 0px; height: 0px"
-  ></pdf-viewer>
+      (after-load-complete)="callBackFn($event)"
+      (error)="onError($event)"
+      [src]="link"
+      [render-text]="true"
+      [original-size]="false"
+      style="width: 0px; height: 0px"
+    ></pdf-viewer>
   </ng-container>
-  <ng-container *ngIf="data.materialType != 'PDF'" >
-    {{callBackVideo()}}
+  <ng-container *ngIf="data.materialType != 'PDF'">
+    {{ callBackVideo() }}
   </ng-container>
 </div>

@@ -31,7 +31,6 @@ import { PDFDocumentProxy, PdfViewerModule } from 'ng2-pdf-viewer';
 })
 export class MaterialsContentAddComponent {
   private dialogRef = inject(MatDialogRef<MaterialsContentAddComponent>);
-
   public formGroup: FormGroup;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { materialType: string }) {
@@ -59,7 +58,6 @@ export class MaterialsContentAddComponent {
       this.dialogRef.close(materialData);
     }
   }
-
   onSubmit() {
     if (this.formGroup.valid) {
       this.error = '';
@@ -68,45 +66,37 @@ export class MaterialsContentAddComponent {
       this.link = formData.materialLink;
     }
   }
-
   onInput() {
     this.canCreate = false;
     this.error = '';
   }
-
   callBackFn(pdf: PDFDocumentProxy) {
     this.canCreate = true;
     this.error = '';
     this.loading = false;
   }
-
   callBackVideo() {
     this.canCreate = true;
     this.error = '';
     this.loading = false;
   }
-
   onError(error: any) {
     this.loading = false;
     this.error = 'Ошибка! Ссылка не прошла проверку!';
   }
-
   public isLinkValid(link: string): boolean {
     if (this.data.materialType === 'Video') {
       const videoRegex = /[?&]v=([a-zA-Z0-9_-]{11})|\/embed\/([a-zA-Z0-9_-]{11})/;
       return videoRegex.test(link);
     }
-
     if (this.data.materialType === 'PDF') {
       const pdfRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*\.pdf$/;
       return pdfRegex.test(link);
     }
-
     if (this.data.materialType === 'Audio') {
       const audioRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*\.mp3$/;
       return audioRegex.test(link);
     }
-
     return true;
   }
 }
