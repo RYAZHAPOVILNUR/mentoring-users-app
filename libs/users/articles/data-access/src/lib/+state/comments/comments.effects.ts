@@ -8,12 +8,13 @@ import { ApiService } from '@users/core/http';
 import { CreateComment } from '../../models/create-comment.model';
 import { Comment } from '../../models/user-comment.model';
 import { AuthFacade } from '@auth/data-access';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 export const publishComment$ = createEffect(
   (actions$ = inject(Actions), store = inject(Store), auth$ = inject(AuthFacade), apiService = inject(ApiService)) => {
     return actions$.pipe(
       ofType(CommentsActions.publishComment),
-      withLatestFrom(auth$.user$),
+      withLatestFrom(toObservable(auth$.user$)),
       switchMap(([{ comment }, user]) => {
         console.log(user);
 

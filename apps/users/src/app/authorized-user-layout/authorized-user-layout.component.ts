@@ -10,6 +10,7 @@ import { AuthFacade } from '@auth/data-access';
 import { Observable, map, take, tap, withLatestFrom } from 'rxjs';
 import { RouterModule } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'users-authorized-user-layout',
@@ -35,7 +36,7 @@ export class AuthorizedUserLayoutComponent {
   private readonly facade = inject(AuthFacade);
   public readonly breakpointObserver = inject(BreakpointObserver);
 
-  public readonly isAuthenticated$: Observable<boolean> = this.facade.isAuthenticated$;
+  public readonly  isAuthenticated$ = toObservable(this.facade.isAuthenticated$);
   private readonly handset$ = this.breakpointObserver.observe(Breakpoints.Handset);
   private readonly handsetLandscape$ = this.breakpointObserver.observe(Breakpoints.HandsetLandscape);
 

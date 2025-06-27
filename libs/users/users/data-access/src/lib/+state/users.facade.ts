@@ -5,12 +5,14 @@ import * as UsersSelectors from './users.selectors';
 import { Observable, of, switchMap } from 'rxjs';
 import { UsersErrors } from './users.reducer';
 import { onSuccessEditionCbType } from './users.actions';
-import { selectLoggedUser } from '@auth/data-access';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { AuthStore } from 'libs/core/auth/data-access/src/lib/+state/auth.store';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
   private readonly store = inject(Store);
+  private readonly authStore = inject(AuthStore);
 
   /**
    * Combine pieces of state using createSelector,
@@ -20,7 +22,7 @@ export class UsersFacade {
   public readonly allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
   public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
-  public readonly loggedUser$ = this.store.select(selectLoggedUser);
+  public readonly loggedUser$ = toObservable(this.authStore.loggedUser);
   public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError));
   /**
    * Use the initialization action to perform one
