@@ -1,15 +1,16 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { CommonModule, NgIf } from '@angular/common';
-import { FooterComponent, HeaderComponent, NavbarComponent } from '@users/core/ui/layout';
-import { PushPipe } from '@ngrx/component';
-import { MatSidenavModule, MatSidenav } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { Store } from '@ngrx/store';
-import { AuthFacade } from '@auth/data-access';
-import { Observable, map, take, tap, withLatestFrom } from 'rxjs';
-import { RouterModule } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { CommonModule, NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
+import { RouterModule } from '@angular/router';
+import { PushPipe } from '@ngrx/component';
+import { Store } from '@ngrx/store';
+import { map, Observable, take, withLatestFrom } from 'rxjs';
+
+import { AuthFacade } from '@auth/data-access';
+import { FooterComponent, HeaderComponent, NavbarComponent } from '@users/core/ui/layout';
 
 @Component({
   selector: 'users-authorized-user-layout',
@@ -33,15 +34,15 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 export class AuthorizedUserLayoutComponent {
   private readonly store = inject(Store);
   private readonly facade = inject(AuthFacade);
-  public readonly breakpointObserver = inject(BreakpointObserver);
-
-  public readonly isAuthenticated$: Observable<boolean> = this.facade.isAuthenticated$;
+  private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly handset$ = this.breakpointObserver.observe(Breakpoints.Handset);
   private readonly handsetLandscape$ = this.breakpointObserver.observe(Breakpoints.HandsetLandscape);
 
+  public readonly isAuthenticated$: Observable<boolean> = this.facade.isAuthenticated$;
+
   public readonly isMobile$ = this.handset$.pipe(
     withLatestFrom(this.handsetLandscape$),
-    map(([handset, handsetLandscape]) => !!(handset.matches && !handsetLandscape.matches))
+    map(([handset, handsetLandscape]) => !!(handset.matches && !handsetLandscape.matches)),
   );
 
   opened!: boolean;

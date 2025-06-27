@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { UiPhotoModalComponent } from './ui-photo-modal.component';
 
 describe('UiPhotoModalComponent', () => {

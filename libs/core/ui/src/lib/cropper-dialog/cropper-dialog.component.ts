@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
 
 @Component({
   selector: 'users-cropper-dialog',
@@ -14,8 +14,10 @@ import { MatIconModule } from '@angular/material/icon';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CropperDialogComponent {
-  public croppedImg: any = '';
   private readonly dialogRef = inject(MatDialogRef<CropperDialogComponent>);
+  public croppedImg = '';
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public readonly data: any = inject(MAT_DIALOG_DATA);
   public readonly imageBase64 = this.data.image.src;
 

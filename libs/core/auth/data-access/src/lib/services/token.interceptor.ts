@@ -1,10 +1,11 @@
 import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpRequest } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
-import { LocalStorageJwtService } from './local-storage-jwt.service';
 import { Router } from '@angular/router';
+import { catchError, Observable, throwError } from 'rxjs';
 
-const shouldIntercept = (req: HttpRequest<any>): boolean => {
+import { LocalStorageJwtService } from './local-storage-jwt.service';
+
+const shouldIntercept = (req: HttpRequest<unknown>): boolean => {
   const excludedUrls: string[] = ['suggestions.dadata.ru'];
 
   for (const url of excludedUrls) {
@@ -16,7 +17,10 @@ const shouldIntercept = (req: HttpRequest<any>): boolean => {
   return true;
 };
 
-export const tokenInterceptor = (request: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> => {
+export const tokenInterceptor = (
+  request: HttpRequest<unknown>,
+  next: HttpHandlerFn,
+): Observable<HttpEvent<unknown>> => {
   const localStorageJwtService = inject(LocalStorageJwtService);
   const token: string | null = localStorageJwtService.getItem();
   const router = inject(Router);
@@ -35,6 +39,6 @@ export const tokenInterceptor = (request: HttpRequest<any>, next: HttpHandlerFn)
         localStorageJwtService.removeItem();
       }
       return throwError(() => error);
-    })
+    }),
   );
 };

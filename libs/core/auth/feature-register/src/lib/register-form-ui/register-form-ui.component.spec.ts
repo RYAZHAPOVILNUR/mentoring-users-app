@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { RegisterFormUiComponent } from './register-form-ui.component';
 
 describe('RegisterFormUiComponent', () => {

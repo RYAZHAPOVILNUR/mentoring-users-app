@@ -1,10 +1,6 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 
-export interface DocsSiteTheme {
-  name: string;
-  displayName: string;
-  isDefault?: boolean;
-}
+import { DocsSiteTheme } from '../interfaces/docs-site-theme.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeStorage {
@@ -12,10 +8,12 @@ export class ThemeStorage {
 
   onThemeUpdate: EventEmitter<DocsSiteTheme> = new EventEmitter<DocsSiteTheme>();
 
-  storeTheme(theme: DocsSiteTheme) {
+  storeTheme(theme: DocsSiteTheme): void {
     try {
       window.localStorage[ThemeStorage.storageKey] = theme.name;
-    } catch {}
+    } catch {
+      /* empty */
+    }
 
     this.onThemeUpdate.emit(theme);
   }
@@ -26,11 +24,5 @@ export class ThemeStorage {
     } catch {
       return null;
     }
-  }
-
-  clearStorage() {
-    try {
-      window.localStorage.removeItem(ThemeStorage.storageKey);
-    } catch {}
   }
 }

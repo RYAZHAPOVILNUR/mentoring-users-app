@@ -1,11 +1,13 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
+
+import { filterColumnsByTerm } from '@users/users/task';
+
 import { tasksAction } from './tasks.action';
 import { ITaskBoard } from '../model/tasks.interface';
-import { filterColumnsByTerm } from '../../../../src/lib/tasks-view-container/tasks-list-container.store';
 
 export const TASKS_FEATURE_KEY = 'tasks';
 
-export const tasksInitialState: ITaskBoard = {
+const tasksInitialState: ITaskBoard = {
   id: 0,
   created_at: 0,
   email: '',
@@ -45,6 +47,6 @@ export const tasksFeature = createFeature({
         term,
         filteredColumns: term ? filteredColumns : [],
       };
-    })
+    }),
   ),
 });

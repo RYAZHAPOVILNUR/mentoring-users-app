@@ -1,8 +1,14 @@
 import { inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { ApiService } from '@users/core/http';
-import { authActions } from './auth.actions';
+import { Store } from '@ngrx/store';
 import { catchError, concatMap, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
+
+import { UsersDTO, usersDTOAdapter } from '@users/core/data-access';
+import { ApiService } from '@users/core/http';
+
+import { authActions } from './auth.actions';
+import { selectAuthStatus } from './auth.selectors';
 import {
   ChangePasswordPayload,
   ChangePasswordResponse,
@@ -12,10 +18,6 @@ import {
   SignAuthResponse,
 } from './sign.auth.model';
 import { LocalStorageJwtService } from '../services/local-storage-jwt.service';
-import { Router } from '@angular/router';
-import { UsersDTO, usersDTOAdapter } from '@users/core/data-access';
-import { Store } from '@ngrx/store';
-import { selectAuthStatus } from './auth.selectors';
 
 export const loginEffect$ = createEffect(
   (api = inject(ApiService), actions$ = inject(Actions)) =>
@@ -28,11 +30,11 @@ export const loginEffect$ = createEffect(
             const updatedRes = { ...res, user: userEntity };
             return authActions.loginSuccess({ res: updatedRes });
           }),
-          catchError((error) => of(authActions.loginFailure({ error })))
-        )
-      )
+          catchError((error) => of(authActions.loginFailure({ error }))),
+        ),
+      ),
     ),
-  { functional: true }
+  { functional: true },
 );
 
 export const loginSuccessEffect$ = createEffect(
@@ -42,10 +44,10 @@ export const loginSuccessEffect$ = createEffect(
       tap((action) => {
         localStorageJwtService.setItem(action.res.authToken);
         router.navigateByUrl('/profile');
-      })
+      }),
     );
   },
-  { functional: true, dispatch: false }
+  { functional: true, dispatch: false },
 );
 
 export const getUserEffect$ = createEffect(
@@ -53,7 +55,7 @@ export const getUserEffect$ = createEffect(
     actions$ = inject(Actions),
     api = inject(ApiService),
     localStorageJwtService = inject(LocalStorageJwtService),
-    store = inject(Store)
+    store = inject(Store),
   ) =>
     actions$.pipe(
       ofType(authActions.getUser),
@@ -64,14 +66,14 @@ export const getUserEffect$ = createEffect(
               map((userDTO) =>
                 authActions.getUserSuccess({
                   user: usersDTOAdapter.DTOtoEntity(userDTO),
-                })
+                }),
               ),
-              catchError((error) => of(authActions.getUserFailure({ error })))
+              catchError((error) => of(authActions.getUserFailure({ error }))),
             )
-          : of()
-      )
+          : of(),
+      ),
     ),
-  { functional: true }
+  { functional: true },
 );
 
 export const registerEffect$ = createEffect(
@@ -81,12 +83,12 @@ export const registerEffect$ = createEffect(
       switchMap(({ userData }) =>
         api.post<RegisterResponse, NewUser>('/auth/signup', userData).pipe(
           map(({ authToken }) => authActions.registerSuccess({ authToken })),
-          catchError((error) => of(authActions.registerFailure({ error })))
-        )
-      )
+          catchError((error) => of(authActions.registerFailure({ error }))),
+        ),
+      ),
     );
   },
-  { functional: true }
+  { functional: true },
 );
 
 export const registerSuccessEffects$ = createEffect(
@@ -97,10 +99,10 @@ export const registerSuccessEffects$ = createEffect(
         localStorageJwtService.setItem(action.authToken);
         router.navigateByUrl('/profile');
         return of(authActions.getUser());
-      })
+      }),
     );
   },
-  { functional: true }
+  { functional: true },
 );
 
 export const logoutEffect$ = createEffect(
@@ -112,9 +114,9 @@ export const logoutEffect$ = createEffect(
         router.navigate(['/login']);
         const notDefaultTheme: Element | null = document.head.querySelector('.style-manager-theme');
         if (notDefaultTheme) notDefaultTheme.remove();
-      })
+      }),
     ),
-  { functional: true, dispatch: false }
+  { functional: true, dispatch: false },
 );
 
 export const changePasswordEffects$ = createEffect(
@@ -124,11 +126,11 @@ export const changePasswordEffects$ = createEffect(
       switchMap(({ data }) =>
         api.put<ChangePasswordResponse, ChangePasswordPayload>('/auth/change_password', data).pipe(
           map((res) => authActions.changePasswordSuccess({ res })),
-          catchError((error) => of(authActions.changePasswordFailure({ error })))
-        )
-      )
+          catchError((error) => of(authActions.changePasswordFailure({ error }))),
+        ),
+      ),
     ),
-  { functional: true }
+  { functional: true },
 );
 
 export const uploadImageEffects$ = createEffect(
@@ -136,15 +138,16 @@ export const uploadImageEffects$ = createEffect(
     actions$.pipe(
       ofType(authActions.uploadImage),
       switchMap(({ image }) =>
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         api.post<UsersDTO, any>('/users/upload/image', { image }).pipe(
           map((userDTO) =>
             authActions.uploadImageSuccess({
               user: usersDTOAdapter.DTOtoEntity(userDTO),
-            })
+            }),
           ),
-          catchError((error) => of(authActions.uploadImageFailure({ error })))
-        )
-      )
+          catchError((error) => of(authActions.uploadImageFailure({ error }))),
+        ),
+      ),
     ),
-  { functional: true }
+  { functional: true },
 );

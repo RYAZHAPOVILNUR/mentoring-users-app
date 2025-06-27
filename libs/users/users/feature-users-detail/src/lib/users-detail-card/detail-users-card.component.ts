@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,28 +11,28 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { onSuccessEditionCbType } from '@users/users/data-access';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { DetailUsersCardVm } from './detail-users-card-vm';
+import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { DadataApiService } from '@dadata';
-import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs';
 import { PushPipe } from '@ngrx/component';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs';
+
+import { DadataApiService } from '@dadata';
+import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+import { onSuccessEditionCbType } from '@users/users/data-access';
+
+import { DetailUsersCardVm } from './detail-users-card-vm';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'detail-users-card',
+  selector: 'users-detail-users-card',
   standalone: true,
   imports: [
     CommonModule,
@@ -60,8 +60,42 @@ export class DetailUsersCardComponent implements OnInit {
     status: 'init',
     errors: null,
   };
-  public get vm() {
-    return this._vm;
+  private readonly destroyRef = inject(DestroyRef);
+  private dadata = inject(DadataApiService);
+  private snackBar = inject(MatSnackBar);
+  private onEditSuccess: onSuccessEditionCbType = () =>
+    this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+  public formGroup = new FormBuilder().group({
+    name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
+    email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
+    username: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+  });
+
+  @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<unknown>;
+  public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
+    debounceTime(300),
+    distinctUntilChanged(),
+    filter(Boolean),
+    switchMap((value) => this.dadata.getCities(value)),
+  );
+  public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
+  @Output() editUser = new EventEmitter<{
+    user: CreateUserDTO;
+    onSuccessCb: onSuccessEditionCbType;
+  }>();
+
+  @Output() closeUser = new EventEmitter();
+
+  @Output() closeEditMode = new EventEmitter();
+  @Output() openEditMode = new EventEmitter();
+  @Output() deleteUser = new EventEmitter();
+  ngOnInit(): void {
+    this.checkChangeFields();
   }
   @Input({ required: true })
   set vm(vm: DetailUsersCardVm) {
@@ -82,46 +116,9 @@ export class DetailUsersCardComponent implements OnInit {
       this.formGroup.disable();
     }
   }
-
-  public formGroup = new FormBuilder().group({
-    name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
-    email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
-    username: new FormControl({ value: '', disabled: !this.vm.editMode }),
-    city: new FormControl({ value: '', disabled: !this.vm.editMode }),
-  });
-
-  @Output() editUser = new EventEmitter<{
-    user: CreateUserDTO;
-    onSuccessCb: onSuccessEditionCbType;
-  }>();
-  @Output() closeUser = new EventEmitter();
-  @Output() closeEditMode = new EventEmitter();
-  @Output() openEditMode = new EventEmitter();
-  @Output() deleteUser = new EventEmitter();
-  @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
-  private dadata = inject(DadataApiService);
-  public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
-    debounceTime(300),
-    distinctUntilChanged(),
-    filter(Boolean),
-    switchMap((value) => this.dadata.getCities(value))
-  );
-
-  private snackBar = inject(MatSnackBar);
-  private readonly destroyRef = inject(DestroyRef);
-  public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
-
-  ngOnInit(): void {
-    this.checkChangeFields();
+  public get vm() {
+    return this._vm;
   }
-
-  private onEditSuccess: onSuccessEditionCbType = () =>
-    this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
-      duration: 2500,
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-    });
-
   onSubmit(): void {
     this.editUser.emit({
       user: {
@@ -135,27 +132,21 @@ export class DetailUsersCardComponent implements OnInit {
       onSuccessCb: this.onEditSuccess,
     });
   }
-
   onCloseUser() {
     this.closeUser.emit();
   }
-
   onCloseEditMode() {
     this.closeEditMode.emit();
   }
-
   onOpenEditMode() {
     this.openEditMode.emit();
   }
-
   onDeleteUser() {
     this.deleteUser.emit();
   }
-
   public onOptionClicked(selectedValue: string) {
     this.formGroup.get('city')?.setValue(selectedValue);
   }
-
   private checkChangeFields() {
     this.formGroup.valueChanges
       .pipe(
@@ -168,7 +159,7 @@ export class DetailUsersCardComponent implements OnInit {
           const isFieldChanged = formEntries.some(([key, control]) => isFormControlChanged(key, control));
 
           this.areFieldsChanged$.next(isFieldChanged);
-        })
+        }),
       )
       .subscribe();
   }

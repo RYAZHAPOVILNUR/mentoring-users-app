@@ -1,37 +1,33 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { QuillModule } from 'ngx-quill';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import {
+  AbstractControl,
   FormControl,
   FormGroup,
+  FormGroupDirective,
   FormsModule,
+  NgForm,
   ReactiveFormsModule,
-  Validators,
+  ValidationErrors,
   ValidatorFn,
-  AbstractControl,
-  ValidationErrors
+  Validators,
 } from '@angular/forms';
-import Quill from 'quill';
-import BlotFormatter from 'quill-blot-formatter';
 import { MatButtonModule } from '@angular/material/button';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ErrorStateMatcher } from '@angular/material/core';
-import { FormGroupDirective, NgForm } from '@angular/forms';
-import {
-  ArticlesFacade,
-  CreateArticle,
-} from '@users/users/articles/data-access';
+import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { QuillModule } from 'ngx-quill';
+import Quill from 'quill';
+import BlotFormatter from 'quill-blot-formatter';
+
+import { ArticlesFacade, CreateArticle } from '@users/users/articles/data-access';
 
 import { ArticlesCreateVm } from './articles-create-vm';
-import { TranslateModule } from '@ngx-translate/core';
-import { Router } from '@angular/router';
 
 class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(
-    control: FormControl | null,
-    form: FormGroupDirective | NgForm | null
-  ): boolean {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && isSubmitted && control.touched);
   }
@@ -40,8 +36,7 @@ class MyErrorStateMatcher implements ErrorStateMatcher {
 Quill.register('modules/blotFormatter', BlotFormatter);
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'articles-create-ui',
+  selector: 'users-articles-create-ui',
   standalone: true,
   imports: [
     CommonModule,
@@ -58,38 +53,20 @@ Quill.register('modules/blotFormatter', BlotFormatter);
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticlesCreateUiComponent {
-  public _vm!: ArticlesCreateVm;
-  private readonly articleFacade = inject(ArticlesFacade);
+  private _vm!: ArticlesCreateVm;
   private readonly router = inject(Router);
-  @Input({ required: true })
-  set vm(value: ArticlesCreateVm) {
-    this._vm = value;
-    this.patchFormValues();
-  }
-
-  get vm() {
-    return this._vm;
-  }
-
-  @Output() publishArticle = new EventEmitter<CreateArticle>();
-  @Output() formChange = new EventEmitter<boolean>();
+  private readonly articleFacade = inject(ArticlesFacade);
 
   public formGroup = new FormGroup({
     textEditor: new FormControl('', {
       validators: [Validators.required, this.validateWithClearTegs()],
     }),
     title: new FormControl('', {
-      validators: [
-        Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(66),
-      ],
+      validators: [Validators.required, Validators.minLength(5), Validators.maxLength(66)],
     }),
   });
-
   public formSubmitted = false;
   public matcher = new MyErrorStateMatcher();
-
   public quillEditorModules = {
     toolbar: [
       [{ font: [] }],
@@ -100,9 +77,22 @@ export class ArticlesCreateUiComponent {
     ],
     blotFormatter: {},
   };
+  @Output() publishArticle = new EventEmitter<CreateArticle>();
+
+  @Output() formChange = new EventEmitter<boolean>();
 
   constructor() {
     this.checkChanges();
+  }
+
+  @Input({ required: true })
+  set vm(value: ArticlesCreateVm) {
+    this._vm = value;
+    this.patchFormValues();
+  }
+
+  get vm() {
+    return this._vm;
   }
 
   public patchFormValues() {
@@ -128,8 +118,8 @@ export class ArticlesCreateUiComponent {
         title: this.formGroup.value.title as string,
         content: this.formGroup.value.textEditor as string,
       };
-      this.publishArticle.emit(article)
-      if (this.vm.editMode == true) {
+      this.publishArticle.emit(article);
+      if (this.vm.editMode) {
         this.formChange.emit(false);
         this.articleFacade.editArticle(article, this.vm.editingArticle!.id);
       } else {
@@ -147,18 +137,17 @@ export class ArticlesCreateUiComponent {
     if (!this.vm.editMode) this.formChange.emit(false);
     this.publishArticle.emit({
       ...article,
-      articlesId: this.vm.editingArticle!.id
-    })
+      articlesId: this.vm.editingArticle?.id,
+    });
     this.router.navigate(['/articles']);
   }
 
   private validateWithClearTegs(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-
-      const content = control.value.replace(/<[^>]*>/g, '');  // clear tegs 
+      const content = control.value.replace(/<[^>]*>/g, ''); // clear tegs
 
       if (content.length > 66) return null;
-      return { 'minLength': 'min length must be < 60 symbols' };
+      return { minLength: 'min length must be < 60 symbols' };
     };
   }
 
@@ -176,8 +165,6 @@ export class ArticlesCreateUiComponent {
         }
       : { textEditor: '', title: '' };
 
-    return (
-      JSON.stringify(this.formGroup.value) !== JSON.stringify(initialFormValues)
-    );
+    return JSON.stringify(this.formGroup.value) !== JSON.stringify(initialFormValues);
   }
 }

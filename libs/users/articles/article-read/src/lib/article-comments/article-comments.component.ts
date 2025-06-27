@@ -9,8 +9,6 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { LoadingStatus } from '../../../../../../core/data-access/src';
-import { RouterLink } from '@angular/router';
-import { CommentsFacade } from '../../../../data-access/src/lib/+state/comments/comments.facade';
 import { PushPipe } from '@ngrx/component';
 import { ArticleCommentComponent } from './article-comment/article-comment.component';
 import { AuthFacade } from '../../../../../../core/auth/data-access/src';

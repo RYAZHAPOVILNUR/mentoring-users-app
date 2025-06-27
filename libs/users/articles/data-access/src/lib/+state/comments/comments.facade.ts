@@ -1,7 +1,8 @@
-import { Injectable, inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectComments, selectCommentsEntities } from './comments.selectors';
 import { Observable } from 'rxjs';
+
+import { selectComments, selectCommentsEntities } from './comments.selectors';
 import { Comment } from '../../models/user-comment.model';
 
 @Injectable({ providedIn: 'root' })

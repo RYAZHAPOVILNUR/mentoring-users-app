@@ -1,11 +1,13 @@
 import { inject } from '@angular/core';
-import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, catchError, of, map, withLatestFrom, filter, tap } from 'rxjs';
-import * as UsersActions from './users.actions';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { select, Store } from '@ngrx/store';
+import { catchError, filter, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
+
+import { CreateUserDTO, selectRouteParams, UsersDTO, usersDTOAdapter, UsersEntity } from '@users/core/data-access';
 import { ApiService } from '@users/core/http';
-import { Store, select } from '@ngrx/store';
+
+import * as UsersActions from './users.actions';
 import { selectUsersEntities } from './users.selectors';
-import { CreateUserDTO, UsersDTO, UsersEntity, selectRouteParams, usersDTOAdapter } from '@users/core/data-access';
 
 export const userEffects = createEffect(
   () => {
@@ -20,17 +22,17 @@ export const userEffects = createEffect(
           map((users) =>
             UsersActions.loadUsersSuccess({
               users: users.map((user) => usersDTOAdapter.DTOtoEntity(user)),
-            })
+            }),
           ),
           catchError((error) => {
             console.error('Error', error);
             return of(UsersActions.loadUsersFailure({ error }));
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   },
-  { functional: true }
+  { functional: true },
 );
 
 export const deleteUser = createEffect(
@@ -46,12 +48,12 @@ export const deleteUser = createEffect(
           catchError((error) => {
             console.error('Error', error);
             return of(UsersActions.deleteUserFailed({ error }));
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   },
-  { functional: true }
+  { functional: true },
 );
 
 export const addUser = createEffect(
@@ -68,12 +70,12 @@ export const addUser = createEffect(
           catchError((error) => {
             console.error('Error', error);
             return of(UsersActions.addUserFailed({ error }));
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   },
-  { functional: true }
+  { functional: true },
 );
 
 export const editUser = createEffect(
@@ -104,12 +106,12 @@ export const editUser = createEffect(
           catchError((error) => {
             console.error('Error', error);
             return of(UsersActions.editUserFailed({ error }));
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   },
-  { functional: true }
+  { functional: true },
 );
 
 export const loadUser = createEffect(
@@ -128,12 +130,12 @@ export const loadUser = createEffect(
             catchError((error) => {
               console.error('Error', error);
               return of(UsersActions.loadUserFailed({ error }));
-            })
+            }),
           );
         }
         return of(UsersActions.updateUserStatus({ status: 'loading' }));
-      })
+      }),
     );
   },
-  { functional: true }
+  { functional: true },
 );

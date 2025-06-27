@@ -1,6 +1,6 @@
 {
   "name": "users-feature-change-theme",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/settings/feature-change-theme/src",
   "prefix": "users",
   "tags": [],
@@ -15,12 +15,7 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/settings/feature-change-theme/**/*.ts",
-          "libs/settings/feature-change-theme/**/*.html"
-        ]
-      }
+      "outputs": ["{options.outputFile}"]
     }
   }
 }

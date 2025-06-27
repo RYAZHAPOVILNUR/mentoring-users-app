@@ -1,16 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChangeThemeComponentHeader } from './change-theme-header.component';
+
+import { ChangeThemeHeaderComponent } from './change-theme-header.component';
 
 describe('ChangeThemeComponentHeader', () => {
-  let component: ChangeThemeComponentHeader;
-  let fixture: ComponentFixture<ChangeThemeComponentHeader>;
+  let component: ChangeThemeHeaderComponent;
+  let fixture: ComponentFixture<ChangeThemeHeaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ChangeThemeComponentHeader],
+      imports: [ChangeThemeHeaderComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ChangeThemeComponentHeader);
+    fixture = TestBed.createComponent(ChangeThemeHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

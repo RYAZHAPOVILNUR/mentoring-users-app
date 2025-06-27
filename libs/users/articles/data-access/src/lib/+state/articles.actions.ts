@@ -1,6 +1,7 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { CreateArticle } from '../models/create-article.model';
+
 import { Article } from '../models/article.model';
+import { CreateArticle } from '../models/create-article.model';
 
 export const ArticlesActions = createActionGroup({
   source: 'Article',

@@ -1,8 +1,10 @@
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { CommentsActions } from './comments.actions';
+
 import { LoadingStatus } from '@users/core/data-access';
+
+import { CommentsActions } from './comments.actions';
 import { Comment } from '../../models/user-comment.model';
-import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 
 export const commentsFeatureKey = 'comments';
 
@@ -33,7 +35,7 @@ export const commentsFeature = createFeature({
     })),
 
     on(CommentsActions.loadCommentsSuccess, (state, { comments }) =>
-      commentsAdapter.setAll(comments, { ...state, status: 'loaded' as const })
+      commentsAdapter.setAll(comments, { ...state, status: 'loaded' as const }),
     ),
 
     on(CommentsActions.loadCommentsFailed, (state) => ({
@@ -50,7 +52,7 @@ export const commentsFeature = createFeature({
       commentsAdapter.addOne(comment, {
         ...state,
         publishStatus: 'loaded' as const,
-      })
+      }),
     ),
 
     on(CommentsActions.publishCommentFailed, (state) => ({
@@ -58,6 +60,6 @@ export const commentsFeature = createFeature({
       publishStatus: 'error' as const,
     })),
 
-    on(CommentsActions.deleteComment, (state, { id }) => commentsAdapter.removeOne(id, state))
+    on(CommentsActions.deleteComment, (state, { id }) => commentsAdapter.removeOne(id, state)),
   ),
 });

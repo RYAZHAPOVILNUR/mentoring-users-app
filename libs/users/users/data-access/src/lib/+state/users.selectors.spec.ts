@@ -1,5 +1,6 @@
-import { UsersEntity } from './users.models';
-import { usersAdapter, UsersPartialState, initialUsersState } from './users.reducer';
+import { UsersEntity } from '@users/core/data-access';
+
+import { initialUsersState, usersAdapter, UsersPartialState } from './users.reducer';
 import * as UsersSelectors from './users.selectors';
 
 describe('Users Selectors', () => {
@@ -9,7 +10,7 @@ describe('Users Selectors', () => {
     ({
       id,
       name: name || `name-${id}`,
-    } as UsersEntity);
+    }) as UsersEntity;
 
   let state: UsersPartialState;
 
@@ -22,7 +23,7 @@ describe('Users Selectors', () => {
           selectedId: 'PRODUCT-BBB',
           error: ERROR_MSG,
           loaded: true,
-        }
+        },
       ),
     };
   });
@@ -44,7 +45,7 @@ describe('Users Selectors', () => {
     });
 
     it('selectUsersLoaded() should return the current "loaded" status', () => {
-      const result = UsersSelectors.selectUsersLoaded(state);
+      const result = UsersSelectors.selectUserById(state);
 
       expect(result).toBe(true);
     });

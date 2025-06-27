@@ -61,7 +61,3 @@ export interface ChangeProfileDataPayload {
   city?: string;
   email?: string;
 }
-
-export interface ChangeProfileDataResponse {
-  message: string;
-}

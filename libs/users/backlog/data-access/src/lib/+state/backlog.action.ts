@@ -1,4 +1,5 @@
-import { createActionGroup, props, emptyProps, createAction } from '@ngrx/store';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
+
 import { CreateBacklog, IBacklog } from '../model/backlog.model';
 
 export const backlogAction = createActionGroup({

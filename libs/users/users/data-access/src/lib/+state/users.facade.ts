@@ -1,12 +1,14 @@
-import { Injectable, inject } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import * as UsersActions from './users.actions';
-import * as UsersSelectors from './users.selectors';
 import { Observable, of, switchMap } from 'rxjs';
-import { UsersErrors } from './users.reducer';
-import { onSuccessEditionCbType } from './users.actions';
+
 import { selectLoggedUser } from '@auth/data-access';
 import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
+
+import * as UsersActions from './users.actions';
+import { onSuccessEditionCbType } from './users.actions';
+import * as UsersSelectors from './users.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
@@ -21,7 +23,9 @@ export class UsersFacade {
   public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
   public readonly loggedUser$ = this.store.select(selectLoggedUser);
-  public readonly errors$: Observable<UsersErrors | null> = this.store.pipe(select(UsersSelectors.selectUsersError));
+  public readonly errors$: Observable<HttpErrorResponse | null> = this.store.pipe(
+    select(UsersSelectors.selectUsersError),
+  );
   /**
    * Use the initialization action to perform one
    * or more tasks in your Effects.
@@ -50,7 +54,7 @@ export class UsersFacade {
         } else {
           return of(null);
         }
-      })
+      }),
     );
   }
 

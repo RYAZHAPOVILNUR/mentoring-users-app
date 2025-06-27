@@ -1,18 +1,19 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
-import { AuthFacade } from '@auth/data-access';
-import { Observable, map } from 'rxjs';
 import { PushPipe } from '@ngrx/component';
-import { UiPhotoModalComponent } from 'libs/users/profile/ui-profile/ui-photo-modal/ui-photo-modal.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { map, Observable } from 'rxjs';
+
+import { AuthFacade } from '@auth/data-access';
+import { UiPhotoModalComponent } from 'ui-profile';
 
 @Component({
-  selector: 'navbar',
+  selector: 'lib-navbar',
   standalone: true,
   imports: [
     CommonModule,
@@ -30,9 +31,9 @@ import { UiPhotoModalComponent } from 'libs/users/profile/ui-profile/ui-photo-mo
 })
 export class NavbarComponent {
   private readonly facade = inject(AuthFacade);
+  private readonly dialog = inject(MatDialog);
   public readonly userPhoto: Observable<string | undefined> = this.facade.user$.pipe(map((user) => user.photo?.url));
   public readonly photo = this.userPhoto ? this.userPhoto : '';
-  private readonly dialog = inject(MatDialog);
 
   public onLogout() {
     this.facade.logout();

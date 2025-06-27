@@ -4,9 +4,9 @@
     editingArticle: editingArticle$
   } as vm"
 >
-  <articles-create-ui
+  <users-articles-create-ui
     [vm]="vm"
     (publishArticle)="onPublishArticle($event)"
     (formChange)="onFormChange($event)"
-  ></articles-create-ui>
+  />
 </ng-container>

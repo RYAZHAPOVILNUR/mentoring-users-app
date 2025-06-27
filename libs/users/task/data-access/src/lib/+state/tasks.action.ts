@@ -1,4 +1,5 @@
-import { createActionGroup, props, emptyProps } from '@ngrx/store';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
+
 import { IColumn, ITaskBoard } from '../model/tasks.interface';
 
 export const tasksAction = createActionGroup({

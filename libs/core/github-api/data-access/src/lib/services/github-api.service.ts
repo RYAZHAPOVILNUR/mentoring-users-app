@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
-import { GithubUserDTO } from '../models/github-user-DTO.model';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { CLIENT_ID } from '../client-id.token';
+import { inject, Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+
 import { ApiService } from '@users/core/http';
+
+import { CLIENT_ID } from '../client-id.token';
 import { GithubTokenDTO } from '../models/github-token-DTO.model';
+import { GithubUserDTO } from '../models/github-user-DTO.model';
 
 @Injectable({
   providedIn: 'root',

@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit, Input, inject } from '@angular/core';
+import { Component, inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuillModule } from 'ngx-quill';
 import { MatCardModule } from '@angular/material/card';
@@ -26,9 +26,11 @@ export class ArticleReadComponent implements OnInit {
   private readonly componentStore = inject(UsersListContainerStore);
   private readonly userFacade = inject(UsersFacade);
   public authorPhoto$!: Observable<string | undefined>;
+
   public clearArticleContent(content: string) {
     return content.replace(/<[^>]*>/g, ' ');
   }
+
   ngOnInit(): void {
     this.authorPhoto$ = this.userFacade.getUserFromStore(this.article!.authorId).pipe(map((data) => data?.photo?.url));
   }

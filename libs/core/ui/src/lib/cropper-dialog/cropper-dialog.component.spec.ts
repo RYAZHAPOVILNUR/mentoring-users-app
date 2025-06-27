@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { CropperDialogComponent } from './cropper-dialog.component';
 
 describe('CropperDialogComponent', () => {

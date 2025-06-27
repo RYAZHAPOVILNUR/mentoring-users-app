@@ -1,17 +1,18 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output } from '@angular/core';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatButtonModule } from '@angular/material/button';
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
+
 import { NewUser } from '@auth/data-access';
-import { InputPasswordComponent } from '@users/core/ui';
 import { ApiService } from '@users/core/http';
+import { InputPasswordComponent } from '@users/core/ui';
 import { LanguageKeys, LanguageSwitchService } from '@users/users/core/ui/language-switch';
 
 @Component({
@@ -35,7 +36,10 @@ import { LanguageKeys, LanguageSwitchService } from '@users/users/core/ui/langua
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterFormUiComponent {
+  private readonly api = inject(ApiService);
+  private readonly languageSwitchService = inject(LanguageSwitchService);
   public hide = true;
+
   public formGroup = new FormBuilder().group({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     email: new FormControl('', [Validators.required, Validators.email, Validators.minLength(3)]),
@@ -43,8 +47,6 @@ export class RegisterFormUiComponent {
     agreement: new FormControl(false, Validators.requiredTrue),
   });
 
-  private readonly api = inject(ApiService);
-  private readonly languageSwitchService = inject(LanguageSwitchService);
   public readonly selectedLanguage$ = this.languageSwitchService.selectedLanguage$;
 
   @Output() redirectToLogin = new EventEmitter();

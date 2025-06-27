@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { map, timer } from 'rxjs';
-import { Student } from './students-data.model';
+
 import { studentData } from './students-data.data';
+import { Student } from './students-data.model';
 
 @Injectable({ providedIn: 'root' })
 export class HighchartsService {
@@ -16,7 +17,7 @@ export class HighchartsService {
           stData.push(item);
         });
         return stData;
-      })
+      }),
     );
   }
 }

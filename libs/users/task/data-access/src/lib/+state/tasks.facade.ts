@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+
 import { tasksAction } from './tasks.action';
 import { selectColumns } from './tasks.selector';
 import { IColumn } from '../model/tasks.interface';
-import { select, Store } from '@ngrx/store';
 
 @Injectable({
   providedIn: 'root',

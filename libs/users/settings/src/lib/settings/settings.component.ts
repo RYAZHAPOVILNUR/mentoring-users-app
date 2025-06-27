@@ -1,14 +1,14 @@
-import { Store } from '@ngrx/store';
-import { inject, OnInit } from '@angular/core';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { LanguageKeys, LanguageSwitchService } from '@users/users/core/ui/language-switch';
-import { PushPipe } from '@ngrx/component';
-import { MatIconModule } from '@angular/material/icon';
-import { SettingsFacade } from '@users/settings/data-access';
 import { MatCardModule } from '@angular/material/card';
-import { ChangeThemeComponent } from 'libs/users/settings/feature-change-theme/src/lib/change-theme-settings/change-theme.component';
+import { MatIconModule } from '@angular/material/icon';
+import { PushPipe } from '@ngrx/component';
+import { Store } from '@ngrx/store';
+
+import { SettingsFacade } from '@users/settings/data-access';
+import { LanguageKeys, LanguageSwitchService } from '@users/users/core/ui/language-switch';
+import { ChangeThemeComponent } from '@users/users/settings/feature-change-theme';
 
 @Component({
   selector: 'users-settings',

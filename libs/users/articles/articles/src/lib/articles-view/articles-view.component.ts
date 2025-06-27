@@ -1,22 +1,21 @@
-import { ChangeDetectionStrategy, Component, inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { QuillModule } from 'ngx-quill';
-import { MatCardModule } from '@angular/material/card';
-import { RouterModule } from '@angular/router';
+import { ChangeDetectionStrategy, Component, inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { Article } from '@users/users/articles/data-access';
-import { ArticlesCreateButtonComponent } from '@users/users/articles/articles-create';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { RouterModule } from '@angular/router';
 import { PushPipe } from '@ngrx/component';
-import { map, Observable } from 'rxjs';
-import { ApiService } from '@users/core/http';
-import { LanguageSwitchService } from '@users/users/core/ui/language-switch';
 import { TranslateModule } from '@ngx-translate/core';
-import { UsersListContainerStore } from '../../../../../users/feature-users-list/src/lib/users-list-container/users-list-container.store';
-import { UsersFacade } from '@users/users/data-access';
+import { QuillModule } from 'ngx-quill';
+import { map, Observable } from 'rxjs';
+
+import { UsersListContainerStore } from '@users/feature-users-list';
 import { SettingsFacade } from '@users/settings/data-access';
+import { ArticlesCreateButtonComponent } from '@users/users/articles/articles-create';
+import { Article } from '@users/users/articles/data-access';
+import { UsersFacade } from '@users/users/data-access';
 
 @Component({
   selector: 'users-articles-view',
@@ -52,6 +51,14 @@ export class ArticlesViewComponent implements OnInit {
   public authorArticle$: Observable<string | undefined>[] = [];
   public readonly viewStyleType$ = this.settingsFacade.articlesViewStyleType$;
 
+  ngOnInit(): void {
+    this.settingsFacade.getSettings();
+
+    for (const article of this.articles) {
+      this.authorPhoto$.push(this.userFacade.getUserFromStore(article.authorId).pipe(map((data) => data?.photo?.url)));
+      this.authorArticle$.push(this.userFacade.getUserFromStore(article.authorId).pipe(map((data) => data?.username)));
+    }
+  }
   changeArticlesStyleType(styleType: string): void {
     this.settingsFacade.setArticlesStyleType(styleType);
   }
@@ -62,14 +69,5 @@ export class ArticlesViewComponent implements OnInit {
 
   preventRouterNavigation(event: Event) {
     event.stopPropagation();
-  }
-
-  ngOnInit(): void {
-    this.settingsFacade.getSettings();
-
-    for (const article of this.articles) {
-      this.authorPhoto$.push(this.userFacade.getUserFromStore(article.authorId).pipe(map((data) => data?.photo?.url)));
-      this.authorArticle$.push(this.userFacade.getUserFromStore(article.authorId).pipe(map((data) => data?.username)));
-    }
   }
 }

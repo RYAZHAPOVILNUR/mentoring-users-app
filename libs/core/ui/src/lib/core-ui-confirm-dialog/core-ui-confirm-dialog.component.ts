@@ -1,12 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogModule,
-  MatDialogRef,
-} from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'users-core-ui-confirm-dialog',
@@ -28,6 +24,6 @@ export class CoreUiConfirmDialogComponent {
   }
 
   cancel() {
-    this.dialogRef.close(false)
+    this.dialogRef.close(false);
   }
 }

@@ -1,6 +1,7 @@
-import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { Comment } from '../../models/user-comment.model';
+import { createActionGroup, props } from '@ngrx/store';
+
 import { CreateComment } from '../../models/create-comment.model';
+import { Comment } from '../../models/user-comment.model';
 
 export const CommentsActions = createActionGroup({
   source: 'Comment',

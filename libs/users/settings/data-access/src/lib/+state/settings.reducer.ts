@@ -1,4 +1,5 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
+
 import { SettingsActions } from './settings.actions';
 import { ISettings } from '../model/settings.interface';
 
@@ -18,6 +19,6 @@ export const settingsFeature = createFeature({
     }),
     on(SettingsActions.setArticlesStyleType, (state, { articlesViewStyleType }) => {
       return { ...state, articlesViewStyleType };
-    })
+    }),
   ),
 });

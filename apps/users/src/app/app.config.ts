@@ -1,25 +1,27 @@
-import { ApplicationConfig, importProvidersFrom, isDevMode } from '@angular/core';
-import { provideRouter, withEnabledBlockingInitialNavigation } from '@angular/router';
-import { appRoutes } from './app.routes';
 import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { API_URL } from '@users/core/http';
-import { environment } from '../environments/environment.development';
-import { provideEffects } from '@ngrx/effects';
-import { provideStore } from '@ngrx/store';
-import { USERS_FEATURE_KEY, usersReducer, userEffects } from '@users/users/data-access';
-import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { provideRouterStore, routerReducer } from '@ngrx/router-store';
+import { ApplicationConfig, importProvidersFrom, isDevMode } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { authEffects, authFeature, tokenInterceptor } from '@auth/data-access';
-import { SettingsEffects, settingsFeature } from '@users/settings/data-access';
-import { DADATA_TOKEN } from '@users/core/dadata';
+import { provideRouter, withEnabledBlockingInitialNavigation } from '@angular/router';
+import { provideEffects } from '@ngrx/effects';
+import { provideRouterStore, routerReducer } from '@ngrx/router-store';
+import { provideStore } from '@ngrx/store';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideQuillConfig } from 'ngx-quill/config';
-import { articlesEffects, articlesFeature, commentsEffects, commentsFeature } from '@users/users/articles/data-access';
-import { tasksEffects, tasksFeature } from '@users/users/task/data-access';
+
+import { authEffects, authFeature, tokenInterceptor } from '@auth/data-access';
+import { DADATA_TOKEN } from '@users/core/dadata';
 import { CLIENT_ID, githubApiEffects, githubApiFeature } from '@users/core/github-api/data-access';
-import { backlogFeature, backlogEffects } from '@users/users/backlog/data-access';
+import { API_URL } from '@users/core/http';
+import { SettingsEffects, settingsFeature } from '@users/settings/data-access';
+import { articlesEffects, articlesFeature, commentsEffects, commentsFeature } from '@users/users/articles/data-access';
+import { backlogEffects, backlogFeature } from '@users/users/backlog/data-access';
+import { userEffects, USERS_FEATURE_KEY, usersReducer } from '@users/users/data-access';
+import { TasksEffects, tasksFeature } from '@users/users/task/data-access';
+
+import { appRoutes } from './app.routes';
+import { environment } from '../environments/environment.development';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -31,11 +33,11 @@ export const appConfig: ApplicationConfig = {
       userEffects,
       authEffects,
       articlesEffects,
-      tasksEffects,
+      TasksEffects,
       commentsEffects,
       githubApiEffects,
       backlogEffects,
-      SettingsEffects
+      SettingsEffects,
     ),
     provideStore({
       router: routerReducer,
@@ -84,7 +86,7 @@ export const appConfig: ApplicationConfig = {
           deps: [HttpClient],
         },
         defaultLanguage: 'en',
-      })
+      }),
     ),
   ],
 };

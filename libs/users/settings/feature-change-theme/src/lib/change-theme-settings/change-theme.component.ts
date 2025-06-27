@@ -1,17 +1,19 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSliderModule } from '@angular/material/slider';
-import { ThemeStorage, DocsSiteTheme } from '../change-theme-storage/change-theme-storage';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+import { ThemeStorage } from '../change-theme-storage/change-theme-storage';
+import { DocsSiteTheme } from '../interfaces/docs-site-theme.interface';
 import { StyleManager } from '../style-manager';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'users-change-theme',
@@ -32,8 +34,8 @@ import { FormsModule } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChangeThemeComponent implements OnInit, OnDestroy {
-  currentTheme: DocsSiteTheme | undefined;
   private queryParamSubscription = Subscription.EMPTY;
+  currentTheme: DocsSiteTheme | undefined;
 
   themes: DocsSiteTheme[] = [
     {
@@ -98,6 +100,23 @@ export class ChangeThemeComponent implements OnInit, OnDestroy {
     color: `${color}-${this.secondaryValue}`,
   }));
 
+  constructor(
+    public styleManager: StyleManager,
+    private themeStorage: ThemeStorage,
+    private activatedRoute: ActivatedRoute,
+  ) {}
+  ngOnInit(): void {
+    this.queryParamSubscription = this.activatedRoute.queryParamMap
+      .pipe(map((params: ParamMap) => params.get('theme')))
+      .subscribe((themeName: string | null) => {
+        if (themeName) {
+          this.selectTheme(themeName);
+        }
+      });
+  }
+  ngOnDestroy() {
+    this.queryParamSubscription.unsubscribe();
+  }
   primarySliderChange() {
     this.primaryColors = this.colors.map((color) => ({
       color: `${color}-${this.primaryValue}`,
@@ -124,26 +143,6 @@ export class ChangeThemeComponent implements OnInit, OnDestroy {
     } else {
       this.selectedSecondaryColor = color;
     }
-  }
-
-  constructor(
-    public styleManager: StyleManager,
-    private themeStorage: ThemeStorage,
-    private activatedRoute: ActivatedRoute
-  ) {}
-
-  ngOnInit(): void {
-    this.queryParamSubscription = this.activatedRoute.queryParamMap
-      .pipe(map((params: ParamMap) => params.get('theme')))
-      .subscribe((themeName: string | null) => {
-        if (themeName) {
-          this.selectTheme(themeName);
-        }
-      });
-  }
-
-  ngOnDestroy() {
-    this.queryParamSubscription.unsubscribe();
   }
 
   selectTheme(themeName: string) {

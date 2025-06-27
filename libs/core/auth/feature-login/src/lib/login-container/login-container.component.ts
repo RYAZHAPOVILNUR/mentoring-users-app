@@ -1,9 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginFormUiComponent } from '../login-form-ui/login-form-ui.component';
-import { Store } from '@ngrx/store';
-import { authActions, SignAuthPayload } from '@auth/data-access';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+
+import { authActions, SignAuthPayload } from '@auth/data-access';
+
+import { LoginFormUiComponent } from '../login-form-ui/login-form-ui.component';
 
 @Component({
   selector: 'users-login-container',

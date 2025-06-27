@@ -1,8 +1,9 @@
-import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { DadataResponse } from '@dadata';
+
 import { DADATA_TOKEN } from '../dadata.token';
+import { DadataResponse } from '../suggestions.model';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +31,7 @@ export class DadataApiService {
           from_bound: { value: 'city' },
           to_bound: { value: 'city' },
         }),
-        this.options
+        this.options,
       )
       .pipe(
         map((response) => {
@@ -39,7 +40,7 @@ export class DadataApiService {
             arr.push(item.value);
           });
           return arr;
-        })
+        }),
       );
   }
 }

@@ -1,19 +1,19 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
-import { UsersErrors, UsersFacade, onSuccessEditionCbType } from '@users/users/data-access';
-import { Observable, map, tap } from 'rxjs';
-import { selectQueryParam, CreateUserDTO, UsersEntity } from '@users/core/data-access';
-import { Store, select } from '@ngrx/store';
-import { LetDirective } from '@ngrx/component';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { CoreUiConfirmDialogComponent } from '@users/core/ui';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { LetDirective } from '@ngrx/component';
+import { select, Store } from '@ngrx/store';
+import { map, Observable, tap } from 'rxjs';
+
+import { CreateUserDTO, selectQueryParam, UsersEntity } from '@users/core/data-access';
+import { CoreUiConfirmDialogComponent } from '@users/core/ui';
+import { onSuccessEditionCbType, UsersFacade } from '@users/users/data-access';
+
+import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'users-detail',
   standalone: true,
   imports: [CommonModule, DetailUsersCardComponent, MatDialogModule, LetDirective],
   templateUrl: './users-detail-container.component.html',
@@ -24,9 +24,9 @@ export class UsersDetailComponent {
   private readonly usersFacade = inject(UsersFacade);
   private readonly store = inject(Store);
   private readonly router = inject(Router);
-  public user!: UsersEntity;
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
+  public user!: UsersEntity;
 
   public readonly user$: Observable<UsersEntity | null> = this.usersFacade.openedUser$.pipe(
     tap((user) => {
@@ -35,14 +35,14 @@ export class UsersDetailComponent {
       } else {
         this.user = user;
       }
-    })
+    }),
   );
   public readonly status$ = this.usersFacade.status$;
   public readonly editMode$: Observable<boolean> = this.store.pipe(
     select(selectQueryParam('edit')),
-    map((params) => params === 'true')
+    map((params) => params === 'true'),
   );
-  public readonly errors$: Observable<UsersErrors | null> = this.usersFacade.errors$;
+  public readonly errors$ = this.usersFacade.errors$;
 
   public onEditUser(userData: CreateUserDTO, onSuccessCb: onSuccessEditionCbType) {
     this.usersFacade.editUser(userData, this.user.id, onSuccessCb);

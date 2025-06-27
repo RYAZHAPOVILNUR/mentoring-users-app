@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { AuthorizedUserLayoutComponent } from './authorized-user-layout.component';
 
 describe('AuthorizedUserLayoutComponent', () => {

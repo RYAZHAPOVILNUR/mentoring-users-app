@@ -1,7 +1,6 @@
-import { selectRouteParams } from '@users/core/data-access';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Store, select } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import {
   Article,
   ArticlesActions,
@@ -9,15 +8,14 @@ import {
   CommentsActions,
   commentsSelectors,
 } from '../../../../data-access/src';
-import { selectQueryParam, selectRouteParam } from '../../../../../../core/data-access/src';
-import { map, Observable, withLatestFrom, take } from 'rxjs';
+import { map, Observable, take, withLatestFrom } from 'rxjs';
 import { LetDirective } from '@ngrx/component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ArticleReadComponent } from '../article-read/article-read.component';
 import { ArticleCommentsComponent } from '../article-comments/article-comments.component';
 import { selectLoggedUserId } from '../../../../../../core/auth/data-access/src';
 import { selectComments } from '../../../../data-access/src/lib/+state/comments/comments.selectors';
-import { selectOpenedArticle } from 'libs/users/articles/data-access/src/lib/+state/articles.selectors';
+import { selectRouteParams } from '../../../../../../core/data-access/src';
 
 @Component({
   selector: 'article-read-container',
@@ -42,7 +40,7 @@ export class ArticleReadContainerComponent {
         this.store.dispatch(ArticlesActions.getArticleForRead());
       }
       return article;
-    })
+    }),
   );
 
   onSubmitComment(commentText: string) {

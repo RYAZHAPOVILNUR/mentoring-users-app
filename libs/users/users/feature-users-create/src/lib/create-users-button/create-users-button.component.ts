@@ -1,12 +1,14 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { CreateUsersDialogComponent } from '../create-users-dialog/create-users-dialog.component';
-import { UsersFacade } from '@users/users/data-access';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatIconModule } from '@angular/material/icon';
+
 import { CreateUserDTO } from '@users/core/data-access';
+import { UsersFacade } from '@users/users/data-access';
+
+import { CreateUsersDialogComponent } from '../create-users-dialog/create-users-dialog.component';
 
 @Component({
   selector: 'users-create-users-button',
@@ -17,11 +19,12 @@ import { CreateUserDTO } from '@users/core/data-access';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateUsersButtonComponent {
-  private name!: string;
-  private email!: string;
-  public dialog = inject(MatDialog);
   private readonly usersFacade = inject(UsersFacade);
   private readonly destroyRef = inject(DestroyRef);
+  private name!: string;
+
+  private email!: string;
+  public dialog = inject(MatDialog);
 
   openAddUserDialog(): void {
     const dialogRef: MatDialogRef<CreateUsersDialogComponent> = this.dialog.open(CreateUsersDialogComponent, {

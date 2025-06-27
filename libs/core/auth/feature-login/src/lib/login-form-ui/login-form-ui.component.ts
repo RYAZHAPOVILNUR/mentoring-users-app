@@ -1,17 +1,18 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output } from '@angular/core';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatButtonModule } from '@angular/material/button';
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { ApiService } from '@users/core/http';
 import { PushPipe } from '@ngrx/component';
+import { TranslateModule } from '@ngx-translate/core';
+
+import { ApiService } from '@users/core/http';
 import { InputPasswordComponent } from '@users/core/ui';
 import { LanguageKeys, LanguageSwitchService } from '@users/users/core/ui/language-switch';
-import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'users-login-form-ui',
@@ -35,15 +36,15 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class LoginFormUiComponent {
   private readonly api = inject(ApiService);
-  @Output() login = new EventEmitter();
-  @Output() redirectToSignup = new EventEmitter();
   private readonly languageSwitchService = inject(LanguageSwitchService);
   public readonly selectedLanguage$ = this.languageSwitchService.selectedLanguage$;
-
   public formGroup = new FormBuilder().group({
     email: new FormControl('admin@gmail.com', [Validators.required, Validators.email]),
     password: new FormControl('12345', [Validators.required]),
   });
+  @Output() login = new EventEmitter();
+
+  @Output() redirectToSignup = new EventEmitter();
 
   onRedirectToSignUp() {
     this.redirectToSignup.emit();

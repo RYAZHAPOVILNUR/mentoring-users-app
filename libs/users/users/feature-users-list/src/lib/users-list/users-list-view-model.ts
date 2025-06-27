@@ -1,11 +1,13 @@
-import { DeepReadonly } from '@users/core/utils';
-import { UsersVM } from '../../../../users-vm';
-import { UsersErrors } from '@users/users/data-access';
+import { HttpErrorResponse } from '@angular/common/http';
+
 import { LoadingStatus, UsersEntity } from '@users/core/data-access';
+import { DeepReadonly } from '@users/core/utils';
+
+import { UsersVM } from '../users-vm';
 
 export type UsersListVM = DeepReadonly<{
   users: UsersVM[];
   status: LoadingStatus;
-  errors: UsersErrors | null;
+  errors: HttpErrorResponse | null;
   loggedUser: UsersEntity;
 }>;

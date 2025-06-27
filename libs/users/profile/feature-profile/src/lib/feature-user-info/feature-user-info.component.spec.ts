@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { FeatureUserInfoComponent } from './feature-user-info.component';
 
 describe('FeatureUserInfoComponent', () => {

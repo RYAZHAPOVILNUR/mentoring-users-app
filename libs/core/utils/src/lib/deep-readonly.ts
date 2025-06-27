@@ -1,10 +1,10 @@
 export type DeepReadonly<T> = T extends (infer R)[]
   ? DeepReadonlyArray<R>
   : T extends (...args: unknown[]) => unknown
-  ? T
-  : T extends object
-  ? DeepReadonlyObject<T>
-  : T;
+    ? T
+    : T extends object
+      ? DeepReadonlyObject<T>
+      : T;
 
 export type DeepReadonlyArray<T> = ReadonlyArray<DeepReadonly<T>>;
 
