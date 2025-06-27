@@ -160,7 +160,7 @@ $color-palettes: (
 @each $color-name, $color-palette in $color-palettes {
   @for $i from 100 through 900 {
     $shade: $i;
-    .#{$color-name}-#{$shade} {
+    .#{"" + $color-name}-#{$shade} {
       background-color: mat.m2-get-color-from-palette($color-palette, $shade);
     }
   }
