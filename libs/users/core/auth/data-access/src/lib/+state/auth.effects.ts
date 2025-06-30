@@ -4,6 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, concatMap, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
 
+import { LocalStorageJwtService } from '@core/data-access-interceptors';
 import { UsersDTO, usersDTOAdapter } from '@users/core/data-access';
 import { ApiService } from '@users/core/http';
 
@@ -17,7 +18,6 @@ import {
   SignAuthPayload,
   SignAuthResponse,
 } from './sign.auth.model';
-import { LocalStorageJwtService } from '../services/local-storage-jwt.service';
 
 export const loginEffect$ = createEffect(
   (api = inject(ApiService), actions$ = inject(Actions)) =>

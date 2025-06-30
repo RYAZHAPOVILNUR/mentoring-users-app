@@ -1,7 +1,7 @@
 {
-  "name": "core-auth-data-access",
+  "name": "data-access-interceptors",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/core/auth/data-access/src",
+  "sourceRoot": "libs/core/data-access/data-access-interceptors/src",
   "prefix": "users",
   "projectType": "library",
   "tags": [],
@@ -10,12 +10,11 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/core/auth/data-access/jest.config.ts"
+        "jestConfig": "libs/core/data-access/data-access-interceptors/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
+      "executor": "@nx/eslint:lint"
     }
   }
 }

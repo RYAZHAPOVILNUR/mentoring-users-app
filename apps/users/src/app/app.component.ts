@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { authActions, AuthFacade } from '@auth/data-access';
+import { authActions, AuthFacade } from '@users/data-access-auth';
 
 @Component({
   standalone: true,

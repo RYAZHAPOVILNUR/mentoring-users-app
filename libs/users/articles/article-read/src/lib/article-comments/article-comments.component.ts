@@ -11,8 +11,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { LoadingStatus } from '../../../../../../core/data-access/src';
 import { PushPipe } from '@ngrx/component';
 import { ArticleCommentComponent } from './article-comment/article-comment.component';
-import { AuthFacade } from '../../../../../../core/auth/data-access/src';
 import { TranslateModule } from '@ngx-translate/core';
+import { AuthFacade } from '@users/data-access-auth';
 
 @Component({
   selector: 'article-comments',

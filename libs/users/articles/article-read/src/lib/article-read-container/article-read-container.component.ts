@@ -13,9 +13,9 @@ import { LetDirective } from '@ngrx/component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ArticleReadComponent } from '../article-read/article-read.component';
 import { ArticleCommentsComponent } from '../article-comments/article-comments.component';
-import { selectLoggedUserId } from '../../../../../../core/auth/data-access/src';
-import { selectComments } from '../../../../data-access/src/lib/+state/comments/comments.selectors';
+import { authSelectors } from '@users/data-access-auth';
 import { selectRouteParams } from '../../../../../../core/data-access/src';
+import { selectComments } from '../../../../data-access/src/lib/+state/comments/comments.selectors';
 
 @Component({
   selector: 'article-read-container',
@@ -29,7 +29,7 @@ export class ArticleReadContainerComponent {
   private readonly store = inject(Store);
   public readonly status$ = this.store.select(ArticleSelectors.selectStatus);
   public readonly commentsStatus$ = this.store.select(commentsSelectors.selectStatus);
-  public readonly loggedUserId$ = this.store.select(selectLoggedUserId);
+  public readonly loggedUserId$ = this.store.select(authSelectors.selectLoggedUserId);
   public articleComments$ = this.store.select(selectComments);
 
   public articleId$ = this.store.pipe(select(selectRouteParams));

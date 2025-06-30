@@ -1,8 +1,8 @@
 export default {
-  displayName: 'core-auth-data-access',
-  preset: '../../../../jest.preset.js',
+  displayName: 'data-access-auth',
+  preset: '../../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../../coverage/libs/core/auth/data-access',
+  coverageDirectory: '../../../../../coverage/libs/users/core/auth/data-access',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
