@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { authActions, SignAuthPayload } from '@auth/data-access';
+import { authActions, SignAuthPayload } from '@users/data-access-auth';
 
 import { LoginFormUiComponent } from '../login-form-ui/login-form-ui.component';
 

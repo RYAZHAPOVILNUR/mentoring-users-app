@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { LocalStorageJwtService } from './local-storage-jwt.service';
+import { LocalStorageJwtService } from '@core/data-access-interceptors';
 
 export const authGuard = () => {
   const router = inject(Router);

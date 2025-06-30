@@ -15,9 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@auth/data-access": ["libs/core/auth/data-access/src/index.ts"],
       "@auth/feature-login": ["libs/core/auth/feature-login/src/index.ts"],
       "@auth/feature-register": ["libs/core/auth/feature-register/src/index.ts"],
+      "@core/data-access-interceptors": ["libs/core/data-access/data-access-interceptors/src/index.ts"],
       "@dadata": ["libs/core/dadata/src/index.ts"],
       "@users/core/dadata": ["libs/core/dadata/src/index.ts"],
       "@users/core/data-access": ["libs/core/data-access/src/index.ts"],
@@ -29,6 +29,7 @@
       "@users/core/ui/layout": ["libs/users/core/ui/layout/src/public-api.ts"],
       "@users/core/utils": ["libs/core/utils/src/index.ts"],
       "@users/data-access": ["libs/data-access/src/index.ts"],
+      "@users/data-access-auth": ["libs/users/core/auth/data-access/src/index.ts"],
       "@users/feature-users-create": ["libs/users/users/feature-users-create/src/index.ts"],
       "@users/feature-users-detail": ["libs/users/users/feature-users-detail/src/index.ts"],
       "@users/feature-users-list": ["libs/users/users/feature-users-list/src/index.ts"],

@@ -17,7 +17,7 @@ import {
   SignAuthPayload,
   SignAuthResponse,
 } from './sign.auth.model';
-import { LocalStorageJwtService } from '../services/local-storage-jwt.service';
+import { LocalStorageJwtService } from '@core/data-access-interceptors';
 
 export const loginEffect$ = createEffect(
   (api = inject(ApiService), actions$ = inject(Actions)) =>

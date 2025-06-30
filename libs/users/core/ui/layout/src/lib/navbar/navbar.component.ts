@@ -9,7 +9,7 @@ import { PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 import { map, Observable } from 'rxjs';
 
-import { AuthFacade } from '@auth/data-access';
+import { AuthFacade } from '@users/data-access-auth';
 import { UiPhotoModalComponent } from 'ui-profile';
 
 @Component({

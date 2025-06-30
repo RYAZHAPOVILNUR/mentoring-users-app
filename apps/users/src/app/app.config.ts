@@ -10,10 +10,11 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideQuillConfig } from 'ngx-quill/config';
 
-import { authEffects, authFeature, tokenInterceptor } from '@auth/data-access';
+import { tokenInterceptor } from '@core/data-access-interceptors';
 import { DADATA_TOKEN } from '@users/core/dadata';
 import { CLIENT_ID, githubApiEffects, githubApiFeature } from '@users/core/github-api/data-access';
 import { API_URL } from '@users/core/http';
+import { authFeature, authEffects } from '@users/data-access-auth';
 import { SettingsEffects, settingsFeature } from '@users/settings/data-access';
 import { articlesEffects, articlesFeature, commentsEffects, commentsFeature } from '@users/users/articles/data-access';
 import { backlogEffects, backlogFeature } from '@users/users/backlog/data-access';

@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
-import { authActions, selectAuthStatus, selectLoggedUser } from '@auth/data-access';
 import { LetDirective } from '@ngrx/component';
 import { Store } from '@ngrx/store';
 import { selectQueryParam, UsersEntity } from '@users/core/data-access';
@@ -13,6 +12,7 @@ import {
   selectGithubUserName,
 } from '@users/core/github-api/data-access';
 import { CropperDialogComponent } from '@users/core/ui';
+import { authActions, authSelectors } from '@users/data-access-auth';
 import { noop, of, tap } from 'rxjs';
 
 import { FeatureUserInfoComponent } from '../feature-user-info/feature-user-info.component';
@@ -32,8 +32,8 @@ export class ProfileContainerComponent implements OnInit {
 
   public readonly user!: UsersEntity;
 
-  public readonly user$ = this.store.select(selectLoggedUser);
-  public readonly status$ = this.store.select(selectAuthStatus);
+  public readonly user$ = this.store.select(authSelectors.selectLoggedUser);
+  public readonly status$ = this.store.select(authSelectors.selectAuthStatus);
   public readonly githubUserName$ = this.store.select(selectGithubUserName);
   public readonly githubStatus$ = this.store.select(selectGithubStatus);
   public readonly isLoggedUser = of(true);
