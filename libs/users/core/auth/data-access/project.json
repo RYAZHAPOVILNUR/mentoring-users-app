@@ -2,7 +2,7 @@
   "name": "data-access-auth",
   "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/users/core/auth/data-access/src",
-  "prefix": "lib",
+  "prefix": "users",
   "projectType": "library",
   "tags": [],
   "targets": {

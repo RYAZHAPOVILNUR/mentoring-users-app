@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
   displayName: 'users-backlog',
   preset: '../../../jest.preset.js',

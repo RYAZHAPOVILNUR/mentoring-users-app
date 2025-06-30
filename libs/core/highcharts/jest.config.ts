@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
   displayName: 'core-highcharts',
   preset: '../../../jest.preset.js',

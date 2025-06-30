@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
   displayName: 'users-articles-articles-create',
   preset: '../../../../jest.preset.js',

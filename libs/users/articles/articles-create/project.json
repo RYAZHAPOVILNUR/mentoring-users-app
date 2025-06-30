@@ -3,8 +3,8 @@
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/users/articles/articles-create/src",
   "prefix": "users",
-  "tags": [],
   "projectType": "library",
+  "tags": [],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",

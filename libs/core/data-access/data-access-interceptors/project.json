@@ -2,7 +2,7 @@
   "name": "data-access-interceptors",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/core/data-access/data-access-interceptors/src",
-  "prefix": "lib",
+  "prefix": "users",
   "projectType": "library",
   "tags": [],
   "targets": {

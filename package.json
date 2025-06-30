@@ -53,6 +53,8 @@
     "@angular/cli": "^19.2.9",
     "@angular/compiler-cli": "~19.2.8",
     "@angular/language-service": "~19.2.8",
+    "@eslint/eslintrc": "^2.1.1",
+    "@eslint/js": "~8.57.0",
     "@ngrx/schematics": "~19.1.0",
     "@ngrx/store-devtools": "~19.1.0",
     "@nrwl/cli": "^15.9.3",
