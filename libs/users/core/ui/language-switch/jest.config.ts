@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
   displayName: 'users-core-ui-language-switch',
   preset: '../../../../../jest.preset.js',

@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
   displayName: 'users-users-feature-users-create',
   preset: '../../../../jest.preset.js',
