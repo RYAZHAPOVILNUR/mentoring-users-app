@@ -1,0 +1,36 @@
+{
+  "name": "ui-profile",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/users/profile/ui-profile/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/users/profile/ui-profile/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/users/profile/ui-profile/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/users/profile/ui-profile/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/users/profile/ui-profile/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

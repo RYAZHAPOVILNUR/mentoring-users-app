@@ -1,14 +1,16 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
+
+import { UsersEntity } from '@users/core/data-access';
+
 import {
-  NewUser,
-  SignAuthPayload,
-  SignAuthUser,
   ChangePasswordPayload,
   ChangePasswordResponse,
   ChangeProfileDataPayload,
   ChangeProfileDataResponse,
+  NewUser,
+  SignAuthPayload,
+  SignAuthUser,
 } from './sign.auth.model';
-import { UsersEntity } from '@users/core/data-access';
 
 export const authActions = createActionGroup({
   source: 'Auth',
@@ -22,6 +24,7 @@ export const authActions = createActionGroup({
 
     changeProfileData: props<{ data: ChangeProfileDataPayload }>(),
     changePassword: props<{ data: ChangePasswordPayload }>(),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     uploadImage: props<{ image: any }>(),
     register: props<{ userData: NewUser }>(),
     getUser: emptyProps(),

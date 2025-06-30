@@ -1,6 +1,6 @@
 <mat-card
   class="user-card-wrapper"
-  (click)="redirectToEditPage(false, $event)"
+  (click)="redirectToEditPage(false)"
   matTooltip="{{ user.isAdmin ? 'Admin' : 'User' }}"
   matTooltipClass="example-tooltip-uppercase"
 >
@@ -14,12 +14,12 @@
   </mat-card-content>
 
   <mat-menu #menu="matMenu">
-    <button mat-menu-item color="accent" (click)="redirectToEditPage(true, $event)">Редактировать</button>
+    <button mat-menu-item color="accent" (click)="redirectToEditPage(true)">Редактировать</button>
     <button
       mat-menu-item
       color="warn"
       [disabled]="user.isAdmin || user.id === loggedUser.id"
-      (click)="onDeleteUser($event)"
+      (click)="onDeleteUser()"
     >
       Удалить
     </button>

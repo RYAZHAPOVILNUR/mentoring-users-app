@@ -1,10 +1,10 @@
-import { createFeature, createReducer, on } from '@ngrx/store';
-import { IBacklog } from '../model/backlog.model';
-import { backlogAction } from './backlog.action';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { createFeature, createReducer, on } from '@ngrx/store';
+
 import { LoadingStatus } from '@users/core/data-access';
-import * as UsersActions from '../../../../../users/data-access/src/lib/+state/users.actions';
-import { usersAdapter } from '@users/users/data-access';
+
+import { backlogAction } from './backlog.action';
+import { IBacklog } from '../model/backlog.model';
 
 export const BACKLOG_FEATURE_KEY = 'backlogs';
 
@@ -36,7 +36,7 @@ export const backlogFeature = createFeature({
     }),
     on(backlogAction.deleteBacklogSuccess, (state, { id }) => backlogsAdapter.removeOne(id, { ...state })),
     on(backlogAction.addBacklogSuccess, (state, { backlogData }) =>
-      backlogsAdapter.addOne({ ...backlogData }, { ...state })
-    )
+      backlogsAdapter.addOne({ ...backlogData }, { ...state }),
+    ),
   ),
 });

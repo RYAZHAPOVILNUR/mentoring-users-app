@@ -1,4 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
+
 import { ISettings } from '../model/settings.interface';
 
 export const SettingsActions = createActionGroup({

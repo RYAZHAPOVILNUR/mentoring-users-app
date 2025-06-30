@@ -1,8 +1,10 @@
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { ArticlesActions } from './articles.actions';
+
 import { LoadingStatus } from '@users/core/data-access';
+
+import { ArticlesActions } from './articles.actions';
 import { Article } from '../models/article.model';
-import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 
 export const articlesFeatureKey = 'articles';
 
@@ -27,7 +29,7 @@ export const articlesFeature = createFeature({
     })),
 
     on(ArticlesActions.loadArticlesSuccess, (state, { articles }) =>
-      articlesAdapter.setAll(articles, { ...state, status: 'loaded' as const })
+      articlesAdapter.setAll(articles, { ...state, status: 'loaded' as const }),
     ),
     on(ArticlesActions.editArticleSuccess, (state, { articles }) =>
       articlesAdapter.updateOne(
@@ -35,8 +37,8 @@ export const articlesFeature = createFeature({
           id: articles.id,
           changes: articles,
         },
-        state
-      )
+        state,
+      ),
     ),
     on(ArticlesActions.loadArticlesFailed, (state) => ({
       ...state,
@@ -49,7 +51,7 @@ export const articlesFeature = createFeature({
     })),
 
     on(ArticlesActions.getArticleForEditSuccess, (state, { article }) =>
-      articlesAdapter.addOne({ ...article }, { ...state, status: 'loaded' as const })
+      articlesAdapter.addOne({ ...article }, { ...state, status: 'loaded' as const }),
     ),
 
     on(ArticlesActions.getArticleForRead, (state) => ({
@@ -58,7 +60,7 @@ export const articlesFeature = createFeature({
     })),
 
     on(ArticlesActions.getArticleForReadSuccess, (state, { article }) =>
-      articlesAdapter.addOne({ ...article }, { ...state, status: 'loaded' as const })
-    )
+      articlesAdapter.addOne({ ...article }, { ...state, status: 'loaded' as const }),
+    ),
   ),
 });

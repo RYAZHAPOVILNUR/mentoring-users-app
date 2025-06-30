@@ -1,13 +1,15 @@
-import { Injectable, inject } from '@angular/core';
-import { ComponentStore } from '@ngrx/component-store';
-import { UsersFacade } from '@users/users/data-access';
-import { DeepReadonly } from '@users/core/utils';
-import { UsersVM } from '../../../../users-vm';
-import { tap } from 'rxjs';
-import { usersVMAdapter } from '../../../../users-vm.adapter';
+import { inject, Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { CoreUiConfirmDialogComponent } from '@users/core/ui';
+import { ComponentStore } from '@ngrx/component-store';
+import { tap } from 'rxjs';
+
 import { UsersEntity } from '@users/core/data-access';
+import { CoreUiConfirmDialogComponent } from '@users/core/ui';
+import { DeepReadonly } from '@users/core/utils';
+import { UsersFacade } from '@users/users/data-access';
+
+import { UsersVM } from '../users-vm';
+import { usersVMAdapter } from '../users-vm.adapter';
 
 type UsersListState = DeepReadonly<{
   users: UsersVM[];
@@ -31,16 +33,6 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
     this.setUsersFromGlobalToLocalStore();
   }
 
-  private setUsersFromGlobalToLocalStore(): void {
-    this.effect(() => this.usersFacade.allUsers$.pipe(tap((users: UsersEntity[]) => this.patchUsers(users))));
-  }
-
-  private patchUsers(users: UsersEntity[]): void {
-    this.patchState({
-      users: users.map((user) => usersVMAdapter.entityToVM(user)),
-    });
-  }
-
   public deleteUser(user: UsersVM): void {
     const dialogRef: MatDialogRef<CoreUiConfirmDialogComponent> = this.dialog.open(CoreUiConfirmDialogComponent, {
       data: { dialogText: `Вы уверены, что хотите удалить ${user.name}` },
@@ -49,8 +41,17 @@ export class UsersListContainerStore extends ComponentStore<UsersListState> {
       dialogRef.afterClosed().pipe(
         tap((result: boolean) => {
           if (result) this.usersFacade.deleteUser(user.id);
-        })
-      )
+        }),
+      ),
     );
+  }
+  private setUsersFromGlobalToLocalStore(): void {
+    this.effect(() => this.usersFacade.allUsers$.pipe(tap((users: UsersEntity[]) => this.patchUsers(users))));
+  }
+
+  private patchUsers(users: UsersEntity[]): void {
+    this.patchState({
+      users: users.map((user) => usersVMAdapter.entityToVM(user)),
+    });
   }
 }

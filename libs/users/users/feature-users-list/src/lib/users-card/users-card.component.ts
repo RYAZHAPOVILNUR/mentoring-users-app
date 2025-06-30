@@ -1,14 +1,15 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsersVM } from '../../../../users-vm';
-import { MatCardModule } from '@angular/material/card';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatMenuTrigger } from '@angular/material/menu';
-import { RouterModule } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { UsersEntity } from '@users/core/data-access';
+import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterModule } from '@angular/router';
+
+import { UsersEntity } from '@users/core/data-access';
+
+import { UsersVM } from '../users-vm';
 
 @Component({
   selector: 'users-card',
@@ -25,21 +26,20 @@ export class UsersCardComponent {
   @Input({ required: true })
   loggedUser!: UsersEntity;
 
+  @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
   @Output() deleteUser = new EventEmitter();
   @Output() redirectToEdit = new EventEmitter();
-
-  @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
 
   onOpenMenu(event: Event) {
     event.stopPropagation();
     this.trigger.openMenu();
   }
 
-  onDeleteUser(event: Event) {
+  onDeleteUser() {
     this.deleteUser.emit();
   }
 
-  redirectToEditPage(editMode: boolean, event: Event) {
+  redirectToEditPage(editMode: boolean) {
     const emitData = {
       id: this.user.id,
       editMode,

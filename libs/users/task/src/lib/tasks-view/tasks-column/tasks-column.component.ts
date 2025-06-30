@@ -1,22 +1,16 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { CdkDrag, CdkDragDrop, CdkDropList, DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
-import {
-  CdkDrag,
-  CdkDragDrop,
-  CdkDragPreview,
-  CdkDropList,
-  CdkDropListGroup,
-  DragDropModule,
-} from '@angular/cdk/drag-drop';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { IColumn } from '@users/users/task/data-access';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { BehaviorSubject, skip } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
+import { IColumn, ITask } from '@users/users/task/data-access';
 
 @Component({
   selector: 'users-tasks-column',
@@ -26,19 +20,41 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     CdkDrag,
     CdkDropList,
     FormsModule,
-    CdkDropListGroup,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    CdkDragPreview,
     DragDropModule,
   ],
   templateUrl: './tasks-column.component.html',
   styleUrls: ['./tasks-column.component.scss'],
 })
 export class TasksColumnComponent {
+  private readonly editing$ = new BehaviorSubject(false);
+  private columnData!: IColumn;
+  public title!: string;
+  public titleInitialValue!: string;
+  @Output() deleteColumn = new EventEmitter<number>();
+
+  @Output() deleteTask = new EventEmitter<{
+    columnIndex: number;
+    taskName: string;
+  }>();
+
+  @Output() dragDrop = new EventEmitter<CdkDragDrop<IColumn>>();
+
+  @Output() addTask = new EventEmitter();
+  @Output() removeTask = new EventEmitter();
+  @Output() changeTaskModal = new EventEmitter();
+  @Output() changeColumnName = new EventEmitter<string>();
+  constructor() {
+    this.editing$.pipe(skip(1), takeUntilDestroyed()).subscribe((editing) => {
+      if (!editing && this.title !== this.titleInitialValue) {
+        this.changeColumnName.emit(this.title);
+      }
+    });
+  }
   @Input({ required: true })
   set column(column: IColumn) {
     this.title = column.columnName;
@@ -50,40 +66,19 @@ export class TasksColumnComponent {
   get column() {
     return this.columnData;
   }
-  @Output() deleteColumn = new EventEmitter<number>();
-  @Output() deleteTask = new EventEmitter<{
-    columnIndex: number;
-    taskName: string;
-  }>();
-  @Output() dragDrop = new EventEmitter<CdkDragDrop<IColumn>>();
-  @Output() addTask = new EventEmitter();
-  @Output() removeTask = new EventEmitter();
-  @Output() changeTaskModal = new EventEmitter();
-  @Output() changeColumnName = new EventEmitter<string>();
+
   @ViewChild('input', { read: ElementRef })
   set input(elRef: ElementRef<HTMLInputElement>) {
     if (elRef) {
       elRef.nativeElement.focus();
     }
   }
-  private readonly editing$ = new BehaviorSubject(false);
+
   set editing(value: boolean) {
     this.editing$.next(value);
   }
   get editing(): boolean {
     return this.editing$.value;
-  }
-
-  public title!: string;
-  public titleInitialValue!: string;
-  private columnData!: IColumn;
-
-  constructor() {
-    this.editing$.pipe(skip(1), takeUntilDestroyed()).subscribe((editing) => {
-      if (!editing && this.title !== this.titleInitialValue) {
-        this.changeColumnName.emit(this.title);
-      }
-    });
   }
 
   onDragDrop($event: CdkDragDrop<IColumn>) {
@@ -94,10 +89,10 @@ export class TasksColumnComponent {
     this.addTask.emit();
   }
 
-  public onRemoveTask(taskData: any) {
+  public onRemoveTask(taskData: string) {
     this.removeTask.emit(taskData);
   }
-  public onChangeTaskModal(task: any) {
+  public onChangeTaskModal(task: ITask) {
     this.changeTaskModal.emit(task);
   }
 

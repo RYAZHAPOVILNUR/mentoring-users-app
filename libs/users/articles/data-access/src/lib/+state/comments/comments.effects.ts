@@ -1,16 +1,16 @@
-import { withLatestFrom } from 'rxjs';
-import { Store } from '@ngrx/store';
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { CommentsActions } from './comments.actions';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, map, of, switchMap, withLatestFrom } from 'rxjs';
+
+import { AuthFacade } from '@auth/data-access';
 import { ApiService } from '@users/core/http';
+
+import { CommentsActions } from './comments.actions';
 import { CreateComment } from '../../models/create-comment.model';
 import { Comment } from '../../models/user-comment.model';
-import { AuthFacade } from '@auth/data-access';
 
 export const publishComment$ = createEffect(
-  (actions$ = inject(Actions), store = inject(Store), auth$ = inject(AuthFacade), apiService = inject(ApiService)) => {
+  (actions$ = inject(Actions), auth$ = inject(AuthFacade), apiService = inject(ApiService)) => {
     return actions$.pipe(
       ofType(CommentsActions.publishComment),
       withLatestFrom(auth$.user$),
@@ -30,17 +30,17 @@ export const publishComment$ = createEffect(
           map((comment) =>
             CommentsActions.publishCommentSuccess({
               comment: { ...comment, author },
-            })
+            }),
           ),
           catchError((error) => {
             console.error('Error', error);
             return of(CommentsActions.publishCommentFailed({ error }));
-          })
+          }),
         );
-      })
+      }),
     );
   },
-  { functional: true }
+  { functional: true },
 );
 
 export const loadComments$ = createEffect(
@@ -53,12 +53,12 @@ export const loadComments$ = createEffect(
           catchError((error) => {
             console.error('Error', error);
             return of(CommentsActions.loadCommentsFailed({ error }));
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   },
-  { functional: true }
+  { functional: true },
 );
 export const deleteComment$ = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) => {
@@ -70,10 +70,10 @@ export const deleteComment$ = createEffect(
           catchError((error) => {
             console.error('Error', error);
             return of(CommentsActions.deleteCommentFailed({ error }));
-          })
+          }),
         );
-      })
+      }),
     );
   },
-  { functional: true }
+  { functional: true },
 );

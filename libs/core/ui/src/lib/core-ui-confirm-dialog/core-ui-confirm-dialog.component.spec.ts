@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { CoreUiConfirmDialogComponent } from './core-ui-confirm-dialog.component';
 
 describe('CoreUiConfirmDialogComponent', () => {

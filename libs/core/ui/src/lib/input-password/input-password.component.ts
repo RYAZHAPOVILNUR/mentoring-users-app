@@ -1,14 +1,13 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Self } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Self } from '@angular/core';
 import { ControlValueAccessor, NgControl, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'input-password',
+  selector: 'users-input-password',
   standalone: true,
   imports: [CommonModule, MatIconModule, MatInputModule, MatButtonModule, MatFormFieldModule, ReactiveFormsModule],
   templateUrl: './input-password.component.html',
@@ -16,13 +15,16 @@ import { MatInputModule } from '@angular/material/input';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputPasswordComponent implements ControlValueAccessor {
-  public value: string | undefined;
-  public isHide = true;
-
   private onChange!: (value: string) => void;
   private onTouched!: () => void;
+  public value: string | undefined;
 
-  constructor(@Self() private readonly ngControl: NgControl, private readonly changeDetector: ChangeDetectorRef) {
+  public isHide = true;
+
+  constructor(
+    @Self() private readonly ngControl: NgControl,
+    private readonly changeDetector: ChangeDetectorRef,
+  ) {
     this.ngControl.valueAccessor = this;
   }
 

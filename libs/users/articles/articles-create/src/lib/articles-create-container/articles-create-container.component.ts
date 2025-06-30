@@ -1,15 +1,17 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ArticlesCreateUiComponent } from '../articles-create-ui/articles-create-ui.component';
-import { CreateArticle, ArticlesActions, ArticleSelectors, Article } from '@users/users/articles/data-access';
-import { Store, select } from '@ngrx/store';
-import { DeactivatableComponent } from '@users/core/utils';
-import { MatDialog } from '@angular/material/dialog';
-import { CoreUiConfirmDialogComponent } from '@users/core/ui';
-import { Observable, filter, first, map, tap, withLatestFrom } from 'rxjs';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { selectQueryParam } from '@users/core/data-access';
+import { MatDialog } from '@angular/material/dialog';
 import { LetDirective } from '@ngrx/component';
+import { select, Store } from '@ngrx/store';
+import { filter, first, map, Observable, tap, withLatestFrom } from 'rxjs';
+
+import { selectQueryParam } from '@users/core/data-access';
+import { CoreUiConfirmDialogComponent } from '@users/core/ui';
+import { DeactivatableComponent } from '@users/core/utils';
+import { Article, ArticlesActions, ArticleSelectors, CreateArticle } from '@users/users/articles/data-access';
+
+import { ArticlesCreateUiComponent } from '../articles-create-ui/articles-create-ui.component';
 
 @Component({
   selector: 'users-articles-create-container',
@@ -19,22 +21,32 @@ import { LetDirective } from '@ngrx/component';
   styleUrls: ['./articles-create-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ArticlesCreateContainerComponent implements DeactivatableComponent {
+export class ArticlesCreateContainerComponent implements DeactivatableComponent, OnInit {
   private readonly store = inject(Store);
+  private readonly destroyRef = inject(DestroyRef);
   private dialog = inject(MatDialog);
   private dialogText = '';
   private article: CreateArticle | null = null;
   private isFormChange = false;
   private isEditMode = false;
-  private readonly destroyRef = inject(DestroyRef);
 
   public editMode$ = this.store.pipe(
     takeUntilDestroyed(this.destroyRef), //Почему не происходит отписка?
     select(selectQueryParam('mode')),
     filter((mode) => mode !== undefined),
-    map((mode) => mode === 'edit')
+    map((mode) => mode === 'edit'),
   );
 
+  public articleId$ = this.store.pipe(select(selectQueryParam('id')));
+  public editingArticle$: Observable<Article | null> = this.store.select(ArticleSelectors.selectArticleForEdit).pipe(
+    withLatestFrom(this.articleId$),
+    map(([article, id]) => {
+      if (!article && id && typeof id === 'string') {
+        this.store.dispatch(ArticlesActions.getArticleForEdit({ id }));
+      }
+      return article;
+    }),
+  );
   ngOnInit(): void {
     this.editMode$.pipe(first()).subscribe((mode) => (this.isEditMode = mode));
 
@@ -44,22 +56,9 @@ export class ArticlesCreateContainerComponent implements DeactivatableComponent 
     }
   }
 
-  public articleId$ = this.store.pipe(select(selectQueryParam('id')));
-
-  public editingArticle$: Observable<Article | null> = this.store.select(ArticleSelectors.selectArticleForEdit).pipe(
-    withLatestFrom(this.articleId$),
-    map(([article, id]) => {
-      if (!article && id && typeof id === 'string') {
-        this.store.dispatch(ArticlesActions.getArticleForEdit({ id }));
-      }
-      return article;
-    })
-  );
-
   onPublishArticle(article: CreateArticle) {
     this.article = article;
     console.log(this.article);
-
   }
 
   onFormChange(isFormChage: boolean) {
@@ -83,11 +82,13 @@ export class ArticlesCreateContainerComponent implements DeactivatableComponent 
         tap((result) => {
           if (this.article && result) this.store.dispatch(ArticlesActions.publishArticle({ article: this.article }));
 
-          if(this.article && this.article.articlesId && result) {
-            this.store.dispatch(ArticlesActions.editArticle({ articleData: this.article, id: this.article.articlesId }));
+          if (this.article && this.article.articlesId && result) {
+            this.store.dispatch(
+              ArticlesActions.editArticle({ articleData: this.article, id: this.article.articlesId }),
+            );
           }
         }),
-        map((result: boolean) => result)
+        map((result: boolean) => result),
       );
   }
 }

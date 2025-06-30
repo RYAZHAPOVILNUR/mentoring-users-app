@@ -1,14 +1,15 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
-import { MatListModule } from '@angular/material/list';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { IBacklog, BacklogFacade } from '@users/users/backlog/data-access';
-import { Observable } from 'rxjs';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { TaskChangeDialogComponent } from '../../../../task/src/lib/task-change-dialog/task-change-dialog.component';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { Observable } from 'rxjs';
+
+import { BacklogFacade, IBacklog } from '@users/users/backlog/data-access';
+import { TaskChangeDialogComponent } from '@users/users/task';
 
 @Component({
   selector: 'users-backlog',

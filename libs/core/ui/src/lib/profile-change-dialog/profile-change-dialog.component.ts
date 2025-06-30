@@ -1,20 +1,18 @@
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { LetDirective, PushPipe } from '@ngrx/component';
-import { InputCityComponent } from '../input-city/input-city.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
-import { UsersEntity } from '@users/core/data-access';
-import { AuthFacade } from '@auth/data-access';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { UsersEntity } from '@users/core/data-access';
+
+import { InputCityComponent } from '../input-city/input-city.component';
+
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'profile-change-dialog',
   standalone: true,
   imports: [
     ReactiveFormsModule,
@@ -24,9 +22,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatDialogModule,
     MatButtonModule,
     MatInputModule,
-    LetDirective,
     CommonModule,
-    PushPipe,
     TranslateModule,
   ],
   templateUrl: './profile-change-dialog.component.html',

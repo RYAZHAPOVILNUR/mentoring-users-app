@@ -1,9 +1,10 @@
 import { inject } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { selectIsAdmin } from '../+state/auth.selectors';
-import { filter, map, tap } from 'rxjs';
 import { CanActivateFn } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { filter, map, tap } from 'rxjs';
+
 import { authActions } from '../+state/auth.actions';
+import { selectIsAdmin } from '../+state/auth.selectors';
 
 export const adminGuard: CanActivateFn = () => {
   const store = inject(Store);
@@ -15,6 +16,6 @@ export const adminGuard: CanActivateFn = () => {
       }
     }),
     filter((isAdmin) => isAdmin !== null),
-    map((isAdmin) => !!isAdmin)
+    map((isAdmin) => !!isAdmin),
   );
 };

@@ -1,19 +1,20 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ArticlesViewComponent } from '../articles-view/articles-view.component';
-import { select, Store } from '@ngrx/store';
-import { ArticleSelectors, ArticlesActions, Article } from '@users/users/articles/data-access';
-import { LetDirective } from '@ngrx/component';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { selectLoggedUserId } from '@auth/data-access';
-import { ArticleReadComponent } from '@users/users/articles/article-read';
+import { LetDirective } from '@ngrx/component';
+import { select, Store } from '@ngrx/store';
 import { map, Observable, withLatestFrom } from 'rxjs';
+
+import { selectLoggedUserId } from '@auth/data-access';
 import { selectQueryParam } from '@users/core/data-access';
+import { Article, ArticlesActions, ArticleSelectors } from '@users/users/articles/data-access';
+
+import { ArticlesViewComponent } from '../articles-view/articles-view.component';
 
 @Component({
   selector: 'users-articles-view-container',
   standalone: true,
-  imports: [CommonModule, ArticlesViewComponent, LetDirective, MatProgressBarModule, ArticleReadComponent],
+  imports: [CommonModule, ArticlesViewComponent, LetDirective, MatProgressBarModule],
   templateUrl: './articles-view-container.component.html',
   styleUrls: ['./articles-view-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,7 +34,7 @@ export class ArticlesViewContainerComponent {
         this.store.dispatch(ArticlesActions.getArticleForEdit({ id }));
       }
       return article;
-    })
+    }),
   );
 
   constructor() {

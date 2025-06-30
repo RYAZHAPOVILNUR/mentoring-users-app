@@ -1,8 +1,10 @@
 import { Route } from '@angular/router';
+
 import { adminGuard, authGuard } from '@auth/data-access';
+import { canDeactivateFormComponent } from '@users/core/utils';
+
 import { AuthorizedUserLayoutComponent } from './authorized-user-layout/authorized-user-layout.component';
 import { UnauthorizedUserLayoutComponent } from './unauthorized-user-layout-component/unauthorized-user-layout-component.component';
-import { canDeactivateFormComponent } from '@users/core/utils';
 
 const layoutAgnosticComponents = [
   {

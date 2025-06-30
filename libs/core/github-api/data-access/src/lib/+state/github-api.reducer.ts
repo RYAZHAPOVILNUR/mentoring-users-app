@@ -1,7 +1,10 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { githubApiActions } from './github-api.actions';
+
 import { LoadingStatus } from '@users/core/data-access';
+
+import { githubApiActions } from './github-api.actions';
 import { GithubUserDTO } from '../models/github-user-DTO.model';
+
 export const authFeatureKey = 'auth';
 
 export interface GithubApiState {
@@ -53,6 +56,6 @@ export const githubApiFeature = createFeature({
     on(githubApiActions.logoutFromGithub, (state) => ({
       ...state,
       githubUser: null,
-    }))
+    })),
   ),
 });

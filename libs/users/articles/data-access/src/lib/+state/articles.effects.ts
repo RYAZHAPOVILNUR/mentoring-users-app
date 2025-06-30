@@ -1,14 +1,16 @@
 import { inject } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { ArticlesActions } from './articles.actions';
-import { catchError, filter, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
-import { ApiService } from '@users/core/http';
-import { CreateArticle } from '../models/create-article.model';
 import { Router } from '@angular/router';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { select, Store } from '@ngrx/store';
+import { catchError, filter, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
+
+import { selectRouteParams } from '@users/core/data-access';
+import { ApiService } from '@users/core/http';
+
+import { ArticlesActions } from './articles.actions';
+import { selectArticlesEntities } from './articles.selectors';
 import { Article } from '../models/article.model';
-import { Store, select } from '@ngrx/store';
-import { selectQueryParam, selectQueryParams, selectRouteParams } from '@users/core/data-access';
-import { selectArticles, selectArticlesEntities } from './articles.selectors';
+import { CreateArticle } from '../models/create-article.model';
 
 export const publishArticle$ = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService), router = inject(Router)) => {
@@ -21,12 +23,12 @@ export const publishArticle$ = createEffect(
           catchError((error) => {
             console.error('Error', error);
             return of(ArticlesActions.publishArticleFailed({ error }));
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   },
-  { functional: true, dispatch: false }
+  { functional: true, dispatch: false },
 );
 
 export const loadArticles$ = createEffect(
@@ -39,12 +41,12 @@ export const loadArticles$ = createEffect(
           catchError((error) => {
             console.error('Error', error);
             return of(ArticlesActions.loadArticlesFailed({ error }));
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   },
-  { functional: true }
+  { functional: true },
 );
 export const getArticleForEdit$ = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) => {
@@ -56,12 +58,12 @@ export const getArticleForEdit$ = createEffect(
           catchError((error) => {
             console.error('Error', error);
             return of(ArticlesActions.getArticleForEditFailed({ error }));
-          })
+          }),
         );
-      })
+      }),
     );
   },
-  { functional: true }
+  { functional: true },
 );
 
 export const getArticleForRead$ = createEffect(
@@ -78,19 +80,19 @@ export const getArticleForRead$ = createEffect(
           catchError((error) => {
             console.error('Error', error);
             return of(ArticlesActions.getArticleForReadFailed({ error }));
-          })
+          }),
         );
-      })
+      }),
     );
   },
-  { functional: true }
+  { functional: true },
 );
 
 export const editArticle$ = createEffect(
   (
     actions$ = inject(Actions),
     articlesEntities$ = inject(Store).pipe(select(selectArticlesEntities)),
-    apiService = inject(ApiService)
+    apiService = inject(ApiService),
   ) => {
     return actions$.pipe(
       ofType(ArticlesActions.editArticle),
@@ -111,10 +113,10 @@ export const editArticle$ = createEffect(
           catchError((error) => {
             console.error('Error', error);
             return of(ArticlesActions.editArticleFailed({ error }));
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   },
-  { functional: true }
+  { functional: true },
 );

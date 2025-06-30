@@ -1,13 +1,15 @@
-import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsersListComponent } from '../users-list/users-list.component';
-import { UsersListContainerStore } from './users-list-container.store';
-import { UsersVM } from '../../../../users-vm';
+import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { UsersFacade } from '@users/users/data-access';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
+
+import { UsersFacade } from '@users/users/data-access';
+
+import { UsersListContainerStore } from './users-list-container.store';
+import { UsersListComponent } from '../users-list/users-list.component';
+import { UsersVM } from '../users-vm';
 
 @Component({
   standalone: true,
@@ -20,12 +22,12 @@ import { LetDirective } from '@ngrx/component';
 })
 export class UsersListContainerComponent {
   private readonly componentStore = inject(UsersListContainerStore);
+  private readonly router = inject(Router);
   public usersFacade = inject(UsersFacade);
   public readonly users$ = this.componentStore.users$;
   public readonly status$ = this.componentStore.status$;
   public readonly errors$ = this.componentStore.errors$;
   public readonly loggedUser$ = this.usersFacade.loggedUser$;
-  private readonly router = inject(Router);
 
   onDeleteUser(user: UsersVM) {
     this.componentStore.deleteUser(user);

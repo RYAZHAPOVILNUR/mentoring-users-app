@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { FeatureUserInfoComponent } from 'libs/users/profile/feature-user-info/feature-user-info.component';
-import { Observable, of, tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { AuthFacade } from '@auth/data-access';
 import { LetDirective } from '@ngrx/component';
 import { UsersFacade } from '@users/users/data-access';
-import { UsersEntity } from '@users/core/data-access';
-import { AuthFacade } from '@auth/data-access';
+import { filter, of, tap } from 'rxjs';
+
+import { FeatureUserInfoComponent } from '../feature-user-info/feature-user-info.component';
 
 @Component({
   selector: 'users-profile-container',
@@ -22,7 +22,8 @@ export class UserProfileContainerComponent {
   public readonly isLoggedUser = of(false);
 
   public readonly status$ = this.authFacade.status$;
-  public readonly user$: Observable<UsersEntity | any> = this.usersFacade.openedUser$.pipe(
-    tap((_) => this.usersFacade.loadUser())
+  public readonly user$ = this.usersFacade.openedUser$.pipe(
+    tap(() => this.usersFacade.loadUser()),
+    filter(Boolean),
   );
 }

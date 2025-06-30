@@ -1,7 +1,9 @@
-import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { inject } from '@angular/core';
-import { ApiService } from '@users/core/http';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
+
+import { ApiService } from '@users/core/http';
+
 import { backlogAction } from './backlog.action';
 import { CreateBacklog, IBacklog } from '../model/backlog.model';
 
@@ -17,12 +19,12 @@ export const addBacklogTask$ = createEffect(
           map((backlogEntity) => backlogAction.addBacklogSuccess({ backlogData: backlogEntity })),
           catchError((error) => {
             return of(error);
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   },
-  { functional: true }
+  { functional: true },
 );
 
 export const loadBacklogs$ = createEffect(
@@ -40,12 +42,12 @@ export const loadBacklogs$ = createEffect(
           catchError((error) => {
             console.error('Error', error);
             return of(error);
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   },
-  { functional: true }
+  { functional: true },
 );
 
 export const deleteBacklog$ = createEffect(
@@ -61,10 +63,10 @@ export const deleteBacklog$ = createEffect(
           catchError((error) => {
             console.log(error);
             return of(error);
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   },
-  { functional: true }
+  { functional: true },
 );

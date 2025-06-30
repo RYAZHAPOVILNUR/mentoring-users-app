@@ -1,4 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
+
 import { GithubUserDTO } from '../models/github-user-DTO.model';
 
 export const githubApiActions = createActionGroup({

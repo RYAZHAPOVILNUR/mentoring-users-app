@@ -1,2 +1,1 @@
-export * from './lib/create-users-button/create-users-button.component';
-export * from '../../users-vm';
+export { CreateUsersButtonComponent } from './lib/create-users-button/create-users-button.component';

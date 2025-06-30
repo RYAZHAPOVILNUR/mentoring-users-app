@@ -1,7 +1,9 @@
+import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Injectable, inject } from '@angular/core';
-import { selectArticlesViewStyleType } from './settings.selectors';
+
 import { SettingsActions } from './settings.actions';
+import { selectArticlesViewStyleType } from './settings.selectors';
+
 @Injectable({
   providedIn: 'root',
 })

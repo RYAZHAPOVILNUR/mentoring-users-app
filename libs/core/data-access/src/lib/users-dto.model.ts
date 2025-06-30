@@ -1,4 +1,5 @@
 import { DeepReadonly } from '@users/core/utils';
+
 export enum Role {
   Admin = 'admin',
   User = 'user',

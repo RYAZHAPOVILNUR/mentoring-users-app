@@ -1,9 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RegisterFormUiComponent } from '../register-form-ui/register-form-ui.component';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { NewUser, authActions } from '@auth/data-access';
 import { Store } from '@ngrx/store';
+
+import { authActions, NewUser } from '@auth/data-access';
+
+import { RegisterFormUiComponent } from '../register-form-ui/register-form-ui.component';
 
 @Component({
   selector: 'users-register-container',

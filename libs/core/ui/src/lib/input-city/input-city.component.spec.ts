@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { InputCityComponent } from './input-city.component';
 
 describe('InputCityComponent', () => {

@@ -1,16 +1,18 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { ThemeStorage, DocsSiteTheme } from '../change-theme-storage/change-theme-storage';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+import { ThemeStorage } from '../change-theme-storage/change-theme-storage';
+import { DocsSiteTheme } from '../interfaces/docs-site-theme.interface';
 import { StyleManager } from '../style-manager';
-import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'users-change-theme-header',
@@ -29,9 +31,9 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ChangeThemeComponentHeader implements OnInit, OnDestroy {
-  currentTheme: DocsSiteTheme | undefined;
+export class ChangeThemeHeaderComponent implements OnInit, OnDestroy {
   private queryParamSubscription = Subscription.EMPTY;
+  currentTheme: DocsSiteTheme | undefined;
 
   themes: DocsSiteTheme[] = [
     {
@@ -64,7 +66,7 @@ export class ChangeThemeComponentHeader implements OnInit, OnDestroy {
   constructor(
     public styleManager: StyleManager,
     private themeStorage: ThemeStorage,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {
     const themeName = this.themeStorage.getStoredThemeName();
 
