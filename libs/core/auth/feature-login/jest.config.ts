@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
   displayName: 'core-auth-feature-login',
   preset: '../../../../jest.preset.js',

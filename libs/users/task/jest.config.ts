@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
   displayName: 'users-task',
   preset: '../../../jest.preset.js',

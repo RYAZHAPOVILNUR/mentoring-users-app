@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
   displayName: 'core-auth-data-access',
   preset: '../../../../jest.preset.js',
