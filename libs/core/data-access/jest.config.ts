@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
   displayName: 'core-data-access',
   preset: '../../../jest.preset.js',

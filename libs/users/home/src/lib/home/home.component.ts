@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@
 import { MatIconModule } from '@angular/material/icon';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
+// eslint-disable-next-line import/default
 import Highcharts from 'highcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
 
@@ -97,6 +98,7 @@ export class HomeComponent implements OnInit {
           enabled: true,
           format: '<b>{point.name}</b>: {point.percentage:.1f} %',
           style: {
+            // eslint-disable-next-line import/no-named-as-default-member
             color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
           },
         },
