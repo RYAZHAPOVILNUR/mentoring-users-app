@@ -1,0 +1,24 @@
+<div class="timer-widget-data-container">
+    <div class="timer-widget-data">
+        <ng-container *ngIf="formattedTime$ | async as time">
+            <span>{{ time.days < 10 ? '0' + time.days : time.days }}{{ 'PROFILE.USER_INFO.DAY' | translate }} </span>
+            <span>{{ time.hours < 10 ? '0' + time.hours : time.hours }}{{ 'PROFILE.USER_INFO.HOUR' | translate }}  </span>
+            <span>{{ time.minutes }}:</span>
+            <span>{{ time.seconds }}</span>
+        </ng-container>
+    </div>
+</div>
+<div class="timer-widget-buttons-container" >
+    <button *ngIf="!(isRunning$ | async)" (click)="onStartTimer()" mat-button>
+        <mat-icon>timer</mat-icon>
+        <span class="button-label">{{ 'PROFILE.USER_INFO.START_TIMER' | translate }}</span>
+    </button>
+    <button *ngIf="isRunning$ | async" (click)="onPauseTimer()" mat-button>
+        <mat-icon>pause</mat-icon>
+        <span class="button-label">{{ 'PROFILE.USER_INFO.PAUSE_TIMER' | translate }}</span>
+    </button>
+    <button (click)="onStopTimer()" mat-button>
+        <mat-icon>stop</mat-icon>
+        <span class="button-label">{{ 'PROFILE.USER_INFO.STOP_TIMER' | translate }}</span>
+    </button>
+</div> 

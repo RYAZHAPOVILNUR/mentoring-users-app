@@ -52,6 +52,7 @@
       </mat-card-content>
       <mat-card-actions class="user-info-items">
         <ng-container *ngIf="vm.isLoggedUser">
+          <users-user-timer-widget/>
           <button mat-button class="navbar-btn" (click)="onOpenChangePassword()">
             <mat-icon>lock-reset</mat-icon
             ><span class="button-label">{{ 'PROFILE.USER_INFO.CHANGE_PASSWORD' | translate }}</span>

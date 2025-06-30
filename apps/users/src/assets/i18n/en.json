@@ -48,7 +48,12 @@
     "USER_INFO": {
       "CONNECT_GITHUB": "Connect GitHub",
       "DISCONNECT_GITHUB": "Disconnect Github",
-      "CHANGE_PASSWORD": "Change password"
+      "CHANGE_PASSWORD": "Change password",
+      "START_TIMER": "Start timer",
+      "PAUSE_TIMER": "Pause",
+      "STOP_TIMER": "Stop",
+      "DAY": "d",
+      "HOUR": "hr"
     },
     "PASSWORD_CHANGE": {
       "FILL_THE_FORM": "Fill the form for password change",

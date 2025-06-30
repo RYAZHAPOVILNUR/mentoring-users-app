@@ -1,0 +1,38 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border: solid 1px #7e57c2;
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+
+button {
+  width: 100%;
+}
+
+.mat-icon {
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+.timer-widget-data-container {
+  background-image: #7e57c2;
+  padding: 15px;
+  border-radius: 4px;
+  text-align: center;
+  width: 300px
+}
+
+.timer-widget-data {
+  font-size: 25px;
+}
+
+.timer-widget-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}

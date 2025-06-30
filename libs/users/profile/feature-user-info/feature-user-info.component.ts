@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
+import { UserTimerWidgetComponent } from './user-timer-widget/user-timer-widget.component';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -32,6 +33,7 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     FormsModule,
     TranslateModule,
+    UserTimerWidgetComponent
   ],
   templateUrl: './feature-user-info.component.html',
   styleUrls: ['./feature-user-info.component.scss'],
