@@ -5,8 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
-import { CreateUserDTO } from '@users/core/data-access';
-import { UsersFacade } from '@users/users/data-access';
+import { CreateUserDTO, UsersFacade } from '@users/users/data-access';
 
 import { CreateUsersDialogComponent } from '../create-users-dialog/create-users-dialog.component';
 

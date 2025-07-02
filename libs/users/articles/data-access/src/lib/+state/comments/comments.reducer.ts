@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 
-import { LoadingStatus } from '@users/core/data-access';
+import { LoadingStatus } from '@shared/util-store';
 
 import { CommentsActions } from './comments.actions';
 import { Comment } from '../../models/user-comment.model';

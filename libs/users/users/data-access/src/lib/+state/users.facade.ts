@@ -3,12 +3,13 @@ import { inject, Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable, of, switchMap } from 'rxjs';
 
-import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
-import { authSelectors } from '@users/data-access-auth';
+import { authSelectors } from '@users/core/data-access-auth';
+import { UsersEntity } from '@users/core/data-access-models';
 
 import * as UsersActions from './users.actions';
 import { onSuccessEditionCbType } from './users.actions';
 import * as UsersSelectors from './users.selectors';
+import { CreateUserDTO } from '../types/create-user-dto.type';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {

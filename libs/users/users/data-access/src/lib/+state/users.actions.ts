@@ -1,7 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
 
-import { CreateUserDTO, LoadingStatus, UsersDTO, UsersEntity } from '@users/core/data-access';
+import { LoadingStatus } from '@shared/util-store';
+import { UsersDTO, UsersEntity } from '@users/core/data-access-models';
+
+import { CreateUserDTO } from '../types/create-user-dto.type';
 
 export type onSuccessEditionCbType = () => void;
 

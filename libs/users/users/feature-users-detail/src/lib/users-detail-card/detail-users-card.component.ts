@@ -26,8 +26,8 @@ import { PushPipe } from '@ngrx/component';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs';
 
 import { DadataApiService } from '@dadata';
-import { CreateUserDTO, UsersEntity } from '@users/core/data-access';
-import { onSuccessEditionCbType } from '@users/users/data-access';
+import { UsersEntity } from '@users/core/data-access-models';
+import { CreateUserDTO, onSuccessEditionCbType } from '@users/users/data-access';
 
 import { DetailUsersCardVm } from './detail-users-card-vm';
 

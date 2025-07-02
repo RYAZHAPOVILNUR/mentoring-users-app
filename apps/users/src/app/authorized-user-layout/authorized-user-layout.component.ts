@@ -9,8 +9,8 @@ import { PushPipe } from '@ngrx/component';
 import { Store } from '@ngrx/store';
 import { map, Observable, take, withLatestFrom } from 'rxjs';
 
+import { AuthFacade } from '@users/core/data-access-auth';
 import { FooterComponent, HeaderComponent, NavbarComponent } from '@users/core/ui/layout';
-import { AuthFacade } from '@users/data-access-auth';
 
 @Component({
   selector: 'users-authorized-user-layout',

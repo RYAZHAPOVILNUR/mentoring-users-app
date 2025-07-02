@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
 import { catchError, filter, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
 
-import { selectRouteParams } from '@users/core/data-access';
+import { selectRouteParams } from '@shared/util-store';
 import { ApiService } from '@users/core/http';
 
 import { ArticlesActions } from './articles.actions';

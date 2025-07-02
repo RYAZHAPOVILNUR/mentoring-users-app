@@ -1,4 +1,5 @@
-import { LoadingStatus, UsersEntity } from '@users/core/data-access';
+import { LoadingStatus } from '@shared/util-store';
+import { UsersEntity } from '@users/core/data-access-models';
 
 export type ProfileFormVm = {
   user: UsersEntity;

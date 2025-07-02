@@ -1,4 +1,4 @@
-import { UsersEntity } from '@users/core/data-access';
+import { UsersEntity } from '@users/core/data-access-models';
 
 import { UsersVM } from './users-vm';
 

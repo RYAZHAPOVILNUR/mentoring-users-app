@@ -8,5 +8,7 @@
     "types": []
   },
   "exclude": ["src/**/*.spec.ts", "src/test-setup.ts", "jest.config.ts", "src/**/*.test.ts"],
-  "include": ["src/**/*.ts", "../../../core/data-access/src/lib/users.entity.ts"]
+  "include": ["src/**/*.ts",
+    "../../core/data-access/data-access-models/src/lib/types/users-entity.type.ts"
+  ]
 }

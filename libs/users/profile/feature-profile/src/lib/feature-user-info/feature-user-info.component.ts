@@ -19,8 +19,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
+import { AuthFacade, ChangePasswordPayload, ChangeProfileDataPayload } from '@users/core/data-access-auth';
 import { PasswordChangeDialogComponent, ProfileChangeDialogComponent } from '@users/core/ui';
-import { AuthFacade, ChangePasswordPayload, ChangeProfileDataPayload } from '@users/data-access-auth';
 import { of } from 'rxjs';
 import { UiPhotoModalComponent } from 'ui-profile';
 

@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { UsersEntity } from '@users/core/data-access';
+import { UsersEntity } from '@users/core/data-access-models';
 
 import * as UsersActions from './users.actions';
 import { initialUsersState, usersReducer, UsersState } from './users.reducer';

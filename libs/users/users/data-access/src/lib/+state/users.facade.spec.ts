@@ -4,7 +4,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { Store, StoreModule } from '@ngrx/store';
 import { readFirst } from '@nx/angular/testing';
 
-import { UsersEntity } from '@users/core/data-access';
+import { UsersEntity } from '@users/core/data-access-models';
 
 import * as UsersActions from './users.actions';
 import * as UsersEffects from './users.effects';

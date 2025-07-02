@@ -56,7 +56,6 @@ export default [
       extends: [
         'eslint:recommended',
         'plugin:@nx/typescript',
-        'plugin:@angular-eslint/recommended',
         'plugin:@typescript-eslint/recommended',
         'plugin:prettier/recommended',
         'plugin:import/recommended',

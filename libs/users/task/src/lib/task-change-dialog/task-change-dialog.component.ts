@@ -13,7 +13,7 @@ import { PushPipe } from '@ngrx/component';
 import { QuillModule } from 'ngx-quill';
 import { skip } from 'rxjs/operators';
 
-import { UsersEntity } from '@users/core/data-access';
+import { UsersEntity } from '@users/core/data-access-models';
 import { BacklogFacade, IBacklog } from '@users/users/backlog/data-access';
 import { UsersFacade } from '@users/users/data-access';
 

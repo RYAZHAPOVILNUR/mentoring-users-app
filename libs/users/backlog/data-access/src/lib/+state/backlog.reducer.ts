@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 
-import { LoadingStatus } from '@users/core/data-access';
+import { LoadingStatus } from '@shared/util-store';
 
 import { backlogAction } from './backlog.action';
 import { IBacklog } from '../model/backlog.model';

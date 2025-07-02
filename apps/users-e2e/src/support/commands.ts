@@ -10,7 +10,6 @@
 
 //
 // -- This is a parent command --
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 Cypress.Commands.add('login', (email, password) => {
   console.log('Custom command example: Login', email, password);

@@ -1,4 +1,4 @@
-import { UsersEntity } from '@users/core/data-access';
+import { UsersEntity } from '@users/core/data-access-models';
 
 import { initialUsersState, usersAdapter, UsersPartialState } from './users.reducer';
 import * as UsersSelectors from './users.selectors';

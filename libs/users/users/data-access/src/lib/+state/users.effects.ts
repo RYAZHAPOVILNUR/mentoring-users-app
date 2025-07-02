@@ -3,11 +3,13 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
 import { catchError, filter, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
 
-import { CreateUserDTO, selectRouteParams, UsersDTO, usersDTOAdapter, UsersEntity } from '@users/core/data-access';
+import { selectRouteParams } from '@shared/util-store';
+import { UsersDTO, usersDTOAdapter, UsersEntity } from '@users/core/data-access-models';
 import { ApiService } from '@users/core/http';
 
 import * as UsersActions from './users.actions';
 import { selectUsersEntities } from './users.selectors';
+import { CreateUserDTO } from '../types/create-user-dto.type';
 
 export const userEffects = createEffect(
   () => {
