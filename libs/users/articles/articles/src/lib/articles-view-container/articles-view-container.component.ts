@@ -5,8 +5,8 @@ import { LetDirective } from '@ngrx/component';
 import { select, Store } from '@ngrx/store';
 import { map, Observable, withLatestFrom } from 'rxjs';
 
-import { selectQueryParam } from '@users/core/data-access';
-import { authSelectors } from '@users/data-access-auth';
+import { selectQueryParam } from '@shared/util-store';
+import { authSelectors } from '@users/core/data-access-auth';
 import { Article, ArticlesActions, ArticleSelectors } from '@users/users/articles/data-access';
 
 import { ArticlesViewComponent } from '../articles-view/articles-view.component';

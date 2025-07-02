@@ -19,7 +19,7 @@ import { PushPipe } from '@ngrx/component';
 import { debounceTime, distinctUntilChanged, filter, fromEvent, map, Observable, switchMap } from 'rxjs';
 
 import { DadataApiService } from '@dadata';
-import { UsersEntity } from '@users/core/data-access';
+import { UsersEntity } from '@users/core/data-access-models';
 
 @Component({
   selector: 'users-input-city',

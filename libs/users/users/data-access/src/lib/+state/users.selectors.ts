@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { selectRouteParams } from '@users/core/data-access';
+import { selectRouteParams } from '@shared/util-store';
 
 import { USERS_FEATURE_KEY, usersAdapter, UsersState } from './users.reducer';
 

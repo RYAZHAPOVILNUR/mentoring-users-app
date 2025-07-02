@@ -7,7 +7,7 @@ import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 
-import { UsersEntity } from '@users/core/data-access';
+import { UsersEntity } from '@users/core/data-access-models';
 
 import { UsersVM } from '../users-vm';
 

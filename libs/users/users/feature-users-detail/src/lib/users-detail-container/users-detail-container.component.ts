@@ -7,9 +7,10 @@ import { LetDirective } from '@ngrx/component';
 import { select, Store } from '@ngrx/store';
 import { map, Observable, tap } from 'rxjs';
 
-import { CreateUserDTO, selectQueryParam, UsersEntity } from '@users/core/data-access';
+import { selectQueryParam } from '@shared/util-store';
+import { UsersEntity } from '@users/core/data-access-models';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
-import { onSuccessEditionCbType, UsersFacade } from '@users/users/data-access';
+import { CreateUserDTO, onSuccessEditionCbType, UsersFacade } from '@users/users/data-access';
 
 import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
 

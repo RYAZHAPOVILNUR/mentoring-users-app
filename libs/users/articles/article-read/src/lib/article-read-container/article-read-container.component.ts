@@ -13,9 +13,9 @@ import { LetDirective } from '@ngrx/component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ArticleReadComponent } from '../article-read/article-read.component';
 import { ArticleCommentsComponent } from '../article-comments/article-comments.component';
-import { authSelectors } from '@users/data-access-auth';
-import { selectRouteParams } from '../../../../../../core/data-access/src';
+import { authSelectors } from '@users/core/data-access-auth';
 import { selectComments } from '../../../../data-access/src/lib/+state/comments/comments.selectors';
+import { selectRouteParams } from '../../../../../../shared/utils/util-store/src/lib/router/router.selectors';
 
 @Component({
   selector: 'article-read-container',

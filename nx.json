@@ -28,10 +28,7 @@
       }
     },
     "@nx/eslint:lint": {
-      "inputs": [
-        "default",
-        "{workspaceRoot}/eslint.config.mjs"
-      ],
+      "inputs": ["default", "{workspaceRoot}/eslint.config.mjs"],
       "cache": true
     }
   },

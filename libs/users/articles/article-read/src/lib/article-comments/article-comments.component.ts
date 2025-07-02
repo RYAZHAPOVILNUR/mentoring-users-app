@@ -8,11 +8,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { LoadingStatus } from '../../../../../../core/data-access/src';
 import { PushPipe } from '@ngrx/component';
 import { ArticleCommentComponent } from './article-comment/article-comment.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { AuthFacade } from '@users/data-access-auth';
+import { LoadingStatus } from '../../../../../../shared/utils/util-store/src';
+import { AuthFacade } from '../../../../../core/data-access/data-access-auth/src';
 
 @Component({
   selector: 'article-comments',

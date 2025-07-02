@@ -10,9 +10,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { NewUser } from '@users/core/data-access-auth';
 import { ApiService } from '@users/core/http';
 import { InputPasswordComponent } from '@users/core/ui';
-import { NewUser } from '@users/data-access-auth';
 import { LanguageKeys, LanguageSwitchService } from '@users/users/core/ui/language-switch';
 
 @Component({
