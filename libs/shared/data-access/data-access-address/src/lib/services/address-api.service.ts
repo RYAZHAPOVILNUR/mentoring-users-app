@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
-import { ADDRESS_API_KEY } from '../tokens/address-api-key.token';
 import { AddressResponse } from '../interfaces/address-response.interface';
+import { ADDRESS_API_KEY } from '../tokens/address-api-key.token';
 
 @Injectable({
   providedIn: 'root',

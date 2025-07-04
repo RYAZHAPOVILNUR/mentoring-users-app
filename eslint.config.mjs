@@ -10,7 +10,7 @@ const compat = new FlatCompat({
   recommendedConfig: js.configs.recommended,
 });
 
-/**
+  /**
  * @see [Flat eslint config](https://eslint.org/docs/latest/use/configure/configuration-files)
  */
 export default [
