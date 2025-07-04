@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 
-import { ApiService } from '@users/core/http';
+import { ApiService } from '@core/data-access-api';
 
 import { backlogAction } from './backlog.action';
 import { CreateBacklog, IBacklog } from '../model/backlog.model';

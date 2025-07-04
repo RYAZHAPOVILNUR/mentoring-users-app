@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 
-import { ApiService } from '@users/core/http';
+import { ApiService } from '@core/data-access-api';
 
 import { IColumn, ITaskBoard } from './../model/tasks.interface';
 import { tasksAction } from './tasks.action';

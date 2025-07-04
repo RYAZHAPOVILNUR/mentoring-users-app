@@ -4,15 +4,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
 import { LetDirective } from '@ngrx/component';
 import { Store } from '@ngrx/store';
+import { githubApiActions, GithubApiService, githubSelectors } from '@shared/data-access-github';
 import { selectQueryParam } from '@shared/util-store';
 import { authActions, authSelectors } from '@users/core/data-access-auth';
 import { UsersEntity } from '@users/core/data-access-models';
-import {
-  githubApiActions,
-  GithubApiService,
-  selectGithubStatus,
-  selectGithubUserName,
-} from '@users/core/github-api/data-access';
 import { CropperDialogComponent } from '@users/core/ui';
 import { noop, of, tap } from 'rxjs';
 
@@ -35,8 +30,8 @@ export class ProfileContainerComponent implements OnInit {
 
   public readonly user$ = this.store.select(authSelectors.selectLoggedUser);
   public readonly status$ = this.store.select(authSelectors.selectAuthStatus);
-  public readonly githubUserName$ = this.store.select(selectGithubUserName);
-  public readonly githubStatus$ = this.store.select(selectGithubStatus);
+  public readonly githubUserName$ = this.store.select(githubSelectors.selectGithubUserName);
+  public readonly githubStatus$ = this.store.select(githubSelectors.selectGithubStatus);
   public readonly isLoggedUser = of(true);
 
   ngOnInit() {

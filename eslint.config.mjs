@@ -10,9 +10,12 @@ const compat = new FlatCompat({
   recommendedConfig: js.configs.recommended,
 });
 
+/**
+ * @see [Flat eslint config](https://eslint.org/docs/latest/use/configure/configuration-files)
+ */
 export default [
   {
-    ignores: ['**/dist'],
+    ignores: ['**/dist', 'libs/**/*.spec.ts'],
   },
   {
     plugins: {
@@ -65,6 +68,9 @@ export default [
     .map((config) => ({
       ...config,
       files: ['**/*.ts', '**/*.tsx', '**/*.cts', '**/*.mts'],
+      linterOptions: {
+        reportUnusedDisableDirectives: "warn",
+      },
       rules: {
         ...config.rules,
         '@stylistic/semi': 'error',
@@ -215,7 +221,4 @@ export default [
         ...config.rules,
       },
     })),
-  {
-    ignores: ['libs/**/*.spec.ts'],
-  },
 ];

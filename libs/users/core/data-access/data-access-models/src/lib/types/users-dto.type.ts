@@ -1,4 +1,4 @@
-import { DeepReadonly } from '@users/core/utils';
+import { DeepReadonly } from '@shared/util-typescript';
 
 import { Role } from '../enums/role.enum';
 

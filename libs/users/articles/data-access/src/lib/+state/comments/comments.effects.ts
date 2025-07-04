@@ -2,8 +2,8 @@ import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap, withLatestFrom } from 'rxjs';
 
+import { ApiService } from '@core/data-access-api';
 import { AuthFacade } from '@users/core/data-access-auth';
-import { ApiService } from '@users/core/http';
 
 import { CommentsActions } from './comments.actions';
 import { CreateComment } from '../../models/create-comment.model';
