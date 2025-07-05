@@ -10,11 +10,11 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideQuillConfig } from 'ngx-quill/config';
 
+import { API_URL } from '@core/data-access-api';
 import { tokenInterceptor } from '@core/data-access-interceptors';
-import { DADATA_TOKEN } from '@users/core/dadata';
+import { ADDRESS_API_KEY } from '@shared/data-access-address';
+import { GITHUB_CLIENT_ID, githubEffects, githubApiFeature } from '@shared/data-access-github';
 import { authFeature, authEffects } from '@users/core/data-access-auth';
-import { CLIENT_ID, githubApiEffects, githubApiFeature } from '@users/core/github-api/data-access';
-import { API_URL } from '@users/core/http';
 import { SettingsEffects, settingsFeature } from '@users/settings/data-access';
 import { articlesEffects, articlesFeature, commentsEffects, commentsFeature } from '@users/users/articles/data-access';
 import { backlogEffects, backlogFeature } from '@users/users/backlog/data-access';
@@ -36,7 +36,7 @@ export const appConfig: ApplicationConfig = {
       articlesEffects,
       TasksEffects,
       commentsEffects,
-      githubApiEffects,
+      githubEffects,
       backlogEffects,
       SettingsEffects,
     ),
@@ -66,11 +66,11 @@ export const appConfig: ApplicationConfig = {
       useValue: environment.api_url,
     },
     {
-      provide: DADATA_TOKEN,
-      useValue: environment.dadata_api_key,
+      provide: ADDRESS_API_KEY,
+      useValue: environment.address_api_key,
     },
     {
-      provide: CLIENT_ID,
+      provide: GITHUB_CLIENT_ID,
       useValue: environment.github_client_id,
     },
     provideAnimations(),

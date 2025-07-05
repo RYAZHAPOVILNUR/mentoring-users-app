@@ -1,0 +1,50 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+<ng-container [ngSwitch]="selectedLanguage$ | ngrxPush">
+  <button mat-icon-button *ngSwitchCase="'ru'" (click)="onSwitchLanguage('en')" class="lang-switch-btn">En</button>
+  <button mat-icon-button *ngSwitchCase="'en'" (click)="onSwitchLanguage('ru')" class="lang-switch-btn">Ru</button>
+</ng-container>
+
+<div class="form-element">
+  <div class="wrapper">
+    <h1>{{ 'LAYOUT.REGISTRATION.SIGN_UP' | translate }}</h1>
+    <p>
+      {{ 'LAYOUT.REGISTRATION.YOU_HAVE_AN_ACCOUNT' | translate }}
+      <span class="interactive-link" (click)="onRedirectToLogin()">{{
+        'LAYOUT.REGISTRATION.SIGN_IN' | translate
+      }}</span>
+    </p>
+
+    <form class="form-fields-wrapper" [formGroup]="formGroup" (ngSubmit)="onRegister()">
+      <mat-label>{{ 'LAYOUT.REGISTRATION.FULLNAME' | translate }}*</mat-label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="name" />
+      </mat-form-field>
+
+      <mat-label>{{ 'LAYOUT.REGISTRATION.EMAIL' | translate }}*</mat-label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="email" />
+      </mat-form-field>
+
+      <mat-label>{{ 'LAYOUT.REGISTRATION.PASSWORD' | translate }}*</mat-label>
+
+      <users-input-password [formControlName]="'password'"> </users-input-password>
+
+      <div class="checkbox-container">
+        <mat-checkbox formControlName="agreement"></mat-checkbox>
+        <div>
+          <span>{{ 'LAYOUT.REGISTRATION.AGREE' | translate }} </span>
+          <span class="interactive-link">{{ 'LAYOUT.REGISTRATION.TERMS' | translate }} </span>
+          <span>{{ 'LAYOUT.REGISTRATION.AND' | translate }}</span>
+          <span class="interactive-link">
+            {{ 'LAYOUT.REGISTRATION.PRIVACY_POLICY' | translate }}
+          </span>
+        </div>
+      </div>
+
+      <button mat-fab extended color="primary">
+        {{ 'LAYOUT.REGISTRATION.SIGN_UP' | translate }}
+      </button>
+    </form>
+  </div>
+</div>

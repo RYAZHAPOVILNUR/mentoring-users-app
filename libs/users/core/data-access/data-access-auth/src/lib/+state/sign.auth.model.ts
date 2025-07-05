@@ -1,5 +1,5 @@
+import { DeepReadonly } from '@shared/util-typescript';
 import { UsersDTO, UsersEntity } from '@users/core/data-access-models';
-import { DeepReadonly } from '@users/core/utils';
 
 export interface SignAuthPayload {
   email: string;

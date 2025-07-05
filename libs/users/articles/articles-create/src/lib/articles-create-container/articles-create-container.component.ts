@@ -6,9 +6,9 @@ import { LetDirective } from '@ngrx/component';
 import { select, Store } from '@ngrx/store';
 import { filter, first, map, Observable, tap, withLatestFrom } from 'rxjs';
 
+import { DeactivatableComponent } from '@shared/util-router';
 import { selectQueryParam } from '@shared/util-store';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
-import { DeactivatableComponent } from '@users/core/utils';
 import { Article, ArticlesActions, ArticleSelectors, CreateArticle } from '@users/users/articles/data-access';
 
 import { ArticlesCreateUiComponent } from '../articles-create-ui/articles-create-ui.component';

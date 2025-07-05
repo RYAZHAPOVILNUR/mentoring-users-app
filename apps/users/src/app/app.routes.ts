@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
 
+import { canDeactivateGuard } from '@shared/util-router';
 import { adminGuard, authGuard } from '@users/core/data-access-auth';
-import { canDeactivateFormComponent } from '@users/core/utils';
 
 import { AuthorizedUserLayoutComponent } from './authorized-user-layout/authorized-user-layout.component';
 import { UnauthorizedUserLayoutComponent } from './unauthorized-user-layout-component/unauthorized-user-layout-component.component';
@@ -46,7 +46,7 @@ export const appRoutes: Route[] = [
         path: 'article-editor',
         loadComponent: () =>
           import('@users/users/articles/articles-create').then((c) => c.ArticlesCreateContainerComponent),
-        canDeactivate: [canDeactivateFormComponent],
+        canDeactivate: [canDeactivateGuard],
       },
       {
         path: 'articles',
@@ -82,10 +82,10 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'login',
-    loadComponent: () => import('@auth/feature-login').then((c) => c.LoginContainerComponent),
+    loadComponent: () => import('@users/auth/feature-login').then((c) => c.LoginContainerComponent),
   },
   {
     path: 'signup',
-    loadComponent: () => import('@auth/feature-register').then((c) => c.RegisterContainerComponent),
+    loadComponent: () => import('@users/auth/feature-register').then((c) => c.RegisterContainerComponent),
   },
 ];

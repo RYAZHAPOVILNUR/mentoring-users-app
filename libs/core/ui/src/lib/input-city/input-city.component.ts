@@ -18,7 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { PushPipe } from '@ngrx/component';
 import { debounceTime, distinctUntilChanged, filter, fromEvent, map, Observable, switchMap } from 'rxjs';
 
-import { DadataApiService } from '@dadata';
+import { AddressApiService } from '@shared/data-access-address';
 import { UsersEntity } from '@users/core/data-access-models';
 
 @Component({
@@ -31,7 +31,7 @@ import { UsersEntity } from '@users/core/data-access-models';
 })
 export class InputCityComponent implements ControlValueAccessor, OnInit {
   @Input({ required: true }) vm!: UsersEntity;
-  private dadataService = inject(DadataApiService);
+  private addressApiService = inject(AddressApiService);
   private destroyRef = inject(DestroyRef);
   private onChange!: (value: string) => void;
   private onTouched!: () => void;
@@ -55,7 +55,7 @@ export class InputCityComponent implements ControlValueAccessor, OnInit {
       debounceTime(300),
       distinctUntilChanged(),
       filter(Boolean),
-      switchMap((value) => this.dadataService.getCities(value)),
+      switchMap((value) => this.addressApiService.getCities(value)),
       takeUntilDestroyed(this.destroyRef),
     );
   }

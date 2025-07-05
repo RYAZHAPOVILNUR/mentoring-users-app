@@ -1,12 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 // eslint-disable-next-line import/default
 import Highcharts from 'highcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
-
-import { HighchartsService } from '@users/core/highcharts';
 
 @Component({
   standalone: true,
@@ -16,7 +14,7 @@ import { HighchartsService } from '@users/core/highcharts';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   Highcharts: typeof Highcharts = Highcharts;
   chartOptions: Highcharts.Options = {
     chart: {
@@ -130,12 +128,4 @@ export class HomeComponent implements OnInit {
       },
     ],
   };
-  constructor(private readonly apiData: HighchartsService) {}
-
-  ngOnInit() {
-    this.apiData.getData().subscribe((data) => {
-      console.log(data);
-      // this.studentsData = data
-    });
-  }
 }
