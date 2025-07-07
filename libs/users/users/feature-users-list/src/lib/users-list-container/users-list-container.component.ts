@@ -1,21 +1,34 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { LetDirective } from '@ngrx/component';
+import { CommonModule } from "@angular/common";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  ViewEncapsulation,
+} from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
+import { MatDialogModule } from "@angular/material/dialog";
+import { Router } from "@angular/router";
+import { LetDirective } from "@ngrx/component";
 
-import { UsersFacade } from '@users/users/data-access';
+import { UsersFacade } from "@users/users/data-access";
 
-import { UsersListContainerStore } from './users-list-container.store';
-import { UsersListComponent } from '../users-list/users-list.component';
-import { UsersVM } from '../users-vm';
+import { UsersListContainerStore } from "./users-list-container.store";
+import { UsersListComponent } from "../users-list/users-list.component";
+import { UsersVM } from "../users-vm";
+import { UsersFilterComponent } from "../users-filter/users-filter.component";
 
 @Component({
   standalone: true,
-  imports: [CommonModule, UsersListComponent, MatButtonModule, MatDialogModule, LetDirective],
-  templateUrl: './users-list-container.component.html',
-  styleUrls: ['./users-list-container.component.scss'],
+  imports: [
+    CommonModule,
+    UsersListComponent,
+    MatButtonModule,
+    MatDialogModule,
+    LetDirective,
+    UsersFilterComponent,
+  ],
+  templateUrl: "./users-list-container.component.html",
+  styleUrls: ["./users-list-container.component.scss"],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [UsersListContainerStore],
@@ -33,8 +46,12 @@ export class UsersListContainerComponent {
     this.componentStore.deleteUser(user);
   }
 
+  onFilterUsers(name: string) {
+    this.componentStore.filterUsers(name);
+  }
+
   onRedirectToEdit({ id, editMode }: { id: number; editMode: boolean }) {
-    this.router.navigate(['/admin/users', id], {
+    this.router.navigate(["/admin/users", id], {
       queryParams: { edit: editMode },
     });
   }
