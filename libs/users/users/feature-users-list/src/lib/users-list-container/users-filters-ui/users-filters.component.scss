@@ -1,0 +1,38 @@
+.btn-primary {
+  background: linear-gradient(135deg, #ff6b6b, #f06595);
+  color: white;
+  border: none;
+  padding: 0.6em 1.5em;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(240, 101, 149, 0.4);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #f06595, #ff6b6b);
+  box-shadow: 0 6px 20px rgba(240, 101, 149, 0.7);
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+  box-shadow: 0 3px 8px rgba(240, 101, 149, 0.6);
+}
+
+input {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #f06595;
+    box-shadow: 0 0 5px rgba(240, 101, 149, 0.5);
+  }
+}
+

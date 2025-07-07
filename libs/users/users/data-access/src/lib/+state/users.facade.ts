@@ -11,6 +11,9 @@ import { onSuccessEditionCbType } from './users.actions';
 import * as UsersSelectors from './users.selectors';
 import { CreateUserDTO } from '../types/create-user-dto.type';
 
+import { selectFilteredUsers } from './users.selectors';
+import { setUsersFilter } from './users.actions';
+
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
   private readonly store = inject(Store);
@@ -24,6 +27,7 @@ export class UsersFacade {
   public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
   public readonly loggedUser$ = this.store.select(authSelectors.selectLoggedUser);
+  public readonly filteredUsers$ = this.store.select(selectFilteredUsers);
   public readonly errors$: Observable<HttpErrorResponse | null> = this.store.pipe(
     select(UsersSelectors.selectUsersError),
   );
@@ -61,5 +65,9 @@ export class UsersFacade {
 
   loadUser() {
     this.store.dispatch(UsersActions.loadUser());
+  }
+
+  setUsersFilter(filter: { name: string }) {
+    this.store.dispatch(setUsersFilter({ filter }));
   }
 }

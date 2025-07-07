@@ -10,10 +10,12 @@ import * as UsersActions from './users.actions';
 export const USERS_FEATURE_KEY = 'users';
 
 export interface UsersState extends EntityState<UsersEntity> {
-  selectedId?: string | number; // which Users record has been selected
+  selectedId?: string | number;
   status: LoadingStatus;
   error: HttpErrorResponse | null;
+  usersFilter: { name: string };
 }
+
 
 export interface UsersPartialState {
   readonly [USERS_FEATURE_KEY]: UsersState;
@@ -22,10 +24,12 @@ export interface UsersPartialState {
 export const usersAdapter: EntityAdapter<UsersEntity> = createEntityAdapter<UsersEntity>();
 
 export const initialUsersState: UsersState = usersAdapter.getInitialState({
-  // set initial required properties
+  selectedId: undefined,
   status: 'init',
   error: null,
+  usersFilter: { name: '' },
 });
+
 
 const reducer = createReducer(
   initialUsersState,
@@ -73,6 +77,10 @@ const reducer = createReducer(
     ...state,
     status,
   })),
+  on(UsersActions.setUsersFilter, (state, { filter }) => ({
+  ...state,
+  usersFilter: filter
+})),
 );
 
 export function usersReducer(state: UsersState | undefined, action: Action) {
