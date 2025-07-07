@@ -22,6 +22,9 @@ export const addUser = createAction('[Users Page] Add User', props<{ userData: C
 export const addUserSuccess = createAction('[Users/Api] Add User Success', props<{ userData: UsersEntity }>());
 export const addUserFailed = createAction('[Users/Api] Add User Failed', props<{ error: HttpErrorResponse }>());
 
+export const setUsersFilter = createAction('[Users] Set Users Filter', props<{ filter: { name: string } }>());
+
+
 // export const selectId = createAction('[Users Page] Select Id', props<{ id: number }>());
 
 // export const deleteSelectedId = createAction('[Users Page] Delete Selected Id');
