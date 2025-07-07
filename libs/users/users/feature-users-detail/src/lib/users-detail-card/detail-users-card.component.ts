@@ -25,7 +25,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { PushPipe } from '@ngrx/component';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs';
 
-import { DadataApiService } from '@dadata';
+import { AddressApiService } from '@shared/data-access-address';
 import { UsersEntity } from '@users/core/data-access-models';
 import { CreateUserDTO, onSuccessEditionCbType } from '@users/users/data-access';
 
@@ -61,7 +61,7 @@ export class DetailUsersCardComponent implements OnInit {
     errors: null,
   };
   private readonly destroyRef = inject(DestroyRef);
-  private dadata = inject(DadataApiService);
+  private addressApiService = inject(AddressApiService);
   private snackBar = inject(MatSnackBar);
   private onEditSuccess: onSuccessEditionCbType = () =>
     this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
@@ -81,7 +81,7 @@ export class DetailUsersCardComponent implements OnInit {
     debounceTime(300),
     distinctUntilChanged(),
     filter(Boolean),
-    switchMap((value) => this.dadata.getCities(value)),
+    switchMap((value) => this.addressApiService.getCities(value)),
   );
   public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
   @Output() editUser = new EventEmitter<{

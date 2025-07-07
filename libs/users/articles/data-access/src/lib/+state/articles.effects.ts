@@ -4,8 +4,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
 import { catchError, filter, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
 
+import { ApiService } from '@core/data-access-api';
 import { selectRouteParams } from '@shared/util-store';
-import { ApiService } from '@users/core/http';
 
 import { ArticlesActions } from './articles.actions';
 import { selectArticlesEntities } from './articles.selectors';

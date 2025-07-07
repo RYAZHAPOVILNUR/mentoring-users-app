@@ -3,9 +3,9 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ComponentStore } from '@ngrx/component-store';
 import { tap } from 'rxjs';
 
+import { DeepReadonly } from '@shared/util-typescript';
 import { UsersEntity } from '@users/core/data-access-models';
 import { CoreUiConfirmDialogComponent } from '@users/core/ui';
-import { DeepReadonly } from '@users/core/utils';
 import { UsersFacade } from '@users/users/data-access';
 
 import { UsersVM } from '../users-vm';
