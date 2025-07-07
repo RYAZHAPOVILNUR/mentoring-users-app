@@ -14,9 +14,10 @@ import { API_URL } from '@core/data-access-api';
 import { tokenInterceptor } from '@core/data-access-interceptors';
 import { ADDRESS_API_KEY } from '@shared/data-access-address';
 import { GITHUB_CLIENT_ID, githubEffects, githubApiFeature } from '@shared/data-access-github';
+import { articlesEffects, articlesFeature } from '@users/articles/data-access-article';
+import { commentsEffects, commentsFeature } from '@users/articles/data-access-comment';
 import { authFeature, authEffects } from '@users/core/data-access-auth';
 import { SettingsEffects, settingsFeature } from '@users/settings/data-access';
-import { articlesEffects, articlesFeature, commentsEffects, commentsFeature } from '@users/users/articles/data-access';
 import { backlogEffects, backlogFeature } from '@users/users/backlog/data-access';
 import { userEffects, USERS_FEATURE_KEY, usersReducer } from '@users/users/data-access';
 import { TasksEffects, tasksFeature } from '@users/users/task/data-access';
@@ -24,7 +25,7 @@ import { TasksEffects, tasksFeature } from '@users/users/task/data-access';
 import { appRoutes } from './app.routes';
 import { environment } from '../environments/environment.development';
 
-export function HttpLoaderFactory(http: HttpClient) {
+function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
