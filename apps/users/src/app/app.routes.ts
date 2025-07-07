@@ -45,16 +45,17 @@ export const appRoutes: Route[] = [
       {
         path: 'article-editor',
         loadComponent: () =>
-          import('@users/users/articles/articles-create').then((c) => c.ArticlesCreateContainerComponent),
+          import('@users/articles/feature-article-create').then((c) => c.ArticlesCreateContainerComponent),
         canDeactivate: [canDeactivateGuard],
       },
       {
         path: 'articles',
-        loadComponent: () => import('@users/users/articles/articles').then((c) => c.ArticlesViewContainerComponent),
+        loadComponent: () => import('@users/articles/feature-articles').then((c) => c.ArticleListContainerComponent),
       },
       {
         path: 'articles/:id',
-        loadComponent: () => import('@users/users/articles/article-read').then((c) => c.ArticleReadContainerComponent),
+        loadComponent: () =>
+          import('@users/articles/feature-article-details').then((c) => c.ArticleDetailsContainerComponent),
       },
       {
         path: 'tasks',
