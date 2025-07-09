@@ -6,8 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { PushPipe } from '@ngrx/component';
 import { Store } from '@ngrx/store';
 
+import { LanguageKeys, LanguageService } from '@shared/util-language';
 import { SettingsFacade } from '@users/settings/data-access';
-import { LanguageKeys, LanguageSwitchService } from '@users/users/core/ui/language-switch';
 import { ChangeThemeComponent } from '@users/users/settings/feature-change-theme';
 
 @Component({
@@ -21,7 +21,7 @@ import { ChangeThemeComponent } from '@users/users/settings/feature-change-theme
 export class SettingsComponent implements OnInit {
   private readonly store = inject(Store);
 
-  private readonly languageSwitchService = inject(LanguageSwitchService);
+  private readonly languageSwitchService = inject(LanguageService);
   private settingsFacade = inject(SettingsFacade);
   public readonly selectedLanguage$ = this.languageSwitchService.selectedLanguage$;
   public articleStyle$ = this.settingsFacade.articlesViewStyleType$;

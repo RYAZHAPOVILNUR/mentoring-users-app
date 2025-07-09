@@ -13,8 +13,8 @@ import { PushPipe } from '@ngrx/component';
 import { QuillModule } from 'ngx-quill';
 import { skip } from 'rxjs/operators';
 
-import { UsersEntity } from '@users/core/data-access-models';
-import { BacklogFacade, IBacklog } from '@users/users/backlog/data-access';
+import { BacklogFacade } from '@users/backlog/data-access-backlog';
+import { Backlog, UsersEntity } from '@users/core/data-access-models';
 import { UsersFacade } from '@users/users/data-access';
 
 interface Task {
@@ -56,7 +56,7 @@ export class TaskChangeDialogComponent implements OnInit {
   private readonly backlogFacade = inject(BacklogFacade);
   private readonly usersFacade = inject(UsersFacade);
   private dialogRef = inject(MatDialogRef<TaskChangeDialogComponent>);
-  public readonly data: Pick<IBacklog, 'title' | 'description'> = inject(MAT_DIALOG_DATA);
+  public readonly data: Pick<Backlog, 'title' | 'description'> = inject(MAT_DIALOG_DATA);
 
   public status = false;
 

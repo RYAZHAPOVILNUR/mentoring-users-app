@@ -9,10 +9,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
+import { InputPasswordComponent } from '@users/core/ui';
 
 import { ApiService } from '@core/data-access-api';
-import { InputPasswordComponent } from '@users/core/ui';
-import { LanguageKeys, LanguageSwitchService } from '@users/users/core/ui/language-switch';
+import { LanguageKeys, LanguageService } from '@shared/util-language';
 
 @Component({
   selector: 'users-login-form-ui',
@@ -36,7 +36,7 @@ import { LanguageKeys, LanguageSwitchService } from '@users/users/core/ui/langua
 })
 export class LoginFormUiComponent {
   private readonly api = inject(ApiService);
-  private readonly languageSwitchService = inject(LanguageSwitchService);
+  private readonly languageSwitchService = inject(LanguageService);
   public readonly selectedLanguage$ = this.languageSwitchService.selectedLanguage$;
   public formGroup = new FormBuilder().group({
     email: new FormControl('admin@gmail.com', [Validators.required, Validators.email]),

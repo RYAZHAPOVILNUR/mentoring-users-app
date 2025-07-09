@@ -2,9 +2,7 @@ import { Route } from '@angular/router';
 
 import { canDeactivateGuard } from '@shared/util-router';
 import { adminGuard, authGuard } from '@users/core/data-access-auth';
-
-import { AuthorizedUserLayoutComponent } from './authorized-user-layout/authorized-user-layout.component';
-import { UnauthorizedUserLayoutComponent } from './unauthorized-user-layout-component/unauthorized-user-layout-component.component';
+import { AuthorizedLayoutComponent, UnauthorizedLayoutComponent } from '@users/core/ui-layout';
 
 const layoutAgnosticComponents = [
   {
@@ -16,7 +14,7 @@ const layoutAgnosticComponents = [
 export const appRoutes: Route[] = [
   {
     path: '',
-    component: AuthorizedUserLayoutComponent,
+    component: AuthorizedLayoutComponent,
     canActivate: [authGuard],
     children: [
       {
@@ -67,18 +65,18 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'chart',
-        loadComponent: () => import('@users/users/chart').then((c) => c.ChartViewComponent),
+        loadComponent: () => import('@users/chart/feature-chart').then((c) => c.ChartComponent),
       },
       {
         path: 'backlog',
-        loadComponent: () => import('@users/users/backlog').then((c) => c.BacklogComponent),
+        loadComponent: () => import('@users/backlog/feature-backlog').then((c) => c.BacklogComponent),
       },
       ...layoutAgnosticComponents,
     ],
   },
   {
     path: 'guest',
-    component: UnauthorizedUserLayoutComponent,
+    component: UnauthorizedLayoutComponent,
     children: [...layoutAgnosticComponents],
   },
   {
