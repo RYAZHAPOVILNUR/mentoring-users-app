@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DetailUsersCardComponent } from '../users-detail-card/detail-users-card.component';
-import { UsersErrors, UsersFacade, onSuccessEditionCbType } from '@users/users/data-access';
+import { UsersErrors, UsersFacade, onSuccessEditionCbType, onSuccessStoryPointCbType } from '@users/users/data-access';
 import { Observable, map, tap } from 'rxjs';
 import { selectQueryParam, CreateUserDTO, UsersEntity } from '@users/core/data-access';
 import { Store, select } from '@ngrx/store';
@@ -51,6 +51,10 @@ export class UsersDetailComponent {
     });
   }
 
+  onAddStoryPoints(user: CreateUserDTO, onSuccessStoryPoint: onSuccessStoryPointCbType) {
+    this.usersFacade.addStoryPoints(user, this.user.id, onSuccessStoryPoint)
+  }
+
   onCloseUser() {
     this.router.navigate(['/admin/users']);
   }
@@ -73,6 +77,7 @@ export class UsersDetailComponent {
         dialogText: `Вы уверены, что хотите удалить ${this.user.name}`,
       },
     });
+
 
     dialogRef
       .afterClosed()

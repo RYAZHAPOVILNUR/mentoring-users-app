@@ -6,4 +6,6 @@ export type DetailUsersCardVm = {
   status: LoadingStatus;
   user: UsersEntity | null;
   errors: UsersErrors | null;
+  storyPoints?: number; 
 };
+

@@ -55,4 +55,5 @@ export class UsersListContainerComponent {
   onFilteredUser(name:string) {
     this.usersFacade.setUsersFilter(name)
   }
+
 }

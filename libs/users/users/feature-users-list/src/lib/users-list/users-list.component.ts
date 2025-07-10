@@ -28,4 +28,5 @@ export class UsersListComponent {
   onRedirectToEdit(editData: { id: number; editMode: boolean }) {
     this.redirectToEdit.emit(editData);
   }
+
 }

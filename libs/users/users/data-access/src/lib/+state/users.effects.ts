@@ -112,6 +112,40 @@ export const editUser = createEffect(
   { functional: true }
 );
 
+export const addStoryPoints = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
+
+    return actions$.pipe(
+      ofType(UsersActions.addUserStoryPoints),
+      withLatestFrom(usersEntities$),
+      filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
+      map(([{ user, id, onSucccessStoryPoints }, usersEntities]) => ({
+        user: {
+          ...usersDTOAdapter.entityToDTO(<UsersEntity>usersEntities[id]),
+          ...user, 
+          totalStoryPoints: user.totalStoryPoints, 
+        },
+        onSucccessStoryPoints,
+      })),
+      switchMap(({ user, onSucccessStoryPoints }) =>
+        apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+          map((user) => ({ user, onSucccessStoryPoints })),
+          tap(({ onSucccessStoryPoints }) => onSucccessStoryPoints()),
+          map(({ user }) => UsersActions.addUserStoryPointsSucces({ user })),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(UsersActions.addUserStoryPointsFailed({ error }));
+          })
+        )
+      )
+    );
+  },
+  { functional: true }
+);
+
 export const loadUser = createEffect(
   () => {
     const actions$ = inject(Actions);
