@@ -8,7 +8,6 @@ import { authActions, SignAuthPayload } from '@users/core/data-access-auth';
 import { LoginFormUiComponent } from '../login-form-ui/login-form-ui.component';
 
 @Component({
-  selector: 'users-login-container',
   standalone: true,
   imports: [CommonModule, LoginFormUiComponent],
   templateUrl: './login-container.component.html',

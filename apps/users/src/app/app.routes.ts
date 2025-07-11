@@ -7,7 +7,7 @@ import { AuthorizedLayoutComponent, UnauthorizedLayoutComponent } from '@users/c
 const layoutAgnosticComponents = [
   {
     path: 'home',
-    loadComponent: () => import('@users/home').then((c) => c.HomeComponent),
+    loadComponent: () => import('@users/home/feature-home').then((c) => c.HomeComponent),
   },
 ];
 

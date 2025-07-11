@@ -8,7 +8,6 @@ import { authActions, NewUser } from '@users/core/data-access-auth';
 import { RegisterFormUiComponent } from '../register-form-ui/register-form-ui.component';
 
 @Component({
-  selector: 'users-register-container',
   standalone: true,
   imports: [CommonModule, RegisterFormUiComponent],
   templateUrl: './register-container.component.html',
