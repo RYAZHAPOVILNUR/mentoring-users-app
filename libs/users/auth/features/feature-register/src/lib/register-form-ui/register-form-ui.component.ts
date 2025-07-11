@@ -9,11 +9,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
+import { InputPasswordComponent } from '@users/core/ui';
 
 import { ApiService } from '@core/data-access-api';
+import { LanguageKeys, LanguageService } from '@shared/util-language';
 import { NewUser } from '@users/core/data-access-auth';
-import { InputPasswordComponent } from '@users/core/ui';
-import { LanguageKeys, LanguageSwitchService } from '@users/users/core/ui/language-switch';
 
 @Component({
   selector: 'users-register-form-ui',
@@ -37,7 +37,7 @@ import { LanguageKeys, LanguageSwitchService } from '@users/users/core/ui/langua
 })
 export class RegisterFormUiComponent {
   private readonly api = inject(ApiService);
-  private readonly languageSwitchService = inject(LanguageSwitchService);
+  private readonly languageSwitchService = inject(LanguageService);
   public hide = true;
 
   public formGroup = new FormBuilder().group({

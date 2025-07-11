@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -10,7 +10,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterLink } from '@angular/router';
 
 import { Comment } from '@users/core/data-access-models';
-import { LanguageSwitchService } from '@users/users/core/ui/language-switch';
 
 @Component({
   standalone: true,
@@ -32,7 +31,6 @@ import { LanguageSwitchService } from '@users/users/core/ui/language-switch';
 export class ArticleCommentComponent {
   @Input({ required: true }) comment!: Comment;
   @Input({ required: true }) userId!: number;
-  private readonly languageService = inject(LanguageSwitchService);
 
   public likesCount = 0;
   public disLikesCount = 0;
