@@ -10,10 +10,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { map, Observable } from 'rxjs';
 
 import { AuthFacade } from '@users/core/data-access-auth';
-import { UiPhotoModalComponent } from 'ui-profile';
+import { UiPhotoModalComponent } from '@users/profile/ui-profile-photo';
 
 @Component({
-  selector: 'users-lib-navbar',
+  selector: 'users-navbar',
   standalone: true,
   imports: [
     CommonModule,

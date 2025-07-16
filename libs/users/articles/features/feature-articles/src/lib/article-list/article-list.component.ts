@@ -14,7 +14,7 @@ import { map, Observable } from 'rxjs';
 import { ArticlesCreateButtonComponent } from '@users/articles/feature-article-create';
 import { Article } from '@users/core/data-access-models';
 import { UsersListContainerStore } from '@users/feature-users-list';
-import { SettingsFacade } from '@users/settings/data-access';
+import { SettingsFacade } from '@users/settings/data-access-settings';
 import { UsersFacade } from '@users/users/data-access';
 
 @Component({

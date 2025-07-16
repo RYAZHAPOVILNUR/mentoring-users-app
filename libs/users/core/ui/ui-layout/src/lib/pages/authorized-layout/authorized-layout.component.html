@@ -4,7 +4,7 @@
 
     <mat-sidenav-container class="sidenav-container">
       <mat-sidenav #sidenav [mode]="(isMobile$ | ngrxPush) ? 'over' : 'side'" [(opened)]="opened" class="sidenav">
-        <users-lib-navbar (click)="closeSidenavOnTouch(sidenav)"/>
+        <users-navbar (click)="closeSidenavOnTouch(sidenav)"/>
       </mat-sidenav>
 
       <mat-sidenav-content class="sidenav-content">
