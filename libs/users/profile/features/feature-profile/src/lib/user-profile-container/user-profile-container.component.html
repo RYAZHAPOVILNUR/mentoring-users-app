@@ -1,0 +1,11 @@
+<ng-container
+  *ngrxLet="{
+    user: user$,
+    status: status$,
+    isLoggedUser
+  } as vm"
+>
+  <ng-container *ngIf="vm.status === 'loaded'">
+    <users-profile [vm]="vm"/>
+  </ng-container>
+</ng-container>

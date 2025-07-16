@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 
 import { BacklogFacade } from '@users/backlog/data-access-backlog';
 import { Backlog } from '@users/core/data-access-models';
-import { TaskChangeDialogComponent } from '@users/users/task';
+import { TaskChangeDialogComponent } from '@users/tasks/feature-tasks';
 
 @Component({
   standalone: true,

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatListItemIcon } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
@@ -11,7 +12,8 @@ import { Observable } from 'rxjs';
 
 import { LanguageKeys, LanguageService } from '@shared/util-language';
 import { AuthFacade } from '@users/core/data-access-auth';
-import { ChangeThemeHeaderComponent } from '@users/users/settings/feature-change-theme';
+
+import { ThemePickerComponent } from './theme-picker/theme-picker.component';
 
 @Component({
   selector: 'users-lib-header',
@@ -25,7 +27,8 @@ import { ChangeThemeHeaderComponent } from '@users/users/settings/feature-change
     RouterModule,
     MatMenuModule,
     PushPipe,
-    ChangeThemeHeaderComponent,
+    ThemePickerComponent,
+    MatListItemIcon,
   ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],

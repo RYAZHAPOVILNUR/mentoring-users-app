@@ -12,7 +12,7 @@
   <button mat-icon-button routerLink="/profile">
     <mat-icon matListItemIcon>account_circle</mat-icon>
   </button>
-  <users-change-theme-header></users-change-theme-header>
+  <users-theme-picker/>
   <button mat-button [matMenuTriggerFor]="menu" class="lang-switch-btn">
     {{ selectedLanguage$ | ngrxPush }}
   </button>

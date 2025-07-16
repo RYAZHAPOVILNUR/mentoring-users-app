@@ -33,12 +33,11 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'profile',
-        loadComponent: () => import('@users/users/profile/feature-profile').then((c) => c.ProfileContainerComponent),
+        loadComponent: () => import('@users/profile/feature-profile').then((c) => c.SelfProfileContainerComponent),
       },
       {
         path: 'profile/:id',
-        loadComponent: () =>
-          import('@users/users/profile/feature-profile').then((c) => c.UserProfileContainerComponent),
+        loadComponent: () => import('@users/profile/feature-profile').then((c) => c.UserProfileContainerComponent),
       },
       {
         path: 'article-editor',
@@ -57,11 +56,11 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'tasks',
-        loadComponent: () => import('@users/users/task').then((c) => c.TasksContainerComponent),
+        loadComponent: () => import('@users/tasks/feature-tasks').then((c) => c.TasksContainerComponent),
       },
       {
         path: 'settings',
-        loadComponent: () => import('@users/settings').then((c) => c.SettingsComponent),
+        loadComponent: () => import('@users/settings/feature-settings').then((c) => c.SettingsComponent),
       },
       {
         path: 'chart',
