@@ -5,7 +5,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { LoadingStatus } from '@shared/util-store';
 import { DeepReadonly } from '@shared/util-typescript';
-import { UserEntity, UserVM } from '@users/core/data-access-models';
+import { UserEntity, UserVM } from '@users/shared/data-access-models';
 import { CreateUserButtonComponent } from '@users/users/feature-user-create';
 
 import { UserCardComponent } from '../user-card/user-card.component';

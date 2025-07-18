@@ -6,7 +6,7 @@ import { catchError, concatMap, map, of, switchMap, tap, withLatestFrom } from '
 
 import { ApiService } from '@core/data-access-api';
 import { LocalStorageJwtService } from '@core/data-access-interceptors';
-import { UserDTO, userAdapter } from '@users/core/data-access-models';
+import { UserDTO, userAdapter } from '@users/shared/data-access-models';
 
 import { authActions } from './auth.actions';
 import { selectAuthStatus } from './auth.selectors';

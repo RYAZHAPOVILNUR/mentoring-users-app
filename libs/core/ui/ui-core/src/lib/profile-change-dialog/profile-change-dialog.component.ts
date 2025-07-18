@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { UserEntity } from '@users/core/data-access-models';
+import { UserEntity } from '@users/shared/data-access-models';
 
 import { InputCityComponent } from '../input-city/input-city.component';
 

@@ -7,7 +7,7 @@ import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 
-import { UserEntity, UserVM } from '@users/core/data-access-models';
+import { UserEntity, UserVM } from '@users/shared/data-access-models';
 
 @Component({
   selector: 'users-user-card',

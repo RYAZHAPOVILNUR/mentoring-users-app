@@ -14,7 +14,7 @@ import { QuillModule } from 'ngx-quill';
 import { skip } from 'rxjs/operators';
 
 import { BacklogFacade } from '@users/backlog/data-access-backlog';
-import { Backlog, UserEntity } from '@users/core/data-access-models';
+import { Backlog, UserEntity } from '@users/shared/data-access-models';
 import { UsersFacade } from '@users/users/data-access-user';
 
 interface Task {

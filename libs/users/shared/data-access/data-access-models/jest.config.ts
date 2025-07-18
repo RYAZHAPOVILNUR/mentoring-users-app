@@ -2,7 +2,7 @@ export default {
   displayName: 'data-access-models',
   preset: '../../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../../../coverage/libs/users/core/data-access/data-access-models',
+  coverageDirectory: '../../../../../coverage/libs/users/shared/data-access/data-access-models',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

@@ -1,5 +1,5 @@
 import { DeepReadonly } from '@shared/util-typescript';
-import { Role } from '@users/core/data-access-models';
+import { Role } from '@users/shared/data-access-models';
 
 export type CreateUserDTO = DeepReadonly<{
   id?: number | null;

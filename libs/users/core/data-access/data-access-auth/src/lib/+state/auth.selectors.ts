@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
 
 import { LoadingStatus } from '@shared/util-store';
-import { UserEntity } from '@users/core/data-access-models';
+import { UserEntity } from '@users/shared/data-access-models';
 
 import { authFeature, AuthState } from './auth.reducer';
 

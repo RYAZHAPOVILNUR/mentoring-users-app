@@ -24,8 +24,8 @@ import { of } from 'rxjs';
 import { PasswordChangeDialogComponent, ProfileChangeDialogComponent } from '@core/ui-core';
 import { LoadingStatus } from '@shared/util-store';
 import { AuthFacade, ChangePasswordPayload, ChangeProfileDataPayload } from '@users/core/data-access-auth';
-import { UserEntity } from '@users/core/data-access-models';
 import { UiPhotoModalComponent } from '@users/profile/ui-profile-photo';
+import { UserEntity } from '@users/shared/data-access-models';
 
 interface ProfileFormVm {
   user: UserEntity;

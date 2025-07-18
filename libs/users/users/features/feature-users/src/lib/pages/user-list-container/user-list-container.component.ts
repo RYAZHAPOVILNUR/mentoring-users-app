@@ -5,7 +5,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 
-import { UserVM } from '@users/core/data-access-models';
+import { UserVM } from '@users/shared/data-access-models';
 import { UsersFacade } from '@users/users/data-access-user';
 
 import { UserListContainerStore } from './user-list-container.store';

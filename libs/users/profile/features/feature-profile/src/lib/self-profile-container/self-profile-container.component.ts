@@ -10,7 +10,7 @@ import { CropperDialogComponent } from '@core/ui-core';
 import { githubApiActions, GithubApiService, githubSelectors } from '@shared/data-access-github';
 import { selectQueryParam } from '@shared/util-store';
 import { authActions, authSelectors } from '@users/core/data-access-auth';
-import { UserEntity } from '@users/core/data-access-models';
+import { UserEntity } from '@users/shared/data-access-models';
 
 import { ProfileComponent } from '../feature-user-info/profile.component';
 

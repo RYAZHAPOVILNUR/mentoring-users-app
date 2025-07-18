@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { Article } from '@users/core/data-access-models';
+import { Article } from '@users/shared/data-access-models';
 
 import { articlesActions } from './articles.actions';
 import { selectArticles, selectArticlesEntities } from './articles.selectors';

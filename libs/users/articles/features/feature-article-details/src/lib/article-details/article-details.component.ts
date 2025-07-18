@@ -8,7 +8,7 @@ import { PushPipe } from '@ngrx/component';
 import { QuillModule } from 'ngx-quill';
 import { map, Observable } from 'rxjs';
 
-import { Article } from '@users/core/data-access-models';
+import { Article } from '@users/shared/data-access-models';
 import { UsersFacade } from '@users/users/data-access-user';
 
 @Component({

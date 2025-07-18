@@ -5,7 +5,7 @@ import { Observable, of, switchMap } from 'rxjs';
 
 import { Callback } from '@shared/util-typescript';
 import { authSelectors } from '@users/core/data-access-auth';
-import { UserEntity } from '@users/core/data-access-models';
+import { UserEntity } from '@users/shared/data-access-models';
 
 import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';

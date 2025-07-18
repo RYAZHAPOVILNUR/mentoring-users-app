@@ -5,7 +5,7 @@ import { catchError, filter, map, of, switchMap, tap, withLatestFrom } from 'rxj
 
 import { ApiService } from '@core/data-access-api';
 import { selectRouteParams } from '@shared/util-store';
-import { UserDTO, userAdapter, UserEntity } from '@users/core/data-access-models';
+import { UserDTO, userAdapter, UserEntity } from '@users/shared/data-access-models';
 
 import * as UsersActions from './users.actions';
 import { selectUsersEntities } from './users.selectors';

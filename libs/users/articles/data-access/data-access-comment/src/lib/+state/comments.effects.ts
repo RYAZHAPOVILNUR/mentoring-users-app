@@ -4,7 +4,7 @@ import { catchError, map, of, switchMap, withLatestFrom } from 'rxjs';
 
 import { ApiService } from '@core/data-access-api';
 import { AuthFacade } from '@users/core/data-access-auth';
-import { Comment } from '@users/core/data-access-models';
+import { Comment } from '@users/shared/data-access-models';
 
 import { commentsActions } from './comments.actions';
 import { CreateComment } from '../interface/create-comment.interface';

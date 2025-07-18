@@ -5,7 +5,7 @@ import { tap } from 'rxjs';
 
 import { CoreUiConfirmDialogComponent } from '@core/ui-core';
 import { DeepReadonly } from '@shared/util-typescript';
-import { UserEntity, userAdapter, UserVM } from '@users/core/data-access-models';
+import { UserEntity, userAdapter, UserVM } from '@users/shared/data-access-models';
 import { UsersFacade } from '@users/users/data-access-user';
 
 type UserListState = DeepReadonly<{

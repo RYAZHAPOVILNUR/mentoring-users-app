@@ -10,7 +10,7 @@ import { CoreUiConfirmDialogComponent } from '@core/ui-core';
 import { DeactivatableComponent } from '@shared/util-router';
 import { selectQueryParam } from '@shared/util-store';
 import { articlesActions, articleSelectors, CreateArticle } from '@users/articles/data-access-article';
-import { Article } from '@users/core/data-access-models';
+import { Article } from '@users/shared/data-access-models';
 
 import { ArticlesCreateUiComponent } from '../articles-create-ui/articles-create-ui.component';
 

@@ -12,8 +12,8 @@ import { QuillModule } from 'ngx-quill';
 import { map, Observable } from 'rxjs';
 
 import { ArticlesCreateButtonComponent } from '@users/articles/feature-article-create';
-import { Article } from '@users/core/data-access-models';
 import { SettingsFacade } from '@users/settings/data-access-settings';
+import { Article } from '@users/shared/data-access-models';
 import { UsersFacade } from '@users/users/data-access-user';
 
 @Component({
