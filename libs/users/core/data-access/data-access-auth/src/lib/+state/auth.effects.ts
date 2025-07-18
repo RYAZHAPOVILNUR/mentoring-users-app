@@ -6,7 +6,7 @@ import { catchError, concatMap, map, of, switchMap, tap, withLatestFrom } from '
 
 import { ApiService } from '@core/data-access-api';
 import { LocalStorageJwtService } from '@core/data-access-interceptors';
-import { UsersDTO, usersDTOAdapter } from '@users/core/data-access-models';
+import { UserDTO, userAdapter } from '@users/core/data-access-models';
 
 import { authActions } from './auth.actions';
 import { selectAuthStatus } from './auth.selectors';
@@ -26,7 +26,7 @@ export const loginEffect$ = createEffect(
       switchMap(({ userData }) =>
         api.post<SignAuthResponse, SignAuthPayload>('/auth/login', userData).pipe(
           map((res) => {
-            const userEntity = usersDTOAdapter.DTOtoEntity(res.user);
+            const userEntity = userAdapter.DTOtoEntity(res.user);
             const updatedRes = { ...res, user: userEntity };
             return authActions.loginSuccess({ res: updatedRes });
           }),
@@ -62,10 +62,10 @@ export const getUserEffect$ = createEffect(
       withLatestFrom(store.select(selectAuthStatus)),
       switchMap(([, authStatus]) =>
         localStorageJwtService.getItem() && authStatus !== 'loaded'
-          ? api.get<UsersDTO>('/auth/me').pipe(
+          ? api.get<UserDTO>('/auth/me').pipe(
               map((userDTO) =>
                 authActions.getUserSuccess({
-                  user: usersDTOAdapter.DTOtoEntity(userDTO),
+                  user: userAdapter.DTOtoEntity(userDTO),
                 }),
               ),
               catchError((error) => of(authActions.getUserFailure({ error }))),
@@ -139,10 +139,10 @@ export const uploadImageEffects$ = createEffect(
       ofType(authActions.uploadImage),
       switchMap(({ image }) =>
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        api.post<UsersDTO, any>('/users/upload/image', { image }).pipe(
+        api.post<UserDTO, any>('/users/upload/image', { image }).pipe(
           map((userDTO) =>
             authActions.uploadImageSuccess({
-              user: usersDTOAdapter.DTOtoEntity(userDTO),
+              user: userAdapter.DTOtoEntity(userDTO),
             }),
           ),
           catchError((error) => of(authActions.uploadImageFailure({ error }))),

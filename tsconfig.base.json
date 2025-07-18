@@ -17,6 +17,7 @@
     "paths": {
       "@core/data-access-api": ["libs/core/data-access/data-access-api/src/index.ts"],
       "@core/data-access-interceptors": ["libs/core/data-access/data-access-interceptors/src/index.ts"],
+      "@core/ui-core": ["libs/core/ui/ui-core/src/index.ts"],
       "@shared/data-access-address": ["libs/shared/data-access/data-access-address/src/index.ts"],
       "@shared/data-access-github": ["libs/shared/data-access/data-access-github/src/index.ts"],
       "@shared/data-access-theme": ["libs/shared/data-access/data-access-theme/src/index.ts"],
@@ -37,11 +38,7 @@
       "@users/chart/feature-chart": ["libs/users/chart/features/feature-chart/src/index.ts"],
       "@users/core/data-access-auth": ["libs/users/core/data-access/data-access-auth/src/index.ts"],
       "@users/core/data-access-models": ["libs/users/core/data-access/data-access-models/src/index.ts"],
-      "@users/core/ui": ["libs/core/ui/src/index.ts"],
       "@users/core/ui-layout": ["libs/users/core/ui/ui-layout/src/index.ts"],
-      "@users/feature-users-create": ["libs/users/users/feature-users-create/src/index.ts"],
-      "@users/feature-users-detail": ["libs/users/users/feature-users-detail/src/index.ts"],
-      "@users/feature-users-list": ["libs/users/users/feature-users-list/src/index.ts"],
       "@users/home/feature-home": ["libs/users/home/features/src/index.ts"],
       "@users/profile/feature-profile": ["libs/users/profile/features/feature-profile/src/index.ts"],
       "@users/profile/ui-profile-photo": ["libs/users/profile/ui/ui-profile-photo/src/index.ts"],
@@ -49,7 +46,10 @@
       "@users/settings/feature-settings": ["libs/users/settings/features/feature-settings/src/index.ts"],
       "@users/tasks/data-access-task": ["libs/users/task/data-access/data-access-task/src/index.ts"],
       "@users/tasks/feature-tasks": ["libs/users/task/features/feature-tasks/src/index.ts"],
-      "@users/users/data-access": ["libs/users/users/data-access/src/index.ts"],
+      "@users/users/data-access-user": ["libs/users/users/data-access/data-access-user/src/index.ts"],
+      "@users/users/feature-user-create": ["libs/users/users/features/feature-user-create/src/index.ts"],
+      "@users/users/feature-user-details": ["libs/users/users/features/feature-user-details/src/index.ts"],
+      "@users/users/feature-users": ["libs/users/users/features/feature-users/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

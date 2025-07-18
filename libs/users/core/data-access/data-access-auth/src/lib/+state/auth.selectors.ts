@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
 
 import { LoadingStatus } from '@shared/util-store';
-import { UsersEntity } from '@users/core/data-access-models';
+import { UserEntity } from '@users/core/data-access-models';
 
 import { authFeature, AuthState } from './auth.reducer';
 
@@ -17,4 +17,4 @@ export const selectIsAuthenticated = createSelector(
   (loadingStatus: LoadingStatus) => loadingStatus === 'loaded',
 );
 
-export const selectLoggedUserId = createSelector(selectLoggedUser, (loggedInUser: UsersEntity) => loggedInUser.id);
+export const selectLoggedUserId = createSelector(selectLoggedUser, (loggedInUser: UserEntity) => loggedInUser.id);

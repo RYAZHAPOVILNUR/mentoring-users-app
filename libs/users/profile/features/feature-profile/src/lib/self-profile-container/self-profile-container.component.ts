@@ -6,11 +6,11 @@ import { LetDirective } from '@ngrx/component';
 import { Store } from '@ngrx/store';
 import { noop, of, tap } from 'rxjs';
 
+import { CropperDialogComponent } from '@core/ui-core';
 import { githubApiActions, GithubApiService, githubSelectors } from '@shared/data-access-github';
 import { selectQueryParam } from '@shared/util-store';
 import { authActions, authSelectors } from '@users/core/data-access-auth';
-import { UsersEntity } from '@users/core/data-access-models';
-import { CropperDialogComponent } from '@users/core/ui';
+import { UserEntity } from '@users/core/data-access-models';
 
 import { ProfileComponent } from '../feature-user-info/profile.component';
 
@@ -27,7 +27,7 @@ export class SelfProfileContainerComponent implements OnInit {
   private readonly githubApiService = inject(GithubApiService);
   private destroyRef = inject(DestroyRef);
 
-  public readonly user!: UsersEntity;
+  public readonly user!: UserEntity;
 
   public readonly user$ = this.store.select(authSelectors.selectLoggedUser);
   public readonly status$ = this.store.select(authSelectors.selectAuthStatus);

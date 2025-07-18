@@ -1,7 +1,7 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 
 import { LoadingStatus } from '@shared/util-store';
-import { UsersEntity } from '@users/core/data-access-models';
+import { UserEntity } from '@users/core/data-access-models';
 
 import { authActions } from './auth.actions';
 
@@ -11,7 +11,7 @@ export interface AuthState {
   authStatus: LoadingStatus;
   error: string | null;
   authToken: string;
-  loggedUser: UsersEntity;
+  loggedUser: UserEntity;
 }
 
 export const authInitialState: AuthState = {
