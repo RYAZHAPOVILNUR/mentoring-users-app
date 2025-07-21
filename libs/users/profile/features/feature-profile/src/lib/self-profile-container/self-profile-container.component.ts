@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
 import { LetDirective } from '@ngrx/component';
 import { Store } from '@ngrx/store';
@@ -8,7 +8,7 @@ import { noop, of, tap } from 'rxjs';
 
 import { githubApiActions, GithubApiService, githubSelectors } from '@shared/data-access-github';
 import { selectQueryParam } from '@shared/util-store';
-import { authActions, authSelectors } from '@users/core/data-access-auth';
+import { authActions, authSelectors, AuthStore } from '@users/core/data-access-auth';
 import { UsersEntity } from '@users/core/data-access-models';
 import { CropperDialogComponent } from '@users/core/ui';
 
@@ -23,14 +23,15 @@ import { ProfileComponent } from '../feature-user-info/profile.component';
 })
 export class SelfProfileContainerComponent implements OnInit {
   private readonly store = inject(Store);
+  private readonly authStore = inject(AuthStore);
   private readonly dialog = inject(MatDialog);
   private readonly githubApiService = inject(GithubApiService);
   private destroyRef = inject(DestroyRef);
 
   public readonly user!: UsersEntity;
 
-  public readonly user$ = this.store.select(authSelectors.selectLoggedUser);
-  public readonly status$ = this.store.select(authSelectors.selectAuthStatus);
+  public readonly user$ = toObservable(this.authStore.loggedUser);
+  public readonly status$ = toObservable(this.authStore.status);
   public readonly githubUserName$ = this.store.select(githubSelectors.selectGithubUserName);
   public readonly githubStatus$ = this.store.select(githubSelectors.selectGithubStatus);
   public readonly isLoggedUser = of(true);

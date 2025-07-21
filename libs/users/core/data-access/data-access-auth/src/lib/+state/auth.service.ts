@@ -1,6 +1,21 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+
+import { ApiService } from '@core/data-access-api';
+import { SignAuthPayload, SignAuthResponse } from '@users/core/data-access-auth';
+import { UsersDTO } from '@users/core/data-access-models';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {}
+export class AuthService {
+  private readonly apiService = inject(ApiService);
+
+
+  login(userData: SignAuthPayload) {
+    return this.apiService.post<SignAuthResponse, SignAuthPayload>('/auth/login', userData);
+  }
+
+  getUser() {
+    return this.apiService.get<UsersDTO>('/auth/me')
+  }
+}

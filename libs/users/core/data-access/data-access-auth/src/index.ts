@@ -5,5 +5,6 @@ export { authFeature } from './lib/+state/auth.reducer';
 export { AuthFacade } from './lib/auth.facade';
 export { adminGuard } from './lib/guards/admin.guard';
 export { authGuard } from './lib/guards/auth.guard';
+export { AuthStore } from './lib/+state/auth-signal-store';
 // todo
 export * from './lib/+state/sign.auth.model';
