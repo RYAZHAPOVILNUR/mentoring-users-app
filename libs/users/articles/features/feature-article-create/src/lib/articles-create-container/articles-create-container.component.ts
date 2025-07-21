@@ -6,11 +6,11 @@ import { LetDirective } from '@ngrx/component';
 import { select, Store } from '@ngrx/store';
 import { filter, first, map, Observable, tap, withLatestFrom } from 'rxjs';
 
+import { CoreUiConfirmDialogComponent } from '@core/ui-core';
 import { DeactivatableComponent } from '@shared/util-router';
 import { selectQueryParam } from '@shared/util-store';
 import { articlesActions, articleSelectors, CreateArticle } from '@users/articles/data-access-article';
-import { Article } from '@users/core/data-access-models';
-import { CoreUiConfirmDialogComponent } from '@users/core/ui';
+import { Article } from '@users/shared/data-access-models';
 
 import { ArticlesCreateUiComponent } from '../articles-create-ui/articles-create-ui.component';
 

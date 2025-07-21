@@ -1,6 +1,6 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
-import { UsersEntity } from '@users/core/data-access-models';
+import { UserEntity } from '@users/shared/data-access-models';
 
 import {
   ChangePasswordPayload,
@@ -17,9 +17,9 @@ export const authActions = createActionGroup({
   events: {
     changeProfileDataSuccess: props<{ res: ChangeProfileDataResponse }>(),
     changePasswordSuccess: props<{ res: ChangePasswordResponse }>(),
-    uploadImageSuccess: props<{ user: UsersEntity }>(),
+    uploadImageSuccess: props<{ user: UserEntity }>(),
     registerSuccess: props<{ authToken: string }>(),
-    getUserSuccess: props<{ user: UsersEntity }>(),
+    getUserSuccess: props<{ user: UserEntity }>(),
     loginSuccess: props<{ res: SignAuthUser }>(),
 
     changeProfileData: props<{ data: ChangeProfileDataPayload }>(),

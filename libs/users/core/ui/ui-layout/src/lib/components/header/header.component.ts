@@ -16,7 +16,7 @@ import { AuthFacade } from '@users/core/data-access-auth';
 import { ThemePickerComponent } from './theme-picker/theme-picker.component';
 
 @Component({
-  selector: 'users-lib-header',
+  selector: 'users-header',
   standalone: true,
   imports: [
     CommonModule,

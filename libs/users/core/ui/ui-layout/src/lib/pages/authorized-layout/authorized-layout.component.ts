@@ -43,7 +43,7 @@ export class AuthorizedLayoutComponent {
 
   public readonly isMobile$ = this.handset$.pipe(
     withLatestFrom(this.handsetLandscape$),
-    map(([handset, handsetLandscape]) => !!(handset.matches && !handsetLandscape.matches)),
+    map(([handset, handsetLandscape]) => handset.matches && !handsetLandscape.matches),
   );
 
   opened!: boolean;

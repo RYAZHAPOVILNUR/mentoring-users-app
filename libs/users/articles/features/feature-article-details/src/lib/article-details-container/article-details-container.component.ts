@@ -9,7 +9,7 @@ import { selectRouteParams } from '@shared/util-store';
 import { articlesActions, articleSelectors } from '@users/articles/data-access-article';
 import { commentsActions, commentsSelectors } from '@users/articles/data-access-comment';
 import { authSelectors } from '@users/core/data-access-auth';
-import { Article } from '@users/core/data-access-models';
+import { Article } from '@users/shared/data-access-models';
 
 import { ArticleCommentsComponent } from '../article-comments/article-comments.component';
 import { ArticleDetailsComponent } from '../article-details/article-details.component';

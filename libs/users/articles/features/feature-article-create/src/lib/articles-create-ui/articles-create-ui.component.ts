@@ -23,7 +23,7 @@ import Quill from 'quill';
 import BlotFormatter from 'quill-blot-formatter';
 
 import { ArticlesFacade, CreateArticle } from '@users/articles/data-access-article';
-import { Article } from '@users/core/data-access-models';
+import { Article } from '@users/shared/data-access-models';
 
 type ArticlesCreateVm = {
   editMode: boolean;

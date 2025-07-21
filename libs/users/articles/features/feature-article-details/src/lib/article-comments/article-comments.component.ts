@@ -12,7 +12,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { LoadingStatus } from '@shared/util-store';
 import { AuthFacade } from '@users/core/data-access-auth';
-import { Comment } from '@users/core/data-access-models';
+import { Comment } from '@users/shared/data-access-models';
 
 import { ArticleCommentComponent } from './article-comment/article-comment.component';
 

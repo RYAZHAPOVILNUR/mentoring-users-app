@@ -1,5 +1,5 @@
 import { DeepReadonly } from '@shared/util-typescript';
-import { UsersDTO, UsersEntity } from '@users/core/data-access-models';
+import { UserDTO, UserEntity } from '@users/shared/data-access-models';
 
 export interface SignAuthPayload {
   email: string;
@@ -8,12 +8,12 @@ export interface SignAuthPayload {
 
 export interface SignAuthResponse {
   authToken: string;
-  user: UsersDTO;
+  user: UserDTO;
 }
 
 export interface SignAuthUser {
   authToken: string;
-  user: UsersEntity;
+  user: UserEntity;
 }
 
 export interface RegisterResponse {
