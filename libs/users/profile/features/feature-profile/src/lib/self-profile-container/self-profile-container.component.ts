@@ -8,7 +8,7 @@ import { noop, of, tap } from 'rxjs';
 
 import { githubApiActions, GithubApiService, githubSelectors } from '@shared/data-access-github';
 import { selectQueryParam } from '@shared/util-store';
-import { authActions, authSelectors, AuthStore } from '@users/core/data-access-auth';
+import { authActions, AuthStore } from '@users/core/data-access-auth';
 import { UsersEntity } from '@users/core/data-access-models';
 import { CropperDialogComponent } from '@users/core/ui';
 

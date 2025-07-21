@@ -1,4 +1,6 @@
-import { computed, inject } from '@angular/core';
+// @ts-ignore
+
+import { computed, inject, Signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
@@ -37,6 +39,7 @@ export const authInitialState: AuthState = {
   },
 };
 
+
 export const AuthStore = signalStore(
   { providedIn: 'root' },
   withState(authInitialState),
@@ -58,14 +61,13 @@ export const AuthStore = signalStore(
                 return updatedRes;
               }),
               tap((res) => {
-                // eslint-disable-next-line @typescript-eslint/no-unused-expressions
                 patchState(store, {
                   authStatus: 'loaded',
                   authToken: res.authToken,
                   loggedUser: res.user,
                   error: null,
-                }),
-                  localStorageJwtService.setItem(res.authToken);
+                });
+                localStorageJwtService.setItem(res.authToken);
                 router.navigateByUrl('/profile');
               }),
               catchError((err: Error) => {
