@@ -18,7 +18,7 @@ export class AuthFacade {
   status$ = toObservable(this.store2.status);
 
   public logout() {
-    this.store.dispatch(authActions.logout());
+    this.store2.logout();
   }
 
   public changePassword(data: ChangePasswordPayload) {

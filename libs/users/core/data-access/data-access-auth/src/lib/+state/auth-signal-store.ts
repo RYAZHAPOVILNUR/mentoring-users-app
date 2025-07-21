@@ -100,6 +100,16 @@ export const AuthStore = signalStore(
           ),
         ),
       ),
+      logout: rxMethod<void>(
+        pipe(
+          tap(() => {
+            localStorageJwtService.removeItem();
+            router.navigate(['/login']);
+            const notDefaultTheme: Element | null = document.head.querySelector('.style-manager-theme');
+            if (notDefaultTheme) notDefaultTheme.remove();
+          }),
+        ),
+      ),
     }),
   ),
   withComputed((store) => ({
