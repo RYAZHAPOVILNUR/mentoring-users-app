@@ -22,7 +22,7 @@ export class AuthFacade {
   }
 
   public changePassword(data: ChangePasswordPayload) {
-    this.store.dispatch(authActions.changePassword({ data }));
+    this.store2.changePassword({ data })
   }
 
   public changeProfileData(data: ChangeProfileDataPayload) {

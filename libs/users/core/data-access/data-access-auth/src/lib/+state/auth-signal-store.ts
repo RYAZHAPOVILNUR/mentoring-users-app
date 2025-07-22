@@ -1,6 +1,7 @@
 // @ts-ignore
 
 import { computed, inject, Signal } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
@@ -11,7 +12,7 @@ import { LoadingStatus } from '@shared/util-store';
 import { usersDTOAdapter, UsersEntity } from '@users/core/data-access-models';
 
 import { AuthService } from './auth.service';
-import { NewUser, SignAuthPayload } from './sign.auth.model';
+import { ChangePasswordPayload, NewUser, SignAuthPayload } from './sign.auth.model';
 
 export interface AuthState {
   authStatus: LoadingStatus;
@@ -39,7 +40,6 @@ export const authInitialState: AuthState = {
   },
 };
 
-
 export const AuthStore = signalStore(
   { providedIn: 'root' },
   withState(authInitialState),
@@ -49,6 +49,7 @@ export const AuthStore = signalStore(
       authService = inject(AuthService),
       localStorageJwtService = inject(LocalStorageJwtService),
       router = inject(Router),
+      snackBar = inject(MatSnackBar),
     ) => ({
       login: rxMethod<{ userData: SignAuthPayload }>(
         pipe(
@@ -119,14 +120,56 @@ export const AuthStore = signalStore(
                 router.navigate(['/profile']);
               }),
               switchMap(() => authService.getUser()),
-              tap((user) => patchState(store, {
-                authStatus: 'loaded' as const,
-                loggedUser: usersDTOAdapter.DTOtoEntity(user),
+              tap((user) =>
+                patchState(store, {
+                  authStatus: 'loaded' as const,
+                  loggedUser: usersDTOAdapter.DTOtoEntity(user),
                 }),
               ),
             ),
           ),
-
+        ),
+      ),
+      changePassword: rxMethod<{ data: ChangePasswordPayload }>(
+        pipe(
+          switchMap(({ data }) =>
+            authService.changePassword(data).pipe(
+              tap(() => {
+                snackBar.open('Пароль успешно изменён', 'Закрыть', {
+                  duration: 3000,
+                  panelClass: 'success-snackbar',
+                });
+              }),
+              catchError((err) => {
+                snackBar.open('Произошла ошибка', 'Закрыть', {
+                  duration: 3000,
+                  panelClass: 'success-snackbar',
+                });
+                return of(err);
+              }),
+            ),
+          ),
+        ),
+      ),
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      uploadImage: rxMethod<{ image: any }>(
+        pipe(
+          switchMap(({ image }) =>
+            authService.uploadImage(image).pipe(
+              tap((userDTO) => {
+                patchState(store, {
+                  loggedUser: usersDTOAdapter.DTOtoEntity(userDTO),
+                })
+              }),
+              catchError((err) => {
+                snackBar.open('Произошла ошибка', 'Закрыть', {
+                  duration: 3000,
+                  panelClass: 'success-snackbar',
+                });
+                return of(err);
+              })
+            )
+          )
         )
       ),
     }),

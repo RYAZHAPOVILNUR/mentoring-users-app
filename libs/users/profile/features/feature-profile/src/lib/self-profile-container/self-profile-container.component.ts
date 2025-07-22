@@ -68,9 +68,9 @@ export class SelfProfileContainerComponent implements OnInit {
         data: { image },
       });
 
-      dialogRef.afterClosed().subscribe((result) => {
+      dialogRef.afterClosed().subscribe((result: any) => {
         if (result) {
-          this.store.dispatch(authActions.uploadImage({ image: result }));
+          this.authStore.uploadImage({ image: result });
         }
       });
     };
