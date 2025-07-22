@@ -4,14 +4,14 @@ import { computed, inject, Signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
+import { catchError, concatMap, map, of, pipe, switchMap, tap } from 'rxjs';
 
 import { LocalStorageJwtService } from '@core/data-access-interceptors';
 import { LoadingStatus } from '@shared/util-store';
 import { usersDTOAdapter, UsersEntity } from '@users/core/data-access-models';
 
 import { AuthService } from './auth.service';
-import { SignAuthPayload } from './sign.auth.model';
+import { NewUser, SignAuthPayload } from './sign.auth.model';
 
 export interface AuthState {
   authStatus: LoadingStatus;
@@ -50,10 +50,10 @@ export const AuthStore = signalStore(
       localStorageJwtService = inject(LocalStorageJwtService),
       router = inject(Router),
     ) => ({
-      login: rxMethod<SignAuthPayload>(
+      login: rxMethod<{ userData: SignAuthPayload }>(
         pipe(
           tap(() => patchState(store, { authStatus: 'loading' })),
-          switchMap((userData) =>
+          switchMap(({ userData }) =>
             authService.login(userData).pipe(
               map((res) => {
                 const userEntity = usersDTOAdapter.DTOtoEntity(res.user);
@@ -109,6 +109,25 @@ export const AuthStore = signalStore(
             if (notDefaultTheme) notDefaultTheme.remove();
           }),
         ),
+      ),
+      register: rxMethod<{ userData: NewUser }>(
+        pipe(
+          switchMap(({ userData }) =>
+            authService.register(userData).pipe(
+              tap(({ authToken }) => {
+                localStorageJwtService.setItem(authToken);
+                router.navigate(['/profile']);
+              }),
+              switchMap(() => authService.getUser()),
+              tap((user) => patchState(store, {
+                authStatus: 'loaded' as const,
+                loggedUser: usersDTOAdapter.DTOtoEntity(user),
+                }),
+              ),
+            ),
+          ),
+
+        )
       ),
     }),
   ),
