@@ -18,7 +18,7 @@ export class LoginContainerComponent {
   private readonly router = inject(Router);
 
   onLogin(userData: SignAuthPayload) {
-    this.authStore.login(userData);
+    this.authStore.login({ userData });
   }
 
   onRedirectToSignup() {
