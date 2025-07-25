@@ -19,7 +19,7 @@ export const articlesActions = createActionGroup({
     loadArticlesSuccess: props<{ articles: Article[] }>(),
     loadArticlesFailed: props<{ error: Error }>(),
 
-    getArticleForEdit: props<{ id: string }>(),
+    getArticleForEdit: props<{ id: Article['id'] }>(),
     getArticleForEditSuccess: props<{ article: Article }>(),
     getArticleForEditFailed: props<{ error: Error }>(),
 

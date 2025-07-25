@@ -6,3 +6,5 @@ export * as userEffects from './lib/+state/users.effects';
 export * as usersSelectors from './lib/+state/users.selectors';
 
 export { CreateUserDTO } from './lib/types/create-user-dto.type';
+
+export { UserDialogService } from './lib/services/user-dialog.service';

@@ -5,8 +5,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 
+import { ConfirmDialogService } from '@shared/ui-confirm-dialog';
 import { UserVM } from '@users/shared/data-access-models';
-import { UsersFacade } from '@users/users/data-access-user';
+import { UserDialogService, UsersFacade } from '@users/users/data-access-user';
 
 import { UserListContainerStore } from './user-list-container.store';
 import { UserListComponent } from '../../components/user-list/user-list.component';
@@ -17,7 +18,7 @@ import { UserListComponent } from '../../components/user-list/user-list.componen
   templateUrl: './user-list-container.component.html',
   styleUrls: ['./user-list-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [UserListContainerStore],
+  providers: [UserListContainerStore, UserDialogService, ConfirmDialogService],
 })
 export class UserListContainerComponent {
   private readonly componentStore = inject(UserListContainerStore);

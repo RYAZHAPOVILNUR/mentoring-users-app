@@ -133,12 +133,19 @@ export class ArticlesCreateUiComponent {
     }
   }
 
-  public goToArticles() {
+  public onCancel() {
+    const containsUnsavedChanges = this.containsUnsavedChanges();
+    if (containsUnsavedChanges) {
+      this.formChange.emit(true);
+      this.router.navigate(['/articles']);
+      return;
+    }
+
     const article: CreateArticle = {
       title: this.formGroup.value.title as string,
       content: this.formGroup.value.textEditor as string,
     };
-    if (!this.vm.editMode) this.formChange.emit(false);
+
     this.publishArticle.emit({
       ...article,
       articlesId: this.vm.editingArticle?.id,
