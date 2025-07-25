@@ -31,7 +31,7 @@ export class ArticleListContainerComponent {
     withLatestFrom(this.articleId$),
     map(([article, id]) => {
       if (!article && id && typeof id === 'string') {
-        this.store.dispatch(articlesActions.getArticleForEdit({ id }));
+        this.store.dispatch(articlesActions.getArticleForEdit({ id: Number(id) }));
       }
       return article;
     }),
