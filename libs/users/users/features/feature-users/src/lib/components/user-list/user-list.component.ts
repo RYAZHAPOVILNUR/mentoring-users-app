@@ -2,11 +2,11 @@ import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { UserEntity, UserVM } from '@users/shared/data-access-models';
+import { CreateUserButtonComponent } from '@users/users/feature-user-create';
 
 import { LoadingStatus } from '@shared/util-store';
 import { DeepReadonly } from '@shared/util-typescript';
-import { UserEntity, UserVM } from '@users/shared/data-access-models';
-import { CreateUserButtonComponent } from '@users/users/feature-user-create';
 
 import { UserCardComponent } from '../user-card/user-card.component';
 

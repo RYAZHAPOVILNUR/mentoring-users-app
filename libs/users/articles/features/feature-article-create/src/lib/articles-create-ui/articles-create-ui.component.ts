@@ -18,12 +18,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { Article } from '@users/shared/data-access-models';
 import { QuillModule } from 'ngx-quill';
 import Quill from 'quill';
 import BlotFormatter from 'quill-blot-formatter';
 
 import { ArticlesFacade, CreateArticle } from '@users/articles/data-access-article';
-import { Article } from '@users/shared/data-access-models';
 
 type ArticlesCreateVm = {
   editMode: boolean;

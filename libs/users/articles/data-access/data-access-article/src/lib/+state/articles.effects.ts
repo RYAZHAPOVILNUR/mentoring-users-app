@@ -2,11 +2,11 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
+import { Article } from '@users/shared/data-access-models';
 import { catchError, filter, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
 
 import { ApiService } from '@core/data-access-api';
 import { selectRouteParams } from '@shared/util-store';
-import { Article } from '@users/shared/data-access-models';
 
 import { articlesActions } from './articles.actions';
 import { selectArticlesEntities } from './articles.selectors';

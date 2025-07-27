@@ -2,10 +2,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { select, Store } from '@ngrx/store';
+import { UsersEntity } from '@users/core/data-access-models';
 import { Observable, of, switchMap } from 'rxjs';
 
 import { AuthStore } from '@users/core/data-access-auth';
-import { UsersEntity } from '@users/core/data-access-models';
 
 import * as UsersActions from './users.actions';
 import { onSuccessEditionCbType } from './users.actions';

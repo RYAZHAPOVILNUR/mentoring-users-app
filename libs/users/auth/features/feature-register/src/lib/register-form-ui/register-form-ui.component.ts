@@ -9,11 +9,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
+import { InputPasswordComponent } from '@users/core/ui';
 
 import { ApiService } from '@core/data-access-api';
 import { LanguageKeys, LanguageService } from '@shared/util-language';
 import { NewUser } from '@users/core/data-access-auth';
-import { InputPasswordComponent } from '@users/core/ui';
 
 @Component({
   selector: 'users-register-form-ui',

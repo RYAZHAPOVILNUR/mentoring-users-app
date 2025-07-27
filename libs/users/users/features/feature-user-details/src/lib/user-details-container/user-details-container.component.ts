@@ -4,13 +4,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { select, Store } from '@ngrx/store';
-import { filter, map, Observable, tap } from 'rxjs';
-
 import { ConfirmDialogService } from '@shared/ui-confirm-dialog';
-import { selectQueryParam } from '@shared/util-store';
-import { Callback } from '@shared/util-typescript';
 import { UserEntity } from '@users/shared/data-access-models';
 import { CreateUserDTO, UserDialogService, UsersFacade } from '@users/users/data-access-user';
+import { filter, map, Observable, tap } from 'rxjs';
+
+import { selectQueryParam } from '@shared/util-store';
+import { Callback } from '@shared/util-typescript';
 
 import { UserDetailsCardComponent } from '../user-details-card/user-details-card.component';
 

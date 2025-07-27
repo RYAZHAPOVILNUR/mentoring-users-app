@@ -1,7 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
-
 import { ChangePasswordPayload, ChangeProfileDataPayload } from '@users/core/data-access-models';
 
 import { AuthStore } from './+state/auth-signal-store';

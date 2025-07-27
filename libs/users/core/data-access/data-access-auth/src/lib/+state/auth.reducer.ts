@@ -1,7 +1,7 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { UsersEntity } from '@users/core/data-access-models';
 
 import { LoadingStatus } from '@shared/util-store';
-import { UsersEntity } from '@users/core/data-access-models';
 
 import { authActions } from './auth.actions';
 

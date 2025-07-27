@@ -7,11 +7,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { InputPasswordComponent } from '@core/ui-core';
 import { PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { ApiService } from '@core/data-access-api';
-import { InputPasswordComponent } from '@core/ui-core';
 import { LanguageKeys, LanguageService } from '@shared/util-language';
 
 @Component({

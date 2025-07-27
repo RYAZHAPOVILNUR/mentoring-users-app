@@ -2,11 +2,11 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { UsersDTO, usersDTOAdapter } from '@users/core/data-access-models';
 import { catchError, concatMap, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
 
 import { ApiService } from '@core/data-access-api';
 import { LocalStorageJwtService } from '@core/data-access-interceptors';
-import { UsersDTO, usersDTOAdapter } from '@users/core/data-access-models';
 
 import { authActions } from './auth.actions';
 import { selectAuthStatus } from './auth.selectors';

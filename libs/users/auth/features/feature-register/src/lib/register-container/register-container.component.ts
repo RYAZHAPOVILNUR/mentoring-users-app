@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { NewUser } from '@users/core/data-access-models';
 
 import { AuthStore } from '@users/core/data-access-auth';
-import { NewUser } from '@users/core/data-access-models';
 
 import { RegisterFormUiComponent } from '../register-form-ui/register-form-ui.component';
 

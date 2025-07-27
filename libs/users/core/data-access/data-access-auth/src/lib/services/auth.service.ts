@@ -1,9 +1,5 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { map, switchMap, tap } from 'rxjs';
-
-import { ApiService } from '@core/data-access-api';
-import { LocalStorageJwtService } from '@core/data-access-interceptors';
 import {
   UsersDTO,
   ChangePasswordPayload,
@@ -14,6 +10,10 @@ import {
   SignAuthResponse,
   usersDTOAdapter,
 } from '@users/core/data-access-models';
+import { map, switchMap, tap } from 'rxjs';
+
+import { ApiService } from '@core/data-access-api';
+import { LocalStorageJwtService } from '@core/data-access-interceptors';
 
 @Injectable({
   providedIn: 'root',

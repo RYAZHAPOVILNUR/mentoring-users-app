@@ -2,12 +2,12 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { Store } from '@ngrx/store';
+import { ConfirmDialogService } from '@shared/ui-confirm-dialog';
+import { Article } from '@users/shared/data-access-models';
 import { map, Observable, of } from 'rxjs';
 
-import { ConfirmDialogService } from '@shared/ui-confirm-dialog';
 import { DeactivatableComponent } from '@shared/util-router';
 import { articlesActions, articleSelectors, CreateArticle } from '@users/articles/data-access-article';
-import { Article } from '@users/shared/data-access-models';
 
 import { ArticlesCreateUiComponent } from '../articles-create-ui/articles-create-ui.component';
 

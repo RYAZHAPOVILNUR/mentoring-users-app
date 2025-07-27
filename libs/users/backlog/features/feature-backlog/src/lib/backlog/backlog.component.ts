@@ -6,10 +6,10 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
+import { Backlog } from '@users/shared/data-access-models';
 import { Observable } from 'rxjs';
 
 import { BacklogFacade } from '@users/backlog/data-access-backlog';
-import { Backlog } from '@users/shared/data-access-models';
 import { TaskChangeDialogComponent } from '@users/tasks/feature-tasks';
 
 @Component({

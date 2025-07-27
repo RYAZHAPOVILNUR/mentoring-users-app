@@ -1,11 +1,11 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
+import { UserDTO, userAdapter, UserEntity } from '@users/shared/data-access-models';
 import { catchError, filter, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
 
 import { ApiService } from '@core/data-access-api';
 import { selectRouteParams } from '@shared/util-store';
-import { UserDTO, userAdapter, UserEntity } from '@users/shared/data-access-models';
 
 import * as UsersActions from './users.actions';
 import { selectUsersEntities } from './users.selectors';

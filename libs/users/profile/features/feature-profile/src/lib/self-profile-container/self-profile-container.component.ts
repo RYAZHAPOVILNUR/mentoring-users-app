@@ -4,13 +4,13 @@ import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
 import { LetDirective } from '@ngrx/component';
 import { Store } from '@ngrx/store';
+import { UsersEntity } from '@users/core/data-access-models';
+import { CropperDialogComponent } from '@users/core/ui';
 import { noop, of, tap } from 'rxjs';
 
 import { githubApiActions, GithubApiService, githubSelectors } from '@shared/data-access-github';
 import { selectQueryParam } from '@shared/util-store';
 import { AuthStore } from '@users/core/data-access-auth';
-import { UsersEntity } from '@users/core/data-access-models';
-import { CropperDialogComponent } from '@users/core/ui';
 
 import { ProfileComponent } from '../feature-user-info/profile.component';
 

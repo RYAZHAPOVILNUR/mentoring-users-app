@@ -4,7 +4,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
-
 import { ConfirmDialogService } from '@shared/ui-confirm-dialog';
 import { UserVM } from '@users/shared/data-access-models';
 import { UserDialogService, UsersFacade } from '@users/users/data-access-user';

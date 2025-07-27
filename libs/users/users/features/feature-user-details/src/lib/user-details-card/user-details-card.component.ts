@@ -24,13 +24,13 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { PushPipe } from '@ngrx/component';
+import { UserEntity } from '@users/shared/data-access-models';
+import { CreateUserDTO } from '@users/users/data-access-user';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs';
 
 import { AddressApiService } from '@shared/data-access-address';
 import { LoadingStatus } from '@shared/util-store';
 import { Callback } from '@shared/util-typescript';
-import { UserEntity } from '@users/shared/data-access-models';
-import { CreateUserDTO } from '@users/users/data-access-user';
 
 type DetailUsersCardVm = {
   editMode: boolean;

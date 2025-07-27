@@ -1,10 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
+import { userAdapter, UserEntity, UserVM } from '@users/shared/data-access-models';
+import { UserDialogService, UsersFacade } from '@users/users/data-access-user';
 import { filter, tap } from 'rxjs';
 
 import { DeepReadonly } from '@shared/util-typescript';
-import { userAdapter, UserEntity, UserVM } from '@users/shared/data-access-models';
-import { UserDialogService, UsersFacade } from '@users/users/data-access-user';
 
 type UserListState = DeepReadonly<{
   users: UserVM[];

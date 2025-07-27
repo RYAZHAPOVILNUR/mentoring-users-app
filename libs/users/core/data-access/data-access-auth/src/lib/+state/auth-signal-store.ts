@@ -1,11 +1,6 @@
 import { computed, inject } from '@angular/core';
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
-
-import { LocalStorageJwtService } from '@core/data-access-interceptors';
-import { NotificationService } from '@shared/util-notification';
-import { LoadingStatus } from '@shared/util-store';
 import {
   ChangePasswordPayload,
   ChangeProfileDataPayload,
@@ -14,6 +9,11 @@ import {
   usersDTOAdapter,
   UsersEntity,
 } from '@users/core/data-access-models';
+import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
+
+import { LocalStorageJwtService } from '@core/data-access-interceptors';
+import { NotificationService } from '@shared/util-notification';
+import { LoadingStatus } from '@shared/util-store';
 
 import { AuthService } from '../services/auth.service';
 

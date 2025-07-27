@@ -18,14 +18,14 @@ import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { DomSanitizer } from '@angular/platform-browser';
+import { PasswordChangeDialogComponent, ProfileChangeDialogComponent } from '@core/ui-core';
 import { TranslateModule } from '@ngx-translate/core';
+import { UserEntity } from '@users/shared/data-access-models';
 import { of } from 'rxjs';
 
-import { PasswordChangeDialogComponent, ProfileChangeDialogComponent } from '@core/ui-core';
 import { LoadingStatus } from '@shared/util-store';
 import { AuthFacade, ChangePasswordPayload, ChangeProfileDataPayload } from '@users/core/data-access-auth';
 import { UiPhotoModalComponent } from '@users/profile/ui-profile-photo';
-import { UserEntity } from '@users/shared/data-access-models';
 
 interface ProfileFormVm {
   user: UserEntity;

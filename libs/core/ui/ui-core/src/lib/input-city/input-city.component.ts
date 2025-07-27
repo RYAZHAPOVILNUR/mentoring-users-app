@@ -16,10 +16,10 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { PushPipe } from '@ngrx/component';
+import { UserEntity } from '@users/shared/data-access-models';
 import { debounceTime, distinctUntilChanged, filter, fromEvent, map, Observable, switchMap } from 'rxjs';
 
 import { AddressApiService } from '@shared/data-access-address';
-import { UserEntity } from '@users/shared/data-access-models';
 
 @Component({
   selector: 'users-input-city',
