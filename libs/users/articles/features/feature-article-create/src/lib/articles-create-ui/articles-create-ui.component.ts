@@ -23,7 +23,7 @@ import Quill from 'quill';
 import BlotFormatter from 'quill-blot-formatter';
 
 import { ArticlesFacade, CreateArticle } from '@users/articles/data-access-article';
-import { Article } from '@users/core/data-access-models';
+import { Article } from '@users/shared/data-access-models';
 
 type ArticlesCreateVm = {
   editMode: boolean;
@@ -133,12 +133,19 @@ export class ArticlesCreateUiComponent {
     }
   }
 
-  public goToArticles() {
+  public onCancel() {
+    const containsUnsavedChanges = this.containsUnsavedChanges();
+    if (containsUnsavedChanges) {
+      this.formChange.emit(true);
+      this.router.navigate(['/articles']);
+      return;
+    }
+
     const article: CreateArticle = {
       title: this.formGroup.value.title as string,
       content: this.formGroup.value.textEditor as string,
     };
-    if (!this.vm.editMode) this.formChange.emit(false);
+
     this.publishArticle.emit({
       ...article,
       articlesId: this.vm.editingArticle?.id,

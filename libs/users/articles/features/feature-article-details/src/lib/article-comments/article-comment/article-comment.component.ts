@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterLink } from '@angular/router';
 
-import { Comment } from '@users/core/data-access-models';
+import { Comment } from '@users/shared/data-access-models';
 
 @Component({
   standalone: true,

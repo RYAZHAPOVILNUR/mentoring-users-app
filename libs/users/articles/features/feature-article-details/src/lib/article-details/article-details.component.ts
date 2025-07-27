@@ -8,9 +8,8 @@ import { PushPipe } from '@ngrx/component';
 import { QuillModule } from 'ngx-quill';
 import { map, Observable } from 'rxjs';
 
-import { Article } from '@users/core/data-access-models';
-import { UsersListContainerStore } from '@users/feature-users-list';
-import { UsersFacade } from '@users/users/data-access';
+import { Article } from '@users/shared/data-access-models';
+import { UsersFacade } from '@users/users/data-access-user';
 
 @Component({
   selector: 'users-article-details',
@@ -18,13 +17,11 @@ import { UsersFacade } from '@users/users/data-access';
   imports: [CommonModule, QuillModule, MatCardModule, RouterModule, MatButtonModule, MatIconModule, PushPipe],
   templateUrl: './article-details.component.html',
   styleUrls: ['./article-details.component.scss'],
-  providers: [UsersListContainerStore],
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class ArticleDetailsComponent implements OnInit {
   @Input({ required: true }) article!: Article | null;
   @Input({ required: true }) loggedUserId!: number;
-  private readonly componentStore = inject(UsersListContainerStore);
   private readonly userFacade = inject(UsersFacade);
   public authorPhoto$!: Observable<string | undefined>;
 

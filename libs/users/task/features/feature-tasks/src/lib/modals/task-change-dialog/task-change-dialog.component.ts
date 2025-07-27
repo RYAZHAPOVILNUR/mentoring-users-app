@@ -14,15 +14,15 @@ import { QuillModule } from 'ngx-quill';
 import { skip } from 'rxjs/operators';
 
 import { BacklogFacade } from '@users/backlog/data-access-backlog';
-import { Backlog, UsersEntity } from '@users/core/data-access-models';
-import { UsersFacade } from '@users/users/data-access';
+import { Backlog, UserEntity } from '@users/shared/data-access-models';
+import { UsersFacade } from '@users/users/data-access-user';
 
 interface Task {
   name: string;
   descriprion: string;
   priority: string;
   status: string;
-  assignees: UsersEntity[];
+  assignees: UserEntity[];
 }
 
 interface StoryPoint {
@@ -145,7 +145,7 @@ export class TaskChangeDialogComponent implements OnInit {
     };
   }
 
-  addAssigned(assigned: UsersEntity): void {
+  addAssigned(assigned: UserEntity): void {
     this.task = { ...this.task, assignees: [...this.task.assignees, assigned] };
   }
 

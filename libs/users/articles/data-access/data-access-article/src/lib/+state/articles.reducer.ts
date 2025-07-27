@@ -2,7 +2,7 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 
 import { LoadingStatus } from '@shared/util-store';
-import { Article } from '@users/core/data-access-models';
+import { Article } from '@users/shared/data-access-models';
 
 import { articlesActions } from './articles.actions';
 

@@ -11,8 +11,8 @@ import { PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { ApiService } from '@core/data-access-api';
+import { InputPasswordComponent } from '@core/ui-core';
 import { LanguageKeys, LanguageService } from '@shared/util-language';
-import { InputPasswordComponent } from '@users/core/ui';
 
 @Component({
   selector: 'users-login-form-ui',

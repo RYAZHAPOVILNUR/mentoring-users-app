@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { Comment } from '@users/core/data-access-models';
+import { Comment } from '@users/shared/data-access-models';
 
 import { selectComments, selectCommentsEntities } from './comments.selectors';
 

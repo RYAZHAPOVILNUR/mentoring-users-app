@@ -20,7 +20,7 @@ import { commentsEffects, commentsFeature } from '@users/articles/data-access-co
 import { backlogEffects, backlogFeature } from '@users/backlog/data-access-backlog';
 import { SettingsEffects, settingsFeature } from '@users/settings/data-access-settings';
 import { TasksEffects, tasksFeature } from '@users/tasks/data-access-task';
-import { userEffects, USERS_FEATURE_KEY, usersReducer } from '@users/users/data-access';
+import { userEffects, USERS_FEATURE_KEY, usersReducer } from '@users/users/data-access-user';
 
 import { appRoutes } from './app.routes';
 import { environment } from '../environments/environment.development';

@@ -23,11 +23,11 @@ export const appRoutes: Route[] = [
         children: [
           {
             path: 'users',
-            loadComponent: () => import('@users/feature-users-list').then((c) => c.UsersListContainerComponent),
+            loadComponent: () => import('@users/users/feature-users').then((c) => c.UserListContainerComponent),
           },
           {
             path: 'users/:id',
-            loadComponent: () => import('@users/feature-users-detail').then((c) => c.UsersDetailComponent),
+            loadComponent: () => import('@users/users/feature-user-details').then((c) => c.UserDetailsComponent),
           },
         ],
       },
