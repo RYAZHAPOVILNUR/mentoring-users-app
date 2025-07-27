@@ -1,18 +1,21 @@
-// @ts-ignore
-
-import { computed, inject, Signal } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { computed, inject } from '@angular/core';
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { catchError, concatMap, map, of, pipe, switchMap, tap } from 'rxjs';
+import { catchError, map, of, pipe, switchMap, tap } from 'rxjs';
 
 import { LocalStorageJwtService } from '@core/data-access-interceptors';
+import { NotificationService } from '@shared/util-notification';
 import { LoadingStatus } from '@shared/util-store';
-import { usersDTOAdapter, UsersEntity } from '@users/core/data-access-models';
+import {
+  ChangePasswordPayload,
+  ChangeProfileDataPayload,
+  NewUser,
+  SignAuthPayload,
+  usersDTOAdapter,
+  UsersEntity,
+} from '@users/core/data-access-models';
 
-import { AuthService } from './auth.service';
-import { ChangePasswordPayload, NewUser, SignAuthPayload } from './sign.auth.model';
+import { AuthService } from '../services/auth.service';
 
 export interface AuthState {
   authStatus: LoadingStatus;
@@ -48,19 +51,13 @@ export const AuthStore = signalStore(
       store,
       authService = inject(AuthService),
       localStorageJwtService = inject(LocalStorageJwtService),
-      router = inject(Router),
-      snackBar = inject(MatSnackBar),
+      notificationService = inject(NotificationService),
     ) => ({
       login: rxMethod<{ userData: SignAuthPayload }>(
         pipe(
           tap(() => patchState(store, { authStatus: 'loading' })),
           switchMap(({ userData }) =>
             authService.login(userData).pipe(
-              map((res) => {
-                const userEntity = usersDTOAdapter.DTOtoEntity(res.user);
-                const updatedRes = { ...res, user: userEntity };
-                return updatedRes;
-              }),
               tap((res) => {
                 patchState(store, {
                   authStatus: 'loaded',
@@ -68,11 +65,8 @@ export const AuthStore = signalStore(
                   loggedUser: res.user,
                   error: null,
                 });
-                localStorageJwtService.setItem(res.authToken);
-                router.navigateByUrl('/profile');
               }),
               catchError((err: Error) => {
-                console.log(err.message);
                 patchState(store, { error: err.message });
                 return of(err);
               }),
@@ -94,6 +88,7 @@ export const AuthStore = signalStore(
                   }),
                   catchError((err) => {
                     patchState(store, { error: err.message });
+                    notificationService.showSnackbar('Произошла ошибка. Не смогли получить ваши данные');
                     return of(err);
                   }),
                 )
@@ -101,31 +96,24 @@ export const AuthStore = signalStore(
           ),
         ),
       ),
-      logout: rxMethod<void>(
-        pipe(
-          tap(() => {
-            localStorageJwtService.removeItem();
-            router.navigate(['/login']);
-            const notDefaultTheme: Element | null = document.head.querySelector('.style-manager-theme');
-            if (notDefaultTheme) notDefaultTheme.remove();
-          }),
-        ),
-      ),
+      logout() {
+        authService.logout();
+      },
       register: rxMethod<{ userData: NewUser }>(
         pipe(
           switchMap(({ userData }) =>
             authService.register(userData).pipe(
-              tap(({ authToken }) => {
-                localStorageJwtService.setItem(authToken);
-                router.navigate(['/profile']);
-              }),
-              switchMap(() => authService.getUser()),
               tap((user) =>
                 patchState(store, {
                   authStatus: 'loaded' as const,
                   loggedUser: usersDTOAdapter.DTOtoEntity(user),
                 }),
               ),
+              catchError((err) => {
+                patchState(store, { error: err.message });
+                notificationService.showSnackbar('Произошла ошибка. Попробуйте ещё раз');
+                return of(err);
+              }),
             ),
           ),
         ),
@@ -135,16 +123,11 @@ export const AuthStore = signalStore(
           switchMap(({ data }) =>
             authService.changePassword(data).pipe(
               tap(() => {
-                snackBar.open('Пароль успешно изменён', 'Закрыть', {
-                  duration: 3000,
-                  panelClass: 'success-snackbar',
-                });
+                notificationService.showSnackbar('Пароль успешно изменён');
               }),
               catchError((err) => {
-                snackBar.open('Произошла ошибка', 'Закрыть', {
-                  duration: 3000,
-                  panelClass: 'success-snackbar',
-                });
+                patchState(store, { error: err.message });
+                notificationService.showSnackbar('Произошла ошибка. Попробуйте ещё раз');
                 return of(err);
               }),
             ),
@@ -159,26 +142,29 @@ export const AuthStore = signalStore(
               tap((userDTO) => {
                 patchState(store, {
                   loggedUser: usersDTOAdapter.DTOtoEntity(userDTO),
-                })
+                });
               }),
               catchError((err) => {
-                snackBar.open('Произошла ошибка', 'Закрыть', {
-                  duration: 3000,
-                  panelClass: 'success-snackbar',
-                });
+                patchState(store, { error: err.message });
+                notificationService.showSnackbar('Произошла ошибка. Попробуйте ещё раз');
                 return of(err);
-              })
-            )
-          )
-        )
+              }),
+            ),
+          ),
+        ),
+      ),
+      changeProfileData: rxMethod<{ userData: ChangeProfileDataPayload }>(
+        pipe(
+          tap(() => {
+            notificationService.showSnackbar('УУУУППППСССС! Что-то пошло не так :(');
+          }),
+        ),
       ),
     }),
   ),
   withComputed((store) => ({
     isAdmin: computed(() => store.loggedUser().isAdmin),
-    authToken: computed(() => store.authToken()),
     isAuthenticated: computed(() => store.authStatus() === 'loaded'),
-    loggedUser: computed(() => store.loggedUser()),
     loggedUserId: computed(() => store.loggedUser().id),
     status: computed(() => store.authStatus()),
   })),

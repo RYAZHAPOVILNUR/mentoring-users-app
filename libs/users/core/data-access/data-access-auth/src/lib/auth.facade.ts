@@ -1,32 +1,31 @@
 import { inject, Injectable } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
+
+import { ChangePasswordPayload, ChangeProfileDataPayload } from '@users/core/data-access-models';
 
 import { AuthStore } from './+state/auth-signal-store';
-import { authActions } from './+state/auth.actions';
-import * as AuthSelectors from './+state/auth.selectors';
-import { ChangePasswordPayload, ChangeProfileDataPayload } from './+state/sign.auth.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthFacade {
   store = inject(Store);
-  store2 = inject(AuthStore);
-  isAuthenticated$ = toObservable(this.store2.isAuthenticated);
-  user$ = toObservable(this.store2.loggedUser);
-  isAdmin$ = toObservable(this.store2.isAdmin);
-  loggedUserId$ = toObservable(this.store2.loggedUserId);
-  status$ = toObservable(this.store2.status);
+  signalStore = inject(AuthStore);
+  isAuthenticated$ = toObservable(this.signalStore.isAuthenticated);
+  user$ = toObservable(this.signalStore.loggedUser);
+  isAdmin$ = toObservable(this.signalStore.isAdmin);
+  loggedUserId$ = toObservable(this.signalStore.loggedUserId);
+  status$ = toObservable(this.signalStore.status);
 
   public logout() {
-    this.store2.logout();
+    this.signalStore.logout();
   }
 
   public changePassword(data: ChangePasswordPayload) {
-    this.store2.changePassword({ data })
+    this.signalStore.changePassword({ data });
   }
 
-  public changeProfileData(data: ChangeProfileDataPayload) {
-    this.store.dispatch(authActions.changeProfileData({ data }));
+  public changeProfileData(userData: ChangeProfileDataPayload) {
+    this.signalStore.changeProfileData({ userData });
   }
 
   public getLoggedUser() {
