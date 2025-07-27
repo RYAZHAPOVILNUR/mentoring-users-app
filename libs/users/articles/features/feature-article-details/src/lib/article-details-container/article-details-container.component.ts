@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { LetDirective } from '@ngrx/component';
 import { select, Store } from '@ngrx/store';
@@ -8,7 +9,7 @@ import { map, Observable, take, withLatestFrom } from 'rxjs';
 import { selectRouteParams } from '@shared/util-store';
 import { articlesActions, articleSelectors } from '@users/articles/data-access-article';
 import { commentsActions, commentsSelectors } from '@users/articles/data-access-comment';
-import { authSelectors } from '@users/core/data-access-auth';
+import { AuthStore } from '@users/core/data-access-auth';
 import { Article } from '@users/core/data-access-models';
 
 import { ArticleCommentsComponent } from '../article-comments/article-comments.component';
@@ -23,9 +24,10 @@ import { ArticleDetailsComponent } from '../article-details/article-details.comp
 })
 export class ArticleDetailsContainerComponent {
   private readonly store = inject(Store);
+  private readonly authStore = inject(AuthStore);
   public readonly status$ = this.store.select(articleSelectors.selectStatus);
   public readonly commentsStatus$ = this.store.select(commentsSelectors.selectStatus);
-  public readonly loggedUserId$ = this.store.select(authSelectors.selectLoggedUserId);
+  public readonly loggedUserId$ = toObservable(this.authStore.loggedUserId);
   public articleComments$ = this.store.select(commentsSelectors.selectComments);
 
   public articleId$ = this.store.pipe(select(selectRouteParams));

@@ -8,7 +8,7 @@ import { noop, of, tap } from 'rxjs';
 
 import { githubApiActions, GithubApiService, githubSelectors } from '@shared/data-access-github';
 import { selectQueryParam } from '@shared/util-store';
-import { authActions, AuthStore } from '@users/core/data-access-auth';
+import { AuthStore } from '@users/core/data-access-auth';
 import { UsersEntity } from '@users/core/data-access-models';
 import { CropperDialogComponent } from '@users/core/ui';
 
@@ -68,7 +68,7 @@ export class SelfProfileContainerComponent implements OnInit {
         data: { image },
       });
 
-      dialogRef.afterClosed().subscribe((result: any) => {
+      dialogRef.afterClosed().subscribe((result) => {
         if (result) {
           this.authStore.uploadImage({ image: result });
         }

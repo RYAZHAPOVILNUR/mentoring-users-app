@@ -1,9 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { select, Store } from '@ngrx/store';
 import { Observable, of, switchMap } from 'rxjs';
 
-import { authSelectors } from '@users/core/data-access-auth';
+import { AuthStore } from '@users/core/data-access-auth';
 import { UsersEntity } from '@users/core/data-access-models';
 
 import * as UsersActions from './users.actions';
@@ -14,6 +15,7 @@ import { CreateUserDTO } from '../types/create-user-dto.type';
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
   private readonly store = inject(Store);
+  private readonly authStore = inject(AuthStore);
 
   /**
    * Combine pieces of state using createSelector,
@@ -23,7 +25,7 @@ export class UsersFacade {
   public readonly allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
   public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
-  public readonly loggedUser$ = this.store.select(authSelectors.selectLoggedUser);
+  public readonly loggedUser$ = toObservable(this.authStore.loggedUser);
   public readonly errors$: Observable<HttpErrorResponse | null> = this.store.pipe(
     select(UsersSelectors.selectUsersError),
   );

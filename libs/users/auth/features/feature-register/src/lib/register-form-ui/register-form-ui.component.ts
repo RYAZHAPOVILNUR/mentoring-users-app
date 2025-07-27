@@ -12,7 +12,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { ApiService } from '@core/data-access-api';
 import { LanguageKeys, LanguageService } from '@shared/util-language';
-import { NewUser } from '@users/core/data-access-auth';
+import { NewUser } from '@users/core/data-access-models';
 import { InputPasswordComponent } from '@users/core/ui';
 
 @Component({

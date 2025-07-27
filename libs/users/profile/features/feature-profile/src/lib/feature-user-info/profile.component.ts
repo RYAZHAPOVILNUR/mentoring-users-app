@@ -22,8 +22,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
 
 import { LoadingStatus } from '@shared/util-store';
-import { AuthFacade, ChangePasswordPayload, ChangeProfileDataPayload } from '@users/core/data-access-auth';
-import { UsersEntity } from '@users/core/data-access-models';
+import { AuthFacade } from '@users/core/data-access-auth';
+import { ChangePasswordPayload, ChangeProfileDataPayload, UsersEntity } from '@users/core/data-access-models';
 import { PasswordChangeDialogComponent, ProfileChangeDialogComponent } from '@users/core/ui';
 import { UiPhotoModalComponent } from '@users/profile/ui-profile-photo';
 

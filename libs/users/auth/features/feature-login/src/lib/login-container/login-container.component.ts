@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { SignAuthPayload, AuthStore } from '@users/core/data-access-auth';
+import { AuthStore } from '@users/core/data-access-auth';
+import { SignAuthPayload } from '@users/core/data-access-models';
 
 import { LoginFormUiComponent } from '../login-form-ui/login-form-ui.component';
 
