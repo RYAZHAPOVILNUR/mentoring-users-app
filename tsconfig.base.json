@@ -21,6 +21,7 @@
       "@shared/data-access-address": ["libs/shared/data-access/data-access-address/src/index.ts"],
       "@shared/data-access-github": ["libs/shared/data-access/data-access-github/src/index.ts"],
       "@shared/data-access-theme": ["libs/shared/data-access/data-access-theme/src/index.ts"],
+      "@shared/feature-cropper": ["libs/shared/features/feature-cropper/src/index.ts"],
       "@shared/ui-confirm-dialog": ["libs/shared/ui/ui-confirm-dialog/src/index.ts"],
       "@shared/util-language": ["libs/shared/utils/util-language/src/index.ts"],
       "@shared/util-router": ["libs/shared/utils/util-router/src/index.ts"],

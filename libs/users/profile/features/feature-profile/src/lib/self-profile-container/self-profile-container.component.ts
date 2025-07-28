@@ -1,13 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { MatDialog } from '@angular/material/dialog';
 import { LetDirective } from '@ngrx/component';
 import { Store } from '@ngrx/store';
-import { noop, of, tap } from 'rxjs';
+import { filter, noop, of, tap } from 'rxjs';
 
-import { CropperDialogComponent } from '@core/ui-core';
 import { githubApiActions, GithubApiService, githubSelectors } from '@shared/data-access-github';
+import { CropperDialogService } from '@shared/feature-cropper';
 import { selectQueryParam } from '@shared/util-store';
 import { authActions, authSelectors } from '@users/core/data-access-auth';
 import { UserEntity } from '@users/shared/data-access-models';
@@ -23,9 +22,10 @@ import { ProfileComponent } from '../feature-user-info/profile.component';
 })
 export class SelfProfileContainerComponent implements OnInit {
   private readonly store = inject(Store);
-  private readonly dialog = inject(MatDialog);
+  private readonly destroyRef = inject(DestroyRef);
+
+  private readonly cropperDialogService = inject(CropperDialogService);
   private readonly githubApiService = inject(GithubApiService);
-  private destroyRef = inject(DestroyRef);
 
   public readonly user!: UserEntity;
 
@@ -39,12 +39,12 @@ export class SelfProfileContainerComponent implements OnInit {
     this.store
       .select(selectQueryParam('code'))
       .pipe(
-        takeUntilDestroyed(this.destroyRef),
         tap((code) => {
           if (code && typeof code === 'string') {
             this.store.dispatch(githubApiActions.getAccessToken({ code }));
           }
         }),
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe(noop);
 
@@ -57,21 +57,14 @@ export class SelfProfileContainerComponent implements OnInit {
   public onLoadPhoto(file: File): void {
     const reader = new FileReader();
     reader.onload = (e) => {
-      const image = new Image();
-
-      if (typeof e.target?.result === 'string') {
-        image.src = e.target.result;
-      }
-
-      const dialogRef = this.dialog.open(CropperDialogComponent, {
-        data: { image },
-      });
-
-      dialogRef.afterClosed().subscribe((result) => {
-        if (result) {
-          this.store.dispatch(authActions.uploadImage({ image: result }));
-        }
-      });
+      const dialogRef = this.cropperDialogService.open({ imageSrc: e.target!.result as string });
+      dialogRef
+        .afterClosed()
+        .pipe(
+          filter(Boolean),
+          tap((image) => this.store.dispatch(authActions.uploadImage({ image }))),
+        )
+        .subscribe();
     };
     reader.readAsDataURL(file);
   }
