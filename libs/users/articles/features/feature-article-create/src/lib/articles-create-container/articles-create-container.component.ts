@@ -16,7 +16,6 @@ import { ArticlesCreateUiComponent } from '../articles-create-ui/articles-create
   imports: [LetDirective, ArticlesCreateUiComponent],
   templateUrl: './articles-create-container.component.html',
   styleUrls: ['./articles-create-container.component.scss'],
-  providers: [ConfirmDialogService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticlesCreateContainerComponent implements DeactivatableComponent {

@@ -6,7 +6,6 @@ import { LetDirective } from '@ngrx/component';
 import { select, Store } from '@ngrx/store';
 import { filter, map, Observable, tap } from 'rxjs';
 
-import { ConfirmDialogService } from '@shared/ui-confirm-dialog';
 import { selectQueryParam } from '@shared/util-store';
 import { Callback } from '@shared/util-typescript';
 import { UserEntity } from '@users/shared/data-access-models';
@@ -19,7 +18,6 @@ import { UserDetailsCardComponent } from '../user-details-card/user-details-card
   imports: [CommonModule, UserDetailsCardComponent, MatDialogModule, LetDirective],
   templateUrl: './user-details-container.component.html',
   styleUrls: ['./user-details-container.component.scss'],
-  providers: [UserDialogService, ConfirmDialogService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserDetailsComponent {

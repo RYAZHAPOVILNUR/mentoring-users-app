@@ -4,7 +4,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog.component';
 import { ConfirmDialogData } from '../interfaces/confirm-dialog-data.interface';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ConfirmDialogService {
   private readonly dialog = inject(MatDialog);
 
