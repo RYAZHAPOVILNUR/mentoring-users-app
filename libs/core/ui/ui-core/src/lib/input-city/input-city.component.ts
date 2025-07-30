@@ -1,85 +1,84 @@
-import { CommonModule } from '@angular/common';
+import { NgForOf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
-  DestroyRef,
   ElementRef,
+  forwardRef,
   inject,
-  Input,
   OnInit,
-  Self,
+  signal,
+  viewChild,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ControlValueAccessor, NgControl, ReactiveFormsModule } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { PushPipe } from '@ngrx/component';
-import { debounceTime, distinctUntilChanged, filter, fromEvent, map, Observable, switchMap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, fromEvent, map, Observable, of, switchMap } from 'rxjs';
 
 import { AddressApiService } from '@shared/data-access-address';
-import { UserEntity } from '@users/shared/data-access-models';
+import { Callback } from '@shared/util-typescript';
+
+type ControlValue = string | null;
+type InputValue = Extract<ControlValue, string>;
 
 @Component({
   selector: 'users-input-city',
   standalone: true,
-  imports: [MatAutocompleteModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, CommonModule, PushPipe],
+  imports: [NgForOf, ReactiveFormsModule, PushPipe, MatAutocompleteModule, MatFormFieldModule, MatInputModule],
   templateUrl: './input-city.component.html',
   styleUrls: ['./input-city.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => InputCityComponent),
+      multi: true,
+    },
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputCityComponent implements ControlValueAccessor, OnInit {
-  @Input({ required: true }) vm!: UserEntity;
-  private addressApiService = inject(AddressApiService);
-  private destroyRef = inject(DestroyRef);
-  private onChange!: (value: string) => void;
-  private onTouched!: () => void;
-  private inputElement!: HTMLInputElement;
+  private readonly addressApiService = inject(AddressApiService);
 
-  value?: string;
-  public citySuggestions$!: Observable<string[]>;
+  private readonly inputElement = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
 
-  constructor(
-    @Self() private readonly ngControl: NgControl,
-    private readonly changeDetector: ChangeDetectorRef,
-    private elementRef: ElementRef,
-  ) {
-    this.ngControl.valueAccessor = this;
-  }
+  private onChange?: Callback<InputValue>;
+  private onTouched?: Callback;
+
+  readonly value = signal<ControlValue>(null);
+
+  citySuggestions$!: Observable<string[]>;
+
   ngOnInit(): void {
-    this.value = this.vm.city;
-    this.inputElement = this.elementRef.nativeElement.querySelector('#inputElement');
-    this.citySuggestions$ = fromEvent<Event>(this.inputElement, 'input').pipe(
-      map((event: Event) => (event.target as HTMLInputElement).value),
+    this.citySuggestions$ = this.getCitySuggestionsChanges();
+  }
+
+  private getCitySuggestionsChanges(): Observable<string[]> {
+    return fromEvent<InputEvent>(this.inputElement().nativeElement, 'input').pipe(
+      map((event) => (event.target as HTMLInputElement)?.value),
       debounceTime(300),
       distinctUntilChanged(),
-      filter(Boolean),
-      switchMap((value) => this.addressApiService.getCities(value)),
-      takeUntilDestroyed(this.destroyRef),
+      switchMap((value) => (value ? this.addressApiService.getCities(value) : of([]))),
     );
   }
 
-  public onInputValueChange(event: Event): void {
-    const targetInputElement = event.target as HTMLInputElement;
-    const city = targetInputElement.value;
-    this.onChange(city);
+  onInputValueChange(city: InputValue): void {
+    this.onChange?.(city);
   }
 
-  registerOnChange(fn: (value: string) => void): void {
+  onSuggestionClick(city: InputValue): void {
+    this.onChange?.(city);
+  }
+
+  registerOnChange(fn: typeof this.onChange): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: () => void): void {
+  registerOnTouched(fn: typeof this.onTouched): void {
     this.onTouched = fn;
   }
 
-  onClickSuggestion(suggestion: string) {
-    this.onChange(suggestion);
-  }
-
-  writeValue(value: string): void {
-    this.value = value;
-    this.changeDetector.detectChanges();
+  writeValue(value: ControlValue): void {
+    this.value.set(value);
   }
 }

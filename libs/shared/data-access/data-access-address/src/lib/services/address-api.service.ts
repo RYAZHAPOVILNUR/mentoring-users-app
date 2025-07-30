@@ -33,14 +33,6 @@ export class AddressApiService {
         }),
         this.options,
       )
-      .pipe(
-        map((response) => {
-          const arr: string[] = [];
-          response.suggestions.forEach((item) => {
-            arr.push(item.value);
-          });
-          return arr;
-        }),
-      );
+      .pipe(map(({ suggestions }) => suggestions.map(({ value }) => value)));
   }
 }
