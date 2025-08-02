@@ -6,6 +6,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, filter, of, pipe, switchMap, tap } from 'rxjs';
 
 import { LocalStorageJwtService } from '@core/data-access-interceptors';
+import { SnackbarService } from '@shared/util-notification';
 import { LoadingStatus } from '@shared/util-store';
 import { UserEntity } from '@users/shared/data-access-models';
 
@@ -35,9 +36,13 @@ export const AuthStore = signalStore(
     loggedUserId: computed(() => store.loggedUser()?.id),
     userPhoto: computed(() => store.loggedUser()?.photo?.url),
   })),
-  withMethods((store) => ({
+  withMethods((store, snackBarService = inject(SnackbarService)) => ({
+    snackBar(message: string) {
+      snackBarService.show(message);
+    },
     handleError(err: HttpErrorResponse) {
       patchState(store, { error: err.error.message });
+      snackBarService.show(err.error.message);
       return of(EMPTY);
     },
   })),
@@ -55,7 +60,6 @@ export const AuthStore = signalStore(
             authService.login(userData).pipe(
               tap((res) => {
                 patchState(store, { status: 'loaded', token: res.authToken, loggedUser: res.user });
-                console.log(res.user.isAdmin);
                 localStorageJwtService.setItem(res.authToken);
                 router.navigate(['/profile']);
               }),
@@ -71,7 +75,6 @@ export const AuthStore = signalStore(
             authService.getUser().pipe(
               tap((user: UserEntity) => {
                 patchState(store, { loggedUser: user, status: 'loaded' });
-                console.log(user);
               }),
               catchError(store.handleError),
             ),
@@ -85,6 +88,7 @@ export const AuthStore = signalStore(
               tap((res) => {
                 localStorageJwtService.setItem(res.authToken);
                 router.navigateByUrl('/login');
+                store.snackBar('Register successful!');
               }),
               catchError(store.handleError),
             ),
@@ -108,7 +112,7 @@ export const AuthStore = signalStore(
           switchMap(({ data }) =>
             authService.changePassword(data).pipe(
               tap(() => {
-                alert('Password changed successfully.');
+                store.snackBar('Change password successful');
               }),
               catchError(store.handleError),
             ),
@@ -131,7 +135,7 @@ export const AuthStore = signalStore(
       changeProfileData: rxMethod<{ data: ChangeProfileDataPayload }>(
         pipe(
           tap(() => {
-            alert('While we can not change data!');
+            store.snackBar("While we can't change profile data.");
           }),
         ),
       ),
