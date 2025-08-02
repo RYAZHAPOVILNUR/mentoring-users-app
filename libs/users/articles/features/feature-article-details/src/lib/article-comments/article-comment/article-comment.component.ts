@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { DatePipe, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,7 +14,6 @@ import { Comment } from '@users/shared/data-access-models';
 @Component({
   standalone: true,
   imports: [
-    CommonModule,
     MatFormFieldModule,
     ReactiveFormsModule,
     MatCardModule,
@@ -23,6 +22,8 @@ import { Comment } from '@users/shared/data-access-models';
     MatIconModule,
     MatProgressSpinnerModule,
     RouterLink,
+    DatePipe,
+    NgIf,
   ],
   selector: 'users-article-comment',
   templateUrl: './article-comment.component.html',
@@ -48,7 +49,7 @@ export class ArticleCommentComponent {
   }
 
   public get avatarSrc(): string {
-    return this.comment.author.photo ? this.comment.author.photo.url : 'assets/img/1.png';
+    return this.comment.author?.photo ? this.comment.author.photo.url : 'assets/img/1.png';
   }
 
   public get isLikesExists(): boolean {

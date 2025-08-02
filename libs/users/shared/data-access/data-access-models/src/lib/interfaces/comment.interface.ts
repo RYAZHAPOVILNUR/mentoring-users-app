@@ -9,7 +9,7 @@ export interface Comment {
     photo?: {
       url: string;
     };
-  };
+  } | null;
   text: string;
   created_at: Date;
 }

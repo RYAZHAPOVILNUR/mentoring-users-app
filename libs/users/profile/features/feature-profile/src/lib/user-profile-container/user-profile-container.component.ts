@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { LetDirective } from '@ngrx/component';
-import { filter, of, tap } from 'rxjs';
+import { filter, tap } from 'rxjs';
 
-import { AuthFacade } from '@users/core/data-access-auth';
+import { AuthStore } from '@users/core/data-access-auth';
 import { UsersFacade } from '@users/users/data-access-user';
 
 import { ProfileComponent } from '../feature-user-info/profile.component';
@@ -17,11 +17,11 @@ import { ProfileComponent } from '../feature-user-info/profile.component';
 })
 export class UserProfileContainerComponent {
   private readonly usersFacade = inject(UsersFacade);
-  private readonly authFacade = inject(AuthFacade);
+  private readonly authStore = inject(AuthStore);
 
-  public readonly isLoggedUser = of(false);
+  public readonly status = this.authStore.status;
+  public readonly isLoggedUser = this.authStore.isAuthenticated;
 
-  public readonly status$ = this.authFacade.status$;
   public readonly user$ = this.usersFacade.openedUser$.pipe(
     tap(() => this.usersFacade.loadUser()),
     filter(Boolean),

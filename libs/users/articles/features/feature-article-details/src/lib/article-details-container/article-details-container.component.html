@@ -3,8 +3,7 @@
     viewedArticle: openedArticle$,
     comments: articleComments$,
     status: status$,
-    commentsStatus: commentsStatus$,
-    loggedUserId: loggedUserId$
+    commentsStatus: commentsStatus$
   } as vm"
 >
   <ng-container [ngSwitch]="vm.status">
@@ -14,7 +13,7 @@
 
     <ng-container *ngSwitchCase="'loaded'">
       <ng-container>
-        <users-article-details [article]="vm.viewedArticle" [loggedUserId]="vm.loggedUserId" />
+        <users-article-details [article]="vm.viewedArticle" [loggedUserId]="loggedUserId()!" />
         <users-article-details-comments
           [comments]="vm.comments"
           [status]="vm.commentsStatus"

@@ -3,8 +3,7 @@
     users: users$,
     status: status$,
     errors: errors$,
-    loggedUser: loggedUser$
   } as vm"
 >
-  <users-user-list [vm]="vm" (deleteUser)="onDeleteUser($event)" (redirectToEdit)="onRedirectToEdit($event)" />
+  <users-user-list [vm]="{users: vm.users, status: vm.status, errors: vm.errors, loggedUser: loggedUser$()}" (deleteUser)="onDeleteUser($event)" (redirectToEdit)="onRedirectToEdit($event)" />
 </ng-container>

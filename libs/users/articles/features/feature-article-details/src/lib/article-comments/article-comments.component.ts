@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgForOf, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,11 +7,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { LoadingStatus } from '@shared/util-store';
-import { AuthFacade } from '@users/core/data-access-auth';
+import { AuthStore } from '@users/core/data-access-auth';
 import { Comment } from '@users/shared/data-access-models';
 
 import { ArticleCommentComponent } from './article-comment/article-comment.component';
@@ -20,7 +19,6 @@ import { ArticleCommentComponent } from './article-comment/article-comment.compo
   selector: 'users-article-details-comments',
   standalone: true,
   imports: [
-    CommonModule,
     MatFormFieldModule,
     ReactiveFormsModule,
     MatCardModule,
@@ -28,9 +26,10 @@ import { ArticleCommentComponent } from './article-comment/article-comment.compo
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    PushPipe,
     ArticleCommentComponent,
     TranslateModule,
+    NgIf,
+    NgForOf,
   ],
   templateUrl: './article-comments.component.html',
   styleUrls: ['./article-comments.component.scss'],
@@ -39,8 +38,8 @@ import { ArticleCommentComponent } from './article-comment/article-comment.compo
 export class ArticleCommentsComponent {
   @Input() comments!: Comment[];
   @Input() status!: LoadingStatus;
-  private authFacade = inject(AuthFacade);
-  public readonly userId$ = this.authFacade.loggedUserId$;
+  private readonly authStore = inject(AuthStore);
+  public readonly userId = this.authStore.loggedUserId;
   public formGroup = new FormGroup({
     commentText: new FormControl('', [Validators.maxLength(100)]),
   });

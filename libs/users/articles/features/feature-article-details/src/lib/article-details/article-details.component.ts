@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { DatePipe, NgIf } from '@angular/common';
 import { Component, inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -14,7 +14,7 @@ import { UsersFacade } from '@users/users/data-access-user';
 @Component({
   selector: 'users-article-details',
   standalone: true,
-  imports: [CommonModule, QuillModule, MatCardModule, RouterModule, MatButtonModule, MatIconModule, PushPipe],
+  imports: [QuillModule, MatCardModule, RouterModule, MatButtonModule, MatIconModule, PushPipe, NgIf, DatePipe],
   templateUrl: './article-details.component.html',
   styleUrls: ['./article-details.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
