@@ -7,7 +7,7 @@ import { map, Observable, withLatestFrom } from 'rxjs';
 
 import { selectQueryParam } from '@shared/util-store';
 import { articlesActions, articleSelectors } from '@users/articles/data-access-article';
-import { authSelectors } from '@users/core/data-access-auth';
+import { AuthStore } from '@users/core/data-access-auth';
 import { Article } from '@users/shared/data-access-models';
 
 import { ArticleListComponent } from '../article-list/article-list.component';
@@ -21,10 +21,11 @@ import { ArticleListComponent } from '../article-list/article-list.component';
 })
 export class ArticleListContainerComponent {
   private readonly store = inject(Store);
+  private readonly authStore = inject(AuthStore);
 
   public readonly articles$ = this.store.select(articleSelectors.selectArticles);
   public readonly status$ = this.store.select(articleSelectors.selectStatus);
-  public readonly loggedUserId$ = this.store.select(authSelectors.selectLoggedUserId);
+  public readonly loggedUserId = this.authStore.loggedUserId;
   public articleId$ = this.store.pipe(select(selectQueryParam('id')));
 
   public viewedArticle$: Observable<Article | null> = this.store.select(articleSelectors.selectArticleForEdit).pipe(

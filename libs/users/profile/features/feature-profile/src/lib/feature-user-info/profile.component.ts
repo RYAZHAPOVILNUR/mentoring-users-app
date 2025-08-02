@@ -23,7 +23,7 @@ import { of } from 'rxjs';
 
 import { PasswordChangeDialogComponent, ProfileChangeDialogComponent } from '@core/ui-core';
 import { LoadingStatus } from '@shared/util-store';
-import { AuthFacade, ChangePasswordPayload, ChangeProfileDataPayload } from '@users/core/data-access-auth';
+import { AuthStore, ChangePasswordPayload, ChangeProfileDataPayload } from '@users/core/data-access-auth';
 import { UiPhotoModalComponent } from '@users/profile/ui-profile-photo';
 import { UserEntity } from '@users/shared/data-access-models';
 
@@ -55,7 +55,7 @@ export class ProfileComponent implements OnInit {
   @Input({ required: true }) vm!: ProfileFormVm;
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
-  private readonly authFacade = inject(AuthFacade);
+  private readonly authStore = inject(AuthStore);
   private matIconRegistry = inject(MatIconRegistry);
   private domSanitizer = inject(DomSanitizer);
 
@@ -83,11 +83,11 @@ export class ProfileComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((result) => {
         if (result) {
-          const changePasswordPayload: ChangePasswordPayload = {
+          const data: ChangePasswordPayload = {
             newPassword: result.value.newPassword,
             oldPassword: result.value.oldPassword,
           };
-          this.authFacade.changePassword(changePasswordPayload);
+          this.authStore.changePassword({ data });
         }
       });
   }
@@ -102,10 +102,10 @@ export class ProfileComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((result) => {
         if (result) {
-          const changeProfileDataPayload: ChangeProfileDataPayload = {
+          const data: ChangeProfileDataPayload = {
             ...result.value,
           };
-          this.authFacade.changeProfileData(changeProfileDataPayload);
+          this.authStore.changeProfileData({ data });
         }
       });
   }

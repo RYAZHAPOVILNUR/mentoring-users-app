@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,10 +8,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
 
 import { LanguageKeys, LanguageService } from '@shared/util-language';
-import { AuthFacade } from '@users/core/data-access-auth';
+import { AuthStore } from '@users/core/data-access-auth';
 
 import { ThemePickerComponent } from './theme-picker/theme-picker.component';
 
@@ -19,7 +18,6 @@ import { ThemePickerComponent } from './theme-picker/theme-picker.component';
   selector: 'users-header',
   standalone: true,
   imports: [
-    CommonModule,
     TranslateModule,
     MatButtonModule,
     MatToolbarModule,
@@ -29,21 +27,22 @@ import { ThemePickerComponent } from './theme-picker/theme-picker.component';
     PushPipe,
     ThemePickerComponent,
     MatListItemIcon,
+    NgIf,
   ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  private readonly facade = inject(AuthFacade);
+  private readonly authStore = inject(AuthStore);
   private readonly languageSwitchService = inject(LanguageService);
-  public readonly isAuthenticated$: Observable<boolean> = this.facade.isAuthenticated$;
-  public readonly isAdmin$: Observable<boolean | null> = this.facade.isAdmin$;
+  public readonly isAuthenticated = this.authStore.isAuthenticated;
+  public readonly isAdmin = this.authStore.isAdmin;
   public readonly selectedLanguage$ = this.languageSwitchService.selectedLanguage$;
 
   @Output() sidenavToggle = new EventEmitter();
 
   public onLogout() {
-    this.facade.logout();
+    this.authStore.logout();
   }
 
   public onSwitchLanguage(language: LanguageKeys) {
