@@ -18,7 +18,6 @@ import { THEMES, THEMES_TOKEN, initializeTheme } from '@shared/data-access-theme
 import { articlesEffects, articlesFeature } from '@users/articles/data-access-article';
 import { commentsEffects, commentsFeature } from '@users/articles/data-access-comment';
 import { backlogEffects, backlogFeature } from '@users/backlog/data-access-backlog';
-import { authFeature, authEffects } from '@users/core/data-access-auth';
 import { SettingsEffects, settingsFeature } from '@users/settings/data-access-settings';
 import { TasksEffects, tasksFeature } from '@users/tasks/data-access-task';
 import { userEffects, USERS_FEATURE_KEY, usersReducer } from '@users/users/data-access-user';
@@ -34,7 +33,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideEffects(
       userEffects,
-      authEffects,
       articlesEffects,
       TasksEffects,
       commentsEffects,
@@ -46,7 +44,6 @@ export const appConfig: ApplicationConfig = {
       router: routerReducer,
       [USERS_FEATURE_KEY]: usersReducer,
       [settingsFeature.name]: settingsFeature.reducer,
-      [authFeature.name]: authFeature.reducer,
       [articlesFeature.name]: articlesFeature.reducer,
       [commentsFeature.name]: commentsFeature.reducer,
       [tasksFeature.name]: tasksFeature.reducer,
