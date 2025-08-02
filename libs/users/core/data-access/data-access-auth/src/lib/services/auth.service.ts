@@ -16,7 +16,6 @@ export class AuthService {
     return this.authApiService.login(userData).pipe(
       map((res) => {
         const userEntity = userAdapter.DTOtoEntity(res.user);
-        console.log(userEntity);
         return { ...res, user: userEntity };
       }),
     );
