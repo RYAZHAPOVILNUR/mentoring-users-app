@@ -17,6 +17,8 @@ export const deleteUser = createAction('[Users Page] Delete User', props<{ id: n
 export const deleteUserSuccess = createAction('[Users/Api] Delete User Success', props<{ id: number }>());
 export const deleteUserFailed = createAction('[Users/Api] Delete User Failed', props<{ error: HttpErrorResponse }>());
 
+export const setUsersFilter = createAction('[Users Page] Filter User', props<{ filter: { name: string } }>());
+
 export const addUser = createAction('[Users Page] Add User', props<{ userData: CreateUserDTO }>());
 export const addUserSuccess = createAction('[Users/Api] Add User Success', props<{ userData: UserEntity }>());
 export const addUserFailed = createAction('[Users/Api] Add User Failed', props<{ error: HttpErrorResponse }>());
