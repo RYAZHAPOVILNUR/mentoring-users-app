@@ -1,4 +1,4 @@
 <mat-form-field>
   <mat-label>Поиск по имени</mat-label>
-  <input matInput type="text" [formControl]="name">
+  <input matInput #inputElement (input)="onUserFilterChange(inputElement.value)" />
 </mat-form-field>

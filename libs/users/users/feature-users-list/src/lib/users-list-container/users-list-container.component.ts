@@ -22,7 +22,7 @@ import { UsersFilterComponent } from '../users-filter/users-filter.component';
     MatDialogModule,
     LetDirective,
     CreateUsersButtonComponent,
-    UsersFilterComponent
+    UsersFilterComponent,
   ],
   templateUrl: './users-list-container.component.html',
   styleUrls: ['./users-list-container.component.scss'],
@@ -48,8 +48,4 @@ export class UsersListContainerComponent {
       queryParams: { edit: editMode },
     });
   }
-
-  // onFilterChange(name: string){
-  //   this.usersFacade.setUsersFilter({ name });
-  // }
 }
