@@ -70,12 +70,6 @@
             </mat-form-field>
 
             <users-address-field [type]="addressTypes.CITY" formControlName="city"/>
-            <users-address-field [type]="addressTypes.AREA" formControlName="city"/>
-            <users-address-field [type]="addressTypes.COUNTRY" formControlName="city"/>
-            <users-address-field [type]="addressTypes.SETTLEMENT" formControlName="city"/>
-            <users-address-field [type]="addressTypes.STREET" formControlName="city"/>
-            <users-address-field [type]="addressTypes.HOUSE" formControlName="city"/>
-            <users-address-field [type]="addressTypes.FLAT" formControlName="city"/>
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
