@@ -12,7 +12,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { ApiService } from '@core/data-access-api';
 import { InputPasswordComponent } from '@core/ui-core';
-import { LanguageKeys, LanguageService } from '@shared/util-language';
+import { LanguageService, LanguageValues } from '@shared/util-language';
 
 @Component({
   selector: 'users-login-form-ui',
@@ -60,7 +60,7 @@ export class LoginFormUiComponent {
     }
   }
 
-  public onSwitchLanguage(language: LanguageKeys) {
+  public onSwitchLanguage(language: LanguageValues) {
     this.languageSwitchService.setLanguage(language);
   }
 }

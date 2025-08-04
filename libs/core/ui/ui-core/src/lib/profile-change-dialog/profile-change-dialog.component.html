@@ -12,8 +12,8 @@
       <mat-form-field appearance="outline">
         <input matInput type="text" formControlName="email" />
       </mat-form-field>
-      <mat-label>{{ 'PROFILE.PROFILE_CHANGE.CITY' | translate }}</mat-label>
-      <users-input-city formControlName="city"/>
+
+      <users-address-field appearance="outline" formControlName="city" [type]="addressTypes.CITY"/>
     </div>
     <div mat-dialog-actions>
       <button mat-button [mat-dialog-close]="formGroup" cdkFocusInitial>

@@ -1,8 +1,8 @@
 <!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 <ng-container [ngSwitch]="selectedLanguage$ | ngrxPush">
-  <button mat-icon-button *ngSwitchCase="'ru'" (click)="onSwitchLanguage('en')" class="lang-switch-btn">En</button>
-  <button mat-icon-button *ngSwitchCase="'en'" (click)="onSwitchLanguage('ru')" class="lang-switch-btn">Ru</button>
+  <button mat-icon-button *ngSwitchCase="'ru'" (click)="onSwitchLanguage('en')" class="lang-switch-btn">Ru</button>
+  <button mat-icon-button *ngSwitchCase="'en'" (click)="onSwitchLanguage('ru')" class="lang-switch-btn">En</button>
 </ng-container>
 
 <div class="form-element">

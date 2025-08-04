@@ -12,13 +12,14 @@ import { provideQuillConfig } from 'ngx-quill/config';
 
 import { API_URL } from '@core/data-access-api';
 import { tokenInterceptor } from '@core/data-access-interceptors';
-import { ADDRESS_API_KEY } from '@shared/data-access-address';
-import { GITHUB_CLIENT_ID, githubEffects, githubApiFeature } from '@shared/data-access-github';
-import { THEMES, THEMES_TOKEN, initializeTheme } from '@shared/data-access-theme';
+import { ADDRESS_API_KEY, ADDRESS_API_URL } from '@shared/data-access-address';
+import { GITHUB_CLIENT_ID, githubApiFeature, githubEffects } from '@shared/data-access-github';
+import { initializeTheme, THEMES, THEMES_TOKEN } from '@shared/data-access-theme';
+import { initializeLanguage } from '@shared/util-language';
 import { articlesEffects, articlesFeature } from '@users/articles/data-access-article';
 import { commentsEffects, commentsFeature } from '@users/articles/data-access-comment';
 import { backlogEffects, backlogFeature } from '@users/backlog/data-access-backlog';
-import { authFeature, authEffects } from '@users/core/data-access-auth';
+import { authEffects, authFeature } from '@users/core/data-access-auth';
 import { SettingsEffects, settingsFeature } from '@users/settings/data-access-settings';
 import { TasksEffects, tasksFeature } from '@users/tasks/data-access-task';
 import { userEffects, USERS_FEATURE_KEY, usersReducer } from '@users/users/data-access-user';
@@ -30,8 +31,14 @@ function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
+function initApp(): void {
+  initializeTheme();
+  initializeLanguage();
+}
+
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAppInitializer(initApp),
     provideEffects(
       userEffects,
       authEffects,
@@ -72,6 +79,10 @@ export const appConfig: ApplicationConfig = {
       useValue: environment.address_api_key,
     },
     {
+      provide: ADDRESS_API_URL,
+      useValue: environment.address_api_url,
+    },
+    {
       provide: GITHUB_CLIENT_ID,
       useValue: environment.github_client_id,
     },
@@ -85,7 +96,6 @@ export const appConfig: ApplicationConfig = {
         syntax: true,
       },
     }),
-    provideAppInitializer(() => initializeTheme()),
     importProvidersFrom(
       TranslateModule.forRoot({
         loader: {
