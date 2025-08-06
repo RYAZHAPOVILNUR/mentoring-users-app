@@ -5,11 +5,11 @@ import { catchError, filter, map, of, switchMap, tap, withLatestFrom } from 'rxj
 
 import { ApiService } from '@core/data-access-api';
 import { selectRouteParams } from '@shared/util-store';
-import { UserDTO, userAdapter, UserEntity } from '@users/shared/data-access-models';
+import { userAdapter, UserDTO, UserEntity } from '@users/shared/data-access-models';
 
+import { CreateUserDTO } from '../types/create-user-dto.type';
 import * as UsersActions from './users.actions';
 import { selectUsersEntities } from './users.selectors';
-import { CreateUserDTO } from '../types/create-user-dto.type';
 
 export const userEffects = createEffect(
   () => {
@@ -111,6 +111,45 @@ export const editUser = createEffect(
           }),
         ),
       ),
+    );
+  },
+  { functional: true },
+);
+
+export const addUserStoryPoints = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const userEntities$ = inject(Store).pipe(select(selectUsersEntities));
+
+    return actions$.pipe(
+      ofType(UsersActions.addUserStoryPoints),
+      withLatestFrom(userEntities$),
+      filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
+      map(([{ userData, id, onSuccessAddSP }, usersEntities]) => {
+        return {
+          user: {
+            ...userAdapter.entityToDTO(<UserEntity>usersEntities[id]),
+            purchaseDate: usersEntities[id]?.purchaseDate || '12.10.2023',
+            educationStatus: usersEntities[id]?.educationStatus || 'trainee',
+            totalStoryPoints: userData.totalStoryPoints,
+          },
+          onSuccessAddSP,
+        };
+      }),
+      switchMap(({ user, onSuccessAddSP }) => {
+        return apiService.post<UserDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+          map((userData) => ({ userData, onSuccessAddSP })),
+          tap(({ onSuccessAddSP }) => onSuccessAddSP()),
+          map(({ userData }) => {
+            return UsersActions.addUserStoryPointsSuccess({ userData });
+          }),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(UsersActions.addUserStoryPointsFailed({ error }));
+          }),
+        );
+      }),
     );
   },
   { functional: true },

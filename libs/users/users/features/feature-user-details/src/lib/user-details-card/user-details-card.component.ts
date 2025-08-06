@@ -31,6 +31,7 @@ import { LoadingStatus } from '@shared/util-store';
 import { Callback } from '@shared/util-typescript';
 import { UserEntity } from '@users/shared/data-access-models';
 import { CreateUserDTO } from '@users/users/data-access-user';
+import { onSuccessSPonCbType } from 'libs/users/users/data-access/data-access-user/src/lib/+state/users.actions';
 
 type DetailUsersCardVm = {
   editMode: boolean;
@@ -84,7 +85,11 @@ export class UserDetailsCardComponent implements OnInit {
     city: new FormControl({ value: '', disabled: !this.vm.editMode }),
   });
 
-  @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<unknown>;
+  public totalStoryPoints = new FormControl({ value: 0, disabled: true });
+
+  @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<any>;
+  @ViewChild('snackbarStoryPoints') snackbarTemplateRefSP!: TemplateRef<any>;
+
   public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
     debounceTime(300),
     distinctUntilChanged(),
@@ -102,9 +107,12 @@ export class UserDetailsCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
+  @Output() addStoryPoints = new EventEmitter<{ user: CreateUserDTO; onSuccessAddSP: onSuccessSPonCbType }>();
+
   ngOnInit(): void {
     this.checkChangeFields();
   }
+
   @Input({ required: true })
   set vm(vm: DetailUsersCardVm) {
     this._vm = vm;
@@ -116,6 +124,7 @@ export class UserDetailsCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
+      this.totalStoryPoints.setValue(this._vm.user!.totalStoryPoints ?? 0);
     }
 
     if (vm.editMode) {
@@ -127,6 +136,7 @@ export class UserDetailsCardComponent implements OnInit {
   public get vm() {
     return this._vm;
   }
+
   onSubmit(): void {
     this.editUser.emit({
       user: {
@@ -138,6 +148,26 @@ export class UserDetailsCardComponent implements OnInit {
         educationStatus: 'trainee',
       },
       onSuccessCb: this.onEditSuccess,
+    });
+  }
+
+  private onAddSPSuccess: onSuccessSPonCbType = () =>
+    this.snackBar.openFromTemplate(this.snackbarTemplateRefSP, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+
+  onAddStoryPoints() {
+    this.totalStoryPoints.disable();
+    this.addStoryPoints.emit({
+      //@ts-ignore
+      user: {
+        name: this.formGroup.value.name || '',
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        totalStoryPoints: this.totalStoryPoints.value || 0,
+      },
+      onSuccessAddSP: this.onAddSPSuccess,
     });
   }
   onCloseUser() {
