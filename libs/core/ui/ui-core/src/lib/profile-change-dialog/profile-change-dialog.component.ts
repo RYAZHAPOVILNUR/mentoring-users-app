@@ -8,15 +8,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { AddressType } from '@shared/data-access-address';
+import { AddressFieldComponent } from '@shared/feature-address-field';
 import { UserEntity } from '@users/shared/data-access-models';
-
-import { InputCityComponent } from '../input-city/input-city.component';
 
 @Component({
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    InputCityComponent,
+    AddressFieldComponent,
     MatFormFieldModule,
     MatTooltipModule,
     MatDialogModule,
@@ -31,6 +31,8 @@ import { InputCityComponent } from '../input-city/input-city.component';
 })
 export class ProfileChangeDialogComponent {
   public userEntityData: UserEntity = inject(MAT_DIALOG_DATA);
+
+  readonly addressTypes = AddressType;
 
   public formGroup = new FormBuilder().group({
     name: new FormControl(this.userEntityData.name, [Validators.required]),

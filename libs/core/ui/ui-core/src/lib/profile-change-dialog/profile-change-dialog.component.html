@@ -6,14 +6,14 @@
     <div mat-dialog-content>
       <mat-label>{{ 'PROFILE.PROFILE_CHANGE.NAME' | translate }}</mat-label>
       <mat-form-field appearance="outline">
-        <input matInput type="text" [formControlName]="'name'" />
+        <input matInput type="text" formControlName="name" />
       </mat-form-field>
       <mat-label>{{ 'PROFILE.PROFILE_CHANGE.EMAIL' | translate }}</mat-label>
       <mat-form-field appearance="outline">
-        <input matInput type="text" [formControlName]="'email'" />
+        <input matInput type="text" formControlName="email" />
       </mat-form-field>
-      <mat-label>{{ 'PROFILE.PROFILE_CHANGE.CITY' | translate }}</mat-label>
-      <users-input-city [vm]="userEntityData" [formControlName]="'city'"></users-input-city>
+
+      <users-address-field appearance="outline" formControlName="city" [type]="addressTypes.CITY"/>
     </div>
     <div mat-dialog-actions>
       <button mat-button [mat-dialog-close]="formGroup" cdkFocusInitial>
