@@ -4,7 +4,8 @@ import { filter, tap } from 'rxjs';
 
 import { DeepReadonly } from '@shared/util-typescript';
 import { userAdapter, UserEntity, UserVM } from '@users/shared/data-access-models';
-import { UserDialogService, UsersFacade } from '@users/users/data-access-user';
+import { UsersFacade } from '@users/users/data-access-user';
+import { UserDialogService } from '@users/users/feature-user-dialog';
 
 type UserListState = DeepReadonly<{
   users: UserVM[];

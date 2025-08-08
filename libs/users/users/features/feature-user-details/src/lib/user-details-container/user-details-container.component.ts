@@ -9,7 +9,8 @@ import { filter, map, Observable, tap } from 'rxjs';
 import { selectQueryParam } from '@shared/util-store';
 import { Callback } from '@shared/util-typescript';
 import { UserEntity } from '@users/shared/data-access-models';
-import { CreateUserDTO, UserDialogService, UsersFacade } from '@users/users/data-access-user';
+import { CreateUserDTO, UsersFacade } from '@users/users/data-access-user';
+import { UserDialogService } from '@users/users/feature-user-dialog';
 
 import { UserDetailsCardComponent } from '../user-details-card/user-details-card.component';
 
