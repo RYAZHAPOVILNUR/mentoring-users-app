@@ -1,0 +1,10 @@
+<button mat-raised-button [matMenuTriggerFor]="menu" class="mat-primary add-material-button">
+  <mat-icon class="add-icon">add</mat-icon>
+  <mat-menu #menu="matMenu" class="menu">
+    <ng-template matMenuContent>
+      <button mat-menu-item (click)="chooseMaterialType('video')">Видео</button>
+      <button mat-menu-item (click)="chooseMaterialType('pdf')">Файл PDF</button>
+      <button mat-menu-item (click)="chooseMaterialType('audio')">Подкаст</button>
+    </ng-template>
+  </mat-menu>
+</button>

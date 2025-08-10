@@ -1,0 +1,19 @@
+:host {
+  min-width: 400px;
+  display: grid;
+  grid-template-columns: auto;
+  padding: 20px 16px;
+}
+
+.dialog-form__field {
+  width: 100%;
+}
+
+.action-button {
+  width: 50%;
+}
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: space-between;
+}

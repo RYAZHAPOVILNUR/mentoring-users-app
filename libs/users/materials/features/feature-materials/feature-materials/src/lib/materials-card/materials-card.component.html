@@ -1,0 +1,26 @@
+<button
+  class="material-card"
+  (dblclick)="openMaterial(material)"
+  (mouseenter)="isHovered = true"
+  (mouseleave)="isHovered = false"
+>
+  <span class="buttons-actions">
+    <button class="btn-open-material">
+      <ng-container *ngIf="material.material_link.endsWith('.pdf')">
+        <mat-icon>picture_as_pdf</mat-icon>
+      </ng-container>
+      <ng-container *ngIf="material.material_link.endsWith('.mp3')">
+        <mat-icon> audiotrack </mat-icon>
+      </ng-container>
+      <ng-container *ngIf="material.material_link.includes('www.youtube.com')">
+        <mat-icon>live_tv</mat-icon>
+      </ng-container>
+    </button>
+    <button class="btn-delete-material" [ngClass]="{ visible: isHovered }" (click)="onDeleteMaterial(material)">
+      <mat-icon class="trash-icon">delete</mat-icon>
+    </button>
+  </span>
+
+  <span class="title"> {{ material.title }}</span>
+  <span>{{ material.created_at | date }}</span>
+</button>

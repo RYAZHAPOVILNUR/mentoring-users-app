@@ -1,0 +1,19 @@
+<form class="dialog-form" (ngSubmit)="onSubmit()">
+  <h1>Новая папка</h1>
+  <mat-form-field appearance="fill" class="dialog-form__field">
+    <input
+      name="folderName"
+      [(ngModel)]="folderName"
+      #folderNameInput="ngModel"
+      required
+      matInput
+      placeholder="Название папки*"
+    />
+    <mat-icon matSuffix>folder</mat-icon>
+    <mat-error *ngIf="folderNameInput.invalid && folderNameInput.touched">Введите название</mat-error>
+  </mat-form-field>
+  <div class="action-buttons">
+    <button type="button" class="action-button" mat-raised-button (click)="cancelDialog()">Отмена</button>
+    <button type="submit" class="action-button" mat-raised-button color="primary">Сохранить</button>
+  </div>
+</form>

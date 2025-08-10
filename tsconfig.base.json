@@ -38,6 +38,19 @@
       "@users/chart/feature-chart": ["libs/users/chart/features/feature-chart/src/index.ts"],
       "@users/core/data-access-auth": ["libs/users/core/data-access/data-access-auth/src/index.ts"],
       "@users/core/ui-layout": ["libs/users/core/ui/ui-layout/src/index.ts"],
+      "@users/data-access-folders": ["libs/users/materials/data-access/data-access-folders/src/index.ts"],
+      "@users/data-access-materials": ["libs/users/materials/data-access/data-access-materials/src/index.ts"],
+      "@users/feature-folders-create": [
+        "libs/users/materials/features/feature-folders/feature-folders-create/src/index.ts"
+      ],
+      "@users/feature-folders": ["libs/users/materials/features/feature-folders/feature-folders/src/index.ts"],
+      "@users/feature-materials-content": [
+        "libs/users/materials/features/feature-materials/feature-materials-content/src/index.ts"
+      ],
+      "@users/feature-materials-create": [
+        "libs/users/materials/features/feature-materials/feature-materials-create/src/index.ts"
+      ],
+      "@users/feature-materials": ["libs/users/materials/features/feature-materials/feature-materials/src/index.ts"],
       "@users/home/feature-home": ["libs/users/home/features/src/index.ts"],
       "@users/profile/feature-profile": ["libs/users/profile/features/feature-profile/src/index.ts"],
       "@users/profile/ui-profile-photo": ["libs/users/profile/ui/ui-profile-photo/src/index.ts"],

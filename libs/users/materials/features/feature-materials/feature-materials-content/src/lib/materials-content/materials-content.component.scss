@@ -1,0 +1,25 @@
+.header {
+  min-width: 300px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.pdf-viewer {
+  height: 80vh;
+  width: 600px;
+  display: block;
+}
+
+.close-btn {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  z-index: 100;
+}
+.video-material-wrapper {
+  display: flex;
+  align-items: center;
+}

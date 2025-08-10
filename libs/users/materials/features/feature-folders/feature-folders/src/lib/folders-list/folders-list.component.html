@@ -1,0 +1,3 @@
+@for (folder of folders; track folder.id) {
+  <users-folders-card [folder]="folder" (deleteFolder)="onDelete($event)" />
+}

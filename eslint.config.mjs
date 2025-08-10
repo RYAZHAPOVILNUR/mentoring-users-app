@@ -5,12 +5,15 @@ import js from '@eslint/js';
 import nxEslintPlugin from '@nx/eslint-plugin';
 import eslintPluginImport from 'eslint-plugin-import';
 
+const rootDir = dirname(fileURLToPath(import.meta.url));
+const tsConfigBasePath = `${rootDir}/tsconfig.base.json`;
+
 const compat = new FlatCompat({
-  baseDirectory: dirname(fileURLToPath(import.meta.url)),
+  baseDirectory: rootDir,
   recommendedConfig: js.configs.recommended,
 });
 
-  /**
+/**
  * @see [Flat eslint config](https://eslint.org/docs/latest/use/configure/configuration-files)
  */
 export default [
@@ -27,7 +30,7 @@ export default [
     settings: {
       'import/resolver': {
         typescript: {
-          project: 'tsconfig.base.json',
+          project: tsConfigBasePath,
         },
         node: {
           extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
@@ -69,7 +72,7 @@ export default [
       ...config,
       files: ['**/*.ts', '**/*.tsx', '**/*.cts', '**/*.mts'],
       linterOptions: {
-        reportUnusedDisableDirectives: "warn",
+        reportUnusedDisableDirectives: 'warn',
       },
       rules: {
         ...config.rules,
@@ -203,7 +206,7 @@ export default [
       },
       languageOptions: {
         parserOptions: {
-          project: ['tsconfig.base.json'],
+          project: [tsConfigBasePath],
           createDefaultProgram: true,
         },
       },

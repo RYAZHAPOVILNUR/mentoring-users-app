@@ -13,12 +13,14 @@ import { provideQuillConfig } from 'ngx-quill/config';
 import { API_URL } from '@core/data-access-api';
 import { tokenInterceptor } from '@core/data-access-interceptors';
 import { ADDRESS_API_KEY } from '@shared/data-access-address';
-import { GITHUB_CLIENT_ID, githubEffects, githubApiFeature } from '@shared/data-access-github';
-import { THEMES, THEMES_TOKEN, initializeTheme } from '@shared/data-access-theme';
+import { GITHUB_CLIENT_ID, githubApiFeature, githubEffects } from '@shared/data-access-github';
+import { initializeTheme, THEMES, THEMES_TOKEN } from '@shared/data-access-theme';
 import { articlesEffects, articlesFeature } from '@users/articles/data-access-article';
 import { commentsEffects, commentsFeature } from '@users/articles/data-access-comment';
 import { backlogEffects, backlogFeature } from '@users/backlog/data-access-backlog';
-import { authFeature, authEffects } from '@users/core/data-access-auth';
+import { authEffects, authFeature } from '@users/core/data-access-auth';
+import { foldersEffects, foldersFeature } from '@users/data-access-folders';
+import { materialsEffects, materialsFeature } from '@users/data-access-materials';
 import { SettingsEffects, settingsFeature } from '@users/settings/data-access-settings';
 import { TasksEffects, tasksFeature } from '@users/tasks/data-access-task';
 import { userEffects, USERS_FEATURE_KEY, usersReducer } from '@users/users/data-access-user';
@@ -41,6 +43,8 @@ export const appConfig: ApplicationConfig = {
       githubEffects,
       backlogEffects,
       SettingsEffects,
+      foldersEffects,
+      materialsEffects,
     ),
     provideStore({
       router: routerReducer,
@@ -52,6 +56,8 @@ export const appConfig: ApplicationConfig = {
       [tasksFeature.name]: tasksFeature.reducer,
       [githubApiFeature.name]: githubApiFeature.reducer,
       [backlogFeature.name]: backlogFeature.reducer,
+      [foldersFeature.name]: foldersFeature.reducer,
+      [materialsFeature.name]: materialsFeature.reducer,
     }),
     provideRouterStore(),
     provideStoreDevtools({
