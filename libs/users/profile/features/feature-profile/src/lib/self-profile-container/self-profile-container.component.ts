@@ -1,40 +1,42 @@
-import { CommonModule } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LetDirective } from '@ngrx/component';
 import { Store } from '@ngrx/store';
-import { filter, noop, of, tap } from 'rxjs';
+import { filter, noop, tap } from 'rxjs';
 
 import { githubApiActions, GithubApiService, githubSelectors } from '@shared/data-access-github';
 import { CropperDialogService } from '@shared/feature-cropper';
 import { selectQueryParam } from '@shared/util-store';
-import { authActions, authSelectors } from '@users/core/data-access-auth';
-import { UserEntity } from '@users/shared/data-access-models';
+import { AuthStore } from '@users/core/data-access-auth';
+import { UsersFacade } from '@users/users/data-access-user';
 
 import { ProfileComponent } from '../feature-user-info/profile.component';
 
 @Component({
   standalone: true,
-  imports: [ProfileComponent, LetDirective, CommonModule],
+  imports: [ProfileComponent, LetDirective, NgIf],
   templateUrl: './self-profile-container.component.html',
   styleUrls: ['./self-profile-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelfProfileContainerComponent implements OnInit {
   private readonly store = inject(Store);
+  private readonly authStore = inject(AuthStore);
+  private readonly usersFacade = inject(UsersFacade);
   private readonly destroyRef = inject(DestroyRef);
 
   private readonly cropperDialogService = inject(CropperDialogService);
   private readonly githubApiService = inject(GithubApiService);
 
-  public readonly user!: UserEntity;
+  public readonly status = this.authStore.status;
 
-  public readonly user$ = this.store.select(authSelectors.selectLoggedUser);
-  public readonly status$ = this.store.select(authSelectors.selectAuthStatus);
   public readonly githubUserName$ = this.store.select(githubSelectors.selectGithubUserName);
   public readonly githubStatus$ = this.store.select(githubSelectors.selectGithubStatus);
-  public readonly isLoggedUser = of(true);
+  public readonly isLoggedUser = this.authStore.loggedUserId;
+  public readonly loggedUser = this.authStore.loggedUser;
 
+  protected readonly Boolean = Boolean;
   ngOnInit() {
     this.store
       .select(selectQueryParam('code'))
@@ -62,7 +64,7 @@ export class SelfProfileContainerComponent implements OnInit {
         .afterClosed()
         .pipe(
           filter(Boolean),
-          tap((image) => this.store.dispatch(authActions.uploadImage({ image }))),
+          tap((image) => this.usersFacade.uploadImage(image)),
         )
         .subscribe();
     };

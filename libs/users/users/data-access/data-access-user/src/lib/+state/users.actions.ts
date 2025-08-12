@@ -21,9 +21,12 @@ export const addUser = createAction('[Users Page] Add User', props<{ userData: C
 export const addUserSuccess = createAction('[Users/Api] Add User Success', props<{ userData: UserEntity }>());
 export const addUserFailed = createAction('[Users/Api] Add User Failed', props<{ error: HttpErrorResponse }>());
 
-// export const selectId = createAction('[Users Page] Select Id', props<{ id: number }>());
-
-// export const deleteSelectedId = createAction('[Users Page] Delete Selected Id');
+export const uploadImage = createAction('[Users Page] Upload Image', props<{ image: string }>());
+export const uploadImageSuccess = createAction('[Users Page] Upload Image Success', props<{ user: UserEntity }>());
+export const uploadImageFailure = createAction(
+  '[Users Page] Upload Image Failure',
+  props<{ error: HttpErrorResponse }>(),
+);
 
 export const editUser = createAction(
   '[Users Detail] Edit User',

@@ -1,16 +1,18 @@
 <ng-container
   *ngrxLet="{
-    user: user$,
-    status: status$,
     githubUserName: githubUserName$,
     githubStatus: githubStatus$,
-    isLoggedUser
   } as vm"
 >
   <div class="profile-container">
     <users-profile
-      *ngIf="vm.status === 'loaded'"
-      [vm]="vm"
+      *ngIf="status() === 'loaded' && loggedUser() as user"
+      [vm]="{
+        githubStatus: vm.githubStatus,
+        githubUserName: vm.githubUserName,
+        user: user,
+        isLoggedUser: Boolean(isLoggedUser())
+      }"
       (loadPhoto)="onLoadPhoto($event)"
       (connectGithub)="onConnectGithub()"
       (disconnectGithub)="onDisconnectGithub()"

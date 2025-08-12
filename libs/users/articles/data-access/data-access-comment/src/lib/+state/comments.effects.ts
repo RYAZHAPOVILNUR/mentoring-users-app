@@ -1,23 +1,21 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, of, switchMap, withLatestFrom } from 'rxjs';
+import { catchError, map, of, switchMap } from 'rxjs';
 
 import { ApiService } from '@core/data-access-api';
-import { AuthFacade } from '@users/core/data-access-auth';
+import { AuthStore } from '@users/core/data-access-auth';
 import { Comment } from '@users/shared/data-access-models';
 
 import { commentsActions } from './comments.actions';
 import { CreateComment } from '../interface/create-comment.interface';
 
 export const publishComment$ = createEffect(
-  (actions$ = inject(Actions), auth$ = inject(AuthFacade), apiService = inject(ApiService)) => {
+  (actions$ = inject(Actions), auth$ = inject(AuthStore), apiService = inject(ApiService)) => {
     return actions$.pipe(
       ofType(commentsActions.publishComment),
-      withLatestFrom(auth$.user$),
-      switchMap(([{ comment }, user]) => {
-        console.log(user);
-
-        const author = {
+      switchMap(({ comment }) => {
+        const user = auth$.loggedUser()!;
+        const author: Comment['author'] = {
           id: user.id,
           name: user.name,
           username: user.username,

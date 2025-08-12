@@ -13,7 +13,7 @@
       <span class="interactive-link" (click)="onRedirectToSignUp()">{{ 'LAYOUT.LOGIN.SIGN_UP' | translate }}</span>
     </p>
 
-    <form class="form-fields-wrapper" [formGroup]="formGroup" (ngSubmit)="onLogin()">
+    <form class="form-fields-wrapper" [formGroup]="formGroup">
       <mat-label>{{ 'LAYOUT.LOGIN.EMAIL' | translate }}*</mat-label>
       <mat-form-field appearance="outline">
         <input matInput formControlName="email" />
@@ -27,7 +27,7 @@
         <span class="interactive-link">{{ 'LAYOUT.LOGIN.FORGOT_YOUR_PASSWORD' | translate }}</span>
       </div>
 
-      <button mat-fab extended color="primary" type="submit">
+      <button mat-fab extended color="primary" (click)="onLogin()">
         {{ 'LAYOUT.LOGIN.SIGN_IN' | translate }}
       </button>
     </form>

@@ -1,15 +1,15 @@
 import { inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { filter } from 'rxjs';
 
-import { LocalStorageJwtService } from '@core/data-access-interceptors';
+import { AuthStore } from '../+state/auth.store';
 
 export const authGuard = () => {
-  const router = inject(Router);
-  const storage = inject(LocalStorageJwtService);
+  const authStore = inject(AuthStore);
 
-  if (!storage.getItem()) {
-    router.navigate(['/guest/home']);
-    return false;
+  if (!localStorage.getItem('jwtToken')) {
+    authStore.logout();
   }
-  return true;
+
+  return toObservable(authStore.loggedUser).pipe(filter(Boolean));
 };

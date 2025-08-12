@@ -1,25 +1,35 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { filter, tap } from 'rxjs';
 
-import { authActions, SignAuthPayload } from '@users/core/data-access-auth';
+import { AuthStore, SignAuthPayload } from '@users/core/data-access-auth';
 
 import { LoginFormUiComponent } from '../login-form-ui/login-form-ui.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, LoginFormUiComponent],
+  imports: [LoginFormUiComponent],
   templateUrl: './login-container.component.html',
   styleUrls: ['./login-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginContainerComponent {
-  private readonly store = inject(Store);
+  private readonly authStore = inject(AuthStore);
   private readonly router = inject(Router);
+  private readonly destroyRef = inject(DestroyRef);
 
-  onLogin(userData: SignAuthPayload) {
-    this.store.dispatch(authActions.login({ userData }));
+  constructor() {
+    toObservable(this.authStore.loggedUser)
+      .pipe(
+        filter(Boolean),
+        tap(() => this.router.navigate(['/profile']), takeUntilDestroyed(this.destroyRef)),
+      )
+      .subscribe(console.log);
+  }
+
+  onLogin(data: SignAuthPayload) {
+    this.authStore.login({ data });
   }
 
   onRedirectToSignup() {

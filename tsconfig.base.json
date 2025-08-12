@@ -25,6 +25,7 @@
       "@shared/feature-cropper": ["libs/shared/features/feature-cropper/src/index.ts"],
       "@shared/ui-confirm-dialog": ["libs/shared/ui/ui-confirm-dialog/src/index.ts"],
       "@shared/util-language": ["libs/shared/utils/util-language/src/index.ts"],
+      "@shared/util-notification": ["libs/shared/utils/util-notification/src/index.ts"],
       "@shared/util-router": ["libs/shared/utils/util-router/src/index.ts"],
       "@shared/util-store": ["libs/shared/utils/util-store/src/index.ts"],
       "@shared/util-typescript": ["libs/shared/utils/util-typescript/src/index.ts"],

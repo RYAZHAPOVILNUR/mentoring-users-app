@@ -21,11 +21,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { PushPipe } from '@ngrx/component';
 import { BehaviorSubject, tap } from 'rxjs';
 
+
+import { AddressApiService, AddressType } from '@shared/data-access-address';
+import { NotificationService } from '@shared/util-notification';
 import { AddressType } from '@shared/data-access-address';
 import { AddressFieldComponent } from '@shared/feature-address-field';
 import { LoadingStatus } from '@shared/util-store';
@@ -71,13 +74,11 @@ export class UserDetailsCardComponent implements OnInit {
     errors: null,
   };
   private readonly destroyRef = inject(DestroyRef);
-  private snackBar = inject(MatSnackBar);
-  private onEditSuccess: Callback = () =>
-    this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
-      duration: 2500,
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-    });
+
+  private addressApiService = inject(AddressApiService);
+  private notificationService = inject(NotificationService);
+  private onEditSuccess: Callback = () => this.notificationService.openFromTemplate(this.snackbarTemplateRef);
+
   public formGroup = new FormBuilder().group({
     name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),

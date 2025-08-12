@@ -11,15 +11,15 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideQuillConfig } from 'ngx-quill/config';
 
 import { API_URL } from '@core/data-access-api';
-import { tokenInterceptor } from '@core/data-access-interceptors';
+
+import { tokenInterceptor, forbiddenInterceptor } from '@core/data-access-interceptors';
 import { ADDRESS_API_KEY, ADDRESS_API_URL } from '@shared/data-access-address';
-import { GITHUB_CLIENT_ID, githubApiFeature, githubEffects } from '@shared/data-access-github';
-import { initializeTheme, THEMES, THEMES_TOKEN } from '@shared/data-access-theme';
+import { GITHUB_CLIENT_ID, githubEffects, githubApiFeature } from '@shared/data-access-github';
+import { THEMES, THEMES_TOKEN, initializeTheme } from '@shared/data-access-theme';
 import { initializeLanguage } from '@shared/util-language';
 import { articlesEffects, articlesFeature } from '@users/articles/data-access-article';
 import { commentsEffects, commentsFeature } from '@users/articles/data-access-comment';
 import { backlogEffects, backlogFeature } from '@users/backlog/data-access-backlog';
-import { authEffects, authFeature } from '@users/core/data-access-auth';
 import { SettingsEffects, settingsFeature } from '@users/settings/data-access-settings';
 import { TasksEffects, tasksFeature } from '@users/tasks/data-access-task';
 import { userEffects, USERS_FEATURE_KEY, usersReducer } from '@users/users/data-access-user';
@@ -41,7 +41,6 @@ export const appConfig: ApplicationConfig = {
     provideAppInitializer(initApp),
     provideEffects(
       userEffects,
-      authEffects,
       articlesEffects,
       TasksEffects,
       commentsEffects,
@@ -53,7 +52,6 @@ export const appConfig: ApplicationConfig = {
       router: routerReducer,
       [USERS_FEATURE_KEY]: usersReducer,
       [settingsFeature.name]: settingsFeature.reducer,
-      [authFeature.name]: authFeature.reducer,
       [articlesFeature.name]: articlesFeature.reducer,
       [commentsFeature.name]: commentsFeature.reducer,
       [tasksFeature.name]: tasksFeature.reducer,
@@ -69,7 +67,7 @@ export const appConfig: ApplicationConfig = {
       traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
     }),
     provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
-    provideHttpClient(withInterceptors([tokenInterceptor])),
+    provideHttpClient(withInterceptors([tokenInterceptor, forbiddenInterceptor])),
     {
       provide: API_URL,
       useValue: environment.api_url,

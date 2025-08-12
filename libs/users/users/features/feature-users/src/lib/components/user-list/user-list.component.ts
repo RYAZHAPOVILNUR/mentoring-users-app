@@ -14,7 +14,7 @@ type UsersListVM = DeepReadonly<{
   users: UserVM[];
   status: LoadingStatus;
   errors: HttpErrorResponse | null;
-  loggedUser: UserEntity;
+  loggedUser: UserEntity | null;
 }>;
 
 @Component({

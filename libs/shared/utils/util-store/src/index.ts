@@ -5,3 +5,5 @@ export {
   selectRouteParams,
   selectRouteParam,
 } from './lib/router/router.selectors';
+export { withErrorHandler } from './lib/rxjs-operators/error-handler';
+export { ErrorMsg } from './lib/configs/error.enum';

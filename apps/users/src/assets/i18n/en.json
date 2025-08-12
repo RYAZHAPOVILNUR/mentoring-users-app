@@ -78,6 +78,9 @@
       "HEADER_SIZE": "The header should contain minimum 6 symbols and maximum 60!"
     }
   },
+  "ERROR_MESSAGE": {
+    "API_ERROR": "An unexpected error has occurred. Please contact support"
+  },
   "ADDRESS": {
     "COUNTRY": "Country",
     "REGION": "Region",
