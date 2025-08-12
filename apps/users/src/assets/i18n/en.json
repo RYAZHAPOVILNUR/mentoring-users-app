@@ -80,6 +80,16 @@
   },
   "ERROR_MESSAGE": {
     "API_ERROR": "An unexpected error has occurred. Please contact support"
+  },
+  "ADDRESS": {
+    "COUNTRY": "Country",
+    "REGION": "Region",
+    "AREA": "Area",
+    "CITY": "City",
+    "SETTLEMENT": "Settlement",
+    "STREET": "Street",
+    "HOUSE": "House",
+    "FLAT": "Flat"
   }
 }
 

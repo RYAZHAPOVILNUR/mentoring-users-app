@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { PushPipe } from '@ngrx/component';
 import { Store } from '@ngrx/store';
 
-import { LanguageKeys, LanguageService } from '@shared/util-language';
+import { LanguageService, LanguageValues } from '@shared/util-language';
 import { SettingsFacade } from '@users/settings/data-access-settings';
 
 import { ThemeSettingComponent } from '../../components/theme-setting/theme-setting.component';
@@ -34,7 +34,7 @@ export class SettingsComponent implements OnInit {
     this.settingsFacade.setArticlesStyleType(styleType);
   }
 
-  onSwitchLanguage(language: LanguageKeys) {
+  onSwitchLanguage(language: LanguageValues) {
     this.languageSwitchService.setLanguage(language);
   }
 }

@@ -24,10 +24,13 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { PushPipe } from '@ngrx/component';
-import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
 
-import { AddressApiService } from '@shared/data-access-address';
+
+import { AddressApiService, AddressType } from '@shared/data-access-address';
 import { NotificationService } from '@shared/util-notification';
+import { AddressType } from '@shared/data-access-address';
+import { AddressFieldComponent } from '@shared/feature-address-field';
 import { LoadingStatus } from '@shared/util-store';
 import { Callback } from '@shared/util-typescript';
 import { UserEntity } from '@users/shared/data-access-models';
@@ -57,6 +60,7 @@ type DetailUsersCardVm = {
     MatSnackBarModule,
     MatAutocompleteModule,
     PushPipe,
+    AddressFieldComponent,
   ],
   templateUrl: './user-details-card.component.html',
   styleUrls: ['./user-details-card.component.scss'],
@@ -70,24 +74,22 @@ export class UserDetailsCardComponent implements OnInit {
     errors: null,
   };
   private readonly destroyRef = inject(DestroyRef);
+
   private addressApiService = inject(AddressApiService);
   private notificationService = inject(NotificationService);
   private onEditSuccess: Callback = () => this.notificationService.openFromTemplate(this.snackbarTemplateRef);
+
   public formGroup = new FormBuilder().group({
     name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
-    city: new FormControl({ value: '', disabled: !this.vm.editMode }),
+    city: new FormControl({ value: '', disabled: !this.vm.editMode }, { nonNullable: true }),
   });
 
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<unknown>;
-  public citySuggestions = this.formGroup.controls.city.valueChanges.pipe(
-    debounceTime(300),
-    distinctUntilChanged(),
-    filter(Boolean),
-    switchMap((value) => this.addressApiService.getCities(value)),
-  );
+
   public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
+  readonly addressTypes = AddressType;
   @Output() editUser = new EventEmitter<{
     user: CreateUserDTO;
     onSuccessCb: Callback;

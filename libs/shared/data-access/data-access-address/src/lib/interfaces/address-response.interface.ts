@@ -1,7 +1,8 @@
-export interface AddressResponse {
-  suggestions: Suggestion[];
-}
+import { Address } from './address.interface';
 
-interface Suggestion {
-  value: string;
+/**
+ * @see [API](https://dadata.ru/api/suggest/address/)
+ */
+export interface AddressResponse {
+  suggestions: Address[];
 }
