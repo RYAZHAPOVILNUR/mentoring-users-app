@@ -18,8 +18,8 @@ import {
 export class AuthApiService {
   private readonly apiService = inject(ApiService);
 
-  login(userData: SignAuthPayload) {
-    return this.apiService.post<SignAuthResponse, SignAuthPayload>('/auth/login', userData);
+  login(data: SignAuthPayload) {
+    return this.apiService.post<SignAuthResponse, SignAuthPayload>('/auth/login', data);
   }
 
   getUser() {
@@ -33,9 +33,8 @@ export class AuthApiService {
   changePassword(data: ChangePasswordPayload) {
     return this.apiService.put<ChangePasswordResponse, ChangePasswordPayload>('/auth/change_password', data);
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  uploadImage(image: any) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return this.apiService.post<UserDTO, any>('/users/upload/image', { image });
+
+  uploadImage(image: unknown) {
+    return this.apiService.post<UserDTO, unknown>('/users/upload/image', { image });
   }
 }

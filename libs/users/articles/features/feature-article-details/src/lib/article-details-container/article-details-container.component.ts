@@ -1,14 +1,14 @@
 import { NgSwitch, NgSwitchCase } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { toObservable } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { LetDirective } from '@ngrx/component';
 import { select, Store } from '@ngrx/store';
-import { map, Observable, take, withLatestFrom } from 'rxjs';
+import { first, map, Observable, take, tap, withLatestFrom } from 'rxjs';
 
 import { selectRouteParams } from '@shared/util-store';
 import { articlesActions, articleSelectors } from '@users/articles/data-access-article';
-import { commentsActions, commentsSelectors } from '@users/articles/data-access-comment';
+import { commentsActions, commentsSelectors, CreateComment } from '@users/articles/data-access-comment';
 import { AuthStore } from '@users/core/data-access-auth';
 import { Article } from '@users/shared/data-access-models';
 
@@ -31,6 +31,7 @@ import { ArticleDetailsComponent } from '../article-details/article-details.comp
 })
 export class ArticleDetailsContainerComponent {
   private readonly store = inject(Store);
+  private readonly destroyRef = inject(DestroyRef);
   private readonly authStore = inject(AuthStore);
   public readonly status$ = this.store.select(articleSelectors.selectStatus);
   public readonly commentsStatus$ = this.store.select(commentsSelectors.selectStatus);
@@ -53,18 +54,18 @@ export class ArticleDetailsContainerComponent {
       this.store.dispatch(commentsActions.loadComments({ articleId: params['id'] }));
     });
   }
-  onSubmitComment(commentText: string) {
-    toObservable(this.loggedUserId)
-      .pipe(withLatestFrom(this.openedArticle$), take(1))
-      .subscribe(([authorId, article]) => {
-        console.log('authorId, articleId', authorId, article?.id);
-
-        const comment = {
-          author_id: Number(authorId),
+  onSubmitComment(commentText: CreateComment['text']) {
+    this.openedArticle$.pipe(
+      first(),
+      tap((article) => {
+        const comment: CreateComment = {
+          author_id: this.loggedUserId()!,
           article_id: Number(article?.id),
           text: commentText,
         };
         this.store.dispatch(commentsActions.publishComment({ comment }));
-      });
+      }),
+      takeUntilDestroyed(this.destroyRef),
+    );
   }
 }

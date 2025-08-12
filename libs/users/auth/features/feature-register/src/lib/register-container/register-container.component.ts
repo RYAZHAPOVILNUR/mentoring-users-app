@@ -22,5 +22,6 @@ export class RegisterContainerComponent {
 
   onRegister(user: NewUser) {
     this.authStore.register({ user });
+    this.router.navigate(['/profile']);
   }
 }

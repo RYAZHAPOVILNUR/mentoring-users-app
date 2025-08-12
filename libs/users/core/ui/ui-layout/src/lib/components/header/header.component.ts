@@ -35,7 +35,7 @@ import { ThemePickerComponent } from './theme-picker/theme-picker.component';
 export class HeaderComponent {
   private readonly authStore = inject(AuthStore);
   private readonly languageSwitchService = inject(LanguageService);
-  public readonly isAuthenticated = this.authStore.isAuthenticated;
+  public readonly isLoggedUser = this.authStore.loggedUserId;
   public readonly isAdmin = this.authStore.isAdmin;
   public readonly selectedLanguage$ = this.languageSwitchService.selectedLanguage$;
 

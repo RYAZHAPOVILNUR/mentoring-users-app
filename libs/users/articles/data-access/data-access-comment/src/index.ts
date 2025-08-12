@@ -4,3 +4,5 @@ export { commentsActions } from './lib/+state/comments.actions';
 export { commentsFeature } from './lib/+state/comments.reducer';
 
 export { CommentsFacade } from './lib/+state/comments.facade';
+
+export { CreateComment } from './lib/interface/create-comment.interface';

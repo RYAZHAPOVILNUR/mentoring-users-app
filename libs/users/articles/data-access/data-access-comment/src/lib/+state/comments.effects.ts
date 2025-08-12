@@ -1,7 +1,6 @@
 import { inject } from '@angular/core';
-import { toObservable } from '@angular/core/rxjs-interop';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, of, switchMap, withLatestFrom } from 'rxjs';
+import { catchError, map, of, switchMap } from 'rxjs';
 
 import { ApiService } from '@core/data-access-api';
 import { AuthStore } from '@users/core/data-access-auth';
@@ -14,20 +13,16 @@ export const publishComment$ = createEffect(
   (actions$ = inject(Actions), auth$ = inject(AuthStore), apiService = inject(ApiService)) => {
     return actions$.pipe(
       ofType(commentsActions.publishComment),
-      withLatestFrom(toObservable(auth$.loggedUser)),
-      switchMap(([{ comment }, user]) => {
-        console.log(user);
-
-        const author = user
-          ? {
-              id: user.id,
-              name: user.name,
-              username: user.username,
-              photo: {
-                url: user.photo!.url,
-              },
-            }
-          : null;
+      switchMap(({ comment }) => {
+        const user = auth$.loggedUser()!;
+        const author: Comment['author'] = {
+          id: user.id,
+          name: user.name,
+          username: user.username,
+          photo: {
+            url: user.photo!.url,
+          },
+        };
 
         return apiService.post<Comment, CreateComment>('/comments', comment).pipe(
           map((comment) =>

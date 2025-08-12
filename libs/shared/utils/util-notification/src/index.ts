@@ -1,1 +1,1 @@
-export { SnackbarService } from './lib/services/snackbar.service';
+export { NotificationService } from './lib/services/notification.service';

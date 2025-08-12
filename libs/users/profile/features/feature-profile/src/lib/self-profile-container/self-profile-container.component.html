@@ -8,10 +8,10 @@
     <users-profile
       *ngIf="status() === 'loaded' && loggedUser() as user"
       [vm]="{
-      githubStatus: vm.githubStatus,
-      githubUserName: vm.githubUserName,
-      user: user,
-      isLoggedUser: isLoggedUser()
+        githubStatus: vm.githubStatus,
+        githubUserName: vm.githubUserName,
+        user: user,
+        isLoggedUser: Boolean(isLoggedUser())
       }"
       (loadPhoto)="onLoadPhoto($event)"
       (connectGithub)="onConnectGithub()"

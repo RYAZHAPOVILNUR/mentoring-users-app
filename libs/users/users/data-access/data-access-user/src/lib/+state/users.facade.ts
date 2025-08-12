@@ -62,4 +62,8 @@ export class UsersFacade {
   loadUser() {
     this.store.dispatch(UsersActions.loadUser());
   }
+
+  uploadImage(image: string) {
+    this.store.dispatch(UsersActions.uploadImage({ image }));
+  }
 }

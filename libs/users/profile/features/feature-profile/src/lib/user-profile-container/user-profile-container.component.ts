@@ -20,10 +20,11 @@ export class UserProfileContainerComponent {
   private readonly authStore = inject(AuthStore);
 
   public readonly status = this.authStore.status;
-  public readonly isLoggedUser = this.authStore.isAuthenticated;
+  public readonly isLoggedUser = this.authStore.loggedUserId;
 
   public readonly user$ = this.usersFacade.openedUser$.pipe(
     tap(() => this.usersFacade.loadUser()),
     filter(Boolean),
   );
+  protected readonly Boolean = Boolean;
 }

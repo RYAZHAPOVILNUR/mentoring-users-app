@@ -37,7 +37,7 @@ export class AuthorizedLayoutComponent {
   private readonly handset$ = this.breakpointObserver.observe(Breakpoints.Handset);
   private readonly handsetLandscape$ = this.breakpointObserver.observe(Breakpoints.HandsetLandscape);
 
-  public readonly isAuthenticated = this.authStore.isAuthenticated;
+  public readonly isLoggedUser = this.authStore.loggedUserId;
 
   public readonly isMobile$ = this.handset$.pipe(
     withLatestFrom(this.handsetLandscape$),

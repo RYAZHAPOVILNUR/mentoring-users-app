@@ -1,11 +1,11 @@
 import { inject } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { CanActivateFn } from '@angular/router';
-import { map } from 'rxjs';
 
-import { AuthService } from '../services/auth.service';
+import { AuthStore } from '../+state/auth.store';
 
 export const adminGuard: CanActivateFn = () => {
-  const authService = inject(AuthService);
+  const authStore = inject(AuthStore);
 
-  return authService.getUser().pipe(map((user) => !!user.isAdmin));
+  return toObservable(authStore.isAdmin);
 };

@@ -67,6 +67,15 @@ const reducer = createReducer(
     ...state,
     status,
   })),
+  on(UsersActions.uploadImageSuccess, (state, { user }) =>
+    usersAdapter.updateOne(
+      {
+        id: user.id,
+        changes: user,
+      },
+      state,
+    ),
+  ),
 );
 
 export function usersReducer(state: UsersState | undefined, action: Action) {

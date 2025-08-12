@@ -9,6 +9,7 @@ import { githubApiActions, GithubApiService, githubSelectors } from '@shared/dat
 import { CropperDialogService } from '@shared/feature-cropper';
 import { selectQueryParam } from '@shared/util-store';
 import { AuthStore } from '@users/core/data-access-auth';
+import { UsersFacade } from '@users/users/data-access-user';
 
 import { ProfileComponent } from '../feature-user-info/profile.component';
 
@@ -22,6 +23,7 @@ import { ProfileComponent } from '../feature-user-info/profile.component';
 export class SelfProfileContainerComponent implements OnInit {
   private readonly store = inject(Store);
   private readonly authStore = inject(AuthStore);
+  private readonly usersFacade = inject(UsersFacade);
   private readonly destroyRef = inject(DestroyRef);
 
   private readonly cropperDialogService = inject(CropperDialogService);
@@ -31,16 +33,10 @@ export class SelfProfileContainerComponent implements OnInit {
 
   public readonly githubUserName$ = this.store.select(githubSelectors.selectGithubUserName);
   public readonly githubStatus$ = this.store.select(githubSelectors.selectGithubStatus);
-  public readonly isLoggedUser = this.authStore.isAuthenticated;
+  public readonly isLoggedUser = this.authStore.loggedUserId;
   public readonly loggedUser = this.authStore.loggedUser;
 
-  public readonly vm = {
-    user: this.loggedUser(),
-    githubUserName: this.githubUserName$,
-    githubStatus: this.githubStatus$,
-    isLoggedUser: this.isLoggedUser(),
-  };
-
+  protected readonly Boolean = Boolean;
   ngOnInit() {
     this.store
       .select(selectQueryParam('code'))
@@ -63,13 +59,12 @@ export class SelfProfileContainerComponent implements OnInit {
   public onLoadPhoto(file: File): void {
     const reader = new FileReader();
     reader.onload = (e) => {
-      // @typescript-eslint/no-non-null-assertion
       const dialogRef = this.cropperDialogService.open({ imageSrc: e.target!.result as string });
       dialogRef
         .afterClosed()
         .pipe(
           filter(Boolean),
-          tap((image) => this.authStore.uploadImage({ image })),
+          tap((image) => this.usersFacade.uploadImage(image)),
         )
         .subscribe();
     };

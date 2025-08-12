@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
@@ -5,6 +6,7 @@ import { catchError, filter, map, of, switchMap, tap, withLatestFrom } from 'rxj
 
 import { ApiService } from '@core/data-access-api';
 import { selectRouteParams } from '@shared/util-store';
+import { AuthStore } from '@users/core/data-access-auth';
 import { UserDTO, userAdapter, UserEntity } from '@users/shared/data-access-models';
 
 import * as UsersActions from './users.actions';
@@ -137,6 +139,26 @@ export const loadUser = createEffect(
         }
         return of(UsersActions.updateUserStatus({ status: 'loading' }));
       }),
+    );
+  },
+  { functional: true },
+);
+
+export const uploadImage = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const authStore = inject(AuthStore);
+    return actions$.pipe(
+      ofType(UsersActions.uploadImage),
+      switchMap(({ image }) =>
+        apiService.post<UserDTO, unknown>('/users/upload/image', { image }).pipe(
+          map((user: UserDTO) => userAdapter.DTOtoEntity(user)),
+          tap((user: UserEntity) => authStore.setLoggedUser(user)),
+          map((user: UserEntity) => UsersActions.uploadImageSuccess({ user: user })),
+          catchError((err: HttpErrorResponse) => of(UsersActions.uploadImageFailure(err))),
+        ),
+      ),
     );
   },
   { functional: true },
