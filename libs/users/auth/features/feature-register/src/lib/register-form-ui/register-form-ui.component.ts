@@ -11,7 +11,7 @@ import { PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { ApiService } from '@core/data-access-api';
-import { InputPasswordComponent } from '@core/ui-core';
+import { PasswordFieldComponent } from '@shared/feature-password-field';
 import { LanguageService, LanguageValues } from '@shared/util-language';
 import { NewUser } from '@users/core/data-access-auth';
 
@@ -27,7 +27,7 @@ import { NewUser } from '@users/core/data-access-auth';
     MatButtonModule,
     ReactiveFormsModule,
     MatCheckboxModule,
-    InputPasswordComponent,
+    PasswordFieldComponent,
     TranslateModule,
     PushPipe,
   ],

@@ -6,7 +6,7 @@ import { filter, of, tap } from 'rxjs';
 import { AuthFacade } from '@users/core/data-access-auth';
 import { UsersFacade } from '@users/users/data-access-user';
 
-import { ProfileComponent } from '../feature-user-info/profile.component';
+import { ProfileComponent } from '../profile/profile.component';
 
 @Component({
   standalone: true,
