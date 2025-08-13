@@ -3,8 +3,9 @@
     users: users$,
     status: status$,
     errors: errors$,
-    loggedUser: loggedUser$
+    loggedUser: loggedUser$,
   } as vm"
 >
+  <users-user-filter />
   <users-user-list [vm]="vm" (deleteUser)="onDeleteUser($event)" (redirectToEdit)="onRedirectToEdit($event)" />
 </ng-container>
