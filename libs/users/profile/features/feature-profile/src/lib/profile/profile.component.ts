@@ -19,11 +19,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
-import { of } from 'rxjs';
+import { filter, of, tap } from 'rxjs';
 
-import { PasswordChangeDialogComponent, ProfileChangeDialogComponent } from '@core/ui-core';
+import { ProfileChangeDialogComponent } from '@core/ui-core';
 import { LoadingStatus } from '@shared/util-store';
-import { AuthFacade, ChangePasswordPayload, ChangeProfileDataPayload } from '@users/core/data-access-auth';
+import { AuthFacade, ChangeProfileDataPayload } from '@users/core/data-access-auth';
+import { PasswordChangeDialogService } from '@users/profile/ui-password-change';
 import { UiPhotoModalComponent } from '@users/profile/ui-profile-photo';
 import { UserEntity } from '@users/shared/data-access-models';
 
@@ -56,6 +57,7 @@ export class ProfileComponent implements OnInit {
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
   private readonly authFacade = inject(AuthFacade);
+  private readonly passwordChangeDialogService = inject(PasswordChangeDialogService);
   private matIconRegistry = inject(MatIconRegistry);
   private domSanitizer = inject(DomSanitizer);
 
@@ -76,20 +78,15 @@ export class ProfileComponent implements OnInit {
     of(this.vm.githubUserName).subscribe(console.log);
   }
 
-  onOpenChangePassword() {
-    const dialogRef = this.dialog.open(PasswordChangeDialogComponent);
-    dialogRef
+  onOpenChangePassword(): void {
+    this.passwordChangeDialogService
+      .open()
       .afterClosed()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((result) => {
-        if (result) {
-          const changePasswordPayload: ChangePasswordPayload = {
-            newPassword: result.value.newPassword,
-            oldPassword: result.value.oldPassword,
-          };
-          this.authFacade.changePassword(changePasswordPayload);
-        }
-      });
+      .pipe(
+        filter(Boolean),
+        tap((data) => this.authFacade.changePassword(data)),
+      )
+      .subscribe();
   }
 
   onOpenChangeProfileData() {
