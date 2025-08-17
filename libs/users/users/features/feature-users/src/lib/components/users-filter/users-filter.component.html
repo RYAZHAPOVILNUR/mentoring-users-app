@@ -1,0 +1,10 @@
+<div class="form-users">
+  <h2>Name:</h2>
+  <form>
+    <input #inputElement
+           class="search" type="text"
+           placeholder="Введите имя пользователя"
+           (input)="onUserFilterChange(inputElement.value)"
+    />
+  </form>
+</div>
