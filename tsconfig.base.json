@@ -17,7 +17,6 @@
     "paths": {
       "@core/data-access-api": ["libs/core/data-access/data-access-api/src/index.ts"],
       "@core/data-access-interceptors": ["libs/core/data-access/data-access-interceptors/src/index.ts"],
-      "@core/ui-core": ["libs/core/ui/ui-core/src/index.ts"],
       "@shared/data-access-address": ["libs/shared/data-access/data-access-address/src/index.ts"],
       "@shared/data-access-github": ["libs/shared/data-access/data-access-github/src/index.ts"],
       "@shared/data-access-theme": ["libs/shared/data-access/data-access-theme/src/index.ts"],
@@ -45,6 +44,7 @@
       "@users/home/feature-home": ["libs/users/home/features/src/index.ts"],
       "@users/profile/feature-profile": ["libs/users/profile/features/feature-profile/src/index.ts"],
       "@users/profile/ui-password-change": ["libs/users/profile/ui/ui-password-change/src/index.ts"],
+      "@users/profile/ui-profile-change": ["libs/users/profile/ui/ui-profile-change/src/index.ts"],
       "@users/profile/ui-profile-photo": ["libs/users/profile/ui/ui-profile-photo/src/index.ts"],
       "@users/settings/data-access-settings": ["libs/users/settings/data-access/data-access-settings/src/index.ts"],
       "@users/settings/feature-settings": ["libs/users/settings/features/feature-settings/src/index.ts"],
