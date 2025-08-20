@@ -11,7 +11,7 @@ import { selectQueryParam } from '@shared/util-store';
 import { authActions, authSelectors } from '@users/core/data-access-auth';
 import { UserEntity } from '@users/shared/data-access-models';
 
-import { ProfileComponent } from '../profile/profile.component';
+import { ProfileComponent } from '../../components/profile/profile.component';
 
 @Component({
   standalone: true,

@@ -1,15 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  EventEmitter,
-  inject,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -21,10 +11,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
 import { filter, of, tap } from 'rxjs';
 
-import { ProfileChangeDialogComponent } from '@core/ui-core';
 import { LoadingStatus } from '@shared/util-store';
-import { AuthFacade, ChangeProfileDataPayload } from '@users/core/data-access-auth';
+import { AuthFacade } from '@users/core/data-access-auth';
 import { PasswordChangeDialogService } from '@users/profile/ui-password-change';
+import { ProfileChangeDialogService } from '@users/profile/ui-profile-change';
 import { UiPhotoModalComponent } from '@users/profile/ui-profile-photo';
 import { UserEntity } from '@users/shared/data-access-models';
 
@@ -55,9 +45,9 @@ interface ProfileFormVm {
 export class ProfileComponent implements OnInit {
   @Input({ required: true }) vm!: ProfileFormVm;
   private readonly dialog = inject(MatDialog);
-  private readonly destroyRef = inject(DestroyRef);
   private readonly authFacade = inject(AuthFacade);
   private readonly passwordChangeDialogService = inject(PasswordChangeDialogService);
+  private readonly profileChangeDialogService = inject(ProfileChangeDialogService);
   private matIconRegistry = inject(MatIconRegistry);
   private domSanitizer = inject(DomSanitizer);
 
@@ -89,22 +79,15 @@ export class ProfileComponent implements OnInit {
       .subscribe();
   }
 
-  onOpenChangeProfileData() {
-    const dialogRef = this.dialog.open(ProfileChangeDialogComponent, {
-      width: '400px',
-      data: this.vm.user,
-    });
-    dialogRef
+  onOpenChangeProfileData(): void {
+    this.profileChangeDialogService
+      .open(this.vm.user)
       .afterClosed()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((result) => {
-        if (result) {
-          const changeProfileDataPayload: ChangeProfileDataPayload = {
-            ...result.value,
-          };
-          this.authFacade.changeProfileData(changeProfileDataPayload);
-        }
-      });
+      .pipe(
+        filter(Boolean),
+        tap((data) => this.authFacade.changeProfileData(data)),
+      )
+      .subscribe();
   }
 
   onMouseEnter() {
