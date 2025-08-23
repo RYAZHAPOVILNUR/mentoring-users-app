@@ -20,7 +20,5 @@ export const foldersActions = createActionGroup({
     deleteFolder: props<{ folder_id: number }>(),
     deleteFolderSuccess: props<{ folder_id: number }>(),
     deleteFolderFailed: props<{ error: Error }>(),
-
-    noCustomerFolder: emptyProps(),
   },
 });

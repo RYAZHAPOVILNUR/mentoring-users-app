@@ -62,7 +62,5 @@ export const foldersFeature = createFeature({
       }),
     ),
     on(foldersActions.deleteFolderFailed, (state) => ({ ...state, status: 'error' as const })),
-
-    on(foldersActions.noCustomerFolder, (state) => ({ ...state, status: 'error' as const })),
   ),
 });

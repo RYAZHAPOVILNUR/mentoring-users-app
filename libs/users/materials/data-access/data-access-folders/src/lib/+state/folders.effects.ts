@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, filter, map, of, switchMap } from 'rxjs';
 
 import { ApiService } from '@core/data-access-api';
 import { selectRouteParams } from '@shared/util-store';
@@ -34,7 +34,7 @@ export const loadFolders$ = createEffect(
       ofType(foldersActions.loadFolders, foldersActions.publishFolderSuccess),
       switchMap(() =>
         apiService.get<Folder[]>('/folder').pipe(
-          map((folders) => foldersActions.loadFoldersSuccess({ folders: folders })),
+          map((folders) => foldersActions.loadFoldersSuccess({ folders })),
           catchError((error) => {
             console.error('Error', error);
             return of(foldersActions.loadFoldersFailed({ error }));
@@ -51,30 +51,27 @@ export const getFolderForMaterials$ = createEffect(
     return actions$.pipe(
       ofType(foldersActions.getFolderForMaterials),
       concatLatestFrom(() => store.select(selectRouteParams)),
+      filter(([, params]) => !!params['id']),
       switchMap(([, params]) => {
-        if (!params['id']) {
-          return of(foldersActions.noCustomerFolder());
-        } else {
-          return apiService.get<Folder>(`/folder/${params['id']}`).pipe(
-            map((folder) => foldersActions.getFolderForMaterialsSuccess({ folder })),
-            catchError((error) => {
-              console.error('Error', error);
-              return of(foldersActions.getFolderForMaterialsFailed({ error }));
-            }),
-          );
-        }
+        return apiService.get<Folder>(`/folder/${params['id']}`).pipe(
+          map((folder) => foldersActions.getFolderForMaterialsSuccess({ folder })),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(foldersActions.getFolderForMaterialsFailed({ error }));
+          }),
+        );
       }),
     );
   },
   { functional: true },
 );
 
-export const deleteFolder = createEffect(
+export const deleteFolder$ = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) => {
     return actions$.pipe(
       ofType(foldersActions.deleteFolder),
       switchMap(({ folder_id }) =>
-        apiService.delete<number>(`/folder/${folder_id}`).pipe(
+        apiService.delete(`/folder/${folder_id}`).pipe(
           map(() => foldersActions.deleteFolderSuccess({ folder_id })),
           catchError((error) => {
             console.error('Error', error);
