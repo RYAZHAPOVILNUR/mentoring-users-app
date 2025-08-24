@@ -56,7 +56,9 @@
    - `@users/materials/feature-materials`
    - `@users/materials/data-access-materials`
 
-### Как создать файл (`@users/users/feature-users`):
+### Как создать файл 
+
+В корне библиотеки (`src/lib/...`) сгруппируйте сущности в одноимённые директории, например для библиотеки `@users/users/feature-users`:
 
 | pages/                   | components/                   | services/               | interfaces/         | enums/           |
 |--------------------------|-------------------------------|-------------------------|---------------------|------------------|
