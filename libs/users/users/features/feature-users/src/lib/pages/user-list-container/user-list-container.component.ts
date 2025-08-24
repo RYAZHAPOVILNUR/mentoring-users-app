@@ -10,7 +10,7 @@ import { UsersFacade } from '@users/users/data-access-user';
 
 import { UserListContainerStore } from './user-list-container.store';
 import { UserListComponent } from '../../components/user-list/user-list.component';
-import { UsersFilterComponent } from "../../components/users-filter/users-filter.component";
+import { UsersFilterComponent } from '../../components/users-filter/users-filter.component';
 
 @Component({
   standalone: true,

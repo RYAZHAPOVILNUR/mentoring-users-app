@@ -11,7 +11,8 @@
   font-size: 16px;
   font-weight: 500;
   border-radius: 5px;
-}
-.search-input::placeholder {
-  font-weight: 400;
+
+  &::placeholder {
+    font-weight: 500;
+  }
 }
