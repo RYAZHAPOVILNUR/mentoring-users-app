@@ -1,8 +1,9 @@
 <div class="filter-container">
     <form class="filter-form">
-        <mat-form-field class="example-full-width">
+        <mat-form-field class="form-field-container">
             <mat-label>Search user</mat-label>
             <input matInput placeholder="User name" [formControl]="name">
+            <button (click)="applyFilter()" matButton="elevated">Search</button>
         </mat-form-field>
     </form>
 </div>
