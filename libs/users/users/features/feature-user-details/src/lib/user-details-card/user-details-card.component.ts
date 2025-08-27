@@ -30,8 +30,7 @@ import { AddressApiService } from '@shared/data-access-address';
 import { LoadingStatus } from '@shared/util-store';
 import { Callback } from '@shared/util-typescript';
 import { UserEntity } from '@users/shared/data-access-models';
-import { CreateUserDTO } from '@users/users/data-access-user';
-import { onSuccessSPonCbType } from 'libs/users/users/data-access/data-access-user/src/lib/+state/users.actions';
+import { CreateUserDTO, onSuccessSPonCbType } from '@users/users/data-access-user';
 
 type DetailUsersCardVm = {
   editMode: boolean;
@@ -74,6 +73,12 @@ export class UserDetailsCardComponent implements OnInit {
   private snackBar = inject(MatSnackBar);
   private onEditSuccess: Callback = () =>
     this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+  private onAddSPSuccess: onSuccessSPonCbType = () =>
+    this.snackBar.openFromTemplate(this.snackbarTemplateRefSP, {
       duration: 2500,
       horizontalPosition: 'center',
       verticalPosition: 'top',
@@ -124,7 +129,7 @@ export class UserDetailsCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
-      this.totalStoryPoints.setValue(this._vm.user!.totalStoryPoints ?? 0);
+      this.totalStoryPoints.setValue(this._vm.user?.totalStoryPoints ?? 0);
     }
 
     if (vm.editMode) {
@@ -150,13 +155,6 @@ export class UserDetailsCardComponent implements OnInit {
       onSuccessCb: this.onEditSuccess,
     });
   }
-
-  private onAddSPSuccess: onSuccessSPonCbType = () =>
-    this.snackBar.openFromTemplate(this.snackbarTemplateRefSP, {
-      duration: 2500,
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-    });
 
   onAddStoryPoints() {
     this.totalStoryPoints.disable();

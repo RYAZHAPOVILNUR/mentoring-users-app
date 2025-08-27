@@ -5,4 +5,6 @@ export { usersReducer } from './lib/+state/users.reducer';
 export * as userEffects from './lib/+state/users.effects';
 export * as usersSelectors from './lib/+state/users.selectors';
 
+export { onSuccessSPonCbType, onSuccessEditionCbType } from './lib/+state/users.actions';
+
 export { CreateUserDTO } from './lib/types/create-user-dto.type';

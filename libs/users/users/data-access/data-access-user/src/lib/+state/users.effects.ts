@@ -7,9 +7,9 @@ import { ApiService } from '@core/data-access-api';
 import { selectRouteParams } from '@shared/util-store';
 import { userAdapter, UserDTO, UserEntity } from '@users/shared/data-access-models';
 
-import { CreateUserDTO } from '../types/create-user-dto.type';
 import * as UsersActions from './users.actions';
 import { selectUsersEntities } from './users.selectors';
+import { CreateUserDTO } from '../types/create-user-dto.type';
 
 export const userEffects = createEffect(
   () => {
