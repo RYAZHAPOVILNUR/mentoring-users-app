@@ -4,7 +4,11 @@
 
 ## Клонирование проекта
 
-В проекте используется [формат переноса строки](https://developer.mozilla.org/ru/docs/Glossary/CRLF) для Unix-систем - `LF`, который, наиболее вероятно, будет у вас на реальной работе.
+В проекте используется [формат переноса строки](https://developer.mozilla.org/ru/docs/Glossary/CRLF) для Unix-систем - `LF`.
+
+Этот формат, наиболее вероятно, будет у вас на реальной работе.
+
+`CRLF` который используется в Windows следует переформатироввть при клонированием проекта.
 
 В связи с этим перед клонированием следует ввести в терминал команду `git config --global core.autocrlf input`
 
@@ -19,7 +23,9 @@
 
 Наиболее вероятно на вашей будущей работе будут правила по написанию и форматированию кода.
 
-Мы используем `Eslint` и `Prettier`. Рекомендуется сразу включить авто-форматирование ([Actions on Save](https://www.jetbrains.com/guide/go/tips/run-actions-on-save/)) и обращать внимание на подсказки.
+Мы используем `Eslint` и `Prettier`. 
+
+Рекомендуется сразу включить авто-форматирование ([Actions on Save](https://www.jetbrains.com/guide/go/tips/run-actions-on-save/)) и обращать внимание на подсказки.
 
 Также для вашего удобства рекомендуем включить `Optimize imports`. Так ваша `IDE` будет автоматически удалять неиспользуемые импорты. Скажем нет ручной работе!
 
@@ -33,7 +39,7 @@
 
 ## Архитектура
 
-В проекте используется [модульная архитектура](https://javascript.plainenglish.io/frontend-architectures-simple-modular-approach-7f3b3efe0ecd) с использованием [DDD](https://www.angulararchitects.io/blog/sustainable-angular-architectures-1/).
+В проекте используется [модульная архитектура](https://javascript.plainenglish.io/frontend-architectures-simple-modular-approach-7f3b3efe0ecd) (где под модулями мы подразумеваем библиотеки NX) с использованием [DDD](https://www.angulararchitects.io/blog/sustainable-angular-architectures-1/).
 
 Используйте [NX консоль](https://nx.dev/recipes/nx-console/console-generate-command) для генерации библиотек и их наполнения. 
 
