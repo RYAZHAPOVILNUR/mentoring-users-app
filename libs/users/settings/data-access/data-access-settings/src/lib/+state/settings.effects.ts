@@ -1,21 +1,25 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of, switchMap } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+import { LocalStorageService, StorageKey } from '@shared/util-storage';
 
 import { SettingsActions } from './settings.actions';
 
 @Injectable()
 export class SettingsEffects {
+  private readonly localStorageService = inject(LocalStorageService);
+
   loadSettings$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(SettingsActions.loadSettings),
       switchMap(() => {
-        const articleViewType = localStorage.getItem('articleViewType');
+        const articleViewType = this.localStorageService.get<string>(StorageKey.ARTICLE_VIEW_TYPE);
         const defaultViewType = 'LIST';
 
         if (!articleViewType) {
-          localStorage.setItem('articleViewType', defaultViewType);
+          this.localStorageService.set(StorageKey.ARTICLE_VIEW_TYPE, defaultViewType);
         }
 
         return of(1).pipe(
@@ -35,7 +39,8 @@ export class SettingsEffects {
     return this.actions$.pipe(
       ofType(SettingsActions.setArticlesStyleType),
       switchMap(({ articlesViewStyleType }) => {
-        localStorage.setItem('articleViewType', articlesViewStyleType);
+        this.localStorageService.set(StorageKey.ARTICLE_VIEW_TYPE, articlesViewStyleType);
+
         return of(1).pipe(
           map(() =>
             SettingsActions.setArticlesStyleTypeSuccess({

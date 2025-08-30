@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { ApiService } from '@core/data-access-api';
+import { LocalStorageService, StorageKey } from '@shared/util-storage';
 
 import { GithubTokenDTO } from '../models/github-token-DTO.interface';
 import { GithubUserDTO } from '../models/github-user-DTO.interface';
@@ -12,9 +12,9 @@ import { GITHUB_CLIENT_ID } from '../tokens/github-client-id.token';
   providedIn: 'root',
 })
 export class GithubApiService {
-  http = inject(HttpClient);
-  apiService = inject(ApiService);
-  clientId = inject(GITHUB_CLIENT_ID);
+  private readonly localStorageService = inject(LocalStorageService);
+  private readonly apiService = inject(ApiService);
+  private readonly clientId = inject(GITHUB_CLIENT_ID);
 
   public accessToken = new BehaviorSubject<string | null>(this.getStoredAccessToken());
 
@@ -30,15 +30,15 @@ export class GithubApiService {
     return this.apiService.post<GithubUserDTO, GithubTokenDTO>('/githubAPI/getUser', { token });
   }
 
-  public getStoredAccessToken() {
-    return localStorage.getItem('github');
+  public getStoredAccessToken(): string | null {
+    return this.localStorageService.get<string>(StorageKey.GITHUB);
   }
 
-  public setStoredAccessToken(token: string) {
-    return localStorage.setItem('github', token);
+  public setStoredAccessToken(token: string): void {
+    this.localStorageService.set(StorageKey.GITHUB, token);
   }
 
-  public clearStoredAccessToken() {
-    return localStorage.removeItem('github');
+  public clearStoredAccessToken(): void {
+    this.localStorageService.remove(StorageKey.GITHUB);
   }
 }

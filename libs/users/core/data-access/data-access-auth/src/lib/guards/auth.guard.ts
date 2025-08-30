@@ -1,15 +1,18 @@
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { LocalStorageJwtService } from '@core/data-access-interceptors';
+import { LocalStorageService, StorageKey } from '@shared/util-storage';
 
 export const authGuard = () => {
   const router = inject(Router);
-  const storage = inject(LocalStorageJwtService);
+  const localStorageService = inject(LocalStorageService);
 
-  if (!storage.getItem()) {
+  const token = localStorageService.get<string>(StorageKey.JWT_TOKEN);
+
+  if (!token) {
     router.navigate(['/guest/home']);
     return false;
   }
+
   return true;
 };
