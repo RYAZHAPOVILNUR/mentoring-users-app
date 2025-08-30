@@ -41,3 +41,5 @@ export const loadUserSuccess = createAction('[Users/Api] Load User Success', pro
 export const loadUserFailed = createAction('[Users/Api] Load User Failed', props<{ error: HttpErrorResponse }>());
 
 export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{ status: LoadingStatus }>());
+
+export const setUsersFilter = createAction('[Users Page] Set Users Filter', props<{ filter: {name: string} }>());
