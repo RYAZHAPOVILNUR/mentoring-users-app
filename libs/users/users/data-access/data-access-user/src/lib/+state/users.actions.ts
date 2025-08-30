@@ -20,7 +20,7 @@ export const deleteUserFailed = createAction('[Users/Api] Delete User Failed', p
 export const addUser = createAction('[Users Page] Add User', props<{ userData: CreateUserDTO }>());
 export const addUserSuccess = createAction('[Users/Api] Add User Success', props<{ userData: UserEntity }>());
 export const addUserFailed = createAction('[Users/Api] Add User Failed', props<{ error: HttpErrorResponse }>());
-
+export const setUsersFilter = createAction('[Users] Set users Filter', props<{ filter: { name: string } }>());
 // export const selectId = createAction('[Users Page] Select Id', props<{ id: number }>());
 
 // export const deleteSelectedId = createAction('[Users Page] Delete Selected Id');
