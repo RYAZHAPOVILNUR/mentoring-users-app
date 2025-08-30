@@ -1,0 +1,21 @@
+<div class="filter-row">
+  <label for="name">Имя</label>
+  <input
+    class="input"
+    id="name"
+    type="text"
+    [formControl]="nameControl"
+    placeholder="Введите имя..."
+    autocomplete="off"
+  />
+
+  <button
+    class="button"
+    type="button"
+    (click)="nameControl.setValue('')"
+    *ngIf="(nameControl.value ?? '').length > 0"
+    aria-label="Очистить"
+  >
+    ×
+  </button>
+</div>
