@@ -26,6 +26,7 @@
       "@shared/ui-confirm-dialog": ["libs/shared/ui/ui-confirm-dialog/src/index.ts"],
       "@shared/util-language": ["libs/shared/utils/util-language/src/index.ts"],
       "@shared/util-router": ["libs/shared/utils/util-router/src/index.ts"],
+      "@shared/util-storage": ["libs/shared/utils/util-storage/src/index.ts"],
       "@shared/util-store": ["libs/shared/utils/util-store/src/index.ts"],
       "@shared/util-typescript": ["libs/shared/utils/util-typescript/src/index.ts"],
       "@users/articles/data-access-article": ["libs/users/articles/data-access/data-access-article/src/index.ts"],

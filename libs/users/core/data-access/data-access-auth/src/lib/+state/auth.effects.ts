@@ -5,8 +5,8 @@ import { Store } from '@ngrx/store';
 import { catchError, concatMap, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
 
 import { ApiService } from '@core/data-access-api';
-import { LocalStorageJwtService } from '@core/data-access-interceptors';
-import { UserDTO, userAdapter } from '@users/shared/data-access-models';
+import { LocalStorageService, StorageKey } from '@shared/util-storage';
+import { userAdapter, UserDTO } from '@users/shared/data-access-models';
 
 import { authActions } from './auth.actions';
 import { selectAuthStatus } from './auth.selectors';
@@ -38,11 +38,11 @@ export const loginEffect$ = createEffect(
 );
 
 export const loginSuccessEffect$ = createEffect(
-  (actions$ = inject(Actions), localStorageJwtService = inject(LocalStorageJwtService), router = inject(Router)) => {
+  (actions$ = inject(Actions), localStorageService = inject(LocalStorageService), router = inject(Router)) => {
     return actions$.pipe(
       ofType(authActions.loginSuccess),
       tap((action) => {
-        localStorageJwtService.setItem(action.res.authToken);
+        localStorageService.set(StorageKey.JWT_TOKEN, action.res.authToken);
         router.navigateByUrl('/profile');
       }),
     );
@@ -54,14 +54,14 @@ export const getUserEffect$ = createEffect(
   (
     actions$ = inject(Actions),
     api = inject(ApiService),
-    localStorageJwtService = inject(LocalStorageJwtService),
+    localStorageService = inject(LocalStorageService),
     store = inject(Store),
   ) =>
     actions$.pipe(
       ofType(authActions.getUser),
       withLatestFrom(store.select(selectAuthStatus)),
       switchMap(([, authStatus]) =>
-        localStorageJwtService.getItem() && authStatus !== 'loaded'
+        localStorageService.get(StorageKey.JWT_TOKEN) && authStatus !== 'loaded'
           ? api.get<UserDTO>('/auth/me').pipe(
               map((userDTO) =>
                 authActions.getUserSuccess({
@@ -92,11 +92,11 @@ export const registerEffect$ = createEffect(
 );
 
 export const registerSuccessEffects$ = createEffect(
-  (actions$ = inject(Actions), localStorageJwtService = inject(LocalStorageJwtService), router = inject(Router)) => {
+  (actions$ = inject(Actions), localStorageService = inject(LocalStorageService), router = inject(Router)) => {
     return actions$.pipe(
       ofType(authActions.registerSuccess),
       concatMap((action) => {
-        localStorageJwtService.setItem(action.authToken);
+        localStorageService.set(StorageKey.JWT_TOKEN, action.authToken);
         router.navigateByUrl('/profile');
         return of(authActions.getUser());
       }),
@@ -106,11 +106,11 @@ export const registerSuccessEffects$ = createEffect(
 );
 
 export const logoutEffect$ = createEffect(
-  (actions$ = inject(Actions), jwtService = inject(LocalStorageJwtService), router = inject(Router)) =>
+  (actions$ = inject(Actions), localStorageService = inject(LocalStorageService), router = inject(Router)) =>
     actions$.pipe(
       ofType(authActions.logout),
       tap(() => {
-        jwtService.removeItem();
+        localStorageService.remove(StorageKey.JWT_TOKEN);
         router.navigate(['/login']);
         const notDefaultTheme: Element | null = document.head.querySelector('.style-manager-theme');
         if (notDefaultTheme) notDefaultTheme.remove();
