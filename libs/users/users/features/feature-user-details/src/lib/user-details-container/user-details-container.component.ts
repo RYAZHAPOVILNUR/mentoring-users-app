@@ -12,6 +12,7 @@ import { UserEntity } from '@users/shared/data-access-models';
 import { CreateUserDTO, UserDialogService, UsersFacade } from '@users/users/data-access-user';
 
 import { UserDetailsCardComponent } from '../user-details-card/user-details-card.component';
+import { onSuccessSPonCbType } from '@users/users/data-access-user';
 
 @Component({
   standalone: true,
@@ -79,5 +80,8 @@ export class UserDetailsComponent {
         }),
       )
       .subscribe();
+  }
+  onAddStoryPoints(userData: CreateUserDTO, onSuccessAddSP: onSuccessSPonCbType) {
+    this.usersFacade.addStoryPoints(userData, this.user.id, onSuccessAddSP);
   }
 }

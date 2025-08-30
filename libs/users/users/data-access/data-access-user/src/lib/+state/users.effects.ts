@@ -9,7 +9,7 @@ import { UserDTO, userAdapter, UserEntity } from '@users/shared/data-access-mode
 
 import * as UsersActions from './users.actions';
 import { selectUsersEntities } from './users.selectors';
-import { CreateUserDTO } from '../types/create-user-dto.type';
+import { CreateUserDTO, UsersDTO } from '../types/create-user-dto.type';
 
 export const userEffects = createEffect(
   () => {
@@ -124,9 +124,9 @@ export const loadUser = createEffect(
     return actions$.pipe(
       ofType(UsersActions.loadUser),
       withLatestFrom(store.select(selectRouteParams)),
-      switchMap(([, params]) => {
+      switchMap(([, params ]) => {
         if (params['id']) {
-          return apiService.get<UserDTO>(`/users/${params['id']}`).pipe(
+          return apiService.get<UserDTO>(`/users/${ params['id'] }`).pipe(
             map((user) => userAdapter.DTOtoEntity(user)),
             map((userEntity) => UsersActions.loadUserSuccess({ userData: userEntity })),
             catchError((error) => {
@@ -140,4 +140,38 @@ export const loadUser = createEffect(
     );
   },
   { functional: true },
+);
+
+// addUserStoryPoints
+export const addUserStoryPoints  = createEffect(
+  ()=> {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
+
+    return actions$.pipe(
+      ofType(UsersActions.addUserStoryPoints),
+      withLatestFrom(usersEntities$),
+      filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
+      map(([{ userData, id, onSuccessAddSP }, usersEntities]) => ({
+        user: {
+          ...userAdapter.entityToDTO(<UserEntity>usersEntities[id]),
+          totalStoryPoints: userData.totalStoryPoints,
+        },
+        onSuccessAddSP,
+      })),
+      switchMap(({ user, onSuccessAddSP }) =>
+        apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+          map((userData) => ({ userData, onSuccessAddSP })),
+          tap(({ onSuccessAddSP }) => onSuccessAddSP()),
+          map(({ userData }) => UsersActions.addUserStoryPointsSuccess({ userData })),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(UsersActions.addUserStoryPointsFailed({ error }));
+          }),
+        ),
+      ),
+    );
+  },
+  { functional: true }
 );

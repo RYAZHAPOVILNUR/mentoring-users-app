@@ -9,7 +9,9 @@ import { UserEntity } from '@users/shared/data-access-models';
 
 import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
-import { CreateUserDTO } from '../types/create-user-dto.type';
+import { CreateUserDTO, UsersDTO } from '../types/create-user-dto.type';
+import { addUserStoryPoints } from './users.effects';
+import { onSuccessEditionCbType } from './users.actions';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
@@ -28,6 +30,7 @@ export class UsersFacade {
     select(UsersSelectors.selectUsersError),
   );
   public readonly filteredUsers$ = this.store.select(UsersSelectors.filteredUsersSelector);
+
   /**
    * Use the initialization action to perform one
    * or more tasks in your Effects.
@@ -66,5 +69,9 @@ export class UsersFacade {
 
   setUsersFilter(filter: { name: string }): void {
     this.store.dispatch(UsersActions.setUsersFilter({ filter }));
+  }
+
+  addStoryPoints(userData: CreateUserDTO, id: number, onSuccessAddSP: onSuccessEditionCbType) {
+    this.store.dispatch(UsersActions.addUserStoryPoints({ userData, id, onSuccessAddSP }));
   }
 }
