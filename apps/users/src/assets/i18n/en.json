@@ -3,7 +3,14 @@
   "LAYOUT": {
     "HEADER": {
       "HOME": "Home",
-      "USERS": "Users"
+      "USERS": "Users",
+      "TIMER": {
+        "TIMER_LABEL": "Timer",
+        "DAYS": "d",
+        "HOURS": "h",
+        "MINUTES": "m",
+        "SECONDS": "s"
+      }
     },
     "SIDENAV": {
       "PROFILE": "Profile",
@@ -66,6 +73,11 @@
       "CITY": "City",
       "CANSEL": "Cansel",
       "CHANGE": "Change"
+    },
+    "TIMER": {
+      "START_TIMER": "Start",
+      "RESTART_TIMER": "Restart",
+      "STOP_TIMER": "Stop"
     }
   },
   "ARTICLES": {
