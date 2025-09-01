@@ -2,7 +2,14 @@
   "LAYOUT": {
     "HEADER": {
       "HOME": "Главная",
-      "USERS": "Пользователи"
+      "USERS": "Пользователи",
+      "TIMER": {
+        "TIMER_LABEL": "Таймер",
+        "DAYS": "д",
+        "HOURS": "ч",
+        "MINUTES": "м",
+        "SECONDS": "с"
+      }
     },
     "SIDENAV": {
       "PROFILE": "Профиль",
@@ -65,6 +72,11 @@
       "CITY": "Город",
       "CANSEL": "Отмена",
       "CHANGE": "Сменить"
+    },
+    "TIMER": {
+      "START_TIMER": "Начать",
+      "RESTART_TIMER": "Сбросить",
+      "STOP_TIMER": "Остановить"
     }
   },
   "ARTICLES": {
@@ -89,4 +101,3 @@
     "FLAT": "Квартира"
   }
 }
-
