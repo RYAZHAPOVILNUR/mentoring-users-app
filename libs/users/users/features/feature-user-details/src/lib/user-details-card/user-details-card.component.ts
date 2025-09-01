@@ -85,6 +85,8 @@ export class UserDetailsCardComponent implements OnInit {
     city: new FormControl({ value: '', disabled: !this.vm.editMode }, { nonNullable: true }),
   });
 
+  public totalStoryPoints = new FormControl({ value: 0, disabled: true });
+
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<unknown>;
 
   public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
@@ -113,6 +115,10 @@ export class UserDetailsCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
+    }
+
+    if(vm.user){
+      this.totalStoryPoints.setValue(vm.user.totalStoryPoints);
     }
 
     if (vm.editMode) {
@@ -167,5 +173,10 @@ export class UserDetailsCardComponent implements OnInit {
         }),
       )
       .subscribe();
+  }
+
+  public onChangeStoryPoints(points: UserEntity['totalStoryPoints']) {
+    this.totalStoryPoints.enable();
+
   }
 }
