@@ -78,6 +78,13 @@ export class UserDetailsCardComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'top',
     });
+  private onAddSpSuccess: Callback = () =>
+    this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+
   public formGroup = new FormBuilder().group({
     name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
@@ -101,6 +108,11 @@ export class UserDetailsCardComponent implements OnInit {
   @Output() closeEditMode = new EventEmitter();
   @Output() openEditMode = new EventEmitter();
   @Output() deleteUser = new EventEmitter();
+
+  @Output() changeStoryPoints = new EventEmitter<{
+    user: CreateUserDTO;
+    onSuccessAddSp: Callback;
+  }>();
   ngOnInit(): void {
     this.checkChangeFields();
   }
@@ -115,9 +127,6 @@ export class UserDetailsCardComponent implements OnInit {
         username: vm.user.username,
         city: vm.user.city,
       });
-    }
-
-    if(vm.user){
       this.totalStoryPoints.setValue(vm.user.totalStoryPoints);
     }
 
@@ -175,8 +184,19 @@ export class UserDetailsCardComponent implements OnInit {
       .subscribe();
   }
 
-  public onChangeStoryPoints(points: UserEntity['totalStoryPoints']) {
-    this.totalStoryPoints.enable();
-
+  public onChangeStoryPoints(): void {
+    this.changeStoryPoints.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        totalStoryPoints: this.totalStoryPoints.value || 0,
+        purchaseDate: this.vm.user?.purchaseDate || new Date().toString(),
+        educationStatus: this.vm.user?.educationStatus || 'trainee',
+        username: this.formGroup.value.username || '',
+        city: this.formGroup.value.city || '',
+      },
+      onSuccessAddSp: this.onAddSpSuccess,
+    });
+    this.totalStoryPoints.disable();
   }
 }

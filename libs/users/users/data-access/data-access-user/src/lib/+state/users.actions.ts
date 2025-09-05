@@ -41,3 +41,16 @@ export const loadUserSuccess = createAction('[Users/Api] Load User Success', pro
 export const loadUserFailed = createAction('[Users/Api] Load User Failed', props<{ error: HttpErrorResponse }>());
 
 export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{ status: LoadingStatus }>());
+
+export const addStoryPoints = createAction(
+  '[Users Detail] Add Story Points',
+  props<{ id: number; userData: CreateUserDTO; onSuccessAddSp: Callback }>(),
+);
+export const addStoryPointsSuccess = createAction(
+  '[Users Detail] Add Story Points Success',
+  props<{ userData: UserDTO }>(),
+);
+export const addStoryPointsFailed = createAction(
+  '[Users Detail] Add Story Points Failed',
+  props<{ error: HttpErrorResponse }>(),
+);
