@@ -68,9 +68,26 @@
               <mat-label>Имя пользователя:</mat-label>
               <input matInput placeholder="Имя пользователя" formControlName="username" class="edit-user-input" />
             </mat-form-field>
-
-            <users-address-field [type]="addressTypes.CITY" formControlName="city"/>
+            <users-address-field [type]="addressTypes.CITY" formControlName="city" />
           </div>
+          <mat-form-field
+            class="edit-user-field"
+            [matTooltip]="'Текущие сторипоинты: ' + totalStoryPoints.value"
+            [matTooltipDisabled]="totalStoryPoints.enabled"
+          >
+            <mat-label>Количество сторипоинтов</mat-label>
+            <input matInput placeholder="Количество сторипоинтов" [formControl]="totalStoryPoints" />
+            <button matSuffix mat-icon-button (click)="totalStoryPoints.enable()" *ngIf="totalStoryPoints.disabled">
+              <mat-icon>add</mat-icon>
+            </button>
+            <button matSuffix mat-icon-button *ngIf="totalStoryPoints.enabled" (click)="onChangeStoryPoints()">
+              <mat-icon>check</mat-icon>
+            </button>
+            <button matSuffix mat-icon-button *ngIf="totalStoryPoints.enabled" (click)="totalStoryPoints.disable()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
               mat-icon-button

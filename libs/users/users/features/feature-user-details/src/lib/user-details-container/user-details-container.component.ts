@@ -81,4 +81,7 @@ export class UserDetailsComponent {
       )
       .subscribe();
   }
+  onAddStoryPoints(userData: CreateUserDTO, onSuccessAddSp: Callback) {
+    this.usersFacade.addStoryPoints(userData, this.user.id, onSuccessAddSp);
+  }
 }
