@@ -10,10 +10,11 @@ import { UsersFacade } from '@users/users/data-access-user';
 
 import { UserListContainerStore } from './user-list-container.store';
 import { UserListComponent } from '../../components/user-list/user-list.component';
+import { UsersFormComponent } from "../../components/users-filter/users-filter.component";
 
 @Component({
   standalone: true,
-  imports: [CommonModule, UserListComponent, MatButtonModule, MatDialogModule, LetDirective],
+  imports: [CommonModule, UserListComponent, MatButtonModule, MatDialogModule, LetDirective, UsersFormComponent],
   templateUrl: './user-list-container.component.html',
   styleUrls: ['./user-list-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

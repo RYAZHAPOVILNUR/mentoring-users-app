@@ -6,5 +6,6 @@
     loggedUser: loggedUser$
   } as vm"
 >
+  <users-users-form></users-users-form>
   <users-user-list [vm]="vm" (deleteUser)="onDeleteUser($event)" (redirectToEdit)="onRedirectToEdit($event)" />
 </ng-container>
