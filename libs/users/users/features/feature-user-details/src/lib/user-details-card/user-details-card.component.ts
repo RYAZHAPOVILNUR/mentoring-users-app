@@ -26,6 +26,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { PushPipe } from '@ngrx/component';
 import { BehaviorSubject, tap } from 'rxjs';
 
+import { ApiService } from '@core/data-access-api';
 import { AddressType } from '@shared/data-access-address';
 import { AddressFieldComponent } from '@shared/feature-address-field';
 import { LoadingStatus } from '@shared/util-store';
@@ -72,6 +73,7 @@ export class UserDetailsCardComponent implements OnInit {
   };
   private readonly destroyRef = inject(DestroyRef);
   private snackBar = inject(MatSnackBar);
+  private usersApi = inject(ApiService);
   private onEditSuccess: Callback = () =>
     this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
       duration: 2500,
@@ -83,6 +85,11 @@ export class UserDetailsCardComponent implements OnInit {
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
     username: new FormControl({ value: '', disabled: !this.vm.editMode }),
     city: new FormControl({ value: '', disabled: !this.vm.editMode }, { nonNullable: true }),
+    totalStoryPoints: new FormControl<number | null>({ value: null, disabled: !this.vm.editMode }, [
+      Validators.required,
+      Validators.min(0),
+      Validators.pattern(/^\d+$/),
+    ]),
   });
 
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<unknown>;
@@ -112,6 +119,7 @@ export class UserDetailsCardComponent implements OnInit {
         email: vm.user.email,
         username: vm.user.username,
         city: vm.user.city,
+        totalStoryPoints: vm.user.totalStoryPoints ?? null,
       });
     }
 
@@ -125,18 +133,40 @@ export class UserDetailsCardComponent implements OnInit {
     return this._vm;
   }
   onSubmit(): void {
+    if (!this.vm.user) return;
+
+    const formValue = this.formGroup.getRawValue();
+
+    const updatedUser: CreateUserDTO = {
+      name: formValue.name || '',
+      username: formValue.username || '',
+      city: formValue.city || '',
+      email: formValue.email?.trim().toLowerCase() || '',
+      purchaseDate: new Date().toString(),
+      educationStatus: 'trainee',
+      totalStoryPoints: formValue.totalStoryPoints ?? this.vm.user.totalStoryPoints,
+    };
+
+    const isStoryPointsChanged = updatedUser.totalStoryPoints !== this.vm.user.totalStoryPoints;
+
     this.editUser.emit({
-      user: {
-        name: this.formGroup.value.name || '',
-        username: this.formGroup.value.username || '',
-        city: this.formGroup.value.city || '',
-        email: this.formGroup.value.email?.trim().toLowerCase() || '',
-        purchaseDate: new Date().toString() || '',
-        educationStatus: 'trainee',
+      user: { ...this.vm.user, ...updatedUser, id: this.vm.user.id! },
+      onSuccessCb: () => {
+        this.onEditSuccess();
+
+        if (isStoryPointsChanged) {
+          setTimeout(() => {
+            this.snackBar.open('Сторипоинты успешно обновлены', 'Закрыть', {
+              duration: 2500,
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            });
+          }, 2500);
+        }
       },
-      onSuccessCb: this.onEditSuccess,
     });
   }
+
   onCloseUser() {
     this.closeUser.emit();
   }
@@ -151,6 +181,13 @@ export class UserDetailsCardComponent implements OnInit {
   }
   public onOptionClicked(selectedValue: string) {
     this.formGroup.get('city')?.setValue(selectedValue);
+  }
+  get totalStoryPointsTooltip(): string {
+    const value = this.vm?.user?.totalStoryPoints;
+    return value != null ? value.toString() : '';
+  }
+  get totalStoryPointsControl() {
+    return this.formGroup.get('totalStoryPoints');
   }
   private checkChangeFields() {
     this.formGroup.valueChanges

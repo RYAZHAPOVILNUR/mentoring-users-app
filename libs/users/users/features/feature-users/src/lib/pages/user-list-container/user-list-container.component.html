@@ -6,7 +6,7 @@
     loggedUser: loggedUser$
   } as vm"
 >  
-  <users-filter (nameFilterChange)="usersFacade.setUsersFilter($event)"></users-filter>
+  <users-filter (nameFilterChange)="onFilterChange($event)"></users-filter>
 
   <users-user-list [vm]="vm" (deleteUser)="onDeleteUser($event)" (redirectToEdit)="onRedirectToEdit($event)" />
 </ng-container>

@@ -13,7 +13,7 @@
     class="button"
     type="button"
     (click)="nameControl.setValue('')"
-    *ngIf="(nameControl.value ?? '').length > 0"
+    *ngIf="nameControl.value.length > 0"
     aria-label="Очистить"
   >
     ×

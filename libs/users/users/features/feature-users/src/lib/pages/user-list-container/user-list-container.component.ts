@@ -29,6 +29,10 @@ export class UserListContainerComponent {
   public readonly errors$ = this.componentStore.errors$;
   public readonly loggedUser$ = this.usersFacade.loggedUser$;
 
+  onFilterChange(filterValue: string) {
+    this.usersFacade.setUsersFilter(filterValue);
+  }
+
   onDeleteUser(user: UserVM) {
     this.componentStore.deleteUser(user);
   }

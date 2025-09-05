@@ -70,6 +70,25 @@
             </mat-form-field>
 
             <users-address-field [type]="addressTypes.CITY" formControlName="city"/>
+
+            <mat-form-field
+              class="edit-user-field"
+              [matTooltip]="totalStoryPointsTooltip"
+              [matTooltipDisabled]="formGroup.enabled"
+            >
+              <mat-label>Количество сторипоинтов</mat-label>
+              <input matInput placeholder="Введите число" formControlName="totalStoryPoints" class="edit-user-input" />
+              <mat-error
+                *ngIf="totalStoryPointsControl?.hasError('required')"
+              >
+                Это поле обязательно для заполнения
+              </mat-error>
+              <mat-error
+                *ngIf="totalStoryPointsControl?.hasError('pattern') || totalStoryPointsControl?.hasError('min')"
+              >
+                Допустимы только числовые значения, от 0 и выше
+              </mat-error>
+            </mat-form-field>
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
