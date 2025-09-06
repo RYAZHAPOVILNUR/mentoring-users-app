@@ -17,6 +17,7 @@ export const selectUsersError = createSelector(selectUsersState, (state: UsersSt
 export const selectAllUsers = createSelector(selectUsersState, (state: UsersState) => selectAll(state));
 
 export const usersFilterSelector = createSelector(selectUsersState, (state: UsersState) => state.usersFilter);
+
 export const selectFilteredUsers = createSelector(usersFilterSelector, selectAllUsers, (userFilter, allUsers) =>
   userFilter.name !== ""
     ? allUsers.filter((user) => user.name.toLowerCase().includes(userFilter.name.toLowerCase()))
