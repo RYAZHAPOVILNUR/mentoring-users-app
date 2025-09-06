@@ -1,0 +1,23 @@
+<div
+  role="button"
+  tabindex="0"
+  class="folder-card"
+  (dblclick)="onCardClick()"
+  (mouseenter)="isHovered = true"
+  (mouseleave)="isHovered = false"
+>
+  <div class="folder-card__buttons">
+    <button class="folder-card__open">
+      <mat-icon class="folder-card__icon folder-card__icon--folder">folder</mat-icon>
+    </button>
+    <button
+      class="folder-card__delete"
+      [ngClass]="{ 'folder-card__delete--visible': isHovered }"
+      (click)="onDeleteClick(folder)"
+    >
+      <mat-icon class="folder-card__icon folder-card__icon--delete">delete</mat-icon>
+    </button>
+  </div>
+  <span class="folder-card__title">{{ folder.title }}</span>
+  <span class="folder-card__date">{{ folder.created_at | date }}</span>
+</div>

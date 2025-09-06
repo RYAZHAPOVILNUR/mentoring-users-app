@@ -19,8 +19,8 @@ import { articlesEffects, articlesFeature } from '@users/articles/data-access-ar
 import { commentsEffects, commentsFeature } from '@users/articles/data-access-comment';
 import { backlogEffects, backlogFeature } from '@users/backlog/data-access-backlog';
 import { authEffects, authFeature } from '@users/core/data-access-auth';
-import { foldersEffects, foldersFeature } from '@users/data-access-folders';
-import { materialsEffects, materialsFeature } from '@users/data-access-materials';
+import { foldersEffects, foldersFeature } from '@users/data-access-folder';
+import { materialsEffects, materialsFeature } from '@users/data-access-material';
 import { SettingsEffects, settingsFeature } from '@users/settings/data-access-settings';
 import { TasksEffects, tasksFeature } from '@users/tasks/data-access-task';
 import { userEffects, USERS_FEATURE_KEY, usersReducer } from '@users/users/data-access-user';

@@ -1,7 +1,0 @@
-@for (material of materials; track material.id) {
-  <users-materials-card
-    [material]="material"
-    (deleteMaterial)="onDelete(material)"
-    (viewMaterial)="openMaterial(material)"
-  />
-}

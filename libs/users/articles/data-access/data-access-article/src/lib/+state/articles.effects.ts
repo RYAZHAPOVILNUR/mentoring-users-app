@@ -8,9 +8,9 @@ import { ApiService } from '@core/data-access-api';
 import { selectRouteParams } from '@shared/util-store';
 import { Article } from '@users/shared/data-access-models';
 
-import { CreateArticle } from '../interfaces/create-article.interface';
 import { articlesActions } from './articles.actions';
 import { selectArticlesEntities } from './articles.selectors';
+import { CreateArticle } from '../interfaces/create-article.interface';
 
 export const publishArticle$ = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService), router = inject(Router)) => {
