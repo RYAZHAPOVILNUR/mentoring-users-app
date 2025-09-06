@@ -2,7 +2,6 @@ import { Component, inject } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { UsersFacade } from "@users/users/data-access-user";
 import { MatInputModule } from "@angular/material/input";
-import { setUsersFilter } from "libs/users/users/data-access/data-access-user/src/lib/+state/users.actions";
 import { debounceTime, distinctUntilChanged } from "rxjs";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
@@ -17,7 +16,7 @@ export class UsersFormComponent {
   usersFacade = inject(UsersFacade);
 
   filterForm = new FormGroup({
-    'userName': new FormControl(''),
+    'userName': new FormControl('', { nonNullable: true }),
   });
 
   constructor() {
@@ -27,12 +26,12 @@ export class UsersFormComponent {
         distinctUntilChanged(),
         takeUntilDestroyed(),
       )
-      .subscribe(value => {
-        this.setUsersFilter(value)
+      .subscribe((inputValue: string) => {
+        this.setUsersFilter(inputValue)
       });
   }
 
-  setUsersFilter(username: string | null) {
-    this.usersFacade.setUsersFilter({ filter: { name: username ? username : '' } });
+  setUsersFilter(username: string) {
+    this.usersFacade.setUsersFilter({ filter: { name: username } });
   }
 }
