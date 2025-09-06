@@ -1,10 +1,9 @@
-import{ createFeatureSelector, createSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { selectRouteParams } from '@shared/util-store';
 
 import { usersAdapter, UsersState } from './users.reducer';
 import { USERS_FEATURE_KEY } from '../constants/users-feature-key.constant';
-
 
 // Lookup the 'Users' feature state managed by NgRx
 export const selectUsersState = createFeatureSelector<UsersState>(USERS_FEATURE_KEY);

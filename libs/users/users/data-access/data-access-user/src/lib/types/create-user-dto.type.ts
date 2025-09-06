@@ -12,12 +12,4 @@ export type CreateUserDTO = DeepReadonly<{
   educationStatus: string;
   educationTime?: number;
   totalStoryPoints?: number;
-}>;
-
-export interface UsersDTO {
-  id: number;
-  name: string;
-  email: string;
-  username: string;
-  totalStoryPoints?: number;
-}
+}>

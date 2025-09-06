@@ -30,8 +30,7 @@ import { AddressApiService } from '@shared/data-access-address';
 import { LoadingStatus } from '@shared/util-store';
 import { Callback } from '@shared/util-typescript';
 import { UserEntity } from '@users/shared/data-access-models';
-import { CreateUserDTO } from '@users/users/data-access-user';
-import { onSuccessSPonCbType } from '@users/users/data-access-user';
+import { CreateUserDTO, onSuccessSPonCbType } from '@users/users/data-access-user';
 
 type DetailUsersCardVm = {
   editMode: boolean;
@@ -78,6 +77,12 @@ export class UserDetailsCardComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'top',
     });
+  private onAddSPSuccess: onSuccessSPonCbType = () =>
+    this.snackBar.openFromTemplate(this.snackbarTemplateRefSP, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
   public formGroup = new FormBuilder().group({
     name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
@@ -111,18 +116,16 @@ export class UserDetailsCardComponent implements OnInit {
   }
   @Input({ required: true })
   set vm(vm: DetailUsersCardVm) {
-    this._vm = vm;
+    this._vm = this.vm;
 
-    if (vm.user) {
+    if (this.vm.user) {
       this.formGroup.patchValue({
-        name: vm.user.name,
-        email: vm.user.email,
-        username: vm.user.username,
-        city: vm.user.city,
+        name: this.vm.user.name,
+        email: this.vm.user.email,
+        username: this.vm.user.username,
+        city: this.vm.user.city,
       });
-      this.totalStoryPoints.setValue(
-        this._vm.user?.totalStoryPoints ?? 0
-      )
+      this.totalStoryPoints.setValue(this.vm.user?.totalStoryPoints ?? 0);
     }
 
     if (vm.editMode) {
@@ -162,6 +165,26 @@ export class UserDetailsCardComponent implements OnInit {
   public onOptionClicked(selectedValue: string) {
     this.formGroup.get('city')?.setValue(selectedValue);
   }
+  onAddStoryPoints() {
+    this.totalStoryPoints.disable();
+    this.addStoryPoints.emit({
+      user: {
+        name: this.formGroup.value.name || '',
+        email: this.formGroup.value.email?.trim().toLowerCase() || '',
+        totalStoryPoints: this.totalStoryPoints.value || 0,
+        purchaseDate: '',
+        educationStatus: '',
+      },
+      onSuccessAddSP: this.onAddSPSuccess,
+    });
+  }
+  toggleStoryPoints(): void {
+    if (this.totalStoryPoints.disabled) {
+      this.totalStoryPoints.enable();
+    } else {
+      this.totalStoryPoints.disable();
+    }
+  }
   private checkChangeFields() {
     this.formGroup.valueChanges
       .pipe(
@@ -178,33 +201,4 @@ export class UserDetailsCardComponent implements OnInit {
       )
       .subscribe();
   }
-  private onAddSPSuccess: onSuccessSPonCbType = () =>
-    this.snackBar.openFromTemplate(this.snackbarTemplateRefSP, {
-      duration: 2500,
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-    });
-
-  onAddStoryPoints() {
-    this.totalStoryPoints.disable();
-    this.addStoryPoints.emit({
-      user: {
-        name: this.formGroup.value.name || '',
-        email: this.formGroup.value.email?.trim().toLowerCase() || '',
-        totalStoryPoints: this.totalStoryPoints.value || 0,
-        purchaseDate: '',
-        educationStatus: '',
-      },
-      onSuccessAddSP: this.onAddSPSuccess,
-    });
-  }
-
-  toggleStoryPoints(): void {
-    if (this.totalStoryPoints.disabled) {
-      this.totalStoryPoints.enable();
-    } else {
-      this.totalStoryPoints.disable();
-    }
-  }
 }
-

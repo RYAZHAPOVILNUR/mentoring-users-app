@@ -8,10 +8,9 @@ import { authSelectors } from '@users/core/data-access-auth';
 import { UserEntity } from '@users/shared/data-access-models';
 
 import * as UsersActions from './users.actions';
-import * as UsersSelectors from './users.selectors';
-import { CreateUserDTO, UsersDTO } from '../types/create-user-dto.type';
-import { addUserStoryPoints } from './users.effects';
 import { onSuccessEditionCbType } from './users.actions';
+import * as UsersSelectors from './users.selectors';
+import { CreateUserDTO } from '../types/create-user-dto.type';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {

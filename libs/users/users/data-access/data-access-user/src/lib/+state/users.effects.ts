@@ -9,7 +9,7 @@ import { UserDTO, userAdapter, UserEntity } from '@users/shared/data-access-mode
 
 import * as UsersActions from './users.actions';
 import { selectUsersEntities } from './users.selectors';
-import { CreateUserDTO, UsersDTO } from '../types/create-user-dto.type';
+import { CreateUserDTO } from '../types/create-user-dto.type';
 
 export const userEffects = createEffect(
   () => {
@@ -124,9 +124,9 @@ export const loadUser = createEffect(
     return actions$.pipe(
       ofType(UsersActions.loadUser),
       withLatestFrom(store.select(selectRouteParams)),
-      switchMap(([, params ]) => {
+      switchMap(([, params]) => {
         if (params['id']) {
-          return apiService.get<UserDTO>(`/users/${ params['id'] }`).pipe(
+          return apiService.get<UserDTO>(`/users/${params['id']}`).pipe(
             map((user) => userAdapter.DTOtoEntity(user)),
             map((userEntity) => UsersActions.loadUserSuccess({ userData: userEntity })),
             catchError((error) => {
@@ -143,8 +143,8 @@ export const loadUser = createEffect(
 );
 
 // addUserStoryPoints
-export const addUserStoryPoints  = createEffect(
-  ()=> {
+export const addUserStoryPoints = createEffect(
+  () => {
     const actions$ = inject(Actions);
     const apiService = inject(ApiService);
     const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
@@ -161,7 +161,7 @@ export const addUserStoryPoints  = createEffect(
         onSuccessAddSP,
       })),
       switchMap(({ user, onSuccessAddSP }) =>
-        apiService.post<UsersDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+        apiService.post<UserDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
           map((userData) => ({ userData, onSuccessAddSP })),
           tap(({ onSuccessAddSP }) => onSuccessAddSP()),
           map(({ userData }) => UsersActions.addUserStoryPointsSuccess({ userData })),
@@ -173,5 +173,5 @@ export const addUserStoryPoints  = createEffect(
       ),
     );
   },
-  { functional: true }
+  { functional: true },
 );

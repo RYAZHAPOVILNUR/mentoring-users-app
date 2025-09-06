@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output } from '@angular/core';
+
 import { UsersFacade } from '@users/users/data-access-user';
 
 @Component({

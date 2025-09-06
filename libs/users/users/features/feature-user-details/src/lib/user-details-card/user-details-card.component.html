@@ -89,7 +89,6 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
-
             <mat-form-field
               class="edit-user-field">
               <mat-label>Количество сторипоинтов</mat-label>
@@ -113,6 +112,8 @@
                 <mat-icon>{{ totalStoryPoints.disabled ? 'add' : 'close' }}</mat-icon>
               </button>
             </mat-form-field>
+
+
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button

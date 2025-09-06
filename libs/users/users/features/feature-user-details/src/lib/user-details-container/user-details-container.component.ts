@@ -9,10 +9,9 @@ import { filter, map, Observable, tap } from 'rxjs';
 import { selectQueryParam } from '@shared/util-store';
 import { Callback } from '@shared/util-typescript';
 import { UserEntity } from '@users/shared/data-access-models';
-import { CreateUserDTO, UserDialogService, UsersFacade } from '@users/users/data-access-user';
+import { CreateUserDTO, UserDialogService, UsersFacade, onSuccessSPonCbType } from '@users/users/data-access-user';
 
 import { UserDetailsCardComponent } from '../user-details-card/user-details-card.component';
-import { onSuccessSPonCbType } from '@users/users/data-access-user';
 
 @Component({
   standalone: true,
