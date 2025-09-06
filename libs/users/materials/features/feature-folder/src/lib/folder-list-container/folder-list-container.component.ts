@@ -4,7 +4,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { LetDirective } from '@ngrx/component';
 import { filter, tap } from 'rxjs';
 
-import { CoreUiConfirmDialogComponent } from '@core/ui-core';
+import { ConfirmDialogComponent, ConfirmDialogService } from '@shared/ui-confirm-dialog';
 import { CreateFolder, Folder, FoldersFacade } from '@users/data-access-folder';
 import { FolderAddButtonComponent, FolderAddDialogComponent, FolderDialogService } from '@users/feature-folder-create';
 
@@ -20,6 +20,7 @@ import { FolderListComponent } from '../folder-list/folder-list.component';
 export class FolderListContainerComponent implements OnInit {
   public readonly foldersFacade = inject(FoldersFacade);
   public readonly folderDialogService = inject(FolderDialogService);
+  public readonly confirmDialogService = inject(ConfirmDialogService);
   public readonly folders$ = this.foldersFacade.folders$;
   public readonly status$ = this.foldersFacade.status$;
 
@@ -41,8 +42,9 @@ export class FolderListContainerComponent implements OnInit {
   }
 
   onDeleteFolder(folder: Folder) {
-    const dialogRef = this.folderDialogService.open(CoreUiConfirmDialogComponent, {
-      data: { dialogText: `Вы уверены, что хотите удалить папку "${folder.title}"?` },
+    const dialogRef = this.confirmDialogService.open({
+      title: `Вы уверены, что хотите удалить папку "${folder.title}"`,
+      content: '',
     });
 
     dialogRef

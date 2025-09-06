@@ -7,7 +7,7 @@ import { RouterLink } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { filter, tap } from 'rxjs';
 
-import { CoreUiConfirmDialogComponent } from '@core/ui-core';
+import { ConfirmDialogService } from '@shared/ui-confirm-dialog';
 import { FoldersFacade } from '@users/data-access-folder';
 import { CreateMaterial, Material, MaterialsFacade } from '@users/data-access-material';
 import { MaterialContentComponent } from '@users/feature-material-content';
@@ -47,7 +47,7 @@ export class MaterialListContainerComponent implements OnInit {
   public readonly status$ = this.materialsFacade.status$;
   public readonly materials$ = this.materialsFacade.materials$;
   public readonly dialogService = inject(MaterialDialogService);
-
+  public readonly confirmDialogService = inject(ConfirmDialogService);
   ngOnInit(): void {
     this.foldersFacade.loadOpenedFolder();
     this.materialsFacade.loadMaterials();
@@ -71,10 +71,11 @@ export class MaterialListContainerComponent implements OnInit {
   }
 
   public deleteMaterial(material: Material) {
-    console.log(material);
-    const dialogRef = this.dialogService.open(CoreUiConfirmDialogComponent, {
-      data: { dialogText: `Вы уверены, что хотите удалить материал "${material.title}"?` },
+    const dialogRef = this.confirmDialogService.open({
+      title: `Вы уверены, что хотите удалить материал "${material.title}"?`,
+      content: '',
     });
+
     dialogRef
       .afterClosed()
       .pipe(
