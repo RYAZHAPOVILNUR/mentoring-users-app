@@ -4,7 +4,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { LetDirective } from '@ngrx/component';
 import { filter, tap } from 'rxjs';
 
-import { ConfirmDialogComponent, ConfirmDialogService } from '@shared/ui-confirm-dialog';
+import { ConfirmDialogService } from '@shared/ui-confirm-dialog';
 import { CreateFolder, Folder, FoldersFacade } from '@users/data-access-folder';
 import { FolderAddButtonComponent, FolderAddDialogComponent, FolderDialogService } from '@users/feature-folder-create';
 
