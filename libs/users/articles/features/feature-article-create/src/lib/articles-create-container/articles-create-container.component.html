@@ -1,11 +1,6 @@
-<ng-container
-  *ngrxLet="{
-    editMode: editMode$,
-    editingArticle: editingArticle$
-  } as vm"
->
+<ng-container *ngrxLet="{editingArticle: editingArticle$} as vm">
   <users-articles-create-ui
-    [vm]="vm"
+    [vm]="{editingArticle: vm.editingArticle, editMode: isEdit}"
     (publishArticle)="onPublishArticle($event)"
     (formChange)="onFormChange($event)"
   />

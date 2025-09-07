@@ -11,8 +11,8 @@ import { PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { ApiService } from '@core/data-access-api';
-import { InputPasswordComponent } from '@core/ui-core';
-import { LanguageKeys, LanguageService } from '@shared/util-language';
+import { PasswordFieldComponent } from '@shared/feature-password-field';
+import { LanguageService, LanguageValues } from '@shared/util-language';
 
 @Component({
   selector: 'users-login-form-ui',
@@ -26,7 +26,7 @@ import { LanguageKeys, LanguageService } from '@shared/util-language';
     MatButtonModule,
     ReactiveFormsModule,
     MatCheckboxModule,
-    InputPasswordComponent,
+    PasswordFieldComponent,
     TranslateModule,
     PushPipe,
   ],
@@ -60,7 +60,7 @@ export class LoginFormUiComponent {
     }
   }
 
-  public onSwitchLanguage(language: LanguageKeys) {
+  public onSwitchLanguage(language: LanguageValues) {
     this.languageSwitchService.setLanguage(language);
   }
 }

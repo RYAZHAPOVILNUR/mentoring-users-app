@@ -1,0 +1,35 @@
+<span mat-dialog-title>
+  {{ 'PROFILE.PROFILE_CHANGE.PROFILE_CHANGE' | translate }}
+</span>
+
+<form mat-dialog-content [formGroup]="formGroup"  (ngSubmit)="onFormSubmit()">
+  <label for="profile-change-name-field">
+    {{ 'PROFILE.PROFILE_CHANGE.NAME' | translate }}
+  </label>
+  <mat-form-field appearance="outline">
+    <input id="profile-change-name-field" matInput type="text" formControlName="name" />
+  </mat-form-field>
+
+  <label for="profile-change-email-field">
+    {{ 'PROFILE.PROFILE_CHANGE.EMAIL' | translate }}
+  </label>
+  <mat-form-field appearance="outline">
+    <input id="profile-change-email-field" matInput type="text" formControlName="email" />
+  </mat-form-field>
+
+  <users-address-field appearance="outline" formControlName="city" [type]="addressTypes.CITY"/>
+
+  <div mat-dialog-actions align="end">
+    <button type="button" mat-button mat-dialog-close>
+      {{ 'PROFILE.PROFILE_CHANGE.CANSEL' | translate }}
+    </button>
+
+    <button
+      mat-button
+      type="submit"
+      cdkFocusInitial
+      [disabled]="formGroup.invalid">
+      {{ 'PROFILE.PROFILE_CHANGE.CHANGE' | translate }}
+    </button>
+  </div>
+</form>

@@ -1,3 +1,5 @@
 export { LanguageService } from './lib/services/language.service';
 
-export { LanguageKeys } from './lib/types/language-keys.type';
+export { LanguageValues } from './lib/types/language-values.type';
+
+export { initializeLanguage } from './lib/utils/initialize-language.util';

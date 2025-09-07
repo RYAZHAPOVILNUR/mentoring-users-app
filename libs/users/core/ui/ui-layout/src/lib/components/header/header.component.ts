@@ -10,7 +10,7 @@ import { PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 
-import { LanguageKeys, LanguageService } from '@shared/util-language';
+import { LanguageService, LanguageValues } from '@shared/util-language';
 import { AuthFacade } from '@users/core/data-access-auth';
 
 import { ThemePickerComponent } from './theme-picker/theme-picker.component';
@@ -46,7 +46,7 @@ export class HeaderComponent {
     this.facade.logout();
   }
 
-  public onSwitchLanguage(language: LanguageKeys) {
+  public onSwitchLanguage(language: LanguageValues) {
     this.languageSwitchService.setLanguage(language);
   }
 

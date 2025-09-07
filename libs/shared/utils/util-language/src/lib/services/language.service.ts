@@ -2,28 +2,26 @@ import { inject, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { Languages } from '../constants/languages.constant';
-import { LanguageKeys } from '../types/language-keys.type';
+import { LocalStorageService, StorageKey } from '@shared/util-storage';
 
-@Injectable({
-  providedIn: 'root',
-})
+import { Languages } from '../constants/languages.constant';
+import { LanguageValues } from '../types/language-values.type';
+
+@Injectable({ providedIn: 'root' })
 export class LanguageService {
   private readonly translateService = inject(TranslateService);
+  private readonly localStorageService = inject(LocalStorageService);
 
-  public selectedLanguage$ = new BehaviorSubject<LanguageKeys>(this.getStoredLanguage());
+  readonly selectedLanguage$ = new BehaviorSubject<LanguageValues>(this.getStoredLanguage());
 
-  constructor() {
-    this.translateService.setDefaultLang(this.getStoredLanguage());
-  }
-
-  public setLanguage(language: LanguageKeys) {
+  setLanguage(language: LanguageValues): void {
     this.selectedLanguage$.next(language);
     this.translateService.use(language);
-    localStorage.setItem('lang', language);
+    this.localStorageService.set(StorageKey.LANGUAGE, language);
   }
-  private getStoredLanguage() {
-    const savedLanguage = localStorage.getItem('lang');
-    return savedLanguage ? (savedLanguage as LanguageKeys) : Languages.Russian;
+
+  getStoredLanguage(): LanguageValues {
+    const savedLanguage = this.localStorageService.get<LanguageValues>(StorageKey.LANGUAGE);
+    return savedLanguage ? savedLanguage : Languages.Russian;
   }
 }
