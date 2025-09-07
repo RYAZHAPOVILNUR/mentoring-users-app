@@ -1,17 +1,18 @@
 import { inject, Injectable } from '@angular/core';
 
+import { LocalStorageService, StorageKey } from '@shared/util-storage';
+
 import { Theme } from '../interfaces/theme.interface';
 import { THEMES_TOKEN } from '../tokens/themes.token';
 import { StyleManager } from '../utils/style-manager.util';
-import { ThemeStorage } from '../utils/theme-storage.util';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
   private readonly themes = inject(THEMES_TOKEN);
   private readonly styleManager = inject(StyleManager);
-  private readonly themeStorage = inject(ThemeStorage);
+  private readonly localStorageService = inject(LocalStorageService);
 
-  selectTheme(name: Theme['name']) {
+  selectTheme(name: Theme['name']): void {
     const theme = this.themes.find((t) => t.name === name);
 
     if (!theme) {
@@ -24,6 +25,6 @@ export class ThemeService {
       this.styleManager.setStyle('theme', `${theme.name}.css`);
     }
 
-    this.themeStorage.storeTheme(theme.name);
+    this.localStorageService.set(StorageKey.THEME, theme.name);
   }
 }

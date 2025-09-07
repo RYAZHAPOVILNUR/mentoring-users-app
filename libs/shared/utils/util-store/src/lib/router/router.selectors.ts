@@ -4,6 +4,8 @@ import { getRouterSelectors } from '@ngrx/router-store';
 // of your choice by creating a feature selector and pass it to the `getRouterSelectors` function
 // export const selectRouter = createFeatureSelector<RouterReducerState>('yourFeatureName');
 
+/** select the current route param */
+export const selectRouteParam = getRouterSelectors().selectRouteParam;
 /** select the current route params */
 export const selectRouteParams = getRouterSelectors().selectRouteParams;
 /** factory function to select a query param */

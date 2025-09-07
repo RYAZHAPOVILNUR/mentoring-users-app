@@ -1,0 +1,32 @@
+@if(!isLabelInside()) {
+  <label for="addressField">{{ labels[type()] | translate }}</label>
+}
+
+<mat-form-field [appearance]="appearance()">
+  @if(isLabelInside()) {
+    <mat-label>{{ labels[type()] | translate }}</mat-label>
+  }
+
+  <input
+    id="addressField"
+    #addressInput
+    matInput
+    type="text"
+    [placeholder]="placeholder()"
+    [value]="value()"
+    [disabled]="isDisabled()"
+    [matAutocomplete]="auto"
+    [matTooltip]="value()"
+    [matTooltipDisabled]="!isDisabled()"
+    (input)="onValueInput(addressInput.value)"
+  />
+  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+    <mat-option
+      *ngFor="let value of addressValues$ | ngrxPush"
+      [value]="value"
+      (click)="onValueClick(value)"
+    >
+      {{ value }}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

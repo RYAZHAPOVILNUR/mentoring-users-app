@@ -33,8 +33,13 @@
     </p>
 
     <div class="button">
-      <button mat-raised-button (click)="onSubmit()" color="primary">{{ vm.editMode ? ('ARTICLES.ARTICLE.EDIT' | translate) : ('ARTICLES.ARTICLE.POST' | translate) }}</button>
-      <button mat-raised-button (click)="goToArticles()" color="primary">{{('ARTICLES.ARTICLE.CLOSE' | translate)}}</button>
+      <button
+        color="primary"
+        mat-raised-button
+        (click)="onSubmit()">
+        {{ vm.editMode ? ('ARTICLES.ARTICLE.EDIT' | translate) : ('ARTICLES.ARTICLE.POST' | translate) }}
+      </button>
+      <button mat-raised-button (click)="onCancel()" color="primary">{{ ('ARTICLES.ARTICLE.CLOSE' | translate) }}</button>
     </div>
   </form>
 </div>

@@ -11,8 +11,8 @@ import { PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { ApiService } from '@core/data-access-api';
-import { InputPasswordComponent } from '@core/ui-core';
-import { LanguageKeys, LanguageService } from '@shared/util-language';
+import { PasswordFieldComponent } from '@shared/feature-password-field';
+import { LanguageService, LanguageValues } from '@shared/util-language';
 import { NewUser } from '@users/core/data-access-auth';
 
 @Component({
@@ -27,7 +27,7 @@ import { NewUser } from '@users/core/data-access-auth';
     MatButtonModule,
     ReactiveFormsModule,
     MatCheckboxModule,
-    InputPasswordComponent,
+    PasswordFieldComponent,
     TranslateModule,
     PushPipe,
   ],
@@ -67,7 +67,7 @@ export class RegisterFormUiComponent {
     this.redirectToLogin.emit();
   }
 
-  public onSwitchLanguage(language: LanguageKeys) {
+  public onSwitchLanguage(language: LanguageValues) {
     this.languageSwitchService.setLanguage(language);
   }
 }

@@ -31,9 +31,9 @@
             <mat-icon>delete</mat-icon>
           </button>
         </div>
-        <h1 class="edit-user-title">
+        <h3 class="edit-user-title">
           {{ vm.editMode ? 'Редактирование пользователя' : 'Информация пользователя' }}
-        </h1>
+        </h3>
         <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="edit-user-form">
           <div class="edit-user-content">
             <mat-form-field
@@ -69,26 +69,7 @@
               <input matInput placeholder="Имя пользователя" formControlName="username" class="edit-user-input" />
             </mat-form-field>
 
-            <mat-form-field
-              class="edit-user-field"
-              [matTooltip]="vm.user!.city"
-              [matTooltipDisabled]="formGroup.enabled"
-            >
-              <mat-label>Город:</mat-label>
-              <input
-                type="text"
-                class="edit-user-input"
-                placeholder="Введите город"
-                matInput
-                formControlName="city"
-                [matAutocomplete]="auto"
-              />
-              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                <mat-option *ngFor="let suggestion of citySuggestions | ngrxPush" [value]="suggestion">
-                  {{ suggestion }}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
+            <users-address-field [type]="addressTypes.CITY" formControlName="city"/>
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
