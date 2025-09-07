@@ -1,0 +1,18 @@
+.search-form {
+  max-width: 1300px;
+  margin: 25px auto;
+}
+
+.search-input {
+  width: 100%;
+  padding: 15px;
+  background-color: rgb(206, 206, 207);
+  color: black;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 5px;
+
+  &::placeholder {
+    font-weight: 500;
+  }
+}
