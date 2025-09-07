@@ -1,0 +1,8 @@
+<button mat-raised-button [matMenuTriggerFor]="menu" class="mat-primary material__add-btn">
+  <mat-icon class="material__add-icon">add</mat-icon>
+  <mat-menu #menu="matMenu" class="material__menu">
+    <ng-container *ngFor="let menuItem of materialMenuItems">
+      <button mat-menu-item (click)="selectMaterialType(menuItem.type)">{{ menuItem.label }}</button>
+    </ng-container>
+  </mat-menu>
+</button>

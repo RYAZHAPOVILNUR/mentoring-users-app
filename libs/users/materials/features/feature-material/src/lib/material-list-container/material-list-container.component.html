@@ -1,0 +1,37 @@
+<a routerLink="/materials">
+  <mat-icon> arrow_back_ios </mat-icon>
+</a>
+
+<ng-container
+  *ngrxLet="{
+    status: status$,
+    openedFolder: openedFolder$,
+    materials: materials$,
+  } as vm"
+>
+  <ng-container [ngSwitch]="vm.status">
+    <ng-container *ngSwitchCase="'loading'">
+      <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'loaded'">
+      <ng-container>
+        @if (vm.openedFolder) {
+          <h1>{{ vm.openedFolder.title }}</h1>
+        }
+        <users-material-list
+          [materials]="vm.materials"
+          (materialDeleteClicked)="deleteMaterial($event)"
+          (viewMaterialClicked)="viewMaterial($event)"
+        />
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'error'">
+      <h1>Ошибка!</h1>
+      <p>Произошла ошибка при загрузке данных.</p>
+    </ng-container>
+  </ng-container>
+
+  <users-material-add-button (addMaterialClicked)="publishMaterial($event)" />
+</ng-container>
