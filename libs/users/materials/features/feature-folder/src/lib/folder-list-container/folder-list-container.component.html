@@ -1,0 +1,23 @@
+<ng-container
+  *ngrxLet="{
+    status: status$,
+    folders: folders$,
+  } as vm"
+>
+  <ng-container [ngSwitch]="vm.status">
+    <ng-container *ngSwitchCase="'loading'">
+      <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'loaded'">
+      <ng-container>
+        <users-folder-list [folders]="vm.folders" (deleteFolder)="onDeleteFolder($event)" />
+        <users-folder-add-button (click)="onPublishFolder()" />
+      </ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="'error'">
+      <h1>Ошибка!</h1>
+      <p>Произошла ошибка при загрузке данных.</p>
+    </ng-container>
+  </ng-container>
+</ng-container>

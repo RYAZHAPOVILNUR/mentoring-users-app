@@ -1,0 +1,62 @@
+.folder-card {
+  width: 100%;
+  min-height: 100px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  cursor: default;
+  border: 1px solid rgb(241, 237, 237);
+  background: rgb(253, 252, 252);
+}
+
+.folder-card:hover {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.folder-card__title {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 14px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.folder-card__buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.folder-card__icon {
+  display: flex;
+}
+
+.folder-card__open {
+  cursor: default;
+}
+.folder-card__icon--folder {
+  color: #ffe583;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 38px !important;
+}
+
+.folder-card__icon--delete {
+  color: #ec8600;
+}
+
+.folder-card__delete {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.folder-card__delete--visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease;
+}
