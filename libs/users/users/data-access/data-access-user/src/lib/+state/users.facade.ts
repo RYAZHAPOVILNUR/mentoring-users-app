@@ -7,9 +7,10 @@ import { Callback } from '@shared/util-typescript';
 import { authSelectors } from '@users/core/data-access-auth';
 import { UserEntity } from '@users/shared/data-access-models';
 
-import * as UsersActions from './users.actions';
-import * as UsersSelectors from './users.selectors';
 import { CreateUserDTO } from '../types/create-user-dto.type';
+import * as UsersActions from './users.actions';
+import { onSuccessSPonCbType } from './users.actions';
+import * as UsersSelectors from './users.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
@@ -57,6 +58,10 @@ export class UsersFacade {
         }
       }),
     );
+  }
+
+  addStoryPoints(userData: CreateUserDTO, id: number, onSuccessAddSP: onSuccessSPonCbType) {
+    this.store.dispatch(UsersActions.addUserStoryPoints({ userData, id, onSuccessAddSP }));
   }
 
   loadUser() {

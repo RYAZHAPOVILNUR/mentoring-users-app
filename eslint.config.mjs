@@ -1,9 +1,9 @@
 import { FlatCompat } from '@eslint/eslintrc';
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
 import js from '@eslint/js';
 import nxEslintPlugin from '@nx/eslint-plugin';
 import eslintPluginImport from 'eslint-plugin-import';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
 const rootDir = dirname(fileURLToPath(import.meta.url));
 const tsConfigBasePath = `${rootDir}/tsconfig.base.json`;

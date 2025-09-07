@@ -25,14 +25,27 @@ export const addUserFailed = createAction('[Users/Api] Add User Failed', props<{
 
 // export const deleteSelectedId = createAction('[Users Page] Delete Selected Id');
 
+export type onSuccessEditionCbType = () => void;
+export type onSuccessSPonCbType = () => void;
+
 export const editUser = createAction(
   '[Users Detail] Edit User',
-  props<{
-    userData: CreateUserDTO;
-    id: number;
-    onSuccessCb: Callback;
-  }>(),
+  props<{ userData: CreateUserDTO; id: number; onSuccessCb: Callback }>(),
 );
+
+export const addUserStoryPoints = createAction(
+  '[Users Detail] Add User StoryPoints',
+  props<{ userData: CreateUserDTO; id: number; onSuccessAddSP: onSuccessSPonCbType }>(),
+);
+export const addUserStoryPointsSuccess = createAction(
+  '[Users Detail] Add User StoryPoints Success',
+  props<{ userData: UserDTO }>(),
+);
+export const addUserStoryPointsFailed = createAction(
+  ' [Users Detail]Add User StoryPoints Failed',
+  props<{ error: HttpErrorResponse }>(),
+);
+
 export const editUserSuccess = createAction('[Users Detail] Edit User Success', props<{ userData: UserDTO }>());
 export const editUserFailed = createAction('[Users Detail] Edit Failed', props<{ error: HttpErrorResponse | null }>());
 
