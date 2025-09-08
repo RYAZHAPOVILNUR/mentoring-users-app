@@ -7,7 +7,7 @@
     <div class="edit-user-container">
       <mat-card class="edit-user-card">
         <div class="close-button-container">
-          <button mat-icon-button aria-label="close dialog" color="accent" (click)="onCloseUser()">
+          <button mat-icon-button aria-label="close dialog" color="accent" (click)="onBackButtonClick()">
             <mat-icon>arrow_back</mat-icon>
           </button>
           <button
@@ -16,7 +16,7 @@
             color="accent"
             class="edit-user-button"
             *ngIf="!vm.editMode"
-            (click)="onOpenEditMode()"
+            (click)="onEditButtonClick()"
           >
             <mat-icon>edit</mat-icon>
           </button>
@@ -26,7 +26,7 @@
             color="accent"
             class="edit-user-button"
             *ngIf="vm.editMode"
-            (click)="onDeleteUser()"
+            (click)="onDeleteButtonClick()"
           >
             <mat-icon>delete</mat-icon>
           </button>
@@ -34,27 +34,27 @@
         <h3 class="edit-user-title">
           {{ vm.editMode ? 'Редактирование пользователя' : 'Информация пользователя' }}
         </h3>
-        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="edit-user-form">
+        <form [formGroup]="form" (ngSubmit)="onFormSubmit()" class="edit-user-form">
           <div class="edit-user-content">
             <mat-form-field
               class="edit-user-field"
               [matTooltip]="vm.user!.name"
-              [matTooltipDisabled]="formGroup.enabled"
+              [matTooltipDisabled]="form.enabled"
             >
               <mat-label>Имя:</mat-label>
               <input matInput placeholder="Имя*" formControlName="name" class="edit-user-input" />
-              <mat-error *ngIf="formGroup.hasError('required', 'name')">Это поле обязательно для заполнения</mat-error>
+              <mat-error *ngIf="form.hasError('required', 'name')">Это поле обязательно для заполнения</mat-error>
             </mat-form-field>
 
             <mat-form-field
               class="edit-user-field"
               [matTooltip]="vm.user!.email"
-              [matTooltipDisabled]="formGroup.enabled"
+              [matTooltipDisabled]="form.enabled"
             >
               <mat-label>Электронная почта:</mat-label>
               <input matInput placeholder="Электронная почта*" formControlName="email" class="edit-user-input" />
               <mat-error
-                *ngIf="formGroup.get('email')?.hasError('required') || formGroup.get('email')?.hasError('email')"
+                *ngIf="form.controls.email.hasError('required') || form.controls.email.hasError('email')"
               >
                 Введите корректную электронную почту
               </mat-error>
@@ -63,26 +63,26 @@
             <mat-form-field
               class="edit-user-field"
               [matTooltip]="vm.user!.username"
-              [matTooltipDisabled]="formGroup.enabled"
+              [matTooltipDisabled]="form.enabled"
             >
               <mat-label>Имя пользователя:</mat-label>
               <input matInput placeholder="Имя пользователя" formControlName="username" class="edit-user-input" />
             </mat-form-field>
 
-            <users-address-field [type]="addressTypes.CITY" formControlName="city"/>
+            <users-address-field [type]="addressTypes.CITY" formControlName="city" />
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
               mat-icon-button
               color="primary"
               type="submit"
-              [disabled]="formGroup.invalid || (areFieldsChanged$ | ngrxPush) === false"
+              [disabled]="form.invalid || !(areFormChanged$ | ngrxPush)"
               aria-label="submit new user data"
             >
               <mat-icon>done</mat-icon>
             </button>
 
-            <button mat-icon-button color="warn" type="button" aria-label="Close edit mode" (click)="onCloseEditMode()">
+            <button mat-icon-button color="warn" type="button" aria-label="Close edit mode" (click)="onCloseButtonClick()">
               <mat-icon>close</mat-icon>
             </button>
           </mat-card-actions>
@@ -94,7 +94,7 @@
 
 <ng-template #error>
   <div class="alert alert-danger" role="alert">
-    <h1>{{ vm.errors?.status }}</h1>
+    <h3>{{ vm.errors?.status }}</h3>
     <hr />
     Данный пользователь не найден
   </div>

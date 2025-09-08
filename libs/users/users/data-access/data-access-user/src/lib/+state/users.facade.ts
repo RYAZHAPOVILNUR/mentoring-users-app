@@ -10,6 +10,7 @@ import { UserEntity } from '@users/shared/data-access-models';
 import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
 import { CreateUserDTO } from '../types/create-user-dto.type';
+import { EditUserEntity } from '../types/edit-user-entity.type';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
@@ -43,8 +44,8 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.addUser({ userData }));
   }
 
-  editUser(userData: CreateUserDTO, id: number, onSuccessCb: Callback) {
-    this.store.dispatch(UsersActions.editUser({ userData, id, onSuccessCb }));
+  editUser(user: EditUserEntity, onSuccessCb: Callback) {
+    this.store.dispatch(UsersActions.editUser({ user, onSuccessCb }));
   }
 
   getUserFromStore(id: number) {

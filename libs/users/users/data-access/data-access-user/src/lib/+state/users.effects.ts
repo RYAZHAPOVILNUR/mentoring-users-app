@@ -5,11 +5,12 @@ import { catchError, filter, map, of, switchMap, tap, withLatestFrom } from 'rxj
 
 import { ApiService } from '@core/data-access-api';
 import { selectRouteParams } from '@shared/util-store';
-import { UserDTO, userAdapter, UserEntity } from '@users/shared/data-access-models';
+import { userAdapter, UserDTO, UserEntity } from '@users/shared/data-access-models';
 
 import * as UsersActions from './users.actions';
 import { selectUsersEntities } from './users.selectors';
 import { CreateUserDTO } from '../types/create-user-dto.type';
+import { EditUserDTO } from '../types/edit-user-dto.type';
 
 export const userEffects = createEffect(
   () => {
@@ -89,19 +90,16 @@ export const editUser = createEffect(
     return actions$.pipe(
       ofType(UsersActions.editUser),
       withLatestFrom(usersEntities$),
-      filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
-      map(([{ userData, id, onSuccessCb }, usersEntities]) => ({
+      filter(([{ user }, usersEntities]) => Boolean(usersEntities[user.id])),
+      map(([{ user, onSuccessCb }, usersEntities]) => ({
         user: {
-          ...userAdapter.entityToDTO(<UserEntity>usersEntities[id]),
-          name: userData.name,
-          email: userData.email,
-          username: userData.username,
-          city: userData.city,
+          ...userAdapter.entityToDTO(<UserEntity>usersEntities[user.id]),
+          ...user,
         },
         onSuccessCb,
       })),
       switchMap(({ user, onSuccessCb }) =>
-        apiService.post<UserDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+        apiService.post<UserDTO, EditUserDTO>(`/users/${user.id}`, user).pipe(
           map((userData) => ({ userData, onSuccessCb })),
           tap(({ onSuccessCb }) => onSuccessCb()),
           map(({ userData }) => UsersActions.editUserSuccess({ userData })),
