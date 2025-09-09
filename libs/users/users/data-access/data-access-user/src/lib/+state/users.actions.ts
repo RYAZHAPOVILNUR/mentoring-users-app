@@ -44,5 +44,5 @@ export const updateUserStatus = createAction('[Users Detail] Update User Status'
 
 export const setUsersFilter = createAction(
   '[Users Filter] Set Users Filter',
-  props<{ filter: { name: string } }>()
+  props<{ filter: { userName: string } }>()
 );

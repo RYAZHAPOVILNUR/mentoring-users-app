@@ -13,25 +13,17 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
   imports: [ReactiveFormsModule, MatInputModule],
 })
 export class UsersFormComponent {
-  usersFacade = inject(UsersFacade);
+  private readonly usersFacade = inject(UsersFacade);
 
-  filterForm = new FormGroup({
-    'userName': new FormControl('', { nonNullable: true }),
-  });
+  readonly userNameFormControl = new FormControl('', { nonNullable: true })
 
   constructor() {
-    this.filterForm.controls.userName.valueChanges
-      .pipe(
-        debounceTime(300),
-        distinctUntilChanged(),
-        takeUntilDestroyed(),
-      )
-      .subscribe((inputValue: string) => {
-        this.setUsersFilter(inputValue)
-      });
+    this.userNameFormControl.valueChanges
+      .pipe(debounceTime(300), distinctUntilChanged(), takeUntilDestroyed())
+      .subscribe((userName: string) => this.setUsersFilter({ userName }));
   }
 
-  setUsersFilter(username: string) {
-    this.usersFacade.setUsersFilter({ filter: { name: username } });
+  private setUsersFilter(filter: { userName: string }): void {
+    this.usersFacade.setUsersFilter({ filter });
   }
 }
