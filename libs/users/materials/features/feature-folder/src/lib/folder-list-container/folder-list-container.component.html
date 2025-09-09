@@ -11,8 +11,8 @@
 
     <ng-container *ngSwitchCase="'loaded'">
       <ng-container>
-        <users-folder-list [folders]="vm.folders" (deleteFolder)="onDeleteFolder($event)" />
-        <users-folder-add-button (click)="onPublishFolder()" />
+        <users-folder-list [folders]="vm.folders" (deleteFolderClick)="deleteFolderClick($event)" />
+        <users-folder-add-button (addFolderClick)="addFolderClick()" />
       </ng-container>
     </ng-container>
     <ng-container *ngSwitchCase="'error'">

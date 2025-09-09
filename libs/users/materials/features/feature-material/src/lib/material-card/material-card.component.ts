@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
 import { Material } from '@users/data-access-material';
 @Component({
   selector: 'users-material-card',
@@ -17,13 +16,13 @@ export class MaterialCardComponent {
 
   public isHovered = false;
 
-  @Output() viewMaterialClicked = new EventEmitter<Material>();
-  @Output() materialDeleteClicked = new EventEmitter<Material>();
+  @Output() viewMaterialClick = new EventEmitter<Material>();
+  @Output() deleteMaterialClick = new EventEmitter<Material>();
 
-  viewClicked(material: Material) {
-    this.viewMaterialClicked.emit(material);
+  onViewButtonClick(material: Material) {
+    this.viewMaterialClick.emit(material);
   }
-  deleteClicked(material: Material) {
-    this.materialDeleteClicked.emit(material);
+  onDeleteButtonClick(material: Material) {
+    this.deleteMaterialClick.emit(material);
   }
 }

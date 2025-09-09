@@ -4,7 +4,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
-
 import { Folder } from '@users/data-access-folder';
 @Component({
   selector: 'users-folder-card',
@@ -19,10 +18,10 @@ export class FolderCardComponent {
   public readonly router = inject(Router);
   public isHovered = false;
 
-  @Output() deleteClick = new EventEmitter<Folder>();
+  @Output() deleteFolderClick = new EventEmitter<Folder>();
 
-  onDeleteClick(folder: Folder) {
-    this.deleteClick.emit(folder);
+  onDeleteButtonClick(folder: Folder) {
+    this.deleteFolderClick.emit(folder);
   }
 
   onCardClick() {

@@ -1,0 +1,20 @@
+.material-dialog {
+  &__form {
+    min-width: 400px;
+    display: grid;
+    grid-template-columns: auto;
+    padding: 20px 16px;
+  }
+
+  &__field {
+    width: 100%;
+  }
+  &__buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+  }
+  &__button {
+    width: 50%;
+  }
+}

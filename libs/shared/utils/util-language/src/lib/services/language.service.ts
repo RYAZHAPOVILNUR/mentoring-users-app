@@ -1,8 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { BehaviorSubject } from 'rxjs';
-
 import { LocalStorageService, StorageKey } from '@shared/util-storage';
+import { BehaviorSubject } from 'rxjs';
 
 import { Languages } from '../constants/languages.constant';
 import { LanguageValues } from '../types/language-values.type';

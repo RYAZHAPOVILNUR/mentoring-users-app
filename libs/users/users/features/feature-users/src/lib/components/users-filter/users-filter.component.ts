@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-
 import { UsersFacade } from '@users/users/data-access-user';
 
 @Component({

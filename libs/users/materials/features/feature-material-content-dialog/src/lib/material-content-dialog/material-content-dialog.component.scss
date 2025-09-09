@@ -1,0 +1,32 @@
+.material {
+  &__header {
+    min-width: 300px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+
+  &__header-button--close {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    z-index: 100;
+  }
+
+  &__video {
+    display: flex;
+    align-items: center;
+  }
+  &__audio {
+    display: flex;
+    align-items: center;
+  }
+
+  &__pdf {
+    height: 80vh;
+    width: 600px;
+    display: block;
+  }
+}

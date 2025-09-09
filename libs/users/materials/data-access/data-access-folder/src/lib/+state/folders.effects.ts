@@ -1,12 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { concatLatestFrom } from '@ngrx/operators';
-import { Store } from '@ngrx/store';
-import { catchError, filter, map, of, switchMap } from 'rxjs';
-
 import { ApiService } from '@core/data-access-api';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { selectRouteParams } from '@shared/util-store';
+import { catchError, filter, map, of, switchMap, withLatestFrom } from 'rxjs';
 
 import { foldersActions } from './folders.actions';
 import { CreateFolder } from '../interfaces/create-folder.interface';
@@ -52,10 +50,10 @@ export const getFolderForMaterials$ = createEffect(
   (actions$ = inject(Actions), store = inject(Store), apiService = inject(ApiService)) => {
     return actions$.pipe(
       ofType(foldersActions.getFolderForMaterials),
-      concatLatestFrom(() => store.select(selectRouteParams)),
+      withLatestFrom(store.select(selectRouteParams)),
       filter(([, routeParams]) => Boolean(Number(routeParams['id']))),
-      switchMap(([, { id: folderId }]) => {
-        return apiService.get<Folder>(`/folder/${folderId}`).pipe(
+      switchMap(([, { id: folder_id }]) => {
+        return apiService.get<Folder>(`/folder/${folder_id}`).pipe(
           map((folder) => foldersActions.getFolderForMaterialsSuccess({ folder })),
           catchError((error: HttpErrorResponse) => {
             console.error('Error', error);

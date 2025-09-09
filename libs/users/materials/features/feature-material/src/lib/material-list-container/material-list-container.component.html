@@ -21,8 +21,8 @@
         }
         <users-material-list
           [materials]="vm.materials"
-          (materialDeleteClicked)="deleteMaterial($event)"
-          (viewMaterialClicked)="viewMaterial($event)"
+          (deleteMaterialClick)="deleteMaterialClick($event)"
+          (viewMaterialClick)="viewMaterialClick($event)"
         />
       </ng-container>
     </ng-container>
@@ -33,5 +33,5 @@
     </ng-container>
   </ng-container>
 
-  <users-material-add-button (addMaterialClicked)="publishMaterial($event)" />
+  <users-material-add-button (addMaterialClick)="addMaterialClick($event)" />
 </ng-container>

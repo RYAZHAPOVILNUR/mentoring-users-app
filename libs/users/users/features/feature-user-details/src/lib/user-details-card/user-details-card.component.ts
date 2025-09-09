@@ -24,14 +24,13 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { PushPipe } from '@ngrx/component';
-import { BehaviorSubject, tap } from 'rxjs';
-
 import { AddressType } from '@shared/data-access-address';
 import { AddressFieldComponent } from '@shared/feature-address-field';
 import { LoadingStatus } from '@shared/util-store';
 import { Callback } from '@shared/util-typescript';
 import { UserEntity } from '@users/shared/data-access-models';
 import { CreateUserDTO, onSuccessSPonCbType } from '@users/users/data-access-user';
+import { BehaviorSubject, tap } from 'rxjs';
 
 type DetailUsersCardVm = {
   editMode: boolean;
@@ -92,7 +91,7 @@ export class UserDetailsCardComponent implements OnInit {
   });
   public totalStoryPoints = new FormControl({ value: 0, disabled: true });
   @ViewChild('snackbar') snackbarTemplateRef!: TemplateRef<unknown>;
-  @ViewChild('snackbarStoryPoints') snackbarTemplateRefSP!: TemplateRef<any>;
+  @ViewChild('snackbarStoryPoints') snackbarTemplateRefSP!: TemplateRef<unknown>;
 
   public areFieldsChanged$ = new BehaviorSubject<boolean>(false);
   readonly addressTypes = AddressType;
@@ -153,7 +152,6 @@ export class UserDetailsCardComponent implements OnInit {
   onAddStoryPoints() {
     this.totalStoryPoints.disable();
     this.addStoryPoints.emit({
-      //@ts-ignore
       user: {
         name: this.formGroup.value.name || '',
         email: this.formGroup.value.email?.trim().toLowerCase() || '',

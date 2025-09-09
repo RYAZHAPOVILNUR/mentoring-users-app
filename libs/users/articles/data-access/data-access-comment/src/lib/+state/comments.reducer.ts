@@ -1,6 +1,5 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
-
 import { LoadingStatus } from '@shared/util-store';
 import { Comment } from '@users/shared/data-access-models';
 

@@ -4,9 +4,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-
 import { authActions, AuthFacade } from '@users/core/data-access-auth';
+import { Observable } from 'rxjs';
 
 @Component({
   standalone: true,

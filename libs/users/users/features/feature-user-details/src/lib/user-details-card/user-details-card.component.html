@@ -69,7 +69,7 @@
               <input matInput placeholder="Имя пользователя" formControlName="username" class="edit-user-input" />
             </mat-form-field>
 
-            <users-address-field [type]="addressTypes.CITY" formControlName="city"/>
+            <users-address-field [type]="addressTypes.CITY" formControlName="city" />
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button

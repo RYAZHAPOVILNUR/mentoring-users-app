@@ -2,28 +2,28 @@
   role="button"
   tabindex="0"
   class="material-card"
-  (dblclick)="viewClicked(material)"
+  (dblclick)="onViewButtonClick(material)"
   (mouseenter)="isHovered = true"
   (mouseleave)="isHovered = false"
 >
   <div class="material-card__actions">
     <button class="material-card__button material-card__button--open">
-      <ng-container *ngIf="material.material_link.endsWith('.pdf')">
+      <ng-container *ngIf="material.materialLink.endsWith('.pdf')">
         <mat-icon>picture_as_pdf</mat-icon>
       </ng-container>
-      <ng-container *ngIf="material.material_link.endsWith('.mp3')">
+      <ng-container *ngIf="material.materialLink.endsWith('.mp3')">
         <mat-icon> audiotrack </mat-icon>
       </ng-container>
-      <ng-container *ngIf="material.material_link.includes('www.youtube.com')">
+      <ng-container *ngIf="material.materialLink.includes('www.youtube.com')">
         <mat-icon>live_tv</mat-icon>
       </ng-container>
     </button>
     <button
       class="material-card__button material-card__button--delete"
-      [ngClass]="{ visible: isHovered }"
-      (click)="deleteClicked(material)"
+      [ngClass]="{ 'material-card__delete--visible': isHovered }"
+      (click)="onDeleteButtonClick(material)"
     >
-      <mat-icon class="material-card__icon material-card__icon--trash">delete</mat-icon>
+      <mat-icon class="material-card__icon material-card__icon--delete">delete</mat-icon>
     </button>
   </div>
 

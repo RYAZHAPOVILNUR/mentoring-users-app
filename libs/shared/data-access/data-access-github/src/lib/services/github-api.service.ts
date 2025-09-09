@@ -1,8 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-
 import { ApiService } from '@core/data-access-api';
 import { LocalStorageService, StorageKey } from '@shared/util-storage';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { GithubTokenDTO } from '../models/github-token-DTO.interface';
 import { GithubUserDTO } from '../models/github-user-DTO.interface';

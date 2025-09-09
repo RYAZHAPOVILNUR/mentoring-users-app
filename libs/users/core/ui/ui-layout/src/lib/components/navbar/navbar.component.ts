@@ -7,10 +7,9 @@ import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 import { PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
-import { map, Observable } from 'rxjs';
-
 import { AuthFacade } from '@users/core/data-access-auth';
 import { UiPhotoModalComponent } from '@users/profile/ui-profile-photo';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'users-navbar',

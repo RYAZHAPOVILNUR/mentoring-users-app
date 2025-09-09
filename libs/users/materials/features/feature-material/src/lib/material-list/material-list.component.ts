@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-
 import { Material } from '@users/data-access-material';
 
 import { MaterialCardComponent } from '../material-card/material-card.component';
@@ -14,14 +13,14 @@ import { MaterialCardComponent } from '../material-card/material-card.component'
 })
 export class MaterialListComponent {
   @Input({ required: true }) materials!: Material[];
-  @Output() materialDeleteClicked = new EventEmitter<Material>();
-  @Output() viewMaterialClicked = new EventEmitter<Material>();
+  @Output() viewMaterialClick = new EventEmitter<Material>();
+  @Output() deleteMaterialClick = new EventEmitter<Material>();
 
-  viewClicked(material: Material) {
-    this.viewMaterialClicked.emit(material);
+  onViewButtonClick(material: Material) {
+    this.viewMaterialClick.emit(material);
   }
 
-  deleteClicked(material: Material) {
-    this.materialDeleteClicked.emit(material);
+  onDeleteButtonClick(material: Material) {
+    this.deleteMaterialClick.emit(material);
   }
 }

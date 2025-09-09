@@ -1,5 +1,5 @@
 <div class="folder-cards-container">
   @for (folder of folders; track folder.id) {
-    <users-folder-card [folder]="folder" (deleteClick)="handleDelete($event)" />
+    <users-folder-card [folder]="folder" (deleteFolderClick)="onDeleteButtonClick($event)" />
   }
 </div>

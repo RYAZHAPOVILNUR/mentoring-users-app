@@ -1,7 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Action, createReducer, on } from '@ngrx/store';
-
 import { LoadingStatus } from '@shared/util-store';
 import { UserEntity } from '@users/shared/data-access-models';
 

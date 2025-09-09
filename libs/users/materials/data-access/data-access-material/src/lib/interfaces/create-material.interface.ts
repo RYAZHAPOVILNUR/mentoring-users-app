@@ -1,3 +1,5 @@
-import { Material } from './material.interface';
-
-export type CreateMaterial = Partial<Pick<Material, 'title' | 'material_link' | 'folder_id'>>;
+export type CreateMaterial = {
+  title: string;
+  materialLink: string;
+  folderId?: string;
+};

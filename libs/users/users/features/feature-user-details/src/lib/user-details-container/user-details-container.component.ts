@@ -4,15 +4,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { select, Store } from '@ngrx/store';
-import { filter, map, Observable, tap } from 'rxjs';
-
 import { selectQueryParam } from '@shared/util-store';
 import { Callback } from '@shared/util-typescript';
 import { UserEntity } from '@users/shared/data-access-models';
-import { CreateUserDTO, UsersFacade } from '@users/users/data-access-user';
+import { CreateUserDTO, UsersFacade, onSuccessSPonCbType } from '@users/users/data-access-user';
 import { UserDialogService } from '@users/users/feature-user-dialog';
+import { filter, map, Observable, tap } from 'rxjs';
 
-import { onSuccessSPonCbType } from 'libs/users/users/data-access/data-access-user/src/lib/+state/users.actions';
 import { UserDetailsCardComponent } from '../user-details-card/user-details-card.component';
 
 @Component({
