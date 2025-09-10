@@ -4,14 +4,15 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { select, Store } from '@ngrx/store';
+import { filter, map, Observable, tap } from 'rxjs';
+
 import { selectQueryParam } from '@shared/util-store';
 import { Callback } from '@shared/util-typescript';
 import { UserEntity } from '@users/shared/data-access-models';
-import { CreateUserDTO, UsersFacade, onSuccessSPonCbType } from '@users/users/data-access-user';
+import { EditUserEntity, UsersFacade } from '@users/users/data-access-user';
 import { UserDialogService } from '@users/users/feature-user-dialog';
-import { filter, map, Observable, tap } from 'rxjs';
 
-import { UserDetailsCardComponent } from '../user-details-card/user-details-card.component';
+import { UserDetailsCardComponent } from '../../components/user-details-card/user-details-card.component';
 
 @Component({
   standalone: true,
@@ -43,8 +44,8 @@ export class UserDetailsComponent {
   );
   public readonly errors$ = this.usersFacade.errors$;
 
-  public onEditUser(userData: CreateUserDTO, onSuccessCb: Callback) {
-    this.usersFacade.editUser(userData, this.user.id, onSuccessCb);
+  public onEditUser(user: EditUserEntity, onSuccessCb: Callback): void {
+    this.usersFacade.editUser(user, onSuccessCb);
     this.router.navigate(['/admin/users', this.user.id], {
       queryParams: { edit: false },
     });
@@ -52,10 +53,6 @@ export class UserDetailsComponent {
 
   onCloseUser() {
     this.router.navigate(['/admin/users']);
-  }
-
-  onAddStoryPoints(userData: CreateUserDTO, onSuccessAddSP: onSuccessSPonCbType) {
-    this.usersFacade.addStoryPoints(userData, this.user.id, onSuccessAddSP);
   }
 
   onCloseEditMode() {

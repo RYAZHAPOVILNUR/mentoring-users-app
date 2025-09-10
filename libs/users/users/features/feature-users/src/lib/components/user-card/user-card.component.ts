@@ -6,7 +6,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
+
 import { UserEntity, UserVM } from '@users/shared/data-access-models';
+
+import { UserRedirectPayload } from '../../interfaces/user-redirect-payload.interface';
 
 @Component({
   selector: 'users-user-card',
@@ -17,30 +20,28 @@ import { UserEntity, UserVM } from '@users/shared/data-access-models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserCardComponent {
-  @Input({ required: true })
-  user!: UserVM;
+  @Input({ required: true }) user!: UserVM;
+  @Input({ required: true }) loggedUser!: UserEntity;
 
-  @Input({ required: true })
-  loggedUser!: UserEntity;
+  @ViewChild(MatMenuTrigger, { static: true }) trigger!: MatMenuTrigger;
 
-  @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
-  @Output() deleteUser = new EventEmitter();
-  @Output() redirectToEdit = new EventEmitter();
+  @Output() userDelete = new EventEmitter<void>();
+  @Output() userRedirect = new EventEmitter<UserRedirectPayload>();
 
-  onOpenMenu(event: Event) {
+  onOpenMenu(event: Event): void {
     event.stopPropagation();
     this.trigger.openMenu();
   }
 
-  onDeleteUser() {
-    this.deleteUser.emit();
+  onDeleteUser(): void {
+    this.userDelete.emit();
   }
 
-  redirectToEditPage(editMode: boolean) {
-    const emitData = {
+  redirectToEditPage(editMode: boolean): void {
+    const emitData: UserRedirectPayload = {
       id: this.user.id,
       editMode,
     };
-    this.redirectToEdit.emit(emitData);
+    this.userRedirect.emit(emitData);
   }
 }

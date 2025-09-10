@@ -1,14 +1,16 @@
 import { inject } from '@angular/core';
-import { ApiService } from '@core/data-access-api';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
+import { catchError, filter, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
+
+import { ApiService } from '@core/data-access-api';
 import { selectRouteParams } from '@shared/util-store';
 import { userAdapter, UserDTO, UserEntity } from '@users/shared/data-access-models';
-import { catchError, filter, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
 
 import * as UsersActions from './users.actions';
 import { selectUsersEntities } from './users.selectors';
 import { CreateUserDTO } from '../types/create-user-dto.type';
+import { EditUserDTO } from '../types/edit-user-dto.type';
 
 export const userEffects = createEffect(
   () => {
@@ -88,19 +90,16 @@ export const editUser = createEffect(
     return actions$.pipe(
       ofType(UsersActions.editUser),
       withLatestFrom(usersEntities$),
-      filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
-      map(([{ userData, id, onSuccessCb }, usersEntities]) => ({
+      filter(([{ user }, usersEntities]) => Boolean(usersEntities[user.id])),
+      map(([{ user, onSuccessCb }, usersEntities]) => ({
         user: {
-          ...userAdapter.entityToDTO(<UserEntity>usersEntities[id]),
-          name: userData.name,
-          email: userData.email,
-          username: userData.username,
-          city: userData.city,
+          ...userAdapter.entityToDTO(<UserEntity>usersEntities[user.id]),
+          ...user,
         },
         onSuccessCb,
       })),
       switchMap(({ user, onSuccessCb }) =>
-        apiService.post<UserDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
+        apiService.post<UserDTO, EditUserDTO>(`/users/${user.id}`, user).pipe(
           map((userData) => ({ userData, onSuccessCb })),
           tap(({ onSuccessCb }) => onSuccessCb()),
           map(({ userData }) => UsersActions.editUserSuccess({ userData })),
@@ -110,45 +109,6 @@ export const editUser = createEffect(
           }),
         ),
       ),
-    );
-  },
-  { functional: true },
-);
-
-export const addUserStoryPoints = createEffect(
-  () => {
-    const actions$ = inject(Actions);
-    const apiService = inject(ApiService);
-    const userEntities$ = inject(Store).pipe(select(selectUsersEntities));
-
-    return actions$.pipe(
-      ofType(UsersActions.addUserStoryPoints),
-      withLatestFrom(userEntities$),
-      filter(([{ id }, usersEntities]) => Boolean(usersEntities[id])),
-      map(([{ userData, id, onSuccessAddSP }, usersEntities]) => {
-        return {
-          user: {
-            ...userAdapter.entityToDTO(<UserEntity>usersEntities[id]),
-            purchaseDate: usersEntities[id]?.purchaseDate || '12.10.2023',
-            educationStatus: usersEntities[id]?.educationStatus || 'trainee',
-            totalStoryPoints: userData.totalStoryPoints,
-          },
-          onSuccessAddSP,
-        };
-      }),
-      switchMap(({ user, onSuccessAddSP }) => {
-        return apiService.post<UserDTO, CreateUserDTO>(`/users/${user.id}`, user).pipe(
-          map((userData) => ({ userData, onSuccessAddSP })),
-          tap(({ onSuccessAddSP }) => onSuccessAddSP()),
-          map(({ userData }) => {
-            return UsersActions.addUserStoryPointsSuccess({ userData });
-          }),
-          catchError((error) => {
-            console.error('Error', error);
-            return of(UsersActions.addUserStoryPointsFailed({ error }));
-          }),
-        );
-      }),
     );
   },
   { functional: true },

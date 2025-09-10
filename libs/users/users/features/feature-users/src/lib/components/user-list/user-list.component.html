@@ -10,8 +10,8 @@
           <users-user-card
             [user]="user"
             [loggedUser]="vm.loggedUser"
-            (deleteUser)="onDeleteUser(user)"
-            (redirectToEdit)="onRedirectToEdit($event)"
+            (userDelete)="onDeleteUser(user)"
+            (userRedirect)="onRedirectToEdit($event)"
           />
         </div>
       </div>
