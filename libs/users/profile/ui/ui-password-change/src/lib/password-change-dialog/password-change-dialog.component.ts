@@ -5,7 +5,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatError } from '@angular/material/form-field';
 import { TranslateModule } from '@ngx-translate/core';
-
 import { PasswordFieldComponent } from '@shared/feature-password-field';
 
 import { PasswordChangeDialogCloseData } from '../password-change-dialog-close-data.interface';

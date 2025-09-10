@@ -1,10 +1,9 @@
 import { inject } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, of, switchMap, withLatestFrom } from 'rxjs';
-
 import { ApiService } from '@core/data-access-api';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AuthFacade } from '@users/core/data-access-auth';
 import { Comment } from '@users/shared/data-access-models';
+import { catchError, map, of, switchMap, withLatestFrom } from 'rxjs';
 
 import { commentsActions } from './comments.actions';
 import { CreateComment } from '../interface/create-comment.interface';

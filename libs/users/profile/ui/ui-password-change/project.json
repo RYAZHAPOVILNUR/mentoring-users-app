@@ -2,6 +2,7 @@
   "name": "ui-password-change",
   "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/users/profile/ui/ui-password-change/src",
+
   "prefix": "users",
   "projectType": "library",
   "tags": [],

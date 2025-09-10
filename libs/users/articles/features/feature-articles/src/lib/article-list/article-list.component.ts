@@ -8,13 +8,12 @@ import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 import { PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
-import { QuillModule } from 'ngx-quill';
-import { map, Observable } from 'rxjs';
-
 import { ArticlesCreateButtonComponent } from '@users/articles/feature-article-create';
 import { SettingsFacade } from '@users/settings/data-access-settings';
 import { Article } from '@users/shared/data-access-models';
 import { UsersFacade } from '@users/users/data-access-user';
+import { QuillModule } from 'ngx-quill';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'users-articles-view',

@@ -3,12 +3,11 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { LetDirective } from '@ngrx/component';
 import { select, Store } from '@ngrx/store';
-import { map, Observable, withLatestFrom } from 'rxjs';
-
 import { selectQueryParam } from '@shared/util-store';
 import { articlesActions, articleSelectors } from '@users/articles/data-access-article';
 import { authSelectors } from '@users/core/data-access-auth';
 import { Article } from '@users/shared/data-access-models';
+import { map, Observable, withLatestFrom } from 'rxjs';
 
 import { ArticleListComponent } from '../article-list/article-list.component';
 

@@ -1,13 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable, of, switchMap } from 'rxjs';
-
 import { Callback } from '@shared/util-typescript';
 import { authSelectors } from '@users/core/data-access-auth';
 import { UserEntity } from '@users/shared/data-access-models';
+import { Observable, of, switchMap } from 'rxjs';
 
 import * as UsersActions from './users.actions';
+import { onSuccessSPonCbType } from './users.actions';
 import * as UsersSelectors from './users.selectors';
 import { CreateUserDTO } from '../types/create-user-dto.type';
 import { EditUserEntity } from '../types/edit-user-entity.type';
@@ -20,6 +20,7 @@ export class UsersFacade {
    * Combine pieces of state using createSelector,
    * and expose them as observables through the facade.
    */
+  public readonly filteredUsers$ = this.store.pipe(select(UsersSelectors.selectFilteredUsers));
   public readonly status$ = this.store.pipe(select(UsersSelectors.selectUsersStatus));
   public readonly allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
   public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
@@ -47,6 +48,9 @@ export class UsersFacade {
   editUser(user: EditUserEntity, onSuccessCb: Callback) {
     this.store.dispatch(UsersActions.editUser({ user, onSuccessCb }));
   }
+  filterUsers(filter: { name: string }) {
+    this.store.dispatch(UsersActions.setUsersFilter({ filter }));
+  }
 
   getUserFromStore(id: number) {
     return this.store.select(UsersSelectors.selectUserById(id)).pipe(
@@ -58,6 +62,10 @@ export class UsersFacade {
         }
       }),
     );
+  }
+
+  addStoryPoints(userData: CreateUserDTO, id: number, onSuccessAddSP: onSuccessSPonCbType) {
+    this.store.dispatch(UsersActions.addUserStoryPoints({ userData, id, onSuccessAddSP }));
   }
 
   loadUser() {

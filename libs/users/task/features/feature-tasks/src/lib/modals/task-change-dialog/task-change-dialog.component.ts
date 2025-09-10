@@ -10,12 +10,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { PushPipe } from '@ngrx/component';
-import { QuillModule } from 'ngx-quill';
-import { skip } from 'rxjs/operators';
-
 import { BacklogFacade } from '@users/backlog/data-access-backlog';
 import { Backlog, UserEntity } from '@users/shared/data-access-models';
 import { UsersFacade } from '@users/users/data-access-user';
+import { QuillModule } from 'ngx-quill';
+import { skip } from 'rxjs/operators';
 
 interface Task {
   name: string;

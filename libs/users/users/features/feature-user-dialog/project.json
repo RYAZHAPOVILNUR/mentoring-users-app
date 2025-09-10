@@ -2,6 +2,7 @@
   "name": "feature-user-dialog",
   "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/users/users/features/feature-user-dialog/src",
+
   "prefix": "users",
   "projectType": "library",
   "tags": [],

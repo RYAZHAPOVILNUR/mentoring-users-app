@@ -1,5 +1,4 @@
 import { createActionGroup, props } from '@ngrx/store';
-
 import { Comment } from '@users/shared/data-access-models';
 
 import { CreateComment } from '../interface/create-comment.interface';

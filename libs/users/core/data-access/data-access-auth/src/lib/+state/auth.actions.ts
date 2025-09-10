@@ -1,5 +1,4 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-
 import { UserEntity } from '@users/shared/data-access-models';
 
 import {

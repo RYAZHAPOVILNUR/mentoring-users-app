@@ -3,7 +3,7 @@
     users: users$,
     status: status$,
     errors: errors$,
-    loggedUser: loggedUser$
+    loggedUser: loggedUser$,
   } as vm"
 >
   <users-user-list [vm]="vm" (userDelete)="onDeleteUser($event)" (userRedirect)="onRedirectToEdit($event)" />

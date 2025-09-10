@@ -1,9 +1,8 @@
 import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpRequest } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, Observable, throwError } from 'rxjs';
-
 import { LocalStorageService, StorageKey } from '@shared/util-storage';
+import { catchError, Observable, throwError } from 'rxjs';
 
 const shouldIntercept = (req: HttpRequest<unknown>): boolean => {
   const excludedUrls: string[] = ['suggestions.dadata.ru'];

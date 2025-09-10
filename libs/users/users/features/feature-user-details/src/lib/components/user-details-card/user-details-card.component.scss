@@ -38,7 +38,32 @@
 .edit-user-field {
   width: 100%;
 }
+.edit-user-storypoints-field {
+  width: 100%;
+  display: flex;
+  position: relative;
+}
 
+input[type='number']::-webkit-inner-spin-button,
+.storypoints-field input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.edit-story-points-btn {
+  position: absolute;
+  display: flex;
+  top: 50%;
+  right: 0;
+  transform: translate(30%, -50%);
+}
+.mat-card-actions {
+  position: absolute;
+  display: flex;
+  top: 50%;
+  right: 0;
+  transform: translate(20%, -50%);
+}
 .edit-user-btns-container {
   display: flex;
   justify-content: space-between;

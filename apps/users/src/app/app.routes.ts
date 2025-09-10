@@ -1,5 +1,4 @@
 import { Route } from '@angular/router';
-
 import { canDeactivateGuard } from '@shared/util-router';
 import { adminGuard, authGuard } from '@users/core/data-access-auth';
 import { AuthorizedLayoutComponent, UnauthorizedLayoutComponent } from '@users/core/ui-layout';
@@ -70,6 +69,16 @@ export const appRoutes: Route[] = [
         path: 'backlog',
         loadComponent: () => import('@users/backlog/feature-backlog').then((c) => c.BacklogComponent),
       },
+
+      {
+        path: 'materials',
+        loadComponent: () => import('@users/feature-folder').then((c) => c.FolderListContainerComponent),
+      },
+      {
+        path: 'materials/:id',
+        loadComponent: () => import('@users/feature-material').then((c) => c.MaterialListContainerComponent),
+      },
+
       ...layoutAgnosticComponents,
     ],
   },

@@ -1,0 +1,9 @@
+<div class="card-container">
+  @for (material of materials; track material.id) {
+    <users-material-card
+      [material]="material"
+      (deleteMaterialClick)="onDeleteButtonClick($event)"
+      (viewMaterialClick)="onViewButtonClick($event)"
+    />
+  }
+</div>

@@ -2,16 +2,14 @@ import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common
 import { ApplicationConfig, importProvidersFrom, isDevMode, provideAppInitializer } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withEnabledBlockingInitialNavigation } from '@angular/router';
+import { API_URL } from '@core/data-access-api';
+import { tokenInterceptor } from '@core/data-access-interceptors';
 import { provideEffects } from '@ngrx/effects';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { provideQuillConfig } from 'ngx-quill/config';
-
-import { API_URL } from '@core/data-access-api';
-import { tokenInterceptor } from '@core/data-access-interceptors';
 import { ADDRESS_API_KEY, ADDRESS_API_URL } from '@shared/data-access-address';
 import { GITHUB_CLIENT_ID, githubApiFeature, githubEffects } from '@shared/data-access-github';
 import { initializeTheme, THEMES, THEMES_TOKEN } from '@shared/data-access-theme';
@@ -20,9 +18,12 @@ import { articlesEffects, articlesFeature } from '@users/articles/data-access-ar
 import { commentsEffects, commentsFeature } from '@users/articles/data-access-comment';
 import { backlogEffects, backlogFeature } from '@users/backlog/data-access-backlog';
 import { authEffects, authFeature } from '@users/core/data-access-auth';
+import { foldersEffects, foldersFeature } from '@users/data-access-folder';
+import { materialsEffects, materialsFeature } from '@users/data-access-material';
 import { SettingsEffects, settingsFeature } from '@users/settings/data-access-settings';
 import { TasksEffects, tasksFeature } from '@users/tasks/data-access-task';
 import { userEffects, USERS_FEATURE_KEY, usersReducer } from '@users/users/data-access-user';
+import { provideQuillConfig } from 'ngx-quill/config';
 
 import { appRoutes } from './app.routes';
 import { environment } from '../environments/environment.development';
@@ -48,6 +49,8 @@ export const appConfig: ApplicationConfig = {
       githubEffects,
       backlogEffects,
       SettingsEffects,
+      foldersEffects,
+      materialsEffects,
     ),
     provideStore({
       router: routerReducer,
@@ -59,6 +62,8 @@ export const appConfig: ApplicationConfig = {
       [tasksFeature.name]: tasksFeature.reducer,
       [githubApiFeature.name]: githubApiFeature.reducer,
       [backlogFeature.name]: backlogFeature.reducer,
+      [foldersFeature.name]: foldersFeature.reducer,
+      [materialsFeature.name]: materialsFeature.reducer,
     }),
     provideRouterStore(),
     provideStoreDevtools({

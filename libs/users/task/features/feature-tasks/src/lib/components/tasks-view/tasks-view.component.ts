@@ -15,9 +15,8 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { filter } from 'rxjs';
-
 import { Column, Task } from '@users/tasks/data-access-task';
+import { filter } from 'rxjs';
 
 import { TasksColumnComponent } from './tasks-column/tasks-column.component';
 import { TaskChangeDialogComponent } from '../../modals/task-change-dialog/task-change-dialog.component';

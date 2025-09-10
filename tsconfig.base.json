@@ -42,6 +42,13 @@
       "@users/chart/feature-chart": ["libs/users/chart/features/feature-chart/src/index.ts"],
       "@users/core/data-access-auth": ["libs/users/core/data-access/data-access-auth/src/index.ts"],
       "@users/core/ui-layout": ["libs/users/core/ui/ui-layout/src/index.ts"],
+      "@users/data-access-folder": ["libs/users/materials/data-access/data-access-folder/src/index.ts"],
+      "@users/data-access-material": ["libs/users/materials/data-access/data-access-material/src/index.ts"],
+      "@users/feature-folder": ["libs/users/materials/features/feature-folder/src/index.ts"],
+      "@users/feature-material": ["libs/users/materials/features/feature-material/src/index.ts"],
+      "@users/feature-material-content-dialog": [
+        "libs/users/materials/features/feature-material-content-dialog/src/index.ts"
+      ],
       "@users/home/feature-home": ["libs/users/home/features/src/index.ts"],
       "@users/profile/feature-profile": ["libs/users/profile/features/feature-profile/src/index.ts"],
       "@users/profile/ui-password-change": ["libs/users/profile/ui/ui-password-change/src/index.ts"],
