@@ -31,3 +31,5 @@ export const selectOpenedUser = createSelector(
   selectUsersEntities,
   ({ id }, entities) => entities[id] || null,
 );
+
+export const selectTotalStoryPoints = createSelector(selectOpenedUser, (user) => user?.totalStoryPoints ?? null);

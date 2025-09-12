@@ -11,6 +11,8 @@ export interface UsersState extends EntityState<UserEntity> {
   selectedId?: string | number; // which Users record has been selected
   status: LoadingStatus;
   error: HttpErrorResponse | null;
+  totalStoryPoints: number | null;
+  loading?: boolean;
 }
 
 export const usersAdapter: EntityAdapter<UserEntity> = createEntityAdapter<UserEntity>();
@@ -19,6 +21,8 @@ const initialUsersState: UsersState = usersAdapter.getInitialState({
   // set initial required properties
   status: 'init',
   error: null,
+  totalStoryPoints: null,
+  loading: false,
 });
 
 const reducer = createReducer(
@@ -66,6 +70,24 @@ const reducer = createReducer(
   on(UsersActions.updateUserStatus, (state, { status }) => ({
     ...state,
     status,
+  })),
+  on(UsersActions.updateStoryPoints, (state) => ({
+    ...state,
+    status: 'loaded' as const,
+  })),
+  on(UsersActions.updateStoryPointsSuccess, (state, { user }) =>
+    usersAdapter.updateOne(
+      {
+        id: user.id,
+        changes: { totalStoryPoints: user.totalStoryPoints },
+      },
+      { ...state, status: 'loaded' as const },
+    ),
+  ),
+  on(UsersActions.updateStoryPointsFailure, (state, { error }) => ({
+    ...state,
+    status: 'error' as const,
+    error,
   })),
 );
 

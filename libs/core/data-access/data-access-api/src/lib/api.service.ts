@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
+
+import { UserDTO, UserEntity } from '@users/shared/data-access-models';
 
 import { API_URL } from './api-url.token';
 
@@ -34,12 +36,19 @@ export class ApiService {
     });
   }
 
+  updateStoryPoints(id: number, updatedUserData: Partial<UserEntity>): Observable<UserEntity> {
+    return this.http.post<UserDTO>(`${this.apiUrl}/users/${id}`, updatedUserData).pipe(
+      map((userDto) => ({
+        ...userDto,
+        isAdmin: updatedUserData.isAdmin ?? null,
+      })),
+    );
+  }
   private get headers(): HttpHeaders {
     const headersConfig = {
       'Content-Type': 'application/json',
       Accept: 'application/json',
     };
-
     return new HttpHeaders(headersConfig);
   }
 }

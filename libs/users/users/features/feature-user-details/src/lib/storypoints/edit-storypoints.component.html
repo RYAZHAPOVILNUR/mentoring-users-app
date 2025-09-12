@@ -1,0 +1,56 @@
+<form [formGroup]="formgroup" class="storypoints">
+  <mat-form-field
+    class="edit-user-storypoint"
+    [matTooltip]="totalStoryPointsControl.value?.toString() || ''"
+    [matTooltipDisabled]="editing"
+  >
+    <mat-label>Количество сторипоинтов</mat-label>
+
+    <input
+      matInput
+      placeholder="Введите число"
+      formControlName="totalStoryPoints"
+      class="edit-user-input"
+    />
+
+    <mat-error *ngIf="totalStoryPointsControl?.hasError('required')">
+      Это поле обязательно для заполнения
+    </mat-error>
+
+    <mat-error
+      *ngIf="totalStoryPointsControl?.hasError('pattern') || totalStoryPointsControl?.hasError('min')"
+    >
+      Допустимы только числовые значения, от 0 и выше
+    </mat-error>
+
+    <button
+      *ngIf="!editing"
+      mat-icon-button
+      style="color: white;"
+      matSuffix
+      (click)="startEditing()"
+      type="button"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <ng-container matSuffix *ngIf="editing">
+      <button  
+        mat-icon-button 
+        color="primary" 
+        (click)="confirm()" 
+        type="button"
+      >
+        <mat-icon>done</mat-icon>
+      </button>
+      <button  
+        mat-icon-button 
+        color="warn" 
+        (click)="cancel()" 
+        type="button"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </ng-container>
+  </mat-form-field>
+</form>

@@ -70,6 +70,9 @@
             </mat-form-field>
 
             <users-address-field [type]="addressTypes.CITY" formControlName="city"/>
+
+            <users-edit-storypoints></users-edit-storypoints>
+
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button

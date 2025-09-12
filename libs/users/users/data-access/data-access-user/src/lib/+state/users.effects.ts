@@ -8,6 +8,7 @@ import { selectRouteParams } from '@shared/util-store';
 import { UserDTO, userAdapter, UserEntity } from '@users/shared/data-access-models';
 
 import * as UsersActions from './users.actions';
+import { UsersState } from './users.reducer';
 import { selectUsersEntities } from './users.selectors';
 import { CreateUserDTO } from '../types/create-user-dto.type';
 
@@ -136,6 +137,36 @@ export const loadUser = createEffect(
           );
         }
         return of(UsersActions.updateUserStatus({ status: 'loading' }));
+      }),
+    );
+  },
+  { functional: true },
+);
+
+export const updateStoryPoints$ = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const store = inject(Store<UsersState>);
+    const apiService = inject(ApiService);
+
+    return actions$.pipe(
+      ofType(UsersActions.updateStoryPoints),
+      withLatestFrom(store.select(selectUsersEntities)),
+      switchMap(([{ id, totalStoryPoints }, usersEntities]) => {
+        const currentUser = usersEntities[id];
+        if (!currentUser) {
+          return of(UsersActions.updateStoryPointsFailure({ error: null }));
+        }
+
+        const updatedUser: Partial<UserEntity> = {
+          ...currentUser,
+          totalStoryPoints,
+        };
+
+        return apiService.updateStoryPoints(id, updatedUser).pipe(
+          map((user) => UsersActions.updateStoryPointsSuccess({ user })),
+          catchError((error) => of(UsersActions.updateStoryPointsFailure({ error }))),
+        );
       }),
     );
   },

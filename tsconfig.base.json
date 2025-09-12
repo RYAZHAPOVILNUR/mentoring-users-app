@@ -53,7 +53,8 @@
       "@users/users/feature-user-create": ["libs/users/users/features/feature-user-create/src/index.ts"],
       "@users/users/feature-user-details": ["libs/users/users/features/feature-user-details/src/index.ts"],
       "@users/users/feature-user-dialog": ["libs/users/users/features/feature-user-dialog/src/index.ts"],
-      "@users/users/feature-users": ["libs/users/users/features/feature-users/src/index.ts"]
+      "@users/users/feature-users": ["libs/users/users/features/feature-users/src/index.ts"],
+      "@users/users/state/*": ["libs/users/users/data-access/data-access-user/src/lib/+state/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -24,6 +24,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { PushPipe } from '@ngrx/component';
+import { Store } from '@ngrx/store';
 import { BehaviorSubject, tap } from 'rxjs';
 
 import { AddressType } from '@shared/data-access-address';
@@ -32,6 +33,8 @@ import { LoadingStatus } from '@shared/util-store';
 import { Callback } from '@shared/util-typescript';
 import { UserEntity } from '@users/shared/data-access-models';
 import { CreateUserDTO } from '@users/users/data-access-user';
+
+import { EditStorypointsComponent } from '../storypoints/edit-storypoints.component';
 
 type DetailUsersCardVm = {
   editMode: boolean;
@@ -58,6 +61,7 @@ type DetailUsersCardVm = {
     MatAutocompleteModule,
     PushPipe,
     AddressFieldComponent,
+    EditStorypointsComponent,
   ],
   templateUrl: './user-details-card.component.html',
   styleUrls: ['./user-details-card.component.scss'],
@@ -78,6 +82,8 @@ export class UserDetailsCardComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'top',
     });
+  readonly store = inject(Store);
+
   public formGroup = new FormBuilder().group({
     name: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required]),
     email: new FormControl({ value: '', disabled: !this.vm.editMode }, [Validators.required, Validators.email]),
