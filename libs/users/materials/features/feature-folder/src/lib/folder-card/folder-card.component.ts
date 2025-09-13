@@ -4,7 +4,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
-import { Folder } from '@users/data-access-folder';
+
+import { FolderVM } from '@users/data-access-folder';
 @Component({
   selector: 'users-folder-card',
   imports: [CommonModule, DatePipe, MatButtonModule, MatIconModule, MatTooltipModule],
@@ -13,14 +14,14 @@ import { Folder } from '@users/data-access-folder';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FolderCardComponent {
-  @Input({ required: true }) folder!: Folder;
+  @Input({ required: true }) folder!: FolderVM;
 
-  public readonly router = inject(Router);
+  private readonly router = inject(Router);
   public isHovered = false;
 
-  @Output() deleteFolderClick = new EventEmitter<Folder>();
+  @Output() deleteFolderClick = new EventEmitter<FolderVM>();
 
-  onDeleteButtonClick(folder: Folder) {
+  onDeleteButtonClick(folder: FolderVM) {
     this.deleteFolderClick.emit(folder);
   }
 

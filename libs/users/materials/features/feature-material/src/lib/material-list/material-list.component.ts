@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { Material } from '@users/data-access-material';
+
+import { DeleteMaterialData, MaterialVM, ViewMaterialData } from '@users/data-access-material';
 
 import { MaterialCardComponent } from '../material-card/material-card.component';
 
@@ -12,15 +13,15 @@ import { MaterialCardComponent } from '../material-card/material-card.component'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialListComponent {
-  @Input({ required: true }) materials!: Material[];
-  @Output() viewMaterialClick = new EventEmitter<Material>();
-  @Output() deleteMaterialClick = new EventEmitter<Material>();
+  @Input({ required: true }) materials!: MaterialVM[];
+  @Output() viewMaterialClick = new EventEmitter<ViewMaterialData>();
+  @Output() deleteMaterialClick = new EventEmitter<DeleteMaterialData>();
 
-  onViewButtonClick(material: Material) {
+  onViewButtonClick(material: ViewMaterialData) {
     this.viewMaterialClick.emit(material);
   }
 
-  onDeleteButtonClick(material: Material) {
+  onDeleteButtonClick(material: DeleteMaterialData) {
     this.deleteMaterialClick.emit(material);
   }
 }

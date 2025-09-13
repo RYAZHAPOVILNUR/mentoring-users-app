@@ -1,14 +1,12 @@
-export { materialsFeature } from './lib/+state/materials.reducer';
+export { materialFeature } from './lib/+state/material.reducer';
 
-export { MaterialsFacade } from './lib/+state/materials.facade';
+export { MaterialFacade } from './lib/+state/material.facade';
 
-export { Material } from './lib/interfaces/material.interface';
-export { CreateMaterial } from './lib/interfaces/create-material.interface';
-export { MaterialType } from './lib/types/material-dialog-data';
+export { MaterialVM } from './lib/types/material-vm.type';
+export { MaterialType } from './lib/models/material-type';
+export { DeleteMaterialData } from './lib/models/delete-material-data.type';
+export { ViewMaterialData } from './lib/models/view-material-data.type';
+export { CreateMaterialData } from './lib/models/create-material-data.type';
+export * as materialSelectors from './lib/+state/material.selectors';
 
-export { materialRegex } from './lib/utils/material-regex-map';
-export { materialIconMap } from './lib/utils/material-icon-map';
-
-export * as materialsSelectors from './lib/+state/materials.selectors';
-
-export * as materialsEffects from './lib/+state/materials.effects';
+export * as materialEffects from './lib/+state/material.effects';

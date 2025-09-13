@@ -7,7 +7,6 @@ import { UserEntity } from '@users/shared/data-access-models';
 import { Observable, of, switchMap } from 'rxjs';
 
 import * as UsersActions from './users.actions';
-import { onSuccessSPonCbType } from './users.actions';
 import * as UsersSelectors from './users.selectors';
 import { CreateUserDTO } from '../types/create-user-dto.type';
 import { EditUserEntity } from '../types/edit-user-entity.type';
@@ -48,9 +47,6 @@ export class UsersFacade {
   editUser(user: EditUserEntity, onSuccessCb: Callback) {
     this.store.dispatch(UsersActions.editUser({ user, onSuccessCb }));
   }
-  filterUsers(filter: { name: string }) {
-    this.store.dispatch(UsersActions.setUsersFilter({ filter }));
-  }
 
   getUserFromStore(id: number) {
     return this.store.select(UsersSelectors.selectUserById(id)).pipe(
@@ -62,10 +58,6 @@ export class UsersFacade {
         }
       }),
     );
-  }
-
-  addStoryPoints(userData: CreateUserDTO, id: number, onSuccessAddSP: onSuccessSPonCbType) {
-    this.store.dispatch(UsersActions.addUserStoryPoints({ userData, id, onSuccessAddSP }));
   }
 
   loadUser() {

@@ -3,7 +3,8 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Material } from '@users/data-access-material';
+
+import { DeleteMaterialData, MaterialVM, ViewMaterialData } from '@users/data-access-material';
 @Component({
   selector: 'users-material-card',
   imports: [CommonModule, CommonModule, DatePipe, MatButtonModule, MatIconModule, MatTooltipModule],
@@ -12,17 +13,17 @@ import { Material } from '@users/data-access-material';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialCardComponent {
-  @Input({ required: true }) material!: Material;
+  @Input({ required: true }) material!: MaterialVM;
 
   public isHovered = false;
 
-  @Output() viewMaterialClick = new EventEmitter<Material>();
-  @Output() deleteMaterialClick = new EventEmitter<Material>();
+  @Output() viewMaterialClick = new EventEmitter<ViewMaterialData>();
+  @Output() deleteMaterialClick = new EventEmitter<DeleteMaterialData>();
 
-  onViewButtonClick(material: Material) {
+  onViewButtonClick(material: ViewMaterialData) {
     this.viewMaterialClick.emit(material);
   }
-  onDeleteButtonClick(material: Material) {
+  onDeleteButtonClick(material: DeleteMaterialData) {
     this.deleteMaterialClick.emit(material);
   }
 }

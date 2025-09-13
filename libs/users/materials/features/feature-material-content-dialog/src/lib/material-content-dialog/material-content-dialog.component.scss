@@ -1,27 +1,28 @@
-.material {
-  &__header {
-    min-width: 300px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    position: relative;
-  }
+.material-content {
+  position: relative;
+  overflow: hidden;
 
-  &__header-button--close {
+  &__button--close {
     position: absolute;
-    top: 50%;
+    top: 0;
     right: 20px;
-    transform: translateY(-50%);
+    transform: translateY(50%);
     z-index: 100;
+    font-size: 19px;
+    color: white;
+    background-color: rgba(136, 150, 150, 0.37);
   }
 
-  &__video {
-    display: flex;
-    align-items: center;
+  &__audio-wrapper {
+    position: relative;
+    min-width: 300px;
+    min-height: 150px;
   }
+
   &__audio {
-    display: flex;
-    align-items: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
   }
 
   &__pdf {

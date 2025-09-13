@@ -1,20 +1,19 @@
-<div class="material">
-  <header class="material__header">
-    <span mat-dialog-title>{{ data.title }}</span>
-    <button
-      class="material__header-button material__header-button--close"
-      mat-icon-button
-      (click)="cancel()"
-      aria-label="Отказаться"
-    >
-      <mat-icon>close</mat-icon>
-    </button>
-  </header>
+<div class="material-content">
+  <button
+    class="material-content__button material-content__button--close"
+    mat-icon-button
+    (click)="cancel()"
+    aria-label="Отказаться"
+  >
+    <mat-icon mat-icon-button>close</mat-icon>
+  </button>
 
   <ng-container *ngIf="data.materialLink.endsWith('.mp3')">
-    <audio controls role="audio" class="material__audio">
-      <source [src]="data.materialLink" type="audio/mpeg" />
-    </audio>
+    <div class="material-content__audio-wrapper">
+      <audio controls role="audio" class="material-content__audio">
+        <source [src]="data.materialLink" type="audio/mpeg" />
+      </audio>
+    </div>
   </ng-container>
 
   <ng-container *ngIf="data.materialLink.endsWith('.pdf')">
@@ -23,15 +22,18 @@
       [src]="data.materialLink"
       [original-size]="false"
       [zoom-scale]="'page-width'"
-      class="material__pdf"
+      class="material-content__pdf"
     ></pdf-viewer>
   </ng-container>
 
   <ng-container *ngIf="!data.materialLink.endsWith('.mp3') && !data.materialLink.endsWith('.pdf')">
-    <div class="material__video" role="video">
-      <a *ngIf="data.materialLink as link" [href]="link" target="_blank">
-        <img [src]="link | youtubeThumbnail" alt="Video preview" />
-      </a>
-    </div>
+    <youtube-player
+      [videoId]="data.materialLink | youtubeId"
+      suggestedQuality="highres"
+      [width]="660"
+      [height]="345"
+      [startSeconds]="4"
+      [endSeconds]="8"
+    ></youtube-player>
   </ng-container>
 </div>

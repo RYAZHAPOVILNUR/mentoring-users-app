@@ -29,11 +29,6 @@ const reducer = createReducer(
     status: 'loading' as const,
   })),
 
-  on(UsersActions.setUsersFilter, (state, { filter }) => ({
-    ...state,
-    usersFilter: filter,
-  })),
-
   on(UsersActions.loadUsersSuccess, (state, { users }) =>
     usersAdapter.setAll(users, { ...state, status: 'loaded' as const }),
   ),
@@ -66,20 +61,6 @@ const reducer = createReducer(
     usersAdapter.addOne({ ...userData }, { ...state, status: 'loaded' as const }),
   ),
   on(UsersActions.loadUserFailed, (state, { error }) => ({
-    ...state,
-    status: 'error' as const,
-    error,
-  })),
-  on(UsersActions.addUserStoryPointsSuccess, (state, { userData }) =>
-    usersAdapter.updateOne(
-      {
-        id: userData.id,
-        changes: userData,
-      },
-      state,
-    ),
-  ),
-  on(UsersActions.addUserStoryPointsFailed, (state, { error }) => ({
     ...state,
     status: 'error' as const,
     error,
