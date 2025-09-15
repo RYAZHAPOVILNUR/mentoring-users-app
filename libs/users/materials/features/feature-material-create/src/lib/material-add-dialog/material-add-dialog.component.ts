@@ -16,7 +16,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-
 import { materialRegex, MaterialType, iconMap, CreateMaterial } from '@users/data-access-material';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {

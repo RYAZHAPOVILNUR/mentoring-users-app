@@ -8,7 +8,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-
 import { CreateFolder } from '@users/data-access-folder';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {

@@ -18,10 +18,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltip } from '@angular/material/tooltip';
 import { PushPipe } from '@ngrx/component';
 import { TranslatePipe } from '@ngx-translate/core';
-import { fromEvent, map, Observable } from 'rxjs';
-
 import { Address, AddressService, AddressType } from '@shared/data-access-address';
 import { Callback } from '@shared/util-typescript';
+import { fromEvent, map, Observable } from 'rxjs';
 
 import { ADDRESS_FIELD_LABELS } from '../../constants/address-field-labels.constant';
 

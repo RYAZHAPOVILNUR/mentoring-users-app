@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { LetDirective } from '@ngrx/component';
-import { filter, of, tap } from 'rxjs';
-
 import { AuthFacade } from '@users/core/data-access-auth';
 import { UsersFacade } from '@users/users/data-access-user';
+import { filter, of, tap } from 'rxjs';
 
 import { ProfileComponent } from '../../components/profile/profile.component';
 

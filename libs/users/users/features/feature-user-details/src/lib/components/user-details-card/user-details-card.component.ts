@@ -21,14 +21,13 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { PushPipe } from '@ngrx/component';
-import { map, Observable } from 'rxjs';
-
 import { AddressType } from '@shared/data-access-address';
 import { AddressFieldComponent } from '@shared/feature-address-field';
 import { LoadingStatus } from '@shared/util-store';
 import { Callback } from '@shared/util-typescript';
 import { UserEntity } from '@users/shared/data-access-models';
 import { EditUserEntity } from '@users/users/data-access-user';
+import { map, Observable } from 'rxjs';
 
 import { UserFormService } from '../../services/user-form.service';
 

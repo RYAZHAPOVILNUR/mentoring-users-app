@@ -2,11 +2,10 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { LetDirective } from '@ngrx/component';
-import { filter, tap } from 'rxjs';
-
 import { ConfirmDialogService } from '@shared/ui-confirm-dialog';
 import { CreateFolder, Folder, FoldersFacade } from '@users/data-access-folder';
 import { FolderAddButtonComponent, FolderAddDialogComponent, FolderDialogService } from '@users/feature-folder-create';
+import { filter, tap } from 'rxjs';
 
 import { FolderListComponent } from '../folder-list/folder-list.component';
 

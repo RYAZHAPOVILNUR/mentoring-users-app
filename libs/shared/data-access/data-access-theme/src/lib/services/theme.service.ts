@@ -1,5 +1,4 @@
 import { inject, Injectable } from '@angular/core';
-
 import { LocalStorageService, StorageKey } from '@shared/util-storage';
 
 import { Theme } from '../interfaces/theme.interface';

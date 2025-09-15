@@ -9,7 +9,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
-
 import { LoadingStatus } from '@shared/util-store';
 import { AuthFacade } from '@users/core/data-access-auth';
 import { Comment } from '@users/shared/data-access-models';

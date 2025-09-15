@@ -2,7 +2,6 @@ import { NgForOf, NgIf } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-
 import { LoadingStatus } from '@shared/util-store';
 import { DeepReadonly } from '@shared/util-typescript';
 import { UserEntity, UserVM } from '@users/shared/data-access-models';

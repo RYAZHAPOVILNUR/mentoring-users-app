@@ -3,13 +3,12 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LetDirective } from '@ngrx/component';
 import { Store } from '@ngrx/store';
-import { filter, noop, of, tap } from 'rxjs';
-
 import { githubApiActions, GithubApiService, githubSelectors } from '@shared/data-access-github';
 import { CropperDialogService } from '@shared/feature-cropper';
 import { selectQueryParam } from '@shared/util-store';
 import { authActions, authSelectors } from '@users/core/data-access-auth';
 import { UserEntity } from '@users/shared/data-access-models';
+import { filter, noop, of, tap } from 'rxjs';
 
 import { ProfileComponent } from '../../components/profile/profile.component';
 

@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-
 import { Material } from '@users/data-access-material';
 
 import { MaterialCardComponent } from '../material-card/material-card.component';

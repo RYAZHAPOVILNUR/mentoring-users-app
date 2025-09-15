@@ -1,12 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
+import { ApiService } from '@core/data-access-api';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { catchError, filter, map, of, switchMap } from 'rxjs';
-
-import { ApiService } from '@core/data-access-api';
 import { selectRouteParams } from '@shared/util-store';
+import { catchError, filter, map, of, switchMap } from 'rxjs';
 
 import { foldersActions } from './folders.actions';
 import { CreateFolder } from '../interfaces/create-folder.interface';

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Chart, registerables } from 'chart.js';
-
 import { CHART_CONFIG } from '@users/chart/data-access-chart';
+import { Chart, registerables } from 'chart.js';
 
 Chart.register(...registerables);
 

@@ -1,5 +1,4 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-
 import { Backlog } from '@users/shared/data-access-models';
 
 import { CreateBacklog } from '../interfaces/create-backlog.interface';

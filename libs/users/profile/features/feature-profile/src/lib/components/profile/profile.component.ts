@@ -9,14 +9,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
-import { filter, of, tap } from 'rxjs';
-
 import { LoadingStatus } from '@shared/util-store';
 import { AuthFacade } from '@users/core/data-access-auth';
 import { PasswordChangeDialogService } from '@users/profile/ui-password-change';
 import { ProfileChangeDialogService } from '@users/profile/ui-profile-change';
 import { UiPhotoModalComponent } from '@users/profile/ui-profile-photo';
 import { UserEntity } from '@users/shared/data-access-models';
+import { filter, of, tap } from 'rxjs';
 
 interface ProfileFormVm {
   user: UserEntity;

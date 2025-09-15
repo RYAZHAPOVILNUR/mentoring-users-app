@@ -1,5 +1,4 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-
 import { selectRouteParams } from '@shared/util-store';
 import { UserEntity } from '@users/shared/data-access-models';
 

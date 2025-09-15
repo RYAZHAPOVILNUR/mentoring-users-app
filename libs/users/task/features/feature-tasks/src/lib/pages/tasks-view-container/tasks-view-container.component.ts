@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { PushPipe } from '@ngrx/component';
-
 import { Column } from '@users/tasks/data-access-task';
 
 import { TasksStore } from './tasks-list-container.store';

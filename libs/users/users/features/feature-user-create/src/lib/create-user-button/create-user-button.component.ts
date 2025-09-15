@@ -4,7 +4,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-
 import { CreateUserDTO, UsersFacade } from '@users/users/data-access-user';
 
 import { CreateUserDialogComponent } from '../create-user-dialog/create-user-dialog.component';

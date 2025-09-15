@@ -5,8 +5,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RouterLink } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
-import { filter, tap } from 'rxjs';
-
 import { ConfirmDialogService } from '@shared/ui-confirm-dialog';
 import { FoldersFacade } from '@users/data-access-folder';
 import { CreateMaterial, Material, MaterialsFacade } from '@users/data-access-material';
@@ -16,6 +14,7 @@ import {
   MaterialAddDialogComponent,
   MaterialDialogService,
 } from '@users/feature-material-create';
+import { filter, tap } from 'rxjs';
 
 import { MaterialListComponent } from '../material-list/material-list.component';
 export interface ResultDialogData {

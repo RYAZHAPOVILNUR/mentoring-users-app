@@ -1,5 +1,4 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-
 import { selectRouteParams } from '@shared/util-store';
 
 import { MATERIAL_FEATURE_KEY, materialsAdapter, materialsFeature, MaterialsState } from './materials.reducer';

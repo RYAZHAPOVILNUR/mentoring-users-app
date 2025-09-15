@@ -5,11 +5,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { PushPipe } from '@ngrx/component';
-import { QuillModule } from 'ngx-quill';
-import { map, Observable } from 'rxjs';
-
 import { Article } from '@users/shared/data-access-models';
 import { UsersFacade } from '@users/users/data-access-user';
+import { QuillModule } from 'ngx-quill';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'users-article-details',

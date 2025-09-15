@@ -1,9 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { LocalStorageService, StorageKey } from '@shared/util-storage';
 import { of, switchMap } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-import { LocalStorageService, StorageKey } from '@shared/util-storage';
 
 import { SettingsActions } from './settings.actions';
 

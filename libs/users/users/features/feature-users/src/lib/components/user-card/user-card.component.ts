@@ -6,7 +6,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
-
 import { UserEntity, UserVM } from '@users/shared/data-access-models';
 
 import { UserRedirectPayload } from '../../interfaces/user-redirect-payload.interface';

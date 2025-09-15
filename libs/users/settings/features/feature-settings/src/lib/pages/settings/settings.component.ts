@@ -5,7 +5,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { PushPipe } from '@ngrx/component';
 import { Store } from '@ngrx/store';
-
 import { LanguageService, LanguageValues } from '@shared/util-language';
 import { SettingsFacade } from '@users/settings/data-access-settings';
 

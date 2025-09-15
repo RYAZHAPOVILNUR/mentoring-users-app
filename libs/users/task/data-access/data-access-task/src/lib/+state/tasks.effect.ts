@@ -1,9 +1,8 @@
 import { inject } from '@angular/core';
+import { ApiService } from '@core/data-access-api';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
-
-import { ApiService } from '@core/data-access-api';
 
 import { tasksAction } from './tasks.action';
 import { Column } from '../interfaces/column.interface';

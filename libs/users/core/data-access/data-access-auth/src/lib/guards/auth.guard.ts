@@ -1,6 +1,5 @@
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { LocalStorageService, StorageKey } from '@shared/util-storage';
 
 export const authGuard = () => {

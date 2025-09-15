@@ -8,10 +8,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
-
 import { LanguageService, LanguageValues } from '@shared/util-language';
 import { AuthFacade } from '@users/core/data-access-auth';
+import { Observable } from 'rxjs';
 
 import { ThemePickerComponent } from './theme-picker/theme-picker.component';
 

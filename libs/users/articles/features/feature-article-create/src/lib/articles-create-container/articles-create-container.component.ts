@@ -3,10 +3,9 @@ import { ChangeDetectionStrategy, Component, inject, OnInit, ViewChild } from '@
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ActivatedRoute } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
-import { map } from 'rxjs';
-
 import { ConfirmDialogService } from '@shared/ui-confirm-dialog';
 import { ArticlesFacade, CreateArticle } from '@users/articles/data-access-article';
+import { map } from 'rxjs';
 
 import { ArticlesCreateUiComponent } from '../articles-create-ui/articles-create-ui.component';
 
