@@ -16,7 +16,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-
 import { MaterialType } from '@users/data-access-material';
 
 import { MATERIAL_ICONS } from '../constants/material-icon.constant';

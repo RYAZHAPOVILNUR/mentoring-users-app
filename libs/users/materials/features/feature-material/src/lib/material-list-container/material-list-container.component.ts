@@ -4,11 +4,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RouterLink } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
-import { filter, tap } from 'rxjs';
-
 import { FolderFacade } from '@users/data-access-folder';
 import { MaterialType, MaterialFacade, ViewMaterialData, DeleteMaterialData } from '@users/data-access-material';
 import { MaterialAddButtonComponent, MaterialDialogService } from '@users/feature-material-create';
+import { filter, tap } from 'rxjs';
 
 import { MaterialListComponent } from '../material-list/material-list.component';
 

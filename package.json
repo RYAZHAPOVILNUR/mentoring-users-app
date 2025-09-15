@@ -61,6 +61,7 @@
     "@ngrx/schematics": "~19.1.0",
     "@ngrx/store-devtools": "~19.1.0",
     "@nrwl/cli": "^15.9.3",
+    "@nrwl/workspace": "^19.8.4",
     "@nx/cypress": "20.8.0",
     "@nx/esbuild": "20.8.0",
     "@nx/eslint": "20.8.0",
