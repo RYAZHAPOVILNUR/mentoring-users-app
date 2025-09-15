@@ -38,7 +38,6 @@ import { UsersFacade } from '@users/users/data-access-user';
 })
 export class ArticleListComponent implements OnInit {
   @Input({ required: true }) articles!: Article[];
-  @Input({ required: true }) article!: Article | null;
   @Input({ required: true }) loggedUserId!: number;
 
   private readonly userFacade = inject(UsersFacade);
@@ -49,6 +48,7 @@ export class ArticleListComponent implements OnInit {
 
   ngOnInit(): void {
     this.settingsFacade.getSettings();
+    console.log(this.authorPhoto$);
 
     for (const article of this.articles) {
       this.authorPhoto$.push(this.userFacade.getUserFromStore(article.authorId).pipe(map((data) => data?.photo?.url)));
@@ -60,7 +60,7 @@ export class ArticleListComponent implements OnInit {
   }
 
   public clearArticleContent(content: string) {
-    return content.replace(/<[^>]*>/g, ' ');
+    return content.replace(/<[^>]*>|&nbsp;/g, ' ');
   }
 
   preventRouterNavigation(event: Event) {

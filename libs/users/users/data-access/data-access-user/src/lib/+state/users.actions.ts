@@ -6,6 +6,7 @@ import { Callback } from '@shared/util-typescript';
 import { UserDTO, UserEntity } from '@users/shared/data-access-models';
 
 import { CreateUserDTO } from '../types/create-user-dto.type';
+import { EditUserEntity } from '../types/edit-user-entity.type';
 
 export const initUsers = createAction('[Users Page] Init');
 
@@ -32,20 +33,7 @@ export type onSuccessSPonCbType = () => void;
 
 export const editUser = createAction(
   '[Users Detail] Edit User',
-  props<{ userData: CreateUserDTO; id: number; onSuccessCb: Callback }>(),
-);
-
-export const addUserStoryPoints = createAction(
-  '[Users Detail] Add User StoryPoints',
-  props<{ userData: CreateUserDTO; id: number; onSuccessAddSP: onSuccessSPonCbType }>(),
-);
-export const addUserStoryPointsSuccess = createAction(
-  '[Users Detail] Add User StoryPoints Success',
-  props<{ userData: UserDTO }>(),
-);
-export const addUserStoryPointsFailed = createAction(
-  ' [Users Detail]Add User StoryPoints Failed',
-  props<{ error: HttpErrorResponse }>(),
+  props<{ user: EditUserEntity; onSuccessCb: Callback }>(),
 );
 
 export const editUserSuccess = createAction('[Users Detail] Edit User Success', props<{ userData: UserDTO }>());

@@ -8,3 +8,5 @@ export * as usersSelectors from './lib/+state/users.selectors';
 export { onSuccessSPonCbType, onSuccessEditionCbType } from './lib/+state/users.actions';
 
 export { CreateUserDTO } from './lib/types/create-user-dto.type';
+export { EditUserDTO } from './lib/types/edit-user-dto.type';
+export { EditUserEntity } from './lib/types/edit-user-entity.type';

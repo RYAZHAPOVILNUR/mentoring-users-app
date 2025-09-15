@@ -1,10 +1,9 @@
 <ng-container
   *ngrxLet="{
-  articles: articles$,
-  status: status$,
-  loggedUserId: loggedUserId$,
-  viewedArticle: viewedArticle$,
-} as vm"
+    status: status$,
+    articles: articles$,
+    loggedUserId: loggedUserId$,
+  } as vm"
 >
   <ng-container [ngSwitch]="vm.status">
     <ng-container *ngSwitchCase="'loading'">
@@ -12,9 +11,7 @@
     </ng-container>
 
     <ng-container *ngSwitchCase="'loaded'">
-      <ng-container>
-        <users-articles-view [articles]="vm.articles" [loggedUserId]="vm.loggedUserId" [article]="vm.viewedArticle" />
-      </ng-container>
+      <users-articles-view [articles]="vm.articles" [loggedUserId]="vm.loggedUserId" />
     </ng-container>
 
     <ng-container *ngSwitchCase="'error'">

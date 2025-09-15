@@ -14,11 +14,10 @@
   >
     <mat-card-header class="article-header">
       <mat-card-content class="article-header-block">
-        <mat-card-content class="article-author-block-img">
+        <mat-card-content *ngIf="authorPhoto$[i] | ngrxPush as authorPhoto" class="article-author-block-img">
           <img
             [routerLink]="article.authorId === loggedUserId ? ['/profile'] : ['/profile', article.authorId]"
             class="article-author-img"
-            *ngIf="authorPhoto$[i] | ngrxPush as authorPhoto"
             mat-card-avatar
             [src]="authorPhoto"
             alt=""
@@ -41,7 +40,7 @@
             {{ 'ARTICLES.FROM' | translate }}
             {{ article.author ? article.author : (authorArticle$[i] | ngrxPush) }}
           </mat-card-subtitle>
-          <mat-card-subtitle class="article-subtitle">{{ article.created_at | date : 'dd/MM/yyyy' }}</mat-card-subtitle>
+          <mat-card-subtitle class="article-subtitle">{{ article.created_at | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
         </mat-card-content>
       </mat-card-content>
 

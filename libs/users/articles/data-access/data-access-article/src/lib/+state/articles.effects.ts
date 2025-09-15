@@ -1,34 +1,32 @@
 import { inject } from '@angular/core';
-import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
-import { catchError, filter, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
+import { catchError, filter, map, of, switchMap, withLatestFrom } from 'rxjs';
 
 import { ApiService } from '@core/data-access-api';
-import { selectRouteParams } from '@shared/util-store';
+import { selectQueryParam } from '@shared/util-store';
 import { Article } from '@users/shared/data-access-models';
 
 import { articlesActions } from './articles.actions';
-import { selectArticlesEntities } from './articles.selectors';
+import * as articleSelectors from './articles.selectors';
 import { CreateArticle } from '../interfaces/create-article.interface';
 
-export const publishArticle$ = createEffect(
-  (actions$ = inject(Actions), apiService = inject(ApiService), router = inject(Router)) => {
+export const addArticle$ = createEffect(
+  (actions$ = inject(Actions), apiService = inject(ApiService)) => {
     return actions$.pipe(
-      ofType(articlesActions.publishArticle),
+      ofType(articlesActions.addArticle),
       switchMap(({ article }) =>
-        apiService.post<void, CreateArticle>('/articles', article).pipe(
-          tap(() => router.navigate(['/articles'])),
-          map(() => articlesActions.publishArticleSuccess),
+        apiService.post<Article, CreateArticle>('/articles', article).pipe(
+          map((article) => articlesActions.addArticleSuccess({ article })),
           catchError((error) => {
             console.error('Error', error);
-            return of(articlesActions.publishArticleFailed({ error }));
+            return of(articlesActions.addArticleFailed({ error }));
           }),
         ),
       ),
     );
   },
-  { functional: true, dispatch: false },
+  { functional: true },
 );
 
 export const loadArticles$ = createEffect(
@@ -48,16 +46,33 @@ export const loadArticles$ = createEffect(
   },
   { functional: true },
 );
-export const getArticleForEdit$ = createEffect(
-  (actions$ = inject(Actions), apiService = inject(ApiService)) => {
+
+export const updateArticle$ = createEffect(
+  (
+    actions$ = inject(Actions),
+    store$ = inject(Store),
+    articlesEntities$ = inject(Store).pipe(select(articleSelectors.selectArticleEntities)),
+    apiService = inject(ApiService),
+  ) => {
+    const id$ = store$.select(selectQueryParam('id'));
+
     return actions$.pipe(
-      ofType(articlesActions.getArticleForEdit),
-      switchMap(({ id }) => {
-        return apiService.get<Article>(`/articles/${id}`).pipe(
-          map((article) => articlesActions.getArticleForEditSuccess({ article })),
+      ofType(articlesActions.updateArticle),
+      withLatestFrom(articlesEntities$, id$),
+      filter(([, , idParam]) => Boolean(idParam)),
+      switchMap(([{ article }, entities, idParam]) => {
+        const articleId = Number(idParam);
+        const articleData = {
+          ...entities[articleId],
+          articlesId: articleId,
+          title: article.title,
+          content: article.content,
+        };
+        return apiService.post<Article, CreateArticle>(`/articles/${articleData.id}`, articleData).pipe(
+          map((article) => articlesActions.updateArticleSuccess({ article })),
           catchError((error) => {
             console.error('Error', error);
-            return of(articlesActions.getArticleForEditFailed({ error }));
+            return of(articlesActions.updateArticleFailed({ error }));
           }),
         );
       }),
@@ -66,56 +81,26 @@ export const getArticleForEdit$ = createEffect(
   { functional: true },
 );
 
-export const getArticleForRead$ = createEffect(
+export const loadArticle$ = createEffect(
   () => {
     const actions$ = inject(Actions);
     const store = inject(Store);
     const apiService = inject(ApiService);
+    const id$ = store.select(selectQueryParam('id'));
     return actions$.pipe(
-      ofType(articlesActions.getArticleForRead),
-      withLatestFrom(store.select(selectRouteParams)),
-      switchMap(([, params]) => {
-        return apiService.get<Article>(`/articles/${params['id']}`).pipe(
-          map((article) => articlesActions.getArticleForReadSuccess({ article })),
+      ofType(articlesActions.loadArticle),
+      withLatestFrom(id$),
+      filter(([, idParam]) => Boolean(idParam)),
+      switchMap(([, idParam]) => {
+        const articleId = Number(idParam);
+        return apiService.get<Article>(`/articles/${articleId}`).pipe(
+          map((article) => articlesActions.loadArticleSuccess({ article })),
           catchError((error) => {
             console.error('Error', error);
-            return of(articlesActions.getArticleForReadFailed({ error }));
+            return of(articlesActions.loadArticleFailed({ error }));
           }),
         );
       }),
-    );
-  },
-  { functional: true },
-);
-
-export const editArticle$ = createEffect(
-  (
-    actions$ = inject(Actions),
-    articlesEntities$ = inject(Store).pipe(select(selectArticlesEntities)),
-    apiService = inject(ApiService),
-  ) => {
-    return actions$.pipe(
-      ofType(articlesActions.editArticle),
-      withLatestFrom(articlesEntities$),
-      filter(([{ id }, articlesEntities$]) => Boolean(articlesEntities$[id])),
-      map(([{ articleData, id }, articlesEntities$]) => ({
-        article: {
-          ...articlesEntities$[id],
-          articlesId: id,
-          title: articleData.title,
-          content: articleData.content,
-        },
-      })),
-      switchMap(({ article }) =>
-        apiService.post<Article, CreateArticle>(`/articles/${article.id}`, article).pipe(
-          map((articles) => ({ articles })),
-          map(({ articles }) => articlesActions.editArticleSuccess({ articles })),
-          catchError((error) => {
-            console.error('Error', error);
-            return of(articlesActions.editArticleFailed({ error }));
-          }),
-        ),
-      ),
     );
   },
   { functional: true },

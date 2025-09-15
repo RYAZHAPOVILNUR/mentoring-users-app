@@ -33,7 +33,7 @@ export class ArticleDetailsContainerComponent {
   public openedArticle$: Observable<Article | null> = this.store.select(articleSelectors.selectOpenedArticle).pipe(
     map((article) => {
       if (!article) {
-        this.store.dispatch(articlesActions.getArticleForRead());
+        this.store.dispatch(articlesActions.loadArticle());
       }
       return article;
     }),

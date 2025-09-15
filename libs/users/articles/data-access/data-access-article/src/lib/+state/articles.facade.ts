@@ -1,24 +1,29 @@
 import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-
-import { Article } from '@users/shared/data-access-models';
 
 import { articlesActions } from './articles.actions';
-import { selectArticles, selectArticlesEntities } from './articles.selectors';
+import * as articleSelectors from './articles.selectors';
 import { CreateArticle } from '../interfaces/create-article.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ArticlesFacade {
   private readonly store = inject(Store);
-  public readonly articles$: Observable<Article[]> = this.store.select(selectArticles);
-  public readonly articlesEntities$ = this.store.select(selectArticlesEntities);
+  public readonly articles$ = this.store.select(articleSelectors.selectAllArticles);
+  public readonly status$ = this.store.select(articleSelectors.selectStatus);
+  public readonly articleForEdit$ = this.store.select(articleSelectors.selectArticleForEdit);
 
-  editArticle(articleData: CreateArticle, id: number) {
-    this.store.dispatch(articlesActions.editArticle({ articleData, id }));
+  addArticle(article: CreateArticle) {
+    this.store.dispatch(articlesActions.addArticle({ article }));
   }
 
-  publishArticle(article: CreateArticle) {
-    this.store.dispatch(articlesActions.publishArticle({ article }));
+  updateArticle(article: CreateArticle) {
+    this.store.dispatch(articlesActions.updateArticle({ article }));
+  }
+
+  loadArticles() {
+    this.store.dispatch(articlesActions.loadArticles());
+  }
+  loadArticle() {
+    this.store.dispatch(articlesActions.loadArticle());
   }
 }

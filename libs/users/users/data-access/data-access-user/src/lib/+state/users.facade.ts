@@ -7,10 +7,10 @@ import { Callback } from '@shared/util-typescript';
 import { authSelectors } from '@users/core/data-access-auth';
 import { UserEntity } from '@users/shared/data-access-models';
 
-import { CreateUserDTO } from '../types/create-user-dto.type';
 import * as UsersActions from './users.actions';
-import { onSuccessSPonCbType } from './users.actions';
 import * as UsersSelectors from './users.selectors';
+import { CreateUserDTO } from '../types/create-user-dto.type';
+import { EditUserEntity } from '../types/edit-user-entity.type';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
@@ -45,8 +45,8 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.addUser({ userData }));
   }
 
-  editUser(userData: CreateUserDTO, id: number, onSuccessCb: Callback) {
-    this.store.dispatch(UsersActions.editUser({ userData, id, onSuccessCb }));
+  editUser(user: EditUserEntity, onSuccessCb: Callback) {
+    this.store.dispatch(UsersActions.editUser({ user, onSuccessCb }));
   }
   filterUsers(filter: { name: string }) {
     this.store.dispatch(UsersActions.setUsersFilter({ filter }));
@@ -62,10 +62,6 @@ export class UsersFacade {
         }
       }),
     );
-  }
-
-  addStoryPoints(userData: CreateUserDTO, id: number, onSuccessAddSP: onSuccessSPonCbType) {
-    this.store.dispatch(UsersActions.addUserStoryPoints({ userData, id, onSuccessAddSP }));
   }
 
   loadUser() {

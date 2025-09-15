@@ -6,20 +6,36 @@ import { Article } from '@users/shared/data-access-models';
 
 import { articlesActions } from './articles.actions';
 
+export const ARTICLE_FEATURE_KEY = 'articles';
+
 export interface ArticlesState extends EntityState<Article> {
   status: LoadingStatus;
+  isEdit: boolean;
 }
 
 export const articlesAdapter: EntityAdapter<Article> = createEntityAdapter<Article>();
 
 const initialArticlesState: ArticlesState = articlesAdapter.getInitialState({
   status: 'init',
+  isEdit: false,
 });
 
 export const articlesFeature = createFeature({
-  name: 'articles',
+  name: ARTICLE_FEATURE_KEY,
   reducer: createReducer(
     initialArticlesState,
+
+    on(articlesActions.addArticle, (state) => ({
+      ...state,
+      status: 'loading' as const,
+    })),
+    on(articlesActions.addArticleSuccess, (state, { article }) =>
+      articlesAdapter.addOne({ ...article }, { ...state, status: 'loaded' as const }),
+    ),
+    on(articlesActions.addArticleFailed, (state) => ({
+      ...state,
+      status: 'error' as const,
+    })),
 
     on(articlesActions.loadArticles, (state) => ({
       ...state,
@@ -29,36 +45,36 @@ export const articlesFeature = createFeature({
     on(articlesActions.loadArticlesSuccess, (state, { articles }) =>
       articlesAdapter.setAll(articles, { ...state, status: 'loaded' as const }),
     ),
-    on(articlesActions.editArticleSuccess, (state, { articles }) =>
-      articlesAdapter.updateOne(
-        {
-          id: articles.id,
-          changes: articles,
-        },
-        state,
-      ),
-    ),
     on(articlesActions.loadArticlesFailed, (state) => ({
       ...state,
       status: 'error' as const,
     })),
 
-    on(articlesActions.getArticleForEdit, (state) => ({
+    on(articlesActions.updateArticle, (state) => ({
+      ...state,
+      status: 'loading' as const,
+    })),
+    on(articlesActions.updateArticleSuccess, (state, { article }) => ({
+      ...articlesAdapter.updateOne({ id: article.id, changes: article }, state),
+      status: 'loaded' as const,
+    })),
+    on(articlesActions.updateArticleFailed, (state) => ({
+      ...state,
+      status: 'error' as const,
+    })),
+
+    on(articlesActions.loadArticle, (state) => ({
       ...state,
       status: 'loading' as const,
     })),
 
-    on(articlesActions.getArticleForEditSuccess, (state, { article }) =>
+    on(articlesActions.loadArticleSuccess, (state, { article }) =>
       articlesAdapter.addOne({ ...article }, { ...state, status: 'loaded' as const }),
     ),
 
-    on(articlesActions.getArticleForRead, (state) => ({
+    on(articlesActions.loadArticleFailed, (state) => ({
       ...state,
-      status: 'loading' as const,
+      status: 'error' as const,
     })),
-
-    on(articlesActions.getArticleForReadSuccess, (state, { article }) =>
-      articlesAdapter.addOne({ ...article }, { ...state, status: 'loaded' as const }),
-    ),
   ),
 });
