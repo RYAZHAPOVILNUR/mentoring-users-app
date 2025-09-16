@@ -73,7 +73,7 @@
     "@schematics/angular": "~19.2.9",
     "@stylistic/eslint-plugin": "^3.1.0",
     "@swc-node/register": "~1.9.1",
-    "@swc/core": "~1.5.7",
+    "@swc/core": "^1.5.29",
     "@swc/helpers": "~0.5.11",
     "@types/jest": "29.5.14",
     "@types/node": "^22.15.2",
