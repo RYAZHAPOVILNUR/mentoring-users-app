@@ -18,6 +18,8 @@ import { ProfileChangeDialogService } from '@users/profile/ui-profile-change';
 import { UiPhotoModalComponent } from '@users/profile/ui-profile-photo';
 import { UserEntity } from '@users/shared/data-access-models';
 
+import { TimerService } from '../../services/timer.service';
+
 interface ProfileFormVm {
   user: UserEntity;
   githubUserName?: string;
@@ -48,6 +50,7 @@ export class ProfileComponent implements OnInit {
   private readonly authFacade = inject(AuthFacade);
   private readonly passwordChangeDialogService = inject(PasswordChangeDialogService);
   private readonly profileChangeDialogService = inject(ProfileChangeDialogService);
+  private readonly timerService = inject(TimerService);
   private matIconRegistry = inject(MatIconRegistry);
   private domSanitizer = inject(DomSanitizer);
 
@@ -64,6 +67,10 @@ export class ProfileComponent implements OnInit {
     this.matIconRegistry.addSvgIcon(
       'github',
       this.domSanitizer.bypassSecurityTrustResourceUrl(`assets/icons/github.svg`),
+    );
+    this.matIconRegistry.addSvgIcon(
+      'play_pause',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(`assets/icons/play_pause.svg`),
     );
     of(this.vm.githubUserName).subscribe(console.log);
   }
@@ -117,5 +124,13 @@ export class ProfileComponent implements OnInit {
     this.dialog.open(UiPhotoModalComponent, {
       data: this.vm.user.photo ? this.vm.user.photo.url : '',
     });
+  }
+
+  onToggleTimer() {
+    this.timerService.toggleTimer();
+  }
+
+  onRestartTimer() {
+    this.timerService.restartTimer();
   }
 }

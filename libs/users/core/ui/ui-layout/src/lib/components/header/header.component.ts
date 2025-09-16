@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, inject, OnInit, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListItemIcon } from '@angular/material/list';
@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 
 import { LanguageService, LanguageValues } from '@shared/util-language';
 import { AuthFacade } from '@users/core/data-access-auth';
+import { TimerService, timerValue } from '@users/profile/feature-profile';
 
 import { ThemePickerComponent } from './theme-picker/theme-picker.component';
 
@@ -33,14 +34,25 @@ import { ThemePickerComponent } from './theme-picker/theme-picker.component';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   private readonly facade = inject(AuthFacade);
   private readonly languageSwitchService = inject(LanguageService);
   public readonly isAuthenticated$: Observable<boolean> = this.facade.isAuthenticated$;
   public readonly isAdmin$: Observable<boolean | null> = this.facade.isAdmin$;
   public readonly selectedLanguage$ = this.languageSwitchService.selectedLanguage$;
+  public readonly timerService = inject(TimerService);
+  public readonly timer$: Observable<timerValue> = this.timerService.getTimer();
 
   @Output() sidenavToggle = new EventEmitter();
+
+  ngOnInit(): void {
+    this.timerService.getFromLocalStorage();
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  onBeforeUnload(): void {
+    this.timerService.setToLocalStorage();
+  }
 
   public onLogout() {
     this.facade.logout();

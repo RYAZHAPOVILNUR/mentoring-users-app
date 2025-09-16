@@ -9,10 +9,18 @@
     {{ 'LAYOUT.HEADER.USERS' | translate }}
   </button>
   <span class="spacer"></span>
+  <div>
+    <span>{{ 'LAYOUT.HEADER.TIMER.TIMER_LABEL' | translate }}</span>
+    <span> {{ (timer$ | async)?.days }} {{ 'LAYOUT.HEADER.TIMER.DAYS' | translate }} </span>
+    <span> {{ (timer$ | async)?.hours }} {{ 'LAYOUT.HEADER.TIMER.HOURS' | translate }} </span>
+    <span> {{ (timer$ | async)?.minutes }} {{ 'LAYOUT.HEADER.TIMER.MINUTES' | translate }} </span>
+    <span> {{ (timer$ | async)?.seconds }} {{ 'LAYOUT.HEADER.TIMER.SECONDS' | translate }} </span>
+  </div>
+  <span class="spacer"></span>
   <button mat-icon-button routerLink="/profile">
     <mat-icon matListItemIcon>account_circle</mat-icon>
   </button>
-  <users-theme-picker/>
+  <users-theme-picker />
   <button mat-button [matMenuTriggerFor]="menu" class="lang-switch-btn">
     {{ selectedLanguage$ | ngrxPush }}
   </button>

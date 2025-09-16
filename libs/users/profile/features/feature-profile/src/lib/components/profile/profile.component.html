@@ -75,6 +75,18 @@
             </button>
           </ng-template>
         </ng-container>
+        <ng-container *ngIf="vm.isLoggedUser">
+          <div class="user-timer">
+            <button mat-button class="navbar-btn" (click)="onToggleTimer()">
+              <mat-icon svgIcon="play_pause"></mat-icon>
+              <span class="button-label">{{ 'PROFILE.TIMER.START_TIMER' | translate }}</span>
+            </button>
+            <button mat-button class="navbar-btn" (click)="onRestartTimer()">
+              <mat-icon>restart_alt</mat-icon>
+              <span class="button-label">{{ 'PROFILE.TIMER.RESTART_TIMER' | translate }}</span>
+            </button>
+          </div>
+        </ng-container>
       </mat-card-actions>
     </mat-card>
   </div>
