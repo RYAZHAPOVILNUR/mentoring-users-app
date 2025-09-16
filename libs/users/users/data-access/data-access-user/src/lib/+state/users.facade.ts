@@ -1,11 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable, of, switchMap } from 'rxjs';
-
 import { Callback } from '@shared/util-typescript';
 import { authSelectors } from '@users/core/data-access-auth';
 import { UserEntity } from '@users/shared/data-access-models';
+import { Observable, of, switchMap } from 'rxjs';
 
 import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';

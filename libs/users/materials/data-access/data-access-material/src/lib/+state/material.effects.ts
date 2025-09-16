@@ -19,10 +19,11 @@ export const addMaterial = createEffect(
       filter(([, routeParams]) => Boolean(Number(routeParams['id']))),
       switchMap(([{ material }, { id: folder_id }]) => {
         const data = materialAdapter.entityToDTO({ ...material, folderId: folder_id });
-        console.log(data);
         return apiService.post<MaterialDTO, CreateMaterialDTO>('/material', data).pipe(
-          map((material) => materialAdapter.DTOtoEntity(material)),
-          map((material) => materialActions.addMaterialSuccess({ material })),
+          map((material) => {
+            const entity = materialAdapter.DTOtoEntity(material);
+            return materialActions.addMaterialSuccess({ material: entity });
+          }),
           catchError((error: HttpErrorResponse) => {
             console.error('Error', error);
             return of(materialActions.adddMaterialFailed({ error }));
@@ -40,8 +41,10 @@ export const loadMaterials$ = createEffect(
       ofType(materialActions.loadMaterials),
       switchMap(() => {
         return apiService.get<MaterialDTO[]>('/material').pipe(
-          map((materials) => materials.map(materialAdapter.DTOtoEntity)),
-          map((materials) => materialActions.loadMaterialsSuccess({ materials })),
+          map((materials) => {
+            const entity = materials.map(materialAdapter.DTOtoEntity);
+            return materialActions.loadMaterialsSuccess({ materials: entity });
+          }),
           catchError((error: HttpErrorResponse) => {
             console.log(error);
             return of(materialActions.loadMaterialsFailed({ error }));
