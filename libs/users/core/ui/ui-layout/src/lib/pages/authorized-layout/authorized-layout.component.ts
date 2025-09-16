@@ -7,8 +7,9 @@ import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
 import { PushPipe } from '@ngrx/component';
 import { Store } from '@ngrx/store';
-import { AuthFacade } from '@users/core/data-access-auth';
 import { map, Observable, take, withLatestFrom } from 'rxjs';
+
+import { AuthFacade } from '@users/core/data-access-auth';
 
 import { FooterComponent } from '../../components/footer/footer.component';
 import { HeaderComponent } from '../../components/header/header.component';

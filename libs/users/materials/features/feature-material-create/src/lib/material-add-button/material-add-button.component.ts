@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+
 import { MaterialType } from '@users/data-access-material';
 
 import { MATERIAL_OPTIONS } from '../constants/material-options.constant';

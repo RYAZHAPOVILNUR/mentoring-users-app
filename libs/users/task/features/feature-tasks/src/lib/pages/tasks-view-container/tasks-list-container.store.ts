@@ -1,7 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { filterColumnsByTerm, Column, TasksFacade } from '@users/tasks/data-access-task';
 import { tap } from 'rxjs';
+
+import { filterColumnsByTerm, Column, TasksFacade } from '@users/tasks/data-access-task';
 
 type TaskColumnsState = {
   columns: Column[];

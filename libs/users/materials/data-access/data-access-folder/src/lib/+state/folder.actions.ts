@@ -1,4 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/module.d-CnjH8Dlt';
+import { HttpErrorResponse } from '@angular/common/http';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
 import { CreateFolderDTO } from '../types/create-folder-dto.type';
