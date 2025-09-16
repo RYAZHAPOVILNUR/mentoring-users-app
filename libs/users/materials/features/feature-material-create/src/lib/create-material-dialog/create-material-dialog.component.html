@@ -1,0 +1,35 @@
+<div class="material-dialog">
+  <form class="material-dialog__form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <h1>Добавить {{ materialType | lowercase }}</h1>
+    <mat-form-field appearance="fill" class="material-dialog__field">
+      <input formControlName="title" matInput placeholder="Название*" />
+      <mat-icon matSuffix>
+        {{ materialIcon[materialType] }}
+      </mat-icon>
+      <mat-error>Введите название</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="material-dialog__field">
+      <input formControlName="materialLink" matInput placeholder="Ссылка*" />
+      <mat-icon matSuffix>link</mat-icon>
+      <mat-error>Ссылка не корректна</mat-error>
+    </mat-form-field>
+    <div class="material-dialog__buttons">
+      <button
+        class="material-dialog__button material-dialog__button--cancel"
+        type="button"
+        mat-raised-button
+        mat-dialog-close
+      >
+        Отмена
+      </button>
+      <button
+        class="material-dialog__button material-dialog__button--submit"
+        type="submit"
+        mat-raised-button
+        color="primary"
+      >
+        Сохранить
+      </button>
+    </div>
+  </form>
+</div>

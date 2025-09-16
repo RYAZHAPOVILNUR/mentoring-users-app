@@ -1,0 +1,39 @@
+<div class="material-content">
+  <button
+    class="material-content__button material-content__button--close"
+    mat-icon-button
+    (click)="cancel()"
+    aria-label="Отказаться"
+  >
+    <mat-icon mat-icon-button>close</mat-icon>
+  </button>
+
+  <ng-container *ngIf="data.materialLink.endsWith('.mp3')">
+    <div class="material-content__audio-wrapper">
+      <audio controls role="audio" class="material-content__audio">
+        <source [src]="data.materialLink" type="audio/mpeg" />
+      </audio>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="data.materialLink.endsWith('.pdf')">
+    <pdf-viewer
+      role="document"
+      [src]="data.materialLink"
+      [original-size]="false"
+      [zoom-scale]="'page-width'"
+      class="material-content__pdf"
+    ></pdf-viewer>
+  </ng-container>
+
+  <ng-container *ngIf="!data.materialLink.endsWith('.mp3') && !data.materialLink.endsWith('.pdf')">
+    <youtube-player
+      [videoId]="data.materialLink | youtubeId"
+      suggestedQuality="highres"
+      [width]="660"
+      [height]="345"
+      [startSeconds]="4"
+      [endSeconds]="8"
+    ></youtube-player>
+  </ng-container>
+</div>

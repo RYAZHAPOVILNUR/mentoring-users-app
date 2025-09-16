@@ -36,26 +36,16 @@
         </h3>
         <form [formGroup]="form" (ngSubmit)="onFormSubmit()" class="edit-user-form">
           <div class="edit-user-content">
-            <mat-form-field
-              class="edit-user-field"
-              [matTooltip]="vm.user!.name"
-              [matTooltipDisabled]="form.enabled"
-            >
+            <mat-form-field class="edit-user-field" [matTooltip]="vm.user!.name" [matTooltipDisabled]="form.enabled">
               <mat-label>Имя:</mat-label>
               <input matInput placeholder="Имя*" formControlName="name" class="edit-user-input" />
               <mat-error *ngIf="form.hasError('required', 'name')">Это поле обязательно для заполнения</mat-error>
             </mat-form-field>
 
-            <mat-form-field
-              class="edit-user-field"
-              [matTooltip]="vm.user!.email"
-              [matTooltipDisabled]="form.enabled"
-            >
+            <mat-form-field class="edit-user-field" [matTooltip]="vm.user!.email" [matTooltipDisabled]="form.enabled">
               <mat-label>Электронная почта:</mat-label>
               <input matInput placeholder="Электронная почта*" formControlName="email" class="edit-user-input" />
-              <mat-error
-                *ngIf="form.controls.email.hasError('required') || form.controls.email.hasError('email')"
-              >
+              <mat-error *ngIf="form.controls.email.hasError('required') || form.controls.email.hasError('email')">
                 Введите корректную электронную почту
               </mat-error>
             </mat-form-field>
@@ -82,7 +72,13 @@
               <mat-icon>done</mat-icon>
             </button>
 
-            <button mat-icon-button color="warn" type="button" aria-label="Close edit mode" (click)="onCloseButtonClick()">
+            <button
+              mat-icon-button
+              color="warn"
+              type="button"
+              aria-label="Close edit mode"
+              (click)="onCloseButtonClick()"
+            >
               <mat-icon>close</mat-icon>
             </button>
           </mat-card-actions>

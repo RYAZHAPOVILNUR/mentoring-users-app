@@ -1,0 +1,10 @@
+<button mat-fab [matMenuTriggerFor]="menu" class="mat-primary material__add-btn">
+  <mat-icon>add</mat-icon>
+  <mat-menu #menu="matMenu">
+    @for (option of options; track option.type) {
+      <button mat-menu-item (click)="onButtonClick(option.type)">
+        {{ option.label }}
+      </button>
+    }
+  </mat-menu>
+</button>
