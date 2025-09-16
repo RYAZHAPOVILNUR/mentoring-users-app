@@ -18,7 +18,7 @@ import { ArticlesCreateUiComponent } from '../articles-create-ui/articles-create
 export class ArticlesCreateContainerComponent implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly articleFacade = inject(ArticlesFacade);
-  @ViewChild(ArticlesCreateUiComponent) formComponent!: ArticlesCreateUiComponent;
+  @ViewChild(ArticlesCreateUiComponent) articleForm!: ArticlesCreateUiComponent;
 
   public readonly editingArticle$ = this.articleFacade.articleForEdit$;
   public readonly confirmDialogService = inject(ConfirmDialogService);
@@ -39,7 +39,7 @@ export class ArticlesCreateContainerComponent implements OnInit {
   }
 
   canDeactivate() {
-    if (this.formComponent.formGroup.dirty) {
+    if (this.articleForm.formGroup.dirty) {
       return this.confirmDialogService
         .open({
           title: 'Подтверждение выхода',

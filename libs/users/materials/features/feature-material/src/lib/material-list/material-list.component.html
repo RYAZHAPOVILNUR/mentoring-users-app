@@ -1,9 +1,0 @@
-<div class="card-container">
-  @for (material of materials; track material.id) {
-    <users-material-card
-      [material]="material"
-      (materialDeleteClicked)="deleteClicked($event)"
-      (viewMaterialClicked)="viewClicked($event)"
-    />
-  }
-</div>

@@ -9,14 +9,12 @@ export const ARTICLE_FEATURE_KEY = 'articles';
 
 export interface ArticlesState extends EntityState<Article> {
   status: LoadingStatus;
-  isEdit: boolean;
 }
 
 export const articlesAdapter: EntityAdapter<Article> = createEntityAdapter<Article>();
 
 const initialArticlesState: ArticlesState = articlesAdapter.getInitialState({
   status: 'init',
-  isEdit: false,
 });
 
 export const articlesFeature = createFeature({
