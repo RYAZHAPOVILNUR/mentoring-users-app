@@ -4,7 +4,6 @@ import { fileURLToPath } from 'url';
 import js from '@eslint/js';
 import nxEslintPlugin from '@nx/eslint-plugin';
 import eslintPluginImport from 'eslint-plugin-import';
-import simpleImportSort from 'eslint-plugin-simple-import-sort';
 
 const rootDir = dirname(fileURLToPath(import.meta.url));
 const tsConfigBasePath = `${rootDir}/tsconfig.base.json`;
@@ -25,7 +24,6 @@ export default [
     plugins: {
       '@nx': nxEslintPlugin,
       import: eslintPluginImport,
-      'simple-import-sort': simpleImportSort,
     },
   },
   {
