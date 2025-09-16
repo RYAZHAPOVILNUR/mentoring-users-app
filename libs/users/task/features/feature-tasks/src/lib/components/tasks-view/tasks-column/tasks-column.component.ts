@@ -8,8 +8,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { Column, Task } from '@users/tasks/data-access-task';
 import { BehaviorSubject, skip } from 'rxjs';
+
+import { Column, Task } from '@users/tasks/data-access-task';
 
 @Component({
   selector: 'users-tasks-column',

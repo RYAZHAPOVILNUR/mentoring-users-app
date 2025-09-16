@@ -1,10 +1,11 @@
 import { inject } from '@angular/core';
-import { ApiService } from '@core/data-access-api';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
+import { catchError, filter, map, of, switchMap, withLatestFrom } from 'rxjs';
+
+import { ApiService } from '@core/data-access-api';
 import { selectQueryParam } from '@shared/util-store';
 import { Article } from '@users/shared/data-access-models';
-import { catchError, filter, map, of, switchMap, withLatestFrom } from 'rxjs';
 
 import { articlesActions } from './articles.actions';
 import * as articleSelectors from './articles.selectors';

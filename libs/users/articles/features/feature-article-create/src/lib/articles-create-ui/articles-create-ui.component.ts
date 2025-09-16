@@ -16,10 +16,11 @@ import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import BlotFormatter from '@enzedonline/quill-blot-formatter2';
 import { TranslateModule } from '@ngx-translate/core';
-import { CreateArticle } from '@users/articles/data-access-article';
-import { Article } from '@users/shared/data-access-models';
 import { QuillModule } from 'ngx-quill';
 import Quill from 'quill';
+
+import { CreateArticle } from '@users/articles/data-access-article';
+import { Article } from '@users/shared/data-access-models';
 
 type ArticlesCreateVm = {
   editMode: boolean;
