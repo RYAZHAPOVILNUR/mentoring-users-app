@@ -1,0 +1,18 @@
+<mat-card class="folder-card-wrapper" (click)="onOpenFolder()">
+  <div class="button-container">
+    <button
+      mat-icon-button
+      color="warn"
+      class="button"
+      (click)="onDeleteFolder($event)"
+      matTooltip="Удалить папку"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+  <mat-card-content class="mat-card-content">
+    <mat-icon class="folder-icon">folder</mat-icon>
+    <h3 class="title">{{ folder.title }}</h3>
+    <p class="folder-date">{{ folder.created_at | date: 'dd.MM.yyyy' }}</p>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,13 @@
+<users-materials-list
+  [materials]="(vm$ | async)?.materials || []"
+  [status]="(vm$ | async)?.status || 'init'"
+  [error]="(vm$ | async)?.error || null"
+  [folderTitle]="(vm$ | async)?.folderTitle || 'Материалы'"
+  (deleteMaterial)="onDeleteMaterial($event)"
+  (openMaterial)="onOpenMaterial($event)"
+  (backToFolders)="onBackToFolders()"
+/>
+
+@if (folderId$ | async; as folderId) {
+  <users-materials-add-button [folderId]="folderId" />
+}

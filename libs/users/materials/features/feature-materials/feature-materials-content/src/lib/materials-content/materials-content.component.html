@@ -1,0 +1,51 @@
+<div class="header">
+  <h2>{{ material.title }}</h2>
+  <button class="close-btn" mat-icon-button (click)="close()" aria-label="Закрыть">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content>
+  <ng-container [ngSwitch]="getFileType()">
+    <ng-container *ngSwitchCase="'pdf'">
+      <div class="pdf-container">
+        <pdf-viewer
+          [src]="material.material_link"
+          [original-size]="false"
+          [zoom-scale]="'page-width'"
+          class="pdf-viewer"
+        ></pdf-viewer>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'audio'">
+      <div class="content-container">
+        <div class="audio-container">
+          <div class="audio-info">
+            <mat-icon class="audio-icon">audiotrack</mat-icon>
+            <h3>{{ material.title }}</h3>
+            <p class="audio-date">{{ material.created_at | date: 'dd.MM.yyyy' }}</p>
+          </div>
+
+          <audio controls class="audio-player">
+            <source [src]="material.material_link" [type]="getAudioType()">
+            Ваш браузер не поддерживает аудио элемент.
+          </audio>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'video'">
+      <div class="content-container">
+        <div class="video-container">
+          <iframe
+            [src]="sanitizer.bypassSecurityTrustResourceUrl(getEmbedUrl())"
+            allowfullscreen
+            class="video-iframe"
+          ></iframe>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+</mat-dialog-content>
+

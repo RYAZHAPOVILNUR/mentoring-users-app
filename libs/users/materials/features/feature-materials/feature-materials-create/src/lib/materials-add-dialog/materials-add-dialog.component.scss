@@ -1,0 +1,21 @@
+.dialog-container {
+  padding: 20px;
+  min-width: 400px;
+}
+
+h2 mat-dialog-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.material-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.full-width {
+  width: 100%;
+}
