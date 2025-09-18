@@ -1,0 +1,21 @@
+@if (vm.status === 'loading') {
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+} @else if (vm.status === 'error') {
+  <div class="error-state">
+    <mat-icon>error_outline</mat-icon>
+    <h3>Ошибка загрузки папок</h3>
+    <p>{{ vm.error || 'Неизвестная ошибка' }}</p>
+  </div>
+} @else {
+  <div class="folders-grid">
+    @for (folder of vm.folders; track folder.id) {
+      <div class="folder-item">
+        <users-folders-card
+          [folder]="folder"
+          (deleteFolder)="onDeleteFolder(folder)"
+          (openFolder)="onOpenFolder($event)"
+        />
+      </div>
+    }
+  </div>
+}

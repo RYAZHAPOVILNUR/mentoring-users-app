@@ -1,0 +1,138 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  flex-shrink: 0;
+
+  h2 {
+    margin: 0;
+    flex: 1;
+    color: #dddddd;
+  }
+}
+
+.close-btn {
+  margin-left: 16px;
+}
+
+mat-dialog-content {
+  flex: 1;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  display: flex;
+  min-height: 0;
+}
+
+.content-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.pdf-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .pdf-viewer {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+  }
+}
+
+.audio-container {
+  width: 100%;
+  max-width: 600px;
+  padding: 40px 20px;
+  text-align: center;
+
+  .audio-info {
+    margin-bottom: 24px;
+
+    .audio-icon {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+      color: #2196f3;
+      margin-bottom: 16px;
+    }
+
+    h3 {
+      margin: 0 0 8px 0;
+      font-size: 20px;
+    }
+
+    .audio-date {
+      margin: 0;
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 14px;
+    }
+  }
+
+  .audio-player {
+    width: 100%;
+    margin-bottom: 24px;
+  }
+}
+
+.video-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .video-iframe {
+    width: 100%;
+    max-width: 854px;
+    height: 480px;
+    border: none;
+    border-radius: 4px;
+  }
+}
+
+.unknown-format {
+  text-align: center;
+  padding: 40px 20px;
+
+  mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: #f44336;
+    margin-bottom: 16px;
+  }
+
+  h3 {
+    margin: 0 0 8px 0;
+    font-size: 20px;
+  }
+
+  p {
+    margin: 0 0 20px 0;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+mat-dialog-actions {
+  padding: 16px 24px;
+  border-top: 1px solid #e0e0e0;
+  flex-shrink: 0;
+}

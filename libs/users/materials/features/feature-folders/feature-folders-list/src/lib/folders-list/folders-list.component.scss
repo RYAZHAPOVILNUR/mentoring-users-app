@@ -1,0 +1,42 @@
+:host {
+  display: block;
+  padding: 16px;
+}
+
+.folders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  padding: 16px 0;
+}
+
+.folder-item {
+  height: 200px;
+}
+
+.error-state, .empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: rgba(0, 0, 0, 0.6);
+
+  mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+  }
+
+  h3 {
+    margin: 0 0 8px 0;
+    font-weight: 500;
+  }
+
+  p {
+    margin: 0;
+    font-size: 14px;
+  }
+}
+
+.error-state {
+  color: #f44336;
+}

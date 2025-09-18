@@ -1,0 +1,27 @@
+<mat-card
+  class="material-card"
+  (click)="onOpen()"
+  (mouseenter)="isHovered = true"
+  (mouseleave)="isHovered = false"
+>
+  <div class="card-header">
+    <button
+      mat-icon-button
+      class="delete-btn"
+      (click)="onDelete($event)"
+      matTooltip="Удалить материал"
+      [class.visible]="isHovered"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+
+  <mat-card-content class="card-content">
+    <div class="material-icon">
+      <mat-icon [class]="getFileIconClass()">{{ getFileIcon() }}</mat-icon>
+    </div>
+
+    <h3 class="material-title">{{ material.title }}</h3>
+    <p class="material-date">{{ material.created_at | date: 'dd.MM.yyyy' }}</p>
+  </mat-card-content>
+</mat-card>

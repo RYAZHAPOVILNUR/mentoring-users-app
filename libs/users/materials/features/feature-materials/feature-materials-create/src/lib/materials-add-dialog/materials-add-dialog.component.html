@@ -1,0 +1,56 @@
+<div class="dialog-container">
+  <h2 mat-dialog-title>
+    <mat-icon>{{ icon }}</mat-icon>
+    {{ getDialogTitle() }}
+  </h2>
+
+  <mat-dialog-content>
+    <form [formGroup]="materialForm" class="material-form">
+      <mat-form-field appearance="outline" class="full-width">
+        <input
+          matInput
+          formControlName="title"
+          placeholder="Введите название материала"
+          required
+          [errorStateMatcher]="matcher"
+        />
+        <mat-error *ngIf="title?.hasError('required')">
+          Название обязательно для заполнения
+        </mat-error>
+        <mat-error *ngIf="title?.hasError('minlength')">
+          Название должно содержать хотя бы 1 символ
+        </mat-error>
+        <mat-error *ngIf="title?.hasError('maxlength')">
+          Название не может превышать 50 символов
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <input
+          matInput
+          formControlName="material_link"
+          placeholder="Ссылка*"
+          required
+        />
+        <mat-error *ngIf="material_link?.hasError('required')">
+          Ссылка обязательна для заполнения
+        </mat-error>
+        <mat-error *ngIf="material_link?.hasError('pattern')">
+          {{ getLinkErrorText() }}
+        </mat-error>
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">Отмена</button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="onSave()"
+      [disabled]="!materialForm.valid"
+    >
+      Сохранить
+    </button>
+  </mat-dialog-actions>
+</div>

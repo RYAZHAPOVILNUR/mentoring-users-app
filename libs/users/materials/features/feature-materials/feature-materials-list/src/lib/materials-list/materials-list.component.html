@@ -1,0 +1,56 @@
+@if (status === 'loading') {
+  <div class="loading-container">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    <p class="loading-text">Загрузка материалов...</p>
+  </div>
+}
+
+@if (status === 'error') {
+  <div class="error-container">
+    <mat-icon class="error-icon">error_outline</mat-icon>
+    <h3 class="error-title">Ошибка загрузки материалов</h3>
+    <p class="error-message">{{ error || 'Неизвестная ошибка' }}</p>
+    <button mat-raised-button color="primary" (click)="onBackToFolders()">
+      Вернуться к папкам
+    </button>
+  </div>
+}
+
+@if (status === 'loaded' && materials.length === 0) {
+  <div class="empty-container">
+    <div class="header">
+      <button mat-icon-button (click)="onBackToFolders()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h2>{{ folderTitle }}</h2>
+    </div>
+
+    <div class="empty-state">
+      <mat-icon class="empty-icon">folder_open</mat-icon>
+      <h3 class="empty-title">В этой папке пока нет материалов</h3>
+      <p class="empty-message">Добавьте первый материал</p>
+    </div>
+  </div>
+}
+
+@if (status === 'loaded' && materials.length > 0) {
+  <div class="materials-container">
+    <div class="header">
+      <button mat-icon-button (click)="onBackToFolders()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h2>{{ folderTitle }}</h2>
+      <span class="materials-count">{{ materials.length }} материал(ов)</span>
+    </div>
+
+    <div class="materials-grid">
+      @for (material of materials; track material.id) {
+        <users-materials-card
+          [material]="material"
+          (deleteMaterial)="onDeleteMaterial($event)"
+          (openMaterial)="onOpenMaterial($event)"
+        />
+      }
+    </div>
+  </div>
+}
