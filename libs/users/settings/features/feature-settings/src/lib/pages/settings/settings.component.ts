@@ -3,17 +3,25 @@ import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/cor
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+
 import { PushPipe } from '@ngrx/component';
 import { Store } from '@ngrx/store';
 
-import { LanguageService, LanguageValues } from '@shared/util-language';
 import { SettingsFacade } from '@users/settings/data-access-settings';
+import { LanguageService, LanguageValues } from '@shared/util-language';
 
 import { ThemeSettingComponent } from '../../components/theme-setting/theme-setting.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, MatButtonModule, PushPipe, MatIconModule, MatCardModule, ThemeSettingComponent],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    PushPipe,
+    MatIconModule,
+    MatCardModule,
+    ThemeSettingComponent,
+  ],
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

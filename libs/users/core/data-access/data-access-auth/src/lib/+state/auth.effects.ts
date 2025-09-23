@@ -1,12 +1,14 @@
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+
 import { catchError, concatMap, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
 
+import { userAdapter, UserDTO } from '@users/shared/data-access-models';
 import { ApiService } from '@core/data-access-api';
 import { LocalStorageService, StorageKey } from '@shared/util-storage';
-import { userAdapter, UserDTO } from '@users/shared/data-access-models';
 
 import { authActions } from './auth.actions';
 import { selectAuthStatus } from './auth.selectors';
@@ -38,7 +40,11 @@ export const loginEffect$ = createEffect(
 );
 
 export const loginSuccessEffect$ = createEffect(
-  (actions$ = inject(Actions), localStorageService = inject(LocalStorageService), router = inject(Router)) => {
+  (
+    actions$ = inject(Actions),
+    localStorageService = inject(LocalStorageService),
+    router = inject(Router),
+  ) => {
     return actions$.pipe(
       ofType(authActions.loginSuccess),
       tap((action) => {
@@ -92,7 +98,11 @@ export const registerEffect$ = createEffect(
 );
 
 export const registerSuccessEffects$ = createEffect(
-  (actions$ = inject(Actions), localStorageService = inject(LocalStorageService), router = inject(Router)) => {
+  (
+    actions$ = inject(Actions),
+    localStorageService = inject(LocalStorageService),
+    router = inject(Router),
+  ) => {
     return actions$.pipe(
       ofType(authActions.registerSuccess),
       concatMap((action) => {
@@ -106,13 +116,18 @@ export const registerSuccessEffects$ = createEffect(
 );
 
 export const logoutEffect$ = createEffect(
-  (actions$ = inject(Actions), localStorageService = inject(LocalStorageService), router = inject(Router)) =>
+  (
+    actions$ = inject(Actions),
+    localStorageService = inject(LocalStorageService),
+    router = inject(Router),
+  ) =>
     actions$.pipe(
       ofType(authActions.logout),
       tap(() => {
         localStorageService.remove(StorageKey.JWT_TOKEN);
         router.navigate(['/login']);
-        const notDefaultTheme: Element | null = document.head.querySelector('.style-manager-theme');
+        const notDefaultTheme: Element | null =
+          document.head.querySelector('.style-manager-theme');
         if (notDefaultTheme) notDefaultTheme.remove();
       }),
     ),
@@ -124,10 +139,15 @@ export const changePasswordEffects$ = createEffect(
     actions$.pipe(
       ofType(authActions.changePassword),
       switchMap(({ data }) =>
-        api.put<ChangePasswordResponse, ChangePasswordPayload>('/auth/change_password', data).pipe(
-          map((res) => authActions.changePasswordSuccess({ res })),
-          catchError((error) => of(authActions.changePasswordFailure({ error }))),
-        ),
+        api
+          .put<
+            ChangePasswordResponse,
+            ChangePasswordPayload
+          >('/auth/change_password', data)
+          .pipe(
+            map((res) => authActions.changePasswordSuccess({ res })),
+            catchError((error) => of(authActions.changePasswordFailure({ error }))),
+          ),
       ),
     ),
   { functional: true },

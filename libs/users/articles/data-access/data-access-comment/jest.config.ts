@@ -2,7 +2,8 @@ export default {
   displayName: 'data-access-comment',
   preset: '../../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../../../coverage/libs/users/articles/data-access/data-access-comment',
+  coverageDirectory:
+    '../../../../../coverage/libs/users/articles/data-access/data-access-comment',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

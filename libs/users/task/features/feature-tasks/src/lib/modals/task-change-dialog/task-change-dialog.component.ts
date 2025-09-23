@@ -9,9 +9,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
+
 import { PushPipe } from '@ngrx/component';
-import { QuillModule } from 'ngx-quill';
+
 import { skip } from 'rxjs/operators';
+
+import { QuillModule } from 'ngx-quill';
 
 import { BacklogFacade } from '@users/backlog/data-access-backlog';
 import { Backlog, UserEntity } from '@users/shared/data-access-models';
@@ -68,7 +71,8 @@ export class TaskChangeDialogComponent implements OnInit {
   };
   public task: Task = {
     name: this.data?.title,
-    descriprion: this.data?.description ?? 'У тасок в меню "Задачи" с бека description не приходит',
+    descriprion:
+      this.data?.description ?? 'У тасок в меню "Задачи" с бека description не приходит',
     priority: 'high',
     status: 'progress',
     assignees: [

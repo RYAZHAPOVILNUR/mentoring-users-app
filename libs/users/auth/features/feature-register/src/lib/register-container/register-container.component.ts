@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { Store } from '@ngrx/store';
 
 import { authActions, NewUser } from '@users/core/data-access-auth';

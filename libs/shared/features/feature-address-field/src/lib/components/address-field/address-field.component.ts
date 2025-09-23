@@ -11,13 +11,19 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import {
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldAppearance, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltip } from '@angular/material/tooltip';
+
 import { PushPipe } from '@ngrx/component';
 import { TranslatePipe } from '@ngx-translate/core';
+
 import { fromEvent, map, Observable } from 'rxjs';
 
 import { Address, AddressService, AddressType } from '@shared/data-access-address';
@@ -55,7 +61,8 @@ type InputValue = Extract<ControlValue, string>;
 export class AddressFieldComponent implements ControlValueAccessor, OnInit {
   private readonly addressService = inject(AddressService);
 
-  private readonly addressInput = viewChild.required<ElementRef<HTMLInputElement>>('addressInput');
+  private readonly addressInput =
+    viewChild.required<ElementRef<HTMLInputElement>>('addressInput');
 
   private onChange?: Callback<InputValue>;
   private onTouched?: Callback;
@@ -104,7 +111,9 @@ export class AddressFieldComponent implements ControlValueAccessor, OnInit {
     this.isDisabled.set(isDisabled);
   }
 
-  private getAddressValuesByQueryChanges(type: AddressType): Observable<Array<Address['value']>> {
+  private getAddressValuesByQueryChanges(
+    type: AddressType,
+  ): Observable<Array<Address['value']>> {
     const queryInput = this.addressInput().nativeElement;
 
     const query$ = fromEvent<InputEvent>(queryInput, 'input').pipe(

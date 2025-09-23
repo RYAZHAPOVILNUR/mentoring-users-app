@@ -9,8 +9,10 @@ export class PasswordChangeDialogService {
   private readonly dialog = inject(MatDialog);
 
   open(): MatDialogRef<PasswordChangeDialogComponent, PasswordChangeDialogCloseData> {
-    return this.dialog.open<PasswordChangeDialogComponent, undefined, PasswordChangeDialogCloseData>(
+    return this.dialog.open<
       PasswordChangeDialogComponent,
-    );
+      undefined,
+      PasswordChangeDialogCloseData
+    >(PasswordChangeDialogComponent);
   }
 }

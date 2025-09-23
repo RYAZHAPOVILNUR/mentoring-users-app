@@ -1,13 +1,16 @@
 import { inject } from '@angular/core';
+
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+
 import { EMPTY } from 'rxjs';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 
 import { ApiService } from '@core/data-access-api';
 
-import { tasksAction } from './tasks.action';
 import { Column } from '../interfaces/column.interface';
 import { TaskBoard } from '../interfaces/tasks.interface';
+
+import { tasksAction } from './tasks.action';
 
 export class TasksEffects {
   // Загрузка всех бордв, спросить нужны ли они
@@ -32,7 +35,9 @@ export class TasksEffects {
     return actions$.pipe(
       ofType(tasksAction.loadMyBoard),
       mergeMap(() =>
-        api.get<TaskBoard>('/todos/me').pipe(map((res) => tasksAction.loadMyBoardSuccess({ board: res }))),
+        api
+          .get<TaskBoard>('/todos/me')
+          .pipe(map((res) => tasksAction.loadMyBoardSuccess({ board: res }))),
       ),
     );
   });
@@ -43,7 +48,9 @@ export class TasksEffects {
     return actions$.pipe(
       ofType(tasksAction.deleteColumn),
       mergeMap(({ columnIndex }) =>
-        api.delete(`/todos/${columnIndex}`).pipe(map(() => tasksAction.deleteColumnSuccess({ columnIndex }))),
+        api
+          .delete(`/todos/${columnIndex}`)
+          .pipe(map(() => tasksAction.deleteColumnSuccess({ columnIndex }))),
       ),
     );
   });
@@ -54,10 +61,17 @@ export class TasksEffects {
     return actions$.pipe(
       ofType(tasksAction.updateColumns),
       switchMap((action) =>
-        api.post<{ columns: Column[] }, { columns: Column[] }>('/todos/change', { columns: action.columns }).pipe(
-          map((response) => tasksAction.updateColumnsSuccess({ columns: response.columns })),
-          catchError(() => EMPTY),
-        ),
+        api
+          .post<
+            { columns: Column[] },
+            { columns: Column[] }
+          >('/todos/change', { columns: action.columns })
+          .pipe(
+            map((response) =>
+              tasksAction.updateColumnsSuccess({ columns: response.columns }),
+            ),
+            catchError(() => EMPTY),
+          ),
       ),
     );
   });

@@ -5,8 +5,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
+
 import { PushPipe } from '@ngrx/component';
 import { Store } from '@ngrx/store';
+
 import { map, Observable, take, withLatestFrom } from 'rxjs';
 
 import { AuthFacade } from '@users/core/data-access-auth';
@@ -37,7 +39,9 @@ export class AuthorizedLayoutComponent {
   private readonly facade = inject(AuthFacade);
   private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly handset$ = this.breakpointObserver.observe(Breakpoints.Handset);
-  private readonly handsetLandscape$ = this.breakpointObserver.observe(Breakpoints.HandsetLandscape);
+  private readonly handsetLandscape$ = this.breakpointObserver.observe(
+    Breakpoints.HandsetLandscape,
+  );
 
   public readonly isAuthenticated$: Observable<boolean> = this.facade.isAuthenticated$;
 

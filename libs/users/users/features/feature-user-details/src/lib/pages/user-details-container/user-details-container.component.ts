@@ -2,15 +2,17 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+
 import { LetDirective } from '@ngrx/component';
 import { select, Store } from '@ngrx/store';
+
 import { filter, map, Observable, tap } from 'rxjs';
 
-import { selectQueryParam } from '@shared/util-store';
-import { Callback } from '@shared/util-typescript';
 import { UserEntity } from '@users/shared/data-access-models';
 import { EditUserEntity, UsersFacade } from '@users/users/data-access-user';
 import { UserDialogService } from '@users/users/feature-user-dialog';
+import { selectQueryParam } from '@shared/util-store';
+import { Callback } from '@shared/util-typescript';
 
 import { UserDetailsCardComponent } from '../../components/user-details-card/user-details-card.component';
 
@@ -28,15 +30,16 @@ export class UserDetailsComponent {
   private readonly usersFacade = inject(UsersFacade);
   public user!: UserEntity;
 
-  public readonly user$: Observable<UserEntity | null> = this.usersFacade.openedUser$.pipe(
-    tap((user) => {
-      if (!user) {
-        this.usersFacade.loadUser();
-      } else {
-        this.user = user;
-      }
-    }),
-  );
+  public readonly user$: Observable<UserEntity | null> =
+    this.usersFacade.openedUser$.pipe(
+      tap((user) => {
+        if (!user) {
+          this.usersFacade.loadUser();
+        } else {
+          this.user = user;
+        }
+      }),
+    );
   public readonly status$ = this.usersFacade.status$;
   public readonly editMode$: Observable<boolean> = this.store.pipe(
     select(selectQueryParam('edit')),

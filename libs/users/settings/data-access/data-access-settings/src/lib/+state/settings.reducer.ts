@@ -1,7 +1,8 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 
-import { SettingsActions } from './settings.actions';
 import { Settings } from '../interfaces/settings.interface';
+
+import { SettingsActions } from './settings.actions';
 
 export const SETTINGS_FEATURE_KEY = 'settings';
 

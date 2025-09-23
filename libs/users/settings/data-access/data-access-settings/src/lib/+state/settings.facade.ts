@@ -1,4 +1,5 @@
 import { inject, Injectable } from '@angular/core';
+
 import { Store } from '@ngrx/store';
 
 import { SettingsActions } from './settings.actions';

@@ -26,9 +26,12 @@ export class CreateUserButtonComponent {
   public dialog = inject(MatDialog);
 
   openAddUserDialog(): void {
-    const dialogRef: MatDialogRef<CreateUserDialogComponent> = this.dialog.open(CreateUserDialogComponent, {
-      data: { name: this.name, email: this.email },
-    });
+    const dialogRef: MatDialogRef<CreateUserDialogComponent> = this.dialog.open(
+      CreateUserDialogComponent,
+      {
+        data: { name: this.name, email: this.email },
+      },
+    );
     dialogRef
       .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))

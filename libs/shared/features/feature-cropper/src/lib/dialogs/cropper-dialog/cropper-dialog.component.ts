@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogClose, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+
 import { ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
 
 import { CropperDialogData } from '../../interfaces/cropper-dialog-data.interface';

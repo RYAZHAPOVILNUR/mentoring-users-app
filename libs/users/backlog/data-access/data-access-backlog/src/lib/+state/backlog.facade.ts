@@ -1,9 +1,11 @@
 import { inject, Injectable } from '@angular/core';
+
 import { Store } from '@ngrx/store';
+
+import { CreateBacklog } from '../interfaces/create-backlog.interface';
 
 import { backlogAction } from './backlog.action';
 import { selectBacklogEntities, selectBacklogs } from './backlog.selector';
-import { CreateBacklog } from '../interfaces/create-backlog.interface';
 
 @Injectable({ providedIn: 'root' })
 export class BacklogFacade {

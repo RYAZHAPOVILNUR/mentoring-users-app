@@ -2,8 +2,9 @@ import { createFeature, createReducer, on } from '@ngrx/store';
 
 import { LoadingStatus } from '@shared/util-store';
 
-import { githubApiActions } from './github-api.actions';
 import { GithubUserDTO } from '../models/github-user-DTO.interface';
+
+import { githubApiActions } from './github-api.actions';
 
 interface GithubApiState {
   status: LoadingStatus;

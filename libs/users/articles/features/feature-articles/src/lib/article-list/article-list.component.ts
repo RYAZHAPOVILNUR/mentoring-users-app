@@ -6,10 +6,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
+
 import { PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
-import { QuillModule } from 'ngx-quill';
+
 import { map, Observable } from 'rxjs';
+
+import { QuillModule } from 'ngx-quill';
 
 import { ArticlesCreateButtonComponent } from '@users/articles/feature-article-create';
 import { SettingsFacade } from '@users/settings/data-access-settings';
@@ -17,7 +20,7 @@ import { Article } from '@users/shared/data-access-models';
 import { UsersFacade } from '@users/users/data-access-user';
 
 @Component({
-  selector: 'users-articles-view',
+  selector: 'users-article-list',
   standalone: true,
   imports: [
     CommonModule,
@@ -51,8 +54,16 @@ export class ArticleListComponent implements OnInit {
     console.log(this.authorPhoto$);
 
     for (const article of this.articles) {
-      this.authorPhoto$.push(this.userFacade.getUserFromStore(article.authorId).pipe(map((data) => data?.photo?.url)));
-      this.authorArticle$.push(this.userFacade.getUserFromStore(article.authorId).pipe(map((data) => data?.username)));
+      this.authorPhoto$.push(
+        this.userFacade
+          .getUserFromStore(article.authorId)
+          .pipe(map((data) => data?.photo?.url)),
+      );
+      this.authorArticle$.push(
+        this.userFacade
+          .getUserFromStore(article.authorId)
+          .pipe(map((data) => data?.username)),
+      );
     }
   }
   changeArticlesStyleType(styleType: string): void {

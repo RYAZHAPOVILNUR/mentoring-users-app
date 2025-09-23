@@ -1,18 +1,27 @@
 import { inject } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, of, switchMap, withLatestFrom } from 'rxjs';
 
-import { ApiService } from '@core/data-access-api';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
+
+import { catchError, filter, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
+
 import { AuthFacade } from '@users/core/data-access-auth';
 import { Comment } from '@users/shared/data-access-models';
+import { ApiService } from '@core/data-access-api';
+import { selectRouteParam } from '@shared/util-store';
 
-import { commentsActions } from './comments.actions';
 import { CreateComment } from '../interface/create-comment.interface';
 
-export const publishComment$ = createEffect(
-  (actions$ = inject(Actions), auth$ = inject(AuthFacade), apiService = inject(ApiService)) => {
+import { commentsActions } from './comments.actions';
+
+export const add$ = createEffect(
+  (
+    actions$ = inject(Actions),
+    auth$ = inject(AuthFacade),
+    apiService = inject(ApiService),
+  ) => {
     return actions$.pipe(
-      ofType(commentsActions.publishComment),
+      ofType(commentsActions.add),
       withLatestFrom(auth$.user$),
       switchMap(([{ comment }, user]) => {
         console.log(user);
@@ -28,13 +37,11 @@ export const publishComment$ = createEffect(
 
         return apiService.post<Comment, CreateComment>('/comments', comment).pipe(
           map((comment) =>
-            commentsActions.publishCommentSuccess({
-              comment: { ...comment, author },
-            }),
+            commentsActions.addSuccess({ comment: { ...comment, author } }),
           ),
           catchError((error) => {
             console.error('Error', error);
-            return of(commentsActions.publishCommentFailed({ error }));
+            return of(commentsActions.addFailed({ error }));
           }),
         );
       }),
@@ -43,33 +50,41 @@ export const publishComment$ = createEffect(
   { functional: true },
 );
 
-export const loadComments$ = createEffect(
-  (actions$ = inject(Actions), apiService = inject(ApiService)) => {
+export const getAll$ = createEffect(
+  () => {
+    const store = inject(Store);
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const articleId$ = store.select(selectRouteParam('id'));
     return actions$.pipe(
-      ofType(commentsActions.loadComments),
-      switchMap(({ articleId }) =>
-        apiService.get<Comment[]>(`/commentsByArticle/${articleId}`).pipe(
-          map((comments) => commentsActions.loadCommentsSuccess({ comments })),
+      ofType(commentsActions.getAll),
+      withLatestFrom(articleId$),
+      filter(([, articleId]) => Boolean(Number(articleId))),
+      map(([, articleId]) => Number(articleId)),
+      switchMap((articleId) => {
+        return apiService.get<Comment[]>(`/commentsByArticle/${articleId}`).pipe(
+          tap((comments) => console.log(comments)),
+          map((comments) => commentsActions.getAllSuccess({ comments })),
           catchError((error) => {
             console.error('Error', error);
-            return of(commentsActions.loadCommentsFailed({ error }));
+            return of(commentsActions.getAllFailed({ error }));
           }),
-        ),
-      ),
+        );
+      }),
     );
   },
   { functional: true },
 );
-export const deleteComment$ = createEffect(
+export const delete$ = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) => {
     return actions$.pipe(
-      ofType(commentsActions.deleteComment),
+      ofType(commentsActions.delete),
       switchMap(({ id }) => {
         return apiService.delete<number>(`/comments/${id}`).pipe(
-          map(() => commentsActions.deleteCommentSuccess({ id })),
+          map(() => commentsActions.deleteSuccess({ id })),
           catchError((error) => {
             console.error('Error', error);
-            return of(commentsActions.deleteCommentFailed({ error }));
+            return of(commentsActions.deleteFailed({ error }));
           }),
         );
       }),

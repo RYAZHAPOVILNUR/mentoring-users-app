@@ -1,20 +1,22 @@
-import { createActionGroup, props } from '@ngrx/store';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
 import { Comment } from '@users/shared/data-access-models';
 
 import { CreateComment } from '../interface/create-comment.interface';
 
 export const commentsActions = createActionGroup({
-  source: 'Comment',
+  source: 'Comments',
   events: {
-    publishComment: props<{ comment: CreateComment }>(),
-    publishCommentSuccess: props<{ comment: Comment }>(),
-    publishCommentFailed: props<{ error: Error }>(),
-    loadComments: props<{ articleId: number }>(),
-    loadCommentsSuccess: props<{ comments: Comment[] }>(),
-    loadCommentsFailed: props<{ error: Error }>(),
-    deleteComment: props<{ id: number }>(),
-    deleteCommentSuccess: props<{ id: number }>(),
-    deleteCommentFailed: props<{ error: Error }>(),
+    add: props<{ comment: CreateComment }>(),
+    addSuccess: props<{ comment: Comment }>(),
+    addFailed: props<{ error: Error }>(),
+
+    getAll: emptyProps(),
+    getAllSuccess: props<{ comments: Comment[] }>(),
+    getAllFailed: props<{ error: Error }>(),
+
+    delete: props<{ id: number }>(),
+    deleteSuccess: props<{ id: number }>(),
+    deleteFailed: props<{ error: Error }>(),
   },
 });

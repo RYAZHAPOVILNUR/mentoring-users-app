@@ -2,25 +2,25 @@ import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
 import { Article } from '@users/shared/data-access-models';
 
-import { CreateArticle } from '../interfaces/create-article.interface';
+import { ArticleVM } from '../types/article-vm.interface';
 
 export const articlesActions = createActionGroup({
-  source: 'Article',
+  source: 'Articles',
   events: {
-    addArticle: props<{ article: CreateArticle }>(),
+    addArticle: props<{ article: ArticleVM }>(),
     addArticleSuccess: props<{ article: Article }>(),
     addArticleFailed: props<{ error: Error }>(),
 
-    loadArticles: emptyProps(),
-    loadArticlesSuccess: props<{ articles: Article[] }>(),
-    loadArticlesFailed: props<{ error: Error }>(),
+    getAll: emptyProps(),
+    getAllSuccess: props<{ articles: Article[] }>(),
+    getAllFailed: props<{ error: Error }>(),
 
-    updateArticle: props<{ article: CreateArticle }>(),
+    updateArticle: props<{ article: ArticleVM }>(),
     updateArticleSuccess: props<{ article: Article }>(),
     updateArticleFailed: props<{ error: Error }>(),
 
-    loadArticle: emptyProps(),
-    loadArticleSuccess: props<{ article: Article }>(),
-    loadArticleFailed: props<{ error: Error }>(),
+    getOne: emptyProps(),
+    getOneSuccess: props<{ article: Article }>(),
+    getOneFailed: props<{ error: Error }>(),
   },
 });

@@ -2,7 +2,8 @@ export default {
   displayName: 'feature-user-dialog',
   preset: '../../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../../../coverage/libs/users/users/features/feature-user-dialog',
+  coverageDirectory:
+    '../../../../../coverage/libs/users/users/features/feature-user-dialog',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

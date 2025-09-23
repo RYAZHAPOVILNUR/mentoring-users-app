@@ -1,9 +1,13 @@
 import { inject, Injectable } from '@angular/core';
+
 import { select, Store } from '@ngrx/store';
 
 import { authActions } from './+state/auth.actions';
 import * as AuthSelectors from './+state/auth.selectors';
-import { ChangePasswordPayload, ChangeProfileDataPayload } from './+state/sign.auth.model';
+import {
+  ChangePasswordPayload,
+  ChangeProfileDataPayload,
+} from './+state/sign.auth.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthFacade {

@@ -1,13 +1,16 @@
-import { createSelector } from '@ngrx/store';
+import { createFeatureSelector } from '@ngrx/store';
 
-import { commentsAdapter, commentsFeature, CommentsState } from './comments.reducer';
+import {
+  COMMENTS_FEATURE_KEY,
+  commentsAdapter,
+  commentsFeature,
+  CommentsState,
+} from './comments.reducer';
 
-export const { selectCommentsState, selectIds, selectStatus } = commentsFeature;
+export const { selectIds, selectStatus } = commentsFeature;
 
-const { selectAll, selectEntities } = commentsAdapter.getSelectors();
+export const selectCommentState =
+  createFeatureSelector<CommentsState>(COMMENTS_FEATURE_KEY);
 
-export const selectComments = createSelector(selectCommentsState, (state: CommentsState) => selectAll(state));
-
-export const selectCommentsEntities = createSelector(selectCommentsState, (state: CommentsState) =>
-  selectEntities(state),
-);
+export const { selectAll: selectAllComments } =
+  commentsAdapter.getSelectors(selectCommentState);

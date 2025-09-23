@@ -7,11 +7,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { RouterLink } from '@angular/router';
 
 import { Comment } from '@users/shared/data-access-models';
 
 @Component({
+  selector: 'users-article-comment',
   standalone: true,
   imports: [
     CommonModule,
@@ -22,16 +22,15 @@ import { Comment } from '@users/shared/data-access-models';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    RouterLink,
   ],
-  selector: 'users-article-comment',
+
   templateUrl: './article-comment.component.html',
   styleUrls: ['./article-comment.component.scss'],
 })
 export class ArticleCommentComponent {
   @Input({ required: true }) comment!: Comment;
   @Input({ required: true }) userId!: number;
-
+  public readonly defaultAvatar = 'assets/img/1.png';
   public likesCount = 0;
   public disLikesCount = 0;
   public isLikeActive = false;
@@ -48,7 +47,7 @@ export class ArticleCommentComponent {
   }
 
   public get avatarSrc(): string {
-    return this.comment.author.photo ? this.comment.author.photo.url : 'assets/img/1.png';
+    return this.comment.author.photo ? this.comment.author.photo.url : this.defaultAvatar;
   }
 
   public get isLikesExists(): boolean {

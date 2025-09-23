@@ -2,7 +2,8 @@ export default {
   displayName: 'data-access-chart',
   preset: '../../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../../../coverage/libs/users/chart/data-access/data-access-chart',
+  coverageDirectory:
+    '../../../../../coverage/libs/users/chart/data-access/data-access-chart',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

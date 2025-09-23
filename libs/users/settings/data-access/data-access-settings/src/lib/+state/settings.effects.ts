@@ -1,5 +1,7 @@
 import { inject, Injectable } from '@angular/core';
+
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+
 import { of, switchMap } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -15,7 +17,9 @@ export class SettingsEffects {
     return this.actions$.pipe(
       ofType(SettingsActions.loadSettings),
       switchMap(() => {
-        const articleViewType = this.localStorageService.get<string>(StorageKey.ARTICLE_VIEW_TYPE);
+        const articleViewType = this.localStorageService.get<string>(
+          StorageKey.ARTICLE_VIEW_TYPE,
+        );
         const defaultViewType = 'LIST';
 
         if (!articleViewType) {

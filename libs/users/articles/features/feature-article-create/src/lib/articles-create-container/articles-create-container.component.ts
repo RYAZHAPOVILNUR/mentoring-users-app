@@ -1,12 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ActivatedRoute } from '@angular/router';
+
 import { LetDirective } from '@ngrx/component';
+
 import { map } from 'rxjs';
 
+import { ArticlesFacade, ArticleVM } from '@users/articles/data-access-article';
 import { ConfirmDialogService } from '@shared/ui-confirm-dialog';
-import { ArticlesFacade, CreateArticle } from '@users/articles/data-access-article';
+import { DeactivatableComponent } from '@shared/util-router';
 
 import { ArticlesCreateUiComponent } from '../articles-create-ui/articles-create-ui.component';
 
@@ -16,10 +25,11 @@ import { ArticlesCreateUiComponent } from '../articles-create-ui/articles-create
   styleUrls: ['./articles-create-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ArticlesCreateContainerComponent implements OnInit {
+export class ArticlesCreateContainerComponent implements OnInit, DeactivatableComponent {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly articleFacade = inject(ArticlesFacade);
-  @ViewChild(ArticlesCreateUiComponent) articleForm!: ArticlesCreateUiComponent;
+  @ViewChild(ArticlesCreateUiComponent, { static: true })
+  readonly articlesCreateUiComponent!: ArticlesCreateUiComponent;
 
   public readonly editingArticle$ = this.articleFacade.articleForEdit$;
   public readonly confirmDialogService = inject(ConfirmDialogService);
@@ -29,28 +39,30 @@ export class ArticlesCreateContainerComponent implements OnInit {
   readonly isEdit = Boolean(this.articleId);
 
   ngOnInit(): void {
-    this.articleFacade.loadArticle();
+    this.articleFacade.getOne();
   }
 
-  onAddArticle(article: CreateArticle) {
-    this.articleFacade.addArticle(article);
+  onAddArticle(article: ArticleVM) {
+    this.articleFacade.add(article);
   }
-  onEditArticle(article: CreateArticle) {
-    this.articleFacade.updateArticle(article);
+  onEditArticle(article: ArticleVM) {
+    this.articleFacade.update(article);
   }
 
   canDeactivate() {
-    if (this.articleForm.formGroup.dirty) {
-      return this.confirmDialogService
-        .open({
-          title: 'Подтверждение выхода',
-          content: 'Вы уверены, что хотите покинуть данную страницу?<br>Несохранённые изменения будут утеряны!',
-          primaryButtonText: 'Покинуть страницу',
-          secondaryButtonText: 'Остаться',
-        })
-        .afterClosed()
-        .pipe(map(Boolean));
+    if (!this.articlesCreateUiComponent?.formGroup.dirty) {
+      return true;
     }
-    return true;
+
+    return this.confirmDialogService
+      .open({
+        title: 'Подтверждение выхода',
+        content:
+          'Вы уверены, что хотите покинуть данную страницу?<br>Несохранённые изменения будут утеряны!',
+        primaryButtonText: 'Покинуть страницу',
+        secondaryButtonText: 'Остаться',
+      })
+      .afterClosed()
+      .pipe(map(Boolean));
   }
 }

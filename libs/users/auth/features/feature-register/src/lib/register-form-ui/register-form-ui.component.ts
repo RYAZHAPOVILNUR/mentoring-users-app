@@ -1,19 +1,31 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output } from '@angular/core';
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  inject,
+  Output,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
+
 import { PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { NewUser } from '@users/core/data-access-auth';
 import { ApiService } from '@core/data-access-api';
 import { PasswordFieldComponent } from '@shared/feature-password-field';
 import { LanguageService, LanguageValues } from '@shared/util-language';
-import { NewUser } from '@users/core/data-access-auth';
 
 @Component({
   selector: 'users-register-form-ui',
@@ -42,7 +54,11 @@ export class RegisterFormUiComponent {
 
   public formGroup = new FormBuilder().group({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    email: new FormControl('', [Validators.required, Validators.email, Validators.minLength(3)]),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.email,
+      Validators.minLength(3),
+    ]),
     password: new FormControl('', [Validators.required, Validators.minLength(3)]),
     agreement: new FormControl(false, Validators.requiredTrue),
   });

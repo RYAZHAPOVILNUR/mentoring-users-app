@@ -1,16 +1,19 @@
 import { inject } from '@angular/core';
+
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
+
 import { catchError, filter, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
 
+import { userAdapter, UserDTO, UserEntity } from '@users/shared/data-access-models';
 import { ApiService } from '@core/data-access-api';
 import { selectRouteParams } from '@shared/util-store';
-import { userAdapter, UserDTO, UserEntity } from '@users/shared/data-access-models';
+
+import { CreateUserDTO } from '../types/create-user-dto.type';
+import { EditUserDTO } from '../types/edit-user-dto.type';
 
 import * as UsersActions from './users.actions';
 import { selectUsersEntities } from './users.selectors';
-import { CreateUserDTO } from '../types/create-user-dto.type';
-import { EditUserDTO } from '../types/edit-user-dto.type';
 
 export const userEffects = createEffect(
   () => {

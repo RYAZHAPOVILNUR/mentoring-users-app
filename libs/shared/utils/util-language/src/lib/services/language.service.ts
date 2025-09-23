@@ -1,5 +1,7 @@
 import { inject, Injectable } from '@angular/core';
+
 import { TranslateService } from '@ngx-translate/core';
+
 import { BehaviorSubject } from 'rxjs';
 
 import { LocalStorageService, StorageKey } from '@shared/util-storage';
@@ -12,7 +14,9 @@ export class LanguageService {
   private readonly translateService = inject(TranslateService);
   private readonly localStorageService = inject(LocalStorageService);
 
-  readonly selectedLanguage$ = new BehaviorSubject<LanguageValues>(this.getStoredLanguage());
+  readonly selectedLanguage$ = new BehaviorSubject<LanguageValues>(
+    this.getStoredLanguage(),
+  );
 
   setLanguage(language: LanguageValues): void {
     this.selectedLanguage$.next(language);
@@ -21,7 +25,9 @@ export class LanguageService {
   }
 
   getStoredLanguage(): LanguageValues {
-    const savedLanguage = this.localStorageService.get<LanguageValues>(StorageKey.LANGUAGE);
+    const savedLanguage = this.localStorageService.get<LanguageValues>(
+      StorageKey.LANGUAGE,
+    );
     return savedLanguage ? savedLanguage : Languages.Russian;
   }
 }

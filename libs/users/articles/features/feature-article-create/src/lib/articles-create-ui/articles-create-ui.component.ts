@@ -1,5 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -14,12 +22,14 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
-import BlotFormatter from '@enzedonline/quill-blot-formatter2';
+
 import { TranslateModule } from '@ngx-translate/core';
+
 import { QuillModule } from 'ngx-quill';
 import Quill from 'quill';
+import BlotFormatter from 'quill-blot-formatter';
 
-import { CreateArticle } from '@users/articles/data-access-article';
+import { ArticleVM } from '@users/articles/data-access-article';
 import { Article } from '@users/shared/data-access-models';
 
 type ArticlesCreateVm = {
@@ -28,7 +38,10 @@ type ArticlesCreateVm = {
 };
 
 class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null,
+  ): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && isSubmitted && control.touched);
   }
@@ -53,22 +66,41 @@ Quill.register('modules/blotFormatter', BlotFormatter);
   styleUrls: ['./articles-create-ui.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ArticlesCreateUiComponent {
+export class ArticlesCreateUiComponent implements OnInit {
   private _vm!: ArticlesCreateVm;
   private readonly router = inject(Router);
+  public readonly fieldErrors: Record<string, boolean> = {};
 
   public formGroup = new FormGroup({
     textEditor: new FormControl('', {
       validators: [
         Validators.required,
         (control) => {
-          const pattern = control.value.replace(/<[^>]*>/g, '');
-          return pattern.length > 66 ? null : { minLength: 'min length must be > 60 symbols' };
+          const raw = (control.value || '').trim();
+          let text = raw.replace(/<[^>]*>/g, '');
+          text = text.replace(/&nbsp;/g, ' ');
+          text = text.trim();
+          return text.length >= 66
+            ? null
+            : { minLength: 'min length must be  ≥ 66  symbols' };
         },
       ],
     }),
     title: new FormControl('', {
-      validators: [Validators.required, Validators.minLength(5), Validators.maxLength(66)],
+      validators: [
+        Validators.required,
+        (control) => {
+          const value = control.value?.trim() || '';
+
+          if (value.length < 6) {
+            return { minLength: 'min length must be ≥ 6 symbols' };
+          }
+          if (value.length > 60) {
+            return { maxLength: 'max length must be ≤ 60 symbols' };
+          }
+          return null;
+        },
+      ],
     }),
   });
 
@@ -82,9 +114,15 @@ export class ArticlesCreateUiComponent {
     ],
     blotFormatter: {},
   };
-
-  @Output() addArticle = new EventEmitter<CreateArticle>();
-  @Output() updateArticle = new EventEmitter<CreateArticle>();
+  @Output() addArticle = new EventEmitter<ArticleVM>();
+  @Output() updateArticle = new EventEmitter<ArticleVM>();
+  ngOnInit(): void {
+    Object.keys(this.formGroup.controls).forEach((controlName) => {
+      this.formGroup.get(controlName)?.valueChanges.subscribe(() => {
+        this.fieldErrors[controlName] = false;
+      });
+    });
+  }
 
   @Input({ required: true }) set vm(value: ArticlesCreateVm) {
     this._vm = value;
@@ -110,12 +148,18 @@ export class ArticlesCreateUiComponent {
   }
 
   public onSubmit() {
+    Object.keys(this.formGroup.controls).forEach((controlName) => {
+      if (this.formGroup.get(controlName)?.invalid) {
+        this.fieldErrors[controlName] = true;
+      }
+    });
+
     if (this.formGroup.invalid) {
       this.formGroup.markAllAsTouched();
       return;
     }
 
-    const article: CreateArticle = {
+    const article: ArticleVM = {
       title: this.formGroup.value.title as string,
       content: this.formGroup.value.textEditor as string,
     };

@@ -1,10 +1,10 @@
 import { FlatCompat } from '@eslint/eslintrc';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 import js from '@eslint/js';
 import nxEslintPlugin from '@nx/eslint-plugin';
 import eslintPluginImport from 'eslint-plugin-import';
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-
+import simpleImportSort from "eslint-plugin-simple-import-sort";
 const rootDir = dirname(fileURLToPath(import.meta.url));
 const tsConfigBasePath = `${rootDir}/tsconfig.base.json`;
 
@@ -24,6 +24,7 @@ export default [
     plugins: {
       '@nx': nxEslintPlugin,
       import: eslintPluginImport,
+      "simple-import-sort": simpleImportSort,
     },
   },
   {
@@ -78,19 +79,23 @@ export default [
         ...config.rules,
         '@stylistic/semi': 'error',
         'import/no-unresolved': ['off'],
-        'import/order': [
-          'error',
-          {
-            'newlines-between': 'always',
-            groups: [['external', 'builtin'], ['internal'], ['parent', 'sibling', 'index']],
-            alphabetize: {
-              order: 'asc',
-            },
-          },
-        ],
+        'import/order': ['off'],
         'import/no-duplicates': ['error'],
         'import/no-mutable-exports': ['error'],
         '@angular-eslint/sort-lifecycle-methods': ['error'],
+         "simple-import-sort/imports": ["error",{
+         "groups": [
+            ["^@angular"],
+            ["^@ngrx", "^@ngx"],
+            ["^rxjs"],
+            ["^[a-z]"],
+            ["^@users", "^@core", "^@shared"],
+            ["^\\.\\./"],
+            ["^\\./"],
+            ["^.+\\.css$"]
+            ]
+          }],
+       "simple-import-sort/exports": "error",
         'sort-class-members/sort-class-members': [
           2,
           {

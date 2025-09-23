@@ -1,14 +1,17 @@
-.thum-up-icon {
-  color: gray;
-}
-.like-active {
-  color: #7e57c2;
-}
+.article-comment {
+  &__header {
+    cursor: pointer;
+  }
 
-.likes-count {
-  font-size: 16px;
-}
+  &__icon {
+    color: gray;
+    margin-right: 4px;
+  }
+  &__icon--active {
+    color: #7e57c2;
+  }
 
-.mat-card-header {
-  cursor: pointer;
+  &__likes-count {
+    font-size: 16px;
+  }
 }

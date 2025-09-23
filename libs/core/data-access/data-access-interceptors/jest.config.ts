@@ -2,7 +2,8 @@ export default {
   displayName: 'data-access-interceptors',
   preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../../coverage/libs/core/data-access/data-access-interceptors',
+  coverageDirectory:
+    '../../../../coverage/libs/core/data-access/data-access-interceptors',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

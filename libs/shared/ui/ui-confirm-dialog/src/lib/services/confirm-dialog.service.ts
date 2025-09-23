@@ -16,8 +16,11 @@ export class ConfirmDialogService {
   };
 
   open(data: ConfirmDialogData): MatDialogRef<ConfirmDialogComponent, true> {
-    return this.dialog.open<ConfirmDialogComponent, ConfirmDialogData, true>(ConfirmDialogComponent, {
-      data: { ...this.defaultData, ...data },
-    });
+    return this.dialog.open<ConfirmDialogComponent, ConfirmDialogData, true>(
+      ConfirmDialogComponent,
+      {
+        data: { ...this.defaultData, ...data },
+      },
+    );
   }
 }

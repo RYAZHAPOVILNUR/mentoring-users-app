@@ -7,7 +7,12 @@
     <div class="edit-user-container">
       <mat-card class="edit-user-card">
         <div class="close-button-container">
-          <button mat-icon-button aria-label="close dialog" color="accent" (click)="onBackButtonClick()">
+          <button
+            mat-icon-button
+            aria-label="close dialog"
+            color="accent"
+            (click)="onBackButtonClick()"
+          >
             <mat-icon>arrow_back</mat-icon>
           </button>
           <button
@@ -36,16 +41,41 @@
         </h3>
         <form [formGroup]="form" (ngSubmit)="onFormSubmit()" class="edit-user-form">
           <div class="edit-user-content">
-            <mat-form-field class="edit-user-field" [matTooltip]="vm.user!.name" [matTooltipDisabled]="form.enabled">
+            <mat-form-field
+              class="edit-user-field"
+              [matTooltip]="vm.user!.name"
+              [matTooltipDisabled]="form.enabled"
+            >
               <mat-label>Имя:</mat-label>
-              <input matInput placeholder="Имя*" formControlName="name" class="edit-user-input" />
-              <mat-error *ngIf="form.hasError('required', 'name')">Это поле обязательно для заполнения</mat-error>
+              <input
+                matInput
+                placeholder="Имя*"
+                formControlName="name"
+                class="edit-user-input"
+              />
+              <mat-error *ngIf="form.hasError('required', 'name')">
+                Это поле обязательно для заполнения
+              </mat-error>
             </mat-form-field>
 
-            <mat-form-field class="edit-user-field" [matTooltip]="vm.user!.email" [matTooltipDisabled]="form.enabled">
+            <mat-form-field
+              class="edit-user-field"
+              [matTooltip]="vm.user!.email"
+              [matTooltipDisabled]="form.enabled"
+            >
               <mat-label>Электронная почта:</mat-label>
-              <input matInput placeholder="Электронная почта*" formControlName="email" class="edit-user-input" />
-              <mat-error *ngIf="form.controls.email.hasError('required') || form.controls.email.hasError('email')">
+              <input
+                matInput
+                placeholder="Электронная почта*"
+                formControlName="email"
+                class="edit-user-input"
+              />
+              <mat-error
+                *ngIf="
+                  form.controls.email.hasError('required') ||
+                  form.controls.email.hasError('email')
+                "
+              >
                 Введите корректную электронную почту
               </mat-error>
             </mat-form-field>
@@ -56,7 +86,12 @@
               [matTooltipDisabled]="form.enabled"
             >
               <mat-label>Имя пользователя:</mat-label>
-              <input matInput placeholder="Имя пользователя" formControlName="username" class="edit-user-input" />
+              <input
+                matInput
+                placeholder="Имя пользователя"
+                formControlName="username"
+                class="edit-user-input"
+              />
             </mat-form-field>
 
             <users-address-field [type]="addressTypes.CITY" formControlName="city" />

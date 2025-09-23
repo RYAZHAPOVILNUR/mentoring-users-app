@@ -2,7 +2,8 @@ export default {
   displayName: 'feature-backlog',
   preset: '../../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../../../coverage/libs/users/backlog/features/feature-backlog',
+  coverageDirectory:
+    '../../../../../coverage/libs/users/backlog/features/feature-backlog',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

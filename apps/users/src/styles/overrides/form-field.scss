@@ -1,0 +1,28 @@
+/* Убираем нижний бордер у контейнера */
+.mdc-text-field.mdc-text-field--invalid.mdc-text-field--filled {
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+/* Убираем нижний бордер у псевдоэлементов линии */
+.mdc-text-field.mdc-text-field--invalid.mdc-text-field--filled .mdc-line-ripple::before,
+.mdc-text-field.mdc-text-field--invalid.mdc-text-field--filled .mdc-line-ripple::after {
+  border-bottom: none !important;
+  border-bottom-color: transparent !important;
+}
+
+/* Дополнительный фикс на wrapper */
+.mat-mdc-text-field-wrapper
+  .mdc-text-field.mdc-text-field--invalid.mdc-text-field--filled {
+  border-bottom: none !important;
+}
+
+/* Цвет каретки */
+.mdc-text-field.mdc-text-field--invalid.mdc-text-field--filled .mdc-text-field__input {
+  caret-color: black !important;
+}
+
+/* Убираем отступ у текста ошибки */
+.mat-mdc-form-field-error-wrapper {
+  padding: 0 !important;
+}

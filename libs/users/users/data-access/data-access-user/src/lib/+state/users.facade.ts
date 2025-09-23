@@ -1,16 +1,19 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+
 import { select, Store } from '@ngrx/store';
+
 import { Observable, of, switchMap } from 'rxjs';
 
-import { Callback } from '@shared/util-typescript';
 import { authSelectors } from '@users/core/data-access-auth';
 import { UserEntity } from '@users/shared/data-access-models';
+import { Callback } from '@shared/util-typescript';
+
+import { CreateUserDTO } from '../types/create-user-dto.type';
+import { EditUserEntity } from '../types/edit-user-entity.type';
 
 import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
-import { CreateUserDTO } from '../types/create-user-dto.type';
-import { EditUserEntity } from '../types/edit-user-entity.type';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {

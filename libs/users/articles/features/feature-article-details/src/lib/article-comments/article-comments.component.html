@@ -3,10 +3,11 @@
     <h2>{{ 'LAYOUT.ARTICALE.COMMENTS' | translate }}</h2>
     <mat-form-field>
       <textarea
-        placeholder="{{ 'LAYOUT.ARTICALE.WRITE_SOMETHING' | translate }}..."
-        formControlName="commentText"
         matInput
-      ></textarea>
+        formControlName="commentText"
+        placeholder="{{ 'LAYOUT.ARTICALE.WRITE_SOMETHING' | translate }}..."
+      >
+      </textarea>
       <mat-error *ngIf="formGroup.get('commentText')?.hasError('maxlength')">
         {{ 'LAYOUT.ARTICALE.COMMENT_ERROR' | translate }}
       </mat-error>
@@ -15,10 +16,21 @@
       </button>
     </mat-form-field>
   </form>
-  <mat-spinner *ngIf="status === 'loading'" diameter="50"></mat-spinner>
-  <ul *ngIf="status === 'loaded'">
-    <li *ngFor="let comment of comments">
-      <users-article-comment [comment]="comment" [userId]="userId"/>
-    </li>
-  </ul>
+
+  <ng-container [ngSwitch]="status">
+    <ng-container *ngSwitchCase="'loading'">
+      <mat-spinner diameter="50"></mat-spinner>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'loaded'">
+      <div *ngFor="let comment of comments">
+        <users-article-comment [comment]="comment" [userId]="userId" />
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'error'">
+      <h1>Ошибка!</h1>
+      <p>Произошла ошибка при загрузке данных.</p>
+    </ng-container>
+  </ng-container>
 </section>

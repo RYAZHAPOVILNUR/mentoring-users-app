@@ -1,29 +1,35 @@
 import { inject, Injectable } from '@angular/core';
+
 import { Store } from '@ngrx/store';
+
+import { ArticleVM } from '../types/article-vm.interface';
 
 import { articlesActions } from './articles.actions';
 import * as articleSelectors from './articles.selectors';
-import { CreateArticle } from '../interfaces/create-article.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ArticlesFacade {
   private readonly store = inject(Store);
   public readonly articles$ = this.store.select(articleSelectors.selectAllArticles);
   public readonly status$ = this.store.select(articleSelectors.selectStatus);
-  public readonly articleForEdit$ = this.store.select(articleSelectors.selectArticleForEdit);
+  public readonly articleForEdit$ = this.store.select(
+    articleSelectors.selectArticleForEdit,
+  );
 
-  addArticle(article: CreateArticle) {
+  public readonly openedArticle = this.store.select(articleSelectors.selectOpenedArticle);
+
+  add(article: ArticleVM) {
     this.store.dispatch(articlesActions.addArticle({ article }));
   }
 
-  updateArticle(article: CreateArticle) {
+  update(article: ArticleVM) {
     this.store.dispatch(articlesActions.updateArticle({ article }));
   }
 
-  loadArticles() {
-    this.store.dispatch(articlesActions.loadArticles());
+  getAll() {
+    this.store.dispatch(articlesActions.getAll());
   }
-  loadArticle() {
-    this.store.dispatch(articlesActions.loadArticle());
+  getOne() {
+    this.store.dispatch(articlesActions.getOne());
   }
 }

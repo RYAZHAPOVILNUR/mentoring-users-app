@@ -11,7 +11,14 @@ import { Theme, ThemeService } from '@shared/data-access-theme';
 @Component({
   selector: 'users-theme-picker',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatIconModule, MatListModule, MatGridListModule, MatMenuModule],
+  imports: [
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatListModule,
+    MatGridListModule,
+    MatMenuModule,
+  ],
   templateUrl: './theme-picker.component.html',
   styleUrls: ['./theme-picker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

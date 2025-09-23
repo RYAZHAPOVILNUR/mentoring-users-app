@@ -1,18 +1,26 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+
 import { PushPipe } from '@ngrx/component';
 
 import { Column } from '@users/tasks/data-access-task';
 
-import { TasksStore } from './tasks-list-container.store';
 import { TasksSearchInputComponent } from '../../components/tasks-search-input/tasks-search-input.component';
 import { TasksViewComponent } from '../../components/tasks-view/tasks-view.component';
+
+import { TasksStore } from './tasks-list-container.store';
 
 @Component({
   selector: 'users-tasks-container',
   standalone: true,
-  imports: [CommonModule, TasksViewComponent, MatButtonModule, PushPipe, TasksSearchInputComponent],
+  imports: [
+    CommonModule,
+    TasksViewComponent,
+    MatButtonModule,
+    PushPipe,
+    TasksSearchInputComponent,
+  ],
   templateUrl: './tasks-view-container.component.html',
   styleUrls: ['./tasks-view-container.component.scss'],
   providers: [TasksStore],
@@ -48,7 +56,13 @@ export class TasksContainerComponent {
     this.tasksStore.searchTask(this.text);
   }
 
-  public onChangeColumnName({ columnIndex, columnName }: { columnIndex: number; columnName: string }): void {
+  public onChangeColumnName({
+    columnIndex,
+    columnName,
+  }: {
+    columnIndex: number;
+    columnName: string;
+  }): void {
     this.tasksStore.changeColumnName({ columnIndex, columnName });
   }
 }

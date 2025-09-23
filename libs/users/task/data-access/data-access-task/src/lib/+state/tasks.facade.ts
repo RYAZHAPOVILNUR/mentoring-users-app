@@ -1,9 +1,11 @@
 import { inject, Injectable } from '@angular/core';
+
 import { select, Store } from '@ngrx/store';
+
+import { Column } from '../interfaces/column.interface';
 
 import { tasksAction } from './tasks.action';
 import { selectColumns } from './tasks.selector';
-import { Column } from '../interfaces/column.interface';
 
 @Injectable({
   providedIn: 'root',

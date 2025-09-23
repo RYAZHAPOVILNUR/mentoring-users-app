@@ -1,8 +1,10 @@
 import { inject, Injectable } from '@angular/core';
+
 import { ComponentStore } from '@ngrx/component-store';
+
 import { tap } from 'rxjs';
 
-import { filterColumnsByTerm, Column, TasksFacade } from '@users/tasks/data-access-task';
+import { Column, filterColumnsByTerm, TasksFacade } from '@users/tasks/data-access-task';
 
 type TaskColumnsState = {
   columns: Column[];
@@ -49,14 +51,16 @@ export class TasksStore extends ComponentStore<TaskColumnsState> {
       return { ...state, columns: updatedColumns };
     },
   );
-  public deleteTask = this.updater((state, { columnIndex, taskName }: { columnIndex: number; taskName: string }) => {
-    const updatedColumns = [...state.columns];
-    const column = { ...updatedColumns[columnIndex] };
-    column.tasks = column.tasks.filter((task) => task.taskName !== taskName);
-    updatedColumns[columnIndex] = column;
-    this.taskFacade.updateColumns(updatedColumns);
-    return { ...state, columns: updatedColumns };
-  });
+  public deleteTask = this.updater(
+    (state, { columnIndex, taskName }: { columnIndex: number; taskName: string }) => {
+      const updatedColumns = [...state.columns];
+      const column = { ...updatedColumns[columnIndex] };
+      column.tasks = column.tasks.filter((task) => task.taskName !== taskName);
+      updatedColumns[columnIndex] = column;
+      this.taskFacade.updateColumns(updatedColumns);
+      return { ...state, columns: updatedColumns };
+    },
+  );
   public searchTask = this.updater((state, term: string) => {
     this.taskFacade.searchTask(term);
     if (!term) {
@@ -82,7 +86,11 @@ export class TasksStore extends ComponentStore<TaskColumnsState> {
   private setColumnsFromGlobalToLocalStore(): void {
     this.taskFacade.getMyBoard();
     this.taskFacade.getAllBoards();
-    this.effect(() => this.taskFacade.allTaskColumns$.pipe(tap((columns: Column[]) => this.patchColumns(columns))));
+    this.effect(() =>
+      this.taskFacade.allTaskColumns$.pipe(
+        tap((columns: Column[]) => this.patchColumns(columns)),
+      ),
+    );
   }
 
   private patchColumns(columns: Column[]): void {

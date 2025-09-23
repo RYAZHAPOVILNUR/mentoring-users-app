@@ -1,59 +1,64 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { LetDirective } from '@ngrx/component';
-import { select, Store } from '@ngrx/store';
-import { map, Observable, take, withLatestFrom } from 'rxjs';
 
-import { selectRouteParams } from '@shared/util-store';
-import { articlesActions, articleSelectors } from '@users/articles/data-access-article';
-import { commentsActions, commentsSelectors } from '@users/articles/data-access-comment';
-import { authSelectors } from '@users/core/data-access-auth';
-import { Article } from '@users/shared/data-access-models';
+import { LetDirective } from '@ngrx/component';
+import { Store } from '@ngrx/store';
+
+import { take, withLatestFrom } from 'rxjs';
+
+import { ArticlesFacade } from '@users/articles/data-access-article';
+import { CommentsFacade } from '@users/articles/data-access-comment';
+import { AuthFacade, authSelectors } from '@users/core/data-access-auth';
 
 import { ArticleCommentsComponent } from '../article-comments/article-comments.component';
 import { ArticleDetailsComponent } from '../article-details/article-details.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, ArticleDetailsComponent, ArticleCommentsComponent, LetDirective, MatProgressBarModule],
+  imports: [
+    CommonModule,
+    ArticleDetailsComponent,
+    ArticleCommentsComponent,
+    LetDirective,
+    MatProgressBarModule,
+  ],
   templateUrl: './article-details-container.component.html',
   styleUrls: ['./article-details-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ArticleDetailsContainerComponent {
+export class ArticleDetailsContainerComponent implements OnInit {
   private readonly store = inject(Store);
-  public readonly status$ = this.store.select(articleSelectors.selectStatus);
-  public readonly commentsStatus$ = this.store.select(commentsSelectors.selectStatus);
+  public readonly articlesFacade = inject(ArticlesFacade);
+  public readonly сommentsFacade = inject(CommentsFacade);
+  public readonly auth = inject(AuthFacade);
+  public readonly articleStatus$ = this.articlesFacade.status$;
+  public readonly article$ = this.articlesFacade.openedArticle;
+
+  public readonly commentsStatus$ = this.сommentsFacade.status$;
+  public readonly comments$ = this.сommentsFacade.comments$;
+
   public readonly loggedUserId$ = this.store.select(authSelectors.selectLoggedUserId);
-  public articleComments$ = this.store.select(commentsSelectors.selectComments);
 
-  public articleId$ = this.store.pipe(select(selectRouteParams));
-
-  public openedArticle$: Observable<Article | null> = this.store.select(articleSelectors.selectOpenedArticle).pipe(
-    map((article) => {
-      if (!article) {
-        this.store.dispatch(articlesActions.loadArticle());
-      }
-      return article;
-    }),
-  );
-
-  constructor() {
-    this.openedArticle$.pipe(take(1), withLatestFrom(this.articleId$)).subscribe(([, params]) => {
-      this.store.dispatch(commentsActions.loadComments({ articleId: params['id'] }));
-    });
+  ngOnInit(): void {
+    this.articlesFacade.getOne();
+    this.сommentsFacade.getAll();
   }
   onSubmitComment(commentText: string) {
-    this.loggedUserId$.pipe(withLatestFrom(this.openedArticle$), take(1)).subscribe(([authorId, article]) => {
-      console.log('authorId, articleId', authorId, article?.id);
+    this.loggedUserId$
+      .pipe(withLatestFrom(this.article$), take(1))
 
-      const comment = {
-        author_id: Number(authorId),
-        article_id: Number(article?.id),
-        text: commentText,
-      };
-      this.store.dispatch(commentsActions.publishComment({ comment }));
-    });
+      .subscribe(([authorId, article]) => {
+        console.log('authorId, articleId', authorId, article?.id);
+
+        const comment = {
+          article_id: Number(article?.id),
+          author_id: Number(authorId),
+          text: commentText,
+          like_user_ids: [],
+          dislike_user_ids: [],
+        };
+        this.сommentsFacade.add(comment);
+      });
   }
 }

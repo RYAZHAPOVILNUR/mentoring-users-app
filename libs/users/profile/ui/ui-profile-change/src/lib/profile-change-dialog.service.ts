@@ -13,10 +13,13 @@ export class ProfileChangeDialogService {
     width: '400px',
   };
 
-  open(data: ProfileChangeDialogData): MatDialogRef<ProfileChangeDialogComponent, ProfileChangeDialogCloseData> {
-    return this.dialog.open<ProfileChangeDialogComponent, ProfileChangeDialogData, ProfileChangeDialogCloseData>(
+  open(
+    data: ProfileChangeDialogData,
+  ): MatDialogRef<ProfileChangeDialogComponent, ProfileChangeDialogCloseData> {
+    return this.dialog.open<
       ProfileChangeDialogComponent,
-      { ...this.defaultConfig, data },
-    );
+      ProfileChangeDialogData,
+      ProfileChangeDialogCloseData
+    >(ProfileChangeDialogComponent, { ...this.defaultConfig, data });
   }
 }

@@ -1,12 +1,15 @@
 import { inject } from '@angular/core';
+
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+
 import { catchError, map, of, switchMap } from 'rxjs';
 
-import { ApiService } from '@core/data-access-api';
 import { Backlog } from '@users/shared/data-access-models';
+import { ApiService } from '@core/data-access-api';
+
+import { CreateBacklog } from '../interfaces/create-backlog.interface';
 
 import { backlogAction } from './backlog.action';
-import { CreateBacklog } from '../interfaces/create-backlog.interface';
 
 export const addBacklogTask$ = createEffect(
   () => {
@@ -17,7 +20,9 @@ export const addBacklogTask$ = createEffect(
       ofType(backlogAction.addBacklog),
       switchMap(({ backlogData }) =>
         apiService.post<Backlog, CreateBacklog>('/backlog', backlogData).pipe(
-          map((backlogEntity) => backlogAction.addBacklogSuccess({ backlogData: backlogEntity })),
+          map((backlogEntity) =>
+            backlogAction.addBacklogSuccess({ backlogData: backlogEntity }),
+          ),
           catchError((error) => {
             return of(error);
           }),

@@ -2,14 +2,16 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+
 import { LetDirective } from '@ngrx/component';
 
 import { UserVM } from '@users/shared/data-access-models';
 import { UsersFacade } from '@users/users/data-access-user';
 
-import { UserListContainerStore } from './user-list-container.store';
 import { UserListComponent } from '../../components/user-list/user-list.component';
 import { UserRedirectPayload } from '../../interfaces/user-redirect-payload.interface';
+
+import { UserListContainerStore } from './user-list-container.store';
 
 @Component({
   standalone: true,

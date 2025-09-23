@@ -1,15 +1,27 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
 import { LetDirective } from '@ngrx/component';
 import { Store } from '@ngrx/store';
+
 import { filter, noop, of, tap } from 'rxjs';
 
-import { githubApiActions, GithubApiService, githubSelectors } from '@shared/data-access-github';
-import { CropperDialogService } from '@shared/feature-cropper';
-import { selectQueryParam } from '@shared/util-store';
 import { authActions, authSelectors } from '@users/core/data-access-auth';
 import { UserEntity } from '@users/shared/data-access-models';
+import {
+  githubApiActions,
+  GithubApiService,
+  githubSelectors,
+} from '@shared/data-access-github';
+import { CropperDialogService } from '@shared/feature-cropper';
+import { selectQueryParam } from '@shared/util-store';
 
 import { ProfileComponent } from '../../components/profile/profile.component';
 
@@ -31,7 +43,9 @@ export class SelfProfileContainerComponent implements OnInit {
 
   public readonly user$ = this.store.select(authSelectors.selectLoggedUser);
   public readonly status$ = this.store.select(authSelectors.selectAuthStatus);
-  public readonly githubUserName$ = this.store.select(githubSelectors.selectGithubUserName);
+  public readonly githubUserName$ = this.store.select(
+    githubSelectors.selectGithubUserName,
+  );
   public readonly githubStatus$ = this.store.select(githubSelectors.selectGithubStatus);
   public readonly isLoggedUser = of(true);
 
@@ -57,7 +71,9 @@ export class SelfProfileContainerComponent implements OnInit {
   public onLoadPhoto(file: File): void {
     const reader = new FileReader();
     reader.onload = (e) => {
-      const dialogRef = this.cropperDialogService.open({ imageSrc: e.target!.result as string });
+      const dialogRef = this.cropperDialogService.open({
+        imageSrc: e.target!.result as string,
+      });
       dialogRef
         .afterClosed()
         .pipe(

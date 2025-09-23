@@ -9,8 +9,14 @@ import { CropperDialogCloseData } from '../types/cropper-dialog-close-data.type'
 export class CropperDialogService {
   private readonly dialog = inject(MatDialog);
 
-  open(data: CropperDialogData): MatDialogRef<CropperDialogComponent, CropperDialogCloseData> {
-    return this.dialog.open<CropperDialogComponent, CropperDialogData, CropperDialogCloseData>(CropperDialogComponent, {
+  open(
+    data: CropperDialogData,
+  ): MatDialogRef<CropperDialogComponent, CropperDialogCloseData> {
+    return this.dialog.open<
+      CropperDialogComponent,
+      CropperDialogData,
+      CropperDialogCloseData
+    >(CropperDialogComponent, {
       data,
     });
   }

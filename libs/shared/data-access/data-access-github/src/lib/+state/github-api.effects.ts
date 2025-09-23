@@ -1,10 +1,13 @@
 import { inject } from '@angular/core';
+
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 
-import { githubApiActions } from './github-api.actions';
 import { GithubApiService } from '../services/github-api.service';
+
+import { githubApiActions } from './github-api.actions';
 
 export const getAccessTokenEffect$ = createEffect(
   (githubApiService = inject(GithubApiService), actions$ = inject(Actions)) => {
@@ -24,7 +27,11 @@ export const getAccessTokenEffect$ = createEffect(
 );
 
 export const getAccessTokenSuccessEffect$ = createEffect(
-  (actions$ = inject(Actions), githubApiService = inject(GithubApiService), store = inject(Store)) =>
+  (
+    actions$ = inject(Actions),
+    githubApiService = inject(GithubApiService),
+    store = inject(Store),
+  ) =>
     actions$.pipe(
       ofType(githubApiActions.getAccessTokenSuccess),
       tap(({ token }) => {

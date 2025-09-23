@@ -1,57 +1,39 @@
-.wrapper {
+.article {
   padding: 0 15px;
-}
 
-.editor {
-  display: block;
-}
-
-quill-editor {
-  &.ql-toolbar .ql-stroke {
-    fill: none !important;
-    stroke: #fff !important;
+  &__mat-field {
+    display: block;
   }
-  &.ql-toolbar .ql-fill {
-    fill: #fff !important;
-    stroke: none !important;
+
+  &__mat-field--error {
+    --mdc-filled-text-field-container-color: #ffd6d3;
   }
-  &.ql-toolbar .ql-picker {
-    color: #fff !important;
+
+  &__quill-editor {
+    display: block;
+    background-color: rgb(244.8, 244.8, 244.8);
+    &:hover {
+      background-color: #ececec;
+    }
   }
-}
-
-.ql-toolbar .ql-stroke {
-  fill: none !important;
-  stroke: #fff !important;
-}
-
-.ql-toolbar .ql-fill {
-  fill: #fff !important;
-  stroke: none !important;
-}
-
-.ql-toolbar .ql-picker {
-  color: #fff !important;
-}
-
-mat-form-field {
-  display: block;
-}
-
-.custom-input-container {
-  font-size: 14px;
-  & .light-invalid {
+  &__quill-editor--error {
     background-color: #ffd6d3;
+    &:hover {
+      background-color: #f6cecc;
+    }
   }
-  & .dark-invalid {
-    background-color: #7c4c47;
+
+  &__buttons {
+    width: 100%;
+    margin-top: 15px;
+    display: flex;
+    gap: 15px;
   }
-}
 
-.error-message {
-  color: #f44336;
-}
-
-.button {
-  margin-top: 20px;
+  &__button--submit {
+    width: 50%;
+  }
+  &__button--cancel {
+    width: 50%;
+  }
 }

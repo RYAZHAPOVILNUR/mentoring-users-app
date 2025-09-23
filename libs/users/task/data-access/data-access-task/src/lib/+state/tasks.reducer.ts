@@ -1,8 +1,9 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 
-import { tasksAction } from './tasks.action';
 import { TaskBoard } from '../interfaces/tasks.interface';
 import { filterColumnsByTerm } from '../utils/filter-columns-by-term.util';
+
+import { tasksAction } from './tasks.action';
 
 export const TASKS_FEATURE_KEY = 'tasks';
 

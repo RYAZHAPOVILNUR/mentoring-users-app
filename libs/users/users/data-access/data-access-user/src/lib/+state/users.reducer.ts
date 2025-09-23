@@ -1,9 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
+
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Action, createReducer, on } from '@ngrx/store';
 
-import { LoadingStatus } from '@shared/util-store';
 import { UserEntity } from '@users/shared/data-access-models';
+import { LoadingStatus } from '@shared/util-store';
 
 import * as UsersActions from './users.actions';
 
@@ -36,8 +37,12 @@ const reducer = createReducer(
     status: 'error' as const,
     error,
   })),
-  on(UsersActions.deleteUserSuccess, (state, { id }) => usersAdapter.removeOne(id, { ...state })),
-  on(UsersActions.addUserSuccess, (state, { userData }) => usersAdapter.addOne({ ...userData }, { ...state })),
+  on(UsersActions.deleteUserSuccess, (state, { id }) =>
+    usersAdapter.removeOne(id, { ...state }),
+  ),
+  on(UsersActions.addUserSuccess, (state, { userData }) =>
+    usersAdapter.addOne({ ...userData }, { ...state }),
+  ),
   on(UsersActions.editUserSuccess, (state, { userData }) =>
     usersAdapter.updateOne(
       {

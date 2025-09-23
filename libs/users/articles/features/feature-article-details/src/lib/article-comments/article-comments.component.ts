@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+} from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -7,12 +14,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 import { PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { LoadingStatus } from '@shared/util-store';
 import { AuthFacade } from '@users/core/data-access-auth';
 import { Comment } from '@users/shared/data-access-models';
+import { LoadingStatus } from '@shared/util-store';
 
 import { ArticleCommentComponent } from './article-comment/article-comment.component';
 
@@ -37,21 +45,22 @@ import { ArticleCommentComponent } from './article-comment/article-comment.compo
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleCommentsComponent {
-  @Input() comments!: Comment[];
-  @Input() status!: LoadingStatus;
+  @Input({ required: true }) comments!: Comment[];
+  @Input({ required: true }) status!: LoadingStatus;
   private authFacade = inject(AuthFacade);
   public readonly userId$ = this.authFacade.loggedUserId$;
   public formGroup = new FormGroup({
-    commentText: new FormControl('', [Validators.maxLength(100)]),
+    commentText: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.maxLength(100), Validators.required],
+    }),
   });
   @Output() submitComment = new EventEmitter<string>();
 
   onSubmitComment() {
-    if (this.formGroup.valid && this.formGroup.value.commentText) {
+    if (this.formGroup.valid) {
       this.submitComment.emit(this.formGroup.value.commentText);
       this.formGroup.reset();
-      return;
     }
-    return;
   }
 }
