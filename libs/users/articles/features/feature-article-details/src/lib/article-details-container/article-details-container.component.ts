@@ -55,8 +55,6 @@ export class ArticleDetailsContainerComponent implements OnInit {
           article_id: Number(article?.id),
           author_id: Number(authorId),
           text: commentText,
-          like_user_ids: [],
-          dislike_user_ids: [],
         };
         this.сommentsFacade.add(comment);
       });
