@@ -1,57 +1,70 @@
-.wrapper {
+::ng-deep {
+  /* Убираем нижний бордер у контейнера */
+  .mdc-text-field.mdc-text-field--invalid.mdc-text-field--filled {
+    border-bottom: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Убираем нижний бордер у псевдоэлементов линии */
+  .mdc-text-field.mdc-text-field--invalid.mdc-text-field--filled .mdc-line-ripple::before,
+  .mdc-text-field.mdc-text-field--invalid.mdc-text-field--filled .mdc-line-ripple::after {
+    border-bottom: none !important;
+    border-bottom-color: transparent !important;
+  }
+
+  /* Дополнительный фикс на wrapper */
+  .mat-mdc-text-field-wrapper .mdc-text-field.mdc-text-field--invalid.mdc-text-field--filled {
+    border-bottom: none !important;
+  }
+
+  /* Цвет каретки */
+  .mdc-text-field.mdc-text-field--invalid.mdc-text-field--filled .mdc-text-field__input {
+    caret-color: black !important;
+  }
+
+  /* Убираем отступ у текста ошибки */
+  .mat-mdc-form-field-error-wrapper {
+    padding: 0 !important;
+  }
+}
+
+.article {
   padding: 0 15px;
-}
 
-.editor {
-  display: block;
-}
-
-quill-editor {
-  &.ql-toolbar .ql-stroke {
-    fill: none !important;
-    stroke: #fff !important;
+  &__mat-field {
+    display: block;
   }
-  &.ql-toolbar .ql-fill {
-    fill: #fff !important;
-    stroke: none !important;
+  &__mat-field--error {
+    --mdc-filled-text-field-container-color: #ffd6d3;
   }
-  &.ql-toolbar .ql-picker {
-    color: #fff !important;
+
+  &__quill-editor {
+    display: block;
+    background-color: rgb(244.8, 244.8, 244.8);
+
+    &:hover {
+      background-color: #ececec;
+    }
   }
-}
 
-.ql-toolbar .ql-stroke {
-  fill: none !important;
-  stroke: #fff !important;
-}
-
-.ql-toolbar .ql-fill {
-  fill: #fff !important;
-  stroke: none !important;
-}
-
-.ql-toolbar .ql-picker {
-  color: #fff !important;
-}
-
-mat-form-field {
-  display: block;
-}
-
-.custom-input-container {
-  font-size: 14px;
-  & .light-invalid {
+  &__quill-editor--error {
     background-color: #ffd6d3;
-  }
-  & .dark-invalid {
-    background-color: #7c4c47;
-  }
-}
 
-.error-message {
-  color: #f44336;
-}
+    &:hover {
+      background-color: #f6cecc;
+    }
+  }
 
-.button {
-  margin-top: 20px;
+  &__buttons {
+    width: 100%;
+    margin-top: 15px;
+    display: flex;
+    gap: 15px;
+  }
+  &__button--submit {
+    width: 50%;
+  }
+  &__button--cancel {
+    width: 50%;
+  }
 }

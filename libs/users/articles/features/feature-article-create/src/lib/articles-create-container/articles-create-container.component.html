@@ -1,7 +1,7 @@
 <ng-container *ngrxLet="{editingArticle: editingArticle$} as vm">
   <users-articles-create-ui
     [vm]="{editingArticle: vm.editingArticle, editMode: isEdit}"
-    (publishArticle)="onPublishArticle($event)"
-    (formChange)="onFormChange($event)"
+    (addArticle)="onAddArticle($event)"
+    (updateArticle)="onEditArticle($event)"
   />
 </ng-container>

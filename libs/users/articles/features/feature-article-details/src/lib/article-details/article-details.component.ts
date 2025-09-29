@@ -21,7 +21,7 @@ import { UsersFacade } from '@users/users/data-access-user';
 })
 export class ArticleDetailsComponent implements OnInit {
   @Input({ required: true }) article!: Article | null;
-  @Input({ required: true }) loggedUserId!: number;
+
   private readonly userFacade = inject(UsersFacade);
   public authorPhoto$!: Observable<string | undefined>;
 

@@ -1,18 +1,15 @@
-import { createSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { selectQueryParams, selectRouteParams } from '@shared/util-store';
 
 import { articlesAdapter, articlesFeature, ArticlesState } from './articles.reducer';
 
-export const { selectArticlesState, selectIds, selectStatus } = articlesFeature;
+export const selectArticleState = createFeatureSelector<ArticlesState>(articlesFeature.name);
 
-const { selectAll, selectEntities } = articlesAdapter.getSelectors();
+export const { selectIds, selectStatus } = articlesFeature;
 
-export const selectArticles = createSelector(selectArticlesState, (state: ArticlesState) => selectAll(state));
-
-export const selectArticlesEntities = createSelector(selectArticlesState, (state: ArticlesState) =>
-  selectEntities(state),
-);
+export const { selectAll: selectAllArticles, selectEntities: selectArticlesEntities } =
+  articlesAdapter.getSelectors(selectArticleState);
 
 export const selectArticleForEdit = createSelector(
   selectQueryParams,

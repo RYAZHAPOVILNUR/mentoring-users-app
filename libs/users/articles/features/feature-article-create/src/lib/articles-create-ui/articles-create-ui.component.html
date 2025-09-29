@@ -1,45 +1,57 @@
-<div class="wrapper">
-  <form [formGroup]="formGroup">
-    <mat-form-field>
+<div class="article">
+  <form [formGroup]="formGroup" class="article__form">
+    <mat-form-field
+      class="article__mat-field"
+      [ngClass]="{
+        'article__mat-field--error':
+         formGroup.get('title')?.invalid && fieldErrors['title']}
+         "
+        >
       <input
         type="text"
         autocomplete="off"
-        placeholder="{{ 'ARTICLES.ARTICLE.HEADER' | translate }}"
+        placeholder="{{'ARTICLES.ARTICLE.HEADER' | translate}}"
         formControlName="title"
-        class="input-field"
         matInput
-        [errorStateMatcher]="matcher"
       />
-      <mat-error *ngIf="formSubmitted && formGroup.get('title')?.hasError">
-        {{ 'ARTICLES.ARTICLE.HEADER_SIZE' | translate }}
+      <mat-error *ngIf="formGroup.get('title')?.invalid && fieldErrors['title']">
+        {{'ARTICLES.ARTICLE.HEADER_SIZE' | translate}}
       </mat-error>
     </mat-form-field>
 
-    <div class="custom-input-container">
-      <quill-editor
-        class="editor"
-        [class.light-invalid]="formSubmitted && formGroup.get('textEditor')?.invalid"
-        [styles]="{ height: '400px' }"
-        [modules]="quillEditorModules"
-        placeholder=""
-        defaultEmptyValue=""
-        formControlName="textEditor"
-      >
-      </quill-editor>
-    </div>
+    <quill-editor
+      class="article__quill-editor"
+      [ngClass]="{
+        'article__quill-editor--error':
+        formGroup.get('textEditor')?.invalid && fieldErrors['textEditor']}
+        "
+      [styles]="{ height: '400px' }"
+      [modules]="quillEditorModules"
+      placeholder=""
+      defaultEmptyValue=""
+      formControlName="textEditor"
+    >
+    </quill-editor>
 
-    <p class="error-message" *ngIf="formSubmitted && formGroup.get('textEditor')?.invalid">
-      {{ 'ARTICLES.ARTICLE.ARTICLE_SIZE' | translate }}
-    </p>
-
-    <div class="button">
+    <mat-error *ngIf="formGroup.get('textEditor')?.invalid && fieldErrors['textEditor']">
+      {{'ARTICLES.ARTICLE.ARTICLE_SIZE' | translate}}
+    </mat-error>
+    <div class="article__buttons">
+      <button
+        color="primary"
+        class="article__button article__button--cancel"
+        mat-raised-button
+        (click)="onCancel()"
+        >
+        {{'ARTICLES.ARTICLE.CLOSE' | translate}}
+      </button>
       <button
         color="primary"
         mat-raised-button
+        class="article__button article__button--submit"
         (click)="onSubmit()">
-        {{ vm.editMode ? ('ARTICLES.ARTICLE.EDIT' | translate) : ('ARTICLES.ARTICLE.POST' | translate) }}
+        {{vm.editMode ? ('ARTICLES.ARTICLE.EDIT' | translate) : ('ARTICLES.ARTICLE.POST' | translate)}}
       </button>
-      <button mat-raised-button (click)="onCancel()" color="primary">{{ ('ARTICLES.ARTICLE.CLOSE' | translate) }}</button>
     </div>
   </form>
 </div>
