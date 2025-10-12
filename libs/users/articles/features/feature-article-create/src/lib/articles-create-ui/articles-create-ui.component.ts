@@ -1,5 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -18,9 +27,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { QuillModule } from 'ngx-quill';
 import Quill from 'quill';
 import BlotFormatter from 'quill-blot-formatter';
+import { Subscription } from 'rxjs';
 
 import { ArticleVM } from '@users/articles/data-access-article';
 import { Article } from '@users/shared/data-access-models';
+
+import { ArticleValidators } from '../validators/article-validators';
 
 type ArticlesCreateVm = {
   editMode: boolean;
@@ -54,42 +66,20 @@ Quill.register('modules/blotFormatter', BlotFormatter);
   styleUrls: ['./articles-create-ui.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ArticlesCreateUiComponent implements OnInit {
+export class ArticlesCreateUiComponent implements OnInit, OnDestroy {
   private _vm!: ArticlesCreateVm;
   private readonly router = inject(Router);
+  private subscriptions = new Subscription();
   public readonly fieldErrors: Record<string, boolean> = {};
 
   public formGroup = new FormGroup({
-    textEditor: new FormControl('', {
-      validators: [
-        Validators.required,
-        (control) => {
-          const raw = (control.value || '').trim();
-          let text = raw.replace(/<[^>]*>/g, '');
-          text = text.replace(/&nbsp;/g, ' ');
-          text = text.trim();
-          return text.length >= 66 ? null : { minLength: 'min length must be  ≥ 66  symbols' };
-        },
-      ],
-    }),
     title: new FormControl('', {
-      validators: [
-        Validators.required,
-        (control) => {
-          const value = control.value?.trim() || '';
-
-          if (value.length < 6) {
-            return { minLength: 'min length must be ≥ 6 symbols' };
-          }
-          if (value.length > 60) {
-            return { maxLength: 'max length must be ≤ 60 symbols' };
-          }
-          return null;
-        },
-      ],
+      validators: [Validators.required, ArticleValidators.validateTitle],
+    }),
+    textEditor: new FormControl('', {
+      validators: [Validators.required, ArticleValidators.validateContent],
     }),
   });
-
   public formSubmitted = false;
   public matcher = new MyErrorStateMatcher();
   public quillEditorModules = {
@@ -106,11 +96,18 @@ export class ArticlesCreateUiComponent implements OnInit {
   @Output() updateArticle = new EventEmitter<ArticleVM>();
 
   ngOnInit(): void {
-    Object.keys(this.formGroup.controls).forEach((controlName) => {
-      this.formGroup.get(controlName)?.valueChanges.subscribe(() => {
+    Object.keys(this.formGroup?.controls).forEach((controlName) => {
+      const sub = this.formGroup.get(controlName)?.valueChanges.subscribe(() => {
         this.fieldErrors[controlName] = false;
       });
+
+      if (sub) {
+        this.subscriptions.add(sub);
+      }
     });
+  }
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   @Input({ required: true })
