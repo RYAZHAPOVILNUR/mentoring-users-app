@@ -27,7 +27,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { QuillModule } from 'ngx-quill';
 import Quill from 'quill';
 import BlotFormatter from 'quill-blot-formatter';
-import { Subscription } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 import { ArticleVM } from '@users/articles/data-access-article';
 import { Article } from '@users/shared/data-access-models';
@@ -69,7 +69,7 @@ Quill.register('modules/blotFormatter', BlotFormatter);
 export class ArticlesCreateUiComponent implements OnInit, OnDestroy {
   private _vm!: ArticlesCreateVm;
   private readonly router = inject(Router);
-  private subscriptions = new Subscription();
+  private readonly unsubscribe$ = new Subject<void>();
   public readonly fieldErrors: Record<string, boolean> = {};
 
   public formGroup = new FormGroup({
@@ -97,17 +97,17 @@ export class ArticlesCreateUiComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     Object.keys(this.formGroup?.controls).forEach((controlName) => {
-      const sub = this.formGroup.get(controlName)?.valueChanges.subscribe(() => {
-        this.fieldErrors[controlName] = false;
-      });
-
-      if (sub) {
-        this.subscriptions.add(sub);
-      }
+      this.formGroup
+        .get(controlName)
+        ?.valueChanges.pipe(takeUntil(this.unsubscribe$))
+        .subscribe(() => {
+          this.fieldErrors[controlName] = false;
+        });
     });
   }
   ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   @Input({ required: true })
