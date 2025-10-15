@@ -2,13 +2,14 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   EventEmitter,
   inject,
   Input,
-  OnDestroy,
   OnInit,
   Output,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   FormControl,
   FormGroup,
@@ -27,7 +28,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { QuillModule } from 'ngx-quill';
 import Quill from 'quill';
 import BlotFormatter from 'quill-blot-formatter';
-import { Subject, takeUntil } from 'rxjs';
 
 import { ArticleVM } from '@users/articles/data-access-article';
 import { Article } from '@users/shared/data-access-models';
@@ -66,10 +66,10 @@ Quill.register('modules/blotFormatter', BlotFormatter);
   styleUrls: ['./articles-create-ui.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ArticlesCreateUiComponent implements OnInit, OnDestroy {
+export class ArticlesCreateUiComponent implements OnInit {
   private _vm!: ArticlesCreateVm;
   private readonly router = inject(Router);
-  private readonly unsubscribe$ = new Subject<void>();
+  private readonly destroyRef = inject(DestroyRef);
   public readonly fieldErrors: Record<string, boolean> = {};
 
   public formGroup = new FormGroup({
@@ -99,15 +99,11 @@ export class ArticlesCreateUiComponent implements OnInit, OnDestroy {
     Object.keys(this.formGroup?.controls).forEach((controlName) => {
       this.formGroup
         .get(controlName)
-        ?.valueChanges.pipe(takeUntil(this.unsubscribe$))
+        ?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(() => {
           this.fieldErrors[controlName] = false;
         });
     });
-  }
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 
   @Input({ required: true })
