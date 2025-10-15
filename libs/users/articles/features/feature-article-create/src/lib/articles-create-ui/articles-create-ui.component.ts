@@ -1,15 +1,22 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import {
-  AbstractControl,
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {
   FormControl,
   FormGroup,
   FormGroupDirective,
   FormsModule,
   NgForm,
   ReactiveFormsModule,
-  ValidationErrors,
-  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,8 +29,10 @@ import { QuillModule } from 'ngx-quill';
 import Quill from 'quill';
 import BlotFormatter from 'quill-blot-formatter';
 
-import { ArticlesFacade, CreateArticle } from '@users/articles/data-access-article';
+import { ArticleVM } from '@users/articles/data-access-article';
 import { Article } from '@users/shared/data-access-models';
+
+import { ArticleValidators } from '../validators/article-validators';
 
 type ArticlesCreateVm = {
   editMode: boolean;
@@ -52,21 +61,23 @@ Quill.register('modules/blotFormatter', BlotFormatter);
     MatInputModule,
     TranslateModule,
   ],
+  providers: [{ provide: ErrorStateMatcher, useClass: MyErrorStateMatcher }],
   templateUrl: './articles-create-ui.component.html',
   styleUrls: ['./articles-create-ui.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ArticlesCreateUiComponent {
+export class ArticlesCreateUiComponent implements OnInit {
   private _vm!: ArticlesCreateVm;
   private readonly router = inject(Router);
-  private readonly articleFacade = inject(ArticlesFacade);
+  private readonly destroyRef = inject(DestroyRef);
+  public readonly fieldErrors: Record<string, boolean> = {};
 
   public formGroup = new FormGroup({
-    textEditor: new FormControl('', {
-      validators: [Validators.required, this.validateWithClearTegs()],
-    }),
     title: new FormControl('', {
-      validators: [Validators.required, Validators.minLength(5), Validators.maxLength(66)],
+      validators: [Validators.required, ArticleValidators.validateTitle],
+    }),
+    textEditor: new FormControl('', {
+      validators: [Validators.required, ArticleValidators.validateContent],
     }),
   });
   public formSubmitted = false;
@@ -81,12 +92,18 @@ export class ArticlesCreateUiComponent {
     ],
     blotFormatter: {},
   };
-  @Output() publishArticle = new EventEmitter<CreateArticle>();
+  @Output() addArticle = new EventEmitter<ArticleVM>();
+  @Output() updateArticle = new EventEmitter<ArticleVM>();
 
-  @Output() formChange = new EventEmitter<boolean>();
-
-  constructor() {
-    this.checkChanges();
+  ngOnInit(): void {
+    Object.keys(this.formGroup?.controls).forEach((controlName) => {
+      this.formGroup
+        .get(controlName)
+        ?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe(() => {
+          this.fieldErrors[controlName] = false;
+        });
+    });
   }
 
   @Input({ required: true })
@@ -102,8 +119,8 @@ export class ArticlesCreateUiComponent {
   public patchFormValues() {
     if (this._vm.editMode && !this.formGroup.dirty) {
       this.formGroup.patchValue({
-        textEditor: this.vm.editingArticle?.content || '',
-        title: this.vm.editingArticle?.title || '',
+        textEditor: this.vm.editingArticle?.content,
+        title: this.vm.editingArticle?.title,
       });
     } else if (!this._vm.editMode) {
       this.formGroup.patchValue({
@@ -114,68 +131,30 @@ export class ArticlesCreateUiComponent {
   }
 
   public onSubmit() {
-    // event.preventDefault();
-    this.formSubmitted = true;
-    this.formGroup.markAllAsTouched();
-    if (this.formGroup.valid) {
-      const article: CreateArticle = {
-        title: this.formGroup.value.title as string,
-        content: this.formGroup.value.textEditor as string,
-      };
-      this.publishArticle.emit(article);
-      if (this.vm.editMode) {
-        this.formChange.emit(false);
-        this.articleFacade.editArticle(article, this.vm.editingArticle!.id);
-      } else {
-        this.router.navigate(['/articles']);
+    Object.keys(this.formGroup.controls).forEach((controlName) => {
+      if (this.formGroup.get(controlName)?.invalid) {
+        this.fieldErrors[controlName] = true;
       }
-      console.log(article);
-    }
-  }
+    });
 
-  public onCancel() {
-    const containsUnsavedChanges = this.containsUnsavedChanges();
-    if (containsUnsavedChanges) {
-      this.formChange.emit(true);
-      this.router.navigate(['/articles']);
+    if (this.formGroup.invalid) {
+      this.formGroup.markAllAsTouched();
       return;
     }
-
-    const article: CreateArticle = {
+    const article: ArticleVM = {
       title: this.formGroup.value.title as string,
       content: this.formGroup.value.textEditor as string,
     };
-
-    this.publishArticle.emit({
-      ...article,
-      articlesId: this.vm.editingArticle?.id,
-    });
+    if (this.vm.editMode) {
+      this.updateArticle.emit(article);
+    } else {
+      this.addArticle.emit(article);
+    }
+    this.formGroup.markAsPristine();
     this.router.navigate(['/articles']);
   }
 
-  private validateWithClearTegs(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const content = control.value.replace(/<[^>]*>/g, ''); // clear tegs
-
-      if (content.length > 66) return null;
-      return { minLength: 'min length must be < 60 symbols' };
-    };
-  }
-
-  private checkChanges() {
-    this.formGroup.valueChanges.subscribe(() => {
-      this.formChange.emit(this.containsUnsavedChanges());
-    });
-  }
-
-  private containsUnsavedChanges() {
-    const initialFormValues = this.vm.editMode
-      ? {
-          textEditor: this.vm.editingArticle?.content,
-          title: this.vm.editingArticle?.title,
-        }
-      : { textEditor: '', title: '' };
-
-    return JSON.stringify(this.formGroup.value) !== JSON.stringify(initialFormValues);
+  public onCancel() {
+    this.router.navigate(['/articles']);
   }
 }

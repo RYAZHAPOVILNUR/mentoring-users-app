@@ -17,7 +17,7 @@ import { Article } from '@users/shared/data-access-models';
 import { UsersFacade } from '@users/users/data-access-user';
 
 @Component({
-  selector: 'users-articles-view',
+  selector: 'users-articles-list',
   standalone: true,
   imports: [
     CommonModule,
@@ -38,7 +38,6 @@ import { UsersFacade } from '@users/users/data-access-user';
 })
 export class ArticleListComponent implements OnInit {
   @Input({ required: true }) articles!: Article[];
-  @Input({ required: true }) article!: Article | null;
   @Input({ required: true }) loggedUserId!: number;
 
   private readonly userFacade = inject(UsersFacade);

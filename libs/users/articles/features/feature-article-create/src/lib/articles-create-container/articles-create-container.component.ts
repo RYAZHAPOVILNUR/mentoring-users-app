@@ -1,54 +1,53 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, OnInit, ViewChild } from '@angular/core';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ActivatedRoute } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
-import { Store } from '@ngrx/store';
-import { map, Observable, of } from 'rxjs';
+import { map } from 'rxjs';
 
 import { ConfirmDialogService } from '@shared/ui-confirm-dialog';
 import { DeactivatableComponent } from '@shared/util-router';
-import { articlesActions, articleSelectors, CreateArticle } from '@users/articles/data-access-article';
-import { Article } from '@users/shared/data-access-models';
+import { ArticlesFacade, ArticleVM } from '@users/articles/data-access-article';
 
 import { ArticlesCreateUiComponent } from '../articles-create-ui/articles-create-ui.component';
 
 @Component({
   standalone: true,
-  imports: [LetDirective, ArticlesCreateUiComponent],
+  imports: [CommonModule, LetDirective, MatProgressBarModule, ArticlesCreateUiComponent],
   templateUrl: './articles-create-container.component.html',
   styleUrls: ['./articles-create-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ArticlesCreateContainerComponent implements DeactivatableComponent {
+export class ArticlesCreateContainerComponent implements OnInit, DeactivatableComponent {
   private readonly activatedRoute = inject(ActivatedRoute);
-  private readonly store = inject(Store);
-  private readonly confirmDialogService = inject(ConfirmDialogService);
+  private readonly articleFacade = inject(ArticlesFacade);
 
-  private readonly articleId = this.activatedRoute.snapshot.queryParamMap.get('id');
+  @ViewChild(ArticlesCreateUiComponent, { static: true })
+  readonly articlesCreateUiComponent!: ArticlesCreateUiComponent;
 
-  private isFormChanged = false;
+  public readonly editingArticle$ = this.articleFacade.articleForEdit$;
+  public readonly confirmDialogService = inject(ConfirmDialogService);
+
+  public readonly articleId = this.activatedRoute.snapshot.queryParamMap.get('id');
 
   readonly isEdit = Boolean(this.articleId);
-  readonly editingArticle$ = this.store.select(articleSelectors.selectArticleForEdit);
 
-  constructor() {
-    if (Number(this.articleId)) {
-      this.getArticle(Number(this.articleId));
+  ngOnInit(): void {
+    this.articleFacade.getOne();
+  }
+
+  onAddArticle(article: ArticleVM) {
+    this.articleFacade.add(article);
+  }
+
+  onEditArticle(article: ArticleVM) {
+    this.articleFacade.update(article);
+  }
+
+  canDeactivate() {
+    if (!this.articlesCreateUiComponent?.formGroup.dirty) {
+      return true;
     }
-  }
-
-  onPublishArticle(article: CreateArticle) {
-    console.log(article);
-  }
-
-  onFormChange(isFormChanged: boolean) {
-    this.isFormChanged = isFormChanged;
-  }
-
-  canDeactivate(): Observable<boolean> {
-    if (!this.isFormChanged) {
-      return of(true);
-    }
-
     return this.confirmDialogService
       .open({
         title: 'Подтверждение выхода',
@@ -58,9 +57,5 @@ export class ArticlesCreateContainerComponent implements DeactivatableComponent 
       })
       .afterClosed()
       .pipe(map(Boolean));
-  }
-
-  private getArticle(id: Article['id']) {
-    this.store.dispatch(articlesActions.getArticleForEdit({ id }));
   }
 }

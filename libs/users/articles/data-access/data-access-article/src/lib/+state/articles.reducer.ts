@@ -21,44 +21,51 @@ export const articlesFeature = createFeature({
   reducer: createReducer(
     initialArticlesState,
 
-    on(articlesActions.loadArticles, (state) => ({
+    on(articlesActions.add, (state) => ({ ...state, status: 'loading' as const })),
+
+    on(articlesActions.addSuccess, (state, { article }) =>
+      articlesAdapter.addOne(article, { ...state, status: 'loaded' as const }),
+    ),
+
+    on(articlesActions.addFailed, (state) => ({ ...state, status: 'error' as const })),
+
+    on(articlesActions.getAll, (state) => ({
       ...state,
       status: 'loading' as const,
     })),
-
-    on(articlesActions.loadArticlesSuccess, (state, { articles }) =>
+    on(articlesActions.getAllSuccess, (state, { articles }) =>
       articlesAdapter.setAll(articles, { ...state, status: 'loaded' as const }),
     ),
-    on(articlesActions.editArticleSuccess, (state, { articles }) =>
-      articlesAdapter.updateOne(
-        {
-          id: articles.id,
-          changes: articles,
-        },
-        state,
-      ),
-    ),
-    on(articlesActions.loadArticlesFailed, (state) => ({
+
+    on(articlesActions.getAllFailed, (state) => ({
       ...state,
       status: 'error' as const,
     })),
 
-    on(articlesActions.getArticleForEdit, (state) => ({
+    on(articlesActions.update, (state) => ({
       ...state,
       status: 'loading' as const,
     })),
 
-    on(articlesActions.getArticleForEditSuccess, (state, { article }) =>
-      articlesAdapter.addOne({ ...article }, { ...state, status: 'loaded' as const }),
+    on(articlesActions.updateSuccess, (state, { article }) =>
+      articlesAdapter.updateOne({ id: article.id, changes: article }, { ...state, status: 'loaded' as const }),
     ),
 
-    on(articlesActions.getArticleForRead, (state) => ({
+    on(articlesActions.updateFailed, (state) => ({
+      ...state,
+      status: 'error' as const,
+    })),
+    on(articlesActions.getOne, (state) => ({
       ...state,
       status: 'loading' as const,
     })),
 
-    on(articlesActions.getArticleForReadSuccess, (state, { article }) =>
-      articlesAdapter.addOne({ ...article }, { ...state, status: 'loaded' as const }),
+    on(articlesActions.getOneSuccess, (state, { article }) =>
+      articlesAdapter.setOne({ ...article }, { ...state, status: 'loaded' as const }),
     ),
+    on(articlesActions.getOneFailed, (state) => ({
+      ...state,
+      status: 'error' as const,
+    })),
   ),
 });

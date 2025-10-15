@@ -1,46 +1,44 @@
 import { inject } from '@angular/core';
-import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { select, Store } from '@ngrx/store';
-import { catchError, filter, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { catchError, filter, map, of, switchMap, withLatestFrom } from 'rxjs';
 
 import { ApiService } from '@core/data-access-api';
-import { selectRouteParams } from '@shared/util-store';
+import { selectQueryParam, selectRouteParam } from '@shared/util-store';
 import { Article } from '@users/shared/data-access-models';
 
 import { articlesActions } from './articles.actions';
-import { selectArticlesEntities } from './articles.selectors';
-import { CreateArticle } from '../interfaces/create-article.interface';
+import { ArticleVM } from '../types/article-vm.type';
+import { UpdateArticleDTO } from '../types/update-article.type';
 
-export const publishArticle$ = createEffect(
-  (actions$ = inject(Actions), apiService = inject(ApiService), router = inject(Router)) => {
+export const add$ = createEffect(
+  (actions$ = inject(Actions), apiService = inject(ApiService)) => {
     return actions$.pipe(
-      ofType(articlesActions.publishArticle),
+      ofType(articlesActions.add),
       switchMap(({ article }) =>
-        apiService.post<void, CreateArticle>('/articles', article).pipe(
-          tap(() => router.navigate(['/articles'])),
-          map(() => articlesActions.publishArticleSuccess),
+        apiService.post<Article, ArticleVM>('/articles', article).pipe(
+          map((article) => articlesActions.addSuccess({ article })),
           catchError((error) => {
             console.error('Error', error);
-            return of(articlesActions.publishArticleFailed({ error }));
+            return of(articlesActions.addFailed({ error }));
           }),
         ),
       ),
     );
   },
-  { functional: true, dispatch: false },
+  { functional: true },
 );
 
-export const loadArticles$ = createEffect(
+export const getAll$ = createEffect(
   (actions$ = inject(Actions), apiService = inject(ApiService)) => {
     return actions$.pipe(
-      ofType(articlesActions.loadArticles),
+      ofType(articlesActions.getAll),
       switchMap(() =>
         apiService.get<Article[]>('/articles').pipe(
-          map((articles) => articlesActions.loadArticlesSuccess({ articles })),
+          map((articles) => articlesActions.getAllSuccess({ articles })),
           catchError((error) => {
             console.error('Error', error);
-            return of(articlesActions.loadArticlesFailed({ error }));
+            return of(articlesActions.getAllFailed({ error }));
           }),
         ),
       ),
@@ -49,15 +47,24 @@ export const loadArticles$ = createEffect(
   { functional: true },
 );
 export const getArticleForEdit$ = createEffect(
-  (actions$ = inject(Actions), apiService = inject(ApiService)) => {
+  (store$ = inject(Store), actions$ = inject(Actions), apiService = inject(ApiService)) => {
+    const id$ = store$.select(selectQueryParam('id'));
     return actions$.pipe(
-      ofType(articlesActions.getArticleForEdit),
-      switchMap(({ id }) => {
-        return apiService.get<Article>(`/articles/${id}`).pipe(
-          map((article) => articlesActions.getArticleForEditSuccess({ article })),
+      ofType(articlesActions.update),
+      withLatestFrom(id$),
+      filter(([, idParam]) => Boolean(Number(idParam))),
+      switchMap(([{ article }, idParam]) => {
+        const articleId = Number(idParam);
+        const articleData: UpdateArticleDTO = {
+          articlesId: articleId,
+          title: article.title,
+          content: article.content,
+        };
+        return apiService.post<Article, UpdateArticleDTO>(`/articles/${articleId}`, articleData).pipe(
+          map((article) => articlesActions.updateSuccess({ article })),
           catchError((error) => {
             console.error('Error', error);
-            return of(articlesActions.getArticleForEditFailed({ error }));
+            return of(articlesActions.updateFailed({ error }));
           }),
         );
       }),
@@ -66,56 +73,27 @@ export const getArticleForEdit$ = createEffect(
   { functional: true },
 );
 
-export const getArticleForRead$ = createEffect(
+export const getOne$ = createEffect(
   () => {
-    const actions$ = inject(Actions);
     const store = inject(Store);
+    const actions$ = inject(Actions);
     const apiService = inject(ApiService);
+    const idFromQuery$ = store.select(selectQueryParam('id'));
+    const idFromRoute$ = store.select(selectRouteParam('id'));
     return actions$.pipe(
-      ofType(articlesActions.getArticleForRead),
-      withLatestFrom(store.select(selectRouteParams)),
-      switchMap(([, params]) => {
-        return apiService.get<Article>(`/articles/${params['id']}`).pipe(
-          map((article) => articlesActions.getArticleForReadSuccess({ article })),
+      ofType(articlesActions.getOne),
+      withLatestFrom(idFromQuery$, idFromRoute$),
+      filter(([, idFromQuery, idFromRoute]) => Boolean(Number(idFromQuery || idFromRoute))),
+      map(([, idFromQuery, idFromRoute]) => Number(idFromQuery || idFromRoute)),
+      switchMap((articleId) => {
+        return apiService.get<Article>(`/articles/${articleId}`).pipe(
+          map((article) => articlesActions.getOneSuccess({ article })),
           catchError((error) => {
             console.error('Error', error);
-            return of(articlesActions.getArticleForReadFailed({ error }));
+            return of(articlesActions.getOneFailed({ error }));
           }),
         );
       }),
-    );
-  },
-  { functional: true },
-);
-
-export const editArticle$ = createEffect(
-  (
-    actions$ = inject(Actions),
-    articlesEntities$ = inject(Store).pipe(select(selectArticlesEntities)),
-    apiService = inject(ApiService),
-  ) => {
-    return actions$.pipe(
-      ofType(articlesActions.editArticle),
-      withLatestFrom(articlesEntities$),
-      filter(([{ id }, articlesEntities$]) => Boolean(articlesEntities$[id])),
-      map(([{ articleData, id }, articlesEntities$]) => ({
-        article: {
-          ...articlesEntities$[id],
-          articlesId: id,
-          title: articleData.title,
-          content: articleData.content,
-        },
-      })),
-      switchMap(({ article }) =>
-        apiService.post<Article, CreateArticle>(`/articles/${article.id}`, article).pipe(
-          map((articles) => ({ articles })),
-          map(({ articles }) => articlesActions.editArticleSuccess({ articles })),
-          catchError((error) => {
-            console.error('Error', error);
-            return of(articlesActions.editArticleFailed({ error }));
-          }),
-        ),
-      ),
     );
   },
   { functional: true },

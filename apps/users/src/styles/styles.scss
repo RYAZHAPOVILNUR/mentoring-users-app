@@ -1,5 +1,5 @@
 @use '@angular/material' as mat;
-@use "tailwindcss";
+@use 'tailwindcss';
 
 @include mat.core();
 
@@ -15,9 +15,4 @@ body {
 
 mat-progress-bar {
   margin-top: 2px;
-}
-
-.ql-editor:focus {
-  border: 1px solid #80bdff !important;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important;
 }
