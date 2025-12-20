@@ -42,7 +42,7 @@ export class UserListContainerStore extends ComponentStore<UserListState> {
   }
 
   private setUsersFromGlobalToLocalStore(): void {
-    this.effect(() => this.usersFacade.allUsers$.pipe(tap(this.patchUsers.bind(this))));
+    this.effect(() => this.usersFacade.filteredUsers$.pipe(tap(this.patchUsers.bind(this))));
   }
 
   private patchUsers(users: UserEntity[]): void {
