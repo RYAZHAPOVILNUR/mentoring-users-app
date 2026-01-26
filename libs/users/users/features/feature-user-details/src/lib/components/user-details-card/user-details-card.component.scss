@@ -57,3 +57,35 @@ div.alert-success {
   justify-content: center;
   color: white;
 }
+
+// .store-points-input {
+//   // ПОКАЗЫВАЕМ СТАНДАРТНЫЕ СТРЕЛКИ ДЛЯ ЧИСЛОВОГО ИНПУТА
+//   &::-webkit-outer-spin-button,
+//   &::-webkit-inner-spin-button {
+//     -webkit-appearance: auto;
+//     opacity: 1;
+//     margin: 0;
+//   }
+
+//   // Для Firefox
+//   &[type=number] {
+//     -moz-appearance: textfield;
+
+//     &:hover,
+//     &:focus {
+//       -moz-appearance: number-input;
+//     }
+//   }
+
+//   // Скрываем стрелки в режиме просмотра (readonly)
+//   &:read-only {
+//     &::-webkit-outer-spin-button,
+//     &::-webkit-inner-spin-button {
+//       display: none;
+//     }
+
+//     &[type=number] {
+//       -moz-appearance: textfield;
+//     }
+//   }
+// }
