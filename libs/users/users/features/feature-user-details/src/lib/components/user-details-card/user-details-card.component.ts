@@ -8,15 +8,9 @@ import {
   Output,
   TemplateRef,
   ViewChild,
-  OnInit
+  OnInit,
 } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators
-} from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -64,20 +58,17 @@ export class UserDetailsCardComponent implements OnInit {
 
   private readonly snackBar = inject(MatSnackBar);
 
-  // Форма для 4 основных полей
   userForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     username: new FormControl(''),
-    city: new FormControl('')
+    city: new FormControl(''),
   });
 
-  // Отдельный control для сторипоинтов с особым поведением
   storyPointsControl = new FormControl(0, [Validators.min(0), Validators.required]);
   isEditingStoryPoints = false;
   private originalStoryPoints = 0;
 
-  // СОБЫТИЯ
   @Output() addStoryPoints = new EventEmitter<{
     storyPoints: number;
     onSuccessCb: () => void;
@@ -104,25 +95,21 @@ export class UserDetailsCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Изначально сторипоинты не редактируются
     this.storyPointsControl.disable();
   }
 
   private initFormData(user: UserEntity): void {
-    // Основные 4 поля
     this.userForm.patchValue({
       name: user.name || '',
       email: user.email || '',
       username: user.username || '',
-      city: user.city || ''
+      city: user.city || '',
     });
 
-    // Сторипоинты
     const storyPoints = user.totalStoryPoints || 0;
     this.storyPointsControl.setValue(storyPoints, { emitEvent: false });
     this.originalStoryPoints = storyPoints;
 
-    // Управляем состоянием формы
     this.updateFormState();
   }
 
@@ -134,14 +121,11 @@ export class UserDetailsCardComponent implements OnInit {
     }
   }
 
-  // НАЧАТЬ редактирование сторипоинтов (кнопка +)
   startEditStoryPoints(): void {
-    // Убрана проверка на vm.editMode - можно редактировать всегда
     this.isEditingStoryPoints = true;
     this.storyPointsControl.enable();
     this.originalStoryPoints = Number(this.storyPointsControl.value) || 0;
 
-    // Фокусируемся на поле и выделяем текст
     setTimeout(() => {
       const input = document.querySelector('.story-points-input') as HTMLInputElement;
       if (input) {
@@ -151,31 +135,27 @@ export class UserDetailsCardComponent implements OnInit {
     }, 100);
   }
 
-  // ПОДТВЕРДИТЬ изменение сторипоинтов (кнопка ✓)
   confirmStoryPointsEdit(): void {
     if (this.storyPointsControl.invalid) {
       this.snackBar.open('❌ Введите корректное значение (не меньше 0)', 'OK', {
         duration: 3000,
         panelClass: ['error-snackbar'],
         horizontalPosition: 'center',
-        verticalPosition: 'top'
+        verticalPosition: 'top',
       });
       return;
     }
 
     const newStoryPoints = Number(this.storyPointsControl.value) || 0;
 
-    // Если значение не изменилось
     if (newStoryPoints === this.originalStoryPoints) {
       this.cancelStoryPointsEdit();
       return;
     }
 
-    // Закрываем режим редактирования
     this.isEditingStoryPoints = false;
     this.storyPointsControl.disable();
 
-    // Отправляем новые сторипоинты
     this.addStoryPoints.emit({
       storyPoints: newStoryPoints,
       onSuccessCb: () => {
@@ -185,39 +165,36 @@ export class UserDetailsCardComponent implements OnInit {
           verticalPosition: 'top',
         });
         this.originalStoryPoints = newStoryPoints;
-      }
+      },
     });
   }
 
-  // ОТМЕНИТЬ редактирование сторипоинтов (кнопка ×)
   cancelStoryPointsEdit(): void {
     this.storyPointsControl.setValue(this.originalStoryPoints, { emitEvent: false });
     this.isEditingStoryPoints = false;
     this.storyPointsControl.disable();
   }
 
-  // Сохранить ВСЕ изменения (основные 4 поля)
   saveAllChanges(): void {
     if (this.userForm.invalid) {
       this.snackBar.open('❌ Проверьте правильность заполнения полей', 'OK', {
         duration: 3000,
         panelClass: ['error-snackbar'],
         horizontalPosition: 'center',
-        verticalPosition: 'top'
+        verticalPosition: 'top',
       });
       return;
     }
 
     const formValue = this.userForm.getRawValue();
 
-    // Отправляем обновленные данные пользователя
     this.updateUserData.emit({
       userData: {
         name: formValue.name,
         email: formValue.email,
         username: formValue.username,
-        city: formValue.city
-      }
+        city: formValue.city,
+      },
     });
 
     this.snackBar.open('✅ Данные пользователя сохранены!', 'OK', {

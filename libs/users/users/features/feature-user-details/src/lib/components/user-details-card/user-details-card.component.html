@@ -25,21 +25,12 @@
           {{ vm.editMode ? 'Редактирование пользователя' : 'Информация пользователя' }}
         </h3>
 
-        <!-- Форма для основных 4 полей -->
         <form [formGroup]="userForm" class="user-form">
-
-          <!-- 1. Имя -->
           <mat-form-field class="edit-user-field">
             <mat-label>Имя:</mat-label>
-            <input
-              matInput
-              formControlName="name"
-              placeholder="Имя пользователя"
-              [readonly]="!vm.editMode"
-            />
+            <input matInput formControlName="name" placeholder="Имя пользователя" [readonly]="!vm.editMode" />
           </mat-form-field>
 
-          <!-- 2. Email -->
           <mat-form-field class="edit-user-field">
             <mat-label>Email:</mat-label>
             <input
@@ -51,43 +42,23 @@
             />
           </mat-form-field>
 
-          <!-- 3. Username -->
           <mat-form-field class="edit-user-field">
             <mat-label>Username:</mat-label>
-            <input
-              matInput
-              formControlName="username"
-              placeholder="username"
-              [readonly]="!vm.editMode"
-            />
+            <input matInput formControlName="username" placeholder="username" [readonly]="!vm.editMode" />
           </mat-form-field>
 
-          <!-- 4. Город -->
           <mat-form-field class="edit-user-field">
             <mat-label>Город:</mat-label>
-            <input
-              matInput
-              formControlName="city"
-              placeholder="Город"
-              [readonly]="!vm.editMode"
-            />
+            <input matInput formControlName="city" placeholder="Город" [readonly]="!vm.editMode" />
           </mat-form-field>
-
         </form>
 
-        <!-- ОТДЕЛЬНОЕ поле для сторипоинтов с особым поведением -->
         <div class="story-points-section">
-          <!-- Режим ПРОСМОТРА сторипоинтов -->
           <div *ngIf="!isEditingStoryPoints">
             <mat-form-field class="edit-user-field">
               <mat-label>Количество сторипоинтов:</mat-label>
-              <input
-                matInput
-                [value]="storyPointsControl.value"
-                [readonly]="true"
-                class="story-points-display"
-              />
-              <!-- Кнопка "+" для начала редактирования -->
+              <input matInput [value]="storyPointsControl.value" [readonly]="true" class="story-points-display" />
+
               <button
                 mat-icon-button
                 matSuffix
@@ -101,7 +72,6 @@
             </mat-form-field>
           </div>
 
-          <!-- Режим РЕДАКТИРОВАНИЯ сторипоинтов -->
           <div *ngIf="isEditingStoryPoints">
             <mat-form-field class="edit-user-field">
               <mat-label>Сторипоинты:</mat-label>
@@ -114,7 +84,7 @@
                 min="0"
                 step="1"
               />
-              <!-- Кнопки ✓ и × в режиме редактирования -->
+
               <div class="story-points-edit-buttons" matSuffix>
                 <button
                   mat-icon-button
@@ -140,7 +110,6 @@
           </div>
         </div>
 
-        <!-- Кнопки для сохранения основных 4 полей -->
         <div class="form-actions" *ngIf="vm.editMode">
           <button
             mat-raised-button
@@ -151,16 +120,8 @@
           >
             Сохранить основные данные
           </button>
-          <button
-            mat-button
-            color="warn"
-            type="button"
-            (click)="onCloseButtonClick()"
-          >
-            Отмена
-          </button>
+          <button mat-button color="warn" type="button" (click)="onCloseButtonClick()">Отмена</button>
         </div>
-
       </mat-card>
     </div>
   </ng-container>
