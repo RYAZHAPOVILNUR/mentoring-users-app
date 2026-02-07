@@ -30,7 +30,6 @@ export const userEffects = createEffect(
             }),
           ),
           catchError((error) => {
-            console.error('Error', error);
             return of(UsersActions.loadUsersFailure({ error }));
           }),
         ),
@@ -51,7 +50,6 @@ export const deleteUser = createEffect(
         apiService.delete<void>(`/users/${id}`).pipe(
           map(() => UsersActions.deleteUserSuccess({ id })),
           catchError((error) => {
-            console.error('Error', error);
             return of(UsersActions.deleteUserFailed({ error }));
           }),
         ),
@@ -73,7 +71,6 @@ export const addUser = createEffect(
           map((user) => userAdapter.DTOtoEntity(user)),
           map((userEntity) => UsersActions.addUserSuccess({ userData: userEntity })),
           catchError((error) => {
-            console.error('Error', error);
             return of(UsersActions.addUserFailed({ error }));
           }),
         ),
@@ -106,7 +103,6 @@ export const editUser = createEffect(
           tap(({ onSuccessCb }) => onSuccessCb()),
           map(({ userData }) => UsersActions.editUserSuccess({ userData })),
           catchError((error) => {
-            console.error('Error', error);
             return of(UsersActions.editUserFailed({ error }));
           }),
         ),
@@ -146,21 +142,15 @@ export const addStoryPoints = createEffect(
           photo: loggedUser.photo || null,
         };
 
-        console.log('🚀 Sending update with hardcoded required fields');
-        console.log('📅 purchaseDate:', updateData.purchaseDate);
-        console.log('🎓 educationStatus:', updateData.educationStatus);
-
         return apiService.post<any, any>(`/users/${loggedUser.id}`, updateData).pipe(
           map((response) => ({ response, onSuccessCb })),
           tap(({ onSuccessCb }) => onSuccessCb()),
           map(({ response }) => {
-            console.log('🎉 SUCCESS! Story points updated');
             return UsersActions.addStoryPointsSuccess({
               userData: response,
             });
           }),
           catchError((error) => {
-            console.error('❌ Error:', error.error?.message || error.message);
             return of(UsersActions.addStoryPointsFailed({ error }));
           }),
         );
@@ -183,7 +173,6 @@ export const loadUser = createEffect(
             map((user) => userAdapter.DTOtoEntity(user)),
             map((userEntity) => UsersActions.loadUserSuccess({ userData: userEntity })),
             catchError((error) => {
-              console.error('Error', error);
               return of(UsersActions.loadUserFailed({ error }));
             }),
           );
