@@ -33,15 +33,15 @@
 игнорируйте ошибки до момента отправки вашего кода в репозиторий.
 Перед отправкой следует выполнить команду `npm run lint:fix` (она находится в `package.json`) и исправить ошибки, которые остались после выполнения команды.
 
-`Pull Request` в котором `Eslint` завершается ошибкой (мы подключили его в [Github Actions](https://docs.github.com/ru/actions/get-started/understand-github-actions)) - проверяться не будет.
+`Pull Request` в котором пайплайны завершаются ошибкой (мы подключили скрипт в CI через [Github Actions](https://docs.github.com/ru/actions/get-started/understand-github-actions)) - проверяться не будет.
 
 Так мы сможем проверить ваш код, а не спорить о форматировании. Спасибо за понимание!
 
 ## Архитектура
 
-В проекте используется [модульная архитектура](https://javascript.plainenglish.io/frontend-architectures-simple-modular-approach-7f3b3efe0ecd) (где под модулями мы подразумеваем библиотеки NX) с использованием [DDD](https://www.angulararchitects.io/blog/sustainable-angular-architectures-1/).
+В проекте применяется [модульная архитектура](https://javascript.plainenglish.io/frontend-architectures-simple-modular-approach-7f3b3efe0ecd) (где под модулями мы подразумеваем библиотеки NX) с использованием [DDD](https://www.angulararchitects.io/blog/sustainable-angular-architectures-1/).
 
-Используйте [NX консоль](https://nx.dev/recipes/nx-console/console-generate-command) для генерации библиотек и их наполнения. 
+Для генерации библиотек и их наполнения установите плагин - [NX консоль](https://nx.dev/recipes/nx-console/console-generate-command) . 
 
 ### Создание библиотек
 
