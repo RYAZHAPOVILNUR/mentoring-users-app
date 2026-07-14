@@ -7,7 +7,9 @@
     "build": "nx build users",
     "format": "npx prettier --write '**/*.{ts,html,css,scss,json,md,spec.ts}'",
     "lint": "nx run-many -t lint",
-    "lint:fix": "nx run-many -t lint --fix"
+    "lint:fix": "nx run-many -t lint --fix",
+    "updatedesk:init": "node tools/updatedesk-init.mjs",
+    "updatedesk:note": "node tools/updatedesk-note.mjs"
   },
   "private": true,
   "dependencies": {
