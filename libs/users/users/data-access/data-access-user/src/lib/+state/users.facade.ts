@@ -16,22 +16,16 @@ import { EditUserEntity } from '../types/edit-user-entity.type';
 export class UsersFacade {
   private readonly store = inject(Store);
 
-  /**
-   * Combine pieces of state using createSelector,
-   * and expose them as observables through the facade.
-   */
   public readonly status$ = this.store.pipe(select(UsersSelectors.selectUsersStatus));
   public readonly allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
   public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
   public readonly loggedUser$ = this.store.select(authSelectors.selectLoggedUser);
+  public readonly filteredUsers$ = this.store.select(UsersSelectors.filterUsers);
   public readonly errors$: Observable<HttpErrorResponse | null> = this.store.pipe(
     select(UsersSelectors.selectUsersError),
   );
-  /**
-   * Use the initialization action to perform one
-   * or more tasks in your Effects.
-   */
+
   init() {
     this.store.dispatch(UsersActions.initUsers());
   }
