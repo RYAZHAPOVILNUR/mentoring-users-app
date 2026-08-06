@@ -23,6 +23,7 @@ export class UsersFacade {
   public readonly status$ = this.store.pipe(select(UsersSelectors.selectUsersStatus));
   public readonly allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
   public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
+  public readonly filteredUsers$ = this.store.select(UsersSelectors.filteredUsers);
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
   public readonly loggedUser$ = this.store.select(authSelectors.selectLoggedUser);
   public readonly errors$: Observable<HttpErrorResponse | null> = this.store.pipe(
