@@ -5,6 +5,7 @@ import { catchError, filter, map, of, switchMap, tap, withLatestFrom } from 'rxj
 
 import { ApiService } from '@core/data-access-api';
 import { selectRouteParams } from '@shared/util-store';
+import { Callback } from '@shared/util-typescript';
 import { userAdapter, UserDTO, UserEntity } from '@users/shared/data-access-models';
 
 import * as UsersActions from './users.actions';
@@ -82,35 +83,11 @@ export const addUser = createEffect(
 );
 
 export const editUser = createEffect(
-  () => {
-    const actions$ = inject(Actions);
-    const apiService = inject(ApiService);
-    const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
-
-    return actions$.pipe(
-      ofType(UsersActions.editUser),
-      withLatestFrom(usersEntities$),
-      filter(([{ user }, usersEntities]) => Boolean(usersEntities[user.id])),
-      map(([{ user, onSuccessCb }, usersEntities]) => ({
-        user: {
-          ...userAdapter.entityToDTO(<UserEntity>usersEntities[user.id]),
-          ...user,
-        },
-        onSuccessCb,
-      })),
-      switchMap(({ user, onSuccessCb }) =>
-        apiService.post<UserDTO, EditUserDTO>(`/users/${user.id}`, user).pipe(
-          map((userData) => ({ userData, onSuccessCb })),
-          tap(({ onSuccessCb }) => onSuccessCb()),
-          map(({ userData }) => UsersActions.editUserSuccess({ userData })),
-          catchError((error) => {
-            console.error('Error', error);
-            return of(UsersActions.editUserFailed({ error }));
-          }),
-        ),
-      ),
-    );
-  },
+  () =>
+    inject(Actions).pipe(
+      ofType(UsersActions.editUser, UsersActions.setUserStoryPoints),
+      map(({ user, onSuccessCb }) => UsersActions.updateUser({ user, onSuccessCb })),
+    ),
   { functional: true },
 );
 
@@ -135,6 +112,38 @@ export const loadUser = createEffect(
         }
         return of(UsersActions.updateUserStatus({ status: 'loading' }));
       }),
+    );
+  },
+  { functional: true },
+);
+
+export const updateUser = createEffect(
+  () => {
+    const actions$ = inject(Actions);
+    const apiService = inject(ApiService);
+    const usersEntities$ = inject(Store).pipe(select(selectUsersEntities));
+
+    return actions$.pipe(
+      ofType(UsersActions.updateUser),
+      withLatestFrom(usersEntities$),
+      filter(([{ user }, usersEntities]) => Boolean(usersEntities[user.id])),
+      map(([{ user, onSuccessCb }, usersEntities]): { user: UserEntity; onSuccessCb?: Callback } => ({
+        user: {
+          ...userAdapter.entityToDTO(<UserEntity>usersEntities[user.id]),
+          ...user,
+        },
+        onSuccessCb,
+      })),
+      switchMap(({ user, onSuccessCb }) =>
+        apiService.post<UserDTO, EditUserDTO>(`/users/${user.id}`, user).pipe(
+          tap(() => onSuccessCb?.()),
+          map(() => UsersActions.updateUserSuccess({ user })),
+          catchError((error) => {
+            console.error('Error', error);
+            return of(UsersActions.updateUserFailed({ error }));
+          }),
+        ),
+      ),
     );
   },
   { functional: true },

@@ -3,10 +3,10 @@ import { createAction, props } from '@ngrx/store';
 
 import { LoadingStatus } from '@shared/util-store';
 import { Callback } from '@shared/util-typescript';
-import { UserDTO, UserEntity } from '@users/shared/data-access-models';
+import { UserEntity } from '@users/shared/data-access-models';
 
 import { CreateUserDTO } from '../types/create-user-dto.type';
-import { EditUserEntity } from '../types/edit-user-entity.type';
+import { UpdateUser } from '../types/update-user.type';
 
 export const initUsers = createAction('[Users Page] Init');
 
@@ -26,15 +26,26 @@ export const addUserFailed = createAction('[Users/Api] Add User Failed', props<{
 
 // export const deleteSelectedId = createAction('[Users Page] Delete Selected Id');
 
-export const editUser = createAction(
-  '[Users Detail] Edit User',
-  props<{ user: EditUserEntity; onSuccessCb: Callback }>(),
-);
-export const editUserSuccess = createAction('[Users Detail] Edit User Success', props<{ userData: UserDTO }>());
-export const editUserFailed = createAction('[Users Detail] Edit Failed', props<{ error: HttpErrorResponse | null }>());
+export const editUser = createAction('[Users Detail] Edit User', props<{ user: UserEntity; onSuccessCb: Callback }>());
 
 export const loadUser = createAction('[Users Page] Load User');
 export const loadUserSuccess = createAction('[Users/Api] Load User Success', props<{ userData: UserEntity }>());
 export const loadUserFailed = createAction('[Users/Api] Load User Failed', props<{ error: HttpErrorResponse }>());
 
 export const updateUserStatus = createAction('[Users Detail] Update User Status', props<{ status: LoadingStatus }>());
+
+export const setUserStoryPoints = createAction(
+  '[Users Detail] Set User StoryPoints',
+  props<{ user: UpdateUser; onSuccessCb: Callback }>(),
+);
+export const updateUser = createAction(
+  '[Users Detail] updateUser',
+  props<{ user: UpdateUser; onSuccessCb?: Callback }>(),
+);
+
+export const updateUserSuccess = createAction('[Users Detail] updateUserSuccess', props<{ user: UserEntity }>());
+
+export const updateUserFailed = createAction(
+  '[Users Detail] updateUserFailed',
+  props<{ error: HttpErrorResponse | null }>(),
+);

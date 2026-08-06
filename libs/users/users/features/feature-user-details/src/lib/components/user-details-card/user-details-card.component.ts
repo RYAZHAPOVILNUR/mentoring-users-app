@@ -10,7 +10,7 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -28,7 +28,7 @@ import { AddressFieldComponent } from '@shared/feature-address-field';
 import { LoadingStatus } from '@shared/util-store';
 import { Callback } from '@shared/util-typescript';
 import { UserEntity } from '@users/shared/data-access-models';
-import { EditUserEntity } from '@users/users/data-access-user';
+import { EditUserEntity, UpdateUser } from '@users/users/data-access-user';
 
 import { UserFormService } from '../../services/user-form.service';
 
@@ -71,12 +71,22 @@ export class UserDetailsCardComponent {
 
   private readonly snackBar = inject(MatSnackBar);
 
-  private readonly onEditSuccess: Callback = () =>
+  private readonly onEditSuccess: Callback = () => {
     this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
       duration: 2500,
       horizontalPosition: 'center',
       verticalPosition: 'top',
     });
+    this.snackBarText = 'Пользователь успешно обновлен!';
+  };
+  private readonly onUpdateSuccess: Callback = () => {
+    this.snackBar.openFromTemplate(this.snackbarTemplateRef, {
+      duration: 2500,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+    this.snackBarText = 'Сторипоинты успешно обновлены!';
+  };
 
   @ViewChild('snackbar', { static: true }) snackbarTemplateRef!: TemplateRef<unknown>;
 
@@ -85,6 +95,16 @@ export class UserDetailsCardComponent {
   readonly areFormChanged$ = this.isFormChanged();
 
   readonly addressTypes = AddressType;
+
+  readonly storyPointsControl = inject(FormBuilder).control(
+    { value: 0, disabled: true },
+    {
+      nonNullable: true,
+      validators: [Validators.required],
+    },
+  );
+
+  public snackBarText = '';
 
   @Output() userEdit = new EventEmitter<{
     user: EditUserEntity;
@@ -95,6 +115,10 @@ export class UserDetailsCardComponent {
   @Output() userDelete = new EventEmitter<void>();
   @Output() editModeOpen = new EventEmitter<void>();
   @Output() editModeClose = new EventEmitter<void>();
+  @Output() userStoryPoints = new EventEmitter<{
+    user: UpdateUser;
+    onSuccessCb: Callback;
+  }>();
 
   @Input({ required: true })
   set vm(vm: DetailUsersCardVm) {
@@ -140,9 +164,35 @@ export class UserDetailsCardComponent {
     this.userDelete.emit();
   }
 
+  onEditStoryPointsBtnClick(): void {
+    this.enableStoryPointsControl();
+  }
+
+  onCloseEditStoryPointsBtnClick(): void {
+    this.disableStoryPointsControl();
+  }
+
+  onUserStoryPointsSet(): void {
+    const points = this.storyPointsControl.getRawValue();
+    this.userStoryPoints.emit({
+      user: { ...this.vm.user!, totalStoryPoints: points },
+      onSuccessCb: this.onUpdateSuccess,
+    });
+    this.disableStoryPointsControl();
+  }
+
+  private disableStoryPointsControl(): void {
+    this.storyPointsControl.disable();
+  }
+
+  private enableStoryPointsControl(): void {
+    this.storyPointsControl.enable();
+  }
+
   private initFormState(vm: DetailUsersCardVm): void {
     if (vm.user) {
       this.form.patchValue(vm.user);
+      this.storyPointsControl.patchValue(vm.user.totalStoryPoints ?? 0);
     }
 
     if (vm.editMode) {

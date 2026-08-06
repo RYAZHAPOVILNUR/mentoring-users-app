@@ -10,7 +10,7 @@ import { UserEntity } from '@users/shared/data-access-models';
 import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
 import { CreateUserDTO } from '../types/create-user-dto.type';
-import { EditUserEntity } from '../types/edit-user-entity.type';
+import { UpdateUser } from '../types/update-user.type';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
@@ -22,7 +22,6 @@ export class UsersFacade {
    */
   public readonly status$ = this.store.pipe(select(UsersSelectors.selectUsersStatus));
   public readonly allUsers$ = this.store.pipe(select(UsersSelectors.selectAllUsers));
-  public readonly selectedUsers$ = this.store.pipe(select(UsersSelectors.selectEntity));
   public readonly openedUser$ = this.store.select(UsersSelectors.selectOpenedUser);
   public readonly loggedUser$ = this.store.select(authSelectors.selectLoggedUser);
   public readonly errors$: Observable<HttpErrorResponse | null> = this.store.pipe(
@@ -44,7 +43,7 @@ export class UsersFacade {
     this.store.dispatch(UsersActions.addUser({ userData }));
   }
 
-  editUser(user: EditUserEntity, onSuccessCb: Callback) {
+  editUser(user: UserEntity, onSuccessCb: Callback) {
     this.store.dispatch(UsersActions.editUser({ user, onSuccessCb }));
   }
 
@@ -62,5 +61,9 @@ export class UsersFacade {
 
   loadUser() {
     this.store.dispatch(UsersActions.loadUser());
+  }
+
+  setUserStoryPoints(user: UpdateUser, onSuccessCb: Callback) {
+    return this.store.dispatch(UsersActions.setUserStoryPoints({ user, onSuccessCb }));
   }
 }

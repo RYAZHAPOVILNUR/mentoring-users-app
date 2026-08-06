@@ -70,6 +70,43 @@
             </mat-form-field>
 
             <users-address-field [type]="addressTypes.CITY" formControlName="city" />
+
+            <mat-form-field
+              class="edit-user-field"
+            >
+              <mat-label>Количество сторипоинтов</mat-label>
+              <input
+                [formControl]="storyPointsControl"
+                matInput
+                placeholder="Количество сторипоинтов">
+              <button
+                *ngIf="storyPointsControl.disabled; else storyPointsEditMode"
+                (click)="onEditStoryPointsBtnClick()"
+                mat-icon-button
+                matSuffix
+                type="button">
+                <mat-icon fontIcon="add"></mat-icon>
+              </button>
+              <ng-template #storyPointsEditMode>
+                <button
+                  mat-icon-button
+                  matSuffix
+                  type="button"
+                  (click)="onUserStoryPointsSet()"
+                >
+                  <mat-icon fontIcon="check"></mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  matSuffix
+                  type="button"
+                  (click)="onCloseEditStoryPointsBtnClick()"
+                >
+                  <mat-icon fontIcon="close"></mat-icon>
+                </button>
+              </ng-template>
+            </mat-form-field>
+
           </div>
           <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
             <button
@@ -82,7 +119,12 @@
               <mat-icon>done</mat-icon>
             </button>
 
-            <button mat-icon-button color="warn" type="button" aria-label="Close edit mode" (click)="onCloseButtonClick()">
+            <button
+              mat-icon-button
+              color="warn"
+              type="button"
+              aria-label="Close edit mode"
+              (click)="onCloseButtonClick()">
               <mat-icon>close</mat-icon>
             </button>
           </mat-card-actions>
@@ -102,6 +144,6 @@
 
 <ng-template #snackbar>
   <div class="edit-user-snackbar">
-    <span>Пользователь успешно изменён!</span>
+    <span>{{ snackBarText }}</span>
   </div>
 </ng-template>

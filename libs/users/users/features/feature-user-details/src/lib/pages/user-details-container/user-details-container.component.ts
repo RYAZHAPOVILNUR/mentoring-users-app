@@ -9,7 +9,7 @@ import { filter, map, Observable, tap } from 'rxjs';
 import { selectQueryParam } from '@shared/util-store';
 import { Callback } from '@shared/util-typescript';
 import { UserEntity } from '@users/shared/data-access-models';
-import { EditUserEntity, UsersFacade } from '@users/users/data-access-user';
+import { EditUserEntity, UpdateUser, UsersFacade } from '@users/users/data-access-user';
 import { UserDialogService } from '@users/users/feature-user-dialog';
 
 import { UserDetailsCardComponent } from '../../components/user-details-card/user-details-card.component';
@@ -45,7 +45,7 @@ export class UserDetailsComponent {
   public readonly errors$ = this.usersFacade.errors$;
 
   public onEditUser(user: EditUserEntity, onSuccessCb: Callback): void {
-    this.usersFacade.editUser(user, onSuccessCb);
+    this.usersFacade.editUser(user as UserEntity, onSuccessCb);
     this.router.navigate(['/admin/users', this.user.id], {
       queryParams: { edit: false },
     });
@@ -80,5 +80,9 @@ export class UserDetailsComponent {
         }),
       )
       .subscribe();
+  }
+
+  onUserStoryPointsSet(user: UpdateUser, onSuccessCb: Callback) {
+    this.usersFacade.setUserStoryPoints(user, onSuccessCb);
   }
 }

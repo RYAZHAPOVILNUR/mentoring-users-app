@@ -8,3 +8,4 @@ export * as usersSelectors from './lib/+state/users.selectors';
 export { CreateUserDTO } from './lib/types/create-user-dto.type';
 export { EditUserDTO } from './lib/types/edit-user-dto.type';
 export { EditUserEntity } from './lib/types/edit-user-entity.type';
+export { UpdateUser } from './lib/types/update-user.type';

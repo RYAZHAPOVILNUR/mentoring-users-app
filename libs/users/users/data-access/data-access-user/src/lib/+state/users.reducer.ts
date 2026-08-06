@@ -37,16 +37,16 @@ const reducer = createReducer(
   })),
   on(UsersActions.deleteUserSuccess, (state, { id }) => usersAdapter.removeOne(id, { ...state })),
   on(UsersActions.addUserSuccess, (state, { userData }) => usersAdapter.addOne({ ...userData }, { ...state })),
-  on(UsersActions.editUserSuccess, (state, { userData }) =>
+  on(UsersActions.updateUserSuccess, (state, { user }) =>
     usersAdapter.updateOne(
       {
-        id: userData.id,
-        changes: userData,
+        id: user.id,
+        changes: user,
       },
       state,
     ),
   ),
-  on(UsersActions.editUserFailed, (state, { error }) => ({
+  on(UsersActions.updateUserFailed, (state, { error }) => ({
     ...state,
     status: 'error' as const,
     error,
