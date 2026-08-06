@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Добавление новой папки</h2>
+<form [formGroup]="newFolderForm" class="dialog-container" mat-dialog-content>
+  <mat-form-field >
+    <input
+      class="dialog-container__input"
+      formControlName="title"
+      matInput
+      type="text"
+      placeholder="Название папки*">
+  </mat-form-field>
+</form>
+<mat-dialog-actions>
+  <button
+    mat-raised-button
+    type="button"
+    mat-dialog-close
+  >
+    Отмена
+  </button>
+  <button
+    mat-raised-button
+    type="button"
+    color="primary"
+    (click)="onCloseButtonClick()"
+  >
+    Сохранить
+  </button>
+</mat-dialog-actions>
+

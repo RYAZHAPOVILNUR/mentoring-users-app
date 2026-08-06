@@ -1,0 +1,23 @@
+<div class="navigation-bar">
+  <button
+    (click)="backToFolders()"
+    mat-icon-button
+  >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <mat-spinner
+    [diameter]="30"
+    *ngIf="(folderTitle$ | async) === 'loading folder'; else folderTitle"
+  />
+  <ng-template #folderTitle>
+    <h2
+      *ngIf="folderTitle$ | async as title"
+      class="navigation-bar__title"
+      [matTooltip]="title"
+      matTooltipPosition="after"
+    >
+      {{ title }}
+    </h2>
+  </ng-template>
+</div>
+

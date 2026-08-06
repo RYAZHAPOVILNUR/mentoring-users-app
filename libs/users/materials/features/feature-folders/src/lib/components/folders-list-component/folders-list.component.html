@@ -1,0 +1,24 @@
+<mat-progress-bar mode="indeterminate" *ngIf="isLoadingStatus | async; else foldersList"/>
+
+<ng-template #foldersList>
+  <div class="folders-list">
+    <users-folders-card
+      (click)="openFolder(folder)"
+      (deleteButtonClick)="deleteFolder(folder)"
+      *ngFor="let folder of folders$ | async"
+      [folder]="folder"
+      class="folders-list__item"
+    />
+  </div>
+
+  <button
+    class="create-button"
+    mat-fab="filled"
+    type="button"
+    color="primary"
+    matTooltip="Создать новую папку"
+    (click)="onCreateFolderButtonClick()"
+  >
+    <mat-icon fontIcon="add"/>
+  </button>
+</ng-template>

@@ -1,0 +1,17 @@
+.folder-card{
+  cursor: pointer;
+  gap: 1px;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.content {
+  &__title {
+    font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}

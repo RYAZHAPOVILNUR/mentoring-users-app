@@ -1,0 +1,16 @@
+.navigation-bar {
+  display: flex;
+  align-items: center;
+
+  &__title {
+    margin: 0;
+    display: inline-block;
+    max-width: 200px;
+    width: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: help;
+    flex: 0 0 auto;
+  }
+}

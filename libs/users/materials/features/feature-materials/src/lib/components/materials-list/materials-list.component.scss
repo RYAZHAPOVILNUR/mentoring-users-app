@@ -1,0 +1,19 @@
+.create-button {
+  position: fixed;
+  bottom: 70px;
+  right: 110px;
+}
+
+.materials-list {
+  padding-left: 9%;
+  padding-right: 9%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  &__item {
+    flex-basis: 120px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}

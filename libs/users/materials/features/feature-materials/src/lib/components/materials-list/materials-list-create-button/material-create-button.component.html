@@ -1,0 +1,19 @@
+<button
+  class="create-button"
+  mat-fab="filled"
+  type="button"
+  color="primary"
+  matTooltip="Создать новый материал"
+  [matMenuTriggerFor]="menu"
+>
+  <mat-icon fontIcon="add"/>
+</button>
+<mat-menu #menu="matMenu">
+  <button
+    mat-menu-item
+    *ngFor="let button of buttonsTypes"
+    (click)="onButtonClick(button.type)"
+  >
+    {{ button.label }}
+  </button>
+</mat-menu>

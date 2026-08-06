@@ -1,0 +1,23 @@
+<mat-progress-bar
+  mode="indeterminate"
+  *ngIf="isLoadingStatus$ | async; else materialsList"
+/>
+
+<ng-template #materialsList>
+  <users-materials-navigation/>
+
+  <div class="materials-list">
+    <users-materials-card
+      (deleteMaterialBtnClick)="deleteMaterial(material)"
+      *ngFor="let material of material$ | async"
+      [material]="material"
+      class="materials-list__item"
+    >
+    </users-materials-card>
+  </div>
+
+  <users-material-create-button
+    (buttonClick)="createMaterial($event)"
+  />
+</ng-template>
+

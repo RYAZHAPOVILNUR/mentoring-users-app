@@ -70,6 +70,14 @@ export const appRoutes: Route[] = [
         path: 'backlog',
         loadComponent: () => import('@users/backlog/feature-backlog').then((c) => c.BacklogComponent),
       },
+      {
+        path: 'materials',
+        loadComponent: () => import('@users/materials/feature-folders').then((c) => c.FoldersListComponent),
+      },
+      {
+        path: 'materials/:id',
+        loadComponent: () => import('@users/materials/feature-materials').then((c) => c.MaterialsListComponent),
+      },
       ...layoutAgnosticComponents,
     ],
   },

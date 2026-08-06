@@ -1,0 +1,25 @@
+<mat-card
+  #materialCard
+  class="material-card"
+>
+  <mat-card-header>
+    <mat-icon>{{ material.material_link | materialIcon }}</mat-icon>
+
+    <users-delete-button
+      usersTemplateHover
+      [hoverTarget]="hoverTarget"
+      (buttonClick)="onDeleteButtonClick()"
+      tooltipText="Удалить файл"
+    />
+  </mat-card-header>
+  <mat-card-content class="material-card__content content">
+    <span
+      [matTooltip]='material.title'
+      matTooltipShowDelay="1000"
+      class="content__title"
+    >
+      {{ material.title }}
+    </span>
+    <span>{{ material.created_at | date }}</span>
+  </mat-card-content>
+</mat-card>

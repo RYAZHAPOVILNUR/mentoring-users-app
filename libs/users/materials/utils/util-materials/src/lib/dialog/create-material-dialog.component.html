@@ -1,0 +1,62 @@
+<h1 mat-dialog-title>
+  Добавить
+  <ng-container [ngSwitch]="materialType">
+    <ng-container *ngSwitchCase="materialTypes.VIDEO">
+      видео
+    </ng-container>
+    <ng-container *ngSwitchCase="materialTypes.AUDIO">
+      подкаст
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      PDF
+    </ng-container>
+  </ng-container>
+</h1>
+
+<form [formGroup]="newMaterialForm" class="create-dialog__container" mat-dialog-content>
+    <mat-form-field>
+      <mat-label>
+        Название:
+      </mat-label>
+      <input
+        class="modal-input"
+        formControlName="title"
+        matInput
+        type="text">
+      <mat-error>Empty name is not allowed!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>
+        Ссылка:
+      </mat-label>
+      <input
+        class="modal-input"
+        formControlName="material_link"
+        matInput
+        type="text">
+      <mat-error
+        *ngIf="newMaterialForm.controls.material_link.errors as error"
+      >
+        {{ error | urlValidator }}
+      </mat-error>
+    </mat-form-field>
+</form>
+
+<mat-dialog-actions class="dialog-buttons">
+  <button
+    mat-button
+    type="button"
+    mat-dialog-close
+  >
+    Отмена
+  </button>
+  <button
+    mat-raised-button
+    type="button"
+    [disabled]="newMaterialForm.invalid"
+    (click)="onSaveButtonClick()"
+  >
+    Сохранить
+  </button>
+</mat-dialog-actions>

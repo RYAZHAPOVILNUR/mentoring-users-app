@@ -1,0 +1,25 @@
+<mat-card
+  #folderCard
+  class="folder-card"
+>
+  <mat-card-header>
+    <mat-icon>folder</mat-icon>
+
+    <users-delete-button
+      usersTemplateHover
+      [hoverTarget]="hoverTarget"
+      (buttonClick)="onDeleteButtonClick($event)"
+      tooltipText="Удалить папку"
+    />
+  </mat-card-header>
+  <mat-card-content class="folder-card__content content">
+    <span
+      [matTooltip]='folder.title'
+      matTooltipShowDelay="1000"
+      class="content__title"
+    >
+      {{ folder.title }}
+    </span>
+    <span>{{ folder.created_at | date }}</span>
+  </mat-card-content>
+</mat-card>
