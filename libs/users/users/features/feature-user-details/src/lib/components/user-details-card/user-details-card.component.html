@@ -3,7 +3,7 @@
 </ng-container>
 
 <ng-template #loadingResult>
-  <ng-container *ngIf="vm.status === 'loaded'; else error">
+  <ng-container *ngIf="vm.status === 'loaded' && vm.user; else error">
     <div class="edit-user-container">
       <mat-card class="edit-user-card">
         <div class="close-button-container">
@@ -20,73 +20,108 @@
           >
             <mat-icon>edit</mat-icon>
           </button>
-          <button
-            mat-icon-button
-            type="button"
-            color="accent"
-            class="edit-user-button"
-            *ngIf="vm.editMode"
-            (click)="onDeleteButtonClick()"
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
         </div>
         <h3 class="edit-user-title">
           {{ vm.editMode ? 'Редактирование пользователя' : 'Информация пользователя' }}
         </h3>
-        <form [formGroup]="form" (ngSubmit)="onFormSubmit()" class="edit-user-form">
-          <div class="edit-user-content">
-            <mat-form-field
-              class="edit-user-field"
-              [matTooltip]="vm.user!.name"
-              [matTooltipDisabled]="form.enabled"
-            >
-              <mat-label>Имя:</mat-label>
-              <input matInput placeholder="Имя*" formControlName="name" class="edit-user-input" />
-              <mat-error *ngIf="form.hasError('required', 'name')">Это поле обязательно для заполнения</mat-error>
-            </mat-form-field>
 
-            <mat-form-field
-              class="edit-user-field"
-              [matTooltip]="vm.user!.email"
-              [matTooltipDisabled]="form.enabled"
-            >
-              <mat-label>Электронная почта:</mat-label>
-              <input matInput placeholder="Электронная почта*" formControlName="email" class="edit-user-input" />
-              <mat-error
-                *ngIf="form.controls.email.hasError('required') || form.controls.email.hasError('email')"
-              >
-                Введите корректную электронную почту
-              </mat-error>
-            </mat-form-field>
+        <form [formGroup]="userForm" class="user-form">
+          <mat-form-field class="edit-user-field">
+            <mat-label>Имя:</mat-label>
+            <input matInput formControlName="name" placeholder="Имя пользователя" [readonly]="!vm.editMode" />
+          </mat-form-field>
 
-            <mat-form-field
-              class="edit-user-field"
-              [matTooltip]="vm.user!.username"
-              [matTooltipDisabled]="form.enabled"
-            >
-              <mat-label>Имя пользователя:</mat-label>
-              <input matInput placeholder="Имя пользователя" formControlName="username" class="edit-user-input" />
-            </mat-form-field>
+          <mat-form-field class="edit-user-field">
+            <mat-label>Email:</mat-label>
+            <input
+              matInput
+              formControlName="email"
+              placeholder="example@mail.com"
+              type="email"
+              [readonly]="!vm.editMode"
+            />
+          </mat-form-field>
 
-            <users-address-field [type]="addressTypes.CITY" formControlName="city" />
-          </div>
-          <mat-card-actions class="edit-user-btns-container" *ngIf="vm.editMode">
-            <button
-              mat-icon-button
-              color="primary"
-              type="submit"
-              [disabled]="form.invalid || !(areFormChanged$ | ngrxPush)"
-              aria-label="submit new user data"
-            >
-              <mat-icon>done</mat-icon>
-            </button>
+          <mat-form-field class="edit-user-field">
+            <mat-label>Username:</mat-label>
+            <input matInput formControlName="username" placeholder="username" [readonly]="!vm.editMode" />
+          </mat-form-field>
 
-            <button mat-icon-button color="warn" type="button" aria-label="Close edit mode" (click)="onCloseButtonClick()">
-              <mat-icon>close</mat-icon>
-            </button>
-          </mat-card-actions>
+          <mat-form-field class="edit-user-field">
+            <mat-label>Город:</mat-label>
+            <input matInput formControlName="city" placeholder="Город" [readonly]="!vm.editMode" />
+          </mat-form-field>
         </form>
+
+        <div class="story-points-section">
+          <div *ngIf="!isEditingStoryPoints">
+            <mat-form-field class="edit-user-field">
+              <mat-label>Количество сторипоинтов:</mat-label>
+              <input matInput [value]="storyPointsControl.value" [readonly]="true" class="story-points-display" />
+
+              <button
+                mat-icon-button
+                matSuffix
+                color="primary"
+                type="button"
+                (click)="startEditStoryPoints()"
+                aria-label="Редактировать сторипоинты"
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+
+          <div *ngIf="isEditingStoryPoints">
+            <mat-form-field class="edit-user-field">
+              <mat-label>Сторипоинты:</mat-label>
+              <input
+                matInput
+                type="number"
+                placeholder="0"
+                [formControl]="storyPointsControl"
+                class="story-points-input"
+                min="0"
+                step="1"
+              />
+
+              <div class="story-points-edit-buttons" matSuffix>
+                <button
+                  mat-icon-button
+                  color="primary"
+                  type="button"
+                  (click)="confirmStoryPointsEdit()"
+                  [disabled]="storyPointsControl.invalid"
+                  aria-label="Подтвердить"
+                >
+                  <mat-icon>check</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  color="warn"
+                  type="button"
+                  (click)="cancelStoryPointsEdit()"
+                  aria-label="Отменить"
+                >
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="form-actions" *ngIf="vm.editMode">
+          <button
+            mat-raised-button
+            color="primary"
+            type="button"
+            (click)="saveAllChanges()"
+            [disabled]="userForm.invalid"
+          >
+            Сохранить основные данные
+          </button>
+          <button mat-button color="warn" type="button" (click)="onCloseButtonClick()">Отмена</button>
+        </div>
       </mat-card>
     </div>
   </ng-container>
@@ -94,14 +129,9 @@
 
 <ng-template #error>
   <div class="alert alert-danger" role="alert">
-    <h3>{{ vm.errors?.status }}</h3>
+    <h3>Ошибка</h3>
     <hr />
-    Данный пользователь не найден
-  </div>
-</ng-template>
-
-<ng-template #snackbar>
-  <div class="edit-user-snackbar">
-    <span>Пользователь успешно изменён!</span>
+    <p *ngIf="vm.status === 'error'">Произошла ошибка при загрузке данных</p>
+    <p *ngIf="vm.status !== 'error'">Данный пользователь не найден</p>
   </div>
 </ng-template>
