@@ -9,11 +9,11 @@ import { UsersFacade } from '@users/users/data-access-user';
 
 import { UserListContainerStore } from './user-list-container.store';
 import { UserListComponent } from '../../components/user-list/user-list.component';
-import { UserRedirectPayload } from '../../interfaces/user-redirect-payload.interface';
+import { UsersFilterComponent } from '../../components/users-filter/users-filter.component';
 
 @Component({
   standalone: true,
-  imports: [UserListComponent, MatButtonModule, MatDialogModule, LetDirective],
+  imports: [CommonModule, UserListComponent, MatButtonModule, MatDialogModule, LetDirective, UsersFilterComponent],
   templateUrl: './user-list-container.component.html',
   styleUrls: ['./user-list-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
